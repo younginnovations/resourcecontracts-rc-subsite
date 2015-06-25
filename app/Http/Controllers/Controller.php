@@ -57,8 +57,8 @@ class Controller extends BaseController
     	return view('RC.contractview',compact('document','summary','annotations'));
     }
 
-    public function annotation()
+    public function documentview()
     {
-    	return view('RC.annotation');
+    	return view('RC.documentview');
     }
 }

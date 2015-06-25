@@ -13,4 +13,4 @@
 
 $app->get('/','Controller@home' );
 $app->get('/contract','Controller@viewContract' );
-$app->get('/annotation','Controller@annotation' );
+$app->get('/documentview','Controller@documentview' );
