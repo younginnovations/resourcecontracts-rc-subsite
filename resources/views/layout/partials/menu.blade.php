@@ -11,45 +11,48 @@
         </li>
         <li class="countries">
             <label for="">Countries</label>
-            <ul>
-                <li>
-                    <a href="#">
-                        <span>Guinea</span>
-                        <small class="label pull-right">12</small>
-                    </a>
-                </li>
-                 <li>
-                    <a href="#">
-                        <span>Belize</span>
-                        <small class="label pull-right">12</small>
-                    </a>
-                </li>
-                 <li>
-                    <a href="#">
-                        <span>Liberia</span>
-                        <small class="label pull-right">12</small>
-                    </a>
-                </li>
-            </ul>
+                <ul>
+                    @foreach($summary['country_summary'] as $country=>$value)
+                    <li>
+                        <a href="#">
+                            <span>{{$country}}</span>
+                            <small class="label pull-right">{{$value}}</small>
+                        </a>
+                    </li>
+                     @endforeach
+                </ul>
+           
             <div class="load-more">
                 <a href="#" class="load-more">See all countries</a>
             </div>
         </li>
-        <li class="recent-contracts">
-            <label for="">Recent Contracts</label>
-            <ul>
-                <li>
-                    <a href="#">Petrochad (Mangara) Limited ...</a>
-                </li>
-                 <li>
-                    <a href="#">Petrochad (Mangara) Limited ...</a>
-                </li>
-                 <li>
-                    <a href="#">Petrochad (Mangara) Limited ...</a>
-                </li>
-            </ul>
+        <li class="year">
+            <label for="">Year</label>
+                <ul>
+                    @foreach($summary['year_summary'] as $year=>$value)
+                    <li>
+                        <a href="#">
+                            <span>{{$year}}</span>
+                            <small class="label pull-right">{{$value}}</small>
+                        </a>
+                    </li>
+                     @endforeach
+                </ul>
+        </li>
+        <li class="resources">
+            <label for="">Resources</label>
+              <ul>
+                    @foreach($summary['resource_summary'] as $resource=>$value)
+                    <li>
+                        <a href="#">
+                            <span>{{$resource}}</span>
+                            <small class="label pull-right">{{$value}}</small>
+                        </a>
+                    </li>
+                     @endforeach
+                </ul>
             <div class="load-more">
-                <a href="#" class="load-more">See all contracts</a>
+                <a href="#" class="load-more">See all resources</a>
             </div>
         </li>
     </ul>

@@ -1,20 +1,25 @@
-$(document).ready(function () {
-    $('.confirm').on('click', function (e) {
-        if (confirm($(this).data('confirm'))) {
-            return true;
-        }
-        else {
-            return false;
-        }
+$(document).ready(function () {        
+    $('.search-link').click(function(){
+        $(this).css('display','none');
+        $('.search-hide').css('display','inline-block');
+        $(this).siblings('.search-input-wrapper').slideToggle();
+        $(this).parents('.top-container').toggleClass('expand');
+    });
+    
+    $('.search-hide').click(function(){
+        $(this).css('display','none');
+        $('.open').css('display','inline-block');
     });
 
-    $.ajaxSetup({
-        headers: {'X-CSRF-Token': $('meta[name=_token]').attr('content')}
-    });
-
-    $("#menu-toggle").click(function(e) {
+    $('.view-annotations').click(function(e){
         e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
+        $(this).css('display','none');
+        $('.close-annotations').css('display','inline-block');
+        $('body').find('.annotation-pop').toggle().addClass('open');
     });
 
+     $('.close-annotations').click(function(){
+        $(this).css('display','none');
+        $('.open-annotations').css('display','inline-block');
+    });
 });
