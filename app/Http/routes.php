@@ -13,4 +13,8 @@
 
 $app->get('/','Controller@home' );
 $app->get('/contract','Controller@viewContract' );
+
 $app->get('/documentview','Controller@documentview' );
+
+$app->get('/pdf-text/{id}/page/{page_no}','Controller@pdfText' );
+
