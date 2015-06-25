@@ -12,11 +12,11 @@
         <li class="countries">
             <label for="">Countries</label>
                 <ul>
-                    @foreach($summary['country_summary'] as $country=>$value)
+                    @foreach($summary['country_summary'] as $country)
                     <li>
                         <a href="#">
-                            <span>{{$country}}</span>
-                            <small class="label pull-right">{{$value}}</small>
+                            <span>{{$country['key']}}</span>
+                            <small class="label pull-right">{{$country['doc_count']}}</small>
                         </a>
                     </li>
                      @endforeach
@@ -29,11 +29,11 @@
         <li class="year">
             <label for="">Year</label>
                 <ul>
-                    @foreach($summary['year_summary'] as $year=>$value)
+                    @foreach($summary['year_summary'] as $year)
                     <li>
                         <a href="#">
-                            <span>{{$year}}</span>
-                            <small class="label pull-right">{{$value}}</small>
+                            <span>{{$year['key']}}</span>
+                            <small class="label pull-right">{{$year['doc_count']}}</small>
                         </a>
                     </li>
                      @endforeach
@@ -42,11 +42,11 @@
         <li class="resources">
             <label for="">Resources</label>
               <ul>
-                    @foreach($summary['resource_summary'] as $resource=>$value)
+                    @foreach($summary['resource_summary'] as $resource)
                     <li>
                         <a href="#">
-                            <span>{{$resource}}</span>
-                            <small class="label pull-right">{{$value}}</small>
+                            <span>{{$resource['key']}}</span>
+                            <small class="label pull-right">{{$resource['doc_count']}}</small>
                         </a>
                     </li>
                      @endforeach
