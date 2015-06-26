@@ -1,10 +1,10 @@
 <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
         <li class="sidebar-brand">
-            <a href="#">Resource <span>Contracts</span></a>
+            <a href="{{route('home')}}">Resource <span>Contracts</span></a>
         </li>
         <li class="contracts active">
-            <a href="#">
+            <a href="{{route('home')}}">
                 <span>All Contracts</span>
                 <small class="label pull-right">{{$summary['contract_count']}}</small>
             </a>
