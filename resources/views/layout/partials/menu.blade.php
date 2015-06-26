@@ -22,9 +22,9 @@
                      @endforeach
                 </ul>
            
-            <div class="load-more">
-                <a href="#" class="load-more">See all countries</a>
-            </div>
+            {{--<div class="load-more">--}}
+                {{--<a href="#" class="load-more">See all countries</a>--}}
+            {{--</div>--}}
         </li>
         <li class="year">
             <label for="">Year</label>

@@ -63,10 +63,11 @@ class SiteController extends BaseController
      */
     public function page($id, $page_no)
     {
-        $data       = $this->api->getTextPage($id, $page_no);
-        $annotation = $this->api->getAnnotationPage($id, $page_no);
+        $page        = $this->api->getTextPage($id, $page_no);
+        $annotations = $this->api->getAnnotationPage($id, $page_no);
+        $contract    = $this->api->getMetadataDocument($id);
 
-        return view('site.documentview', compact('data'));
+        return view('site.documentview', compact('page', 'contract', 'annotations'));
     }
 
     /**
@@ -88,6 +89,6 @@ class SiteController extends BaseController
      */
     public function filter(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
     }
 }

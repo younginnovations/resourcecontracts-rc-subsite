@@ -1,7 +1,7 @@
 @extends("layout.app")
 
 @section('content')
-@include('layout.partials.search')
+{{--@include('layout.partials.search')--}}
 
     <div class="panel panel-default">
         <div class="panel-heading">All Contracts</div>
