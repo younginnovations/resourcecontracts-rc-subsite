@@ -10,11 +10,8 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-$app->get('/','Controller@home' );
-$app->get('/contract','Controller@viewContract' );
-
-$app->get('/contract/{id}/metadata','Controller@documentview' );
-
-$app->get('/pdf-text/{id}/page/{page_no}','Controller@pdfText' );
+$app->get('/', 'Controller@home');
+$app->get('/contract', 'Controller@viewContract');
+$app->get('/contract/{id}/metadata', 'Controller@documentview');
+$app->get('/pdf-text/{id}/page/{page_no}', 'Controller@pdfText');
 

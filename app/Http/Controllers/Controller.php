@@ -4,6 +4,10 @@ use App\Http\Services\APIService;
 use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
+/**
+ * Class Controller
+ * @package App\Http\Controllers
+ */
 class Controller extends BaseController
 {
     /**
@@ -17,15 +21,17 @@ class Controller extends BaseController
 
     /**
      * @param APIService $api
-     * @param Request $request
+     * @param Request    $request
      */
     public function __construct(APIService $api, Request $request)
     {
-
         $this->api     = $api;
         $this->request = $request;
     }
 
+    /**
+     * @return \Illuminate\View\View
+     */
     public function home()
     {
         $summary = $this->api->getSummary();
@@ -34,30 +40,37 @@ class Controller extends BaseController
             ["name" => "contract 2", "id" => 2],
             ["name" => "contract 3", "id" => 3]
         ];
+
         return view('RC.home', compact('summary', 'result'));
     }
 
-
+    /**
+     * @param $id
+     * @return \Illuminate\View\View
+     */
     public function documentview($id)
     {
-        $summary=$this->api->getSummary();
+        $summary     = $this->api->getSummary();
         $annotations = [
             ["no" => 1, "text" => "Type of resource", "quote" => "coal", "tag" => ["local", "company"]],
             ["no" => 2, "text" => "Type of resource", "quote" => "coal", "tag" => ["local", "company"]]
         ];
 
-        $document=$this->api->getMetadataDocument($id);
-       // dd($document);
+        $document = $this->api->getMetadataDocument($id);
+
         return view('RC.contractview', compact('document', 'summary', 'annotations'));
     }
 
-
-
-
+    /**
+     * @param $id
+     * @param $page_no
+     * @return \Illuminate\View\View
+     */
     public function pdfText($id, $page_no)
     {
         $data       = $this->api->getTextPage($id, $page_no);
         $annotation = $this->api->getAnnotationPage($id, $page_no);
+
         return view('RC.documentview', compact('data'));
     }
 }
