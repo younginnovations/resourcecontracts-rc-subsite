@@ -38,7 +38,7 @@ class Controller extends BaseController
     }
 
 
-    public function viewContract()
+    public function documentview($id)
     {
         $summary=$this->api->getSummary();
         $annotations = [
@@ -46,35 +46,12 @@ class Controller extends BaseController
             ["no" => 2, "text" => "Type of resource", "quote" => "coal", "tag" => ["local", "company"]]
         ];
 
-        $document = [
-            "contract_name"         => "JJJJJJJJJJJJJJJJ",
-            "contract_identifier"   => "identifier",
-            "language"              => "English",
-            "country"               => "USA",
-            "document_type"         => "contract",
-            "government_entity"     => "xxxxxxxx",
-            "government_identifier" => "LLLLL",
-            "type_of_contract"      => "RC",
-            "signature_date"        => "2015-06-23",
-            "translation_parent"    => "no",
-            "company"               => [
-                "name"                          => "ZZZZZZZZZ",
-                "jurisdiction_of_incorporation" => "ppppppp",
-                "registration_agency"           => "rrrrrrrr",
-                "company_address"               => "2014-01-01",
-                "company_address"               => "USA",
-                "comp_id"                       => 123,
-                "parent_company"                => "ccccccccc",
-                "open_corporate_id"             => 321
-            ]
-        ];
+        $document=$this->api->getMetadataDocument($id);
+       // dd($document);
         return view('RC.contractview', compact('document', 'summary', 'annotations'));
     }
 
-    public function documentview()
-    {
-        return view('RC.documentview');
-    }
+
 
 
     public function pdfText($id, $page_no)
