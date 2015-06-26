@@ -10,7 +10,10 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+$app->get('/', ['as' => 'home', 'uses' => 'SiteController@home']);
+$app->get('/contract/{id}', ['as' => 'contract.detail', 'uses' => 'SiteController@show']);
+$app->get('/contract/{id}/page/{page_no}', ['as' => 'contract.page.detail', 'uses' => 'SiteController@page']);
+$app->get('/contract/{id}/pages', ['as' => 'contract.pages', 'uses' => 'SiteController@pages']);
+$app->get('/filter', ['as' => 'filter', 'uses' => 'SiteController@filter']);
+$app->get('/search', ['as' => 'search', 'uses' => 'SiteController@search']);
 
-$app->get('/','Controller@home' );
-$app->get('/contract','Controller@viewContract' );
-$app->get('/documentview','Controller@documentview' );
