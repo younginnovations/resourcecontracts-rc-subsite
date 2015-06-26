@@ -7,13 +7,15 @@
         	<div class="contract-name pull-left">
         		{{$document['metadata']['contract_name']}}
                 <div class="contract-actions">
-                    <a href="" class="download">Download<span class="size">(1.24mb)</a>
-                    <a href="" class="view-annotations open-annotations">View Annotations</a>
-                    <a href="" class="view-annotations close-annotations">close Annotations</a>
+                    <a href="" class="download">Download<span class="size">{{getFileSize($document['metadata']['file_size'])}}</a>
+                    <div class="contract-annotations">
+                        <a href="" class="view-annotations open-annotations">View Annotations</a>
+                        <a href="" class="view-annotations close-annotations">close Annotations</a>
+                    </div>
                 </div>
     		</div>
     		<div class="pull-right">
-        		<a href="#" class="btn btn-view">View Document</a>
+        		<a href="{{route('contract.pages',['id'=>$document['contract_id']])}}" class="btn btn-view">View Document</a>
         	</div>
 		</div>
          <div class="panel-body">
@@ -95,7 +97,7 @@
             <ul>
             @foreach($annotations as $anote)
             <li>
-                <div class="pull-left page-num">pg{{$anote['no']}}</div>
+                <div class="pull-left page-num">{{$anote['page_no']}}</div>
                 <div class="pull-left">
                     <div class="annotation-text">{{$anote['text']}}</div>
                     <div class="quote">{{$anote['quote']}}</div>

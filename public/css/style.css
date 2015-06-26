@@ -1,3 +1,4 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
 html, body {
     height: 100%;
 }
@@ -637,6 +638,11 @@ header {
     background: url(../images/ic_sprite.png) no-repeat 0 -188px;
     padding: 10px 12px 10px 30px;
     margin-right: 20px;
+    float: left;
+}
+
+.contract-annotations {
+    float: left;
 }
 
 .contract-actions a .size {
@@ -705,7 +711,7 @@ header {
 
 .annotation-pop {
     position: absolute;
-    top: 105px;
+    top: 98px;
     background-color: #f5f5f5;
     left: 110px;
     width: 510px;

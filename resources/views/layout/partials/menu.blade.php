@@ -6,7 +6,7 @@
         <li class="contracts active">
             <a href="#">
                 <span>All Contracts</span>
-                <small class="label pull-right">367</small>
+                <small class="label pull-right">{{$summary['contract_count']}}</small>
             </a>
         </li>
         <li class="countries">
@@ -14,8 +14,8 @@
                 <ul>
                     @foreach($summary['country_summary'] as $country)
                     <li>
-                        <a href="#">
-                            <span>{{$country['key']}}</span>
+                        <a href="{{route('filter')}}?country={{$country['key']}}">
+                            <span>{{ucfirst($country['key'])}}</span>
                             <small class="label pull-right">{{$country['doc_count']}}</small>
                         </a>
                     </li>
@@ -31,7 +31,7 @@
                 <ul>
                     @foreach($summary['year_summary'] as $year)
                     <li>
-                        <a href="#">
+                        <a href="{{route('filter')}}?year={{$year['key']}}">
                             <span>{{$year['key']}}</span>
                             <small class="label pull-right">{{$year['doc_count']}}</small>
                         </a>
@@ -44,16 +44,16 @@
               <ul>
                     @foreach($summary['resource_summary'] as $resource)
                     <li>
-                        <a href="#">
+                        <a href="{{route('filter')}}?resource={{$resource['key']}}">
                             <span>{{$resource['key']}}</span>
                             <small class="label pull-right">{{$resource['doc_count']}}</small>
                         </a>
                     </li>
                      @endforeach
                 </ul>
-            <div class="load-more">
-                <a href="#" class="load-more">See all resources</a>
-            </div>
+            {{--<div class="load-more">--}}
+                {{--<a href="#" class="load-more">See all resources</a>--}}
+            {{--</div>--}}
         </li>
     </ul>
 </div>
