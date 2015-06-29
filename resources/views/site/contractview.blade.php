@@ -1,16 +1,18 @@
 @extends("layout.app")
 
 @section('content')
-{{--@include('layout.partials.search') --}}
+@include('layout.partials.search')
  <div class="panel panel-default">
         <div class="panel-heading">
         	<div class="contract-name pull-left">
         		{{$document['metadata']['contract_name']}}
                 <div class="contract-actions">
-                    <a href="" class="download">Download<span class="size">{{getFileSize($document['metadata']['file_size'])}}</a>
+                    <a target="_blank" href="{{ isset($document['metadata']['file_url']) ? $document['metadata']['file_url'] : ''}}" class="download">Download
+                        <span class="size">{{getFileSize($document['metadata']['file_size'])}}
+                    </a>
                     <div class="contract-annotations">
                         <a href="" class="view-annotations open-annotations">View Annotations</a>
-                        <a href="" class="view-annotations close-annotations">close Annotations</a>
+                        <a href="" class="view-annotations close-annotations">Close Annotations</a>
                     </div>
                 </div>
     		</div>
@@ -60,37 +62,39 @@
                     </tr>
                 </table>
                 <h3>Company</h3>
+                @foreach($document['metadata']['company'] as $company)
                 <table class="table table-responsive">
                     <tr>
                         <td>Company Name</td>
-                        <td>{{$document['metadata']['company'][0]['name']}}</td>
+                        <td>{{$company['name']}}</td>
                     </tr>
                     <tr>
                         <td>Jurisdiction of Incorporation</td>
-                        <td>{{$document['metadata']['company'][0]['jurisdiction_of_incorporation']}}</td>
+                        <td>{{$company['jurisdiction_of_incorporation']}}</td>
                     </tr>
                     <tr>
                         <td>Registration Agency</td>
-                        <td>{{$document['metadata']['company'][0]['registration_agency']}}</td>
+                        <td>{{$company['registration_agency']}}</td>
                     </tr>
                     <tr>
                         <td>Company Address</td>
-                        <td>{{$document['metadata']['company'][0]['company_address']}}</td>
+                        <td>{{$company['company_address']}}</td>
                     </tr>
 
                     <tr>
                         <td>Identifier at company register</td>
-                        <td>{{$document['metadata']['company'][0]['comp_id']}}</td>
+                        <td>{{$company['comp_id']}}</td>
                     </tr>
                     <tr>
                         <td>Parent Company</td>
-                        <td>{{$document['metadata']['company'][0]['parent_company']}}</td>
+                        <td>{{$company['parent_company']}}</td>
                     </tr>
                     <tr>
                         <td>Open Corporate Id</td>
-                        <td>{{$document['metadata']['company'][0]['open_corporate_id']}}</td>
+                        <td>{{$company['open_corporate_id']}}</td>
                     </tr>
                 </table>
+                    @endforeach
             </div>
         </div>
         <div class="annotation-pop">

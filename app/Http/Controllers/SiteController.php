@@ -34,10 +34,12 @@ class SiteController extends BaseController
      */
     public function home()
     {
-        $summary   = $this->api->getSummary();
         $contracts = $this->api->getAllContracts();
+        if ($contracts === false) {
+            return "error";
+        }
 
-        return view('site.home', compact('summary', 'contracts'));
+        return view('site.home', compact('contracts'));
     }
 
     /**
@@ -46,14 +48,13 @@ class SiteController extends BaseController
      */
     public function show($id)
     {
-        $summary     = $this->api->getSummary();
         $annotations = $this->api->getAnnotations($id);
         $document    = $this->api->getMetadataDocument($id);
-        if (!$document) {
-            //return redirect()->back()->with("error", "No contract found.");
+        if ($document === false) {
+            return "error";
         }
 
-        return view('site.contractview', compact('document', 'summary', 'annotations'));
+        return view('site.contractview', compact('document', 'annotations'));
     }
 
     /**
@@ -66,6 +67,9 @@ class SiteController extends BaseController
         $page        = $this->api->getTextPage($id, $page_no);
         $annotations = $this->api->getAnnotationPage($id, $page_no);
         $contract    = $this->api->getMetadataDocument($id);
+        if ($contract === false) {
+            return "error";
+        }
 
         return view('site.documentview', compact('page', 'contract', 'annotations'));
     }
@@ -80,15 +84,26 @@ class SiteController extends BaseController
         $page        = $this->api->getTextPage($id, $page_no);
         $annotations = $this->api->getAnnotationPage($id, $page_no);
         $contract    = $this->api->getMetadataDocument($id);
+        if ($contract === false) {
+            return "error";
+        }
 
         return view('site.documentview', compact('page', 'contract', 'annotations'));
     }
 
     /**
      * @param Request $request
+     * @return \Illuminate\View\View
      */
     public function filter(Request $request)
     {
-        //dd($request->all());
+        $contracts = $this->api->filter($request->all());
+        $filters   = $request->all();
+
+        if ($contracts === false) {
+            return "error";
+        }
+
+        return view('site.filter', compact('contracts', 'filters'));
     }
 }
