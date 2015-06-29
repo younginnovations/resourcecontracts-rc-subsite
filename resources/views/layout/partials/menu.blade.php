@@ -15,7 +15,7 @@
                     @foreach($summary['country_summary'] as $country)
                     <li>
                         <a href="{{route('filter')}}?country={{$country['key']}}">
-                            <span>{{ucfirst($country['key'])}}</span>
+                            <span>{{trans('country.'.strtoupper($country['key']))}}</span>
                             <small class="label pull-right">{{$country['doc_count']}}</small>
                         </a>
                     </li>
@@ -45,7 +45,7 @@
                     @foreach($summary['resource_summary'] as $resource)
                     <li>
                         <a href="{{route('filter')}}?resource={{$resource['key']}}">
-                            <span>{{$resource['key']}}</span>
+                            <span>{{ucfirst($resource['key'])}}</span>
                             <small class="label pull-right">{{$resource['doc_count']}}</small>
                         </a>
                     </li>

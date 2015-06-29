@@ -1,6 +1,7 @@
 <?php namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -11,10 +12,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $api = app('App\Http\Services\APIService');
         View::composer(
             '*',
             function ($view) {
+                $api = app('App\Http\Services\APIService');
                 $view->with('summary', $api->getSummary());
             }
         );

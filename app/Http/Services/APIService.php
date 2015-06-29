@@ -12,10 +12,6 @@ use GuzzleHttp\Message\Request;
 class APIService
 {
     /**
-     * Elastic Search Host
-     */
-    const APIURL = 'http://192.168.1.39:8000/';
-    /**
      * @var Client
      */
     protected $client;
@@ -45,7 +41,7 @@ class APIService
     /**
      * @param $contractId
      * @param $pageNo
-     * @return Array
+     * @return Array|false
      */
     public function getTextPage($contractId, $pageNo)
     {
@@ -53,53 +49,54 @@ class APIService
         try {
             $response = $this->client->send($request);
             $data     = $response->getBody();
-            $text     = json_decode($data, true);
+
+            return json_decode($data, true);
         } catch (\Exception $e) {
             Log::error("Error.{$e->getMessage()}");
         }
 
+        return false;
 
-        return $text;
     }
 
     /**
      * @param $contractId
      * @param $pageNo
-     * @return Array
+     * @return Array|false
      */
     public function getAnnotationPage($contractId, $pageNo)
     {
         try {
-            $request    = new Request(
+            $request  = new Request(
                 'GET',
                 $this->apiURL('es/contracts/' . $contractId . '/annotation/' . $pageNo . '/page')
             );
-            $response   = $this->client->send($request);
-            $data       = $response->getBody();
-            $annotation = json_decode($data, true);
+            $response = $this->client->send($request);
+            $data     = $response->getBody();
+
+            return json_decode($data, true);
         } catch (\Exception $e) {
             Log::error("Error.{$e->getMessage()}");
         }
 
-        return $annotation;
+        return false;
     }
 
     /**
-     * @return array
+     * @return Array|false
      */
     public function getSummary()
     {
         try {
-            $request    = new Request('GET', $this->apiURL('es/contracts/summary'));
-            $response   = $this->client->send($request);
-            $data       = $response->getBody();
-            $annotation = json_decode($data, true);
+            $response = $this->client->get($this->apiURL('es/contracts/summary'));
+            $data     = $response->getBody();
+
+            return json_decode($data, true);
         } catch (\Exception $e) {
-            return [];
-            //Log::error("Error.{$e->getMessage()}");
+            Log::error("Error.{$e->getMessage()}");
         }
 
-        return $annotation;
+        return false;
     }
 
     /**
@@ -112,17 +109,18 @@ class APIService
             $request  = new Request('GET', $this->apiURL('es/contracts/' . $contractId . '/metadata'));
             $response = $this->client->send($request);
             $data     = $response->getBody();
-            $metadata = json_decode($data, true);
+
+            return json_decode($data, true);
         } catch (\Exception $e) {
             Log::error("Error.{$e->getMessage()}");
         }
 
-        return $metadata;
+        return false;
     }
 
     /**
      * @param $contractId
-     * @return Array
+     * @return Array|false
      */
     public function getAnnotations($contractId)
     {
@@ -130,16 +128,17 @@ class APIService
             $request  = new Request('GET', $this->apiURL(sprintf('es/contracts/%d/annotations', $contractId)));
             $response = $this->client->send($request);
             $data     = $response->getBody();
-            $response = json_decode($data, true);
+
+            return json_decode($data, true);
         } catch (\Exception $e) {
             Log::error("Error.{$e->getMessage()}");
         }
 
-        return $response;
+        return false;
     }
 
     /**
-     * @return Array
+     * @return Array|false
      */
     public function getAllContracts()
     {
@@ -148,11 +147,32 @@ class APIService
             $response = $this->client->send($request);
             $data     = $response->getBody();
             $metadata = json_decode($data, true);
+
+            return $metadata;
         } catch (\Exception $e) {
             Log::error("Error.{$e->getMessage()}");
         }
 
-        return $metadata;
+        return false;
+    }
+
+    /**
+     * @param $filter
+     * @return Array|false
+     */
+    public function filter($filter)
+    {
+        try {
+            $response = $this->client->get($this->apiURL(sprintf('es/contracts/filter')), ['query' => $filter]);
+            $data     = $response->getBody();
+            $metadata = json_decode($data, true);
+
+            return $metadata;
+        } catch (\Exception $e) {
+            Log::error("Error.{$e->getMessage()}");
+        }
+
+        return false;
     }
 
 }

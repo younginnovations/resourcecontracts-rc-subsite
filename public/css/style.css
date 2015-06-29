@@ -467,8 +467,9 @@ header {
 .search-box .text {
   color: #999999;
   border: 0;
-  width: 100%;
+  width: 93%;
   padding: 0 6px;
+  height: 30px;
 }
 .search-box .submit {
   text-indent: -9999px;
@@ -476,6 +477,7 @@ header {
   width: 30px;
   height: 27px;
   background: url(../images/ic_sprite.png) no-repeat 0 -276px;
+  float: right;
 }
 
 .search-link {
@@ -823,4 +825,8 @@ header {
 
 .left-document-wrap,.right-document-wrap {
     height: 100vh;
+}
+
+.search-box form {
+    width: 100%;
 }
