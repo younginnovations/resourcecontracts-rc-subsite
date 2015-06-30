@@ -45,10 +45,12 @@ class APIService
      */
     public function getTextPage($contractId, $pageNo)
     {
-        $request = new Request('GET', $this->apiURL('es/contracts/' . $contractId . '/text/' . $pageNo . '/page'));
         try {
-            $response = $this->client->send($request);
-            $data     = $response->getBody();
+            $response = $this->client->get(
+                $this->apiURL(sprintf('es/contracts/%s/text/%s/page', $contractId, $pageNo))
+            );
+
+            $data = $response->getBody();
 
             return json_decode($data, true);
         } catch (\Exception $e) {
@@ -69,15 +71,19 @@ class APIService
         try {
             $request  = new Request(
                 'GET',
-                $this->apiURL('es/contracts/' . $contractId . '/annotation/' . $pageNo . '/page')
+                $this->apiURL('es/contracts/' . $contractId . '/page/' . $pageNo . '/annotations')
             );
             $response = $this->client->send($request);
-            $data     = $response->getBody();
+
+            $data = $response->getBody();
+            Log::Info("result.{$data}");
 
             return json_decode($data, true);
         } catch (\Exception $e) {
             Log::error("Error.{$e->getMessage()}");
         }
+        echo "herer";
+        exit;
 
         return false;
     }
@@ -164,6 +170,28 @@ class APIService
     {
         try {
             $response = $this->client->get($this->apiURL(sprintf('es/contracts/filter')), ['query' => $filter]);
+            $data     = $response->getBody();
+            $metadata = json_decode($data, true);
+
+            return $metadata;
+        } catch (\Exception $e) {
+            Log::error("Error.{$e->getMessage()}");
+        }
+
+        return false;
+    }
+
+    /**
+     * @param $f
+     * @return Array|false
+     */
+    public function getFullTextSearch($contractId, $query)
+    {
+        try {
+            $response = $this->client->get(
+                $this->apiURL(sprintf('es/contracts/pdfsearch')),
+                ['query' => ['contract_id' => $contractId, 'q' => $query]]
+            );
             $data     = $response->getBody();
             $metadata = json_decode($data, true);
 
