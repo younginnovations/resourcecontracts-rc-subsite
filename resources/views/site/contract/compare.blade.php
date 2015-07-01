@@ -13,6 +13,16 @@
             background-color: #eee;
         }
     </style>
+    <style>
+        .metadata {
+            display: block;
+            position: absolute;
+            top: 40px;
+            right: 0px;
+            width: 400px;
+            background-color: #eee;
+        }
+    </style>
 @stop
 @section('content')
     <div class="panel panel-default">
@@ -66,7 +76,43 @@
     <script src="{{ url('js/lib/underscore.js') }}"></script>
     <script src="{{ url('js/lib/backbone.js') }}"></script>
     <script src="{{ url('js/contractmvc.js') }}"></script>
+    <script type="text/template" id="metadataViewTemplate">
+        <table class="table">
+            <tr>
+                <td>Contract Identifier</td>
+                <td><%= contract_identifier %></td>
+            </tr>
+            <tr>
+                <td>Language</td>
+                <td><%= language %></td>
+            </tr>
 
+            <tr>
+                <td>Government Entity</td>
+                <td><%= government_entity %></td>
+            </tr>
+            <tr>
+                <td>Government Identifier</td>
+                <td><%= government_identifier %></td>
+            </tr>
+            <tr>
+                <td>Type of Contract</td>
+                <td><%= type_of_contract %></td>
+            </tr>
+            <tr>
+                <td>Signature Date</td>
+                <td><%= signature_date %></td>
+            </tr>
+            <tr>
+                <td>Document Type</td>
+                <td><%= document_type %></td>
+            </tr>
+            <tr>
+                <td>Translation from original</td>
+                <td><%= translation_parent %></td>
+            </tr>
+        </table>
+    </script>
     <script>
         var contract1Annotations = {!!json_encode($contract1Annotations)!!};
         var contract2Annotations = {!!json_encode($contract2Annotations)!!};

@@ -140,6 +140,7 @@ var PageView = Backbone.View.extend({
         this.annotationsListView.toggle();
     },
     toggleMetadataList: function() {
+        console.log(this.metadataView);
         this.metadataView.toggle();
     },
     saveClicked: function() {
@@ -364,10 +365,12 @@ var MetadataView = Backbone.View.extend({
     },
     render: function() {
         var that = this;
+        var template = _.template($('#metadataViewTemplate').html());
         that.$el.append('<ul>');
         console.log(this.options.metadata)
         //todo make view for metadata
-        that.$el.append('</ul>');
+        console.log(template(this.options.metadata))
+        this.$el.append(template(this.options.metadata));
         return this;
     },
     toggle: function() {
