@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Services\APIService;
+use App\Http\Services\ContractService;
 use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
@@ -13,20 +14,26 @@ class SiteController extends BaseController
     /**
      * @var APIService
      */
-    private $api;
+    protected $api;
     /**
      * @var Request
      */
-    private $request;
+    protected $request;
+    /**
+     * @var ContractService
+     */
+    protected $contract;
 
     /**
-     * @param APIService $api
-     * @param Request    $request
+     * @param APIService      $api
+     * @param Request         $request
+     * @param ContractService $contract
      */
-    public function __construct(APIService $api, Request $request)
+    public function __construct(APIService $api, Request $request, ContractService $contract)
     {
-        $this->api     = $api;
-        $this->request = $request;
+        $this->api      = $api;
+        $this->request  = $request;
+        $this->contract = $contract;
     }
 
     /**
@@ -105,5 +112,24 @@ class SiteController extends BaseController
         }
 
         return view('site.filter', compact('contracts', 'filters'));
+    }
+
+    /**
+     * @param Request $request
+     * @param         $contractId1
+     * @param         $contractId2
+     * @return \Illuminate\View\View
+     */
+    public function compare($contractId1, $contractId2)
+    {
+        $contract1Annotations = $this->contract->annotations($contractId1);
+        $contract2Annotations = $this->contract->annotations($contractId2);
+        $contract1    = $this->api->getMetadataDocument($contractId1);
+        $contract2   = $this->api->getMetadataDocument($contractId2);
+
+        return view(
+            'site.contract.compare',
+            compact('contract1Annotations','contract2Annotations','contract1','contract2')
+        );
     }
 }

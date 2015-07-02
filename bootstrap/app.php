@@ -78,9 +78,10 @@ $app->singleton(
 |
 */
 
-$app->register('Collective\Html\HtmlServiceProvider');
+//$app->register('Collective\Html\HtmlServiceProvider');
+//$app->register('Laracasts\Utilities\UtilitiesServiceProvider');
 $app->register(App\Providers\AppServiceProvider::class);
-class_alias('Collective\Html\FormFacade', 'Form');
+//class_alias('Collective\Html\FormFacade', 'Form');
 
 
 

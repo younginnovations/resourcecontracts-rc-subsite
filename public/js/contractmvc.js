@@ -40,6 +40,9 @@ var Contract = Backbone.Model.extend({
     getAnnotationsListEl: function() {
         return this.options.annotationslistEl;
     },
+    getMetadataEl: function() {
+        return this.options.metadataEl;
+    },
     addAnnotation: function(annotation) {
         this.annotationCollection.add(annotation);
     }
@@ -114,6 +117,7 @@ var PageView = Backbone.View.extend({
         this.pdfView = options.pdfView || null;
         this.annotatorjsView = options.annotatorjsView || null;
         this.annotationsListView = options.annotationsListView || null;
+        this.metadataView = options.metadataView || null;
         this.searchFormView = options.searchFormView || null;
         // this.paginationView = new PaginationView({paginationEl: options.contractModel.getPaginationEl(), totalPages: options.contractModel.get('totalPages'), pageModel: options.model});
         // this.textEditorView = new TextEditorView({editorEl: options.contractModel.getEditorEl(), model: options.model});
@@ -128,11 +132,16 @@ var PageView = Backbone.View.extend({
         if(this.pdfView) this.pdfView.render();
         if(this.annotatorjsView) this.annotatorjsView.render();
         if(this.annotationsListView) this.annotationsListView.render();
+        if(this.metadataView) this.metadataView.render();
         if(this.searchFormView) this.searchFormView.render();        
         return this;
     },
     toggleAnnotationList: function() {
         this.annotationsListView.toggle();
+    },
+    toggleMetadataList: function() {
+        console.log(this.metadataView);
+        this.metadataView.toggle();
     },
     saveClicked: function() {
         this.options.pageModel.save();
@@ -342,6 +351,26 @@ var AnnotationsListView = Backbone.View.extend({
             that.$el.append(annotationSideView.render().$el);
         })
         // that.$el.append('</ul>');
+        return this;
+    },
+    toggle: function() {
+        this.$el.toggle();
+    }
+});
+
+var MetadataView = Backbone.View.extend({
+    initialize: function(options) {
+        this.options = options;
+        this.$el = $(options.metadataEl);
+    },
+    render: function() {
+        var that = this;
+        var template = _.template($('#metadataViewTemplate').html());
+        that.$el.append('<ul>');
+        console.log(this.options.metadata)
+        //todo make view for metadata
+        console.log(template(this.options.metadata))
+        this.$el.append(template(this.options.metadata));
         return this;
     },
     toggle: function() {

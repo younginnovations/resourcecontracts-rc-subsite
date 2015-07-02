@@ -54,6 +54,8 @@ class PageController extends BaseController
      */
     public function annotations()
     {
-        return response()->json($this->api->getAnnotationPage($this->request->input('contract'), $this->request->input('document_page_no')));
+        return response()->json(
+            $this->api->getAnnotationPage($this->request->input('contract'), $this->request->input('document_page_no'))
+        );
     }
 }

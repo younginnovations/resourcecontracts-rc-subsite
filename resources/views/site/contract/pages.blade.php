@@ -13,11 +13,11 @@
                 <div class="title">{{$contract['metadata']['contract_name']}}</div>
             </div>
             <div class=" pull-right contract-actions view-document-action">
-                <a href="" class="download">Download<span
+                <a target="_blank" href="{{ isset($document['metadata']['file_url']) ? $document['metadata']['file_url'] : ''}}" class="download">Download<span
                             class="size">({{getFileSize($contract['metadata']['file_size'])}})</span></a>
                 <div class="contract-annotations">
-                    <a href="" class="view-annotations open-annotations">View Annotations</a>
-                    <a href="" class="view-annotations close-annotations">Close Annotations</a>
+                    <a href="javascript:void();" class="open-annotations">View Annotations</a>
+                    <a href="javascript:void();" class="open-metadata">View Metadata</a>
                 </div>
             </div>
         </div>
@@ -59,24 +59,6 @@
             </div>
         </div>
     </div>
-        <div class="annotation-pop">
-            <ul>
-                @foreach($annotations as $anote)
-                    <li>
-                        <div class="pull-left page-num">{{$anote['page_no']}}</div>
-                        <div class="pull-left">
-                            <div class="annotation-text">{{$anote['text']}}</div>
-                            <div class="quote">{{$anote['quote']}}</div>
-                            <div class="tags">
-                                @foreach($anote['tag'] as $tag)
-                                    <span>{{$tag}}</span>
-                                @endforeach
-                            </div>
-                        </div>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
     </div>
 @endsection
 
@@ -133,7 +115,7 @@
                 annotatorjsEl: contract.getAnnotatorjsEl(),
                 pageModel: contract.getPageModel(),
                 contractModel: contract,
-                tags:['test']
+                tags:[]
             }),
             searchFormView: new SearchFormView({
                 collection: contract.searchResultCollection,
