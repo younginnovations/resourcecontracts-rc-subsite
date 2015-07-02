@@ -2,6 +2,31 @@
 @section('css')
     <link rel="stylesheet" href="{{ url('css/pagination.css') }}"/>
     <link rel="stylesheet" href="{{ url('css/annotator.css') }}">
+    <style>
+        .popup-metadata {
+            position: absolute;
+            background-color: #FFFFFF  ;
+            padding: 20px;
+            right: 0px;
+            z-index: 100;
+            border: 1px solid #ccc;
+            top: 107px;
+            font-size: 14px;
+            width: 330px;
+            text-align: left;
+        }
+        .annotation-list {
+            position: absolute;
+            background-color: #FFFFFF  ;
+            padding: 20px;
+            right: 143px;
+            z-index: 100;
+            border: 1px solid #ccc;
+            top: 107px;
+            font-size: 14px;
+            width: 330px;
+        }
+    </style>
 @stop
 @section('content')
     <div class="panel panel-default">
@@ -16,11 +41,16 @@
                 <a target="_blank" href="{{ isset($document['metadata']['file_url']) ? $document['metadata']['file_url'] : ''}}" class="download">Download<span
                             class="size">({{getFileSize($contract['metadata']['file_size'])}})</span></a>
                 <div class="contract-annotations">
-                    <a href="javascript:void();" class="open-annotations">View Annotations</a>
-                    <a href="javascript:void();" class="open-metadata">View Metadata</a>
+                    <a href="#" class="annotation_button">View Annotations</a>
+                    <div id="annotations_list" class="annotation-list" style="display:none"></div>
+                </div>
+                <div class="contract-metadata">
+                    <a href="#" class="metadata_button">View Metadata</a>
+                    <div id="metadata" class="metadata" style="display:none"></div>
                 </div>
             </div>
         </div>
+
         <div id="searchForm"></div>
         <script type="text/template" id="searchFormTemplate">
 
@@ -56,6 +86,7 @@
                 </div>
                 <div class="searchresults"></div>
 
+
             </div>
         </div>
     </div>
@@ -70,6 +101,18 @@
     <script src="{{ url('js/lib/underscore.js') }}"></script>
     <script src="{{ url('js/lib/backbone.js') }}"></script>
     <script src="{{ url('js/contractmvc.js') }}"></script>
+    <script type="text/template" id="metadataViewTemplate">
+        <div class="popup-metadata">
+            <p><strong>Contract Title:</strong><%= contract_name %></p>
+            <p><strong>Country:</strong> <%= country.name %></p>
+            <p><strong>Date of signature:</strong> <%= signature_date %></p>
+            <p><strong>Resource:</strong>
+                <% _.each(resource, function(name){ %>
+                        <%= _.escape(name) %>
+                <% }); %>
+            </p></div>
+
+    </script>
 
     <script>
         //defining format to use .format function
@@ -81,6 +124,12 @@
             }
             return formatted;
         };
+        var contractAnnotations = {!!json_encode($annotations)!!};
+        var contractMetadata = {!!json_encode($contract['metadata'])!!};
+        var annotationsCollection = new MyAnnotationCollection()
+        contractAnnotations.forEach(function (annotationData) {
+            annotationsCollection.add(annotationData);
+        });
         var contract = new Contract({
             id: '{{$contract['contract_id']}}',
             totalPages: '{{$contract['total_pages']}}',
@@ -89,7 +138,8 @@
 
             editorEl: '#editor',
             paginationEl: '#pagination',
-            // annotationEl: '#annotation',
+            annotationslistEl: '#annotations_list',
+            metadataEl: '#metadata',
             pdfviewEl: 'pdfcanvas',
             annotatorjsEl: '#annotatorjs',
             textLoadAPI: "{{route('contract.page.get', ['id'=>$contract['contract_id']])}}",
@@ -126,7 +176,24 @@
                 collection: contract.searchResultCollection,
                 pageModel: contract.getPageModel(),
             }),
+            annotationsListView: new AnnotationsListView({
+                annotationslistEl: contract.getAnnotationsListEl(),
+                collection: annotationsCollection,
+                pageModel: contract.getPageModel()
+            }),
+            metadataView: new MetadataView({
+                metadataEl: contract.getMetadataEl(),
+                metadata: contractMetadata,
+                pageModel: contract.getPageModel()
+            })
         }).render();
+        $('.annotation_button').click(function () {
+            pageView.toggleAnnotationList();
+        });
+        $('.metadata_button').click(function () {
+            pageView.toggleMetadataList();
+
+        });
     </script>
 @stop
 
