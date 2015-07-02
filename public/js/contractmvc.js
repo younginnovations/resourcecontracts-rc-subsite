@@ -367,9 +367,6 @@ var MetadataView = Backbone.View.extend({
         var that = this;
         var template = _.template($('#metadataViewTemplate').html());
         that.$el.append('<ul>');
-        console.log(this.options.metadata)
-        //todo make view for metadata
-        console.log(template(this.options.metadata))
         this.$el.append(template(this.options.metadata));
         return this;
     },

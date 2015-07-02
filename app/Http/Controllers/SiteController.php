@@ -89,8 +89,9 @@ class SiteController extends BaseController
     {
         $page_no     = 1;
         $page        = $this->api->getTextPage($id, $page_no);
-        $annotations = $this->api->getAnnotations($id);
         $contract    = $this->api->getMetadataDocument($id);
+        $annotations = $this->contract->annotations($id);
+
         if ($contract === false) {
             return "error";
         }

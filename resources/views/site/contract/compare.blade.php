@@ -12,8 +12,6 @@
             width: 400px;
             background-color: #eee;
         }
-    </style>
-    <style>
         .metadata {
             display: block;
             position: absolute;

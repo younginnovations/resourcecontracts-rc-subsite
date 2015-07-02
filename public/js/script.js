@@ -44,6 +44,14 @@ $(document).ready(function () {
             $('.close-annotations').hide();
             $('.open-annotations').show();
         }
+
+        if ($(e.target).closest('.contract-annotations').length === 0) {
+            $('.annotation-list').hide();
+        }
+
+        if ($(e.target).closest('.contract-metadata').length === 0) {
+            $('.metadata').hide();
+        }
     });
 
 
