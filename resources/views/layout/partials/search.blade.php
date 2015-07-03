@@ -1,53 +1,88 @@
-<div class="top-container">
+<div class="top-container @if(isset($show_advance) && $show_advance) expand @endif">
     <div class="top-inner-container">
         <div class="search-wrapper">
-            <div class="search-box">
-                <form role="form" method="get" action="{{route('filter')}}">
-                    <input name="q" value="@if(isset($filters['q'])) {{$filters['q']}}@endif" type="text"
-                           placeholder="Search for a contract..." class="text">
-                    <input type="submit" class="submit">
-                </form>
-            </div>
-            <form role="form" method="get" action="{{route('filter')}}">
-                <span class="search-link open">Advanced Search</span>
-                <span class="search-link search-hide">Close Advanced Search</span>
+            <form role="form" id="advance-search" method="get" action="{{route('filter')}}">
+                <div class="search-box">
+                    <form role="form" method="get" action="{{route('filter')}}">
+                        <input name="q" value="{{$filter['q'] or ''}}" type="text"
+                               placeholder="Search for a contract..." class="text">
+                        <input type="submit" class="submit"/>
+                </div>
 
-                <div class="search-input-wrapper">
+                <span class="search-link open" @if(isset($show_advance) && $show_advance) style="display:none"  @endif>Advanced Search</span>
+                <span class="search-link search-hide" @if(isset($show_advance) && $show_advance) style="display:inline-block"  @endif>Close Advanced Search</span>
+
+                <div class="search-input-wrapper" @if(isset($show_advance) && $show_advance) style="display: block"  @endif >
                     <div class="search-input">
-                        {{--<div class="input-wrapper">--}}
-                        {{--<label for="">Year (from)</label>--}}
-                        {{--<input  type="text">--}}
-                        {{--</div>--}}
-                        {{--<div class="input-wrapper">--}}
-                        {{--<label for="">Year (to)</label>--}}
-                        {{--<input  type="text">--}}
-                        {{--</div>--}}
                         <div class="input-wrapper">
                             <label for="">Country</label>
-                            <select name="country" id="">
+                            <select name="country[]" id="" multiple="multiple">
                                 @foreach($summary['country_summary'] as $country)
-                                    <option @if(isset($filters['country']) and $country['key'] == $filters['country'])
-                                        selected
+                                    <option @if(isset($filter['country']) && in_array($country['key'], $filter['country']))
+                                        selected="selected"
                                         @endif value="{{$country['key']}}">{{trans('country.'.strtoupper($country['key']))}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="input-wrapper">
-                            <label for="">Contract type</label>
-                            <select name="resource" id="">
-                                @foreach($summary['resource_summary'] as $resource)
-                                    <option @if(isset($filters['resource']) and $resource['key'] == $filters['resource'])
-                                        selected
-                                        @endif value="{{$resource['key']}}">{{ucfirst($resource['key'])}}</option>
+                            <label for="year">Year</label>
+                            <select name="year[]" id="year" multiple="multiple">
+                                @foreach($summary['year_summary'] as $year)
+                                    <option  @if(isset($filter['year']) && in_array($year['key'], $filter['year']))
+                                        selected="selected" @endif    value="{{$year['key']}}">{{$year['key']}}</option>
                                 @endforeach
                             </select>
                         </div>
+
+                        <div class="input-wrapper">
+                            <label for="sortby">Order by</label>
+                            <select name="sortby" id="sortby">
+                                <option value="">Select</option>
+                                <option @if(isset($filter['sortby']) && $filter['sortby'] == 'country')
+                                    selected="selected" @endif value="country">Country
+                                </option>
+                                <option @if(isset($filter['sortby']) && $filter['sortby'] == 'year') selected="selected"
+                                                                                                     @endif value="year">
+                                    Year
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="input-wrapper">
+                            <label for="order">Sort by</label>
+                            <select name="order" id="order">
+                                <option value="">Select</option>
+                                <option @if(isset($filter['order']) && $filter['order'] == 'asc') selected="selected"
+                                                                                                  @endif value="asc">ASC
+                                </option>
+                                <option @if(isset($filter['order']) && $filter['order'] == 'desc') selected="selected"
+                                                                                                   @endif value="desc">
+                                    DESC
+                                </option>
+                            </select>
+                        </div>
                     </div>
+                    <input type="button" class="btn btn-reset btn-default" value="reset">
                     <button type="submit" class="btn btn-search">Search</button>
                 </div>
         </div>
         </form>
     </div>
+
+    @section('script')
+        <script>
+            $(function () {
+                $('.btn-reset').on('click', function () {
+                    $('input[type=text]').val('');
+                    $('select', '#advance-search').each(function(){
+                        $(this).select2('val', null);
+                    });
+                });
+            });
+        </script>
+    @stop
+
+
     <div class="breadcrumb-wrapper">
         <div class="breadcrumb">
             <ul>

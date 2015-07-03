@@ -101,22 +101,6 @@ class SiteController extends BaseController
 
     /**
      * @param Request $request
-     * @return \Illuminate\View\View
-     */
-    public function filter(Request $request)
-    {
-        $contracts = $this->api->filter($request->all());
-        $filters   = $request->all();
-
-        if ($contracts === false) {
-            return "error";
-        }
-
-        return view('site.filter', compact('contracts', 'filters'));
-    }
-
-    /**
-     * @param Request $request
      * @param         $contractId1
      * @param         $contractId2
      * @return \Illuminate\View\View

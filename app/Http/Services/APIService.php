@@ -2,7 +2,8 @@
 namespace App\Http\Services;
 
 use GuzzleHttp\Client;
-use Log;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Log;
 use GuzzleHttp\Message\Request;
 
 /**
@@ -21,8 +22,8 @@ class APIService
     protected $logger;
 
     /**
-     * @param Client $client
-     * @param Log    $logger
+     * @param Client    $client
+     * @internal param Log $logger
      */
     public function __construct(Client $client)
     {
@@ -82,9 +83,6 @@ class APIService
         } catch (\Exception $e) {
             Log::error("Error.{$e->getMessage()}");
         }
-        echo "herer";
-        exit;
-
         return false;
     }
 
@@ -166,19 +164,26 @@ class APIService
      * @param $filter
      * @return Array|false
      */
-    public function filter($filter)
+    public function filterSearch($filter)
     {
         try {
-            $response = $this->client->get($this->apiURL(sprintf('es/contracts/filter')), ['query' => $filter]);
-            $data     = $response->getBody();
-            $metadata = json_decode($data, true);
 
-            return $metadata;
+            $filter = array_filter($filter);
+            $response     = $this->client->get(
+                $this->apiURL(sprintf('es/contracts/fulltextsearch')),
+                ['query' => $filter]
+            );
+            $data         = $response->getBody();
+            $data = (object) json_decode($data, true);
+
+            $data->result = new Paginator($data->result, $data->per_page);
+            return $data;
+
         } catch (\Exception $e) {
             Log::error("Error.{$e->getMessage()}");
         }
 
-        return false;
+        return null;
     }
 
     /**
