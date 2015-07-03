@@ -16,10 +16,6 @@ a:hover,a:focus {
     color: #F26747;
 }
 
-.btn:focus {
-    color: #fff;
-}
-
 input:focus,button:focus,textarea:focus,.btn:focus {
 	outline: 0!important;
 }
@@ -125,9 +121,11 @@ input:focus,button:focus,textarea:focus,.btn:focus {
 .panel-default > .panel-heading {
     font-size: 26px;
     background: #f9f9f9;
-    padding: 20px 32px;
+    padding: 20px;
     border: 0;
-    overflow: hidden;
+    display: inline-block;
+    width: 100%;
+    vertical-align: top;
 }
 
 .panel-default > .panel-heading span {
@@ -810,6 +808,7 @@ header {
 
 #pagelist {
     background: transparent;
+    clear: both;
 }
 
 #pagelist ul {
@@ -851,4 +850,56 @@ header {
 
 .search-box form {
     width: 100%;
+}
+
+.top-document-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0 0;
+}
+
+.left-title-wrap,.right-title-wrap {
+    float: left;
+    width: 50%;
+    padding: 0 20px;
+    line-height: 34px;
+}
+
+.left-title-wrap .title,.right-title-wrap .title {
+    font-size: 16px;
+}
+
+.left-title-wrap > .pull-right > a,.right-title-wrap > .pull-right > a {
+    margin-left: 10px;
+}
+
+.simple-pagination {
+    clear: both;
+    padding-top: 12px!important;
+}
+
+.left-title-wrap > .pull-right,.right-title-wrap > .pull-right {
+    display: flex;
+}
+
+.annotation-pop-wrap {
+    margin-left: 10px;
+    position: relative;
+}
+
+.metadata,.annotation-list {
+    position: absolute;
+    background-color: #FFFFFF  ;
+    padding: 20px;
+    right: 0px;
+    z-index: 100;
+    border: 1px solid #ccc;
+    top: 40px;
+    font-size: 14px;
+    width: 330px;
+    text-align: left;
+}
+
+.popup-metadata p {
+    line-height: 22px;
 }
