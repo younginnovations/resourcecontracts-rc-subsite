@@ -438,7 +438,7 @@ header {
 }
 
 .top-inner-container {
-  padding: 20px 32px;
+  padding: 20px 0;
   overflow: hidden;
 }
 
@@ -461,6 +461,7 @@ header {
   -ms-border-radius: 4px;
   border-radius: 4px;
   justify-content: space-between;
+  margin-left: 32px;
 }
 .search-box .text {
   color: #999999;
@@ -485,6 +486,7 @@ header {
   padding-left: 18px;
   background: url(../images/ic_sprite.png) no-repeat -276px 0;
   cursor: pointer;
+  margin-left: 32px;
 }
 
 .search-hide {
@@ -512,24 +514,20 @@ header {
 }
 
 .search-input-wrapper {
-  position: absolute;
   width: 100%;
   background-color: #fff;
-  left: 0px;
-  top: 106px;
   z-index: 1;
   padding-left: 32px;
   display: none;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  bottom: auto;
+  margin-top: 4px;
 }
 
-.search-input-wrapper .input-wrapper:nth-child(2n) {
-  padding-right: 0;
+.search-input-wrapper .input-wrapper:nth-child(3),.search-input-wrapper .input-wrapper:nth-child(4) {
+    width: 150px;
 }
 
 .search-input {
-  width: 530px;
   -webkit-display: flex;
   -moz-display: flex;
   -ms-display: flex;
@@ -541,7 +539,7 @@ header {
   padding: 0 10px 20px 0;
 }
 
-.btn-search,.btn-view {
+.btn-search,.btn-view,.btn-reset {
   margin-bottom: 40px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -551,6 +549,7 @@ header {
   color: #fff;
   width: 150px;
   padding: 8px 12px;
+  text-transform: capitalize;
 }
 
 .btn-view {
@@ -558,9 +557,19 @@ header {
     margin-top: 5px;
 }
 
+.btn-reset {
+    background: #404040;
+    margin-right: 6px;
+}
+
 .btn-search:hover,.btn-view:hover {
     color: #fff;
     background: #F26747;
+}
+
+.btn-reset:hover,.btn-reset:focus {
+    background: #333;
+    color: #fff;
 }
 
 .breadcrumb-wrapper {
@@ -902,4 +911,16 @@ header {
 
 .popup-metadata p {
     line-height: 22px;
+}
+
+.select2-container--classic .select2-search--inline .select2-search__field {
+    height: 22px;
+}
+
+.select2-container--classic .select2-search--inline .select2-search__field {
+    width: 50px!important;
+}
+
+.select2-search__field[placeholder="select"] {
+    width: 100% !important;
 }

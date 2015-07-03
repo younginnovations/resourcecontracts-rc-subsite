@@ -32,6 +32,7 @@ $(document).ready(function () {
         $('.open-annotations').css('display', 'inline-block');
     });
 
+/*
     $(document).on('click', function (e) {
         if ($(e.target).closest('.search-wrapper').length === 0) {
             $('.search-input-wrapper').hide();
@@ -53,6 +54,7 @@ $(document).ready(function () {
         //    $('.metadata').hide();
         //}
     });
+*/
 
 
 });
