@@ -3,62 +3,57 @@
     <link rel="stylesheet" href="{{ url('css/pagination.css') }}"/>
     <link rel="stylesheet" href="{{ url('css/annotator.css') }}">
     <link rel="stylesheet" href="{{ url('css/simplePagination.css') }}">
-    <style>
-        .annotation-list {
-            display: block;
-            position: absolute;
-            top: 40px;
-            right: 0px;
-            width: 400px;
-            background-color: #eee;
-        }
-        .metadata {
-            display: block;
-            position: absolute;
-            top: 40px;
-            right: 0px;
-            width: 400px;
-            background-color: #eee;
-        }
-    </style>
 @stop
 @section('content')
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="pull-left">
                 <div class="title">Compare Contracts</div>
-
             </div>
             <a class="btn btn-default pull-right" href="{{route('home')}}">Home</a>
         </div>
         <div class="panel-body panel-view-wrapper">
+            <div class="top-document-wrapper">
+                <div class="left-title-wrap">
+                    <div class="title pull-left">{{$contract1['metadata']['contract_name']}}</div>
+                    <div class="pull-right">
+                        <div class="annotation-pop-wrap">
+                          <a id="left" class="btn btn-default annotation_button" href="#">Annotations</a>
+                            <div id="annotations_list_left" class="annotation-list" style="display:none"></div>
+                            </div>
+                        <div class="annotation-pop-wrap">
+                          <a id="left" class="btn btn-default metadata_button" href="#">Metadata</a>
+                            <div id="metadata_left" class="metadata" style="display:none"></div>
+                        </div>
+                    </div>
+                    <div id="pagination_left"></div>
+                </div>
+                <div class="right-title-wrap">
+                    <div class="title pull-left">{{$contract2['metadata']['contract_name']}}</div>
+                    <div class="pull-right">
+                        <div class="annotation-pop-wrap">
+                            <a id="right" class="btn btn-default annotation_button" href="#">Annotations</a>
+                            <div id="annotations_list_right" class="annotation-list" style="display:none"></div>
+                            </div>
+                        <div class="annotation-pop-wrap">
+                            <a id="right" class="btn btn-default metadata_button" href="#">Metadata</a>
+                            <div id="metadata_right" class="metadata" style="display:none"></div>
+                        </div>
+                    </div>
+                    <div id="pagination_right"></div>
+                </div>
+            </div>
             <div id="pagelist">
                 <div class="document-wrap">
-
                     <div id="annotatorjs_left" class="left-document-wrap">
-                        <div class="title">{{$contract1['metadata']['contract_name']}}</div>
-                        <a id="left" class="btn btn-default pull-right annotation_button" href="#">Annotations</a>
-                        <a id="left" class="btn btn-default pull-right metadata_button" href="#">Metadata</a>
-
-                        <div class="quill-wrapper">
-                            <div id="pagination_left"></div>
-
+                      <div class="quill-wrapper">
                             <div id="editor_left" class="editor"></div>
                         </div>
-                        <div id="metadata_left" class="metadata" style="display:none"></div>
-                        <div id="annotations_list_left" class="annotation-list" style="display:none"></div>
-                    </div>
+                     </div>
                     <div class="right-document-wrap" id="annotatorjs_right">
-                        <div class="title">{{$contract2['metadata']['contract_name']}}</div>
-                        <a id="right" class="btn btn-default pull-right annotation_button" href="#">Annotations</a>
-                        <a id="right" class="btn btn-default pull-right metadata_button" href="#">Metadata</a>
-
-                        <div class="quill-wrapper">
-                            <div id="pagination_right"></div>
-                            <div id="editor_right" class="editor"></div>
+<div class="quill-wrapper">
+                           <div id="editor_right" class="editor"></div>
                         </div>
-                        <div id="metadata_right" class="metadata" style="display:none"></div>
-                        <div id="annotations_list_right" class="annotation-list" style="display:none"></div>
                     </div>
                 </div>
             </div>
@@ -75,41 +70,16 @@
     <script src="{{ url('js/lib/backbone.js') }}"></script>
     <script src="{{ url('js/contractmvc.js') }}"></script>
     <script type="text/template" id="metadataViewTemplate">
-        <table class="table">
-            <tr>
-                <td>Contract Identifier</td>
-                <td><%= contract_identifier %></td>
-            </tr>
-            <tr>
-                <td>Language</td>
-                <td><%= language %></td>
-            </tr>
+        <div class="popup-metadata">
+            <p><strong>Contract Title:</strong><%= contract_name %></p>
+            <p><strong>Country:</strong> <%= country.name %></p>
+            <p><strong>Date of signature:</strong> <%= signature_date %></p>
+            <p><strong>Resource:</strong>
+                <% _.each(resource, function(name){ %>
+                <%= _.escape(name) %>
+                <% }); %>
+            </p></div>
 
-            <tr>
-                <td>Government Entity</td>
-                <td><%= government_entity %></td>
-            </tr>
-            <tr>
-                <td>Government Identifier</td>
-                <td><%= government_identifier %></td>
-            </tr>
-            <tr>
-                <td>Type of Contract</td>
-                <td><%= type_of_contract %></td>
-            </tr>
-            <tr>
-                <td>Signature Date</td>
-                <td><%= signature_date %></td>
-            </tr>
-            <tr>
-                <td>Document Type</td>
-                <td><%= document_type %></td>
-            </tr>
-            <tr>
-                <td>Translation from original</td>
-                <td><%= translation_parent %></td>
-            </tr>
-        </table>
     </script>
     <script>
         var contract1Annotations = {!!json_encode($contract1Annotations)!!};

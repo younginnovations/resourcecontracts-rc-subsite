@@ -2,31 +2,7 @@
 @section('css')
     <link rel="stylesheet" href="{{ url('css/pagination.css') }}"/>
     <link rel="stylesheet" href="{{ url('css/annotator.css') }}">
-    <style>
-        .popup-metadata {
-            position: absolute;
-            background-color: #FFFFFF  ;
-            padding: 20px;
-            right: 0px;
-            z-index: 100;
-            border: 1px solid #ccc;
-            top: 107px;
-            font-size: 14px;
-            width: 330px;
-            text-align: left;
-        }
-        .annotation-list {
-            position: absolute;
-            background-color: #FFFFFF  ;
-            padding: 20px;
-            right: 143px;
-            z-index: 100;
-            border: 1px solid #ccc;
-            top: 107px;
-            font-size: 14px;
-            width: 330px;
-        }
-    </style>
+
 @stop
 @section('content')
     <div class="panel panel-default">
@@ -38,13 +14,13 @@
                 <div class="title">{{$contract['metadata']['contract_name']}}</div>
             </div>
             <div class=" pull-right contract-actions view-document-action">
-                <a target="_blank" href="{{ isset($document['metadata']['file_url']) ? $document['metadata']['file_url'] : ''}}" class="download">Download<span
+                <a target="_blank" href="{{ $document['metadata']['file_url'] or ''}}" class="download">Download<span
                             class="size">({{getFileSize($contract['metadata']['file_size'])}})</span></a>
-                <div class="contract-annotations">
+                <div class="contract-annotations annotation-pop-wrap">
                     <a href="#" class="annotation_button">View Annotations</a>
                     <div id="annotations_list" class="annotation-list" style="display:none"></div>
                 </div>
-                <div class="contract-metadata">
+                <div class="contract-metadata annotation-pop-wrap">
                     <a href="#" class="metadata_button">View Metadata</a>
                     <div id="metadata" class="metadata" style="display:none"></div>
                 </div>
