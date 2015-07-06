@@ -77,7 +77,8 @@ var Page = Backbone.Model.extend({
             type: 'GET',
             async: false,
             success: function (response) {
-                that.set('text', response.message);
+                that.set('text', response.text);
+                that.set('pdf_url', response.pdf_url);
                 if(that.searchTerm) {
                     that.highLightText(that.searchTerm);
                 }
@@ -85,19 +86,9 @@ var Page = Backbone.Model.extend({
             }
         });
     },
-    save: function(htmlContent) {
-        $.ajax({
-            url: this.options.saveUrl,
-            data: {'text': this.get('text'), 'page': this.get('pageNumber')},
-            type: 'POST'
-        }).done(function (response) {
-            this.textUpdated = false;
-            $('#message').html('<div class="alert alert-success">Your corrections / changes have been saved</div>');
-            $('html,body').animate({ scrollTop: $('body').offset().top},'slow');
-        });
-    },
     getPdfLocation: function() {
-        return "http://{2}/data/{0}/pages/{1}.pdf".format(this.options.contractModel.get('id'), this.get('pageNumber'),'ebproject-dev.elasticbeanstalk.com');
+        console.log(this.get('pdf_url'));
+        return "http://{2}/data/{0}/pages/{1}.pdf".format(this.options.contractModel.get('id'), this.get('pageNumber'),'resourcecontracts-demo.elasticbeanstalk.com');
     },
     highLightText: function(searchTerm) {
         var regex = new RegExp(searchTerm, "gi");        
@@ -330,7 +321,7 @@ var AnnotationSideView = Backbone.View.extend({
     render: function() {
         // <li><span><a onclick='annotationClicked(this,"+contract.id+","+annotation.page+")' href='#'>{0}</a> [Page {1}]</span><br><p>{2}</p></li>
         this.$el.html('<a href="#">'+this.model.get('quote')+'</a>[Page '+this.model.get('page')+']<br><p>'+this.model.get('text')+'</p>');
-        return this;
+        return this;t
     },
     changePage: function() {
         this.options.pageModel.setPageNumber(this.model.get('page'));
