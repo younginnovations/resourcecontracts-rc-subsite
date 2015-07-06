@@ -87,8 +87,7 @@ var Page = Backbone.Model.extend({
         });
     },
     getPdfLocation: function() {
-        console.log(this.get('pdf_url'));
-        return "http://{2}/data/{0}/pages/{1}.pdf".format(this.options.contractModel.get('id'), this.get('pageNumber'),'resourcecontracts-demo.elasticbeanstalk.com');
+        return this.get('pdf_url');
     },
     highLightText: function(searchTerm) {
         var regex = new RegExp(searchTerm, "gi");        
