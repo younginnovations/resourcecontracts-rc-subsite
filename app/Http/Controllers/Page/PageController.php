@@ -34,7 +34,7 @@ class PageController extends BaseController
     {
         $page = $this->api->getTextPage($contractId, $this->request->input('page'));
 
-        return response()->json(['result' => 'success', 'message' => $page['text']]);
+        return response()->json(['result' => 'success', 'text' => $page['text'], 'pdf_url' => $page['pdf_url']]);
     }
 
     /**
