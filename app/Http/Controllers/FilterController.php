@@ -3,8 +3,15 @@
 use App\Http\Services\APIService;
 use Illuminate\Http\Request;
 
+/**
+ * Class FilterController
+ * @package App\Http\Controllers
+ */
 class FilterController
 {
+    /**
+     * @var APIService
+     */
     protected $api;
 
     /**
@@ -41,7 +48,7 @@ class FilterController
 
         $filter['year'] = is_array($request->get('year')) ? $request->get('year') : [$request->get('year')];
 
-        if (!$request->get('country')) {
+        if (!$request->get('year')) {
             $filter['year'] = isset($contract->year) ? $contract->year : [];
         }
 
@@ -49,5 +56,4 @@ class FilterController
 
         return view('site.filter', compact('contract', 'filter', 'show_advance'));
     }
-
 }
