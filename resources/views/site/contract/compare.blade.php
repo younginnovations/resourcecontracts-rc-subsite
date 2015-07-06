@@ -10,7 +10,18 @@
             <div class="pull-left">
                 <div class="title">Compare Contracts</div>
             </div>
-            <a class="btn btn-default pull-right" href="{{route('home')}}">Home</a>
+            <div id="searchForm"></div>
+            <script type="text/template" id="searchFormTemplate">
+                <form method="POST" action="{{route('contract.page.search', ["id"=>$contract1['contract_id']])}}" accept-charset="UTF-8" class="form-inline page-search pull-right" style="width: 421px; margin: 0 auto 23px;">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input id="textfield" class="form-control" placeholder="Search..." style="padding:15px; width:280px" name="q" type="text">
+                        </div>
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Search">
+                </form>
+            </script>
+            {{--<a class="btn btn-default pull-right" href="{{route('home')}}">Home</a>--}}
         </div>
         <div class="panel-body panel-view-wrapper">
             <div class="top-document-wrapper">
@@ -46,12 +57,14 @@
             <div id="pagelist">
                 <div class="document-wrap">
                     <div id="annotatorjs_left" class="left-document-wrap">
+                      <div id="SearchResultsListLeft" ></div>
                       <div class="quill-wrapper">
                             <div id="editor_left" class="editor"></div>
                         </div>
                      </div>
                     <div class="right-document-wrap" id="annotatorjs_right">
-<div class="quill-wrapper">
+                        <div id="SearchResultsListRight"></div>
+                        <div class="quill-wrapper">
                            <div id="editor_right" class="editor"></div>
                         </div>
                     </div>
@@ -202,6 +215,27 @@
             })
 
         }).render();
+
+        var searchView = new PageView({
+            searchFormView: new SearchMultipleContractFormView({
+                collectionRight: contractRight.searchResultCollection,
+                collectionLeft: contractLeft.searchResultCollection,
+                contractIdRight: '{{$contract1['contract_id']}}',
+                contractIdLeft: '{{$contract2['contract_id']}}',
+                el: '#searchForm'
+            }),
+            searchResultsListLeft: new SearchResultListView({
+                el: '#SearchResultsListLeft',
+                collection: contractLeft.searchResultCollection,
+                pageModel: contractLeft.getPageModel()
+            }),
+            searchResultsListRight: new SearchResultListView({
+                el: '#SearchResultsListRight',
+                collection: contractRight.searchResultCollection,
+                pageModel: contractRight.getPageModel()
+            })
+        }).render();
+
 
     </script>
 @stop

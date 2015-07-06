@@ -487,3 +487,26 @@ var SearchFormView = Backbone.View.extend({
         this.collection.fetch({"url": this.$('form').attr('action'), "searchTerm": this.$('#textfield').val()});
     }
 });
+
+var SearchMultipleContractFormView = Backbone.View.extend({
+    events: {
+        "click input[type=submit]": "doSearch"
+    },
+    initialize: function(options) {
+        this.options = options;
+        this.template = _.template($("#searchFormTemplate").html(), {} );
+        this.bind('doSearch', this.doSearch, this);
+    },
+    render: function() {
+        this.$el.html(this.template);
+        return this;
+    },
+    doSearch: function(e) {
+        e.preventDefault();
+        this.options.collectionLeft.destroy();
+        var self = this;
+        this.options.collectionLeft.fetch({"url": "http://localhost:9090/contract/"+self.options.contractIdLeft+"/search", "searchTerm": this.$('#textfield').val()});
+        this.options.collectionRight.destroy();
+        this.options.collectionRight.fetch({"url": "http://localhost:9090/contract/"+self.options.contractIdRight+"/search", "searchTerm": this.$('#textfield').val()});
+    }
+});
