@@ -183,7 +183,7 @@ var PdfView = Backbone.View.extend({
     },
     render: function() {
         var that = this;
-        PDFJS.workerSrc = '/js/lib/pdfjs/pdf.worker.js';
+        PDFJS.workerSrc = app_url +'/js/lib/pdfjs/pdf.worker.js';
         PDFJS.getDocument(this.options.pageModel.getPdfLocation()).then(function (pdf) {
             // Using promise to fetch the page
             pdf.getPage(1).then(function (page) {
@@ -277,7 +277,7 @@ var AnnotatorjsView = Backbone.View.extend({
         } else {
             this.content.annotator('addPlugin', 'Store', {
                 // The endpoint of the store on your server.
-                prefix: '/api',
+                prefix: app_url + '/api',
                 // Attach the uri of the current page to all annotations to allow search.
                 loadFromSearch: {
                     'url': that.options.contractModel.get('annotatorjsAPI'),

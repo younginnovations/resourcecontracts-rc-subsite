@@ -70,6 +70,7 @@
 @endsection
 
 @section('script')
+
     <script src="{{ url('js/lib/annotator/annotator-full.min.js') }}"></script>
     <script src="{{ url('js/lib/quill/quill.js') }}"></script>
     <script src="{{ url('js/lib/pdfjs/pdf.js') }}"></script>
@@ -77,6 +78,11 @@
     <script src="{{ url('js/lib/underscore.js') }}"></script>
     <script src="{{ url('js/lib/backbone.js') }}"></script>
     <script src="{{ url('js/contractmvc.js') }}"></script>
+    <script>
+        var app_url = '<?php echo url('/');?>';
+    </script>
+
+
     <script type="text/template" id="metadataViewTemplate">
         <div class="popup-metadata">
             <p><strong>Contract Title:</strong><%= contract_name %></p>
