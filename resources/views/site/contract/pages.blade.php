@@ -182,8 +182,8 @@
         $('.annotation_button').click(function () {
             pageView.toggleAnnotationList();
         });
-        $('.annotation_button').click(function () {
-            pageView.toggleAnnotationList();
+        $('.metadata_button').click(function () {
+            pageView.toggleMetadataList();
         });
         $('.view-pins-button').click(function () {
             $('#pinList').toggle();
