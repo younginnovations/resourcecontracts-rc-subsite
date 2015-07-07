@@ -10,15 +10,20 @@
                     <a target="_blank" href="{{ isset($document['metadata']['file_url']) ? $document['metadata']['file_url'] : ''}}" class="download">Download
                         <span class="size">{{getFileSize($document['metadata']['file_size'])}}
                     </a>
+                    @if($annotations)
                     <div class="contract-annotations">
                         <a href="" class="view-annotations open-annotations">View Annotations</a>
                         <a href="" class="view-annotations close-annotations">Close Annotations</a>
                     </div>
+                    @endif
                 </div>
     		</div>
+            @if($pages)
+
     		<div class="pull-right">
         		<a href="{{route('contract.pages',['id'=>$document['contract_id']])}}" class="btn btn-view">View Document</a>
         	</div>
+            @endif
 		</div>
          <div class="panel-body">
             <div class="table-contract-view">
