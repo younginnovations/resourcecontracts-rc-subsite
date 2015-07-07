@@ -14,8 +14,17 @@
                 <div class="title">{{$contract['metadata']['contract_name']}}</div>
             </div>
             <div class=" pull-right contract-actions view-document-action">
-                <a target="_blank" href="{{ $document['metadata']['file_url'] or ''}}" class="download">Download<span
+                <a target="_blank" href="{{ $contract['metadata']['file_url'] or ''}}" class="download">Download<span
                             class="size">({{getFileSize($contract['metadata']['file_size'])}})</span></a>
+                <div class="contract-annotations annotation-pop-wrap">
+
+                    <a href="#" class="view-pins-button panel-info_button">View Pins</a>
+                    <div id="pinList" class="pin-list" style="display:none">
+                        <div class="pull-right pin-buttons"><button class="exportPins">export</button>
+                            <button class="removeAllPins">clear all</button></div>
+                    </div>
+
+                </div>
                 <div class="contract-annotations annotation-pop-wrap">
                     <a href="#" class="annotation_button">View Annotations</a>
                     <div id="annotations_list" class="annotation-list" style="display:none"></div>
@@ -78,6 +87,9 @@
     <script src="{{ url('js/lib/underscore.js') }}"></script>
     <script src="{{ url('js/lib/backbone.js') }}"></script>
     <script src="{{ url('js/contractmvc.js') }}"></script>
+    <script type="text/javascript" src="{{ url('js/lib/backbone.localstorage.js') }}"></script>
+    <script type="text/javascript" src="{{ url('js/lib/backbone.exportcsv.js') }}"></script>
+    <script src="{{ url('js/pinning.js') }}"></script>
     <script>
         var app_url = '<?php echo url('/');?>';
     </script>
@@ -89,9 +101,7 @@
             <p><strong>Country:</strong> <%= country.name %></p>
             <p><strong>Date of signature:</strong> <%= signature_date %></p>
             <p><strong>Resource:</strong>
-                <% _.each(resource, function(name){ %>
-                        <%= _.escape(name) %>
-                <% }); %>
+                <%=resource%>
             </p></div>
 
     </script>
@@ -172,9 +182,29 @@
         $('.annotation_button').click(function () {
             pageView.toggleAnnotationList();
         });
-        $('.metadata_button').click(function () {
-            pageView.toggleMetadataList();
-
+        $('.annotation_button').click(function () {
+            pageView.toggleAnnotationList();
+        });
+        $('.view-pins-button').click(function () {
+            $('#pinList').toggle();
+        });
+    </script>
+    <script type="text/template" id="pinTemplate">
+        <%= pintext %><button class='removePin'>x</button>
+    </script>
+    <script>
+        var pinCollection = new PinCollection();
+        pinCollection.fetch();
+        var editorView = new EditorView({
+            el: '.editor',
+            contract_title: '{{$contract['metadata']['contract_name']}}',
+            contract_id: '{{$contract['contract_id']}}',
+            page_url: '{{\Illuminate\Support\Facades\Request::url()}}',
+            collection: pinCollection
+        });
+        var pinListView = new PinListView({
+            el: '#pinList',
+            collection: pinCollection
         });
     </script>
 @stop
