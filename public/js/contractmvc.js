@@ -409,7 +409,7 @@ var SearchResultView = Backbone.View.extend({
     },
     render: function() {
         // <li><span><a onclick='annotationClicked(this,"+contract.id+","+annotation.page+")' href='#'>{0}</a> [Page {1}]</span><br><p>{2}</p></li>
-        this.$el.html('<a href="#">'+this.model.get('text')+'</a>[Page '+this.model.get('pageNumber')+']');
+        this.$el.html('<a href="#">'+this.model.get('text')+'</a> [Page '+this.model.get('pageNumber')+']');
         return this;
     },
     changePage: function() {
@@ -437,7 +437,7 @@ var SearchResultListView = Backbone.View.extend({
         var that = this;
         this.$el.show();
         this.$el.html('');
-        $('.right-document-wrap canvas').hide();
+        $(this.options.searchOverlayLayer).hide();
         // this.remove();
         that.$el.append("<a href='#' class='pull-right search-cancel'><i class='glyphicon glyphicon-remove'></i></a>");
         if(this.collection.length) {
@@ -455,7 +455,7 @@ var SearchResultListView = Backbone.View.extend({
     close: function() {
         this.$el.hide();
         this.$el.html('');
-        $('.right-document-wrap canvas').show();
+        $(this.options.searchOverlayLayer).show();
     }
 });
 
@@ -495,8 +495,8 @@ var SearchMultipleContractFormView = Backbone.View.extend({
         e.preventDefault();
         this.options.collectionLeft.destroy();
         var self = this;
-        this.options.collectionLeft.fetch({"url": "http://localhost:9090/contract/"+self.options.contractIdLeft+"/search", "searchTerm": this.$('#textfield').val()});
+        this.options.collectionLeft.fetch({"url": app_url+"/contract/"+self.options.contractIdLeft+"/search", "searchTerm": this.$('#textfield').val()});
         this.options.collectionRight.destroy();
-        this.options.collectionRight.fetch({"url": "http://localhost:9090/contract/"+self.options.contractIdRight+"/search", "searchTerm": this.$('#textfield').val()});
+        this.options.collectionRight.fetch({"url": app_url+"/contract/"+self.options.contractIdRight+"/search", "searchTerm": this.$('#textfield').val()});
     }
 });

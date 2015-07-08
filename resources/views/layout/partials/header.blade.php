@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="{{url('css/style.css')}}"/>
     <link rel="stylesheet" href="{{url('css/jquery.datetimepicker.css')}}"/>
     <link href="{{url('css/select2.min.css')}}" rel="stylesheet"/>
+    <script>
+        var app_url = '<?php echo url('/');?>';
+    </script>
     @yield('css')
 </head>
 <body>

@@ -2,7 +2,6 @@
 @section('css')
     <link rel="stylesheet" href="{{ url('css/pagination.css') }}"/>
     <link rel="stylesheet" href="{{ url('css/annotator.css') }}">
-    <link rel="stylesheet" href="{{ url('css/simplePagination.css') }}">
 @stop
 @section('content')
     <div class="panel panel-default">
@@ -10,7 +9,7 @@
             <div class="pull-left">
                 <div class="title">Compare Contracts</div>
             </div>
-            <div id="searchForm"></div>
+            <div id="searchFormCompare"></div>
             <script type="text/template" id="searchFormTemplate">
                 <form method="POST" action="{{route('contract.page.search', ["id"=>$contract1['contract_id']])}}" accept-charset="UTF-8" class="form-inline page-search pull-right" style="width: 421px; margin: 0 auto 23px;">
                     <div class="form-group">
@@ -37,7 +36,9 @@
                             <div id="metadata_left" class="metadata" style="display:none"></div>
                         </div>
                     </div>
-                    <div id="pagination_left"></div>
+                    <div id="pagination">
+                      <div id="pagination_left"></div>
+                    </div>
                 </div>
                 <div class="right-title-wrap">
                     <div class="title pull-left">{{$contract2['metadata']['contract_name']}}</div>
@@ -51,13 +52,15 @@
                             <div id="metadata_right" class="metadata" style="display:none"></div>
                         </div>
                     </div>
-                    <div id="pagination_right"></div>
+                    <div id="pagination">
+                      <div id="pagination_right"></div>
+                    </div>
                 </div>
             </div>
             <div id="pagelist">
                 <div class="document-wrap">
                     <div id="annotatorjs_left" class="left-document-wrap">
-                      <div id="SearchResultsListLeft" ></div>
+                        <div id="SearchResultsListLeft" ></div>
                       <div class="quill-wrapper">
                             <div id="editor_left" class="editor"></div>
                         </div>
@@ -88,9 +91,7 @@
             <p><strong>Country:</strong> <%= country.name %></p>
             <p><strong>Date of signature:</strong> <%= signature_date %></p>
             <p><strong>Resource:</strong>
-                <% _.each(resource, function(name){ %>
-                <%= _.escape(name) %>
-                <% }); %>
+                <%=resource %>
             </p></div>
 
     </script>
@@ -222,17 +223,19 @@
                 collectionLeft: contractLeft.searchResultCollection,
                 contractIdRight: '{{$contract1['contract_id']}}',
                 contractIdLeft: '{{$contract2['contract_id']}}',
-                el: '#searchForm'
+                el: '#searchFormCompare'
             }),
             searchResultsListLeft: new SearchResultListView({
                 el: '#SearchResultsListLeft',
                 collection: contractLeft.searchResultCollection,
-                pageModel: contractLeft.getPageModel()
+                pageModel: contractLeft.getPageModel(),
+                searchOverlayLayer: '.editor'
             }),
             searchResultsListRight: new SearchResultListView({
                 el: '#SearchResultsListRight',
                 collection: contractRight.searchResultCollection,
-                pageModel: contractRight.getPageModel()
+                pageModel: contractRight.getPageModel(),
+                searchOverlayLayer: '.editor'
             })
         }).render();
 
