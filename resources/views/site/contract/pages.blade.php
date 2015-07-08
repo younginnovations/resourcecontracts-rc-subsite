@@ -90,10 +90,6 @@
     <script type="text/javascript" src="{{ url('js/lib/backbone.localstorage.js') }}"></script>
     <script type="text/javascript" src="{{ url('js/lib/backbone.exportcsv.js') }}"></script>
     <script src="{{ url('js/pinning.js') }}"></script>
-    <script>
-        var app_url = '<?php echo url('/');?>';
-    </script>
-
 
     <script type="text/template" id="metadataViewTemplate">
         <div class="popup-metadata">
@@ -167,6 +163,7 @@
                 el: '#SearchResultsList',
                 collection: contract.searchResultCollection,
                 pageModel: contract.getPageModel(),
+                searchOverlayLayer :'#pdfcanvas'
             }),
             annotationsListView: new AnnotationsListView({
                 annotationslistEl: contract.getAnnotationsListEl(),
