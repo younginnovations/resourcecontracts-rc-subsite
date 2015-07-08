@@ -60,13 +60,13 @@
             <div id="pagelist">
                 <div class="document-wrap">
                     <div id="annotatorjs_left" class="left-document-wrap">
-                        <div id="SearchResultsListLeft" ></div>
+                        <div id="SearchResultsListRight"></div>
                       <div class="quill-wrapper">
                             <div id="editor_left" class="editor"></div>
                         </div>
                      </div>
                     <div class="right-document-wrap" id="annotatorjs_right">
-                        <div id="SearchResultsListRight"></div>
+                        <div id="SearchResultsListLeft" ></div>
                         <div class="quill-wrapper">
                            <div id="editor_right" class="editor"></div>
                         </div>
