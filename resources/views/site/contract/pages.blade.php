@@ -45,7 +45,7 @@
                             <input id="textfield" class="form-control" placeholder="Search..." style="padding:15px; width:280px" name="q" type="text">
                         </div>
                     </div>
-                    <input class="btn btn-primary" type="submit" value="Submit">
+                    <input class="btn btn-primary" type="submit" value="Search">
                 </form>
 
         </script>
