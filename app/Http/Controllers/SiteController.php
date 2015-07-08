@@ -57,11 +57,12 @@ class SiteController extends BaseController
     {
         $annotations = $this->api->getAnnotations($id);
         $document    = $this->api->getMetadataDocument($id);
+        $pages       = $this->api->getTextPage($id, 1);
         if ($document === false) {
             return "error";
         }
 
-        return view('site.details', compact('document', 'annotations'));
+        return view('site.details', compact('document', 'annotations', 'pages'));
     }
 
     /**
@@ -109,12 +110,12 @@ class SiteController extends BaseController
     {
         $contract1Annotations = $this->contract->annotations($contractId1);
         $contract2Annotations = $this->contract->annotations($contractId2);
-        $contract1    = $this->api->getMetadataDocument($contractId1);
-        $contract2   = $this->api->getMetadataDocument($contractId2);
+        $contract1            = $this->api->getMetadataDocument($contractId1);
+        $contract2            = $this->api->getMetadataDocument($contractId2);
 
         return view(
             'site.contract.compare',
-            compact('contract1Annotations','contract2Annotations','contract1','contract2')
+            compact('contract1Annotations', 'contract2Annotations', 'contract1', 'contract2')
         );
     }
 }

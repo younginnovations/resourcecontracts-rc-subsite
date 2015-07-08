@@ -896,7 +896,7 @@ header {
     position: relative;
 }
 
-.metadata,.annotation-list {
+.metadata,.annotation-list,.pin-list {
     position: absolute;
     background-color: #FFFFFF  ;
     padding: 20px;
@@ -923,4 +923,13 @@ header {
 
 .select2-search__field[placeholder="select"] {
     width: 100% !important;
+}
+
+.pin {
+    clear: both;
+    margin-bottom: 4px;
+}
+
+.removePin {
+    margin-left: 7px;
 }
