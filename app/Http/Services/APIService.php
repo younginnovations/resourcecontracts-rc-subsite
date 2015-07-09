@@ -31,6 +31,7 @@ class APIService
     }
 
     /**
+     * Get Api full URL
      * @param $request
      * @return string
      */
@@ -167,7 +168,6 @@ class APIService
     public function filterSearch($filter)
     {
         try {
-
             $filter = array_filter($filter);
             $response     = $this->client->get(
                 $this->apiURL(sprintf('es/contracts/fulltextsearch')),
@@ -175,7 +175,6 @@ class APIService
             );
             $data         = $response->getBody();
             $data = (object) json_decode($data, true);
-
             $data->result = new Paginator($data->result, $data->per_page);
             return $data;
 

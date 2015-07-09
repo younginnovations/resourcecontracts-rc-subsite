@@ -972,3 +972,17 @@ header {
     margin-left: 5px;
     padding: 0px 4px;
 }
+
+.checkbox-wrapper {
+    margin-bottom: 20px;
+}
+
+.checkbox-wrapper label {
+    margin-right: 10px;
+}
+
+.checkbox-wrapper input {
+    margin-right: 5px;
+    position: relative;
+    top: 2px;
+}
