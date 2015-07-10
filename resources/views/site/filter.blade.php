@@ -20,7 +20,7 @@
                                     @if($data['text'] !="")
                                         {!! $data['text'] or '' !!}
                                     @else
-                                        {!! $data['quote'] or '' !!}
+                                        {!! $data['annotations'] or '' !!}
                                     @endif
 
                                 </div>
