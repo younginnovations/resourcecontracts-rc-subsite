@@ -23,12 +23,36 @@ class FilterController
     }
 
     /**
+     * Show search result
+     *
      * @param Request $request
      * @return \Illuminate\View\View
      */
     public function filter(Request $request)
     {
-        $filter = [
+        $filter = $this->processQueries($request);
+
+        $contract = $this->api->filterSearch($filter);
+
+        $filter = $this->updateFilterData($filter, $contract, $request);
+
+        $show_advance = true;
+
+        return view('site.filter', compact('contract', 'filter', 'show_advance'));
+    }
+
+    /**
+     * Process user search queries
+     *
+     * @param Request $request
+     * @return array
+     */
+    protected function processQueries(Request $request)
+    {
+        $type = is_array($request->get('type')) ? join(',', $request->get('type')) : $request->get('type');
+        $type = $type == '' ? 'metadata,text,annotation' : $type;
+
+        return [
             'q'       => $request->get('q'),
             'country' => is_array($request->get('country')) ? join(',', $request->get('country')) : $request->get(
                 'country'
@@ -36,10 +60,21 @@ class FilterController
             'year'    => is_array($request->get('year')) ? join(',', $request->get('year')) : $request->get('year'),
             'sortby'  => $request->get('sortby'),
             'order'   => $request->get('order'),
+            'type'    => $type
         ];
+    }
 
-        $contract = $this->api->filterSearch($filter);
 
+    /**
+     * Update filter data
+     *
+     * @param array   $filter
+     * @param         $contract
+     * @param Request $request
+     * @return mixed
+     */
+    protected function updateFilterData(array $filter, $contract, Request $request)
+    {
         $filter['country'] = is_array($request->get('country')) ? $request->get('country') : [$request->get('country')];
 
         if (!$request->get('country')) {
@@ -52,8 +87,12 @@ class FilterController
             $filter['year'] = isset($contract->year) ? $contract->year : [];
         }
 
-        $show_advance = (isset($contract->total) && $contract->total > 0) ? true : false;
+        $filter['type'] = is_array($request->get('type')) ? $request->get('type') : [$request->get('type')];
 
-        return view('site.filter', compact('contract', 'filter', 'show_advance'));
+        if (!$request->get('type')) {
+            $filter['type'] = isset($contract->type) ? $contract->type : ['metadata', 'text', 'annotations'];
+        }
+
+        return $filter;
     }
 }

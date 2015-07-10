@@ -22,7 +22,7 @@ class APIService
     protected $logger;
 
     /**
-     * @param Client    $client
+     * @param Client $client
      * @internal param Log $logger
      */
     public function __construct(Client $client)
@@ -31,6 +31,7 @@ class APIService
     }
 
     /**
+     * Get Api full URL
      * @param $request
      * @return string
      */
@@ -83,6 +84,7 @@ class APIService
         } catch (\Exception $e) {
             Log::error("Error.{$e->getMessage()}");
         }
+
         return false;
     }
 
@@ -167,16 +169,15 @@ class APIService
     public function filterSearch($filter)
     {
         try {
-
-            $filter = array_filter($filter);
+            $filter       = array_filter($filter);
             $response     = $this->client->get(
                 $this->apiURL(sprintf('es/contracts/fulltextsearch')),
                 ['query' => $filter]
             );
             $data         = $response->getBody();
-            $data = (object) json_decode($data, true);
-
+            $data         = (object) json_decode($data, true);
             $data->result = new Paginator($data->result, $data->per_page);
+
             return $data;
 
         } catch (\Exception $e) {

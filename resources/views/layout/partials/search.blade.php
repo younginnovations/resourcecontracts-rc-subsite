@@ -10,9 +10,11 @@
                 </div>
 
                 <span class="search-link open" @if(isset($show_advance) && $show_advance) style="display:none"  @endif>Advanced Search</span>
-                <span class="search-link search-hide" @if(isset($show_advance) && $show_advance) style="display:inline-block"  @endif>Close Advanced Search</span>
+                <span class="search-link search-hide" @if(isset($show_advance) && $show_advance)
+                      style="display:inline-block"  @endif>Close Advanced Search</span>
 
-                <div class="search-input-wrapper" @if(isset($show_advance) && $show_advance) style="display: block"  @endif >
+                <div class="search-input-wrapper" @if(isset($show_advance) && $show_advance)
+                     style="display: block"  @endif >
                     <div class="search-input">
                         <div class="input-wrapper">
                             <label for="">Country</label>
@@ -61,6 +63,19 @@
                                 </option>
                             </select>
                         </div>
+
+                        <div class="checkbox-wrapper">
+                            <label><input class="search_in"
+                                          type="checkbox"  @if(isset($filter['type']) && in_array('metadata', $filter['type']))
+                                          checked="checked" @endif   name="type[]" value="metadata"> Metadata</label>
+                            <label><input class="search_in" class="type"
+                                          type="checkbox" @if(isset($filter['type']) && in_array('text', $filter['type']))
+                                          checked="checked" @endif name="type[]" value="text">Text</label>
+                            <label><input class="search_in"
+                                          type="checkbox" @if(isset($filter['type']) && in_array('annotations', $filter['type']))
+                                          checked="checked" @endif name="type[]" value="annotations">Annotations</label>
+                        </div>
+
                     </div>
                     <input type="button" class="btn btn-reset btn-default" value="reset">
                     <button type="submit" class="btn btn-search">Search</button>
@@ -74,10 +89,17 @@
             $(function () {
                 $('.btn-reset').on('click', function () {
                     $('input[type=text]').val('');
-                    $('select', '#advance-search').each(function(){
+                    $('select', '#advance-search').each(function () {
                         $(this).select2('val', null);
                     });
                 });
+
+                $('.search_in').on('click', function () {
+                    if($('.search_in:checked').length <1)
+                    {
+                        return false;
+                    }
+                })
             });
         </script>
     @stop
