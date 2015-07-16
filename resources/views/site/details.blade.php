@@ -81,6 +81,7 @@
                 </table>
                 <h3>Company</h3>
                 @foreach($document['metadata']['company'] as $company)
+
                     <table class="table table-responsive">
                         <tr>
                             <td>Company Name</td>
@@ -103,7 +104,7 @@
 
                         <tr>
                             <td> Company Number</td>
-                            <td>{{$company['company_number']}}</td>
+                            <td>@if(isset($company['company_number'])){{$company['company_number']}}@endif</td>
                         </tr>
                         <tr>
                             <td>Parent Company</td>
@@ -139,7 +140,7 @@
                 <table class="table table-responsive">
                     <tr>
                         <td>Source URL</td>
-                        <td>{{$document['metadata']['Source_url']}}</td>
+                        <td>@if(isset($document['metadata']['source_url'])){{$document['metadata']['source_url']}}@endif</td>
                     </tr>
                     @if(isset($document['metadata']['disclosure_mode']))
                         <tr>
