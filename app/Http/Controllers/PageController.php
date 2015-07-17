@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers\Page;
+<?php namespace App\Http\Controllers;
 
 use App\Http\Services\APIService;
 use Illuminate\Http\Request;

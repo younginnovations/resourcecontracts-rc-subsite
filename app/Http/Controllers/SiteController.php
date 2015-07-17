@@ -70,7 +70,7 @@ class SiteController extends BaseController
      * @param $page_no
      * @return \Illuminate\View\View
      */
-    public function page($id, $page_no)
+    public function getSinglePage($id, $page_no)
     {
         $page        = $this->api->getTextPage($id, $page_no);
         $annotations = $this->api->getAnnotationPage($id, $page_no);
@@ -86,7 +86,7 @@ class SiteController extends BaseController
      * @param $id
      * @return \Illuminate\View\View
      */
-    public function pages($id)
+    public function getPageList($id)
     {
         $page_no     = 1;
         $page        = $this->api->getTextPage($id, $page_no);
