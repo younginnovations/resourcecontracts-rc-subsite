@@ -494,17 +494,6 @@ header {
   display: none;
 }
 
-#searchForm{
-    position: absolute;
-    right: 20px;
-    top: 121px
-}
-
-.page-search{
-    width: 310px !important;
-    margin: 23px 0 0 0 !important;
-}
-
 #pagelist{
     padding: 0;
 }
@@ -925,52 +914,6 @@ header {
 
 .left-title-wrap > .pull-right,.right-title-wrap > .pull-right {
     display: flex;
-}
-
-.annotation-pop-wrap {
-    margin-left: 10px;
-    position: relative;
-}
-
-.metadata,.annotation-list,.pin-list {
-    position: absolute;
-    background-color: #FFFFFF  ;
-    padding: 20px;
-    right: 0px;
-    z-index: 100;
-    border: 1px solid #ccc;
-    top: 40px;
-    font-size: 14px;
-    width: 330px;
-    text-align: left;
-}
-
-.popup-metadata p {
-    line-height: 22px;
-}
-
-.select2-container--classic .select2-search--inline .select2-search__field {
-    height: 22px;
-}
-
-.select2-container--classic .select2-search--inline .select2-search__field {
-    width: 50px!important;
-}
-
-.select2-search__field[placeholder="select"] {
-    width: 100% !important;
-}
-
-.pin {
-    clear: both;
-    margin-bottom: 20px;
-    position: relative;
-    border-left: 3px solid #DDd;
-    padding-left: 12px
-}
-.removePin {
-    margin-left: 5px;
-    padding: 0px 4px;
 }
 
 .checkbox-wrapper {
