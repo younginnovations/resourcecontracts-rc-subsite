@@ -89,9 +89,11 @@
                         </tr>
                         <tr>
                             <td>Jurisdiction of Incorporation</td>
-                            @if(isset(trans('country')[$company['jurisdiction_of_incorporation']]))
-                                <td>{{trans('country')[$company['jurisdiction_of_incorporation']]}}</td>
-                            @endif
+                            <?php $jurisdiction=isset($company['jurisdiction_of_incorporation'])?$jurisdiction =$company['jurisdiction_of_incorporation']:'';   ?>
+                                @if(!empty($jurisdiction))
+                                <td>{{trans('country')[$jurisdiction]}}</td>
+                                 @endif
+
                         </tr>
                         <tr>
                             <td>Registration Agency</td>
