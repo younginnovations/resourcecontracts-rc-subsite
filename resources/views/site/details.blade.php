@@ -120,15 +120,19 @@
                 @endforeach
                 <h3>Concession / license and Project</h3>
                 <table class="table table-responsive">
-                    <tr>
-                        <td>License Name</td>
-                        <td>{{$document['metadata']['license_name']}}</td>
-                    </tr>
-                    <tr>
-                        <td>License Identifier</td>
-                        <td>{{$document['metadata']['license_identifier']}}</td>
-                    </tr>
-                    <tr>
+                    @if(isset($document['metadata']['concession']))
+                        @foreach($document['metadata']['concession'] as $concession)
+                        <tr>
+                            <td>License Name</td>
+                            <td>{{$concession['license_name']}}</td>
+                        </tr>
+                        <tr>
+                            <td>License Identifier</td>
+                            <td>{{$concession['license_identifier']}}</td>
+                        </tr>
+                        <tr>
+                        @endforeach
+                    @endif
                         <td>Project Title</td>
                         <td>{{$document['metadata']['project_title']}}</td>
                     </tr>
