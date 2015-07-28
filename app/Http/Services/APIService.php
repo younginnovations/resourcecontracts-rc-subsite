@@ -13,6 +13,10 @@ use GuzzleHttp\Message\Request;
 class APIService
 {
     /**
+     * @const BASE_URL
+     */
+    const BASE_URL='es';
+    /**
      * @var Client
      */
     protected $client;
@@ -37,7 +41,7 @@ class APIService
      */
     protected function apiURL($request)
     {
-        return env('ELASTIC_SEARCH_HOST') . $request;
+        return env('ELASTIC_SEARCH_HOST').self::BASE_URL. $request;
     }
 
     /**
@@ -49,7 +53,7 @@ class APIService
     {
         try {
             $response = $this->client->get(
-                $this->apiURL(sprintf('es/contracts/%s/text/%s/page', $contractId, $pageNo))
+                $this->apiURL(sprintf('/contracts/%s/text/%s/page', $contractId, $pageNo))
             );
 
             $data = $response->getBody();
@@ -73,7 +77,7 @@ class APIService
         try {
             $request  = new Request(
                 'GET',
-                $this->apiURL('es/contracts/' . $contractId . '/page/' . $pageNo . '/annotations')
+                $this->apiURL('/contracts/' . $contractId . '/page/' . $pageNo . '/annotations')
             );
             $response = $this->client->send($request);
 
@@ -94,7 +98,7 @@ class APIService
     public function getSummary()
     {
         try {
-            $response = $this->client->get($this->apiURL('es/contracts/summary'));
+            $response = $this->client->get($this->apiURL('/contracts/summary'));
             $data     = $response->getBody();
 
             return json_decode($data, true);
@@ -112,7 +116,7 @@ class APIService
     public function getMetadataDocument($contractId)
     {
         try {
-            $request  = new Request('GET', $this->apiURL('es/contracts/' . $contractId . '/metadata'));
+            $request  = new Request('GET', $this->apiURL('/contracts/' . $contractId . '/metadata'));
             $response = $this->client->send($request);
             $data     = $response->getBody();
 
@@ -131,7 +135,7 @@ class APIService
     public function getAnnotations($contractId)
     {
         try {
-            $request  = new Request('GET', $this->apiURL(sprintf('es/contracts/%d/annotations', $contractId)));
+            $request  = new Request('GET', $this->apiURL(sprintf('/contracts/%d/annotations', $contractId)));
             $response = $this->client->send($request);
             $data     = $response->getBody();
 
@@ -149,7 +153,7 @@ class APIService
     public function getAllContracts()
     {
         try {
-            $request  = new Request('GET', $this->apiURL(sprintf('es/contracts')));
+            $request  = new Request('GET', $this->apiURL(sprintf('/contracts')));
             $response = $this->client->send($request);
             $data     = $response->getBody();
             $metadata = json_decode($data, true);
@@ -171,7 +175,7 @@ class APIService
         try {
             $filter       = array_filter($filter);
             $response     = $this->client->get(
-                $this->apiURL(sprintf('es/contracts/fulltextsearch')),
+                $this->apiURL(sprintf('/contracts/fulltextsearch')),
                 ['query' => $filter]
             );
             $data         = $response->getBody();
@@ -195,7 +199,7 @@ class APIService
     {
         try {
             $response = $this->client->get(
-                $this->apiURL(sprintf('es/contracts/pdfsearch')),
+                $this->apiURL(sprintf('/contracts/pdfsearch')),
                 ['query' => ['contract_id' => $contractId, 'q' => $query]]
             );
             $data     = $response->getBody();
