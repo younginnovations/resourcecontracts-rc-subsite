@@ -681,6 +681,10 @@ header {
     background: url(../images/ic_sprite.png) no-repeat 0 -188px;
 }
 
+.contract-actions > a:only-child {
+    margin-right: 4px;
+}
+
 .contract-actions > div > a {
     padding: 10px 12px 10px 30px;
     text-transform: uppercase;
@@ -928,4 +932,12 @@ header {
     margin-right: 5px;
     position: relative;
     top: 2px;
+}
+
+.amla-link {
+    margin-top: 4px;
+}
+
+.amla-link a {
+    font-size: 14px;
 }

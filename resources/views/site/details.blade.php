@@ -5,8 +5,9 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="contract-name pull-left">
-                {{$document['metadata']['contract_name']}}
-                <div class="contract-actions">
+                <div class="contract-name-title">{{$document['metadata']['contract_name']}}</div>
+
+                <div class="contract-actions pull-left">
                     <a target="_blank"
                        href="{{ isset($document['metadata']['file_url']) ? $document['metadata']['file_url'] : ''}}"
                        class="download">Download
@@ -19,6 +20,12 @@
                         </div>
                     @endif
                 </div>
+                <div class="amla-link pull-left">
+                    @if(isset($document['metadata']['amla_url']) and !empty($document['metadata']['amla_url']))
+                        <a href="{{$document['metadata']['amla_url']}}">Current mining legislation at AMLA</a>
+                    @endif
+                </div>
+
             </div>
             @if($pages)
 
@@ -43,9 +50,7 @@
                     <tr>
                         <td>Country</td>
                         <td>{{$document['metadata']['country']['name']}}
-                            @if(isset($document['metadata']['amla_url']) and !empty($document['metadata']['amla_url']))
-                                <a href="{{$document['metadata']['amla_url']}}">Current mining legislation at AMLA</a>
-                            @endif
+
                         </td>
                     </tr>
                     <tr>
@@ -72,12 +77,7 @@
                         <td>Translation from original</td>
                         <td>{{$document['metadata']['translation_parent']}}</td>
                     </tr>
-                    @if(isset($document['metadata']['participation_share']))
-                        <tr>
-                            <td>Participation Share</td>
-                            <td>{{$document['metadata']['participation_share']}}</td>
-                        </tr>
-                    @endif
+
                 </table>
                 <h3>Company</h3>
                 @foreach($document['metadata']['company'] as $company)
@@ -87,6 +87,12 @@
                             <td>Company Name</td>
                             <td>{{$company['name']}}</td>
                         </tr>
+                        @if(isset($company['participation_share']))
+                            <tr>
+                                <td>Participation Share</td>
+                                <td>{{$company['participation_share']}}</td>
+                            </tr>
+                        @endif
                         <tr>
                             <td>Jurisdiction of Incorporation</td>
                             <?php $jurisdiction=isset($company['jurisdiction_of_incorporation'])?$jurisdiction =$company['jurisdiction_of_incorporation']:'';   ?>
@@ -116,6 +122,12 @@
                             <td>Open Corporate Id</td>
                             <td>{{$company['open_corporate_id']}}</td>
                         </tr>
+                        @if(isset($company['operator']))
+                            <tr>
+                                <td>Operator</td>
+                                <td>@if($company['operator']==1) Yes @else No @endif</td>
+                            </tr>
+                        @endif
                     </table>
                 @endforeach
                 <h3>Concession / license and Project</h3>
