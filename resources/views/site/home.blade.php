@@ -11,10 +11,10 @@
                     <tr>
                         <td width="70%"><a
                                     href="{{route('contract.detail',['id'=>isset($data['contract_id']) ? $data['contract_id'] : 'null'])}}">
-                                {{ isset($data['metadata']['contract_name']) ? $data['metadata']['contract_name'] : 'No Name'}}</a>
-                            <span class="label label-default">{{ isset($data['metadata']['language']) ? $data['metadata']['language'] : 'En'}}</span></td>
-                        <td align="right">{{getFileSize($data['metadata']['file_size'])}}</td>
-                        <td align="right">{{isset($data['metadata']['signature_date'])?$data['metadata']['signature_date']:''}}</td>
+                                {{ isset($data['contract_name']) ? $data['contract_name'] : 'No Name'}}</a>
+                            <span class="label label-default">{{ isset($data['language']) ? $data['language'] : 'En'}}</span></td>
+                        <td align="right">{{getFileSize($data['file_size'])}}</td>
+                        <td align="right">{{isset($data['signature_date'])?$data['signature_date']:''}}</td>
                     </tr>
                 @endforeach
             </table>

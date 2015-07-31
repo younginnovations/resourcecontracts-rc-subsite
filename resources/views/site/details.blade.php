@@ -8,11 +8,25 @@
                 <div class="contract-name-title">{{$document['metadata']['contract_name']}}</div>
 
                 <div class="contract-actions pull-left">
-                    <a target="_blank"
-                       href="{{ isset($document['metadata']['file_url']) ? $document['metadata']['file_url'] : ''}}"
-                       class="download">Download
-                        <span class="size">{{getFileSize($document['metadata']['file_size'])}}
-                    </a>
+                   <div class="btn-group">
+                       <button type="button" class=" download btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           Download <span class="caret"></span>
+                       </button>
+                       <ul class="dropdown-menu">
+                           <li><a target="_blank"
+                              href="{{ isset($document['metadata']['file_url']) ? $document['metadata']['file_url'] : ''}}"
+                              class="download">PDF
+                            {{--<span class="size">{{getFileSize($document['metadata']['file_size'])}}></span>--}}
+                           </a></li>
+                           <li>
+                               <a target="_blank"
+                                   href="{{ isset($document['metadata']['word_file']) ? $document['metadata']['word_file'] : ''}}"
+                                   class="download">Word
+                               </a>
+                           </li>
+                       </ul>
+                   </div>
+
                     @if($annotations)
                         <div class="contract-annotations">
                             <a href="" class="view-annotations open-annotations">View Annotations</a>
@@ -20,6 +34,7 @@
                         </div>
                     @endif
                 </div>
+
                 <div class="amla-link pull-left">
                     @if(isset($document['metadata']['amla_url']) and !empty($document['metadata']['amla_url']))
                         <a href="{{$document['metadata']['amla_url']}}">Current mining legislation at AMLA</a>
