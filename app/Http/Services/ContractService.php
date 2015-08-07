@@ -32,12 +32,12 @@ class ContractService
         $contractAnnotationsObj = $this->api->getAnnotations($contractId);
         $annotation             = [];
         if ($contractAnnotationsObj) {
-            foreach ($contractAnnotationsObj as $annotations) {
+            foreach ($contractAnnotationsObj->result as $annotations) {
                 $annotation[] = [
                     'page'  => $annotations->page_no,
                     'quote' => $annotations->quote,
                     'text'  => $annotations->text,
-                    'tags'  => $annotations->tag
+                    'tags'  => $annotations->tags
                 ];
             }
         }

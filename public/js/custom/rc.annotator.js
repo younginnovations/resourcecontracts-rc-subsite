@@ -8,7 +8,7 @@ var AnnotatorjsView = Backbone.View.extend({
             readOnly: !this.options.pageModel.get('isAnnotable')
         });
         this.content.annotator('addPlugin', 'Tags');
-        this.content.annotator('addPlugin', 'Categories', {category:[]});
+       // this.content.annotator('addPlugin', 'Categories', {category:[]});
 
         // this.availableTags = this.options.tags;
         return this;

@@ -182,17 +182,17 @@
                 </table>
             </div>
         </div>
-        @if(!is_null($contract->annotations ))
+        @if(!is_null($annotations ))
         <div class="annotation-pop">
             <ul>
-                @foreach($contract->annotations as $annotation)
+                @foreach($annotations->result as $annotation)
                     <li>
-                        <div class="pull-left page-num">{{$anote['page_no']}}</div>
+                        <div class="pull-left page-num">{{$annotation->page_no}}</div>
                         <div class="pull-left">
-                            <div class="annotation-text">{{$anote['text']}}</div>
-                            <div class="quote">{{$anote['quote']}}</div>
+                            <div class="annotation-text">{{$annotation->text}}</div>
+                            <div class="quote">{{$annotation->quote}}</div>
                             <div class="tags">
-                                @foreach($anote['tag'] as $tag)
+                                @foreach($annotation->tags as $tag)
                                     <span>{{$tag}}</span>
                                 @endforeach
                             </div>

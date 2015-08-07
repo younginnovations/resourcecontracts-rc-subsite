@@ -63,7 +63,6 @@ class APIService
     public function getSummary()
     {
         $call = '/contracts/summary';
-
         return $this->apiCall($call, true);
     }
 
@@ -72,10 +71,17 @@ class APIService
      *
      * @return object|null
      */
-    public function getAllContracts()
+    public function getAllContracts(array $filter = [])
     {
-        $call = '/contracts';
+        $default = [
+            'country'  => '',
+            'year'     => '',
+            'resource' => ''
+        ];
 
+        $filter = array_merge($default, $filter);
+        extract($filter);
+        $call     = sprintf('/contracts?country_code=%s&year=%s&resource=%s', $country, $year, $resource);
         $contract = $this->apiCall($call);
 
         if ($contract) {
@@ -122,7 +128,7 @@ class APIService
      */
     public function getAnnotations($contract_id)
     {
-        $call = sprintf('/contracts/%d/annotations', $contract_id);
+        $call = sprintf('/contract/%d/annotations', $contract_id);
 
         return $this->apiCall($call);
     }
@@ -193,7 +199,6 @@ class APIService
             $request  = new Request('GET', $this->apiURL($call));
             $response = $this->client->send($request);
             $data     = $response->getBody();
-
             if ($array) {
                 return json_decode($data, true);
             }
@@ -203,6 +208,37 @@ class APIService
         } catch (\Exception $e) {
             Log::error($call . ":" . $e->getMessage());
         }
+    }
+
+
+    /**
+     * Full text search
+     *
+     * @param $filter
+     * @return array
+     */
+    public function filterSearch($filter)
+    {
+        extract($filter);
+        $call = sprintf(
+            '/contracts/search?q=%s&country=%s&year=%s&resource=%s&group=%s&sort_by=%s&order=%s&per_page=%s&from=%s',
+            $q,
+            $country,
+            $year,
+            $resource,
+            $group,
+            $sortby,
+            $order,
+            $per_page,
+            $from
+        );
+
+        $contract = $this->apiCall($call);
+        if ($contract) {
+            return $contract;
+        }
+
+        return null;
     }
 
 

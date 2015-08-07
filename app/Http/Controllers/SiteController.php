@@ -59,12 +59,12 @@ class SiteController extends BaseController
     public function show($id)
     {
         $contract = $this->api->getContractDetail($id);
-
+        $annotations = $this->api->getAnnotations($id);
         if (is_null($contract->metadata)) {
             return abort(404);
         }
 
-        return view('site.details', compact('contract'));
+        return view('site.details', compact('contract','annotations'));
     }
 
     /**
@@ -125,5 +125,16 @@ class SiteController extends BaseController
             'site.contract.compare',
             compact('contract1Annotations', 'contract2Annotations', 'contract1', 'contract2')
         );
+    }
+
+    public function filter()
+    {
+        $filter             = [];
+        $filter['country']  = $this->request->get('country');
+        $filter['year']     = $this->request->get('year');
+        $filter['resource'] = $this->request->get('resource');
+
+        $contracts = $this->api->getAllContracts($filter);
+        return view('site.home', compact('contracts'));
     }
 }
