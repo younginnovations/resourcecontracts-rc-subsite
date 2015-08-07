@@ -18,15 +18,16 @@
                             <span class="size">{{getFileSize($contract->metadata->file_size)}}</span>
                            </a></li>
                            <li>
+                               @if(isset($contract->metadata->word_file))
                                <a target="_blank"
                                    href="{{ $contract->metadata->word_file}}"
                                    class="download">Word
                                </a>
+                               @endif
                            </li>
                        </ul>
                    </div>
-
-                    @if($contract->annotations)
+                    @if($contract->annotations->total > 0 )
                         <div class="contract-annotations">
                             <a href="" class="view-annotations open-annotations">View Annotations</a>
                             <a href="" class="view-annotations close-annotations">Close Annotations</a>
@@ -145,7 +146,7 @@
                 @endforeach
                 <h3>Concession / license and Project</h3>
                 <table class="table table-responsive">
-                    @if($contract->metadata->concession)
+                    @if(isset($contract->metadata->concession))
                         @foreach($contract->metadata->concession as $concession)
                         <tr>
                             <td>License Name</td>
@@ -173,22 +174,21 @@
                         <td>Source URL</td>
                         <td>{{$contract->metadata->source_url or ''}}</td>
                     </tr>
-                    @if($contract->metadata->disclosure_mode)
+
                         <tr>
                             <td>Disclosure Mode</td>
                             <td>{{$contract->metadata->disclosure_mode or ''}}</td>
                         </tr>
-                    @endif
                 </table>
             </div>
         </div>
-        @if(!is_null($annotations ))
+        @if($contract->annotations->total >0))
         <div class="annotation-pop">
             <ul>
-                @foreach($annotations->result as $annotation)
+                @foreach($contract->annotations->result as $annotation)
                     <li>
                         <div class="pull-left page-num">{{$annotation->page_no}}</div>
-                        <div class="pull-left">
+                        <div class="pull-lefct">
                             <div class="annotation-text">{{$annotation->text}}</div>
                             <div class="quote">{{$annotation->quote}}</div>
                             <div class="tags">
