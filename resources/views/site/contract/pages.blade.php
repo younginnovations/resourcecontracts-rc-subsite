@@ -8,13 +8,13 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="pull-left title-bar-left">
-                <div class="title">{{$contract['metadata']['contract_name']}}</div>
-                <a href="{{route('contract.detail',['id'=>$contract['contract_id']])}}" class="go-back">Go back to
+                <div class="title">{{$contract->metadata->contract_name}}</div>
+                <a href="{{route('contract.detail',['id'=>$contract->metadata->contract_id])}}" class="go-back">Go back to
                     Contract detail</a>
             </div>
             <div class=" pull-right contract-actions view-document-action">
-                <a target="_blank" href="{{ $contract['metadata']['file_url'] or ''}}" class="download">Download<span
-                            class="size">({{getFileSize($contract['metadata']['file_size'])}})</span></a>
+                <a target="_blank" href="{{ $contract->metadata->file_url or ''}}" class="download">Download<span
+                            class="size">({{getFileSize($contract->metadata->file_size)}})</span></a>
                 <div class="contract-annotations annotation-pop-wrap">
 
                     <a href="#" class="view-pins-button panel-info_button">View Pins</a>
@@ -36,7 +36,7 @@
             </div>
 
         <div id="search-form">
-            <form method="POST" action="{{route('contract.page.search', ["id"=>$contract['contract_id']])}}" accept-charset="UTF-8" class="form-inline page-search pull-right">
+            <form method="POST" action="{{route('contract.page.search', ["id"=>$contract->metadata->contract_id])}}" accept-charset="UTF-8" class="form-inline page-search pull-right">
                 <div class="form-group">
                     <div class="input-group">
                         <input id="textfield" class="form-control" placeholder="Search..." name="q" type="text">
@@ -96,20 +96,20 @@
     <script type="text/javascript">
     var contractEvents = {};
     _.extend(contractEvents, Backbone.Events);
-    var contractMetadata = {!!json_encode($contract['metadata'])!!};
+    var contractMetadata = {!!json_encode($contract->metadata)!!};
     var currentPage = '{{1}}';
     var contract = new Contract({
-        id: '{{$contract['contract_id']}}',
+        id: '{{$contract->metadata->contract_id}}',
         metadata: contractMetadata,
-        totalPages: '{{$contract['total_pages']}}',
+        totalPages: '{{$contract->metadata->total_pages}}',
         currentPage: '{{1}}',
         currentPageId: '{{1}}',
-        annotatorjsAPI: "{{route('contract.page.annotations.search', ['id'=>$contract['contract_id']])}}",
+        annotatorjsAPI: "{{route('contract.page.annotations.search', ['id'=>$contract->metadata->contract_id])}}",
     });
 
     var pageModel = new Page({
         pageNumber: currentPage || 1,
-        loadUrl: "{{route('contract.page.get', ['id'=>$contract['contract_id']])}}", 
+        loadUrl: "{{route('contract.page.get', ['id'=>$contract->metadata->contract_id])}}",
         contractModel: contract,
         eventsPipe: contractEvents
     }).load(currentPage);
@@ -146,7 +146,7 @@
     var searchFormView = new SearchFormView({
         el: '#search-form',
         collection: searchResultCollection,
-        url: "{{route('contract.page.search', ["id"=>$contract['contract_id']])}}",
+        url: "{{route('contract.page.search', ["id"=>$contract->metadata->contract_id])}}",
         eventsPipe: contractEvents
     }).render();
     var searchResultsList = new SearchResultListView({
@@ -161,7 +161,7 @@
         el: "#annotatorjs",
         pageModel: pageModel,
         contractModel: contract,
-        api: "{{route('contract.page.annotations.search', ['id'=>$contract['contract_id']])}}",
+        api: "{{route('contract.page.annotations.search', ['id'=>$contract->metadata->contract_id])}}",
         tags: []
     });
     annotatorjsView.render();
@@ -178,7 +178,7 @@
 
     <script type="text/javascript">
     //annotations list module
-    var annotationsCollection = new MyAnnotationCollection({!!json_encode($annotations)!!});    
+    var annotationsCollection = new MyAnnotationCollection({!!json_encode($contract->annotations)!!});
     var annotationsListView = new AnnotationsListView({
         el: "#annotations_list",
         collection: annotationsCollection,
@@ -219,8 +219,8 @@
     pinCollection.fetch({reset: true});
     var pinningEditorView = new PinningEditorView({
         el: '.editor',
-        contract_title: '{{$contract['metadata']['contract_name']}}',
-        contract_id: '{{$contract['contract_id']}}',
+        contract_title: '{{$contract->metadata->contract_name}}',
+        contract_id: '{{$contract->metadata->contract_id}}',
         page_url: '{{\Illuminate\Support\Facades\Request::url()}}',
         collection: pinCollection
     });

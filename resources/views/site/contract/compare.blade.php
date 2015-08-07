@@ -10,7 +10,7 @@
                 <div class="title">Compare Contracts</div>
             </div>
         <div id="search-form-compare">
-            <form method="POST" action="{{route('contract.page.search', ["id"=>$contract1['contract_id']])}}" accept-charset="UTF-8" class="form-inline page-search pull-right" style="width: 421px; margin: 0 auto 23px;">
+            <form method="POST" action="{{route('contract.page.search', ["id"=>$contract1->contract_id])}}" accept-charset="UTF-8" class="form-inline page-search pull-right" style="width: 421px; margin: 0 auto 23px;">
                 <div class="form-group">
                     <div class="input-group">
                         <input id="textfield" class="form-control" placeholder="Search..." style="padding:15px; width:280px" name="q" type="text">
@@ -33,7 +33,7 @@
         <div class="panel-body panel-view-wrapper">
             <div class="top-document-wrapper">
                 <div class="left-title-wrap">
-                    <div class="title pull-left">{{$contract1['metadata']['contract_name']}}</div>
+                    <div class="title pull-left">{{$contract1->contract_name}}</div>
                     <div class="pull-right">
                         <div class="annotation-pop-wrap">
                           <a id="annotation-button-left" class="btn btn-default annotation_button" href="#">Annotations</a>
@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div class="right-title-wrap">
-                    <div class="title pull-left">{{$contract2['metadata']['contract_name']}}</div>
+                    <div class="title pull-left">{{$contract2->contract_name}}</div>
                     <div class="pull-right">
                         <div class="annotation-pop-wrap">
                             <a id="annotation-button-right" class="btn btn-default annotation_button" href="#">Annotations</a>
@@ -127,17 +127,17 @@
     _.extend(contract1Events, Backbone.Events); 
 
     var currentPage = 1;
-    var contract1Metadata = {!!json_encode($contract1['metadata'])!!};
+    var contract1Metadata = {!!json_encode($contract1)!!};
     var contract1 = new Contract({
-        id: '{{$contract1['contract_id']}}',
-        totalPages: '{{$contract1['total_pages']}}',
+        id: '{{$contract1->contract_id}}',
+        totalPages: '{{$contract1->total_pages}}',
         currentPage: currentPage,
-        annotatorjsAPI: "{{route('contract.page.annotations.search', ['id'=>$contract1['contract_id']])}}"
+        annotatorjsAPI: "{{route('contract.page.annotations.search', ['id'=>$contract1->contract_id])}}"
     });
 
     var pageModel1 = new Page({
         pageNumber: currentPage,
-        loadUrl: "{{route('contract.page.get', ['id'=>$contract1['contract_id']])}}", 
+        loadUrl: "{{route('contract.page.get', ['id'=>$contract1->contract_id])}}",
         contractModel: contract1,
         eventsPipe: contract1Events
     }).load(currentPage);
@@ -166,7 +166,7 @@
         el: "#annotatorjs_left",
         pageModel: pageModel1,
         contractModel: contract1,
-        api: "{{route('contract.page.annotations.search', ['id'=>$contract1['contract_id']])}}"      
+        api: "{{route('contract.page.annotations.search', ['id'=>$contract1->contract_id])}}"
     }).render();
 
     //annotations list module
@@ -194,17 +194,17 @@
     _.extend(contract2Events, Backbone.Events);     
 
     var currentPage = 1;
-    var contract2Metadata = {!!json_encode($contract2['metadata'])!!};
+    var contract2Metadata = {!!json_encode($contract2)!!};
     var contract2 = new Contract({
-        id: '{{$contract2['contract_id']}}',
-        totalPages: '{{$contract2['total_pages']}}',
+        id: '{{$contract2->contract_id}}',
+        totalPages: '{{$contract2->total_pages}}',
         currentPage: currentPage,
-        annotatorjsAPI: "{{route('contract.page.annotations.search', ['id'=>$contract2['contract_id']])}}"
+        annotatorjsAPI: "{{route('contract.page.annotations.search', ['id'=>$contract2->contract_id])}}"
     });
 
     var pageModel2 = new Page({
         pageNumber: currentPage,
-        loadUrl: "{{route('contract.page.get', ['id'=>$contract2['contract_id']])}}", 
+        loadUrl: "{{route('contract.page.get', ['id'=>$contract2->contract_id])}}",
         contractModel: contract2,
         eventsPipe: contract2Events
     }).load(currentPage);
@@ -232,7 +232,7 @@
         el: "#annotatorjs_right",
         pageModel: pageModel2,
         contractModel: contract2,
-        api: "{{route('contract.page.annotations.search', ['id'=>$contract2['contract_id']])}}"        
+        api: "{{route('contract.page.annotations.search', ['id'=>$contract2->contract_id])}}"
     }).render();
 
     //annotations list module
@@ -263,9 +263,9 @@
     var searchFormView = new SearchMultipleContractFormView({
         el: '#search-form-compare',
         collectionLeft: searchResultCollectionLeft,
-        contractIdLeft: '{{$contract1['contract_id']}}',
+        contractIdLeft: '{{$contract1->contract_id}}',
         collectionRight: searchResultCollectionRight,
-        contractIdRight: '{{$contract2['contract_id']}}',
+        contractIdRight: '{{$contract2->contract_id}}',
         events1Pipe: contract1Events,
         events2Pipe: contract2Events
     });
@@ -295,16 +295,16 @@
     pinCollection.fetch({reset: true});
     var pinningEditorViewLeft = new PinningEditorView({
         el: '#editor_left',
-        contract_title: '{{$contract1['metadata']['contract_name']}}',
-        contract_id: '{{$contract1['contract_id']}}',
+        contract_title: '{{$contract1->contract_name}}',
+        contract_id: '{{$contract1->contract_id}}',
         page_url: '{{\Illuminate\Support\Facades\Request::url()}}',
         collection: pinCollection,
         eventsPipe: contract1Events        
     });
     var pinningEditorViewRight = new PinningEditorView({
         el: '#editor_right',
-        contract_title: '{{$contract2['metadata']['contract_name']}}',
-        contract_id: '{{$contract2['contract_id']}}',
+        contract_title: '{{$contract2->contract_name}}',
+        contract_id: '{{$contract2->contract_id}}',
         page_url: '{{\Illuminate\Support\Facades\Request::url()}}',
         collection: pinCollection,
         eventsPipe: contract2Events

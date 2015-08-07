@@ -11,8 +11,8 @@ $app->get('/contract/{id}', ['as' => 'contract.detail', 'uses' => 'SiteControlle
 $app->get('/contract/{id}/page/{page_no}', ['as' => 'contract.page.detail', 'uses' => 'SiteController@getSinglePage']);
 $app->get('/contract/{id}/pages', ['as' => 'contract.pages', 'uses' => 'SiteController@getPageList']);
 $app->get('contract/{contractId1}/{contractId2}/compare', ['as' => 'contracts.compare', 'uses' => 'SiteController@compare']);
-$app->get('/search', ['as' => 'search', 'uses' => 'SiteController@search']);
-$app->get('/filter', ['as' => 'filter', 'uses' => 'FilterController@filter']);
+$app->get('/search', ['as' => 'search', 'uses' => 'FilterController@search']);
+$app->get('/filter', ['as' => 'filter', 'uses' => 'SiteController@filter']);
 
 
 /*

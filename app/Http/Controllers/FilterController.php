@@ -28,8 +28,9 @@ class FilterController
      * @param Request $request
      * @return \Illuminate\View\View
      */
-    public function filter(Request $request)
+    public function search(Request $request)
     {
+
         $filter = $this->processQueries($request);
 
         $contract = $this->api->filterSearch($filter);
@@ -58,9 +59,12 @@ class FilterController
                 'country'
             ),
             'year'    => is_array($request->get('year')) ? join(',', $request->get('year')) : $request->get('year'),
+            'from'    => is_array($request->get('from')) ? join(',', $request->get('from')) : $request->get('from'),
+            'per_page'    => is_array($request->get('per_page')) ? join(',', $request->get('per_page')) : $request->get('per_page'),
+            'resource'    => is_array($request->get('resource')) ? join(',', $request->get('resource')) : $request->get('resource'),
             'sortby'  => $request->get('sortby'),
             'order'   => $request->get('order'),
-            'type'    => $type
+            'group'    => $type
         ];
     }
 

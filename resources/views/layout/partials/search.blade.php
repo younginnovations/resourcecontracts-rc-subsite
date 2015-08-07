@@ -1,9 +1,9 @@
 <div class="top-container @if(isset($show_advance) && $show_advance) expand @endif">
     <div class="top-inner-container">
         <div class="search-wrapper">
-            <form role="form" id="advance-search" method="get" action="{{route('filter')}}">
+            <form role="form" id="advance-search" method="get" action="{{route('search')}}">
                 <div class="search-box">
-                    <form role="form" method="get" action="{{route('filter')}}">
+                    <form role="form" method="get" action="{{route('search')}}">
                         <input name="q" value="{{$filter['q'] or ''}}" type="text"
                                placeholder="Search for a contract..." class="text">
                         <input type="submit" class="submit"/>
@@ -20,7 +20,7 @@
                             <label for="">Country</label>
                             <select name="country[]" id="" multiple="multiple">
                                 @foreach($summary['country_summary'] as $country)
-                                    <option @if(isset($filter['country']) && in_array($country['key'], $filter['country']))
+                                    <option @if(isset($filter['country']) && in_array(strtoupper($country['key']), $filter['country']))
                                         selected="selected"
                                         @endif value="{{$country['key']}}">{{trans('country.'.strtoupper($country['key']))}}</option>
                                 @endforeach
