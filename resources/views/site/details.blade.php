@@ -5,8 +5,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="contract-name pull-left">
-                <div class="contract-name-title">{{$document['metadata']['contract_name']}}</div>
-
+                <div class="contract-name-title">{{$contract->metadata->contract_name}}</div>
                 <div class="contract-actions pull-left">
                    <div class="btn-group">
                        <button type="button" class=" download btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -14,38 +13,37 @@
                        </button>
                        <ul class="dropdown-menu">
                            <li><a target="_blank"
-                              href="{{ isset($document['metadata']['file_url']) ? $document['metadata']['file_url'] : ''}}"
+                              href="{{ $contract->metadata->file_url}}"
                               class="download">PDF
-                            {{--<span class="size">{{getFileSize($document['metadata']['file_size'])}}></span>--}}
+                            <span class="size">{{getFileSize($contract->metadata->file_size)}}</span>
                            </a></li>
                            <li>
                                <a target="_blank"
-                                   href="{{ isset($document['metadata']['word_file']) ? $document['metadata']['word_file'] : ''}}"
+                                   href="{{ $contract->metadata->word_file}}"
                                    class="download">Word
                                </a>
                            </li>
                        </ul>
                    </div>
 
-                    @if($annotations)
+                    @if($contract->annotations)
                         <div class="contract-annotations">
                             <a href="" class="view-annotations open-annotations">View Annotations</a>
                             <a href="" class="view-annotations close-annotations">Close Annotations</a>
                         </div>
                     @endif
                 </div>
-
                 <div class="amla-link pull-left">
-                    @if(isset($document['metadata']['amla_url']) and !empty($document['metadata']['amla_url']))
-                        <a href="{{$document['metadata']['amla_url']}}">Current mining legislation at AMLA</a>
+                    @if($contract->metadata->amla_url !='')
+                        <a href="{{$contract->metadata->amla_url}}">Current mining legislation at AMLA</a>
                     @endif
                 </div>
-
             </div>
-            @if($pages)
+
+            @if($contract->metadata->total_pages > 0)
 
                 <div class="pull-right">
-                    <a href="{{route('contract.pages',['id'=>$document['contract_id']])}}" class="btn btn-view">View
+                    <a href="{{route('contract.pages',['id'=>$contract->metadata->contract_id])}}" class="btn btn-view">View
                         Document</a>
                 </div>
             @endif
@@ -55,62 +53,62 @@
                 <table class="table table-responsive">
                     <tr>
                         <td>Contract Identifier</td>
-                        <td>{{$document['metadata']['contract_identifier']}}</td>
+                        <td>{{$contract->metadata->contract_identifier or ''}}</td>
                     </tr>
                     <tr>
                         <td>Language</td>
-                        <td>{{$document['metadata']['language']}}</td>
+                        <td>{{$contract->metadata->language or ''}}</td>
                     </tr>
 
                     <tr>
                         <td>Country</td>
-                        <td>{{$document['metadata']['country']['name']}}
+                        <td>{{$contract->metadata->country->name or ''}}
 
                         </td>
                     </tr>
                     <tr>
                         <td>Government Entity</td>
-                        <td>{{$document['metadata']['government_entity']}}</td>
+                        <td>{{$contract->metadata->government_entity or ''}}</td>
                     </tr>
                     <tr>
                         <td>Government Identifier</td>
-                        <td>{{$document['metadata']['government_identifier']}}</td>
+                        <td>{{$contract->metadata->government_identifier or ''}}</td>
                     </tr>
                     <tr>
                         <td>Type of Contract</td>
-                        <td>{{$document['metadata']['type_of_contract']}}</td>
+                        <td>{{$contract->metadata->type_of_contract or ''}}</td>
                     </tr>
                     <tr>
                         <td>Signature Date</td>
-                        <td>{{$document['metadata']['signature_date']}}</td>
+                        <td>{{$contract->metadata->signature_date or ''}}</td>
                     </tr>
                     <tr>
                         <td>Document Type</td>
-                        <td>{{$document['metadata']['document_type']}}</td>
+                        <td>{{$contract->metadata->document_type or ''}}</td>
                     </tr>
                     <tr>
                         <td>Translation from original</td>
-                        <td>{{$document['metadata']['translation_parent']}}</td>
+                        <td>{{$contract->metadata->translation_parent or ''}}</td>
                     </tr>
 
                 </table>
                 <h3>Company</h3>
-                @foreach($document['metadata']['company'] as $company)
+                @foreach($contract->metadata->company as $company)
 
                     <table class="table table-responsive">
                         <tr>
                             <td>Company Name</td>
-                            <td>{{$company['name']}}</td>
+                            <td>{{$company->name or ''}}</td>
                         </tr>
-                        @if(isset($company['participation_share']))
+                        @if(isset($company->participation_share))
                             <tr>
                                 <td>Participation Share</td>
-                                <td>{{$company['participation_share']}}</td>
+                                <td>{{$company->participation_share or ''}}</td>
                             </tr>
                         @endif
                         <tr>
                             <td>Jurisdiction of Incorporation</td>
-                            <?php $jurisdiction=isset($company['jurisdiction_of_incorporation'])?$jurisdiction =$company['jurisdiction_of_incorporation']:'';   ?>
+                            <?php $jurisdiction=isset($company->jurisdiction_of_incorporation)?$company->jurisdiction_of_incorporation:'';   ?>
                                 @if(!empty($jurisdiction))
                                 <td>{{trans('country')[$jurisdiction]}}</td>
                                  @endif
@@ -118,54 +116,54 @@
                         </tr>
                         <tr>
                             <td>Registration Agency</td>
-                            <td>{{$company['registration_agency']}}</td>
+                            <td>{{$company->registration_agency or ''}}</td>
                         </tr>
                         <tr>
                             <td>Company Address</td>
-                            <td>{{$company['company_address']}}</td>
+                            <td>{{$company->company_address or ''}}</td>
                         </tr>
 
                         <tr>
                             <td> Company Number</td>
-                            <td>@if(isset($company['company_number'])){{$company['company_number']}}@endif</td>
+                            <td>{{$company->company_number or ''}}</td>
                         </tr>
                         <tr>
                             <td>Parent Company</td>
-                            <td>{{$company['parent_company']}}</td>
+                            <td>{{$company->parent_company or ''}}</td>
                         </tr>
                         <tr>
                             <td>Open Corporate Id</td>
-                            <td>{{$company['open_corporate_id']}}</td>
+                            <td>{{$company->open_corporate_id or ''}}</td>
                         </tr>
-                        @if(isset($company['operator']))
+                        @if(isset($company->operator))
                             <tr>
                                 <td>Operator</td>
-                                <td>@if($company['operator']==1) Yes @else No @endif</td>
+                                <td>@if($company->operator==1) Yes @else No @endif</td>
                             </tr>
                         @endif
                     </table>
                 @endforeach
                 <h3>Concession / license and Project</h3>
                 <table class="table table-responsive">
-                    @if(isset($document['metadata']['concession']))
-                        @foreach($document['metadata']['concession'] as $concession)
+                    @if($contract->metadata->concession)
+                        @foreach($contract->metadata->concession as $concession)
                         <tr>
                             <td>License Name</td>
-                            <td>{{$concession['license_name']}}</td>
+                            <td>{{$concession->license_name}}</td>
                         </tr>
                         <tr>
                             <td>License Identifier</td>
-                            <td>{{$concession['license_identifier']}}</td>
+                            <td>{{$concession->license_identifier}}</td>
                         </tr>
                         <tr>
                         @endforeach
                     @endif
                         <td>Project Title</td>
-                        <td>{{$document['metadata']['project_title']}}</td>
+                        <td>{{$contract->metadata->project_title or ''}}</td>
                     </tr>
                     <tr>
                         <td>Project Identifier</td>
-                        <td>{{$document['metadata']['project_identifier']}}</td>
+                        <td>{{$contract->metadata->project_identifier or ''}}</td>
                     </tr>
 
                 </table>
@@ -173,20 +171,21 @@
                 <table class="table table-responsive">
                     <tr>
                         <td>Source URL</td>
-                        <td>@if(isset($document['metadata']['source_url'])){{$document['metadata']['source_url']}}@endif</td>
+                        <td>{{$contract->metadata->source_url or ''}}</td>
                     </tr>
-                    @if(isset($document['metadata']['disclosure_mode']))
+                    @if($contract->metadata->disclosure_mode)
                         <tr>
                             <td>Disclosure Mode</td>
-                            <td>{{$document['metadata']['disclosure_mode']}}</td>
+                            <td>{{$contract->metadata->disclosure_mode or ''}}</td>
                         </tr>
                     @endif
                 </table>
             </div>
         </div>
+        @if(!is_null($contract->annotations ))
         <div class="annotation-pop">
             <ul>
-                @foreach($annotations as $anote)
+                @foreach($contract->annotations as $annotation)
                     <li>
                         <div class="pull-left page-num">{{$anote['page_no']}}</div>
                         <div class="pull-left">
@@ -202,5 +201,7 @@
                 @endforeach
             </ul>
         </div>
+        @endif
+
     </div>
 @endsection

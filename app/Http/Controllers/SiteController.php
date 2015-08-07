@@ -42,41 +42,48 @@ class SiteController extends BaseController
     public function home()
     {
         $contracts = $this->api->getAllContracts();
-        if ($contracts === false) {
-            return "error";
+
+        if (is_null($contracts)) {
+            return "API Error";
         }
 
         return view('site.home', compact('contracts'));
     }
 
     /**
+     * Show specific Contract detail page
+     *
      * @param $id
      * @return \Illuminate\View\View
      */
     public function show($id)
     {
-        $annotations = $this->api->getAnnotations($id);
-        $document    = $this->api->getMetadataDocument($id);
-        $pages       = $this->api->getTextPage($id, 1);
-        if ($document === false) {
-            return "error";
+        $contract = $this->api->getContractDetail($id);
+
+        if (is_null($contract->metadata)) {
+            return abort(404);
         }
 
-        return view('site.details', compact('document', 'annotations', 'pages'));
+        return view('site.details', compact('contract'));
     }
 
     /**
+     * Get Single page detail
+     *
      * @param $id
      * @param $page_no
      * @return \Illuminate\View\View
      */
     public function getSinglePage($id, $page_no)
     {
-        $page        = $this->api->getTextPage($id, $page_no);
-        $annotations = $this->api->getAnnotationPage($id, $page_no);
-        $contract    = $this->api->getMetadataDocument($id);
-        if ($contract === false) {
-            return "error";
+        dd('ddd');
+        $contract              = new \stdClass();
+        $contract->page        = $this->api->getTextPage($id, $page_no);
+        $contract->annotations = $this->api->getAnnotationPage($id, $page_no);
+        $contract->metadata    = $this->api->getMetadata($id);
+
+        if (is_null($contract->metadata)) {
+            return abort(404);
         }
 
         return view('site.documentview', compact('page', 'contract', 'annotations'));
@@ -88,13 +95,14 @@ class SiteController extends BaseController
      */
     public function getPageList($id)
     {
-        $page_no     = 1;
-        $page        = $this->api->getTextPage($id, $page_no);
-        $contract    = $this->api->getMetadataDocument($id);
-        $annotations = $this->contract->annotations($id);
+        $page_no               = 1;
+        $contract              = new \stdClass();
+        $contract->page        = $this->api->getTextPage($id, $page_no);
+        $contract->metadata    = $this->api->getMetadata($id);
+        $contract->annotations = $this->contract->annotations($id);
 
-        if ($contract === false) {
-            return "error";
+        if (is_null($contract->metadata)) {
+            return abort(404);
         }
 
         return view('site.contract.pages', compact('page', 'contract', 'annotations'));
@@ -110,8 +118,8 @@ class SiteController extends BaseController
     {
         $contract1Annotations = $this->contract->annotations($contractId1);
         $contract2Annotations = $this->contract->annotations($contractId2);
-        $contract1            = $this->api->getMetadataDocument($contractId1);
-        $contract2            = $this->api->getMetadataDocument($contractId2);
+        $contract1            = $this->api->getMetadata($contractId1);
+        $contract2            = $this->api->getMetadata($contractId2);
 
         return view(
             'site.contract.compare',

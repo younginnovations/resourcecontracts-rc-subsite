@@ -3,8 +3,8 @@ namespace App\Http\Services;
 
 use GuzzleHttp\Client;
 use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Facades\Log;
 use GuzzleHttp\Message\Request;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class APIService
@@ -15,7 +15,7 @@ class APIService
     /**
      * @const BASE_URL
      */
-    const BASE_URL='es';
+    const BASE_URL = 'es';
     /**
      * @var Client
      */
@@ -24,47 +24,121 @@ class APIService
      * @var Log
      */
     protected $logger;
+    /**
+     * @var Log
+     */
+    private $log;
 
     /**
      * @param Client $client
+     * @param Log    $log
      * @internal param Log $logger
      */
-    public function __construct(Client $client)
+    public function __construct(Client $client, Log $log)
     {
         $this->client = $client;
+        $this->log    = $log;
     }
 
     /**
      * Get Api full URL
+     *
      * @param $request
      * @return string
      */
     protected function apiURL($request)
     {
-        return env('ELASTIC_SEARCH_HOST').self::BASE_URL. $request;
+        $host    = trim(env('ELASTIC_SEARCH_HOST'), '/');
+        $base    = self::BASE_URL;
+        $request = trim($request, '/');
+
+        return sprintf('%s/%s/%s', $host, $base, $request);
     }
 
     /**
-     * @param $contractId
-     * @param $pageNo
-     * @return Array|false
+     * Get Summary
+     *
+     * @return array|null
      */
-    public function getTextPage($contractId, $pageNo)
+    public function getSummary()
     {
-        try {
-            $response = $this->client->get(
-                $this->apiURL(sprintf('/contracts/%s/text/%s/page', $contractId, $pageNo))
-            );
+        $call = '/contracts/summary';
 
-            $data = $response->getBody();
+        return $this->apiCall($call, true);
+    }
 
-            return json_decode($data, true);
-        } catch (\Exception $e) {
-            Log::error("Error.{$e->getMessage()}");
+    /**
+     * Get All Contracts
+     *
+     * @return object|null
+     */
+    public function getAllContracts()
+    {
+        $call = '/contracts';
+
+        $contract = $this->apiCall($call);
+
+        if ($contract) {
+            return $contract->results;
         }
 
-        return false;
+        return null;
+    }
 
+    /**
+     * Get Contract Detail
+     *
+     * @param $contract_id
+     * @return \stdClass
+     */
+    public function getContractDetail($contract_id)
+    {
+        $contract              = new \stdClass();
+        $contract->metadata    = $this->getMetadata($contract_id);
+        $contract->annotations = $this->getAnnotations($contract_id);
+        $contract->pages       = $this->getTextPage($contract_id, 1);
+
+        return $contract;
+    }
+
+    /**
+     * Get Contract Metadata
+     *
+     * @param $contract_id
+     * @return object|null
+     */
+    public function getMetadata($contract_id)
+    {
+        $call = sprintf('/contract/%s/metadata', $contract_id);
+
+        return $this->apiCall($call);
+    }
+
+    /**
+     * Get Annotations
+     *
+     * @param $contract_id
+     * @return object|null
+     */
+    public function getAnnotations($contract_id)
+    {
+        $call = sprintf('/contracts/%d/annotations', $contract_id);
+
+        return $this->apiCall($call);
+    }
+
+
+    /**
+     * Get Text Page
+     *
+     * @param $contract_id
+     * @return object|null
+     */
+    public function getTextPage($contract_id, $page_no)
+    {
+        $call = sprintf('/contract/%d/text?page=%d', $contract_id, $page_no);
+
+        return $this->apiCall($call);
     }
 
     /**
@@ -93,124 +167,43 @@ class APIService
     }
 
     /**
-     * @return Array|false
+     * Get Full text search
+     *
+     * @param $contract_id
+     * @param $query
+     * @return mixed
      */
-    public function getSummary()
+    public function getFullTextSearch($contract_id, $query)
     {
-        try {
-            $response = $this->client->get($this->apiURL('/contracts/summary'));
-            $data     = $response->getBody();
+        $call = sprintf('/contract/%d/searchtext?q=%s', $contract_id, $query);
 
-            return json_decode($data, true);
-        } catch (\Exception $e) {
-            Log::error("Error.{$e->getMessage()}");
-        }
-
-        return false;
+        return $this->apiCall($call, true);
     }
 
     /**
-     * @param $contractId
-     * @return array
+     * Call API
+     *
+     * @param      $call
+     * @param bool $array
+     * @return mixed
      */
-    public function getMetadataDocument($contractId)
+    protected function apiCall($call, $array = false)
     {
         try {
-            $request  = new Request('GET', $this->apiURL('/contracts/' . $contractId . '/metadata'));
+            $request  = new Request('GET', $this->apiURL($call));
             $response = $this->client->send($request);
             $data     = $response->getBody();
 
-            return json_decode($data, true);
-        } catch (\Exception $e) {
-            Log::error("Error.{$e->getMessage()}");
-        }
+            if ($array) {
+                return json_decode($data, true);
+            }
 
-        return false;
-    }
-
-    /**
-     * @param $contractId
-     * @return Array|false
-     */
-    public function getAnnotations($contractId)
-    {
-        try {
-            $request  = new Request('GET', $this->apiURL(sprintf('/contracts/%d/annotations', $contractId)));
-            $response = $this->client->send($request);
-            $data     = $response->getBody();
-
-            return json_decode($data, true);
-        } catch (\Exception $e) {
-            Log::error("Error.{$e->getMessage()}");
-        }
-
-        return false;
-    }
-
-    /**
-     * @return Array|false
-     */
-    public function getAllContracts()
-    {
-        try {
-            $request  = new Request('GET', $this->apiURL(sprintf('/contracts')));
-            $response = $this->client->send($request);
-            $data     = $response->getBody();
-            $metadata = json_decode($data, true);
-
-            return $metadata;
-        } catch (\Exception $e) {
-            Log::error("Error.{$e->getMessage()}");
-        }
-
-        return false;
-    }
-
-    /**
-     * @param $filter
-     * @return Array|false
-     */
-    public function filterSearch($filter)
-    {
-        try {
-            $filter       = array_filter($filter);
-            $response     = $this->client->get(
-                $this->apiURL(sprintf('/contracts/fulltextsearch')),
-                ['query' => $filter]
-            );
-            $data         = $response->getBody();
-            $data         = (object) json_decode($data, true);
-            $data->result = new Paginator($data->result, $data->per_page);
-
-            return $data;
+            return json_decode($data);
 
         } catch (\Exception $e) {
-            Log::error("Error.{$e->getMessage()}");
+            Log::error($call . ":" . $e->getMessage());
         }
-
-        return null;
     }
 
-    /**
-     * @param $f
-     * @return Array|false
-     */
-    public function getFullTextSearch($contractId, $query)
-    {
-        try {
-            $response = $this->client->get(
-                $this->apiURL(sprintf('/contracts/pdfsearch')),
-                ['query' => ['contract_id' => $contractId, 'q' => $query]]
-            );
-            $data     = $response->getBody();
-            $metadata = json_decode($data, true);
-
-            return $metadata;
-        } catch (\Exception $e) {
-            Log::error("Error.{$e->getMessage()}");
-        }
-
-        return false;
-    }
 
 }
