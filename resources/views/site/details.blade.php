@@ -35,7 +35,7 @@
                     @endif
                 </div>
                 <div class="amla-link pull-left">
-                    @if($contract->metadata->amla_url !='')
+                    @if(isset($contract->metadata->amla_url) and $contract->metadata->amla_url !='' )
                         <a href="{{$contract->metadata->amla_url}}">Current mining legislation at AMLA</a>
                     @endif
                 </div>
