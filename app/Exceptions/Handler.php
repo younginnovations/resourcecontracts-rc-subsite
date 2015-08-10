@@ -2,6 +2,9 @@
 
 use Exception;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use Symfony\Component\HttpKernel\HttpCache\HttpCache;
 
 class Handler extends ExceptionHandler
 {
@@ -37,11 +40,25 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        if ($e instanceof CustomException) {
-            return view('errors.custom', [], 500);
+        if ($this->isHttpException($e)) {
+            return $this->isHttpException($e);
         }
 
         return parent::render($request, $e);
+    }
+
+    /**
+     * Render exception according to exception code
+     * @param HttpException $e
+     * @return mixed
+     */
+    private function isHttpException(HttpException $e)
+    {
+        if (view()->exists('errors.' . $e->getStatusCode())) {
+            return view('errors.' . $e->getStatusCode());
+        } else {
+            return (new SymfonyDisplayer(config('app.debug')))->createResponse($e);
+        }
     }
 
 }
