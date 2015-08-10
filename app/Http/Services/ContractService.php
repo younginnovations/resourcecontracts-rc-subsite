@@ -31,7 +31,7 @@ class ContractService
     {
         $contractAnnotationsObj = $this->api->getAnnotations($contractId);
         $annotation             = [];
-        if ($contractAnnotationsObj) {
+        if ($contractAnnotationsObj->total>0) {
             foreach ($contractAnnotationsObj->result as $annotations) {
                 $annotation[] = [
                     'page'  => $annotations->page_no,
