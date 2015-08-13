@@ -63,6 +63,7 @@ class APIService
     public function getSummary()
     {
         $call = '/contracts/summary';
+
         return $this->apiCall($call, true);
     }
 
@@ -154,22 +155,10 @@ class APIService
      */
     public function getAnnotationPage($contractId, $pageNo)
     {
-        try {
-            $request  = new Request(
-                'GET',
-                $this->apiURL('/contracts/' . $contractId . '/page/' . $pageNo . '/annotations')
-            );
-            $response = $this->client->send($request);
 
-            $data = $response->getBody();
-            Log::Info("result.{$data}");
+        $call = sprintf('/contract/%d/annotations?page=%d', $contractId, $pageNo);
 
-            return json_decode($data, true);
-        } catch (\Exception $e) {
-            Log::error("Error.{$e->getMessage()}");
-        }
-
-        return false;
+        return $this->apiCall($call, true);
     }
 
     /**

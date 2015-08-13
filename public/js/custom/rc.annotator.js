@@ -8,7 +8,7 @@ var AnnotatorjsView = Backbone.View.extend({
             readOnly: !this.options.pageModel.get('isAnnotable')
         });
         this.content.annotator('addPlugin', 'Tags');
-       // this.content.annotator('addPlugin', 'Categories', {category:[]});
+        this.content.annotator('addPlugin', 'Categories', {category:[]});
 
         // this.availableTags = this.options.tags;
         return this;
@@ -16,6 +16,12 @@ var AnnotatorjsView = Backbone.View.extend({
     pageUpdated: function() {
         var that = this;
         var store = this.content.data('annotator').plugins.Store;
+        store._onLoadAnnotationsFromSearch = function(data) {
+            if (data == null) {
+                data = {};
+            }
+            return that.content.data('annotator').plugins.Store._onLoadAnnotations(data.result || []);
+        };
         if (store.annotations) store.annotations = [];
         store.options.loadFromSearch = {
             'url': that.api,
@@ -36,6 +42,8 @@ var AnnotatorjsView = Backbone.View.extend({
         var page = that.options.pageModel.get('pageNumber');
         if (this.content.data('annotator').plugins.Store) {
             var store = this.content.data('annotator').plugins.Store;
+
+
             if (store.annotations) store.annotations = [];
             store.options.loadFromSearch = {
                 'url': that.api,
