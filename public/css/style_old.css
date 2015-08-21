@@ -315,18 +315,6 @@ header {
     overflow: hidden !important;
 }
 
-.table-contract td {
-    color: #8B8B8B;
-    font-size: 12px;
-}
-
-.table-contract td:first-child a {
-    background: url(../../images/ic-img-sprite.png) no-repeat 0 -121px;
-    padding-left: 30px;
-    color: #404040;
-    font-size: 14px;
-}
-
 .contract-actions {
     margin-top: 10px;
 }
