@@ -16,7 +16,7 @@
                             <label for="year">Year</label>
                             <select name="year[]" id="year" multiple="multiple">
                                 @foreach($summary->year_summary as $year)
-                                    <option  @if(isset($filter->year) && in_array($year->key, $filter->year))
+                                    <option  @if(isset($filter['year']) && in_array($year->key, $filter['year']))
                                         selected="selected" @endif    value="{{$year->key}}">{{$year->key}}</option>
                                 @endforeach
                             </select>
@@ -25,7 +25,7 @@
                             <label for="">Country</label>
                             <select name="country[]" id="" multiple="multiple">
                                 @foreach($summary->country_summary as $country)
-                                    <option @if(isset($filter->country) && in_array(strtoupper($country->key), $filter->country))
+                                    <option @if(isset($filter['country']) && in_array($country->key, $filter['country']))
                                         selected="selected"
                                         @endif value="{{$country->key}}">{{trans('country.'.strtoupper($country->key))}}</option>
                                 @endforeach
