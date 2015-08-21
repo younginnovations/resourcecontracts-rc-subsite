@@ -178,20 +178,23 @@ class APIService
         extract($filter);
 
         $query = [
-            'q'        => $q,
-            'country'  => $country,
-            'year'     => $year,
-            'resource' => $resource,
-            'group'    => $group,
-            'sort_by'  => $sortby,
-            'order'    => $order,
-            'per_page' => $per_page,
-            'from'     => $from
+            'q'            => $q,
+            'country_code' => $country,
+            'year'         => $year,
+            'resource'     => $resource,
+            'group'        => $group,
+            'sort_by'      => $sortby,
+            'order'        => $order,
+            'per_page'     => $per_page,
+            'from'         => $from
 
         ];
+        if (!is_null($q)) {
+            $contract = $this->apiCall('contracts/search', $query);
+        } else {
+            $contract = $this->apiCall('contracts', $query);
 
-
-        $contract = $this->apiCall('contracts', $query);
+        }
 
         if ($contract) {
             return $contract;

@@ -6,12 +6,14 @@
         <li class="contracts active">
             <a href="{{url('contracts')}}">
                 <span>All Contracts</span>
-                <small class="label pull-right">6</small>
+
+                <small class="label pull-right">{{$summary->contract_count}}</small>
             </a>
         </li>
         <li class="countries">
             <label>Countries</label>
             <ul>
+
                 @foreach($summary->country_summary as $country)
                     <li>
                         <a href="{{route('search')}}?country={{$country->key}}">
