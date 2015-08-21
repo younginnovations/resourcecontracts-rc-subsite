@@ -31,7 +31,7 @@
                                         {{ $contract->contract_name or ''}}
                                     </a>
                                     <?php
-                                    $arr = array_filter([trans('country.'.strtoupper($contract->country)), $contract->signature_year]);
+                                    $arr = array_filter([$contract->country, $contract->signature_year]);
                                     ?>
                                     - {{ join(', ', $arr)}}
                                     <span class="label label-default">{{strtoupper($contract->language)}}</span>

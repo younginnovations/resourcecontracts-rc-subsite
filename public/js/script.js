@@ -48,10 +48,14 @@ $(document).ready(function() {
 
     $('.search-form:not(.filter-form) input[type="text"]').focus(function(){
         $('.search-input-wrapper').show();
+        $('select').select2({placeholder: "Select", allowClear: true, theme: "classic"});
+
     });
 
-     $('.search-form:not(.filter-form) input[type="text"]').keyup(function(){
-      if($(this).val() == ''){
+
+     $('.search-form input[type="text"]').keyup(function(){
+
+         if($(this).val() == ''){
          $('.search-input-wrapper').hide();
       }else{
          $('.search-input-wrapper').show();
