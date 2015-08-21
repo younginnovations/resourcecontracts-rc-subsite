@@ -175,8 +175,6 @@ class APIService
      */
     public function filterSearch($filter)
     {
-        $resource = sprintf('contracts/search');
-
         extract($filter);
 
         $query = [
@@ -193,7 +191,7 @@ class APIService
         ];
 
 
-        $contract = $this->apiCall($resource, $query);
+        $contract = $this->apiCall('contracts/search', $query);
 
         if ($contract) {
             return $contract;

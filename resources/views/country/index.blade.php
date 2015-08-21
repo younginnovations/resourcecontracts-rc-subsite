@@ -6,31 +6,19 @@
 
 @section('content')
     <div class="row">
-        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="{{url()}}">Resource <span>Contracts</span></a>
-            </div>
-            <div class="navbar-right">
-                <form action="" method="post" class="search-form">
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-navbar-search pull-left"></button>
-                        <input type="text" class="form-control pull-left" placeholder="Search for contracts...">
-                    </div>
-                </form>
-            </div>
-            <!-- /.navbar-header -->
-        </nav>
-    </div>
-    <div class="row">
         <div class="col-lg-12 panel-top-wrapper">
-            <div class="breadcrumb-wrapper">
-                <ul>
-                    <li><a href="{{url()}}">Home</a></li>
-                    <li>Countries</li>
-                </ul>
-            </div>
-            <div class="panel-title">
-                Countries
+            <div class="panel-top-content">
+                <div class="pull-left">
+                    <div class="breadcrumb-wrapper">
+                        <ul>
+                            <li><a href="{{url()}}">Home</a></li>
+                            <li>Countries</li>
+                        </ul>
+                    </div>
+                    <div class="panel-title">
+                        Countries
+                    </div>
+                </div>
             </div>
             <div class="filter-wrapper">
                 <div class="col-lg-2">
@@ -45,35 +33,35 @@
                 </div>
                 <div class="col-lg-8">
                     <div class="pagination-wrapper">
-                        <ul>
-                            <li><a href="#" data-code="" class="alpha active">All</a></li>
-                            <li><a href="#" class="alpha" data-code="A">A</a></li>
-                            <li><a href="#" class="alpha" data-code="B">B</a></li>
-                            <li><a href="#" class="alpha" data-code="C">C</a></li>
-                            <li><a href="#" class="alpha" data-code="D">D</a></li>
-                            <li><a href="#" class="alpha" data-code="E">E</a></li>
-                            <li><a href="#" class="alpha" data-code="F">F</a></li>
-                            <li><a href="#" class="alpha" data-code="G">G</a></li>
-                            <li><a href="#" class="alpha" data-code="H">H</a></li>
-                            <li><a href="#" class="alpha" data-code="I">I</a></li>
-                            <li><a href="#" class="alpha" data-code="J">J</a></li>
-                            <li><a href="#" class="alpha" data-code="K">K</a></li>
-                            <li><a href="#" class="alpha" data-code="L">L</a></li>
-                            <li><a href="#" class="alpha" data-code="M">M</a></li>
-                            <li><a href="#" class="alpha" data-code="N">N</a></li>
-                            <li><a href="#" class="alpha" data-code="O">O</a></li>
-                            <li><a href="#" class="alpha" data-code="P">P</a></li>
-                            <li><a href="#" class="alpha" data-code="Q">Q</a></li>
-                            <li><a href="#" class="alpha" data-code="R">R</a></li>
-                            <li><a href="#" class="alpha" data-code="S">S</a></li>
-                            <li><a href="#" class="alpha" data-code="T">T</a></li>
-                            <li><a href="#" class="alpha" data-code="U">U</a></li>
-                            <li><a href="#" class="alpha" data-code="V">V</a></li>
-                            <li><a href="#" class="alpha" data-code="W">W</a></li>
-                            <li><a href="#" class="alpha" data-code="X">X</a></li>
-                            <li><a href="#" class="alpha" data-code="Y">Y</a></li>
-                            <li><a href="#" class="alpha" data-code="Z">Z</a></li>
-                        </ul>
+                            <ul>
+                                <li><a href="#" data-code="" class="alpha active">All</a></li>
+                                <li><a href="#" class="alpha" data-code="A">A</a></li>
+                                <li><a href="#" class="alpha" data-code="B">B</a></li>
+                                <li><a href="#" class="alpha" data-code="C">C</a></li>
+                                <li><a href="#" class="alpha" data-code="D">D</a></li>
+                                <li><a href="#" class="alpha" data-code="E">E</a></li>
+                                <li><a href="#" class="alpha" data-code="F">F</a></li>
+                                <li><a href="#" class="alpha" data-code="G">G</a></li>
+                                <li><a href="#" class="alpha" data-code="H">H</a></li>
+                                <li><a href="#" class="alpha" data-code="I">I</a></li>
+                                <li><a href="#" class="alpha" data-code="J">J</a></li>
+                                <li><a href="#" class="alpha" data-code="K">K</a></li>
+                                <li><a href="#" class="alpha" data-code="L">L</a></li>
+                                <li><a href="#" class="alpha" data-code="M">M</a></li>
+                                <li><a href="#" class="alpha" data-code="N">N</a></li>
+                                <li><a href="#" class="alpha" data-code="O">O</a></li>
+                                <li><a href="#" class="alpha" data-code="P">P</a></li>
+                                <li><a href="#" class="alpha" data-code="Q">Q</a></li>
+                                <li><a href="#" class="alpha" data-code="R">R</a></li>
+                                <li><a href="#" class="alpha" data-code="S">S</a></li>
+                                <li><a href="#" class="alpha" data-code="T">T</a></li>
+                                <li><a href="#" class="alpha" data-code="U">U</a></li>
+                                <li><a href="#" class="alpha" data-code="V">V</a></li>
+                                <li><a href="#" class="alpha" data-code="W">W</a></li>
+                                <li><a href="#" class="alpha" data-code="X">X</a></li>
+                                <li><a href="#" class="alpha" data-code="Y">Y</a></li>
+                                <li><a href="#" class="alpha" data-code="Z">Z</a></li>
+                            </ul>
                     </div>
                 </div>
                 <div class="col-lg-2">
@@ -88,15 +76,18 @@
             </div>
         </div>
     </div>
-    <div class="row side-collapse-container">
-        <div id="countries" class="col-lg-12 country-list-wrap f32">
 
+    <div class="row side-collapse-container">
+        <div class="sort-wrapper">
+            <label for="">Sort</label>
+            <select class="sort" name="sort" >
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </select>
+        </div>
+        <div id="countries" class="col-lg-12 country-list-wrap f32">
         </div>
     </div>
-
-    <a href="#" class="sort" data-value="asc">asc</a>
-    <a href="#" class="sort" data-value="desc">desc</a>
-
 @stop
 
 @section('js')
@@ -351,9 +342,9 @@
                 updateView();
             });
 
-            $(document).on('click', '.sort', function(e){
+            $(document).on('change', '.sort', function(e){
                 e.preventDefault();
-                option.sort_type = $(this).data('value');
+                option.sort_type = $(this).val();
                 updateView();
             });
 

@@ -1,9 +1,6 @@
 @extends('layout.app-full')
 
 @section('content')
-
-    @include('layout.partials.header')
-
     <div class="row">
         <div class="col-lg-12 panel-top-wrapper">
             <div class="breadcrumb-wrapper">
