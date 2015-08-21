@@ -5,7 +5,7 @@
     <div class="row">
         <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/">Resource <span>Contracts</span></a>
+                <a class="navbar-brand" href="/">Resource<span>Contracts</span></a>
             </div>
             <div class="navbar-right">
                 <form action="" method="post" class="search-form">
