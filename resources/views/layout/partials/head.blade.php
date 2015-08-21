@@ -31,4 +31,4 @@
 </head>
 <body>
 <div id="wrapper">
-    <div id="page-wrapper" class="no-front">
+    <div id="page-wrapper" class="not-front">

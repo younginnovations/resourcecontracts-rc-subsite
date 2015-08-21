@@ -1,5 +1,9 @@
 @extends('layout.app-full')
 
+@section('css')
+    <link rel="stylesheet" type="text/css" href="//cloud.github.com/downloads/lafeber/world-flags-sprite/flags32.css" />
+@stop
+
 @section('content')
     <div class="row">
         <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -105,60 +109,8 @@
         </div>
     </div>
     <div class="row side-collapse-container">
-        <div class="col-lg-12 country-list-wrap">
-            <div class="col-lg-2">
-                <img src="../images/flag/ic-guinea.png" alt="">
-                <div class="country-name">Guinea</div>
-                <div class="contract-count">83 contracts</div>
-            </div>
-            <div class="col-lg-2">
-                <img src="../images/flag/ic-guinea.png" alt="">
-                <div class="country-name">Guinea</div>
-                <div class="contract-count">83 contracts</div>
-            </div>
-            <div class="col-lg-2">
-                <img src="../images/flag/ic-guinea.png" alt="">
-                <div class="country-name">Guinea</div>
-                <div class="contract-count">83 contracts</div>
-            </div>
-            <div class="col-lg-2">
-                <img src="../images/flag/ic-guinea.png" alt="">
-                <div class="country-name">Guinea</div>
-                <div class="contract-count">83 contracts</div>
-            </div>
-            <div class="col-lg-2">
-                <img src="../images/flag/ic-guinea.png" alt="">
-                <div class="country-name">Guinea</div>
-                <div class="contract-count">83 contracts</div>
-            </div>
-            <div class="col-lg-2">
-                <img src="../images/flag/ic-guinea.png" alt="">
-                <div class="country-name">Guinea</div>
-                <div class="contract-count">83 contracts</div>
-            </div>
-            <div class="col-lg-2">
-                <img src="../images/flag/ic-guinea.png" alt="">
-                <div class="country-name">Guinea</div>
-                <div class="contract-count">83 contracts</div>
-            </div>
-            <div class="col-lg-2">
-                <img src="../images/flag/ic-guinea.png" alt="">
-                <div class="country-name">Guinea</div>
-                <div class="contract-count">83 contracts</div>
-            </div>
-            <div class="col-lg-2">
-                <img src="../images/flag/ic-guinea.png" alt="">
-                <div class="country-name">Guinea</div>
-                <div class="contract-count">83 contracts</div>
-            </div>
-            <div class="col-lg-2">
-                <img src="../images/flag/ic-guinea.png" alt="">
-                <div class="country-name">Guinea</div>
-                <div class="contract-count">83 contracts</div>
-            </div>
-        </div>
-        <div class="load-more">
-            <a href="#" class="btn btn-load-more">Load More</a>
+        <div id="countries" class="col-lg-12 country-list-wrap f32">
+
         </div>
     </div>
 
@@ -168,9 +120,6 @@
 
     <a href="#" class="sort" data-value="asc">asc</a>
     <a href="#" class="sort" data-value="desc">desc</a>
-
-    <div id="countries">
-    </div>
 
     <div id="resources">
     </div>
@@ -183,10 +132,13 @@
     <script type="text/javascript" src="{{url('js/lib/backbone.js')}}"></script>
     <script type="text/javascript" src="{{url('js/lib/underscore.js')}}"></script>
     <script type="text/template" id="country-template">
-        <div>
-            <%= country %>
-            <%= total %>
-        </div>
+        <div class="col-lg-2">
+            <a href="{{url('countries')}}/<%= code %>">
+                <p class="flag <%= code %>"></p>
+            </a>
+            <div class="country-name"><%= name %></div>
+            <div class="contract-count"><%= contract %> contracts</div>
+       </div>
     </script>
 
     <script type="text/template" id="resource-template">
@@ -195,9 +147,6 @@
             <%= name %>
         </div>
     </script>
-
-
-
 
     <script>
         var data ={!! json_encode($countries) !!};
@@ -252,24 +201,42 @@
         var CountryCollection = Backbone.Collection.extend({
             model:CountryModel,
 
-            filterByResource:function(resources){
+            filterByResource:function(resources, sort){
                 var filtered = this.filter(function(model) {
                     if( typeof resources === 'undefined' || resources.length === 0) return true;
                     return _.contains(resources, model.get("resource"));
                 });
 
-               filtered = new FilterCountryCollection(filtered);
-               return filtered;
+                filtered = new FilterCountryCollection(filtered);
+
+                if(typeof sort !='undefined')
+                {
+                    filtered.setSortField("name", sort.toUpperCase());
+                    filtered.sort();
+                }
+
+                return filtered;
 
             },
-            countries:function(resources, sort)
+            search:function(collection, what){
+                if(what === '')
+                {
+                    return this;
+                }
+                   lookin = 'name';
+                    var filtered = collection.filter(function(model) {
+                            return _.some(_.values(model.pick(lookin)), function(value) {
+                                return ~value.toLowerCase().indexOf(what);
+                            });
+                        });
+                    filtered = new FilterCountryCollection(filtered);
+                    return filtered;
+            },
+            countries:function(resources, sort_type, search)
             {
-               var filteredCountries = this.filterByResource(resources);
+               var filteredCountries = this.filterByResource(resources, sort_type);
+                filteredCountries = this.search(filteredCountries, '');
                var countryGroup = filteredCountries.groupBy('code');
-
-                console.log(countryGroup);
-               // countryGroup.setSortField("contract", "DESC");
-               // countryGroup.sort();
 
                var totalContractsByCountry =[];
 
@@ -279,8 +246,10 @@
                         return meme + model.get('contract');
                     }, 0);
 
-                    totalContractsByCountry.push({country: countryCode, total: total})
+                    var model = countryGroup[countryCode][0];
+                    totalContractsByCountry.push({code: countryCode, name: model.get('name'), contract: total})
                 }
+
                 return totalContractsByCountry;
             },
             resources:function()
@@ -313,11 +282,11 @@
         var CountryList = Backbone.View.extend({
             initialize: function(options) {
                 this.resources = options.resources;
-                this.sort = options.sort;
+                this.sort_type = options.sort_type;
             },
             render: function() {
                 var self = this;
-                var countries = this.collection.countries(this.resources, this.sort);
+                var countries = this.collection.countries(this.resources, this.sort_type);
                 $(self.el).html('');
                 _.each(countries, function(model) {
                     $(self.el).append(new CountryView({
@@ -334,13 +303,13 @@
 
         var option = [
             resources = [],
-            sort = 'asc'
+            sort_type = 'asc'
         ];
 
 
         var countryList = new CountryList({
             el: '#countries',
-            sort: option.sort,
+            sort_type: option.sort_type,
             collection: collection,
             resources: option.resources
         }).render();
@@ -377,6 +346,7 @@
         }).render();
 
 
+
         $(function(){
             $(document).on('click', '.resource', function(){
                 option.resources = [];
@@ -387,20 +357,17 @@
             });
 
             $(document).on('click', '.sort', function(){
-                option.sort = $this.data('value');
+                option.sort_type = $(this).data('value');
                 updateView();
             });
 
 
             function updateView()
             {
-                countryList.sort = option.sort;
+                countryList.sort_type = option.sort_type;
                 countryList.resources = option.resources;
                 countryList.render();
             }
-
-
-
         });
 
     </script>
