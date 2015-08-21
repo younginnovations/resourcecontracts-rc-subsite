@@ -278,39 +278,6 @@ header {
     padding: 0 10px 20px 0;
 }
 
-.btn-search, .btn-view, .btn-reset {
-    margin-bottom: 40px;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    -ms-border-radius: 4px;
-    border-radius: 4px;
-    background: #F37356;
-    color: #fff;
-    width: 150px;
-    padding: 8px 12px;
-    text-transform: capitalize;
-}
-
-.btn-view {
-    font-weight: bold;
-    margin-top: 5px;
-}
-
-.btn-reset {
-    background: #404040;
-    margin-right: 6px;
-}
-
-.btn-search:hover, .btn-view:hover {
-    color: #fff;
-    background: #F26747;
-}
-
-.btn-reset:hover, .btn-reset:focus {
-    background: #333;
-    color: #fff;
-}
-
 .ql-container {
     overflow: hidden !important;
 }
