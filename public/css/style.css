@@ -51,6 +51,7 @@
 body {
 	font-family: "Open-Sans-Regular";
 	color: #404040;
+	background: #fff;
 }
 
 *:focus {
@@ -644,6 +645,15 @@ footer .col-lg-6:last-of-type li:first-child {
     margin-bottom: 0;
 }
 
+.panel-wrap ul {
+	padding: 0;
+	margin: 0;
+}
+
+.panel-wrap ul li {
+	list-style: none;
+}
+
 .country-contract-wrap {
 	border-right: 1px solid #f2f2f2;
 } 
@@ -730,3 +740,114 @@ footer .col-lg-6:last-of-type li:first-child {
 	padding-left: 36px;
 }
 
+.actions-wrapper > .col-lg-12 {
+	padding: 0 0 0 36px!important;
+}
+
+
+.view-pin-wrap,.download-wrap {
+	font-size: 11px;
+	text-transform: uppercase;
+	background: url(../../images/ic-pin.png) no-repeat left;
+	padding: 12px 0 12px 18px;
+	float: left;
+	width: 140px;
+	border-right: 1px solid rgb(188,188,188);
+	border-right: 1px solid rgba(188,188,188,0.5);
+}
+
+.download-wrap {
+	background: url(../../images/ic-download.png) no-repeat 18px;
+	padding-left: 44px;
+}
+
+.view-pin-wrap:after,.download-wrap:after {
+    content: " ";
+    background: url(../../images/ic-arrow.png) no-repeat 0 0;
+    width: 8px;
+    height: 6px;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+/*contract detail*/
+.contract-detail-wrapper {
+	padding: 60px 0;
+}
+
+.panel-contract-wrap {
+	background: #f9f9f9;
+	border: 1px solid #ebebeb;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	padding: 0;
+	overflow: hidden;
+}
+
+.panel-contract-wrap li {
+	float: left;
+	width: 50%;
+	border-bottom: 1px solid rgb(235,235,235);
+	border-bottom: 1px solid rgba(235,235,235,0.7);
+	border-right: 1px solid rgb(235,235,235);
+	border-right: 1px solid rgba(235,235,235,0.7);
+	padding: 12px 30px;
+}
+
+.panel-contract-wrap li:nth-last-child(-n+2) {
+	border-bottom: 0;
+}
+
+.panel-contract-wrap li:nth-child(even) {
+	border-right: 0;
+}
+
+.panel-contract-wrap li span {
+	display: block;
+	font-family: "Open-Sans-Bold";
+}
+
+.panel-annotation-wrap {
+	background: #FAF9EF;
+	border: 1px solid #E0DFD2;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	padding: 0;
+	min-height: 281px;
+}
+
+.annotation-wrap {
+	margin: 18px;
+	background: url(../../images/ic-annotate.png) no-repeat 0 0;
+	padding-left: 140px;
+	min-height: 200px;
+}
+
+.annotation-wrap .title {
+	font-family: "Open-Sans-Bold";
+	color: rgba(64,64,64,0.7);
+	padding: 20px 0 12px;
+}
+
+.annotation-wrap > ul > li {
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+.annotation-wrap > ul > li > a {
+	display: block;
+	background: #EFEEE3;
+	-webkit-border-radius: 17px;
+	-moz-border-radius: 17px;
+	padding: 7px 18px;
+	border-radius: 17px;
+	color: #404040;
+}
+
+.annotation-wrap > ul > li > a:hover {
+	background: #E6E5D5;
+	text-decoration: none;
+}

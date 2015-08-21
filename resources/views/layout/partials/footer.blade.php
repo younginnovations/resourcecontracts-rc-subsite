@@ -1,4 +1,5 @@
-        <footer>
+
+<footer>
             <div class="row">
                 <div class="col-lg-6">
                     <ul>
@@ -24,6 +25,7 @@ $js = [
         'bootstrap.min.js',
         'metisMenu.min.js',
         'raphael-min.js',
+        'script.js',
        // 'morris.min.js',
      //   'morris-data.js',
         'sb-admin-2.js'

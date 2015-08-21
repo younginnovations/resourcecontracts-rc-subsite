@@ -56,12 +56,12 @@ class CountryController extends BaseController
     {
         $filter['country'] = $country;
         $contracts         = $this->api->allContracts($filter);
-
+        $resources         = $this->api->getResourceByCountry($filter);
         if (!$contracts) {
             return abort(404);
         }
 
-        return view('country.detail', compact('contracts', 'country'));
+        return view('country.detail', compact('contracts', 'country', 'resources'));
     }
 
 }
