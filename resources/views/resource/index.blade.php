@@ -3,14 +3,18 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12 panel-top-wrapper">
-            <div class="breadcrumb-wrapper">
-                <ul>
-                    <li><a href="{{url()}}">Home</a></li>
-                    <li>Resources</li>
-                </ul>
-            </div>
-            <div class="panel-title">
-                Resources
+            <div class="panel-top-content">
+                <div class="pull-left">
+                    <div class="breadcrumb-wrapper">
+                        <ul>
+                            <li><a href="{{url()}}">Home</a></li>
+                            <li>Resource</li>
+                        </ul>
+                    </div>
+                    <div class="panel-title">
+                        Resource
+                    </div>
+                </div>
             </div>
             <div class="filter-wrapper">
                 <div class="col-lg-2">
@@ -18,7 +22,7 @@
                         <form class="search-form filter-form">
                             <div class="form-group">
                                 <button type="submit" class="btn btn-filter-search pull-left"></button>
-                                <input type="text" class="form-control search pull-left" placeholder="Filter by country name...">
+                                <input type="text" class="form-control search pull-left" placeholder="Filter by resource name...">
                             </div>
                         </form>
                     </div>
