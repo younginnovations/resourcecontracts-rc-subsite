@@ -12,7 +12,7 @@
                 <div class="tagline">
                     A directory of <span>Petroleum &amp; Mineral Contracts</span>
                 </div>
-                <form action="{{route('search')}}" method="GET" class="search-form">
+                <form action="{{route('search')}}" method="GET" class="contract-search-form">
                     <div class="form-group">
                         <input type="text" name="q" class="form-control pull-left" placeholder="Type here to search for contracts...">
                         <button type="submit" class="btn btn-search">Search Contract(s)</button>
@@ -29,7 +29,7 @@
                     <p>Contract Documents from</p>
                     <span>{{$countries or ''}}</span> countries
                 </div>
-                <a href="{{route('countries')}}" class="btn btn-view">View all Countries<i class="glyphicon glyphicon-triangle-right"></i></a>
+                <a href="{{route('countries')}}" class="btn btn-view">View all Countries</a>
             </div>
         </div>
         <div class="col-lg-6 resource-wrapper">
@@ -38,7 +38,7 @@
                     <p>Contract Documents related to</p>
                     <span>{{$resources or ''}}</span> resources
                 </div>
-                <a href="{{route('resources')}}" class="btn btn-view">View all Resources<i class="glyphicon glyphicon-triangle-right"></i></a>
+                <a href="{{route('resources')}}" class="btn btn-view">View all Resources</a>
             </div>
         </div>
     </div>

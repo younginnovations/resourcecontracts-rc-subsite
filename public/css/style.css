@@ -211,10 +211,11 @@ nav.navbar {
 
 .advanced-search {
 	font-size: 14px;
-	color: rgba(255,255,255);
+	color: rgb(255,255,255);
 	color: rgba(255,255,255,0.5);
 	text-decoration: underline;
 	cursor: pointer;
+	display: none;
 }
 
 .advanced-search:hover {
@@ -956,6 +957,10 @@ footer .col-lg-6:last-of-type li:first-child {
 
 .panel-contract-wrap .panel-col3-wrap li:nth-child(3n) {
 	border-right: 0;
+}
+
+.panel-contract-wrap li label {
+	font-weight: normal;
 }
 
 .panel-contract-wrap li span {
