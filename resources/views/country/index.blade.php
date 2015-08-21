@@ -1,6 +1,170 @@
-@extends('layout.app')
+@extends('layout.app-full')
 
 @section('content')
+    <div class="row">
+        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html">Resource <span>Contracts</span></a>
+            </div>
+            <div class="navbar-right">
+                <form action="" method="post" class="search-form">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-navbar-search pull-left"></button>
+                        <input type="text" class="form-control pull-left" placeholder="Search for contracts...">
+                    </div>
+                </form>
+            </div>
+            <!-- /.navbar-header -->
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 panel-top-wrapper">
+            <div class="breadcrumb-wrapper">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li>Countries</li>
+                </ul>
+            </div>
+            <div class="panel-title">
+                Countries
+            </div>
+            <div class="filter-wrapper">
+                <div class="col-lg-2">
+                    <div class="filter-country-wrap">
+                        <form action="" method="post" class="search-form filter-form">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-filter-search pull-left"></button>
+                                <input type="text" class="form-control pull-left" placeholder="Filter by country name...">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="pagination-wrapper">
+                        <ul>
+                            <li><a href="#" class="active">All</a></li>
+                            <li><a href="#">A</a></li>
+                            <li><a href="#">B</a></li>
+                            <li><a href="#">C</a></li>
+                            <li><a href="#">D</a></li>
+                            <li><a href="#">E</a></li>
+                            <li><a href="#">F</a></li>
+                            <li><a href="#">G</a></li>
+                            <li><a href="#">H</a></li>
+                            <li><a href="#">I</a></li>
+                            <li><a href="#">J</a></li>
+                            <li><a href="#">K</a></li>
+                            <li><a href="#">L</a></li>
+                            <li><a href="#">M</a></li>
+                            <li><a href="#">N</a></li>
+                            <li><a href="#">O</a></li>
+                            <li><a href="#">P</a></li>
+                            <li><a href="#">Q</a></li>
+                            <li><a href="#">R</a></li>
+                            <li><a href="#">S</a></li>
+                            <li><a href="#">T</a></li>
+                            <li><a href="#">U</a></li>
+                            <li><a href="#">V</a></li>
+                            <li><a href="#">W</a></li>
+                            <li><a href="#">X</a></li>
+                            <li><a href="#">Y</a></li>
+                            <li><a href="#">Z</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="filter-resource-wrap">
+                        <div class="filter-label" data-toggle="collapse-side" data-target=".side-collapse" data-target-2=".side-collapse-container">Filter by Resources<i></i></div>
+                    </div>
+                    <div class="side-collapse in">
+                        <ul>
+                            <li><input type="checkbox"><a href="#">aluminium</a></li>
+                            <li><input type="checkbox"><a href="#">aluminium</a></li>
+                            <li><input type="checkbox"><a href="#">aluminium</a></li>
+                            <li><input type="checkbox"><a href="#">aluminium</a></li>
+                            <li><input type="checkbox"><a href="#">aluminium</a></li>
+                            <li><input type="checkbox"><a href="#">aluminium</a></li>
+                            <li><input type="checkbox"><a href="#">aluminium</a></li>
+                            <li><input type="checkbox"><a href="#">aluminium</a></li>
+                            <li><input type="checkbox"><a href="#">aluminium</a></li>
+                            <li><input type="checkbox"><a href="#">aluminium</a></li>
+                            <li><input type="checkbox"><a href="#">aluminium</a></li>
+                            <li><input type="checkbox"><a href="#">aluminium</a></li>
+                            <li><input type="checkbox"><a href="#">aluminium</a></li>
+                            <li><input type="checkbox"><a href="#">aluminium</a></li>
+                            <li><input type="checkbox"><a href="#">aluminium</a></li>
+                            <li><input type="checkbox"><a href="#">aluminium</a></li>
+                            <li><input type="checkbox"><a href="#">aluminium</a></li>
+                            <li><input type="checkbox"><a href="#">aluminium</a></li>
+                            <li><input type="checkbox"><a href="#">aluminium</a></li>
+                            <li><input type="checkbox"><a href="#">aluminium</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row side-collapse-container">
+        <div class="col-lg-12 country-list-wrap">
+            <div class="col-lg-2">
+                <img src="../images/flag/ic-guinea.png" alt="">
+                <div class="country-name">Guinea</div>
+                <div class="contract-count">83 contracts</div>
+            </div>
+            <div class="col-lg-2">
+                <img src="../images/flag/ic-guinea.png" alt="">
+                <div class="country-name">Guinea</div>
+                <div class="contract-count">83 contracts</div>
+            </div>
+            <div class="col-lg-2">
+                <img src="../images/flag/ic-guinea.png" alt="">
+                <div class="country-name">Guinea</div>
+                <div class="contract-count">83 contracts</div>
+            </div>
+            <div class="col-lg-2">
+                <img src="../images/flag/ic-guinea.png" alt="">
+                <div class="country-name">Guinea</div>
+                <div class="contract-count">83 contracts</div>
+            </div>
+            <div class="col-lg-2">
+                <img src="../images/flag/ic-guinea.png" alt="">
+                <div class="country-name">Guinea</div>
+                <div class="contract-count">83 contracts</div>
+            </div>
+            <div class="col-lg-2">
+                <img src="../images/flag/ic-guinea.png" alt="">
+                <div class="country-name">Guinea</div>
+                <div class="contract-count">83 contracts</div>
+            </div>
+            <div class="col-lg-2">
+                <img src="../images/flag/ic-guinea.png" alt="">
+                <div class="country-name">Guinea</div>
+                <div class="contract-count">83 contracts</div>
+            </div>
+            <div class="col-lg-2">
+                <img src="../images/flag/ic-guinea.png" alt="">
+                <div class="country-name">Guinea</div>
+                <div class="contract-count">83 contracts</div>
+            </div>
+            <div class="col-lg-2">
+                <img src="../images/flag/ic-guinea.png" alt="">
+                <div class="country-name">Guinea</div>
+                <div class="contract-count">83 contracts</div>
+            </div>
+            <div class="col-lg-2">
+                <img src="../images/flag/ic-guinea.png" alt="">
+                <div class="country-name">Guinea</div>
+                <div class="contract-count">83 contracts</div>
+            </div>
+        </div>
+        <div class="load-more">
+            <a href="#" class="btn btn-load-more">Load More</a>
+        </div>
+    </div>
+
+
+
+
 
     <a href="#" class="sort" data-value="asc">asc</a>
     <a href="#" class="sort" data-value="desc">desc</a>
