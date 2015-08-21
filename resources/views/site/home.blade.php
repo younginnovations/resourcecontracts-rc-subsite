@@ -4,7 +4,8 @@
     <div class="row row-top-wrap">
         <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
-                <a class="navbar-brand" href="{{url('/')}}">Resource <span>Contracts</span></a>
+                <span data-toggle="collapse-side" data-target=".sidebar-collapse" data-target-2=".sidebar-collapse-container" class="pull-left trigger">trigger</span>
+                <a class="navbar-brand" href="index.html" >Resource <span>Contracts</span></a>
             </div>
         </nav>
         <div class="col-lg-6 col-md-9">

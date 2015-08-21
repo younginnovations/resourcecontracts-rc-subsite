@@ -2,22 +2,7 @@
 
 @section('content')
 
-    <div class="row">
-        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/">Resource <span>Contracts</span></a>
-            </div>
-            <div class="navbar-right">
-                <form action="" method="post" class="search-form">
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-navbar-search pull-left"></button>
-                        <input type="text" class="form-control pull-left" placeholder="Search for contracts...">
-                    </div>
-                </form>
-            </div>
-            <!-- /.navbar-header -->
-        </nav>
-    </div>
+   
     <div class="row">
         <div class="col-lg-12 panel-top-wrapper">
             <div class="breadcrumb-wrapper">
