@@ -8,10 +8,8 @@
 */
 
 $app->get('/', ['as' => 'home', 'uses' => 'SiteController@home']);
-
 $app->get('/countries', ['as' => 'countries', 'uses' => 'CountryController@index']);
 $app->get('/countries/{key}', ['as' => 'country.detail', 'uses' => 'CountryController@detail']);
-
 $app->get('/resources', ['as' => 'resources', 'uses' => 'ResourceController@index']);
 $app->get('/resource/{key}', ['as' => 'resource.detail', 'uses' => 'ResourceController@detail']);
 
@@ -40,7 +38,7 @@ $app->get('faqs', ['as' => 'faqs', 'uses' => 'PageController@faqs']);
 
 
 
-$app->get('/search', ['as' => 'search', 'uses' => 'FilterController@search']);
+$app->get('/search', ['as' => 'search', 'uses' => 'FilterController@index']);
 $app->get('/filter', ['as' => 'filter', 'uses' => 'SiteController@filter']);
 
 
@@ -51,7 +49,7 @@ $app->get('/filter', ['as' => 'filter', 'uses' => 'SiteController@filter']);
 |
 */
 
-$app->get('contract/{id}/page', ['as' => 'contract.page.get', 'uses' => 'PageController@getText']);
-$app->post('contract/{id}/search', ['as' => 'contract.page.search', 'uses' => 'PageController@search']);
-$app->get('annotation/search', ['as' => 'contract.page.annotations.search', 'uses' => 'PageController@annotations']);
+$app->get('contract/{id}/page', ['as' => 'contract.page.get', 'uses' => 'Contract\PageController@getText']);
+$app->post('contract/{id}/search', ['as' => 'contract.page.search', 'uses' => 'Contract\PageController@search']);
+$app->get('annotation/search', ['as' => 'contract.page.annotations.search', 'uses' => 'Contract\PageController@annotations']);
 

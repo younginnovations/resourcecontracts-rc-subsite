@@ -36,8 +36,12 @@ class ResourceController extends BaseController
      */
     public function index()
     {
-        $summary   = $this->api->summary();
-        $resources = $summary->resource_summary;
+        $resources = $this->api->allCountries();
+        $resources = $resources->results;
+
+        foreach ($resources as &$country) {
+            $country->name = trans('country')[strtoupper($country->code)];
+        }
 
         return view('resource.index', compact('resources'));
     }

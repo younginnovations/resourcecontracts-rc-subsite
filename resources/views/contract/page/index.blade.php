@@ -1,8 +1,8 @@
 @extends('layout.app-full')
 @section('css')
-    <link rel="stylesheet" href="{{ url('css/pages.css') }}">
-    <link rel="stylesheet" href="{{ url('css/pagination.css') }}"/>
-    <link rel="stylesheet" href="{{ url('css/annotator.css') }}">
+    <link rel="stylesheet" href="{{ url('css/annotation/pages.css') }}">
+    <link rel="stylesheet" href="{{ url('css/annotation/pagination.css') }}"/>
+    <link rel="stylesheet" href="{{ url('css/annotation/annotator.css') }}">
 @stop
 @section('content')
     <div class="panel panel-default">
@@ -68,30 +68,33 @@
     </div>
 @endsection
 
-@section('script')
+@section('js')
+    <script>
+        var app_url = '{{url()}}';
+    </script>
 
-    <script src="{{ url('js/lib/annotator/annotator-full.min.js') }}"></script>
-    <script src="{{ url('js/lib/quill/quill.js') }}"></script>
-    <script src="{{ url('js/lib/pdfjs/pdf.js') }}"></script>
-    <script src="{{ url('js/lib/jquery.simplePagination.js') }}"></script>
-    <script src="{{ url('js/lib/underscore.js') }}"></script>
-    <script src="{{ url('js/lib/backbone.js') }}"></script>
-    <script src="{{ url('js/lib/backbone.localstorage.js') }}"></script>
-    <script src="{{ url('js/lib/backbone.exportcsv.js') }}"></script>
+    <script src="{{ url('js/annotation/lib/annotator/annotator-full.min.js') }}"></script>
+    <script src="{{ url('js/annotation/lib/quill/quill.js') }}"></script>
+    <script src="{{ url('js/annotation/lib/pdfjs/pdf.js') }}"></script>
+    <script src="{{ url('js/annotation/lib/jquery.simplePagination.js') }}"></script>
+    <script src="{{ url('js/annotation/lib/underscore.js') }}"></script>
+    <script src="{{ url('js/annotation/lib/backbone.js') }}"></script>
+    <script src="{{ url('js/annotation/lib/backbone.localstorage.js') }}"></script>
+    <script src="{{ url('js/annotation/lib/backbone.exportcsv.js') }}"></script>
 
-    <script src="{{ url('js/custom/rc.utils.js') }}"></script>
-    <script src="{{ url('js/custom/annotator.plugin.categories.js') }}"></script> 
-    <script src="{{ url('js/custom/rc.contract.js') }}"></script>
-    <script src="{{ url('js/custom/rc.page.js') }}"></script>
-    <script src="{{ url('js/custom/rc.pagination.js') }}"></script>
-    <script src="{{ url('js/custom/rc.pdf.js') }}"></script>
-    <script src="{{ url('js/custom/rc.texteditor.js') }}"></script>    
-    <script src="{{ url('js/custom/rc.annotations.js') }}"></script>    
-    <script src="{{ url('js/custom/rc.search.js') }}"></script>    
-    <script src="{{ url('js/custom/rc.annotator.js') }}"></script>    
-    <script src="{{ url('js/custom/rc.metadata.js') }}"></script>
-    <script src="{{ url('js/custom/rc.pinning.js') }}"></script>
-    <script src="{{ url('js/custom/rc.scroll.js') }}"></script>
+    <script src="{{ url('js/annotation/custom/rc.utils.js') }}"></script>
+    <script src="{{ url('js/annotation/custom/annotator.plugin.categories.js') }}"></script>
+    <script src="{{ url('js/annotation/custom/rc.contract.js') }}"></script>
+    <script src="{{ url('js/annotation/custom/rc.page.js') }}"></script>
+    <script src="{{ url('js/annotation/custom/rc.pagination.js') }}"></script>
+    <script src="{{ url('js/annotation/custom/rc.pdf.js') }}"></script>
+    <script src="{{ url('js/annotation/custom/rc.texteditor.js') }}"></script>
+    <script src="{{ url('js/annotation/custom/rc.annotations.js') }}"></script>
+    <script src="{{ url('js/annotation/custom/rc.search.js') }}"></script>
+    <script src="{{ url('js/annotation/custom/rc.annotator.js') }}"></script>
+    <script src="{{ url('js/annotation/custom/rc.metadata.js') }}"></script>
+    <script src="{{ url('js/annotation/custom/rc.pinning.js') }}"></script>
+    <script src="{{ url('js/annotation/custom/rc.scroll.js') }}"></script>
 
     <script type="text/javascript">
     var contractEvents = {};

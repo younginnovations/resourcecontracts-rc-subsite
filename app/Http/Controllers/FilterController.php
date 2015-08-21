@@ -28,9 +28,8 @@ class FilterController
      * @param Request $request
      * @return \Illuminate\View\View
      */
-    public function search(Request $request)
+    public function index(Request $request)
     {
-
         $filter = $this->processQueries($request);
 
         $contract = $this->api->filterSearch($filter);

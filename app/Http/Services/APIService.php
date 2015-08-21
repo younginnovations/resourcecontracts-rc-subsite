@@ -177,6 +177,8 @@ class APIService
     {
         $resource = sprintf('contracts/search');
 
+        extract($filter);
+
         $query = [
             'q'        => $q,
             'country'  => $country,
@@ -189,6 +191,7 @@ class APIService
             'from'     => $from
 
         ];
+
 
         $contract = $this->apiCall($resource, $query);
 
