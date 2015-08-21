@@ -1,61 +1,42 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Services\APIService;
-use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
+/**
+ * Class PageController
+ * @package App\Http\Controllers
+ */
 class PageController extends BaseController
 {
-    /**
-     * @var APIService
-     */
-    private $api;
-    /**
-     * @var Request
-     */
-    private $request;
 
     /**
-     * @param APIService $api
-     * @param Request    $request
+     * About us page
+     *
+     * @return \Illuminate\View\View
      */
-    public function __construct(APIService $api, Request $request)
+    public function about()
     {
-        $this->api     = $api;
-        $this->request = $request;
+        return view('page.about');
     }
 
     /**
-     * Get Page Text
-     * @param         $contractId
-     * @return json
+     * Contact us Page
+     *
+     * @return \Illuminate\View\View
      */
-    public function getText($contractId)
+    public function contact()
     {
-        $page = $this->api->getTextPage($contractId, $this->request->input('page'));
-        $page = $page->result[0];
-        return response()->json(['result' => 'success', 'text' => $page->text, 'pdf_url' => $page->pdf_url]);
+        return view('page.contact');
     }
 
     /**
-     * Get Search  Text
-     * @param         $contractId
-     * @return json
+     * FAQs Page
+     *
+     * @return \Illuminate\View\View
      */
-    public function search($contractId)
+    public function faqs()
     {
-        return response()->json($this->api->getFullTextSearch($contractId, $this->request->input('q')));
+        return view('page.faqs');
     }
 
-    /**
-     * Get Annotations
-     * @param  $contractId
-     * @return json
-     */
-    public function annotations()
-    {
-        return response()->json(
-            $this->api->getAnnotationPage($this->request->input('contract'), $this->request->input('document_page_no'))
-        );
-    }
 }

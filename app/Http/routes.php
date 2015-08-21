@@ -6,11 +6,40 @@
 |--------------------------------------------------------------------------
 |
 */
+
 $app->get('/', ['as' => 'home', 'uses' => 'SiteController@home']);
-$app->get('/contract/{id}', ['as' => 'contract.detail', 'uses' => 'SiteController@show']);
-$app->get('/contract/{id}/page/{page_no}', ['as' => 'contract.page.detail', 'uses' => 'SiteController@getSinglePage']);
-$app->get('/contract/{id}/pages', ['as' => 'contract.pages', 'uses' => 'SiteController@getPageList']);
-$app->get('contract/{contractId1}/{contractId2}/compare', ['as' => 'contracts.compare', 'uses' => 'SiteController@compare']);
+
+$app->get('/countries', ['as' => 'countries', 'uses' => 'CountryController@index']);
+$app->get('/countries/{key}', ['as' => 'country.detail', 'uses' => 'CountryController@detail']);
+
+$app->get('/resources', ['as' => 'resources', 'uses' => 'ResourceController@index']);
+$app->get('/resource/{key}', ['as' => 'resource.detail', 'uses' => 'ResourceController@detail']);
+
+/*
+|--------------------------------------------------------------------------
+| Contract Pages
+|--------------------------------------------------------------------------
+|
+*/
+
+$app->get('/contracts', ['as' => 'contracts', 'uses' => 'ContractController@index']);
+$app->get('/contract/{id}', ['as' => 'contract.detail', 'uses' => 'ContractController@detail']);
+$app->get('/contract/{id}/pages', ['as' => 'contract.pages', 'uses' => 'ContractController@pageIndex']);
+$app->get('/contract/{id}/page/{page_no}', ['as' => 'contract.page.detail', 'uses' => 'ContractController@pageDetail']);
+$app->get('contract/{contractId1}/{contractId2}/compare', ['as' => 'contracts.compare', 'uses' => 'ContractController@PageCompare']);
+
+/*
+|--------------------------------------------------------------------------
+| Static Pages
+|--------------------------------------------------------------------------
+|
+*/
+$app->get('about', ['as' => 'about', 'uses' => 'PageController@about']);
+$app->get('contact', ['as' => 'contact', 'uses' => 'PageController@contact']);
+$app->get('faqs', ['as' => 'faqs', 'uses' => 'PageController@faqs']);
+
+
+
 $app->get('/search', ['as' => 'search', 'uses' => 'FilterController@search']);
 $app->get('/filter', ['as' => 'filter', 'uses' => 'SiteController@filter']);
 
