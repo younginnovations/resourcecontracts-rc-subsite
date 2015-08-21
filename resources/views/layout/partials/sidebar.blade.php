@@ -1,46 +1,51 @@
 <div id="sidebar-wrapper" class="sidebar-collapse in">
     <ul class="sidebar-nav">
         <li class="sidebar-brand">
-            <a href="http://rc-site-demo.elasticbeanstalk.com/site/public">Resource <span>Contracts</span></a>
+            <a href="{{url()}}">Resource <span>Contracts</span></a>
         </li>
         <li class="contracts active">
-            <a href="http://rc-site-demo.elasticbeanstalk.com/site/public">
+            <a href="{{url('contracts')}}">
                 <span>All Contracts</span>
                 <small class="label pull-right">6</small>
             </a>
         </li>
         <li class="countries">
-            <label for="">Countries</label>
+            <label>Countries</label>
             <ul>
-                <li>
-                    <a href="http://rc-site-demo.elasticbeanstalk.com/site/public/filter?country=as">
-                        <span>American samoa</span>
-                        <small class="label pull-right">2</small>
-                    </a>
-                </li>
+                @foreach($summary->country_summary as $country)
+                    <li>
+                        <a href="{{route('search')}}?country={{$country->key}}">
+                            <span>{{trans('country.'.strtoupper($country->key))}}</span>
+                            <small class="label pull-right">{{$country->doc_count}}</small>
+                        </a>
+                    </li>
+                @endforeach
             </ul>
-
         </li>
         <li class="year">
-            <label for="">Year</label>
+            <label>Year</label>
             <ul>
-                <li>
-                    <a href="http://rc-site-demo.elasticbeanstalk.com/site/public/filter?year=2015">
-                        <span>2015</span>
-                        <small class="label pull-right">3</small>
-                    </a>
-                </li>
+                @foreach($summary->year_summary as $year)
+                    <li>
+                        <a href="{{route('search')}}?year={{$year->key}}">
+                            <span>{{$year->key}}</span>
+                            <small class="label pull-right">{{$year->doc_count}}</small>
+                        </a>
+                    </li>
+                @endforeach
             </ul>
         </li>
         <li class="resources">
-            <label for="">Resources</label>
+            <label>Resources</label>
             <ul>
-                <li>
-                    <a href="http://rc-site-demo.elasticbeanstalk.com/site/public/filter?resource=base">
-                        <span>Base</span>
-                        <small class="label pull-right">3</small>
-                    </a>
-                </li>
+                @foreach($summary->resource_summary as $resource)
+                    <li>
+                        <a href="{{route('search')}}?resource={{$resource->key}}">
+                            <span>{{ucfirst($resource->key)}}</span>
+                            <small class="label pull-right">{{$resource->doc_count}}</small>
+                        </a>
+                    </li>
+                @endforeach
             </ul>
         </li>
     </ul>

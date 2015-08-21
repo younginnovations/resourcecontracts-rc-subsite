@@ -33,6 +33,7 @@ class FilterController
         $filter = $this->processQueries($request);
 
         $contracts = $this->api->filterSearch($filter);
+
         $contracts = $contracts->result;
 
         $filter = $this->updateFilterData($filter, $contracts, $request);
