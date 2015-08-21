@@ -1,4 +1,5 @@
 @extends('layout.app-full')
+@section('content')
 <div class="row">
     <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
@@ -31,8 +32,9 @@
                 </div>
             </div>
             <div class="pull-right action-links">
+
                 <ul>
-                    <li class="pull-left"><a href="#">View Document</a></li>
+                    <li class="pull-left"><a href="{{route('contract.pages',['id'=>$contract->metadata->contract_id])}}">View Document</a></li>
                     <li class="pull-left"><a href="#annotation" class="view-annotation">View Annotations</a></li>
                 </ul>
             </div>
@@ -73,19 +75,23 @@
                         </li>
                         <li>
                             <label for="">Signature Date</label>
-                            <span>{{$contract->metadata->signature_year}}</span>
+                            <?php
+                                $date = $contract->metadata->signature_date;
+                                $date = strtotime($date);
+                            ?>
+                            <span>{{date('F',$date)}} {{date('d',$date)}}, {{date('Y',$date)}}</span>
                         </li>
                         <li>
                             <label for="">Document Type</label>
-                            <span>Contract</span>
+                            <span>{{!empty($contract->metadata->document_type)?$contract->metadata->document_type:'-'}}</span>
                         </li>
                         <li>
                             <label for="">Type of Contract</label>
-                            <span>Exploration Permit/License</span>
+                            <span>{{!empty($contract->metadata->contract_type)?$contract->metadata->contract_type:'-'}}</span>
                         </li>
                         <li>
                             <label for="">Translation from Original</label>
-                            <span>-</span>
+                            <span>{{!empty($contract->metadata->translation_parent)?$contract->metadata->translation_parent:'-'}}</span>
                         </li>
                     </ul>
                 </div>
@@ -97,8 +103,9 @@
                     <div class="annotation-block">
                         <div class="title">Annotations</div>
                         <ul>
-                            <li><a href="#">General information</a></li>
-                            <li><a href="">Country</a></li>
+                            @foreach($contract->annotations->result as $annotation)
+                                <li><a>{{$annotation->category}}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="view-all-annotations">
@@ -113,71 +120,50 @@
             <div class="panel-heading">
                 Company
             </div>
+            @foreach($contract->metadata->company as $company)
             <div class="panel-body panel-col3-wrap">
+
                 <ul>
                     <li>
                         <label for="">Company Name</label>
-                        <span>-</span>
+                        <span>{{!empty($company->name)?$company->name:'-'}}</span>
                     </li>
                     <li>
                         <label for="">Jurisdiction of Incorporation</label>
-                        <span>Kenya</span>
+                        <span>{{!empty($company->jurisdiction_of_incorporation)?$company->jurisdiction_of_incorporation:'-'}}</span>
                     </li>
                     <li>
                         <label for="">Registration Agency</label>
-                        <span>Kenya</span>
+                        <span>{{!empty($company->registration_agency)?$company->registration_agency:'-'}}</span>
                     </li>
                     <li>
                         <label for="">Company Address</label>
-                        <span>-</span>
+                        <span>{{!empty($company->company_address)?$company->company_address:'-'}}</span>
                     </li>
                     <li>
                         <label for="">Company Number</label>
-                        <span>2</span>
+                        <span>{{!empty($company->company_number)?$company->company_number:'-'}}</span>
                     </li>
                     <li>
                         <label for="">Parent Company</label>
-                        <span>-</span>
+                        <span>{{!empty($company->parent_company)?$company->parent_company:'-'}}</span>
                     </li>
                     <li>
                         <label for="">Open Corporate ID</label>
-                        <span>-</span>
+                        <span>{{!empty($company->open_corporate_id)?$company->open_corporate_id:'-'}}</span>
+                    </li>
+                    <li>
+                        <label for="">Participation Share</label>
+                        <span>{{!empty($company->participation_share)?$company->participation_share:'-'}}</span>
+                    </li>
+                    <li>
+                        <label for="">Operator</label>
+                        <span>{{$company->operator==1?$company->operator:'-'}}</span>
                     </li>
                 </ul>
             </div>
-            <div class="panel-body panel-col3-wrap">
-                <ul>
-                    <li>
-                        <label for="">Company Name</label>
-                        <span>-</span>
-                    </li>
-                    <li>
-                        <label for="">Jurisdiction of Incorporation</label>
-                        <span>Kenya</span>
-                    </li>
-                    <li>
-                        <label for="">Registration Agency</label>
-                        <span>Kenya</span>
-                    </li>
-                    <li>
-                        <label for="">Company Address</label>
-                        <span>-</span>
-                    </li>
-                    <li>
-                        <label for="">Company Number</label>
-                        <span>2</span>
-                    </li>
-                    <li>
-                        <label for="">Parent Company</label>
-                        <span>-</span>
-                    </li>
-                    <li>
-                        <label for="">Open Corporate ID</label>
-                        <span>-</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
+            @endforeach
+
     </div>
     <div class="col-lg-12">
         <div class="panel panel-default panel-wrap panel-contract-wrap">
@@ -187,16 +173,18 @@
             <div class="panel-body panel-table">
                 <table class="table table-responsive table-contract table-associated-contract">
                     <tbody>
-                    <tr>
-                        <td width="70%">
-                            <a href="http://192.168.1.60:8000/contract/129">
-                                Iraqi Kurdistan Akri-Bijeel-Block  Kalegran LTD PSC
-                            </a> - Iraq, 2007
-                            <span class="label label-default">EN</span>
-                        </td>
-                        <td align="right">10.37 MB</td>
-                        <td align="right">June 30, 2015</td>
-                    </tr>
+                    @foreach($contract->metadata->supporting_contracts as $supportingContract)
+                        <tr>
+                            <td width="70%">
+                                @if($supportingContract->status=="published")
+                                    <a href="{{route('contract.detail',['id'=>$supportingContract->id])}}">{{$supportingContract->contract_name}}</a>
+                                @else
+                                    {{json_decode($supportingContract->contract_name)}}
+                                @endif
+                            </td>
+
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
@@ -210,21 +198,24 @@
             <div class="panel-body">
                 <ul>
                     <li>
-                        <label for="">License Name</label>
-                        <span>-</span>
-                    </li>
-                    <li>
-                        <label for="">License Identifier</label>
-                        <span>-</span>
-                    </li>
-                    <li>
                         <label for="">Project Title</label>
-                        <span>-</span>
+                        <span>{{!empty($contract->metadata->project_title)?$contract->metadata->project_title:'-'}}</span>
                     </li>
                     <li>
                         <label for="">Project Identifier</label>
-                        <span>-</span>
+                        <span>{{!empty($contract->metadata->project_identifier)?$contract->metadata->project_identifier:'-'}}</span>
                     </li>
+                    @foreach($contract->metadata->concession as $consession)
+                    <li>
+                        <label for="">License Name</label>
+                        <span>{{!empty($consession->license_name)?$consession->license_name:'-'}}</span>
+                    </li>
+                    <li>
+                        <label for="">License Identifier</label>
+                        <span>{{!empty($consession->license_identifier)?$consession->license_identifier:'-'}}</span>
+                    </li>
+                   @endforeach
+
                 </ul>
             </div>
         </div>
@@ -238,17 +229,18 @@
                 <ul>
                     <li>
                         <label for="">Source URL</label>
-                        <span>xxx</span>
+                        <span><a href="{{!empty($contract->metadata->source_url)?$contract->metadata->source_url:'-'}}">Link</a></span>
                     </li>
                     <li>
-                        <label for="">Disclosure</label>
-                        <span>corporate</span>
+                        <label for="">Disclosure Mode</label>
+                        <span>{{!empty($contract->metadata->disclosure_mode)?$contract->metadata->disclosure_mode:'-'}}</span>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
 </div>
+
 <div class="row annotation-list-wrapper" id="annotation">
     <div class="col-lg-12">
         <div class="panel panel-default panel-wrap panel-annotation-list-wrap">
@@ -309,208 +301,4 @@
         </div>
     </div>
 </div>
-
-
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <div class="contract-name pull-left">
-                <div class="contract-name-title">{{$contract->metadata->contract_name}}</div>
-                <div class="contract-actions pull-left">
-                   <div class="btn-group">
-                       <button type="button" class=" download btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                           Download <span class="caret"></span>
-                       </button>
-                       <ul class="dropdown-menu">
-                           <li><a target="_blank"
-                              href="{{ $contract->metadata->file_url}}"
-                              class="download">PDF
-                            <span class="size">{{getFileSize($contract->metadata->file_size)}}</span>
-                           </a></li>
-                           <li>
-                               @if(isset($contract->metadata->word_file))
-                               <a target="_blank"
-                                   href="{{ $contract->metadata->word_file}}"
-                                   class="download">Word
-                               </a>
-                               @endif
-                           </li>
-                       </ul>
-                   </div>
-                    @if($contract->annotations->total > 0 )
-                        <div class="contract-annotations">
-                            <a href="" class="view-annotations open-annotations">View Annotations</a>
-                            <a href="" class="view-annotations close-annotations">Close Annotations</a>
-                        </div>
-                    @endif
-                </div>
-                <div class="amla-link pull-left">
-                    @if(isset($contract->metadata->amla_url) and $contract->metadata->amla_url !='' )
-                        <a href="{{$contract->metadata->amla_url}}">Current mining legislation at AMLA</a>
-                    @endif
-                </div>
-            </div>
-
-            @if($contract->metadata->total_pages > 0)
-
-                <div class="pull-right">
-                    <a href="{{route('contract.pages',['id'=>$contract->metadata->contract_id])}}" class="btn btn-view">View
-                        Document</a>
-                </div>
-            @endif
-        </div>
-        <div class="panel-body">
-            <div class="table-contract-view">
-                <table class="table table-responsive">
-                    <tr>
-                        <td>Contract Identifier</td>
-                        <td>{{$contract->metadata->contract_identifier or ''}}</td>
-                    </tr>
-                    <tr>
-                        <td>Language</td>
-                        <td>{{$contract->metadata->language or ''}}</td>
-                    </tr>
-
-                    <tr>
-                        <td>Country</td>
-                        <td>{{$contract->metadata->country->name or ''}}
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Government Entity</td>
-                        <td>{{$contract->metadata->government_entity or ''}}</td>
-                    </tr>
-                    <tr>
-                        <td>Government Identifier</td>
-                        <td>{{$contract->metadata->government_identifier or ''}}</td>
-                    </tr>
-                    <tr>
-                        <td>Type of Contract</td>
-                        <td>{{$contract->metadata->type_of_contract or ''}}</td>
-                    </tr>
-                    <tr>
-                        <td>Signature Date</td>
-                        <td>{{$contract->metadata->signature_date or ''}}</td>
-                    </tr>
-                    <tr>
-                        <td>Document Type</td>
-                        <td>{{$contract->metadata->document_type or ''}}</td>
-                    </tr>
-                    <tr>
-                        <td>Translation from original</td>
-                        <td>{{$contract->metadata->translation_parent or ''}}</td>
-                    </tr>
-
-                </table>
-                <h3>Company</h3>
-                @foreach($contract->metadata->company as $company)
-
-                    <table class="table table-responsive">
-                        <tr>
-                            <td>Company Name</td>
-                            <td>{{$company->name or ''}}</td>
-                        </tr>
-                        @if(isset($company->participation_share))
-                            <tr>
-                                <td>Participation Share</td>
-                                <td>{{$company->participation_share or ''}}</td>
-                            </tr>
-                        @endif
-                        <tr>
-                            <td>Jurisdiction of Incorporation</td>
-                            <?php $jurisdiction=isset($company->jurisdiction_of_incorporation)?$company->jurisdiction_of_incorporation:'';   ?>
-                                @if(!empty($jurisdiction))
-                                <td>{{trans('country')[$jurisdiction]}}</td>
-                                 @endif
-
-                        </tr>
-                        <tr>
-                            <td>Registration Agency</td>
-                            <td>{{$company->registration_agency or ''}}</td>
-                        </tr>
-                        <tr>
-                            <td>Company Address</td>
-                            <td>{{$company->company_address or ''}}</td>
-                        </tr>
-
-                        <tr>
-                            <td> Company Number</td>
-                            <td>{{$company->company_number or ''}}</td>
-                        </tr>
-                        <tr>
-                            <td>Parent Company</td>
-                            <td>{{$company->parent_company or ''}}</td>
-                        </tr>
-                        <tr>
-                            <td>Open Corporate Id</td>
-                            <td>{{$company->open_corporate_id or ''}}</td>
-                        </tr>
-                        @if(isset($company->operator))
-                            <tr>
-                                <td>Operator</td>
-                                <td>@if($company->operator==1) Yes @else No @endif</td>
-                            </tr>
-                        @endif
-                    </table>
-                @endforeach
-                <h3>Concession / license and Project</h3>
-                <table class="table table-responsive">
-                    @if(isset($contract->metadata->concession))
-                        @foreach($contract->metadata->concession as $concession)
-                        <tr>
-                            <td>License Name</td>
-                            <td>{{$concession->license_name}}</td>
-                        </tr>
-                        <tr>
-                            <td>License Identifier</td>
-                            <td>{{$concession->license_identifier}}</td>
-                        </tr>
-                        <tr>
-                        @endforeach
-                    @endif
-                        <td>Project Title</td>
-                        <td>{{$contract->metadata->project_title or ''}}</td>
-                    </tr>
-                    <tr>
-                        <td>Project Identifier</td>
-                        <td>{{$contract->metadata->project_identifier or ''}}</td>
-                    </tr>
-
-                </table>
-                <h3>Source</h3>
-                <table class="table table-responsive">
-                    <tr>
-                        <td>Source URL</td>
-                        <td>{{$contract->metadata->source_url or ''}}</td>
-                    </tr>
-
-                        <tr>
-                            <td>Disclosure Mode</td>
-                            <td>{{$contract->metadata->disclosure_mode or ''}}</td>
-                        </tr>
-                </table>
-            </div>
-        </div>
-        @if($contract->annotations->total >0))
-        <div class="annotation-pop">
-            <ul>
-                @foreach($contract->annotations->result as $annotation)
-                    <li>
-                        <div class="pull-left page-num">{{$annotation->page_no}}</div>
-                        <div class="pull-lefct">
-                            <div class="annotation-text">{{$annotation->text}}</div>
-                            <div class="quote">{{$annotation->quote}}</div>
-                            <div class="tags">
-                                @foreach($annotation->tags as $tag)
-                                    <span>{{$tag}}</span>
-                                @endforeach
-                            </div>
-                        </div>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
-
-    </div>
+@stop
