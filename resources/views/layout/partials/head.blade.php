@@ -16,7 +16,8 @@
             'style_old.css',
             'style.css',
             'morris.css',
-            'font-awesome.min.css'
+            'font-awesome.min.css',
+            'select2.min.css'
     ];
     ?>
     @foreach($css as $link)
