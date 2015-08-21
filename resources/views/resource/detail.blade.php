@@ -9,7 +9,7 @@
                 <ul>
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Countries</a></li>
-                    <li>Guinea</li>
+                    <li>{{ucfirst($resource)}}</li>
                 </ul>
             </div>
             <div class="panel-title">
@@ -21,7 +21,7 @@
                         <form action="" method="post" class="search-form filter-form">
                             <div class="form-group">
                                 <button type="submit" class="btn btn-filter-search pull-left"></button>
-                                <input type="text" class="form-control pull-left" placeholder="Find a contract {{$resource}}...">
+                                <input type="text" class="form-control pull-left" placeholder="Find a contract {{ucfirst($resource)}}...">
                             </div>
                         </form>
                     </div>
@@ -69,7 +69,7 @@
             </div>
             <div class="col-lg-4">
                 <div class="panel panel-default panel-wrap country-resource-wrap">
-                    <div class="panel-heading">Resources in Guinea</div>
+                    <div class="panel-heading">Countries</div>
                     <div class="panel-body">
                         <ul>
                         <?php $i=0; ?>
@@ -86,15 +86,6 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-12 contract-year-list">
-            <div class="panel panel-default panel-wrap contract-year-wrap">
-                <div class="panel-heading">Contracts by year in Guinea</div>
-                <div class="panel-body">
-                    <img src="../images/ic-graph.png" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
+
 
 @stop

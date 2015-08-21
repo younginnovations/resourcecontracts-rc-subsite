@@ -3,9 +3,9 @@
             <div class="row">
                 <div class="col-lg-6">
                     <ul>
-                        <li><a href="{{route('about')}}">About</a></li>
-                        <li><a href="{{route('faqs')}}">Faq</a></li>
-                        <li><a href="{{route('contact')}}">Contact</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Faq</a></li>
+                        <li><a href="#">Contact</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-6">

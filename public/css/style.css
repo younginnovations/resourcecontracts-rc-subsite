@@ -810,7 +810,7 @@ footer .col-lg-6:last-of-type li:first-child {
 }
 
 .table-contract td:first-child {
-	background: url(../../images/ic-file.png) no-repeat 36px;
+	background: url(../../images/ic-file.png) no-repeat 36px 15px;
     padding-left: 60px;
 }
 
@@ -874,12 +874,9 @@ footer .col-lg-6:last-of-type li:first-child {
 	padding: 0 0 0 36px!important;
 }
 
-
-.view-pin-wrap,.download-wrap {
+.view-main-pin-wrap,.download-main-wrap {
 	font-size: 11px;
 	text-transform: uppercase;
-	background: url(../../images/ic-sprite.png) no-repeat -174px 11px;
-	padding: 12px 0 12px 18px;
 	float: left;
 	width: 140px;
 	border-right: 1px solid rgb(188,188,188);
@@ -888,9 +885,14 @@ footer .col-lg-6:last-of-type li:first-child {
 	position: relative;
 }
 
+.view-pin-wrap,.download-wrap {
+	padding: 12px 0 12px 22px;
+	background: url(../../images/ic-sprite.png) no-repeat -174px 11px;
+}
+
 .download-wrap {
-	background: url(../../images/ic-sprite.png) no-repeat -152px -40px;
 	padding-left: 44px;
+	background: url(../../images/ic-sprite.png) no-repeat -152px -40px;
 }
 
 .view-pin-wrap:after,.download-wrap:after {

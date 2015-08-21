@@ -1,4 +1,7 @@
 @extends('layout.app-full')
+@section('css')
+    <link rel="stylesheet" type="text/css" href="//cloud.github.com/downloads/lafeber/world-flags-sprite/flags32.css" />
+@stop
 @section('content')
 
 <div class="row">
@@ -12,7 +15,9 @@
                         <li>{{$contract->metadata->contract_name}}</li>
                     </ul>
                 </div>
-                <div class="panel-title">
+
+                <div class="panel-title f32">
+                        <p class="flag <%= code %>"></p>
                     {{$contract->metadata->contract_name}}
                 </div>
             </div>
@@ -26,21 +31,23 @@
         </div>
         <div class="filter-wrapper actions-wrapper">
             <div class="col-lg-12">
-                <div class="view-pin-wrap">
-                    <span>View Pins</span>
+                <div class="view-main-pin-wrap">
+                    <div class="view-pin-wrap">
+                        <span>View Pins</span>
+                    </div>
                     <ul class="dropdown-menu">
                         <li><a href="#">khfhgkfd</a></li>
                         <li><a href="#">mvbfkjfd</a></li>
                     </ul>
                 </div>
-
-                <div class="download-wrap" data-toggle="dropdown">
-                    <span>Download</span>
+                <div class="download-main-wrap">
+                    <div class="download-wrap">
+                        <span>Download</span>
+                    </div>
                     <ul class="dropdown-menu">
                         <li><a href="{{$contract->metadata->file_url}}">Pdf</a></li>
                         <li><a href="{{$contract->metadata->word_file}}">Word File</a></li>
                     </ul>
-
                 </div>
             </div>
         </div>
@@ -242,56 +249,30 @@
             <div class="panel-heading">Annotations</div>
             <div class="panel-body">
                 <div class="category-wrap">
+
+                   @foreach($contract->annotations->result as $contractAnnotations)
                     <div class="category-title">
-                        Country
+                        {{$contractAnnotations->category}}
                     </div>
                     <ul>
                         <li>
-                            <div class="page-num pull-left">Pg 1</div>
+                            <div class="page-num pull-left">Pg {{$contractAnnotations->page_no}}</div>
                             <div class="pull-left">
-                                <div class="annotation-text">This integrated circuit was introduced in 1953</div>
-                                <div class="quote">How true is this? Somebody verify if this is authetic.</div>
+                                <div class="annotation-text">{{$contractAnnotations->text}}</div>
+                                <div class="quote">{{$contractAnnotations->quote}}</div>
                                 <div class="tags">
-                                    <a href="#">environment</a>
-                                    <a href="#">education</a>
+                                    @foreach($contractAnnotations->tags as $tags)
+                                    <a >{{$tags}}</a>
+
+                                    @endforeach
                                 </div>
                             </div>
                         </li>
-                        <li>
-                            <div class="page-num pull-left">Pg 1</div>
-                            <div class="pull-left">
-                                <div class="annotation-text">This integrated circuit was introduced in 1953</div>
-                                <div class="quote">How true is this? Somebody verify if this is authetic.</div>
-                                <div class="tags">
-                                    <a href="#">environment</a>
-                                    <a href="#">education</a>
-                                </div>
-                                <div class="note">
-                                    <em>in associated document</em>
-                                    <span>SOCAR, BP, ELF, Lukoil, OIES, Statoil, TPAO &hellip;</span>
-                                </div>
-                            </div>
-                        </li>
+
                     </ul>
+                  @endforeach
                 </div>
-                <div class="category-wrap">
-                    <div class="category-title">
-                        General Information
-                    </div>
-                    <ul>
-                        <li>
-                            <div class="page-num pull-left">Pg 1</div>
-                            <div class="pull-left">
-                                <div class="annotation-text">This integrated circuit was introduced in 1953</div>
-                                <div class="quote">How true is this? Somebody verify if this is authetic.</div>
-                                <div class="tags">
-                                    <a href="#">environment</a>
-                                    <a href="#">education</a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+
             </div>
         </div>
     </div>

@@ -46,11 +46,11 @@ $(document).ready(function() {
 
     // search form toggle
 
-    $('.search-form input[type="text"]').focus(function(){
+    $('.search-form:not(.filter-form) input[type="text"]').focus(function(){
         $('.search-input-wrapper').show();
     });
 
-     $('.search-form input[type="text"]').keyup(function(){
+     $('.search-form:not(.filter-form) input[type="text"]').keyup(function(){
       if($(this).val() == ''){
          $('.search-input-wrapper').hide();
       }else{
@@ -70,6 +70,6 @@ $(document).ready(function() {
     });
 
     $('.download-wrap,.view-pin-wrap').click(function(){
-       $(this).children('ul').toggle();
+       $(this).siblings('ul').toggle();
     });
 });
