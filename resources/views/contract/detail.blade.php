@@ -42,10 +42,20 @@
         <div class="filter-wrapper actions-wrapper">
             <div class="col-lg-12">
                 <div class="view-pin-wrap">
-                    View Pins
+                    <span>View Pins</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">khfhgkfd</a></li>
+                        <li><a href="#">mvbfkjfd</a></li>
+                    </ul>
                 </div>
-                <div class="download-wrap">
-                    Download
+
+                <div class="download-wrap" data-toggle="dropdown">
+                    <span>Download</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{$contract->metadata->file_url}}">Pdf</a></li>
+                        <li><a href="{{$contract->metadata->word_file}}">Word File</a></li>
+                    </ul>
+
                 </div>
             </div>
         </div>
@@ -240,7 +250,7 @@
         </div>
     </div>
 </div>
-
+</div>
 <div class="row annotation-list-wrapper" id="annotation">
     <div class="col-lg-12">
         <div class="panel panel-default panel-wrap panel-annotation-list-wrap">
