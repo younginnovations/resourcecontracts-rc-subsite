@@ -50,15 +50,14 @@ class ResourceController extends BaseController
      */
     public function detail($resource)
     {
-        $filter = ['resource' => $resource];
+        $filter    = ['resource' => $resource];
         $contracts = $this->api->allContracts($filter);
-
-        if(!$contracts)
-        {
-          return abort(404);
+        $countries = $this->api->getCountryByResource($filter);
+        if (!$contracts) {
+            return abort(404);
         }
 
-        return view('resource.detail', compact('contracts', 'resource'));
+        return view('resource.detail', compact('contracts', 'resource','countries'));
     }
 
 }

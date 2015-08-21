@@ -1,3 +1,316 @@
+@extends('layout.app-full')
+<div class="row">
+    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">Resource <span>Contracts</span></a>
+        </div>
+        <div class="navbar-right">
+            <form action="" method="post" class="search-form">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-navbar-search pull-left"></button>
+                    <input type="text" class="form-control pull-left" placeholder="Search for contracts...">
+                </div>
+            </form>
+        </div>
+        <!-- /.navbar-header -->
+    </nav>
+</div>
+<div class="row">
+    <div class="col-lg-12 panel-top-wrapper">
+        <div class="panel-top-content">
+            <div class="pull-left">
+                <div class="breadcrumb-wrapper">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Contracts</a></li>
+                        <li>{{$contract->metadata->contract_name}}</li>
+                    </ul>
+                </div>
+                <div class="panel-title">
+                    {{$contract->metadata->contract_name}}
+                </div>
+            </div>
+            <div class="pull-right action-links">
+                <ul>
+                    <li class="pull-left"><a href="#">View Document</a></li>
+                    <li class="pull-left"><a href="#annotation" class="view-annotation">View Annotations</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="filter-wrapper actions-wrapper">
+            <div class="col-lg-12">
+                <div class="view-pin-wrap">
+                    View Pins
+                </div>
+                <div class="download-wrap">
+                    Download
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row contract-detail-wrapper">
+    <div class="col-lg-12">
+        <div class="col-lg-6">
+            <div class="panel panel-default panel-wrap panel-contract-wrap">
+                <div class="panel-body">
+                    <ul>
+                        <li>
+                            <label for="">Language</label>
+                            <span>{{strtoupper($contract->metadata->language)}}</span>
+                        </li>
+                        <li>
+                            <label for="">Country</label>
+                            <span>{{ucfirst($contract->metadata->country->name)}}</span>
+                        </li>
+                        <li>
+                            <label for="">Government Entity</label>
+                            <span>{{!empty($contract->metadata->government_entity)?$contract->metadata->government_entity:'-'}}</span>
+                        </li>
+                        <li>
+                            <label for="">Government Identifier</label>
+                            <span>{{!empty($contract->metadata->government_identifier)?$contract->metadata->government_identifier:'-'}}</span>
+                        </li>
+                        <li>
+                            <label for="">Signature Date</label>
+                            <span>{{$contract->metadata->signature_year}}</span>
+                        </li>
+                        <li>
+                            <label for="">Document Type</label>
+                            <span>Contract</span>
+                        </li>
+                        <li>
+                            <label for="">Type of Contract</label>
+                            <span>Exploration Permit/License</span>
+                        </li>
+                        <li>
+                            <label for="">Translation from Original</label>
+                            <span>-</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="panel panel-default panel-wrap panel-annotation-wrap">
+                <div class="panel-body">
+                    <div class="annotation-block">
+                        <div class="title">Annotations</div>
+                        <ul>
+                            <li><a href="#">General information</a></li>
+                            <li><a href="">Country</a></li>
+                        </ul>
+                    </div>
+                    <div class="view-all-annotations">
+                        <a href="#annotation" class="view-annotation">View all Annotations</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="panel panel-default panel-wrap panel-contract-wrap">
+            <div class="panel-heading">
+                Company
+            </div>
+            <div class="panel-body panel-col3-wrap">
+                <ul>
+                    <li>
+                        <label for="">Company Name</label>
+                        <span>-</span>
+                    </li>
+                    <li>
+                        <label for="">Jurisdiction of Incorporation</label>
+                        <span>Kenya</span>
+                    </li>
+                    <li>
+                        <label for="">Registration Agency</label>
+                        <span>Kenya</span>
+                    </li>
+                    <li>
+                        <label for="">Company Address</label>
+                        <span>-</span>
+                    </li>
+                    <li>
+                        <label for="">Company Number</label>
+                        <span>2</span>
+                    </li>
+                    <li>
+                        <label for="">Parent Company</label>
+                        <span>-</span>
+                    </li>
+                    <li>
+                        <label for="">Open Corporate ID</label>
+                        <span>-</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="panel-body panel-col3-wrap">
+                <ul>
+                    <li>
+                        <label for="">Company Name</label>
+                        <span>-</span>
+                    </li>
+                    <li>
+                        <label for="">Jurisdiction of Incorporation</label>
+                        <span>Kenya</span>
+                    </li>
+                    <li>
+                        <label for="">Registration Agency</label>
+                        <span>Kenya</span>
+                    </li>
+                    <li>
+                        <label for="">Company Address</label>
+                        <span>-</span>
+                    </li>
+                    <li>
+                        <label for="">Company Number</label>
+                        <span>2</span>
+                    </li>
+                    <li>
+                        <label for="">Parent Company</label>
+                        <span>-</span>
+                    </li>
+                    <li>
+                        <label for="">Open Corporate ID</label>
+                        <span>-</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="panel panel-default panel-wrap panel-contract-wrap">
+            <div class="panel-heading">
+                Associated Contracts
+            </div>
+            <div class="panel-body panel-table">
+                <table class="table table-responsive table-contract table-associated-contract">
+                    <tbody>
+                    <tr>
+                        <td width="70%">
+                            <a href="http://192.168.1.60:8000/contract/129">
+                                Iraqi Kurdistan Akri-Bijeel-Block  Kalegran LTD PSC
+                            </a> - Iraq, 2007
+                            <span class="label label-default">EN</span>
+                        </td>
+                        <td align="right">10.37 MB</td>
+                        <td align="right">June 30, 2015</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="panel panel-default panel-wrap panel-contract-wrap">
+            <div class="panel-heading">
+                CONCESSION / LICENSE AND PROJECT
+            </div>
+            <div class="panel-body">
+                <ul>
+                    <li>
+                        <label for="">License Name</label>
+                        <span>-</span>
+                    </li>
+                    <li>
+                        <label for="">License Identifier</label>
+                        <span>-</span>
+                    </li>
+                    <li>
+                        <label for="">Project Title</label>
+                        <span>-</span>
+                    </li>
+                    <li>
+                        <label for="">Project Identifier</label>
+                        <span>-</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="panel panel-default panel-wrap panel-contract-wrap">
+            <div class="panel-heading">
+                Source
+            </div>
+            <div class="panel-body">
+                <ul>
+                    <li>
+                        <label for="">Source URL</label>
+                        <span>xxx</span>
+                    </li>
+                    <li>
+                        <label for="">Disclosure</label>
+                        <span>corporate</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row annotation-list-wrapper" id="annotation">
+    <div class="col-lg-12">
+        <div class="panel panel-default panel-wrap panel-annotation-list-wrap">
+            <div class="panel-heading">Annotations</div>
+            <div class="panel-body">
+                <div class="category-wrap">
+                    <div class="category-title">
+                        Country
+                    </div>
+                    <ul>
+                        <li>
+                            <div class="page-num pull-left">Pg 1</div>
+                            <div class="pull-left">
+                                <div class="annotation-text">This integrated circuit was introduced in 1953</div>
+                                <div class="quote">How true is this? Somebody verify if this is authetic.</div>
+                                <div class="tags">
+                                    <a href="#">environment</a>
+                                    <a href="#">education</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="page-num pull-left">Pg 1</div>
+                            <div class="pull-left">
+                                <div class="annotation-text">This integrated circuit was introduced in 1953</div>
+                                <div class="quote">How true is this? Somebody verify if this is authetic.</div>
+                                <div class="tags">
+                                    <a href="#">environment</a>
+                                    <a href="#">education</a>
+                                </div>
+                                <div class="note">
+                                    <em>in associated document</em>
+                                    <span>SOCAR, BP, ELF, Lukoil, OIES, Statoil, TPAO &hellip;</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="category-wrap">
+                    <div class="category-title">
+                        General Information
+                    </div>
+                    <ul>
+                        <li>
+                            <div class="page-num pull-left">Pg 1</div>
+                            <div class="pull-left">
+                                <div class="annotation-text">This integrated circuit was introduced in 1953</div>
+                                <div class="quote">How true is this? Somebody verify if this is authetic.</div>
+                                <div class="tags">
+                                    <a href="#">environment</a>
+                                    <a href="#">education</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
     <div class="panel panel-default">
         <div class="panel-heading">

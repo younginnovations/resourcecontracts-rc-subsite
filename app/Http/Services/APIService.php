@@ -245,6 +245,11 @@ class APIService
         return $this->apiCall($resource);
     }
 
+    /**
+     * Get Resource by Country
+     * @param $filter
+     * @return array
+     */
     public function getResourceByCountry($filter)
     {
         $default  = [
@@ -261,6 +266,31 @@ class APIService
         }
 
         return [];
+    }
+
+    /**
+     * Get Country By resource
+     *
+     * @param $filter
+     * @return array
+     */
+    public function getCountryByResource($filter)
+    {
+        $default  = [
+            'resource' => '',
+        ];
+        $filter   = array_merge($default, $filter);
+        $query    = [
+            'resource' => $filter['resource']
+        ];
+        $country = $this->apiCall('contract/countries', $query);
+
+        if (count($country->results) > 0) {
+            return $country->results;
+        }
+
+        return [];
+
     }
 
 
