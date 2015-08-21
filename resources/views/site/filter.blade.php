@@ -50,12 +50,4 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
-
-
-
-
-
-=======
->>>>>>> ae43e13af94a48c2ba33928c7d3fce4e671f5e6c
 @stop
