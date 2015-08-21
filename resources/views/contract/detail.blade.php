@@ -1,7 +1,5 @@
 @extends('layout.app-full')
-@section('css')
-    <link rel="stylesheet" type="text/css" href="//cloud.github.com/downloads/lafeber/world-flags-sprite/flags32.css" />
-@stop
+
 @section('content')
 
 <div class="row">
@@ -10,19 +8,17 @@
             <div class="pull-left">
                 <div class="breadcrumb-wrapper">
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Contracts</a></li>
+                        <li><a href="{{url()}}">Home</a></li>
+                        <li><a href="{{route('contracts')}}">Contracts</a></li>
                         <li>{{$contract->metadata->contract_name}}</li>
                     </ul>
                 </div>
 
-                <div class="panel-title f32">
-                        <p class="flag <%= code %>"></p>
+                <div class="panel-title">
                     {{$contract->metadata->contract_name}}
                 </div>
             </div>
             <div class="pull-right action-links">
-
                 <ul>
                     <li class="pull-left"><a href="{{route('contract.pages',['id'=>$contract->metadata->contract_id])}}">View Document</a></li>
                     <li class="pull-left"><a href="#annotation" class="view-annotation">View Annotations</a></li>

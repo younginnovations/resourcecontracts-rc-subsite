@@ -203,6 +203,7 @@ nav.navbar {
 	padding: 0 22px;
 	border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+	width: 200px;
 }
 
 .btn-search:hover {

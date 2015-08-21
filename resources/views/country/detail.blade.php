@@ -1,23 +1,25 @@
 @extends('layout.app-full')
-@section('css')
-    <link rel="stylesheet" type="text/css" href="//cloud.github.com/downloads/lafeber/world-flags-sprite/flags32.css" />
-@stop
 
 @section('content')
     <div class="row">
         <div class="col-lg-12 panel-top-wrapper">
-            <div class="breadcrumb-wrapper">
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Countries</a></li>
-                    <li>{{@trans('country')[strtoupper($country)]}}</li>
-                </ul>
-            </div>
-            <div class="panel-title f32">
-                <p class="flag {{$country}}"></p>
 
-                {{@trans('country')[strtoupper($country)]}}
+            <div class="panel-top-content">
+                <div class="pull-left">
+                    <div class="breadcrumb-wrapper">
+                        <ul>
+                            <li><a href="{{url()}}">Home</a></li>
+                            <li><a href="{{route('countries')}}">Countries</a></li>
+                            <li>{{@trans('country')[strtoupper($country)]}}</li>
+                        </ul>
+                    </div>
+                    <div class="panel-title">
+                        <img src="http://flags.fmcdn.net/data/flags/small/{{$country}}.png" />
+                        {{@trans('country')[strtoupper($country)]}}
+                    </div>
+                </div>
             </div>
+
             <div class="filter-wrapper">
                 <div class="col-lg-12">
                     <div class="filter-country-wrap">
@@ -75,7 +77,8 @@
             </div>
             <div class="col-lg-4">
                 <div class="panel panel-default panel-wrap country-resource-wrap">
-                    <div class="panel-heading">Resources in Guinea</div>
+                    <div class="panel-heading">Resources in  {{@trans('country')[strtoupper($country)]}}
+                    </div>
                     <div class="panel-body">
 
                         <ul>

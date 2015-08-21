@@ -61,9 +61,6 @@
                     </div>
                 </div>
                 <div class="col-lg-2">
-                    <div class="filter-resource-wrap">
-                        <div class="filter-label" data-toggle="collapse-side" data-target=".side-collapse" data-target-2=".side-collapse-container">Filter by Resources<i></i></div>
-                    </div>
                     <div class="side-collapse in">
                         <ul id="countries">
                         </ul>
@@ -73,13 +70,17 @@
         </div>
     </div>
     <div class="row side-collapse-container">
-        <div id="resources" class="col-lg-12 country-list-wrap f32">
+        <div class="sort-wrapper">
+            <label for="">Sort</label>
+            <select class="sort" name="sort" >
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </select>
+        </div>
 
+        <div id="resources" class="col-lg-12 country-list-wrap f32">
         </div>
     </div>
-
-    <a href="#" class="sort" data-value="asc">asc</a>
-    <a href="#" class="sort" data-value="desc">desc</a>
 
 @stop
 
@@ -296,9 +297,9 @@
 
 
         $(function(){
-            $(document).on('click', '.sort', function(e){
+            $(document).on('change', '.sort', function(e){
                 e.preventDefault();
-                option.sort_type = $(this).data('value');
+                option.sort_type = $(this).val();
                 updateView();
             });
 

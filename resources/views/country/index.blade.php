@@ -1,9 +1,5 @@
 @extends('layout.app-full')
 
-@section('css')
-    <link rel="stylesheet" type="text/css" href="//cloud.github.com/downloads/lafeber/world-flags-sprite/flags32.css" />
-@stop
-
 @section('content')
     <div class="row">
         <div class="col-lg-12 panel-top-wrapper">
@@ -85,7 +81,7 @@
                 <option value="desc">Descending</option>
             </select>
         </div>
-        <div id="countries" class="col-lg-12 country-list-wrap f32">
+        <div id="countries" class="col-lg-12 country-list-wrap">
         </div>
     </div>
 @stop
@@ -96,9 +92,9 @@
     <script type="text/template" id="country-template">
         <div class="col-lg-2">
             <a href="{{url('countries')}}/<%= code %>">
-                <p class="flag <%= code %>"></p>
+                <img src="http://flags.fmcdn.net/data/flags/small/<%= code %>.png" />
+                <div class="country-name"><%= name %></div>
             </a>
-            <div class="country-name"><%= name %></div>
             <div class="contract-count"><%= contract %> contracts</div>
        </div>
     </script>

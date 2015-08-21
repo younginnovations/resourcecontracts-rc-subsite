@@ -4,16 +4,20 @@
 
     <div class="row">
         <div class="col-lg-12 panel-top-wrapper">
-            <div class="breadcrumb-wrapper">
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li>All Contracts</li>
-                </ul>
-            </div>
-            <div class="panel-title">
-                All Contracts
-            </div>
 
+            <div class="panel-top-content">
+                <div class="pull-left">
+                    <div class="breadcrumb-wrapper">
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li>All Contracts</li>
+                        </ul>
+                    </div>
+                    <div class="panel-title">
+                        All Countries
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
