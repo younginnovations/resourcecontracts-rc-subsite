@@ -2,9 +2,9 @@
 namespace App\Http\Services;
 
 use GuzzleHttp\Client;
-use Illuminate\Pagination\Paginator;
 use GuzzleHttp\Message\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 
 /**
  * Class APIService
@@ -15,29 +15,18 @@ class APIService
     /**
      * @const BASE_URL
      */
-    const BASE_URL = 'es';
+    const CATEGORY = 'rc';
     /**
      * @var Client
      */
     protected $client;
-    /**
-     * @var Log
-     */
-    protected $logger;
-    /**
-     * @var Log
-     */
-    private $log;
 
     /**
      * @param Client $client
-     * @param Log    $log
-     * @internal param Log $logger
      */
-    public function __construct(Client $client, Log $log)
+    public function __construct(Client $client)
     {
         $this->client = $client;
-        $this->log    = $log;
     }
 
     /**
@@ -49,22 +38,21 @@ class APIService
     protected function apiURL($request)
     {
         $host    = trim(env('ELASTIC_SEARCH_HOST'), '/');
-        $base    = self::BASE_URL;
         $request = trim($request, '/');
 
-        return sprintf('%s/%s/%s', $host, $base, $request);
+        return sprintf('%s/%s', $host, $request);
     }
 
     /**
      * Get Summary
      *
-     * @return array|null
+     * @return object|null
      */
-    public function getSummary()
+    public function summary()
     {
-        $call = '/contracts/summary';
+        $resource = 'contracts/summary';
 
-        return $this->apiCall($call, true);
+        return $this->apiCall($resource);
     }
 
     /**
@@ -72,7 +60,7 @@ class APIService
      *
      * @return object|null
      */
-    public function getAllContracts(array $filter = [])
+    public function allContracts(array $filter = [])
     {
         $default = [
             'country'  => '',
@@ -81,11 +69,16 @@ class APIService
         ];
 
         $filter = array_merge($default, $filter);
-        extract($filter);
-        $call     = sprintf('/contracts?country_code=%s&year=%s&resource=%s', $country, $year, $resource);
-        $contract = $this->apiCall($call);
 
-        if ($contract) {
+        $query = [
+            'country_code' => $filter['country'],
+            'year'         => $filter['year'],
+            'resource'     => $filter['resource']
+        ];
+
+        $contract = $this->apiCall('contracts', $query);
+
+        if ($contract->total > 0) {
             return $contract->results;
         }
 
@@ -98,10 +91,10 @@ class APIService
      * @param $contract_id
      * @return \stdClass
      */
-    public function getContractDetail($contract_id)
+    public function contractDetail($contract_id)
     {
         $contract              = new \stdClass();
-        $contract->metadata    = $this->getMetadata($contract_id);
+        $contract->metadata    = $this->metadata($contract_id);
         $contract->annotations = $this->getAnnotations($contract_id);
         $contract->pages       = $this->getTextPage($contract_id, 1);
 
@@ -114,11 +107,11 @@ class APIService
      * @param $contract_id
      * @return object|null
      */
-    public function getMetadata($contract_id)
+    public function metadata($contract_id)
     {
-        $call = sprintf('/contract/%s/metadata', $contract_id);
+        $resource = sprintf('contract/%s/metadata', $contract_id);
 
-        return $this->apiCall($call);
+        return $this->apiCall($resource);
     }
 
     /**
@@ -129,9 +122,9 @@ class APIService
      */
     public function getAnnotations($contract_id)
     {
-        $call = sprintf('/contract/%d/annotations', $contract_id);
+        $resource = sprintf('contract/%d/annotations', $contract_id);
 
-        return $this->apiCall($call);
+        return $this->apiCall($resource);
     }
 
 
@@ -143,22 +136,21 @@ class APIService
      */
     public function getTextPage($contract_id, $page_no)
     {
-        $call = sprintf('/contract/%d/text?page=%d', $contract_id, $page_no);
+        $resource = sprintf('contract/%d/text', $contract_id);
 
-        return $this->apiCall($call);
+        return $this->apiCall($resource, ['page' => $page_no]);
     }
 
     /**
-     * @param $contractId
+     * @param $contract_id
      * @param $pageNo
-     * @return Array|false
+     * @return array|false
      */
-    public function getAnnotationPage($contractId, $pageNo)
+    public function getAnnotationPage($contract_id, $page_no)
     {
+        $resource = sprintf('contract/%d/annotations', $contract_id);
 
-        $call = sprintf('/contract/%d/annotations?page=%d', $contractId, $pageNo);
-
-        return $this->apiCall($call, true);
+        return $this->apiCall($resource, ['page' => $page_no], true);
     }
 
     /**
@@ -170,35 +162,10 @@ class APIService
      */
     public function getFullTextSearch($contract_id, $query)
     {
-        $call = sprintf('/contract/%d/searchtext?q=%s', $contract_id, $query);
+        $resource = sprintf('contract/%d/searchtext', $contract_id);
 
-        return $this->apiCall($call, true);
+        return $this->apiCall($resource, ['q' => $query], true);
     }
-
-    /**
-     * Call API
-     *
-     * @param      $call
-     * @param bool $array
-     * @return mixed
-     */
-    protected function apiCall($call, $array = false)
-    {
-        try {
-            $request  = new Request('GET', $this->apiURL($call));
-            $response = $this->client->send($request);
-            $data     = $response->getBody();
-            if ($array) {
-                return json_decode($data, true);
-            }
-
-            return json_decode($data);
-
-        } catch (\Exception $e) {
-            Log::error($call . ":" . $e->getMessage());
-        }
-    }
-
 
     /**
      * Full text search
@@ -209,25 +176,123 @@ class APIService
     public function filterSearch($filter)
     {
         extract($filter);
-        $call = sprintf(
-            '/contracts/search?q=%s&country=%s&year=%s&resource=%s&group=%s&sort_by=%s&order=%s&per_page=%s&from=%s',
-            $q,
-            $country,
-            $year,
-            $resource,
-            $group,
-            $sortby,
-            $order,
-            $per_page,
-            $from
-        );
 
-        $contract = $this->apiCall($call);
+        $query = [
+            'q'            => $q,
+            'country_code' => $country,
+            'year'         => $year,
+            'resource'     => $resource,
+            'group'        => $group,
+            'sort_by'      => $sortby,
+            'order'        => $order,
+            'per_page'     => $per_page,
+            'from'         => $from
+
+        ];
+        if (!is_null($q)) {
+            $contract = $this->apiCall('contracts/search', $query);
+        } else {
+            $contract = $this->apiCall('contracts', $query);
+
+        }
+
         if ($contract) {
             return $contract;
         }
 
         return null;
+    }
+
+    /**
+     * Call API
+     *
+     * @param       $resource
+     * @param array $query
+     * @param bool  $array
+     * @return array|object|null
+     */
+    protected function apiCall($resource, array $query = [], $array = false)
+    {
+        try {
+            $request           = new Request('GET', $this->apiURL($resource));
+            $query['category'] = static::CATEGORY;
+
+            $request->setQuery($query);
+
+            $response = $this->client->send($request);
+            $data     = $response->getBody();
+
+            if ($array) {
+                return json_decode($data, true);
+            }
+
+            return json_decode($data);
+
+        } catch (\Exception $e) {
+            Log::error($resource . ":" . $e->getMessage(), $query);
+
+            return null;
+        }
+    }
+
+    /**
+     * Get all countries
+     *
+     * @return object
+     */
+    public function allCountries()
+    {
+        $resource = sprintf('contract/country/resource');
+
+        return $this->apiCall($resource);
+    }
+
+    /**
+     * Get Resource by Country
+     * @param $filter
+     * @return array
+     */
+    public function getResourceByCountry($filter)
+    {
+        $default  = [
+            'country' => '',
+        ];
+        $filter   = array_merge($default, $filter);
+        $query    = [
+            'country' => $filter['country']
+        ];
+        $contract = $this->apiCall('contract/resources', $query);
+
+        if (count($contract->results) > 0) {
+            return $contract->results;
+        }
+
+        return [];
+    }
+
+    /**
+     * Get Country By resource
+     *
+     * @param $filter
+     * @return array
+     */
+    public function getCountryByResource($filter)
+    {
+        $default = [
+            'resource' => '',
+        ];
+        $filter  = array_merge($default, $filter);
+        $query   = [
+            'resource' => $filter['resource']
+        ];
+        $country = $this->apiCall('contract/countries', $query);
+
+        if (count($country->results) > 0) {
+            return $country->results;
+        }
+
+        return [];
+
     }
 
 

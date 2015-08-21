@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
             '*',
             function ($view) {
                 $api = app('App\Http\Services\APIService');
-                $view->with('summary', $api->getSummary());
+                $view->with('summary', $api->summary());
             }
         );
     }

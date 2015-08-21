@@ -37,93 +37,18 @@ class SiteController extends BaseController
     }
 
     /**
+     * Home Page
+     *
      * @return \Illuminate\View\View
      */
     public function home()
     {
-        $contracts = $this->api->getAllContracts();
+        $summary   = $this->api->summary();
+        $countries = count($summary->country_summary);
+        $resources = count($summary->resource_summary);
+        $contracts = $summary->contract_count;
 
-        if (is_null($contracts)) {
-            return "API Error";
-        }
-
-        return view('site.home', compact('contracts'));
-    }
-
-    /**
-     * Show specific Contract detail page
-     *
-     * @param $id
-     * @return \Illuminate\View\View
-     */
-    public function show($id)
-    {
-        $contract = $this->api->getContractDetail($id);
-        if (is_null($contract->metadata)) {
-            return abort(404);
-        }
-
-        return view('site.details', compact('contract'));
-    }
-
-    /**
-     * Get Single page detail
-     *
-     * @param $id
-     * @param $page_no
-     * @return \Illuminate\View\View
-     */
-    public function getSinglePage($id, $page_no)
-    {
-        dd('ddd');
-        $contract              = new \stdClass();
-        $contract->page        = $this->api->getTextPage($id, $page_no);
-        $contract->annotations = $this->api->getAnnotationPage($id, $page_no);
-        $contract->metadata    = $this->api->getMetadata($id);
-
-        if (is_null($contract->metadata)) {
-            return abort(404);
-        }
-
-        return view('site.documentview', compact('page', 'contract', 'annotations'));
-    }
-
-    /**
-     * @param $id
-     * @return \Illuminate\View\View
-     */
-    public function getPageList($id)
-    {
-        $page_no               = 1;
-        $contract              = new \stdClass();
-        $contract->page        = $this->api->getTextPage($id, $page_no);
-        $contract->metadata    = $this->api->getMetadata($id);
-        $contract->annotations = $this->contract->annotations($id);
-
-        if (is_null($contract->metadata)) {
-            return abort(404);
-        }
-
-        return view('site.contract.pages', compact('page', 'contract', 'annotations'));
-    }
-
-    /**
-     * @param Request $request
-     * @param         $contractId1
-     * @param         $contractId2
-     * @return \Illuminate\View\View
-     */
-    public function compare($contractId1, $contractId2)
-    {
-        $contract1Annotations = $this->contract->annotations($contractId1);
-        $contract2Annotations = $this->contract->annotations($contractId2);
-        $contract1            = $this->api->getMetadata($contractId1);
-        $contract2            = $this->api->getMetadata($contractId2);
-
-        return view(
-            'site.contract.compare',
-            compact('contract1Annotations', 'contract2Annotations', 'contract1', 'contract2')
-        );
+        return view('site.home', compact('countries', 'resources', 'contracts'));
     }
 
     public function filter()
@@ -134,6 +59,7 @@ class SiteController extends BaseController
         $filter['resource'] = $this->request->get('resource');
 
         $contracts = $this->api->getAllContracts($filter);
+
         return view('site.home', compact('contracts'));
     }
 }
