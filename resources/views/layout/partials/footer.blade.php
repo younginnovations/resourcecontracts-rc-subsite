@@ -37,13 +37,5 @@ $js = [
 
 @yield('js')
 
-@if(env('APP_DEBUG') == true)
-    <hr/>
-    <pre style="background: #ccc; padding: 10px;">
-    {{\Session::get('url')}}
-            {{dd(\Session::get('response'))}}
-    </pre>
-@endif
-
 </body>
 </html>

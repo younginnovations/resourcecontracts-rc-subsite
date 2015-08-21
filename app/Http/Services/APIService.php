@@ -191,7 +191,7 @@ class APIService
         ];
 
 
-        $contract = $this->apiCall('contracts/search', $query);
+        $contract = $this->apiCall('contracts', $query);
 
         if ($contract) {
             return $contract;
@@ -213,13 +213,11 @@ class APIService
         try {
             $request           = new Request('GET', $this->apiURL($resource));
             $query['category'] = static::CATEGORY;
+
             $request->setQuery($query);
 
             $response = $this->client->send($request);
             $data     = $response->getBody();
-
-            \Session::flash('url', $request->getUrl());
-            \Session::flash('response', json_decode($data));
 
             if ($array) {
                 return json_decode($data, true);
@@ -277,11 +275,11 @@ class APIService
      */
     public function getCountryByResource($filter)
     {
-        $default  = [
+        $default = [
             'resource' => '',
         ];
-        $filter   = array_merge($default, $filter);
-        $query    = [
+        $filter  = array_merge($default, $filter);
+        $query   = [
             'resource' => $filter['resource']
         ];
         $country = $this->apiCall('contract/countries', $query);
