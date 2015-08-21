@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-12 country-list-wrapper">
+        <div class="col-lg-12 country-list-wrapper search-container" >
             <div class="panel panel-default panel-wrap country-list-wrap">
                 <div class="panel-body">
                     <table class="table table-responsive table-contract">

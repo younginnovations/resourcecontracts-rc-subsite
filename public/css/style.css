@@ -1347,3 +1347,7 @@ footer .col-lg-6:last-of-type li:first-child {
 .dropdown-menu li:not(:last-child) {
 	border-bottom: 1px solid #f5f5f5;
 }
+
+.search-container {
+	min-height: 300px;
+}

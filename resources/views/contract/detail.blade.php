@@ -65,11 +65,11 @@
                         </li>
                         <li>
                             <label for="">Government Entity</label>
-                            <span>{{!empty($contract->metadata->government_entity)?$contract->metadata->government_entity:'-'}}</span>
+                            <span>{{(isset($contract->metadata) && !empty($contract->metadata->government_entity))?$contract->metadata->government_entity:'-'}}</span>
                         </li>
                         <li>
                             <label for="">Government Identifier</label>
-                            <span>{{!empty($contract->metadata->government_identifier)?$contract->metadata->government_identifier:'-'}}</span>
+                            <span>{{(isset($contract->metadata) && !empty($contract->metadata->government_identifier))?$contract->metadata->government_identifier:'-'}}</span>
                         </li>
                         <li>
                             <label for="">Signature Date</label>
@@ -81,15 +81,15 @@
                         </li>
                         <li>
                             <label for="">Document Type</label>
-                            <span>{{!empty($contract->metadata->document_type)?$contract->metadata->document_type:'-'}}</span>
+                            <span>{{(isset($contract->metadata) && !empty($contract->metadata->document_type))?$contract->metadata->document_type:'-'}}</span>
                         </li>
                         <li>
                             <label for="">Type of Contract</label>
-                            <span>{{!empty($contract->metadata->contract_type)?$contract->metadata->contract_type:'-'}}</span>
+                            <span>{{(isset($contract->metadata) && !empty($contract->metadata->contract_type))?$contract->metadata->contract_type:'-'}}</span>
                         </li>
                         <li>
                             <label for="">Translation from Original</label>
-                            <span>{{!empty($contract->metadata->translation_parent)?$contract->metadata->translation_parent:'-'}}</span>
+                            <span>{{(isset($contract->metadata) && !empty($contract->metadata->translation_parent))?$contract->metadata->translation_parent:'-'}}</span>
                         </li>
                     </ul>
                 </div>
@@ -124,39 +124,39 @@
                 <ul>
                     <li>
                         <label for="">Company Name</label>
-                        <span>{{!empty($company->name)?$company->name:'-'}}</span>
+                        <span>{{(isset($company->name) && !empty($company->name))?$company->name:'-'}}</span>
                     </li>
                     <li>
                         <label for="">Jurisdiction of Incorporation</label>
-                        <span>{{!empty($company->jurisdiction_of_incorporation)?$company->jurisdiction_of_incorporation:'-'}}</span>
+                        <span>{{(isset($company->jurisdiction_of_incorporation) && !empty($company->jurisdiction_of_incorporation))?$company->jurisdiction_of_incorporation:'-'}}</span>
                     </li>
                     <li>
                         <label for="">Registration Agency</label>
-                        <span>{{!empty($company->registration_agency)?$company->registration_agency:'-'}}</span>
+                        <span>{{(isset($company->registration_agency) && !empty($company->registration_agency))?$company->registration_agency:'-'}}</span>
                     </li>
                     <li>
                         <label for="">Company Address</label>
-                        <span>{{!empty($company->company_address)?$company->company_address:'-'}}</span>
+                        <span>{{(isset($company->company_address) && !empty($company->company_address))?$company->company_address:'-'}}</span>
                     </li>
                     <li>
                         <label for="">Company Number</label>
-                        <span>{{!empty($company->company_number)?$company->company_number:'-'}}</span>
+                        <span>{{(isset($company->company_number) && !empty($company->company_number))?$company->company_number:'-'}}</span>
                     </li>
                     <li>
                         <label for="">Parent Company</label>
-                        <span>{{!empty($company->parent_company)?$company->parent_company:'-'}}</span>
+                        <span>{{(isset($company->parent_company) && !empty($company->parent_company))?$company->parent_company:'-'}}</span>
                     </li>
                     <li>
                         <label for="">Open Corporate ID</label>
-                        <span>{{!empty($company->open_corporate_id)?$company->open_corporate_id:'-'}}</span>
+                        <span>{{(isset($company->open_corporate_id) && !empty($company->open_corporate_id))?$company->open_corporate_id:'-'}}</span>
                     </li>
                     <li>
                         <label for="">Participation Share</label>
-                        <span>{{!empty($company->participation_share)?$company->participation_share:'-'}}</span>
+                        <span>{{(isset($company->participation_share) && !empty($company->participation_share))?$company->participation_share:'-'}}</span>
                     </li>
                     <li>
                         <label for="">Operator</label>
-                        <span>{{$company->operator==1?$company->operator:'-'}}</span>
+                        <span>{{ (isset($company->operator) && $company->operator==1) ?$company->operator:'-'}}</span>
                     </li>
                 </ul>
             </div>
@@ -197,20 +197,20 @@
                 <ul>
                     <li>
                         <label for="">Project Title</label>
-                        <span>{{!empty($contract->metadata->project_title)?$contract->metadata->project_title:'-'}}</span>
+                        <span>{{(isset($contract->metadata) && !empty($contract->metadata->project_title))?$contract->metadata->project_title:'-'}}</span>
                     </li>
                     <li>
                         <label for="">Project Identifier</label>
-                        <span>{{!empty($contract->metadata->project_identifier)?$contract->metadata->project_identifier:'-'}}</span>
+                        <span>{{(isset($contract->metadata) && !empty($contract->metadata->project_identifier))?$contract->metadata->project_identifier:'-'}}</span>
                     </li>
                     @foreach($contract->metadata->concession as $consession)
                     <li>
                         <label for="">License Name</label>
-                        <span>{{!empty($consession->license_name)?$consession->license_name:'-'}}</span>
+                        <span>{{(isset($consession->license_name) && !empty($consession->license_name))?$consession->license_name:'-'}}</span>
                     </li>
                     <li>
                         <label for="">License Identifier</label>
-                        <span>{{!empty($consession->license_identifier)?$consession->license_identifier:'-'}}</span>
+                        <span>{{(isset($consession->license_identifier) && !empty($consession->license_identifier))?$consession->license_identifier:'-'}}</span>
                     </li>
                    @endforeach
 
@@ -227,11 +227,11 @@
                 <ul>
                     <li>
                         <label for="">Source URL</label>
-                        <span><a href="{{!empty($contract->metadata->source_url)?$contract->metadata->source_url:'-'}}">Link</a></span>
+                        <span><a href="{{(isset($contract->metadata) && !empty($contract->metadata->source_url))?$contract->metadata->source_url:'-'}}">Link</a></span>
                     </li>
                     <li>
                         <label for="">Disclosure Mode</label>
-                        <span>{{!empty($contract->metadata->disclosure_mode)?$contract->metadata->disclosure_mode:'-'}}</span>
+                        <span>{{(isset($contract->metadata) && !empty($contract->metadata->disclosure_mode))?$contract->metadata->disclosure_mode:'-'}}</span>
                     </li>
                 </ul>
             </div>
