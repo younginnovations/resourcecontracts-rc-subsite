@@ -233,7 +233,7 @@
                 <ul>
                     <li>
                         <label for="">Source URL</label>
-                        <span><a href="{{(isset($contract->metadata) && !empty($contract->metadata->source_url))?$contract->metadata->source_url:'-'}}">Link</a></span>
+                        <span>@if((isset($contract->metadata) && !empty($contract->metadata->source_url)))<a href="{{$contract->metadata->source_url}}">Link</a>@endif</span>
                     </li>
                     <li>
                         <label for="">Disclosure Mode</label>

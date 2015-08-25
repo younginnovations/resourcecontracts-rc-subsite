@@ -16,7 +16,7 @@
 
                 @foreach($summary->country_summary as $country)
                     <li>
-                        <a href="{{route('search')}}?country={{$country->key}}">
+                        <a href="{{route('country.detail', ['key'=>$country->key])}}">
                             <span>{{trans('country.'.strtoupper($country->key))}}</span>
                             <small class="label pull-right">{{$country->doc_count}}</small>
                         </a>
@@ -42,7 +42,7 @@
             <ul>
                 @foreach($summary->resource_summary as $resource)
                     <li>
-                        <a href="{{route('search')}}?resource={{$resource->key}}">
+                        <a href="{{route('resource.detail', ['key'=>$resource->key])}}">
                             <span>{{ucfirst($resource->key)}}</span>
                             <small class="label pull-right">{{$resource->doc_count}}</small>
                         </a>
