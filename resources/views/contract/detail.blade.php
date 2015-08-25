@@ -31,10 +31,9 @@
                     <div class="view-pin-wrap">
                         <span>View Pins</span>
                     </div>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">khfhgkfd</a></li>
-                        <li><a href="#">mvbfkjfd</a></li>
+                    <ul id="pinList" class="dropdown-menu">
                     </ul>
+                    <div id="no-pin-message"></div>
                 </div>
                 <div class="download-main-wrap">
                     <div class="download-wrap">
@@ -280,4 +279,32 @@
         </div>
     </div>
 </div>
+@stop
+
+@section('js')
+    <script src="{{ url('js/annotation/lib/underscore.js') }}"></script>
+    <script src="{{ url('js/annotation/lib/backbone.js') }}"></script>
+    <script src="{{ url('js/annotation/lib/backbone.localstorage.js') }}"></script>
+    <script src="{{ url('js/annotation/lib/backbone.exportcsv.js') }}"></script>
+
+    <script src="{{ url('js/annotation/custom/rc.pinning.js') }}"></script>
+
+    <script type="text/template" id="pin-template">
+        <li><a href="#"><%= pintext %></a></li>
+    </script>
+    <script type="text/javascript">
+    //pinning module
+    var contractEvents = {};
+    _.extend(contractEvents, Backbone.Events);
+    var pinCollection = new PinCollection();
+
+    pinCollection.fetch({reset: true});
+    console.log("contract pins",pinCollection.byContract("16"));
+    //var contractPins = pinCollection.byContract("16");
+    var pinListView = new PinListView({
+        el: '#pinList',
+        collection: pinCollection,
+        eventsPipe: contractEvents
+    });
+    </script>
 @stop
