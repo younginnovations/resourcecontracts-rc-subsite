@@ -22,6 +22,9 @@
               </div>
           </div>
       </div>
+      <div class="contract-number-wrap contract-search-number-wrap">
+          <span>{{$total_contract}}</span>contracts
+      </div>
   </div>
 
     <div class="row">

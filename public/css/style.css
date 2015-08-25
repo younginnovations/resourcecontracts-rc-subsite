@@ -1335,7 +1335,7 @@ footer .col-lg-6:last-of-type li:first-child {
 }
 
 .sidebar-nav li a span {
-	width: 88%;
+	width: 85%;
 	display: inline-block;
 }
 
@@ -1499,7 +1499,7 @@ footer .col-lg-6:last-of-type li:first-child {
 	background: #f9f9f9;
 }
 
-.search-page-form button {
+.search-page-form button,.search-page-form button:hover,.search-page-form button:focus {
 	margin: 0;
 }
 
@@ -1556,4 +1556,8 @@ button.search-close:hover,button.search-close:focus {
 .no-data {
 	color: rgba(64,64,64,0.5);
 	background: none!important;
+}
+
+.contract-search-number-wrap {
+	top: 70px;
 }
