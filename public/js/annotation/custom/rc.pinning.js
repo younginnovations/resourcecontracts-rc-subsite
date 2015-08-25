@@ -3,6 +3,14 @@ var PinCollection = Backbone.Collection.extend({
     model: PinModel,
     localStorage: new Backbone.LocalStorage("pincollection"),
     initialize: function() {
+    },
+    byContract: function (contract) {
+        var self = this;
+        console.log(self)
+        var filtered = self.filter(function (model) {
+            return model.get("contract_id") === contract;
+        });
+        return new PinCollection(filtered);
     }
 });
 var PinView = Backbone.View.extend({
