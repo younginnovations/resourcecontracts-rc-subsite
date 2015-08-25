@@ -1115,8 +1115,8 @@ footer .col-lg-6:last-of-type li:first-child {
 
 .panel-annotation-list-wrap .panel-heading {
     margin-bottom: 50px;
-    padding: 0 36px 0 84px;
-    background: url(../../images/ic-annotation.png) no-repeat 50px;
+    padding: 0 36px 0 76px;
+    background: url(../../images/ic-annotation.png) no-repeat 40px;
 }
 
 .page-num {
@@ -1127,12 +1127,12 @@ footer .col-lg-6:last-of-type li:first-child {
 }
 
 .annotation-text {
-	font-family: "Open-Sans-Bold";
 	margin-bottom: 3px;
+	color: rgba(64,64,64,0.8);
 }
 
 .quote {
-	color: rgba(64,64,64,0.7);
+	color: rgba(64,64,64,0.6);
 	margin-bottom: 12px;
 }
 
@@ -1555,9 +1555,5 @@ button.search-close:hover,button.search-close:focus {
 
 .no-data {
 	color: rgba(64,64,64,0.5);
-    padding: 0 20px;
-}
-
-.annotation-block .no-data {
-	padding: 0;
+	background: none!important;
 }

@@ -10,7 +10,7 @@
                     <ul>
                         <li><a href="{{url()}}">Home</a></li>
                         <li><a href="{{route('contracts')}}">Contracts</a></li>
-                        <li>{{$contract->metadata->contract_name}}</li>
+                        <li>{{str_limit($contract->metadata->contract_name, 100)}}</li>
                     </ul>
                 </div>
 
@@ -116,10 +116,9 @@
                                         <?php $i++; ?>
                                         @endif
                                 @empty
-                                    Not Available
+                                    <div class="no-data">Not Available</div>
                                 @endforelse
                         </ul>
-                        <div class="no-data">Not Available</div>
                     </div>
                     <div class="view-all-annotations">
                         <a href="#annotation" class="view-annotation">View all Annotations</a>
@@ -188,7 +187,6 @@
                 Associated Contracts
             </div>
             <div class="panel-body panel-table">
-                <div class="no-data">There are no contracts associated</div>
                 <table class="table table-responsive table-contract table-associated-contract">
                     <tbody>
                     <?php $supportingContracts = _e($contract->metadata, 'supporting_contracts', []);?>
@@ -205,7 +203,7 @@
                                 </tr>
                         @empty
                             <tr>
-                                <td>
+                                <td class="no-data">
                                     There are no contracts associated.
                                 </td>
                              </tr>
@@ -266,7 +264,6 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 <div class="row annotation-list-wrapper" id="annotation">
     <div class="col-lg-12">

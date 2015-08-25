@@ -18,7 +18,7 @@
                 <label for="">Country</label>
                 <select name="country[]" id="" multiple="multiple">
                     @foreach($summary->country_summary as $country)
-                        <option @if(isset($filter['country']) && in_array(strtoupper($country->key), $filter['country']))
+                        <option @if(isset($filter['country']) && in_array(strtoupper($country->key), array_map('strtoupper',$filter['country'])))
                             selected="selected"
                             @endif value="{{$country->key}}">{{trans('country.'.strtoupper($country->key))}}</option>
                     @endforeach
