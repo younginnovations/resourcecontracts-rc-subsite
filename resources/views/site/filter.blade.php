@@ -1,42 +1,60 @@
 @extends('layout.app-full')
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 panel-top-wrapper">
+
+  <div class="row">
+        <div class="col-lg-12 panel-top-wrapper search-top-wrapper">
             <div class="panel-top-content">
                 <div class="pull-left">
-                    <div class="breadcrumb-wrapper">
-                        <ul>
-                            <li><a href="{{url()}}">Home</a></li>
-                            <li>Search</li>
-                        </ul>
-                    </div>
                     <div class="panel-title">
-                        Search
+                        Search results for <span>{{\Illuminate\Support\Facades\Input::get('q')}}</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+  <div class="row">
+      <div class="filter-wrapper">
+          <div class="col-lg-12">
+              <div class="filter-country-wrap">
+                  @include('layout.partials.search')
+              </div>
+          </div>
+      </div>
+  </div>
+
     <div class="row">
-        <div class="col-lg-12 country-list-wrapper search-container" >
+        <div class="col-lg-12 country-list-wrapper search-list-wrapper">
             <div class="panel panel-default panel-wrap country-list-wrap">
                 <div class="panel-body">
                     <table class="table table-responsive table-contract">
                         <tbody>
+
                         @forelse($contracts as $contract)
                             <tr>
                                 <td width="70%">
-                                    <a href="{{route('contract.detail',['id'=>$contract->contract_id ])}}">
-                                        {{ $contract->contract_name or ''}}
-                                    </a>
-                                    <?php
-                                    $arr = array_filter([$contract->country, $contract->signature_year]);
-                                    ?>
-                                    - {{ join(', ', $arr)}}
+                                     <a href="{{route('contract.detail',['id'=>$contract->contract_id ])}}">
+                                            {{ $contract->contract_name or ''}}
+                                     </a>
                                     <span class="label label-default">{{strtoupper($contract->language)}}</span>
+                                    - {{trans('country')[$contract->country]}}
+                                    <div class="search-text">
+                                        {!!$contract->text or ''!!}
+                                        {!!$contract->annotations or ''!!}
+                                        {!!$contract->metadata or ''!!}
+                                    </div>
                                 </td>
+                                <td>{{$contract->signature_year}}</td>
                                 <td align="right">{{getFileSize($contract->file_size)}}</td>
+
+                                @if(isset($contract->group))
+                                    <td align="right">
+                                        @foreach($contract->group as $group)
+                                            <a>{{$group}}</a>
+                                        @endforeach
+                                    </td>
+                                @endif
                             </tr>
                         @empty
                             <tr>
@@ -44,10 +62,10 @@
                             </tr>
                         @endforelse
                         </tbody>
-
                     </table>
                 </div>
             </div>
         </div>
     </div>
+
 @stop

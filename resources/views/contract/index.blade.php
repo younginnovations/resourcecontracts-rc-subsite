@@ -1,7 +1,6 @@
 @extends('layout.app-full')
 
 @section('content')
-
     <div class="row">
         <div class="col-lg-12 panel-top-wrapper">
 
@@ -9,12 +8,21 @@
                 <div class="pull-left">
                     <div class="breadcrumb-wrapper">
                         <ul>
-                            <li><a href="/">Home</a></li>
+                            <li><a href="{{url()}}">Home</a></li>
+                            @if(\Illuminate\Support\Facades\Input::get('year') =='')
                             <li>All Contracts</li>
+                             @else
+                                <li><a href="{{url('contracts')}}">All Contracts</a></li>
+                                <li>{{\Illuminate\Support\Facades\Input::get('year')}}</li>
+                             @endif
                         </ul>
                     </div>
                     <div class="panel-title">
-                        All Countries
+                        @if(\Illuminate\Support\Facades\Input::get('year') !='')
+                            Contracts in {{\Illuminate\Support\Facades\Input::get('year')}}
+                          @else
+                            All Contracts
+                        @endif
                     </div>
                 </div>
             </div>
@@ -26,8 +34,8 @@
                 <div class="panel-body">
                     <table class="table table-responsive table-contract">
                         <tbody>
-
-                        @forelse($contracts as $contract)
+                        @if($contracts)
+                        @foreach($contracts as $contract)
                             <tr>
                                 <td width="70%">
                                     <a href="{{route('contract.detail',['id'=>$contract->contract_id ])}}">
@@ -42,11 +50,12 @@
                                 </td>
                                 <td align="right">{{getFileSize($contract->file_size)}}</td>
                             </tr>
-                        @empty
+                        @endforeach
+                        @else
                             <tr>
-                                <td colspan="2">{{'Search result not found.'}}</td>
+                                <td colspan="2">{{'Contract not found.'}}</td>
                             </tr>
-                        @endforelse
+                        @endif
                         </tbody>
                     </table>
                 </div>

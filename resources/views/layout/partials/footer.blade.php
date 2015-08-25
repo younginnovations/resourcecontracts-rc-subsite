@@ -4,7 +4,7 @@
                 <div class="col-lg-6">
                     <ul>
                         <li><a href="#">About</a></li>
-                        <li><a href="#">Faq</a></li>
+                        <li><a href="#">FAQ</a></li>
                         <li><a href="#">Contact</a></li>
                     </ul>
                 </div>

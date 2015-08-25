@@ -31,10 +31,9 @@
                     <div class="view-pin-wrap">
                         <span>View Pins</span>
                     </div>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">khfhgkfd</a></li>
-                        <li><a href="#">mvbfkjfd</a></li>
+                    <ul id="pinList" class="dropdown-menu">
                     </ul>
+                    <div id="no-pin-message"></div>
                 </div>
                 <div class="download-main-wrap">
                     <div class="download-wrap">
@@ -101,9 +100,15 @@
                     <div class="annotation-block">
                         <div class="title">Annotations</div>
                         <ul>
-                            @foreach($contract->annotations->result as $annotation)
-                                <li><a>{{$annotation->category}}</a></li>
-                            @endforeach
+                            <?php $i=0;  ?>
+
+                                @foreach($contract->annotationsGroup as $category=>$annotation)
+                                    @if($i <5)
+                                        <li><a>{{$category}}</a></li>
+                                    <?php $i++; ?>
+                                    @endif
+                                @endforeach
+
                         </ul>
                     </div>
                     <div class="view-all-annotations">
@@ -161,7 +166,7 @@
                 </ul>
             </div>
             @endforeach
-
+        </div>
     </div>
     <div class="col-lg-12">
         <div class="panel panel-default panel-wrap panel-contract-wrap">
@@ -227,7 +232,7 @@
                 <ul>
                     <li>
                         <label for="">Source URL</label>
-                        <span><a href="{{(isset($contract->metadata) && !empty($contract->metadata->source_url))?$contract->metadata->source_url:'-'}}">Link</a></span>
+                        <span>@if((isset($contract->metadata) && !empty($contract->metadata->source_url)))<a href="{{$contract->metadata->source_url}}">Link</a>@endif</span>
                     </li>
                     <li>
                         <label for="">Disclosure Mode</label>
@@ -244,33 +249,62 @@
         <div class="panel panel-default panel-wrap panel-annotation-list-wrap">
             <div class="panel-heading">Annotations</div>
             <div class="panel-body">
-                <div class="category-wrap">
 
-                   @foreach($contract->annotations->result as $contractAnnotations)
-                    <div class="category-title">
-                        {{$contractAnnotations->category}}
+                @foreach($contract->annotationsGroup as $category=>$annotations)
+                    <div class="category-wrap">
+                        <div class="category-title">
+                            {{$category}}
+                        </div>
+                        <ul>
+                            @foreach($annotations as $annotation)
+
+                                <li>
+                                    <div class="page-num pull-left">Pg {{$annotation->page_no}}</div>
+                                    <div class="pull-left">
+                                        <div class="annotation-text">{{$annotation->text}}</div>
+                                        <div class="quote">{{$annotation->quote}}</div>
+                                        <div class="tags">
+                                            @foreach($annotation->tags as $tag)
+                                                <a>{{$tag}}</a>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
                     </div>
-                    <ul>
-                        <li>
-                            <div class="page-num pull-left">Pg {{$contractAnnotations->page_no}}</div>
-                            <div class="pull-left">
-                                <div class="annotation-text">{{$contractAnnotations->text}}</div>
-                                <div class="quote">{{$contractAnnotations->quote}}</div>
-                                <div class="tags">
-                                    @foreach($contractAnnotations->tags as $tags)
-                                    <a >{{$tags}}</a>
-
-                                    @endforeach
-                                </div>
-                            </div>
-                        </li>
-
-                    </ul>
-                  @endforeach
-                </div>
+                @endforeach
 
             </div>
         </div>
     </div>
 </div>
+@stop
+
+@section('js')
+    <script src="{{ url('js/annotation/lib/underscore.js') }}"></script>
+    <script src="{{ url('js/annotation/lib/backbone.js') }}"></script>
+    <script src="{{ url('js/annotation/lib/backbone.localstorage.js') }}"></script>
+    <script src="{{ url('js/annotation/lib/backbone.exportcsv.js') }}"></script>
+
+    <script src="{{ url('js/annotation/custom/rc.pinning.js') }}"></script>
+
+    <script type="text/template" id="pin-template">
+        <li><a href="#"><%= pintext %></a></li>
+    </script>
+    <script type="text/javascript">
+    //pinning module
+    var contractEvents = {};
+    _.extend(contractEvents, Backbone.Events);
+    var pinCollection = new PinCollection();
+
+    pinCollection.fetch({reset: true});
+    console.log("contract pins",pinCollection.byContract("16"));
+    //var contractPins = pinCollection.byContract("16");
+    var pinListView = new PinListView({
+        el: '#pinList',
+        collection: pinCollection,
+        eventsPipe: contractEvents
+    });
+    </script>
 @stop

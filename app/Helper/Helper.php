@@ -26,3 +26,12 @@ function getFileSize($bytes)
 
     return $bytes;
 }
+
+function getFlagUrl($code = '')
+{
+    if ($code != '') {
+        $code = $code . '.png';
+    }
+
+    return sprintf("https://raw.githubusercontent.com/younginnovations/country-flags/master/png250px/%s", $code);
+}

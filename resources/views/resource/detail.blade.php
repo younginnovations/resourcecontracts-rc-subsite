@@ -4,16 +4,22 @@
     <div class="row">
         <div class="col-lg-12 panel-top-wrapper">
 
-            <div class="breadcrumb-wrapper">
-                <ul>
-                    <li><a href="{{url()}}">Home</a></li>
-                    <li><a href="{{route('resources')}}">Resources</a></li>
-                    <li>{{ucfirst($resource)}}</li>
-                </ul>
+            <div class="panel-top-content">
+                <div class="pull-left">
+                    <div class="breadcrumb-wrapper">
+                        <ul>
+                            <li><a href="{{url()}}">Home</a></li>
+                            <li><a href="{{route('resources')}}">Resources</a></li>
+                            <li>{{ucfirst($resource)}}</li>
+                        </ul>
+                    </div>
+
+                    <div class="panel-title">
+                        {{ucfirst($resource)}}
+                    </div>
+                </div>
             </div>
-            <div class="panel-title">
-                {{ucfirst($resource)}}
-            </div>
+
             <div class="filter-wrapper">
                 <div class="col-lg-12">
                     <div class="filter-country-wrap">

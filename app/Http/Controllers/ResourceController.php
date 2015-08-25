@@ -42,7 +42,6 @@ class ResourceController extends BaseController
         foreach ($resources as &$country) {
             $country->name = trans('country')[strtoupper($country->code)];
         }
-
         return view('resource.index', compact('resources'));
     }
 
