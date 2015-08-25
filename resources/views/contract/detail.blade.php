@@ -104,13 +104,16 @@
                         <div class="title">Annotations</div>
                         <ul>
                             <?php $i=0;  ?>
-
-                                @foreach($contract->annotationsGroup as $category=>$annotation)
-                                    @if($i <5)
-                                        <li><a>{{$category}}</a></li>
-                                    <?php $i++; ?>
-                                    @endif
-                                @endforeach
+                                @if(!empty($contract->annotationsGroup))
+                                    @foreach($contract->annotationsGroup as $category=>$annotation)
+                                        @if($i <5)
+                                            <li><a>{{$category}}</a></li>
+                                        <?php $i++; ?>
+                                        @endif
+                                    @endforeach
+                                @else
+                                    Not Available
+                                @endif
 
                         </ul>
                     </div>
@@ -179,18 +182,22 @@
             <div class="panel-body panel-table">
                 <table class="table table-responsive table-contract table-associated-contract">
                     <tbody>
-                    @foreach($contract->metadata->supporting_contracts as $supportingContract)
-                        <tr>
-                            <td width="70%">
-                                @if($supportingContract->status=="published")
-                                    <a href="{{route('contract.detail',['id'=>$supportingContract->id])}}">{{$supportingContract->contract_name}}</a>
-                                @else
-                                    {{json_decode($supportingContract->contract_name)}}
-                                @endif
-                            </td>
+                        @if(!empty($contract->metadata->supporting_contracts))
+                            @foreach($contract->metadata->supporting_contracts as $supportingContract)
+                                <tr>
+                                    <td width="70%">
+                                        @if($supportingContract->status=="published")
+                                            <a href="{{route('contract.detail',['id'=>$supportingContract->id])}}">{{$supportingContract->contract_name}}</a>
+                                        @else
+                                            {{json_decode($supportingContract->contract_name)}}
+                                        @endif
+                                    </td>
 
-                        </tr>
-                    @endforeach
+                                </tr>
+                            @endforeach
+                        @else
+                            There are no contracts associated.
+                        @endif
                     </tbody>
                 </table>
             </div>
@@ -211,15 +218,19 @@
                         <label for="">Project Identifier</label>
                         <span>{{_e($contract->metadata,'project_identifier','-')}}</span>
                     </li>
-                    @foreach($contract->metadata->concession as $consession)
-                    <li>
-                        <label for="">License Name</label>
-                        <span>{{_e($consession,'license_name','-')}}</span>
-                    </li>
-                    <li>
-                        <label for="">License Identifier</label>
-                        <span>{{_e($consession,'license_identifier','-')}}</span>
-                    </li>
+                    <?php
+                        $concessions = _e($contract->metadata,'concession');
+                        $concessions = !empty($concessions)?$concessions:[];
+                    ?>
+                    @foreach($concessions as $concession)
+                        <li>
+                            <label for="">License Name</label>
+                            <span>{{_e($concession,'license_name','-')}}</span>
+                        </li>
+                        <li>
+                            <label for="">License Identifier</label>
+                            <span>{{_e($concession,'license_identifier','-')}}</span>
+                        </li>
                    @endforeach
 
                 </ul>
