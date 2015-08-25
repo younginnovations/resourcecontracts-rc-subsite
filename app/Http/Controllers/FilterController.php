@@ -33,9 +33,10 @@ class FilterController
         $filter = $this->processQueries($request);
         $contracts = $this->api->filterSearch($filter);
         $filter = $this->updateFilterData($filter, $contracts, $request);
+        $total_contract = $contracts->total;
         $contracts = $contracts->results;
         $show_advance = true;
-        return view('site.filter', compact('contracts', 'filter', 'show_advance'));
+        return view('site.filter', compact('contracts', 'filter', 'show_advance', 'total_contract'));
     }
 
     /**
