@@ -14,7 +14,7 @@
                         </ul>
                     </div>
                     <div class="panel-title">
-                        <img src="http://flags.fmcdn.net/data/flags/small/{{$country}}.png" />
+                        <img src="{{getFlagUrl($country)}}" />
                         {{@trans('country')[strtoupper($country)]}}
                     </div>
                 </div>

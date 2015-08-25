@@ -2,3 +2,4 @@
 .env
 .idea
 /storage
+._.DS_Store

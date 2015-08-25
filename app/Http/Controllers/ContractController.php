@@ -2,6 +2,7 @@
 
 use App\Http\Services\APIService;
 use App\Http\Services\ContractService;
+use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
 /**
@@ -25,7 +26,7 @@ class ContractController extends BaseController
      */
     public function __construct(APIService $api, ContractService $contract)
     {
-        $this->api = $api;
+        $this->api      = $api;
         $this->contract = $contract;
     }
 
@@ -50,7 +51,6 @@ class ContractController extends BaseController
     public function detail($contract_id)
     {
         $contract = $this->api->contractDetail($contract_id);
-
 
         if (is_null($contract->metadata)) {
             return abort(404);
@@ -119,6 +119,38 @@ class ContractController extends BaseController
             'contract.page.compare',
             compact('contract1Annotations', 'contract2Annotations', 'contract1', 'contract2')
         );
+    }
+
+    /**
+     * Get Countries
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function getCountries(Request $request)
+    {
+        $filter    = ['resource' => $request->get('resource')];
+        $countries = $this->api->getCountryByResource($filter);
+
+        foreach ($countries as &$country) {
+            $country->name = trans('country')[strtoupper($country->code)];
+        }
+
+        return response()->json($countries);
+    }
+
+    /**
+     * Get Resources
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function getResources(Request $request)
+    {
+        $filter    = ['country' => $request->get('country')];
+        $resources = $this->api->getResourceByCountry($filter);
+
+        return response()->json($resources);
     }
 
 }

@@ -1,7 +1,7 @@
 @extends('layout.app-full')
 
 @section('content')
-    <div class="row row-top-wrap">
+    <div class="row row-top-wrap front-row-top-wrap">
         <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <span data-toggle="collapse-side" data-target=".sidebar-collapse" data-target-2=".sidebar-collapse-container" class="pull-left trigger">trigger</span>

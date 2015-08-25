@@ -161,7 +161,7 @@
                 </ul>
             </div>
             @endforeach
-
+        </div>
     </div>
     <div class="col-lg-12">
         <div class="panel panel-default panel-wrap panel-contract-wrap">
@@ -244,9 +244,8 @@
         <div class="panel panel-default panel-wrap panel-annotation-list-wrap">
             <div class="panel-heading">Annotations</div>
             <div class="panel-body">
+                @foreach($contract->annotations->result as $contractAnnotations)
                 <div class="category-wrap">
-
-                   @foreach($contract->annotations->result as $contractAnnotations)
                     <div class="category-title">
                         {{$contractAnnotations->category}}
                     </div>
@@ -264,11 +263,9 @@
                                 </div>
                             </div>
                         </li>
-
                     </ul>
-                  @endforeach
                 </div>
-
+                 @endforeach
             </div>
         </div>
     </div>

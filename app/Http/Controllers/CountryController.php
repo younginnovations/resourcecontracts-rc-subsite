@@ -36,14 +36,7 @@ class CountryController extends BaseController
      */
     public function index()
     {
-        $countries = $this->api->allCountries();
-        $countries = $countries->results;
-
-        foreach ($countries as &$country) {
-            $country->name = trans('country')[strtoupper($country->code)];
-        }
-
-        return view('country.index', compact('countries'));
+        return view('country.index');
     }
 
     /**
