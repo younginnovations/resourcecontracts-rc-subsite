@@ -35,9 +35,11 @@ class ContractController extends BaseController
      *
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $contracts = $this->api->allContracts();
+        $filter = ['year' => $request->get('year')];
+
+        $contracts = $this->api->allContracts($filter);
 
         return view('contract.index', compact('contracts'));
     }

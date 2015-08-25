@@ -178,24 +178,19 @@ class APIService
         extract($filter);
 
         $query = [
-            'q'            => $q,
-            'country_code' => $country,
-            'year'         => $year,
-            'resource'     => $resource,
-            'group'        => $group,
-            'sort_by'      => $sortby,
-            'order'        => $order,
-            'per_page'     => $per_page,
-            'from'         => $from
+            'q'        => $q,
+            'country'  => $country,
+            'year'     => $year,
+            'resource' => $resource,
+            'group'    => $group,
+            'sort_by'  => $sortby,
+            'order'    => $order,
+            'per_page' => $per_page,
+            'from'     => $from
 
         ];
 
-        if (!is_null($q)) {
-            $contract = $this->apiCall('contracts/search', $query);
-        } else {
-            $query = array_only($query, ['country_code', 'resource']);
-            $contract = $this->apiCall('contracts', $query);
-        }
+        $contract = $this->apiCall('contracts/search', $query);
 
         if ($contract) {
             return $contract;
@@ -217,9 +212,7 @@ class APIService
         try {
             $request           = new Request('GET', $this->apiURL($resource));
             $query['category'] = static::CATEGORY;
-
             $request->setQuery($query);
-
             $response = $this->client->send($request);
             $data     = $response->getBody();
 

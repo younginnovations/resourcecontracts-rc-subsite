@@ -55,15 +55,18 @@ $(document).ready(function() {
 
     });
 
+    $(document).on('click', '.search-close', function(){
+        $('.search-input-wrapper').hide();
+    });
 
-     $('#search-form input[type="text"]').keyup(function(){
+    /* $('#search-form input[type="text"]').keyup(function(){
 
          if($(this).val() == ''){
          $('.search-input-wrapper').hide();
       }else{
          $('.search-input-wrapper').show();
       }
-    });
+    });*/
 
     // $(document).mouseup(function (e)
     // {

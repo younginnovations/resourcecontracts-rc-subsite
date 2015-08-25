@@ -29,7 +29,7 @@
             <ul>
                 @foreach($summary->year_summary as $year)
                     <li>
-                        <a href="{{route('search')}}?year={{$year->key}}">
+                        <a href="{{route('contracts')}}?year={{$year->key}}">
                             <span>{{$year->key}}</span>
                             <small class="label pull-right">{{$year->doc_count}}</small>
                         </a>

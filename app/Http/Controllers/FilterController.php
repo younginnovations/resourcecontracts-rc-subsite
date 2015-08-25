@@ -31,15 +31,10 @@ class FilterController
     public function index(Request $request)
     {
         $filter = $this->processQueries($request);
-
         $contracts = $this->api->filterSearch($filter);
-
-        $contracts = $contracts->results;
-
         $filter = $this->updateFilterData($filter, $contracts, $request);
-
+        $contracts = $contracts->results;
         $show_advance = true;
-
         return view('site.filter', compact('contracts', 'filter', 'show_advance'));
     }
 
