@@ -70,10 +70,8 @@
 
     <script type="text/template" id="country-template">
         <li>
-            <label>
-                <input class="country" name="country[]" type="checkbox" value="<%= code %>" />
-                <%= name %>
-            </label>
+            <input class="country" name="country[]" type="checkbox" value="<%= code %>" />
+            <label><%= name %></label>
         </li>
     </script>
 

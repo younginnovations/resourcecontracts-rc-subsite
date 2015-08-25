@@ -52,32 +52,20 @@ $(document).ready(function() {
     $('#search-form input[type="text"]').focus(function(){
         $('.search-input-wrapper').show();
         $('select').select2({placeholder: "Select", allowClear: true, theme: "classic"});
-
     });
 
     $(document).on('click', '.search-close', function(){
         $('.search-input-wrapper').hide();
     });
 
-    /* $('#search-form input[type="text"]').keyup(function(){
-
+     $('#search-form input[type="text"]').keyup(function(){
          if($(this).val() == ''){
          $('.search-input-wrapper').hide();
       }else{
          $('.search-input-wrapper').show();
       }
-    });*/
+    });
 
-    // $(document).mouseup(function (e)
-    // {
-    //     var container = $(".search-form");
-
-    //     if (!container.is(e.target) // if the target of the click isn't the container...
-    //         && container.has(e.target).length === 0) // ... nor a descendant of the container
-    //     {
-    //         $('.search-input-wrapper').hide();
-    //     }
-    // });
 
     $('.download-wrap,.view-pin-wrap').click(function(){
        $(this).siblings('ul').toggle();

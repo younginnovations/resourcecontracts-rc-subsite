@@ -65,6 +65,8 @@
                             <label for="">Country</label>
                             <span>{{ucfirst(_e($contract->metadata->country,'name','-'))}}</span>
                         </li>
+                    </ul>
+                    <ul>
                         <li>
                             <label for="">Government Entity</label>
                             <span>{{_e($contract->metadata,'government_entity','-')}}</span>
@@ -73,6 +75,8 @@
                             <label for="">Government Identifier</label>
                             <span>{{_e($contract->metadata,'government_identifier','-')}}</span>
                         </li>
+                    </ul>
+                    <ul>
                         <li>
                             <label for="">Signature Date</label>
                             <?php
@@ -85,6 +89,8 @@
                             <label for="">Document Type</label>
                             <span>{{_e($contract->metadata->document_type,'document_type','-')}}</span>
                         </li>
+                    </ul>
+                    <ul>
                         <li>
                             <label for="">Type of Contract</label>
                             <span>{{_e($contract->metadata,'contract_type','-')}}</span>
@@ -103,19 +109,17 @@
                     <div class="annotation-block">
                         <div class="title">Annotations</div>
                         <ul>
-                            <?php $i=0;  ?>
-                                @if(!empty($contract->annotationsGroup))
-                                    @foreach($contract->annotationsGroup as $category=>$annotation)
-                                        @if($i <5)
+                              <?php $i=0; ?>
+                               @forelse($contract->annotationsGroup as $category=>$annotation)
+                                        @if($i < 5 )
                                             <li><a>{{str_limit($category,32)}}</a></li>
                                         <?php $i++; ?>
                                         @endif
-                                    @endforeach
-                                @else
+                                @empty
                                     Not Available
-                                @endif
-
+                                @endforelse
                         </ul>
+                        <div class="no-data">Not Available</div>
                     </div>
                     <div class="view-all-annotations">
                         <a href="#annotation" class="view-annotation">View all Annotations</a>
@@ -145,6 +149,8 @@
                         <label for="">Registration Agency</label>
                         <span>{{_e($company,'registration_agency','-')}}</span>
                     </li>
+                </ul>
+                <ul>
                     <li>
                         <label for="">Company Address</label>
                         <span>{{_e($company,'company_address','-')}}</span>
@@ -157,6 +163,8 @@
                         <label for="">Parent Company</label>
                         <span>{{_e($company,'parent_company','-')}}</span>
                     </li>
+                </ul>
+                <ul>
                     <li>
                         <label for="">Open Corporate ID</label>
                         <span>{{_e($company,'open_corporate_id','-')}}</span>
@@ -180,10 +188,11 @@
                 Associated Contracts
             </div>
             <div class="panel-body panel-table">
+                <div class="no-data">There are no contracts associated</div>
                 <table class="table table-responsive table-contract table-associated-contract">
                     <tbody>
-                        @if(!empty($contract->metadata->supporting_contracts))
-                            @foreach($contract->metadata->supporting_contracts as $supportingContract)
+                    <?php $supportingContracts = _e($contract->metadata, 'supporting_contracts', []);?>
+                            @forelse($contract->metadata->supporting_contracts as $supportingContract)
                                 <tr>
                                     <td width="70%">
                                         @if($supportingContract->status=="published")
@@ -194,10 +203,13 @@
                                     </td>
 
                                 </tr>
-                            @endforeach
-                        @else
-                            There are no contracts associated.
-                        @endif
+                        @empty
+                            <tr>
+                                <td>
+                                    There are no contracts associated.
+                                </td>
+                             </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
@@ -219,8 +231,7 @@
                         <span>{{_e($contract->metadata,'project_identifier','-')}}</span>
                     </li>
                     <?php
-                        $concessions = _e($contract->metadata,'concession');
-                        $concessions = !empty($concessions)?$concessions:[];
+                        $concessions = _e($contract->metadata,'concession', []);
                     ?>
                     @foreach($concessions as $concession)
                         <li>
@@ -232,7 +243,6 @@
                             <span>{{_e($concession,'license_identifier','-')}}</span>
                         </li>
                    @endforeach
-
                 </ul>
             </div>
         </div>
