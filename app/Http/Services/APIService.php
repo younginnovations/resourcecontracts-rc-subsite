@@ -189,11 +189,12 @@ class APIService
             'from'         => $from
 
         ];
+
         if (!is_null($q)) {
             $contract = $this->apiCall('contracts/search', $query);
         } else {
+            $query = array_only($query, ['country_code', 'resource']);
             $contract = $this->apiCall('contracts', $query);
-
         }
 
         if ($contract) {
