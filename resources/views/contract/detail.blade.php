@@ -101,9 +101,15 @@
                     <div class="annotation-block">
                         <div class="title">Annotations</div>
                         <ul>
-                            @foreach($contract->annotations->result as $annotation)
-                                <li><a>{{$annotation->category}}</a></li>
-                            @endforeach
+                            <?php $i=0;  ?>
+
+                                @foreach($contract->annotationsGroup as $category=>$annotation)
+                                    @if($i <5)
+                                        <li><a>{{$category}}</a></li>
+                                    <?php $i++; ?>
+                                    @endif
+                                @endforeach
+
                         </ul>
                     </div>
                     <div class="view-all-annotations">
@@ -244,28 +250,32 @@
         <div class="panel panel-default panel-wrap panel-annotation-list-wrap">
             <div class="panel-heading">Annotations</div>
             <div class="panel-body">
-                @foreach($contract->annotations->result as $contractAnnotations)
-                <div class="category-wrap">
-                    <div class="category-title">
-                        {{$contractAnnotations->category}}
-                    </div>
-                    <ul>
-                        <li>
-                            <div class="page-num pull-left">Pg {{$contractAnnotations->page_no}}</div>
-                            <div class="pull-left">
-                                <div class="annotation-text">{{$contractAnnotations->text}}</div>
-                                <div class="quote">{{$contractAnnotations->quote}}</div>
-                                <div class="tags">
-                                    @foreach($contractAnnotations->tags as $tags)
-                                    <a >{{$tags}}</a>
 
-                                    @endforeach
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                 @endforeach
+                @foreach($contract->annotationsGroup as $category=>$annotations)
+                    <div class="category-wrap">
+                        <div class="category-title">
+                            {{$category}}
+                        </div>
+                        <ul>
+                            @foreach($annotations as $annotation)
+
+                                <li>
+                                    <div class="page-num pull-left">Pg {{$annotation->page_no}}</div>
+                                    <div class="pull-left">
+                                        <div class="annotation-text">{{$annotation->text}}</div>
+                                        <div class="quote">{{$annotation->quote}}</div>
+                                        <div class="tags">
+                                            @foreach($annotation->tags as $tag)
+                                                <a>{{$tag}}</a>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endforeach
+
             </div>
         </div>
     </div>
