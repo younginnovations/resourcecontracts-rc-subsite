@@ -107,7 +107,7 @@
                                 @if(!empty($contract->annotationsGroup))
                                     @foreach($contract->annotationsGroup as $category=>$annotation)
                                         @if($i <5)
-                                            <li><a>{{$category}}</a></li>
+                                            <li><a>{{str_limit($category,32)}}</a></li>
                                         <?php $i++; ?>
                                         @endif
                                     @endforeach
