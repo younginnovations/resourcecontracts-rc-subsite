@@ -35,3 +35,23 @@ function getFlagUrl($code = '')
 
     return sprintf("https://raw.githubusercontent.com/younginnovations/country-flags/master/png250px/%s", $code);
 }
+
+
+function _e($arrayOrObject, $key, $default = null, $echo = false)
+{
+    $return = $default;
+        if (is_array($arrayOrObject) && array_key_exists($arrayOrObject, $key)) {
+            $return = $arrayOrObject[$key];
+        }
+
+        if (is_object($arrayOrObject) && property_exists($arrayOrObject, $key)) {
+            $return = $arrayOrObject->$key;
+        }
+
+        if ($echo) {
+            echo $return;
+        } else {
+            return $return;
+        }
+
+}

@@ -88,9 +88,10 @@ class ContractController extends BaseController
      * @param $id
      * @return \Illuminate\View\View
      */
-    public function pageIndex($id)
+    public function pageIndex($id, Request $request)
     {
-        $page_no               = 1;
+        $page                  = $request->get('page');
+        $page_no               = !empty($page) ? $page : 1;
         $contract              = new \stdClass();
         $contract->page        = $this->api->getTextPage($id, $page_no);
         $contract->metadata    = $this->api->metadata($id);
