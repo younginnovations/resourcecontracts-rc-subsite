@@ -68,10 +68,8 @@
     </script>
     <script type="text/template" id="resource-template">
         <li>
-            <label>
-                <input class="resource" name="resource[]" type="checkbox" value="<%= value %>" />
-                <%= name %> (<%= contract %>)
-            </label>
+            <input class="resource" name="resource[]" type="checkbox" value="<%= value %>" />
+            <label><%= name %> (<%= contract %>)</label>
         </li>
     </script>
     <script>

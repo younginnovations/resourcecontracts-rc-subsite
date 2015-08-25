@@ -23,10 +23,11 @@
             <div class="filter-wrapper">
                 <div class="col-lg-12">
                     <div class="filter-country-wrap">
-                        <form action="" method="post" class="search-form filter-form">
+                        <form action="{{url('search')}}" method="get" class="search-form filter-form">
                             <div class="form-group">
                                 <button type="submit" class="btn btn-filter-search pull-left"></button>
-                                <input type="text" class="form-control pull-left" placeholder="Find a contract {{ucfirst($resource)}}...">
+                                <input type="text" name="q" class="form-control pull-left" placeholder="Find a contract {{ucfirst($resource)}}...">
+                                <input type="hidden" name="resource" value="{{$resource}}" />
                             </div>
                         </form>
                     </div>
@@ -52,19 +53,14 @@
                                         <a href="{{route('contract.detail',['id'=>$contract->contract_id ])}}">
                                             {{ $contract->contract_name or ''}}
                                         </a>
-
-                                        <?php
-                                        $arr = array_filter([trans('country.'.strtoupper($contract->country_code)), $contract->signature_year]);
-                                        ?>
-                                        - {{ join(', ', $arr)}}
                                         <span class="label label-default">{{strtoupper($contract->language)}}</span>
+                                        <p class="country_name">- {{trans('country.'.strtoupper($contract->country_code))}}</p>
                                     </td>
-                                    <td align="right">{{getFileSize($contract->file_size)}}</td>
-                                    <td align="right">June 30, 2015</td>
+                                    <td align="right"> {{$contract->signature_year}} </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="2">{{'Search result not found.'}}</td>
+                                    <td colspan="2">{{'Contract result not found.'}}</td>
                                 </tr>
                             @endforelse
                             </tbody>

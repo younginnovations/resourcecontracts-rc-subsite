@@ -76,13 +76,13 @@ class FilterController
         $filter['country'] = is_array($request->get('country')) ? $request->get('country') : [$request->get('country')];
 
         if (!$request->get('country')) {
-            $filter['country'] = isset($contract->country) ? $contract->country : [];
+            $filter['country'] = isset($contract->country) ? (array) $contract->country : [];
         }
 
         $filter['year'] = is_array($request->get('year')) ? $request->get('year') : [$request->get('year')];
 
         if (!$request->get('year')) {
-            $filter['year'] = isset($contract->year) ? $contract->year : [];
+            $filter['year'] = isset($contract->year) ? (array) $contract->year : [];
         }
 
         $filter['type'] = is_array($request->get('type')) ? $request->get('type') : [$request->get('type')];
