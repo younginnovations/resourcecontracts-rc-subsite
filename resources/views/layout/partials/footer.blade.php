@@ -1,11 +1,11 @@
-
 <footer>
             <div class="row">
                 <div class="col-lg-6">
                     <ul>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="{{url('about')}}">About</a></li>
+                        <li><a href="{{url('faqs')}}">FAQs</a></li>
+                        <li><a href="{{url('guides')}}">Guides</a></li>
+                        <li><a href="{{url('contact')}}">Contact</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-6">
@@ -35,9 +35,6 @@ $js = [
 @foreach($js as $link)
     <script src="{{url(sprintf('js/%s',$link))}}"></script>
 @endforeach
-
-
-
 
 @yield('js')
 

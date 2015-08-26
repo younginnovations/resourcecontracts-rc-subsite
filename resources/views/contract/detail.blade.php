@@ -95,10 +95,6 @@
                             <label for="">Type of Contract</label>
                             <span>{{_e($contract->metadata,'contract_type','-')}}</span>
                         </li>
-                        <li>
-                            <label for="">Translation from Original</label>
-                            <span>{{_e($contract->metadata,'translation_parent','-')}}</span>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -181,6 +177,42 @@
             @endforeach
         </div>
     </div>
+
+    <div class="col-lg-12">
+        <div class="panel panel-default panel-wrap panel-contract-wrap">
+            <div class="panel-heading">
+                Parent Contract
+            </div>
+            <div class="panel-body panel-table">
+                <table class="table table-responsive table-contract table-associated-contract">
+                    <tbody>
+                    <?php $parentContract = _e($contract->metadata, 'parent_document', []);?>
+
+
+                    @if(!empty($parentContract[0]))
+                        <?php $parentContract = $parentContract[0];?>
+                        <tr>
+                            <td width="70%">
+                                @if($parentContract->status=="published")
+                                    <a href="{{route('contract.detail',['id'=>$parentContract->id])}}">{{$parentContract->contract_name}}</a>
+                                @else
+                                    {{$parentContract->contract_name}}
+                                @endif
+                            </td>
+                        </tr>
+                    @else
+                        <tr>
+                            <td class="no-data">
+                                There is no contract associated.
+                            </td>
+                        </tr>
+                    @endif
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
     <div class="col-lg-12">
         <div class="panel panel-default panel-wrap panel-contract-wrap">
             <div class="panel-heading">

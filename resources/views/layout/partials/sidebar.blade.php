@@ -1,3 +1,10 @@
+<?php
+if (!isset($summary)) {
+    $api     = app('App\Http\Services\APIService');
+    $summary = $api->summary();
+}
+?>
+
 <div id="sidebar-wrapper" class="sidebar-collapse in">
     <ul class="sidebar-nav">
         <li class="sidebar-brand">
