@@ -74,4 +74,7 @@ $(document).ready(function() {
     $('.search-click').click(function(){
         $('#search-form input[type="text"]').focus();
     });
+
+    var annotationWrapHeight = $('.col-lg-6 .panel-contract-wrap').height();
+    $('.panel-annotation-wrap').css('height',annotationWrapHeight);
 });

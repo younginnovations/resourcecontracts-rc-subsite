@@ -1,5 +1,26 @@
 @extends('layout.app-full')
 
+
+@section('css')
+    <style>
+        .pin-list{
+            position: absolute;
+            z-index: 1;
+            background: #fff;
+            padding: 15px;
+            width: 350px;
+            font-size: 13px;
+            text-transform: initial;
+            border: 1px solid #DADADA;}
+        .pin-list p {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ECECEC;
+            padding-bottom: 10px;
+            margin-top: 10px;
+        }
+    </style>
+    @stop
+
 @section('content')
 
 <div class="row">
@@ -31,9 +52,7 @@
                     <div class="view-pin-wrap">
                         <span>View Pins</span>
                     </div>
-                    <ul id="pinList" class="dropdown-menu">
-                    </ul>
-                    <div id="no-pin-message"></div>
+                    <div id="pinLists" style="display: none"></div>
                 </div>
                 <div class="download-main-wrap">
                     <div class="download-wrap">
@@ -330,15 +349,22 @@
 @stop
 
 @section('js')
-    <script src="{{ url('js/annotation/lib/underscore.js') }}"></script>
-    <script src="{{ url('js/annotation/lib/backbone.js') }}"></script>
-    <script src="{{ url('js/annotation/lib/backbone.localstorage.js') }}"></script>
-    <script src="{{ url('js/annotation/lib/backbone.exportcsv.js') }}"></script>
+    <script src="{{ url('js/lib/underscore.js') }}"></script>
+    <script src="{{ url('js/lib/backbone.js') }}"></script>
+    <script src="{{ url('js/lib/backbone.localstorage.js') }}"></script>
+    <script src="{{ url('js/lib/backbone.exportcsv.js') }}"></script>
+    
+    <script src="{{ url('js/custom/rc.pinning.js') }}"></script>
 
-    <script src="{{ url('js/annotation/custom/rc.pinning.js') }}"></script>
-
+    <script type="text/template" id="pin-list-template">
+    <div id="pinList" class="pin-list">
+        <div class="pull-right pin-buttons">
+            <div id="no-pin-message"></div>
+        </div>
+    </div>
+    </script>
     <script type="text/template" id="pin-template">
-        <li><a href="#"><%= pintext %></a></li>
+        <p><%= pintext %></p>
     </script>
     <script type="text/javascript">
     //pinning module
@@ -347,12 +373,18 @@
     var pinCollection = new PinCollection();
 
     pinCollection.fetch({reset: true});
-    console.log("contract pins",pinCollection.byContract("16"));
+    //console.log("contract pins",pinCollection.byContract("16"));
     //var contractPins = pinCollection.byContract("16");
     var pinListView = new PinListView({
-        el: '#pinList',
+        el: '#pinLists',
         collection: pinCollection,
         eventsPipe: contractEvents
-    });
+    }).render();
+    var pinButtonView = new PinButtonView({
+        el: '.view-pin-wrap',
+        collection: pinCollection,
+        pinListView: pinListView,
+        eventsPipe: contractEvents
+    }).render();    
     </script>
 @stop
