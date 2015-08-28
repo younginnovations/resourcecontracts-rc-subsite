@@ -20,7 +20,7 @@
             </div>
             <div class="pull-right action-links">
                 <ul>
-                    <li class="pull-left"><a href="{{route('contract.pages',['id'=>$contract->metadata->contract_id])}}">View Document</a></li>
+                    <li class="pull-left"><a href="{{route('contract.text',['id'=>$contract->metadata->contract_id])}}">View Document</a></li>
                     <li class="pull-left"><a href="#annotation" class="view-annotation">View Annotations</a></li>
                 </ul>
             </div>
