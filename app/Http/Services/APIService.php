@@ -13,20 +13,18 @@ use Illuminate\Support\Facades\Session;
 class APIService
 {
     /**
-     * @const BASE_URL
-     */
-    const CATEGORY = 'rc';
-    /**
      * @var Client
      */
     protected $client;
+    protected $category;
 
     /**
      * @param Client $client
      */
     public function __construct(Client $client)
     {
-        $this->client = $client;
+        $this->client   = $client;
+        $this->category = trim(env('CATEGORY'));
     }
 
     /**
@@ -97,7 +95,7 @@ class APIService
         $contract->metadata         = $this->metadata($contract_id);
         $contract->annotations      = $this->getAnnotations($contract_id);
         $contract->annotationsGroup = $this->groupAnnotationsByCategory($contract->annotations);
-        $contract->pages = $this->getTextPage($contract_id, 1);
+        $contract->pages            = $this->getTextPage($contract_id, 1);
 
         return $contract;
     }
@@ -212,7 +210,7 @@ class APIService
     {
         try {
             $request           = new Request('GET', $this->apiURL($resource));
-            $query['category'] = static::CATEGORY;
+            $query['category'] = $this->category;
             $request->setQuery($query);
             $response = $this->client->send($request);
             $data     = $response->getBody();
