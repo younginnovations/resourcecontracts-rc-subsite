@@ -55,8 +55,8 @@
 @stop
 
 @section('js')
-    <script type="text/javascript" src="{{url('js/lib/backbone.js')}}"></script>
     <script type="text/javascript" src="{{url('js/lib/underscore.js')}}"></script>
+    <script type="text/javascript" src="{{url('js/lib/backbone.js')}}"></script>
     <script type="text/javascript" src="{{url('js/lib/backbone.fetch-cache.min.js')}}"></script>
 
     <script type="text/template" id="resource-template">
