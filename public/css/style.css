@@ -1027,10 +1027,6 @@ footer .col-lg-6:last-of-type li:first-child {
 	padding: 12px 30px;
 }
 
-/*.panel-contract-wrap .panel-body:not(.panel-col3-wrap) li:nth-last-child(-n+2),.panel-contract-wrap .panel-col3-wrap li:last-of-type {
-	border-bottom: 0;
-}*/
-
 .panel-contract-wrap .panel-body:not(.panel-col3-wrap) li:nth-child(even) {
 	border-right: 0;
 }
@@ -1800,4 +1796,9 @@ h1 + .editable-container.editable-inline {
 .search-click {
 	text-decoration: underline;
 	cursor: pointer;
+}
+
+.panel-sub-heading {
+	text-transform: uppercase;
+	padding: 10px 22px 0;
 }

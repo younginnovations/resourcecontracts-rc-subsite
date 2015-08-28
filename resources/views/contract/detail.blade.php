@@ -181,9 +181,10 @@
     <div class="col-lg-12">
         <div class="panel panel-default panel-wrap panel-contract-wrap">
             <div class="panel-heading">
-                Parent Contract
+                Associated Documents
             </div>
             <div class="panel-body panel-table">
+                <div class="panel-sub-heading">Parent Document</div>
                 <table class="table table-responsive table-contract table-associated-contract">
                     <tbody>
                     <?php $parentContract = _e($contract->metadata, 'parent_document', []);?>
@@ -203,48 +204,42 @@
                     @else
                         <tr>
                             <td class="no-data">
-                                There is no contract associated.
+                                There is no parent contract.
                             </td>
                         </tr>
                     @endif
                     </tbody>
                 </table>
             </div>
-        </div>
-    </div>
-
-    <div class="col-lg-12">
-        <div class="panel panel-default panel-wrap panel-contract-wrap">
-            <div class="panel-heading">
-                Associated Contracts
-            </div>
             <div class="panel-body panel-table">
+                <div class="panel-sub-heading">Supporting Documents</div>
                 <table class="table table-responsive table-contract table-associated-contract">
-                    <tbody>
-                    <?php $supportingContracts = _e($contract->metadata, 'supporting_contracts', []);?>
-                            @forelse($contract->metadata->supporting_contracts as $supportingContract)
-                                <tr>
-                                    <td width="70%">
-                                        @if($supportingContract->status=="published")
-                                            <a href="{{route('contract.detail',['id'=>$supportingContract->id])}}">{{$supportingContract->contract_name}}</a>
-                                        @else
-                                            {{json_decode($supportingContract->contract_name)}}
-                                        @endif
-                                    </td>
+                <tbody>
+                <?php $supportingContracts = _e($contract->metadata, 'supporting_contracts', []);?>
+                @forelse($contract->metadata->supporting_contracts as $supportingContract)
+                    <tr>
+                        <td width="70%">
+                            @if($supportingContract->status=="published")
+                                <a href="{{route('contract.detail',['id'=>$supportingContract->id])}}">{{$supportingContract->contract_name}}</a>
+                            @else
+                                {{json_decode($supportingContract->contract_name)}}
+                            @endif
+                        </td>
 
-                                </tr>
-                        @empty
-                            <tr>
-                                <td class="no-data">
-                                    There are no contracts associated.
-                                </td>
-                             </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+                    </tr>
+                @empty
+                    <tr>
+                        <td class="no-data">
+                            There are no supporting contracts associated.
+                        </td>
+                    </tr>
+                @endforelse
+                </tbody>
+            </table>
             </div>
         </div>
     </div>
+
     <div class="col-lg-12">
         <div class="panel panel-default panel-wrap panel-contract-wrap">
             <div class="panel-heading">
