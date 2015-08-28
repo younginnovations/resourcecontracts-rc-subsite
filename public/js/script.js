@@ -70,4 +70,8 @@ $(document).ready(function() {
     $('.download-wrap,.view-pin-wrap').click(function(){
        $(this).siblings('ul').toggle();
     });
+
+    $('.search-click').click(function(){
+        $('#search-form input[type="text"]').focus();
+    });
 });

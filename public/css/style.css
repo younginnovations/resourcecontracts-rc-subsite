@@ -1762,3 +1762,42 @@ button.search-close:hover,button.search-close:focus {
 h1 + .editable-container.editable-inline {
 	border: 1px solid #ccc;
 }
+
+/* 404 page */
+
+.not-found-wrapper {
+	background-image: radial-gradient(50% 79%, #F99172   32%, #DF8A71   79%);
+}
+
+.not-found-container {
+	background: url(../../images/error-bg.png) no-repeat bottom;
+}
+
+.not-found-content {
+	background: url(../../images/paper-bg.png) no-repeat center;
+	text-align: center;
+	color: #fff;
+	padding: 100px 0 300px;
+}
+
+.error-text {
+	font: 100px/136px "Open-Sans-Bold";
+}
+
+.not-found-content p {
+	font-size: 18px;
+	color: rgba(255,255,255,0.7)  ;
+}
+
+.not-found-content p:last-of-type {
+	font-size: 16px;
+	color: rgba(
+			255,255,255,0.5)  ;
+	width: 300px;
+	margin: 70px auto 0;
+}
+
+.search-click {
+	text-decoration: underline;
+	cursor: pointer;
+}
