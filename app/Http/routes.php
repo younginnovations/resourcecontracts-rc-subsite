@@ -27,6 +27,7 @@ $app->get('/contract/{id}', ['as' => 'contract.detail', 'uses' => 'ContractContr
 $app->get('/contract/{id}/pages', ['as' => 'contract.pages', 'uses' => 'ContractController@pageIndex']);
 $app->get('/contract/{id}/page/{page_no}', ['as' => 'contract.page.detail', 'uses' => 'ContractController@pageDetail']);
 $app->get('contract/{contractId1}/{contractId2}/compare', ['as' => 'contracts.compare', 'uses' => 'ContractController@PageCompare']);
+$app->get('/contract/{id}/text', ['as' => 'contract.text', 'uses' => 'ContractController@textIndex']);
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +59,8 @@ $app->get('/filter', ['as' => 'filter', 'uses' => 'SiteController@filter']);
 |
 */
 $app->get('contract/{id}/page', ['as' => 'contract.page.get', 'uses' => 'Contract\PageController@getText']);
+$app->get('contract/{id}/allpage', ['as' => 'contract.allpage.get', 'uses' => 'Contract\PageController@getAllText']);
 $app->post('contract/{id}/search', ['as' => 'contract.page.search', 'uses' => 'Contract\PageController@search']);
 $app->get('annotation/search', ['as' => 'contract.page.annotations.search', 'uses' => 'Contract\PageController@annotations']);
+$app->get('api/search', ['as' => 'api.search', 'uses' => 'Contract\PageController@annotations']);
 

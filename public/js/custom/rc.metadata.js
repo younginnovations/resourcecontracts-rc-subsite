@@ -20,11 +20,19 @@ var MetadataButtonView = Backbone.View.extend({
         'click': 'toggle'
     },
     initialize: function(options) {
+        this.eventsPipe = options.eventsPipe;
         this.metadataView = options.metadataView;
+        this.eventsPipe.on('close-metadatapopup', this.close, this);
         return this;
+    },
+    close: function() {
+        this.metadataView.$el.hide();
+        $('.annotation-title').parent().removeClass('annotation-static-block');
     },
     toggle: function(e) {
         e.preventDefault();
+        this.eventsPipe.trigger('close-pinpopup');
+        $('.annotation-title').parent().toggleClass('annotation-static-block');
         this.metadataView.toggle();
     },
 });
