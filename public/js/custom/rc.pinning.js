@@ -6,7 +6,6 @@ var PinCollection = Backbone.Collection.extend({
     },
     byContract: function (contract) {
         var self = this;
-        console.log(self)
         var filtered = self.filter(function (model) {
             return model.get("contract_id") === contract;
         });
@@ -38,11 +37,13 @@ var PinListView = Backbone.View.extend({
     },
     initialize: function(options) {
         this.eventsPipe = options.eventsPipe;
+        _.bindAll(this, 'addOne');
         this.collection.bind('add remove', this.showNoPinsMessage, this);
         this.collection.bind('add', this.onPinAdded, this);
+        // this.collection.on('reset', this.addAll, this);
         this.eventsPipe.on('pin-annotation', this.pinAnnotation, this);
-        this.addAll();
         this.showNoPinsMessage();
+        $(this.el).html(_.template($('#pin-list-template').html()));
     },
     showNoPinsMessage: function() {
         if (0 === this.collection.length) {
@@ -58,7 +59,7 @@ var PinListView = Backbone.View.extend({
         var view = new PinView({
             model: model
         });
-        $(this.el).append(view.render().el);
+        $(this.el).find('#pinList').append(view.render().$el);
     },
     addAll: function() {
         var self = this;
@@ -78,6 +79,10 @@ var PinListView = Backbone.View.extend({
     pinAnnotation: function(annotationModel) {
         this.collection.add(annotationModel);
         annotationModel.save();
+    },
+    render: function() {
+        this.addAll();
+        return this;
     }
 });
 var PinningEditorView = Backbone.View.extend({
@@ -115,9 +120,11 @@ var PinButtonView = Backbone.View.extend({
         'click': 'toggle'
     },
     initialize: function(options) {
+        this.eventsPipe = options.eventsPipe;
         this.listenTo(this.collection, 'reset', this.updateTitle);
         this.listenTo(this.collection, 'add', this.updateTitle);
         this.listenTo(this.collection, 'remove', this.updateTitle);
+        this.eventsPipe.on('close-pinpopup', this.close, this);
         this.pinListView = options.pinListView;
         return this;
     },
@@ -125,8 +132,14 @@ var PinButtonView = Backbone.View.extend({
         var pinTitle = (this.collection.length) ? "View Pins-" + this.collection.length : "View Pins";
         $(this.el).html(pinTitle);
     },
+    close: function() {
+        this.pinListView.$el.hide();
+        $('.annotation-title').parent().removeClass('annotation-static-block');        
+    },
     toggle: function(e) {
+        this.eventsPipe.trigger('close-metadatapopup');
         e.preventDefault();
+        $('.annotation-title').parent().toggleClass('annotation-static-block');        
         this.pinListView.$el.toggle();
     },
     render: function() {

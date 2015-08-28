@@ -58,4 +58,16 @@ class PageController extends BaseController
             $this->api->getAnnotationPage($this->request->input('contract'), $this->request->input('document_page_no'))
         );
     }
+
+    /**
+     * Get All Page Text
+     * @param         $contractId
+     * @return json
+     */
+    public function getAllText($contractId)
+    {
+        $page = $this->api->getTextPage($contractId, "");
+        return response()->json($page);
+    }
+
 }
