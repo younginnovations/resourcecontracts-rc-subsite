@@ -37,7 +37,14 @@ $app->get('contract/{contractId1}/{contractId2}/compare', ['as' => 'contracts.co
 $app->get('about', ['as' => 'about', 'uses' => 'PageController@about']);
 $app->get('contact', ['as' => 'contact', 'uses' => 'PageController@contact']);
 $app->get('faqs', ['as' => 'faqs', 'uses' => 'PageController@faqs']);
+$app->get('guides', ['as' => 'guides', 'uses' => 'PageController@guides']);
+$app->post('page/save', ['as' => 'page', 'uses' => 'PageController@savePage']);
 
+
+
+$app->get('login', ['as' => 'login', 'uses' => 'PageController@login']);
+$app->post('login', ['as' => 'login.post', 'uses' => 'PageController@loginPost']);
+$app->get('logout', ['as' => 'logout', 'uses' => 'PageController@logout']);
 
 
 $app->get('/search', ['as' => 'search', 'uses' => 'FilterController@index']);

@@ -1,3 +1,7 @@
+<?php
+$api = app('App\Http\Services\APIService');
+$summary = $api->summary();
+?>
 <form action="{{url('search')}}" method="get" class="search-form @if(isset($show_advance)) search-page-form @endif" id="search-form">
     <div class="form-group">
         <button type="submit" class="btn btn-navbar-search pull-left"></button>

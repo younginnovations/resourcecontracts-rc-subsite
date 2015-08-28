@@ -12,13 +12,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer(
-            '*',
-            function ($view) {
-                $api = app('App\Http\Services\APIService');
-                $view->with('summary', $api->summary());
-            }
-        );
+      //
     }
 
     /**

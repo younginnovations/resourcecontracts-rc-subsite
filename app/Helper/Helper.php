@@ -55,3 +55,9 @@ function _e($arrayOrObject, $key, $default = null, $echo = false)
         }
 
 }
+
+function auth()
+{
+   return app('App\Http\Services\AuthService');
+}
+

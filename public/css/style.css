@@ -48,10 +48,38 @@
 	color: rgba(64,64,64,0.5);
 }
 
+.login-panel .form-control::-webkit-input-placeholder { 
+	color: rgba(64,64,64,0.5);
+}
+
+.login-panel .form-control:-moz-placeholder { 
+	color: rgba(64,64,64,0.5);
+}
+
+.login-panel .form-control::-moz-placeholder { 
+	color: rgba(64,64,64,0.5);
+}
+
+.login-panel .form-control:-ms-input-placeholder { 
+	color: rgba(64,64,64,0.5);
+}
+
+html,body {
+	height: 100%;
+}
+
 body {
 	font-family: "Open-Sans-Regular";
 	color: #404040;
 	background: #fff;
+}
+
+a {
+	color: #F37356;
+}
+
+a:hover,a:focus {
+	color: #F46A4A;
 }
 
 *:focus {
@@ -1499,7 +1527,7 @@ footer .col-lg-6:last-of-type li:first-child {
 	background: #f9f9f9;
 }
 
-.search-page-form button,.search-page-form button:hover,.search-page-form button:focus {
+.search-page-form .form-group button, .search-page-form .form-froup button:hover, .search-page-form .form-group button:focus {
 	margin: 0;
 }
 
@@ -1560,4 +1588,177 @@ button.search-close:hover,button.search-close:focus {
 
 .contract-search-number-wrap {
 	top: 70px;
+}
+
+/*static content*/
+
+.panel-content {
+	padding: 0;
+	box-shadow: none;
+	border: 0;
+}
+
+.panel-content .panel-heading,.content-wrap #title {
+	background: none;
+	border: 0;
+	font-size: 24px;
+	padding-top: 20px;
+	margin-bottom: 20px;
+}
+
+.panel-content .panel-body,.content-wrap #content {
+	white-space: initial!important;
+	width: 50%;
+	margin-bottom: 40px;
+	line-height: 22px;
+	border: 0;
+}
+
+.panel-content p,.content-wrap #content p {
+	line-height: 22px;
+	margin-bottom: 20px;
+	white-space: initial!important;
+}
+
+.panel-content strong,.content-wrap #content strong {
+	font-family: "Open-Sans-Bold";
+}
+
+.content-note {
+	font-style: italic;
+	color: rgba(64,64,64,0.7);
+}
+
+.panel-content label {
+	font-family: "Open-Sans-Bold";
+	vertical-align: top;
+}
+
+.content-wrap {
+	margin-left: 22%;
+}
+
+.panel-content ol {
+	padding-left: 20px;
+}
+
+.panel-content ol > li {
+	font-family: "Open-Sans-Bold";
+}
+
+.panel-content ol > li > *:not(label) {
+	font-family: "Open-Sans-Regular";
+}
+
+.panel-content ul {
+	padding-left: 20px;
+	padding-bottom: 14px;
+}
+
+.panel-content ul li {
+	list-style-type: disc;
+	padding-bottom: 6px;
+}
+
+/*login block*/
+
+.login-container .row-top-wrap {
+	height: 100vh;
+}
+
+.login-panel {
+	background: rgba(255,255,255,0.7);
+	margin-top: 50%;
+}
+
+.login-panel .panel-heading {
+	background: #fff;
+}
+
+.panel-login-title {
+	padding: 0;
+	font: 18px/24px "Open-Sans-Regular";
+    color: rgba(64,64,64,0.7);
+}
+
+.btn-login-block,.btn-login-block:hover,.btn-login-block:hover:focus {
+	background: #F37356;
+	color: #fff;
+	padding: 7px;
+}
+
+.btn-login-block:hover,.btn-login-block:focus {
+	background: #F46A4A;
+}
+
+.login-panel .checkbox label {
+	color: #777;
+}
+
+.editable-container.editable-inline {
+	width: 50%!important;
+	margin-bottom: 40px;
+	border-radius: 4px;
+	line-height: 22px;
+	color: #404040;
+}
+
+.editable-container.editable-inline .form-group ,.editable-container.editable-inline .editable-input,.editable-container.editable-inline textarea {
+	width: 100%;
+}
+
+.content-wrap .glyphicon-ok,.content-wrap .glyphicon-remove {
+	background: url(../../images/ic-ok.png) no-repeat 0 0!important;
+    width: 10px;
+    height: 10px;
+    display: block;
+}
+
+.content-wrap .glyphicon-remove {
+	background: url(../../images/ic-close.png) no-repeat 0 0!important;
+}
+
+.content-wrap .glyphicon-ok:before,.content-wrap .glyphicon-remove:before {
+	display: none;
+}
+
+.content-wrap .editable-buttons button:last-of-type {
+	background: #d9534f;
+	border: 1px solid #d43f3a;
+}
+
+.content-wrap .editable-buttons button:last-of-type:hover {
+	background: #c9302c;
+	border-color: #ac2925;
+}
+
+.edit-mode {
+	background-color: #333;
+	padding: 10px 20px;
+	color: #fff;
+	margin: 20px 0;
+}
+
+.edit-mode > div {
+	margin-left: 21.5%
+}
+
+.editable-container.editable-inline .editable-input > input {
+	font-size: 24px;
+	color: #404040;
+	height: auto;
+	border: 0;
+	box-shadow: none;
+}
+
+.form-inline .form-control {border:0px; outline:none; box-shadow: none}
+
+.content-wrap #title {
+	padding-top: 0;
+}
+
+.note-editor {border-color: #ccc!important;}
+
+h1 + .editable-container.editable-inline {
+	border: 1px solid #ccc;
 }

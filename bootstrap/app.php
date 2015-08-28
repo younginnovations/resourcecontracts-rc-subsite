@@ -55,13 +55,13 @@ $app->singleton(
 |
 */
 
-// $app->middleware([
+ $app->middleware([
 //     // Illuminate\Cookie\Middleware\EncryptCookies::class,
 //     // Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-//     // Illuminate\Session\Middleware\StartSession::class,
+      Illuminate\Session\Middleware\StartSession::class,
 //     // Illuminate\View\Middleware\ShareErrorsFromSession::class,
 //     // Laravel\Lumen\Http\Middleware\VerifyCsrfToken::class,
-// ]);
+ ]);
 
 // $app->routeMiddleware([
 
@@ -83,9 +83,18 @@ $app->singleton(
 $app->register(App\Providers\AppServiceProvider::class);
 //class_alias('Collective\Html\FormFacade', 'Form');
 
-
-
 // $app->register(App\Providers\EventServiceProvider::class);
+
+config(
+    [
+        'hoglog' => [
+            'rootPrefix' => 'logger/',
+            'logdir'     => storage_path() . '/logs'
+        ]
+    ]
+);
+$app->register('HogLog\HogLogServiceProvider');
+
 
 /*
 |--------------------------------------------------------------------------
