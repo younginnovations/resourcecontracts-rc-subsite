@@ -281,7 +281,7 @@
                 <ul>
                     <li>
                         <label for="">Source URL</label>
-                        <span>@if(!empty(_e($contract->metadata,'source_url')))<a href="{{$contract->metadata->source_url}}">Link</a>@endif</span>
+                        <span>@if(!empty(_e($contract->metadata,'source_url')))<a href="{{$contract->metadata->source_url}}">{{str_limit($contract->metadata->source_url,50)}}</a>@endif</span>
                     </li>
                     <li>
                         <label for="">Disclosure Mode</label>
