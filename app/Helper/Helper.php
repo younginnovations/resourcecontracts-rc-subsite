@@ -40,24 +40,27 @@ function getFlagUrl($code = '')
 function _e($arrayOrObject, $key, $default = null, $echo = false)
 {
     $return = $default;
-        if (is_array($arrayOrObject) && array_key_exists($arrayOrObject, $key)) {
-            $return = $arrayOrObject[$key];
-        }
+    if (is_array($arrayOrObject) && array_key_exists($arrayOrObject, $key)) {
+        $return = $arrayOrObject[$key];
+    }
 
-        if (is_object($arrayOrObject) && property_exists($arrayOrObject, $key)) {
-            $return = $arrayOrObject->$key;
-        }
-
-        if ($echo) {
-            echo $return;
-        } else {
-            return $return;
-        }
+    if (is_object($arrayOrObject) && property_exists($arrayOrObject, $key)) {
+        $return = $arrayOrObject->$key;
+    }
+    if (empty($return)) {
+        $return = $default;
+    }
+    
+    if ($echo) {
+        echo $return;
+    } else {
+        return $return;
+    }
 
 }
 
 function auth()
 {
-   return app('App\Http\Services\AuthService');
+    return app('App\Http\Services\AuthService');
 }
 
