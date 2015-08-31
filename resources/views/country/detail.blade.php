@@ -16,6 +16,7 @@
                     <div class="panel-title">
                         <img src="{{getFlagUrl($country)}}" />
                         {{@trans('country')[strtoupper($country)]}}
+                        @if(!empty(@trans('amla')[strtoupper($country)]))<a href="{{@trans('amla')[strtoupper($country)]}}" class="country-amla-link">AMLA</a>@endif
                     </div>
                 </div>
             </div>
