@@ -53,6 +53,7 @@ class ResourceController extends BaseController
      */
     public function detail($resource)
     {
+        $resource=urldecode($resource);
         $filter    = ['resource' => $resource];
         $contracts = $this->api->allContracts($filter);
         $countries = $this->api->getCountryByResource($filter);
