@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Services;
 
+use Exception;
 use Log;
 
 /**
@@ -31,7 +32,7 @@ class ContractService
     {
         $contractAnnotationsObj = $this->api->getAnnotations($contractId);
         $annotation             = [];
-        if ($contractAnnotationsObj->total>0) {
+        if ($contractAnnotationsObj->total > 0) {
             foreach ($contractAnnotationsObj->result as $annotations) {
                 $annotation[] = [
                     'page'  => $annotations->page_no,
@@ -43,5 +44,22 @@ class ContractService
         }
 
         return $annotation;
+    }
+
+    /**
+     * Get Contract Text from AWS S3
+     *
+     * @param $file
+     * @return null|string
+     */
+    public function getTextFromS3($file)
+    {
+        try {
+            return file_get_contents($file);
+        } catch (Exception $e) {
+            Log::error('File not found:' . $e->getMessage());
+
+            return null;
+        }
     }
 }

@@ -171,5 +171,38 @@ class ContractController extends BaseController
         return view('contract.page.text', compact('page', 'contract', 'annotations'));
     }
 
+    /**
+     * Download Word File
+     *
+     * @param $contract_id
+     */
+    public function download($contract_id)
+    {
+        $contract = $this->api->contractDetail($contract_id);
+        if (is_null($contract->metadata)) {
+            return abort(404);
+        }
+
+        $text = $this->contract->getTextFromS3($contract->metadata->word_file);
+
+        if (empty($text)) {
+            abort(404);
+        }
+
+        $filename = sprintf('%s-%s', $contract->metadata->contract_id, str_limit(str_slug($contract->metadata->contract_name), 70));
+
+        header("Content-type: application/vnd.ms-wordx");
+        header("Content-Disposition: attachment;Filename=$filename.doc");
+
+        $html = "<html>";
+        $html .= "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">";
+        $html .= "<body>";
+        $html .= $text;
+        $html .= "</body>";
+        $html .= "</html>";
+        echo $html;
+        exit;
+    }
+
 
 }
