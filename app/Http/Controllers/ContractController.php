@@ -53,7 +53,6 @@ class ContractController extends BaseController
     public function detail($contract_id)
     {
         $contract = $this->api->contractDetail($contract_id);
-
         if (is_null($contract->metadata)) {
             return abort(404);
         }
