@@ -180,7 +180,7 @@
                 <ul>
                     <li>
                         <label for="">Open Corporate ID</label>
-                        <span>@if(isset($company->open_corporate_id) && !empty($company->open_corporate_id))<a href="{{$company->open_corporate_id}}">{{str_limit($company->open_corporate_id,100)}}</a> @else - @endif</span>
+                        <span>@if(isset($company->open_corporate_id) && !empty($company->open_corporate_id))<a href="{{$company->open_corporate_id}}">{{str_limit($company->open_corporate_id,25)}}</a> @else - @endif</span>
                     </li>
                     <li>
                         <label for="">Participation Share</label>
