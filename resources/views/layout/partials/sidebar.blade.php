@@ -21,7 +21,7 @@ if (!isset($summary)) {
             <label>Countries</label>
             <ul>
 
-                @foreach($summary->country_summary as $country)
+                @foreach(array_slice($summary->country_summary, 0, 10, true) as $country)
                     <li>
                         <a href="{{route('country.detail', ['key'=>$country->key])}}">
                             <span>{{trans('country.'.strtoupper($country->key))}}</span>
@@ -29,6 +29,7 @@ if (!isset($summary)) {
                         </a>
                     </li>
                 @endforeach
+                <li><a  href="{{route('countries')}}">View all</a></li>
             </ul>
         </li>
         <li class="year">
@@ -42,12 +43,13 @@ if (!isset($summary)) {
                         </a>
                     </li>
                 @endforeach
+
             </ul>
         </li>
         <li class="resources">
             <label>Resources</label>
             <ul>
-                @foreach($summary->resource_summary as $resource)
+                @foreach(array_slice($summary->resource_summary,0,10,true) as $resource)
                     <li>
                         <a href="{{route('resource.detail', ['key'=>$resource->key])}}">
                             <span>{{ucfirst($resource->key)}}</span>
@@ -55,6 +57,7 @@ if (!isset($summary)) {
                         </a>
                     </li>
                 @endforeach
+                    <li><a href="{{route('resources')}}">View all</a></li>
             </ul>
         </li>
     </ul>

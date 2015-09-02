@@ -197,7 +197,7 @@
         annotationCategories.add({name: category});
     });
     var annotationCollection = new AnnotationCollection();
-    annotationCollection.url = "{{route('contract.page.annotations.search', ['id'=>$contract->metadata->contract_id])}}";
+    annotationCollection.url = "{{route('contract.page.annotations.search', ['contract'=>$contract->metadata->contract_id])}}";
     annotationCollection.fetch({reset: true});
 
     var Tabs = Backbone.View.extend({
