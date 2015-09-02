@@ -7,7 +7,8 @@ $queries = array_except($queries,['page']);
 $current_url .= "?";
 $current_url .= (http_build_query($queries) == '') ? '' : http_build_query($queries) . '&';
 ?>
-@if($total_page > 1)
+
+@if($total_page > 1 && $current_page <= $total_page)
 <div class="text-center">
     <ul class="pagination pagination-sm">
         @if($current_page > 1)
