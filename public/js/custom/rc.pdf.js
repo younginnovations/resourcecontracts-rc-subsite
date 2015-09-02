@@ -93,7 +93,7 @@ var PdfViewerPagination = Backbone.View.extend({
         this.render();
     },
     changePage: function() {
-        $("#goto_pdfpage").val(this.currentPage.getPage());
+        $(this.el).find(".goto_pdfpage").val(this.currentPage.getPage());
     },
     render: function() {
         this.changePage();

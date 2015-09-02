@@ -23,6 +23,7 @@
     border: 0;
     overflow: inherit!important;
     font-size: initial!important;
+    z-index: 10;
 }
 
 .document-wrap {
@@ -396,6 +397,7 @@
     border-bottom: 1px solid rgba(220,223,226,0.7);
     display: inline-block;
     width: 100%;
+    background-color: #fff;
 }
 
 .wordwrap span {
