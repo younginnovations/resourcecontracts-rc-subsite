@@ -112,7 +112,7 @@ var AnnotationsListView = Backbone.View.extend({
             var t = _.template($('#annotation-category-with-items-template').html());
             for (var annotationCategoryName in annotationsByCategories) {
                 var annotationsGroup = annotationsByCategories[annotationCategoryName];
-                annotationCategoryElemId = annotationCategoryName.replace(/\s+|;|:|,|#|\/|\.|\(|\)/g, '-');
+                annotationCategoryElemId = annotationCategoryName.replace(/\s+|;|:|,|"|'|{|}|#|\/|\.|\(|\)/g, '-');
                 $(self.el).append(t({
                     'elemId': annotationCategoryElemId,
                     'categoryName': annotationCategoryName.trunc(40),

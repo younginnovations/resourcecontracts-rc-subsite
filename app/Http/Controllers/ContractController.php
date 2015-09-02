@@ -112,13 +112,27 @@ class ContractController extends BaseController
      * @param         $contractId2
      * @return \Illuminate\View\View
      */
-    public function compare($contractId1, $contractId2)
+    public function oldcompare($contractId1, $contractId2)
     {
         $contract1Annotations = $this->contract->annotations($contractId1);
         $contract2Annotations = $this->contract->annotations($contractId2);
         $contract1            = $this->api->metadata($contractId1);
         $contract2            = $this->api->metadata($contractId2);
 
+        return view(
+            'contract.page.oldcompare',
+            compact('contract1Annotations', 'contract2Annotations', 'contract1', 'contract2')
+        );
+    }
+
+    public function compare($contractId1, $contractId2)
+    {
+        $contract1            = new \stdClass();
+        $contract2            = new \stdClass();
+        $contract1Annotations = $this->contract->annotations($contractId1);
+        $contract2Annotations = $this->contract->annotations($contractId2);
+        $contract1->metadata  = $this->api->metadata($contractId1);
+        $contract2->metadata  = $this->api->metadata($contractId2);
         return view(
             'contract.page.compare',
             compact('contract1Annotations', 'contract2Annotations', 'contract1', 'contract2')

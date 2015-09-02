@@ -26,7 +26,8 @@ $app->get('contract/resources', ['as' => 'contract.resources', 'uses' => 'Contra
 $app->get('/contract/{id}', ['as' => 'contract.detail', 'uses' => 'ContractController@detail']);
 $app->get('/contract/{id}/pages', ['as' => 'contract.pages', 'uses' => 'ContractController@pageIndex']);
 $app->get('/contract/{id}/page/{page_no}', ['as' => 'contract.page.detail', 'uses' => 'ContractController@pageDetail']);
-$app->get('contract/{contractId1}/{contractId2}/compare', ['as' => 'contracts.compare', 'uses' => 'ContractController@PageCompare']);
+$app->get('/contract/{contractId1}/{contractId2}/oldcompare', ['as' => 'contracts.oldcompare', 'uses' => 'ContractController@oldcompare']);
+$app->get('/contract/{contractId1}/{contractId2}/compare', ['as' => 'contracts.compare', 'uses' => 'ContractController@compare']);
 $app->get('/contract/{id}/text', ['as' => 'contract.text', 'uses' => 'ContractController@textIndex']);
 $app->get('/contract/{id}/download', ['as' => 'contract.download', 'uses' => 'ContractController@download']);
 
