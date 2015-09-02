@@ -101,7 +101,7 @@
                                 $date = $contract->metadata->signature_date;
                                 $date = strtotime($date);
                             ?>
-                            <span>{{date('F',$date)}} {{date('d',$date)}}, {{date('Y',$date)}}</span>
+                            <span>@if($date){{date('F',$date)}} {{date('d',$date)}}, {{date('Y',$date)}}@else - @endif</span>
                         </li>
                         <li>
                             <label for="">Document Type</label>
@@ -135,7 +135,9 @@
                         </ul>
                     </div>
                     <div class="view-all-annotations">
+                        @if(count($contract->annotationsGroup)>0)
                         <a href="#annotation" class="view-annotation">View all Annotations</a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -187,7 +189,7 @@
                     </li>
                     <li>
                         <label for="">Operator</label>
-                        <span>{{_e($company,'operator','-')}}</span>
+                        <span>@if($company->operator==1) Yes @else - @endif</span>
                     </li>
                 </ul>
             </div>
@@ -201,38 +203,23 @@
                 Associated Documents
             </div>
             <div class="panel-body panel-table">
-                <div class="panel-sub-heading">Parent Document</div>
-                <table class="table table-responsive table-contract table-associated-contract">
-                    <tbody>
-                    <?php $parentContract = _e($contract->metadata, 'parent_document', []);?>
-
-
-                    @if(!empty($parentContract[0]))
-                        <?php $parentContract = $parentContract[0];?>
-                        <tr>
-                            <td width="70%">
-                                @if($parentContract->status=="published")
-                                    <a href="{{route('contract.detail',['id'=>$parentContract->id])}}">{{$parentContract->contract_name}}</a>
-                                @else
-                                    {{$parentContract->contract_name}}
-                                @endif
-                            </td>
-                        </tr>
-                    @else
-                        <tr>
-                            <td class="no-data">
-                                There is no parent contract.
-                            </td>
-                        </tr>
-                    @endif
-                    </tbody>
-                </table>
-            </div>
-            <div class="panel-body panel-table">
-                <div class="panel-sub-heading">Supporting Documents</div>
                 <table class="table table-responsive table-contract table-associated-contract">
                 <tbody>
+                <tr>
+                    <td width="70%">
+                        @foreach($contract->metadata->parent_document as $parentContract)
+                        @if($parentContract->status=="published")
+                            <a href="{{route('contract.detail',['id'=>$parentContract->id])}}">{{$parentContract->contract_name}}</a>
+                        @else
+                            {{json_decode($parentContract->contract_name)}}
+                        @endif
+                        (parent)
+                            @endforeach
+                    </td>
+
+                </tr>
                 <?php $supportingContracts = _e($contract->metadata, 'supporting_contracts', []);?>
+
                 @forelse($contract->metadata->supporting_contracts as $supportingContract)
                     <tr>
                         <td width="70%">
@@ -247,7 +234,7 @@
                 @empty
                     <tr>
                         <td class="no-data">
-                            There are no supporting contracts associated.
+                            There are no contracts associated.
                         </td>
                     </tr>
                 @endforelse
@@ -357,7 +344,7 @@
     <script src="{{ url('js/lib/backbone.js') }}"></script>
     <script src="{{ url('js/lib/backbone.localstorage.js') }}"></script>
     <script src="{{ url('js/lib/backbone.exportcsv.js') }}"></script>
-    
+
     <script src="{{ url('js/custom/rc.pinning.js') }}"></script>
 
     <script type="text/template" id="pin-list-template">
@@ -389,6 +376,6 @@
         collection: pinCollection,
         pinListView: pinListView,
         eventsPipe: contractEvents
-    }).render();    
+    }).render();
     </script>
 @stop

@@ -26,6 +26,9 @@
                     </div>
                 </div>
             </div>
+            <div class="contract-number-wrap" style="margin-top: -40px;">
+                <span>{{$contracts->total}}</span>contracts
+            </div>
         </div>
     </div>
     <div class="row">
