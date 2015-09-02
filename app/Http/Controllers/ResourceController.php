@@ -42,26 +42,30 @@ class ResourceController extends BaseController
         foreach ($resources as &$country) {
             $country->name = trans('country')[strtoupper($country->code)];
         }
+
         return view('resource.index', compact('resources'));
     }
 
     /**
      * Page for specific resource
      *
-     * @param $resource
+     * @param Request $request
+     * @param         $resource
      * @return \Illuminate\View\View
      */
-    public function detail($resource)
+    public function detail(Request $request, $resource)
     {
-        $resource=urldecode($resource);
-        $filter    = ['resource' => $resource];
-        $contracts = $this->api->allContracts($filter);
-        $countries = $this->api->getCountryByResource($filter);
+        $resource    = urldecode($resource);
+        $currentPage = $request->get('page', 1);
+        $filter      = ['resource' => $resource, 'from' => $currentPage];
+        $contracts   = $this->api->allContracts($filter);
+        $countries   = $this->api->getCountryByResource($filter);
+
         if (!$contracts) {
             return abort(404);
         }
 
-        return view('resource.detail', compact('contracts', 'resource','countries'));
+        return view('resource.detail', compact('contracts', 'resource', 'countries', 'currentPage'));
     }
 
 }

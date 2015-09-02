@@ -30,13 +30,14 @@ class FilterController
      */
     public function index(Request $request)
     {
+        $currentPage = $request->get('page', 1);
         $filter = $this->processQueries($request);
+        $filter['from'] = $currentPage;
         $contracts = $this->api->filterSearch($filter);
         $filter = $this->updateFilterData($filter, $contracts, $request);
-        $total_contract = $contracts->total;
-        $contracts = $contracts->results;
         $show_advance = true;
-        return view('site.filter', compact('contracts', 'filter', 'show_advance', 'total_contract'));
+
+        return view('site.filter', compact('contracts', 'filter', 'show_advance', 'total_contract', 'currentPage'));
     }
 
     /**
@@ -48,7 +49,7 @@ class FilterController
     protected function processQueries(Request $request)
     {
         $type = is_array($request->get('type')) ? join(',', $request->get('type')) : $request->get('type');
-        $type = $type == '' ? 'metadata,text,annotation' : $type;
+        $type = $type == '' ? 'metadata,text,annotations' : $type;
 
         return [
             'q'        => $request->get('q',''),

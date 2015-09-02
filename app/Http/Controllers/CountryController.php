@@ -42,19 +42,21 @@ class CountryController extends BaseController
     /**
      * Page for a specific country
      *
-     * @param $country
+     * @param         $country
+     * @param Request $request
      * @return \Illuminate\View\View
      */
-    public function detail($country)
+    public function detail(Request $request, $country)
     {
-        $filter['country'] = $country;
-        $contracts         = $this->api->allContracts($filter);
-        $resources         = $this->api->getResourceByCountry($filter);
+        $currentPage = $request->get('page', 1);
+        $filter      = ['country' => $country, 'from' => $currentPage];
+        $contracts   = $this->api->allContracts($filter);
+        $resources   = $this->api->getResourceByCountry($filter);
         if (!$contracts) {
             return abort(404);
         }
 
-        return view('country.detail', compact('contracts', 'country', 'resources'));
+        return view('country.detail', compact('contracts', 'country', 'resources', 'currentPage'));
     }
 
 }

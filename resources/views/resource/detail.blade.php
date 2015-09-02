@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="contract-number-wrap">
-                <span>{{count($contracts)}}</span>contracts
+                <span>{{$contracts->total}}</span>contracts
             </div>
         </div>
     </div>
@@ -47,7 +47,7 @@
                         <table class="table table-responsive table-contract">
                             <tbody>
 
-                            @forelse($contracts as $contract)
+                            @forelse($contracts->results as $contract)
                                 <tr>
                                     <td width="70%">
                                         <a href="{{route('contract.detail',['id'=>$contract->contract_id ])}}">
@@ -65,6 +65,8 @@
                             @endforelse
                             </tbody>
                         </table>
+                        @include('contract.partials.pagination', ['total_item' => $contracts->total, 'per_page'=>$contracts->per_page, 'current_page' => $currentPage ])
+
                     </div>
                 </div>
             </div>
