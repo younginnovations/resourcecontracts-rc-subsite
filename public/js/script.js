@@ -75,6 +75,38 @@ $(document).ready(function() {
         $('#search-form input[type="text"]').focus();
     });
 
-    var annotationWrapHeight = $('.col-lg-6 .panel-contract-wrap').height();
+    var annotationWrapHeight = $('.col-lg-6 .panel-contract-wrap').height() - 4;
     $('.panel-annotation-wrap').css('height',annotationWrapHeight);
+
+    $("#no-pin-message").each(function(){
+        if (!$(this).text().trim().length) {
+            $(this).parents('.pin-list').css('display','none');
+        }
+    });
+
+    // $('.download-main-wrap').click(function(){
+    //     $(this).siblings('.dropdown-wrap-menu').toggle();
+    // });
+
+    // $(document).mouseup(function (e)
+    //     {
+    //         var container = $(".download-main-wrap .dropdown-wrap-menu");
+
+    //         if (!container.is(e.target) // if the target of the click isn't the container...
+    //             && container.has(e.target).length === 0) // ... nor a descendant of the container
+    //         {
+    //             container.hide();
+    //         }
+
+    //         var container1 = $("#pinLists");
+
+    //         if (!container1.is(e.target) // if the target of the click isn't the container...
+    //             && container1.has(e.target).length === 0) // ... nor a descendant of the container
+    //         {
+    //             container1.hide();
+    //         }
+    // });
+
+
+
 });

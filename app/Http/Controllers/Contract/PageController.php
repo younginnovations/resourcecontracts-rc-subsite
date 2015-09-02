@@ -34,6 +34,7 @@ class PageController extends BaseController
     {
         $page = $this->api->getTextPage($contractId, $this->request->input('page'));
         $page = $page->result[0];
+
         return response()->json(['result' => 'success', 'text' => $page->text, 'pdf_url' => $page->pdf_url]);
     }
 
@@ -54,8 +55,14 @@ class PageController extends BaseController
      */
     public function annotations()
     {
+        if ($this->request->has('contract')) {
+            $contract_id = $this->request->input('contract');
+        } else {
+            $contract_id = $this->request->input('id');
+        }
+
         return response()->json(
-            $this->api->getAnnotationPage($this->request->input('contract'), $this->request->input('document_page_no'))
+            $this->api->getAnnotationPage($contract_id, $this->request->input('document_page_no'))
         );
     }
 
@@ -67,6 +74,7 @@ class PageController extends BaseController
     public function getAllText($contractId)
     {
         $page = $this->api->getTextPage($contractId, "");
+
         return response()->json($page);
     }
 

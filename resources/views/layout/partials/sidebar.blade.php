@@ -29,7 +29,9 @@ if (!isset($summary)) {
                         </a>
                     </li>
                 @endforeach
+                @if(count($summary->country_summary)>10)
                 <li><a  href="{{route('countries')}}">View all</a></li>
+                    @endif
             </ul>
         </li>
         <li class="year">
@@ -57,7 +59,9 @@ if (!isset($summary)) {
                         </a>
                     </li>
                 @endforeach
+                @if(count($summary->resource_summary)>10)
                     <li><a href="{{route('resources')}}">View all</a></li>
+                    @endif
             </ul>
         </li>
     </ul>
