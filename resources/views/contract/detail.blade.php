@@ -130,14 +130,17 @@
                                         <?php $i++; ?>
                                         @endif
                                 @empty
-                                    <div class="no-data">Not Available</div>
+                                    <div class="no-data">There’s no annotation added to this document yet.</div>
                                 @endforelse
                         </ul>
                     </div>
                     <div class="view-all-annotations">
                         @if(count($contract->annotationsGroup)>0)
                         <a href="#annotation" class="view-annotation">View all Annotations</a>
+                        @else
+                            <a href="javascript:void()" class="view-annotation disabled">View all Annotations</a>
                         @endif
+
                     </div>
                 </div>
             </div>
@@ -206,16 +209,18 @@
                 <table class="table table-responsive table-contract table-associated-contract">
                 <tbody>
                 <tr>
-                    <td width="70%">
+
                         @foreach($contract->metadata->parent_document as $parentContract)
+                        <td width="70%">
                         @if($parentContract->status=="published")
                             <a href="{{route('contract.detail',['id'=>$parentContract->id])}}">{{$parentContract->contract_name}}</a>
                         @else
                             {{json_decode($parentContract->contract_name)}}
                         @endif
                         (parent)
-                            @endforeach
-                    </td>
+                        </td>
+
+                    @endforeach
 
                 </tr>
                 <?php $supportingContracts = _e($contract->metadata, 'supporting_contracts', []);?>
@@ -259,6 +264,8 @@
                         <label for="">Project Identifier</label>
                         <span>{{_e($contract->metadata,'project_identifier','-')}}</span>
                     </li>
+                </ul>
+                <ul>
                     <?php
                         $concessions = _e($contract->metadata,'concession', []);
                     ?>
@@ -296,6 +303,7 @@
         </div>
     </div>
 </div>
+@if(count($contract->annotationsGroup)>0))
 <div class="row annotation-list-wrapper" id="annotation">
     <div class="col-lg-12">
         <div class="panel panel-default panel-wrap panel-annotation-list-wrap">
@@ -328,7 +336,7 @@
                 @empty
                     <div class="category-wrap">
                         <ul>
-                            <li>Not Available</li>
+                            <li class="no-data">There’s no annotation added to this document yet.</li>
                         </ul>
                     </div>
                 @endforelse
@@ -337,6 +345,7 @@
         </div>
     </div>
 </div>
+    @endif
 @stop
 
 @section('js')
