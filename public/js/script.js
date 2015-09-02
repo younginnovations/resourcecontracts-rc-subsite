@@ -80,7 +80,7 @@ $(document).ready(function() {
 
     $("#no-pin-message").each(function(){
         if (!$(this).text().trim().length) {
-            $(this).parents('.pin-list').css('display','none');
+            // $(this).parents('.pin-list').css('display','none');
         }
     });
 
