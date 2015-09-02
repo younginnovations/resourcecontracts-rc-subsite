@@ -46,14 +46,23 @@
                                         </a>
 
                                         <?php
+                                            $country_code ='';
+                                            if($contract->country_code !='')
+                                                {
+                                                    $country_code = trans('country.' . strtoupper($contract->country_code));
+                                                }
+
                                         $arr = array_filter(
                                                 [
-                                                        trans('country.' . strtoupper($contract->country_code)),
+                                                        $country_code,
                                                         $contract->signature_year
                                                 ]
                                         );
+                                        $subText = join(', ', $arr);
                                         ?>
-                                        - {{ join(', ', $arr)}}
+                                        @if($subText)
+                                        - {{$subText}}
+                                        @endif
                                         <span class="label label-default">{{strtoupper($contract->language)}}</span>
                                     </td>
                                     <td align="right">{{getFileSize($contract->file_size)}}</td>

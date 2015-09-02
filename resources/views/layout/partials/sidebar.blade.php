@@ -20,7 +20,6 @@ if (!isset($summary)) {
         <li class="countries">
             <label>Countries</label>
             <ul>
-
                 @foreach(array_slice($summary->country_summary, 0, 10, true) as $country)
                     <li>
                         <a href="{{route('country.detail', ['key'=>$country->key])}}">
@@ -31,22 +30,38 @@ if (!isset($summary)) {
                 @endforeach
                 @if(count($summary->country_summary)>10)
                 <li><a  href="{{route('countries')}}">View all</a></li>
-                    @endif
+                @endif
             </ul>
         </li>
         <li class="year">
             <label>Year</label>
             <ul>
-                @foreach($summary->year_summary as $year)
+                @foreach(array_slice($summary->year_summary, 0, 10, true) as $year)
                     <li>
                         <a href="{{route('contracts')}}?year={{$year->key}}">
-                            <span>{{$year->key}}</span>
+                            <span>{{trans($year->key)}}</span>
                             <small class="label pull-right">{{$year->doc_count}}</small>
                         </a>
                     </li>
                 @endforeach
-
             </ul>
+
+            @if(count($summary->year_summary)>10)
+                <ul id="year-more" style="display: none">
+                    @foreach(array_slice($summary->year_summary, 10, null, true) as $year)
+                        <li>
+                            <a href="{{route('contracts')}}?year={{$year->key}}">
+                                <span>{{$year->key}}</span>
+                                <small class="label pull-right">{{$year->doc_count}}</small>
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
+
+            @if(count($summary->year_summary)>10)
+                <div><a href="#year-more" class="toggle-all">More</a></div>
+            @endif
         </li>
         <li class="resources">
             <label>Resources</label>
