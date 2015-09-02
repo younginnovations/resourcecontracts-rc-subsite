@@ -51,15 +51,4 @@ class SiteController extends BaseController
         return view('site.home', compact('countries', 'resources', 'contracts'));
     }
 
-    public function filter()
-    {
-        $filter             = [];
-        $filter['country']  = $this->request->get('country');
-        $filter['year']     = $this->request->get('year');
-        $filter['resource'] = $this->request->get('resource');
-
-        $contracts = $this->api->getAllContracts($filter);
-
-        return view('site.home', compact('contracts'));
-    }
 }

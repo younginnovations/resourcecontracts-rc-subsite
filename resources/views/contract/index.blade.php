@@ -63,7 +63,7 @@
                         @endif
                         </tbody>
                     </table>
-                    @include('contract.partials.pagination')
+                    @include('contract.partials.pagination', ['total_item' => $contracts->total, 'per_page'=>$contracts->per_page, 'current_page' => $currentPage ])
                 </div>
             </div>
         </div>

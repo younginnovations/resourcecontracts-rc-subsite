@@ -33,6 +33,7 @@ class ContractController extends BaseController
     /**
      * All Contracts
      *
+     * @param Request $request
      * @return \Illuminate\View\View
      */
     public function index(Request $request)

@@ -64,8 +64,8 @@ class APIService
             'country'  => '',
             'year'     => '',
             'resource' => '',
-            'per_page' => 2,
-            'from'     => 2,
+            'per_page' => 25,
+            'from'     => 0,
         ];
 
         $filter = array_merge($default, $filter);
@@ -75,7 +75,7 @@ class APIService
             'year'         => $filter['year'],
             'resource'     => $filter['resource'],
             'per_page'     => $filter['per_page'],
-            'from'         => $filter['from'],
+            'from'         => $filter['per_page'] * ($filter['from'] - 1),
         ];
 
         $contract = $this->apiCall('contracts', $query);
@@ -189,7 +189,7 @@ class APIService
             'sort_by'  => $sortby,
             'order'    => $order,
             'per_page' => $per_page,
-            'from'     => $from
+            'from'     => $per_page * ($from - 1),
 
         ];
 

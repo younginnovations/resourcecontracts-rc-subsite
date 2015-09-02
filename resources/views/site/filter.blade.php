@@ -23,7 +23,7 @@
           </div>
       </div>
       <div class="contract-number-wrap contract-search-number-wrap">
-          <span>{{$total_contract}}</span>contracts
+          <span>{{$contracts->total}}</span>contracts
       </div>
   </div>
 
@@ -33,15 +33,18 @@
                 <div class="panel-body">
                     <table class="table table-responsive table-contract">
                         <tbody>
-
-                        @forelse($contracts as $contract)
+                        @forelse($contracts->results as $contract)
                             <tr>
                                 <td width="70%">
                                      <a href="{{route('contract.detail',['id'=>$contract->contract_id ])}}">
                                             {{ $contract->contract_name or ''}}
                                      </a>
                                     <span class="label label-default">{{strtoupper($contract->language)}}</span>
-                                    - {{trans('country')[$contract->country]}}
+
+                                    @if($contract->country !='')
+                                    - {{@trans('country')[$contract->country]}}
+                                    @endif
+
                                     <div class="search-text">
                                         {!!$contract->text or ''!!}
                                         {!!$contract->annotations or ''!!}
@@ -66,6 +69,7 @@
                         @endforelse
                         </tbody>
                     </table>
+                    @include('contract.partials.pagination', ['total_item' => $contracts->total, 'per_page'=>$contracts->per_page, 'current_page' => $currentPage ])
                 </div>
             </div>
         </div>
