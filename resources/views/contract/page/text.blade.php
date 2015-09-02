@@ -47,14 +47,14 @@
                 <div class="column-pdf column-common" style="display:none">
                     <div id="pdf-pagination" class="view-text-pagination pull-right">
                         <a href="#" class="previous">&laquo;</a>
-                        <input id="goto_pdfpage" placeholder="Goto Page" type="number" class="small-input" title="Go to page">
+                        <input placeholder="Goto Page" type="number" class="small-input goto_pdfpage" title="Go to page">
                         <a href="#" class="next">&raquo;</a>
                     </div>
                 </div>
                 <div class="column-text column-common">
                     <div id="text-pagination" class="view-text-pagination pull-right">
                         <a href="#" class="previous">&laquo;</a>
-                        <input id="goto_page" placeholder="Goto Page" type="number" class="small-input" title="Go to page">
+                        <input placeholder="Goto Page" type="number" class="small-input goto_page" title="Go to page">
                         <a href="#" class="next">&raquo;</a>
                     </div>
                 </div>

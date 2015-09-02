@@ -883,6 +883,12 @@ footer .col-lg-6:last-of-type li:first-child {
 	padding: 14px;
 }
 
+.country-resource-wrap ul li span:first-child {
+	width: 88%;
+	display: inline-block;
+	vertical-align: top;
+}
+
 .country-resource-wrap ul li:last-child {
 	border-bottom: 0;
 }

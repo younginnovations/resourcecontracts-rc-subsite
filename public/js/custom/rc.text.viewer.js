@@ -17,8 +17,9 @@ var TextPageView = Backbone.View.extend({
         var template = _.template($('#text-page-partial-view').html());
         this.setElement(template(this.model.toJSON()));
         var self = this;
+        var parentId = $(this.parent.el).attr('id');
         $(this.el).waypoint({
-            context: document.getElementById('text-viewer-wrapper-overflow-scroll'),
+            context: document.getElementById(parentId),
             handler: function(direction) {                
                 if(direction == "up" && self.parent.scrolled) {
                     self.currentPage.setPage(self.model.get('page_no')-1);
@@ -27,7 +28,7 @@ var TextPageView = Backbone.View.extend({
             offset: "50%"
         });
         $(this.el).waypoint({
-            context: document.getElementById('text-viewer-wrapper-overflow-scroll'),
+            context: document.getElementById(parentId),
             handler: function(direction) {
                 if(direction == "down" && self.parent.scrolled) {
                     self.currentPage.setPage(self.model.get('page_no'));
@@ -77,7 +78,6 @@ var TextViewerView = Backbone.View.extend({
 });
 
 var TextViewerPagination = Backbone.View.extend({
-    tagName: 'div',
     events: {
         "click .next": "nextPage",
         "click .previous": "previousPage"
@@ -88,7 +88,7 @@ var TextViewerPagination = Backbone.View.extend({
         this.render();
     },
     changePage: function() {
-        $("#goto_page").val(this.currentPage.getPage());
+        $(this.el).find(".goto_page").val(this.currentPage.getPage());
     },
     render: function() {
         this.changePage();
