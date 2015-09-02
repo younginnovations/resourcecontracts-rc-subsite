@@ -10,11 +10,11 @@
                         <ul>
                             <li><a href="{{url()}}">Home</a></li>
                             @if(\Illuminate\Support\Facades\Input::get('year') =='')
-                            <li>All Contracts</li>
-                             @else
+                                <li>All Contracts</li>
+                            @else
                                 <li><a href="{{url('contracts')}}">All Contracts</a></li>
                                 <li>{{\Illuminate\Support\Facades\Input::get('year')}}</li>
-                             @endif
+                            @endif
                         </ul>
                     </div>
                     <div class="panel-title">
@@ -34,23 +34,28 @@
                 <div class="panel-body">
                     <table class="table table-responsive table-contract">
                         <tbody>
-                        @if($contracts)
-                        @foreach($contracts as $contract)
-                            <tr>
-                                <td width="70%">
-                                    <a href="{{route('contract.detail',['id'=>$contract->contract_id ])}}">
-                                        {{ $contract->contract_name or ''}}
-                                    </a>
+                        @if($contracts->results)
+                            @foreach($contracts->results as $contract)
+                                <tr>
+                                    <td width="70%">
+                                        <a href="{{route('contract.detail',['id'=>$contract->contract_id ])}}">
+                                            {{ $contract->contract_name or ''}}
+                                        </a>
 
-                                    <?php
-                                    $arr = array_filter([trans('country.'.strtoupper($contract->country_code)), $contract->signature_year]);
-                                    ?>
-                                    - {{ join(', ', $arr)}}
-                                    <span class="label label-default">{{strtoupper($contract->language)}}</span>
-                                </td>
-                                <td align="right">{{getFileSize($contract->file_size)}}</td>
-                            </tr>
-                        @endforeach
+                                        <?php
+                                        $arr = array_filter(
+                                                [
+                                                        trans('country.' . strtoupper($contract->country_code)),
+                                                        $contract->signature_year
+                                                ]
+                                        );
+                                        ?>
+                                        - {{ join(', ', $arr)}}
+                                        <span class="label label-default">{{strtoupper($contract->language)}}</span>
+                                    </td>
+                                    <td align="right">{{getFileSize($contract->file_size)}}</td>
+                                </tr>
+                            @endforeach
                         @else
                             <tr>
                                 <td colspan="2">{{'Contract not found.'}}</td>
@@ -58,6 +63,7 @@
                         @endif
                         </tbody>
                     </table>
+                    @include('contract.partials.pagination')
                 </div>
             </div>
         </div>

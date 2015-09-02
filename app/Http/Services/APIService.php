@@ -63,7 +63,9 @@ class APIService
         $default = [
             'country'  => '',
             'year'     => '',
-            'resource' => ''
+            'resource' => '',
+            'per_page' => 2,
+            'from'     => 2,
         ];
 
         $filter = array_merge($default, $filter);
@@ -71,13 +73,15 @@ class APIService
         $query = [
             'country_code' => $filter['country'],
             'year'         => $filter['year'],
-            'resource'     => $filter['resource']
+            'resource'     => $filter['resource'],
+            'per_page'     => $filter['per_page'],
+            'from'         => $filter['from'],
         ];
 
         $contract = $this->apiCall('contracts', $query);
 
         if ($contract->total > 0) {
-            return $contract->results;
+            return $contract;
         }
 
         return null;
