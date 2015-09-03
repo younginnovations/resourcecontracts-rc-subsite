@@ -1,0 +1,182 @@
+.panel-default > .panel-heading {
+    padding: 10px 20px;\
+    display: inline-block;
+    width: 100%;
+}
+
+.title-bar-left {
+    width: 46%;
+}
+
+.title-bar-left .title {
+    font-size: 20px;
+    margin-top: 2px;
+}
+
+.view-document-action {
+    margin-top: 0;
+}
+
+.go-back {
+    float: left;
+    margin-top: 4px;
+}
+
+.contract-actions > a {
+    padding: 10px 12px 10px 30px;
+    text-transform: uppercase;
+    background: url(../../images/ic-img-sprite.png) no-repeat 0 -188px;
+}
+
+#search-form {
+    position: absolute;
+    right: 20px;
+    top: 155px;
+}
+
+#search-results-cache {
+    font-size: 14px;
+    margin: 13px 0 0 4px;
+}
+
+#search-form input[type="submit"] {
+    margin-top: 4px;
+    font-size: 12px;
+}
+
+.annotation-pop-wrap {
+    position: relative;
+}
+
+.metadata, .annotation-list, .pin-list {
+    position: absolute;
+    background-color: #FFFFFF;
+    padding: 20px;
+    right: 0px;
+    z-index: 100;
+    border: 1px solid #ccc;
+    top: 40px;
+    font-size: 13px;
+    width: 330px;
+    text-align: left;
+}
+
+.pin-list, .annotation-list {
+    width: 450px;
+    height: 500px;
+    overflow: scroll;
+}
+
+.popup-metadata p {
+    line-height: 22px;
+}
+
+.pin {
+    clear: both;
+    margin-bottom: 20px;
+    position: relative;
+    border-left: 3px solid #DDd;
+    padding-left: 12px
+}
+
+.removePin {
+    margin-left: 5px;
+    padding: 0px 4px;
+}
+
+.pin-buttons {
+    margin-bottom: 12px;
+}
+
+.pin-buttons button, .pin button, .annotation-item button {
+    border-radius: 4px;
+    border: 0;
+}
+
+.pin button, .annotation-item button {
+    font-size: 10px;
+    line-height: 15px;
+}
+
+.pin-it {
+    margin-right: 10px;
+    float: left;
+}
+
+.pin-it + p {
+    font-size: 14px;
+}
+
+.page-num {
+    float: left;
+}
+
+/* delete these */
+.select2-container--classic .select2-search--inline .select2-search__field {
+    height: 22px;
+}
+
+.select2-container--classic .select2-search--inline .select2-search__field {
+    width: 50px !important;
+}
+
+.select2-search__field[placeholder="select"] {
+    width: 100% !important;
+}
+
+.tag {
+    background-color: #eee;
+    font-size: 11px;
+    padding: 4px 6px;
+    border-radius: 4px;
+}
+
+#annotations-list-title {
+    margin-bottom: 14px;
+}
+
+.annotation-category-done ul {
+    margin-top: 6px;
+    padding-left: 24px;
+}
+
+.annotation-category-done ul li {
+    margin-bottom: 14px;
+}
+
+.annotation-category-done, .annotation-category-not-done {
+    border-left: 2px solid #4F9E06;
+    padding-left: 12px;
+    margin-bottom: 14px;
+}
+
+.annotation-category-not-done {
+    border-left: 2px solid #f00;
+}
+
+.annotation-item {
+    font-size: 13px;
+    overflow: hidden;
+}
+
+.annotation-item span {
+    margin-bottom: 5px;
+}
+
+.annotation-item .quote {
+    display: block;
+    margin: 0 5px 0 0;
+}
+
+.annotation-item .text {
+    color: #777;
+    margin-bottom: 10px !important;
+}
+
+.annotation-item-description {
+    float: left;
+}
+
+.annotation-item-description p {
+    clear: both;
+}

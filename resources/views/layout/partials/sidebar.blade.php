@@ -8,7 +8,12 @@ if (!isset($summary)) {
 <div id="sidebar-wrapper" class="sidebar-collapse in">
     <ul class="sidebar-nav">
         <li class="sidebar-brand">
-            <a href="{{url()}}">Resource <span>Contracts</span></a>
+            @if(env("CATEGORY")=="rc")
+                <a href="{{url()}}">Resource <span>Contracts</span></a>
+            @else
+                <a href="{{url()}}">OPENLAND <span>Contracts</span></a>
+            @endif
+
         </li>
         <li class="contracts active">
             <a href="{{url('contracts')}}">
