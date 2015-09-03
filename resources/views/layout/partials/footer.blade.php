@@ -10,9 +10,9 @@
                 </div>
                 <div class="col-lg-6">
                     <ul>
-                        <li><a href="#"><img src="{{url('images/ic-gei-icon.png')}}" /></a></li>
-                        <li><a href="#"><img src="{{url('images/ic-nrgi-icon.png')}}" /></a></li>
-                        <li><a href="#"><img src="{{url('images/ic-cc-icon.png')}}" /></a></li>
+                        <li><a href="#"><img src="{{url('images/ic-gei.png')}}" /></a></li>
+                        <li><a href="#"><img src="{{url('images/ic-nrgi.png')}}" /></a></li>
+                        <li><a href="#"><img src="{{url('images/ic-cc.png')}}" /></a></li>
                     </ul>
                 </div>
             </div>
