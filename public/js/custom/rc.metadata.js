@@ -1,7 +1,4 @@
 var MetadataView = Backbone.View.extend({
-    events: {
-        'click': 'render'
-    },
     initialize: function(options) {
         this.options = options;
     },
