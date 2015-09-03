@@ -60,10 +60,10 @@ class PageController extends BaseController
         } else {
             $contract_id = $this->request->input('id');
         }
+        $response         = $this->api->getAnnotationPage($contract_id, $this->request->input('document_page_no'));
+        $response['rows'] = $response['result'];
 
-        return response()->json(
-            $this->api->getAnnotationPage($contract_id, $this->request->input('document_page_no'))
-        );
+        return response()->json($response);
     }
 
     /**

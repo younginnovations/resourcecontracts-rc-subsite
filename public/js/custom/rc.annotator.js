@@ -45,7 +45,7 @@ var AnnotatorjsView = Backbone.View.extend({
         var self = this;
         this.content.annotator('addPlugin', 'Store', {
             // The endpoint of the store on your server.
-            prefix: '/api',
+            prefix: app_url+"/api",
             // Attach the uri of the current page to all annotations to allow search.
             loadFromSearch: {
                 'url': self.api,

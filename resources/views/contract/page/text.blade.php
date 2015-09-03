@@ -254,7 +254,7 @@
                     availableTags: {!! json_encode(trans("codelist/annotation.tags")) !!},
                     collection: annotationCollection,
                     annotationCategories: annotationCategories,
-                    enablePdfAnnotation: false
+                    enablePdfAnnotation: true
                 });   
             }
         },
