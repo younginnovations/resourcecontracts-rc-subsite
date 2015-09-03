@@ -1886,3 +1886,7 @@ h1 + .editable-container.editable-inline {
 .pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus, .pagination>li>span:hover {
 	color: #F37356;
 }
+
+input.select2-search__field {
+	width: 100%;
+}

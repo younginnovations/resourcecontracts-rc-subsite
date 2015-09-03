@@ -80,8 +80,10 @@
                         </li>
                         <li>
                             <label for="">Country</label>
-                            <span>{{ucfirst(_e($contract->metadata->country,'name','-'))}}
-                                @if(isset($contract->metadata->amla_url) && !empty($contract->metadata->amla_url))<a href="{{$contract->metadata->amla_url}}" class="amla-link" target="_blank">AMLA</a>@endif</span>
+                            @if($code = strtolower(_e($contract->metadata->country,'code')))
+                                <span><a href="{{route('country.detail', ['key'=>$code])}}">{{ucfirst(_e($contract->metadata->country,'name'))}}</a>
+                                 @if(isset($contract->metadata->amla_url) && !empty($contract->metadata->amla_url))<a href="{{$contract->metadata->amla_url}}" class="amla-link" target="_blank">AMLA</a>@endif</span>
+                            @endif
                         </li>
                     </ul>
                     <ul>
