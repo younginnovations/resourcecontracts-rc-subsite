@@ -5,13 +5,21 @@
         <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <span data-toggle="collapse-sidebar" data-target=".sidebar-collapse" data-target-2=".sidebar-collapse-container" class="pull-left trigger">trigger</span>
+                @if(env("CATEGORY")=="rc")
                 <a class="navbar-brand" href="{{url()}}" >Resource <span>Contracts</span></a>
+                @else
+                    <a class="navbar-brand" href="{{url()}}" >OPENLAND <span>Contracts</span></a>
+                 @endif
             </div>
         </nav>
-        <div class="col-lg-7 col-md-9">
+        <div @if(env("CATEGORY")=="rc") class="col-lg-7 col-md-9" @else class="col-lg-8 col-md-9" @endif>
             <div class="row row-top-content">
                 <div class="tagline">
+                    @if(env("CATEGORY")=="rc")
                     A directory of <span>Petroleum &amp; Mineral Contracts</span>
+                    @else
+                        A directory of <span>Open Land Contracts</span>
+                    @endif
                 </div>
                 <form action="{{route('search')}}" method="GET" class="contract-search-form">
                     <div class="form-group">

@@ -6,7 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Resource Contracts</title>
+    @if(env("CATEGORY")=="rc")
+        <link rel="icon" href="images/favicon.ico">
+        <title>Resource Contracts</title>
+    @else
+        <link rel="icon" href="olc/images/favicon.ico">
+        <title>OPENLAND Contracts</title>
+    @endif
+
     <?php
     $css = [
             'bootstrap.min.css',
@@ -20,10 +27,16 @@
             'select2.min.css'
     ];
     ?>
-    @foreach($css as $link)
-        <link href="{{url(sprintf('css/%s',$link))}}" rel="stylesheet">
-    @endforeach
-
+    @if(env("CATEGORY")=="rc")
+        @foreach($css as $link)
+            <link href="{{url(sprintf('css/%s',$link))}}" rel="stylesheet">
+        @endforeach
+    @endif
+    @if(env("CATEGORY")=="olc")
+        @foreach($css as $link)
+            <link href="{{url(sprintf('olc/css/%s',$link))}}" rel="stylesheet">
+        @endforeach
+    @endif
     @yield('css')
 
     <!--[if lt IE 9]>
