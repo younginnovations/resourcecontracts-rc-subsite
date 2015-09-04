@@ -179,7 +179,7 @@
                         <span>{{_e($company,'company_number','-')}}</span>
                     </li>
                     <li>
-                        <label for="">Parent Company</label>
+                        <label for="">Corporate Grouping</label>
                         <span>{{_e($company,'parent_company','-')}}</span>
                     </li>
                 </ul>
@@ -194,7 +194,7 @@
                     </li>
                     <li>
                         <label for="">Operator</label>
-                        <span>@if($company->operator==1) Yes @else - @endif</span>
+                        <span>@if(isset($company->operator) && $company->operator==1) Yes @else - @endif</span>
                     </li>
                 </ul>
             </div>
