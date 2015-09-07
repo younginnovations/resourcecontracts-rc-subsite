@@ -386,7 +386,7 @@ footer .col-lg-6:last-of-type li:first-child {
 }
 
 .btn-navbar-search,.btn-navbar-search:hover,.btn-navbar-search:active {
-    background: url(../../images/ic-sprite.png) no-repeat 0 -392px;
+    background: url(../../images/ic-sprite.png) no-repeat -3px -392px;
     text-indent: -9999px;
     width: 20px;
     margin: 26px 0;
@@ -544,8 +544,6 @@ footer .col-lg-6:last-of-type li:first-child {
 	padding: 10px 30px 10px 45px;
 }
 
-
-
 .action-links ul li a:hover {
 	text-decoration: none;
 	background-color: #F46A4A;
@@ -654,7 +652,7 @@ footer .col-lg-6:last-of-type li:first-child {
 }
 
 .country-list-wrap {
-	padding: 16px 0 50px!important;
+	padding: 30px 0 50px!important;
 	min-height: 500px;
 }
 
@@ -740,6 +738,7 @@ footer .col-lg-6:last-of-type li:first-child {
 	width: 280px;
 	position: fixed;
 	border-left: 0;
+	z-index: 10000;
 }
 
 .side-collapse ul {
@@ -794,7 +793,6 @@ footer .col-lg-6:last-of-type li:first-child {
 .sidebar-collapse-container.out {
 	right: auto;
 	left: 280px;
-	position: fixed!important;
 }
 
 .contract-number-wrap {
@@ -844,6 +842,10 @@ footer .col-lg-6:last-of-type li:first-child {
 .country-contract-wrap {
 	border-right: 1px solid #f2f2f2;
 } 
+
+.country-detail-wrapper > div > div {
+	min-height: 500px;
+}
 
 .country-detail-wrapper,.country-detail-wrapper > div {
 	padding: 0;
@@ -981,9 +983,12 @@ footer .col-lg-6:last-of-type li:first-child {
 	padding: 0 36px;
 }
 
+.contract-detail-wrapper > .col-lg-12:not(:last-of-type) {
+	margin-bottom: 70px;
+}
+
 .panel-contract-wrap {
 	padding: 0;
-	margin-bottom: 70px;
 }
 
 .panel-contract-wrap .panel-heading,.panel-annotation-list-wrap .panel-heading {
@@ -1002,6 +1007,10 @@ footer .col-lg-6:last-of-type li:first-child {
 	padding: 0;
 	overflow: hidden;
 	margin-bottom: 8px;
+}
+
+.panel-contract-wrap > .panel-body:only-child {
+	margin-bottom: 0;
 }
 
 .panel-contract-wrap ul {
@@ -1151,7 +1160,7 @@ footer .col-lg-6:last-of-type li:first-child {
 }
 
 .panel-annotation-list-wrap .panel-heading {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     padding: 0 36px 0 76px;
     background: url(../../images/ic-annotation.png) no-repeat 40px;
 }
@@ -1160,7 +1169,12 @@ footer .col-lg-6:last-of-type li:first-child {
 	font-family: "Open-Sans-Bold";
 	color: rgba(64,64,64,0.7);
 	font-size: 12px;
-	margin-right: 16px;
+	margin: 2px 16px 0 0;
+	min-width: 34px;
+}
+
+.page-num+.pull-left {
+	width: 90%;
 }
 
 .annotation-text {
@@ -1187,11 +1201,15 @@ footer .col-lg-6:last-of-type li:first-child {
 .category-wrap li {
 	float: left;
 	width: 50%;
-	padding-left: 40px;
+	padding: 40px 0 0 40px;
 }
 
-.category-wrap li:first-child {
+.category-wrap li:nth-child(odd) {
 	padding-left: 0;
+}
+
+.category-wrap li:nth-child(-n+2) {
+	padding-top: 0;
 }
 
 .category-title {
@@ -1205,15 +1223,20 @@ footer .col-lg-6:last-of-type li:first-child {
 	-webkit-border-radius: 11px;
 	-moz-border-radius: 11px;
 	border-radius: 11px;
-	margin-right: 4px;
+	margin: 0 6px 6px 0;
 	padding: 2px 12px;
 	color: #898989;
 	font-size: 12px;
+	display: inline-block;
 }
 
 .tags a:hover {
 	text-decoration: none;
 	background: #ddd;
+}
+
+.tags a:empty {
+	display: none;
 }
 
 .note {
