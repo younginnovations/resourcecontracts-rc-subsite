@@ -104,28 +104,13 @@ $(document).ready(function () {
         })
     });
 
-    // $('.download-main-wrap').click(function(){
-    //     $(this).siblings('.dropdown-wrap-menu').toggle();
-    // });
+    $(".sidebar-nav li ul").each(function () {
+        if (!$(this).text().trim().length) {
+            $(this).parent('li').css('display','none');
+        }
+    });
 
-    // $(document).mouseup(function (e)
-    //     {
-    //         var container = $(".download-main-wrap .dropdown-wrap-menu");
 
-    //         if (!container.is(e.target) // if the target of the click isn't the container...
-    //             && container.has(e.target).length === 0) // ... nor a descendant of the container
-    //         {
-    //             container.hide();
-    //         }
-
-    //         var container1 = $("#pinLists");
-
-    //         if (!container1.is(e.target) // if the target of the click isn't the container...
-    //             && container1.has(e.target).length === 0) // ... nor a descendant of the container
-    //         {
-    //             container1.hide();
-    //         }
-    // });
 
 
 });
