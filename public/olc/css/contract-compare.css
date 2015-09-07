@@ -1,0 +1,122 @@
+.panel-compare {
+	padding: 50px 0 0;
+}
+
+.panel-compare > .col-lg-6 {
+	padding: 0;
+}
+
+.panel-compare > .col-lg-6:first-child {
+	border-right: 1px solid rgb(220,223,226);
+	border-right: 1px solid rgba(220,223,226,0.7);
+}
+
+#search-form {
+	position: static;
+    width: 70%;
+    padding: 8px 0;
+    border-left: 1px solid rgb(220,223,226);
+    border-left: 1px solid rgba(220,223,226,0.7);
+}
+
+.word-wrapper > .pull-right {
+	width: 450px;
+}
+
+.view-text-pagination {
+	margin-top: 0!important;
+}
+
+.document-wrap-head {
+	display: inline-block;
+	width: 100%;
+	min-height: 30px;
+	background: #fff;
+	border-top: 1px solid rgb(220,223,226);
+    border-top: 1px solid rgba(220,223,226,0.7);
+    padding: 0;
+}
+
+.navigation > a {
+	display: inline-block;
+	padding-bottom: 14px;
+}
+
+.navigation > a#pdf1-view,.navigation > a#pdf2-view {
+    background: url(../../images/ic-sprite-new.png) no-repeat -474px 11px;
+} 
+
+.document-wrap-head .view-metadata {
+	border: 0;
+}
+
+.document-wrap-head .view-metadata a {
+	text-indent: -9999px;
+	padding: 13px 10px 13px 40px;
+	background-position: -390px -82px;
+	opacity: 0.5;
+}
+
+.document-wrap-head .view-metadata a:hover {
+	opacity: 1;
+}
+
+.document-wrap-head .view-metadata a+a {
+	border-left: 1px solid rgb(220,223,226);
+    border-left: 1px solid rgba(220,223,226,0.7);
+}
+
+.column-text, .column-pdf {
+	width: 100%;
+	border: 0;
+}
+
+.view-wrapper {
+	margin-top: -5px;
+}
+
+.document-wrap-head .view-metadata a:after {
+	float: left;
+	height: 8px;
+	background-position: -176px -111px;
+	margin-top: 2px;
+	margin-left: 0;
+}
+
+.view-metadata a.btn-annotation {
+	background: url(../../images/ic-annotation.png) no-repeat 14px 11px;
+	background-size: 18px;
+}
+
+.previous {
+	background-position: -194px -563px!important;
+}
+
+.next {
+    background-position: -271px -563px!important;
+}
+
+.metadata {
+    top: 93px;
+}
+
+.pin-list {
+    top: 50px;
+}
+
+.annotation-list-view > div:first-of-type:not(.annotation-title) {
+    position: static;
+}
+
+.annotation-list-view > div:first-of-type:not(.annotation-title)+div {
+    padding-top: 20px;
+}
+
+.column-annotations {
+    padding: 5px;
+    width: 100%;
+}
+
+.panel-heading-fixed {
+    height: 50px;
+}

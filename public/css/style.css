@@ -322,20 +322,20 @@ footer > .row {
 	margin: 0;
 }
 
-footer .col-lg-6 {
+footer > .row > div {
 	padding: 0 32px;
 }
 
-footer .col-lg-6:first-of-type {
+footer > .row > div:first-of-type {
 	padding-top: 20px;
 }
 
 footer ul li {
 	list-style: none;
-	float: left;
+	display: inline-block;
 }
 
-footer .col-lg-6:first-of-type li {
+footer > .row > div:first-of-type li {
 	border-left: 1px solid rgb(255,255,255);
 	border-left: 1px solid rgba(255,255,255,0.7);
 	line-height: 12px;
@@ -343,7 +343,7 @@ footer .col-lg-6:first-of-type li {
 	margin-left: 10px;
 }
 
-footer .col-lg-6:first-of-type li:first-child {
+footer > .row > div:first-of-type li:first-child {
 	border-left: 0;
 	padding-left: 0;
 	margin-left: 0;
@@ -364,11 +364,11 @@ footer ul li a:hover {
 	color: rgb(255,255,255);
 }
 
-footer .col-lg-6:last-of-type li {
+footer > .row > div:last-of-type li {
 	margin-left: 34px;
 }
 
-footer .col-lg-6:last-of-type li:first-child {
+footer > .row > div:last-of-type li:first-child {
 	margin-left: 0;
 } 
 
@@ -386,7 +386,7 @@ footer .col-lg-6:last-of-type li:first-child {
 }
 
 .btn-navbar-search,.btn-navbar-search:hover,.btn-navbar-search:active {
-    background: url(../../images/ic-sprite.png) no-repeat 0 -392px;
+    background: url(../../images/ic-sprite.png) no-repeat -3px -392px;
     text-indent: -9999px;
     width: 20px;
     margin: 26px 0;
@@ -423,12 +423,15 @@ footer .col-lg-6:last-of-type li:first-child {
 	margin: 0;
 	z-index: 1;
 }
-/*
-.search-input-wrapper:not(.search-page-input-wrapper) .col-lg-4 {
-	clear: both;
-	float: none;
+
+.search-input-wrapper .col-lg-12 {
+	margin-bottom: 20px;
 }
-*/
+
+.search-input-wrapper .col-lg-4 {
+	padding-left: 30px;
+}
+
 .input-wrapper input,.input-wrapper select {
 	background: #f9f9f9;
 	border: 1px solid #CECECE;
@@ -454,6 +457,10 @@ footer .col-lg-6:last-of-type li:first-child {
 	color: #fff;
 	background: #F46A4A;
 } 
+
+.search-input-wrapper .col-lg-4 .btn {
+	margin-top: 0;
+}
 
 .panel-top-wrapper {
 	background: #f9f9f9;
@@ -544,8 +551,6 @@ footer .col-lg-6:last-of-type li:first-child {
 	padding: 10px 30px 10px 45px;
 }
 
-
-
 .action-links ul li a:hover {
 	text-decoration: none;
 	background-color: #F46A4A;
@@ -594,6 +599,10 @@ footer .col-lg-6:last-of-type li:first-child {
 
 /*pagination*/
 
+.pagination-wrapper {
+	margin-top: 30px;
+}
+
 .pagination-wrapper ul {
 	margin: 0;
 	padding: 0;
@@ -614,7 +623,7 @@ footer .col-lg-6:last-of-type li:first-child {
 	text-align: center;
 }
 
-.pagination-wrapper ul li a.active {
+.pagination-wrapper ul li.active a {
 	border-radius: 50%;
 	background: #404040;
 	color: #fff;
@@ -654,7 +663,7 @@ footer .col-lg-6:last-of-type li:first-child {
 }
 
 .country-list-wrap {
-	padding: 16px 0 50px!important;
+	padding: 30px 0 50px!important;
 	min-height: 500px;
 }
 
@@ -740,6 +749,7 @@ footer .col-lg-6:last-of-type li:first-child {
 	width: 280px;
 	position: fixed;
 	border-left: 0;
+	z-index: 10000;
 }
 
 .side-collapse ul {
@@ -794,7 +804,6 @@ footer .col-lg-6:last-of-type li:first-child {
 .sidebar-collapse-container.out {
 	right: auto;
 	left: 280px;
-	position: fixed!important;
 }
 
 .contract-number-wrap {
@@ -844,6 +853,10 @@ footer .col-lg-6:last-of-type li:first-child {
 .country-contract-wrap {
 	border-right: 1px solid #f2f2f2;
 } 
+
+.country-detail-wrapper > div > div {
+	min-height: 500px;
+}
 
 .country-detail-wrapper,.country-detail-wrapper > div {
 	padding: 0;
@@ -981,9 +994,12 @@ footer .col-lg-6:last-of-type li:first-child {
 	padding: 0 36px;
 }
 
+.contract-detail-wrapper > .col-lg-12:not(:last-of-type) {
+	margin-bottom: 70px;
+}
+
 .panel-contract-wrap {
 	padding: 0;
-	margin-bottom: 70px;
 }
 
 .panel-contract-wrap .panel-heading,.panel-annotation-list-wrap .panel-heading {
@@ -1002,6 +1018,10 @@ footer .col-lg-6:last-of-type li:first-child {
 	padding: 0;
 	overflow: hidden;
 	margin-bottom: 8px;
+}
+
+.panel-contract-wrap > .panel-body:only-child {
+	margin-bottom: 0;
 }
 
 .panel-contract-wrap ul {
@@ -1151,7 +1171,7 @@ footer .col-lg-6:last-of-type li:first-child {
 }
 
 .panel-annotation-list-wrap .panel-heading {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     padding: 0 36px 0 76px;
     background: url(../../images/ic-annotation.png) no-repeat 40px;
 }
@@ -1160,7 +1180,12 @@ footer .col-lg-6:last-of-type li:first-child {
 	font-family: "Open-Sans-Bold";
 	color: rgba(64,64,64,0.7);
 	font-size: 12px;
-	margin-right: 16px;
+	margin: 2px 16px 0 0;
+	min-width: 34px;
+}
+
+.page-num+.pull-left {
+	width: 90%;
 }
 
 .annotation-text {
@@ -1169,8 +1194,8 @@ footer .col-lg-6:last-of-type li:first-child {
 }
 
 .quote {
-	color: rgba(64,64,64,0.6);
-	margin-bottom: 12px;
+	color: rgba(64,64,64,0.6)!important;
+	margin-bottom: 12px!important;
 }
 
 .category-wrap {
@@ -1187,11 +1212,15 @@ footer .col-lg-6:last-of-type li:first-child {
 .category-wrap li {
 	float: left;
 	width: 50%;
-	padding-left: 40px;
+	padding: 40px 0 0 40px;
 }
 
-.category-wrap li:first-child {
+.category-wrap li:nth-child(odd) {
 	padding-left: 0;
+}
+
+.category-wrap li:nth-child(-n+2) {
+	padding-top: 0;
 }
 
 .category-title {
@@ -1205,15 +1234,20 @@ footer .col-lg-6:last-of-type li:first-child {
 	-webkit-border-radius: 11px;
 	-moz-border-radius: 11px;
 	border-radius: 11px;
-	margin-right: 4px;
+	margin: 0 6px 6px 0;
 	padding: 2px 12px;
 	color: #898989;
 	font-size: 12px;
+	display: inline-block;
 }
 
 .tags a:hover {
 	text-decoration: none;
 	background: #ddd;
+}
+
+.tags a:empty {
+	display: none;
 }
 
 .note {
@@ -1471,6 +1505,7 @@ footer .col-lg-6:last-of-type li:first-child {
     border-bottom: 1px solid rgba(209,214,219,0.7);
     padding: 20px 36px;
     border-right: 1px solid rgba(209,214,219,0.7);
+    overflow: hidden;
 }
 
 #resources > .col-lg-4:nth-child(-n+3) {
@@ -1870,10 +1905,6 @@ h1 + .editable-container.editable-inline {
 	font-style: italic;
 }
 
-.pagination {
-	margin-top: 30px;
-}
-
 .pagination > li > a {
 	color: #F37356;
 }
@@ -1888,5 +1919,17 @@ h1 + .editable-container.editable-inline {
 }
 
 input.select2-search__field {
-	width: 100%;
+	min-width: 50px;
+}
+
+.search-input-wrapper .input-wrapper:nth-child(3), .search-input-wrapper .input-wrapper:nth-child(4) {
+	width: 25%;
+}
+
+.num-text {
+	margin-left: 10px;
+}
+
+.num-text.first,.num-text.next{
+	margin-left: 0;
 }
