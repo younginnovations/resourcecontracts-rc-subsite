@@ -181,15 +181,18 @@ class APIService
         extract($filter);
 
         $query = [
-            'q'        => $q,
-            'country'  => $country,
-            'year'     => $year,
-            'resource' => $resource,
-            'group'    => $group,
-            'sort_by'  => $sortby,
-            'order'    => $order,
-            'per_page' => $per_page,
-            'from'     => $per_page * ($from - 1),
+            'q'               => $q,
+            'country'         => $country,
+            'corporate_group' => $corporate_group,
+            'company_name'    => $company_name,
+            'contract_type'   => $contract_type,
+            'year'            => $year,
+            'resource'        => $resource,
+            'group'           => $group,
+            'sort_by'         => $sortby,
+            'order'           => $order,
+            'per_page'        => $per_page,
+            'from'            => $per_page * ($from - 1),
 
         ];
 
@@ -313,6 +316,18 @@ class APIService
         }
 
         return $data;
+    }
+
+    /**
+     * Get Search Atributes such as contract_type,corporate_grouping,company_name
+     *
+     * @return object|null
+     */
+    public function searchAttributed()
+    {
+        $resource = 'contract/attributes';
+
+        return $this->apiCall($resource);
     }
 
 
