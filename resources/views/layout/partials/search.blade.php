@@ -1,6 +1,7 @@
 <?php
-$api = app('App\Http\Services\APIService');
+$api     = app('App\Http\Services\APIService');
 $summary = $api->summary();
+$attributes = $api->searchAttributed();
 ?>
 <form action="{{url('search')}}" method="get" class="search-form @if(isset($show_advance)) search-page-form @endif" id="search-form">
     <div class="form-group">
@@ -28,57 +29,52 @@ $summary = $api->summary();
                     @endforeach
                 </select>
             </div>
-            <div class="col-lg-2 input-wrapper">
-                <label for="">Country</label>
-                <select name="country[]" id="" multiple="multiple">
-                    @foreach($summary->country_summary as $country)
-                        <option @if(isset($filter['country']) && in_array(strtoupper($country->key), array_map('strtoupper',$filter['country'])))
-                            selected="selected"
-                            @endif value="{{$country->key}}">{{trans('country.'.strtoupper($country->key))}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-lg-2 input-wrapper">
-                <label for="">Contract Type</label>
-                <select name="country[]" id="" multiple="multiple">
-                    @foreach($summary->country_summary as $country)
-                        <option @if(isset($filter['country']) && in_array(strtoupper($country->key), array_map('strtoupper',$filter['country'])))
-                            selected="selected"
-                            @endif value="{{$country->key}}">{{trans('country.'.strtoupper($country->key))}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-lg-2 input-wrapper">
-                <label for="">Company Name</label>
-                <select name="country[]" id="" multiple="multiple">
-                    @foreach($summary->country_summary as $country)
-                        <option @if(isset($filter['country']) && in_array(strtoupper($country->key), array_map('strtoupper',$filter['country'])))
-                            selected="selected"
-                            @endif value="{{$country->key}}">{{trans('country.'.strtoupper($country->key))}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-lg-2 input-wrapper">
-                <label for="">Corporate Group</label>
-                <select name="country[]" id="" multiple="multiple">
-                    @foreach($summary->country_summary as $country)
-                        <option @if(isset($filter['country']) && in_array(strtoupper($country->key), array_map('strtoupper',$filter['country'])))
-                            selected="selected"
-                            @endif value="{{$country->key}}">{{trans('country.'.strtoupper($country->key))}}</option>
-                    @endforeach
-                </select>
-            </div>
+
             <div class="col-lg-2 input-wrapper">
                 <label for="">Resource</label>
-                <select name="country[]" id="" multiple="multiple">
-                    @foreach($summary->country_summary as $country)
-                        <option @if(isset($filter['country']) && in_array(strtoupper($country->key), array_map('strtoupper',$filter['country'])))
+                <select name="resource[]" id="" multiple="multiple">
+                    @foreach($summary->resource_summary as $resource)
+                        <option @if(isset($filter['resource']) && in_array($resource->key, $filter['resource']))
                             selected="selected"
-                            @endif value="{{$country->key}}">{{trans('country.'.strtoupper($country->key))}}</option>
+                            @endif value="{{$resource->key}}">{{$resource->key}}</option>
                     @endforeach
                 </select>
             </div>
+
             <div class="col-lg-2 input-wrapper">
+                <label for="">Company Name</label>
+                <select name="company_name[]" id="" multiple="multiple">
+                    @foreach($attributes->company_name as $company)
+                        <option @if(isset($filter['company_name']) && in_array($company, $filter['company_name']))
+                            selected="selected"
+                            @endif value="{{$company}}">{{$company}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col-lg-2 input-wrapper">
+                <label for="">Corporate Group</label>
+                <select name="corporate_group[]" id="" multiple="multiple">
+                    @foreach($attributes->corporate_grouping as $group)
+                        <option @if(isset($filter['corporate_group']) && in_array($group, $filter['corporate_group']))
+                            selected="selected"
+                            @endif value="{{$group}}">{{$group}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col-lg-2 input-wrapper">
+                <label for="">Contract Type</label>
+                <select name="contract_type[]" id="" multiple="multiple">
+                    @foreach(array_filter($attributes->contract_type) as $type)
+                        <option @if(isset($filter['contract_type']) && in_array($type, $filter['contract_type']))
+                            selected="selected"
+                            @endif value="{{$type}}">{{$type}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col-lg-2 input-wrapper" style="clear: both">
                 <label for="sortby">Order by</label>
                 <select name="sortby" id="sortby">
                     <option value="">Select</option>
