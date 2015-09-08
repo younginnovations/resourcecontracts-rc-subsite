@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+    $('select').select2({placeholder: "Select", allowClear: true, theme: "classic"});
     //slide effect for filter resource
     var sideslider = $('[data-toggle=collapse-side]');
     var sel = sideslider.attr('data-target');
@@ -48,9 +48,9 @@ $(document).ready(function () {
 
     // search form toggle
 
-    $('#search-form input[type="text"]').focus(function () {
+    $('#search-form:not(.search-page-form) input[type="text"]').focus(function () {
         $('.search-input-wrapper').show();
-        $('select').select2({placeholder: "Select", allowClear: true, theme: "classic"});
+
     });
 
     $(document).on('click', '.search-close', function () {

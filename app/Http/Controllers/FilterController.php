@@ -35,7 +35,7 @@ class FilterController
         $filter['from'] = $currentPage;
         $contracts      = $this->api->filterSearch($filter);
         $filter         = $this->updateFilterData($filter, $contracts, $request);
-        $show_advance   = false;
+        $show_advance   = true;
 
         return view('site.filter', compact('contracts', 'filter', 'show_advance', 'total_contract', 'currentPage'));
     }

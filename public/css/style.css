@@ -426,6 +426,7 @@ footer > .row > div:last-of-type li:first-child {
 
 .search-input-wrapper .col-lg-12 {
 	margin-bottom: 20px;
+	padding: 0 21px;
 }
 
 .search-input-wrapper .col-lg-4 {
@@ -1531,6 +1532,10 @@ footer > .row > div:last-of-type li:first-child {
 	font-family: "Open-Sans-Bold";
 }
 
+.search-list-wrapper {
+	padding-top: 362px;
+}
+
 .search-list-wrapper td:nth-child(3) {
 	min-width: 140px;
 }
@@ -1601,6 +1606,7 @@ footer > .row > div:last-of-type li:first-child {
 	background: #f9f9f9;
 	padding: 10px 0 16px;
 	box-shadow: none;
+	display: block!important;
 }
 
 .search-page-input-wrapper button {
