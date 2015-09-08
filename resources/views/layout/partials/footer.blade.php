@@ -10,7 +10,6 @@
                 </div>
                 <div class="col-lg-8">
                     <ul class="pull-right">
-                        <li><a href="#"><img src="{{url('images/ic-gei.png')}}" /></a></li>
                         <li><a href="#"><img src="{{url('images/ic-nrgi.png')}}" /></a></li>
                         <li><a href="#"><img src="{{url('images/ic-cc.png')}}" /></a></li>
                         <li><a href="#"><img src="{{url('images/ic-worldbank.png')}}" /></a></li>

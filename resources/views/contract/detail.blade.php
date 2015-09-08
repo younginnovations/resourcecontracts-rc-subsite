@@ -122,7 +122,7 @@
                             $resource = is_array($resource)?$resource:[];
 
                             ?>
-                            <span>
+                            <span class="resource-list">
                                 @foreach($resource as $res)
                                     <a href="{{route("search",['resource'=>$res])}}">{{$res}}</a>
                                 @endforeach

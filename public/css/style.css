@@ -1939,3 +1939,10 @@ input.select2-search__field {
 .num-text.first,.num-text.next{
 	margin-left: 0;
 }
+
+.resource-list a+a:before{
+	content: ",";
+	display: inline-block;
+	padding-right: 3px;
+	color: #404040;
+}
