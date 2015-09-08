@@ -113,9 +113,23 @@
                     <ul>
                         <li>
                             <label for="">Type of Contract</label>
-                            <span>{{_e($contract->metadata,'type_of_contract','-')}}</span>
+                            <span>@if(isset($contract->metadata->type_of_contract) && !empty($contract->metadata->type_of_contract))<a href="{{route("search",['contract_type'=>$contract->metadata->type_of_contract])}}">{{_e($contract->metadata,'type_of_contract','-')}}</a>@else - @endif</span>
+                        </li>
+                        <li>
+                            <label for="">Resource</label>
+                            <?php
+                            $resource=_e($contract->metadata,'resource','-');
+                            $resource = is_array($resource)?$resource:[];
+
+                            ?>
+                            <span class="resource-list">
+                                @foreach($resource as $res)
+                                    <a href="{{route("search",['resource'=>$res])}}">{{$res}}</a>
+                                @endforeach
+                            </span>
                         </li>
                     </ul>
+
                 </div>
             </div>
         </div>
@@ -158,11 +172,11 @@
                 <ul>
                     <li>
                         <label for="">Company Name</label>
-                        <span>{{_e($company,'name','-')}}</span>
+                        <span>@if(isset($company->name) && !empty($company->name)) <a href="{{route("search",['company_name'=>$company->name])}}">{{$company->name}} </a> @else - @endif</span>
                     </li>
                     <li>
                         <label for="">Jurisdiction of Incorporation</label>
-                        <span>{{_e($company,'jurisdiction_of_incorporation','-')}}</span>
+                        <span> {{_e($company,'jurisdiction_of_incorporation','-')}}</span>
                     </li>
                     <li>
                         <label for="">Registration Agency</label>
@@ -180,7 +194,7 @@
                     </li>
                     <li>
                         <label for="">Corporate Grouping</label>
-                        <span>{{_e($company,'parent_company','-')}}</span>
+                        <span>@if(isset($company->parent_company) && !empty($company->parent_company)) <a href="{{route("search",['corporate_group'=>$company->parent_company])}}">{{$company->parent_company}} </a> @else - @endif                          </span>
                     </li>
                 </ul>
                 <ul>

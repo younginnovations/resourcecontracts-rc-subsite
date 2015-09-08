@@ -23,6 +23,7 @@
     border: 0;
     overflow: inherit!important;
     font-size: initial!important;
+    z-index: 10;
 }
 
 .document-wrap {
@@ -381,6 +382,7 @@
     padding: 2px 12px;
     color: #898989;
     font-size: 12px;
+    display: inline-block;
 }
 
 .back {
@@ -396,6 +398,7 @@
     border-bottom: 1px solid rgba(220,223,226,0.7);
     display: inline-block;
     width: 100%;
+    background-color: #fff;
 }
 
 .wordwrap span {
@@ -428,6 +431,10 @@
     height: 6px;
     display: inline-block;
     margin-left: 8px;
+}
+
+.view-metadata a.btn-pins {
+    background: url(../../images/ic-sprite.png) no-repeat -154px 16px;
 }
 
 .view-metadata a:hover {

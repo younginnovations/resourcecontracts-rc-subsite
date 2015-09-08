@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+    $('select').select2({placeholder: "Select", allowClear: true, theme: "classic"});
     //slide effect for filter resource
     var sideslider = $('[data-toggle=collapse-side]');
     var sel = sideslider.attr('data-target');
@@ -48,9 +48,9 @@ $(document).ready(function () {
 
     // search form toggle
 
-    $('#search-form input[type="text"]').focus(function () {
+    $('#search-form:not(.search-page-form) input[type="text"]').focus(function () {
         $('.search-input-wrapper').show();
-        $('select').select2({placeholder: "Select", allowClear: true, theme: "classic"});
+
     });
 
     $(document).on('click', '.search-close', function () {
@@ -74,12 +74,21 @@ $(document).ready(function () {
         $('#search-form input[type="text"]').focus();
     });
 
-    var annotationWrapHeight = $('.col-lg-6 .panel-contract-wrap').height() - 4;
+    var annotationWrapHeight = $('.col-lg-6 .panel-contract-wrap').height();
     $('.panel-annotation-wrap').css('height', annotationWrapHeight);
 
     $("#no-pin-message").each(function () {
         if (!$(this).text().trim().length) {
-            // $(this).parents('.pin-list').css('display','none');
+            $(this).parents('.pin-list').css('display','none');
+        }
+    });
+
+    $(document).click(function(e){
+        if(!$(e.target).closest('.download-wrap, .dropdown-menu').length){
+            $(".dropdown-menu").hide();
+        }
+         if(!$(e.target).closest('.view-pin-wrap, #pinLists').length){
+            $("#pinLists").hide();
         }
     });
 
@@ -95,28 +104,13 @@ $(document).ready(function () {
         })
     });
 
-    // $('.download-main-wrap').click(function(){
-    //     $(this).siblings('.dropdown-wrap-menu').toggle();
-    // });
+    $(".sidebar-nav li ul").each(function () {
+        if (!$(this).text().trim().length) {
+            $(this).parent('li').css('display','none');
+        }
+    });
 
-    // $(document).mouseup(function (e)
-    //     {
-    //         var container = $(".download-main-wrap .dropdown-wrap-menu");
 
-    //         if (!container.is(e.target) // if the target of the click isn't the container...
-    //             && container.has(e.target).length === 0) // ... nor a descendant of the container
-    //         {
-    //             container.hide();
-    //         }
-
-    //         var container1 = $("#pinLists");
-
-    //         if (!container1.is(e.target) // if the target of the click isn't the container...
-    //             && container1.has(e.target).length === 0) // ... nor a descendant of the container
-    //         {
-    //             container1.hide();
-    //         }
-    // });
 
 
 });

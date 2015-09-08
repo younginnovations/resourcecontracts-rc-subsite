@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="contract-number-wrap">
-                <span>{{$contracts->total}}</span>contracts
+                <span>{{$contracts->total}}</span> @if($contracts->total > 1)contracts @else Contract @endif
             </div>
         </div>
     </div>
@@ -78,13 +78,11 @@
                     </div>
                     <div class="panel-body">
                         <ul>
-                            <?php $i=0; ?>
                             @foreach($resources as $resource)
-                                <li  @if($i<3) class="highest-count" @endif>
+                                <li>
                                     <span>{{ucfirst($resource->resource)}}</span>
                                     <span class="count pull-right">{{$resource->contract}}</span>
                                 </li>
-                               <?php $i++; ?>
                             @endforeach
                         </ul>
                     </div>
