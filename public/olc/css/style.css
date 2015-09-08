@@ -1601,6 +1601,7 @@ footer > .row > div:last-of-type li:first-child {
 	background: #f9f9f9;
 	padding: 10px 0 16px;
 	box-shadow: none;
+	display: block!important;
 }
 
 .search-page-input-wrapper button {
