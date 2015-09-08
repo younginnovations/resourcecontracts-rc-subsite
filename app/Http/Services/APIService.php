@@ -181,18 +181,19 @@ class APIService
         extract($filter);
 
         $query = [
-            'q'               => $q,
-            'country'         => $country,
-            'corporate_group' => $corporate_group,
-            'company_name'    => $company_name,
-            'contract_type'   => $contract_type,
-            'year'            => $year,
-            'resource'        => $resource,
-            'group'           => $group,
-            'sort_by'         => $sortby,
-            'order'           => $order,
-            'per_page'        => $per_page,
-            'from'            => $per_page * ($from - 1),
+            'q'                   => $q,
+            'country'             => $country,
+            'corporate_group'     => $corporate_group,
+            'company_name'        => $company_name,
+            'contract_type'       => $contract_type,
+            'year'                => $year,
+            'resource'            => $resource,
+            'group'               => $group,
+            'annotation_category' => $annotation_category,
+            'sort_by'             => $sortby,
+            'order'               => $order,
+            'per_page'            => $per_page,
+            'from'                => $per_page * ($from - 1),
 
         ];
 
@@ -326,6 +327,18 @@ class APIService
     public function searchAttributed()
     {
         $resource = 'contract/attributes';
+
+        return $this->apiCall($resource);
+    }
+
+    /**
+     * Get Annotations category
+     *
+     * @return object|null
+     */
+    public function getAnnotationsCategory()
+    {
+        $resource = 'contracts/annotations/category';
 
         return $this->apiCall($resource);
     }
