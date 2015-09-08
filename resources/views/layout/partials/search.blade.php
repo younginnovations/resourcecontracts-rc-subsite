@@ -95,6 +95,8 @@ $category=$api->getAnnotationsCategory();
                     </option>
                 </select>
             </div>
+        </div>
+        <div class="col-lg-12">
             <div class="col-lg-3 input-wrapper">
                 <label for="order">Sort by</label>
                 <select name="order" id="order">

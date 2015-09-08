@@ -48,7 +48,7 @@ $(document).ready(function () {
 
     // search form toggle
 
-    $('#search-form input[type="text"]').focus(function () {
+    $('#search-form:not(.search-page-form) input[type="text"]').focus(function () {
         $('.search-input-wrapper').show();
         $('select').select2({placeholder: "Select", allowClear: true, theme: "classic"});
     });
