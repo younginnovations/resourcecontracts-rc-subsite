@@ -38,6 +38,22 @@ if (!isset($summary)) {
                 @endif
             </ul>
         </li>
+        <li class="resources">
+            <label>Resources</label>
+            <ul>
+                @foreach(array_slice($summary->resource_summary,0,10,true) as $resource)
+                    <li>
+                        <a href="{{route('resource.detail', ['key'=>$resource->key])}}">
+                            <span>{{ucfirst($resource->key)}}</span>
+                            <small class="label pull-right">{{$resource->doc_count}}</small>
+                        </a>
+                    </li>
+                @endforeach
+                @if(count($summary->resource_summary)>10)
+                    <li><a href="{{route('resources')}}">View all</a></li>
+                @endif
+            </ul>
+        </li>
         <li class="year">
             <label>Year</label>
             <ul>
@@ -68,21 +84,6 @@ if (!isset($summary)) {
                 <div><a href="#year-more" class="toggle-all">More</a></div>
             @endif
         </li>
-        <li class="resources">
-            <label>Resources</label>
-            <ul>
-                @foreach(array_slice($summary->resource_summary,0,10,true) as $resource)
-                    <li>
-                        <a href="{{route('resource.detail', ['key'=>$resource->key])}}">
-                            <span>{{ucfirst($resource->key)}}</span>
-                            <small class="label pull-right">{{$resource->doc_count}}</small>
-                        </a>
-                    </li>
-                @endforeach
-                @if(count($summary->resource_summary)>10)
-                    <li><a href="{{route('resources')}}">View all</a></li>
-                    @endif
-            </ul>
-        </li>
+
     </ul>
 </div>
