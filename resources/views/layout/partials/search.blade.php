@@ -2,13 +2,14 @@
 $api     = app('App\Http\Services\APIService');
 $summary = $api->summary();
 $attributes = $api->searchAttributed();
+$category=$api->getAnnotationsCategory();
 ?>
 <form action="{{url('search')}}" method="get" class="search-form @if(isset($show_advance)) search-page-form @endif" id="search-form">
     <div class="form-group">
         <button type="submit" class="btn btn-navbar-search pull-left"></button>
         <input type="text" autocomplete="off" value="{{\Illuminate\Support\Facades\Input::get('q')}}" name="q" class="form-control pull-left" placeholder="Search for contracts...">
     </div>
-    <div class="search-input-wrapper @if(isset($show_advance)) search-page-input-wrapper @endif">
+    <div  class="search-input-wrapper @if(isset($show_advance)) search-page-input-wrapper @endif">
         <div class="col-lg-12">
             <div class="col-lg-3 input-wrapper">
                 <label for="year">Year</label>
@@ -68,6 +69,16 @@ $attributes = $api->searchAttributed();
                         <option @if(isset($filter['contract_type']) && in_array($type, $filter['contract_type']))
                             selected="selected"
                             @endif value="{{$type}}">{{$type}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-lg-3 input-wrapper">
+                <label for="">Annotations Category</label>
+                <select name="annotation_category[]" id="" multiple="multiple">
+                    @foreach(array_filter($category->results) as $cat)
+                        <option @if(isset($filter['annotation_category']) && in_array($cat, $filter['annotation_category']))
+                            selected="selected"
+                            @endif value="{{$cat}}">{{$cat}}</option>
                     @endforeach
                 </select>
             </div>
