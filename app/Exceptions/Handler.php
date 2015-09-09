@@ -5,18 +5,11 @@ use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\HttpCache\HttpCache;
+use ErrorException;
+use Symfony\Component\Debug\ExceptionHandler as SymfonyDisplayer;
 
 class Handler extends ExceptionHandler
 {
-
-    /**
-     * A list of the exception types that should not be reported.
-     *
-     * @var array
-     */
-    protected $dontReport = [
-        'Symfony\Component\HttpKernel\Exception\HttpException'
-    ];
 
     /**
      * Report or log an exception.
@@ -40,8 +33,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        if ($this->isHttpException($e)) {
-            return $this->isHttpException($e);
+        if ($e instanceof HttpException) {
+            return $this->renderHttpException($e);
+        } else {
+            return view('errors.error');
         }
 
         return parent::render($request, $e);
@@ -52,7 +47,7 @@ class Handler extends ExceptionHandler
      * @param HttpException $e
      * @return mixed
      */
-    private function isHttpException(HttpException $e)
+    private function renderHttpException(HttpException $e)
     {
         if (view()->exists('errors.' . $e->getStatusCode())) {
             return view('errors.' . $e->getStatusCode());
