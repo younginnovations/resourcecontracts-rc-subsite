@@ -6,7 +6,7 @@
             <div class="navbar-header">
                 <span data-toggle="collapse-sidebar" data-target=".sidebar-collapse" data-target-2=".sidebar-collapse-container" class="pull-left trigger">trigger</span>
                 @if(env("CATEGORY")=="rc")
-                <a class="navbar-brand" href="{{url()}}" >Resource <span>Contracts</span></a>
+                <a class="navbar-brand" href="{{url()}}" >Resource <span class="beta">Beta</span><span>Contracts</span></a>
                 @else
                     <a class="navbar-brand" href="{{url()}}" >OPENLAND <span>Contracts</span></a>
                  @endif
@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="row row-content">
-        <div class="col-lg-6 country-wrapper">
+        <div class="col-sm-6 col-md-6 col-lg-6 country-wrapper">
             <div class="country-wrap">
                 <div class="country-inner-wrap">
                     <p>Contract Documents from</p>
@@ -41,7 +41,7 @@
                 <a href="{{route('countries')}}" class="btn btn-view">View all countries</a>
             </div>
         </div>
-        <div class="col-lg-6 resource-wrapper">
+        <div class="col-sm-6 col-md-6 col-lg-6 resource-wrapper">
             <div class="resource-wrap">
                 <div class="resource-inner-wrap">
                     <p>Contract Documents related to</p>

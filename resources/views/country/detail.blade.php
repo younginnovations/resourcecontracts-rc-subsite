@@ -42,7 +42,7 @@
 
     <div class="row">
         <div class="col-lg-12 country-detail-wrapper">
-            <div class="col-lg-8">
+            <div class="col-md-8 col-lg-8">
                 <div class="panel panel-default panel-wrap country-contract-wrap">
                     <div class="panel-heading">Contracts in {{@trans('country')[strtoupper($country)]}}</div>
                     <div class="panel-body">
@@ -87,7 +87,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-md-4 col-lg-4">
                 <div class="panel panel-default panel-wrap country-resource-wrap">
                     <div class="panel-heading">Resources in  {{@trans('country')[strtoupper($country)]}}
                     </div>

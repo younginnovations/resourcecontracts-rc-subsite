@@ -74,11 +74,11 @@
             <div class="panel panel-default panel-wrap panel-contract-wrap">
                 <div class="panel-body">
                     <ul>
-                        <li>
+                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <label for="">Language</label>
                             <span>{{strtoupper(_e($contract->metadata,'language','-'))}}</span>
                         </li>
-                        <li>
+                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <label for="">Country</label>
                             @if($code = strtolower(_e($contract->metadata->country,'code')))
                                 <span><a href="{{route('country.detail', ['key'=>$code])}}">{{ucfirst(_e($contract->metadata->country,'name'))}}</a>
@@ -87,17 +87,17 @@
                         </li>
                     </ul>
                     <ul>
-                        <li>
+                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <label for="">Government Entity</label>
                             <span>{{_e($contract->metadata,'government_entity','-')}}</span>
                         </li>
-                        <li>
+                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <label for="">Government Identifier</label>
                             <span>{{_e($contract->metadata,'government_identifier','-')}}</span>
                         </li>
                     </ul>
                     <ul>
-                        <li>
+                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <label for="">Signature Date</label>
                             <?php
                                 $date = $contract->metadata->signature_date;
@@ -105,17 +105,17 @@
                             ?>
                             <span>@if($date){{date('F',$date)}} {{date('d',$date)}}, {{date('Y',$date)}}@else - @endif</span>
                         </li>
-                        <li>
+                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <label for="">Document Type</label>
                             <span>{{_e($contract->metadata,'document_type','-')}}</span>
                         </li>
                     </ul>
                     <ul>
-                        <li>
+                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <label for="">Type of Contract</label>
                             <span>@if(isset($contract->metadata->type_of_contract) && !empty($contract->metadata->type_of_contract))<a href="{{route("search",['contract_type'=>$contract->metadata->type_of_contract])}}">{{_e($contract->metadata,'type_of_contract','-')}}</a>@else - @endif</span>
                         </li>
-                        <li>
+                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <label for="">Resource</label>
                             <?php
                             $resource=_e($contract->metadata,'resource','-');
@@ -129,7 +129,6 @@
                             </span>
                         </li>
                     </ul>
-
                 </div>
             </div>
         </div>
