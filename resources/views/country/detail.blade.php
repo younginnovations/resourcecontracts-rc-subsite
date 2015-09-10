@@ -49,6 +49,11 @@
                         <table class="table table-responsive table-contract">
                                 <tbody>
                                 @forelse($contracts->results as $contract)
+                                    <?php
+                                    $api     = app('App\Http\Services\APIService');
+                                    $annotations = $api->getAnnotations($contract->contract_id);
+
+                                    ?>
                                     <tr>
                                         <td width="70%">
                                             <a href="{{route('contract.detail',['id'=>$contract->contract_id ])}}">
@@ -56,8 +61,18 @@
                                             </a>
                                             <span class="label label-default">{{strtoupper($contract->language)}}</span>
                                             <p class="country_name">- {{trans('country.'.strtoupper($contract->country_code))}}</p>
+                                            {{$contract->contract_type}}
                                         </td>
-                                        <td align="right"> {{$contract->signature_year}} </td>
+                                        <td align="right"> {{$contract->signature_date}} </td>
+                                        <td align="right">
+                                            @foreach($contract->resources as $resource)
+                                                {{$resource}}
+                                            @endforeach
+                                        </td>
+
+                                        @if($annotations->total>0)
+                                            <td align="right"> Annotated </td>
+                                        @endif
                                     </tr>
                                 @empty
                                     <tr>
@@ -80,7 +95,7 @@
                         <ul>
                             @foreach($resources as $resource)
                                 <li>
-                                    <span>{{ucfirst($resource->resource)}}</span>
+                                    <span><a href="{{route("resource.detail",["key"=>$resource->resource])}}">{{ucfirst($resource->resource)}}</a></span>
                                     <span class="count pull-right">{{$resource->contract}}</span>
                                 </li>
                             @endforeach

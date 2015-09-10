@@ -36,18 +36,18 @@
             <div class="country-wrap">
                 <div class="country-inner-wrap">
                     <p>Contract Documents from</p>
-                    <span>{{$countries or ''}}</span> countries
+                    <span>{{$countries or ''}}</span> Countries
                 </div>
-                <a href="{{route('countries')}}" class="btn btn-view">View all Countries</a>
+                <a href="{{route('countries')}}" class="btn btn-view">View all countries</a>
             </div>
         </div>
         <div class="col-lg-6 resource-wrapper">
             <div class="resource-wrap">
                 <div class="resource-inner-wrap">
                     <p>Contract Documents related to</p>
-                    <span>{{$resources or ''}}</span> resources
+                    <span>{{$resources or ''}}</span> Resources
                 </div>
-                <a href="{{route('resources')}}" class="btn btn-view">View all Resources</a>
+                <a href="{{route('resources')}}" class="btn btn-view">View all resources</a>
             </div>
         </div>
     </div>

@@ -34,6 +34,11 @@
                     <table class="table table-responsive table-contract">
                         <tbody>
                         @forelse($contracts->results as $contract)
+                            <?php
+                            $api     = app('App\Http\Services\APIService');
+                            $annotations = $api->getAnnotations($contract->contract_id);
+
+                            ?>
                             <tr>
                                 <td width="70%">
                                      <a href="{{route('contract.detail',['id'=>$contract->contract_id ])}}">
@@ -52,14 +57,21 @@
                                     </div>
                                 </td>
                                 <td>{{$contract->signature_year}}</td>
-                                <td align="right">{{getFileSize($contract->file_size)}}</td>
-
+                                <td align="right">{{getFileSize($contract->contract_type)}}</td>
+                                <td align="right">
+                                    @foreach($contract->resource as $resource)
+                                        {{$resource}}
+                                    @endforeach
+                                </td>
                                 @if(isset($contract->group))
                                     <td align="right">
                                         @foreach($contract->group as $group)
                                             <a>{{$group}}</a>
                                         @endforeach
                                     </td>
+                                @endif
+                                @if($annotations->total>0)
+                                    <td align="right"> Annotated </td>
                                 @endif
                             </tr>
                         @empty

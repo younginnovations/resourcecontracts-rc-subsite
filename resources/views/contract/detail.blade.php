@@ -124,7 +124,7 @@
                             ?>
                             <span class="resource-list">
                                 @foreach($resource as $res)
-                                    <a href="{{route("search",['resource'=>$res])}}">{{$res}}</a>
+                                    <a href="{{route("resource.detail",['key'=>$res])}}">{{$res}}</a>
                                 @endforeach
                             </span>
                         </li>

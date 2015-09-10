@@ -79,7 +79,6 @@ class APIService
         ];
 
         $contract = $this->apiCall('contracts', $query);
-
         if ($contract->total > 0) {
             return $contract;
         }
