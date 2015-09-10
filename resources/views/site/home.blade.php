@@ -8,7 +8,7 @@
                 @if(env("CATEGORY")=="rc")
                 <a class="navbar-brand" href="{{url()}}" >Resource <span class="beta">Beta</span><span>Contracts</span></a>
                 @else
-                    <a class="navbar-brand" href="{{url()}}" >OPENLAND <span>Contracts</span></a>
+                    <a class="navbar-brand" href="{{url()}}" >OPENLAND <span class="beta">Beta</span><span>Contracts</span></a>
                  @endif
             </div>
         </nav>

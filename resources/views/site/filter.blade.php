@@ -40,43 +40,50 @@
 
                             ?>
                             <tr>
-                                <td width="70%">
+                                <td>
                                      <a href="{{route('contract.detail',['id'=>$contract->contract_id ])}}">
                                             {{ $contract->contract_name or ''}}
-                                     </a>
-                                    <span class="label label-default">{{strtoupper($contract->language)}}</span>
-
-                                    @if($contract->country !='')
-                                    - {{@trans('country')[$contract->country]}}
-                                    @endif
-
-                                    <div class="search-text">
+                                     </a>  
+                                      <div class="search-text">
                                         {!!$contract->text or ''!!}
                                         {!!$contract->annotations or ''!!}
                                         {!!$contract->metadata or ''!!}
-                                    </div>
+                                    </div>      
+                                    <div class="contract-type">{{$contract->contract_type}}</div>                          
+                                    <ul>
+                                    @if($contract->country !='')
+                                    <li>
+                                    {{@trans('country')[$contract->country]}}
+                                    </li>
+                                    @endif
+                                     @if($annotations->total>0)
+                                    <li class="annotate-text"> Annotated </li>
+                                    @endif
+                                    <li>{{$contract->signature_year}}</li>
+                                   </ul>
+                                    
                                 </td>
-                                <td>{{$contract->signature_year}}</td>
-                                <td align="right">{{getFileSize($contract->contract_type)}}</td>
-                                <td align="right">
+                                <td>
+                                  <span class="label label-default">{{strtoupper($contract->language)}}</span>
+                                </td>
+                                <td>
                                     @foreach($contract->resource as $resource)
                                         {{$resource}}
                                     @endforeach
                                 </td>
+
                                 @if(isset($contract->group))
-                                    <td align="right">
+                                    <td>
                                         @foreach($contract->group as $group)
                                             <a>{{$group}}</a>
                                         @endforeach
                                     </td>
                                 @endif
-                                @if($annotations->total>0)
-                                    <td align="right"> Annotated </td>
-                                @endif
+       
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="2">{{'Search result not found.'}}</td>
+                                <td colspan="2" class="search-not-found">{{'Search result not found.'}}</td>
                             </tr>
                         @endforelse
                         </tbody>

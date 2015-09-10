@@ -7,7 +7,7 @@
             <a class="navbar-brand" href="{{url()}}" >Resource <span class="beta">Beta</span><span>Contracts</span></a>
             @else
                 <link rel="icon" href="olc/images/favicon.ico">
-                <a class="navbar-brand" href="{{url()}}" >OPENLAND <span>Contracts</span></a>
+                <a class="navbar-brand" href="{{url()}}" >OPENLAND <span class="beta">Beta</span><span>Contracts</span></a>
             @endif
         </div>
         <div class="col-sm-12 col-md-9 col-lg-10 navbar-right">
