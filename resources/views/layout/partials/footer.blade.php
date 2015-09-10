@@ -1,6 +1,6 @@
 <footer>
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-4 footer-left-wrap">
                     <ul>
                         <li><a href="{{url('about')}}">About</a></li>
                         <li><a href="{{url('faqs')}}">FAQs</a></li>
@@ -8,8 +8,8 @@
                         <li><a href="{{url('contact')}}">Contact</a></li>
                     </ul>
                 </div>
-                <div class="col-lg-8">
-                    <ul class="pull-right">
+                <div class="col-lg-8 footer-right-wrap">
+                    <ul>
                         <li><a href="#"><img src="{{url('images/ic-nrgi.png')}}" /></a></li>
                         <li><a href="#"><img src="{{url('images/ic-cc.png')}}" /></a></li>
                         <li><a href="#"><img src="{{url('images/ic-worldbank.png')}}" /></a></li>

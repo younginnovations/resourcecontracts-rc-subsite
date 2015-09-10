@@ -9,9 +9,9 @@ if (!isset($summary)) {
     <ul class="sidebar-nav">
         <li class="sidebar-brand">
             @if(env("CATEGORY")=="rc")
-                <a href="{{url()}}">Resource <span>Contracts</span></a>
+                <a href="{{url()}}">Resource <span class="beta">Beta</span><span>Contracts</span></a>
             @else
-                <a href="{{url()}}">OPENLAND <span>Contracts</span></a>
+                <a href="{{url()}}">OPENLAND <span class="beta">Beta</span><span>Contracts</span></a>
             @endif
 
         </li>

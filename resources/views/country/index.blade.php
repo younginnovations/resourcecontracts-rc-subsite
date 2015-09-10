@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="filter-wrapper">
-                <div class="col-lg-8">
+                <div class="col-xs-6 col-sm-6 col-md-9 col-lg-8">
                     <div class="filter-country-wrap">
                         <form class="search-form filter-form">
                             <div class="form-group">
@@ -27,7 +27,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="col-lg-2 pull-right">
+                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-2 pull-right">
                     <div class="filter-resource-wrap">
                         <div class="filter-label" data-toggle="collapse-side" data-target=".side-collapse" data-target-2=".side-collapse-container">Filter by Resources<i></i></div>
                     </div>
@@ -58,7 +58,7 @@
     <script type="text/javascript" src="{{url('js/lib/backbone.js')}}"></script>
     <script type="text/javascript" src="{{url('js/lib/backbone.fetch-cache.min.js')}}"></script>
     <script type="text/template" id="country-template">
-        <div class="col-lg-2">
+        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
             <a href="{{url('countries')}}/<%= code %>">
                 <img width="200" src="{{getFlagUrl()}}<%= code %>.png" />
                 <div class="country-name"><%= name %></div>

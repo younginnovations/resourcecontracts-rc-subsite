@@ -11,7 +11,7 @@ $category=$api->getAnnotationsCategory();
     </div>
     <div  class="search-input-wrapper @if(isset($show_advance)) search-page-input-wrapper @endif">
         <div class="col-lg-12">
-            <div class="col-lg-3 input-wrapper">
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 input-wrapper">
                 <label for="year">Year</label>
                 <select name="year[]" id="year" multiple="multiple">
                     @foreach($summary->year_summary as $year)
@@ -20,7 +20,7 @@ $category=$api->getAnnotationsCategory();
                     @endforeach
                 </select>
             </div>
-            <div class="col-lg-3 input-wrapper">
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 input-wrapper">
                 <label for="">Country</label>
                 <select name="country[]" id="" multiple="multiple">
                     @foreach($summary->country_summary as $country)
@@ -30,7 +30,7 @@ $category=$api->getAnnotationsCategory();
                     @endforeach
                 </select>
             </div>
-            <div class="col-lg-3 input-wrapper">
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 input-wrapper">
                 <label for="">Resource</label>
                 <select name="resource[]" id="" multiple="multiple">
                     @foreach($summary->resource_summary as $resource)
@@ -40,7 +40,7 @@ $category=$api->getAnnotationsCategory();
                     @endforeach
                 </select>
             </div>
-            <div class="col-lg-3 input-wrapper">
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 input-wrapper">
                 <label for="">Company Name</label>
                 <select name="company_name[]" id="" multiple="multiple">
                     @foreach($attributes->company_name as $company)
@@ -52,7 +52,7 @@ $category=$api->getAnnotationsCategory();
             </div>
         </div>
         <div class="col-lg-12">
-            <div class="col-lg-3 input-wrapper">
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 input-wrapper">
                 <label for="">Corporate Group</label>
                 <select name="corporate_group[]" id="" multiple="multiple">
                     @foreach($attributes->corporate_grouping as $group)
@@ -62,7 +62,7 @@ $category=$api->getAnnotationsCategory();
                     @endforeach
                 </select>
             </div>
-            <div class="col-lg-3 input-wrapper">
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 input-wrapper">
                 <label for="">Contract Type</label>
                 <select name="contract_type[]" id="" multiple="multiple">
                     @foreach(array_filter($attributes->contract_type) as $type)
@@ -72,7 +72,7 @@ $category=$api->getAnnotationsCategory();
                     @endforeach
                 </select>
             </div>
-            <div class="col-lg-3 input-wrapper">
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 input-wrapper">
                 <label for="">Annotations Category</label>
                 <select name="annotation_category[]" id="" multiple="multiple">
                     @foreach(array_filter($category->results) as $cat)
@@ -82,36 +82,8 @@ $category=$api->getAnnotationsCategory();
                     @endforeach
                 </select>
             </div>
-            <div class="col-lg-3 input-wrapper">
-                <label for="sortby">Order by</label>
-                <select name="sortby" id="sortby">
-                    <option value="">Select</option>
-                    <option @if(isset($filter['sortby']) && $filter['sortby'] == 'country')
-                        selected="selected" @endif value="country">Country
-                    </option>
-                    <option @if(isset($filter['sortby']) && $filter['sortby'] == 'year') selected="selected"
-                                                                                         @endif value="year">
-                        Year
-                    </option>
-                </select>
-            </div>
         </div>
-        <div class="col-lg-12">
-            <div class="col-lg-3 input-wrapper">
-                <label for="order">Sort by</label>
-                <select name="order" id="order">
-                    <option value="">Select</option>
-                    <option @if(isset($filter['order']) && $filter['order'] == 'asc') selected="selected"
-                                                                                      @endif value="asc">ASC
-                    </option>
-                    <option @if(isset($filter['order']) && $filter['order'] == 'desc') selected="selected"
-                                                                                       @endif value="desc">
-                        DESC
-                    </option>
-                </select>
-            </div>
-        </div>
-            <div class="col-lg-4">
+            <div class="col-lg-5">
                 <button type="submit" class="btn btn-form-search">Search</button>
                 <button type="button" class="btn btn-form-search search-close">Cancel</button>
             </div>
