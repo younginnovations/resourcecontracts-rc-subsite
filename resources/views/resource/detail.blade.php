@@ -55,24 +55,28 @@
 
                                 ?>
                                 <tr>
-                                    <td width="70%">
+                                    <td>
                                         <a href="{{route('contract.detail',['id'=>$contract->contract_id ])}}">
                                             {{ $contract->contract_name or ''}}
                                         </a>
-                                        <span class="label label-default">{{strtoupper($contract->language)}}</span>
+                                         @if($annotations->total>0)
+                                        <div class="annotate-text"> Annotated </div>
+                                        @endif
                                         <p class="country_name">- {{trans('country.'.strtoupper($contract->country_code))}}</p>
-                                        {{$contract->contract_type}}
+                                        <div class="resource-contract-list">
+                                         <div class="resource-type">
+                                            <label for="">Resources: </label>
+                                            @foreach($contract->resources as $resource)
+                                                {{$resource}}
+                                            @endforeach
+                                        </div>
+                                        <div class="contract-type">
+                                            <label for="">Contract Type:</label>
+                                            {{$contract->contract_type}}
+                                        </div>
+                                        </div>
                                     </td>
-                                    @if($annotations->total>0)
-                                        <td align="right"> Annotated </td>
-                                    @endif
-                                    <td align="right"> {{$contract->signature_date}} </td>
-
-                                    <td align="right">
-                                        @foreach($contract->resources as $resource)
-                                            {{$resource}}
-                                        @endforeach
-                                    </td>
+                                    <td class="contract-date">{{$contract->signature_date}}</td>
 
                                 </tr>
                             @empty

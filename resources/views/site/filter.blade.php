@@ -44,42 +44,41 @@
                                      <a href="{{route('contract.detail',['id'=>$contract->contract_id ])}}">
                                             {{ $contract->contract_name or ''}}
                                      </a>  
+                                      @if($annotations->total>0)
+                                      <div class="annotate-text"> Annotated </div>
+                                      @endif
                                       <div class="search-text">
                                         {!!$contract->text or ''!!}
                                         {!!$contract->annotations or ''!!}
                                         {!!$contract->metadata or ''!!}
-                                    </div>      
-                                    <div class="contract-type">{{$contract->contract_type}}</div>                          
-                                    <ul>
-                                    @if($contract->country !='')
-                                    <li>
+                                      </div> 
+                                         @if(isset($contract->group))
+                                        <div class="contract-group">
+                                          <label for="">Found in: </label>
+                                            @foreach($contract->group as $group)
+                                                <a>{{$group}}</a>
+                                            @endforeach
+                                        </div>
+                                        @endif   
+                                        <div class="resource-contract-list">  
+                                        <div class="resource-type">
+                                          <label for="">Resource: </label>
+                                          @foreach($contract->resource as $resource)
+                                          {{$resource}}
+                                          @endforeach
+                                        </div>
+                                        <div class="contract-type">
+                                          <label for="">Contract Type:</label>{{$contract->contract_type}}
+                                        </div>  
+                                      </div>                        
+                                  </td>
+                                  @if($contract->country !='')
+                                  <td>{{$contract->signature_year}}</td>
+                                  <td>
                                     {{@trans('country')[$contract->country]}}
-                                    </li>
-                                    @endif
-                                     @if($annotations->total>0)
-                                    <li class="annotate-text"> Annotated </li>
-                                    @endif
-                                    <li>{{$contract->signature_year}}</li>
-                                   </ul>
-                                    
-                                </td>
-                                <td>
-                                  <span class="label label-default">{{strtoupper($contract->language)}}</span>
-                                </td>
-                                <td>
-                                    @foreach($contract->resource as $resource)
-                                        {{$resource}}
-                                    @endforeach
-                                </td>
-
-                                @if(isset($contract->group))
-                                    <td>
-                                        @foreach($contract->group as $group)
-                                            <a>{{$group}}</a>
-                                        @endforeach
-                                    </td>
-                                @endif
-       
+                                  </td>
+                                  @endif
+                                  
                             </tr>
                         @empty
                             <tr>
