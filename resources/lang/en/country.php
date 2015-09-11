@@ -58,7 +58,7 @@ return [
     "CO" => "Colombia",
     "KM" => "Comoros",
     "CG" => "Congo",
-    "CD" => "Congo,Democratic Republic of the Congo",
+    "CD" => "Democratic Republic of the Congo",
     "CK" => "Cook Islands",
     "CR" => "Costa Rica",
     "CI" => "CÃ”te d'ivoire",
