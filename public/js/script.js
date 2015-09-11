@@ -29,9 +29,6 @@ $(document).ready(function () {
     });
 
 
-    var countryLine = $('.country-detail-wrapper').height();
-    $('.country-contract-wrap').css('height', countryLine);
-
     // slide to annotation list
 
     $(".view-annotation").on('click', function (e) {
@@ -95,7 +92,19 @@ $(document).ready(function () {
         else {
             $('.panel-annotation-wrap').css('height', 'auto');
         }
-    })
+    });
+
+    if($(window).width() > 992) {
+        var countryLine = $('.country-detail-wrapper').height();
+        $('.country-contract-wrap').css('height', countryLine);
+    }
+
+    $(window).on('resize',function(){ 
+        if($(window).width() > 992) {
+            var countryLine = $('.country-detail-wrapper').height();
+            $('.country-contract-wrap').css('height', countryLine);
+        }
+    });
 
     $("#no-pin-message").each(function () {
         if (!$(this).text().trim().length) {
@@ -129,8 +138,6 @@ $(document).ready(function () {
             $(this).parent('li').css('display','none');
         }
     });
-
-
 
 
 });
