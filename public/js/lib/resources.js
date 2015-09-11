@@ -193,8 +193,9 @@ $(function () {
 
         collection.url = APP_URL + '/contract/resources?country=' + country.join();
         collection.fetch({'reset': true, cache: true, expires: 60000, success:function(){
+            $('#resources').find('.col-lg-4').removeClass('col-lg-4').addClass('col-lg-6');
             $('.side-collapse').css('height', $('#resources').height()+150 + 'px');
-            $('#resources').find('.col-lg-6').removeClass('col-lg-6').addClass('col-lg-4')}
+        }
         });
 
     });

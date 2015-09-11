@@ -189,8 +189,8 @@ $(function () {
         });
         collection.url = APP_URL + '/contract/countries?resource=' + resources.join();
         collection.fetch({'reset': true, cache: true, expires: 60000, success:function(){
-            $('.side-collapse').css('height', $('#countries').height()+150 + 'px');
             $('#countries').find('.col-lg-2').removeClass('col-lg-2').addClass('col-lg-3');
+            $('.side-collapse').css('height', $('#countries').height()+150 + 'px');
         }});
     });
 
