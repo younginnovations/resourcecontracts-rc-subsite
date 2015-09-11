@@ -62,7 +62,7 @@
     <script type="text/template" id="resource-template">
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
             <a href="{{url('resource')}}/<%= value %>">
-                <div class="country-name pull-left"><%= name %></div>
+                <div class="country-name resource-name pull-left"><%= name %></div>
             </a>
             <div class="contract-count pull-right"><%= contract %> contracts</div>
         </div>

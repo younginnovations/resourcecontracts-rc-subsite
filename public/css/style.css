@@ -718,7 +718,10 @@ footer ul li a:hover {
 	font-family: "Open-Sans-Bold";
 	line-height: 16px;
 	color: #404040;
-	width: 80%;
+}
+
+.resource-name {
+	width: 70%;
 	text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -1781,6 +1784,10 @@ tr:empty {
 	border: 0;
 }
 
+.content-wrap #content {
+	width: 80%;
+}
+
 .panel-content p,.content-wrap #content p {
 	line-height: 22px;
 	margin-bottom: 20px;
@@ -1802,7 +1809,7 @@ tr:empty {
 }
 
 .content-wrap {
-	margin-left: 22%;
+	margin-left: 16%;
 	min-height: 500px;
 }
 
@@ -1950,6 +1957,10 @@ h1 + .editable-container.editable-inline {
 	text-align: center;
 	color: #fff;
 	padding: 100px 0 300px;
+}
+
+.service-not-found-content {
+	height: 100vh;
 }
 
 .error-text {
@@ -2150,6 +2161,10 @@ input.select2-search__field {
 	.view-all-annotations {
 		position: absolute;
 	}
+
+	.content-wrap #content {
+		width: 70%;
+	}
 }
 
 @media all and (min-width: 1200px) {
@@ -2171,6 +2186,14 @@ input.select2-search__field {
 
 	.panel-contract-wrap {
 		margin-bottom: 0;
+	}
+
+	.content-wrap #content {
+		width: 50%;
+	}
+
+	.content-wrap {
+		margin-left: 22%;
 	}
 }
 
