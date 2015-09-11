@@ -187,9 +187,11 @@ $(function () {
         $(".resource:checked").each(function () {
             resources.push($(this).val());
         });
-
         collection.url = APP_URL + '/contract/countries?resource=' + resources.join();
-        collection.fetch({'reset': true, cache: true, expires: 60000});
+        collection.fetch({'reset': true, cache: true, expires: 60000, success:function(){
+            $('#countries').find('.col-lg-2').removeClass('col-lg-2').addClass('col-lg-3');
+            $('.side-collapse').css('height', $('#countries').height()+150 + 'px');
+        }});
     });
 
     $(document).on('change', '.sort', function (e) {
@@ -201,4 +203,8 @@ $(function () {
         e.preventDefault();
         collection.trigger('search', $(this).val());
     });
+
+
+
+
 });
