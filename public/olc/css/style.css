@@ -2300,3 +2300,16 @@ input.select2-search__field {
     line-height: normal;
     font-size: inherit;
 }
+
+.government-entity-wrap li label {
+	display: block;;
+}
+
+.government-entity-wrap li span {
+	display: inline-block;
+}
+
+.government-entity-wrap li span+span:before {
+	content: ",";
+	display: inline-block;
+}
