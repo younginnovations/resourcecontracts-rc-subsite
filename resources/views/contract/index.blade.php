@@ -77,9 +77,13 @@
                                             {{$resource}}
                                         @endforeach
                                     </td>
-                                    @if($annotations->total>0)
-                                        <td align="right"> Annotated </td>
-                                    @endif
+
+                                        <td align="right">
+                                            @if($annotations->total>0)
+                                                Annotated
+                                            @endif
+                                        </td>
+
                                 </tr>
                             @endforeach
                         @else
