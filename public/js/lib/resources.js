@@ -173,7 +173,11 @@ var resourceList = new ResourceList({
 }).el;
 
 var rCollection = new CountryController(APP_URL + '/contract/countries');
-rCollection.fetch({reset: true, cache: true, expires: 60000});
+//rCollection.fetch({reset: true, cache: true, expires: 60000});
+
+rCollection.fetch({'reset': true, cache: true, expires: 60000});
+
+
 
 var countryList = new CountryList({
     el: '#countries',
@@ -188,7 +192,11 @@ $(function () {
         });
 
         collection.url = APP_URL + '/contract/resources?country=' + country.join();
-        collection.fetch({'reset': true, cache: true, expires: 60000});
+        collection.fetch({'reset': true, cache: true, expires: 60000, success:function(){
+            $('.side-collapse').css('height', $('#resources').height()+150 + 'px');
+            $('#resources').find('.col-lg-6').removeClass('col-lg-6').addClass('col-lg-4')}
+        });
+
     });
 
     $(document).on('change', '.sort', function (e) {
