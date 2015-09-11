@@ -708,9 +708,6 @@ footer ul li a:hover {
 	margin-top: 0;
 }
 
-/*.country-list-wrap .col-lg-2:nth-child(-n+6),.country-list-wrap .col-lg-3:nth-child(-n+4) {
-	margin-top: 0;
-}*/
 
 .country-list-wrap .col-lg-2 a:hover,.country-list-wrap .col-lg-2 a:focus {
 	text-decoration: none;
@@ -721,6 +718,10 @@ footer ul li a:hover {
 	font-family: "Open-Sans-Bold";
 	line-height: 16px;
 	color: #404040;
+	width: 80%;
+	text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .contract-count {
