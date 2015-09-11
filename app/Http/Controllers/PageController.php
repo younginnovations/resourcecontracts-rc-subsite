@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Services\AuthService;
-use App\Http\Services\PageService;
+use App\Http\Services\Page\PageService;
 use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as BaseController;
 

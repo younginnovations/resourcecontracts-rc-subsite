@@ -4,6 +4,7 @@ $(document).ready(function () {
     var sideslider = $('[data-toggle=collapse-side]');
     var sel = sideslider.attr('data-target');
     var sel2 = sideslider.attr('data-target-2');
+    console.log(sideslider);
     sideslider.click(function (event) {
         $(this).toggleClass('active');
         $(sel).toggleClass('in');
@@ -12,6 +13,10 @@ $(document).ready(function () {
         $(sel2).find('.col-lg-4,.col-lg-6').toggleClass('col-lg-4').toggleClass('col-lg-6');
         var containerHeight = $('.side-collapse-container').height();
         $('.side-collapse').height(containerHeight);
+
+        $('input.resource').on('click',function(){
+            $('#countries > .col-lg-3').addClass('toggle-width');
+        });
     });
 
     var sideslider1 = $('[data-toggle=collapse-sidebar]');
@@ -74,8 +79,23 @@ $(document).ready(function () {
         $('#search-form input[type="text"]').focus();
     });
 
-    var annotationWrapHeight = $('.col-lg-6 .panel-contract-wrap').height();
-    $('.panel-annotation-wrap').css('height', annotationWrapHeight);
+    if($(window).width() > 992) {
+        var annotationWrapHeight = $('.col-lg-6 .panel-contract-wrap').height();
+        $('.panel-annotation-wrap').css('height', annotationWrapHeight);
+    }
+    else {
+        $('.panel-annotation-wrap').css('height', 'auto');
+    }
+
+    $(window).on('resize',function(){
+        if($(window).width() > 992) {
+            var annotationWrapHeight = $('.col-lg-6 .panel-contract-wrap').height();
+            $('.panel-annotation-wrap').css('height', annotationWrapHeight);
+        }
+        else {
+            $('.panel-annotation-wrap').css('height', 'auto');
+        }
+    })
 
     $("#no-pin-message").each(function () {
         if (!$(this).text().trim().length) {

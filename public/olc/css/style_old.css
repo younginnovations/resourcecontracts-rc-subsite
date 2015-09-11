@@ -261,10 +261,6 @@ header {
     margin-top: 4px;
 }
 
-.search-input-wrapper .input-wrapper:nth-child(3), .search-input-wrapper .input-wrapper:nth-child(4) {
-    width: 150px;
-}
-
 .search-input {
     -webkit-display: flex;
     -moz-display: flex;

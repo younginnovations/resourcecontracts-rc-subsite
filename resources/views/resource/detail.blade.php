@@ -41,7 +41,7 @@
     </div>
     <div class="row">
         <div class="col-lg-12 country-detail-wrapper">
-            <div class="col-lg-8">
+            <div class="col-md-8 col-lg-8">
                 <div class="panel panel-default panel-wrap country-contract-wrap">
                     <div class="panel-heading">Contracts of {{ucfirst($resource)}}</div>
                     <div class="panel-body">
@@ -49,6 +49,11 @@
                             <tbody>
 
                             @forelse($contracts->results as $contract)
+                                <?php
+                                $api     = app('App\Http\Services\APIService');
+                                $annotations = $api->getAnnotations($contract->contract_id);
+
+                                ?>
                                 <tr>
                                     <td width="70%">
                                         <a href="{{route('contract.detail',['id'=>$contract->contract_id ])}}">
@@ -56,8 +61,19 @@
                                         </a>
                                         <span class="label label-default">{{strtoupper($contract->language)}}</span>
                                         <p class="country_name">- {{trans('country.'.strtoupper($contract->country_code))}}</p>
+                                        {{$contract->contract_type}}
                                     </td>
-                                    <td align="right"> {{$contract->signature_year}} </td>
+                                    @if($annotations->total>0)
+                                        <td align="right"> Annotated </td>
+                                    @endif
+                                    <td align="right"> {{$contract->signature_date}} </td>
+
+                                    <td align="right">
+                                        @foreach($contract->resources as $resource)
+                                            {{$resource}}
+                                        @endforeach
+                                    </td>
+
                                 </tr>
                             @empty
                                 <tr>
@@ -71,14 +87,14 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-md-4 col-lg-4">
                 <div class="panel panel-default panel-wrap country-resource-wrap">
                     <div class="panel-heading">Countries</div>
                     <div class="panel-body">
                         <ul>
                         @foreach($countries as $country)
                             <li>
-                                <span>{{trans('country')[strtoupper(ucfirst($country->code))]}}</span>
+                                <span><a href="{{route("country.detail",["key"=>$country->code])}}">{{trans('country')[strtoupper(ucfirst($country->code))]}}</a></span>
                                 <span class="count pull-right">{{$country->contract}}</span>
                             </li>
                         @endforeach

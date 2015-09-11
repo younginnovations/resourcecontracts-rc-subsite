@@ -37,7 +37,7 @@
                     {{$contract->metadata->contract_name}}
                 </div>
             </div>
-            <div class="pull-right action-links">
+            <div class="action-links">
                 <ul>
                     @if($contract->pages->total>0)<li class="pull-left"><a href="{{route('contract.text',['id'=>$contract->metadata->contract_id])}}">View Document</a></li>@endif
                 </ul>
@@ -70,15 +70,15 @@
 
 <div class="row contract-detail-wrapper">
     <div class="col-lg-12">
-        <div class="col-lg-6">
+        <div class="col-md-6 col-lg-6">
             <div class="panel panel-default panel-wrap panel-contract-wrap">
                 <div class="panel-body">
                     <ul>
-                        <li>
+                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <label for="">Language</label>
                             <span>{{strtoupper(_e($contract->metadata,'language','-'))}}</span>
                         </li>
-                        <li>
+                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <label for="">Country</label>
                             @if($code = strtolower(_e($contract->metadata->country,'code')))
                                 <span><a href="{{route('country.detail', ['key'=>$code])}}">{{ucfirst(_e($contract->metadata->country,'name'))}}</a>
@@ -87,17 +87,17 @@
                         </li>
                     </ul>
                     <ul>
-                        <li>
+                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <label for="">Government Entity</label>
                             <span>{{_e($contract->metadata,'government_entity','-')}}</span>
                         </li>
-                        <li>
+                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <label for="">Government Identifier</label>
                             <span>{{_e($contract->metadata,'government_identifier','-')}}</span>
                         </li>
                     </ul>
                     <ul>
-                        <li>
+                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <label for="">Signature Date</label>
                             <?php
                                 $date = $contract->metadata->signature_date;
@@ -105,17 +105,17 @@
                             ?>
                             <span>@if($date){{date('F',$date)}} {{date('d',$date)}}, {{date('Y',$date)}}@else - @endif</span>
                         </li>
-                        <li>
+                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <label for="">Document Type</label>
                             <span>{{_e($contract->metadata,'document_type','-')}}</span>
                         </li>
                     </ul>
                     <ul>
-                        <li>
+                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <label for="">Type of Contract</label>
                             <span>@if(isset($contract->metadata->type_of_contract) && !empty($contract->metadata->type_of_contract))<a href="{{route("search",['contract_type'=>$contract->metadata->type_of_contract])}}">{{_e($contract->metadata,'type_of_contract','-')}}</a>@else - @endif</span>
                         </li>
-                        <li>
+                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <label for="">Resource</label>
                             <?php
                             $resource=_e($contract->metadata,'resource','-');
@@ -124,16 +124,15 @@
                             ?>
                             <span class="resource-list">
                                 @foreach($resource as $res)
-                                    <a href="{{route("search",['resource'=>$res])}}">{{$res}}</a>
+                                    <a href="{{route("resource.detail",['key'=>$res])}}">{{$res}}</a>
                                 @endforeach
                             </span>
                         </li>
                     </ul>
-
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-md-6 col-lg-6">
             <div class="panel panel-default panel-wrap panel-annotation-wrap">
                 <div class="panel-body">
                     <div class="annotation-block">
@@ -170,43 +169,43 @@
             @foreach($contract->metadata->company as $company)
             <div class="panel-body panel-col3-wrap">
                 <ul>
-                    <li>
+                    <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                         <label for="">Company Name</label>
                         <span>@if(isset($company->name) && !empty($company->name)) <a href="{{route("search",['company_name'=>$company->name])}}">{{$company->name}} </a> @else - @endif</span>
                     </li>
-                    <li>
+                    <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                         <label for="">Jurisdiction of Incorporation</label>
                         <span> {{_e($company,'jurisdiction_of_incorporation','-')}}</span>
                     </li>
-                    <li>
+                    <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                         <label for="">Registration Agency</label>
                         <span>{{_e($company,'registration_agency','-')}}</span>
                     </li>
                 </ul>
                 <ul>
-                    <li>
+                    <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                         <label for="">Company Address</label>
                         <span>{{_e($company,'company_address','-')}}</span>
                     </li>
-                    <li>
+                    <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                         <label for="">Company Number</label>
                         <span>{{_e($company,'company_number','-')}}</span>
                     </li>
-                    <li>
+                    <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                         <label for="">Corporate Grouping</label>
                         <span>@if(isset($company->parent_company) && !empty($company->parent_company)) <a href="{{route("search",['corporate_group'=>$company->parent_company])}}">{{$company->parent_company}} </a> @else - @endif                          </span>
                     </li>
                 </ul>
                 <ul>
-                    <li>
+                    <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                         <label for="">Open Corporate ID</label>
                         <span>@if(isset($company->open_corporate_id) && !empty($company->open_corporate_id))<a href="{{$company->open_corporate_id}}">{{str_limit($company->open_corporate_id,25)}}</a> @else - @endif</span>
                     </li>
-                    <li>
+                    <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                         <label for="">Participation Share</label>
                         <span>{{_e($company,'participation_share','-')}}</span>
                     </li>
-                    <li>
+                    <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                         <label for="">Operator</label>
                         <span>@if(isset($company->operator) && $company->operator==1) Yes @else - @endif</span>
                     </li>
@@ -272,11 +271,11 @@
             </div>
             <div class="panel-body">
                 <ul>
-                    <li>
+                    <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                         <label for="">Project Title</label>
                         <span>{{_e($contract->metadata,'project_title','-')}}</span>
                     </li>
-                    <li>
+                    <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                         <label for="">Project Identifier</label>
                         <span>{{_e($contract->metadata,'project_identifier','-')}}</span>
                     </li>
@@ -286,11 +285,11 @@
                         $concessions = _e($contract->metadata,'concession', []);
                     ?>
                     @foreach($concessions as $concession)
-                        <li>
+                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <label for="">License Name</label>
                             <span>{{_e($concession,'license_name','-')}}</span>
                         </li>
-                        <li>
+                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <label for="">License Identifier</label>
                             <span>{{_e($concession,'license_identifier','-')}}</span>
                         </li>
@@ -306,11 +305,11 @@
             </div>
             <div class="panel-body">
                 <ul>
-                    <li>
+                    <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                         <label for="">Source URL</label>
                         <span>@if(!empty(_e($contract->metadata,'source_url')))<a href="{{$contract->metadata->source_url}}" target="_blank">{{str_limit($contract->metadata->source_url,50)}}</a>@endif</span>
                     </li>
-                    <li>
+                    <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                         <label for="">Disclosure Mode</label>
                         <span>{{_e($contract->metadata,'disclosure_mode','-')}}</span>
                     </li>
@@ -334,7 +333,7 @@
                         <ul>
                             @foreach($annotations as $annotation)
 
-                                <li>
+                                <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                     <div class="page-num pull-left">Pg {{_e($annotation,'page_no')}}</div>
                                     <div class="pull-left">
                                         <div class="annotation-text">{{_e($annotation,'text')}}</div>
