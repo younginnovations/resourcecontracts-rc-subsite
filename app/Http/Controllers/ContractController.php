@@ -220,5 +220,16 @@ class ContractController extends BaseController
         exit;
     }
 
+    public function view($contract_id) 
+    {
+        $contract              = new \stdClass();
+        $contract->metadata    = $this->api->metadata($contract_id);
+        if (is_null($contract->metadata)) {
+            return abort(404);
+        }
+
+        return view('contract.page.view', compact('contract'));
+    }
+
 
 }

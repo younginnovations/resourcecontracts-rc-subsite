@@ -7,10 +7,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
     @if(env("CATEGORY")=="rc")
-        <link rel="icon" href="images/favicon.ico">
+        <link rel="icon" href="/images/favicon.ico">
         <title>Resource Contracts</title>
     @else
-        <link rel="icon" href="olc/images/favicon.ico">
+        <link rel="icon" href="/olc/images/favicon.ico">
         <title>OPENLAND Contracts</title>
     @endif
 

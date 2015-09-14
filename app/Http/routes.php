@@ -30,6 +30,7 @@ $app->get('/contract/{contractId1}/{contractId2}/oldcompare', ['as' => 'contract
 $app->get('/contract/{contractId1}/{contractId2}/compare', ['as' => 'contracts.compare', 'uses' => 'ContractController@compare']);
 $app->get('/contract/{id}/text', ['as' => 'contract.text', 'uses' => 'ContractController@textIndex']);
 $app->get('/contract/{id}/download', ['as' => 'contract.download', 'uses' => 'ContractController@download']);
+$app->get('/contract/{id}/view', ['as' => 'contract.view', 'uses' => 'ContractController@view']);
 
 /*
 |--------------------------------------------------------------------------
