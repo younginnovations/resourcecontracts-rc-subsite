@@ -716,11 +716,7 @@ footer ul li a:hover {
 	margin-top: 10px;
 	font-family: "Open-Sans-Bold";
 	line-height: 16px;
-	color: #404040;
-	width: 70%;
-	text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
+	color: #404040  ;
 }
 .contract-count {
 	font-size: 12px;
@@ -2270,4 +2266,11 @@ input.select2-search__field {
 .search-not-found {
 	background: none!important;
 	padding-left: 36px!important;
+}
+
+.resource-name {
+	width: 70%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 }

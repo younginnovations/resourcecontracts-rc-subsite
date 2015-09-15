@@ -154,15 +154,16 @@
     </script>
     <script type="text/template" id="annotation-item-view-template">
         <div>
-            <% if (typeof page_no !== "undefined") { %>
-                <span class="page-no">Pg <a href='#'><%= page_no %></a></span>
-            <% } %>
+            <span class="text"><%= text %></span>
             <a href='#' class="quote">
                 <% if (typeof quote !== "undefined") { %>
                 <%= quote %>
                 <% } %>
             </a>
-            <span class="text"><%= text %></span>
+            <% if (typeof page_no !== "undefined") { %>
+            <span class="page-no">Pg <a href='#'><%= page_no %></a></span>
+            <% } %>
+
             <% if (typeof tags !== "undefined") { %>
             <% _.each(tags, function(tag) { %>
                 <span class="tag"><%= tag %></span>
