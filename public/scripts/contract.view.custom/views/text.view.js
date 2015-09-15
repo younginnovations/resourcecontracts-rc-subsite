@@ -80,8 +80,12 @@ var TextPageView = React.createClass({
   },
   _onLeave: function(e) {
   },
+  sanitizeTxt: function(text) {
+    //replace the <  and > with &lt;%gt if they are not one of the tags below
+    return text.replace(/(<)(\/?)(\b(?!span|div|p|br))([^>]*)(>)/g,"&lt;$2$3$4&gt;");
+  },
   render: function() {
-    var text = this.props.page.get('text');
+    var text = this.sanitizeTxt(this.props.page.get('text'));
     var page_no = this.props.page.get('page_no');
     return (      
       <span className={page_no} >
