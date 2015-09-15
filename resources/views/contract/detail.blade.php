@@ -39,7 +39,7 @@
             </div>
             <div class="action-links">
                 <ul>
-                    @if($contract->pages->total>0)<li class="pull-left"><a href="{{route('contract.text',['id'=>$contract->metadata->contract_id])}}">View Document</a></li>@endif
+                    @if($contract->pages->total>0)<li class="pull-left"><a href="{{route('contract.detail',['id'=>$contract->metadata->contract_id])}}">View Document</a></li>@endif
                 </ul>
             </div>
         </div>

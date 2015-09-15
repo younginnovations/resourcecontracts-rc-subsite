@@ -171,22 +171,6 @@ class ContractController extends BaseController
         return response()->json($resources);
     }
 
-    public function textIndex($id, Request $request)
-    {
-        $page                  = $request->get('page');
-        $page_no               = !empty($page) ? $page : 1;
-        $contract              = new \stdClass();
-        $contract->page        = $this->api->getTextPage($id, $page_no);
-        $contract->metadata    = $this->api->metadata($id);
-        $contract->annotations = $this->contract->annotations($id);
-
-        if (is_null($contract->metadata)) {
-            return abort(404);
-        }
-
-        return view('contract.page.text', compact('page', 'contract', 'annotations'));
-    }
-
     /**
      * Download Word File
      *
