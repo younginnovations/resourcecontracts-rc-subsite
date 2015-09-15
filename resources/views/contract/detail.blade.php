@@ -350,9 +350,12 @@
                         </div>
                         <ul>
                             @foreach($annotations as $annotation)
-
+                                <?php $annotation_type = isset($annotation->shapes) ? 'pdf' : 'text'; ?>
                                 <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                    <div class="page-num pull-left">Pg {{_e($annotation,'page_no')}}</div>
+                                    <div class="page-num pull-left">
+                                    <a href="{{route('contract.detail',['id'=>$contract->metadata->contract_id])}}#/{{$annotation_type}}/page/{{$annotation->page_no}}/annotation/{{$annotation->id}}"> Pg {{_e($annotation,'page_no')}}</a>
+
+                                    </div>
                                     <div class="pull-left">
                                         <div class="annotation-text">{{_e($annotation,'text')}}</div>
                                         <div class="quote">{{_e($annotation,'quote')}}</div>

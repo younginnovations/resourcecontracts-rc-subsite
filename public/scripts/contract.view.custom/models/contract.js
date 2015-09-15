@@ -80,6 +80,7 @@
       return this.get("canrender");
     },
     setCurrentPage: function(page_no) {
+      page_no = parseInt(page_no);
       this.set({page_no: page_no});
     },
     getCurrentPage: function() {
