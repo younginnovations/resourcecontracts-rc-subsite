@@ -10,7 +10,10 @@
                 </div>
                 <div class="col-lg-8 footer-right-wrap">
                     <ul>
-                        <li><a href="#"><img src="{{url('images/ic-nrgi.png')}}" /></a></li>
+                        @if(env("CATEGORY")=="rc")
+                            <li><a href="#"><img src="{{url('images/ic-nrgi.png')}}" /></a></li>
+                        @endif
+
                         <li><a href="#"><img src="{{url('images/ic-cc.png')}}" /></a></li>
                         <li><a href="#"><img src="{{url('images/ic-worldbank.png')}}" /></a></li>
                     </ul>

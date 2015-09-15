@@ -18,7 +18,7 @@
       <div class="filter-wrapper">
           <div class="col-lg-12">
               <div class="filter-country-wrap">
-                  @include('layout.partials.search')
+                  @include('layout.partials.search', ['searchPage' => true])
               </div>
           </div>
       </div>

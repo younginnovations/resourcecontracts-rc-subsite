@@ -82,7 +82,9 @@
                             <label for="">Country</label>
                             @if($code = strtolower(_e($contract->metadata->country,'code')))
                                 <span><a href="{{route('country.detail', ['key'=>$code])}}">{{ucfirst(_e($contract->metadata->country,'name'))}}</a>
-                                 @if(isset($contract->metadata->amla_url) && !empty($contract->metadata->amla_url))<a href="{{$contract->metadata->amla_url}}" class="amla-link" target="_blank">AMLA</a>@endif</span>
+                                    @if(env("CATEGORY")=="rc")
+                                     @if(isset($contract->metadata->amla_url) && !empty($contract->metadata->amla_url))<a href="{{$contract->metadata->amla_url}}" class="amla-link" target="_blank">AMLA</a>@endif</span>
+                                    @endif
                             @endif
                         </li>
                     </ul>
@@ -120,7 +122,6 @@
                             <?php
                             $resource=_e($contract->metadata,'resource','-');
                             $resource = is_array($resource)?$resource:[];
-
                             ?>
                             <span class="resource-list">
                                 @foreach($resource as $res)
@@ -175,7 +176,14 @@
                     </li>
                     <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                         <label for="">Jurisdiction of Incorporation</label>
-                        <span> {{_e($company,'jurisdiction_of_incorporation','-')}}</span>
+                        <span>
+                        <?php $ji = _e($company,'jurisdiction_of_incorporation',null);?>
+                        @if(!is_null($ji))
+                            {{trans('country')[strtoupper($ji)] or '-'}}
+                        @else
+                             -
+                        @endif
+                        </span>
                     </li>
                     <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                         <label for="">Registration Agency</label>
@@ -207,7 +215,17 @@
                     </li>
                     <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                         <label for="">Operator</label>
-                        <span>@if(isset($company->operator) && $company->operator==1) Yes @else - @endif</span>
+                        <span>@if(isset($company->operator))
+                                @if($company->operator==1)
+                                    Yes
+                                @elseif($company->operator==0)
+                                    No
+                                @else
+                                    -
+                                @endif
+                            @endif
+
+                        </span>
                     </li>
                 </ul>
             </div>
@@ -338,13 +356,9 @@
                                     <div class="pull-left">
                                         <div class="annotation-text">{{_e($annotation,'text')}}</div>
                                         <div class="quote">{{_e($annotation,'quote')}}</div>
-                                        <div class="tags">
-                                            @foreach($annotation->tags as $tag)
-                                                <a href="{{route('contract.pages',['id'=>$contract->metadata->contract_id,'page'=>$annotation->page_no])}}">{{$tag}}</a>
-                                            @endforeach
-                                        </div>
                                     </div>
                                 </li>
+
                             @endforeach
                         </ul>
                     </div>

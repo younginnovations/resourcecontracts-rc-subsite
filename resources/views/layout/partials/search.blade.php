@@ -12,7 +12,7 @@ $category=$api->getAnnotationsCategory();
     <div  class="search-input-wrapper @if(isset($show_advance)) search-page-input-wrapper @endif">
         <div class="col-lg-12">
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
-                <label for="year">Year</label>
+                <label for="">Year signed</label>
                 <select name="year[]" id="year" multiple="multiple">
                     @foreach($summary->year_summary as $year)
                         <option  @if(isset($filter['year']) && in_array($year->key, $filter['year']))
@@ -85,7 +85,10 @@ $category=$api->getAnnotationsCategory();
         </div>
             <div class="col-lg-5">
                 <button type="submit" class="btn btn-form-search">Search</button>
-                <button type="button" class="btn btn-form-search search-close">Cancel</button>
+
+                @if(!isset($searchPage))
+                    <button type="button" class="btn btn-form-search search-close">Cancel</button>
+                @endif
             </div>
     </div>
 </form>
