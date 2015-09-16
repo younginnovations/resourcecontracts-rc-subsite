@@ -82,7 +82,11 @@
     background-position: -474px 13px;
 }
 
-.navigation > a:hover {
+.navigation > a:hover, .navigation > a:active {
+    opacity: 1;
+}
+
+.navigation > a.active {
     opacity: 1;
 }
 
@@ -219,6 +223,7 @@
     margin-bottom: 7px;
     display: inline-block;
     width: 90%;
+    cursor: pointer;
 }
 
 .annotation-category ul {

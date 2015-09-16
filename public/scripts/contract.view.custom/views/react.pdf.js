@@ -12,40 +12,29 @@ var Pdf = React.createClass({
     return { };
   },
   getDefaultProps: function() {
-    return {page: 1, scale: 1.0};
+    return {
+      page: 1, 
+      scale: 1.0
+    };
   },
   loadFile: function() {
-    var self = this,
-        pdffile = this.props.contractApp.getPdfUrl(); 
-    if(!!pdffile){
-      PDFJS.getDocument(pdffile).then(this._onDocumentComplete);
-    }
-    else if(!!this.props.content){
-      var bytes = window.atob(this.props.content);
-      var byteLength = bytes.length;
-      var byteArray = new Uint8Array(new ArrayBuffer(byteLength));
-      for(index = 0; index < byteLength; index++) {
-        byteArray[index] = bytes.charCodeAt(index);
-      }
-      PDFJS.getDocument(byteArray).then(this._onDocumentComplete);   
+    var self = this;
+    var content = this.props.pdfPage.get("content")
+    if(!!content){
+      PDFJS.getDocument(content).then(this._onDocumentComplete);   
     }
     else {
+      this.setState({ page: ""});
       // console.error('React_Pdf works with a file(URL) or (base64)content. At least one needs to be provided!')
     }
   },
   componentDidMount: function() {
     var self = this;
-    this.props.contractApp.on("change:page_no", function() {
-      if(self.props.contractApp.getView() === "pdf") {
-        self.loadFile();
-        self.setState({ page: ""});
-      }
+    this.props.pdfPage.on("change:content", function() {
+      self.loadFile();
     });
   },
   render: function() {
-    if(!this.state.page) {
-      this.loadFile();
-    }
     var self = this;
     if (!!this.state.page) {
       setTimeout(function() {
@@ -74,7 +63,8 @@ var Pdf = React.createClass({
       });
       return (React.createElement("canvas", {ref: "pdfCanvas"}));
     }
-    return (this.props.loading || React.createElement("div", null, "Loading pdf...."));
+    var page_no = this.props.contractApp.getCurrentPage();
+    return (this.props.loading || React.createElement("div", null, "Loading pdf page " + page_no));
   },
   _onDocumentComplete: function(pdf){
     // this.setState({ pdf: pdf })

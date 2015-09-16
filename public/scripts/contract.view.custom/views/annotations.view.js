@@ -47,6 +47,7 @@ var AnnotationItem = React.createClass({
         }
     },
     handleEllipsis: function(e) {
+        e.preventDefault();
         var text = e.target.innerHTML;
         if(text == "...more") {            
             this.props.annotation.ellipsis = "showless";
@@ -59,15 +60,23 @@ var AnnotationItem = React.createClass({
         var category = this.props.annotation.get('category');
         var id = this.props.annotation.get('id');
         var text = this.props.annotation.get('text');
-        var quote = this.props.annotation.get('quote');
+        var quote = this.props.annotation.get('quote') || "";
         var page_no = "Pg " + this.props.annotation.get('page_no');
         var annotation_type = "";
         if(this.props.annotation.get('shapes')) {
-            annotation_type = "pdf";
+            annotation_type = " (pdf)";
         } else if(this.props.annotation.get('ranges')) {
-            annotation_type = "text";
+            annotation_type = " (text)";
         }
-        var showText = text,
+        text = text.trim();
+        if(quote.trim()) {
+            if(text.trim()) {
+                text = text + " - " + quote.trim();
+            } else {
+                text = quote.trim();
+            }
+        }
+        var showText = text;
             ellipsistext = "";
         if(!this.props.annotation.ellipsis || this.props.annotation.ellipsis == "showmore") {
             showText = this.truncate(text);            
@@ -85,14 +94,14 @@ var AnnotationItem = React.createClass({
         
         return (
             <div className="annotation-category">
-                {category}
+                <span onClick={this.handleAnnotationClick}>{category}</span>                
                 <ul>
                     <li className={currentAnnotationClass}>
                         <div id={id}>
                             <span onClick={this.handleAnnotationClick}>{page_no}</span>
-                            <span onClick={this.handleAnnotationClick}> {showText} </span> 
-                            <a onClick={this.handleEllipsis}>{ellipsistext}</a>
-                            - {annotation_type}
+                            <span>{showText}</span> 
+                            <a href="#" onClick={this.handleEllipsis}>{ellipsistext}</a>
+                            {annotation_type}
                         </div>
                     </li>
                 </ul>
@@ -104,16 +113,16 @@ var AnnotationItem = React.createClass({
 var AnnotationsSort = React.createClass({
     getInitialState: function() {
         return {
-            value: 'sort-by-page'
+            value: 'sort-by-category'
         }
     },    
     handleSelect: function(e) {
         this.setState({value: event.target.value});
-        if("sort-by-category" === event.target.value) {
-            annotationsCollection.setSortByKey("category");
+        if("sort-by-page" === event.target.value) {
+            annotationsCollection.setSortByKey("page_no");
         } else {
             //default sort by page
-            annotationsCollection.setSortByKey("page_no");
+            annotationsCollection.setSortByKey("category");
         }
         annotationsCollection.trigger("reset");
     },
@@ -149,7 +158,7 @@ var AnnotationsList = React.createClass({
             var parentTop = $('.annotations-viewer').scrollTop();
             var parentOffsetTop = $('.annotations-viewer').offset().top
             $('.annotations-viewer').animate({scrollTop: parentTop - parentOffsetTop + pageOffsetTop},500);
-            self.props.contractApp.resetSelectedAnnotation();            
+            this.props.contractApp.resetSelectedAnnotation();
         }
     },    
     render: function() {

@@ -5,7 +5,7 @@ var Annotation = Backbone.Model.extend({
 });
 var AnnotationsCollection = Backbone.Collection.extend({
     model: Annotation,
-    sort_key: "page_no",
+    sort_key: "category",
     parse: function(response) {
         return response.rows;
     },
