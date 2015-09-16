@@ -27,7 +27,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-2 pull-right">
+                <div class="col-xs-5 col-sm-3 col-md-3 col-lg-2 pull-right">
                     <div class="filter-resource-wrap">
                         <div class="filter-label" data-toggle="collapse-side" data-target=".side-collapse" data-target-2=".side-collapse-container">Filter by Resources<i></i></div>
                     </div>

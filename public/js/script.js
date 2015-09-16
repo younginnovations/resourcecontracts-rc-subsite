@@ -16,7 +16,34 @@ $(document).ready(function () {
         $('input.resource').on('click',function(){
             $('#countries > .col-lg-3').addClass('toggle-width');
         });
+
+        if($(window).width() < 1200) {
+            $(sel2).find('.col-md-3,.col-md-6').toggleClass('col-md-3').toggleClass('col-md-6');
+        }
+
+        if($(window).width() < 992) {
+            $(sel2).find('.col-sm-4,.col-sm-6').toggleClass('col-sm-4').toggleClass('col-sm-6');
+        }
+
+        if($(window).width() < 768) {
+            $(sel2).find('.col-xs-6,.col-xs-12').toggleClass('col-xs-6').toggleClass('col-xs-12');
+        }
+
+        $(window).resize(function(){
+            if($(window).width() < 1200) {
+                $(sel2).find('.col-md-3,.col-md-6').toggleClass('col-md-6').toggleClass('col-md-3');
+            }
+
+            if($(window).width() < 992) {
+                $(sel2).find('.col-sm-4,.col-sm-6').toggleClass('col-sm-4').toggleClass('col-sm-6');
+            }
+
+            if($(window).width() < 768) {
+                $(sel2).find('.col-xs-6,.col-xs-12').toggleClass('col-xs-6').toggleClass('col-xs-12');
+            }
+        });
     });
+
 
     var sideslider1 = $('[data-toggle=collapse-sidebar]');
     var sela = sideslider1.attr('data-target');
