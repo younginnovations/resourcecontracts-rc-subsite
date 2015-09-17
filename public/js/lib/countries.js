@@ -191,6 +191,17 @@ $(function () {
         collection.fetch({'reset': true, cache: true, expires: 60000, success:function(){
             $('#countries').find('.col-lg-2').removeClass('col-lg-2').addClass('col-lg-3');
             $('.side-collapse').css('height', $('#countries').height()+150 + 'px');
+            if($(window).width() < 1200) {
+                $('#countries').find('.col-md-3,.col-md-6').toggleClass('col-md-3').toggleClass('col-md-6');
+            }
+
+            if($(window).width() < 992) {
+                $('#countries').find('.col-sm-4,.col-sm-6').toggleClass('col-sm-4').toggleClass('col-sm-6');
+            }
+
+            if($(window).width() < 768) {
+                $('#countries').find('.col-xs-6,.col-xs-12').toggleClass('col-xs-6').toggleClass('col-xs-12');
+            }
         }});
     });
 
