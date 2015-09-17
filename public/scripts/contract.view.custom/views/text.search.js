@@ -24,10 +24,16 @@ var TextSearchResultRow = React.createClass({
     // this.props.currentPage.set({"page_no": this.props.resultRow.get("page_no")});
     // this.props.currentPage.trigger("scroll-to-page");
   },
+  highlightSearchQuery: function(text, highlightword) {
+    var re = new RegExp(highlightword, "gi");
+    return text.replace(re,"<span style='background-color:#a1aeec;'>" + highlightword + "</span>");
+  },  
   render: function() {
+    var text = this.highlightSearchQuery(this.props.resultRow.get("text"), this.props.contractApp.getSearchQuery());
+    text = text + "[Pg " + this.props.resultRow.get("page_no") + "]";
     return(
       <div className="search-result-row" onClick={this.handleClick}>
-        {this.props.resultRow.get("text")} [Pg {this.props.resultRow.get("page_no")}]
+        <span dangerouslySetInnerHTML={{__html: text}} />
       </div>
     );
   }
@@ -45,7 +51,9 @@ var TextSearchResultsList = React.createClass({
     if(this.props.searchResultsCollection.models.length > 0) {
       resultsView = this.props.searchResultsCollection.models.map(function(model) {
         return (
-          <TextSearchResultRow contractApp={self.props.contractApp} resultRow={model} />
+          <TextSearchResultRow 
+            contractApp={self.props.contractApp} 
+            resultRow={model} />
         );
       });
     } 

@@ -18,9 +18,6 @@
       var self = this;
       this.metadata.url = this.getMetadataUrl();
       this.metadata.fetch();
-      // this.metadata.on("sync", function() {
-      //   self.set({total_pages: self.metadata.get("total_pages")});
-      // });
     },
     getShowMeta: function() {
       return this.get("showMeta");
@@ -36,18 +33,12 @@
     },  
     getAllPageUrl: function() {
       return "http://rc-elasticsearch.elasticbeanstalk.com/api/contract/" + this.getContractId() + "/text";
-      // return "http://rc.yipl.com.np/contract/946/allpage";
-      // return "allpages.json";
     },
     getAllAnnotationsUrl: function() {
-      // return "http://rc.yipl.com.np/annotation/search?contract=946";
       return "http://rc-elasticsearch.elasticbeanstalk.com/api/contract/" + this.getContractId() + "/annotations";
-      // return "data/search.annotations-941";
     },
     getSearchUrl: function() {
       return "http://rc-elasticsearch.elasticbeanstalk.com/api/contract/" + this.getContractId() + "/searchtext"
-      // return "http://rc-site-stage.elasticbeanstalk.com/rc/public/contract/946/search";
-      // return "data/search.results.json";
     },
     getPdfUrl: function() {
       var page_no = parseInt(this.getCurrentPage());
@@ -56,19 +47,12 @@
           return pageModel[0].get("pdf_url");
       }
       return "";
-      // if(parseInt(this.getCurrentPage()) == 1) {
-      //   return "data/1.pdf";  
-      // } else {
-      //   return "data/2.pdf";  
-      // }      
     },
     getFullPdfUrl: function() {
       return "";
     },
     getLoadAnnotationsUrl: function() {
       return "http://rc-elasticsearch.elasticbeanstalk.com/api/contract/" + this.getContractId() + "/annotations"; 
-      // return "http://rc.yipl.com.np/api/";
-      // return "http://localhost:8009";
     },
     renderStart: function() {
       this.set({"canrender": true});
@@ -105,6 +89,9 @@
     },
     getView: function() {
       return this.get("view");
+    },
+    getSearchQuery: function() {
+      return this.get("search_query");
     },
     setSearchQuery: function(query) {
       this.set({search_query: query.trim()});

@@ -90,14 +90,7 @@ var PdfViewer = React.createClass({
     this.props.pagesCollection.on("reset", function() {
       self.props.contractApp.trigger("change:page_no");
     });
-    this.props.contractApp.on("change:page_no", function() {
-      if(self.props.contractApp.getView() === "pdf") {
-        contractApp.renderStart();
-        self.props.contractApp.triggerUpdatePdfPaginationPage(self.props.contractApp.getCurrentPage());
-      }
-    });
     this.props.contractApp.on("change:pdfscale", function() {
-      contractApp.renderStart();
       self.forceUpdate();
     });
   },
@@ -108,10 +101,11 @@ var PdfViewer = React.createClass({
         <div className="pdf-viewer pdf-annotator" style={this.props.style}>
         <Pdf 
           contractApp={this.props.contractApp}
+          pdfPage={this.props.pdfPage}
           page={1}
+          content={this.props.pdfPage.get("content")}
           scale={parseFloat(this.props.contractApp.getPdfScale())||1}
-          onPageRendered={this._onPageRendered} 
-          onPageComplete={this._onPageCompleted} />
+          onPageRendered={this._onPageRendered} />
         </div>
       );
   },
@@ -130,17 +124,14 @@ var PdfViewer = React.createClass({
     }
   },  
   _onPageRendered: function() {
-    if(this.props.contractApp.getView() === "pdf" && contractApp.canRender()) {
+    if(this.props.contractApp.getView() === "pdf") {
       if(this.annotator) {
         this.annotator.pageUpdated();
       } else {
         if($(".pdf-viewer").is(":visible")) {          
           this.loadAnnotations();
         }
-      }    
-      contractApp.renderComplete();
+      }
     }
   },
-  _onPageCompleted: function(page){
-  }
 });

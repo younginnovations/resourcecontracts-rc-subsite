@@ -32,6 +32,7 @@
     <script src="{{ url('scripts/contract.view.custom/models/search.js') }}"></script>
     <script src="{{ url('scripts/contract.view.custom/models/metadata.js') }}"></script>
     <script src="{{ url('scripts/contract.view.custom/models/contract.js') }}"></script>
+    <script src="{{ url('scripts/contract.view.custom/models/pdf.js') }}"></script>
 
     <script src="{{ url('scripts/lib/annotator/annotator-full.min.js') }}"></script>
     <script src="{{ url('scripts/lib/annotator.plugin.annotorious.js') }}"></script>
@@ -55,6 +56,11 @@
 
       var searchResultsCollection = new SearchResultsCollection();
       searchResultsCollection.url = contractApp.getSearchUrl();
+
+      var pdfPage = new PdfPage({
+        contractApp: contractApp
+      });
+
       
       /**
       * @jsx React.DOM
@@ -133,7 +139,8 @@
               <div className="head-wrap">
                 <TextSearchForm
                   style={this.getStyle(contractApp.isViewVisible("TextSearchForm"))} />
-                <NavigationView selected="pdf" />
+                <NavigationView 
+                  contractApp={contractApp} />
                 <TextPaginationView 
                   style={this.getStyle(contractApp.isViewVisible("TextPaginationView"))} 
                   contractApp={contractApp}
@@ -162,6 +169,7 @@
                   contractApp={contractApp}
                   pagesCollection={pagesCollection} />
                 <PdfViewer 
+                  pdfPage={pdfPage}
                   style={this.getStyle(contractApp.isViewVisible("PdfViewer"))}                  
                   contractApp={contractApp}
                   pagesCollection={pagesCollection} />

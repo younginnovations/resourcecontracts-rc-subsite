@@ -1,9 +1,16 @@
 var NavigationView = React.createClass({
   render: function() {
+    if(this.props.contractApp.getView() === "pdf") {
+      pdfClass = "active";
+      textClass = "";
+    } else {
+      textClass = "active";
+      pdfClass = "";
+    }
     return (
       <div className="navigation">
-        <a href="#/text">Text</a>
-        <a href="#/pdf">Pdf</a>        
+        <a href="#/text" className={textClass}>Text</a>
+        <a href="#/pdf" className={pdfClass}>Pdf</a>
       </div>
     );
   }
@@ -84,9 +91,16 @@ var TextPageView = React.createClass({
     //replace the <  and > with &lt;%gt if they are not one of the tags below
     return text.replace(/(<)(\/?)(\b(?!span|div|p|br))([^>]*)(>)/g,"&lt;$2$3$4&gt;");
   },
+  highlightSearchQuery: function(text, highlightword) {
+    var re = new RegExp(highlightword, "gi");
+    return text.replace(re,"<span style='background-color:#a1aeec;'>" + highlightword + "</span>");
+  },
   render: function() {
     var text = this.sanitizeTxt(this.props.page.get('text'));
     var page_no = this.props.page.get('page_no');
+    if(this.props.contractApp.getSearchQuery()) {
+      text = this.highlightSearchQuery(text, this.props.contractApp.getSearchQuery());
+    }
     return (      
       <span className={page_no} >
         <span>{page_no}</span>
