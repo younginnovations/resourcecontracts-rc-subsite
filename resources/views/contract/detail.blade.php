@@ -178,11 +178,11 @@
                         <label for="">Jurisdiction of Incorporation</label>
                         <span>
                         <?php $ji = _e($company,'jurisdiction_of_incorporation',null);?>
-                        @if(!is_null($ji))
-                            {{trans('country')[strtoupper($ji)] or '-'}}
-                        @else
-                             -
-                        @endif
+                            @if(!is_null($ji))
+                                {{trans('country')[strtoupper($ji)]}}
+                            @else
+                                 -
+                            @endif
                         </span>
                     </li>
                     <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
