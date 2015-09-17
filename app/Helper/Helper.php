@@ -50,7 +50,7 @@ function _e($arrayOrObject, $key, $default = null, $echo = false)
     if (empty($return)) {
         $return = $default;
     }
-    
+
     if ($echo) {
         echo $return;
     } else {
@@ -62,5 +62,17 @@ function _e($arrayOrObject, $key, $default = null, $echo = false)
 function auth()
 {
     return app('App\Http\Services\AuthService');
+}
+
+function searchInArray($arrays, $field, $value)
+{
+    foreach ($arrays as $key => $array) {
+        $array = (array) $array;
+        if ($array[$field] === $value) {
+            return $array;
+        }
+    }
+
+    return null;
 }
 
