@@ -55,7 +55,8 @@ class ContractController extends BaseController
     public function detail($contract_id)
     {
         $contract = $this->api->contractDetail($contract_id);
-        if (is_null($contract->metadata)) {
+
+        if (empty($contract->metadata)) {
             return abort(404);
         }
 
@@ -98,7 +99,7 @@ class ContractController extends BaseController
         $contract->metadata    = $this->api->metadata($id);
         $contract->annotations = $this->contract->annotations($id);
 
-        if (is_null($contract->metadata)) {
+        if (empty($contract->metadata)) {
             return abort(404);
         }
 
@@ -133,6 +134,7 @@ class ContractController extends BaseController
         $contract2Annotations = $this->contract->annotations($contractId2);
         $contract1->metadata  = $this->api->metadata($contractId1);
         $contract2->metadata  = $this->api->metadata($contractId2);
+
         return view(
             'contract.page.compare',
             compact('contract1Annotations', 'contract2Annotations', 'contract1', 'contract2')
@@ -189,7 +191,11 @@ class ContractController extends BaseController
             abort(404);
         }
 
-        $filename = sprintf('%s-%s', $contract->metadata->contract_id, str_limit(str_slug($contract->metadata->contract_name), 70));
+        $filename = sprintf(
+            '%s-%s',
+            $contract->metadata->contract_id,
+            str_limit(str_slug($contract->metadata->contract_name), 70)
+        );
 
         header("Content-type: application/vnd.ms-wordx");
         header("Content-Disposition: attachment;Filename=$filename.doc");
@@ -204,11 +210,12 @@ class ContractController extends BaseController
         exit;
     }
 
-    public function view($contract_id) 
+    public function view($contract_id)
     {
-        $contract              = new \stdClass();
-        $contract->metadata    = $this->api->metadata($contract_id);
-        if (is_null($contract->metadata)) {
+        $contract           = new \stdClass();
+        $contract->metadata = $this->api->metadata($contract_id);
+
+        if (empty($contract->metadata)) {
             return abort(404);
         }
 
