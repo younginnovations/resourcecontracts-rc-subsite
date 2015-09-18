@@ -37,9 +37,10 @@ class PageController extends BaseController
      */
     public function about()
     {
-        $about = $this->page->get('about');
+        $page      = $this->page->get('about');
+        $page_name = 'contact';
 
-        return view('page.about', compact('about'));
+        return view('page.master', compact('page', 'page_name'));
     }
 
     /**
@@ -49,9 +50,23 @@ class PageController extends BaseController
      */
     public function contact()
     {
-        $contact = $this->page->get('contact');
+        $page      = $this->page->get('contact');
+        $page_name = 'contact';
 
-        return view('page.contact', compact('contact'));
+        return view('page.master', compact('page', 'page_name'));
+    }
+
+    /**
+     * Resources Page
+     *
+     * @return \Illuminate\View\View
+     */
+    public function resources()
+    {
+        $page      = $this->page->get('resources');
+        $page_name = 'resources';
+
+        return view('page.master', compact('page', 'page_name'));
     }
 
     /**
@@ -61,9 +76,10 @@ class PageController extends BaseController
      */
     public function faqs()
     {
-        $faqs = $this->page->get('faqs');
+        $page      = $this->page->get('faqs');
+        $page_name = 'faqs';
 
-        return view('page.faqs', compact('faqs'));
+        return view('page.master', compact('page', 'page_name'));
     }
 
     /**
@@ -71,11 +87,13 @@ class PageController extends BaseController
      *
      * @return \Illuminate\View\View
      */
-    public function guides()
+    public function glossary()
     {
-        $guides = $this->page->get('guides');
+        $page      = $this->page->get('glossary');
+        $page_name = 'glossary';
 
-        return view('page.guides', compact('guides'));
+        return view('page.master', compact('page', 'page_name'));
+
     }
 
     /**
@@ -94,6 +112,7 @@ class PageController extends BaseController
         $contentArray[$key] = $content;
 
         $this->page->save($page, $contentArray);
+
         return response()->json($contentArray);
     }
 
