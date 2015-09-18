@@ -1,15 +1,17 @@
 <?php
-$api     = app('App\Http\Services\APIService');
+$api = app('App\Http\Services\APIService');
 $summary = $api->summary();
 $attributes = $api->searchAttributed();
-$category=$api->getAnnotationsCategory();
+$category = $api->getAnnotationsCategory();
 ?>
-<form action="{{url('search')}}" method="get" class="search-form @if(isset($show_advance)) search-page-form @endif" id="search-form">
+<form action="{{url('search')}}" method="get" class="search-form @if(isset($show_advance)) search-page-form @endif"
+      id="search-form">
     <div class="form-group">
         <button type="submit" class="btn btn-navbar-search pull-left"></button>
-        <input type="text" autocomplete="off" value="{{\Illuminate\Support\Facades\Input::get('q')}}" name="q" class="form-control pull-left" placeholder="Search for contracts...">
+        <input type="text" autocomplete="off" value="{{\Illuminate\Support\Facades\Input::get('q')}}" name="q"
+               class="form-control pull-left" placeholder="Search for contracts...">
     </div>
-    <div  class="search-input-wrapper @if(isset($show_advance)) search-page-input-wrapper @endif">
+    <div class="search-input-wrapper @if(isset($show_advance)) search-page-input-wrapper @endif">
         <div class="col-lg-12">
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
                 <label for="">Year signed</label>
@@ -43,7 +45,10 @@ $category=$api->getAnnotationsCategory();
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
                 <label for="">Company Name</label>
                 <select name="company_name[]" id="" multiple="multiple">
-                    @foreach($attributes->company_name as $company)
+                    <?php $company_array = array_map('trim', (array) $attributes->company_name);
+                    sort($company_array);
+                    ?>
+                    @foreach($company_array as $company)
                         <option @if(isset($filter['company_name']) && in_array($company, $filter['company_name']))
                             selected="selected"
                             @endif value="{{$company}}">{{$company}}</option>
@@ -74,8 +79,11 @@ $category=$api->getAnnotationsCategory();
             </div>
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
                 <label for="">Annotations Category</label>
+                <?php $annotation_category = array_map('trim', (array) $category->results);
+                sort($annotation_category);
+                ?>
                 <select name="annotation_category[]" id="" multiple="multiple">
-                    @foreach(array_filter($category->results) as $cat)
+                    @foreach(array_filter($annotation_category) as $cat)
                         <option @if(isset($filter['annotation_category']) && in_array($cat, $filter['annotation_category']))
                             selected="selected"
                             @endif value="{{$cat}}">{{$cat}}</option>
@@ -83,12 +91,12 @@ $category=$api->getAnnotationsCategory();
                 </select>
             </div>
         </div>
-            <div class="col-lg-5">
-                <button type="submit" class="btn btn-form-search">Search</button>
+        <div class="col-lg-5">
+            <button type="submit" class="btn btn-form-search">Search</button>
 
-                @if(!isset($searchPage))
-                    <button type="button" class="btn btn-form-search search-close">Cancel</button>
-                @endif
-            </div>
+            @if(!isset($searchPage))
+                <button type="button" class="btn btn-form-search search-close">Cancel</button>
+            @endif
+        </div>
     </div>
 </form>
