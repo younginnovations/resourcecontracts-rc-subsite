@@ -40,9 +40,9 @@ $app->get('/contract/{id}/view', ['as' => 'contract.detail', 'uses' => 'Contract
 $app->get('about', ['as' => 'about', 'uses' => 'PageController@about']);
 $app->get('contact', ['as' => 'contact', 'uses' => 'PageController@contact']);
 $app->get('faqs', ['as' => 'faqs', 'uses' => 'PageController@faqs']);
-$app->get('guides', ['as' => 'guides', 'uses' => 'PageController@guides']);
+$app->get('resources', ['as' => 'guides', 'uses' => 'PageController@resources']);
+$app->get('glossary', ['as' => 'guides', 'uses' => 'PageController@glossary']);
 $app->post('page/save', ['as' => 'page', 'uses' => 'PageController@savePage']);
-
 
 
 $app->get('login', ['as' => 'login', 'uses' => 'PageController@login']);

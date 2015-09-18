@@ -19,8 +19,9 @@ class DatabaseSeeder extends Seeder
         $pages = [
             ['title' => 'About', 'slug' => 'about', 'content' => 'About content'],
             ['title' => 'Contact', 'slug' => 'contact', 'content' => 'Contact content'],
-            ['title' => 'Guides', 'slug' => 'guides', 'content' => 'Guide content'],
+            ['title' => 'Resources', 'slug' => 'resources', 'content' => 'Guide content'],
             ['title' => 'FAQs', 'slug' => 'faqs', 'content' => 'FAQs content'],
+            ['title' => 'Glossary', 'slug' => 'glossary', 'content' => 'Glossary content'],
         ];
 
         foreach ($pages as $page) {

@@ -4,7 +4,8 @@
                     <ul>
                         <li><a href="{{url('about')}}">About</a></li>
                         <li><a href="{{url('faqs')}}">FAQs</a></li>
-                        <li><a href="{{url('guides')}}">Guides</a></li>
+                        <li><a href="{{url('resources')}}">Resources</a></li>
+                        <li><a href="{{url('glossary')}}">Glossary</a></li>
                         <li><a href="{{url('contact')}}">Contact</a></li>
                     </ul>
                 </div>
