@@ -142,7 +142,7 @@
                               <?php $i=0; ?>
                                @forelse($contract->annotationsGroup as $category=>$annotation)
                                         @if($i < 5 )
-                                            <li><a class="view-annotation-category" href ="#{{str_limit($category,32)}}">{{str_limit($category,32)}}</a></li>
+                                            <li><a class="view-annotation-category" href ="#{{str_slug($category,'-')}}">{{str_limit($category,32)}}</a></li>
                                         <?php $i++; ?>
                                         @endif
                                 @empty
@@ -344,7 +344,7 @@
             <div class="panel-body">
 
                 @forelse($contract->annotationsGroup as $category=>$annotations)
-                    <div id="{{str_limit($category,32)}}" class="category-wrap">
+                    <div id="{{str_slug($category,'-')}}" class="category-wrap">
                         <div class="category-title">
                             {{$category}}
                         </div>
