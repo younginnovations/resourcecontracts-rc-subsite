@@ -59,7 +59,7 @@ var AnnotationItem = React.createClass({
     render: function() {
         var category = this.props.annotation.get('category');
         var id = this.props.annotation.get('id');
-        var text = this.props.annotation.get('text');
+        var text = this.props.annotation.get('text') || "";
         var quote = this.props.annotation.get('quote') || "";
         var page_no = "Pg " + this.props.annotation.get('page_no');
         var annotation_type = "";
@@ -68,7 +68,7 @@ var AnnotationItem = React.createClass({
         } else if(this.props.annotation.get('ranges')) {
             annotation_type = " (text)";
         }
-        text = text.trim();
+        text = text.toString().trim() + "";
         if(quote.trim()) {
             if(text.trim()) {
                 text = text + " - " + quote.trim();
