@@ -74,6 +74,12 @@
             <div class="panel panel-default panel-wrap panel-contract-wrap">
                 <div class="panel-body">
                     <ul>
+                        <li class="col-lg-12 open-contracting-id">
+                            <label for="">Open Contracting ID :</label>
+                            <span>ocds-eGkhWQCo-EDmtL</span>
+                        </li>
+                    </ul>
+                    <ul>
                         <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <label for="">Language</label>
                             <span>{{strtoupper(_e($contract->metadata,'language','-'))}}</span>
@@ -86,6 +92,7 @@
                                      @if(isset($contract->metadata->amla_url) && !empty($contract->metadata->amla_url))<a href="{{$contract->metadata->amla_url}}" class="amla-link" target="_blank">AMLA</a>@endif</span>
                                     @endif
                             @endif
+                            <span class="amla-link">See <a href="#" target="_blank">Legislation</a> in African Mining Legislation Atlas</span>
                         </li>
                     </ul>
                     <ul>
