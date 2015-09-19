@@ -38,10 +38,16 @@ var PdfPage = Backbone.Model.extend({
         self.set({
             content: ""
         });
-        this.fetchBlob(this.contractApp.getPdfUrl(), function(blob) {
-            self.set({
-                content: blob
+        if (this.contractApp.getPdfUrl() !== "") {
+            this.fetchBlob(this.contractApp.getPdfUrl(), function(blob) {
+                self.set({
+                    content: blob
+                });
             });
-        });
+        } else {
+            self.set({
+                content: false
+            });
+        }
     },
 });

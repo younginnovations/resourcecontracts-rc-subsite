@@ -114,9 +114,6 @@ var TextPageView = React.createClass({
   }
 });
 var TextViewer = React.createClass({
-  getInitialState: function() {
-    return {content: "Please wait while loading ..."};
-  },
   loadAnnotations: function() {
     if(!this.annotator) {
       this.annotator = new AnnotatorjsView({
@@ -131,14 +128,20 @@ var TextViewer = React.createClass({
     }
   },
   scrollToPage: function(page) {
-    var pageOffsetTop = $('.'+page).offset().top;
-    var parentTop = $('.text-annotator ').scrollTop();
-    var parentOffsetTop = $('.text-annotator').offset().top
-    $('.text-annotator').animate({scrollTop: parentTop - parentOffsetTop + pageOffsetTop},100);
+    if($('.'+page).offset()) {
+      var pageOffsetTop = $('.'+page).offset().top;
+      var parentTop = $('.text-annotator ').scrollTop();
+      var parentOffsetTop = $('.text-annotator').offset().top
+      $('.text-annotator').animate({scrollTop: parentTop - parentOffsetTop + pageOffsetTop},100);
+    }
   },
   componentDidMount: function() {
     var self = this;
     this.props.pagesCollection.on("reset", function() {
+      self.message = "";
+      if(self.props.pagesCollection.models.length === 0) {
+        self.message = "There seems to be problem with the contract text. Please contact administrator with the url.";
+      }
       self.forceUpdate();
       self.loadAnnotations();
       self.props.contractApp.triggerScrollToTextPage();
@@ -149,7 +152,7 @@ var TextViewer = React.createClass({
   },
   render: function() {
     var self = this;
-    var pagesView = "Please wait while loading ...";
+    var message = (this.message)?this.message:"Please wait while loading ...";
     if(this.props.pagesCollection.models.length > 0) {
       pagesView = this.props.pagesCollection.models.map(function(model, i) {
         return (
@@ -164,7 +167,7 @@ var TextViewer = React.createClass({
       <div className="text-annotator" style={this.props.style} >
         <div></div>
         <div className="text-viewer">
-        {pagesView}
+        {message}
         </div>
       </div>
     );
