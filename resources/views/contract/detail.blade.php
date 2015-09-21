@@ -257,13 +257,14 @@
                 <tr>
 
                         @foreach($contract->metadata->parent_document as $parentContract)
+
                         <td width="70%">
                         @if($parentContract->status=="published")
-                            <a href="{{route('contract.detail',['id'=>$parentContract->id])}}">{{$parentContract->contract_name}}</a>
+                            <a href="{{route('contract.detail',['id'=>$parentContract->id])}}">{{$parentContract->contract_name}}</a>(parent)
                         @else
-                            {{json_decode($parentContract->contract_name)}}
+                            {{$parentContract->contract_name}}(parent)
                         @endif
-                        (parent)
+
                         </td>
 
                     @endforeach
