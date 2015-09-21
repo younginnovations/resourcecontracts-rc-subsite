@@ -74,12 +74,14 @@
                                                         $category
                                                 );
                                                 ?>
+                                                @if($annotation)
                                                 <?php $annotation_type = isset($annotation['shapes']) ? 'pdf' : 'text'; ?>
                                                 {{str_limit($category,50)}}-<span
                                                         style="color: #404040;">{{str_limit($annotation['text'],50)}}</span>
                                                 <a style="float: none" href="{{route('contract.detail',['id'=>$contract->contract_id])}}#/{{$annotation_type}}/page/{{$annotation['page_no']}}/annotation/{{$annotation['id']}}">
                                                     [Pg {{$annotation['page_no']}}]</a>
                                                 <br>
+                                                @endif
                                             @endforeach
 
                                         @endif
