@@ -21,6 +21,7 @@
     @stop
 
 @section('content')
+
 <div class="row">
     <div class="col-lg-12 panel-top-wrapper">
         <div class="panel-top-content">
@@ -89,21 +90,26 @@
                             @if($code = strtolower(_e($contract->metadata->country,'code')))
                                 <span><a href="{{route('country.detail', ['key'=>$code])}}">{{ucfirst(_e($contract->metadata->country,'name'))}}</a>
                                     @if(env("CATEGORY")=="rc")
-                                     @if(isset($contract->metadata->amla_url) && !empty($contract->metadata->amla_url))<a href="{{$contract->metadata->amla_url}}" class="amla-link" target="_blank">AMLA</a>@endif</span>
+                                     @if(isset($contract->metadata->amla_url) && !empty($contract->metadata->amla_url))<span class="amla-link">See <a href="{{$contract->metadata->amla_url}}" target="_blank">Legislation</a> in African Mining Legislation Atlas</span>@endif</span>
                                     @endif
                             @endif
-                            <span class="amla-link">See <a href="#" target="_blank">Legislation</a> in African Mining Legislation Atlas</span>
+
                         </li>
                     </ul>
-                    <ul>
-                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <ul class="government-entity-wrap">
+                        <li class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <label for="">Government Entity</label>
-                            <span>{{_e($contract->metadata,'government_entity','-')}}</span>
+                            @if(isset($contract->metadata->government_entity))
+                                @foreach($contract->metadata->government_entity as $governmentEntity)
+                                    <span>
+                                        @if(isset($governmentEntity->entity) && isset($governmentEntity->identifier) && !empty($governmentEntity->entity))
+                                        {{$governmentEntity->entity}}({{$governmentEntity->identifier}})
+                                        @endif
+                                    </span>
+                                @endforeach
+                            @endif
                         </li>
-                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                            <label for="">Government Identifier</label>
-                            <span>{{_e($contract->metadata,'government_identifier','-')}}</span>
-                        </li>
+
                     </ul>
                     <ul>
                         <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
