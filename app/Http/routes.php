@@ -40,7 +40,7 @@ $app->get('/contract/{id}/view', ['as' => 'contract.detail', 'uses' => 'Contract
 $app->get('about', ['as' => 'about', 'uses' => 'PageController@about']);
 $app->get('contact', ['as' => 'contact', 'uses' => 'PageController@contact']);
 $app->get('faqs', ['as' => 'faqs', 'uses' => 'PageController@faqs']);
-$app->get('resources', ['as' => 'guides', 'uses' => 'PageController@resources']);
+$app->get('page/resources', ['as' => 'page.resources', 'uses' => 'PageController@resources']);
 $app->get('glossary', ['as' => 'guides', 'uses' => 'PageController@glossary']);
 $app->post('page/save', ['as' => 'page', 'uses' => 'PageController@savePage']);
 
@@ -65,4 +65,3 @@ $app->get('contract/{id}/allpage', ['as' => 'contract.allpage.get', 'uses' => 'C
 $app->post('contract/{id}/search', ['as' => 'contract.page.search', 'uses' => 'Contract\PageController@search']);
 $app->get('annotation/search', ['as' => 'contract.page.annotations.search', 'uses' => 'Contract\PageController@annotations']);
 $app->get('api/search', ['as' => 'api.search', 'uses' => 'Contract\PageController@annotations']);
-

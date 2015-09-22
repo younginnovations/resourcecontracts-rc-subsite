@@ -1,5 +1,3 @@
-
-
 @extends('layout.app-full')
 
 @section('content')
