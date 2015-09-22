@@ -128,7 +128,7 @@ a:hover,a:focus {
 }
 
 .row-top-wrap {
-	background: url(../images/ic-home-bg.png) no-repeat 0 0/cover;
+	background: url(../images/ic-home-bg.png) no-repeat center/cover;
 	margin: 0;
 }
 
@@ -352,6 +352,7 @@ footer > .row {
 footer ul li {
 	list-style: none;
 	display: inline-block;
+	vertical-align: middle;
 }
 
 .footer-left-wrap li {

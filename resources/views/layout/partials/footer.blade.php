@@ -12,11 +12,12 @@
                 <div class="col-lg-8 footer-right-wrap">
                     <ul>
                         @if(env("CATEGORY")=="rc")
-                            <li><a href="#"><img src="{{url('images/ic-nrgi.png')}}" /></a></li>
+                            <li><a href="http://www.resourcecontracts.org/" target="_blank"><img src="{{url('images/ic-nrgi.png')}}" /></a></li>
                         @endif
 
-                        <li><a href="#"><img src="{{url('images/ic-cc.png')}}" /></a></li>
-                        <li><a href="#"><img src="{{url('images/ic-worldbank.png')}}" /></a></li>
+                        <li><a href="http://ccsi.columbia.edu/" target="_blank"><img src="{{url('images/ic-cc.png')}}" /></a></li>
+                        <li><a href="http://www.worldbank.org/en/topic/governance" target="_blank"><img src="{{url('images/ic-worldbank.png')}}" /></a></li>
+                        <li><a href="http://www.dfid.gov.uk" target="_blank"><img src="{{url('images/ic-dfid.png')}}" /></a></li>
                     </ul>
                 </div>
             </div>
