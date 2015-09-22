@@ -210,6 +210,30 @@ class ContractController extends BaseController
         exit;
     }
 
+    /**
+     * Download Pdf File
+     *
+     * @param $contract_id
+     */
+    public function downloadPdf($contract_id)
+    {
+        $contract = $this->api->metadata($contract_id);
+
+        $filename = sprintf(
+            '%s-%s',
+            $contract->contract_id,
+            str_limit(str_slug($contract->contract_name), 70)
+        );
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/pdf');
+            header('Content-Disposition: attachment; filename="' . basename($filename) . '.pdf"');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            readfile($contract->file_url);
+            exit;
+    }
+
     public function view($contract_id)
     {
         $contract           = new \stdClass();

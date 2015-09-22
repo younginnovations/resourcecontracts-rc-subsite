@@ -1010,6 +1010,28 @@ footer ul li a:hover {
 	background: url(../images/ic-sprite.png) no-repeat -152px -40px;
 }
 
+.contract-info-section .download-main-wrap {
+	width: auto;
+	margin-right: 20px;
+	padding-right: 20px;
+}
+
+.contract-info-section .download-wrap {
+	padding: 2px 0 2px 27px;
+	background-position: -169px -49px;
+}
+
+.contract-info-section .dropdown-menu {
+	margin-top: 2px;
+}
+
+.contract-info-section .dropdown-menu li {
+	width: 100%;
+	border: 0;
+	margin: 0;
+	padding: 2px 0;
+}
+
 .view-pin-wrap:after,.download-wrap:after {
     content: " ";
     background: url(../images/ic-sprite.png) no-repeat -176px -114px;
