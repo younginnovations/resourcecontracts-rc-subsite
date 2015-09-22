@@ -77,7 +77,7 @@
                     <ul>
                         <li class="col-lg-12 open-contracting-id">
                             <label for="">Open Contracting ID :</label>
-                            <span>ocds-eGkhWQCo-EDmtL</span>
+                            <span>{{_e($contract->metadata,'open_contracting_id','-')}}</span>
                         </li>
                     </ul>
                     <ul>
