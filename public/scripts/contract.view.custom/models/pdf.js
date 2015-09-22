@@ -4,9 +4,11 @@ var PdfPage = Backbone.Model.extend({
     },
     initialize: function(options) {
         var self = this;
+        self.init = false;
         this.contractApp = options.contractApp;
         this.contractApp.on("change:page_no", function() {
             if (self.contractApp.getView() === "pdf") {
+                debug("pdf.js change:page_no called");
                 //load pdf if only in pdfview
                 self.loadPdf();
             }
@@ -35,13 +37,24 @@ var PdfPage = Backbone.Model.extend({
     },
     loadPdf: function() {
         var self = this;
-        self.set({
-            content: ""
-        });
-        this.fetchBlob(this.contractApp.getPdfUrl(), function(blob) {
+        if (this.contractApp.getPdfUrl() !== "") {
+            debug('setting content to blank');
             self.set({
-                content: blob
+                content: ""
             });
-        });
+            self.trigger("change:content");
+            this.fetchBlob(this.contractApp.getPdfUrl(), function(blob) {
+                self.init = true;
+                debug("pdf.js loadPdf: fetched ", this.contractApp.getPdfUrl(), " setting pdfpage: content");
+                self.set({
+                    content: blob
+                });
+            });
+        } else {
+            debug("pdf.js loadPdf: no url defined for pdf "," setting pdfpage: content to false");
+            self.set({
+                content: false
+            });
+        }
     },
 });
