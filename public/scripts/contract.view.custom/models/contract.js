@@ -32,6 +32,7 @@
       return "http://rc-elasticsearch.elasticbeanstalk.com/api/contract/" + this.getContractId() + "/metadata";  
     },  
     getAllPageUrl: function() {
+      // return "/data/text.733.json";
       return "http://rc-elasticsearch.elasticbeanstalk.com/api/contract/" + this.getContractId() + "/text";
     },
     getAllAnnotationsUrl: function() {

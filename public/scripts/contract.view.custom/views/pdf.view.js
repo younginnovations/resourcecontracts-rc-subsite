@@ -88,6 +88,7 @@ var PdfViewer = React.createClass({
   componentDidMount: function() {
     var self = this;
     this.props.pagesCollection.on("reset", function() {
+      debug("pdf.view.js pagesCollection reset called: triggering change:page_no");
       self.props.contractApp.trigger("change:page_no");
     });
     this.props.contractApp.on("change:pdfscale", function() {

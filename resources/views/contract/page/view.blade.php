@@ -39,16 +39,27 @@
 
     <script src="{{ url('scripts/contract.view.custom/annotation/rc.annotator.js') }}"></script>
     <script type="text/jsx">
+      var debug = function() {
+        var DEBUG = false;
+        if(DEBUG) {
+          console.log("-----");
+          for (var i=0; i < arguments.length; i++) {
+            console.log(arguments[i]);
+          }
+        }
+      }
       var app_url = '{{url()}}';
       var contractTitle = "{{$contract->metadata->contract_name}}";
       var contractApp = new ContractApp({
         contract_id: '{{$contract->metadata->contract_id}}',
         total_pages: '{{$contract->metadata->total_pages}}'
       });
+      debug("initializing contract ", contractTitle, contractApp.get("contract_id"));
 
       var pagesCollection = new ViewerPageCollection();
       pagesCollection.url = contractApp.getAllPageUrl();
       pagesCollection.fetch({reset: true});
+
 
       var annotationsCollection = new AnnotationsCollection();
       annotationsCollection.url = contractApp.getAllAnnotationsUrl();
@@ -73,6 +84,7 @@
           }
         },
         text: function(page_no, annotation_id) {
+          debug("view.blade.php: setting text view");
           contractApp.setView("text");
           contractApp.setCurrentPage(1);
           contractApp.resetSelectedAnnotation();
@@ -85,17 +97,31 @@
           this.forceUpdate();
         },
         pdf: function(page_no, annotation_id) {
-          contractApp.setView("pdf");
-          this.forceUpdate();
+          debug("view.blade.php: setting pdf view");
           if(page_no) {
             contractApp.setCurrentPage(page_no);
+            debug("view.blade.php: setting current page to", page_no);
+          } else {
+            // contractApp.trigger("change:page_no");
+            // this.forceUpdate();
           }
           if(annotation_id) {
             contractApp.setSelectedAnnotation(annotation_id);
+            debug("view.blade.php: setting annotation to", annotation_id);
           } else {
             contractApp.resetSelectedAnnotation();
           }
-          // contractApp.trigger('change:page_no');
+          pagesCollection.on("reset", function() {
+            debug("view.blade pageCollection reset, trigger change:page_no")
+            contractApp.trigger("change:page_no");
+          });
+          if(!pdfPage.init && contractApp.getView() != "pdf") {
+            debug("view.blade pdfPage init-none, trigger change:page_no")
+            contractApp.setView("pdf");
+            contractApp.trigger("change:page_no");
+          } 
+          contractApp.setView("pdf");
+          this.forceUpdate();
         },
         search: function(query) {
           contractApp.setView("search");
@@ -110,7 +136,6 @@
           this.forceUpdate();
         },
         componentDidUpdate: function() {
-          // viewerCurrentPage.set({"page_no": 8});
         },
         componentDidMount: function() {
           var router = Router({

@@ -22,19 +22,33 @@ var Pdf = React.createClass({
   loadFile: function() {
     var self = this;
     var content = this.props.pdfPage.get("content")
-    this.setState({message: "" });
     if(content === false) {
-      this.setState({ page: ""});
-      this.setState({message: "There seems to be problem with this contract pdf. Please contact administrator with the url."});
+      this.setState({
+        page: "",
+        content: "",
+        message: "There seems to be problem with this contract pdf. Please contact administrator with the url."
+      });
     } else {
       if(!!content){
+        debug("react.pdf.js loadFile: getDocument content called");
+        this.setState({
+          message: "",
+          content: content
+        });
         PDFJS.getDocument(content).then(this._onDocumentComplete);
+      } else {
+        this.setState({
+          page: "",
+          message: "",
+          content: ""
+        });
       }
     }
   },
   componentDidMount: function() {
     var self = this;
     this.props.pdfPage.on("change:content", function() {
+      debug("react.pdf.js pdfPage change:content called");
       self.loadFile();
     });
   },
@@ -57,10 +71,13 @@ var Pdf = React.createClass({
           var completeCallback = pageRendering._internalRenderTask.callback;
           pageRendering._internalRenderTask.callback = function (error) {
             //Step 2: what you want to do before calling the complete method
+            debug("react.pdf pageRendering callback", error);
             completeCallback.call(this, error);
             //Step 3: do some more stuff
             if(!!self.props.onPageRendered && typeof self.props.onPageRendered === 'function'){
-              self.props.onPageRendered();
+              if(!!self.state.content) {
+                self.props.onPageRendered();  
+              }
             }
           };
         }
@@ -68,9 +85,11 @@ var Pdf = React.createClass({
       return (React.createElement("canvas", {ref: "pdfCanvas"}));
     }
     if(this.state.message) {
+      debug("react.pdf  showing generic message", this.state.message)
       return (React.createElement("div", null, this.state.message));
     } else {
       var page_no = this.props.contractApp.getCurrentPage();
+      debug("react.pdf showing page loader", page_no);
       return (this.props.loading || React.createElement("div", null, "Loading pdf page " + page_no));
     }
   },

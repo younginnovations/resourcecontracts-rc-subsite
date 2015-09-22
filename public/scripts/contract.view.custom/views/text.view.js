@@ -89,7 +89,12 @@ var TextPageView = React.createClass({
   },
   sanitizeTxt: function(text) {
     //replace the <  and > with &lt;%gt if they are not one of the tags below
-    return text.replace(/(<)(\/?)(\b(?!span|div|p|br))([^>]*)(>)/g,"&lt;$2$3$4&gt;");
+    text = text.replace(/(<)(\/?)([span|div|p|br])([^>]*)(>)/g,"----lt----$2$3$4----gt----");
+    text = text.replace(/</g,"&lt;");
+    text = text.replace(/>/g,"&gt;");
+    text = text.replace(/----lt----/g,"<");
+    text = text.replace(/----gt----/g,">");
+    return text;
   },
   highlightSearchQuery: function(text, highlightword) {
     var re = new RegExp(highlightword, "gi");
@@ -98,6 +103,14 @@ var TextPageView = React.createClass({
   render: function() {
     var text = this.sanitizeTxt(this.props.page.get('text'));
     var page_no = this.props.page.get('page_no');
+    if(this.props.page.get('page_no') == 30) {
+      var t = this.props.page.get('text');
+      t = t.replace(/(<)(\/?)([span|div|p|br])([^>]*)(>)/g,"----lt----$2$3$4----gt----")
+      t = t.replace(/</g,"&lt;");
+      t = t.replace(/>/g,"&gt;");
+      t = t.replace(/----lt----/g,"<");
+      t = t.replace(/----gt----/g,">");
+    }
     if(this.props.contractApp.getSearchQuery()) {
       text = this.highlightSearchQuery(text, this.props.contractApp.getSearchQuery());
     }
@@ -140,7 +153,7 @@ var TextViewer = React.createClass({
     this.props.pagesCollection.on("reset", function() {
       self.message = "";
       if(self.props.pagesCollection.models.length === 0) {
-        self.message = "There seems to be problem with the contract text. Please contact administrator with the url.";
+        self.message = "There seems to be problem with this contract text. Please contact administrator with the url.";
       }
       self.forceUpdate();
       self.loadAnnotations();
@@ -152,22 +165,22 @@ var TextViewer = React.createClass({
   },
   render: function() {
     var self = this;
-    var message = (this.message)?this.message:"Please wait while loading ...";
+    var pagesView = (this.message)?this.message:"Please wait while loading ...";
     if(this.props.pagesCollection.models.length > 0) {
       pagesView = this.props.pagesCollection.models.map(function(model, i) {
         return (
           <TextPageView
-            key={i} 
-            contractApp={self.props.contractApp} 
+            key={i}
+            contractApp={self.props.contractApp}
             page={model} />
         );
       });
     }
     return (
-      <div className="text-annotator" style={this.props.style} >
+      <div className="text-annotator" style={this.props.style}>
         <div></div>
         <div className="text-viewer">
-        {message}
+        {pagesView}
         </div>
       </div>
     );
