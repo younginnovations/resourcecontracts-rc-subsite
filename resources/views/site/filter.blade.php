@@ -34,10 +34,10 @@
                         <h2>Compare</h2>
                         <ul>
                         </ul>
-                        <button>Compare</button>
+                        <button class="btn btn-compare">Compare</button>
                     </div>
 
-                    <table class="table table-responsive table-contract">
+                    <table class="table table-responsive table-contract table-contract-list">
                         <tbody>
                         @forelse($contracts->results as $contract)
                             <?php
@@ -166,7 +166,12 @@
                        Cookies.remove(cookieName);
                    },
                    "items": function() {
-                       return Cookies.getJSON(cookieName);
+                       var item = Cookies.getJSON(cookieName);
+                       if(item)
+                       {
+                           return item;
+                       }
+                       return [];
                    },
                    "isLimitExceed":function(){
                        return this.items().length > 1;
@@ -195,7 +200,7 @@
                        $(el).removeAttr('disabled');
                    },
                    "itemTemplate" : function (id, title) {
-                       return '<li class="item-'+id+'">'+title+' <a href="#" data-id="'+id+'" class="item-delete">delete</a></li>';
+                       return '<li class="item-'+id+'"><a href="#" data-id="'+id+'" class="item-delete">delete</a>'+title+' </li>';
                    },
                    "removeItem":function(id)
                    {

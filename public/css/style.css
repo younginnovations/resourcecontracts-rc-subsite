@@ -466,7 +466,7 @@ footer ul li a:hover {
 	height: auto;
 }
 
-.btn-form-search { 
+.btn-form-search,.btn-compare {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
@@ -479,7 +479,11 @@ footer ul li a:hover {
   margin-top: 24px;
 }
 
-.btn-form-search:hover,.btn-form-search:focus {
+.btn-compare {
+	margin: 4px 0 10px;
+}
+
+.btn-form-search:hover,.btn-form-search:focus,.btn-compare:hover,.btn-compare:focus {
 	color: #fff;
 	background: #F46A4A;
 } 
@@ -1000,6 +1004,10 @@ footer ul li a:hover {
 	position: relative;
 }
 
+.download-main-wrap:only-child {
+	border-right: 0;
+}
+
 .view-pin-wrap,.download-wrap {
 	padding: 12px 0 12px 22px;
 	background: url(../../images/ic-sprite.png) no-repeat -174px 11px;
@@ -1009,6 +1017,11 @@ footer ul li a:hover {
 	padding-left: 44px;
 	background: url(../../images/ic-sprite.png) no-repeat -152px -40px;
 }
+
+.contract-info-section {
+	overflow: hidden;
+}
+
 .contract-info-section .download-main-wrap {
 	width: auto;
 	margin-right: 20px;
@@ -2333,4 +2346,36 @@ input.select2-search__field {
 .government-entity-wrap li span+span:before {
 	content: ",";
 	display: inline-block;
+}
+
+
+.table-contract-list input[type="checkbox"] {
+	float: left;
+}
+
+.table-contract-list td:first-child {
+	background-position: 78px 33px;
+}
+
+.table-contract-list td:first-child > a {
+	padding-left: 26px;
+}
+
+#compare-block {
+	background-color: #f2f2f2;
+	padding: 10px 20px;
+}
+
+#compare-block h2 {
+	font: normal 16px "Open-Sans-Bold";
+	margin: 0 0 6px;
+}
+
+#compare-block ul {
+	padding-bottom: 10px;
+}
+
+#compare-block ul li {
+	border-bottom: 1px solid #e5e5e5;
+	padding: 5px 0;
 }
