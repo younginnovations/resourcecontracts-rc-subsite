@@ -44,14 +44,27 @@
                                     <a href="{{route('contract.detail',['id'=>$contract->contract_id ])}}">
                                         {{ $contract->contract_name or ''}}
                                     </a>
+
                                     @if($annotations->total>0)
                                         <div class="annotate-text"> Annotated </div>
                                     @endif
+
                                     <div class="search-text">
                                         {!!$contract->text or ''!!}
                                         {!!$contract->annotations or ''!!}
                                         {!!$contract->metadata or ''!!}
                                       </div>
+                                    <div class="contract-info-section">
+                                        <div class="download-main-wrap">
+                                            <div class="download-wrap">
+                                                <span>Download</span>
+                                            </div>
+
+                                            <ul class="dropdown-menu">
+                                                <li><a href="{{route('contract.download.pdf',['id'=> $contract->contract_id])}}" >Pdf</a></li>
+                                                <li><a href="{{route('contract.download',['id'=> $contract->contract_id])}}" >Word File</a></li>
+                                            </ul>
+                                        </div>
                                     @if(isset($contract->group) && count($contract->group)>0)
                                         <div class="contract-group">
                                             <label for="">Found in: </label>
@@ -60,7 +73,7 @@
                                             @endforeach
                                         </div>
                                     @endif
-
+                                    </div>
                                     @if($annotations->total>0)
                                         @if(\Illuminate\Support\Facades\Input::has('annotation_category'))
                                             <?php $annotation_categories = \Illuminate\Support\Facades\Input::get(
