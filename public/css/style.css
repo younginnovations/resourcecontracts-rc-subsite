@@ -1019,7 +1019,8 @@ footer ul li a:hover {
 }
 
 .contract-info-section {
-	overflow: hidden;
+	display: inline-block;
+	width: 100%;
 }
 
 .contract-info-section .download-main-wrap {
@@ -2351,19 +2352,27 @@ input.select2-search__field {
 
 .table-contract-list input[type="checkbox"] {
 	float: left;
+	margin-left: -32px;
 }
 
 .table-contract-list td:first-child {
-	background-position: 78px 33px;
+    background-position: 50px 33px;
+    padding-left: 60px;
 }
 
 .table-contract-list td:first-child > a {
-	padding-left: 26px;
+	padding-left: 13px;
 }
 
 #compare-block {
 	background-color: #f2f2f2;
 	padding: 10px 20px;
+	position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    border-top: 1px solid #e1e1e1;
 }
 
 #compare-block h2 {
@@ -2378,4 +2387,13 @@ input.select2-search__field {
 #compare-block ul li {
 	border-bottom: 1px solid #e5e5e5;
 	padding: 5px 0;
+}
+
+.item-delete {
+    background: url(../../images/ic-delete.png) no-repeat 4px 5px;
+    display: inline-block;
+    text-indent: -9999px;
+    width: 14px;
+    margin-right: 3px;
+    background-size: 9px;
 }

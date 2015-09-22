@@ -435,7 +435,7 @@
 
 .view-metadata a.btn-pins {
     background: url(../../images/ic-sprite.png) no-repeat -154px 16px;
-}
+    display: none;
 
 .view-metadata a:hover {
     text-decoration: none;

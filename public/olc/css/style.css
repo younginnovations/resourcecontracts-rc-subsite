@@ -466,7 +466,7 @@ footer ul li a:hover {
 	height: auto;
 }
 
-.btn-form-search { 
+.btn-form-search,.btn-compare {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
@@ -479,7 +479,11 @@ footer ul li a:hover {
   margin-top: 24px;
 }
 
-.btn-form-search:hover,.btn-form-search:focus {
+.btn-compare {
+	margin: 4px 0 10px;
+}
+
+.btn-form-search:hover,.btn-form-search:focus,.btn-compare:hover,.btn-compare:focus {
 	color: #fff;
 	background: #1C7041;
 } 
@@ -1000,6 +1004,10 @@ footer ul li a:hover {
 	position: relative;
 }
 
+.download-main-wrap:only-child {
+	border-right: 0;
+}
+
 .view-pin-wrap,.download-wrap {
 	padding: 12px 0 12px 22px;
 	background: url(../images/ic-sprite.png) no-repeat -174px 11px;
@@ -1008,6 +1016,11 @@ footer ul li a:hover {
 .download-wrap {
 	padding-left: 44px;
 	background: url(../images/ic-sprite.png) no-repeat -152px -40px;
+}
+
+.contract-info-section {
+	display: inline-block;
+	width: 100%;
 }
 
 .contract-info-section .download-main-wrap {
@@ -1920,9 +1933,8 @@ tr:empty {
 }
 
 .content-wrap .glyphicon-remove {
-	background: url(../../images/ic-close.png) no-repeat center!important;
+	background: url(../images/ic-close.png) no-repeat center!important;
 }
-
 
 .content-wrap .glyphicon-ok:before,.content-wrap .glyphicon-remove:before {
 	display: none;
@@ -1975,7 +1987,7 @@ h1 + .editable-container.editable-inline {
 	border: 1px solid #ccc;
 }
 
-.not-found-wrapper {
+.not-found-wrapper {	
 	background-image: radial-gradient(50% 79%, #B7DF74 32%, #94BA63 79%);
 }
 
@@ -2335,4 +2347,61 @@ input.select2-search__field {
 .government-entity-wrap li span+span:before {
 	content: ",";
 	display: inline-block;
+}
+
+
+.table-contract-list input[type="checkbox"] {
+	float: left;
+	margin-left: -32px;
+}
+
+.table-contract-list td:first-child {
+    background-position: 50px 33px;
+    padding-left: 60px;
+}
+
+.table-contract-list td:first-child > a {
+	padding-left: 13px;
+}
+
+#compare-block {
+	background-color: #f2f2f2;
+	padding: 10px 20px;
+	position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    border-top: 1px solid #e1e1e1;
+}
+
+#compare-block h2 {
+	font: normal 16px "Open-Sans-Bold";
+	margin: 0 0 6px;
+}
+
+#compare-block ul {
+	padding-bottom: 10px;
+}
+
+#compare-block ul li {
+	border-bottom: 1px solid #e5e5e5;
+	padding: 5px 0;
+}
+
+.item-delete {
+    background: url(../images/ic-delete.png) no-repeat 4px 5px;
+    display: inline-block;
+    text-indent: -9999px;
+    width: 14px;
+    margin-right: 3px;
+    background-size: 9px;
+}
+
+.back {
+	background-color: #217B49!important;
+}
+
+.back:hover {
+	background-color: #1C7041!important;
 }
