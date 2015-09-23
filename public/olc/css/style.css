@@ -345,7 +345,7 @@ footer > .row {
 
 .footer-left-wrap {
 	padding-top: 20px;
-	padding-left: 32px;
+	padding-left: 15px;
 	margin-bottom: 40px;
 }
 
@@ -359,8 +359,8 @@ footer ul li {
 	border-left: 1px solid rgb(255,255,255);
 	border-left: 1px solid rgba(255,255,255,0.7);
 	line-height: 12px;
-	padding-left: 10px;
-	margin-left: 10px;
+	padding-left: 4px;
+	margin-left: 4px;
 }
 
 .footer-left-wrap li:first-child {

@@ -1,6 +1,6 @@
         <footer>
             <div class="row">
-                <div class="col-lg-4 footer-left-wrap">
+                <div class="col-lg-3 footer-left-wrap">
                     <ul>
                         <li><a href="{{url('about')}}">About</a></li>
                         <li><a href="{{url('faqs')}}">FAQs</a></li>
@@ -9,7 +9,7 @@
                         <li><a href="{{url('contact')}}">Contact</a></li>
                     </ul>
                 </div>
-                <div class="col-lg-8 footer-right-wrap">
+                <div class="col-lg-9 footer-right-wrap">
                     <ul>
                         @if(env("CATEGORY")=="rc")
                             <li><a href="http://www.resourcecontracts.org/" target="_blank"><img src="{{url('images/ic-nrgi.png')}}" /></a></li>
@@ -18,6 +18,9 @@
                         <li><a href="http://ccsi.columbia.edu/" target="_blank"><img src="{{url('images/ic-cc.png')}}" /></a></li>
                         <li><a href="http://www.worldbank.org/en/topic/governance" target="_blank"><img src="{{url('images/ic-worldbank.png')}}" /></a></li>
                         <li><a href="http://www.dfid.gov.uk" target="_blank"><img src="{{url('images/ic-dfid.png')}}" /></a></li>
+                            @if(env("CATEGORY")=="rc")
+                                <li><a href="http://www.afdb.org/en/topics-and-sectors/initiatives-partnerships/african-legal-support-facility/" target="_blank"><img src="{{url('images/ic-alsf.png')}}" /></a></li>
+                            @endif
                     </ul>
                 </div>
             </div>
