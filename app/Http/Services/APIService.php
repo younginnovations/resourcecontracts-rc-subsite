@@ -342,5 +342,32 @@ class APIService
         return $this->apiCall($resource);
     }
 
+    /**
+     * Return contract id
+     * @param $contracts
+     * @return array
+     */
+    public function getContractsId($contracts)
+    {
+        $data = [];
+        foreach ($contracts->results as $result) {
+            $data[] = $result->contract_id;
+        }
+
+        return $data;
+    }
+
+    /**
+     * Return all the metadata of given id
+     * @param $id
+     * @return array
+     */
+    public function getAllMetadata($id)
+    {
+        $contracts = $this->apiCall('/contracts/metadata/download', ['id' => $id]);
+
+        return $contracts;
+    }
 
 }
+
