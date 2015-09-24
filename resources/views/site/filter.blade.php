@@ -20,9 +20,6 @@
                   @include('layout.partials.search', ['searchPage' => true])
               </div>
             </div>
-            @if(!empty($contract_id))
-                <div class="download-csv"><a href="{{route('contract.metadata.download',['id'=>implode(',',$contract_id)])}}">Download as CSV</a></div>
-            @endif
         </div>
         <div class="contract-number-wrap contract-search-number-wrap">
             <span>{{$contracts->total}}</span> @if($contracts->total > 1)contracts @else Contract @endif
@@ -33,7 +30,7 @@
         <div class="col-lg-12 country-list-wrapper search-list-wrapper">
             <div class="panel panel-default panel-wrap country-list-wrap">
                 <div class="panel-body">
-                    <div id="compare-block">
+                    <div style="display: none" id="compare-block">
                         <h2>Compare</h2>
                         <ul>
                         </ul>
