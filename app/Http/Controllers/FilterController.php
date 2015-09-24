@@ -30,14 +30,18 @@ class FilterController
      */
     public function index(Request $request)
     {
-        $currentPage    = $request->get('page', 1);
-        $filter         = $this->processQueries($request);
-        $filter['from'] = $currentPage;
-        $contracts      = $this->api->filterSearch($filter);
-        $filter         = $this->updateFilterData($filter, $contracts, $request);
-        $show_advance   = true;
+        $currentPage           = $request->get('page', 1);
+        $filter                = $this->processQueries($request);
+        $filter['from']        = $currentPage;
+        $contracts             = $this->api->filterSearch($filter);
+        $allFilter             = $filter;
+        $allFilter['per_page'] = 100000;
+        $allContracts          = $this->api->filterSearch($allFilter);
+        $contract_id           = $this->api->getContractsId($allContracts);
+        $filter                = $this->updateFilterData($filter, $contracts, $request);
+        $show_advance          = true;
 
-        return view('site.filter', compact('contracts', 'filter', 'show_advance', 'total_contract', 'currentPage'));
+        return view('site.filter', compact('contracts', 'filter', 'show_advance', 'total_contract', 'currentPage', 'contract_id'));
     }
 
     /**

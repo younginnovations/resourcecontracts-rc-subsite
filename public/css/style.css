@@ -590,6 +590,26 @@ footer ul li a:hover {
 	float: left;
 	width: 100%;
 	background: #f9f9f9;
+	position: relative;
+}
+
+.download-csv {
+	position: absolute;
+	bottom: -13px;
+	right: 102px;
+}
+
+.download-csv a {
+	display: block;
+	background: #404040  ;
+	text-decoration: none;
+	color: #fff;
+	border-radius: 4px;
+	padding: 7px 20px;
+}
+
+.filter-wrapper > .col-lg-12 {
+	padding-right: 0;
 }
 
 .filter-wrapper > .col-xs-6:first-child {

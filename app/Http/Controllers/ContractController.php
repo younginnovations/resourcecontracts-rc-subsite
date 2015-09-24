@@ -2,6 +2,7 @@
 
 use App\Http\Services\APIService;
 use App\Http\Services\ContractService;
+use App\Http\Services\DownloadService;
 use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
@@ -19,15 +20,21 @@ class ContractController extends BaseController
      * @var ContractService
      */
     protected $contract;
+    /**
+     * @var DownloadService
+     */
+    private $download;
 
     /**
      * @param APIService      $api
      * @param ContractService $contract
+     * @param DownloadService $download
      */
-    public function __construct(APIService $api, ContractService $contract)
+    public function __construct(APIService $api, ContractService $contract, DownloadService $download)
     {
         $this->api      = $api;
         $this->contract = $contract;
+        $this->download = $download;
     }
 
     /**
@@ -224,14 +231,14 @@ class ContractController extends BaseController
             $contract->contract_id,
             str_limit(str_slug($contract->contract_name), 70)
         );
-            header('Content-Description: File Transfer');
-            header('Content-Type: application/pdf');
-            header('Content-Disposition: attachment; filename="' . basename($filename) . '.pdf"');
-            header('Expires: 0');
-            header('Cache-Control: must-revalidate');
-            header('Pragma: public');
-            readfile($contract->file_url);
-            exit;
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/pdf');
+        header('Content-Disposition: attachment; filename="' . basename($filename) . '.pdf"');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        readfile($contract->file_url);
+        exit;
     }
 
     public function view($contract_id)
@@ -244,6 +251,12 @@ class ContractController extends BaseController
         }
 
         return view('contract.page.view', compact('contract'));
+    }
+
+    public function downloadMetadataAsCSV(Request $request)
+    {
+        $contracts = $this->download->downloadSearchResult($request->get('id'));
+        echo $contracts;
     }
 
 
