@@ -1,4 +1,5 @@
-<?php namespace App\Http\Services;
+<?php
+namespace App\Http\Services;
 
 /**
  * Class DownloadService
@@ -128,7 +129,7 @@ class DownloadService
     private function makeSemicolonSeparated($arrays, $key)
     {
         $data = [];
-        if ($arrays = null) {
+        if ($arrays == null) {
             return $data;
         }
 
