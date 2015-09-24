@@ -89,7 +89,7 @@ var TextPageView = React.createClass({
   },
   sanitizeTxt: function(text) {
     //replace the <  and > with &lt;%gt if they are not one of the tags below
-    text = text.replace(/(<)(\/?)([span|div|p|br])([^>]*)(>)/g,"----lt----$2$3$4----gt----");
+    text = text.replace(/(<)(\/?)(?=span|div|p|br)([^>]*)(>)/g,"----lt----$2$3----gt----");
     text = text.replace(/</g,"&lt;");
     text = text.replace(/>/g,"&gt;");
     text = text.replace(/----lt----/g,"<");
@@ -103,14 +103,6 @@ var TextPageView = React.createClass({
   render: function() {
     var text = this.sanitizeTxt(this.props.page.get('text'));
     var page_no = this.props.page.get('page_no');
-    if(this.props.page.get('page_no') == 30) {
-      var t = this.props.page.get('text');
-      t = t.replace(/(<)(\/?)([span|div|p|br])([^>]*)(>)/g,"----lt----$2$3$4----gt----")
-      t = t.replace(/</g,"&lt;");
-      t = t.replace(/>/g,"&gt;");
-      t = t.replace(/----lt----/g,"<");
-      t = t.replace(/----gt----/g,">");
-    }
     if(this.props.contractApp.getSearchQuery()) {
       text = this.highlightSearchQuery(text, this.props.contractApp.getSearchQuery());
     }
