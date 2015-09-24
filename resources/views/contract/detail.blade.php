@@ -1,25 +1,5 @@
 @extends('layout.app-full')
 
-@section('css')
-    <style>
-        .pin-list{
-            position: absolute;
-            z-index: 1;
-            background: #fff;
-            padding: 15px;
-            width: 350px;
-            font-size: 13px;
-            text-transform: initial;
-            border: 1px solid #DADADA;}
-        .pin-list p {
-            margin-bottom: 10px;
-            border-bottom: 1px solid #ECECEC;
-            padding-bottom: 10px;
-            margin-top: 10px;
-        }
-    </style>
-    @stop
-
 @section('content')
 
 <div class="row">
@@ -46,12 +26,6 @@
         </div>
         <div class="filter-wrapper actions-wrapper">
             <div class="col-lg-12">
-                <div class="view-main-pin-wrap">
-                    <div class="view-pin-wrap">
-                        <span>View Pins</span>
-                    </div>
-                    <div id="pinLists" style="display: none"></div>
-                </div>
                 <div class="download-main-wrap">
                     <div class="download-wrap">
                         <span>Download</span>
@@ -103,10 +77,12 @@
                                 @foreach($contract->metadata->government_entity as $governmentEntity)
                                     <span>
                                         @if(isset($governmentEntity->entity) && isset($governmentEntity->identifier) && !empty($governmentEntity->entity))
-                                        {{$governmentEntity->entity}}({{$governmentEntity->identifier}})
+                                        {{$governmentEntity->entity}} @if($governmentEntity->identifier)({{$governmentEntity->identifier}})@endif
                                         @endif
                                     </span>
                                 @endforeach
+                                @else
+                                -
                             @endif
                         </li>
 
@@ -339,7 +315,7 @@
                 <ul>
                     <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                         <label for="">Source URL</label>
-                        <span>@if(!empty(_e($contract->metadata,'source_url')))<a href="{{$contract->metadata->source_url}}" target="_blank">{{str_limit($contract->metadata->source_url,50)}}</a>@endif</span>
+                        <span>@if(!empty(_e($contract->metadata,'source_url')))<a href="{{$contract->metadata->source_url}}" target="_blank">{{str_limit($contract->metadata->source_url,50)}}</a>@else -@endif</span>
                     </li>
                     <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                         <label for="">Disclosure Mode</label>
@@ -392,45 +368,4 @@
     </div>
 </div>
 @endif
-@stop
-
-@section('js')
-    <script src="{{ url('js/lib/underscore.js') }}"></script>
-    <script src="{{ url('js/lib/backbone.js') }}"></script>
-    <script src="{{ url('js/lib/backbone.localstorage.js') }}"></script>
-    <script src="{{ url('js/lib/backbone.exportcsv.js') }}"></script>
-
-    <script src="{{ url('js/custom/rc.pinning.js') }}"></script>
-
-    <script type="text/template" id="pin-list-template">
-    <div id="pinList" class="pin-list">
-        <div class="pull-right pin-buttons">
-            <div id="no-pin-message"></div>
-        </div>
-    </div>
-    </script>
-    <script type="text/template" id="pin-template">
-        <p><%= pintext %></p>
-    </script>
-    <script type="text/javascript">
-    //pinning module
-    var contractEvents = {};
-    _.extend(contractEvents, Backbone.Events);
-    var pinCollection = new PinCollection();
-
-    pinCollection.fetch({reset: true});
-    //console.log("contract pins",pinCollection.byContract("16"));
-    //var contractPins = pinCollection.byContract("16");
-    var pinListView = new PinListView({
-        el: '#pinLists',
-        collection: pinCollection,
-        eventsPipe: contractEvents
-    }).render();
-    var pinButtonView = new PinButtonView({
-        el: '.view-pin-wrap',
-        collection: pinCollection,
-        pinListView: pinListView,
-        eventsPipe: contractEvents
-    }).render();
-    </script>
 @stop
