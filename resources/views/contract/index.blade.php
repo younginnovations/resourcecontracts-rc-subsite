@@ -34,71 +34,12 @@
         <div class="col-lg-12 country-list-wrapper">
             <div class="panel panel-default panel-wrap country-list-wrap">
                 <div class="panel-body">
-                    <table class="table table-responsive table-contract">
-                        <tbody>
-                        @if($contracts->results)
-                            @foreach($contracts->results as $contract)
-                                <?php
-                                $api     = app('App\Http\Services\APIService');
-                                $annotations = $api->getAnnotations($contract->contract_id);
-
-                                ?>
-                                <tr>
-                                    <td width="70%">
-                                        <a href="{{route('contract.detail',['id'=>$contract->contract_id ])}}">
-                                            {{ $contract->contract_name or ''}}
-                                        </a>
-
-                                        <?php
-                                            $country_code ='';
-                                            if($contract->country_code !='')
-                                                {
-                                                    $country_code = trans('country.' . strtoupper($contract->country_code));
-                                                }
-
-                                        $arr = array_filter(
-                                                [
-                                                        $country_code,
-                                                        $contract->signature_date,
-                                                ]
-                                        );
-                                        $subText = join(', ', $arr);
-                                        ?>
-                                        @if($subText)
-                                        - {{$subText}}
-                                        @endif
-                                        <span class="label label-default">{{strtoupper($contract->language)}}</span>
-                                        {{$contract->contract_type}}
-                                    </td>
-                                    <td align="right">
-                                        @foreach($contract->resources as $resource)
-                                            {{$resource}}
-                                        @endforeach
-                                    </td>
-
-                                        <td align="right">
-                                            @if($annotations->total>0)
-                                                Annotated
-                                            @endif
-                                        </td>
-
-                                </tr>
-                            @endforeach
-                        @else
-                            <tr>
-                                <td colspan="2">{{'Contract not found.'}}</td>
-                            </tr>
-                        @endif
-                        </tbody>
-                    </table>
+                    @include('contract.partials.contractlist');
                     @include('contract.partials.pagination', ['total_item' => $contracts->total, 'per_page'=>$contracts->per_page, 'current_page' => $currentPage ])
                 </div>
             </div>
         </div>
     </div>
-
-
-
 
 
 @stop
