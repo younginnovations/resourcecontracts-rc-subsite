@@ -125,8 +125,14 @@ class APIService
     public function getAnnotations($contract_id)
     {
         $resource = sprintf('contract/%d/annotations', $contract_id);
+        $response = $this->apiCall($resource);
+        foreach ($response->result as $annotation) {
+            $annotation->category_cluster = trans(
+                'codelist/annotation_cluster.cluster_mapping.' . str_slug($annotation->category, '-')
+            );
+        }
 
-        return $this->apiCall($resource);
+        return $response;
     }
 
 

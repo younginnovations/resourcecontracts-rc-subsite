@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Http\Services\AnnotationService;
 use App\Http\Services\APIService;
 use App\Http\Services\ContractService;
 use App\Http\Services\DownloadService;
@@ -24,17 +25,27 @@ class ContractController extends BaseController
      * @var DownloadService
      */
     private $download;
+    /**
+     * @var AnnotationService
+     */
+    private $annotation;
 
     /**
-     * @param APIService      $api
-     * @param ContractService $contract
-     * @param DownloadService $download
+     * @param APIService        $api
+     * @param ContractService   $contract
+     * @param DownloadService   $download
+     * @param AnnotationService $annotation
      */
-    public function __construct(APIService $api, ContractService $contract, DownloadService $download)
-    {
-        $this->api      = $api;
-        $this->contract = $contract;
-        $this->download = $download;
+    public function __construct(
+        APIService $api,
+        ContractService $contract,
+        DownloadService $download,
+        AnnotationService $annotation
+    ) {
+        $this->api        = $api;
+        $this->contract   = $contract;
+        $this->download   = $download;
+        $this->annotation = $annotation;
     }
 
     /**
@@ -61,7 +72,8 @@ class ContractController extends BaseController
      */
     public function detail($contract_id)
     {
-        $contract = $this->api->contractDetail($contract_id);
+        $contract                     = $this->api->contractDetail($contract_id);
+        $contract->annotationsCluster = $this->annotation->groupAnnotationsByCluster($contract->annotations);
 
         if (empty($contract->metadata)) {
             return abort(404);
