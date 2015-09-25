@@ -51,6 +51,7 @@
                         <table class="table table-responsive table-contract">
                                 <tbody>
                                 @forelse($contracts->results as $contract)
+
                                     <?php
                                     $api     = app('App\Http\Services\APIService');
                                     $annotations = $api->getAnnotations($contract->contract_id);
@@ -68,7 +69,7 @@
                                             <div class="resource-contract-list">
                                                 <div class="resource-type">
                                                     <label for="">Resource: </label>
-                                                 @foreach($contract->resources as $resource)
+                                                 @foreach($contract->resource as $resource)
                                                     {{$resource}}
                                                 @endforeach
                                                 </div>
@@ -78,7 +79,8 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="contract-date">{{$contract->signature_date}}</td>                
+
+                                        <td class="contract-date">{{$contract->signature_date}}</td>
                                     </tr>
                                 @empty
                                     <tr>

@@ -66,7 +66,7 @@
                                         <div class="resource-contract-list">
                                          <div class="resource-type">
                                             <label for="">Resources: </label>
-                                            @foreach($contract->resources as $resource)
+                                            @foreach($contract->resource as $resource)
                                                 {{$resource}}
                                             @endforeach
                                         </div>
