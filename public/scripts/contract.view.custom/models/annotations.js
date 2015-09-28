@@ -1,6 +1,8 @@
 var Annotation = Backbone.Model.extend({
     default: {
-        text: ""
+        text: "",
+        cluster: "Other12"
+
     }
 });
 var AnnotationsCollection = Backbone.Collection.extend({
@@ -17,7 +19,7 @@ var AnnotationsCollection = Backbone.Collection.extend({
     },    
     parse: function(response) {
         return response.result;
-    }
+    },
 });
 var AnnotationCategory = Backbone.Model.extend({});
 var AnnotationCategories = Backbone.Collection.extend({

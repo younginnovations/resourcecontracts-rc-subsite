@@ -82,6 +82,12 @@ var TextPaginationView = React.createClass({
 });
 
 var TextPageView = React.createClass({
+  getInitialState: function() {
+    return {
+      originalHtml: "",
+      searchresultsHtml: ""
+    };
+  },
   _onEnter: function(msg, e) {
     this.props.contractApp.triggerUpdateTextPaginationPage(this.props.page.get("page_no"));
   },
@@ -89,7 +95,7 @@ var TextPageView = React.createClass({
   },
   sanitizeTxt: function(text) {
     //replace the <  and > with &lt;%gt if they are not one of the tags below
-    text = text.replace(/(<)(\/?)(?=span|div|p|br)([^>]*)(>)/g,"----lt----$2$3----gt----");
+    text = text.replace(/(<)(\/?)(?=span|div|br)([^>]*)(>)/g,"----lt----$2$3----gt----");
     text = text.replace(/</g,"&lt;");
     text = text.replace(/>/g,"&gt;");
     text = text.replace(/----lt----/g,"<");
@@ -97,19 +103,51 @@ var TextPageView = React.createClass({
     return text;
   },
   highlightSearchQuery: function(text, highlightword) {
-    var re = new RegExp(highlightword, "gi");
-    return text.replace(re,"<span style='background-color:#a1aeec;'>" + highlightword + "</span>");
+    highlightword = decodeURI(highlightword);
+    var re = new RegExp("("+highlightword+")", "gi");
+    return text.replace(re,"<span style='background-color:#a1aeec;'>$1</span>");
+  },
+  componentDidMount: function() {
+    var self = this;
+    this.props.contractApp.on("searchresults:close", function() {
+        self.setState({
+          searchresultsHtml: ""
+        });
+    });
+    this.props.contractApp.on("searchresults:ready", function() {
+      if(self.props.contractApp.getSearchQuery()) {
+        var originalHtml= self.sanitizeTxt(self.props.page.get('text'));
+      // var originalHtml = (self.state.originalHtml !== "")?self.state.originalHtml:React.findDOMNode(self.refs.text_content).innerHTML;;
+        var searchresultsHtml = self.highlightSearchQuery(originalHtml, self.props.contractApp.getSearchQuery());
+        if(!self.state.originalHtml) {
+          self.setState({
+            originalHtml: originalHtml,
+            searchresultsHtml: searchresultsHtml
+          });
+        } else {
+          self.setState({
+            searchresultsHtml: searchresultsHtml
+          });
+        }
+      }
+    });
   },
   render: function() {
-    var text = this.sanitizeTxt(this.props.page.get('text'));
-    var page_no = this.props.page.get('page_no');
-    if(this.props.contractApp.getSearchQuery()) {
-      text = this.highlightSearchQuery(text, this.props.contractApp.getSearchQuery());
+    var text = "";
+    if(!this.state.originalHtml) {
+      text = this.sanitizeTxt(this.props.page.get('text'));  
+    } else {
+      if(this.state.searchresultsHtml) {
+        text = this.state.searchresultsHtml;
+      } else {
+        text = this.state.originalHtml;
+      }
     }
+    var page_no = this.props.page.get('page_no');
     return (      
       <span className={page_no} >
         <span>{page_no}</span>
-        <span dangerouslySetInnerHTML={{__html: text}} />
+        <span ref="text_content" dangerouslySetInnerHTML={{__html: text}} />
         <Waypoint
             onEnter={this._onEnter.bind(this, "enter" + page_no)}
             onLeave={this._onLeave}
@@ -119,6 +157,15 @@ var TextPageView = React.createClass({
   }
 });
 var TextViewer = React.createClass({
+  getInitialState: function() {
+    return {
+    }
+  },
+  handleClickWarning: function(e) {
+    e.preventDefault();
+
+    $(e.target).parent().hide(500);
+  },
   loadAnnotations: function() {
     if(!this.annotator) {
       this.annotator = new AnnotatorjsView({
@@ -142,10 +189,20 @@ var TextViewer = React.createClass({
   },
   componentDidMount: function() {
     var self = this;
+    this.props.contractApp.on("searchresults:ready", function() {
+      if(self.annotator) {
+        setTimeout(self.annotator.reload(), 1000);
+      }
+    });
+    this.props.contractApp.on("searchresults:close", function() {
+      if(self.annotator) {
+        setTimeout(self.annotator.reload(), 1000);
+      }        
+    });    
     this.props.pagesCollection.on("reset", function() {
       self.message = "";
       if(self.props.pagesCollection.models.length === 0) {
-        self.message = "There seems to be problem with this contract text. Please contact administrator with the url.";
+        self.message = <div className="no-contract-error">We're sorry, there is a problem loading the contract. Please contact <a mailto="info@openlandcontracts.org">info@openlandcontracts.org</a> to let us know, or check back later.</div>;//'
       }
       self.forceUpdate();
       self.loadAnnotations();
@@ -158,23 +215,33 @@ var TextViewer = React.createClass({
   render: function() {
     var self = this;
     var pagesView = (this.message)?this.message:"Please wait while loading ...";
+    var warningText = (this.message)?"":(<div className="text-viewer-warning">
+          <span className="pull-right link close" onClick={this.handleClickWarning}>x</span>
+          This contract's text was created automatically and may contain errors and differences from the contract's original PDF file.&nbsp;
+          <a href={app_url + "/faqs"}>Learn more</a>
+        </div>);
     if(this.props.pagesCollection.models.length > 0) {
-      pagesView = this.props.pagesCollection.models.map(function(model, i) {
-        return (
-          <TextPageView
+      pagesView = [];
+      for(var i=0;i < this.props.pagesCollection.models.length; i++) {
+        var model = this.props.pagesCollection.models[i];
+        pagesView.push(<TextPageView
             key={i}
             contractApp={self.props.contractApp}
             page={model} />
         );
-      });
+      }
     }
     return (
-      <div className="text-annotator" style={this.props.style}>
-        <div></div>
-        <div className="text-viewer">
-        {pagesView}
+      <div className="text-panel" style={this.props.style}>
+        {warningText}
+        <div className="text-annotator">
+          <div></div>
+          <div className="text-viewer">
+          {pagesView}
+          </div>
         </div>
       </div>
     );
   }
+  
 });

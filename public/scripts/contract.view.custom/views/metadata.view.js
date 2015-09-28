@@ -1,58 +1,90 @@
 var MetadataToggleButton = React.createClass({
+    getInitialState: function() {
+        return {
+            showMeta: true
+        }
+    },
     handleClick: function() {
-        if(!this.props.contractApp.get("showMeta")) {
-            this.props.contractApp.set({showMeta: true});
-            location.hash="/meta/show";
-            $('.metadata-toggle-button').addClass("metadata-shown");
-            $('.pdf-viewer').css("width","50%");
-            $(".text-annotator").css("width","50%");
+        if(this.state.showMeta) {
+            this.setState({showMeta: false});
+            // this.props.contractApp.set({showMeta: true});
+            $('.right-column-view').hide();
+            $('.metadata-toggle-button').removeClass("metadata-shown");
+            $('.pdf-viewer').css("width","70%");
+            $(".text-panel").css("width","70%");
         }
         else {
-            this.props.contractApp.set({showMeta: false});
-            location.hash="/meta/hide";
-            $('.metadata-toggle-button').removeClass("metadata-shown");
-            $('.pdf-viewer').css("width","72%");
-            $(".text-annotator").css("width","72%");
+            // this.props.contractApp.set({showMeta: false});
+            // location.hash="/meta/hide";
+            this.setState({showMeta: true});
+            $('.metadata-toggle-button').addClass("metadata-shown");
+            $('.right-column-view').show();            
+            $('.pdf-viewer').css("width","50%");
+            $(".text-panel").css("width","50%");
         }
     },
     render: function() {
         return (
-            <div className="metadata-toggle-button pull-right ">
+            <div className="metadata-toggle-button pull-right metadata-shown">
                 <span onClick={this.handleClick}>Meta</span>
             </div>
         );
     }
 });
+
 var MetadataView = React.createClass({
+    getInitialState: function() {
+        return {
+            showMoreMetadata: false
+        }
+    },
     componentDidMount: function() {
         var self = this;
         this.props.metadata.on("sync", function() {
             self.forceUpdate();
         });
-    }, 
+    },
+    clickShowMoreMetadata: function(e) {
+        e.preventDefault();
+        this.setState({showMoreMetadata: !this.state.showMoreMetadata});
+        if(!this.state.showMoreMetadata) {
+            $(".metadata-view .show-more-meta").show(500);
+        } else {
+            $(".metadata-view .show-more-meta").hide(500);
+        }
+    },
     render: function() {
+        var showLabel = "Show more";
+        if(this.state.showMoreMetadata) {
+            showLabel = "Show less";
+        }
         if(this.props.metadata.get("country")) {
             return (
                 <div className="metadata-view">
                     <div>Metadata</div>
+                    <div className="metadata-country">
+                        <span>OCID</span>
+                        <span>{this.props.metadata.get("open_contracting_id")}</span>
+                    </div>
                     <div className="metadata-country">
                         <span>Country</span>
                         <span>{this.props.metadata.get("country").name}</span>
                     </div>
                     <div className="metadata-signature-year">
                         <span>Signature year</span>
-                        <span>{this.props.metadata.get("signature_year")}</span>
-                    </div>
-                    <div className="metadata-type-contract">
-                        <span>Type of Contract</span>
-                        <span>{this.props.metadata.get("type_of_contract")}</span>
+                        <span>{this.props.metadata.get("signature_year") || "-"}</span>
                     </div>
                     <div className="metadata-resource">
                         <span>Resources</span>
                         <span>{this.props.metadata.get("resource").join(",")}</span>
                     </div>
-                    <div>
-                    <a href={this.props.contractApp.getMetadataSummaryLink()}>See details</a>
+                    <div className="metadata-type-contract show-more-meta" style={{display: "none"}}>
+                        <span>Type of Contract</span>
+                        <span>{this.props.metadata.get("type_of_contract")}</span>
+                    </div>
+                    <div className="metadata-view-footer">
+                        <a href="#" onClick={this.clickShowMoreMetadata}>{showLabel}</a>
+                        <a href={this.props.contractApp.getMetadataSummaryLink()}>See Summary</a>
                     </div>
                 </div>
             );            
@@ -61,6 +93,7 @@ var MetadataView = React.createClass({
                 <div className="metadata-view">
                     <div>Metadata</div>
                     <span>Loading...</span>
+                    <a href={this.props.contractApp.getMetadataSummaryLink()}>See summary</a>
                 </div>
             );
         }
@@ -69,23 +102,147 @@ var MetadataView = React.createClass({
 });
 
 var RelatedDocumentsView = React.createClass({
+    componentDidMount: function() {
+        var self = this;
+        this.props.metadata.on("sync", function() {
+            self.forceUpdate();
+        });
+    },
     render: function() {
-        return (
-            <div className="relateddocument-view">            
-                
-            </div>
-        );        
+        function truncate(text) {
+            var words = (text + "").split(" ");
+            var ellipsis = ""
+            if(words.length > 10) {
+                ellipsis = " ...";
+            }
+            words = words.splice(0, 10);
+            return words.join(" ") + ellipsis;
+        }        
+        var parentContracts = "", 
+            supportingContracts = []
+            moreContracts = "";
+        if(this.props.metadata.get("parent_document")) {
+            parentContracts = this.props.metadata.get("parent_document").map(function(doc) {
+                return (
+                    <span>
+                        <a href="{doc.id}">{doc.contract_name}</a>
+                    </span>
+                );
+            });
+            var MaxAllowed = 2;
+            var maxDocs = (this.props.metadata.get("supporting_contracts").length < MaxAllowed)?this.props.metadata.get("supporting_contracts").length:MaxAllowed;
+            for(var i = 0;i < maxDocs; i++) {
+                var doc = this.props.metadata.get("supporting_contracts")[i];
+                var docUrl = app_url + "contract/" + doc.id;
+                supportingContracts.push(<span id={i}><a href={docUrl}>{truncate(doc.contract_name)}</a></span>);
+            }
+            if(this.props.metadata.get("supporting_contracts").length > MaxAllowed) {
+                moreContracts = (<span><a href={this.props.contractApp.getMetadataSummaryLink() + "#relateddocs"}>All related ...</a></span>);
+            }
+            if(parentContracts.length || supportingContracts.length) {
+                return (
+                    <div className="relateddocument-view">
+                        <div>Related docs</div>
+                        {parentContracts}
+                        {supportingContracts}
+                        {moreContracts}
+                    </div>
+                );
+            } else {
+                return (<div></div>);
+            }
+        } else {
+            return (
+                <div className="relateddocument-view">
+                    <div>Related docs</div>
+                    Loading...
+                </div>
+            );
+        }
+
     }
 });
+var RelatedDocumentsMoreView = React.createClass({
+    componentDidMount: function() {
+        var self = this;
+        this.props.metadata.on("sync", function() {
+            self.forceUpdate();
+        });
+    },
+    render: function() {
+        if(this.props.metadata.get("country")) {
+            var countryLink = app_url + "/countries/" + this.props.metadata.get("country").name;
+            var country = React.createElement('a', {href: countryLink}, this.props.metadata.get("country").name);
+            var resourceLinkBase = app_url + "/resources/";
+            var resources = this.props.metadata.get("resource").map(function(resource, i) {
+                return React.createElement('a', {href: app_url + "/resource/" + resource, key: i}, resource);
+            });
+            return (
+                <div className="relateddocument-more-view">
+                    <div>More</div>
+                    <div>
+                        <div>In {country}</div>
+                        <div>In {resources}</div>
+                    </div>
+                </div>
+            );
+        } else {
+            return (
+                <div className="relateddocument-more-view">
+                    <div>More</div>
+                    <span>Loading...</span>
+                </div>
+            );
+        }
+    }
+});
+var OtherSourcesView = React.createClass({
+    componentDidMount: function() {
+        var self = this;
+        this.props.metadata.on("sync", function() {
+            self.forceUpdate();
+        });
+    },
+    render: function() {
+        if(this.props.metadata.get("company")) {
+            var amla_url = this.props.metadata.get("amla_url");
+            var amlaUrlLink = (<span><a href={amla_url}>{this.props.metadata.get("country").name}</a> Legistation</span>);
 
+            if(amla_url) {
+                return (
+                    <div className="other-sources-view">
+                        <div>Other Sources</div>
+                        <div>
+                            <div>{amlaUrlLink}</div>
+                        </div>
+                    </div>
+                );                
+            } else {
+                return (<div></div>);
+            }
+        } else {
+            return (
+                <div className="other-sources-view">
+                    <div>Other Sources</div>
+                    <span>Loading...</span>
+                </div>
+            );
+        }
+    }
+});
 var RightColumnView = React.createClass({
     render: function() {
         return (
-            <div className="right-column-view" style={this.props.style}>
+            <div className="right-column-view">
                 <MetadataView 
                     contractApp={this.props.contractApp}
                     metadata={this.props.metadata} />
                 <RelatedDocumentsView
+                    contractApp={this.props.contractApp}
+                    metadata={this.props.metadata} />
+                <RelatedDocumentsMoreView
+                    metadata={this.props.metadata} />
+                <OtherSourcesView
                     metadata={this.props.metadata} />
             </div>
         );

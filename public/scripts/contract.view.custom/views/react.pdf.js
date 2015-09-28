@@ -13,23 +13,17 @@ var Pdf = React.createClass({
       message: ""
     };
   },
-  getDefaultProps: function() {
-    return {
-      page: 1, 
-      scale: 1.0
-    };
-  },
   loadFile: function() {
     var self = this;
-    var content = this.props.pdfPage.get("content")
-    if(content === false) {
+    var content = this.props.pdfPage.get("content");
+    if(content === "-1" || !content) {
       this.setState({
         page: "",
         content: "",
-        message: "There seems to be problem with this contract pdf. Please contact administrator with the url."
+        message: <div className="no-contract-error">We're sorry, there is a problem loading the contract. Please contact <a href="mailto:info@openlandcontracts.org">info@openlandcontracts.org</a> to let us know, or check back later</div> //'
       });
     } else {
-      if(!!content){
+      if(content !== "-"){
         debug("react.pdf.js loadFile: getDocument content called");
         this.setState({
           message: "",
@@ -50,6 +44,11 @@ var Pdf = React.createClass({
     this.props.pdfPage.on("change:content", function() {
       debug("react.pdf.js pdfPage change:content called");
       self.loadFile();
+    });
+    this.props.contractApp.on("change:pdfscale", function() {
+      debug("react.pdf.js pdfPage change:pdfscale called");
+      self.forceUpdate();
+      // self.loadFile();
     });
   },
   render: function() {

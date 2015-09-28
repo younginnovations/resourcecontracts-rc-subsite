@@ -19,8 +19,9 @@
     <script src="{{ url('scripts/lib/pdfjs/pdf.js') }}"></script>
     <script src="{{ url('scripts/lib/pdfjs/pdf.worker.js') }}"></script>
 
-    <script type="text/jsx" src="{{ url('scripts/contract.view.custom/views/react.pdf.js') }}"></script>
+    <script src="{{ url('scripts/contract.view.custom/rc.utils.js') }}"></script>
     <script type="text/jsx" src="{{ url('scripts/contract.view.custom/views/react.waypoint.js') }}"></script>
+    <script type="text/jsx" src="{{ url('scripts/contract.view.custom/views/react.pdf.js') }}"></script>
     <script type="text/jsx" src="{{ url('scripts/contract.view.custom/views/pdf.view.js') }}"></script>
     <script type="text/jsx" src="{{ url('scripts/contract.view.custom/views/text.view.js') }}"></script>
     <script type="text/jsx" src="{{ url('scripts/contract.view.custom/views/text.search.js') }}"></script>
@@ -32,11 +33,14 @@
     <script src="{{ url('scripts/contract.view.custom/models/search.js') }}"></script>
     <script src="{{ url('scripts/contract.view.custom/models/metadata.js') }}"></script>
     <script src="{{ url('scripts/contract.view.custom/models/contract.js') }}"></script>
+    <script src="{{ url('scripts/contract.view.custom/models/contract.test.js') }}"></script>
     <script src="{{ url('scripts/contract.view.custom/models/pdf.js') }}"></script>
 
     <script src="{{ url('scripts/lib/annotator/annotator-full.min.js') }}"></script>
     <script src="{{ url('scripts/lib/annotator.plugin.annotorious.js') }}"></script>
-
+    <script src="{{ url('scripts/contract.view.custom/annotation/annotator.utils.js') }}"></script>
+    <script src="{{ url('scripts/contract.view.custom/annotation/annotator.plugin.event.js') }}"></script>
+    <script src="{{ url('scripts/contract.view.custom/annotation/annotator.plugin.viewer.js') }}"></script>
     <script src="{{ url('scripts/contract.view.custom/annotation/rc.annotator.js') }}"></script>
     <script type="text/jsx">
       var debug = function() {
@@ -52,7 +56,8 @@
       var contractTitle = "{{$contract->metadata->contract_name}}";
       var contractApp = new ContractApp({
         contract_id: '{{$contract->metadata->contract_id}}',
-        total_pages: '{{$contract->metadata->total_pages}}'
+        total_pages: '{{$contract->metadata->total_pages}}',
+        esapi: '{{env("ELASTIC_SEARCH_HOST")}}'
       });
       debug("initializing contract ", contractTitle, contractApp.get("contract_id"));
 
@@ -76,7 +81,6 @@
       /**
       * @jsx React.DOM
       */
-
       var MainApp = React.createClass({
         getInitialState: function() {
           return {
@@ -85,7 +89,6 @@
         },
         text: function(page_no, annotation_id) {
           debug("view.blade.php: setting text view");
-          contractApp.setView("text");
           contractApp.setCurrentPage(1);
           contractApp.resetSelectedAnnotation();
           if(page_no) {
@@ -94,6 +97,7 @@
           if(annotation_id) {
             contractApp.setSelectedAnnotation(annotation_id);
           }
+          contractApp.setView("text");
           this.forceUpdate();
         },
         pdf: function(page_no, annotation_id) {
@@ -133,7 +137,7 @@
           this.forceUpdate();
         },
         meta: function(action) {
-          this.forceUpdate();
+          // this.forceUpdate();
         },
         componentDidUpdate: function() {
         },
@@ -159,7 +163,7 @@
           return (
             <div className="main-app">
               <div className="title-wrap">
-                {contractTitle}
+              {htmlDecode(contractTitle)}
               </div>
               <div className="head-wrap">
                 <TextSearchForm
@@ -181,7 +185,7 @@
                   contractApp={contractApp} />
               </div>
               <div className="document-wrap">
-                <AnnotationsViewer 
+                <AnnotationsViewer
                   style={this.getStyle(contractApp.isViewVisible("AnnotationsViewer"))}
                   contractApp={contractApp}
                   annotationsCollection={annotationsCollection} />
@@ -200,8 +204,7 @@
                   pagesCollection={pagesCollection} />
                 <RightColumnView 
                   metadata={contractApp.metadata}
-                  contractApp={contractApp}
-                  style={this.getStyle(contractApp.isViewVisible("RightColumnView"))} />
+                  contractApp={contractApp} />
               </div>
             </div>
           );
