@@ -40,14 +40,6 @@
         </div>
     </div>
     <div class="row side-collapse-container">
-        <div class="sort-wrapper">
-            <label for="">Sort</label>
-            <select class="sort" name="sort" >
-                <option value="asc">Ascending</option>
-                <option value="desc">Descending</option>
-            </select>
-        </div>
-
         <div id="resources" class="col-lg-12 country-list-wrap f32">
         </div>
     </div>
@@ -64,7 +56,14 @@
             <a href="{{url('resource')}}/<%= value %>">
                 <div class="country-name resource-name pull-left"><%= name %></div>
             </a>
-            <div class="contract-count pull-right"><%= contract %> contracts</div>
+            <div class="contract-count pull-right"><%= contract %>
+                <% if (contract > 1){%>
+                contracts
+                <% }else{ %>
+                contract
+                <% } %>
+
+            </div>
         </div>
     </script>
 
