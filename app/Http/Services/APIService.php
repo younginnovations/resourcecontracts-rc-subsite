@@ -125,8 +125,9 @@ class APIService
     public function getAnnotations($contract_id)
     {
         $resource = sprintf('contract/%d/annotations', $contract_id);
+        $response = $this->apiCall($resource);
 
-        return $this->apiCall($resource);
+        return $response;
     }
 
 
