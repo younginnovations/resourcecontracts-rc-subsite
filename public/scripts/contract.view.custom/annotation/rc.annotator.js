@@ -15,9 +15,11 @@ var AnnotatorjsView = Backbone.View.extend({
         this.contractApp = options.contractApp;
 
         // this.content.annotator('addPlugin', 'MyTags');
-        // this.content.annotator('addPlugin', 'AnnotatorEvents');
+        this.content.annotator('addPlugin', 'AnnotatorEvents');
+        this.content.annotator('addPlugin', 'AnnotatorNRGIViewer');
         // this.content.data('annotator').plugins.MyTags.availableTags = options.availableTags
-        // this.content.data('annotator').plugins.AnnotatorEvents.collection = options.collection;
+        this.content.data('annotator').plugins.AnnotatorEvents.contractApp = options.contractApp;
+        this.content.data('annotator').plugins.AnnotatorNRGIViewer.contractApp = options.contractApp;
         // this.content.data('annotator').plugins.AnnotatorEvents.currentPage = this.currentPage;
         // this.annotationCategories = options.annotationCategories;
         // this.populateCategories();
@@ -63,7 +65,28 @@ var AnnotatorjsView = Backbone.View.extend({
             }
         });
         return this;
-    }
+    },
+    reload: function() {
+        var self = this;
+        var page_no = this.contractApp.getCurrentPage(),
+            contract_id = this.contractApp.getContractId();        
+        var store = this.content.data('annotator').plugins.Store;
+        if (store.annotations) store.annotations = [];
+        store.options.loadFromSearch = {
+            'url': self.api,
+            'contract': contract_id,
+            'page': page_no,
+            'document_page_no': page_no,
+        };
+        store.options.annotationData = {
+            'url': self.api,
+            'contract': contract_id,
+            'page': page_no,
+            'document_page_no': page_no,
+        };
+
+        store.loadAnnotationsFromSearch(store.options.loadFromSearch);        
+    }    
 });
 
 var PdfAnnotatorjsView = AnnotatorjsView.extend({
@@ -74,6 +97,20 @@ var PdfAnnotatorjsView = AnnotatorjsView.extend({
         if(options.enablePdfAnnotation) {
             this.content.annotator('addPlugin', 'AnnotoriousImagePlugin');
         }
+        var self = this;
+        this.contractApp.on("annotationHighlight", function(annotation) {
+            // if(self.contractApp.getCurrentPage() === annotation.page_no) {
+            //     setTimeout(function() {
+            //         console.log("starting publishing annotationHighlight");
+            //         self.content.data('annotator').publish("annotationHighlight", annotation)
+            //     }, 2000);
+            // }
+            // console.log("start", annotation);
+            // setTimeout(function() {
+            //     console.log("starting publishing annotationHighlight");
+            //     self.content.data('annotator').publish("annotationHighlight", annotation)
+            // }, 4000);
+        });
         // this.listenTo(this.currentPage, 'change:page', this.pageUpdated);
         // this.pageUpdated();
    },

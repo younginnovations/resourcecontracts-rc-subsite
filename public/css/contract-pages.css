@@ -1,0 +1,312 @@
+#page-wrapper.document-page-wrapper {
+  background: #f0f0f0;
+  height: 100%;
+}
+
+.document-page-wrapper > .row {
+  margin: 0;
+}
+
+.document-top-wrapper {
+  border-bottom: 1px solid rgb(220,223,226);
+  border-bottom: 1px solid rgba(220,223,226,0.7);
+}
+
+.document-top-wrapper .col-lg-12 {
+  padding: 0;
+}
+
+.document-top-wrapper .col-lg-8 {
+  padding: 0;
+}
+
+.back {
+    background: #F37356 url(../../images/ic-sprite.png) no-repeat 12px -543px;
+    width: 50px;
+    display: block;
+    height: 50px;
+    text-indent: -9999px;
+}
+
+.document-title {
+  font-size: 21px;
+  line-height: 28px;
+  padding: 11px 13px;
+}
+
+.document-top-wrapper .col-lg-2 {
+  border-left: 1px solid rgb(220,223,226,0.7);
+  border-left: 1px solid rgba(220,223,226,0.7);
+}
+
+.view-metadata a {
+    color: #404040;
+    text-transform: uppercase;
+    font-size: 11px;
+    background: url(../../images/ic-sprite.png) no-repeat -390px -78px;
+    display: block;
+    padding: 17px 10px 17px 40px;
+}
+
+.view-metadata a:after {
+    content: " ";
+    background: url(../../images/ic-sprite.png) no-repeat -176px -114px;
+    width: 8px;
+    height: 6px;
+    display: inline-block;
+    margin-left: 8px;
+}
+
+.document-detail-wrap {
+  background: #f0f0f0;
+}
+
+.document-detail-wrap .col-lg-12,.document-detail-wrap .col-lg-7 {
+  padding: 0;
+}
+
+.left-wrap {
+  border-right: 1px solid rgb(220,223,226);
+  border-right: 1px solid rgba(220,223,226,0.7);
+}
+
+.right-wrap {
+  padding: 0;
+}
+
+.document-search-form {
+    border-bottom: 1px solid rgb(220,223,226);
+    border-bottom: 1px solid rgba(220,223,226,0.7);
+  background: #f9f9f9;
+  overflow: hidden;
+}
+
+.document-search-form .btn-navbar-search {
+  margin: 10px 0;
+}
+
+.document-search-form .form-control {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.view-wrap {
+  background: #fff;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  margin: 0 20px;
+  padding: 20px;
+  height: 85vh;
+  overflow: scroll;
+}
+
+.annotation-document-wrap .panel-heading {
+  font-size: 15px;
+  background: url(../../images/ic-annotation.png) no-repeat 0;
+  padding-left: 32px;
+  text-transform: uppercase;
+  margin-left: 10px;
+  font-family: "Open-Sans-Regular";
+}
+
+.annotation-document-wrap {
+  padding-top: 15px;
+  padding-bottom: 0;
+}
+
+.annotation-list-wrap {
+  background: #E8E8E8;
+  padding: 14px 0!important;
+  height: 83vh;
+}
+
+.annotation-list-wrap .category-wrap {
+  padding: 0 10px;
+}
+
+.annotation-list-wrap .category-title {
+  text-transform: none;
+}
+
+.annotation-list-wrap .category-title:before {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #93C1A7;
+  display: inline-block;
+  content: "";
+  margin-right: 5px;
+}
+
+
+/***
+Bootstrap Line Tabs by @keenthemes
+A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
+Licensed under MIT
+***/
+
+
+/* Default mode */
+.tabbable-line > .nav-tabs {
+  border: none;
+  margin: 0px;
+  background: #f9f9f9;
+  min-height: 40px;
+  border-bottom: 1px solid rgb(220,223,226);
+  border-bottom: 1px solid rgba(220,223,226,0.7);
+  padding-right: 16px;
+}
+.tabbable-line > .nav-tabs > li {
+  border-right: 1px solid rgb(220,223,226);
+  border-right: 1px solid rgba(220,223,226,0.7);
+}
+.tabbable-line > .nav-tabs > li > a {
+    border: 0;
+    margin-right: 0;
+    color: rgb(64,64,64);
+    background: url(../../images/ic-sprite.png) no-repeat -470px 11px;
+    font-size: 11px;
+    text-transform: uppercase;
+    padding: 13px 15px 13px 44px;
+    opacity: 0.5;
+}
+
+.tabbable-line > .nav-tabs > li > a.pdf-tab {
+  background-position: -474px 11px;
+} 
+
+.tabbable-line > .nav-tabs > li > a.both-tab {
+  background-position: -556px 11px;
+} 
+
+.tabbable-line > .nav-tabs > li > a > i {
+  color: #a6a6a6;
+}
+.tabbable-line > .nav-tabs > li.open > a, .tabbable-line > .nav-tabs > li:hover > a {
+  border: 0;
+  color: #404040;
+  opacity: 1;
+}
+.tabbable-line > .nav-tabs > li.open > a > i, .tabbable-line > .nav-tabs > li:hover > a > i {
+  color: #a6a6a6;
+}
+.tabbable-line > .nav-tabs > li.open .dropdown-menu, .tabbable-line > .nav-tabs > li:hover .dropdown-menu {
+  margin-top: 0px;
+}
+.tabbable-line > .nav-tabs > li.active {
+  position: relative;
+}
+.tabbable-line > .nav-tabs > li.active > a {
+  border: 0;
+  color: #404040;
+  opacity: 1;
+  background-color: #f9f9f9;
+}
+.tabbable-line > .nav-tabs > li.active > a > i {
+  color: #404040;
+}
+.tabbable-line > .tab-content {
+  margin-top: -3px;
+  border: 0;
+  padding: 15px 0;
+}
+.portlet .tabbable-line > .tab-content {
+  padding-bottom: 0;
+}
+
+/* Below tabs mode */
+
+.tabbable-line.tabs-below > .nav-tabs > li {
+  border-top: 4px solid transparent;
+}
+.tabbable-line.tabs-below > .nav-tabs > li > a {
+  margin-top: 0;
+}
+.tabbable-line.tabs-below > .nav-tabs > li:hover {
+  border-bottom: 0;
+  border-top: 4px solid #fbcdcf;
+}
+.tabbable-line.tabs-below > .nav-tabs > li.active {
+  margin-bottom: -2px;
+  border-bottom: 0;
+  border-top: 4px solid #f3565d;
+}
+.tabbable-line.tabs-below > .tab-content {
+  margin-top: -10px;
+  border-top: 0;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+
+.annotation-admin-list-wrap .tabbable-line > .nav-tabs > li > a {
+  font: 12px "Open-Sans-Bold";
+  color: rgba(64,64,64,0.7);
+  text-transform: none;
+  background: url(../../images/ic-sprite.png) no-repeat -390px -174px;
+  opacity: 1;
+}
+
+.annotation-admin-list-wrap .tabbable-line > .nav-tabs > li > a.done-tab {
+  background-position: -518px -174px;
+}
+
+.annotation-admin-list-wrap .tabbable-line > .nav-tabs > li > a.remaining-tab {
+  background-position: -655px -174px;
+}
+
+.remaining-category-wrap .category-title:before {
+  background: #D38D96;
+}
+
+.annotation-list-wrap .page-num {
+  margin-bottom: 4px;
+}
+
+.annotation-list-wrap .category-wrap li {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 0 20px;
+}
+
+.annotation-admin-list-wrap {
+  padding: 0!important;
+}
+
+.annotation-admin-list-wrap .tabbable-line > .nav-tabs {
+  background: #f0f0f0;
+  border-top: 1px solid rgb(220,223,226);
+  border-top: 1px solid rgba(220,223,226,0.5);
+  margin-bottom: 20px;
+}
+
+.annotation-admin-list-wrap .category-wrap,.annotation-admin-list-wrap .category-title {
+  margin-bottom: 12px;
+}
+
+.annotation-admin-list-wrap .tabbable-line > .nav-tabs > li.active > a {
+  background-color: #e8e8e8;
+}
+
+.document-pagination input {
+  width: 56px;
+    background: #E7E7E7;
+    border-radius: 4px;
+    border: 1px solid #C0C0C0;
+    height: 30px;
+    margin: 4px 0;
+    text-align: center;
+}
+
+.prev,.next {
+    display: inline-block;
+    text-indent: -9999px;
+    background: url(../../images/ic-sprite.png) no-repeat -194px -562px;
+    height: 20px;
+    width: 15px;
+}
+
+.next {
+  background-position: -271px -564px;
+}

@@ -4,33 +4,33 @@ Annotator.Plugin.AnnotatorEvents = (function(_super) {
         'annotationCreated': 'onAnnotationCreated',
         'annotationDeleted': 'onAnnotationDeleted',
         'annotationUpdated': 'onAnnotationUpdated',
+        'annotorious:annotation-clicked': 'onAnnotationClicked',
     };
-      AnnotatorEvents.prototype.field = null;
-      AnnotatorEvents.prototype.input = null;    
+    AnnotatorEvents.prototype.field = null;
+    AnnotatorEvents.prototype.input = null;    
     AnnotatorEvents.prototype.pluginInit = function(options) {
+        var annotator = this.annotator;
         if (!Annotator.supported()) {
             return;
         }      
+        annotator.viewer.addField({
+            load: this.updateViewer,
+        });       
     };
     AnnotatorEvents.prototype.options = {
         AnnotatorEvents: {}
     };
-
     function AnnotatorEvents(element, options) {
         // this.beforeAnnotationCreated = __bind(this.beforeAnnotationCreated, this);
+        this.onAnnotationClicked = __bind(this.onAnnotationClicked, this);
         this.onAnnotationCreated = __bind(this.onAnnotationCreated, this);
         this.onAnnotationUpdated = __bind(this.onAnnotationUpdated, this);
         this.onAnnotationDeleted = __bind(this.onAnnotationDeleted, this);
         AnnotatorEvents.__super__.constructor.apply(this, arguments);
     };
-    // AnnotatorEvents.prototype.beforeAnnotationCreated = function(annotation) {
-    //     if(this.currentPage) {
-    //         annotation.page = this.currentPage.getPage();
-    //         // annotation.page_id = ;
-    //     }
-    //     return annotation;    
-    //     // this.collection.add(annotation);
-    // };
+    AnnotatorEvents.prototype.onAnnotationClicked = function(obj) {
+        this.contractApp.trigger("annotations:highlight", obj.annotation);
+    };    
     AnnotatorEvents.prototype.onAnnotationCreated = function(annotation) {
         annotation.id = this.collection.length + 1;
         if(this.currentPage) {

@@ -37,10 +37,11 @@ var PdfPage = Backbone.Model.extend({
     },
     loadPdf: function() {
         var self = this;
-        if (this.contractApp.getPdfUrl() !== "") {
-            debug('setting content to blank');
+        if (this.contractApp.getPdfUrl().trim() !== "" ||  self.init == false) {
+            self.init = true;
+            debug('setting content to -');
             self.set({
-                content: ""
+                content: "-"
             });
             self.trigger("change:content");
             this.fetchBlob(this.contractApp.getPdfUrl(), function(blob) {
@@ -53,7 +54,7 @@ var PdfPage = Backbone.Model.extend({
         } else {
             debug("pdf.js loadPdf: no url defined for pdf "," setting pdfpage: content to false");
             self.set({
-                content: false
+                content: "-1"
             });
         }
     },

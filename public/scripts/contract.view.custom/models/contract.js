@@ -7,7 +7,7 @@
       contract_id: 0,
       selected_annotation_id: 0,
       pdfscale: 1,
-      showMeta: false,
+      showMeta: true,
       canrender: true
     },
     initialize: function(options) {
@@ -26,20 +26,19 @@
       return this.get("contract_id");
     },
     getMetadataSummaryLink: function() {
-      return app_url + "/contract/" + this.getContractId();
+      return app_url + "contract/" + this.getContractId();
     },
     getMetadataUrl: function() {
-      return "http://rc-elasticsearch.elasticbeanstalk.com/api/contract/" + this.getContractId() + "/metadata";  
+      return this.get('esapi') + "contract/" + this.getContractId() + "/metadata";  
     },  
     getAllPageUrl: function() {
-      // return "/data/text.733.json";
-      return "http://rc-elasticsearch.elasticbeanstalk.com/api/contract/" + this.getContractId() + "/text";
+      return this.get('esapi') + "contract/" + this.getContractId() + "/text";
     },
     getAllAnnotationsUrl: function() {
-      return "http://rc-elasticsearch.elasticbeanstalk.com/api/contract/" + this.getContractId() + "/annotations";
+      return this.get('esapi') + "contract/" + this.getContractId() + "/annotations";
     },
     getSearchUrl: function() {
-      return "http://rc-elasticsearch.elasticbeanstalk.com/api/contract/" + this.getContractId() + "/searchtext"
+      return this.get('esapi') + "contract/" + this.getContractId() + "/searchtext"
     },
     getPdfUrl: function() {
       var page_no = parseInt(this.getCurrentPage());
@@ -53,7 +52,10 @@
       return "";
     },
     getLoadAnnotationsUrl: function() {
-      return "http://rc-elasticsearch.elasticbeanstalk.com/api/contract/" + this.getContractId() + "/annotations"; 
+      return this.get('esapi') + "contract/" + this.getContractId() + "/annotations"; 
+    },
+    getAnnotationsListAnchor: function() {
+      return app_url + "contract/" + this.getContractId() + "#annotations";
     },
     renderStart: function() {
       this.set({"canrender": true});
@@ -122,9 +124,6 @@
       if(this.get("view") === "pdf") {
         this.trigger("update-pdf-pagination-page", page_no);
       }
-    },
-    triggerScrollInAnnotationList: function() {
-      this.trigger("scroll-in-annotation-list");
     },
     isViewVisible: function(viewName) {
       switch(viewName) {

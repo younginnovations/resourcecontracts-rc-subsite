@@ -1,11 +1,11 @@
 var TextSearchForm = React.createClass({
   handleSubmit: function(e) {
     e.preventDefault();
-    var searchQuery = React.findDOMNode(this.refs.searchInput).value.trim();
+    var searchQuery = React.findDOMNode(this.refs.searchInput).value.trim();    
     if(!searchQuery) {
       return;
     }
-    document.location.hash = '#/search/' + searchQuery;
+    document.location.hash = '#/search/' + encodeURI(searchQuery);
   },
   render: function() {
     return (
@@ -25,14 +25,15 @@ var TextSearchResultRow = React.createClass({
     // this.props.currentPage.trigger("scroll-to-page");
   },
   highlightSearchQuery: function(text, highlightword) {
+    highlightword = decodeURI(highlightword);
     var re = new RegExp(highlightword, "gi");
     return text.replace(re,"<span style='background-color:#a1aeec;'>" + highlightword + "</span>");
   },  
   render: function() {
     var text = this.highlightSearchQuery(this.props.resultRow.get("text"), this.props.contractApp.getSearchQuery());
-    text = text + "[Pg " + this.props.resultRow.get("page_no") + "]";
+    text = "Pg " + this.props.resultRow.get("page_no") + "&nbsp;" + text;
     return(
-      <div className="search-result-row" onClick={this.handleClick}>
+      <div className="search-result-row link" onClick={this.handleClick}>
         <span dangerouslySetInnerHTML={{__html: text}} />
       </div>
     );
@@ -43,15 +44,22 @@ var TextSearchResultsList = React.createClass({
     var self = this;
     this.props.searchResultsCollection.on("reset", function() {
       self.forceUpdate();
+      self.props.contractApp.trigger("searchresults:ready");
     });
+  },
+  handleCloseSearchResults: function() {
+    this.props.contractApp.trigger("searchresults:close");
+    document.location.hash = '#/text';
+    this.props.contractApp.setView("text");
   },
   render: function() {
     var self = this;
     var resultsView = "searching ...";
     if(this.props.searchResultsCollection.models.length > 0) {
-      resultsView = this.props.searchResultsCollection.models.map(function(model) {
+      resultsView = this.props.searchResultsCollection.models.map(function(model, i) {
         return (
-          <TextSearchResultRow 
+          <TextSearchResultRow
+            key={i}
             contractApp={self.props.contractApp} 
             resultRow={model} />
         );
@@ -62,6 +70,7 @@ var TextSearchResultsList = React.createClass({
     }
     return (
       <div style={this.props.style} className="search-results-list">
+      <span className="pull-right link close" onClick={this.handleCloseSearchResults}>x</span>
         {resultsView}
       </div>
     );

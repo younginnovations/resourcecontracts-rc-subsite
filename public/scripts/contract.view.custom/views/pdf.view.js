@@ -82,17 +82,23 @@ var PdfZoom = React.createClass({
 var PdfViewer = React.createClass({
   getInitialState: function() {
     return {
-      rendered: false
+      loadAnnotations: false
     };  
   },  
   componentDidMount: function() {
+    this.loadAnnotationsFlag = false;
     var self = this;
     this.props.pagesCollection.on("reset", function() {
       debug("pdf.view.js pagesCollection reset called: triggering change:page_no");
       self.props.contractApp.trigger("change:page_no");
     });
     this.props.contractApp.on("change:pdfscale", function() {
+      self.loadAnnotationsFlag = true;
       self.forceUpdate();
+    });
+    this.props.pdfPage.on("change:content", function() {
+      self.loadAnnotationsFlag = true;
+      // self.setState({loadAnnotations: true});
     });
   },
   render: function() {
@@ -106,7 +112,8 @@ var PdfViewer = React.createClass({
           page={1}
           content={this.props.pdfPage.get("content")}
           scale={parseFloat(this.props.contractApp.getPdfScale())||1}
-          onPageRendered={this._onPageRendered} />
+          onPageRendered={this._onPageRendered} 
+          renderReady={this.state.renderReady} />
         </div>
       );
   },
@@ -121,17 +128,20 @@ var PdfViewer = React.createClass({
         annotationCategories: ["General information","Country","Local company name"],
         enablePdfAnnotation: true,
         contractApp: this.props.contractApp
-      });      
+      });
     }
   },  
   _onPageRendered: function() {
-    if(this.props.contractApp.getView() === "pdf") {
+    if(this.props.contractApp.getView() === "pdf" && this.loadAnnotationsFlag) {
       if(this.annotator) {
         this.annotator.pageUpdated();
-      } else {
-        if($(".pdf-viewer").is(":visible")) {          
+        this.loadAnnotationsFlag = false;
+        // this.setState({loadAnnotations: false});
+      } 
+      else if($(".pdf-viewer").is(":visible")) {
           this.loadAnnotations();
-        }
+          this.loadAnnotationsFlag = false;
+          // this.setState({loadAnnotations: false});
       }
     }
   },

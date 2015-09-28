@@ -17248,7 +17248,7 @@ goog.require('goog.style');
  * @param {element} image the image DOM element
  * @constructor
  */
-annotorious.modules.image.ImageAnnotator = function(image, opt_popup, eventBroker) {
+annotorious.modules.image.ImageAnnotator = function(image, opt_popup, eventBroker, okfnAnnotator) {
   var annotationLayer, viewCanvas, hint;
 
   /** The editor for this annotator (public for use by plugins) **/
@@ -17305,7 +17305,7 @@ annotorious.modules.image.ImageAnnotator = function(image, opt_popup, eventBroke
   this._currentSelector = default_selector;
 
   /** @private **/
-  this._viewer = new annotorious.modules.image.Viewer(viewCanvas, this.popup, this); 
+  this._viewer = new annotorious.modules.image.Viewer(viewCanvas, this.popup, this, okfnAnnotator); 
 
   this.editor = new annotorious.editor.Editor(this, annotationLayer);
 
@@ -19433,7 +19433,7 @@ goog.require('goog.dom.query');
  * @param {annotorious.modules.image.ImageAnnotator} annotator reference to the annotator
  * @constructor
  */
-annotorious.modules.image.Viewer = function(canvas, popup, annotator) {
+annotorious.modules.image.Viewer = function(canvas, popup, annotator, okfnAnnotator) {
   /** @private **/
   this._canvas = canvas;
 
@@ -19464,12 +19464,20 @@ annotorious.modules.image.Viewer = function(canvas, popup, annotator) {
   /** @private **/
   this._keepHighlighted = false;
 
+  this._okfnAnnotator = okfnAnnotator;
+
   var self = this; 
   goog.events.listen(this._canvas, goog.events.EventType.MOUSEMOVE, function(event) {
     if (self._eventsEnabled) {
       self._onMouseMove(event);
     } else {
       self._cachedMouseEvent = event;
+    }
+  });
+
+  goog.events.listen(this._canvas, goog.events.EventType.MOUSEDOWN, function(event) {
+    if (self._eventsEnabled) {
+      self._onMouseDown(event);
     }
   });
 
@@ -19642,6 +19650,7 @@ annotorious.modules.image.Viewer.prototype._onMouseMove = function(event) {
       // Mouse moved into annotation from empty space - highlight immediately
       this._currentAnnotation = topAnnotation;
       this._redraw(event);
+      // this._okfnAnnotator.publish("mouse-over-annotation", { annotation: this._currentAnnotation } );
       this._annotator.fireEvent(annotorious.events.EventType.MOUSE_OVER_ANNOTATION,
         { annotation: this._currentAnnotation, mouseEvent: event });   
     } else if (this._currentAnnotation != topAnnotation) {
@@ -19658,6 +19667,15 @@ annotorious.modules.image.Viewer.prototype._onMouseMove = function(event) {
   }
 }
 
+annotorious.modules.image.Viewer.prototype._onMouseDown = function(event) {
+  var topAnnotation = this.topAnnotationAt(event.offsetX, event.offsetY);
+  // TODO remove code duplication
+  var self = this;
+  if (topAnnotation) {
+    // this._currentAnnotation = topAnnotation;
+    this._okfnAnnotator.publish("annotorious:annotation-clicked", { annotation: topAnnotation } );
+  }
+}
 /**
  * @private
  */
@@ -19718,7 +19736,7 @@ annotorious.okfn.ImagePlugin = function(image, okfnAnnotator) {
   // Trying to re-use more from the standalone version
   // BEWARE this may get dirty (at first...)
   var popup = new annotorious.okfn.Popup(image, okfnAnnotator, baseOffset, eventBroker);  
-  var annotator = new annotorious.modules.image.ImageAnnotator(image, popup, eventBroker);
+  var annotator = new annotorious.modules.image.ImageAnnotator(image, popup, eventBroker, okfnAnnotator);
   
   var annotationLayer = annotator.annotationLayer;
   if(okfnAnnotator.options.readOnly) {
@@ -19973,7 +19991,7 @@ annotorious.okfn.ImagePlugin = function(image, okfnAnnotator) {
     
     // TODO workaround before we have decent 'edit' behavior in Annotorious standalone!
     eventBroker.fireEvent(annotorious.events.EventType.BEFORE_POPUP_HIDE);
-  });
+  });  
 
   var formatAnnotation = function(annotation) {
     this._current_annotation = annotation;
@@ -20157,7 +20175,7 @@ annotorious.okfn.Popup.prototype.show = function(annotation, xy, mouseevent) {
   // goog.style.setPosition(this._okfnAnnotator.viewer.element[0],
 		// 	 imgOffset.left - this._baseOffset.left + xy.x + 16,
 		// 	 imgOffset.top + window.pageYOffset - this._baseOffset.top + xy.y);
-  goog.style.setPosition(this._okfnAnnotator.viewer.element[0], mouseevent.offsetX, mouseevent.offsetY);
+  goog.style.setPosition(this._okfnAnnotator.viewer.element[0], mouseevent.offsetX+5, mouseevent.offsetY+5);
 
   this.clearHideTimer();
 }
@@ -20373,15 +20391,15 @@ annotorious.plugins.selection.RectDragSelector.prototype.drawShape = function(g2
   if (shape.type == annotorious.shape.ShapeType.RECTANGLE) {
     var color, lineWidth;
     if (highlight) {
-      color = '#fff000';
-      lineWidth = 1.2;
+      color = '#ffff00';
+      lineWidth = 2;
     } else {
-      color = '#ffffff';
+      color = '#fff000';
       lineWidth = 1;
     }
 
     var geom = shape.geometry;
-    g2d.strokeStyle = '#000000';
+    g2d.strokeStyle = '#cccccc';
     g2d.lineWidth = lineWidth;
     g2d.strokeRect(geom.x + 0.5, geom.y + 0.5, geom.width + 1, geom.height + 1);
     g2d.strokeStyle = color;
