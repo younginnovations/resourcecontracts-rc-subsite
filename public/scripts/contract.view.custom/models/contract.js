@@ -26,7 +26,7 @@
       return this.get("contract_id");
     },
     getMetadataSummaryLink: function() {
-      return app_url + "contract/" + this.getContractId();
+      return app_url + "/contract/" + this.getContractId();
     },
     getMetadataUrl: function() {
       return this.get('esapi') + "contract/" + this.getContractId() + "/metadata";  
