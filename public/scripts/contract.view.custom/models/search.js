@@ -9,7 +9,7 @@ var SearchResultsCollection = Backbone.Collection.extend({
         return this.searchTerm;
     },
     fetch: function(options, callback) {
-        this.searchTerm = options.searchTerm;
+        this.searchTerm = decodeURI(options.searchTerm);
         this.searchCompleted = false;
         var self = this;
         $.ajax({
@@ -18,7 +18,7 @@ var SearchResultsCollection = Backbone.Collection.extend({
             type: "GET",
             // type: "POST",
             data: {
-                'q': options.searchTerm
+                'q': self.searchTerm
             },
             async: true,
         }).done(function(response) {
