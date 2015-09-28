@@ -37,7 +37,7 @@ var PdfPage = Backbone.Model.extend({
     },
     loadPdf: function() {
         var self = this;
-        if (this.contractApp.getPdfUrl().trim() !== "" ||  self.init == false) {
+        if (this.contractApp.getPdfUrl().trim() !== "") {
             self.init = true;
             debug('setting content to -');
             self.set({

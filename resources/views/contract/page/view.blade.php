@@ -33,7 +33,6 @@
     <script src="{{ url('scripts/contract.view.custom/models/search.js') }}"></script>
     <script src="{{ url('scripts/contract.view.custom/models/metadata.js') }}"></script>
     <script src="{{ url('scripts/contract.view.custom/models/contract.js') }}"></script>
-    <script src="{{ url('scripts/contract.view.custom/models/contract.test.js') }}"></script>
     <script src="{{ url('scripts/contract.view.custom/models/pdf.js') }}"></script>
 
     <script src="{{ url('scripts/lib/annotator/annotator-full.min.js') }}"></script>
