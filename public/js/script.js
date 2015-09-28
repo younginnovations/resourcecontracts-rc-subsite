@@ -99,26 +99,6 @@ $(document).ready(function () {
 
     });
 
-    // slide to annotation list
-
-    $(".view-annotation-cluster").on('click', function (e) {
-        var href = $(this).attr('href');
-        $(".category-wrap").hide();
-        $(".cluster-wrap").show();
-        // prevent default anchor click behavior
-        e.preventDefault();
-        // animate
-        $('html, body').animate({
-            scrollTop: $(this.hash).offset().top
-        }, 300, function () {
-
-            // when done, add hash to url
-            // (default click behaviour)
-            window.location.hash = href;
-        });
-
-    });
-
     // search form toggle
 
     $('#search-form:not(.search-page-form) input[type="text"]').focus(function () {
@@ -209,6 +189,23 @@ $(document).ready(function () {
             $(this).parent('li').css('display', 'none');
         }
     });
+
+
+    $(document).on('click','.view-annotation-cluster', function(e){
+        e.preventDefault();
+        var href =$(this).attr('href');
+        $('.annotation-category-cluster .active').removeClass('active');
+
+        $(this).addClass('active');
+
+        if(href =='#cluster-all')
+        {
+            $('.cluster-wrap').show();
+        }else{
+            $('.cluster-wrap').hide();
+            $(href).show();
+        }
+    })
 
 
 });

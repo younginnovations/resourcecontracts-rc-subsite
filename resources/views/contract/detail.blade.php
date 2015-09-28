@@ -354,38 +354,41 @@
                     <div class="panel-body">
                         <div class="annotation-category-cluster">
                             <ul>
+                                <li><a class="view-annotation-cluster active" href="#cluster-all">All</a></li>
                                 @foreach($contract->annotationsCluster as $cluster=>$value)
-                                    <li><a class="view-annotation-cluster"
-                                           href="#cluster-{{str_slug($cluster)}}">{{$cluster}}</a></li>
+                                    <li><a class="view-annotation-cluster" href="#cluster-{{str_slug($cluster)}}">{{$cluster}}</a></li>
                                 @endforeach
                             </ul>
 
                         </div>
-                        @forelse($contract->annotationsGroup as $category=>$annotations)
-                            <div id="{{str_slug($category,'-')}}" class="category-wrap">
-                                <div class="category-cluster">
-                                    {{trans('codelist/annotation_cluster.cluster_mapping.'.str_slug($category,'-'))}}
-                                </div>
+
+                        @forelse($contract->annotationsCluster as $cluster  => $categories)
+                            <div id="cluster-{{str_slug($cluster,'-')}}" class="cluster-wrap">
                                 <div class="category-title">
-                                    {{$category}}
+                                    {{$cluster}}
                                 </div>
-                                <ul>
+
+                                    @foreach($categories as $category => $annotations)
+                                    <div class="sub-category">
+                                        {{$category}}
+                                    </div>
+                                    <ul class="row">
                                     @foreach($annotations as $annotation)
-                                        <?php $annotation_type = isset($annotation->shapes) ? 'pdf' : 'text'; ?>
-                                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                            <div class="page-num pull-left">
-                                                <a href="{{route('contract.detail',['id'=>$contract->metadata->contract_id])}}#/{{$annotation_type}}/page/{{$annotation->page_no}}/annotation/{{$annotation->id}}">
-                                                    Pg {{_e($annotation,'page_no')}}</a>
+                                            <?php $annotation_type = isset($annotation->shapes) ? 'pdf' : 'text'; ?>
+                                                <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                                <div class="page-num pull-left">
+                                                    <a href="{{route('contract.detail',['id'=>$contract->metadata->contract_id])}}#/{{$annotation_type}}/page/{{$annotation->page_no}}/annotation/{{$annotation->id}}">
+                                                        Pg {{_e($annotation,'page_no')}}</a>
+                                                </div>
+                                                <div class="pull-left">
+                                                    <div class="annotation-text">{{_e($annotation,'text')}}</div>
+                                                    <div class="quote">{{_e($annotation,'quote')}}</div>
+                                                </div>
+                                            </li>
 
-                                            </div>
-                                            <div class="pull-left">
-                                                <div class="annotation-text">{{_e($annotation,'text')}}</div>
-                                                <div class="quote">{{_e($annotation,'quote')}}</div>
-                                            </div>
-                                        </li>
-
-                                    @endforeach
-                                </ul>
+                                        @endforeach
+                                    </ul>
+                                @endforeach
                             </div>
                         @empty
 
@@ -395,33 +398,6 @@
                                 </ul>
                             </div>
                         @endforelse
-                        @foreach($contract->annotationsCluster as $cluster=>$annotations)
-                            <div id="cluster-{{str_slug($cluster,'-')}}" class="cluster-wrap">
-                                <div class="category-title">
-                                    {{$cluster}}
-                                </div>
-                                <ul>
-                                    @foreach($annotations as $annotation)
-                                        <?php $annotation_type = isset($annotation->shapes) ? 'pdf' : 'text'; ?>
-                                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                            <div class="page-num pull-left">
-                                                <a href="{{route('contract.detail',['id'=>$contract->metadata->contract_id])}}#/{{$annotation_type}}/page/{{$annotation->page_no}}/annotation/{{$annotation->id}}">
-                                                    Pg {{_e($annotation,'page_no')}}</a>
-
-                                            </div>
-                                            <div class="pull-left">
-                                                <div class="category-title">
-                                                    {{_e($annotation,'category')}}
-                                                </div>
-                                                <div class="annotation-text">{{_e($annotation,'text')}}</div>
-                                                <div class="quote">{{_e($annotation,'quote')}}</div>
-                                            </div>
-                                        </li>
-
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endforeach
                     </div>
                 </div>
             </div>

@@ -1329,7 +1329,6 @@ footer ul li a:hover {
 
 .cluster-wrap {
     overflow: hidden;
-    display: none;
     border-bottom: 1px solid #dadada;
     padding: 0 36px 26px;
     margin-bottom: 26px;
@@ -1341,7 +1340,6 @@ footer ul li a:hover {
 
 .cluster-wrap li {
     float: left;
-    padding-top: 40px;
     padding-left: 0;
     /*padding: 40px 0 0 40px;*/
 }
@@ -1354,6 +1352,7 @@ footer ul li a:hover {
     text-transform: uppercase;
     margin-bottom: 18px;
 }
+.sub-category {margin-top:20px; margin-bottom: 10px;}
 
 .tags a {
     background: #E8E8E8;
@@ -2446,4 +2445,9 @@ input.select2-search__field {
     width: 14px;
     margin-right: 3px;
     background-size: 9px;
+}
+
+a.view-annotation-cluster:hover, a.view-annotation-cluster.active {
+    background-color: #F37356 !important;
+    color: #fff;
 }

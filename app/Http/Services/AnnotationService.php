@@ -30,15 +30,8 @@ class AnnotationService
         $annotations = $annotations->result;
         $data        = [];
         foreach ($annotations as $annotation) {
-
-            if (array_key_exists($annotation->category_cluster, $data)) {
-                array_push($data[$annotation->category_cluster], $annotation);
-            } else {
-                $data[$annotation->category_cluster] = [$annotation];
-            }
-
+            $data[$annotation->cluster][$annotation->category][] = $annotation;
         }
-
         return $data;
     }
 }
