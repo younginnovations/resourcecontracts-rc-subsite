@@ -41,13 +41,6 @@
     </div>
 
     <div class="row side-collapse-container">
-        <div class="sort-wrapper">
-            <label for="">Sort</label>
-            <select class="sort" name="sort" >
-                <option value="asc">Ascending</option>
-                <option value="desc">Descending</option>
-            </select>
-        </div>
         <div id="countries" class="col-lg-12 country-list-wrap">
         </div>
     </div>
@@ -63,7 +56,14 @@
                 <img width="200" src="{{getFlagUrl()}}<%= code %>.png" />
                 <div class="country-name"><%= name %></div>
             </a>
-            <div class="contract-count"><%= contract %> contracts</div>
+            <div class="contract-count"><%= contract %>
+                <% if (contract > 1){%>
+                contracts
+                <% }else{ %>
+                contract
+                <% } %>
+
+            </div>
        </div>
     </script>
     <script type="text/template" id="resource-template">
