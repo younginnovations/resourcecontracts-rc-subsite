@@ -57,16 +57,18 @@ $category = $api->getAnnotationsCategory();
             </div>
         </div>
         <div class="col-lg-12">
-            <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
-                <label for="">Corporate Group</label>
-                <select name="corporate_group[]" id="" multiple="multiple">
-                    @foreach($attributes->corporate_grouping as $group)
-                        <option @if(isset($filter['corporate_group']) && in_array($group, $filter['corporate_group']))
-                            selected="selected"
-                            @endif value="{{$group}}">{{$group}}</option>
-                    @endforeach
-                </select>
-            </div>
+            @if(env('CATEGORY')=="rc")
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
+                    <label for="">Corporate Group</label>
+                    <select name="corporate_group[]" id="" multiple="multiple">
+                        @foreach($attributes->corporate_grouping as $group)
+                            <option @if(isset($filter['corporate_group']) && in_array($group, $filter['corporate_group']))
+                                selected="selected"
+                                @endif value="{{$group}}">{{$group}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            @endif
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
                 <label for="">Contract Type</label>
                 <select name="contract_type[]" id="" multiple="multiple">

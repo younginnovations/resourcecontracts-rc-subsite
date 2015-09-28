@@ -63,7 +63,8 @@ class DownloadService
                 'Incorporation Date',
                 'Operator',
                 'License Name',
-                'License Identifier'
+                'License Identifier',
+                'Pdf Url'
 
             ]
         );
@@ -114,6 +115,7 @@ class DownloadService
                 implode(';', $this->getOperator($contract->company, 'operator')),
                 implode(';', $this->makeSemicolonSeparated($contract->concession, 'license_name')),
                 implode(';', $this->makeSemicolonSeparated($contract->concession, 'license_identifier')),
+                $contract->file_url
             ];
         }
 
