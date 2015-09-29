@@ -328,18 +328,18 @@
     height: 22px;
 }
 
-.metadata-country,.metadata-signature-year,.metadata-type-contract,.metadata-resource {
+.metadata-country,.metadata-signature-year,.metadata-type-contract,.metadata-resource, .metadata-ocid {
     font-size: 12px;
     margin-bottom: 16px;
 }
 
-.metadata-country,.metadata-signature-year,.metadata-type-contract,.metadata-resource {
+.metadata-country,.metadata-signature-year,.metadata-type-contract,.metadata-resource, .metadata-ocid {
     border-bottom: 1px solid #C5C5C5;
     border-bottom: 1px solid rgba(197,197,197,0.3);
     padding-bottom: 16px;
 }
 
-.metadata-country span:first-child,.metadata-signature-year span:first-child,.metadata-type-contract span:first-child,.metadata-resource span:first-child {
+.metadata-country span:first-child,.metadata-signature-year span:first-child,.metadata-type-contract span:first-child,.metadata-resource span:first-child, .metadata-ocid span:first-child {
     color: rgba(64,64,64,0.7);
     display: block;
 }
@@ -372,7 +372,11 @@
 }
 
 .relateddocument-more-view a {
+}
+
+.relateddocument-more-view a::after {
     margin-right: 8px;
+    content: ",";
 }
 
 .text-viewer-warning {

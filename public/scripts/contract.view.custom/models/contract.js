@@ -55,7 +55,7 @@
       return this.get('esapi') + "contract/" + this.getContractId() + "/annotations"; 
     },
     getAnnotationsListAnchor: function() {
-      return app_url + "contract/" + this.getContractId() + "#annotations";
+      return app_url + "/contract/" + this.getContractId() + "#annotations";
     },
     renderStart: function() {
       this.set({"canrender": true});
