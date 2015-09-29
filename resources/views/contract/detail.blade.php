@@ -369,8 +369,9 @@
                                 </div>
 
                                     @foreach($categories as $category => $annotations)
-                                    <div id="{{$category}}" class="sub-category">
-                                        {{ str_limit($category, $limit = 150, $end = '...') }}
+                                    <div id="{{str_slug($category,'-')}}" class="sub-category">
+                                        <a href="#{{str_slug($category,'-')}}"><i class='glyphicon glyphicon-link' style="visibility: hidden;"></i></a>
+                                        {{$category}}
                                     </div>
                                     <ul class="row">
                                     @foreach($annotations as $annotation)
