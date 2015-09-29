@@ -80,6 +80,8 @@
             </td>
             @if($contract->country_code !='')
                 <td>
+                    <img style="width: 60px ; height: auto" src="{{getFlagUrl($contract->country_code)}}" />
+              
                     {{@trans('country')[$contract->country_code]}}
                 </td>
                 <td>{{$contract->signature_year}}</td>
