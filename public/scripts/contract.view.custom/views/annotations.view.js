@@ -145,9 +145,9 @@ var AnnotationItem = React.createClass({
         var showText = this.state.text;
         if(this.state.showEllipse) {
             showText = this.state.text;
-            ellipsistext = " ...less";
+            ellipsistext = " ... less";
             if(!this.state.showMoreFlag) {
-                ellipsistext = " ...more";
+                ellipsistext = " ... more";
                 showText = this.state.shortText;
             }
         }
@@ -157,7 +157,7 @@ var AnnotationItem = React.createClass({
                 <span className="link annotation-category-en"><a href="#" onClick={this.handleAnnotationClick}>{this.state.categoryEn}</a></span>
                 <span className="link annotation-category-fr" onClick={this.handleAnnotationClick}>{this.state.categoryFr}</span>
                 <span className="link annotation-item-page" onClick={this.handleAnnotationClick}>Page: {this.state.pageNo}</span>
-                <span className="annotation-item-content" >{showText}<a className="annotation-item-ellipsis" href="#" onClick={this.handleEllipsis} dangerouslySetInnerHTML={{__html: ellipsistext}}></a></span>
+                <span className="annotation-item-content" >{showText}<nobr><a className="annotation-item-ellipsis" href="#" onClick={this.handleEllipsis} dangerouslySetInnerHTML={{__html: ellipsistext}}></a></nobr></span>
             </div>
         );
     }

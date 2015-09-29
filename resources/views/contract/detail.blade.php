@@ -369,8 +369,8 @@
                                 </div>
 
                                     @foreach($categories as $category => $annotations)
-                                    <div class="sub-category">
-                                        {{$category}}
+                                    <div id="{{$category}}" class="sub-category">
+                                        {{ str_limit($category, $limit = 150, $end = '...') }}
                                     </div>
                                     <ul class="row">
                                     @foreach($annotations as $annotation)
