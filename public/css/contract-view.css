@@ -135,6 +135,7 @@
     cursor: pointer;
     text-indent: -9999px;
     display: block;
+    visibility: hidden;;
 }
 
 .metadata-shown span {
