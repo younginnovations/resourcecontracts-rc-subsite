@@ -91,7 +91,7 @@ a:hover, a:focus {
 
 .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
     border-top: 1px solid #eaeaea;
-    padding: 14px;
+    padding: 14px 14px 14px 10px;
     line-height: 22px;
 }
 
@@ -101,7 +101,7 @@ a:hover, a:focus {
     color: rgba(64, 64, 64, 0.6);
     font-size: 12px;
     border-bottom: 1px solid #eaeaea;
-    padding: 8px 14px;
+    padding: 8px 14px 8px 10px;
     white-space: nowrap;
 }
 
@@ -459,6 +459,10 @@ footer ul li a:hover {
     z-index: 1;
 }
 
+.search-input-wrapper:not(.search-page-input-wrapper) > .col-lg-12 > .col-lg-3 {
+    float: none;
+} 
+
 .search-input-wrapper .col-lg-12 {
     padding: 0 21px;
     overflow: hidden;
@@ -609,17 +613,21 @@ footer ul li a:hover {
 
 .download-csv {
     position: absolute;
-    bottom: -13px;
-    right: 102px;
+    bottom: -20px;
+    left: 35px;
+    background: #fff;
+    border: 1px solid rgb(243,115,86);
+    border: 1px solid rgba(243,115,86,0.2);
+    border-radius: 22px;
 }
 
 .download-csv a {
     display: block;
-    background: #404040;
+    font-size: 12px;
+    color: #F37356;
     text-decoration: none;
-    color: #fff;
-    border-radius: 4px;
-    padding: 7px 20px;
+    padding: 13px 25px 13px 44px;
+    background: url(../../images/ic-sprite.png) no-repeat -152px -40px;
 }
 
 .filter-wrapper > .col-lg-12 {
@@ -1659,6 +1667,10 @@ footer ul li a:hover {
 
 /*resources*/
 
+#resources {
+    padding-top: 0!important;
+}
+
 #resources > div {
     border-bottom: 1px solid rgb(209, 214, 219);
     border-bottom: 1px solid rgba(209, 214, 219, 0.7);
@@ -1697,6 +1709,7 @@ footer ul li a:hover {
 .contract-group label {
     font-style: italic;
     color: rgba(64, 64, 64, 0.5);
+    font-size: 12px;
 }
 
 .contract-group a {
@@ -1728,6 +1741,10 @@ footer ul li a:hover {
     font-family: "Open-Sans-Bold";
 }
 
+.search-list-wrapper {
+    padding-top: 40px;
+}
+
 .search-list-wrapper td:nth-child(3) {
     min-width: 140px;
 }
@@ -1747,22 +1764,6 @@ footer ul li a:hover {
     font-size: 14px;
     float: left;
     line-height: 22px;
-}
-
-.search-list-wrapper td ul {
-    margin-top: 10px;
-}
-
-.search-list-wrapper td ul li {
-    float: left;
-    font-size: 12px;
-    line-height: 17px;
-}
-
-.search-list-wrapper td ul li + li {
-    border-left: 1px solid #eee;
-    margin-left: 8px;
-    padding-left: 8px;
 }
 
 .annotate-text {
@@ -2211,7 +2212,7 @@ input.select2-search__field {
     }
 
     #resources > .col-lg-4:nth-child(-n+2) {
-        padding-top: 0;
+        padding-top: 20px;
     }
 
     .contract-number-wrap {
@@ -2290,7 +2291,7 @@ input.select2-search__field {
     }
 
     #resources > .col-lg-4:nth-child(-n+3) {
-        padding-top: 0;
+        padding-top: 20px;
     }
 
     .country-list-wrap .col-lg-2:nth-child(-n+6), .country-list-wrap .col-lg-3:nth-child(-n+4) {
@@ -2418,7 +2419,8 @@ input.select2-search__field {
 
 .table-contract-list input[type="checkbox"] {
     float: left;
-    margin-left: -32px;
+    margin-left: -49px;
+    margin-top: 5px;
 }
 
 .table-contract-list td:first-child {

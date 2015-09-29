@@ -92,13 +92,13 @@ $category = $api->getAnnotationsCategory();
                     @endforeach
                 </select>
             </div>
-        </div>
-        <div class="col-lg-5">
+            <div class="col-lg-4">
             <button type="submit" class="btn btn-form-search">Search</button>
 
             @if(!isset($searchPage))
                 <button type="button" class="btn btn-form-search search-close">Cancel</button>
             @endif
+        </div>
         </div>
     </div>
 </form>

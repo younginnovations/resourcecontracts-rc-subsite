@@ -1,7 +1,7 @@
 <table class="table table-responsive table-contract table-contract-list">
     <thead>
         <th></th>
-        <th>Document</th>
+        <th width="50%">Document</th>
         <th></th>
         <th>Country</th>
         <th>Year</th>
@@ -56,6 +56,14 @@
 
                     @endif
                 @endif
+                @if(isset($contract->group) && count($contract->group)>0)
+                    <div class="contract-group">
+                        <label for="">Found in: </label>
+                        @foreach($contract->group as $group)
+                            <a>{{$group}}</a>
+                        @endforeach
+                    </div>
+                @endif
             </td>
             <td>
                 <div class="contract-info-section">
@@ -68,14 +76,6 @@
                             <li><a href="{{route('contract.download',['id'=> $contract->contract_id])}}" >Word File</a></li>
                         </ul>
                     </div>
-                    @if(isset($contract->group) && count($contract->group)>0)
-                        <div class="contract-group">
-                            <label for="">Found in: </label>
-                            @foreach($contract->group as $group)
-                                <a>{{$group}}</a>
-                            @endforeach
-                        </div>
-                    @endif
                 </div>
             </td>
             @if($contract->country_code !='')
