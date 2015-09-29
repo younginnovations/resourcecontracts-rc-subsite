@@ -91,8 +91,18 @@ a:hover, a:focus {
 
 .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
     border-top: 1px solid #eaeaea;
-    padding: 32px 36px;
+    padding: 14px;
     line-height: 22px;
+}
+
+.table > thead > tr > th {
+    font-family: "Open-Sans-Bold";
+    text-transform: uppercase;
+    color: rgba(64, 64, 64, 0.6);
+    font-size: 12px;
+    border-bottom: 1px solid #eaeaea;
+    padding: 8px 14px;
+    white-space: nowrap;
 }
 
 .table > tbody > tr > td > a, .table > tbody > tr > th > a {
@@ -101,6 +111,11 @@ a:hover, a:focus {
 
 .table tr:first-of-type td {
     border: 0;
+}
+
+.table > thead > tr > th:first-child,.table > tbody > tr > td:first-child {
+    padding: 8px 0 8px 32px;
+    width: 54px;
 }
 
 .table .label-default {
@@ -883,7 +898,7 @@ footer ul li a:hover {
     text-align: center;
     text-transform: uppercase;
     padding-top: 25px;
-    z-index: 1;
+    z-index: 1000;
 }
 
 .contract-number-wrap span {
@@ -937,13 +952,26 @@ footer ul li a:hover {
 }
 
 .table-contract td:not(:first-child) {
-    font-size: 12px;
-    color: #8b8b8b;
+    font-size: 14px;
 }
 
-.table-contract td:first-child {
-    background: url(../../images/ic-file.png) no-repeat 36px 33px;
+.table-contract td:not(:nth-child(2)) {
+    font-size: 12px;
+    color: rgba(64,64,64,0.7);
+}
+
+.table-contract tbody td:first-child {
+    background: url(../../images/ic-file.png) no-repeat 36px 16px;
     padding-left: 60px;
+}
+
+.table-contract td ul {
+    margin-left: 14px;
+}
+
+.table-contract td ul li {
+    list-style: inherit;
+    text-indent: -6px;
 }
 
 .country-resource-wrap ul {
@@ -1037,6 +1065,15 @@ footer ul li a:hover {
     background: url(../../images/ic-sprite.png) no-repeat -152px -40px;
 }
 
+.view-pin-wrap:after, .download-wrap:after {
+    content: " ";
+    background: url(../../images/ic-sprite.png) no-repeat -176px -114px;
+    width: 8px;
+    height: 6px;
+    display: inline-block;
+    margin-left: 5px;
+}
+
 .contract-info-section {
     display: inline-block;
     width: 100%;
@@ -1051,6 +1088,7 @@ footer ul li a:hover {
 .contract-info-section .download-wrap {
     padding: 2px 0 2px 27px;
     background-position: -169px -49px;
+    text-indent: -9999px;
 }
 
 .contract-info-section .dropdown-menu {
@@ -1064,13 +1102,10 @@ footer ul li a:hover {
     padding: 2px 0;
 }
 
-.view-pin-wrap:after, .download-wrap:after {
-    content: " ";
-    background: url(../../images/ic-sprite.png) no-repeat -176px -114px;
-    width: 8px;
-    height: 6px;
-    display: inline-block;
-    margin-left: 5px;
+.contract-info-section .download-wrap:after {
+    margin-left: -4px;
+    float: left;
+    margin-top: 8px;
 }
 
 /*contract detail*/
@@ -1681,26 +1716,6 @@ footer ul li a:hover {
     background: rgba(64, 64, 64, 0.2);
 }
 
-.resource-contract-list {
-    border-top: 1px dotted #f2f2f2;
-    padding-top: 7px;
-    margin-top: 12px;
-}
-
-.resource-type, .contract-type {
-    float: left;
-    width: 40%;
-    margin-right: 20px;
-    color: #404040;
-}
-
-.resource-type label, .contract-type label {
-    display: block;
-    color: #999;
-    margin: 0;
-    font-size: 12px;
-}
-
 .contract-date {
     min-width: 150px;
 }
@@ -1751,9 +1766,11 @@ footer ul li a:hover {
 }
 
 .annotate-text {
-    background: url(../../images/ic-tick.png) no-repeat 8px;
-    padding-left: 26px !important;
-    float: left;
+    background: url(../../images/ic-tick.png) no-repeat 5px;
+    padding-left: 23px !important;
+    display: inline-block;
+    font-size: 12px;
+    color: rgba(64,64,64,0.7);
 }
 
 .search-list-wrapper .search-input-wrapper {
