@@ -156,8 +156,8 @@ var AnnotationItem = React.createClass({
                 <span>{this.state.cluster}</span>
                 <span className="link annotation-category-en"><a href="#" onClick={this.handleAnnotationClick}>{this.state.categoryEn}</a></span>
                 <span className="link annotation-category-fr" onClick={this.handleAnnotationClick}>{this.state.categoryFr}</span>
-                <span className="link" onClick={this.handleAnnotationClick}>#{this.state.pageNo}</span>
-                <span>{showText}<a href="#" onClick={this.handleEllipsis} dangerouslySetInnerHTML={{__html: ellipsistext}}></a></span>
+                <span className="link annotation-item-page" onClick={this.handleAnnotationClick}>#{this.state.pageNo}</span>
+                <span className="annotation-item-content" >{showText}<a className="annotation-item-ellipsis" href="#" onClick={this.handleEllipsis} dangerouslySetInnerHTML={{__html: ellipsistext}}></a></span>
             </div>
         );
     }
@@ -166,7 +166,8 @@ var AnnotationItem = React.createClass({
 var AnnotationsSort = React.createClass({
     getInitialState: function() {
         return {
-            show: false
+            show: false,
+            sortBy: "cluster"
         }
     },
     componentDidMount: function() {
@@ -194,14 +195,18 @@ var AnnotationsSort = React.createClass({
     },
     render: function() {
         var topicList = "";
+        var pageClassName = "active", topicClassName = "";
         if(this.state.sortBy == "cluster") {
+            pageClassName = "";
+            topicClassName = "active";
             topicList = <AnnotationTopicList contractApp={this.props.contractApp} />
         }
+        var activeClass = this.state.sortBy;
         if(this.state.show) {
             return (
                 <div className="annotation-sort">
-                    <span onClick={this.onClickPage}>By Page</span>
-                    <span onClick={this.onClickTopic}>By Topic</span>
+                    <span className={pageClassName} onClick={this.onClickPage}>By Page</span>
+                    <span className={topicClassName} onClick={this.onClickTopic}>By Topic</span>
                     {topicList}
                 </div>
             );
