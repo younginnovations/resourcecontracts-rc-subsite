@@ -84,7 +84,13 @@
 
                     {{@trans('country')[$contract->country_code]}}
                 </td>
+            @else
+                <td></td>
+            @endif
+            @if($contract->signature_year !='')
                 <td>{{$contract->signature_year}}</td>
+            @else
+                <td></td>
             @endif
             <td>
                 <ul>
