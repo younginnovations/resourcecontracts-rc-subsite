@@ -6,7 +6,10 @@
             <div class="panel-top-content">
                 <div class="pull-left">
                     <div class="panel-title">
-                        Search results for <span>{{\Illuminate\Support\Facades\Input::get('q')}}</span>
+                        <?php
+                            $q=\Illuminate\Support\Facades\Input::get('q');
+                        ?>
+                        Search results @if($q)for @endif <span>{{$q}}</span>
                     </div>
                 </div>
             </div>
