@@ -156,7 +156,7 @@ var AnnotationItem = React.createClass({
                 <span>{this.state.cluster}</span>
                 <span className="link annotation-category-en"><a href="#" onClick={this.handleAnnotationClick}>{this.state.categoryEn}</a></span>
                 <span className="link annotation-category-fr" onClick={this.handleAnnotationClick}>{this.state.categoryFr}</span>
-                <span className="link annotation-item-page" onClick={this.handleAnnotationClick}>#{this.state.pageNo}</span>
+                <span className="link annotation-item-page" onClick={this.handleAnnotationClick}>Page: {this.state.pageNo}</span>
                 <span className="annotation-item-content" >{showText}<a className="annotation-item-ellipsis" href="#" onClick={this.handleEllipsis} dangerouslySetInnerHTML={{__html: ellipsistext}}></a></span>
             </div>
         );
