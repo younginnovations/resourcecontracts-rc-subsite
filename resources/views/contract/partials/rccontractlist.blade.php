@@ -22,6 +22,7 @@
                 @if($annotations->total>0)
                     <div class="annotate-text"> Annotated </div>
                 @endif
+
                 <p class="country_name">- {{trans('country.'.strtoupper($contract->country_code))}}</p>
             </td>
             <td class="contract-date">{{$contract->signature_date}}</td>
