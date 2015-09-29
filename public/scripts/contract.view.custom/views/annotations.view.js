@@ -151,15 +151,48 @@ var AnnotationItem = React.createClass({
                 showText = this.state.shortText;
             }
         }
-        return (
-            <div className={currentAnnotationClass} id={this.state.id}>
-                <span>{this.state.cluster}</span>
-                <span className="link annotation-category-en"><a href="#" onClick={this.handleAnnotationClick}>{this.state.categoryEn}</a></span>
-                <span className="link annotation-category-fr" onClick={this.handleAnnotationClick}>{this.state.categoryFr}</span>
-                <span className="link annotation-item-page" onClick={this.handleAnnotationClick}>Page: {this.state.pageNo}</span>
-                <span className="annotation-item-content" >{showText}<nobr><a className="annotation-item-ellipsis" href="#" onClick={this.handleEllipsis} dangerouslySetInnerHTML={{__html: ellipsistext}}></a></nobr></span>
-            </div>
-        );
+        if (this.props.prevAnnotation === undefined) {
+            return (
+                <div className={currentAnnotationClass} id={this.state.id}>
+                    <span className="header annotation-cluster">{this.state.cluster}</span>
+                    <span className="link annotation-category-en"><a href="#" onClick={this.handleAnnotationClick}>{this.state.categoryEn}</a></span>
+                    <span className="link annotation-category-fr" onClick={this.handleAnnotationClick}>{this.state.categoryFr}</span>
+                    <span className="annotation-item-content" >{showText}<nobr><a className="annotation-item-ellipsis" href="#" onClick={this.handleEllipsis} dangerouslySetInnerHTML={{__html: ellipsistext}}></a></nobr></span>
+                    <span className="link annotation-item-page" onClick={this.handleAnnotationClick}>Page: {this.state.pageNo}</span>
+                </div>
+            );
+        } else if (this.props.annotation.attributes.category_key !== this.props.prevAnnotation.attributes.category_key) {
+            return (
+                <div className={currentAnnotationClass} id={this.state.id}>
+                    <span className="link annotation-category-en"><a href="#" onClick={this.handleAnnotationClick}>{this.state.categoryEn}</a></span>
+                    <span className="link annotation-category-fr" onClick={this.handleAnnotationClick}>{this.state.categoryFr}</span>
+                    <span className="annotation-item-content" >{showText}<nobr><a className="annotation-item-ellipsis" href="#" onClick={this.handleEllipsis} dangerouslySetInnerHTML={{__html: ellipsistext}}></a></nobr></span>
+                    <span className="link annotation-item-page" onClick={this.handleAnnotationClick}>Page: {this.state.pageNo}</span>
+                </div>
+            );
+        } else if (this.props.annotation.attributes.text !== this.props.prevAnnotation.attributes.text) {
+            return (
+                <div className={currentAnnotationClass} id={this.state.id}>
+                    <span className="annotation-item-content" >{showText}<nobr><a className="annotation-item-ellipsis" href="#" onClick={this.handleEllipsis} dangerouslySetInnerHTML={{__html: ellipsistext}}></a></nobr></span>
+                    <span className="link annotation-item-page" onClick={this.handleAnnotationClick}>Page: {this.state.pageNo}</span>
+                </div>
+            );
+        } else {
+            return (
+                <div className={currentAnnotationClass} id={this.state.id}>
+                    <span className="link annotation-item-page" onClick={this.handleAnnotationClick}>Page: {this.state.pageNo}</span>
+                </div>
+            );
+        }
+        // return (
+        //     <div className={currentAnnotationClass} id={this.state.id}>
+        //         <span>{this.state.cluster}</span>
+        //         <span className="link annotation-category-en"><a href="#" onClick={this.handleAnnotationClick}>{this.state.categoryEn}</a></span>
+        //         <span className="link annotation-category-fr" onClick={this.handleAnnotationClick}>{this.state.categoryFr}</span>
+        //         <span className="annotation-item-content" >{showText}<nobr><a className="annotation-item-ellipsis" href="#" onClick={this.handleEllipsis} dangerouslySetInnerHTML={{__html: ellipsistext}}></a></nobr></span>
+        //         <span className="link annotation-item-page" onClick={this.handleAnnotationClick}>Page: {this.state.pageNo}</span>
+        //     </div>
+        // );
     }
 });
 
@@ -303,6 +336,7 @@ var AnnotationsList = React.createClass({
                 annotationsList.push((<AnnotationItem
                                 key={annotationsCollectionForList.models[i].get("id")}
                                 contractApp={this.props.contractApp}
+                                prevAnnotation={annotationsCollectionForList.models[i-1]}
                                 annotation={annotationsCollectionForList.models[i]} />
                                 ));
             }
