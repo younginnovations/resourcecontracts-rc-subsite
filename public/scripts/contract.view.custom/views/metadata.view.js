@@ -63,10 +63,6 @@ var MetadataView = React.createClass({
                 <div className="metadata-view">
                     <div>Metadata</div>
                     <div className="metadata-country">
-                        <span>OCID</span>
-                        <span>{this.props.metadata.get("open_contracting_id")}</span>
-                    </div>
-                    <div className="metadata-country">
                         <span>Country</span>
                         <span>{this.props.metadata.get("country").name}</span>
                     </div>
@@ -76,14 +72,17 @@ var MetadataView = React.createClass({
                     </div>
                     <div className="metadata-resource">
                         <span>Resources</span>
-                        <span>{this.props.metadata.get("resource").join(",")}</span>
+                        <span>{this.props.metadata.get("resource").join(", ")}</span>
                     </div>
-                    <div className="metadata-type-contract show-more-meta" style={{display: "none"}}>
+                    <div className="metadata-type-contract">
                         <span>Type of Contract</span>
                         <span>{this.props.metadata.get("type_of_contract")}</span>
                     </div>
+                    <div className="metadata-ocid">
+                        <span>Open Contracting Identifier</span>
+                        <span>{this.props.metadata.get("open_contracting_id")}</span>
+                    </div>
                     <div className="metadata-view-footer">
-                        <a href="#" onClick={this.clickShowMoreMetadata}>{showLabel}</a>
                         <a href={this.props.contractApp.getMetadataSummaryLink()}>See Summary</a>
                     </div>
                 </div>
@@ -181,8 +180,8 @@ var RelatedDocumentsMoreView = React.createClass({
                 <div className="relateddocument-more-view">
                     <div>More</div>
                     <div>
-                        <div>In {country}</div>
-                        <div>In {resources}</div>
+                        <div>From {country}</div>
+                        <div>For {resources}</div>
                     </div>
                 </div>
             );
@@ -206,7 +205,7 @@ var OtherSourcesView = React.createClass({
     render: function() {
         if(this.props.metadata.get("company")) {
             var amla_url = this.props.metadata.get("amla_url");
-            var amlaUrlLink = (<span><a href={amla_url}>{this.props.metadata.get("country").name}</a> Legistation</span>);
+            var amlaUrlLink = (<span><a href={amla_url}>{this.props.metadata.get("country").name}</a> Legislation</span>);
 
             if(amla_url) {
                 return (
@@ -241,8 +240,6 @@ var RightColumnView = React.createClass({
                     contractApp={this.props.contractApp}
                     metadata={this.props.metadata} />
                 <RelatedDocumentsMoreView
-                    metadata={this.props.metadata} />
-                <OtherSourcesView
                     metadata={this.props.metadata} />
             </div>
         );
