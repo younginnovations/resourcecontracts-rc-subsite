@@ -470,6 +470,7 @@
     background-color: #FEEFB3;
     padding: 7px;
     border-radius: 4px;
+    font-size: 12px;
 }
 
 .text-viewer-warning > .close {
@@ -501,7 +502,7 @@
 }
 
 .back {
-    background: #F37356 url(../images/ic-sprite-new.png) no-repeat 12px -543px;
+    background: #217B49 url(../images/ic-sprite-new.png) no-repeat 12px -543px;
     width: 50px;
     display: block;
     height: 50px;

@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ url('css/contract-view.css') }}">
 @stop
 @section('content')
-    <div id="content"></div>
+    <div id="content"></div>  
 @endsection
 @section('js')
     <script src="{{ url('scripts/lib/jquery.js') }}"></script>
@@ -51,6 +51,7 @@
           }
         }
       }
+      var back_url = '{{url()}}';
       var app_url = '{{url()}}';
       var contractTitle = "{{$contract->metadata->contract_name}}";
       var contractApp = new ContractApp({
@@ -63,7 +64,6 @@
       var pagesCollection = new ViewerPageCollection();
       pagesCollection.url = contractApp.getAllPageUrl();
       pagesCollection.fetch({reset: true});
-
 
       var annotationsCollection = new AnnotationsCollection();
       annotationsCollection.url = contractApp.getAllAnnotationsUrl();
@@ -162,7 +162,7 @@
           return (
             <div className="main-app">
               <div className="title-wrap">
-              {htmlDecode(contractTitle)}
+                <a className="back" href={back_url}>Back</a><span>{htmlDecode(contractTitle)}</span>
               </div>
               <div className="head-wrap">
                 <TextSearchForm
