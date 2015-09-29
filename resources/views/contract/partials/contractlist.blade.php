@@ -1,4 +1,13 @@
 <table class="table table-responsive table-contract table-contract-list">
+    <thead>
+        <th></th>
+        <th width="50%">Document</th>
+        <th></th>
+        <th>Country</th>
+        <th>Year</th>
+        <th>Resource Type</th>
+        <th>Contract Type</th> 
+    </thead>
     <tbody>
     @forelse($contracts->results as $contract)
         <?php
@@ -6,6 +15,7 @@
         $annotations = $api->getAnnotations($contract->contract_id);
         ?>
         <tr>
+            <td></td>
             <td>
                 @if(isset($show_advance))<input type="checkbox" class="compare" name="compare[]" value="{{$contract->contract_id}}" />@endif
                 <a class="title-{{$contract->contract_id}}" href="{{route('contract.detail',['id'=>$contract->contract_id ])}}">
@@ -20,25 +30,6 @@
                     {!!$contract->text or ''!!}
                     {!!$contract->annotations or ''!!}
                     {!!$contract->metadata or ''!!}
-                </div>
-                <div class="contract-info-section">
-                    <div class="download-main-wrap">
-                        <div class="download-wrap">
-                            <span>Download</span>
-                        </div>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{route('contract.download.pdf',['id'=> $contract->contract_id])}}" >Pdf</a></li>
-                            <li><a href="{{route('contract.download',['id'=> $contract->contract_id])}}" >Word File</a></li>
-                        </ul>
-                    </div>
-                    @if(isset($contract->group) && count($contract->group)>0)
-                        <div class="contract-group">
-                            <label for="">Found in: </label>
-                            @foreach($contract->group as $group)
-                                <a>{{$group}}</a>
-                            @endforeach
-                        </div>
-                    @endif
                 </div>
                 @if($annotations->total>0)
                     @if(\Illuminate\Support\Facades\Input::has('annotation_category'))
@@ -65,25 +56,44 @@
 
                     @endif
                 @endif
-                <div class="resource-contract-list">
-                    <div class="resource-type">
-                        <label for="">Resource: </label>
-                        @foreach($contract->resource as $resource)
-                            {{$resource}}
+                @if(isset($contract->group) && count($contract->group)>0)
+                    <div class="contract-group">
+                        <label for="">Found in: </label>
+                        @foreach($contract->group as $group)
+                            <a>{{$group}}</a>
                         @endforeach
                     </div>
-                    <div class="contract-type">
-                        <label for="">Contract Type:</label>{{$contract->contract_type}}
+                @endif
+            </td>
+            <td>
+                <div class="contract-info-section">
+                    <div class="download-main-wrap">
+                        <div class="download-wrap">
+                            <span>Download</span>
+                        </div>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{route('contract.download.pdf',['id'=> $contract->contract_id])}}" >Pdf</a></li>
+                            <li><a href="{{route('contract.download',['id'=> $contract->contract_id])}}" >Word File</a></li>
+                        </ul>
                     </div>
                 </div>
             </td>
-
             @if($contract->country_code !='')
-                <td>{{$contract->signature_year}}</td>
                 <td>
                     {{@trans('country')[$contract->country_code]}}
                 </td>
+                <td>{{$contract->signature_year}}</td>
             @endif
+            <td>
+                <ul>
+                     @foreach($contract->resource as $resource)
+                         <li>{{$resource}}</li>
+                     @endforeach
+                </ul>
+            </td>
+            <td>
+                {{$contract->contract_type}}
+            </td>
         </tr>
     @empty
         <tr>

@@ -1,6 +1,12 @@
 <table class="table table-responsive table-contract">
+    <thead>
+        <th></th>
+        <th>Document</th>
+        <th>Year</th>
+        <th>Resource Type</th>
+        <th>Contract Type</th> 
+    </thead>
     <tbody>
-
     @forelse($contracts->results as $contract)
         <?php
         $api     = app('App\Http\Services\APIService');
@@ -8,6 +14,7 @@
 
         ?>
         <tr>
+            <td></td>
             <td>
                 <a href="{{route('contract.detail',['id'=>$contract->contract_id ])}}">
                     {{ $contract->contract_name or ''}}
@@ -16,21 +23,18 @@
                     <div class="annotate-text"> Annotated </div>
                 @endif
                 <p class="country_name">- {{trans('country.'.strtoupper($contract->country_code))}}</p>
-                <div class="resource-contract-list">
-                    <div class="resource-type">
-                        <label for="">Resources: </label>
-                        @foreach($contract->resource as $resource)
-                            {{$resource}}
-                        @endforeach
-                    </div>
-                    <div class="contract-type">
-                        <label for="">Contract Type:</label>
-                        {{$contract->contract_type}}
-                    </div>
-                </div>
             </td>
             <td class="contract-date">{{$contract->signature_date}}</td>
-
+            <td>
+                <ul>
+                     @foreach($contract->resource as $resource)
+                         <li>{{$resource}}</li>
+                     @endforeach
+                </ul>
+            </td>
+            <td>
+                {{$contract->contract_type}}
+            </td>
         </tr>
     @empty
         <tr>
