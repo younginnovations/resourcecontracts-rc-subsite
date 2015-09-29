@@ -8,7 +8,7 @@ var AnnotationHeader = React.createClass({
     render: function() {
         var count = this.props.annotationsCollection.length;
         return (
-            <div className="annotation-title">Annotations - {count}</div>
+            <div className="annotation-title">{count} Annotations</div>
         );
     }
 });
