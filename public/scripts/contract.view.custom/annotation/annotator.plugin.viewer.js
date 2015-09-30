@@ -24,7 +24,11 @@ Annotator.Plugin.AnnotatorNRGIViewer = (function(_super) {
             link="#/pdf/page/"+annotation.page_no+"/annotation/"+annotation.id;
         }
         var textDiv = $(field.parentNode).find('div:first-of-type')[0];
-        textDiv.innerHTML = '<div class="annotation-viewer-category">' + annotation.category + '</div>' + 
+        var annotatinonCatEnglish = annotation.category.split('//')[0];
+        var annotatinonCatFrench = annotation.category.split('//')[1];
+
+        textDiv.innerHTML = '<div class="annotation-viewer-category">' + annotatinonCatEnglish + '<br>' + 
+                            '<i>' + annotatinonCatFrench + '</i></div>' + 
                             '<span>Page ' + annotation.page_no + '</span>' +
                             '<a href="' + link + '" class="annotation-viewer-more"> >> </a>';
         $(textDiv).on("click", "a", function(e) {
