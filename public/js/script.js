@@ -1,5 +1,7 @@
 $(document).ready(function () {
-    $('select').select2({placeholder: "Select", allowClear: true, theme: "classic"});
+    if ($('select').length) {
+        $('select').select2({placeholder: "Select", allowClear: true, theme: "classic"});
+    }
     //slide effect for filter resource
     var sideslider = $('[data-toggle=collapse-side]');
     var sel = sideslider.attr('data-target');
@@ -84,7 +86,7 @@ $(document).ready(function () {
         $(".category-wrap").show();
         $(".cluster-wrap").hide();
 
-        
+
         // prevent default anchor click behavior
         e.preventDefault();
         // animate
@@ -191,17 +193,16 @@ $(document).ready(function () {
     });
 
 
-    $(document).on('click','.view-annotation-cluster', function(e){
+    $(document).on('click', '.view-annotation-cluster', function (e) {
         e.preventDefault();
-        var href =$(this).attr('href');
+        var href = $(this).attr('href');
         $('.annotation-category-cluster .active').removeClass('active');
 
         $(this).addClass('active');
 
-        if(href =='#cluster-all')
-        {
+        if (href == '#cluster-all') {
             $('.cluster-wrap').show();
-        }else{
+        } else {
             $('.cluster-wrap').hide();
             $(href).show();
         }

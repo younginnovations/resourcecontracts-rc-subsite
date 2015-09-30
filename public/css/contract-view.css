@@ -195,7 +195,7 @@
     position: relative;
     width: 25%;
     height: 87vh;
-    overflow: scroll;
+    overflow-y:scroll;
     float:left;
     background: #f0f0f0;
     padding: 0 18px;
@@ -222,10 +222,16 @@
     margin-bottom: 20px!important;
     border-bottom: 1px solid #DCDFE2;
 }
+.metadata-view > div:first-child .metadata-view-footer {
+    font-size: 10px;
+    text-transform: lowercase;
+    padding: 5px 10px 20px;
+}
 
 .metadata-view > div:first-child {
     background: transparent;
     padding-left: 0;
+    padding-right: 0;
 }
 
 .metadata-view > div:first-child:before {
@@ -325,10 +331,9 @@
 .right-column-view {
     font-size: 12px;
     float: right;
-    width: 20%;
+    width: 22%;
     border-left: 1px solid #DCDFE2;
     height: 88vh;
-    overflow: scroll;
 }
 
 .annotation-sort {
@@ -518,7 +523,7 @@
 }
 
 .metadata-view-footer > a {
-    padding-right: 10px;    
+    font-size: 12px
 }
 
 .back {

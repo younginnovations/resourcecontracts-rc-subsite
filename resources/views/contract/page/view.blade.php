@@ -23,10 +23,10 @@
     <script type="text/jsx" src="{{ url('scripts/contract.view.custom/views/react.waypoint.js') }}"></script>
     <script type="text/jsx" src="{{ url('scripts/contract.view.custom/views/react.pdf.js') }}"></script>
     <script type="text/jsx" src="{{ url('scripts/contract.view.custom/views/pdf.view.js') }}"></script>
+    <script type="text/jsx" src="{{ url('scripts/contract.view.custom/views/metadata.view.js') }}"></script>
     <script type="text/jsx" src="{{ url('scripts/contract.view.custom/views/text.view.js') }}"></script>
     <script type="text/jsx" src="{{ url('scripts/contract.view.custom/views/text.search.js') }}"></script>
     <script type="text/jsx" src="{{ url('scripts/contract.view.custom/views/annotations.view.js') }}"></script>
-    <script type="text/jsx" src="{{ url('scripts/contract.view.custom/views/metadata.view.js') }}"></script>
 
     <script src="{{ url('scripts/contract.view.custom/models/pages.js') }}"></script>
     <script src="{{ url('scripts/contract.view.custom/models/annotations.js') }}"></script>
@@ -194,7 +194,9 @@
                 <TextViewer 
                   style={this.getStyle(contractApp.isViewVisible("TextViewer"))}
                   contractApp={contractApp}
-                  pagesCollection={pagesCollection} />
+                  pagesCollection={pagesCollection}
+                  metadata={contractApp.metadata}
+                />
                 <PdfViewer 
                   pdfPage={pdfPage}
                   style={this.getStyle(contractApp.isViewVisible("PdfViewer"))}                  
