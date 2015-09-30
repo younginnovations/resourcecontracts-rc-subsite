@@ -62,6 +62,9 @@ $(document).ready(function () {
     $(".view-annotation").on('click', function (e) {
         var href = $(this).attr('href');
         $(".category-wrap").show();
+        $(".cluster-wrap").show();
+
+        // prevent default anchor click behavior
         e.preventDefault();
         $('html, body').animate({
             scrollTop: $(this.hash).offset().top

@@ -101,7 +101,7 @@ a:hover, a:focus {
     color: rgba(64, 64, 64, 0.6);
     font-size: 12px;
     border-bottom: 1px solid #eaeaea;
-    padding: 8px 14px 8px 10px;
+    padding: 8px 44px 8px 10px;
     white-space: nowrap;
 }
 
@@ -116,6 +116,7 @@ a:hover, a:focus {
 .table > thead > tr > th:first-child,.table > tbody > tr > td:first-child {
     padding: 8px 0 8px 32px;
     width: 54px;
+    min-width: 54px;
 }
 
 .table .label-default {
@@ -616,15 +617,15 @@ footer ul li a:hover {
     bottom: -20px;
     left: 35px;
     background: #fff;
-    border: 1px solid rgb(33,123,73);
-    border: 1px solid rgba(33,123,73,0.2);
+    border: 1px solid rgb(243,115,86);
+    border: 1px solid rgba(243,115,86,0.2);
     border-radius: 22px;
 }
 
 .download-csv a {
     display: block;
     font-size: 12px;
-    color: #217B49;
+    color: #217B46;
     text-decoration: none;
     padding: 13px 25px 13px 44px;
     background: url(../images/ic-sprite.png) no-repeat -152px -40px;
@@ -2161,6 +2162,93 @@ input.select2-search__field {
     border: 0;
 }
 
+.search-not-found {
+    background: none !important;
+    padding-left: 36px !important;
+}
+
+.open-contracting-id label, .open-contracting-id span {
+    float: left;
+}
+
+.open-contracting-id span {
+    margin-left: 4px;
+}
+
+.editable-buttons > button {
+    padding: 0;
+    line-height: normal;
+    font-size: inherit;
+}
+
+.government-entity-wrap li label {
+    display: block;;
+}
+
+.government-entity-wrap li span {
+    display: inline-block;
+}
+
+.government-entity-wrap li span + span:before {
+    content: ",";
+    display: inline-block;
+}
+
+.table-contract-list input[type="checkbox"] {
+    float: left;
+    margin-left: -49px;
+    margin-top: 5px;
+}
+
+.table-contract-list td:first-child {
+    background-position: 50px 33px;
+    padding-left: 60px;
+}
+
+.table-contract-list td:first-child > a {
+    padding-left: 13px;
+}
+
+#compare-block {
+    background-color: #f2f2f2;
+    padding: 10px 20px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    border-top: 1px solid #e1e1e1;
+}
+
+#compare-block h2 {
+    font: normal 16px "Open-Sans-Bold";
+    margin: 0 0 6px;
+}
+
+#compare-block ul {
+    padding-bottom: 10px;
+}
+
+#compare-block ul li {
+    border-bottom: 1px solid #e5e5e5;
+    padding: 5px 0;
+}
+
+.item-delete {
+    background: url(../images/ic-delete.png) no-repeat 4px 5px;
+    display: inline-block;
+    text-indent: -9999px;
+    width: 14px;
+    margin-right: 3px;
+    background-size: 9px;
+}
+
+a.view-annotation-cluster:hover, a.view-annotation-cluster.active {
+    background-color: #217B46 !important;
+    color: #fff;
+}
+
+
 @media all and (min-width: 480px) {
     .filter-wrapper > .col-lg-2 {
         border-top: 0;
@@ -2320,7 +2408,7 @@ input.select2-search__field {
 
     .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
         padding-top: 14px;
-        padding-left: 56px;
+        padding-left: 50%;
         padding-bottom: 14px;
     }
 
@@ -2340,18 +2428,21 @@ input.select2-search__field {
         border: none;
         position: relative;
         padding-left: 50%;
-        border-top: 1px solid #eaeaea !important;
+        border-top: 1px solid #f5f5f5 !important;
     }
 
     td:before {
         /* Now like a table header */
         position: absolute;
         /* Top/left values mimic padding */
-        top: 6px;
-        left: 6px;
+        top: 17px;
+        left: 36px;
         width: 45%;
         padding-right: 10px;
         white-space: nowrap;
+        font: 12px "Open-Sans-Bold";
+        text-transform: uppercase;
+        color: rgba(64, 64, 64, 0.6);
     }
 
     td:empty {
@@ -2371,6 +2462,30 @@ input.select2-search__field {
     table td:first-child {
         overflow: hidden;
     }
+
+    td:nth-of-type(1):before { content: ""; }
+    td:nth-of-type(2):before { content: "Document"; }
+    td:nth-of-type(3):before { content: ""; }
+    td:nth-of-type(4):before { content: "Country"; }
+    td:nth-of-type(5):before { content: "Year"; }
+    td:nth-of-type(6):before { content: "Resource Type"; }
+    td:nth-of-type(7):before { content: "Contract Type"; }
+
+    .table-contract-list input[type="checkbox"] {
+        margin-left: 0;
+        margin-right: 5px;
+    }
+
+    .table > tbody > tr > td {
+        min-height: 51px;
+    }
+    
+    .country-contract-wrap td:nth-of-type(1):before { content: ""; }
+    .country-contract-wrap td:nth-of-type(2):before { content: "Document"; }
+    .country-contract-wrap td:nth-of-type(3):before { content: "Year"; }
+    .country-contract-wrap td:nth-of-type(4):before { content: "Resource Type"; }
+    .country-contract-wrap td:nth-of-type(5):before { content: "Contract Type"; }
+
 }
 
 @media all and (max-width: 480px) {
@@ -2385,95 +2500,7 @@ input.select2-search__field {
     }
 }
 
-.search-not-found {
-    background: none !important;
-    padding-left: 36px !important;
-}
-
-.open-contracting-id label, .open-contracting-id span {
-    float: left;
-}
-
-.open-contracting-id span {
-    margin-left: 4px;
-}
-
-.editable-buttons > button {
-    padding: 0;
-    line-height: normal;
-    font-size: inherit;
-}
-
-.government-entity-wrap li label {
-    display: block;;
-}
-
-.government-entity-wrap li span {
-    display: inline-block;
-}
-
-.government-entity-wrap li span + span:before {
-    content: ",";
-    display: inline-block;
-}
-
-.table-contract-list input[type="checkbox"] {
-    float: left;
-    margin-left: -49px;
-    margin-top: 5px;
-}
-
-.table-contract-list td:first-child {
-    background-position: 50px 33px;
-    padding-left: 60px;
-}
-
-.table-contract-list td:first-child > a {
-    padding-left: 13px;
-}
-
-#compare-block {
-    background-color: #f2f2f2;
-    padding: 10px 20px;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-    width: 100%;
-    border-top: 1px solid #e1e1e1;
-}
-
-#compare-block h2 {
-    font: normal 16px "Open-Sans-Bold";
-    margin: 0 0 6px;
-}
-
-#compare-block ul {
-    padding-bottom: 10px;
-}
-
-#compare-block ul li {
-    border-bottom: 1px solid #e5e5e5;
-    padding: 5px 0;
-}
-
-.item-delete {
-    background: url(../images/ic-delete.png) no-repeat 4px 5px;
-    display: inline-block;
-    text-indent: -9999px;
-    width: 14px;
-    margin-right: 3px;
-    background-size: 9px;
-}
-
-a.view-annotation-cluster:hover, a.view-annotation-cluster.active {
-    background-color: #217B46 !important;
-    color: #fff;
-}
-
-
 .homepage-wrapper{
-	background-color: rgba(0,0,0,0.5)  ;
-	overflow: hidden;
+    background-color: rgba(0,0,0,0.5)  ;
+    overflow: hidden;
 }
-
