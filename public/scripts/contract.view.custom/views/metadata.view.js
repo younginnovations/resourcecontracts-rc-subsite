@@ -170,7 +170,9 @@ var RelatedDocumentsMoreView = React.createClass({
     },
     render: function() {
         if(this.props.metadata.get("country")) {
-            var countryLink = app_url + "/countries/" + this.props.metadata.get("country").name;
+            var countryCode = this.props.metadata.get("country").code.toLowerCase();
+            console.log(countryCode);
+            var countryLink = app_url + "/countries/" + countryCode;
             var country = React.createElement('a', {href: countryLink}, this.props.metadata.get("country").name);
             var resourceLinkBase = app_url + "/resources/";
             var resources = this.props.metadata.get("resource").map(function(resource, i) {
