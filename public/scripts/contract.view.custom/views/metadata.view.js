@@ -61,7 +61,13 @@ var MetadataView = React.createClass({
         if(this.props.metadata.get("country")) {
             return (
                 <div className="metadata-view">
-                    <div>Metadata</div>
+                    <div>
+                        Metadata
+                        <div className="metadata-view-footer pull-right">
+                            <a href={this.props.contractApp.getMetadataSummaryLink()}>See Summary</a>
+                        </div>
+                    </div>
+
                     <div className="metadata-country">
                         <span>Country</span>
                         <span>{this.props.metadata.get("country").name}</span>
@@ -82,17 +88,16 @@ var MetadataView = React.createClass({
                         <span>Open Contracting Identifier</span>
                         <span>{this.props.metadata.get("open_contracting_id")}</span>
                     </div>
-                    <div className="metadata-view-footer">
-                        <a href={this.props.contractApp.getMetadataSummaryLink()}>See Summary</a>
-                    </div>
                 </div>
             );            
         } else {
             return (
                 <div className="metadata-view">
                     <div>Metadata</div>
-                    <span>Loading...</span>
-                    <a href={this.props.contractApp.getMetadataSummaryLink()}>See summary</a>
+                    <span>Loading... </span>
+                    <div className="metadata-view-footer">
+                        <a href={this.props.contractApp.getMetadataSummaryLink()}>See summary</a>
+                    </div>
                 </div>
             );
         }
@@ -171,7 +176,6 @@ var RelatedDocumentsMoreView = React.createClass({
     render: function() {
         if(this.props.metadata.get("country")) {
             var countryCode = this.props.metadata.get("country").code.toLowerCase();
-            console.log(countryCode);
             var countryLink = app_url + "/countries/" + countryCode;
             var country = React.createElement('a', {href: countryLink}, this.props.metadata.get("country").name);
             var resourceLinkBase = app_url + "/resources/";

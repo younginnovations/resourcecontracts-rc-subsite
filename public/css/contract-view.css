@@ -222,6 +222,11 @@
     margin-bottom: 20px!important;
     border-bottom: 1px solid #DCDFE2;
 }
+.annotation-title,.metadata-view > div:first-child .metadata-view-footer {
+    font-size: 10px;
+    text-transform: lowercase;
+    padding: 5px 10px 20px;
+}
 
 .metadata-view > div:first-child {
     background: transparent;
