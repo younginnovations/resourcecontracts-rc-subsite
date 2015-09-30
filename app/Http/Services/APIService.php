@@ -376,18 +376,15 @@ class APIService
         $data      = [];
         foreach ($summaries->country_summary as $summary) {
 
-            $data[]=[
+            $data[trans('country.' . strtoupper($summary->key))]=[
                 'key'=>$summary->key,
                 'name'=>trans('country.' . strtoupper($summary->key)),
                 'doc_count'=>$summary->doc_count
             ];
         }
-        usort($data, function($a, $b) {
-            return $a['name'] - $b['name'];
-        });
+        ksort($data);
         unset($summaries->country_summary);
         $summaries->country_summary = $data;
-
         return $summaries;
     }
 
