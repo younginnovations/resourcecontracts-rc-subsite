@@ -35,7 +35,7 @@
 
                         <ul class="dropdown-menu">
                             <li><a href="{{_e($contract->metadata, 'file_url')}}" target="_blank">Pdf</a></li>
-                            @if(_e($contract->metadata, 'word_file') !='')
+                            @if(_e($contract->metadata, 'word_file') !='' && env('CATEGORY')!="olc")
                                 <li><a href="{{route('contract.download',['id'=> $contract->metadata->contract_id])}}"
                                        target="_blank">Word File</a></li>
                             @endif

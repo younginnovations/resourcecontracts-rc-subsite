@@ -1,6 +1,6 @@
 <?php
 $api = app('App\Http\Services\APIService');
-$summary = $api->summary();
+$summary = $api->sortSummaryCountry();
 $attributes = $api->searchAttributed();
 $category = $api->getAnnotationsCategory();
 ?>
@@ -26,9 +26,9 @@ $category = $api->getAnnotationsCategory();
                 <label for="">Country</label>
                 <select name="country[]" id="" multiple="multiple">
                     @foreach($summary->country_summary as $country)
-                        <option @if(isset($filter['country']) && in_array(strtoupper($country->key), array_map('strtoupper',$filter['country'])))
+                        <option @if(isset($filter['country']) && in_array(strtoupper($country['key']), array_map('strtoupper',$filter['country'])))
                             selected="selected"
-                            @endif value="{{$country->key}}">{{trans('country.'.strtoupper($country->key))}}</option>
+                            @endif value="{{$country['key']}}">{{$country['name']}}</option>
                     @endforeach
                 </select>
             </div>

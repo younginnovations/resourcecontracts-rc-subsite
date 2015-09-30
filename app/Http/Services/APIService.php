@@ -370,5 +370,26 @@ class APIService
         return $contracts;
     }
 
+    public function sortSummaryCountry()
+    {
+        $summaries = $this->summary();
+        $data      = [];
+        foreach ($summaries->country_summary as $summary) {
+
+            $data[]=[
+                'key'=>$summary->key,
+                'name'=>trans('country.' . strtoupper($summary->key)),
+                'doc_count'=>$summary->doc_count
+            ];
+        }
+        usort($data, function($a, $b) {
+            return $a['name'] - $b['name'];
+        });
+        unset($summaries->country_summary);
+        $summaries->country_summary = $data;
+
+        return $summaries;
+    }
+
 }
 
