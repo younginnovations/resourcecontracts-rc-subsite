@@ -222,7 +222,7 @@ class ContractController extends BaseController
         $html = "<html>";
         $html .= "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">";
         $html .= "<body>";
-        $html .= "<h3>NOTICE: This contract's text was created automatically and may contain errors and differences from the contract's original PDF file. Learn more <a href=\"http://alpha.resourcecontracts.org/faqs\">here</a></h1>";
+        $html .= "<h3>NOTICE: This contract's text was created automatically and may contain errors and differences from the contract's original PDF file. Learn more <a href=\"http://alpha.resourcecontracts.org/faqs\">here</a></h3>";
         $html .= $text;
         $html .= "</body>";
         $html .= "</html>";
