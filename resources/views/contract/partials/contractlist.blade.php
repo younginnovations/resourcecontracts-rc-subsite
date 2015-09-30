@@ -73,7 +73,9 @@
                         </div>
                         <ul class="dropdown-menu">
                             <li><a href="{{route('contract.download.pdf',['id'=> $contract->contract_id])}}" >Pdf</a></li>
-                            <li><a href="{{route('contract.download',['id'=> $contract->contract_id])}}" >Word File</a></li>
+                            @if(env('CATEGORY')!="olc")
+                                <li><a href="{{route('contract.download',['id'=> $contract->contract_id])}}" >Word File</a></li>
+                            @endif
                         </ul>
                     </div>
                 </div>

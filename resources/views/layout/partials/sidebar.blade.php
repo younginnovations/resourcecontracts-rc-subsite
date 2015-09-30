@@ -1,7 +1,7 @@
 <?php
 if (!isset($summary)) {
     $api     = app('App\Http\Services\APIService');
-    $summary = $api->summary();
+    $summary = $api->sortSummaryCountry();
 }
 ?>
 
@@ -26,10 +26,11 @@ if (!isset($summary)) {
             <label>Countries</label>
             <ul>
                 @foreach(array_slice($summary->country_summary, 0, 10, true) as $country)
+
                     <li>
-                        <a href="{{route('country.detail', ['key'=>$country->key])}}">
-                            <span>{{trans('country.'.strtoupper($country->key))}}</span>
-                            <small class="label pull-right">{{$country->doc_count}}</small>
+                        <a href="{{route('country.detail', ['key'=>$country['key']])}}">
+                            <span>{{$country['name']}}</span>
+                            <small class="label pull-right">{{$country['doc_count']}}</small>
                         </a>
                     </li>
                 @endforeach
