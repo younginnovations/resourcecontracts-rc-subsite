@@ -347,7 +347,7 @@
         </div>
     </div>
     @if(count($contract->annotationsGroup)>0)
-        <div class="row annotation-list-wrapper" id="annotation">
+        <div class="row annotation-list-wrapper" id="annotations">
             <div class="col-lg-12">
                 <div class="panel panel-default panel-wrap panel-annotation-list-wrap">
                     <div class="panel-heading">Annotations</div>
