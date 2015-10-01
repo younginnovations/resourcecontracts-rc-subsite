@@ -1294,8 +1294,8 @@ footer ul li a:hover {
 }
 
 .table-associated-contract td:first-child {
-    padding-left: 48px;
-    background-position: 22px center;
+    padding-left: 48px!important;
+    background-position: 22px center!important;
 }
 
 .panel-table {

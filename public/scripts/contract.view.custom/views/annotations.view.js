@@ -151,7 +151,7 @@ var AnnotationItem = React.createClass({
                 showText = this.state.shortText;
             }
         }
-        if (this.props.prevAnnotation === undefined) {
+        if (this.props.prevAnnotation === undefined || this.props.showClusterAnyway) {
             return (
                 <div className={currentAnnotationClass} id={this.state.id}>
                     <span className="header annotation-cluster">{this.state.cluster}</span>
@@ -329,11 +329,12 @@ var AnnotationsList = React.createClass({
         e.preventDefault();
         $('.annotations-viewer').animate({scrollTop: 0}, 500);
     },
-    getAnnotationItemsComponent: function(annotationsCollectionForList) {
+    getAnnotationItemsComponent: function(annotationsCollectionForList, showClusterAnyway) {
         var annotationsList = [];
         if(annotationsCollectionForList.models.length > 0) {
             for(var i = 0;i < annotationsCollectionForList.models.length; i++) {
                 annotationsList.push((<AnnotationItem
+                                showClusterAnyway={showClusterAnyway}
                                 key={annotationsCollectionForList.models[i].get("id")}
                                 contractApp={this.props.contractApp}
                                 prevAnnotation={annotationsCollectionForList.models[i-1]}
@@ -348,7 +349,7 @@ var AnnotationsList = React.createClass({
             this.props.annotationsCollection.sort();
             return (
               <div className="annotations-list" id="id-annotations-list">
-                {this.getAnnotationItemsComponent(this.props.annotationsCollection)}
+                {this.getAnnotationItemsComponent(this.props.annotationsCollection, true)}
                 <div className="annotations-list-footer">
                     <a onClick={this.scrollToTop} href="#">Go to Top</a>
                     <a href={this.props.contractApp.getAnnotationsListAnchor()}>See all Annotations</a>
@@ -369,7 +370,7 @@ var AnnotationsList = React.createClass({
             });
             if(filtered.length) {
                 var newCol = new AnnotationsCollection(filtered);
-                annotationsList.push(<div id={cluster} key={cluster}>{self.getAnnotationItemsComponent(newCol)}</div>);
+                annotationsList.push(<div id={cluster} key={cluster}>{self.getAnnotationItemsComponent(newCol, false)}</div>);
             }
         });
         return (
