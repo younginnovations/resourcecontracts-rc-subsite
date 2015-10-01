@@ -252,10 +252,9 @@
 
                                 <td width="70%">
                                     @if($parentContract->status=="published")
-                                        <a href="{{route('contract.detail',['id'=>$parentContract->id])}}">{{$parentContract->contract_name}}</a>
-                                        (parent)
+                                        <a href="{{route('contract.detail',['id'=>$parentContract->id])}}">{{$parentContract->contract_name}}</a> &nbsp; (parent)
                                     @else
-                                        {{$parentContract->contract_name}}(parent)
+                                        {{$parentContract->contract_name}} (parent)
                                     @endif
 
                                 </td>
@@ -269,9 +268,9 @@
                             <tr>
                                 <td width="70%">
                                     @if($supportingContract->status=="published")
-                                        <a href="{{route('contract.detail',['id'=>$supportingContract->id])}}">{{$supportingContract->contract_name}}</a>
+                                        <a href="{{route('contract.detail',['id'=>$supportingContract->id])}}"> {{$supportingContract->contract_name}}</a>
                                     @else
-                                        {{json_decode($supportingContract->contract_name)}}
+                                        {{$supportingContract->contract_name}}
                                     @endif
                                 </td>
 
