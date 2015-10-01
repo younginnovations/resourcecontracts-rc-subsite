@@ -32,7 +32,25 @@ class AnnotationService
         foreach ($annotations as $annotation) {
             $data[$annotation->cluster][$annotation->category][] = $annotation;
         }
+        $data = $this->orderAnnotationsCluster($data);
+
         return $data;
+    }
+
+    /**
+     * Order the clusters data
+     * @param $clusters
+     * @return array
+     */
+    public function orderAnnotationsCluster($clusters)
+    {
+        $order = ['General' => '', 'Environment' => '', 'Fiscal' => '', 'Social' => '', 'Operations' => '', 'Other' => ''];
+        foreach ($clusters as $key => $value) {
+            $order[$key] = $value;
+        }
+        $order = array_filter($order);
+
+        return $order;
     }
 }
 

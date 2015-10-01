@@ -35,7 +35,7 @@ class FilterController
         $filter['from']        = $currentPage;
         $contracts             = $this->api->filterSearch($filter);
         $allFilter             = $filter;
-        $allFilter['per_page'] = 100000;
+        $allFilter['per_page'] = $contracts->total;
         $allContracts          = $this->api->filterSearch($allFilter);
         $contract_id           = $this->api->getContractsId($allContracts);
         $filter                = $this->updateFilterData($filter, $contracts, $request);
