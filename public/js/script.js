@@ -76,6 +76,10 @@ $(document).ready(function () {
     $(".view-annotation-category").on('click', function (e) {
         var href = $(this).attr('href');
         e.preventDefault();
+        $('.cluster-wrap').show();
+        $('.view-annotation-cluster').removeClass('active');
+        $('.annotation-category-cluster li:first-child a').addClass('active');
+
         $('html, body').animate({
             scrollTop: $(this.hash).offset().top-25
         }, 300, function () {
