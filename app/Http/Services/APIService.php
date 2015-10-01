@@ -179,7 +179,7 @@ class APIService
     public function filterSearch($filter)
     {
         extract($filter);
-        $per_page = 25;
+        $per_page = !empty($per_page)?$per_page:25;
         $query    = [
             'q'                   => $q,
             'country'             => $country,
