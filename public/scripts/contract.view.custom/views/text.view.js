@@ -217,7 +217,7 @@ var TextViewer = React.createClass({
     var pagesView = (this.message)?this.message:"Please wait while loading ...";
     var warningText = (this.message)?"":(<div className="text-viewer-warning">
           <span className="pull-right link close" onClick={this.handleClickWarning}>x</span>
-          This contract's text was created automatically and may contain errors and differences from the contract's original PDF file.&nbsp;
+          The text below was created automatically and may contain errors and differences from the contract`s original PDF file.&nbsp;
           <a href={app_url + "/faqs"}>Learn more</a>
         </div>);
     if(this.props.pagesCollection.models.length > 0) {
