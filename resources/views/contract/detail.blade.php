@@ -347,7 +347,7 @@
         </div>
     </div>
     @if(count($contract->annotationsGroup)>0)
-        <div class="row annotation-list-wrapper" id="annotations">
+        <div class="row annotation-list-wrapper" id="annotation">
             <div class="col-lg-12">
                 <div class="panel panel-default panel-wrap panel-annotation-list-wrap">
                     <div class="panel-heading">Annotations</div>
@@ -356,7 +356,7 @@
                             <ul>
                                 <li><a class="view-annotation-cluster active" href="#cluster-all">All</a></li>
                                 @foreach($contract->annotationsCluster as $cluster=>$value)
-                                    <li><a class="view-annotation-cluster" href="#cluster-{{str_slug($cluster)}}">{{$cluster}}</a></li>
+                                    <li><a class="view-annotation-cluster" href="#cluster-{{str_slug($cluster,40)}}">{{$cluster}}</a></li>
                                 @endforeach
                             </ul>
 
