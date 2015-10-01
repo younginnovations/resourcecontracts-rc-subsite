@@ -64,10 +64,15 @@
       var pagesCollection = new ViewerPageCollection();
       pagesCollection.url = contractApp.getAllPageUrl();
       pagesCollection.fetch({reset: true});
+      pagesCollection.on("reset", function() {
+        debug("view.blade pageCollection reset, trigger change:page_no")
+        contractApp.trigger("change:page_no");
+      });
 
       var annotationsCollection = new AnnotationsCollection();
       annotationsCollection.url = contractApp.getAllAnnotationsUrl();
       annotationsCollection.fetch({reset: true});
+
 
       var searchResultsCollection = new SearchResultsCollection();
       searchResultsCollection.url = contractApp.getSearchUrl();
@@ -88,7 +93,7 @@
         },
         text: function(page_no, annotation_id) {
           debug("view.blade.php: setting text view");
-          contractApp.setCurrentPage(1);
+          contractApp.setView("text");
           contractApp.resetSelectedAnnotation();
           if(page_no) {
             contractApp.setCurrentPage(page_no);
@@ -96,7 +101,6 @@
           if(annotation_id) {
             contractApp.setSelectedAnnotation(annotation_id);
           }
-          contractApp.setView("text");
           this.forceUpdate();
         },
         pdf: function(page_no, annotation_id) {
@@ -114,14 +118,9 @@
           } else {
             contractApp.resetSelectedAnnotation();
           }
-          pagesCollection.on("reset", function() {
-            debug("view.blade pageCollection reset, trigger change:page_no")
-            contractApp.trigger("change:page_no");
-          });
           if(!pdfPage.init && contractApp.getView() != "pdf") {
             debug("view.blade pdfPage init-none, trigger change:page_no")
             contractApp.setView("pdf");
-            contractApp.trigger("change:page_no");
           } 
           contractApp.setView("pdf");
           this.forceUpdate();
