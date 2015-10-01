@@ -127,18 +127,31 @@ var RelatedDocumentsView = React.createClass({
             moreContracts = "";
         if(this.props.metadata.get("parent_document")) {
             parentContracts = this.props.metadata.get("parent_document").map(function(doc) {
-                return (
-                    <span>
-                        <a href="{doc.id}">{doc.contract_name}</a>
-                    </span>
-                );
+                var docUrl = app_url + "/contract/" + doc.id;
+                if(doc.status === "published") {
+                    return (
+                        <span>
+                            <a href={docUrl}>{doc.contract_name}</a>
+                        </span>
+                    );
+                } else {
+                    return (
+                        <span>
+                            {doc.contract_name}
+                        </span>
+                    );
+                }
             });
             var MaxAllowed = 2;
             var maxDocs = (this.props.metadata.get("supporting_contracts").length < MaxAllowed)?this.props.metadata.get("supporting_contracts").length:MaxAllowed;
             for(var i = 0;i < maxDocs; i++) {
                 var doc = this.props.metadata.get("supporting_contracts")[i];
-                var docUrl = app_url + "contract/" + doc.id;
-                supportingContracts.push(<span id={i}><a href={docUrl}>{truncate(doc.contract_name)}</a></span>);
+                if(doc.status === "published") {
+                    var docUrl = app_url + "/contract/" + doc.id;
+                    supportingContracts.push(<span id={i}><a href={docUrl}>{truncate(doc.contract_name)}</a></span>);
+                } else {
+                    supportingContracts.push(<span id={i}>{truncate(doc.contract_name)}</span>);
+                }
             }
             if(this.props.metadata.get("supporting_contracts").length > MaxAllowed) {
                 moreContracts = (<span><a href={this.props.contractApp.getMetadataSummaryLink() + "#relateddocs"}>All related ...</a></span>);

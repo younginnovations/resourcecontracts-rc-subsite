@@ -262,7 +262,7 @@
 .annotation-item .annotation-category-en {
     cursor: pointer;
     color: rgba(64,64,64,0.7);
-    padding: 10px 0 0 0;
+    padding: 4px 0 0 0;
     font-family: "open-sans-bold";
 }
 
@@ -282,20 +282,28 @@
     line-height: 18px;
 }
 
-.annotation-item .annotation-cluster {
+.annotation-item .annotation-cluster,div > .annotation-item:first-of-type .annotation-cluster {
     text-transform: uppercase;
     color: #404040;
     font-size: 13px;
-    border-bottom: 1px solid rgb(201,201,201);
-    border-bottom: 1px solid rgba(201,201,201,0.3);
-    padding-bottom: 7px;
-}
-
-.annotation-item > .annotation-cluster+span {
-    border-top: 1px solid rgb(255,255,255);
+    border-top: 1px solid rgb(201,201,201);
     border-top: 1px solid rgba(255,255,255,0.3);
     padding-top: 7px;
+    box-shadow: 0 -1px 0px rgba(201,201,201,0.3);
 }
+
+.annotation-item:first-of-type .annotation-cluster,.annotations-list > div:first-of-type .annotation-item:first-of-type .annotation-cluster {
+    border: 0;
+    box-shadow: none;
+    padding-top: 0;
+}
+
+.annotations-list > .annotation-item:first-of-type .annotation-cluster {
+    border: 0!important;
+    box-shadow: none!important;
+    padding-top: 0!important;
+}
+
 ./*annotation-item > span:first-child {
     text-transform: uppercase;
     color: #404040;
@@ -331,7 +339,7 @@
 .right-column-view {
     font-size: 12px;
     float: right;
-    width: 22%;
+    width: 20%;
     border-left: 1px solid #DCDFE2;
     height: 88vh;
 }
@@ -487,6 +495,10 @@
 .relateddocument-more-view a::after {
     margin-right: 8px;
     content: ",";
+}
+
+.relateddocument-more-view a:last-child::after {
+    display: none;
 }
 
 .text-viewer-warning {
