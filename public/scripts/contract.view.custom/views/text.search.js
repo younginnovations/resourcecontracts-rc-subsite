@@ -1,7 +1,7 @@
 var TextSearchForm = React.createClass({
   handleSubmit: function(e) {
     e.preventDefault();
-    var searchQuery = React.findDOMNode(this.refs.searchInput).value.trim();    
+    var searchQuery = React.findDOMNode(this.refs.searchInput).value.trim();
     if(!searchQuery) {
       return;
     }
@@ -65,9 +65,10 @@ var TextSearchResultsList = React.createClass({
         );
       });
     } 
-    else if(this.props.searchResultsCollection.searchCompleted === true) {
+    else if(this.props.searchResultsCollection.searchCompleted === true || this.props.searchResultsCollection.length == 0) {
       resultsView = "No results found";
     }
+
     return (
       <div style={this.props.style} className="search-results-list">
       <span className="pull-right link close" onClick={this.handleCloseSearchResults}>x</span>
