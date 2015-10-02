@@ -10,7 +10,7 @@
         <link rel="icon" href="/images/favicon.ico">
         <title>Resource Contracts</title>
     @else
-        <link rel="icon" href="/olc/images/favicon.ico">
+        <link rel="icon" href="/images/olc/favicon.ico">
         <title>OPENLAND Contracts</title>
     @endif
 
@@ -31,11 +31,13 @@
         @foreach($css as $link)
             <link href="{{url(sprintf('css/%s',$link))}}" rel="stylesheet">
         @endforeach
+        <link href="{{url('css/rc-style.css')}}" rel="stylesheet">
     @endif
     @if(env("CATEGORY")=="olc")
         @foreach($css as $link)
-            <link href="{{url(sprintf('olc/css/%s',$link))}}" rel="stylesheet">
+            <link href="{{url(sprintf('css/%s',$link))}}" rel="stylesheet">
         @endforeach
+        <link href="{{url('css/olc-style.css')}}" rel="stylesheet">
     @endif
     @yield('css')
 
