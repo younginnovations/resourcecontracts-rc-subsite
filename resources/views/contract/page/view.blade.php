@@ -127,11 +127,23 @@
         },
         search: function(query) {
           contractApp.setView("search");
-          contractApp.setSearchQuery(query);
-          searchResultsCollection.fetch({
-            searchTerm: query,
-            reset: true
-          });
+          var show_pdf_text = contractApp.metadata.get('show_pdf_text');
+
+          console.log(show_pdf_text);
+
+          if(show_pdf_text ==1)
+          {
+            contractApp.setSearchQuery(query);
+            searchResultsCollection.fetch({
+              searchTerm: query,
+              reset: true
+            });
+          }
+          else
+          {
+            searchResultsCollection.reset();
+          }
+
           this.forceUpdate();
         },
         meta: function(action) {
