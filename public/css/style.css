@@ -1983,10 +1983,11 @@ tr:empty {
 
 .editable-container.editable-inline {
     width: 50% !important;
-    margin-bottom: 40px;
+    margin-bottom: 15px;
     border-radius: 4px;
     line-height: 22px;
     color: #404040;
+    margin-left: -11px;
 }
 
 .editable-container.editable-inline .form-group, .editable-container.editable-inline .editable-input, .editable-container.editable-inline textarea {
@@ -2470,3 +2471,13 @@ a.view-annotation-cluster:hover, a.view-annotation-cluster.active {
     background-color: #F37356 !important;
     color: #fff;
 }
+
+.page-edit-button {
+    padding: 10px 25px;
+    font-size: 20px !important;
+    color:white
+}
+
+.note-editable.panel-body {min-height: 200px !important;}
+.editable:hover {border: dashed 1px #0088cc!important; padding: 10px; margin: -11px;}
+#title.editable:hover { padding: 5px 5px 5px 10px; margin: -6px -6px 14px -11px; width: 50%}
