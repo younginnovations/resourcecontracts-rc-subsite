@@ -27,7 +27,7 @@ var TextSearchResultRow = React.createClass({
   highlightSearchQuery: function(text, highlightword) {
     highlightword = decodeURI(highlightword);
     var re = new RegExp(highlightword, "gi");
-    return text.replace(re,"<span style='background-color:#a1aeec;'>" + highlightword + "</span>");
+    return text.replace(re,"<span class='search-highlight-word'>" + highlightword + "</span>");
   },  
   render: function() {
     var text = this.highlightSearchQuery(this.props.resultRow.get("text"), this.props.contractApp.getSearchQuery());

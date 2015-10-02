@@ -5,7 +5,6 @@
 ._.DS_Store
 /node_modules
 /public/css/maps
-/resources/assets
 /bourbon
 /.public
 gulpfile.js

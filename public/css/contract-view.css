@@ -210,6 +210,22 @@
     padding: 18px;
 }
 
+.search-results-list .close {
+    background: url(../images/olc/ic-search-close.png) no-repeat center;
+    width: 10px;
+    height: 10px;
+    text-indent: -9999px;
+    border: 2px solid #217B49;
+    display: block;
+    padding: 10px;
+    border-radius: 50%;
+    opacity: 1;
+}
+
+.search-results-list .close:hover {
+    background: #217B49 url(../images/ic-close-link.png) no-repeat center;
+}
+
 .annotation-title {
     margin: 0 20px;
 }
@@ -336,10 +352,14 @@
     word-wrap: break-word;
 }
 
+.search-result-row:hover {
+    color: #217B49;
+}
+
 .right-column-view {
     font-size: 12px;
     float: right;
-    width: 20%;
+    width: 21%;
     border-left: 1px solid #DCDFE2;
     height: 88vh;
 }
@@ -569,4 +589,8 @@
 
 .annotator-item div:empty {
     display: none;
+}
+
+.search-highlight-word {
+    background-color: #FFFAC0;
 }

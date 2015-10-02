@@ -21,7 +21,6 @@
             'timeline.css',
             'sb-admin-2.css',
             'style_old.css',
-            'style.css',
             'morris.css',
             'font-awesome.min.css',
             'select2.min.css'
