@@ -163,7 +163,6 @@ var TextViewer = React.createClass({
     },
     handleClickWarning: function (e) {
         e.preventDefault();
-
         $(e.target).parent().hide(500);
     },
     loadAnnotations: function () {

@@ -59,6 +59,26 @@ var MetadataView = React.createClass({
             showLabel = "Show less";
         }
         if(this.props.metadata.get("country")) {
+            var countryCode = this.props.metadata.get("country").code.toLowerCase();
+            var countryLink = app_url + "/countries/" + countryCode;
+
+            var sigYear = this.props.metadata.get("signature_year");
+            var sigYearLink = app_url + "/search?q=&year%5B%5D=" + sigYear;
+
+            var re = new RegExp(' ', 'g');
+            var contractType = this.props.metadata.get("type_of_contract");
+            var contractTypeLink = app_url + "/search?q=&contract_type%5B%5D=" + contractType.replace(re, '+');
+
+            var resourceLinkBase = app_url + "/resources/";
+            var resourceLength = this.props.metadata.get("resource").length;
+            var resources = this.props.metadata.get("resource").map(function(resource, i) {
+                if(i != resourceLength-1) {
+                    return React.createElement('a', {href: app_url + "/resource/" + resource, key: i}, resource + ' | ');
+                } else {
+                    return React.createElement('a', {href: app_url + "/resource/" + resource, key: i}, resource);
+                }
+            });
+
             return (
                 <div className="metadata-view">
                     <div>
@@ -70,19 +90,19 @@ var MetadataView = React.createClass({
 
                     <div className="metadata-country">
                         <span>Country</span>
-                        <span>{this.props.metadata.get("country").name}</span>
+                        <span><a href={countryLink}>{this.props.metadata.get("country").name}</a></span>
                     </div>
                     <div className="metadata-signature-year">
                         <span>Signature year</span>
-                        <span>{this.props.metadata.get("signature_year") || "-"}</span>
+                        <span><a href={sigYearLink}>{this.props.metadata.get("signature_year") || "-"}</a></span>
                     </div>
                     <div className="metadata-resource">
                         <span>Resources</span>
-                        <span>{this.props.metadata.get("resource").join(", ")}</span>
+                        <span>{resources}</span>
                     </div>
                     <div className="metadata-type-contract">
                         <span>Type of Contract</span>
-                        <span>{this.props.metadata.get("type_of_contract")}</span>
+                        <span><a href={contractTypeLink}>{this.props.metadata.get("type_of_contract") || "-"}</a></span>
                     </div>
                     <div className="metadata-ocid">
                         <span>Open Contracting Identifier</span>
@@ -255,12 +275,12 @@ var RightColumnView = React.createClass({
                 <MetadataView 
                     contractApp={this.props.contractApp}
                     metadata={this.props.metadata} />
-                <RelatedDocumentsView
-                    contractApp={this.props.contractApp}
-                    metadata={this.props.metadata} />
-                <RelatedDocumentsMoreView
-                    metadata={this.props.metadata} />
             </div>
         );
+                // <RelatedDocumentsView
+                //     contractApp={this.props.contractApp}
+                //     metadata={this.props.metadata} />
+                // <RelatedDocumentsMoreView
+                //     metadata={this.props.metadata} />
     }
 });
