@@ -15,7 +15,7 @@ if (!isset($summary)) {
             @endif
 
         </li>
-        <li class="contracts active">
+        <li class="contracts">
             <a href="{{url('contracts')}}">
                 <span>All Contracts</span>
 

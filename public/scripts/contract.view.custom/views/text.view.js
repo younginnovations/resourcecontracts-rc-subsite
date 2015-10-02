@@ -106,7 +106,7 @@ var TextPageView = React.createClass({
     highlightSearchQuery: function (text, highlightword) {
         highlightword = decodeURI(highlightword);
         var re = new RegExp("(" + highlightword + ")", "gi");
-        return text.replace(re, "<span style='background-color:#a1aeec;'>$1</span>");
+        return text.replace(re, "<span class='search-highlight-word'>$1</span>");
     },
     componentDidMount: function () {
         var self = this;

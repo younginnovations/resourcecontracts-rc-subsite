@@ -1,12 +1,12 @@
 <table class="table table-responsive table-contract table-contract-list">
     <thead>
         <th></th>
-        <th width="50%">Document</th>
+        <th width="30%">Document</th>
         <th></th>
-        <th>Country</th>
+        <th width="10%">Country</th>
         <th>Year</th>
-        <th>Resource Type</th>
-        <th>Contract Type</th> 
+        <th width="15%">Resource Type</th>
+        <th width="15%">Contract Type</th> 
     </thead>
     <tbody>
     @forelse($contracts->results as $contract)
@@ -82,9 +82,8 @@
             </td>
             @if($contract->country_code !='')
                 <td>
-                    <img style="width: 20px ; height: auto" src="{{getFlagUrl($contract->country_code)}}" />
-
-                    {{@trans('country')[$contract->country_code]}}
+                    <img style="width: 24px ; height: auto" src="{{getFlagUrl($contract->country_code)}}" />
+                    <span class="country-name-title">{{@trans('country')[$contract->country_code]}}</span>
                 </td>
             @else
                 <td></td>

@@ -62,6 +62,9 @@ $(document).ready(function () {
     $(".view-annotation").on('click', function (e) {
         var href = $(this).attr('href');
         $(".category-wrap").show();
+        $(".cluster-wrap").show();
+
+        // prevent default anchor click behavior
         e.preventDefault();
         $('html, body').animate({
             scrollTop: $(this.hash).offset().top
@@ -92,18 +95,22 @@ $(document).ready(function () {
 
     $('#search-form:not(.search-page-form) input[type="text"]').focus(function () {
         $('.search-input-wrapper').show();
+        $('.contract-number-wrap').hide();
 
     });
 
     $(document).on('click', '.search-close', function () {
         $('.search-input-wrapper').hide();
+        $('.contract-number-wrap').show();
     });
 
     $('#search-form input[type="text"]').keyup(function () {
         if ($(this).val() == '') {
             $('.search-input-wrapper').hide();
+            $('.contract-number-wrap').show();
         } else {
             $('.search-input-wrapper').show();
+            $('.contract-number-wrap').hide();
         }
     });
 

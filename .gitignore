@@ -3,3 +3,9 @@
 .idea
 /storage
 ._.DS_Store
+/node_modules
+/public/css/maps
+/bourbon
+/.public
+gulpfile.js
+package.json
