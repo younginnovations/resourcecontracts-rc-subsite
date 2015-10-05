@@ -2265,7 +2265,7 @@ footer {
   }
   .footer-note {
     max-width: 940px;
-    padding: 0 10px 10px;
+    padding: 0 15px 10px;
   }
 }
 @media all and(min-width: 1200px) {
@@ -2681,3 +2681,14 @@ input.select2-search__field {
   width: 50%;
 }
 
+.annotation-block > ul > li {
+  float: none;
+  margin-bottom: 6px;
+  a {
+    max-width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+  }
+}

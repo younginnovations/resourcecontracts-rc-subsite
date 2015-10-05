@@ -1635,7 +1635,7 @@ footer {
     right: 102px; }
   .footer-note {
     max-width: 940px;
-    padding: 0 10px 10px; } }
+    padding: 0 15px 10px; } }
 
 @media all and (min-width: 1200px) {
   footer {
@@ -1942,5 +1942,16 @@ input.select2-search__field {
   padding: 5px 5px 5px 10px;
   margin: -6px -6px 14px -11px;
   width: 50%; }
+
+.annotation-block > ul > li {
+  float: none;
+  margin-bottom: 6px; }
+  .annotation-block > ul > li a {
+    max-width: 100%;
+    -o-text-overflow: ellipsis;
+       text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block; }
 
 /*# sourceMappingURL=maps/rc-style.css.map */
