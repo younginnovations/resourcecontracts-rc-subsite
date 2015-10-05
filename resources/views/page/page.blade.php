@@ -1,5 +1,14 @@
+@section('css')
+<link href="{{url('/js/lib/summernote/summernote.css')}}" rel="stylesheet">
+    <style>
+        .note-editor {overflow: inherit}
+        .open>.dropdown-menu {
+            display: block !important;
+        }
+    </style>
+@stop
+
 @section('content')
-    <link href="http://summernote.org/bower_components/summernote/dist/summernote.css" rel="stylesheet">
     @if(auth()->isloggedIn())
         <div class="edit-mode"><div>You are in editing mode. Please click below to edit - <a href="{{route('logout')}}">Logout</a></div></div>
     @endif
@@ -11,7 +20,7 @@
 
 @if(auth()->isloggedIn())
     @section('js')
-        <script src="http://summernote.org/bower_components/summernote/dist/summernote.js"></script>
+        <script src="{{url('js/lib/summernote/summernote.js')}}"></script>
         <link href="{{url('js/lib/editable/bootstrap-editable.css')}}" rel="stylesheet"/>
         <script src="{{url('js/lib/editable/bootstrap-editable.min.js')}}"></script>
         <script>

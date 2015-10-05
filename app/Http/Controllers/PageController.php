@@ -38,7 +38,7 @@ class PageController extends BaseController
     public function about()
     {
         $page      = $this->page->get('about');
-        $page_name = 'contact';
+        $page_name = 'about';
 
         return view('page.master', compact('page', 'page_name'));
     }
