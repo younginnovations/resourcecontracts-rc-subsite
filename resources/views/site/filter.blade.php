@@ -19,7 +19,7 @@
     <div class="row">
         <div class="filter-wrapper">
             <div class="col-lg-12">
-                <div class="filter-country-wrap">
+                <div class="filter-country-wrap" style="display: none">
                   @include('layout.partials.search', ['searchPage' => true])
               </div>
             </div>
@@ -55,6 +55,9 @@
     <script src="{{url('js/jquery.cookie.js')}}"></script>
     <script>
     var contractURL = '{{url('contract')}}';
+        $(function(){
+            $('.filter-country-wrap').show();
+        })
     </script>
     <script src="{{url('js/compare.js')}}"></script>
 @stop
