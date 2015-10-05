@@ -179,7 +179,7 @@ class APIService
     public function filterSearch($filter)
     {
         extract($filter);
-        $per_page = !empty($per_page)?$per_page:25;
+        $per_page = !empty($per_page) ? $per_page : 25;
         $query    = [
             'q'                   => $q,
             'country'             => $country,
@@ -315,7 +315,7 @@ class APIService
             }
 
         }
-
+        ksort($data);
         return $data;
     }
 
@@ -340,7 +340,8 @@ class APIService
     {
         $resource = 'contracts/annotations/category';
 
-        return $this->apiCall($resource);
+        $response = $this->apiCall($resource);
+        return $response;
     }
 
     /**
@@ -376,15 +377,16 @@ class APIService
         $data      = [];
         foreach ($summaries->country_summary as $summary) {
 
-            $data[trans('country.' . strtoupper($summary->key))]=[
-                'key'=>$summary->key,
-                'name'=>trans('country.' . strtoupper($summary->key)),
-                'doc_count'=>$summary->doc_count
+            $data[trans('country.' . strtoupper($summary->key))] = [
+                'key'       => $summary->key,
+                'name'      => trans('country.' . strtoupper($summary->key)),
+                'doc_count' => $summary->doc_count
             ];
         }
         ksort($data);
         unset($summaries->country_summary);
         $summaries->country_summary = $data;
+
         return $summaries;
     }
 
