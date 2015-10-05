@@ -381,13 +381,8 @@
                                                     <div class="page-num pull-left">
                                                     @foreach($annots as $key => $annotation)
                                                         <?php $annotation_type = isset($annotation->shapes) ? 'pdf' : 'text'; ?>
-
                                                             <a  href="{{route('contract.detail',['id'=>$contract->metadata->contract_id])}}#/{{$annotation_type}}/page/{{$annotation->page_no}}/annotation/{{$annotation->id}}">
-                                                                Pg {{_e($annotation,'page_no')}}</a>
-                                                        @if($key > 0 && $key <  count($annotation))
-                                                            ,
-                                                        @endif
-
+                                                                Pg{{_e($annotation,'page_no')}}</a>@if($key > 0 && $key < count($annots)), @endif
                                                     @endforeach
                                                     </div>
                                                 </div>
