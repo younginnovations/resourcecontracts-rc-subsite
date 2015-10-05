@@ -19,7 +19,7 @@
                     @if(env("CATEGORY")=="rc")
                     A directory of <span>Petroleum &amp; Mineral Contracts</span>
                     @else
-                        A directory of <span>Open Land Contracts</span>
+                        An online repository of <span>Open Land Contracts</span>
                     @endif
                 </div>
                 <form action="{{route('search')}}" method="GET" class="contract-search-form">
