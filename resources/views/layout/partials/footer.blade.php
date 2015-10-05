@@ -1,4 +1,12 @@
         <footer>
+            <div style="margin:-50px 30px 20px 30px; padding:0 40px 10px 40px; color:white; text-align:center;">
+                <text class="small">
+                    This site provides summaries of contracts and their terms to facilitate understanding of important provisions in the documents. These summaries are
+                    not interpretations of the documents. Neither the summaries nor the full contracts are complete accounts of all legal obligations related to the
+                    projects in question. This site also includes document text that was created automatically; such text may contain errors and differences from
+                    the original PDF files. No warranty is made to the accuracy of any content on this website.
+                </text>
+            </div>
             <div class="row">
                 <div class="col-lg-3 footer-left-wrap">
                     <ul>
