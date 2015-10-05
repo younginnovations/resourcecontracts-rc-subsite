@@ -139,9 +139,10 @@
                             <ul>
                                 <?php $i = 0; ?>
                                 @forelse($contract->annotationsGroup as $category=>$annotation)
+                                
                                     @if($i < 5 )
                                         <li><a class="view-annotation-category"
-                                               href="#{{str_slug($category,'-')}}">{{str_limit($category,32)}}</a></li>
+                                               href="#{{str_slug($category,'-')}}">{{$category}}</a></li>
                                         <?php $i ++; ?>
                                     @endif
                                 @empty
