@@ -151,7 +151,7 @@
                         </div>
                         <div class="view-all-annotations">
                             @if(count($contract->annotationsGroup)>0)
-                                <a href="#annotation" class="view-annotation">View all Annotations</a>
+                                <a href="#annotations" class="view-annotation">View all Annotations</a>
                             @else
                                 <a href="javascript:void();" class="view-annotation disabled">View all Annotations</a>
                             @endif
@@ -346,7 +346,7 @@
         </div>
     </div>
     @if(count($contract->annotationsGroup)>0)
-        <div class="row annotation-list-wrapper" id="annotation">
+        <div class="row annotation-list-wrapper" id="annotations">
             <div class="col-lg-12">
                 <div class="panel panel-default panel-wrap panel-annotation-list-wrap">
                     <div class="panel-heading">Annotations</div>

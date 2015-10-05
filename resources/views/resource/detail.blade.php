@@ -45,7 +45,7 @@
                 <div class="panel panel-default panel-wrap country-contract-wrap">
                     <div class="panel-heading">Contracts of {{ucfirst($resource)}}</div>
                     <div class="panel-body">
-                        @include('contract.partials.rccontractlist');
+                        @include('contract.partials.rccontractlist')
                         @include('contract.partials.pagination', ['total_item' => $contracts->total, 'per_page'=>$contracts->per_page, 'current_page' => $currentPage ])
 
                     </div>
