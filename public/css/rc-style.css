@@ -460,7 +460,7 @@ a {
 
 footer {
   background: #404040;
-  padding: 80px 0 48px;
+  padding: 48px 0;
   text-align: center; }
   footer ul {
     margin: 0;
@@ -477,6 +477,12 @@ footer {
           color: #fff; }
   footer > .row {
     margin: 0; }
+
+.footer-note {
+  padding: 0 20px 10px;
+  max-width: 940px;
+  color: rgba(255, 255, 255, 0.36);
+  text-align: left; }
 
 .footer-left-wrap {
   padding-top: 20px;
@@ -1626,7 +1632,10 @@ footer {
   .content-wrap #content {
     width: 70%; }
   .contract-number-wrap {
-    right: 102px; } }
+    right: 102px; }
+  .footer-note {
+    max-width: 940px;
+    padding: 0 10px 10px; } }
 
 @media all and (min-width: 1200px) {
   footer {
