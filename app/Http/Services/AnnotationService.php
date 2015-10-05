@@ -30,7 +30,7 @@ class AnnotationService
         $annotations = $annotations->result;
         $data        = [];
         foreach ($annotations as $annotation) {
-            $data[$annotation->cluster][$annotation->category][] = $annotation;
+            $data[$annotation->cluster][$annotation->category][$annotation->text][] = $annotation;
         }
         $data = $this->orderAnnotationsCluster($data);
 
