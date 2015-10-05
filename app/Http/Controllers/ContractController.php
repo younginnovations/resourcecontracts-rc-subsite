@@ -254,8 +254,18 @@ class ContractController extends BaseController
         exit;
     }
 
+    /**
+     * Contract View page
+     *
+     * @param         $contract_id
+     * @param Request $request
+     * @return \Illuminate\View\View|void
+     */
     public function view($contract_id)
     {
+        $referrer = \Request::server('HTTP_REFERER');
+
+        $back = is_null($referrer) ? route('contract.view',['id'=>$contract_id]): $referrer;
         $contract           = new \stdClass();
         $contract->metadata = $this->api->metadata($contract_id);
 
@@ -263,7 +273,7 @@ class ContractController extends BaseController
             return abort(404);
         }
 
-        return view('contract.page.view', compact('contract'));
+        return view('contract.page.view', compact('contract', 'back'));
     }
 
     public function downloadMetadataAsCSV(Request $request)
