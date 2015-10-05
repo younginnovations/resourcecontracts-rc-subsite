@@ -151,7 +151,7 @@
                         </div>
                         <div class="view-all-annotations">
                             @if(count($contract->annotationsGroup)>0)
-                                <a href="#annotation" class="view-annotation">View all Annotations</a>
+                                <a href="#annotations" class="view-annotation">View all Annotations</a>
                             @else
                                 <a href="javascript:void();" class="view-annotation disabled">View all Annotations</a>
                             @endif
