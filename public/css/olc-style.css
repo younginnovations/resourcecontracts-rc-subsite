@@ -950,7 +950,9 @@ footer {
   .contract-detail-wrapper .col-lg-12:not(:first-of-type) {
     padding: 0 36px; }
   .contract-detail-wrapper > .col-lg-12:not(:last-of-type) {
-    margin-bottom: 70px; }
+    margin-bottom: 70px;
+    clear: both;
+  }
 
 .panel-contract-wrap {
   padding: 0;
