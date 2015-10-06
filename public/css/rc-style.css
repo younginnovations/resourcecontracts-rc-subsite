@@ -1719,7 +1719,7 @@ footer {
     padding-left: 20px;
     display: inline-block; }
   .table-contract-list input[type="checkbox"] {
-    margin-left: 0;
+    margin-left: -20px;
     margin-right: 5px; }
   .country-contract-wrap td:nth-of-type(1):before {
     content: ""; }
@@ -1920,10 +1920,16 @@ input.select2-search__field {
   display: block; }
 
 .government-entity-wrap li span {
-  display: inline-block; }
+  display: block; }
   .government-entity-wrap li span + span:before {
-    content: ",";
-    display: inline-block; }
+    content: "";
+    width: 4px;
+    height: 4px;
+    -webkit-border-radius: 50%;
+            border-radius: 50%;
+    background: #404040;
+    display: inline-block;
+    vertical-align: middle; }
 
 .page-edit-button {
   padding: 10px 25px;
