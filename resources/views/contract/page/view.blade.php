@@ -51,7 +51,7 @@
           }
         }
       }
-      var back_url = '{{$back}}';
+      var back_url = '{!!$back!!}';
       var app_url = '{{url()}}';
       var contractTitle = "{{$contract->metadata->contract_name}}";
       var contractApp = new ContractApp({
