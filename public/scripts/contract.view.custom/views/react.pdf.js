@@ -56,12 +56,19 @@ var Pdf = React.createClass({
     if (!!this.state.page) {
       setTimeout(function() {
         if(self.isMounted()) {
-          var canvas = self.refs.pdfCanvas.getDOMNode(),
-            context = canvas.getContext('2d'),
-            scale = self.props.scale,
-            viewport = self.state.page.getViewport(scale);
-          canvas.height = viewport.height;
+          var canvas = self.refs.pdfCanvas.getDOMNode();
+          var context = canvas.getContext('2d');
+          var scale = self.props.scale;
+          var viewport = self.state.page.getViewport(1);
+          if(viewport.width > 600 && scale === 1) {
+            scale = 595.0/viewport.width;
+          } else if(viewport.width > 600) {
+            scale = scale * 595.0/viewport.width;
+          }
+          viewport = self.state.page.getViewport(scale);
+
           canvas.width = viewport.width;
+          canvas.height = viewport.height;
           var renderContext = {
             canvasContext: context,
             viewport: viewport
