@@ -1353,6 +1353,7 @@ footer {
   }
   > .col-lg-12:not(:last-of-type) {
     margin-bottom: 70px;
+    clear: both;
   }
 }
 .panel-contract-wrap {
@@ -1904,6 +1905,7 @@ footer {
 }
 .contract-search-number-wrap {
   top: 70px;
+  display: block!important;
 }
 .panel-content {
   padding: 0;
@@ -2027,7 +2029,7 @@ footer {
   background: $url_15 no-repeat center;
   text-align: center;
   color: $white;
-  padding: 100px 0 300px;
+  padding: 40px 0 270px;
   p {
     font-size: 18px;
     color: $white_70;
@@ -2652,7 +2654,7 @@ input.select2-search__field {
   }
   span {
     display: block;
-    + span:before {
+    &:before {
       content: "";
       width: 4px;
       height: 4px;
@@ -2660,6 +2662,7 @@ input.select2-search__field {
       background: #404040;
       display: inline-block;
       vertical-align: middle;
+      margin-right: 4px;
     }
   }
 }

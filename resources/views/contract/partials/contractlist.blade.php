@@ -3,7 +3,7 @@
         <th></th>
         <th width="50%">Document</th>
         <th></th>
-        <th width="15%">Country</th>
+        <th width="20%">Country</th>
         <th>Year</th>
         <th width="15%">Resource Type</th>
         <th width="15%">Contract Type</th> 
