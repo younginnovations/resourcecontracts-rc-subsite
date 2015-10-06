@@ -74,12 +74,13 @@ class ContractController extends BaseController
     {
         $contract                     = $this->api->contractDetail($contract_id);
         $contract->annotationsCluster = $this->annotation->groupAnnotationsByCluster($contract->annotations);
+        $referrer = \Request::server('HTTP_REFERER');
 
         if (empty($contract->metadata)) {
             return abort(404);
         }
 
-        return view('contract.detail', compact('contract'));
+        return view('contract.detail', compact('contract','referrer'));
     }
 
     /**
@@ -276,11 +277,14 @@ class ContractController extends BaseController
         return view('contract.page.view', compact('contract', 'back'));
     }
 
+    /**
+     * Download metadata in csv
+     * @param Request $request
+     */
     public function downloadMetadataAsCSV(Request $request)
     {
         $contracts = $this->download->downloadSearchResult($request->get('id'));
         echo $contracts;
     }
-
 
 }
