@@ -1091,7 +1091,7 @@ footer {
     }
     img+span {
       display: inline-block;
-      width: 60%;
+      width: 80%;
       vertical-align: top;
       padding-top: 1px;
     }
@@ -1323,8 +1323,7 @@ footer {
   width: 100%;
   .download-main-wrap {
     width: auto;
-    margin-right: 20px;
-    padding-right: 20px;
+    margin-right: 10px;
   }
   .download-wrap {
     padding: 2px 0 2px 27px;
@@ -2115,6 +2114,9 @@ footer {
     > a {
       padding-left: 13px;
     }
+  }
+  td:nth-child(3) {
+    min-width: inherit!important;
   }
 }
 #compare-block {

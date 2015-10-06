@@ -741,7 +741,7 @@ footer {
     display: inline-block; }
   .country-list-wrap > div img + span {
     display: inline-block;
-    width: 60%;
+    width: 80%;
     vertical-align: top;
     padding-top: 1px; }
 
@@ -926,8 +926,7 @@ footer {
   width: 100%; }
   .contract-info-section .download-main-wrap {
     width: auto;
-    margin-right: 20px;
-    padding-right: 20px; }
+    margin-right: 10px; }
   .contract-info-section .download-wrap {
     padding: 2px 0 2px 27px;
     background-position: -169px -49px;
@@ -1539,6 +1538,9 @@ footer {
   padding-left: 60px; }
   .table-contract-list td:first-child > a {
     padding-left: 13px; }
+
+.table-contract-list td:nth-child(3) {
+  min-width: inherit !important; }
 
 #compare-block {
   background-color: #f2f2f2;
