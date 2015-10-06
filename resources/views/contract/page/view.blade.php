@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ url('css/contract-view.css') }}">
 @stop
 @section('content')
-    <div id="content"></div>  
+    <div id="content"></div>
 @endsection
 @section('js')
     <script src="{{ url('scripts/lib/jquery.js') }}"></script>
