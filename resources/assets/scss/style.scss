@@ -817,6 +817,9 @@ footer {
   .col-lg-12 {
     padding: 0 21px;
     overflow: hidden;
+    .col-lg-4 {
+      float: left;
+    }
   }
   .col-lg-2 {
     margin-bottom: 20px;
@@ -2430,6 +2433,9 @@ footer {
     &:nth-of-type(5):before {
       content: "Contract Type";
     }
+  }
+  .search-input-wrapper .col-lg-12 .col-lg-4 {
+    margin-top: 25px;
   }
 }
 @media all and(max-width: 480px) {

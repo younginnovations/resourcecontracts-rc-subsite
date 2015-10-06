@@ -531,6 +531,8 @@ footer {
   .search-input-wrapper .col-lg-12 {
     padding: 0 21px;
     overflow: hidden; }
+    .search-input-wrapper .col-lg-12 .col-lg-4 {
+      float: left; }
   .search-input-wrapper .col-lg-2 {
     margin-bottom: 20px; }
   .search-input-wrapper .col-lg-5 {
@@ -1739,7 +1741,9 @@ footer {
   .country-contract-wrap td:nth-of-type(4):before {
     content: "Resource Type"; }
   .country-contract-wrap td:nth-of-type(5):before {
-    content: "Contract Type"; } }
+    content: "Contract Type"; }
+  .search-input-wrapper .col-lg-12 .col-lg-4 {
+    margin-top: 25px; } }
 
 @media all and (max-width: 480px) {
   .filter-wrapper > .col-lg-2 {
