@@ -70,7 +70,7 @@ var PdfZoom = React.createClass({
     return (
       <div className="pdf-zoom-options" style={this.props.style}> Zoom 
         <div>
-          <span onClick={this.handleClick} className="scale-1">1</span>
+          <span onClick={this.handleClick} className="scale-1 scale-selected">1</span>
           <span onClick={this.handleClick} className="scale-125">1.25</span>
           <span onClick={this.handleClick} className="scale-15">1.5</span>
         </div>
