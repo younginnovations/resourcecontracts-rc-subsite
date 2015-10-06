@@ -594,3 +594,7 @@
 .search-highlight-word {
     background-color: #FFFAC0;
 }
+
+#content {
+    min-height: 400px;
+}
