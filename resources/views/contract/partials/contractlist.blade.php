@@ -27,9 +27,17 @@
                 @endif
 
                 <div class="search-text">
-                    {!!$contract->text or ''!!}
-                    {!!$contract->annotations or ''!!}
-                    {!!$contract->metadata or ''!!}
+                    @if(isset($contract->text ) && $contract->text !='')
+                        <p>{!!$contract->text.'...'!!}</p>
+                    @endif
+
+                    @if(isset($contract->annotations ) && $contract->annotations !='')
+                        <p>{!!$contract->annotations.'...'!!}</p>
+                    @endif
+
+                    @if(isset($contract->metadata ) && $contract->metadata !='')
+                            <p>{!! $contract->metadata.'...' !!}</p>
+                    @endif
                 </div>
                 @if($annotations->total>0)
                     @if(\Illuminate\Support\Facades\Input::has('annotation_category'))
