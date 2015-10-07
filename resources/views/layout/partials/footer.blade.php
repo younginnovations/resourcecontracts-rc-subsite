@@ -42,8 +42,8 @@ $js = [
         'bootstrap.min.js',
         'metisMenu.min.js',
         'raphael-min.js',
-        'script.js',
         'select2.min.js',
+        'script.js',
        // 'morris.min.js',
      //   'morris-data.js',
         'sb-admin-2.js'

@@ -9,10 +9,13 @@ var TextSearchForm = React.createClass({
   },
   render: function() {
     return (
+      <div className="text-search-container">
+      <a className="back" href={back_url}>Back</a>
       <div className="text-search">
       <form onSubmit={this.handleSubmit}>
         <input type="text" className="" ref="searchInput" placeholder="Search in this document" />
       </form>
+      </div>
       </div>
     );
   }
