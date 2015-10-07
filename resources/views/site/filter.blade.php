@@ -60,4 +60,12 @@
         })
     </script>
     <script src="{{url('js/compare.js')}}"></script>
+
+    <script>
+        $(function() {
+            $('#year,#country,#resource,#company_name,#corporate_grouping,#contract_type,#annotation_category').change(function() {
+                this.form.submit();
+            });
+        });
+    </script>
 @stop

@@ -4,6 +4,8 @@ $summary = $api->sortSummaryCountry();
 $attributes = $api->searchAttributed();
 $category = $api->getAnnotationsCategory();
 ?>
+
+
 <form action="{{url('search')}}" method="get" class="search-form @if(isset($show_advance)) search-page-form @endif"
       id="search-form">
     <div class="form-group">
@@ -24,7 +26,7 @@ $category = $api->getAnnotationsCategory();
             </div>
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
                 <label for="">Country</label>
-                <select name="country[]" id="" multiple="multiple">
+                <select name="country[]" id="country" multiple="multiple">
                     @foreach($summary->country_summary as $country)
                         <option @if(isset($filter['country']) && in_array(strtoupper($country['key']), array_map('strtoupper',$filter['country'])))
                             selected="selected"
@@ -34,7 +36,7 @@ $category = $api->getAnnotationsCategory();
             </div>
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
                 <label for="">Resource</label>
-                <select name="resource[]" id="" multiple="multiple">
+                <select name="resource[]" id="resource" multiple="multiple">
                     @foreach($summary->resource_summary as $resource)
                         <option @if(isset($filter['resource']) && in_array($resource->key, $filter['resource']))
                             selected="selected"
@@ -44,7 +46,7 @@ $category = $api->getAnnotationsCategory();
             </div>
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
                 <label for="">Company Name</label>
-                <select name="company_name[]" id="" multiple="multiple">
+                <select name="company_name[]" id="company_name" multiple="multiple">
                     <?php $company_array = array_map('trim', (array) $attributes->company_name);
                     sort($company_array);
                     ?>
@@ -60,7 +62,7 @@ $category = $api->getAnnotationsCategory();
             @if(env('CATEGORY')=="rc")
                 <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
                     <label for="">Corporate Group</label>
-                    <select name="corporate_group[]" id="" multiple="multiple">
+                    <select name="corporate_group[]" id="corporate_grouping" multiple="multiple">
                         @foreach($attributes->corporate_grouping as $group)
                             <option @if(isset($filter['corporate_group']) && in_array($group, $filter['corporate_group']))
                                 selected="selected"
@@ -71,7 +73,7 @@ $category = $api->getAnnotationsCategory();
             @endif
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
                 <label for="">Contract Type</label>
-                <select name="contract_type[]" id="" multiple="multiple">
+                <select name="contract_type[]" id="contract_type" multiple="multiple">
                     @foreach(array_filter($attributes->contract_type) as $type)
                         <option @if(isset($filter['contract_type']) && in_array($type, $filter['contract_type']))
                             selected="selected"
@@ -84,7 +86,7 @@ $category = $api->getAnnotationsCategory();
                 <?php $annotation_category = array_map('trim', (array) $category->results);
                 sort($annotation_category);
                 ?>
-                <select name="annotation_category[]" id="" multiple="multiple">
+                <select name="annotation_category[]" id="annotation_category" multiple="multiple">
                     @foreach(array_filter($annotation_category) as $cat)
                         <option @if(isset($filter['annotation_category']) && in_array($cat, $filter['annotation_category']))
                             selected="selected"
@@ -102,3 +104,5 @@ $category = $api->getAnnotationsCategory();
         </div>
     </div>
 </form>
+
+
