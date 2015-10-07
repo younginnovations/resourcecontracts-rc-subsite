@@ -44,6 +44,7 @@ $app->get('contact', ['as' => 'contact', 'uses' => 'PageController@contact']);
 $app->get('faqs', ['as' => 'faqs', 'uses' => 'PageController@faqs']);
 $app->get('page/resources', ['as' => 'page.resources', 'uses' => 'PageController@resources']);
 $app->get('glossary', ['as' => 'guides', 'uses' => 'PageController@glossary']);
+$app->get('publish-contracts', ['as' => 'guides', 'uses' => 'PageController@publishContracts']);
 $app->post('page/save', ['as' => 'page', 'uses' => 'PageController@savePage']);
 
 

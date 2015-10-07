@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Http\Models\Page\Page;
 use App\Http\Services\AuthService;
 use App\Http\Services\Page\PageService;
 use Illuminate\Http\Request;
@@ -91,6 +92,20 @@ class PageController extends BaseController
     {
         $page      = $this->page->get('glossary');
         $page_name = 'glossary';
+
+        return view('page.master', compact('page', 'page_name'));
+
+    }
+
+    /**
+     * Publish contracts
+     *
+     * @return \Illuminate\View\View
+     */
+    public function publishContracts()
+    {
+        $page      = $this->page->get('publish-contracts');
+        $page_name = 'publish-contracts';
 
         return view('page.master', compact('page', 'page_name'));
 

@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             ['title' => 'Resources', 'slug' => 'resources', 'content' => 'Guide content'],
             ['title' => 'FAQs', 'slug' => 'faqs', 'content' => 'FAQs content'],
             ['title' => 'Glossary', 'slug' => 'glossary', 'content' => 'Glossary content'],
+            ['title' => 'Publish Contracts', 'slug' => 'publish-contracts', 'content' => 'Publish Contracts'],
         ];
 
         foreach ($pages as $page) {
