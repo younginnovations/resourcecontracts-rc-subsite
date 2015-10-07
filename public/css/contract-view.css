@@ -10,8 +10,12 @@
 }
 
 .title-wrap > span {
-    padding: 10px 13px;
+    padding: 20px 13px;
     float: left;
+    width: 80%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .head-wrap {
@@ -29,12 +33,16 @@
     float: left;
 }
 
-.text-search {
-    background: #f9f9f9;
+.text-search-container {
     width: 25%;
     border-right: 1px solid #DCDFE2;
-    line-height: 42px;
-    padding-left: 12px;
+}
+
+.text-search {
+    background: #f9f9f9;
+    line-height: 44px;
+    float: left;
+    width: 80%;
 }
 
 .text-search:before {
@@ -44,12 +52,12 @@
     height: 24px;
     display: inline-block;
     float: left;
-    margin-top: 9px;
+    margin-top: 12px;
 }
 
 .text-search form {
     float: left;
-    width: 90%;
+    width: 85%;
 }
 
 .text-search input {
@@ -562,7 +570,7 @@
     background: #217B49 url(../images/ic-sprite-new.png) no-repeat 12px -543px;
     width: 50px;
     display: block;
-    height: 50px;
+    height: 46px;
     text-indent: -9999px;
     float: left;
 }
@@ -597,4 +605,22 @@
 
 #content {
     min-height: 400px;
+}
+
+.navbar-header {
+    border-right: 1px solid rgb(220,223,226);
+    border-right: 1px solid rgba(220,223,226,0.7);
+    padding: 0 16px;
+}
+
+.navbar-brand span:first-of-type {
+    color: #217B46;
+}
+
+.navbar-brand, .navbar-brand:hover {
+    font-size: 15px;
+}
+
+.title-wrap > span {
+    padding: 20px 13px;
 }

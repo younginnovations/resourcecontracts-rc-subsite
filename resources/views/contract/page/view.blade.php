@@ -173,7 +173,14 @@
           return (
             <div className="main-app">
               <div className="title-wrap">
-                <a className="back" href={back_url}>Back</a><span>{htmlDecode(contractTitle)}</span>
+                <div className="navbar-header">
+                    @if(env("CATEGORY")=="rc")
+                      <a className="navbar-brand" href="{{url()}}" >Resource <span className="beta">Beta</span><span>Contracts</span></a>
+                    @else                        
+                        <a className="navbar-brand" href="{{url()}}" >OPENLAND <span className="beta">Beta</span><span>Contracts</span></a>
+                    @endif
+                </div>              
+                <span>{htmlDecode(contractTitle)}</span>
               </div>
               <div className="head-wrap">
                 <TextSearchForm

@@ -17,7 +17,7 @@
         <tr>
             <td></td>
             <td>
-                @if(isset($show_advance))<input type="checkbox" class="compare" name="compare[]" value="{{$contract->contract_id}}" />@endif
+                @if(isset($show_advanc))<input type="checkbox" class="compare" name="compare[]" value="{{$contract->contract_id}}" />@endif
                 <a class="title-{{$contract->contract_id}}" href="{{route('contract.detail',['id'=>$contract->contract_id ])}}">
                     {{ $contract->contract_name or ''}}
                 </a>

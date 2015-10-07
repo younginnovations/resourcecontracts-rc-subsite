@@ -466,8 +466,9 @@ a {
       background-color: rgba(64, 64, 64, 0.2); }
 
 footer {
+  clear: both;
   background: #404040;
-  padding: 48px 0;
+  padding: 40px 0 20px;
   text-align: center; }
   footer ul {
     margin: 0;
@@ -487,14 +488,15 @@ footer {
 
 .footer-note {
   padding: 0 20px 10px;
-  max-width: 940px;
   color: rgba(255, 255, 255, 0.36);
   text-align: left; }
 
 .footer-left-wrap {
   padding-top: 20px;
   padding-left: 15px;
-  margin-bottom: 40px; }
+  margin-bottom: 40px;
+  float: none;
+  width: 100%; }
   .footer-left-wrap li {
     border-left: 1px solid #fff;
     border-left: 1px solid rgba(255, 255, 255, 0.7);
@@ -508,7 +510,9 @@ footer {
 
 .footer-right-wrap {
   padding-right: 15px;
-  padding-left: 0; }
+  padding-left: 0;
+  float: none;
+  width: 100%; }
   .footer-right-wrap li {
     margin-left: 24px;
     margin-bottom: 20px; }
@@ -1647,12 +1651,9 @@ footer {
   .contract-number-wrap {
     right: 102px; }
   .footer-note {
-    max-width: 940px;
     padding: 0 15px 10px; } }
 
 @media all and (min-width: 1200px) {
-  footer {
-    text-align: inherit; }
   .country-list-wrap .col-lg-2:nth-child(-n+6) {
     margin-top: 0; }
   .country-list-wrap .col-lg-3:nth-child(-n+4) {
@@ -1663,10 +1664,12 @@ footer {
     margin-left: 22%; }
     .content-wrap #content {
       width: 50%; }
-  .footer-right-wrap ul {
-    float: right; }
   #resources > .col-lg-4:nth-child(-n+3) {
     padding-top: 20px; } }
+
+@media all and (min-width: 1500px) {
+  .footer-note {
+    max-width: 940px; } }
 
 @media all and (max-width: 767px) {
   table {
@@ -1975,5 +1978,9 @@ input.select2-search__field {
     white-space: nowrap;
     overflow: hidden;
     display: inline-block; }
+
+@media all and (max-height: 820px) {
+  .not-found-content {
+    padding: 40px 0 200px; } }
 
 /*# sourceMappingURL=maps/olc-style.css.map */
