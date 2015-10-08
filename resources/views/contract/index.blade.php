@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="contract-number-wrap" style="margin-top: -40px;">
-                <span>{{$contracts->total}}</span>contracts
+                <span>{{$contracts->total}}</span> @if($contracts->total == 1)contract @else Contracts @endif
             </div>
         </div>
     </div>

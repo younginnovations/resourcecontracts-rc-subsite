@@ -28,7 +28,7 @@
             @endif
         </div>
         <div class="contract-number-wrap contract-search-number-wrap">
-            <span>{{$contracts->total}}</span> @if($contracts->total > 1)contracts @else Contract @endif
+            <span>{{$contracts->total}}</span> @if($contracts->total == 1)contract @else Contracts @endif
         </div>
     </div>
 
