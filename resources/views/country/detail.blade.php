@@ -46,6 +46,9 @@
         <div class="col-lg-12 country-detail-wrapper">
             <div class="col-md-8 col-lg-8">
                 <div class="panel panel-default panel-wrap country-contract-wrap">
+                    @if(!empty($contract_id))
+                        <a href="{{route('contract.metadata.download',['id'=>implode(',',$contract_id)])}}">Download as csv</a>
+                    @endif
                     <div class="panel-heading">Contracts in {{@trans('country')[strtoupper($country)]}}</div>
                     <div class="panel-body">
                         @include('contract.partials.rccontractlist')
