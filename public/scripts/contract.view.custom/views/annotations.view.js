@@ -31,7 +31,7 @@ var AnnotationItem = React.createClass({
             var quote = (annotation.get('quote')  || "") + "";
             if(text && quote) {
                 return text.trim() + " - " + quote.trim();
-            } 
+            }
             if(text && text.trim()) {
                 return text.trim();
             }
@@ -58,6 +58,8 @@ var AnnotationItem = React.createClass({
         var categoryFr = category.split("//")[1];
         var id = this.props.annotation.get('id');
         var text = getText(this.props.annotation);
+        var preamble = text.split("--")[1] || '';
+          text = text.split("--")[0];
         var showEllipse = shallShowEllipse(text);
         var pageNo = this.props.annotation.get('page_no');
         var shortText = "";
@@ -73,6 +75,7 @@ var AnnotationItem = React.createClass({
         this.setState({
             id: id,
             text: text,
+            preamble:preamble,
             cluster: cluster,
             shortText: shortText,
             categoryEn: categoryEn,
@@ -157,7 +160,8 @@ var AnnotationItem = React.createClass({
                     <span className="header annotation-cluster">{this.state.cluster}</span>
                     <span className="link annotation-category-en"><a href="#" onClick={this.handleAnnotationClick}>{this.state.categoryEn}</a></span>
                     <span className="link annotation-category-fr" onClick={this.handleAnnotationClick}>{this.state.categoryFr}</span>
-                    <span className="annotation-item-content" >{showText}<nobr><a className="annotation-item-ellipsis" href="#" onClick={this.handleEllipsis} dangerouslySetInnerHTML={{__html: ellipsistext}}></a></nobr></span>
+                    <span className="annotation-item-content">{showText}<nobr><a className="annotation-item-ellipsis" href="#" onClick={this.handleEllipsis} dangerouslySetInnerHTML={{__html: ellipsistext}}></a></nobr></span>
+                    <span className="annotation-item-preamble">{this.state.preamble}</span>
                     <span className="link annotation-item-page" onClick={this.handleAnnotationClick}>Page: {this.state.pageNo}</span>
                 </div>
             );
@@ -167,21 +171,21 @@ var AnnotationItem = React.createClass({
                     <span className="link annotation-category-en"><a href="#" onClick={this.handleAnnotationClick}>{this.state.categoryEn}</a></span>
                     <span className="link annotation-category-fr" onClick={this.handleAnnotationClick}>{this.state.categoryFr}</span>
                     <span className="annotation-item-content" >{showText}<nobr><a className="annotation-item-ellipsis" href="#" onClick={this.handleEllipsis} dangerouslySetInnerHTML={{__html: ellipsistext}}></a></nobr></span>
+                    <span className="annotation-item-preamble">{this.state.preamble}</span>
                     <span className="link annotation-item-page" onClick={this.handleAnnotationClick}>Page: {this.state.pageNo}</span>
                 </div>
             );
         } else if (this.props.annotation.attributes.text !== this.props.prevAnnotation.attributes.text) {
             return (
                 <div className={currentAnnotationClass} id={this.state.id}>
-                    <span className="annotation-item-content" >{showText}<nobr><a className="annotation-item-ellipsis" href="#" onClick={this.handleEllipsis} dangerouslySetInnerHTML={{__html: ellipsistext}}></a></nobr></span>
+                    <span className="annotation-item-content">{showText}<nobr><a className="annotation-item-ellipsis" href="#" onClick={this.handleEllipsis} dangerouslySetInnerHTML={{__html: ellipsistext}}></a></nobr></span>
+                    <span className="annotation-item-preamble">{this.state.preamble}</span>
                     <span className="link annotation-item-page" onClick={this.handleAnnotationClick}>Page: {this.state.pageNo}</span>
                 </div>
             );
         } else {
             return (
-                <div className={currentAnnotationClass} id={this.state.id}>
-                    <span className="link annotation-item-page" onClick={this.handleAnnotationClick}>Page: {this.state.pageNo}</span>
-                </div>
+                   <span className="link annotation-item-page" onClick={this.handleAnnotationClick}>, Page: {this.state.pageNo}</span>
             );
         }
         // return (
@@ -211,7 +215,7 @@ var AnnotationsSort = React.createClass({
             }
         });
         this.setState({sortBy: "cluster"});
-    },    
+    },
     onClickPage: function(e) {
         e.preventDefault();
         this.props.annotationsCollection.setSortByKey("page_no");
@@ -313,7 +317,7 @@ var AnnotationsList = React.createClass({
             var pageOffsetTop = $('#'+cluster).offset().top;
             var parentTop = $('.annotations-viewer').scrollTop();
             var parentOffsetTop = $('.annotations-viewer').offset().top
-            $('.annotations-viewer').animate({scrollTop: parentTop - parentOffsetTop + pageOffsetTop},200);            
+            $('.annotations-viewer').animate({scrollTop: parentTop - parentOffsetTop + pageOffsetTop},200);
         }
     },
     scrollToAnnotation: function(annotation_id) {
@@ -344,16 +348,15 @@ var AnnotationsList = React.createClass({
         }
         return annotationsList;
     },
-    sortByPage: function() {        
+    sortByPage: function() {
         if(this.props.annotationsCollection.models.length > 0) {
             this.props.annotationsCollection.sort();
             return (
               <div className="annotations-list" id="id-annotations-list">
                 {this.getAnnotationItemsComponent(this.props.annotationsCollection, true)}
                 <div className="annotations-list-footer">
-                    <a onClick={this.scrollToTop} href="#">Go to Top</a>
                     <a href={this.props.contractApp.getAnnotationsListAnchor()}>See all Annotations</a>
-                </div>          
+                </div>
               </div>
             );
         }
@@ -377,9 +380,8 @@ var AnnotationsList = React.createClass({
           <div className="annotations-list" id="id-annotations-list">
             {annotationsList}
             <div className="annotations-list-footer">
-                <a onClick={this.scrollToTop} href="#">Go to Top</a>
                 <a href={this.props.contractApp.getAnnotationsListAnchor()}>See all Annotations</a>
-            </div>          
+            </div>
           </div>
         );
     },
@@ -402,21 +404,47 @@ var AnnotationsList = React.createClass({
 });
 
 var AnnotationsViewer = React.createClass({
+    getInitialState: function() {
+        return {
+            scrollBtnStyle: 'display:none'
+        }
+    },
     handleGotoTop: function(e) {
         e.preventDefault();
         this.props.contractApp.trigger("annotations:scroll-to-top");
     },
+    componentDidMount() {
+        var offset = 150;
+        var duration = 200;
+
+        $("#annotations-box").scroll(function() {
+                if ($(this).scrollTop() > offset) {
+                    $('.back-to-top').fadeIn(duration);
+                } else {
+                    $('.back-to-top').fadeOut(duration);
+                }
+        });
+
+        $('.back-to-top').click(function(event) {
+            event.preventDefault();
+            $('.annotations-viewer').animate({scrollTop: 0}, duration);
+            return false;
+        })
+    },
     render: function() {
         return(
-            <div className="annotations-viewer" style={this.props.style}>
-                <AnnotationHeader annotationsCollection={this.props.annotationsCollection} />
-                <AnnotationsSort
-                    contractApp={this.props.contractApp} 
-                    annotationsCollection={this.props.annotationsCollection} />
-                <AnnotationsList 
-                    contractApp={this.props.contractApp} 
-                    annotationsCollection={this.props.annotationsCollection} />
-            </div>
+            <div className="annotation-inner-viewer">
+                <div className="annotations-viewer" id="annotations-box" style={this.props.style}>
+                    <AnnotationHeader annotationsCollection={this.props.annotationsCollection} />
+                    <AnnotationsSort
+                        contractApp={this.props.contractApp}
+                        annotationsCollection={this.props.annotationsCollection} />
+                    <AnnotationsList
+                        contractApp={this.props.contractApp}
+                        annotationsCollection={this.props.annotationsCollection} />
+                    <a href="#" className="back-to-top btn btn-primary"><i className="fa fa-arrow-up"></i></a>
+                </div>
+           </div>
         );
     }
 });

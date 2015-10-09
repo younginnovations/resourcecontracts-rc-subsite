@@ -93,7 +93,7 @@ var MetadataView = React.createClass({
                         <span><a href={countryLink}>{this.props.metadata.get("country").name}</a></span>
                     </div>
                     <div className="metadata-signature-year">
-                        <span>Signature year</span>
+                        <span>Signature Year</span>
                         <span><a href={sigYearLink}>{this.props.metadata.get("signature_year") || "-"}</a></span>
                     </div>
                     <div className="metadata-resource">
@@ -116,7 +116,7 @@ var MetadataView = React.createClass({
                     <div>Metadata</div>
                     <span>Loading... </span>
                     <div className="metadata-view-footer">
-                        <a href={this.props.contractApp.getMetadataSummaryLink()}>See summary</a>
+                        <a href={this.props.contractApp.getMetadataSummaryLink()}>See Summary</a>
                     </div>
                 </div>
             );
@@ -142,8 +142,8 @@ var RelatedDocumentsView = React.createClass({
             words = words.splice(0, 10);
             return words.join(" ") + ellipsis;
         }        
-        var parentContracts = "", 
-            supportingContracts = []
+        var parentContracts = "",
+            supportingContracts = [],
             moreContracts = "";
         if(this.props.metadata.get("parent_document")) {
             parentContracts = this.props.metadata.get("parent_document").map(function(doc) {
@@ -154,23 +154,15 @@ var RelatedDocumentsView = React.createClass({
                             <a href={docUrl}>{doc.contract_name}</a>
                         </span>
                     );
-                } else {
-                    return (
-                        <span>
-                            {doc.contract_name}
-                        </span>
-                    );
                 }
             });
-            var MaxAllowed = 2;
+            var MaxAllowed = 3;
             var maxDocs = (this.props.metadata.get("supporting_contracts").length < MaxAllowed)?this.props.metadata.get("supporting_contracts").length:MaxAllowed;
             for(var i = 0;i < maxDocs; i++) {
                 var doc = this.props.metadata.get("supporting_contracts")[i];
                 if(doc.status === "published") {
                     var docUrl = app_url + "/contract/" + doc.id;
                     supportingContracts.push(<span id={i}><a href={docUrl}>{truncate(doc.contract_name)}</a></span>);
-                } else {
-                    supportingContracts.push(<span id={i}>{truncate(doc.contract_name)}</span>);
                 }
             }
             if(this.props.metadata.get("supporting_contracts").length > MaxAllowed) {
@@ -274,6 +266,9 @@ var RightColumnView = React.createClass({
             <div className="right-column-view">
                 <MetadataView 
                     contractApp={this.props.contractApp}
+                    metadata={this.props.metadata} />
+
+                <RelatedDocumentsView
                     metadata={this.props.metadata} />
             </div>
         );

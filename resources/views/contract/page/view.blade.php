@@ -51,7 +51,7 @@
             console.log(arguments[i]);
           }
         }
-      }
+      };
       var back_url = '{!!$back!!}';
       var app_url = '{{url()}}';
       var contractTitle = "{{$contract->metadata->contract_name}}";
@@ -130,9 +130,6 @@
         search: function(query) {
           contractApp.setView("search");
           var show_pdf_text = contractApp.metadata.get('show_pdf_text');
-
-          console.log(show_pdf_text);
-
           if(show_pdf_text ==1)
           {
             contractApp.setSearchQuery(query);
