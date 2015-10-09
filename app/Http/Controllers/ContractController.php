@@ -57,8 +57,7 @@ class ContractController extends BaseController
     public function index(Request $request)
     {
         $currentPage = $request->get('page', 1);
-        $filter      = ['year' => $request->get('year'), 'from' => $currentPage];
-
+        $filter      = ['year' => $request->get('year'), 'from' => $currentPage,'sort_by'=>$request->get('sortby'),'order'=>$request->get('order')];
         $contracts = $this->api->allContracts($filter);
 
         return view('contract.index', compact('contracts', 'currentPage'));

@@ -76,3 +76,11 @@ function searchInArray($arrays, $field, $value)
     return null;
 }
 
+function appendInUrl($url, $sortby, $order)
+{
+    $url["sortby"] = $sortby;
+    $url["order"]  = $order;
+
+    return $url;
+}
+

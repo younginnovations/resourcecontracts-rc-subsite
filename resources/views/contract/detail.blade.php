@@ -259,8 +259,6 @@
                                 <td width="70%">
                                     @if($parentContract->status=="published")
                                         <a href="{{route('contract.detail',['id'=>$parentContract->id])}}">{{$parentContract->contract_name}}</a> &nbsp; (parent)
-                                    @else
-                                        {{$parentContract->contract_name}} (parent)
                                     @endif
 
                                 </td>
@@ -275,8 +273,6 @@
                                 <td width="70%">
                                     @if($supportingContract->status=="published")
                                         <a href="{{route('contract.detail',['id'=>$supportingContract->id])}}"> {{$supportingContract->contract_name}}</a>
-                                    @else
-                                        {{$supportingContract->contract_name}}
                                     @endif
                                 </td>
 
