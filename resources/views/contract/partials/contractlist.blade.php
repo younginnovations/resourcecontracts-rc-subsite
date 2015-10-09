@@ -1,20 +1,15 @@
 <?php
 $url = Request::all();
-$route = "contracts";
-if (isset($show_advance)) {
-    $route = "search";
-}
-
 ?>
 <table class="table table-responsive table-contract table-contract-list">
     <thead>
     <th></th>
-    <th width="50%">Document <a href="{{route($route,appendInUrl($url,"contract_name","asc"))}}">U</a> <a href="{{route($route,appendInUrl($url,"contract_name","desc"))}}">D</a></th>
+    <th width="50%">Document <a href="{{appendInUrl($url,"contract_name","asc")}}">U</a> <a href="{{appendInUrl($url,"contract_name","desc")}}">D</a></th>
     <th></th>
-    <th width="20%">Country <a href="{{route($route,appendInUrl($url,"country","asc"))}}">U</a> <a href="{{route($route,appendInUrl($url,"country","desc"))}}">D</a></th>
-    <th>Year <a href="{{route($route,appendInUrl($url,"year","asc"))}}">U</a> <a href="{{route($route,appendInUrl($url,"year","desc"))}}">D</a></th>
-    <th width="15%">Resource Type <a href="{{route($route,appendInUrl($url,"resource","asc"))}}">U</a> <a href="{{route($route,appendInUrl($url,"resource","desc"))}}">D</a></th>
-    <th width="15%">Contract Type <a href="{{route($route,appendInUrl($url,"contract_type","asc"))}}">U</a> <a href="{{route($route,appendInUrl($url,"contract_type","desc"))}}">D</a></th>
+    <th width="20%">Country <a href="{{appendInUrl($url,"country","asc")}}">U</a> <a href="{{appendInUrl($url,"country","desc")}}">D</a></th>
+    <th>Year <a href="{{appendInUrl($url,"year","asc")}}">U</a> <a href="{{appendInUrl($url,"year","desc")}}">D</a></th>
+    <th width="15%">Resource Type <a href="{{appendInUrl($url,"resource","asc")}}">U</a> <a href="{{appendInUrl($url,"resource","desc")}}">D</a></th>
+    <th width="15%">Contract Type <a href="{{appendInUrl($url,"contract_type","asc")}}">U</a> <a href="{{appendInUrl($url,"contract_type","desc")}}">D</a></th>
     </thead>
     <tbody>
     @forelse($contracts->results as $contract)

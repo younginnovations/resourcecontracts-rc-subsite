@@ -81,6 +81,7 @@ function appendInUrl($url, $sortby, $order)
     $url["sortby"] = $sortby;
     $url["order"]  = $order;
 
-    return $url;
+    return route(Request::path(), $url);
+
 }
 
