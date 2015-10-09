@@ -649,7 +649,7 @@ footer {
 .download-csv {
   position: absolute;
   bottom: -20px;
-  left: 35px;
+  right: 50px;
   background: #fff;
   border: 1px solid #F37356;
   border: 1px solid rgba(243, 115, 86, 0.2);
@@ -662,6 +662,12 @@ footer {
     text-decoration: none;
     padding: 13px 25px 13px 44px;
     background: url(../../images/ic-sprite.png) no-repeat -152px -40px; }
+
+.country-contract-wrap .download-csv {
+  left: auto;
+  bottom: auto;
+  right: 20px;
+  top: -24px; }
 
 .btn-filter-search {
   background: url(../../images/ic-sprite.png) no-repeat -174px -392px;
@@ -863,14 +869,13 @@ footer {
     padding: 0; }
 
 .country-contract-wrap {
-  border-right: 1px solid #f2f2f2; }
+  border-right: 1px solid #f2f2f2;
+  position: relative; }
 
 .country-detail-wrapper {
-  padding: 0;
-  overflow: hidden; }
+  padding: 0; }
   .country-detail-wrapper > div {
-    padding: 0;
-    overflow: hidden; }
+    padding: 0; }
     .country-detail-wrapper > div > div {
       min-height: 500px; }
 
@@ -1535,6 +1540,27 @@ footer {
   padding-left: 60px; }
   .table-contract-list td:first-child > a {
     padding-left: 13px; }
+
+.table-contract-list th a {
+  position: relative;
+  display: inline-block; }
+  .table-contract-list th a:before {
+    content: "";
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 4px solid #404040;
+    border-bottom: 4px solid rgba(64, 64, 64, 0.2);
+    position: absolute;
+    top: -10px;
+    left: 3px; }
+
+.table-contract-list th a:last-child:before {
+  border-top: 4px solid #404040;
+  border-top: 4px solid rgba(64, 64, 64, 0.2);
+  border-bottom: 4px solid transparent;
+  top: auto;
+  bottom: -5px;
+  left: 0; }
 
 .table-contract-list td:nth-child(3) {
   min-width: inherit !important; }

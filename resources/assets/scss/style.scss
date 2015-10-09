@@ -981,7 +981,7 @@ footer {
 .download-csv {
   position: absolute;
   bottom: -20px;
-  left: 35px;
+  right: 50px;
   background: $white;
   border: 1px solid $color_link_color;
   border: 1px solid $color_burnt_sienna_20_approx;
@@ -995,6 +995,12 @@ footer {
     padding: 13px 25px 13px 44px;
     background: $url_2 no-repeat -152px -40px;
   }
+}
+.country-contract-wrap .download-csv {
+    left: auto;
+    bottom: auto;
+    right: 20px;
+    top: -24px;
 }
 .btn-filter-search {
   background: $url_2 no-repeat -174px -392px;
@@ -1244,13 +1250,12 @@ footer {
 }
 .country-contract-wrap {
   border-right: 1px solid $concrete;
+  position: relative;
 }
 .country-detail-wrapper {
   padding: 0;
-  overflow: hidden;
   > div {
     padding: 0;
-    overflow: hidden;
     > div {
       min-height: 500px;
     }
@@ -2117,6 +2122,32 @@ footer {
     padding-left: 60px;
     > a {
       padding-left: 13px;
+    }
+  }
+  th {
+    a {
+      position: relative;
+      display: inline-block;
+      &:before {
+        content: "";
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-bottom: 4px solid rgb(64,64,64);
+        border-bottom: 4px solid rgba(64,64,64,0.2);
+        position: absolute;
+        top: -10px;
+        left: 3px;
+      }
+    }
+    a:last-child {
+      &:before {
+        border-top: 4px solid rgb(64,64,64);
+        border-top: 4px solid rgba(64,64,64,0.2);
+        border-bottom: 4px solid transparent;
+        top: auto;
+        bottom: -5px;
+        left: 0;
+      }
     }
   }
   td:nth-child(3) {

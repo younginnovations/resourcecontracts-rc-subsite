@@ -4,12 +4,12 @@ $url = Request::all();
 <table class="table table-responsive table-contract table-contract-list">
     <thead>
     <th></th>
-    <th width="50%">Document <a href="{{appendInUrl($url,"contract_name","asc")}}">U</a> <a href="{{appendInUrl($url,"contract_name","desc")}}">D</a></th>
+    <th width="50%">Document <a href="{{appendInUrl($url,"contract_name","asc")}}"></a> <a href="{{appendInUrl($url,"contract_name","desc")}}"></a></th>
     <th></th>
-    <th width="20%">Country <a href="{{appendInUrl($url,"country","asc")}}">U</a> <a href="{{appendInUrl($url,"country","desc")}}">D</a></th>
-    <th>Year <a href="{{appendInUrl($url,"year","asc")}}">U</a> <a href="{{appendInUrl($url,"year","desc")}}">D</a></th>
-    <th width="15%">Resource Type <a href="{{appendInUrl($url,"resource","asc")}}">U</a> <a href="{{appendInUrl($url,"resource","desc")}}">D</a></th>
-    <th width="15%">Contract Type <a href="{{appendInUrl($url,"contract_type","asc")}}">U</a> <a href="{{appendInUrl($url,"contract_type","desc")}}">D</a></th>
+    <th width="20%">Country <a href="{{appendInUrl($url,"country","asc")}}"></a> <a href="{{appendInUrl($url,"country","desc")}}"></a></th>
+    <th>Year <a href="{{appendInUrl($url,"year","asc")}}"></a> <a href="{{appendInUrl($url,"year","desc")}}"></a></th>
+    <th width="15%">Resource Type <a href="{{appendInUrl($url,"resource","asc")}}"></a> <a href="{{appendInUrl($url,"resource","desc")}}"></a></th>
+    <th width="15%">Contract Type <a href="{{appendInUrl($url,"contract_type","asc")}}"></a> <a href="{{appendInUrl($url,"contract_type","desc")}}"></a></th>
     </thead>
     <tbody>
     @forelse($contracts->results as $contract)
