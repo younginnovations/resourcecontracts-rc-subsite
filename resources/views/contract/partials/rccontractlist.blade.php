@@ -16,7 +16,7 @@
         <tr>
             <td></td>
             <td>
-                <a href="{{route('contract.detail',['id'=>$contract->contract_id ])}}">
+                <a href="{{route('contract.detail',['id'=>$contract->guid ])}}">
                     {{ $contract->contract_name or ''}}
                 </a>
                 @if($annotations->total>0)

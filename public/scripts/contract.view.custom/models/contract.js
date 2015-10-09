@@ -5,6 +5,7 @@
       view: "pdf",
       search_query: "",
       contract_id: 0,
+      guid: "",
       selected_annotation_id: 0,
       pdfscale: 1,
       showMeta: true,
@@ -25,8 +26,11 @@
     getContractId: function() {
       return this.get("contract_id");
     },
+    getContractGuid: function() {
+      return this.get("guid");
+    },
     getMetadataSummaryLink: function() {
-      return app_url + "/contract/" + this.getContractId();
+      return app_url + "/contract/" + this.getContractGuid();
     },
     getMetadataUrl: function() {
       return this.get('esapi') + "contract/" + this.getContractId() + "/metadata";  

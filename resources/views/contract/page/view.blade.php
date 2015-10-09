@@ -41,6 +41,7 @@
     <script src="{{ url('scripts/contract.view.custom/annotation/annotator.plugin.event.js') }}"></script>
     <script src="{{ url('scripts/contract.view.custom/annotation/annotator.plugin.viewer.js') }}"></script>
     <script src="{{ url('scripts/contract.view.custom/annotation/rc.annotator.js') }}"></script>
+
     <script type="text/jsx">
       var debug = function() {
         var DEBUG = false;
@@ -56,6 +57,7 @@
       var contractTitle = "{{$contract->metadata->contract_name}}";
       var contractApp = new ContractApp({
         contract_id: '{{$contract->metadata->contract_id}}',
+        guid: '{{$contract->metadata->guid}}',
         total_pages: '{{$contract->metadata->total_pages}}',
         esapi: '{{env("ELASTIC_SEARCH_HOST")}}'
       });
