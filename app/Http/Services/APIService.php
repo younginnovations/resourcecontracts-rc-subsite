@@ -66,6 +66,8 @@ class APIService
             'resource' => '',
             'per_page' => 25,
             'from'     => 0,
+            'sort_by'  => '',
+            'order'    => ''
         ];
 
         $filter = array_merge($default, $filter);
@@ -76,6 +78,8 @@ class APIService
             'resource'     => $filter['resource'],
             'per_page'     => $filter['per_page'],
             'from'         => $filter['per_page'] * ($filter['from'] - 1),
+            'sort_by'      => $filter['sort_by'],
+            'order'        => $filter['order']
         ];
 
         $contract = $this->apiCall('contracts', $query);
@@ -316,6 +320,7 @@ class APIService
 
         }
         ksort($data);
+
         return $data;
     }
 
@@ -341,6 +346,7 @@ class APIService
         $resource = 'contracts/annotations/category';
 
         $response = $this->apiCall($resource);
+
         return $response;
     }
 

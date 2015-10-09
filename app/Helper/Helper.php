@@ -76,3 +76,20 @@ function searchInArray($arrays, $field, $value)
     return null;
 }
 
+/**
+ * Append sortby and order in url
+ * 
+ * @param $url
+ * @param $sortby
+ * @param $order
+ * @return string
+ */
+function appendInUrl($url, $sortby, $order)
+{
+    $url["sortby"] = $sortby;
+    $url["order"]  = $order;
+
+    return route(Request::path(), $url);
+
+}
+

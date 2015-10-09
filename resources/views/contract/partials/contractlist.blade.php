@@ -1,12 +1,15 @@
+<?php
+$url = Request::all();
+?>
 <table class="table table-responsive table-contract table-contract-list">
     <thead>
-        <th></th>
-        <th width="50%">Document</th>
-        <th></th>
-        <th width="20%">Country</th>
-        <th>Year</th>
-        <th width="15%">Resource Type</th>
-        <th width="15%">Contract Type</th> 
+    <th></th>
+    <th width="50%">Document <a href="{{appendInUrl($url,"contract_name","asc")}}">U</a> <a href="{{appendInUrl($url,"contract_name","desc")}}">D</a></th>
+    <th></th>
+    <th width="20%">Country <a href="{{appendInUrl($url,"country","asc")}}">U</a> <a href="{{appendInUrl($url,"country","desc")}}">D</a></th>
+    <th>Year <a href="{{appendInUrl($url,"year","asc")}}">U</a> <a href="{{appendInUrl($url,"year","desc")}}">D</a></th>
+    <th width="15%">Resource Type <a href="{{appendInUrl($url,"resource","asc")}}">U</a> <a href="{{appendInUrl($url,"resource","desc")}}">D</a></th>
+    <th width="15%">Contract Type <a href="{{appendInUrl($url,"contract_type","asc")}}">U</a> <a href="{{appendInUrl($url,"contract_type","desc")}}">D</a></th>
     </thead>
     <tbody>
     @forelse($contracts->results as $contract)
@@ -17,13 +20,13 @@
         <tr>
             <td></td>
             <td>
-                @if(isset($show_advanc))<input type="checkbox" class="compare" name="compare[]" value="{{$contract->contract_id}}" />@endif
+                @if(isset($show_advanc))<input type="checkbox" class="compare" name="compare[]" value="{{$contract->contract_id}}"/>@endif
                 <a class="title-{{$contract->contract_id}}" href="{{route('contract.detail',['id'=>$contract->contract_id ])}}">
                     {{ $contract->contract_name or ''}}
                 </a>
 
                 @if($annotations->total>0)
-                    <div class="annotate-text"> Annotated </div>
+                    <div class="annotate-text"> Annotated</div>
                 @endif
 
                 <div class="search-text">
@@ -36,7 +39,7 @@
                     @endif
 
                     @if(isset($contract->metadata ) && $contract->metadata !='')
-                            <p>{!! $contract->metadata.'...' !!}</p>
+                        <p>{!! $contract->metadata.'...' !!}</p>
                     @endif
                 </div>
                 @if($annotations->total>0)
@@ -56,7 +59,8 @@
                                 <?php $annotation_type = isset($annotation['shapes']) ? 'pdf' : 'text'; ?>
                                 {{str_limit($category,50)}}-<span
                                         style="color: #404040;">{{str_limit($annotation['text'],50)}}</span>
-                                <a style="float: none" href="{{route('contract.detail',['id'=>$contract->contract_id])}}#/{{$annotation_type}}/page/{{$annotation['page_no']}}/annotation/{{$annotation['id']}}">
+                                <a style="float: none"
+                                   href="{{route('contract.detail',['id'=>$contract->contract_id])}}#/{{$annotation_type}}/page/{{$annotation['page_no']}}/annotation/{{$annotation['id']}}">
                                     [Pg {{$annotation['page_no']}}]</a>
                                 <br>
                             @endif
@@ -80,9 +84,9 @@
                             <span>Download</span>
                         </div>
                         <ul class="dropdown-menu">
-                            <li><a href="{{route('contract.download.pdf',['id'=> $contract->contract_id])}}" >Pdf</a></li>
+                            <li><a href="{{route('contract.download.pdf',['id'=> $contract->contract_id])}}">Pdf</a></li>
                             @if(env('CATEGORY')!="olc")
-                                <li><a href="{{route('contract.download',['id'=> $contract->contract_id])}}" >Word File</a></li>
+                                <li><a href="{{route('contract.download',['id'=> $contract->contract_id])}}">Word File</a></li>
                             @endif
                         </ul>
                     </div>
@@ -90,7 +94,7 @@
             </td>
             @if($contract->country_code !='')
                 <td>
-                    <img style="width: 24px ; height: auto" src="{{getFlagUrl($contract->country_code)}}" />
+                    <img style="width: 24px ; height: auto" src="{{getFlagUrl($contract->country_code)}}"/>
                     <span class="country-name-title">{{@trans('country')[$contract->country_code]}}</span>
                 </td>
             @else
@@ -102,10 +106,21 @@
                 <td></td>
             @endif
             <td>
+                <?php
+
+                    if (isset($url['sortby']) && $url['sortby'] == "resource") {
+                        if ($url['order'] == "asc") {
+                            asort($contract->resource);
+                        }
+                        if ($url['order'] == "desc") {
+                            rsort($contract->resource);
+                        }
+                    }
+                ?>
                 <ul>
-                     @foreach($contract->resource as $resource)
-                         <li>{{$resource}}</li>
-                     @endforeach
+                    @foreach($contract->resource as $resource)
+                        <li>{{$resource}}</li>
+                    @endforeach
                 </ul>
             </td>
             <td>
