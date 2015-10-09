@@ -24,11 +24,11 @@ class ContractController extends BaseController
     /**
      * @var DownloadService
      */
-    private $download;
+    protected $download;
     /**
      * @var AnnotationService
      */
-    private $annotation;
+    protected $annotation;
 
     /**
      * @param APIService        $api
@@ -73,13 +73,13 @@ class ContractController extends BaseController
     {
         $contract                     = $this->api->contractDetail($contract_id);
         $contract->annotationsCluster = $this->annotation->groupAnnotationsByCluster($contract->annotations);
-        $referrer = \Request::server('HTTP_REFERER');
+        $referrer                     = \Request::server('HTTP_REFERER');
 
         if (empty($contract->metadata)) {
             return abort(404);
         }
 
-        return view('contract.detail', compact('contract','referrer'));
+        return view('contract.detail', compact('contract', 'referrer'));
     }
 
     /**
@@ -126,27 +126,17 @@ class ContractController extends BaseController
     }
 
     /**
-     * Compare Contracts
+     * Compare Contract Document
      *
-     * @param         $contractId1
-     * @param         $contractId2
+     * @param $contractId1
+     * @param $contractId2
      * @return \Illuminate\View\View
      */
-    public function oldcompare($contractId1, $contractId2)
-    {
-        $contract1Annotations = $this->contract->annotations($contractId1);
-        $contract2Annotations = $this->contract->annotations($contractId2);
-        $contract1            = $this->api->metadata($contractId1);
-        $contract2            = $this->api->metadata($contractId2);
-
-        return view(
-            'contract.page.oldcompare',
-            compact('contract1Annotations', 'contract2Annotations', 'contract1', 'contract2')
-        );
-    }
-
     public function compare($contractId1, $contractId2)
     {
+        $contractId1 = $this->api->getRealContractId($contractId1);
+        $contractId2 = $this->api->getRealContractId($contractId2);
+
         $contract1            = new \stdClass();
         $contract2            = new \stdClass();
         $contract1Annotations = $this->contract->annotations($contractId1);
@@ -237,6 +227,7 @@ class ContractController extends BaseController
      */
     public function downloadPdf($contract_id)
     {
+
         $contract = $this->api->metadata($contract_id);
 
         $filename = sprintf(
@@ -263,9 +254,10 @@ class ContractController extends BaseController
      */
     public function view($contract_id)
     {
-        $referrer = \Request::server('HTTP_REFERER');
+        $referrer    = \Request::server('HTTP_REFERER');
+        $contract_id = $this->api->getRealContractId($contract_id);
 
-        $back = is_null($referrer) ? route('contract.view',['id'=>$contract_id]): $referrer;
+        $back               = is_null($referrer) ? route('contract.view', ['id' => $contract_id]) : $referrer;
         $contract           = new \stdClass();
         $contract->metadata = $this->api->metadata($contract_id);
 

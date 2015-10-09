@@ -20,8 +20,9 @@ $url = Request::all();
         <tr>
             <td></td>
             <td>
-                @if(isset($show_advanc))<input type="checkbox" class="compare" name="compare[]" value="{{$contract->contract_id}}"/>@endif
-                <a class="title-{{$contract->contract_id}}" href="{{route('contract.detail',['id'=>$contract->contract_id ])}}">
+
+                @if(isset($show_advanc))<input type="checkbox" class="compare" name="compare[]" value="{{$contract->guid}}" />@endif
+                <a class="title-{{$contract->contract_id}}" href="{{route('contract.detail',['id'=>$contract->guid ])}}">
                     {{ $contract->contract_name or ''}}
                 </a>
 
@@ -59,8 +60,7 @@ $url = Request::all();
                                 <?php $annotation_type = isset($annotation['shapes']) ? 'pdf' : 'text'; ?>
                                 {{str_limit($category,50)}}-<span
                                         style="color: #404040;">{{str_limit($annotation['text'],50)}}</span>
-                                <a style="float: none"
-                                   href="{{route('contract.detail',['id'=>$contract->contract_id])}}#/{{$annotation_type}}/page/{{$annotation['page_no']}}/annotation/{{$annotation['id']}}">
+                                <a style="float: none" href="{{route('contract.detail',['id'=>$contract->guid])}}#/{{$annotation_type}}/page/{{$annotation['page_no']}}/annotation/{{$annotation['id']}}">
                                     [Pg {{$annotation['page_no']}}]</a>
                                 <br>
                             @endif
@@ -84,9 +84,10 @@ $url = Request::all();
                             <span>Download</span>
                         </div>
                         <ul class="dropdown-menu">
-                            <li><a href="{{route('contract.download.pdf',['id'=> $contract->contract_id])}}">Pdf</a></li>
+
+                            <li><a href="{{route('contract.download.pdf',['id'=> $contract->guid])}}" >Pdf</a></li>
                             @if(env('CATEGORY')!="olc")
-                                <li><a href="{{route('contract.download',['id'=> $contract->contract_id])}}">Word File</a></li>
+                                <li><a href="{{route('contract.download',['id'=> $contract->guid])}}" >Word File</a></li>
                             @endif
                         </ul>
                     </div>

@@ -21,10 +21,10 @@
                     <ul>
                         @if($contract->pages->total>0)
                             <li class="pull-left">
-                                @if($referrer == route('contract.detail',['id'=>$contract->metadata->contract_id]))
+                                @if($referrer == route('contract.detail',['id'=>$contract->metadata->guid]))
                                     <a href="{{$referrer}}">Back to document</a>
                                 @else
-                                    <a href="{{route('contract.detail',['id'=>$contract->metadata->contract_id])}}">View Document</a>
+                                    <a href="{{route('contract.detail',['id'=>$contract->metadata->guid])}}">View Document</a>
                                 @endif
                             </li>
                         @endif
@@ -41,7 +41,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="{{_e($contract->metadata, 'file_url')}}" target="_blank">Pdf</a></li>
                             @if(_e($contract->metadata, 'word_file') !='' && env('CATEGORY')!="olc")
-                                <li><a href="{{route('contract.download',['id'=> $contract->metadata->contract_id])}}"
+                                <li><a href="{{route('contract.download',['id'=> $contract->metadata->guid])}}"
                                        target="_blank">Word File</a></li>
                             @endif
                         </ul>
@@ -258,7 +258,9 @@
 
                                 <td width="70%">
                                     @if($parentContract->status=="published")
-                                        <a href="{{route('contract.detail',['id'=>$parentContract->id])}}">{{$parentContract->contract_name}}</a> &nbsp; (parent)
+                                        <a href="{{route('contract.detail',['id'=>$parentContract->guid])}}">{{$parentContract->contract_name}}</a> &nbsp; (parent)
+                                    @else
+                                        {{$parentContract->contract_name}} (parent)
                                     @endif
 
                                 </td>
