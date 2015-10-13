@@ -78,18 +78,29 @@ function searchInArray($arrays, $field, $value)
 
 /**
  * Append sortby and order in url
- * 
+ *
  * @param $url
  * @param $sortby
  * @param $order
  * @return string
  */
-function appendInUrl($url, $sortby, $order)
+function appendInUrl($route,$url, $sortby, $order)
 {
+    if (isset($url['sortby']) && $url['sortby'] == $sortby && isset($url['order']) && $url['order'] == "asc") {
+        $url['order'] = "desc";
+    } else {
+        $url["order"] = "asc";
+    }
     $url["sortby"] = $sortby;
-    $url["order"]  = $order;
 
-    return route(Request::path(), $url);
+
+    return route($route, $url);
 
 }
 
+function show_arrow($order, $show = false)
+{
+    if ($show) {
+            return '<i class="fa fa-black   fa-sort-' . $order . '"></i> ';
+    }
+}
