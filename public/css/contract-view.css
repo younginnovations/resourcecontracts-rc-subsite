@@ -660,7 +660,7 @@
         display: block;
     }
 
-    .annotations-viewer,.pdf-annotator,.right-column-view,.text-panel {
+    .annotation-inner-viewer,.pdf-annotator,.right-column-view,.text-panel {
         width: 100%;
         float: none;
     }
@@ -674,9 +674,10 @@
         border-left: 20px solid #f0f0f0;
         border-right: 20px solid #f0f0f0;
     }
+
 }
 
-@media all and (max-width: 768px) {
+@media all and (max-width: 800px) {
     .text-search-container,.navigation {
         width: 100%;
     }
@@ -691,8 +692,7 @@
     }
 
     .pdf-zoom-options {
-        margin-top: -32px;
-        margin-left: 320px;
+        margin: -30px 0 0 320px;
     }
 }
 
@@ -709,7 +709,7 @@
     }
 }
 
-@media all and (min-width: 768px) and (max-width: 900px) {
+@media all and (min-width: 801px) and (max-width: 900px) {
     .text-search-container {
         width: 35%;
     }
