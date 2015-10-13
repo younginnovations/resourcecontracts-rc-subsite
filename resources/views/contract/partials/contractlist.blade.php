@@ -1,15 +1,21 @@
 <?php
 $url = Request::all();
+$order=\Illuminate\Support\Facades\Input::get('order','desc');
+$sortBy=\Illuminate\Support\Facades\Input::get('sortby','year');
+$route=Request::path();
+
 ?>
 <table class="table table-responsive table-contract table-contract-list">
     <thead>
     <th></th>
-    <th width="50%">Document <a href="{{appendInUrl($url,"contract_name","asc")}}"></a> <a href="{{appendInUrl($url,"contract_name","desc")}}"></a></th>
+    <th width="50%">
+        <a href="{{appendInUrl($route,$url,"contract_name",$order)}}">Document {!!show_arrow($order, $sortBy=='contract_name')!!}</a>
+    </th>
     <th></th>
-    <th width="20%">Country <a href="{{appendInUrl($url,"country","asc")}}"></a> <a href="{{appendInUrl($url,"country","desc")}}"></a></th>
-    <th>Year <a href="{{appendInUrl($url,"year","asc")}}"></a> <a href="{{appendInUrl($url,"year","desc")}}"></a></th>
-    <th width="15%">Resource Type <a href="{{appendInUrl($url,"resource","asc")}}"></a> <a href="{{appendInUrl($url,"resource","desc")}}"></a></th>
-    <th width="15%">Contract Type <a href="{{appendInUrl($url,"contract_type","asc")}}"></a> <a href="{{appendInUrl($url,"contract_type","desc")}}"></a></th>
+    <th width="20%"><a href="{{appendInUrl($route,$url,"country",$order)}}">Country {!!show_arrow($order, $sortBy=='country')!!}</a></th>
+    <th><a href="{{appendInUrl($route,$url,"year",$order)}}">Year {!!show_arrow($order, $sortBy=='year')!!}</a></th>
+    <th width="15%"><a href="{{appendInUrl($route,$url,"resource",$order)}}">Resource Type {!!show_arrow($order, $sortBy=='resource')!!}</a> </th>
+    <th width="15%"><a href="{{appendInUrl($route,$url,"contract_type",$order)}}">Contract Type {!!show_arrow($order, $sortBy=='contract_type')!!}</a></th>
     </thead>
     <tbody>
     @forelse($contracts->results as $contract)
@@ -119,9 +125,15 @@ $url = Request::all();
                     }
                 ?>
                 <ul>
-                    @foreach($contract->resource as $resource)
-                        <li>{{$resource}}</li>
-                    @endforeach
+                    @forelse($contract->resource as $resource)
+                        @if(!empty($resource))
+                            <li>{{$resource}}</li>
+                        @else
+                            -
+                        @endif
+                    @empty
+                        -
+                    @endforelse
                 </ul>
             </td>
             <td>

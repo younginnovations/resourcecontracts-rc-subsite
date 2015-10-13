@@ -16,12 +16,13 @@
                         <li><a href="{{url('glossary')}}">Glossary</a></li>
                         <li><a href="{{url('publish-contracts')}}">Publish Contracts</a></li>
                         <li><a href="{{url('contact')}}">Contact</a></li>
+                        <li><a href="https://github.com/NRGI/resourcecontracts.org/wiki/API" target="_blank">API</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-9 footer-right-wrap">
                     <ul>
                         @if(env("CATEGORY")=="rc")
-                            <li><a href="http://www.resourcecontracts.org/" target="_blank"><img src="{{url('images/ic-nrgi.png')}}" /></a></li>
+                            <li><a href="http://www.resourcegovernance.org/" target="_blank"><img src="{{url('images/ic-nrgi.png')}}" /></a></li>
                         @endif
 
                         <li><a href="http://ccsi.columbia.edu/" target="_blank"><img src="{{url('images/ic-cc.png')}}" /></a></li>
