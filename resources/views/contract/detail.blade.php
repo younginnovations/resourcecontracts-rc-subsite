@@ -378,16 +378,24 @@
                                     </div>
                                     <ul class="row">
                                     @foreach($annotations as $text => $annots)
+                                        <?php $a = explode('--',$text);
+                                            $preamble =  isset($a[1]) ? $a[1] : '';
+                                            $text=  isset($a[0]) ? $a[0] : '';
+                                            ?>
                                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                                 <div class="pull-left">
-                                                    <div class="annotation-text">{{$text}}</div>
-                                                    <div class="page-num pull-left">
-                                                    @foreach($annots as $key => $annotation)
-                                                        <?php $annotation_type = isset($annotation->shapes) ? 'pdf' : 'text'; ?>
-                                                            <a  href="{{route('contract.detail',['id'=>$contract->metadata->contract_id])}}#/{{$annotation_type}}/page/{{$annotation->page_no}}/annotation/{{$annotation->id}}">
+                                                    <p class="annotation-preamle">
+                                                    @if($preamble !='')
+                                                        {{$preamble}},
+                                                    @endif
+                                                        @foreach($annots as $key => $annotation)
+                                                            <?php $annotation_type = isset($annotation->shapes) ? 'pdf' : 'text'; ?>
+                                                            <a  href="{{route('contract.detail',['id'=>$contract->metadata->guid])}}#/{{$annotation_type}}/page/{{$annotation->page_no}}/annotation/{{$annotation->id}}">
                                                                 Pg{{_e($annotation,'page_no')}}</a>@if($key >= 0 && $key < (count($annots)-1)), @endif
-                                                    @endforeach
-                                                    </div>
+                                                        @endforeach
+                                                    </p>
+
+                                                    <div class="annotation-text">{{$text}}</div>
                                                 </div>
                                             </li>
                                         @endforeach

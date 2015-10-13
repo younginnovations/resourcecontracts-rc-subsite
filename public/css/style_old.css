@@ -423,7 +423,6 @@ header {
 }
 
 .annotation-text {
-    font-weight: 700;
     margin-bottom: 7px;
 }
 
@@ -582,3 +581,5 @@ header {
 .left-document-wrap {
     margin-right: 16px;
 }
+
+.sub-category {font-weight: bold}
