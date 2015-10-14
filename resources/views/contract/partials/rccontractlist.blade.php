@@ -28,7 +28,7 @@ if ($path[0] == "resource") {
         <tr>
             <td></td>
             <td>
-                <a href="{{route('contract.detail',['id'=>$contract->guid ])}}">
+                <a href="{{route('contract.detail',['id'=>$contract->open_contracting_id ])}}">
                     {{ $contract->contract_name or ''}}
                 </a>
                 @if($annotations->total>0)

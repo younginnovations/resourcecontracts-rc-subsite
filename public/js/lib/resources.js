@@ -74,7 +74,7 @@ var ResourceCollection = Backbone.Collection.extend({
 
         var resource = [];
         _.each(resources.models, function (model) {
-            resource.push({value: model.get('resource'), name: model.get('resource'), contract: model.get('contract')});
+            resource.push({value: encodeURIComponent(model.get('resource')), name: model.get('resource'), contract: model.get('contract')});
         });
 
         return resource;

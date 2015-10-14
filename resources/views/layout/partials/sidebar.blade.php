@@ -28,7 +28,7 @@ if (!isset($summary)) {
                 @foreach(array_slice($summary->country_summary, 0, 10, true) as $country)
 
                     <li>
-                        <a href="{{route('country.detail', ['key'=>$country['key']])}}">
+                        <a href="{{route('country.detail', ['key'=>urlencode($country['key'])])}}">
                             <span>{{$country['name']}}</span>
                             <small class="label pull-right">{{$country['doc_count']}}</small>
                         </a>
@@ -44,7 +44,7 @@ if (!isset($summary)) {
             <ul>
                 @foreach(array_slice($summary->resource_summary,0,10,true) as $resource)
                     <li>
-                        <a href="{{route('resource.detail', ['key'=>$resource->key])}}">
+                        <a href="{{route('resource.detail', ['key'=>urlencode($resource->key)])}}">
                             <span>{{ucfirst($resource->key)}}</span>
                             <small class="label pull-right">{{$resource->doc_count}}</small>
                         </a>

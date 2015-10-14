@@ -27,8 +27,8 @@ $route=Request::path();
             <td></td>
             <td>
 
-                @if(isset($show_advanc))<input type="checkbox" class="compare" name="compare[]" value="{{$contract->guid}}" />@endif
-                <a class="title-{{$contract->contract_id}}" href="{{route('contract.detail',['id'=>$contract->guid ])}}">
+                @if(isset($show_advanc))<input type="checkbox" class="compare" name="compare[]" value="{{$contract->open_contracting_id}}" />@endif
+                <a class="title-{{$contract->contract_id}}" href="{{route('contract.detail',['id'=>$contract->open_contracting_id ])}}">
                     {{ $contract->contract_name or ''}}
                 </a>
 
@@ -66,7 +66,7 @@ $route=Request::path();
                                 <?php $annotation_type = isset($annotation['shapes']) ? 'pdf' : 'text'; ?>
                                 {{str_limit($category,50)}}-<span
                                         style="color: #404040;">{{str_limit($annotation['text'],50)}}</span>
-                                <a style="float: none" href="{{route('contract.detail',['id'=>$contract->guid])}}#/{{$annotation_type}}/page/{{$annotation['page_no']}}/annotation/{{$annotation['id']}}">
+                                <a style="float: none" href="{{route('contract.detail',['id'=>$contract->open_contracting_id])}}#/{{$annotation_type}}/page/{{$annotation['page_no']}}/annotation/{{$annotation['id']}}">
                                     [Pg {{$annotation['page_no']}}]</a>
                                 <br>
                             @endif
@@ -91,9 +91,9 @@ $route=Request::path();
                         </div>
                         <ul class="dropdown-menu">
 
-                            <li><a href="{{route('contract.download.pdf',['id'=> $contract->guid])}}" >Pdf</a></li>
+                            <li><a href="{{route('contract.download.pdf',['id'=> $contract->open_contracting_id])}}" >Pdf</a></li>
                             @if(env('CATEGORY')!="olc")
-                                <li><a href="{{route('contract.download',['id'=> $contract->guid])}}" >Word File</a></li>
+                                <li><a href="{{route('contract.download',['id'=> $contract->open_contracting_id])}}" >Word File</a></li>
                             @endif
                         </ul>
                     </div>

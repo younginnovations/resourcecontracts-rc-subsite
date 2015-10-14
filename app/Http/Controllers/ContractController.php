@@ -255,8 +255,6 @@ class ContractController extends BaseController
     public function view($contract_id)
     {
         $referrer    = \Request::server('HTTP_REFERER');
-        $contract_id = $this->api->getRealContractId($contract_id);
-
         $back               = is_null($referrer) ? route('contract.view', ['id' => $contract_id]) : $referrer;
         $contract           = new \stdClass();
         $contract->metadata = $this->api->metadata($contract_id);

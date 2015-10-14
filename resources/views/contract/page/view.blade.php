@@ -57,7 +57,7 @@
       var contractTitle = "{{$contract->metadata->contract_name}}";
       var contractApp = new ContractApp({
         contract_id: '{{$contract->metadata->contract_id}}',
-        guid: '{{$contract->metadata->guid}}',
+        guid: '{{$contract->metadata->open_contracting_id}}',
         total_pages: '{{$contract->metadata->total_pages}}',
         esapi: '{{env("ELASTIC_SEARCH_HOST")}}'
       });
