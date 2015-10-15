@@ -131,7 +131,7 @@ class APIService
      */
     public function getAnnotations($contract_id)
     {
-        $resource = sprintf('contract/%d/annotations', $contract_id);
+        $resource = sprintf('contract/%s/annotations', $contract_id);
         $response = $this->apiCall($resource);
 
         return $response;
@@ -146,7 +146,7 @@ class APIService
      */
     public function getTextPage($contract_id, $page_no)
     {
-        $resource = sprintf('contract/%d/text', $contract_id);
+        $resource = sprintf('contract/%s/text', $contract_id);
 
         return $this->apiCall($resource, ['page' => $page_no]);
     }
@@ -158,7 +158,7 @@ class APIService
      */
     public function getAnnotationPage($contract_id, $page_no)
     {
-        $resource = sprintf('contract/%d/annotations', $contract_id);
+        $resource = sprintf('contract/%s/annotations', $contract_id);
 
         return $this->apiCall($resource, ['page' => $page_no], true);
     }
@@ -172,7 +172,7 @@ class APIService
      */
     public function getFullTextSearch($contract_id, $query)
     {
-        $resource = sprintf('contract/%d/searchtext', $contract_id);
+        $resource = sprintf('contract/%s/searchtext', $contract_id);
 
         return $this->apiCall($resource, ['q' => $query], true);
     }
