@@ -350,7 +350,7 @@
     font-size: 12px;
     float: right;
     overflow-y: auto;
-    width: 21%;
+    width: 20%;
     border-left: 1px solid #DCDFE2;
     height: 88vh;
 }
@@ -560,6 +560,10 @@
     height: 46px;
     text-indent: -9999px;
     float: left;
+}
+
+.back:hover {
+    background-color: #1C702A;
 }
 
 .annotation-item-page {
