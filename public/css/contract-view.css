@@ -644,13 +644,13 @@
     margin: 5px 0px;
 }
 
-.annotation-inner-viewer {
+.annotations-viewer {
     float: left;
     width: 25%;
     position: relative;
 }
 
-.annotations-viewer {
+.annotation-inner-viewer {
     height: 87vh;
     overflow-y: scroll;
 }

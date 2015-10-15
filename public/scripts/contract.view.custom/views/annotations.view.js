@@ -433,8 +433,8 @@ var AnnotationsViewer = React.createClass({
     },
     render: function() {
         return(
-            <div className="annotation-inner-viewer">
-                <div className="annotations-viewer" id="annotations-box" style={this.props.style}>
+            <div className="annotations-viewer" id="annotations-box" style={this.props.style}>
+                <div className="annotation-inner-viewer">
                     <AnnotationHeader annotationsCollection={this.props.annotationsCollection} />
                     <AnnotationsSort
                         contractApp={this.props.contractApp}
