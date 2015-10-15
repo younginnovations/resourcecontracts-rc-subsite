@@ -47,33 +47,30 @@
 @stop
 
 @section('js')
-    <script type="text/javascript" src="{{url('js/lib/underscore.js')}}"></script>
-    <script type="text/javascript" src="{{url('js/lib/backbone.js')}}"></script>
-    <script type="text/javascript" src="{{url('js/lib/backbone.fetch-cache.min.js')}}"></script>
-    <script type="text/template" id="country-template">
-        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-            <a href="{{url('countries')}}/<%= code %>">
-                <img width="200" src="{{getFlagUrl()}}<%= code %>.png" />
-                <div class="country-name"><%= name %></div>
-            </a>
-            <div class="contract-count"><%= contract %>
-                <% if (contract > 1){%>
-                contracts
-                <% }else{ %>
-                contract
-                <% } %>
+<script type="text/template" id="country-template">
+    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+        <a href="{{url('countries')}}/<%= code %>">
+            <img width="200" src="{{getFlagUrl()}}<%= code %>.png" />
+            <div class="country-name"><%= name %></div>
+        </a>
+        <div class="contract-count"><%= contract %>
+            <% if (contract > 1){%>
+            contracts
+            <% }else{ %>
+            contract
+            <% } %>
 
-            </div>
-       </div>
-    </script>
-    <script type="text/template" id="resource-template">
-        <li>
-            <input class="resource" name="resource[]" type="checkbox" value="<%= value %>" />
-            <label><%= name %> (<%= contract %>)</label>
-        </li>
-    </script>
-    <script>
-        var APP_URL = '{{url()}}';
-    </script>
-    <script type="text/javascript" src="{{url('js/lib/countries.js')}}"></script>
+        </div>
+   </div>
+</script>
+<script type="text/template" id="resource-template">
+    <li>
+        <input class="resource" name="resource[]" type="checkbox" value="<%= value %>" />
+        <label><%= name %> (<%= contract %>)</label>
+    </li>
+</script>
+<script>
+    var APP_URL = '{{url()}}';
+</script>
+<script type="text/javascript" src="{{url('js/country.min.js')}}"></script>
 @stop

@@ -185,7 +185,7 @@ var AnnotationItem = React.createClass({
             );
         } else {
             return (
-                   <span className="link annotation-item-page" onClick={this.handleAnnotationClick}>, {this.state.pageNo}</span>
+                   <span id={this.state.id} className="link annotation-item-page" onClick={this.handleAnnotationClick}>, {this.state.pageNo}</span>
             );
         }
         // return (

@@ -33,16 +33,16 @@
       return app_url + "/contract/" + this.getContractGuid();
     },
     getMetadataUrl: function() {
-      return this.get('esapi') + "contract/" + this.getContractId() + "/metadata";  
+      return this.get('esapi') + "contract/" + this.getContractGuid() + "/metadata";
     },  
     getAllPageUrl: function() {
-      return this.get('esapi') + "contract/" + this.getContractId() + "/text";
+      return this.get('esapi') + "contract/" + this.getContractGuid() + "/text";
     },
     getAllAnnotationsUrl: function() {
-      return this.get('esapi') + "contract/" + this.getContractId() + "/annotations";
+      return this.get('esapi') + "contract/" + this.getContractGuid() + "/annotations";
     },
     getSearchUrl: function() {
-      return this.get('esapi') + "contract/" + this.getContractId() + "/searchtext"
+      return this.get('esapi') + "contract/" + this.getContractGuid() + "/searchtext"
     },
     getPdfUrl: function() {
       var page_no = parseInt(this.getCurrentPage());
@@ -56,10 +56,10 @@
       return "";
     },
     getLoadAnnotationsUrl: function() {
-      return this.get('esapi') + "contract/" + this.getContractId() + "/annotations"; 
+      return this.get('esapi') + "contract/" + this.getContractGuid() + "/annotations";
     },
     getAnnotationsListAnchor: function() {
-      return app_url + "/contract/" + this.getContractId() + "#annotations";
+      return app_url + "/contract/" + this.getContractGuid() + "#annotations";
     },
     renderStart: function() {
       this.set({"canrender": true});

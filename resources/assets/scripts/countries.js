@@ -214,8 +214,4 @@ $(function () {
         e.preventDefault();
         collection.trigger('search', $(this).val());
     });
-
-
-
-
 });

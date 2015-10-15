@@ -4,7 +4,6 @@ namespace App\Http\Services;
 use GuzzleHttp\Client;
 use GuzzleHttp\Message\Request;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Session;
 
 /**
  * Class APIService
