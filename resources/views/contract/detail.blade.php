@@ -223,7 +223,12 @@
                             </li>
                             <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                                 <label for="">Participation Share</label>
-                                <span>{{_e($company,'participation_share','-')}}</span>
+                                <span>
+                                    <?php
+                                    $ps = _e($company,'participation_share','');
+                                    echo ($ps =='') ? '-' : $ps*100 .'%';
+                                    ?>
+                                    </span>
                             </li>
                             <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                                 <label for="">Operator</label>
@@ -254,7 +259,6 @@
                     <table class="table table-responsive table-contract table-associated-contract">
                         <tbody>
                         <tr>
-
                             @foreach($contract->metadata->parent_document as $parentContract)
 
                                 <td width="70%">
@@ -263,15 +267,11 @@
                                     @else
                                         {{$parentContract->contract_name}} (parent)
                                     @endif
-
                                 </td>
-
                             @endforeach
-
                         </tr>
                         <?php $supportingContracts = _e($contract->metadata, 'supporting_contracts', []);?>
-
-                        @forelse($contract->metadata->supporting_contracts as $supportingContract)
+                        @foreach($contract->metadata->supporting_contracts as $supportingContract)
                             <tr>
                                 <td width="70%">
                                     @if($supportingContract->status=="published")
@@ -280,13 +280,15 @@
                                 </td>
 
                             </tr>
-                        @empty
+                        @endforeach
+
+                        @if(empty($contract->metadata->parent_document) && empty($contract->metadata->supporting_contracts))
                             <tr>
                                 <td class="no-data">
                                     There are no contracts associated.
                                 </td>
                             </tr>
-                        @endforelse
+                        @endif
                         </tbody>
                     </table>
                 </div>
