@@ -206,6 +206,7 @@
     background: #f0f0f0;
     padding: 0 18px;
     border-right: 1px solid #DCDFE2;
+    width: 25%;
 }
 
 .annotations-viewer {

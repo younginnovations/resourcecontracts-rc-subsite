@@ -550,6 +550,7 @@ a {
       th {
         @extend %extend_1;
         font-family: $font_1;
+        font-weight: normal;
         text-transform: uppercase;
         color: $color_cape_cod_60_approx;
         font-size: 12px;
@@ -2141,22 +2142,30 @@ footer {
         content: "";
         border-left: 4px solid transparent;
         border-right: 4px solid transparent;
-        border-bottom: 4px solid rgb(64,64,64);
-        border-bottom: 4px solid rgba(64,64,64,0.2);
+        border-bottom: 4px solid #404040;
+        border-bottom: 4px solid rgba(64, 64, 64, 0.2);
         position: absolute;
-        top: -10px;
-        left: 3px;
+        top: 5px;
+        right: -12px;
+      }
+      &:after {
+        content: "";
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-top: 4px solid #404040;
+        border-top: 4px solid rgba(64, 64, 64, 0.2);
+        top: auto;
+        position: absolute;
+        bottom: 7px;
+        right: -12px;
       }
     }
-    a:last-child {
-      &:before {
-        border-top: 4px solid rgb(64,64,64);
-        border-top: 4px solid rgba(64,64,64,0.2);
-        border-bottom: 4px solid transparent;
-        top: auto;
-        bottom: -5px;
-        left: 0;
-      }
+    .fa-sort-desc,.fa-sort-asc {
+      position: absolute;
+      bottom: 14px;
+      right: -13px;
+      width: 8px;
+      height: 4px;
     }
   }
   td:nth-child(3) {
@@ -2430,22 +2439,6 @@ footer {
         // @extend %extend_31;
       }
     }
-    // tfoot > tr > {
-    //   td {
-    //     @extend %extend_31;
-    //   }
-    //   th {
-    //     @extend %extend_31;
-    //   }
-    // }
-    // thead > tr > {
-    //   td {
-    //     @extend %extend_31;
-    //   }
-    //   th {
-    //     @extend %extend_31;
-    //   }
-    // }
   }
   .table-contract td {
     &:first-child {

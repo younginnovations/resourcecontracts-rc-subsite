@@ -1551,7 +1551,32 @@ footer {
 .table-contract-list th a {
   position: relative;
   display: inline-block; }
+  .table-contract-list th a:before {
+    content: "";
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 4px solid #404040;
+    border-bottom: 4px solid rgba(64, 64, 64, 0.2);
+    position: absolute;
+    top: 5px;
+    right: -12px; }
+  .table-contract-list th a:after {
+    content: "";
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #404040;
+    border-top: 4px solid rgba(64, 64, 64, 0.2);
+    top: auto;
+    position: absolute;
+    bottom: 7px;
+    right: -12px; }
 
+.table-contract-list th .fa-sort-desc, .table-contract-list th .fa-sort-asc {
+  position: absolute;
+  bottom: 14px;
+  right: -12px;
+  width: 8px;
+  height: 4px; }
 
 .table-contract-list td:nth-child(3) {
   min-width: inherit !important; }
@@ -1992,7 +2017,5 @@ input.select2-search__field {
 @media all and (max-height: 820px) {
   .not-found-content {
     padding: 0 0 150px; } }
-
-.fa-black{color:black}
 
 /*# sourceMappingURL=maps/rc-style.css.map */
