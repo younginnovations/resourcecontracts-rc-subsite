@@ -67,7 +67,7 @@
                         <ul>
                             @foreach($resources as $resource)
                                 <li>
-                                    <span><a href="{{route("resource.detail",["key"=>$resource->resource])}}">{{ucfirst($resource->resource)}}</a></span>
+                                    <span><a href="{{route("resource.detail",["key"=> urlencode($resource->resource)])}}">{{ucfirst($resource->resource)}}</a></span>
                                     <span class="count pull-right">{{$resource->contract}}</span>
                                 </li>
                             @endforeach

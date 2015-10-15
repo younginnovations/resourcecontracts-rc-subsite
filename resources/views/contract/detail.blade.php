@@ -21,10 +21,10 @@
                     <ul>
                         @if($contract->pages->total>0)
                             <li class="pull-left">
-                                @if($referrer == route('contract.detail',['id'=>$contract->metadata->guid]))
+                                @if($referrer == route('contract.detail',['id'=>$contract->metadata->open_contracting_id]))
                                     <a href="{{$referrer}}">Back to document</a>
                                 @else
-                                    <a href="{{route('contract.detail',['id'=>$contract->metadata->guid])}}">View Document</a>
+                                    <a href="{{route('contract.detail',['id'=>$contract->metadata->open_contracting_id])}}">View Document</a>
                                 @endif
                             </li>
                         @endif
@@ -41,7 +41,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="{{_e($contract->metadata, 'file_url')}}" target="_blank">Pdf</a></li>
                             @if(_e($contract->metadata, 'word_file') !='' && env('CATEGORY')!="olc")
-                                <li><a href="{{route('contract.download',['id'=> $contract->metadata->guid])}}"
+                                <li><a href="{{route('contract.download',['id'=> $contract->metadata->open_contracting_id])}}"
                                        target="_blank">Word File</a></li>
                             @endif
                         </ul>
@@ -128,7 +128,7 @@
                                 ?>
                                 <span class="resource-list">
                                 @foreach($resource as $res)
-                                        <a href="{{route("resource.detail",['key'=>$res])}}">{{$res}}</a>
+                                        <a href="{{route("resource.detail",['key'=>urlencode($res)])}}">{{$res}}</a>
                                     @endforeach
                             </span>
                             </li>
@@ -258,7 +258,7 @@
 
                                 <td width="70%">
                                     @if($parentContract->status=="published")
-                                        <a href="{{route('contract.detail',['id'=>$parentContract->guid])}}">{{$parentContract->contract_name}}</a> &nbsp; (parent)
+                                        <a href="{{route('contract.detail',['id'=>$parentContract->open_contracting_id])}}">{{$parentContract->contract_name}}</a> &nbsp; (parent)
                                     @else
                                         {{$parentContract->contract_name}} (parent)
                                     @endif
@@ -390,7 +390,7 @@
                                                     @endif
                                                         @foreach($annots as $key => $annotation)
                                                             <?php $annotation_type = isset($annotation->shapes) ? 'pdf' : 'text'; ?>
-                                                            <a  href="{{route('contract.detail',['id'=>$contract->metadata->guid])}}#/{{$annotation_type}}/page/{{$annotation->page_no}}/annotation/{{$annotation->id}}">
+                                                            <a  href="{{route('contract.detail',['id'=>$contract->metadata->open_contracting_id])}}#/{{$annotation_type}}/page/{{$annotation->page_no}}/annotation/{{$annotation->id}}">
                                                                 Pg{{_e($annotation,'page_no')}}</a>@if($key >= 0 && $key < (count($annots)-1)), @endif
                                                         @endforeach
                                                     </p>

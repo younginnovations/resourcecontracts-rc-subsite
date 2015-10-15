@@ -99,7 +99,6 @@ class APIService
      */
     public function contractDetail($contract_id)
     {
-        $contract_id                = $this->getRealContractId($contract_id);
         $contract                   = new \stdClass();
         $contract->metadata         = $this->metadata($contract_id);
         $contract->annotations      = $this->getAnnotations($contract_id);
@@ -117,7 +116,6 @@ class APIService
      */
     public function metadata($contract_id)
     {
-        $contract_id = $this->getRealContractId($contract_id);
         $resource    = sprintf('contract/%s/metadata', $contract_id);
 
         $contract = $this->apiCall($resource);
@@ -399,19 +397,6 @@ class APIService
         $summaries->country_summary = $data;
 
         return $summaries;
-    }
-
-    /**
-     * Get Contract ID
-     *
-     * @param $contract_id
-     * @return mixed
-     */
-    public function getRealContractId($contract_id)
-    {
-        $id = explode('-', $contract_id);
-
-        return $id[0];
     }
 
 }
