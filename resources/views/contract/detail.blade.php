@@ -4,7 +4,9 @@
     <div class="row">
         <div class="col-lg-12 panel-top-wrapper">
             <div class="panel-top-content">
-                <a href="#" class="back contract-back"><span>Go Back</span></a>
+                @if($referrer != '')
+                <a href="{{$referrer}}" class="back contract-back"><span>Go Back</span></a>
+                @endif
                 <div class="pull-left">
                     <div class="breadcrumb-wrapper">
                         <ul>
@@ -22,11 +24,7 @@
                     <ul>
                         @if($contract->pages->total>0)
                             <li class="pull-left">
-                                @if($referrer == route('contract.detail',['id'=>$contract->metadata->open_contracting_id]))
-                                    <a href="{{$referrer}}">Back to document</a>
-                                @else
                                     <a href="{{route('contract.detail',['id'=>$contract->metadata->open_contracting_id])}}">View Document</a>
-                                @endif
                             </li>
                         @endif
                     </ul>
@@ -381,7 +379,8 @@
                                     </div>
                                     <ul class="row">
                                     @foreach($annotations as $text => $annots)
-                                        <?php $a = explode('--',$text);
+                                        <?php
+                                            $a = explode('--',$text);
                                             $preamble =  isset($a[1]) ? $a[1] : '';
                                             $text=  isset($a[0]) ? $a[0] : '';
                                             ?>
@@ -397,8 +396,14 @@
                                                                 Pg{{_e($annotation,'page_no')}}</a>@if($key >= 0 && $key < (count($annots)-1)), @endif
                                                         @endforeach
                                                     </p>
+                                                    <div class="annotation-text">
+                                                        {{$text}}
+                                                        @if($text !='' && $annotation->quote !='')
+                                                        -
+                                                        @endif
+                                                        {{$annotation->quote}}
 
-                                                    <div class="annotation-text">{{$text}}</div>
+                                                    </div>
                                                 </div>
                                             </li>
                                         @endforeach

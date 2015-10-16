@@ -31,9 +31,29 @@ var resource_script = [
 ];
 
 var page_script = [
-    './public/js/lib/summernote/summernote.js',
-    './public/js/lib/editable/bootstrap-editable.min.js',
+    './resources/assets/scripts/lib/summernote.js',
+    './resources/assets/scripts/lib/bootstrap-editable.min.js',
     './resources/assets/scripts/page.js'
+];
+
+var annotation_view_script = [
+    './public/scripts/lib/underscore.js',
+    './public/scripts/lib/backbone.js',
+    './public/scripts/lib/director.min.js',
+    './public/scripts/lib/pdfjs/pdf.js',
+    './public/scripts/contract.view.custom/models/pages.js',
+    './public/scripts/contract.view.custom/models/annotations.js',
+    './public/scripts/contract.view.custom/models/search.js',
+    './public/scripts/contract.view.custom/models/metadata.js',
+    './public/scripts/contract.view.custom/models/contract.js',
+    './public/scripts/contract.view.custom/models/pdf.js',
+    './public/scripts/lib/annotator/annotator-full.min.js',
+    './public/scripts/lib/annotator.plugin.annotorious.js',
+    './public/scripts/contract.view.custom/annotation/annotator.utils.js',
+    './public/scripts/contract.view.custom/annotation/annotator.plugin.event.js',
+    './public/scripts/contract.view.custom/annotation/annotator.plugin.viewer.js',
+    './public/scripts/contract.view.custom/annotation/rc.annotator.js',
+    './public/scripts/contract.view.custom/rc.utils.js'
 ];
 
 /**
@@ -58,13 +78,14 @@ gulp.task('watch', function () {
     gulp.watch(country_script, ['js-resource']);
     gulp.watch(resource_script, ['js-resource']);
     gulp.watch(page_script, ['js-page']);
+    gulp.watch(annotation_view_script, ['js-annotation']);
 
 });
 
-/*
+/*ation-
  * Default task, running just `gulp` will compile the sass,
  */
-gulp.task('default', ['sass', 'watch','js-base','js-country','js-resource','js-page']);
+gulp.task('default', ['sass', 'watch']);
 
 
 gulp.task('js-base', function () {
@@ -105,4 +126,14 @@ gulp.task('js-page', function () {
         .pipe(uglify())
         .pipe(gulp.dest('./public/js'))
         .pipe(notify({message: 'Js-page task complete'}));
+});
+
+gulp.task('js-annotation', function () {
+    return gulp.src(annotation_view_script)
+        .pipe(concat('contract-view.js'))
+        .pipe(gulp.dest('./public/js'))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(uglify())
+        .pipe(gulp.dest('./public/js'))
+        .pipe(notify({message: 'Js-annotation task complete'}));
 });

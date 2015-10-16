@@ -1,6 +1,6 @@
 @section('css')
-<link href="{{url('/js/lib/summernote/summernote.css')}}" rel="stylesheet">
-<link href="{{url('js/lib/editable/bootstrap-editable.css')}}" rel="stylesheet"/>
+<link href="{{url('css/lib/summernote.css')}}" rel="stylesheet">
+<link href="{{url('css/lib/bootstrap-editable.css')}}" rel="stylesheet"/>
     <style>
         .note-editor {overflow: inherit}
         .open>.dropdown-menu {

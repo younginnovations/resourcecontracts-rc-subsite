@@ -315,23 +315,23 @@ var AnnotationsList = React.createClass({
     scrollToCluster: function(cluster) {
         if($('#'+cluster).offset()) {
             var pageOffsetTop = $('#'+cluster).offset().top;
-            var parentTop = $('.annotations-viewer').scrollTop();
-            var parentOffsetTop = $('.annotations-viewer').offset().top
-            $('.annotations-viewer').animate({scrollTop: parentTop - parentOffsetTop + pageOffsetTop},200);
+            var parentTop = $('.annotation-inner-viewer').scrollTop();
+            var parentOffsetTop = $('.annotation-inner-viewer').offset().top
+            $('.annotation-inner-viewer').animate({scrollTop: parentTop - parentOffsetTop + pageOffsetTop},200);
         }
     },
     scrollToAnnotation: function(annotation_id) {
         if(annotation_id) {
             var pageOffsetTop = $('#'+annotation_id).offset().top;
-            var parentTop = $('.annotations-viewer').scrollTop();
-            var parentOffsetTop = $('.annotations-viewer').offset().top
-            $('.annotations-viewer').animate({scrollTop: parentTop - parentOffsetTop + pageOffsetTop},200);
+            var parentTop = $('.annotation-inner-viewer').scrollTop();
+            var parentOffsetTop = $('.annotation-inner-viewer').offset().top
+            $('.annotation-inner-viewer').animate({scrollTop: parentTop - parentOffsetTop + pageOffsetTop},200);
             this.props.contractApp.resetSelectedAnnotation();
         }
     },
     scrollToTop: function(e) {
         e.preventDefault();
-        $('.annotations-viewer').animate({scrollTop: 0}, 500);
+        $('.annotation-inner-viewer').animate({scrollTop: 0}, 500);
     },
     getAnnotationItemsComponent: function(annotationsCollectionForList, showClusterAnyway) {
         var annotationsList = [];
@@ -427,14 +427,14 @@ var AnnotationsViewer = React.createClass({
 
         $('.back-to-top').click(function(event) {
             event.preventDefault();
-            $('.annotations-viewer').animate({scrollTop: 0}, duration);
+            $('.annotation-inner-viewer').animate({scrollTop: 0}, duration);
             return false;
         })
     },
     render: function() {
         return(
-            <div className="annotations-viewer" id="annotations-box" style={this.props.style}>
-                <div className="annotation-inner-viewer">
+            <div className="annotations-viewer" style={this.props.style}>
+                <div className="annotation-inner-viewer" id="annotations-box">
                     <AnnotationHeader annotationsCollection={this.props.annotationsCollection} />
                     <AnnotationsSort
                         contractApp={this.props.contractApp}
@@ -442,8 +442,8 @@ var AnnotationsViewer = React.createClass({
                     <AnnotationsList
                         contractApp={this.props.contractApp}
                         annotationsCollection={this.props.annotationsCollection} />
-                    <a href="#" className="back-to-top btn btn-primary"><i className="fa fa-arrow-up"></i></a>
                 </div>
+                <a href="#" className="back-to-top btn btn-primary"><i className="fa fa-arrow-up"></i></a>
            </div>
         );
     }
