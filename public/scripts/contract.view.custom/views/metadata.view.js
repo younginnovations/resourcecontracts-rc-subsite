@@ -147,7 +147,7 @@ var RelatedDocumentsView = React.createClass({
             moreContracts = "";
         if(this.props.metadata.get("parent_document")) {
             parentContracts = this.props.metadata.get("parent_document").map(function(doc) {
-                var docUrl = app_url + "/contract/" + doc.id;
+                var docUrl = app_url + "/contract/" + doc.open_contracting_id;
                 if(doc.status === "published") {
                     return (
                         <span>
