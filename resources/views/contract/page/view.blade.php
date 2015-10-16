@@ -13,9 +13,10 @@
 @endsection
 @section('js')
     <script src="{{ url('js/contract-view.min.js') }}"></script>
+    <script src="{{ url('scripts/lib/pdfjs/pdf.js') }}"></script>
+    <script src="{{ url('scripts/lib/pdfjs/pdf.worker.js') }}"></script>
     <script src="{{ url('scripts/lib/react/react-with-addons.js') }}"></script>
     <script src="{{ url('scripts/lib/react/JSXTransformer.js') }}"></script>
-    <script src="{{ url('scripts/lib/pdfjs/pdf.worker.js') }}"></script>
     <script type="text/jsx" src="{{ url('scripts/contract.view.custom/views/react.waypoint.js') }}"></script>
     <script type="text/jsx" src="{{ url('scripts/contract.view.custom/views/react.pdf.js') }}"></script>
     <script type="text/jsx" src="{{ url('scripts/contract.view.custom/views/pdf.view.js') }}"></script>

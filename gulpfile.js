@@ -40,7 +40,6 @@ var annotation_view_script = [
     './public/scripts/lib/underscore.js',
     './public/scripts/lib/backbone.js',
     './public/scripts/lib/director.min.js',
-    './public/scripts/lib/pdfjs/pdf.js',
     './public/scripts/contract.view.custom/models/pages.js',
     './public/scripts/contract.view.custom/models/annotations.js',
     './public/scripts/contract.view.custom/models/search.js',
