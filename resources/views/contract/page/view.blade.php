@@ -7,25 +7,15 @@
       @if(env("CATEGORY")=="olc")
           <link href="{{url('css/olc-contract-view.css')}}" rel="stylesheet">
       @endif
-<!--     <link rel="stylesheet" href="{{ url('css/contract-view.css') }}"> -->
 @stop
 @section('content')
     <div id="content"></div>
 @endsection
 @section('js')
-    <script src="{{ url('scripts/lib/jquery.js') }}"></script>
-    <script src="{{ url('scripts/lib/underscore.js') }}"></script>
-    <script src="{{ url('scripts/lib/backbone.js') }}"></script>
-
-    <script src="{{ url('scripts/lib/director.min.js') }}"></script>
-    
+    <script src="{{ url('js/contract-view.min.js') }}"></script>
     <script src="{{ url('scripts/lib/react/react-with-addons.js') }}"></script>
     <script src="{{ url('scripts/lib/react/JSXTransformer.js') }}"></script>
-
-    <script src="{{ url('scripts/lib/pdfjs/pdf.js') }}"></script>
     <script src="{{ url('scripts/lib/pdfjs/pdf.worker.js') }}"></script>
-
-    <script src="{{ url('scripts/contract.view.custom/rc.utils.js') }}"></script>
     <script type="text/jsx" src="{{ url('scripts/contract.view.custom/views/react.waypoint.js') }}"></script>
     <script type="text/jsx" src="{{ url('scripts/contract.view.custom/views/react.pdf.js') }}"></script>
     <script type="text/jsx" src="{{ url('scripts/contract.view.custom/views/pdf.view.js') }}"></script>
@@ -34,19 +24,6 @@
     <script type="text/jsx" src="{{ url('scripts/contract.view.custom/views/text.search.js') }}"></script>
     <script type="text/jsx" src="{{ url('scripts/contract.view.custom/views/annotations.view.js') }}"></script>
 
-    <script src="{{ url('scripts/contract.view.custom/models/pages.js') }}"></script>
-    <script src="{{ url('scripts/contract.view.custom/models/annotations.js') }}"></script>
-    <script src="{{ url('scripts/contract.view.custom/models/search.js') }}"></script>
-    <script src="{{ url('scripts/contract.view.custom/models/metadata.js') }}"></script>
-    <script src="{{ url('scripts/contract.view.custom/models/contract.js') }}"></script>
-    <script src="{{ url('scripts/contract.view.custom/models/pdf.js') }}"></script>
-
-    <script src="{{ url('scripts/lib/annotator/annotator-full.min.js') }}"></script>
-    <script src="{{ url('scripts/lib/annotator.plugin.annotorious.js') }}"></script>
-    <script src="{{ url('scripts/contract.view.custom/annotation/annotator.utils.js') }}"></script>
-    <script src="{{ url('scripts/contract.view.custom/annotation/annotator.plugin.event.js') }}"></script>
-    <script src="{{ url('scripts/contract.view.custom/annotation/annotator.plugin.viewer.js') }}"></script>
-    <script src="{{ url('scripts/contract.view.custom/annotation/rc.annotator.js') }}"></script>
 
     <script type="text/jsx">
       var debug = function() {
