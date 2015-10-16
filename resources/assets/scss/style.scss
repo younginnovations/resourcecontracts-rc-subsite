@@ -514,6 +514,9 @@ a {
 .table {
   > {
     tbody > tr > {
+      &:only-child {
+        border: 0;
+      }
       td {
         @extend %extend_1;
         &:first-child {
@@ -522,6 +525,9 @@ a {
         &.no-data {
           background: none !important;
           padding-left: 30px !important;
+          border: 0;
+          min-width: inherit;
+          width: inherit;
           border: 0;
         }
         > a {
@@ -1473,7 +1479,7 @@ footer {
   .title {
     font-family: $font_1;
     color: $color_cape_cod_70_approx;
-    padding: 20px 0 12px;
+    padding: 0 0 12px;
   }
   > ul > li {
     @extend %extend_19;
@@ -2510,7 +2516,7 @@ footer {
     &:first-child {
       background-position: 36px 17px;
     }
-    &:nth-child(2) a {
+    &:nth-child(2) > a {
       background: $url_5 no-repeat 0 4px;
       padding-left: 20px;
        display: inline-block;
