@@ -312,9 +312,15 @@ a {
     background-color: #F37356 !important;
     color: #fff; }
 
+.table > tbody > tr > :only-child {
+  border: 0; }
+
 .table > tbody > tr > td.no-data {
   background: none !important;
   padding-left: 30px !important;
+  border: 0;
+  min-width: inherit;
+  width: inherit;
   border: 0; }
 
 .table > tbody > tr > td > a {
@@ -1041,7 +1047,7 @@ footer {
   .annotation-block .title {
     font-family: Open-Sans-Bold;
     color: rgba(64, 64, 64, 0.7);
-    padding: 20px 0 12px; }
+    padding: 0 0 12px; }
   .annotation-block > ul > li > a:hover {
     background: #e6e5d5;
     text-decoration: none; }
@@ -1820,7 +1826,7 @@ footer {
     min-height: 51px; }
   .table-contract td:first-child {
     background-position: 36px 17px; }
-  .table-contract td:nth-child(2) a {
+  .table-contract td:nth-child(2) > a {
     background: url(../../images/ic-file.png) no-repeat 0 4px;
     padding-left: 20px;
     display: inline-block; }
