@@ -283,7 +283,7 @@
                         @if(empty($contract->metadata->parent_document) && empty($contract->metadata->supporting_contracts))
                             <tr>
                                 <td class="no-data">
-                                    There are no contracts associated.
+                                    No associated contracts available.
                                 </td>
                             </tr>
                         @endif
@@ -386,24 +386,22 @@
                                             ?>
                                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                                 <div class="pull-left">
+                                                    <div class="annotation-text">
+                                                        {{$text}}
+                                                    </div>
+
                                                     <p class="annotation-preamle">
                                                     @if($preamble !='')
-                                                        {{$preamble}},
+                                                        {{$preamble}}
                                                     @endif
+                                                        <p>
                                                         @foreach($annots as $key => $annotation)
                                                             <?php $annotation_type = isset($annotation->shapes) ? 'pdf' : 'text'; ?>
                                                             <a  href="{{route('contract.detail',['id'=>$contract->metadata->open_contracting_id])}}#/{{$annotation_type}}/page/{{$annotation->page_no}}/annotation/{{$annotation->id}}">
-                                                                Pg{{_e($annotation,'page_no')}}</a>@if($key >= 0 && $key < (count($annots)-1)), @endif
+                                                                Page {{_e($annotation,'page_no')}}</a>@if($key >= 0 && $key < (count($annots)-1)), @endif
                                                         @endforeach
+                                                        </p>
                                                     </p>
-                                                    <div class="annotation-text">
-                                                        {{$text}}
-                                                        @if($text !='' && $annotation->quote !='')
-                                                        -
-                                                        @endif
-                                                        {{$annotation->quote}}
-
-                                                    </div>
                                                 </div>
                                             </li>
                                         @endforeach

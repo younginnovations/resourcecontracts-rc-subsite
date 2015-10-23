@@ -97,7 +97,7 @@ var MetadataView = React.createClass({
                         <span><a href={sigYearLink}>{this.props.metadata.get("signature_year") || "-"}</a></span>
                     </div>
                     <div className="metadata-resource">
-                        <span>Resources</span>
+                        <span>Resource</span>
                         <span>{resources}</span>
                     </div>
                     <div className="metadata-type-contract">

@@ -14,7 +14,7 @@ $route=Request::path();
     <th></th>
     <th width="20%"><a href="{{appendInUrl($route,$url,"country",$order)}}">Country {!!show_arrow($order, $sortBy=='country')!!}</a></th>
     <th><a href="{{appendInUrl($route,$url,"year",$order)}}">Year {!!show_arrow($order, $sortBy=='year')!!}</a></th>
-    <th width="15%"><a href="{{appendInUrl($route,$url,"resource",$order)}}">Resource Type {!!show_arrow($order, $sortBy=='resource')!!}</a> </th>
+    <th width="15%"><a href="{{appendInUrl($route,$url,"resource",$order)}}">Resource {!!show_arrow($order, $sortBy=='resource')!!}</a> </th>
     <th width="15%"><a href="{{appendInUrl($route,$url,"contract_type",$order)}}">Contract Type {!!show_arrow($order, $sortBy=='contract_type')!!}</a></th>
     </thead>
     <tbody>

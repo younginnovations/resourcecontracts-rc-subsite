@@ -15,7 +15,7 @@ if ($path[0] == "resource") {
     <th></th>
     <th><a href="{{appendInUrl($route,$url,"contract_name",$order)}}">Document {!!show_arrow($order, $sortBy=='contract_name')!!}</a></th>
     <th><a href="{{appendInUrl($route,$url,"year",$order)}}">Year {!!show_arrow($order, $sortBy=='year')!!}</a></th>
-    <th><a href="{{appendInUrl($route,$url,"resource",$order)}}">Resource Type {!!show_arrow($order, $sortBy=='resource')!!}</a></th>
+    <th><a href="{{appendInUrl($route,$url,"resource",$order)}}">Resource {!!show_arrow($order, $sortBy=='resource')!!}</a></th>
     <th><a href="{{appendInUrl($route,$url,"contract_type",$order)}}">Contract Type {!!show_arrow($order, $sortBy=='contract_type')!!}</a></th>
     </thead>
     <tbody>

@@ -9,7 +9,7 @@
                     <div class="breadcrumb-wrapper">
                         <ul>
                             <li><a href="{{url()}}">Home</a></li>
-                            <li><a href="{{route('resources')}}">Resources</a></li>
+                            <li><a href="{{route('resources')}}">Resource</a></li>
                             <li>{{ucfirst($resource)}}</li>
                         </ul>
                     </div>
@@ -26,7 +26,7 @@
                         <form action="{{url('search')}}" method="get" class="search-form filter-form">
                             <div class="form-group">
                                 <button type="submit" class="btn btn-filter-search pull-left"></button>
-                                <input type="text" name="q" class="form-control pull-left" placeholder="Find a contract {{ucfirst($resource)}}...">
+                                <input type="text" name="q" class="form-control pull-left" placeholder="Find contracts in {{ucfirst($resource)}} ...">
                                 <input type="hidden" name="resource" value="{{$resource}}" />
                             </div>
                         </form>
@@ -48,7 +48,7 @@
                         <a href="{{route('contract.metadata.download',['id'=>implode(',',$contract_id)])}}">Download as csv</a>
                     </div>
                     @endif
-                    <div class="panel-heading">Contracts of {{ucfirst($resource)}}</div>
+                    <div class="panel-heading">Contracts for {{ucfirst($resource)}}</div>
                     <div class="panel-body">
                         @include('contract.partials.rccontractlist')
                         @include('contract.partials.pagination', ['total_item' => $contracts->total, 'per_page'=>$contracts->per_page, 'current_page' => $currentPage ])
