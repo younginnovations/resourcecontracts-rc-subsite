@@ -162,7 +162,7 @@ var AnnotationItem = React.createClass({
                     <span className="link annotation-category-fr" onClick={this.handleAnnotationClick}>{this.state.categoryFr}</span>
                     <span className="annotation-item-content">{showText}<nobr><a className="annotation-item-ellipsis" href="#" onClick={this.handleEllipsis} dangerouslySetInnerHTML={{__html: ellipsistext}}></a></nobr></span>
                     <span className="annotation-item-preamble">{this.state.preamble}</span>
-                    <span className="link annotation-item-page" onClick={this.handleAnnotationClick}>Page: {this.state.pageNo}</span>
+                    <span className="link annotation-item-page" onClick={this.handleAnnotationClick}>Page {this.state.pageNo}</span>
                 </div>
             );
         } else if (this.props.annotation.attributes.category_key !== this.props.prevAnnotation.attributes.category_key) {
@@ -172,7 +172,7 @@ var AnnotationItem = React.createClass({
                     <span className="link annotation-category-fr" onClick={this.handleAnnotationClick}>{this.state.categoryFr}</span>
                     <span className="annotation-item-content" >{showText}<nobr><a className="annotation-item-ellipsis" href="#" onClick={this.handleEllipsis} dangerouslySetInnerHTML={{__html: ellipsistext}}></a></nobr></span>
                     <span className="annotation-item-preamble">{this.state.preamble}</span>
-                    <span className="link annotation-item-page" onClick={this.handleAnnotationClick}>Page: {this.state.pageNo}</span>
+                    <span className="link annotation-item-page" onClick={this.handleAnnotationClick}>Page {this.state.pageNo}</span>
                 </div>
             );
         } else if (this.props.annotation.attributes.text !== this.props.prevAnnotation.attributes.text) {
@@ -180,7 +180,7 @@ var AnnotationItem = React.createClass({
                 <div className={currentAnnotationClass} id={this.state.id}>
                     <span className="annotation-item-content">{showText}<nobr><a className="annotation-item-ellipsis" href="#" onClick={this.handleEllipsis} dangerouslySetInnerHTML={{__html: ellipsistext}}></a></nobr></span>
                     <span className="annotation-item-preamble">{this.state.preamble}</span>
-                    <span className="link annotation-item-page" onClick={this.handleAnnotationClick}>Page: {this.state.pageNo}</span>
+                    <span className="link annotation-item-page" onClick={this.handleAnnotationClick}>Page {this.state.pageNo}</span>
                 </div>
             );
         } else {

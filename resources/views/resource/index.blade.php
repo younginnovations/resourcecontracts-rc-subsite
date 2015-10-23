@@ -22,7 +22,7 @@
                         <form class="search-form filter-form">
                             <div class="form-group">
                                 <button type="submit" class="btn btn-filter-search pull-left"></button>
-                                <input type="text" class="form-control search pull-left" placeholder="Filter by resource name...">
+                                <input type="text" class="form-control search pull-left" placeholder="Filter by resource ...">
                             </div>
                         </form>
                     </div>

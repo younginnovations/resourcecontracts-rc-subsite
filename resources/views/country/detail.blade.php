@@ -29,7 +29,7 @@
                         <form action="{{url('search')}}" method="GET" class="search-form filter-form">
                             <div class="form-group">
                                 <button type="submit" class="btn btn-filter-search pull-left"></button>
-                                <input type="text" name="q" class="form-control pull-left" placeholder="Find a contract in {{@trans('country')[strtoupper($country)]}}...">
+                                <input type="text" name="q" class="form-control pull-left" placeholder="Find contracts in {{@trans('country')[strtoupper($country)]}}...">
                                 <input type="hidden" name="country" value="{{$country}}" />
                             </div>
                         </form>
