@@ -283,7 +283,7 @@
                         @if(empty($contract->metadata->parent_document) && empty($contract->metadata->supporting_contracts))
                             <tr>
                                 <td class="no-data">
-                                    No associated contracts available.
+                                    No associated documents available.
                                 </td>
                             </tr>
                         @endif
