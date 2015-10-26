@@ -413,7 +413,7 @@ var AnnotationsViewer = React.createClass({
         e.preventDefault();
         this.props.contractApp.trigger("annotations:scroll-to-top");
     },
-    componentDidMount() {
+    componentDidMount: function() {
         var offset = 150;
         var duration = 200;
 
