@@ -145,13 +145,19 @@ $(document).ready(function () {
         var countryLine = $('.country-detail-wrapper').height();
         $('.country-contract-wrap').css('height', countryLine);
     }
+    else {
+        $('.country-contract-wrap').css('height', 'auto');
+    }
 
-    $(window).on('resize', function () {
+    $(window).resize(function(){
         if ($(window).width() > 992) {
             var countryLine = $('.country-detail-wrapper').height();
             $('.country-contract-wrap').css('height', countryLine);
         }
-    });
+        else {
+            $('.country-contract-wrap').css('height', 'auto');
+        }
+    })
 
     $("#no-pin-message").each(function () {
         if (!$(this).text().trim().length) {

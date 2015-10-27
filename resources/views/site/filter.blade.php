@@ -17,7 +17,7 @@
     </div>
 
     <div class="row">
-        <div class="filter-wrapper" style="min-height: 135px">
+        <div class="filter-wrapper advance-filter-wrapper" style="min-height: 135px">
             <div class="col-lg-12">
                 <div class="filter-country-wrap" style="display: none">
                   @include('layout.partials.search', ['searchPage' => true])
