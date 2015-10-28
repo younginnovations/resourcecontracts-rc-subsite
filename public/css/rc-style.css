@@ -1876,7 +1876,8 @@ footer {
   .contract-search-number-wrap {
     top: 140px; }
   .advance-filter-wrapper {
-    margin-top: 47px; }
+    margin-top: 47px;
+    min-height: 135px; }
   .country-detail-wrapper {
     padding-top: 60px; }
   .country-contract-wrap .download-csv {
