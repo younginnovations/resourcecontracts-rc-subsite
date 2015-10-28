@@ -8,7 +8,7 @@
                 <a href="{{$referrer}}" class="back contract-back"><span>Go Back</span></a>
                 @endif
                 <div class="pull-left">
-                    <div class="breadcrumb-wrapper">
+                    <div class="breadcrumb-wrapper contract-breadcrumb-wrapper">
                         <ul>
                             <li><a href="{{url()}}">Home</a></li>
                             <li><a href="{{route('contracts')}}">Contracts</a></li>

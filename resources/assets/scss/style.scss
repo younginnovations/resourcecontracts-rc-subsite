@@ -150,7 +150,7 @@ $url_17: url(../../images/ic-delete.png);
 //.country-inner-wrap, .resource-inner-wrap
 %extend_6 {
   color: $white;
-  font: 56px/76px $font_2;
+  font: 52px/76px $font_2;
   margin-bottom: 20px;
 }
 
@@ -1271,6 +1271,9 @@ footer {
 }
 .country-contract-wrap {
   position: relative;
+  .panel-heading {
+    cursor: auto;
+  }
 }
 .country-detail-wrapper {
   padding: 0;
@@ -2247,6 +2250,9 @@ footer {
     color: rgba(255, 255, 255, 0.36);
     font-size: 11px;
     padding: 0 26px;
+    a {
+      color: rgba(255, 255, 255, 0.36);
+    }
   }
 }
 
@@ -2447,6 +2453,9 @@ footer {
     display: block;
     tr {
       border-bottom: 1px solid $color_gray_nurse_approx;
+      &:only-child {
+        border: 0;
+      }
       td {
         display: block;
         border: none;
@@ -2568,7 +2577,7 @@ footer {
     display: none;
   }
 }
-@media all and(max-width: 550px) {
+@media all and(max-width: 551px) {
   .contract-number-wrap {
     width: 100%;
     border-radius: 0;
@@ -2582,6 +2591,10 @@ footer {
       font-size: 22px;
     }
   } 
+  .contract-breadcrumb-wrapper {
+    margin-top: -70px;
+    margin-left: 60px;
+  }
   .contract-search-number-wrap {
     top: 140px;
   }
