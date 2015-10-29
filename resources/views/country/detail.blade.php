@@ -1,3 +1,7 @@
+<?php
+use Illuminate\Support\Facades\Lang;
+
+?>
 @extends('layout.app-full')
 
 @section('content')
@@ -8,8 +12,8 @@
                 <div class="pull-left">
                     <div class="breadcrumb-wrapper">
                         <ul>
-                            <li><a href="{{url()}}">Home</a></li>
-                            <li><a href="{{route('countries')}}">Countries</a></li>
+                            <li><a href="{{url()}}">@lang('global.home')</a></li>
+                            <li><a href="{{route('countries')}}">@lang('global.countries')</a></li>
                             <li>{{@trans('country')[strtoupper($country)]}}</li>
                         </ul>
                     </div>
@@ -29,7 +33,8 @@
                         <form action="{{url('search')}}" method="GET" class="search-form filter-form">
                             <div class="form-group">
                                 <button type="submit" class="btn btn-filter-search pull-left"></button>
-                                <input type="text" name="q" class="form-control pull-left" placeholder="Find contracts in {{@trans('country')[strtoupper($country)]}}...">
+                                <input type="text" name="q" class="form-control pull-left" placeholder="@lang('countriespage.find_contract') {{@trans('country')[strtoupper($country)]}}...">
+
                                 <input type="hidden" name="country" value="{{$country}}" />
                             </div>
                         </form>
@@ -37,7 +42,7 @@
                 </div>
             </div>
             <div class="contract-number-wrap">
-                <span>{{$contracts->total}}</span> @if($contracts->total == 1)contract @else Contracts @endif
+                <span>{{$contracts->total}}</span> {{ Lang::choice('global.contracts', $contracts->total) }}
             </div>
         </div>
     </div>

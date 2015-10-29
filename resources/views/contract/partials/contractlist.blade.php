@@ -4,18 +4,22 @@ $order=\Illuminate\Support\Facades\Input::get('order','desc');
 $sortBy=\Illuminate\Support\Facades\Input::get('sortby','year');
 $route=Request::path();
 
+
+
 ?>
 <table class="table table-responsive table-contract table-contract-list">
     <thead>
     <th></th>
     <th width="50%">
-        <a href="{{appendInUrl($route,$url,"contract_name",$order)}}">Document {!!show_arrow($order, $sortBy=='contract_name')!!}</a>
+        <a href="{{appendInUrl($route,$url,"contract_name",$order)}}">@lang('global.documents') {!!show_arrow($order, $sortBy=='contract_name')!!}</a>
     </th>
     <th></th>
-    <th width="20%"><a href="{{appendInUrl($route,$url,"country",$order)}}">Country {!!show_arrow($order, $sortBy=='country')!!}</a></th>
-    <th><a href="{{appendInUrl($route,$url,"year",$order)}}">Year {!!show_arrow($order, $sortBy=='year')!!}</a></th>
-    <th width="15%"><a href="{{appendInUrl($route,$url,"resource",$order)}}">Resource {!!show_arrow($order, $sortBy=='resource')!!}</a> </th>
-    <th width="15%"><a href="{{appendInUrl($route,$url,"contract_type",$order)}}">Contract Type {!!show_arrow($order, $sortBy=='contract_type')!!}</a></th>
+
+    <th width="20%"><a href="{{appendInUrl($route,$url,"country",$order)}}">@lang('global.country') {!!show_arrow($order, $sortBy=='country')!!}</a></th>
+    <th><a href="{{appendInUrl($route,$url,"year",$order)}}">@lang('global.year') {!!show_arrow($order, $sortBy=='year')!!}</a></th>
+    <th width="15%"><a href="{{appendInUrl($route,$url,"resource",$order)}}">@lang('global.resource') {!!show_arrow($order, $sortBy=='resource')!!}</a> </th>
+    <th width="15%"><a href="{{appendInUrl($route,$url,"contract_type",$order)}}">@lang('contract.contract_type') {!!show_arrow($order, $sortBy=='contract_type')!!}</a></th>
+
     </thead>
     <tbody>
     @forelse($contracts->results as $contract)

@@ -17,13 +17,13 @@ if (!isset($summary)) {
         </li>
         <li class="contracts">
             <a href="{{url('contracts')}}">
-                <span>All Contracts</span>
+                <span>@lang('sidebar.all_contracts')</span>
 
                 <small class="label pull-right">{{$summary->contract_count}}</small>
             </a>
         </li>
         <li class="countries">
-            <label>Countries</label>
+            <label>@lang('global.countries')</label>
             <ul>
                 @foreach(array_slice($summary->country_summary, 0, 10, true) as $country)
 
@@ -40,7 +40,7 @@ if (!isset($summary)) {
             </ul>
         </li>
         <li class="resources">
-            <label>Resources</label>
+            <label>@lang('global.resources')</label>
             <ul>
                 @foreach(array_slice($summary->resource_summary,0,10,true) as $resource)
                     <li>
@@ -56,7 +56,7 @@ if (!isset($summary)) {
             </ul>
         </li>
         <li class="year">
-            <label>Year</label>
+            <label>@lang('global.year')</label>
             <ul>
                 @foreach(array_slice($summary->year_summary, 0, 10, true) as $year)
                     <li>
