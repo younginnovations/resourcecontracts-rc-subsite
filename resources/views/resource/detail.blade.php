@@ -63,7 +63,7 @@
                         <ul>
                         @foreach($countries as $country)
                             <li>
-                                <span><a href="{{route("country.detail",["key"=>$country->code])}}">{{trans('country')[strtoupper(ucfirst($country->code))]}}</a></span>
+                                <span><a href="{{route("search")}}?q=&resource%5B%5D={{urlencode($resource)}}&country%5B%5D={{urlencode($country->code)}}">{{trans('country')[strtoupper(ucfirst($country->code))]}}</a></span>
                                 <span class="count pull-right">{{$country->contract}}</span>
                             </li>
                         @endforeach
