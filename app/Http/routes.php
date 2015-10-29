@@ -1,12 +1,12 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
 | SITE Routes
 |--------------------------------------------------------------------------
 |
 */
-
 $app->get('/', ['as' => 'home', 'uses' => 'SiteController@home']);
 $app->get('/countries', ['as' => 'countries', 'uses' => 'CountryController@index']);
 $app->get('/countries/{key}', ['as' => 'country.detail', 'uses' => 'CountryController@detail']);

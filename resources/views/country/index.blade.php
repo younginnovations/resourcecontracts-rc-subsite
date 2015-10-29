@@ -7,8 +7,8 @@
                 <div class="pull-left">
                     <div class="breadcrumb-wrapper">
                         <ul>
-                            <li><a href="{{url()}}">Home</a></li>
-                            <li>Countries</li>
+                            <li><a href="{{url()}}">@lang('global.home')</a></li>
+                            <li>@lang('global.countries')</li>
                         </ul>
                     </div>
                     <div class="panel-title">
@@ -22,14 +22,14 @@
                         <form class="search-form filter-form">
                             <div class="form-group">
                                 <button type="submit" class="btn btn-filter-search pull-left"></button>
-                                <input type="text" class="form-control search pull-left" placeholder="Filter by country ...">
+                          <input type="text" class="form-control search pull-left" placeholder="@lang('countriespage.filter_by_contry_name')">
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="col-xs-5 col-sm-3 col-md-3 col-lg-2 pull-right">
                     <div class="filter-resource-wrap">
-                        <div class="filter-label" data-toggle="collapse-side" data-target=".side-collapse" data-target-2=".side-collapse-container">Filter by Resources<i></i></div>
+                        <div class="filter-label" data-toggle="collapse-side" data-target=".side-collapse" data-target-2=".side-collapse-container">@lang('countriespage.filter_by_resources')<i></i></div>
                     </div>
                     <div class="side-collapse in">
                         <ul id="resources">
@@ -55,9 +55,9 @@
         </a>
         <div class="contract-count"><%= contract %>
             <% if (contract > 1){%>
-            contracts
+            @lang('countriespage.contracts')
             <% }else{ %>
-            contract
+            @lang('countriespage.contract')
             <% } %>
 
         </div>
