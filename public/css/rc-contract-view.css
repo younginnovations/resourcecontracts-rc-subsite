@@ -249,13 +249,14 @@
 .metadata-view > div:first-child .metadata-view-footer {
     font-size: 10px;
     text-transform: none;
-    padding: 5px 10px 20px;
+    padding: 5px 10px 0;
 }
 
 .metadata-view > div:first-child {
     background: transparent;
     padding-left: 0;
     padding-right: 0;
+    overflow: hidden;
 }
 
 .metadata-view > div:first-child:before {

@@ -150,7 +150,7 @@ $url_17: url(../../images/ic-delete.png);
 //.country-inner-wrap, .resource-inner-wrap
 %extend_6 {
   color: $white;
-  font: 56px/76px $font_2;
+  font: 52px/76px $font_2;
   margin-bottom: 20px;
 }
 
@@ -664,7 +664,7 @@ a {
   padding-left: 30px;
 }
 .row-top-content {
-  padding: 152px 40px 200px;
+  padding: 100px 40px;
 }
 .tagline {
   font-size: 26px;
@@ -673,9 +673,9 @@ a {
   margin-bottom: 36px;
   word-wrap: break-word;
   span {
-    font-size: 66px;
+    font-size: 50px;
     font-family: $font_2;
-    line-height: 82px;
+    line-height: 60px;
     display: block;
   }
 }
@@ -1002,7 +1002,7 @@ footer {
 .download-csv {
   position: absolute;
   bottom: -20px;
-  right: 50px;
+  right: 40px;
   background: $white;
   border: 1px solid $color_link_color;
   border: 1px solid $color_burnt_sienna_20_approx;
@@ -1270,8 +1270,10 @@ footer {
   }
 }
 .country-contract-wrap {
-  border-right: 1px solid $concrete;
   position: relative;
+  .panel-heading {
+    cursor: auto;
+  }
 }
 .country-detail-wrapper {
   padding: 0;
@@ -2248,11 +2250,25 @@ footer {
     color: rgba(255, 255, 255, 0.36);
     font-size: 11px;
     padding: 0 26px;
+    a {
+      color: rgba(255, 255, 255, 0.36);
+    }
   }
 }
 
 .panel-top-content > .pull-left {
   width: 90%;
+}
+
+@media all and(min-width: 380px) {
+  .tagline span {
+    font-size: 66px;
+    line-height: 82px;
+  }
+
+  .row-top-content {
+    padding: 152px 40px 200px;
+  }
 }
 
 @media all and(min-width: 480px) {
@@ -2314,6 +2330,9 @@ footer {
       //Instead of the line below you could use @include border-bottom-right-radius($radius)
       border-bottom-right-radius: 0;
     }
+  }
+  .country-detail-wrapper {
+    display: inline-block;
   }
   .btn-search, .btn-search:hover, .btn-search:focus {
         width: 200px;
@@ -2398,6 +2417,9 @@ footer {
   .footer-note {
     padding: 0 15px 10px;
   }
+  .country-contract-wrap {
+    border-right: 1px solid $concrete;
+  }
 }
 @media all and(min-width: 1200px) {
   .country-list-wrap {
@@ -2431,6 +2453,9 @@ footer {
     display: block;
     tr {
       border-bottom: 1px solid $color_gray_nurse_approx;
+      &:only-child {
+        border: 0;
+      }
       td {
         display: block;
         border: none;
@@ -2552,11 +2577,38 @@ footer {
     display: none;
   }
 }
-@media all and(max-width: 550px) {
-  .breadcrumb-wrapper {
+@media all and(max-width: 551px) {
+  .contract-number-wrap {
+    width: 100%;
+    border-radius: 0;
+    border: 0;
+    left: 0;
+    top: 129px;
+    height: auto;
+    padding: 0;
+    span {
+      display: inline-block;
+      font-size: 22px;
+    }
+  } 
+  .contract-breadcrumb-wrapper {
     margin-top: -70px;
     margin-left: 60px;
-  }  
+  }
+  .contract-search-number-wrap {
+    top: 140px;
+  }
+  .advance-filter-wrapper {
+    margin-top: 47px;
+    min-height: 135px;
+  }
+  .country-detail-wrapper {
+    padding-top: 60px;
+  }
+  .country-contract-wrap .download-csv {
+    right: 10px;
+    top: -4px;
+  }
   .contract-panel-title {
     margin-top: 26px;
     margin-left: -26px;
@@ -2830,6 +2882,13 @@ input.select2-search__field {
     display: inline-block;
   }
 }
+
+@media all and (min-width: 551px) and (max-width:992px) {
+  .country-contract-wrap .download-csv {
+    right: 156px;
+  }
+}
+
 
 @media all and (max-height: 820px) {
   .not-found-content {

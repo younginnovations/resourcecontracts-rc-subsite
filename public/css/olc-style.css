@@ -49,7 +49,7 @@
 
 .country-inner-wrap, .resource-inner-wrap {
   color: #fff;
-  font: 56px/76px Open-Sans-Light;
+  font: 52px/76px Open-Sans-Light;
   margin-bottom: 20px; }
 
 .country-inner-wrap p, .resource-inner-wrap p {
@@ -424,7 +424,7 @@ a {
   padding-left: 30px; }
 
 .row-top-content {
-  padding: 152px 40px 200px; }
+  padding: 100px 40px; }
 
 .tagline {
   font-size: 26px;
@@ -433,9 +433,9 @@ a {
   margin-bottom: 36px;
   word-wrap: break-word; }
   .tagline span {
-    font-size: 66px;
+    font-size: 50px;
     font-family: Open-Sans-Light;
-    line-height: 82px;
+    line-height: 60px;
     display: block; }
 
 .btn-search:hover {
@@ -676,7 +676,7 @@ footer {
 .download-csv {
   position: absolute;
   bottom: -20px;
-  right: 50px;
+  right: 40px;
   background: #fff;
   border: 1px solid #217B46;
   border: 1px solid rgba(243, 115, 86, 0.2);
@@ -896,8 +896,9 @@ footer {
     padding: 0; }
 
 .country-contract-wrap {
-  border-right: 1px solid #f2f2f2;
   position: relative; }
+  .country-contract-wrap .panel-heading {
+    cursor: auto; }
 
 .country-detail-wrapper {
   padding: 0; }
@@ -1659,9 +1660,18 @@ footer {
     color: rgba(255, 255, 255, 0.36);
     font-size: 11px;
     padding: 0 26px; }
+    .license-buttons p a {
+      color: rgba(255, 255, 255, 0.36); }
 
 .panel-top-content > .pull-left {
   width: 90%; }
+
+@media all and (min-width: 380px) {
+  .tagline span {
+    font-size: 66px;
+    line-height: 82px; }
+  .row-top-content {
+    padding: 152px 40px 200px; } }
 
 @media all and (min-width: 480px) {
   .filter-label {
@@ -1705,6 +1715,8 @@ footer {
               border-top-right-radius: 0;
       -webkit-border-bottom-right-radius: 0;
               border-bottom-right-radius: 0; }
+  .country-detail-wrapper {
+    display: inline-block; }
   .btn-search, .btn-search:hover, .btn-search:focus {
     width: 200px; }
   .search-page-input-wrapper button {
@@ -1754,7 +1766,9 @@ footer {
   .contract-number-wrap {
     right: 102px; }
   .footer-note {
-    padding: 0 15px 10px; } }
+    padding: 0 15px 10px; }
+  .country-contract-wrap {
+    border-right: 1px solid #f2f2f2; } }
 
 @media all and (min-width: 1200px) {
   .country-list-wrap .col-lg-2:nth-child(-n+6) {
@@ -1779,6 +1793,8 @@ footer {
     display: block; }
     table tr {
       border-bottom: 1px solid #eaeaea; }
+      table tr:only-child {
+        border: 0; }
       table tr td {
         display: block;
         border: none;
@@ -1857,10 +1873,32 @@ footer {
   .filter-wrapper > .col-lg-2 {
     display: none; } }
 
-@media all and (max-width: 550px) {
-  .breadcrumb-wrapper {
+@media all and (max-width: 551px) {
+  .contract-number-wrap {
+    width: 100%;
+    -webkit-border-radius: 0;
+            border-radius: 0;
+    border: 0;
+    left: 0;
+    top: 129px;
+    height: auto;
+    padding: 0; }
+    .contract-number-wrap span {
+      display: inline-block;
+      font-size: 22px; }
+  .contract-breadcrumb-wrapper {
     margin-top: -70px;
     margin-left: 60px; }
+  .contract-search-number-wrap {
+    top: 140px; }
+  .advance-filter-wrapper {
+    margin-top: 47px;
+    min-height: 135px; }
+  .country-detail-wrapper {
+    padding-top: 60px; }
+  .country-contract-wrap .download-csv {
+    right: 10px;
+    top: -4px; }
   .contract-panel-title {
     margin-top: 26px;
     margin-left: -26px; }
@@ -2093,6 +2131,10 @@ input.select2-search__field {
     white-space: nowrap;
     overflow: hidden;
     display: inline-block; }
+
+@media all and (min-width: 551px) and (max-width: 992px) {
+  .country-contract-wrap .download-csv {
+    right: 156px; } }
 
 @media all and (max-height: 820px) {
   .not-found-content {

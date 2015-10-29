@@ -142,14 +142,20 @@ $(document).ready(function () {
     });
 
     if ($(window).width() > 992) {
-        var countryLine = $('.country-detail-wrapper').height();
+        var countryLine = $('.country-detail-wrapper').height() + 10;
         $('.country-contract-wrap').css('height', countryLine);
     }
+    else {
+        $('.country-contract-wrap').css('height', 'auto');
+    }
 
-    $(window).on('resize', function () {
+    $(window).on('resize', function(){
         if ($(window).width() > 992) {
-            var countryLine = $('.country-detail-wrapper').height();
+            var countryLine = $('.country-detail-wrapper').height() + 10;
             $('.country-contract-wrap').css('height', countryLine);
+        }
+        else {
+            $('.country-contract-wrap').css('height', 'auto');
         }
     });
 
