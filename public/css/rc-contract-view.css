@@ -238,7 +238,7 @@
 }
 
 .annotation-title, .metadata-view > div:first-child {
-    font-size: 15px;
+    font-size: 16px;
     background: url(../images/ic-annotate-title.png) no-repeat 1px 23px;
     text-transform: uppercase;
     padding: 20px 20px 14px 27px;
