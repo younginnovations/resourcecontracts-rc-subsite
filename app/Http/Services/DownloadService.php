@@ -23,49 +23,49 @@ class DownloadService
 
     /**
      * Make the csv file for download
-     * @param $get
+     * @param $ids
      */
     public function downloadSearchResult($ids)
     {
         $contracts = $this->api->getAllMetadata($ids);
         $data      = $this->formatCSVData($contracts);
-        $filename  = "export" . date('Y-m-d');
+        $filename  = "export_" . date('Y-m-d');
         header('Content-type: text/csv');
         header('Content-Disposition: attachment; filename="' . $filename . '.csv"');
         $file = fopen('php://output', 'w');
         fputcsv(
             $file,
             [
+                'OCID',
+                'Category',
                 'Contract Name',
-                'Contract Identifier ',
+                'Contract Identifier',
                 'Language',
                 'Country Name',
                 'Resource',
                 'Contract Type',
                 'Signature Date',
                 'Document Type',
-                'Project Title',
-                'Project Identifier',
-                'Source Url',
-                'Disclosure Mode',
-                'Retrieval Date',
-                'Signature Year',
                 'Government Entity',
                 'Government Identifier',
                 'Company Name',
-                'Company Address',
                 'Jurisdiction of Incorporation',
                 'Registration Agency',
                 'Company Number',
-                'Corporate Grouping',
+                'Company Address',
                 'Participation Share',
+                'Corporate Grouping',
                 'Open Corporates Link',
                 'Incorporation Date',
                 'Operator',
+                'Project Title',
+                'Project Identifier',
                 'License Name',
                 'License Identifier',
+                'Source Url',
+                'Disclosure Mode',
+                'Retrieval Date',
                 'Pdf Url'
-
             ]
         );
 
@@ -86,7 +86,8 @@ class DownloadService
         $data = [];
         foreach ($contracts as $contract) {
             $data[] = [
-
+                $contract->open_contracting_id,
+                env("CATEGORY"),
                 $contract->contract_name,
                 $contract->contract_identifier,
                 $contract->language,
@@ -95,12 +96,6 @@ class DownloadService
                 $contract->type_of_contract,
                 $contract->signature_date,
                 $contract->document_type,
-                $contract->project_title,
-                $contract->project_identifier,
-                $contract->source_url,
-                $contract->disclosure_mode,
-                $contract->date_retrieval,
-                $contract->signature_year,
                 implode(';', $this->makeSemicolonSeparated($contract->government_entity, 'entity')),
                 implode(';', $this->makeSemicolonSeparated($contract->government_entity, 'identifier')),
                 implode(';', $this->makeSemicolonSeparated($contract->company, 'name')),
@@ -115,6 +110,11 @@ class DownloadService
                 implode(';', $this->getOperator($contract->company, 'operator')),
                 implode(';', $this->makeSemicolonSeparated($contract->concession, 'license_name')),
                 implode(';', $this->makeSemicolonSeparated($contract->concession, 'license_identifier')),
+                $contract->project_title,
+                $contract->project_identifier,
+                $contract->source_url,
+                $contract->disclosure_mode,
+                $contract->date_retrieval,
                 $contract->file_url
             ];
         }
@@ -167,6 +167,5 @@ class DownloadService
 
         return $data;
     }
-
 
 }

@@ -23,8 +23,8 @@
                   @include('layout.partials.search', ['searchPage' => true])
               </div>
             </div>
-            @if(!empty($contract_id))
-                <div class="download-csv"><a href="{{route('contract.metadata.download',['id'=>implode(',',$contract_id)])}}">Download search results as csv</a></div>
+            @if($contracts->total > 0)
+                <div class="download-csv"><a href="{{download_url()}}">Download search results as csv</a></div>
             @endif
         </div>
         <div class="contract-number-wrap contract-search-number-wrap">

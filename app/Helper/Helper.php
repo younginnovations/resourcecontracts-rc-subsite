@@ -81,10 +81,9 @@ function searchInArray($arrays, $field, $value)
  *
  * @param $url
  * @param $sortby
- * @param $order
  * @return string
  */
-function appendInUrl($route,$url, $sortby, $order)
+function appendInUrl($route, $url, $sortby)
 {
     if (isset($url['sortby']) && $url['sortby'] == $sortby && isset($url['order']) && $url['order'] == "asc") {
         $url['order'] = "desc";
@@ -93,14 +92,42 @@ function appendInUrl($route,$url, $sortby, $order)
     }
     $url["sortby"] = $sortby;
 
-
     return route($route, $url);
-
 }
 
 function show_arrow($order, $show = false)
 {
     if ($show) {
-            return '<i class="fa fa-black   fa-sort-' . $order . '"></i> ';
+        return '<i class="fa fa-black   fa-sort-' . $order . '"></i> ';
     }
+}
+
+/**
+ * get full url
+ *
+ * @return string
+ */
+function current_url()
+{
+    $current_url = \Illuminate\Support\Facades\Input::url();
+    $queries     = \Illuminate\Support\Facades\Input::get();
+    $current_url .= "?";
+    $current_url .= (http_build_query($queries) == '') ? '' : http_build_query($queries);
+
+    return $current_url;
+}
+
+/**
+ * get contract csv download url
+ *
+ * @return string
+ */
+function download_url()
+{
+    $url     = route('contract.metadata.download');
+    $queries = \Illuminate\Support\Facades\Input::get();
+    $url .= "?";
+    $url .= (http_build_query($queries) == '') ? '' : http_build_query($queries);
+
+    return $url;
 }
