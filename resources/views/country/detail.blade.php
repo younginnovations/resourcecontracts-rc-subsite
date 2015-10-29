@@ -55,7 +55,6 @@
                     <div class="panel-body">
                         @include('contract.partials.rccontractlist')
                         @include('contract.partials.pagination', ['total_item' => $contracts->total, 'per_page'=>$contracts->per_page, 'current_page' => $currentPage ])
-
                     </div>
                 </div>
             </div>
@@ -67,11 +66,12 @@
                         <ul>
                             @foreach($resources as $resource)
                                 <li>
-                                    <span><a href="{{route("resource.detail",["key"=> urlencode($resource->resource)])}}">{{ucfirst($resource->resource)}}</a></span>
+                                    <span><a href="{{route("search")}}?q=&country%5B%5D={{$country}}&resource%5B%5D={{urlencode($resource->resource)}}">{{ucfirst($resource->resource)}}</a></span>
                                     <span class="count pull-right">{{$resource->contract}}</span>
                                 </li>
                             @endforeach
                         </ul>
+
                     </div>
                 </div>
             </div>
