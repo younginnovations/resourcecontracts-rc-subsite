@@ -2704,10 +2704,11 @@ tr:empty {
   }
 }
 .form-inline .form-control {
-  border: 0;
   outline: none;
   //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
   box-shadow: none;
+  width: 100%;
+  margin-bottom: 10px;
 }
 h1 + .editable-container.editable-inline {
   border: 1px solid $color_celeste_approx;
@@ -2798,25 +2799,29 @@ input.select2-search__field {
 }
 
 .page-edit-button {
-    padding: 10px 25px;
-    font-size: 20px !important;
+    font-size: 17px !important;
     color: $white;
+    padding: 6px 10px;
+    top: 0;
 }
 
 .note-editable.panel-body {
   min-height: 200px !important;
 }
 
-.editable:hover {
-  border: dashed 1px #0088cc!important;
-  padding: 10px;
-  margin: -11px;
-}
-
-#title.editable:hover { 
-  padding: 5px 5px 5px 10px;
+.editable { 
+  padding: 10px!important;
   margin: -6px -6px 14px -11px;
   width: 50%;
+  border: 1px solid transparent!important;
+  box-sizing: border-box;
+  overflow: hidden;
+  &:hover {
+    border: dashed 1px #0088cc!important;
+  }
+  >div {
+    text-align: inherit!important;
+  }
 }
 
 .annotation-block > ul > li {

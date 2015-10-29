@@ -1982,10 +1982,11 @@ tr:empty {
     width: 100%; }
 
 .form-inline .form-control {
-  border: 0;
   outline: none;
   -webkit-box-shadow: none;
-          box-shadow: none; }
+          box-shadow: none;
+  width: 100%;
+  margin-bottom: 10px; }
 
 h1 + .editable-container.editable-inline {
   border: 1px solid #cecece; }
@@ -2066,15 +2067,19 @@ input.select2-search__field {
 .note-editable.panel-body {
   min-height: 200px !important; }
 
-.editable:hover {
-  border: dashed 1px #0088cc !important;
-  padding: 10px;
-  margin: -11px; }
-
-#title.editable:hover {
-  padding: 5px 5px 5px 10px;
+.editable {
+  padding: 10px !important;
   margin: -6px -6px 14px -11px;
-  width: 50%; }
+  width: 50%;
+  border: 1px solid transparent;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  overflow: hidden; }
+  .editable:hover {
+    border: dashed 1px #0088cc !important; }
+  .editable > div {
+    text-align: inherit !important; }
 
 .annotation-block > ul > li {
   float: none;
