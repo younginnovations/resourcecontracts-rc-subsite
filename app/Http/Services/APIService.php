@@ -187,7 +187,7 @@ class APIService
         extract($filter);
         $per_page = !empty($per_page) ? $per_page : 25;
         $query    = [
-            'q'                   => $q,
+            'q'                   => urlencode($q),
             'country'             => $country,
             'corporate_group'     => $corporate_group,
             'company_name'        => $company_name,

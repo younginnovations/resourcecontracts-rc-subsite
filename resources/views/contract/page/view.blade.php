@@ -180,6 +180,11 @@
                 <PdfZoom 
                   style={this.getStyle(contractApp.isViewVisible("PdfZoom"))}
                   contractApp={contractApp} />
+              @if(env("CATEGORY")=="rc")
+                  <div className="tools">
+                      <a  className="pdf-download-link" href="{{route('contract.download.pdf',['id'=> $contract->metadata->open_contracting_id])}}" >pdf download</a>
+                  </div>
+              @endif
                 <MetadataToggleButton 
                   style={this.getStyle(contractApp.getShowMeta())}                  
                   contractApp={contractApp} />
