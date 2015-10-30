@@ -405,8 +405,10 @@
     background: #e5e5e5;
 }
 
+
 .pdf-zoom-options {
-    margin: 12px 0;
+  border-right: 1px solid #ccc;
+  padding: 16px 20px 9px 0px;
 }
 
 .pdf-zoom-options > span {
@@ -704,7 +706,7 @@
     }
 
     .pdf-zoom-options {
-        margin: -30px 0 0 320px;
+        margin: -45px 0 0 320px;
     }
 }
 

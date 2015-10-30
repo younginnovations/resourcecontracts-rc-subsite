@@ -1675,16 +1675,19 @@ footer {
   padding: 13px 25px 13px 44px;
   background: url(../../images/ic-sprite.png) no-repeat -152px -40px; }
 
-.pdf-zoom-options {
-  border-right: 1px solid #ccc;
-  padding: 16px 20px 9px 0px; }
-
 @media all and (min-width: 380px) {
   .tagline span {
     font-size: 66px;
     line-height: 82px; }
   .row-top-content {
     padding: 152px 40px 200px; } }
+
+@media all and (max-width: 380px) {
+  .navbar-header {
+    width: 100%;
+    border-right: 0;
+    border-bottom: 1px solid rgba(220, 223, 226, 0.7);
+    border-bottom: 1px solid #dcdfe2; } }
 
 @media all and (min-width: 480px) {
   .filter-label {
