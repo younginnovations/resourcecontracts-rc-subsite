@@ -1,3 +1,7 @@
+<?php
+use Illuminate\Support\Facades\Lang;
+
+?>
 @extends('layout.app-full')
 
 @section('content')
@@ -5,13 +9,13 @@
         <div class="col-lg-12 panel-top-wrapper">
             <div class="panel-top-content">
                 @if($referrer != '')
-                <a href="{{$referrer}}" class="back contract-back"><span>Go Back</span></a>
+                <a href="{{$referrer}}" class="back contract-back"><span>@lang('global.go_back')</span></a>
                 @endif
                 <div class="pull-left">
                     <div class="breadcrumb-wrapper contract-breadcrumb-wrapper">
                         <ul>
-                            <li><a href="{{url()}}">Home</a></li>
-                            <li><a href="{{route('contracts')}}">Contracts</a></li>
+                            <li><a href="{{url()}}">@lang('global.home')</a></li>
+                            <li><a href="{{route('contracts')}}">{{Lang::choice('global.contracts' , 2)}}</a></li>
                             <li>{{str_limit($contract->metadata->contract_name, 100)}}</li>
                         </ul>
                     </div>
@@ -24,7 +28,7 @@
                     <ul>
                         @if($contract->pages->total>0)
                             <li class="pull-left">
-                                    <a href="{{route('contract.detail',['id'=>$contract->metadata->open_contracting_id])}}">View Document</a>
+                                    <a href="{{route('contract.detail',['id'=>$contract->metadata->open_contracting_id])}}">@lang('global.view_document')</a>
                             </li>
                         @endif
                     </ul>
@@ -34,7 +38,7 @@
                 <div class="col-lg-12">
                     <div class="download-main-wrap">
                         <div class="download-wrap">
-                            <span>Download</span>
+                            <span>@lang('global.download')</span>
                         </div>
 
                         <ul class="dropdown-menu">
@@ -57,17 +61,17 @@
                     <div class="panel-body">
                         <ul>
                             <li class="col-lg-12 open-contracting-id">
-                                <label for="">Open Contracting ID :</label>
+                                <label for="">@lang('contract.open_contracting_id')</label>
                                 <span>{{_e($contract->metadata,'open_contracting_id','-')}}</span>
                             </li>
                         </ul>
                         <ul>
                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <label for="">Language</label>
+                                <label for="">@lang('global.language')</label>
                                 <span>{{strtoupper(_e($contract->metadata,'language','-'))}}</span>
                             </li>
                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <label for="">Country</label>
+                                <label for="">@lang('global.country')</label>
                                 @if($code = strtolower(_e($contract->metadata->country,'code')))
                                     <span><a href="{{route('country.detail', ['key'=>$code])}}">{{ucfirst(_e($contract->metadata->country,'name'))}}</a>
                                         @if(env("CATEGORY")=="rc")
@@ -81,7 +85,7 @@
                         </ul>
                         <ul class="government-entity-wrap">
                             <li class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <label for="">Government Entity</label>
+                                <label for="">@lang('global.government_entity')</label>
                                 @if(isset($contract->metadata->government_entity))
                                     @foreach($contract->metadata->government_entity as $governmentEntity)
                                         <span>
@@ -99,7 +103,7 @@
                         </ul>
                         <ul>
                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <label for="">Signature Date</label>
+                                <label for="">@lang('global.signature_date')</label>
                                 <?php
                                 $date = $contract->metadata->signature_date;
                                 $date = strtotime($date);
@@ -108,19 +112,19 @@
                                         - @endif</span>
                             </li>
                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <label for="">Document Type</label>
+                                <label for="">@lang('global.document_type')</label>
                                 <span>{{_e($contract->metadata,'document_type','-')}}</span>
                             </li>
                         </ul>
                         <ul>
                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <label for="">Type of Contract</label>
+                                <label for="">@lang('global.type_contract')</label>
                                 <span>@if(isset($contract->metadata->type_of_contract) && !empty($contract->metadata->type_of_contract))
                                         <a href="{{route("search",['contract_type'=>$contract->metadata->type_of_contract])}}">{{_e($contract->metadata,'type_of_contract','-')}}</a>@else
                                         - @endif</span>
                             </li>
                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <label for="">Resource</label>
+                                <label for="">@lang('global.resource')</label>
                                 <?php
                                 $resource = _e($contract->metadata, 'resource', '-');
                                 $resource = is_array($resource) ? $resource : [];
@@ -139,7 +143,7 @@
                 <div class="panel panel-default panel-wrap panel-annotation-wrap">
                     <div class="panel-body">
                         <div class="annotation-block">
-                            <div class="title">Annotations</div>
+                            <div class="title">@lang('global.annotations')</div>
                             <ul>
                                 <?php $i = 0; ?>
                                 @forelse($contract->annotationsGroup as $category=>$annotation)
@@ -150,15 +154,15 @@
                                         <?php $i ++; ?>
                                     @endif
                                 @empty
-                                    <div class="no-data">There’s no annotation added to this document yet.</div>
+                                    <div class="no-data">@lang('contract.annotation_message')</div>
                                 @endforelse
                             </ul>
                         </div>
                         <div class="view-all-annotations">
                             @if(count($contract->annotationsGroup)>0)
-                                <a href="#annotations" class="view-annotation">View all Annotations</a>
+                                <a href="#annotations" class="view-annotation">@lang('global.view_annotations')</a>
                             @else
-                                <a href="javascript:void();" class="view-annotation disabled">View all Annotations</a>
+                                <a href="javascript:void();" class="view-annotation disabled">@lang('global.view_annotations')</a>
                             @endif
 
                         </div>
@@ -169,19 +173,19 @@
         <div class="col-lg-12">
             <div class="panel panel-default panel-wrap panel-contract-wrap">
                 <div class="panel-heading">
-                Company
+                @lang('contract.company')
             </div>
                 @foreach($contract->metadata->company as $company)
                     <div class="panel-body panel-col3-wrap">
                         <ul>
                             <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                <label for="">Company Name</label>
+                                <label for="">@lang('contract.company_name')</label>
                                 <span>@if(isset($company->name) && !empty($company->name)) <a
                                             href="{{route("search",['company_name'=>$company->name])}}">{{$company->name}} </a> @else
                                         - @endif</span>
                             </li>
                             <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                <label for="">Jurisdiction of Incorporation</label>
+                                <label for="">@lang('contract.jurisdiction')</label>
                         <span>
                         <?php $ji = _e($company, 'jurisdiction_of_incorporation', null);?>
                             @if(!is_null($ji))
@@ -192,21 +196,21 @@
                         </span>
                             </li>
                             <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                <label for="">Registration Agency</label>
+                                <label for="">@lang('contract.registration_agency')</label>
                                 <span>{{_e($company,'registration_agency','-')}}</span>
                             </li>
                         </ul>
                         <ul>
                             <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                <label for="">Company Address</label>
+                                <label for="">@lang('contract.company_add')</label>
                                 <span>{{_e($company,'company_address','-')}}</span>
                             </li>
                             <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                <label for="">Company Number</label>
+                                <label for="">@lang('contract.company_number')</label>
                                 <span>{{_e($company,'company_number','-')}}</span>
                             </li>
                             <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                <label for="">Corporate Grouping</label>
+                                <label for="">@lang('contract.corporate_grouping')</label>
                                 <span>@if(isset($company->parent_company) && !empty($company->parent_company)) <a
                                             href="{{route("search",['corporate_group'=>$company->parent_company])}}">{{$company->parent_company}} </a> @else
                                         - @endif                          </span>
@@ -214,13 +218,13 @@
                         </ul>
                         <ul>
                             <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                <label for="">Open Corporate ID</label>
+                                <label for="">@lang('contract.open_corporate_ID')</label>
                                 <span>@if(isset($company->open_corporate_id) && !empty($company->open_corporate_id))<a
                                             href="{{$company->open_corporate_id}}">{{str_limit($company->open_corporate_id,25)}}</a> @else
                                         - @endif</span>
                             </li>
                             <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                <label for="">Participation Share</label>
+                                <label for="">@lang('contract.share')</label>
                                 <span>
                                     <?php
                                     $ps = _e($company,'participation_share','');
@@ -229,7 +233,7 @@
                                     </span>
                             </li>
                             <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                <label for="">Operator</label>
+                                <label for="">@lang('contract.operator')</label>
                         <span>@if(isset($company->operator))
                                 @if($company->operator==1)
                                     Yes
@@ -251,7 +255,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default panel-wrap panel-contract-wrap">
                 <div class="panel-heading">
-                Associated Documents
+                @lang('contract.associated_documents')
             </div>
                 <div class="panel-body panel-table">
                     <table class="table table-responsive table-contract table-associated-contract">
@@ -283,7 +287,7 @@
                         @if(empty($contract->metadata->parent_document) && empty($contract->metadata->supporting_contracts))
                             <tr>
                                 <td class="no-data">
-                                    No associated documents available.
+                                    @lang('contract.ass_doc_msg')
                                 </td>
                             </tr>
                         @endif
@@ -296,16 +300,16 @@
         <div class="col-lg-12">
             <div class="panel panel-default panel-wrap panel-contract-wrap">
                 <div class="panel-heading">
-                CONCESSION / LICENSE AND PROJECT
+                @lang('contract.concession')
             </div>
                 <div class="panel-body">
                     <ul>
                         <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                            <label for="">Project Title</label>
+                            <label for="">@lang('contract.project_title')</label>
                             <span>{{_e($contract->metadata,'project_title','-')}}</span>
                         </li>
                         <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                            <label for="">Project Identifier</label>
+                            <label for="">@lang('contract.project_identifier')</label>
                             <span>{{_e($contract->metadata,'project_identifier','-')}}</span>
                         </li>
                     </ul>
@@ -315,11 +319,11 @@
                         ?>
                         @foreach($concessions as $concession)
                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <label for="">License Name</label>
+                                <label for="">@lang('contract.license_name')</label>
                                 <span>{{_e($concession,'license_name','-')}}</span>
                             </li>
                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <label for="">License Identifier</label>
+                                <label for="">@lang('contract.license_identifier')</label>
                                 <span>{{_e($concession,'license_identifier','-')}}</span>
                             </li>
                         @endforeach
@@ -330,19 +334,19 @@
         <div class="col-lg-12">
             <div class="panel panel-default panel-wrap panel-contract-wrap">
                 <div class="panel-heading">
-                Source
+                @lang('contract.source')
             </div>
                 <div class="panel-body">
                     <ul>
                         <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                            <label for="">Source URL</label>
+                            <label for="">@lang('contract.source_url')</label>
                             <span>@if(!empty(_e($contract->metadata,'source_url')))<a
                                         href="{{$contract->metadata->source_url}}"
                                         target="_blank">{{str_limit($contract->metadata->source_url,50)}}</a>@else
                                     -@endif</span>
                         </li>
                         <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                            <label for="">Disclosure Mode</label>
+                            <label for="">@lang('contract.disclosure_mode')</label>
                             <span>{{_e($contract->metadata,'disclosure_mode','-')}}</span>
                         </li>
                     </ul>
@@ -412,7 +416,7 @@
 
                             <div class="category-wrap">
                                 <ul>
-                                    <li class="no-data">There’s no annotation added to this document yet.</li>
+                                    <li class="no-data">@lang('contract.annotation_message')</li>
                                 </ul>
                             </div>
                         @endforelse
