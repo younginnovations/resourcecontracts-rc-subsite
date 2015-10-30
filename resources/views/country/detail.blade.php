@@ -53,10 +53,10 @@ use Illuminate\Support\Facades\Lang;
                 <div class="panel panel-default panel-wrap country-contract-wrap">
                     @if(!empty($contract_id))
                         <div class="download-csv">
-                            <a href="{{route('contract.metadata.download',['id'=>implode(',',$contract_id)])}}">Download as csv</a>
+                            <a href="{{route('contract.metadata.download',['id'=>implode(',',$contract_id)])}}">@lang('global.download_as_csv')</a>
                         </div>
                     @endif
-                    <div class="panel-heading">Contracts in {{@trans('country')[strtoupper($country)]}}</div>
+                    <div class="panel-heading">@lang('countriespage.contracts_in') {{@trans('country')[strtoupper($country)]}}</div>
                     <div class="panel-body">
                         @include('contract.partials.rccontractlist')
                         @include('contract.partials.pagination', ['total_item' => $contracts->total, 'per_page'=>$contracts->per_page, 'current_page' => $currentPage ])
@@ -65,7 +65,7 @@ use Illuminate\Support\Facades\Lang;
             </div>
             <div class="col-md-4 col-lg-4">
                 <div class="panel panel-default panel-wrap country-resource-wrap">
-                    <div class="panel-heading">Resources in  {{@trans('country')[strtoupper($country)]}}
+                    <div class="panel-heading">@lang('countriespage.resources_in')  {{@trans('country')[strtoupper($country)]}}
                     </div>
                     <div class="panel-body">
                         <ul>

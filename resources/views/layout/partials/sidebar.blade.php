@@ -35,7 +35,7 @@ if (!isset($summary)) {
                     </li>
                 @endforeach
                 @if(count($summary->country_summary)>10)
-                <li><a  href="{{route('countries')}}">View all</a></li>
+                <li><a  href="{{route('countries')}}">@lang('sidebar.view_all')</a></li>
                 @endif
             </ul>
         </li>
@@ -51,7 +51,7 @@ if (!isset($summary)) {
                     </li>
                 @endforeach
                 @if(count($summary->resource_summary)>10)
-                    <li><a href="{{route('resources')}}">View all</a></li>
+                    <li><a href="{{route('resources')}}">@lang('sidebar.view_all')</a></li>
                 @endif
             </ul>
         </li>

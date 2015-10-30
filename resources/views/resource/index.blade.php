@@ -7,12 +7,12 @@
                 <div class="pull-left">
                     <div class="breadcrumb-wrapper">
                         <ul>
-                            <li><a href="{{url()}}">Home</a></li>
-                            <li>Resource</li>
+                            <li><a href="{{url()}}">@lang('global.home')</a></li>
+                            <li>@lang('global.resource')</li>
                         </ul>
                     </div>
                     <div class="panel-title">
-                        Resource
+                        @lang('global.resource')
                     </div>
                 </div>
             </div>
@@ -22,14 +22,14 @@
                         <form class="search-form filter-form">
                             <div class="form-group">
                                 <button type="submit" class="btn btn-filter-search pull-left"></button>
-                                <input type="text" class="form-control search pull-left" placeholder="Filter by resource ...">
+                                <input type="text" class="form-control search pull-left" placeholder="@lang('global.filter_by_resource')">
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="col-xs-5 col-sm-3 col-md-3 col-lg-2 pull-right">
                     <div class="filter-resource-wrap">
-                        <div class="filter-label" data-toggle="collapse-side" data-target=".side-collapse" data-target-2=".side-collapse-container">Filter by Countries<i></i></div>
+                        <div class="filter-label" data-toggle="collapse-side" data-target=".side-collapse" data-target-2=".side-collapse-container">@lang('global.filter_by_countries')<i></i></div>
                     </div>
                     <div class="side-collapse in">
                         <ul id="countries">
@@ -54,9 +54,9 @@
         </a>
         <div class="contract-count pull-right"><%= contract %>
             <% if (contract > 1){%>
-            contracts
+            {{\Illuminate\Support\Facades\Lang::choice('global.contracts' , 2)}}
             <% }else{ %>
-            contract
+            {{\Illuminate\Support\Facades\Lang::choice('global.contracts' , 1)}}
             <% } %>
 
         </div>

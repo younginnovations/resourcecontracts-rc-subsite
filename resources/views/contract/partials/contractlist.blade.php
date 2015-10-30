@@ -11,7 +11,7 @@ $route=Request::path();
     <thead>
     <th></th>
     <th width="50%">
-        <a href="{{appendInUrl($route,$url,"contract_name",$order)}}">@lang('global.documents') {!!show_arrow($order, $sortBy=='contract_name')!!}</a>
+        <a href="{{appendInUrl($route,$url,"contract_name",$order)}}">@lang('global.document') {!!show_arrow($order, $sortBy=='contract_name')!!}</a>
     </th>
     <th></th>
 

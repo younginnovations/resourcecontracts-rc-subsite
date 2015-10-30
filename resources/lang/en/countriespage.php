@@ -6,6 +6,9 @@ return [
     'filter_by_resources' => 'Filter by Resources',
     'contract' => 'Contract',
     'contracts' => 'Contracts',
-    'find_contract' => 'Find a contract in'
+    'find_contract' => 'Find a contract in',
+    'contracts_in' => 'Contracts in',
+    'resources_in' => 'Resources In',
+
 
 ];
