@@ -10,7 +10,7 @@ var AnnotationHeader = React.createClass({
         return (
             <div className="annotation-title">{count} Annotations
             <span className="pull-right">
-                    <a href={this.props.contractApp.getAnnotationsListAnchor()}>See all Annotations</a>
+                    <a href={this.props.contractApp.getAnnotationsListAnchor()}>See all</a>
             </span>
             </div>
         );
