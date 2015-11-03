@@ -358,6 +358,9 @@ var AnnotationsList = React.createClass({
             return (
               <div className="annotations-list" id="id-annotations-list">
                 {this.getAnnotationItemsComponent(this.props.annotationsCollection, true)}
+                <div className="annotations-list-footer">
+                    <a href={this.props.contractApp.getAnnotationsListAnchor()}>{lang.see_all_annotations}</a>
+                </div>
               </div>
             );
         }
