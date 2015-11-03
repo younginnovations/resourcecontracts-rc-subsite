@@ -37,5 +37,8 @@ return [
     'annotations' => 'Annotations Fr',
     'view_annotations' => 'View all Annotations Fr',
     'download_as_csv' => 'Fr Download as csv',
+    'see'   => 'See Fr',
+    'search_results' => 'Fr Search results',
+
 
 ];

@@ -36,6 +36,8 @@ return [
     'annotations' => 'Annotations',
     'view_annotations' => 'View all Annotations',
     'download_as_csv' => 'Download as csv',
+    'see'   => 'See',
+    'search_results' => 'Search results',
 
 
 

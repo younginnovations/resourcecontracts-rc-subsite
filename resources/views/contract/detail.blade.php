@@ -76,7 +76,7 @@ use Illuminate\Support\Facades\Lang;
                                     <span><a href="{{route('country.detail', ['key'=>$code])}}">{{ucfirst(_e($contract->metadata->country,'name'))}}</a>
                                         @if(env("CATEGORY")=="rc")
                                             @if(isset($contract->metadata->amla_url) && !empty($contract->metadata->amla_url))
-                                                <span class="amla-link">See <a href="{{$contract->metadata->amla_url}}"
+                                                <span class="amla-link">@lang('global.see') <a href="{{$contract->metadata->amla_url}}"
                                                                                target="_blank">Legislation</a> in African Mining Legislation Atlas</span>@endif</span>
                                 @endif
                                 @endif

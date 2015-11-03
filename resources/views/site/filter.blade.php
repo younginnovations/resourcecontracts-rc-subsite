@@ -9,7 +9,7 @@
                         <?php
                             $q=\Illuminate\Support\Facades\Input::get('q');
                         ?>
-                        Search results @if($q)for @endif <span>{{$q}}</span>
+                        @lang('global.search_results') @if($q)for @endif <span>{{$q}}</span>
                     </div>
                 </div>
             </div>
