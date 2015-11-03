@@ -27,6 +27,7 @@
 
 
     <script type="text/jsx">
+      var lang = <?php echo json_encode(trans('annotation'));?>;
       var debug = function() {
         var DEBUG = false;
         if(DEBUG) {
@@ -193,6 +194,7 @@
                 <AnnotationsViewer
                   style={this.getStyle(contractApp.isViewVisible("AnnotationsViewer"))}
                   contractApp={contractApp}
+                  lang={lang}
                   annotationsCollection={annotationsCollection} />
                 <TextSearchResultsList
                   style={this.getStyle(contractApp.isViewVisible("TextSearchResultsList"))}
