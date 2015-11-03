@@ -355,7 +355,7 @@ var AnnotationsList = React.createClass({
               <div className="annotations-list" id="id-annotations-list">
                 {this.getAnnotationItemsComponent(this.props.annotationsCollection, true)}
                 <div className="annotations-list-footer">
-                    <a href={this.props.contractApp.getAnnotationsListAnchor()}>See all Annotations</a>
+                    <a href={this.props.contractApp.getAnnotationsListAnchor()}>{lang.see_all_annotations}</a>
                 </div>
               </div>
             );
@@ -380,7 +380,7 @@ var AnnotationsList = React.createClass({
           <div className="annotations-list" id="id-annotations-list">
             {annotationsList}
             <div className="annotations-list-footer">
-                <a href={this.props.contractApp.getAnnotationsListAnchor()}>See all Annotations</a>
+                <a href={this.props.contractApp.getAnnotationsListAnchor()}>{lang.see_all_annotations}</a>
             </div>
           </div>
         );
