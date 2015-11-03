@@ -13,6 +13,7 @@ var AnnotationHeader = React.createClass({
                     <a href={this.props.contractApp.getAnnotationsListAnchor()}>See all</a>
             </span>
             </div>
+            <div className="annotation-title">{count} {lang.annotations}</div>
         );
     }
 });
@@ -152,9 +153,9 @@ var AnnotationItem = React.createClass({
         var showText = this.state.text;
         if(this.state.showEllipse) {
             showText = this.state.text;
-            ellipsistext = " ... less";
+            ellipsistext = lang.less;
             if(!this.state.showMoreFlag) {
-                ellipsistext = " ... more";
+                ellipsistext = lang.more;
                 showText = this.state.shortText;
             }
         }
@@ -246,8 +247,8 @@ var AnnotationsSort = React.createClass({
         if(this.state.show) {
             return (
                 <div className="annotation-sort">
-                    <span className={pageClassName} onClick={this.onClickPage}>By Page</span>
-                    <span className={topicClassName} onClick={this.onClickTopic}>By Topic</span>
+                    <span className={pageClassName} onClick={this.onClickPage}>{lang.by_page}</span>
+                    <span className={topicClassName} onClick={this.onClickTopic}>{lang.by_topic}</span>
                     {topicList}
                 </div>
             );
@@ -272,12 +273,12 @@ var AnnotationTopicList = React.createClass({
     render: function() {
         return (
             <div className="annotations-topic-list">
-                <span onClick={this.handleClick}>General</span>
-                <span onClick={this.handleClick}>Environment</span>
-                <span onClick={this.handleClick}>Fiscal</span>
-                <span onClick={this.handleClick}>Operations</span>
-                <span onClick={this.handleClick}>Social</span>
-                <span onClick={this.handleClick}>Other</span>
+                <span onClick={this.handleClick}>{lang.general}</span>
+                <span onClick={this.handleClick}>{lang.environment}</span>
+                <span onClick={this.handleClick}>{lang.fiscal}</span>
+                <span onClick={this.handleClick}>{lang.operations}</span>
+                <span onClick={this.handleClick}>{lang.social}</span>
+                <span onClick={this.handleClick}>{lang.other}</span>
             </div>
         );
     }
@@ -285,7 +286,7 @@ var AnnotationTopicList = React.createClass({
 var AnnotationsList = React.createClass({
     getInitialState: function() {
         return {
-            message: "Loading annotations..."
+            message: lang.loading_annotations
         }
     },
     componentDidMount: function() {
@@ -294,7 +295,7 @@ var AnnotationsList = React.createClass({
             if(self.props.annotationsCollection.models.length > 0) {
                 self.setState({message:""});
             } else {
-                self.setState({message:"There are no annotations associated with this contract."});
+                self.setState({message: lang.no_annotation_msg});
             }
             if(self.props.contractApp.getSelectedAnnotation()) {
                 self.props.contractApp.trigger("annotations:scroll-to-selected-annotation");
