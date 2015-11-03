@@ -8,7 +8,11 @@ var AnnotationHeader = React.createClass({
     render: function() {
         var count = this.props.annotationsCollection.length;
         return (
-            <div className="annotation-title">{count} Annotations</div>
+            <div className="annotation-title">{count} Annotations
+            <span className="pull-right">
+                    <a href={this.props.contractApp.getAnnotationsListAnchor()}>See all</a>
+            </span>
+            </div>
         );
     }
 });
@@ -354,9 +358,6 @@ var AnnotationsList = React.createClass({
             return (
               <div className="annotations-list" id="id-annotations-list">
                 {this.getAnnotationItemsComponent(this.props.annotationsCollection, true)}
-                <div className="annotations-list-footer">
-                    <a href={this.props.contractApp.getAnnotationsListAnchor()}>See all Annotations</a>
-                </div>
               </div>
             );
         }
@@ -379,9 +380,6 @@ var AnnotationsList = React.createClass({
         return (
           <div className="annotations-list" id="id-annotations-list">
             {annotationsList}
-            <div className="annotations-list-footer">
-                <a href={this.props.contractApp.getAnnotationsListAnchor()}>See all Annotations</a>
-            </div>
           </div>
         );
     },
@@ -435,7 +433,9 @@ var AnnotationsViewer = React.createClass({
         return(
             <div className="annotations-viewer" style={this.props.style}>
                 <div className="annotation-inner-viewer" id="annotations-box">
-                    <AnnotationHeader annotationsCollection={this.props.annotationsCollection} />
+                    <AnnotationHeader
+                        contractApp={this.props.contractApp}
+                        annotationsCollection={this.props.annotationsCollection} />
                     <AnnotationsSort
                         contractApp={this.props.contractApp}
                         annotationsCollection={this.props.annotationsCollection} />

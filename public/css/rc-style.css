@@ -675,21 +675,13 @@ footer {
   border: 1px solid rgba(243, 115, 86, 0.2);
   -webkit-border-radius: 22px;
           border-radius: 22px; }
-  .tools .pdf-download-link  {
+  .download-csv a {
     display: block;
-    font-size: 0px;
+    font-size: 12px;
+    color: #F37356;
     text-decoration: none;
-    height: 46px;
     padding: 13px 25px 13px 44px;
     background: url(../../images/ic-sprite.png) no-repeat -152px -40px; }
-
-.download-pdf a {
-  display: block;
-  font-size: 12px;
-  color: #F37356;
-  text-decoration: none;
-  padding: 13px 25px 13px 44px;
-  background: url(../../images/ic-sprite.png) no-repeat -152px -40px; }
 
 .country-contract-wrap .download-csv {
   left: auto;
@@ -1674,6 +1666,13 @@ footer {
   .row-top-content {
     padding: 152px 40px 200px; } }
 
+@media all and (max-width: 380px) {
+  .navbar-header {
+    width: 100%;
+    border-right: 0;
+    border-bottom: 1px solid rgba(220, 223, 226, 0.7);
+    border-bottom: 1px solid #dcdfe2; } }
+
 @media all and (min-width: 480px) {
   .filter-label {
     padding: 6px 24px 7px 20px; }
@@ -2106,9 +2105,10 @@ input.select2-search__field {
     margin-right: 4px; }
 
 .page-edit-button {
-  padding: 10px 25px;
-  font-size: 20px !important;
-  color: #fff; }
+  font-size: 17px !important;
+  color: #fff;
+  padding: 6px 10px;
+  top: 0; }
 
 .note-editable.panel-body {
   min-height: 200px !important; }
@@ -2117,7 +2117,7 @@ input.select2-search__field {
   padding: 10px !important;
   margin: -6px -6px 14px -11px;
   width: 50%;
-  border: 1px solid transparent;
+  border: 1px solid transparent !important;
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
