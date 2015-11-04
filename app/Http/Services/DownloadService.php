@@ -1,6 +1,10 @@
 <?php
 namespace App\Http\Services;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Message\Request;
+use Illuminate\Support\Facades\Log;
+
 /**
  * Class DownloadService
  * @package App\Http\Services
@@ -21,151 +25,110 @@ class DownloadService
         $this->api = $api;
     }
 
+
     /**
-     * Make the csv file for download
-     * @param $get
+     * Fulltext search filter
+     *
+     * @param $filter
+     * @return null
      */
-    public function downloadSearchResult($ids)
+    public function filterSearch($filter)
     {
-        $contracts = $this->api->getAllMetadata($ids);
-        $data      = $this->formatCSVData($contracts);
-        $filename  = "export" . date('Y-m-d');
-        header('Content-type: text/csv');
-        header('Content-Disposition: attachment; filename="' . $filename . '.csv"');
-        $file = fopen('php://output', 'w');
-        fputcsv(
-            $file,
-            [
-                'Contract Name',
-                'Contract Identifier ',
-                'Language',
-                'Country Name',
-                'Resource',
-                'Contract Type',
-                'Signature Date',
-                'Document Type',
-                'Project Title',
-                'Project Identifier',
-                'Source Url',
-                'Disclosure Mode',
-                'Retrieval Date',
-                'Signature Year',
-                'Government Entity',
-                'Government Identifier',
-                'Company Name',
-                'Company Address',
-                'Jurisdiction of Incorporation',
-                'Registration Agency',
-                'Company Number',
-                'Corporate Grouping',
-                'Participation Share',
-                'Open Corporates Link',
-                'Incorporation Date',
-                'Operator',
-                'License Name',
-                'License Identifier',
-                'Pdf Url'
+        extract($filter);
+        $per_page = !empty($per_page) ? $per_page : 25;
+        $query    = [
+            'q'                   => urlencode($q),
+            'country'             => $country,
+            'corporate_group'     => $corporate_group,
+            'company_name'        => $company_name,
+            'contract_type'       => $contract_type,
+            'year'                => $year,
+            'resource'            => $resource,
+            'group'               => $group,
+            'annotation_category' => $annotation_category,
+            'sort_by'             => $sortby,
+            'order'               => $order,
+            'per_page'            => $per_page,
+            'from'                => $per_page * ($from - 1),
+            'download'            => $download,
 
-            ]
-        );
+        ];
+        $contract = $this->apiCall('contracts/search', $query);
 
-        foreach ($data as $row) {
-            fputcsv($file, $row);
+        if ($contract) {
+            return $contract;
         }
-        fclose($file);
-        die();
+
+        return null;
     }
 
     /**
-     * Format all the metadata
-     * @param $contracts
-     * @return array
+     * call API
+     *
+     * @param       $resource
+     * @param array $query
+     * @param bool  $array
+     * @return null
      */
-    private function formatCSVData($contracts)
+    protected function apiCall($resource, array $query = [], $array = false)
     {
-        $data = [];
-        foreach ($contracts as $contract) {
-            $data[] = [
+        try {
+            $request           = new Request('GET', $this->api->apiURL($resource));
+            $query['category'] = $this->api->category;
+            $request->setQuery($query);
+            $response = $this->api->client->send($request);
+            $data     = $response->getBody()->getContents();
+            $filename = "export" . date('Y-m-d');
+            header('Content-type: text/csv');
+            header('Content-Disposition: attachment; filename="' . $filename . '.csv"');
+            print $data;
+            die;
+        } catch (\Exception $e) {
+            Log::error($resource . ":" . $e->getMessage(), $query);
 
-                $contract->contract_name,
-                $contract->contract_identifier,
-                $contract->language,
-                $contract->country->name,
-                implode(';', $contract->resource),
-                $contract->type_of_contract,
-                $contract->signature_date,
-                $contract->document_type,
-                $contract->project_title,
-                $contract->project_identifier,
-                $contract->source_url,
-                $contract->disclosure_mode,
-                $contract->date_retrieval,
-                $contract->signature_year,
-                implode(';', $this->makeSemicolonSeparated($contract->government_entity, 'entity')),
-                implode(';', $this->makeSemicolonSeparated($contract->government_entity, 'identifier')),
-                implode(';', $this->makeSemicolonSeparated($contract->company, 'name')),
-                implode(';', $this->makeSemicolonSeparated($contract->company, 'company_address')),
-                implode(';', $this->makeSemicolonSeparated($contract->company, 'jurisdiction_of_incorporation')),
-                implode(';', $this->makeSemicolonSeparated($contract->company, 'registration_agency')),
-                implode(';', $this->makeSemicolonSeparated($contract->company, 'company_number')),
-                implode(';', $this->makeSemicolonSeparated($contract->company, 'parent_company')),
-                implode(';', $this->makeSemicolonSeparated($contract->company, 'participation_share')),
-                implode(';', $this->makeSemicolonSeparated($contract->company, 'open_corporate_id')),
-                implode(';', $this->makeSemicolonSeparated($contract->company, 'company_founding_date')),
-                implode(';', $this->getOperator($contract->company, 'operator')),
-                implode(';', $this->makeSemicolonSeparated($contract->concession, 'license_name')),
-                implode(';', $this->makeSemicolonSeparated($contract->concession, 'license_identifier')),
-                $contract->file_url
-            ];
+            return null;
         }
-
-        return $data;
     }
 
     /**
-     * Make the array semicolon separated for multiple data
-     * @param $arrays
-     * @param $key
-     * @return array
+     * Filter for all contracts download
+     *
+     * @param $filter
+     * @return null
      */
-    private function makeSemicolonSeparated($arrays, $key)
+    public function allContractsdownload($filter)
     {
-        $data = [];
-        if ($arrays == null) {
-            return $data;
+        $default = [
+            'country'  => '',
+            'year'     => '',
+            'resource' => '',
+            'per_page' => 10000,
+            'from'     => 0,
+            'sort_by'  => '',
+            'order'    => '',
+            'download' => false
+        ];
+
+        $filter = array_merge($default, $filter);
+
+        $query = [
+            'country_code' => $filter['country'],
+            'year'         => $filter['year'],
+            'resource'     => $filter['resource'],
+            'per_page'     => $filter['per_page'],
+            'from'         => 0,
+            'sort_by'      => $filter['sort_by'],
+            'order'        => $filter['order'],
+            'download'     => $filter['download']
+        ];
+
+        $contract = $this->apiCall('contracts', $query);
+
+        if ($contract->total > 0) {
+            return $contract;
         }
 
-        foreach ($arrays as $array) {
-
-            if (is_array($array) && array_key_exists($array, $key)) {
-                array_push($data, $array[$key]);
-            }
-            if (is_object($array) && property_exists($array, $key)) {
-                array_push($data, $array->$key);
-            }
-        }
-
-
-        return $data;
-    }
-
-    /**
-     * Return the operator
-     * @param $company
-     * @return array
-     */
-    private function getOperator($company)
-    {
-        $data     = [];
-        $operator = trans('codelist/operator');
-        foreach ($company as $companyData) {
-            if (isset($companyData->operator) && $companyData->operator) {
-                array_push($data, $operator[$companyData->operator]);
-            }
-
-        }
-
-        return $data;
+        return null;
     }
 
 

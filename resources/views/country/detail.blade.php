@@ -46,11 +46,16 @@
         <div class="col-lg-12 country-detail-wrapper">
             <div class="col-md-8 col-lg-8">
                 <div class="panel panel-default panel-wrap country-contract-wrap">
-                    @if(!empty($contract_id))
+                        <?php
+                            $params = Request::all();
+                            $params['country']=$country;
+                            $params['resource']='';
+                            $params['download']=true;
+                        ?>
                         <div class="download-csv">
-                            <a href="{{route('contract.metadata.download',['id'=>implode(',',$contract_id)])}}">Download as csv</a>
+                            <a href="{{route('contract.metadata.download',$params)}}">Download as csv</a>
                         </div>
-                    @endif
+
                     <div class="panel-heading">Contracts in {{@trans('country')[strtoupper($country)]}}</div>
                     <div class="panel-body">
                         @include('contract.partials.rccontractlist')

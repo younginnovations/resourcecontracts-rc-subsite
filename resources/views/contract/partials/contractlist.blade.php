@@ -31,7 +31,6 @@ $route=Request::path();
                 <a class="title-{{$contract->contract_id}}" href="{{route('contract.detail',['id'=>$contract->open_contracting_id ])}}">
                     {{ $contract->contract_name or ''}}
                 </a>
-
                 @if($annotations->total>0)
                     <div class="annotate-text"> Annotated</div>
                 @endif

@@ -51,16 +51,12 @@ class CountryController extends BaseController
         $currentPage = $request->get('page', 1);
         $filter      = ['country' => urldecode($country), 'from' => $currentPage,'sort_by'=>$request->get('sortby'),'order'=>$request->get('order')];
         $contracts   = $this->api->allContracts($filter);
-        $allFilter             = $filter;
-        $allFilter['per_page'] = $contracts->total;
-        $allContracts          = $this->api->allContracts($allFilter);
-        $contract_id           = $this->api->getContractsId($allContracts);
         $resources   = $this->api->getResourceByCountry($filter);
         if (!$contracts) {
             return abort(404);
         }
 
-        return view('country.detail', compact('contracts', 'country', 'resources', 'currentPage','contract_id'));
+        return view('country.detail', compact('contracts', 'country', 'resources', 'currentPage'));
     }
 
 }
