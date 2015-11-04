@@ -425,4 +425,7 @@ use Illuminate\Support\Facades\Lang;
             </div>
         </div>
     @endif
+    <script>
+    var lang = <?php echo json_encode(trans('annotation'));?>;
+    </script>
 @stop

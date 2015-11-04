@@ -46,7 +46,7 @@ var PdfPaginationView = React.createClass({
       <div className="pdf-pagination pagination" style={this.props.style}>
         <a href="#" className="previous" onClick={this.clickPrevious}>{lang.previous}</a>
         <input type="text" className="goto" ref="userInput" onKeyDown={this.handleKeyDown} />
-        <a href="#" className="next" onClick={this.clickNext}>{lang.next}</a> of {this.state.totalPages}
+        <a href="#" className="next" onClick={this.clickNext}>{lang.next}</a> {lang.of} {this.state.totalPages}
       </div>
     );
   }

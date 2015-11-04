@@ -40,6 +40,12 @@ return [
     'search_results' => 'Search results',
     'a_directory_of' => 'A directory of',
     'petroleum_mineral_contracts' => 'Petroleum &amp; Mineral Contracts',
+    'page_doesnt_exist' => "The page you’re looking for doesn't exist",
+    'if_you_are_looking' => 'If you’re looking for contract documents, use the <span class="search-click">search box</span> above.',
+    'temporarily_unavailable' => ' is temporarily unavailable',
+    'fix_message' => ' We are working to fix this. Please contact resourcecontracts@yipl.com.np if the problem persists.',
+
+
 
 
 

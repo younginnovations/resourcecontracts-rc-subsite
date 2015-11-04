@@ -9,7 +9,7 @@ $category = $api->getAnnotationsCategory();
     <div class="form-group">
         <button type="submit" class="btn btn-navbar-search pull-left"></button>
         <input type="text" autocomplete="off" value="{{\Illuminate\Support\Facades\Input::get('q')}}" name="q"
-               class="form-control pull-left" placeholder="@lang('search.search_message')">
+               class="form-control pull-left" placeholder="@lang('search.search_placeholder')">
     </div>
     <div class="search-input-wrapper @if(isset($show_advance)) search-page-input-wrapper @endif">
         <div class="col-lg-12">

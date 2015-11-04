@@ -6,5 +6,6 @@ return [
     'glossary' => 'Glossary',
     'publish_contracts' => 'Publish Contracts',
     'contact' => 'Contact',
+    'content_lisence' => 'Content is licensed under Attribution-ShareAlike 4.0 International',
 
 ];

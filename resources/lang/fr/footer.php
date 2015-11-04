@@ -5,6 +5,7 @@ return [
     'about' => 'Environ',
     'glossary' => 'Glossaire',
     'publish_contracts' => 'Publier Contrats',
-    'contact' => 'Contacter'
+    'contact' => 'Contacter',
+    'content_lisence' => 'Fr Content is licensed under Attribution-ShareAlike 4.0 International',
 
 ];

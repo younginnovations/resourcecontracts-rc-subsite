@@ -1,7 +1,7 @@
 <?php
 return [
     'page' => 'page',
-    'see_all_annotations' => 'See all annotations in fr',
+    'see_all' => 'Fr See All',
     'loading_annotations' => 'Fr Loading Annotations',
     'annotations' => 'Fr Annotations',
     'by_page' => 'Fr By Page',
@@ -34,12 +34,13 @@ return [
     'no_results_found' => 'Fr No results found',
     'text' => 'Fr Text',
     'pdf' => 'Fr Pdf',
-    'of' => 'fr of',
+    'of' => 'de',
     'text_created_automatically' => 'Fr The text below was created automatically and may contain errors and differences from the contract`s original PDF file.',
     'wait_while_loading' => 'Fr Please wait while loading ...',
     'processing_pdf_file' => "Fr We are currently processing the contract's PDF file, and a text version is not yet available.",
     'more' => '...fr more',
-    'less' => '...fr less',
+    'select' => 'Fr Select',
+
 
 ];
 

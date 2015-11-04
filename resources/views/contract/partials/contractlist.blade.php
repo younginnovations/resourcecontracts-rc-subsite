@@ -146,7 +146,7 @@ $route=Request::path();
         </tr>
     @empty
         <tr>
-            <td colspan="2" class="search-not-found">{{'Search result not found.'}}</td>
+            <td colspan="2" class="search-not-found">@lang('search.search_not_found')</td>
         </tr>
     @endforelse
     </tbody>

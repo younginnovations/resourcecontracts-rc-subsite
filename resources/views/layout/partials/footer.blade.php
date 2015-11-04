@@ -31,7 +31,7 @@
                     </ul>
                 </div>
                 <div class="license-buttons">
-                    <p>Content is licensed under Attribution-ShareAlike 4.0 International <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">(CC BY-SA 4.0)</a></p>
+                    <p>@lang('footer.content_lisence') <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">(CC BY-SA 4.0)</a></p>
                     <img src="{{url('images/license-buttons.png')}}" width="88" height="31" alt="">
                 </div>
             </div>

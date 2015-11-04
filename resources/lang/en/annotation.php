@@ -1,7 +1,7 @@
 <?php
 return [
     'page' => 'page',
-    'see_all_annotations' => 'See all annotations in eng',
+    'see_all' => 'See All',
     'loading_annotations' => 'Loading Annotations',
     'annotations' => 'Annotations',
     'by_page' => 'By Page',
@@ -41,8 +41,6 @@ return [
     'processing_pdf_file' => "We are currently processing the contract's PDF file, and a text version is not yet available.",
     'more' => '...more',
     'less' => '...less',
-
-
-
+    'select' => 'Select',
 ];
 
