@@ -13,10 +13,7 @@
     @if(auth()->isloggedIn())
         <div class="edit-mode"><div>You are in editing mode. Please click below to edit - <a href="{{route('logout')}}">Logout</a></div></div>
     @endif
-    <div class="content-wrap">
-        <h1 id="title">{{$page->title or ''}}</h1>
-        <div id="content">{!!$page->content!!}</div>
-    </div>
+
 @stop
 
 @if(auth()->isloggedIn())

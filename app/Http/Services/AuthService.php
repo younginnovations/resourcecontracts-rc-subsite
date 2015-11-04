@@ -49,6 +49,7 @@ Class AuthService
 
             if ($data->status == 'success') {
                 $this->setAuth($data);
+
                 return true;
             } else {
                 return false;
@@ -79,6 +80,16 @@ Class AuthService
         }
 
         return false;
+    }
+
+    /**
+     * Check for Guest User
+     *
+     * @return bool
+     */
+    public function guest()
+    {
+        return !$this->isLoggedIn();
     }
 
     /**
