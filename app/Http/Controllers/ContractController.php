@@ -3,7 +3,6 @@
 use App\Http\Services\AnnotationService;
 use App\Http\Services\APIService;
 use App\Http\Services\ContractService;
-use App\Http\Services\DownloadService;
 use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
@@ -22,10 +21,6 @@ class ContractController extends BaseController
      */
     protected $contract;
     /**
-     * @var DownloadService
-     */
-    protected $download;
-    /**
      * @var AnnotationService
      */
     protected $annotation;
@@ -33,18 +28,15 @@ class ContractController extends BaseController
     /**
      * @param APIService        $api
      * @param ContractService   $contract
-     * @param DownloadService   $download
      * @param AnnotationService $annotation
      */
     public function __construct(
         APIService $api,
         ContractService $contract,
-        DownloadService $download,
         AnnotationService $annotation
     ) {
         $this->api        = $api;
         $this->contract   = $contract;
-        $this->download   = $download;
         $this->annotation = $annotation;
     }
 
@@ -272,7 +264,8 @@ class ContractController extends BaseController
      */
     public function downloadMetadataAsCSV(Request $request)
     {
-        $contracts = $this->download->downloadSearchResult($request->get('id'));
+        $filter      = ['country' => $request['country'],'resource'=>$request['resource'],'download'=>$request['download'],'from'=>1];
+        $contracts   = $this->api->allContracts($filter);
         echo $contracts;
     }
 
