@@ -39,6 +39,7 @@ return [
     'download_as_csv' => 'Fr Download as csv',
     'see'   => 'See Fr',
     'search_results' => 'Fr Search results',
-
+    'a_directory_of' => 'Fr A directory of',
+    'petroleum_mineral_contracts' => 'Fr Petroleum &amp; Mineral Contracts',
 
 ];

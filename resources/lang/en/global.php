@@ -38,6 +38,9 @@ return [
     'download_as_csv' => 'Download as csv',
     'see'   => 'See',
     'search_results' => 'Search results',
+    'a_directory_of' => 'A directory of',
+    'petroleum_mineral_contracts' => 'Petroleum &amp; Mineral Contracts',
+
 
 
 

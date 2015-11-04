@@ -1,5 +1,6 @@
 <?php
 use \Illuminate\Support\Facades\Lang as Lang;
+
 ?>
 @extends('layout.app-full')
 
@@ -24,7 +25,7 @@ use \Illuminate\Support\Facades\Lang as Lang;
                 <div class="row row-top-content">
                     <div class="tagline">
                         @if(env("CATEGORY")=="rc")
-                            A directory of <span>Petroleum &amp; Mineral Contracts</span>
+                            @lang('global.a_directory_of') <span>@lang('global.petroleum_mineral_contracts')</span>
                         @else
                             @lang('global.an_online_repository_of') <span>@lang('global.open_land_contracts')</span>
                         @endif
