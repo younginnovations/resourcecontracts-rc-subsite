@@ -37,7 +37,7 @@ $route=Request::path();
                 </a>
 
                 @if($annotations->total>0)
-                    <div class="annotate-text"> Annotated</div>
+                    <div class="annotate-text"> @lang('global.annotated')</div>
                 @endif
 
                 <div class="search-text">
@@ -131,7 +131,8 @@ $route=Request::path();
                 <ul>
                     @forelse($contract->resource as $resource)
                         @if(!empty($resource))
-                            <li>{{$resource}}</li>
+                            <li>@lang('resources.'.$resource)</li>
+
                         @else
                             -
                         @endif
