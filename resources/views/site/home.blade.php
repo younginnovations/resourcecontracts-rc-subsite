@@ -50,7 +50,7 @@ use \Illuminate\Support\Facades\Lang as Lang;
                     <p>@lang('global.contract_doc_from')</p>
                     <span>{{$countries or ''}}</span> @lang('global.countries')
                 </div>
-                <a href="{{route('countries')}}" class="btn btn-view">View All Countries</a>
+                <a href="{{route('countries')}}" class="btn btn-view">@lang('global.view_all_countries')</a>
             </div>
         </div>
         <div class="col-sm-6 col-md-6 col-lg-6 resource-wrapper">
@@ -59,7 +59,7 @@ use \Illuminate\Support\Facades\Lang as Lang;
                     <p>@lang('global.contracts_related_to')</p>
                     <span>{{$resources or ''}}</span> @lang('global.resources')
                 </div>
-                <a href="{{route('resources')}}" class="btn btn-view">View All Resources</a>
+                <a href="{{route('resources')}}" class="btn btn-view">@lang('global.view_all_resources')</a>
             </div>
         </div>
     </div>

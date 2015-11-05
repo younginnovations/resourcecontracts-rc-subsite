@@ -50,7 +50,7 @@
 <script type="text/template" id="resource-template">
     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
         <a href="{{url('resource')}}/<%= value %>">
-            <div class="country-name resource-name pull-left"><%= name %></div>
+            <div class="country-name resource-name pull-left"><%= value %></div>
         </a>
         <div class="contract-count pull-right"><%= contract %>
             <% if (contract > 1){%>
@@ -66,13 +66,15 @@
 <script type="text/template" id="country-template">
     <li>
         <input class="country" name="country[]" type="checkbox" value="<%= code %>" />
-        <label><%= name %></label>
+        <label><%= country[code.toUpperCase()] %></label>
     </li>
 </script>
 
 <script>
     var APP_URL = '{{url()}}';
     var lang = <?php echo json_encode(trans('annotation'));?>;
+    //var resource = <?php echo json_encode(trans('resources'));?>;
+    var country = <?php echo json_encode(trans('country'));?>;
 </script>
 
 <script type="text/javascript" src="{{url('js/resource.min.js')}}"></script>

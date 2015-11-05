@@ -17097,10 +17097,10 @@ $(document).ready(function () {
         var target = $(this).attr('href');
         $(target).slideToggle();
         $(this).text(function (index, value) {
-            if (value == 'More')
-                return 'Less';
+            if (value == localization.more)
+                return localization.less;
             else
-                return 'More';
+                return localization.more;
         })
     });
 

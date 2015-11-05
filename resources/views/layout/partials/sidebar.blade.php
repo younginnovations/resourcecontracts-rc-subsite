@@ -1,6 +1,6 @@
 <?php
 if (!isset($summary)) {
-    $api = app('App\Http\Services\APIService');
+    $api     = app('App\Http\Services\APIService');
     $summary = $api->sortSummaryCountry();
 }
 ?>
@@ -45,7 +45,7 @@ if (!isset($summary)) {
                 @foreach(array_slice($summary->resource_summary,0,10,true) as $resource)
                     <li>
                         <a href="{{route('resource.detail', ['key'=>urlencode($resource->key)])}}">
-                            <span>{{ucfirst($resource->key)}}</span>
+                            <span>@lang('resources.'.ucfirst($resource->key))</span>
                             <small class="label pull-right">{{$resource->doc_count}}</small>
                         </a>
                     </li>
@@ -88,3 +88,8 @@ if (!isset($summary)) {
 
     </ul>
 </div>
+<script>
+    var localization = [];
+    localization.more = "@lang('global.more')";
+    localization.less = "@lang('global.less')";
+</script>

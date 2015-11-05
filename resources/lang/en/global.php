@@ -10,12 +10,12 @@ return [
     'contract_doc_from'           => 'CONTRACT DOCUMENTS FROM',
     'countries'                   => 'Countries',
     'country'                     => 'Country',
-    //    'view_all_countries' => 'View All Countries',
+    'view_all_countries'          => 'View All Countries',
     'contracts_related_to'        => 'CONTRACT DOCUMENTS RELATED TO',
     'resources'                   => 'Resources',
     'resource'                    => 'Resource',
     'all_contracts'               => 'All Contracts',
-    //    'view_all_resources' => 'View all resources'
+    'view_all_resources'          => 'View all resources',
     'document'                    => 'Document',
     'year'                        => 'Year',
     'cancel'                      => 'Cancel',
@@ -45,9 +45,12 @@ return [
     'temporarily_unavailable'     => ' is temporarily unavailable',
     'fix_message'                 => ' We are working to fix this. Please contact resourcecontracts@yipl.com.np if the problem persists.',
     'more'                        => 'More',
+    'less'                        => 'Less',
     'prev'                        => 'Prev',
     'next'                        => 'Next',
     'last'                        => 'Last',
+    'annotated'                   => 'Annotated',
+
 
 
 ];

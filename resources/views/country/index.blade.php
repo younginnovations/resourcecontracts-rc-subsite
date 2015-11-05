@@ -51,7 +51,7 @@
     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
         <a href="{{url('countries')}}/<%= code %>">
             <img width="200" src="{{getFlagUrl()}}<%= code %>.png" />
-            <div class="country-name"><%= name %></div>
+            <div class="country-name"><%= country[code.toUpperCase()]%></div>
         </a>
         <div class="contract-count"><%= contract %>
             <% if (contract > 1){%>
@@ -66,12 +66,14 @@
 <script type="text/template" id="resource-template">
     <li>
         <input class="resource" name="resource[]" type="checkbox" value="<%= value %>" />
-        <label><%= name %> (<%= contract %>)</label>
+        <label> <%= resource[name] %> (<%= contract %>)</label>
     </li>
 </script>
 <script>
     var APP_URL = '{{url()}}';
     var lang = <?php echo json_encode(trans('annotation'));?>;
+    var country = <?php echo json_encode(trans('country'));?>;
+    var resource = <?php echo json_encode(trans('resources'));?>;
 </script>
 <script type="text/javascript" src="{{url('js/country.min.js')}}"></script>
 @stop
