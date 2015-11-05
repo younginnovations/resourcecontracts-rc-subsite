@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Lang;
                         <img src="{{getFlagUrl($country)}}" />
                         {{@trans('country')[strtoupper($country)]}}
                         @if(env("CATEGORY")=="rc")
-                            @if(!empty(@trans('amla')[strtoupper($country)]))<a href="{{@trans('amla')[strtoupper($country)]}}" class="country-amla-link">AMLA</a>@endif
+                            @if(!empty(trans('amla')[strtoupper($country)]))<a href="{{trans('amla')[strtoupper($country)]}}" class="country-amla-link">AMLA</a>@endif
                         @endif
                     </div>
                 </div>
@@ -51,12 +51,17 @@ use Illuminate\Support\Facades\Lang;
         <div class="col-lg-12 country-detail-wrapper">
             <div class="col-md-8 col-lg-8">
                 <div class="panel panel-default panel-wrap country-contract-wrap">
-                    @if(!empty($contract_id))
+                        <?php
+                            $params = Request::all();
+                            $params['country']=$country;
+                            $params['resource']='';
+                            $params['download']=true;
+                        ?>
                         <div class="download-csv">
-                            <a href="{{route('contract.metadata.download',['id'=>implode(',',$contract_id)])}}">@lang('global.download_as_csv')</a>
+                            <a href="{{route('contract.metadata.download',$params)}}">@lang('global.download_as_csv')</a>
                         </div>
-                    @endif
-                    <div class="panel-heading">@lang('countriespage.contracts_in') {{@trans('country')[strtoupper($country)]}}</div>
+
+                <div class="panel-heading">@lang('countriespage.contracts_in') {{@trans('country')[strtoupper($country)]}}</div>
                     <div class="panel-body">
                         @include('contract.partials.rccontractlist')
                         @include('contract.partials.pagination', ['total_item' => $contracts->total, 'per_page'=>$contracts->per_page, 'current_page' => $currentPage ])

@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Services\APIService;
+use App\Http\Services\DownloadService;
 use Illuminate\Http\Request;
 
 /**
@@ -13,13 +14,19 @@ class FilterController
      * @var APIService
      */
     protected $api;
+    /**
+     * @var DownloadService
+     */
+    private $download;
 
     /**
-     * @param APIService $api
+     * @param APIService      $api
+     * @param DownloadService $download
      */
-    public function __construct(APIService $api)
+    public function __construct(APIService $api,DownloadService $download)
     {
         $this->api = $api;
+        $this->download = $download;
     }
 
     /**
@@ -34,14 +41,9 @@ class FilterController
         $filter                = $this->processQueries($request);
         $filter['from']        = $currentPage;
         $contracts             = $this->api->filterSearch($filter);
-        $allFilter             = $filter;
-        $allFilter['per_page'] = $contracts->total;
-        $allContracts          = $this->api->filterSearch($allFilter);
-        $contract_id           = $this->api->getContractsId($allContracts);
         $filter                = $this->updateFilterData($filter, $contracts, $request);
         $show_advance          = true;
-
-        return view('site.filter', compact('contracts', 'filter', 'show_advance', 'total_contract', 'currentPage', 'contract_id'));
+        return view('site.filter', compact('contracts', 'filter', 'show_advance', 'total_contract', 'currentPage'));
     }
 
     /**
@@ -68,7 +70,8 @@ class FilterController
             'annotation_category' => is_array($request->get('annotation_category')) ? join(',', $request->get('annotation_category')) : $request->get('annotation_category'),
             'sortby'              => $request->get('sortby'),
             'order'               => $request->get('order'),
-            'group'               => $type
+            'group'               => $type,
+            'download'            => $request->get('download', false)
         ];
     }
 
@@ -107,5 +110,19 @@ class FilterController
 
 
         return $filter;
+    }
+
+    /**
+     * Download searchresult in csv
+     * @param Request $request
+     */
+    public function downloadSearchResultAsCSV(Request $request)
+    {
+
+        $currentPage           = $request->get('page', 1);
+        $filter                = $this->processQueries($request);
+        $filter['from']        = $currentPage;
+        $contracts             = $this->download->filterSearch($filter);
+        echo $contracts;
     }
 }

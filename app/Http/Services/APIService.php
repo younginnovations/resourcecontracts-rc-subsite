@@ -14,8 +14,8 @@ class APIService
     /**
      * @var Client
      */
-    protected $client;
-    protected $category;
+    public $client;
+    public $category;
 
     /**
      * @param Client $client
@@ -32,7 +32,7 @@ class APIService
      * @param $request
      * @return string
      */
-    protected function apiURL($request)
+    public function apiURL($request)
     {
         $host    = trim(env('ELASTIC_SEARCH_HOST'), '/');
         $request = trim($request, '/');
@@ -115,7 +115,7 @@ class APIService
      */
     public function metadata($contract_id)
     {
-        $resource    = sprintf('contract/%s/metadata', $contract_id);
+        $resource = sprintf('contract/%s/metadata', $contract_id);
 
         $contract = $this->apiCall($resource);
 
@@ -200,6 +200,7 @@ class APIService
             'order'               => $order,
             'per_page'            => $per_page,
             'from'                => $per_page * ($from - 1),
+            'download'            => $download,
 
         ];
 
@@ -351,21 +352,7 @@ class APIService
 
         return $response;
     }
-
-    /**
-     * Return contract id
-     * @param $contracts
-     * @return array
-     */
-    public function getContractsId($contracts)
-    {
-        $data = [];
-        foreach ($contracts->results as $result) {
-            $data[] = $result->contract_id;
-        }
-
-        return $data;
-    }
+    
 
     /**
      * Return all the metadata of given id

@@ -272,7 +272,8 @@ class ContractController extends BaseController
      */
     public function downloadMetadataAsCSV(Request $request)
     {
-        $contracts = $this->download->downloadSearchResult($request->get('id'));
+        $filter      = ['country' => $request['country'],'resource'=>$request['resource'],'download'=>$request['download']];
+        $contracts   = $this->download->allContractsdownload($filter);
         echo $contracts;
     }
 

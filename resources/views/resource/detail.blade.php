@@ -48,12 +48,17 @@ use Illuminate\Support\Facades\Lang;
         <div class="col-lg-12 country-detail-wrapper">
             <div class="col-md-8 col-lg-8">
                 <div class="panel panel-default panel-wrap country-contract-wrap">
-                    @if(!empty($contract_id))
+                    <?php
+                    $params = Request::all();
+                    $params['country']='';
+                    $params['resource']=$resource;
+                    $params['download']=true;
+                    ?>
                     <div class="download-csv">
-                        <a href="{{route('contract.metadata.download',['id'=>implode(',',$contract_id)])}}">Download as csv</a>
+                        <a href="{{route('contract.metadata.download',$params)}}">Download as csv</a>
                     </div>
-                    @endif
                     <div class="panel-heading">@lang('global.contracts_for') {{ucfirst($resource)}}</div>
+
                     <div class="panel-body">
                         @include('contract.partials.rccontractlist')
                         @include('contract.partials.pagination', ['total_item' => $contracts->total, 'per_page'=>$contracts->per_page, 'current_page' => $currentPage ])
