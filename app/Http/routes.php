@@ -44,18 +44,28 @@ $app->get('contact', ['as' => 'contact', 'uses' => 'PageController@contact']);
 $app->get('faqs', ['as' => 'faqs', 'uses' => 'PageController@faqs']);
 $app->get('page/resources', ['as' => 'page.resources', 'uses' => 'PageController@resources']);
 $app->get('glossary', ['as' => 'guides', 'uses' => 'PageController@glossary']);
-$app->get('publish-contracts', ['as' => 'guides', 'uses' => 'PageController@publishContracts']);
-$app->post('page/save', ['as' => 'page', 'uses' => 'PageController@savePage']);
-
-
-$app->get('login', ['as' => 'login', 'uses' => 'PageController@login']);
-$app->post('login', ['as' => 'login.post', 'uses' => 'PageController@loginPost']);
-$app->get('logout', ['as' => 'logout', 'uses' => 'PageController@logout']);
-
-
+$app->get('publish-contracts', ['as' => 'publish-contracts', 'uses' => 'PageController@publishContracts']);
 $app->get('/search', ['as' => 'search', 'uses' => 'FilterController@index']);
 $app->get('/filter', ['as' => 'filter', 'uses' => 'SiteController@filter']);
 
+
+/*
+|--------------------------------------------------------------------------
+| CMS Routes
+|--------------------------------------------------------------------------
+|
+*/
+$app->get('login', ['as' => 'login', 'uses' => 'Admin\AuthController@login']);
+$app->post('login', ['as' => 'login.post', 'uses' => 'Admin\AuthController@loginPost']);
+$app->get('logout', ['as' => 'logout', 'uses' => 'Admin\AuthController@logout']);
+
+$app->post('page/save', ['as' => 'page', 'uses' => 'Admin\PageController@update']);
+$app->get('admin', ['as' => 'admin.dashboard', 'uses' => 'Admin\PageController@index']);
+$app->get('admin/page', ['as' => 'admin.page', 'uses' => 'Admin\PageController@index']);
+$app->get('admin/page/create', ['as' => 'admin.page.create', 'uses' => 'Admin\PageController@create']);
+$app->post('admin/page/store', ['as' => 'admin.page.store', 'uses' => 'Admin\PageController@store']);
+$app->get('admin/page/{id}', ['as' => 'admin.page.edit', 'uses' => 'Admin\PageController@edit']);
+$app->post('admin/page/{id}', ['as' => 'admin.page.update', 'uses' => 'Admin\PageController@update']);
 
 /*
 |--------------------------------------------------------------------------

@@ -21,6 +21,17 @@ Class PageService
         $this->page = $page;
     }
 
+
+    /**
+     * Get All Pages
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function all()
+    {
+        return $this->page->orderBy('id', 'DESC')->get();
+    }
+
     /**
      * Get Page
      *
@@ -41,16 +52,45 @@ Class PageService
 
     /**
      * Save Page
-     * @param       $page
+     * @param       $page_id
      * @param array $content
      * @return bool
+     * @internal param $page
      */
-    public function save($page, array $content)
+    public function save($page_id, array $content)
     {
-        $page          = $this->page->where('slug', $page)->first();
-        $page->title   = $content['title'];
-        $page->content = $content['content'];
+        $page          = $this->page->where('id', $page_id)->first();
+        $page->title   = (object) $content['title'];
+        $page->content = (object) $content['content'];
 
         return $page->save();
+    }
+
+    /**
+     * Find page
+     *
+     * @param $id
+     * @return Page
+     */
+    public function find($id)
+    {
+        return $this->page->find($id);
+    }
+
+    /**
+     * Create new Page
+     *
+     * @param $input
+     * @return static
+     */
+    public function create($input)
+    {
+        $input = [
+            'title'   => (object) $input['title'],
+            'content' => (object) $input['content'],
+            'slug'    => str_slug($input['title']['en'])
+        ];
+
+        return $this->page->create($input);
     }
 }

@@ -55,19 +55,22 @@ $app->singleton(
 |
 */
 
-$app->middleware([
+
+$app->middleware(
+    [
 //     // Illuminate\Cookie\Middleware\EncryptCookies::class,
 //     // Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-    Illuminate\Session\Middleware\StartSession::class,
-    App\Http\Middleware\Localization::class,
-
+Illuminate\Session\Middleware\StartSession::class,
 //     // Illuminate\View\Middleware\ShareErrorsFromSession::class,
 //     // Laravel\Lumen\Http\Middleware\VerifyCsrfToken::class,
-]);
+    ]
+);
 
-// $app->routeMiddleware([
-
-// ]);
+$app->routeMiddleware(
+    [
+        'user' => App\Http\Middleware\Authenticate::class
+    ]
+);
 
 /*
 |--------------------------------------------------------------------------
@@ -89,9 +92,19 @@ $app->register(App\Providers\AppServiceProvider::class);
 
 config(
     [
-        'hoglog' => [
+        'hoglog'   => [
             'rootPrefix' => 'logger/',
-            'logdir' => storage_path() . '/logs'
+            'logdir'     => storage_path() . '/logs'
+        ],
+        'language' => [
+            'en' => [
+                'code' => 'en',
+                'name' => 'English'
+            ],
+            'fr' => [
+                'code' => 'fr',
+                'name' => 'French'
+            ]
         ]
     ]
 );
