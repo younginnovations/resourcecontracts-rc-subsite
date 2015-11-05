@@ -24,7 +24,7 @@
               </div>
             </div>
             @if(!empty($contract_id))
-                <div class="download-csv"><a href="{{route('contract.metadata.download',['id'=>implode(',',$contract_id)])}}">Download search results as csv</a></div>
+                <div class="download-csv"><a href="{{route('contract.metadata.download',['id'=>implode(',',$contract_id)])}}">@lang('search.download_as_csv')</a></div>
             @endif
         </div>
         <div class="contract-number-wrap contract-search-number-wrap">
