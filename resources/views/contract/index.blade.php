@@ -1,5 +1,6 @@
 <?php
- use \Illuminate\Support\Facades\Lang as Lang;
+use \Illuminate\Support\Facades\Lang as Lang;
+
 ?>
 @extends('layout.app-full')
 
@@ -22,7 +23,7 @@
                     <div class="panel-title">
                         @if(\Illuminate\Support\Facades\Input::get('year') !='')
                             Contracts in {{\Illuminate\Support\Facades\Input::get('year')}}
-                          @else
+                        @else
                             @lang('global.all_contracts')
                         @endif
                     </div>

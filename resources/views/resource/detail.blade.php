@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\Lang;
                             <div class="form-group">
                                 <button type="submit" class="btn btn-filter-search pull-left"></button>
                                 <input type="text" name="q" class="form-control pull-left" placeholder="@lang('global.find_contract') {{ucfirst($resource)}} ...">
-                                <input type="hidden" name="resource" value="{{$resource}}" />
+                                <input type="hidden" name="resource" value="{{$resource}}"/>
                             </div>
                         </form>
                     </div>
@@ -49,9 +49,9 @@ use Illuminate\Support\Facades\Lang;
             <div class="col-md-8 col-lg-8">
                 <div class="panel panel-default panel-wrap country-contract-wrap">
                     @if(!empty($contract_id))
-                    <div class="download-csv">
-                        <a href="{{route('contract.metadata.download',['id'=>implode(',',$contract_id)])}}">Download as csv</a>
-                    </div>
+                        <div class="download-csv">
+                            <a href="{{route('contract.metadata.download',['id'=>implode(',',$contract_id)])}}">Download as csv</a>
+                        </div>
                     @endif
                     <div class="panel-heading">@lang('global.contracts_for') {{ucfirst($resource)}}</div>
                     <div class="panel-body">
@@ -66,12 +66,12 @@ use Illuminate\Support\Facades\Lang;
                     <div class="panel-heading">@lang('global.countries')</div>
                     <div class="panel-body">
                         <ul>
-                        @foreach($countries as $country)
-                            <li>
-                                <span><a href="{{route("search")}}?q=&resource%5B%5D={{urlencode($resource)}}&country%5B%5D={{urlencode($country->code)}}">{{trans('country')[strtoupper(ucfirst($country->code))]}}</a></span>
-                                <span class="count pull-right">{{$country->contract}}</span>
-                            </li>
-                        @endforeach
+                            @foreach($countries as $country)
+                                <li>
+                                    <span><a href="{{route("search")}}?q=&resource%5B%5D={{urlencode($resource)}}&country%5B%5D={{urlencode($country->code)}}">{{trans('country')[strtoupper(ucfirst($country->code))]}}</a></span>
+                                    <span class="count pull-right">{{$country->contract}}</span>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -79,5 +79,7 @@ use Illuminate\Support\Facades\Lang;
         </div>
     </div>
 
-
+    <script>
+        var lang = <?php echo json_encode(trans('annotation'));?>;
+    </script>
 @stop

@@ -3,7 +3,7 @@ function htmlEncode(html) {
 }
 
 function htmlDecode(html) {
-    var a = document.createElement('a'); 
+    var a = document.createElement('a');
     a.innerHTML = html;
     return a.textContent;
 }

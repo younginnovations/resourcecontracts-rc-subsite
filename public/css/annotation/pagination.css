@@ -1,13 +1,14 @@
 #pagination {
-  background: #f6f6f6;
-  padding: 10px 0;
-  text-align: center;
+    background: #f6f6f6;
+    padding: 10px 0;
+    text-align: center;
 }
+
 #pagination a {
-  color: #8B8B8B;
-  padding: 2px 10px;
-  border: 1px solid transparent;
-  margin: 0;
+    color: #8B8B8B;
+    padding: 2px 10px;
+    border: 1px solid transparent;
+    margin: 0;
 }
 
 #pagination a:focus {
@@ -31,7 +32,7 @@
 
 #pagination a {
     background: transparent;
-    color: rgba(64,64,64,0.7);
+    color: rgba(64, 64, 64, 0.7);
     padding: 2px 8px;
     border: 1px solid transparent;
 }
@@ -46,14 +47,14 @@
     padding: 2px 8px;
 }
 
-#pagination a:hover:not(.next),#pagination .active .current:not(.prev){
+#pagination a:hover:not(.next), #pagination .active .current:not(.prev) {
     background: #e5e5e5;
     border-radius: 50%;
     text-decoration: none;
 }
 
-#pagination li:last-child span.current,#pagination li:first-child .prev {
-    background: transparent!important;
+#pagination li:last-child span.current, #pagination li:first-child .prev {
+    background: transparent !important;
 }
 
 

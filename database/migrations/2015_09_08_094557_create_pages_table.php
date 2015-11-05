@@ -12,14 +12,16 @@ class CreatePagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('pages', function(Blueprint $table)
-        {
-            $table->increments('id');
-            $table->string('title', 150);
-            $table->string('slug', 150);
-            $table->text('content');
-            $table->timestamps();
-        });
+        Schema::create(
+            'pages',
+            function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('title', 150);
+                $table->string('slug', 150);
+                $table->text('content');
+                $table->timestamps();
+            }
+        );
     }
 
     /**

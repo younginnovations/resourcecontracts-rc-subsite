@@ -27,32 +27,6 @@ class APIService
     }
 
     /**
-     * Get Api full URL
-     *
-     * @param $request
-     * @return string
-     */
-    protected function apiURL($request)
-    {
-        $host    = trim(env('ELASTIC_SEARCH_HOST'), '/');
-        $request = trim($request, '/');
-
-        return sprintf('%s/%s', $host, $request);
-    }
-
-    /**
-     * Get Summary
-     *
-     * @return object|null
-     */
-    public function summary()
-    {
-        $resource = 'contracts/summary';
-
-        return $this->apiCall($resource);
-    }
-
-    /**
      * Get All Contracts
      *
      * @return object|null
@@ -91,6 +65,50 @@ class APIService
     }
 
     /**
+     * Call API
+     *
+     * @param       $resource
+     * @param array $query
+     * @param bool  $array
+     * @return array|object|null
+     */
+    protected function apiCall($resource, array $query = [], $array = false)
+    {
+        try {
+            $request           = new Request('GET', $this->apiURL($resource));
+            $query['category'] = $this->category;
+            $request->setQuery($query);
+            $response = $this->client->send($request);
+            $data     = $response->getBody();
+
+            if ($array) {
+                return json_decode($data, true);
+            }
+
+            return json_decode($data);
+
+        } catch (\Exception $e) {
+            Log::error($resource . ":" . $e->getMessage(), $query);
+
+            return null;
+        }
+    }
+
+    /**
+     * Get Api full URL
+     *
+     * @param $request
+     * @return string
+     */
+    protected function apiURL($request)
+    {
+        $host    = trim(env('ELASTIC_SEARCH_HOST'), '/');
+        $request = trim($request, '/');
+
+        return sprintf('%s/%s', $host, $request);
+    }
+
+    /**
      * Get Contract Detail
      *
      * @param $contract_id
@@ -115,7 +133,7 @@ class APIService
      */
     public function metadata($contract_id)
     {
-        $resource    = sprintf('contract/%s/metadata', $contract_id);
+        $resource = sprintf('contract/%s/metadata', $contract_id);
 
         $contract = $this->apiCall($resource);
 
@@ -136,6 +154,29 @@ class APIService
         return $response;
     }
 
+    /**
+     * Group the annotations by its category
+     * @param $annotations
+     * @return array
+     */
+    private function groupAnnotationsByCategory($annotations)
+    {
+        $annotations = $annotations->result;
+        $data        = [];
+        foreach ($annotations as $annotation) {
+
+            if (array_key_exists($annotation->category, $data)) {
+                array_push($data[$annotation->category], $annotation);
+            } else {
+
+                $data[$annotation->category] = [$annotation];
+            }
+
+        }
+        ksort($data);
+
+        return $data;
+    }
 
     /**
      * Get Text Page
@@ -213,36 +254,6 @@ class APIService
     }
 
     /**
-     * Call API
-     *
-     * @param       $resource
-     * @param array $query
-     * @param bool  $array
-     * @return array|object|null
-     */
-    protected function apiCall($resource, array $query = [], $array = false)
-    {
-        try {
-            $request           = new Request('GET', $this->apiURL($resource));
-            $query['category'] = $this->category;
-            $request->setQuery($query);
-            $response = $this->client->send($request);
-            $data     = $response->getBody();
-
-            if ($array) {
-                return json_decode($data, true);
-            }
-
-            return json_decode($data);
-
-        } catch (\Exception $e) {
-            Log::error($resource . ":" . $e->getMessage(), $query);
-
-            return null;
-        }
-    }
-
-    /**
      * Get all countries
      *
      * @return object
@@ -300,30 +311,6 @@ class APIService
 
         return [];
 
-    }
-
-    /**
-     * Group the annotations by its category
-     * @param $annotations
-     * @return array
-     */
-    private function groupAnnotationsByCategory($annotations)
-    {
-        $annotations = $annotations->result;
-        $data        = [];
-        foreach ($annotations as $annotation) {
-
-            if (array_key_exists($annotation->category, $data)) {
-                array_push($data[$annotation->category], $annotation);
-            } else {
-
-                $data[$annotation->category] = [$annotation];
-            }
-
-        }
-        ksort($data);
-
-        return $data;
     }
 
     /**
@@ -396,6 +383,18 @@ class APIService
         $summaries->country_summary = $data;
 
         return $summaries;
+    }
+
+    /**
+     * Get Summary
+     *
+     * @return object|null
+     */
+    public function summary()
+    {
+        $resource = 'contracts/summary';
+
+        return $this->apiCall($resource);
     }
 
 }

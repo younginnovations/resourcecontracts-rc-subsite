@@ -406,7 +406,7 @@
 }
 
 .pdf-zoom-options {
-  padding: 16px 0 9px 0px;
+    padding: 16px 0 9px 0px;
 }
 
 .pdf-zoom-options > span {
@@ -553,7 +553,7 @@
     padding-right: 10px;
 }
 
-.metadata-view-footer > a,.annotation-title span:last-child > a {
+.metadata-view-footer > a, .annotation-title span:last-child > a {
     font-size: 12px;
     text-transform: none;
 }
@@ -632,7 +632,7 @@
     display: none;
 }
 
-.annotation-item-page{
+.annotation-item-page {
     float: left;
     display: inline-block !important;
     width: auto !important;
@@ -666,13 +666,12 @@
     overflow-y: scroll;
 }
 
-
 @media all and (max-width: 1000px) {
     .document-wrap {
         display: block;
     }
 
-    .annotations-viewer,.pdf-annotator,.right-column-view,.text-panel,.search-results-list {
+    .annotations-viewer, .pdf-annotator, .right-column-view, .text-panel, .search-results-list {
         width: 100%;
         float: none;
     }
@@ -687,9 +686,9 @@
         border-right: 20px solid #f0f0f0;
         clear: both;
     }
-    
+
     .tools {
-        float: right!important;
+        float: right !important;
     }
 }
 
@@ -700,7 +699,7 @@
 }
 
 @media all and (max-width: 800px) {
-    .text-search-container,.navigation {
+    .text-search-container, .navigation {
         width: 100%;
     }
 
@@ -739,11 +738,11 @@
 
 @media all and (max-width: 540px) {
     .pdf-zoom-options {
-        display: none!important;
+        display: none !important;
     }
 }
 
-.tools .pdf-download-link  {
+.tools .pdf-download-link {
     display: block;
     font-size: 0px;
     text-decoration: none;
@@ -755,10 +754,10 @@
 }
 
 .download-pdf a {
-  display: block;
-  font-size: 12px;
-  color: #F37356;
-  text-decoration: none;
-  padding: 13px 25px 13px 44px;
-  background: url(../../images/ic-sprite.png) no-repeat -152px -40px; 
+    display: block;
+    font-size: 12px;
+    color: #F37356;
+    text-decoration: none;
+    padding: 13px 25px 13px 44px;
+    background: url(../../images/ic-sprite.png) no-repeat -152px -40px;
 }

@@ -7,7 +7,7 @@
                 @if(env('CATEGORY') == 'olc')
                     <h1><strong>OpenLandContracts.org @lang('global.temporarily_unavailable')</strong></h1>
                     <p style="font-size: 25px;width: 600px">
-                       @lang('global.fix_message')
+                        @lang('global.fix_message')
                     </p>
                 @endif
 

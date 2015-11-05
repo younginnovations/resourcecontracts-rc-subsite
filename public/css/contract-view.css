@@ -325,7 +325,7 @@
     padding-top: 0 !important;
 }
 
-.selected-annotation {  
+.selected-annotation {
     border: 1px solid #C5C5C5;
     background: #F4F4F4;
     -webkit-box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
@@ -623,7 +623,7 @@
     display: none;
 }
 
-.annotation-item-page{
+.annotation-item-page {
     float: left;
     display: inline-block !important;
     width: auto !important;
@@ -657,13 +657,12 @@
     overflow-y: scroll;
 }
 
-
 @media all and (max-width: 900px) {
     .document-wrap {
         display: block;
     }
 
-    .annotations-viewer,.pdf-annotator,.right-column-view,.text-panel,.search-results-list {
+    .annotations-viewer, .pdf-annotator, .right-column-view, .text-panel, .search-results-list {
         width: 100%;
         float: none;
     }
@@ -682,7 +681,7 @@
 }
 
 @media all and (max-width: 800px) {
-    .text-search-container,.navigation {
+    .text-search-container, .navigation {
         width: 100%;
     }
 
@@ -721,7 +720,7 @@
 
 @media all and (max-width: 480px) {
     .pdf-zoom-options {
-        display: none!important;
+        display: none !important;
     }
 }
 

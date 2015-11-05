@@ -49,6 +49,7 @@ Class AuthService
 
             if ($data->status == 'success') {
                 $this->setAuth($data);
+
                 return true;
             } else {
                 return false;
@@ -57,6 +58,16 @@ Class AuthService
         } catch (\Exception $e) {
             return false;
         }
+    }
+
+    /**
+     * Set Auth
+     *
+     * @param $userData
+     */
+    protected function setAuth($userData)
+    {
+        session(['user_auth' => $userData->message]);
     }
 
     /**
@@ -79,16 +90,6 @@ Class AuthService
         }
 
         return false;
-    }
-
-    /**
-     * Set Auth
-     *
-     * @param $userData
-     */
-    protected function setAuth($userData)
-    {
-        session(['user_auth' => $userData->message]);
     }
 
     /**

@@ -71,6 +71,7 @@
 </script>
 <script>
     var APP_URL = '{{url()}}';
+    var lang = <?php echo json_encode(trans('annotation'));?>;
 </script>
 <script type="text/javascript" src="{{url('js/country.min.js')}}"></script>
 @stop

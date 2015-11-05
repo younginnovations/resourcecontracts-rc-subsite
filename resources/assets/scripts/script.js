@@ -1,18 +1,19 @@
 $(document).ready(function () {
-    if ($('select').length) {-
-        $('select').select2({
-            placeholder: lang.select,
-            allowClear: true,
-            theme: "classic",
-            "language": {
-                "noResults": function(){
-                    return lang.no_results_found;
+    if ($('select').length) {
+        -
+            $('select').select2({
+                placeholder: lang.select,
+                allowClear: true,
+                theme: "classic",
+                "language": {
+                    "noResults": function () {
+                        return lang.no_results_found;
+                    }
+                },
+                escapeMarkup: function (markup) {
+                    return markup;
                 }
-            },
-            escapeMarkup: function (markup) {
-                return markup;
-            }
-        });
+            });
     }
     //slide effect for filter resource
     var sideslider = $('[data-toggle=collapse-side]');

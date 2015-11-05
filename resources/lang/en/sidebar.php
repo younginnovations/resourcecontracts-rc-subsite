@@ -3,7 +3,7 @@
 return [
 
     'all_contracts' => 'All Contracts',
-    'view_all' => 'View All',
+    'view_all'      => 'View All',
 
 
 ];

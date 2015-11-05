@@ -1,6 +1,6 @@
 <?php
 if (!isset($summary)) {
-    $api     = app('App\Http\Services\APIService');
+    $api = app('App\Http\Services\APIService');
     $summary = $api->sortSummaryCountry();
 }
 ?>
@@ -29,13 +29,13 @@ if (!isset($summary)) {
 
                     <li>
                         <a href="{{route('country.detail', ['key'=>urlencode($country['key'])])}}">
-                            <span>{{$country['name']}}</span>
+                            <span>@lang('country.'.strtoupper($country['key']))</span>
                             <small class="label pull-right">{{$country['doc_count']}}</small>
                         </a>
                     </li>
                 @endforeach
                 @if(count($summary->country_summary)>10)
-                <li><a  href="{{route('countries')}}">@lang('sidebar.view_all')</a></li>
+                    <li><a href="{{route('countries')}}">@lang('sidebar.view_all')</a></li>
                 @endif
             </ul>
         </li>
@@ -82,7 +82,7 @@ if (!isset($summary)) {
             @endif
 
             @if(count($summary->year_summary)>10)
-                <div><a href="#year-more" class="toggle-all">More</a></div>
+                <div><a href="#year-more" class="toggle-all">@lang('global.more')</a></div>
             @endif
         </li>
 

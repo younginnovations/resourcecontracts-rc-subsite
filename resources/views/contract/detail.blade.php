@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Lang;
         <div class="col-lg-12 panel-top-wrapper">
             <div class="panel-top-content">
                 @if($referrer != '')
-                <a href="{{$referrer}}" class="back contract-back"><span>@lang('global.go_back')</span></a>
+                    <a href="{{$referrer}}" class="back contract-back"><span>@lang('global.go_back')</span></a>
                 @endif
                 <div class="pull-left">
                     <div class="breadcrumb-wrapper contract-breadcrumb-wrapper">
@@ -21,14 +21,14 @@ use Illuminate\Support\Facades\Lang;
                     </div>
 
                     <div class="panel-title contract-panel-title">
-                    {{$contract->metadata->contract_name}}
-                </div>
+                        {{$contract->metadata->contract_name}}
+                    </div>
                 </div>
                 <div class="action-links">
                     <ul>
                         @if($contract->pages->total>0)
                             <li class="pull-left">
-                                    <a href="{{route('contract.detail',['id'=>$contract->metadata->open_contracting_id])}}">@lang('global.view_document')</a>
+                                <a href="{{route('contract.detail',['id'=>$contract->metadata->open_contracting_id])}}">@lang('global.view_document')</a>
                             </li>
                         @endif
                     </ul>
@@ -77,7 +77,7 @@ use Illuminate\Support\Facades\Lang;
                                         @if(env("CATEGORY")=="rc")
                                             @if(isset($contract->metadata->amla_url) && !empty($contract->metadata->amla_url))
                                                 <span class="amla-link">@lang('global.see') <a href="{{$contract->metadata->amla_url}}"
-                                                                               target="_blank">Legislation</a> in African Mining Legislation Atlas</span>@endif</span>
+                                                                                               target="_blank">Legislation</a> in African Mining Legislation Atlas</span>@endif</span>
                                 @endif
                                 @endif
 
@@ -147,7 +147,7 @@ use Illuminate\Support\Facades\Lang;
                             <ul>
                                 <?php $i = 0; ?>
                                 @forelse($contract->annotationsGroup as $category=>$annotation)
-                                
+
                                     @if($i < 5 )
                                         <li><a class="view-annotation-category"
                                                href="#{{str_slug($category,'-')}}">{{$category}}</a></li>
@@ -173,8 +173,8 @@ use Illuminate\Support\Facades\Lang;
         <div class="col-lg-12">
             <div class="panel panel-default panel-wrap panel-contract-wrap">
                 <div class="panel-heading">
-                @lang('contract.company')
-            </div>
+                    @lang('contract.company')
+                </div>
                 @foreach($contract->metadata->company as $company)
                     <div class="panel-body panel-col3-wrap">
                         <ul>
@@ -227,8 +227,8 @@ use Illuminate\Support\Facades\Lang;
                                 <label for="">@lang('contract.share')</label>
                                 <span>
                                     <?php
-                                    $ps = _e($company,'participation_share','');
-                                    echo ($ps =='') ? '-' : $ps*100 .'%';
+                                    $ps = _e($company, 'participation_share', '');
+                                    echo ($ps == '') ? '-' : $ps * 100 . '%';
                                     ?>
                                     </span>
                             </li>
@@ -255,8 +255,8 @@ use Illuminate\Support\Facades\Lang;
         <div class="col-lg-12">
             <div class="panel panel-default panel-wrap panel-contract-wrap">
                 <div class="panel-heading">
-                @lang('contract.associated_documents')
-            </div>
+                    @lang('contract.associated_documents')
+                </div>
                 <div class="panel-body panel-table">
                     <table class="table table-responsive table-contract table-associated-contract">
                         <tbody>
@@ -300,8 +300,8 @@ use Illuminate\Support\Facades\Lang;
         <div class="col-lg-12">
             <div class="panel panel-default panel-wrap panel-contract-wrap">
                 <div class="panel-heading">
-                @lang('contract.concession')
-            </div>
+                    @lang('contract.concession')
+                </div>
                 <div class="panel-body">
                     <ul>
                         <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
@@ -334,8 +334,8 @@ use Illuminate\Support\Facades\Lang;
         <div class="col-lg-12">
             <div class="panel panel-default panel-wrap panel-contract-wrap">
                 <div class="panel-heading">
-                @lang('contract.source')
-            </div>
+                    @lang('contract.source')
+                </div>
                 <div class="panel-body">
                     <ul>
                         <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
@@ -376,17 +376,17 @@ use Illuminate\Support\Facades\Lang;
                                     {{$cluster}}
                                 </div>
 
-                                    @foreach($categories as $category => $annotations)
+                                @foreach($categories as $category => $annotations)
                                     <div id="{{str_slug($category,'-')}}" class="sub-category">
                                         <a href="#{{str_slug($category,'-')}}"><i class='glyphicon glyphicon-link' style="display:none;"></i></a>
                                         {{$category}}
                                     </div>
                                     <ul class="row">
-                                    @foreach($annotations as $text => $annots)
-                                        <?php
-                                            $a = explode('--',$text);
-                                            $preamble =  isset($a[1]) ? $a[1] : '';
-                                            $text=  isset($a[0]) ? $a[0] : '';
+                                        @foreach($annotations as $text => $annots)
+                                            <?php
+                                            $a = explode('--', $text);
+                                            $preamble = isset($a[1]) ? $a[1] : '';
+                                            $text = isset($a[0]) ? $a[0] : '';
                                             ?>
                                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                                 <div class="pull-left">
@@ -398,13 +398,13 @@ use Illuminate\Support\Facades\Lang;
                                                     @if($preamble !='')
                                                         {{$preamble}}
                                                     @endif
-                                                        <p>
+                                                    <p>
                                                         @foreach($annots as $key => $annotation)
                                                             <?php $annotation_type = isset($annotation->shapes) ? 'pdf' : 'text'; ?>
-                                                            <a  href="{{route('contract.detail',['id'=>$contract->metadata->open_contracting_id])}}#/{{$annotation_type}}/page/{{$annotation->page_no}}/annotation/{{$annotation->id}}">
+                                                            <a href="{{route('contract.detail',['id'=>$contract->metadata->open_contracting_id])}}#/{{$annotation_type}}/page/{{$annotation->page_no}}/annotation/{{$annotation->id}}">
                                                                 Page {{_e($annotation,'page_no')}}</a>@if($key >= 0 && $key < (count($annots)-1)), @endif
                                                         @endforeach
-                                                        </p>
+                                                    </p>
                                                     </p>
                                                 </div>
                                             </li>
@@ -426,6 +426,6 @@ use Illuminate\Support\Facades\Lang;
         </div>
     @endif
     <script>
-    var lang = <?php echo json_encode(trans('annotation'));?>;
+        var lang = <?php echo json_encode(trans('annotation'));?>;
     </script>
 @stop

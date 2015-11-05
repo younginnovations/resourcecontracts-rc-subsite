@@ -7,13 +7,13 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 class PageController extends BaseController
 {
     /**
-     * @var APIService
-     */
-    private $api;
-    /**
      * @var Request
      */
     protected $request;
+    /**
+     * @var APIService
+     */
+    private $api;
 
     /**
      * @param APIService $api

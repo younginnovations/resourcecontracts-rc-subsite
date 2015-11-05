@@ -31,9 +31,8 @@ class UpdatePage extends Migration
      */
     public function down()
     {
-        $page        = Page::where('slug', 'resources')->first();
-        if($page)
-        {
+        $page = Page::where('slug', 'resources')->first();
+        if ($page) {
             $page->slug  = 'guides';
             $page->title = 'Guides';
             $page->save();

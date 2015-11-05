@@ -57,8 +57,8 @@ class ContractController extends BaseController
     public function index(Request $request)
     {
         $currentPage = $request->get('page', 1);
-        $filter      = ['year' => $request->get('year'), 'from' => $currentPage,'sort_by'=>$request->get('sortby'),'order'=>$request->get('order')];
-        $contracts = $this->api->allContracts($filter);
+        $filter      = ['year' => $request->get('year'), 'from' => $currentPage, 'sort_by' => $request->get('sortby'), 'order' => $request->get('order')];
+        $contracts   = $this->api->allContracts($filter);
 
         return view('contract.index', compact('contracts', 'currentPage'));
     }
@@ -254,7 +254,7 @@ class ContractController extends BaseController
      */
     public function view($contract_id)
     {
-        $referrer    = \Request::server('HTTP_REFERER');
+        $referrer           = \Request::server('HTTP_REFERER');
         $back               = is_null($referrer) ? route('contract.view', ['id' => $contract_id]) : $referrer;
         $contract           = new \stdClass();
         $contract->metadata = $this->api->metadata($contract_id);

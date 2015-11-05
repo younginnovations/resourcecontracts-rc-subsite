@@ -55,15 +55,16 @@ $app->singleton(
 |
 */
 
-$app->middleware([
+$app->middleware(
+    [
 //     // Illuminate\Cookie\Middleware\EncryptCookies::class,
 //     // Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-    Illuminate\Session\Middleware\StartSession::class,
-    App\Http\Middleware\Localization::class,
-
+Illuminate\Session\Middleware\StartSession::class,
+App\Http\Middleware\Localization::class,
 //     // Illuminate\View\Middleware\ShareErrorsFromSession::class,
 //     // Laravel\Lumen\Http\Middleware\VerifyCsrfToken::class,
-]);
+    ]
+);
 
 // $app->routeMiddleware([
 
@@ -91,7 +92,7 @@ config(
     [
         'hoglog' => [
             'rootPrefix' => 'logger/',
-            'logdir' => storage_path() . '/logs'
+            'logdir'     => storage_path() . '/logs'
         ]
     ]
 );
@@ -109,8 +110,11 @@ $app->register('HogLog\HogLogServiceProvider');
 |
 */
 
-$app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
-    require __DIR__ . '/../app/Http/routes.php';
-});
+$app->group(
+    ['namespace' => 'App\Http\Controllers'],
+    function ($app) {
+        require __DIR__ . '/../app/Http/routes.php';
+    }
+);
 
 return $app;

@@ -18,10 +18,12 @@ use Illuminate\Support\Facades\Lang;
                         </ul>
                     </div>
                     <div class="panel-title">
-                        <img src="{{getFlagUrl($country)}}" />
+                        <img src="{{getFlagUrl($country)}}"/>
                         {{@trans('country')[strtoupper($country)]}}
                         @if(env("CATEGORY")=="rc")
-                            @if(!empty(@trans('amla')[strtoupper($country)]))<a href="{{@trans('amla')[strtoupper($country)]}}" class="country-amla-link">AMLA</a>@endif
+                            @if(!empty(@trans('amla')[strtoupper($country)]))<a
+                                    href="{{@trans('amla')[strtoupper($country)]}}"
+                                    class="country-amla-link">AMLA</a>@endif
                         @endif
                     </div>
                 </div>
@@ -33,9 +35,10 @@ use Illuminate\Support\Facades\Lang;
                         <form action="{{url('search')}}" method="GET" class="search-form filter-form">
                             <div class="form-group">
                                 <button type="submit" class="btn btn-filter-search pull-left"></button>
-                                <input type="text" name="q" class="form-control pull-left" placeholder="@lang('countriespage.find_contract') {{@trans('country')[strtoupper($country)]}}...">
+                                <input type="text" name="q" class="form-control pull-left"
+                                       placeholder="@lang('countriespage.find_contract') {{@trans('country')[strtoupper($country)]}}...">
 
-                                <input type="hidden" name="country" value="{{$country}}" />
+                                <input type="hidden" name="country" value="{{$country}}"/>
                             </div>
                         </form>
                     </div>
@@ -82,5 +85,9 @@ use Illuminate\Support\Facades\Lang;
             </div>
         </div>
     </div>
+
+    <script>
+        var lang = <?php echo json_encode(trans('annotation'));?>;
+    </script>
 
 @stop
