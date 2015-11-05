@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Http\Services\LocalizationService;
 use App\Http\Services\Page\PageService;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
@@ -13,13 +14,19 @@ class PageController extends BaseController
      * @var PageService
      */
     protected $page;
+    /**
+     * @var LocalizationService
+     */
+    protected $lang;
 
     /**
-     * @param PageService $page
+     * @param PageService         $page
+     * @param LocalizationService $lang
      */
-    public function __construct(PageService $page)
+    public function __construct(PageService $page, LocalizationService $lang)
     {
         $this->page = $page;
+        $this->lang = $lang;
     }
 
     /**

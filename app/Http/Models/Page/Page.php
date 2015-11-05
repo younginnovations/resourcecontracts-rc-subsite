@@ -26,7 +26,9 @@ class Page extends Model
      */
     public function title()
     {
-        return $this->title->en;
+        $lang = app('translator')->getLocale();
+
+        return $this->title->$lang;
     }
 
     /**
@@ -36,7 +38,9 @@ class Page extends Model
      */
     public function content()
     {
-        return $this->content->en;
+        $lang = app('translator')->getLocale();
+
+        return $this->content->$lang;
     }
 
     /**
