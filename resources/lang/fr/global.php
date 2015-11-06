@@ -3,6 +3,7 @@
 //this needs to be edited by those who can translate english to french
 
 return [
+
     'an_online_repository_of'     => 'Un en ligne dépôt de',
     'open_land_contracts'         => 'Ouvert Land Contrats',
     'search'                      => 'Recherche',
@@ -41,7 +42,7 @@ return [
     'a_directory_of'              => 'Fr A directory of',
     'petroleum_mineral_contracts' => 'Fr Petroleum &amp; Mineral Contracts',
     'page_doesnt_exist'           => "Fr The page you’re looking for doesn't exist",
-    'if_you_are_looking'          => "Fr If you’re looking for contract documents, use the <span class=\"search-click\">search box</span> above.</p>",
+    'if_you_are_looking'          => 'Fr If you’re looking for contract documents, use the <span class="search-click">search box</span> above.</p>',
     'temporarily_unavailable'     => 'Fr is temporarily unavailable',
     'fix_message'                 => 'Fr We are working to fix this. Please contact resourcecontracts@yipl.com.np if the problem persists.',
     'more'                        => 'Fr More',
@@ -49,5 +50,7 @@ return [
     'prev'                        => 'Fr Prev',
     'next'                        => 'Fr Next',
     'last'                        => 'Fr Last',
-    'annotated'                   => 'Fr Annotated'
+    'first'                       => 'Fr First',
+    'annotated'                   => 'Fr Annotated',
+
 ];

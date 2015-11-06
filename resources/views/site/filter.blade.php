@@ -7,9 +7,9 @@
                 <div class="pull-left">
                     <div class="panel-title">
                         <?php
-                            $q=\Illuminate\Support\Facades\Input::get('q');
+                        $q = \Illuminate\Support\Facades\Input::get('q');
                         ?>
-                        Search results @if($q)for @endif <span>{{$q}}</span>
+                        @lang('global.search_results') @if($q)for @endif <span>{{$q}}</span>
                     </div>
                 </div>
             </div>
@@ -20,15 +20,17 @@
         <div class="filter-wrapper advance-filter-wrapper" style="min-height: 135px">
             <div class="col-lg-12">
                 <div class="filter-country-wrap" style="display: none">
-                  @include('layout.partials.search', ['searchPage' => true])
-              </div>
+                    @include('layout.partials.search', ['searchPage' => true])
+                </div>
             </div>
             @if(!empty($contract_id))
-                <div class="download-csv"><a href="{{route('contract.metadata.download',['id'=>implode(',',$contract_id)])}}">@lang('search.download_as_csv')</a></div>
+                <div class="download-csv"><a
+                            href="{{route('contract.metadata.download',['id'=>implode(',',$contract_id)])}}">@lang('search.download_as_csv')</a>
+                </div>
             @endif
         </div>
         <div class="contract-number-wrap contract-search-number-wrap">
-            <span>{{$contracts->total}}</span> @if($contracts->total == 1)contract @else Contracts @endif
+            <span>{{$contracts->total}}</span> {{ \Illuminate\Support\Facades\Lang::choice('global.contracts' , $contracts->total) }}
         </div>
     </div>
 
@@ -52,12 +54,12 @@
 @stop
 
 @section('js')
-    <script src="{{url('js/jquery.cookie.js')}}"></script>
     <script>
-    var contractURL = '{{url('contract')}}';
-        $(function(){
+        var lang = <?php echo json_encode(trans('annotation'));?>;
+        var contractURL = '{{url('contract')}}';
+
+        $(function () {
             $('.filter-country-wrap').show();
         })
     </script>
-    <script src="{{url('js/compare.js')}}"></script>
 @stop
