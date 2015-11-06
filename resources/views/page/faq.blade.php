@@ -1,61 +1,5 @@
 @extends('layout.app')
 @section('css')
-<style>
-    .affix,.affix-top {
-        position: fixed;
-        top: 5em;
-        width: 20.45em;
-    }
-
-    .affix-bottom {
-        position: absolute;
-        width: 20.45em;
-    }
-
-    @media (min-width: 1200px) {
-        .affix-bottom {
-            width: 20.45em;
-        }
-    }
-
-    body {
-        position: relative;
-    }
-
-    .side-link-nav .nav .active {
-        font-weight: bold;
-    }
-
-    .nav .nav {
-        display: none;
-    }
-
-    .nav .active .nav {
-        display: block;
-    }
-
-    .nav .nav a {
-        font-weight: normal;
-        font-size: .85em;
-    }
-
-    .nav .nav span {
-        margin: 0 5px 0 2px;
-    }
-
-    .nav .nav .active a,
-    .nav .nav .active:hover a,
-    .nav .nav .active:focus a {
-        font-weight: bold;
-        border-left: 5px solid black;
-    }
-
-    .nav .nav .active span,
-    .nav .nav .active:hover span,
-    .nav .nav .active:focus span {
-        display: none;
-    }
-</style>
 @stop
 @section('content')
     @if(auth()->isloggedIn())
@@ -64,7 +8,15 @@
     <div class="content-wrap">
         <h1 id="title">{{$page->title()}}</h1>
         <div id="content">
-
+                <nav id="target-nav" class="col-md-3 scrollspy side-link-nav">
+                    <ul id="nav" class="nav hidden-xs hidden-sm affix" data-spy="affix">
+                        @foreach($page->faqContent() as $key => $faq)
+                            <li>
+                                <a href="#faq-{{$key}}">{{strip_tags($faq['a'])}}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </nav>
 
                 <div id="scroll-able" class="col-md-9" data-spy="scroll" data-target="#target_nav">
                     @foreach($page->faqContent() as $key => $faq)
@@ -78,15 +30,6 @@
                         </section>
                     @endforeach
                 </div>
-                <nav id="target-nav" class="col-md-3 scrollspy side-link-nav">
-                    <ul id="nav" class="nav hidden-xs hidden-sm affix" data-spy="affix">
-                        @foreach($page->faqContent() as $key => $faq)
-                            <li>
-                                <a href="#faq-{{$key}}">{{strip_tags($faq['a'])}}</a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </nav>
         </div>
     </div>
 @stop

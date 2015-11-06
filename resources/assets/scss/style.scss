@@ -489,6 +489,7 @@ body {
   font-family: $font_0;
   color: $color_cape_cod_approx;
   background: $white;
+  position: relative;
 }
 a {
   color: $color_link_color;
@@ -1981,15 +1982,17 @@ footer {
   }
 }
 .content-wrap {
-  margin-left: 16%;
+  margin-left: 16.8%;
   min-height: 500px;
   #title {
     @extend %extend_25;
     padding-top: 0;
+    padding-left: 26px;
   }
   #content {
     @extend %extend_26;
     width: 80%;
+    padding-top: 30px;
     p {
       @extend %extend_27;
     }
@@ -2418,9 +2421,6 @@ footer {
       margin-top: 0;
     }
   }
-  .content-wrap #content {
-    width: 70%;
-  }
   .contract-number-wrap {
     right: 102px;
   }
@@ -2442,12 +2442,6 @@ footer {
   }
   .panel-contract-wrap {
     margin-bottom: 0;
-  }
-  .content-wrap {
-    margin-left: 22%;
-    #content {
-      width: 50%;
-    }
   }
   #resources > .col-lg-4:nth-child(-n+3) {
     padding-top: 20px;
@@ -2606,7 +2600,7 @@ footer {
     margin-left: 60px;
   }
   .contract-search-number-wrap {
-    top: 140px;
+    top: auto;
   }
   .advance-filter-wrapper {
     margin-top: 47px;
@@ -2909,4 +2903,45 @@ input.select2-search__field {
   .not-found-content {
     padding: 0 0 150px;
   }
+}
+
+.affix,.affix-top {
+        position: fixed;
+        top: 11em;
+        width: 20.45em;
+}
+        
+.affix-bottom {
+    position: absolute;
+    width: 20.45em;
+}
+    
+@media (min-width: 1200px) {
+    .affix-bottom {
+        width: 20.45em;
+    }
+}
+      
+        
+.side-link-nav .nav .active {
+    background: #eee;
+    .nav {
+      display: block;
+    }
+}
+        
+.side-link-nav .nav .nav {
+  display: none;
+  a {
+    font-weight: normal;
+    font-size: .85em;
+  }
+}
+      
+        
+.side-link-nav .nav .nav .active a,
+.side-link-nav .nav .nav .active:hover a,
+.side-link-nav .nav .nav .active:focus a {
+    font-weight: bold;
+    border-left: 5px solid black;
 }
