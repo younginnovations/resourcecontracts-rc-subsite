@@ -50,6 +50,7 @@ return [
     'prev'                        => 'Fr Prev',
     'next'                        => 'Fr Next',
     'last'                        => 'Fr Last',
+    'first'                       => 'Fr First',
     'annotated'                   => 'Fr Annotated',
 
 ];

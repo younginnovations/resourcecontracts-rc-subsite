@@ -49,5 +49,6 @@ return [
     'prev'                        => 'Prev',
     'next'                        => 'Next',
     'last'                        => 'Last',
+    'first'                       => 'First',
     'annotated'                   => 'Annotated',
 ];
