@@ -108,8 +108,12 @@ var MetadataView = React.createClass({
                         <span>Open Contracting Identifier</span>
                         <span>{this.props.metadata.get("open_contracting_id")}</span>
                     </div>
+                    <div className="metadata-ocid">
+                        <span>Disclosure Mode</span>
+                        <span>{this.props.metadata.get("disclosure_mode")}</span>
+                    </div>
                 </div>
-            );            
+            );
         } else {
             return (
                 <div className="metadata-view">
@@ -171,7 +175,7 @@ var RelatedDocumentsView = React.createClass({
             if(parentContracts.length || supportingContracts.length) {
                 return (
                     <div className="relateddocument-view">
-                        <div>Related docs</div>
+                        <div>Associated Documents</div>
                         {parentContracts}
                         {supportingContracts}
                         {moreContracts}

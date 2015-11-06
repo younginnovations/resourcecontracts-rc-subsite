@@ -24,8 +24,8 @@
                 </div>
                 <form action="{{route('search')}}" method="GET" class="contract-search-form">
                     <div class="form-group">
-                        <input type="text" name="q" class="form-control pull-left" placeholder="Search {{$contracts}} Contracts">
-                        <button type="submit" class="btn btn-search">Search Contracts</button>
+                        <input type="text" name="q" class="form-control pull-left" placeholder="Search {{$contracts}} contracts and associated documents">
+                        <button type="submit" class="btn btn-search">@lang('Search')</button>
                     </div>
                     <span class="advanced-search">Advanced Search</span>
                 </form>
