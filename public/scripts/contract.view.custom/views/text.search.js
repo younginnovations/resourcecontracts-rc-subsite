@@ -9,14 +9,14 @@ var TextSearchForm = React.createClass({
   },
   render: function() {
     return (
-      <div className="text-search-container">
-      <a className="back" href={back_url}>Back</a>
-      <div className="text-search">
-      <form onSubmit={this.handleSubmit}>
-        <input type="text" className="" ref="searchInput" placeholder="Search in this document" />
-      </form>
-      </div>
-      </div>
+        <div className="text-search-container">
+          <a className="back" href={back_url}>Back</a>
+          <div className="text-search">
+            <form onSubmit={this.handleSubmit}>
+              <input type="text" className="" ref="searchInput" placeholder= {lang.search_in_this_document} />
+            </form>
+          </div>
+        </div>
     );
   }
 });
@@ -31,14 +31,14 @@ var TextSearchResultRow = React.createClass({
     highlightword = decodeURI(highlightword);
     var re = new RegExp(highlightword, "gi");
     return text.replace(re,"<span class='search-highlight-word'>" + highlightword + "</span>");
-  },  
+  },
   render: function() {
     var text = this.highlightSearchQuery(this.props.resultRow.get("text"), this.props.contractApp.getSearchQuery());
     text = "Pg " + this.props.resultRow.get("page_no") + "&nbsp;" + text;
     return(
-      <div className="search-result-row link" onClick={this.handleClick}>
-        <span dangerouslySetInnerHTML={{__html: text}} />
-      </div>
+        <div className="search-result-row link" onClick={this.handleClick}>
+          <span dangerouslySetInnerHTML={{__html: text}} />
+        </div>
     );
   }
 });
@@ -57,26 +57,26 @@ var TextSearchResultsList = React.createClass({
   },
   render: function() {
     var self = this;
-    var resultsView = "searching ...";
+    var resultsView = lang.searching;
     if(this.props.searchResultsCollection.models.length > 0) {
       resultsView = this.props.searchResultsCollection.models.map(function(model, i) {
         return (
-          <TextSearchResultRow
-            key={i}
-            contractApp={self.props.contractApp} 
-            resultRow={model} />
+            <TextSearchResultRow
+                key={i}
+                contractApp={self.props.contractApp}
+                resultRow={model} />
         );
       });
-    } 
+    }
     else if(this.props.searchResultsCollection.searchCompleted === true || this.props.searchResultsCollection.length == 0) {
-      resultsView = "No results found";
+      resultsView = lang.no_results_found;
     }
 
     return (
-      <div style={this.props.style} className="search-results-list">
-      <span className="pull-right link close" onClick={this.handleCloseSearchResults}>x</span>
-        {resultsView}
-      </div>
+        <div style={this.props.style} className="search-results-list">
+          <span className="pull-right link close" onClick={this.handleCloseSearchResults}>x</span>
+          {resultsView}
+        </div>
     );
   }
 });
