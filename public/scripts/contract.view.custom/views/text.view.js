@@ -247,11 +247,11 @@ var TextViewer = React.createClass({
 
         return (
             <div className="text-panel" style={this.props.style}>
-                {warningText}
+        {warningText}
                 <div className="text-annotator">
                     <div></div>
                     <div className="text-viewer">
-                        {pagesView}
+          {pagesView}
                     </div>
                 </div>
             </div>

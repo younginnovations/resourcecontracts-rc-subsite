@@ -9,14 +9,14 @@ var TextSearchForm = React.createClass({
   },
   render: function() {
     return (
-        <div className="text-search-container">
-          <a className="back" href={back_url}>Back</a>
-          <div className="text-search">
-            <form onSubmit={this.handleSubmit}>
-              <input type="text" className="" ref="searchInput" placeholder= {lang.search_in_this_document} />
-            </form>
-          </div>
-        </div>
+      <div className="text-search-container">
+      <a className="back" href={back_url}>Back</a>
+      <div className="text-search">
+      <form onSubmit={this.handleSubmit}>
+        <input type="text" className="" ref="searchInput" placeholder= {lang.search_in_this_document} />
+      </form>
+      </div>
+      </div>
     );
   }
 });
@@ -36,9 +36,9 @@ var TextSearchResultRow = React.createClass({
     var text = this.highlightSearchQuery(this.props.resultRow.get("text"), this.props.contractApp.getSearchQuery());
     text = "Pg " + this.props.resultRow.get("page_no") + "&nbsp;" + text;
     return(
-        <div className="search-result-row link" onClick={this.handleClick}>
-          <span dangerouslySetInnerHTML={{__html: text}} />
-        </div>
+      <div className="search-result-row link" onClick={this.handleClick}>
+        <span dangerouslySetInnerHTML={{__html: text}} />
+      </div>
     );
   }
 });
@@ -61,10 +61,10 @@ var TextSearchResultsList = React.createClass({
     if(this.props.searchResultsCollection.models.length > 0) {
       resultsView = this.props.searchResultsCollection.models.map(function(model, i) {
         return (
-            <TextSearchResultRow
-                key={i}
-                contractApp={self.props.contractApp}
-                resultRow={model} />
+          <TextSearchResultRow
+            key={i}
+            contractApp={self.props.contractApp}
+            resultRow={model} />
         );
       });
     }
@@ -73,10 +73,10 @@ var TextSearchResultsList = React.createClass({
     }
 
     return (
-        <div style={this.props.style} className="search-results-list">
-          <span className="pull-right link close" onClick={this.handleCloseSearchResults}>x</span>
-          {resultsView}
-        </div>
+      <div style={this.props.style} className="search-results-list">
+      <span className="pull-right link close" onClick={this.handleCloseSearchResults}>x</span>
+        {resultsView}
+      </div>
     );
   }
 });
