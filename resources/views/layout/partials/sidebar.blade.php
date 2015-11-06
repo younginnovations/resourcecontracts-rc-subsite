@@ -82,7 +82,7 @@ if (!isset($summary)) {
             @endif
 
             @if(count($summary->year_summary)>10)
-                <div><a href="#year-more" class="toggle-all">More</a></div>
+                <div><a href="#year-more" class="toggle-all">@lang('global.more')</a></div>
             @endif
         </li>
 
