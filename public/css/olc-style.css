@@ -1439,7 +1439,7 @@ footer {
   min-height: 500px; }
   .content-wrap #title {
     padding-top: 0;
-    padding-left: 26px; }
+    padding-left: 15px; }
   .content-wrap #content {
     width: 80%;
     padding-top: 30px; }
@@ -1776,7 +1776,9 @@ footer {
   .footer-note {
     padding: 0 15px 10px; }
   .country-contract-wrap {
-    border-right: 1px solid #f2f2f2; } }
+    border-right: 1px solid #f2f2f2; }
+  .content-wrap #title {
+    padding-left: 26px; } }
 
 @media all and (min-width: 1200px) {
   .country-list-wrap .col-lg-2:nth-child(-n+6) {
@@ -2151,7 +2153,6 @@ input.select2-search__field {
     padding: 0 0 150px; } }
 
 .affix, .affix-top {
-  position: fixed;
   top: 11em;
   width: 20.45em; }
 
@@ -2161,7 +2162,7 @@ input.select2-search__field {
 
 @media (min-width: 1200px) {
   .affix-bottom {
-    width: 20.45em; } }
+    width: 28.45em; } }
 
 .side-link-nav .nav .active {
   background: #eee; }
@@ -2172,12 +2173,16 @@ input.select2-search__field {
   display: none; }
   .side-link-nav .nav .nav a {
     font-weight: normal;
-    font-size: .85em; }
+    font-size: .85em;
+    text-align: left; }
 
 .side-link-nav .nav .nav .active a,
 .side-link-nav .nav .nav .active:hover a,
 .side-link-nav .nav .nav .active:focus a {
   font-weight: bold;
   border-left: 5px solid black; }
+
+#scroll-able .title {
+  font: 15px Open-Sans-Bold; }
 
 /*# sourceMappingURL=maps/olc-style.css.map */
