@@ -14,8 +14,8 @@ class APIService
     /**
      * @var Client
      */
-    protected $client;
-    protected $category;
+    public $client;
+    public $category;
 
     /**
      * @param Client $client
@@ -32,7 +32,7 @@ class APIService
      * @param $request
      * @return string
      */
-    protected function apiURL($request)
+    public function apiURL($request)
     {
         $host    = trim(env('ELASTIC_SEARCH_HOST'), '/');
         $request = trim($request, '/');
@@ -66,7 +66,8 @@ class APIService
             'per_page' => 25,
             'from'     => 0,
             'sort_by'  => '',
-            'order'    => ''
+            'order'    => '',
+            'download' => false
         ];
 
         $filter = array_merge($default, $filter);
@@ -78,9 +79,13 @@ class APIService
             'per_page'     => $filter['per_page'],
             'from'         => $filter['per_page'] * ($filter['from'] - 1),
             'sort_by'      => $filter['sort_by'],
-            'order'        => $filter['order']
+            'order'        => $filter['order'],
+            'download'     => $filter['download']
         ];
 
+        if ($query['download']) {
+            echo $this->downloadAPI('contracts', $query);
+        }
         $contract = $this->apiCall('contracts', $query);
 
         if ($contract->total > 0) {
@@ -115,7 +120,7 @@ class APIService
      */
     public function metadata($contract_id)
     {
-        $resource    = sprintf('contract/%s/metadata', $contract_id);
+        $resource = sprintf('contract/%s/metadata', $contract_id);
 
         $contract = $this->apiCall($resource);
 
@@ -200,11 +205,15 @@ class APIService
             'order'               => $order,
             'per_page'            => $per_page,
             'from'                => $per_page * ($from - 1),
+            'download'            => $download,
 
         ];
 
-        $contract = $this->apiCall('contracts/search', $query);
 
+        if ($filter['download']) {
+            echo $this->downloadAPI('contracts/search', $query);
+        }
+        $contract = $this->apiCall('contracts/search', $query);
         if ($contract) {
             return $contract;
         }
@@ -352,20 +361,6 @@ class APIService
         return $response;
     }
 
-    /**
-     * Return contract id
-     * @param $contracts
-     * @return array
-     */
-    public function getContractsId($contracts)
-    {
-        $data = [];
-        foreach ($contracts->results as $result) {
-            $data[] = $result->contract_id;
-        }
-
-        return $data;
-    }
 
     /**
      * Return all the metadata of given id
@@ -396,6 +391,34 @@ class APIService
         $summaries->country_summary = $data;
 
         return $summaries;
+    }
+
+    /**
+     * call API
+     *
+     * @param       $resource
+     * @param array $query
+     * @param bool  $array
+     * @return null
+     */
+    protected function downloadAPI($resource, array $query = [], $array = false)
+    {
+        try {
+            $request           = new Request('GET', $this->apiURL($resource));
+            $query['category'] = $this->category;
+            $request->setQuery($query);
+            $response = $this->client->send($request);
+            $data     = $response->getBody()->getContents();
+            $filename = "export" . date('Y-m-d');
+            header('Content-type: text/csv');
+            header('Content-Disposition: attachment; filename="' . $filename . '.csv"');
+            print $data;
+            die;
+        } catch (\Exception $e) {
+            Log::error($resource . ":" . $e->getMessage(), $query);
+
+            return null;
+        }
     }
 
 }

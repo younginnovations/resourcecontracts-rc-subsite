@@ -60,16 +60,11 @@ class ResourceController extends BaseController
         $filter      = ['resource' => $resource, 'from' => $currentPage,'sort_by'=>$request->get('sortby'),'order'=>$request->get('order')];
         $contracts   = $this->api->allContracts($filter);
         $countries   = $this->api->getCountryByResource($filter);
-        $allFilter             = $filter;
-        $allFilter['per_page'] = $contracts->total;
-        $allContracts          = $this->api->allContracts($allFilter);
-        $contract_id           = $this->api->getContractsId($allContracts);
-
         if (!$contracts) {
             return abort(404);
         }
 
-        return view('resource.detail', compact('contracts', 'resource', 'countries', 'currentPage','contract_id'));
+        return view('resource.detail', compact('contracts', 'resource', 'countries', 'currentPage'));
     }
 
 }
