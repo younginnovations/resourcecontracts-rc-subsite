@@ -12,7 +12,7 @@
                         </ul>
                     </div>
                     <div class="panel-title">
-                        Countries
+                        @lang('global.countries')
                     </div>
                 </div>
             </div>
@@ -66,7 +66,14 @@
 <script type="text/template" id="resource-template">
     <li>
         <input class="resource" name="resource[]" type="checkbox" value="<%= value %>" />
-        <label> <%= resource[name] %> (<%= contract %>)</label>
+        <label>
+            <% if(typeof resource[name] == 'undefined') {%>
+            <%= name %>
+            <% }else{%>
+            <%= resource[name] %>
+            <% } %>
+            (<%= contract %>)
+        </label>
     </li>
 </script>
 <script>
