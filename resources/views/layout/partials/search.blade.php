@@ -101,4 +101,7 @@ $category = $api->getAnnotationsCategory();
             </div>
         </div>
     </div>
+    <script>
+        var lang = <?php echo json_encode(trans('annotation'));?>;
+    </script>
 </form>

@@ -8,6 +8,7 @@ return [
     'open_land_contracts'         => 'Ouvert Land Contrats',
     'search'                      => 'Recherche',
     'contracts'                   => 'Contrat|Contrats',
+    'associated_documents'        => '(fr) and associated documents',
     'contract_doc_from'           => 'CONTRATS DOCUMENTS DE',
     'countries'                   => 'Pays',
     'country'                     => 'Pays',

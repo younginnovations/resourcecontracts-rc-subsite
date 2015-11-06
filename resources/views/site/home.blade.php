@@ -33,9 +33,9 @@ use \Illuminate\Support\Facades\Lang as Lang;
                     <form action="{{route('search')}}" method="GET" class="contract-search-form">
                         <div class="form-group">
                             <input type="text" name="q" class="form-control pull-left"
-                                   placeholder="@lang('global.search') {{$contracts}} {{ Lang::choice('global.contracts' , $contracts) }}">
+                                   placeholder="@lang('global.search') {{$contracts}} {{ Lang::choice('global.contracts' , $contracts) }} @lang('global.associated_documents')">
                             <button type="submit"
-                                    class="btn btn-search">@lang('global.search') {{ Lang::choice('global.contracts' , $contracts) }}</button>
+                                    class="btn btn-search">@lang('global.search')</button>
                         </div>
                         <span class="advanced-search">Advanced Search</span>
                     </form>

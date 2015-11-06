@@ -7,6 +7,7 @@ return [
     'open_land_contracts'         => 'Open Land Contracts',
     'search'                      => 'Search',
     'contracts'                   => 'Contract|Contracts',
+    'associated_documents'        => 'and associated documents',
     'contract_doc_from'           => 'CONTRACT DOCUMENTS FROM',
     'countries'                   => 'Countries',
     'country'                     => 'Country',
