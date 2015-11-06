@@ -9,7 +9,7 @@ $category = $api->getAnnotationsCategory();
     <div class="form-group">
         <button type="submit" class="btn btn-navbar-search pull-left"></button>
         <input type="text" autocomplete="off" value="{{\Illuminate\Support\Facades\Input::get('q')}}" name="q"
-               class="form-control pull-left" placeholder="@lang('search.search_message')">
+               class="form-control pull-left" placeholder="@lang('search.search_placeholder')">
     </div>
     <div class="search-input-wrapper @if(isset($show_advance)) search-page-input-wrapper @endif">
         <div class="col-lg-12">
@@ -18,7 +18,7 @@ $category = $api->getAnnotationsCategory();
                 <select name="year[]" id="year" multiple="multiple">
                     @foreach($summary->year_summary as $year)
                         <option  @if(isset($filter['year']) && in_array($year->key, $filter['year']))
-                            selected="selected" @endif    value="{{$year->key}}">{{$year->key}}</option>
+                                 selected="selected" @endif    value="{{$year->key}}">{{$year->key}}</option>
                     @endforeach
                 </select>
             </div>
@@ -27,8 +27,8 @@ $category = $api->getAnnotationsCategory();
                 <select name="country[]" id="" multiple="multiple">
                     @foreach($summary->country_summary as $country)
                         <option @if(isset($filter['country']) && in_array(strtoupper($country['key']), array_map('strtoupper',$filter['country'])))
-                            selected="selected"
-                            @endif value="{{$country['key']}}">{{$country['name']}}</option>
+                                selected="selected"
+                                @endif value="{{$country['key']}}">{{$country['name']}}</option>
                     @endforeach
                 </select>
             </div>
@@ -37,8 +37,8 @@ $category = $api->getAnnotationsCategory();
                 <select name="resource[]" id="" multiple="multiple">
                     @foreach($summary->resource_summary as $resource)
                         <option @if(isset($filter['resource']) && in_array($resource->key, $filter['resource']))
-                            selected="selected"
-                            @endif value="{{$resource->key}}">{{$resource->key}}</option>
+                                selected="selected"
+                                @endif value="{{$resource->key}}">{{$resource->key}}</option>
                     @endforeach
                 </select>
             </div>
@@ -50,8 +50,8 @@ $category = $api->getAnnotationsCategory();
                     ?>
                     @foreach($company_array as $company)
                         <option @if(isset($filter['company_name']) && in_array($company, $filter['company_name']))
-                            selected="selected"
-                            @endif value="{{$company}}">{{$company}}</option>
+                                selected="selected"
+                                @endif value="{{$company}}">{{$company}}</option>
                     @endforeach
                 </select>
             </div>
@@ -63,8 +63,8 @@ $category = $api->getAnnotationsCategory();
                     <select name="corporate_group[]" id="" multiple="multiple">
                         @foreach($attributes->corporate_grouping as $group)
                             <option @if(isset($filter['corporate_group']) && in_array($group, $filter['corporate_group']))
-                                selected="selected"
-                                @endif value="{{$group}}">{{$group}}</option>
+                                    selected="selected"
+                                    @endif value="{{$group}}">{{$group}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -74,8 +74,8 @@ $category = $api->getAnnotationsCategory();
                 <select name="contract_type[]" id="" multiple="multiple">
                     @foreach(array_filter($attributes->contract_type) as $type)
                         <option @if(isset($filter['contract_type']) && in_array($type, $filter['contract_type']))
-                            selected="selected"
-                            @endif value="{{$type}}">{{$type}}</option>
+                                selected="selected"
+                                @endif value="{{$type}}">{{$type}}</option>
                     @endforeach
                 </select>
             </div>
@@ -87,18 +87,18 @@ $category = $api->getAnnotationsCategory();
                 <select name="annotation_category[]" id="" multiple="multiple">
                     @foreach(array_filter($annotation_category) as $cat)
                         <option @if(isset($filter['annotation_category']) && in_array($cat, $filter['annotation_category']))
-                            selected="selected"
-                            @endif value="{{$cat}}">{{$cat}}</option>
+                                selected="selected"
+                                @endif value="{{$cat}}">{{$cat}}</option>
                     @endforeach
                 </select>
             </div>
             <div class="col-lg-4">
-            <button type="submit" class="btn btn-form-search">@lang('global.search')</button>
+                <button type="submit" class="btn btn-form-search">@lang('global.search')</button>
 
-            @if(!isset($searchPage))
-                <button type="button" class="btn btn-form-search search-close">@lang('global.cancel')</button>
-            @endif
-        </div>
+                @if(!isset($searchPage))
+                    <button type="button" class="btn btn-form-search search-close">@lang('global.cancel')</button>
+                @endif
+            </div>
         </div>
     </div>
 </form>
