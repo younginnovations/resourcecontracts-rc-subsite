@@ -7,6 +7,9 @@ var AnnotationHeader = React.createClass({
     },
     render: function() {
         var count = this.props.annotationsCollection.length;
+        if(count == 0){
+           return ( <div className="annotation-title">{count} Annotations </div>)
+        }
         return (
             <div className="annotation-title">{count} Annotations
             <span className="pull-right">
