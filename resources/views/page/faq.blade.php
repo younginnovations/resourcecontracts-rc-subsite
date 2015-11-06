@@ -18,7 +18,7 @@
                     </ul>
                 </nav>
 
-                <div id="scroll-able" class="col-md-8 col-md-offset-4" data-spy="scroll" data-target="#target_nav">
+                <div id="scroll-able" class="col-md-8 scrollable" data-spy="scroll" data-target="#target_nav">
                     @foreach($page->faqContent() as $key => $faq)
                         <section id="faq-{{$key}}">
                             <div class="title">{{strip_tags($faq['a'])}}</div>
@@ -51,39 +51,23 @@
                     }
                 }
             });
+
+           $(window).scroll(function() {
+            var abc = $(window).scrollTop() + $(window).height();
+            var xyz = $(document).height() - $('footer').height();
+            if(abc > xyz) {
+               $('#nav').css('position','static');
+           }
+           else {
+            $('#nav').css('position','fixed');
+           }
         });
 
-    $(function () {
-  
-  var msie6 = $.browser == 'msie' && $.browser.version < 7;
-  
-  if (!msie6 && $('#target-nav').offset()!=null) {
-    var top = $('#target-nav').offset().top - parseFloat($('#target-nav').css('margin-top').replace(/auto/, 0));
-    var height = $('#target-nav').height();
-    var winHeight = $(window).height(); 
-    var footerTop = $('footer').offset().top - parseFloat($('footer').css('margin-top').replace(/auto/, 0));
-    var gap = 7;
-    $(window).scroll(function (event) {
-      // what the y position of the scroll is
-      var y = $(this).scrollTop();
-      
-      // whether that's below the form
-      if (y+winHeight >= top+ height+gap && y+winHeight<=footerTop) {
-        // if so, ad the fixed class
-        $('#target-nav').addClass('leftsidebarfixed').css('top',winHeight-height-gap +'px');
-      } 
-      else if (y+winHeight>footerTop) {
-        // if so, ad the fixed class
-       $('#target-nav').addClass('leftsidebarfixed').css('top',footerTop-height-y-gap+'px');
-      } 
-      else    
-      {
-        // otherwise remove it
-        $('#target-nav').removeClass('leftsidebarfixed').css('top','0px');
-      }
-    });
-  }  
-});
+     
+
+
+        });
+
 
     
     
