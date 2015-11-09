@@ -25,15 +25,16 @@ class SiteController extends BaseController
     protected $contract;
 
     /**
-     * @param APIService      $api
-     * @param Request         $request
+     * @param APIService $api
+     * @param Request $request
      * @param ContractService $contract
      */
     public function __construct(APIService $api, Request $request, ContractService $contract)
     {
-        $this->api      = $api;
-        $this->request  = $request;
+        $this->api = $api;
+        $this->request = $request;
         $this->contract = $contract;
+
     }
 
     /**
@@ -43,12 +44,11 @@ class SiteController extends BaseController
      */
     public function home()
     {
-        $summary   = $this->api->summary();
+        $summary = $this->api->summary();
         $countries = count($summary->country_summary);
         $resources = count($summary->resource_summary);
         $contracts = $summary->contract_count;
 
         return view('site.home', compact('countries', 'resources', 'contracts'));
     }
-
 }

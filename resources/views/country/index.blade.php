@@ -7,12 +7,12 @@
                 <div class="pull-left">
                     <div class="breadcrumb-wrapper">
                         <ul>
-                            <li><a href="{{url()}}">Home</a></li>
-                            <li>Countries</li>
+                            <li><a href="{{url()}}">@lang('global.home')</a></li>
+                            <li>@lang('global.countries')</li>
                         </ul>
                     </div>
                     <div class="panel-title">
-                        Countries
+                        @lang('global.countries')
                     </div>
                 </div>
             </div>
@@ -22,14 +22,14 @@
                         <form class="search-form filter-form">
                             <div class="form-group">
                                 <button type="submit" class="btn btn-filter-search pull-left"></button>
-                                <input type="text" class="form-control search pull-left" placeholder="Filter by country ...">
+                          <input type="text" class="form-control search pull-left" placeholder="@lang('countriespage.filter_by_contry_name')">
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="col-xs-5 col-sm-3 col-md-3 col-lg-2 pull-right">
                     <div class="filter-resource-wrap">
-                        <div class="filter-label" data-toggle="collapse-side" data-target=".side-collapse" data-target-2=".side-collapse-container">Filter by Resources<i></i></div>
+                        <div class="filter-label" data-toggle="collapse-side" data-target=".side-collapse" data-target-2=".side-collapse-container">@lang('countriespage.filter_by_resources')<i></i></div>
                     </div>
                     <div class="side-collapse in">
                         <ul id="resources">
@@ -51,13 +51,13 @@
     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
         <a href="{{url('countries')}}/<%= code %>">
             <img width="200" src="{{getFlagUrl()}}<%= code %>.png" />
-            <div class="country-name"><%= name %></div>
+            <div class="country-name"><%= country[code.toUpperCase()]%></div>
         </a>
         <div class="contract-count"><%= contract %>
             <% if (contract > 1){%>
-            contracts
+            @lang('countriespage.contracts')
             <% }else{ %>
-            contract
+            @lang('countriespage.contract')
             <% } %>
 
         </div>
@@ -66,11 +66,21 @@
 <script type="text/template" id="resource-template">
     <li>
         <input class="resource" name="resource[]" type="checkbox" value="<%= value %>" />
-        <label><%= name %> (<%= contract %>)</label>
+        <label>
+            <% if(typeof resource[name] == 'undefined') {%>
+            <%= name %>
+            <% }else{%>
+            <%= resource[name] %>
+            <% } %>
+            (<%= contract %>)
+        </label>
     </li>
 </script>
 <script>
     var APP_URL = '{{url()}}';
+    var lang = <?php echo json_encode(trans('annotation'));?>;
+    var country = <?php echo json_encode(trans('country'));?>;
+    var resource = <?php echo json_encode(trans('resources'));?>;
 </script>
 <script type="text/javascript" src="{{url('js/country.min.js')}}"></script>
 @stop

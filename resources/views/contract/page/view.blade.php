@@ -25,8 +25,9 @@
     <script type="text/jsx" src="{{ url('scripts/contract.view.custom/views/text.search.js') }}"></script>
     <script type="text/jsx" src="{{ url('scripts/contract.view.custom/views/annotations.view.js') }}"></script>
 
-
     <script type="text/jsx">
+      var lang = <?php echo json_encode(trans('annotation'));?>;
+
       var debug = function() {
         var DEBUG = false;
         if(DEBUG) {

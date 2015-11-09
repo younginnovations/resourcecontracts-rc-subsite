@@ -4,18 +4,22 @@ $order=\Illuminate\Support\Facades\Input::get('order','desc');
 $sortBy=\Illuminate\Support\Facades\Input::get('sortby','year');
 $route=Request::path();
 
+
+
 ?>
 <table class="table table-responsive table-contract table-contract-list">
     <thead>
     <th></th>
     <th width="50%">
-        <a href="{{appendInUrl($route,$url,"contract_name",$order)}}">Document {!!show_arrow($order, $sortBy=='contract_name')!!}</a>
+        <a href="{{appendInUrl($route,$url,"contract_name",$order)}}">@lang('global.document') {!!show_arrow($order, $sortBy=='contract_name')!!}</a>
     </th>
     <th></th>
-    <th width="20%"><a href="{{appendInUrl($route,$url,"country",$order)}}">Country {!!show_arrow($order, $sortBy=='country')!!}</a></th>
-    <th><a href="{{appendInUrl($route,$url,"year",$order)}}">Year {!!show_arrow($order, $sortBy=='year')!!}</a></th>
-    <th width="15%"><a href="{{appendInUrl($route,$url,"resource",$order)}}">Resource {!!show_arrow($order, $sortBy=='resource')!!}</a> </th>
-    <th width="15%"><a href="{{appendInUrl($route,$url,"contract_type",$order)}}">Contract Type {!!show_arrow($order, $sortBy=='contract_type')!!}</a></th>
+
+    <th width="20%"><a href="{{appendInUrl($route,$url,"country",$order)}}">@lang('global.country') {!!show_arrow($order, $sortBy=='country')!!}</a></th>
+    <th><a href="{{appendInUrl($route,$url,"year",$order)}}">@lang('global.year') {!!show_arrow($order, $sortBy=='year')!!}</a></th>
+    <th width="15%"><a href="{{appendInUrl($route,$url,"resource",$order)}}">@lang('global.resource') {!!show_arrow($order, $sortBy=='resource')!!}</a> </th>
+    <th width="15%"><a href="{{appendInUrl($route,$url,"contract_type",$order)}}">@lang('contract.contract_type') {!!show_arrow($order, $sortBy=='contract_type')!!}</a></th>
+
     </thead>
     <tbody>
     @forelse($contracts->results as $contract)
@@ -32,7 +36,7 @@ $route=Request::path();
                     {{ $contract->contract_name or ''}}
                 </a>
                 @if($annotations->total>0)
-                    <div class="annotate-text"> Annotated</div>
+                    <div class="annotate-text"> @lang('global.annotated')</div>
                 @endif
 
                 <div class="search-text">
@@ -75,7 +79,7 @@ $route=Request::path();
                 @endif
                 @if(isset($contract->group) && count($contract->group)>0)
                     <div class="contract-group">
-                        <label for="">Found in: </label>
+                        <label for="">@lang('search.found_in'): </label>
                         @foreach($contract->group as $group)
                             <a>{{$group}}</a>
                         @endforeach
@@ -126,7 +130,8 @@ $route=Request::path();
                 <ul>
                     @forelse($contract->resource as $resource)
                         @if(!empty($resource))
-                            <li>{{$resource}}</li>
+                            <li>@lang('resources.'.$resource)</li>
+
                         @else
                             -
                         @endif
@@ -141,7 +146,7 @@ $route=Request::path();
         </tr>
     @empty
         <tr>
-            <td colspan="2" class="search-not-found">{{'Search result not found.'}}</td>
+            <td colspan="2" class="search-not-found">@lang('search.search_not_found')</td>
         </tr>
     @endforelse
     </tbody>
