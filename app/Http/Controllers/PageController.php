@@ -1,9 +1,7 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Models\Page\Page;
-use App\Http\Services\AuthService;
+use App\Http\Services\LocalizationService;
 use App\Http\Services\Page\PageService;
-use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
 /**
@@ -17,18 +15,18 @@ class PageController extends BaseController
      */
     protected $page;
     /**
-     * @var AuthService
+     * @var LocalizationService
      */
-    protected $auth;
+    protected $lang;
 
     /**
-     * @param PageService $page
-     * @param AuthService $auth
+     * @param PageService         $page
+     * @param LocalizationService $lang
      */
-    public function __construct(PageService $page, AuthService $auth)
+    public function __construct(PageService $page, LocalizationService $lang)
     {
         $this->page = $page;
-        $this->auth = $auth;
+        $this->lang = $lang;
     }
 
     /**
@@ -111,66 +109,4 @@ class PageController extends BaseController
 
     }
 
-    /**
-     * Save Page
-     *
-     * @param Request $request
-     * @return bool
-     * @internal param $page
-     */
-    public function savePage(Request $request)
-    {
-        $page               = $request->input('pk');
-        $key                = $request->input('name');
-        $content            = $request->input('value');
-        $contentArray       = $this->page->get($page, true);
-        $contentArray[$key] = $content;
-
-        $this->page->save($page, $contentArray);
-
-        return response()->json($contentArray);
-    }
-
-    /**
-     * Login page
-     *
-     * @return \Illuminate\View\View
-     */
-    public function login()
-    {
-        if ($this->auth->isLoggedIn()) {
-            return redirect()->route('home');
-        }
-
-        return view('page.login');
-    }
-
-    /**
-     * Login process
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function loginPost(Request $request)
-    {
-        $username = $request->input('email');
-        $password = $request->input('password');
-
-        if ($this->auth->login($username, $password)) {
-            return redirect()->route('home');
-        }
-
-        return redirect()->route('login')->withInput()->with('error', 'Invalid Username or password');
-    }
-
-    /**
-     * Logout page
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function logout()
-    {
-        $this->auth->logout();
-
-        return redirect()->route('home');
-    }
 }

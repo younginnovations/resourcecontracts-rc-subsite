@@ -13,7 +13,7 @@ var TextSearchForm = React.createClass({
       <a className="back" href={back_url}>Back</a>
       <div className="text-search">
       <form onSubmit={this.handleSubmit}>
-        <input type="text" className="" ref="searchInput" placeholder="Search in this document" />
+        <input type="text" className="" ref="searchInput" placeholder= {lang.search_in_this_document} />
       </form>
       </div>
       </div>
@@ -31,7 +31,7 @@ var TextSearchResultRow = React.createClass({
     highlightword = decodeURI(highlightword);
     var re = new RegExp(highlightword, "gi");
     return text.replace(re,"<span class='search-highlight-word'>" + highlightword + "</span>");
-  },  
+  },
   render: function() {
     var text = this.highlightSearchQuery(this.props.resultRow.get("text"), this.props.contractApp.getSearchQuery());
     text = "Pg " + this.props.resultRow.get("page_no") + "&nbsp;" + text;
@@ -57,19 +57,19 @@ var TextSearchResultsList = React.createClass({
   },
   render: function() {
     var self = this;
-    var resultsView = "searching ...";
+    var resultsView = lang.searching;
     if(this.props.searchResultsCollection.models.length > 0) {
       resultsView = this.props.searchResultsCollection.models.map(function(model, i) {
         return (
           <TextSearchResultRow
             key={i}
-            contractApp={self.props.contractApp} 
+            contractApp={self.props.contractApp}
             resultRow={model} />
         );
       });
-    } 
+    }
     else if(this.props.searchResultsCollection.searchCompleted === true || this.props.searchResultsCollection.length == 0) {
-      resultsView = "No results found";
+      resultsView = lang.no_results_found;
     }
 
     return (

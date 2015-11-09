@@ -1,3 +1,6 @@
+<?php
+ use \Illuminate\Support\Facades\Lang as Lang;
+?>
 @extends('layout.app-full')
 
 @section('content')
@@ -7,11 +10,11 @@
                 <div class="pull-left">
                     <div class="breadcrumb-wrapper">
                         <ul>
-                            <li><a href="{{url()}}">Home</a></li>
+                            <li><a href="{{url()}}">@lang('global.home')</a></li>
                             @if(\Illuminate\Support\Facades\Input::get('year') =='')
-                                <li>All Contracts</li>
+                                <li>@lang('global.all_contracts')</li>
                             @else
-                                <li><a href="{{url('contracts')}}">All Contracts</a></li>
+                                <li><a href="{{url('contracts')}}">@lang('global.all_contracts')</a></li>
                                 <li>{{\Illuminate\Support\Facades\Input::get('year')}}</li>
                             @endif
                         </ul>
@@ -20,13 +23,13 @@
                         @if(\Illuminate\Support\Facades\Input::get('year') !='')
                             Contracts in {{\Illuminate\Support\Facades\Input::get('year')}}
                           @else
-                            All Contracts
+                            @lang('global.all_contracts')
                         @endif
                     </div>
                 </div>
             </div>
             <div class="contract-number-wrap" style="margin-top: -40px;">
-                <span>{{$contracts->total}}</span> @if($contracts->total == 1)contract @else Contracts @endif
+                <span>{{$contracts->total}}</span> {{ Lang::choice('global.contracts' , $contracts->total) }}
             </div>
         </div>
     </div>
@@ -40,4 +43,8 @@
             </div>
         </div>
     </div>
+    <script>
+        var lang = <?php echo json_encode(trans('annotation'));?>;
+    </script>
+
 @stop

@@ -17,13 +17,13 @@ if (!isset($summary)) {
         </li>
         <li class="contracts">
             <a href="{{url('contracts')}}">
-                <span>All Contracts</span>
+                <span>@lang('sidebar.all_contracts')</span>
 
                 <small class="label pull-right">{{$summary->contract_count}}</small>
             </a>
         </li>
         <li class="countries">
-            <label>Countries</label>
+            <label>@lang('global.countries')</label>
             <ul>
                 @foreach(array_slice($summary->country_summary, 0, 10, true) as $country)
 
@@ -35,28 +35,28 @@ if (!isset($summary)) {
                     </li>
                 @endforeach
                 @if(count($summary->country_summary)>10)
-                <li><a  href="{{route('countries')}}">View all</a></li>
+                <li><a  href="{{route('countries')}}">@lang('sidebar.view_all')</a></li>
                 @endif
             </ul>
         </li>
         <li class="resources">
-            <label>Resources</label>
+            <label>@lang('global.resources')</label>
             <ul>
                 @foreach(array_slice($summary->resource_summary,0,10,true) as $resource)
                     <li>
                         <a href="{{route('resource.detail', ['key'=>urlencode($resource->key)])}}">
-                            <span>{{ucfirst($resource->key)}}</span>
+                            <span>@lang('resources.'.ucfirst($resource->key))</span>
                             <small class="label pull-right">{{$resource->doc_count}}</small>
                         </a>
                     </li>
                 @endforeach
                 @if(count($summary->resource_summary)>10)
-                    <li><a href="{{route('resources')}}">View all</a></li>
+                    <li><a href="{{route('resources')}}">@lang('sidebar.view_all')</a></li>
                 @endif
             </ul>
         </li>
         <li class="year">
-            <label>Year</label>
+            <label>@lang('global.year')</label>
             <ul>
                 @foreach(array_slice($summary->year_summary, 0, 10, true) as $year)
                     <li>
@@ -82,9 +82,14 @@ if (!isset($summary)) {
             @endif
 
             @if(count($summary->year_summary)>10)
-                <div><a href="#year-more" class="toggle-all">More</a></div>
+                <div><a href="#year-more" class="toggle-all">@lang('global.more')</a></div>
             @endif
         </li>
 
     </ul>
 </div>
+<script>
+    var localization = [];
+    localization.more = "@lang('global.more')";
+    localization.less = "@lang('global.less')";
+</script>
