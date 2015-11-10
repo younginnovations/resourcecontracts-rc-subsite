@@ -2131,6 +2131,12 @@ footer {
 .search-not-found {
   background: none !important;
   padding-left: 36px !important;
+  font-size: 14px!important;
+  a {
+    padding-left: 0!important;
+    text-decoration: underline;
+    float: none!important;
+  }
 }
 .open-contracting-id {
   label {

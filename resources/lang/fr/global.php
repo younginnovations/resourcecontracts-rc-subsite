@@ -53,5 +53,9 @@ return [
     'last'                        => 'Fr Last',
     'first'                       => 'Fr First',
     'annotated'                   => 'Fr Annotated',
+    'previous'                    => 'Fr Previous',
+    'close_annotations'           => 'Close Annotations',
+
+
 
 ];

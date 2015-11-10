@@ -8,7 +8,7 @@ return [
     'contract_type'        => 'Contract Type',
     'annotations_category' => 'Annotations Category',
     'download_as_csv'      => 'Download search results as csv',
-    'search_not_found'     => 'Search result not found.',
+    'search_not_found'     => "Your search has 0 results. To start a new search, enter your text in the search bar above. You can also <a href='/contracts'>browse a full list of available contracts. </a>",
     'corporate_group'      => 'Corporate Group',
     'found in'             => 'Found In',
 
