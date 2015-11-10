@@ -52,4 +52,7 @@ return [
     'last'                        => 'Last',
     'first'                       => 'First',
     'annotated'                   => 'Annotated',
+    'previous'                    => 'Previous',
+    'close_annotations'           => 'Close Annotations',
+
 ];
