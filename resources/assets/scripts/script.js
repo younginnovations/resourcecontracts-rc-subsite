@@ -208,5 +208,10 @@ $(document).ready(function () {
         }
     })
 
+    $(document).on('click', '.pin-annotation-cateogry', function (e) {
+        e.preventDefault();
+        console.log("clicked")
+    })
+
 
 });

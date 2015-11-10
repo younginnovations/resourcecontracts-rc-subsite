@@ -1,8 +1,10 @@
 <?php
 use Illuminate\Support\Facades\Lang;
-
 ?>
 @extends('layout.app-full')
+@section('css')
+    <link rel="stylesheet" href="{{ url('css/toastr.css') }}">
+@endsection
 
 @section('content')
     <div class="row">
@@ -76,8 +78,7 @@ use Illuminate\Support\Facades\Lang;
                                     <span><a href="{{route('country.detail', ['key'=>$code])}}">{{ucfirst(_e($contract->metadata->country,'name'))}}</a>
                                         @if(env("CATEGORY")=="rc")
                                             @if(isset($contract->metadata->amla_url) && !empty($contract->metadata->amla_url))
-                                                <span class="amla-link">See <a href="{{$contract->metadata->amla_url}}"
-                                                                               target="_blank">Legislation</a> in African Mining Legislation Atlas</span>@endif</span>
+                                                <span class="amla-link">See <a href="{{$contract->metadata->amla_url}}" target="_blank">Legislation</a> in African Mining Legislation Atlas</span>@endif</span>
                                 @endif
                                 @endif
 
@@ -371,13 +372,15 @@ use Illuminate\Support\Facades\Lang;
                         </div>
 
                         @forelse($contract->annotationsCluster as $cluster  => $categories)
-                            <div id="cluster-{{str_slug($cluster,'-')}}" class="cluster-wrap">
+                            <div id="cluster-{{str_slug($cluster,'-')}}" class="cluster-wrap annotation-list">
                                 <div class="category-title">
                                     {{$cluster}}
                                 </div>
 
                                     @foreach($categories as $category => $annotations)
+                                        <div class="annotation-detail-wrap">
                                     <div id="{{str_slug($category,'-')}}" class="sub-category">
+                                        <a class="pin-annotation-category" data-category="{{$category}}">Pin</a>
                                         <a href="#{{str_slug($category,'-')}}"><i class='glyphicon glyphicon-link' style="display:none;"></i></a>
                                         {{$category}}
                                     </div>
@@ -410,6 +413,7 @@ use Illuminate\Support\Facades\Lang;
                                             </li>
                                         @endforeach
                                     </ul>
+                                        </div>
                                 @endforeach
                             </div>
                         @empty
@@ -424,8 +428,29 @@ use Illuminate\Support\Facades\Lang;
                 </div>
             </div>
         </div>
+        <div class='pin-message' style="display: none">Pin added!</div>
         <script>
         var lang = <?php echo json_encode(trans('annotation'));?>;
         </script>
     @endif
 @stop
+
+@section('js')
+    <script src="{{ url('scripts/lib/toastr.min.js') }}"></script>
+    <script src="{{ url('scripts/lib/underscore.js') }}"></script>
+    <script src="{{ url('scripts/lib/backbone.js') }}"></script>
+    <script type="text/javascript" src="{{ url('scripts/lib/backbone.localstorage.js') }}"></script>
+    <script type="text/javascript" src="{{ url('scripts/lib/backbone.exportcsv.js') }}"></script>
+    <script src="{{ url('js/pinning.js') }}"></script>
+    <script>
+        var pinCollection = new PinCollection();
+        pinCollection.fetch();
+        var annotationView = new AnnotationView({
+            el: '#annotations',
+            contract_title: '{{$contract->metadata->contract_name}}',
+            contract_id: '{{$contract->metadata->contract_id}}',
+            page_url: '{{\Illuminate\Support\Facades\Request::url()}}',
+            collection: pinCollection
+        });
+    </script>
+@endsection
