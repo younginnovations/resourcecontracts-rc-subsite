@@ -2644,6 +2644,10 @@ footer {
     float: left;
     margin: 0 0 20px -20px;
   }
+  .search-input-wrapper .col-lg-12 .col-lg-4 {
+    float: none;
+    clear: both;
+  }
 }
 @media all and(min-width: 1200px) and(max-width: 1300px) {
   .search-input-wrapper .col-lg-2 {
@@ -2840,7 +2844,7 @@ h1 + .editable-container.editable-inline {
   }
 }
 input.select2-search__field {
-  min-width: 50px;
+  min-width: 60px;
   background: transparent;
 }
 .select2-container .select2-selection--multiple .select2-selection__rendered {
