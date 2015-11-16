@@ -42,7 +42,7 @@
                 <div class="document-wrap-head">
                     <div class="navigation pull-left"> 
                         <a href="#" id="text1-view">Text</a> 
-                        <a href='#' id="pdf1-view">Pdf</a>                     
+                        <a href='#' id="pdf1-view">Pdf</a>                  
                     </div>
                     <div class="pull-right">
                         <div id="pagination-text1" class="view-text-pagination pull-left">

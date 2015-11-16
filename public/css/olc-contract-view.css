@@ -40,7 +40,7 @@
 
 .text-search {
     background: #f9f9f9;
-    line-height: 44px;
+    line-height: 42px;
     float: left;
     width: 77%;
 }
@@ -69,13 +69,14 @@
 }
 
 .navigation {
-    line-height: 42px;
+    line-height: 44px;
 }
 
 .document-wrap {
-    padding: 0;
+    padding: 88px 0 0;
     clear: both;
     background: #f0f0f0;
+    overflow: hidden;
 }
 
 .navigation > a {
@@ -87,24 +88,36 @@
     opacity: 0.5;
     text-decoration: none;
     border-right: 1px solid #DCDFE2;
-    display: inline-block;
+    float: left;
 }
 
-.navigation > a:last-child {
+.navigation > a:nth-child(2) {
     background-position: -474px 13px;
 }
 
-.navigation > a:hover, .navigation > a:active {
+.navigation > a:nth-child(3) {
+    background: url(../images/ic-nav-annotate.png) no-repeat 16px 14px;
+}
+
+.navigation > a:nth-child(4) {
+    background: url(../images/ic-nav-metadata.png) no-repeat 16px 14px;
+}
+
+.navigation > a:hover {
     opacity: 1;
+    background-color: #f0f0f0;
 }
 
 .navigation > a.active {
     opacity: 1;
+    border-bottom: 1px solid transparent;
+    margin-bottom: -1px;
+    background-color: #f0f0f0;
 }
 
 .pagination {
     display: block;
-    min-width: 152px;
+    min-width: 146px;
     padding: 2px 0;
     position: relative;
     z-index: 1;
@@ -235,6 +248,7 @@
 
 .annotation-title {
     margin: 0 20px;
+    overflow: hidden;
 }
 
 .annotation-title, .metadata-view > div:first-child {
@@ -356,7 +370,7 @@
     font-size: 12px;
     float: right;
     overflow-y: auto;
-    width: 24%;
+    width: 23%;
     border-left: 1px solid #DCDFE2;
     height: 88vh;
 }
@@ -370,6 +384,7 @@
     color: #fff;
     display: inline-block;
     margin-right: 10px;
+    margin-bottom: 10px;
     background: #C5C5C5;
     line-height: 28px;
     -webkit-border-radius: 14px;
@@ -411,7 +426,7 @@
 }
 
 .pdf-zoom-options {
-  padding: 16px 0 9px 0px;
+  padding: 16px 10px 9px 0px;
 }
 
 .pdf-zoom-options > span {
@@ -542,6 +557,7 @@
     font-size: 12px;
     background-color: rgba(224, 118, 118, 0.45);
     padding: 5px;
+    word-wrap: break-word;
 }
 
 .annotations-topic-list > .selected-topic {
@@ -567,7 +583,7 @@
     background: #217B49 url(../images/ic-sprite-new.png) no-repeat 12px -543px;
     width: 50px;
     display: block;
-    height: 46px;
+    height: 44px;
     text-indent: -9999px;
     float: left;
 }
@@ -671,8 +687,77 @@
     overflow-y: scroll;
 }
 
+.navigation a:nth-last-child(-n+2) {
+    display: none;
+}
 
-@media all and (max-width: 1000px) {
+
+@media all and (max-width: 800px) {
+    .navigation {
+        width: 100%;
+    }
+
+    .text-search-container {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        border: 0;
+        width: 100%;
+    }
+
+    .navigation {
+        border-bottom: 1px solid #E7E9EB;
+        background: #fff;
+    }
+
+    .navigation a {
+        text-indent: -9999px;
+        padding-left: 34px;
+    }
+
+    .navigation a:nth-last-child(-n+3) {
+        display: inline-block;
+    }
+
+    .pagination {
+        margin: 4px 2px 5px 55px;
+        position: relative;
+    }
+
+    .pdf-zoom-options {
+        margin: -45px 90px 0 0;
+        float: right!important;
+
+    }
+
+    .text-search {
+        background: #fff;
+        border: 1px solid #C0C0C0;
+        border-radius: 4px;
+        width: 50%;
+        line-height: 27px;
+        float: right;
+        margin-top: 10px;
+        margin-right: 10px;
+    }
+
+    .text-search:before {
+        margin-top: 5px;
+    }
+
+    .head-wrap {
+        position: relative;
+        background: #f0f0f0;
+    }
+
+    .tools {
+        margin-top: -44px;
+    }
+
+    .back {
+        margin-top: 3px;
+    }
+
     .document-wrap {
         display: block;
     }
@@ -696,30 +781,10 @@
     .tools {
         float: right!important;
     }
-}
 
-@media all and (max-width: 834px) {
-    .tools {
-        margin-top: -44px;
-    }
-}
-
-@media all and (max-width: 800px) {
-    .text-search-container,.navigation {
-        width: 100%;
-    }
-
-    .navigation {
-        border-top: 1px solid #DCDFDE;
-    }
-
-    .pagination {
-        margin-left: 180px;
-        margin-top: -40px;
-    }
-
-    .pdf-zoom-options {
-        margin: -45px 0 0 320px;
+    .annotation-inner-viewer {
+        height: 100%;
+        overflow: auto;
     }
 }
 
@@ -752,11 +817,10 @@
     display: block;
     font-size: 0px;
     text-decoration: none;
-    height: 46px;
-    padding: 13px 25px 13px 44px;
+    height: 44px;
+    padding: 13px 25px 13px 30px;
     background: url(../../images/ic-sprite.png) no-repeat -152px -40px;
     border-left: 1px solid #ccc;
-    margin-left: 16px;
 }
 
 .download-pdf a {
@@ -768,3 +832,13 @@
   background: url(../../images/ic-sprite.png) no-repeat -152px -40px; 
 }
 
+.fixed .head-wrap {
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+}
+
+.fixed+.document-wrap {
+    padding-top: 84px;
+}
