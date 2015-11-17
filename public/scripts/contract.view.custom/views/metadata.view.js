@@ -86,7 +86,10 @@ var MetadataView = React.createClass({
                         <div className="metadata-view-footer pull-right">
                             <a href={this.props.contractApp.getMetadataSummaryLink()}>{lang.see_summary}</a>
                         </div>
-                    </div>
+    <div className="metadata-country">
+    <span>Description</span>
+    <span>{this.props.metadata.get("contract_description")}</span>
+</div>                 </div>
 
                     <div className="metadata-country">
                         <span>{lang.country}</span>
