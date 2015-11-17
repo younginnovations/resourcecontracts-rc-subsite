@@ -80,40 +80,42 @@ var MetadataView = React.createClass({
             });
 
             return (
-                <div className="metadata-view">
-                    <div>
-                {lang.metadata}
-                        <div className="metadata-view-footer pull-right">
-                            <a href={this.props.contractApp.getMetadataSummaryLink()}>{lang.see_summary}</a>
+                <div>
+                    <div className="metadata-info">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime harum hic quis illo, consequuntur magni quo voluptatibus fuga nostrum recusandae.
+                    </div>   
+                    <div className="metadata-view">
+                        <div>
+                    {lang.metadata}
+                            <div className="metadata-view-footer pull-right">
+                                <a href={this.props.contractApp.getMetadataSummaryLink()}>{lang.see_summary}</a>
+                            </div>
                         </div>
-    <div className="metadata-country">
-    <span>Description</span>
-    <span>{this.props.metadata.get("contract_description")}</span>
-</div>                 </div>
 
-                    <div className="metadata-country">
-                        <span>{lang.country}</span>
-                        <span><a href={countryLink}>{this.props.metadata.get("country").name}</a></span>
-                    </div>
-                    <div className="metadata-signature-year">
-                        <span>{lang.signature_year}</span>
-                        <span><a href={sigYearLink}>{this.props.metadata.get("signature_year") || "-"}</a></span>
-                    </div>
-                    <div className="metadata-resource">
-                        <span>{lang.resource}</span>
-                        <span>{resources}</span>
-                    </div>
-                    <div className="metadata-type-contract">
-                        <span>{lang.type_contract}</span>
-                        <span><a href={contractTypeLink}>{this.props.metadata.get("type_of_contract") || "-"}</a></span>
-                    </div>
-                    <div className="metadata-ocid">
-                        <span>{lang.open_contracting_id}</span>
-                        <span>{this.props.metadata.get("open_contracting_id")}</span>
-                    </div>
-                    <div className="metadata-ocid">
-                        <span>{lang.disclosure_mode}</span>
-                        <span>{this.props.metadata.get("disclosure_mode")}</span>
+                        <div className="metadata-country">
+                            <span>{lang.country}</span>
+                            <span><a href={countryLink}>{this.props.metadata.get("country").name}</a></span>
+                        </div>
+                        <div className="metadata-signature-year">
+                            <span>{lang.signature_year}</span>
+                            <span><a href={sigYearLink}>{this.props.metadata.get("signature_year") || "-"}</a></span>
+                        </div>
+                        <div className="metadata-resource">
+                            <span>{lang.resource}</span>
+                            <span>{resources}</span>
+                        </div>
+                        <div className="metadata-type-contract">
+                            <span>{lang.type_contract}</span>
+                            <span><a href={contractTypeLink}>{this.props.metadata.get("type_of_contract") || "-"}</a></span>
+                        </div>
+                        <div className="metadata-ocid">
+                            <span>{lang.open_contracting_id}</span>
+                            <span>{this.props.metadata.get("open_contracting_id")}</span>
+                        </div>
+                        <div className="metadata-ocid">
+                            <span>{lang.disclosure_mode}</span>
+                            <span>{this.props.metadata.get("disclosure_mode")}</span>
+                        </div>
                     </div>
                 </div>
             );

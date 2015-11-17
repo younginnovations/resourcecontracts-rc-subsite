@@ -109,10 +109,10 @@
   bottom: 0;
   right: 0;
   width: 100%;
-  -webkit-transition: width .4s;
-     -moz-transition: width .4s;
-       -o-transition: width .4s;
-          transition: width .4s;
+  -webkit-transition: width 0.4s;
+     -moz-transition: width 0.4s;
+       -o-transition: width 0.4s;
+          transition: width 0.4s;
   background: #f9f9f9;
   border-left: 1px solid #bcbcbc;
   position: absolute;
@@ -123,10 +123,10 @@
   width: 100%;
   position: relative !important;
   right: 0;
-  -webkit-transition: width .4s;
-     -moz-transition: width .4s;
-       -o-transition: width .4s;
-          transition: width .4s;
+  -webkit-transition: width 0.4s;
+     -moz-transition: width 0.4s;
+       -o-transition: width 0.4s;
+          transition: width 0.4s;
   background: #fff;
   min-height: 520px; }
 
@@ -316,7 +316,7 @@ a {
     background-color: #F37356 !important;
     color: #fff; }
 
-.table > tbody > tr:only-child > {
+.table > tbody > tr > :only-child {
   border: 0; }
 
 .table > tbody > tr > td.no-data {
@@ -837,10 +837,10 @@ footer {
 .sidebar-collapse-container {
   right: auto;
   left: 0;
-  -webkit-transition: left .4s;
-     -moz-transition: left .4s;
-       -o-transition: left .4s;
-          transition: left .4s; }
+  -webkit-transition: left 0.4s;
+     -moz-transition: left 0.4s;
+       -o-transition: left 0.4s;
+          transition: left 0.4s; }
   .sidebar-collapse-container.out {
     right: auto;
     left: 280px; }
