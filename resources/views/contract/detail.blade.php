@@ -380,7 +380,6 @@ use Illuminate\Support\Facades\Lang;
                                     @foreach($categories as $category => $annotations)
                                         <div class="annotation-detail-wrap">
                                     <div id="{{str_slug($category,'-')}}" class="sub-category">
-                                        <a class="pin-annotation-category" data-category="{{$category}}">Pin</a>
                                         <a href="#{{str_slug($category,'-')}}"><i class='glyphicon glyphicon-link' style="display:none;"></i></a>
                                         {{$category}}
                                     </div>
@@ -393,8 +392,12 @@ use Illuminate\Support\Facades\Lang;
                                             ?>
                                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                                 <div class="pull-left">
+                                                    <a class="pin-annotation" data-category="{{$category}}">Pin</a>
                                                     <div class="annotation-text">
                                                         {{$text}}
+                                                    </div>
+                                                    <div class="annotation-category" style="display:none;">
+                                                        {{$category}}
                                                     </div>
 
                                                     <p class="annotation-preamle">
@@ -445,7 +448,7 @@ use Illuminate\Support\Facades\Lang;
         pinCollection.fetch();
         var annotationView = new AnnotationView({
             el: '#annotations',
-            contract_title: '{{$contract->metadata->contract_name}}',
+            contract_title: "{!!$contract->metadata->contract_name!!}",
             contract_id: '{{$contract->metadata->contract_id}}',
             page_url: '{{\Illuminate\Support\Facades\Request::url()}}',
             collection: pinCollection

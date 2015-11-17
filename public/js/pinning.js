@@ -6,7 +6,7 @@ var PinCollection = Backbone.Collection.extend({
 
 var AnnotationView = Backbone.View.extend({
     events: {
-        'click .pin-annotation-category': 'pinAnnotation',
+        'click .pin-annotation': 'pinAnnotation',
     },
     initialize: function(options) {
         this.options = options;
@@ -14,12 +14,16 @@ var AnnotationView = Backbone.View.extend({
     },
 
     pinAnnotation: function(ev) {
-        var category = $(ev.currentTarget).parent().parent().find('.sub-category').text().trim()
+        var category = $(ev.currentTarget).parent().find('.annotation-category').text().trim()
+        console.log(category)
         var d = new Date();
-        var text = $(ev.currentTarget).parent().parent().find('.annotation-text').text().trim();
-        var pin = new PinModel({added_datetime: d.toString(),text: text.toString(),category: category.toString().trim(),contract_title: this.options.contract_title,contract_id: this.options.contract_id,page_url: this.options.page_url});
+        var text = $(ev.currentTarget).parent().find('.annotation-text').text().trim();
+        var preamble = $(ev.currentTarget).parent().find('.annotation-preamle').text().trim();
+        console.log(text)
+        console.log(preamble)
+        var pin = new PinModel({added_datetime: d.toString(),text: text.toString(),category: category.toString().trim(),contract_title: this.options.contract_title,contract_id: this.options.contract_id,page_url: this.options.page_url,preamble:preamble});
         this.collection.add(pin);
         pin.save();
-        toastr.success(category.toString().trim()+' pinned successfully.');
+        toastr.success('Pinned successfully.');
     },
 });
