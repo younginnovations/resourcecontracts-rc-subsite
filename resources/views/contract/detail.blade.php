@@ -428,7 +428,6 @@ use Illuminate\Support\Facades\Lang;
                 </div>
             </div>
         </div>
-        <div class='pin-message' style="display: none">Pin added!</div>
         <script>
         var lang = <?php echo json_encode(trans('annotation'));?>;
         </script>
@@ -440,7 +439,6 @@ use Illuminate\Support\Facades\Lang;
     <script src="{{ url('scripts/lib/underscore.js') }}"></script>
     <script src="{{ url('scripts/lib/backbone.js') }}"></script>
     <script type="text/javascript" src="{{ url('scripts/lib/backbone.localstorage.js') }}"></script>
-    <script type="text/javascript" src="{{ url('scripts/lib/backbone.exportcsv.js') }}"></script>
     <script src="{{ url('js/pinning.js') }}"></script>
     <script>
         var pinCollection = new PinCollection();

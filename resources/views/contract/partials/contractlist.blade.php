@@ -35,7 +35,7 @@ $route=Request::path();
                 <a class="title-{{$contract->contract_id}}" href="{{route('contract.detail',['id'=>$contract->open_contracting_id ])}}">
                     {{ $contract->contract_name or ''}}
                 </a>
-                @if($annotations->total>0)
+                @if(isset($annotations->total) && $annotations->total>0)
                     <div class="annotate-text"> @lang('global.annotated')</div>
                 @endif
 
@@ -52,7 +52,7 @@ $route=Request::path();
                         <p>{!! $contract->metadata.'...' !!}</p>
                     @endif
                 </div>
-                @if($annotations->total>0)
+                @if(isset($annotations->total) && $annotations->total>0)
                     @if(\Illuminate\Support\Facades\Input::has('annotation_category'))
                         <?php $annotation_categories = \Illuminate\Support\Facades\Input::get(
                                 'annotation_category'
