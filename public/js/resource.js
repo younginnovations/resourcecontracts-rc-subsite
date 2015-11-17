@@ -3555,8 +3555,12 @@ var CountryController = Backbone.Collection.extend({
     model: CountryModel,
     url: this.url,
     resources: function () {
+        var collection = this;
+        collection = new FilterCollection(collection.toArray());
+        collection.setSortField("name", 'ASC');
+        collection.sort();
         var countries = [];
-        this.each(function (model) {
+        collection.each(function (model) {
             countries.push({code: model.get('code'), name: model.get('name'), contract: model.get('contract')})
         });
         return countries;
