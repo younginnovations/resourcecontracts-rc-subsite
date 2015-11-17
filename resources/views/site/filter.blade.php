@@ -27,7 +27,9 @@
                 $params = Request::all();
                 $params['download'] = true;
             ?>
+            @if($contracts->total!=0)
                 <div class="download-csv"><a href="{{route('contract.csv.download',$params)}}">@lang('search.download_as_csv')</a></div>
+            @endif
 
         </div>
         <div class="contract-number-wrap contract-search-number-wrap">

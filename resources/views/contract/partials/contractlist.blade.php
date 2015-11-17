@@ -90,12 +90,12 @@ $route=Request::path();
                 <div class="contract-info-section">
                     <div class="download-main-wrap">
                         <div class="download-wrap">
+
                             <span>Download</span>
                         </div>
                         <ul class="dropdown-menu">
-
                             <li><a href="{{route('contract.download.pdf',['id'=> $contract->open_contracting_id])}}" >Pdf</a></li>
-                            @if(env('CATEGORY')!="olc")
+                            @if(env('CATEGORY')!="olc" && $contract->show_pdf_text == 1)
                                 <li><a href="{{route('contract.download',['id'=> $contract->open_contracting_id])}}" >Word File</a></li>
                             @endif
                         </ul>

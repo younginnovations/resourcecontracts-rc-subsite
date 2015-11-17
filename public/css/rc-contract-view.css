@@ -276,6 +276,11 @@
     margin-bottom: 15px;
 }
 
+.metadata-info {
+    font-size: 13px;
+    padding: 18px 18px 10px;
+}
+
 .annotation-item {
     font-size: 12px;
     border: 0;

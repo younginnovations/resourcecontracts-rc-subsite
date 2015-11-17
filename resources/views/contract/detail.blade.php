@@ -139,6 +139,17 @@ use Illuminate\Support\Facades\Lang;
                             </span>
                             </li>
                         </ul>
+                        <ul>
+                            <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <label for="">@lang('global.land_matrix_id')</label>
+                                <span>@if(isset($contract->metadata->matrix_page) && isset($contract->metadata->deal_number) && !empty($contract->metadata->matrix_page) && !empty($contract->metadata->deal_number))
+                                        <a  target="_blank" href="{{ $contract->metadata->matrix_page }}">#{{$contract->metadata->deal_number}}</a>
+                                    @else
+                                        - @endif</span>
+                            </li>
+
+                        </ul>
+
                     </div>
                 </div>
             </div>
@@ -170,6 +181,19 @@ use Illuminate\Support\Facades\Lang;
 
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="panel panel-default panel-wrap panel-contract-wrap">
+                <div class="panel-body metadata-note">
+                    <span>@lang('global.note')</span>
+                   @if(isset($contract->metadata->contract_note) && ($contract->metadata->contract_note != ""))
+                    {{$contract->metadata->contract_note}}
+                       @else
+                       -
+                       @endif
+
                 </div>
             </div>
         </div>
