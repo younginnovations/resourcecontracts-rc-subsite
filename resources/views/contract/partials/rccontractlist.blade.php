@@ -19,7 +19,9 @@ if ($path[0] == "resource") {
     <th>
         <a href="{{appendInUrl($route,$url,"contract_name",$order)}}">@lang('global.document'){!!show_arrow($order, $sortBy=='contract_name')!!}</a>
     </th>
-    <th><a href="{{appendInUrl($route,$url,"year",$order)}}">@lang('global.year') {!!show_arrow($order, $sortBy=='year')!!}</a></th>
+    <th></th>
+    <th width="10%"><a href="{{appendInUrl($route,$url,"year",$order)}}">@lang('global.year') {!!show_arrow($order, $sortBy=='year')!!}</a></th>
+
     <th>
         <a href="{{appendInUrl($route,$url,"resource",$order)}}">@lang('global.resource') {!!show_arrow($order, $sortBy=='resource')!!}</a>
     </th>
@@ -44,8 +46,22 @@ if ($path[0] == "resource") {
 
                 <p class="country_name">- {{trans('country.'.strtoupper($contract->country_code))}}</p>
             </td>
-            <td class="contract-date">{{$contract->signature_year}}</td>
             <td>
+                <div class="contract-info-section">
+                    <div class="download-main-wrap">
+                        <div class="download-wrap">
+                            <span>Download</span>
+                        </div>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{route('contract.download.pdf',['id'=> $contract->open_contracting_id])}}" >Pdf</a></li>
+                           </ul>
+                    </div>
+                </div>
+            </td>
+            <td class="contract-date">{{$contract->signature_year}}</td>
+
+            <td>
+
                 <?php
 
                 if (isset($url['sortby']) && $url['sortby'] == "resource") {

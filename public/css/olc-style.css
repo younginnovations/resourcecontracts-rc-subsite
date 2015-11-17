@@ -1349,6 +1349,9 @@ footer {
 .contract-date {
   min-width: 150px; }
 
+td.contract-date {
+  min-width: 100%; }
+
 .contract-type {
   font-size: 12px; }
 
