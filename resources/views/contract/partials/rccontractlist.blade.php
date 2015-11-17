@@ -53,7 +53,6 @@ if ($path[0] == "resource") {
                             <span>Download</span>
                         </div>
                         <ul class="dropdown-menu">
-
                             <li><a href="{{route('contract.download.pdf',['id'=> $contract->open_contracting_id])}}" >Pdf</a></li>
                            </ul>
                     </div>
