@@ -81,9 +81,9 @@ var MetadataView = React.createClass({
 
             return (
                 <div>
-                    <div className="metadata-info">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime harum hic quis illo, consequuntur magni quo voluptatibus fuga nostrum recusandae.
-                    </div>   
+                    <div className="metadata-info">Note:
+                        {this.props.metadata.get("contract_note")
+                       </div>
                     <div className="metadata-view">
                         <div>
                     {lang.metadata}
@@ -116,6 +116,12 @@ var MetadataView = React.createClass({
                             <span>{lang.disclosure_mode}</span>
                             <span>{this.props.metadata.get("disclosure_mode")}</span>
                         </div>
+
+                        <div className="metadata-matrix">
+                            <span>Land Matrix ID</span>
+                                <span><a href={this.props.metadata.get("matrix_page")}>#{this.props.metadata.get("deal_number")}</a></span>
+                            </div>
+
                     </div>
                 </div>
             );
