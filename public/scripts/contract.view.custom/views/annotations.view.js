@@ -293,7 +293,7 @@ var AnnotationTopicList = React.createClass({
     render: function () {
         return (
             <div className="annotations-topic-list">
-                <span onClick={this.handleClick}>{lang.general}</span>
+                <span title = "Just a check" data-toggle="tooltip" onClick={this.handleClick}>{lang.general}</span>
                 <span onClick={this.handleClick}>{lang.environment}</span>
                 <span onClick={this.handleClick}>{lang.fiscal}</span>
                 <span onClick={this.handleClick}>{lang.operations}</span>
