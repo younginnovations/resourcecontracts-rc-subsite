@@ -1,12 +1,12 @@
 <?php
+use Illuminate\Support\Facades\Lang;
+
 $url = Request::all();
 $order=\Illuminate\Support\Facades\Input::get('order','desc');
 $sortBy=\Illuminate\Support\Facades\Input::get('sortby','year');
 $route=Request::path();
-
-
-
 ?>
+
 <table class="table table-responsive table-contract table-contract-list">
     <thead>
     <th></th>
@@ -130,8 +130,13 @@ $route=Request::path();
                 <ul>
                     @forelse($contract->resource as $resource)
                         @if(!empty($resource))
-                            <li>@lang('resources.'.$resource)</li>
-
+                            <li>
+                            @if(Lang::has('resources.'.$resource))
+                                    @lang('resources.'.$resource)
+                            @else
+                                {{ $resource }}
+                            @endif
+                            </li>
                         @else
                             -
                         @endif
