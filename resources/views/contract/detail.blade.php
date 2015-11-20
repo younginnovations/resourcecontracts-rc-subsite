@@ -389,7 +389,7 @@ use Illuminate\Support\Facades\Lang;
                             <ul>
                                 <li><a class="view-annotation-cluster active" href="#cluster-all">All</a></li>
                                 @foreach($contract->annotationsCluster as $cluster=>$value)
-                                    <li><a class="view-annotation-cluster" href="#cluster-{{str_slug($cluster,40)}}">{{$cluster}}</a></li>
+                                    <li><a class="view-annotation-cluster"  data-toggle="tooltip" title="@lang('glossary.'.$cluster)" href="#cluster-{{str_slug($cluster,40)}}">{{$cluster}}</a></li>
                                 @endforeach
                             </ul>
 
@@ -397,7 +397,7 @@ use Illuminate\Support\Facades\Lang;
 
                         @forelse($contract->annotationsCluster as $cluster  => $categories)
                             <div id="cluster-{{str_slug($cluster,'-')}}" class="cluster-wrap">
-                                <div class="category-title">
+                                <div class="category-title" data-toggle="tooltip" title="@lang('glossary.'.$cluster)">
                                     {{$cluster}}
                                 </div>
 
