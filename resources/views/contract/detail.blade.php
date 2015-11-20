@@ -120,8 +120,11 @@ use Illuminate\Support\Facades\Lang;
                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                 <label for="">@lang('global.type_contract')</label>
                                 <span>@if(isset($contract->metadata->type_of_contract) && !empty($contract->metadata->type_of_contract))
-                                        <a href="{{route("search",['contract_type'=>$contract->metadata->type_of_contract])}}">{{_e($contract->metadata,'type_of_contract','-')}}</a>@else
-                                        - @endif</span>
+                                          @foreach($contract->metadata->type_of_contract as $contractype)
+                                            <a href="{{route("search",['contract_type'=>$contractype])}}">{{$contractype}}</a>,
+                                          @endforeach
+                                        @endif
+                                </span>
                             </li>
                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                 <label for="">@lang('global.resource')</label>
