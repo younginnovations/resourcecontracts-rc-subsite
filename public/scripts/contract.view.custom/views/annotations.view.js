@@ -293,12 +293,12 @@ var AnnotationTopicList = React.createClass({
     render: function () {
         return (
             <div className="annotations-topic-list">
-                <span title = "Just a check" data-toggle="tooltip" onClick={this.handleClick}>{lang.general}</span>
-                <span onClick={this.handleClick}>{lang.environment}</span>
-                <span onClick={this.handleClick}>{lang.fiscal}</span>
-                <span onClick={this.handleClick}>{lang.operations}</span>
-                <span onClick={this.handleClick}>{lang.social}</span>
-                <span onClick={this.handleClick}>{lang.other}</span>
+                <span title = {glossary.General} data-toggle="tooltip" onClick={this.handleClick}>{lang.general}</span>
+                <span title = {glossary.Environment} data-toggle="tooltip"  onClick={this.handleClick}>{lang.environment}</span>
+                <span title = {glossary.Fiscal} data-toggle="tooltip"  onClick={this.handleClick}>{lang.fiscal}</span>
+                <span title = {glossary.Operations} data-toggle="tooltip"  onClick={this.handleClick}>{lang.operations}</span>
+                <span title = {glossary.Social} data-toggle="tooltip"  onClick={this.handleClick}>{lang.social}</span>
+                <span title = {glossary.Other} data-toggle="tooltip"  onClick={this.handleClick}>{lang.other}</span>
             </div>
         );
     }

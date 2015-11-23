@@ -27,6 +27,7 @@
 
     <script type="text/jsx">
       var lang = <?php echo json_encode(trans('annotation'));?>;
+      var glossary = <?php echo json_encode(trans('glossary')); ?>;
 
       var debug = function() {
         var DEBUG = false;
