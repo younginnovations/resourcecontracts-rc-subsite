@@ -107,6 +107,7 @@ config(
                 'name' => 'French'
             ]
         ]
+
     ]
 );
 $app->register('HogLog\HogLogServiceProvider');

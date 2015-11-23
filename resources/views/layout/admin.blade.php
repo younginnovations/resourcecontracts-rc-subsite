@@ -21,11 +21,22 @@
             {{ Session::get('success') }}
         </div>
     @endif
-
-
-
+    <?php $url = \Request::getPathInfo();?>
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-sm-4 col-md-3">
+            <div class="list-group">
+
+                <a href="{{route('admin.page')}}" class="@if($url == '/admin' || strpos($url, 'page') != false) active @endif  list-group-item">
+                    <i class="fa fa-file-archive-o"></i> Manage Pages
+                </a>
+
+                <a href="{{route('admin.image')}}" class="@if(strpos($url, 'image') != false) active @endif list-group-item">
+                    <i class="fa fa-image"></i> Manage Image
+                </a>
+
+            </div>
+        </div>
+        <div class="col-lg-8">
             @yield('content')
         </div>
     </div>

@@ -1,9 +1,17 @@
 <?php
 use \Illuminate\Support\Facades\Lang as Lang;
-
 ?>
 @extends('layout.app-full')
 
+@section('css')
+    @if(!empty($image))
+        <style>
+            .row-top-wrap {
+                background-image: url({{$image}});
+            }
+        </style>
+    @endif
+@stop
 @section('content')
     <div class="row row-top-wrap front-row-top-wrap">
         <div class="homepage-wrapper">
