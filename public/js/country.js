@@ -3556,11 +3556,16 @@ var ResourceController = Backbone.Collection.extend({
     model: ResourceModel,
     url: this.url,
     resources: function () {
-        var resources = [];
-        this.each(function (model) {
-            resources.push({name: model.get('resource'), value: model.get('resource'), contract: model.get('contract')})
+        var resources = this;
+        resources =  new FilterCountryCollection(resources.toArray());
+        resources.setSortField("resource", 'ASC');
+        resources.sort();
+
+        var res = []
+        resources.each(function (model) {
+            res.push({name: model.get('resource'), value: model.get('resource'), contract: model.get('contract')})
         });
-        return resources;
+        return res;
     }
 });
 
