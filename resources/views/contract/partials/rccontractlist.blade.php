@@ -46,18 +46,26 @@ if ($path[0] == "resource") {
 
                 <p class="country_name">- {{trans('country.'.strtoupper($contract->country_code))}}</p>
             </td>
-            <td>
-                <div class="contract-info-section">
-                    <div class="download-main-wrap">
-                        <div class="download-wrap">
-                            <span>Download</span>
+
+                <td>
+                    <div class="contract-info-section">
+                        <div class="download-main-wrap">
+                            <div class="download-wrap">
+                                <span>Download</span>
+                            </div>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{route('contract.download.pdf',['id'=> $contract->open_contracting_id])}}" >Pdf</a></li>
+                                @if($contract->show_pdf_text == 1)
+                                <li><a href="{{route('contract.download',['id'=> $contract->open_contracting_id])}}" >Word File</a></li>
+                                @endif
+                            </ul>
                         </div>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{route('contract.download.pdf',['id'=> $contract->open_contracting_id])}}" >Pdf</a></li>
-                           </ul>
                     </div>
-                </div>
-            </td>
+                </td>
+
+
+
+
             <td class="contract-date">{{$contract->signature_year}}</td>
 
             <td>
