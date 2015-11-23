@@ -79,6 +79,18 @@ var MetadataView = React.createClass({
                 }
             });
 
+            var landmatrix='';
+
+            if(this.props.metadata.get("category")[0] === 'olc')
+            {
+                landmatrix +='<div className="metadata-matrix">'+
+                    '<span>Land Matrix ID</span>'+
+                    '<span><a href={this.props.metadata.get("matrix_page")}>#'+
+                    this.props.metadata.get("deal_number")+
+                    '</a></span>'+
+                    '</div>';
+            }
+
             return (
                 <div>
                     <div className="metadata-info">Note:
@@ -117,11 +129,7 @@ var MetadataView = React.createClass({
                             <span>{this.props.metadata.get("disclosure_mode")}</span>
                         </div>
 
-                        <div className="metadata-matrix">
-                            <span>Land Matrix ID</span>
-                                <span><a href={this.props.metadata.get("matrix_page")}>#{this.props.metadata.get("deal_number")}</a></span>
-                            </div>
-
+                       {landmatrix}
                     </div>
                 </div>
             );
