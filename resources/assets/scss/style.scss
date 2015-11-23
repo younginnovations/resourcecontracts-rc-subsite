@@ -842,8 +842,18 @@ footer {
   .col-lg-12 {
     padding: 0 21px;
     overflow: hidden;
-    .col-lg-4 {
-      float: left;
+    .col-lg-12 {
+      padding-left: 15px;
+    }
+    &:last-child {
+      margin-bottom: 20px;
+      > div{
+        margin-bottom: 0;
+      }
+    }
+    button {
+      margin: 0 6px 0 0;
+      width: 100%;
     }
   }
   .col-lg-2 {
@@ -889,6 +899,12 @@ footer {
   &:focus {
     color: $white;
     background: $color_link_hover_color;
+  }
+}
+.btn-form-reset {
+  background: #777;
+  &:hover,&:focus {
+    background: #666;
   }
 }
 .btn-compare {
@@ -2599,8 +2615,13 @@ td.contract-date {
       content: "Contract Type";
     }
   }
-  .search-input-wrapper .col-lg-12 .col-lg-4 {
-    margin-top: 25px;
+  .search-input-wrapper .col-lg-12 {
+    .col-lg-4 {
+      margin-top: 25px;
+    }
+    .col-xs-6:last-child {
+      margin-top: 10px;
+    }
   }
 }
 @media all and(max-width: 480px) {

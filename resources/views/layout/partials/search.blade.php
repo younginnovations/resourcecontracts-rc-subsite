@@ -24,7 +24,7 @@ $category = $api->getAnnotationsCategory();
             </div>
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
                 <label for="">@lang('global.country')</label>
-                <select name="country[]" id="" multiple="multiple">
+                <select name="country[]" id="country" multiple="multiple">
                     @foreach($summary->country_summary as $country)
                         <option @if(isset($filter['country']) && in_array(strtoupper($country['key']), array_map('strtoupper',$filter['country'])))
                                 selected="selected"
@@ -34,7 +34,7 @@ $category = $api->getAnnotationsCategory();
             </div>
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
                 <label for="">@lang('global.resource')</label>
-                <select name="resource[]" id="" multiple="multiple">
+                <select name="resource[]" id="resource" multiple="multiple">
                     @foreach($summary->resource_summary as $resource)
                         <option @if(isset($filter['resource']) && in_array($resource->key, $filter['resource']))
                                 selected="selected"
@@ -44,7 +44,7 @@ $category = $api->getAnnotationsCategory();
             </div>
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
                 <label for="">@lang('search.company_name')</label>
-                <select name="company_name[]" id="" multiple="multiple">
+                <select name="company_name[]" id="company" multiple="multiple">
                     <?php $company_array = array_map('trim', (array) $attributes->company_name);
                     sort($company_array);
                     ?>
@@ -60,7 +60,7 @@ $category = $api->getAnnotationsCategory();
             @if(env('CATEGORY')=="rc")
                 <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
                     <label for="">@lang('search.corporate_group')</label>
-                    <select name="corporate_group[]" id="" multiple="multiple">
+                    <select name="corporate_group[]" id="corporate_group" multiple="multiple">
                         @foreach($attributes->corporate_grouping as $group)
                             <option @if(isset($filter['corporate_group']) && in_array($group, $filter['corporate_group']))
                                     selected="selected"
@@ -71,7 +71,7 @@ $category = $api->getAnnotationsCategory();
             @endif
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
                 <label for="">@lang('search.contract_type')</label>
-                <select name="contract_type[]" id="" multiple="multiple">
+                <select name="contract_type[]" id="contract_type" multiple="multiple">
                     @foreach(array_filter($attributes->contract_type) as $type)
                         <option @if(isset($filter['contract_type']) && in_array($type, $filter['contract_type']))
                                 selected="selected"
@@ -84,7 +84,7 @@ $category = $api->getAnnotationsCategory();
                 <?php $annotation_category = array_map('trim', (array) $category->results);
                 sort($annotation_category);
                 ?>
-                <select name="annotation_category[]" id="" multiple="multiple">
+                <select name="annotation_category[]" id="annotation_category" multiple="multiple">
                     @foreach(array_filter($annotation_category) as $cat)
                         <option @if(isset($filter['annotation_category']) && in_array($cat, $filter['annotation_category']))
                                 selected="selected"
@@ -92,13 +92,19 @@ $category = $api->getAnnotationsCategory();
                     @endforeach
                 </select>
             </div>
-            <div class="col-lg-4">
+    </div>
+        <div class="col-lg-12">
+            <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
                 <button type="submit" class="btn btn-form-search">@lang('global.search')</button>
-
-                @if(!isset($searchPage))
-                    <button type="button" class="btn btn-form-search search-close">@lang('global.cancel')</button>
-                @endif
             </div>
+            <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
+                <button type="reset" name="reset"  id="searchclear" class="btn btn-form-search btn-form-reset">Reset</button>
+            </div>
+            @if(!isset($searchPage))
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
+                    <button type="submit" class="btn btn-form-search search-close">@lang('global.cancel')</button>
+                </div>
+            @endif
         </div>
     </div>
     <script>
