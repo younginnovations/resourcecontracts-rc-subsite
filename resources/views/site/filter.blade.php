@@ -27,6 +27,7 @@
                 $params = Request::all();
                 $params['download'] = true;
             ?>
+
             @if($contracts->total!=0)
                 <div class="download-csv"><a href="{{route('contract.csv.download',$params)}}">@lang('search.download_as_csv')</a></div>
             @endif
@@ -36,9 +37,15 @@
             <span>{{$contracts->total}}</span> {{ \Illuminate\Support\Facades\Lang::choice('global.contracts' , $contracts->total) }}
         </div>
     </div>
-
     <div class="row">
         <div class="col-lg-12 country-list-wrapper search-list-wrapper">
+            <div style="margin-left: 63px;">
+                Other suggested word :
+                @foreach($contracts->suggestion as $suggestion)
+                   <a href="{{route('search',['q'=>$suggestion->text])}}">{{$suggestion->text}}({{$suggestion->freq}})</a> ,
+                @endforeach
+
+            </div>
             <div class="panel panel-default panel-wrap country-list-wrap">
                 <div class="panel-body">
                     <div style="display: none" id="compare-block">

@@ -3,7 +3,7 @@ use Illuminate\Support\Facades\Lang;
 
 $url = Request::all();
 $order=\Illuminate\Support\Facades\Input::get('order','desc');
-$sortBy=\Illuminate\Support\Facades\Input::get('sortby','year');
+$sortBy=\Illuminate\Support\Facades\Input::get('sortby');
 $route=Request::path();
 ?>
 
