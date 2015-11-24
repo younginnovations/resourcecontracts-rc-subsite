@@ -11,7 +11,7 @@
             plugins: [
                 "advlist autolink link image lists charmap  hr anchor pagebreak spellchecker",
                 "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-                "save table contextmenu directionality template paste textcolor"
+                "save table contextmenu directionality template paste textcolor colorpicker"
             ],
             content_css: "css/content.css",
             toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image |  media fullpage | forecolor backcolor",

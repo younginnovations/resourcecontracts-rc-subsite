@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Http\Services\Admin\ImageService;
 use App\Http\Services\APIService;
 use App\Http\Services\ContractService;
 use Illuminate\Http\Request;
@@ -40,15 +41,17 @@ class SiteController extends BaseController
     /**
      * Home Page
      *
+     * @param ImageService $image
      * @return \Illuminate\View\View
      */
-    public function home()
+    public function home(ImageService $image)
     {
+        $image = $image->getHomePageImageUrl();
         $summary = $this->api->summary();
         $countries = count($summary->country_summary);
         $resources = count($summary->resource_summary);
         $contracts = $summary->contract_count;
 
-        return view('site.home', compact('countries', 'resources', 'contracts'));
+        return view('site.home', compact('countries', 'resources', 'contracts', 'image'));
     }
 }
