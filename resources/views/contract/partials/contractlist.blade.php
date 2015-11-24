@@ -2,10 +2,9 @@
 use Illuminate\Support\Facades\Lang;
 
 $url = Request::all();
-$order = \Illuminate\Support\Facades\Input::get('order', '');
-$sortBy = \Illuminate\Support\Facades\Input::get('sortby', '');
-$route = Request::path();
-
+$order=\Illuminate\Support\Facades\Input::get('order','desc');
+$sortBy=\Illuminate\Support\Facades\Input::get('sortby');
+$route=Request::path();
 ?>
 
 <table class="table table-responsive table-contract table-contract-list">
