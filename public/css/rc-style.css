@@ -109,10 +109,10 @@
   bottom: 0;
   right: 0;
   width: 100%;
-  -webkit-transition: width .4s;
-     -moz-transition: width .4s;
-       -o-transition: width .4s;
-          transition: width .4s;
+  -webkit-transition: width 0.4s;
+     -moz-transition: width 0.4s;
+       -o-transition: width 0.4s;
+          transition: width 0.4s;
   background: #f9f9f9;
   border-left: 1px solid #bcbcbc;
   position: absolute;
@@ -123,10 +123,10 @@
   width: 100%;
   position: relative !important;
   right: 0;
-  -webkit-transition: width .4s;
-     -moz-transition: width .4s;
-       -o-transition: width .4s;
-          transition: width .4s;
+  -webkit-transition: width 0.4s;
+     -moz-transition: width 0.4s;
+       -o-transition: width 0.4s;
+          transition: width 0.4s;
   background: #fff;
   min-height: 520px; }
 
@@ -316,7 +316,7 @@ a {
     background-color: #F37356 !important;
     color: #fff; }
 
-.table > tbody > tr:only-child > {
+.table > tbody > tr > :only-child {
   border: 0; }
 
 .table > tbody > tr > td.no-data {
@@ -849,10 +849,10 @@ footer {
 .sidebar-collapse-container {
   right: auto;
   left: 0;
-  -webkit-transition: left .4s;
-     -moz-transition: left .4s;
-       -o-transition: left .4s;
-          transition: left .4s; }
+  -webkit-transition: left 0.4s;
+     -moz-transition: left 0.4s;
+       -o-transition: left 0.4s;
+          transition: left 0.4s; }
   .sidebar-collapse-container.out {
     right: auto;
     left: 280px; }
@@ -987,15 +987,19 @@ footer {
   -webkit-box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
           box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
   position: relative; }
+  .contract-detail-wrapper > .col-lg-12:first-of-type {
+    margin-bottom: 30px !important; }
+  .contract-detail-wrapper > .col-lg-12:nth-child(2) {
+    margin-bottom: 40px !important; }
   .contract-detail-wrapper .col-lg-12:not(:first-of-type) {
-    padding: 0 36px; }
+    padding: 0 30px; }
   .contract-detail-wrapper > .col-lg-12:not(:last-of-type) {
     margin-bottom: 70px;
     clear: both; }
 
 .panel-contract-wrap {
   padding: 0;
-  margin-bottom: 70px; }
+  margin-bottom: 40px; }
   .panel-contract-wrap ul {
     border-bottom: 1px solid #ebebeb;
     border-bottom: 1px solid rgba(235, 235, 235, 0.7);
@@ -2215,5 +2219,8 @@ input.select2-search__field {
   .scroll-able section .title {
     font-size: 15px;
     font-family: Open-Sans-Bold; }
+
+.metadata-note {
+  padding: 14px 30px !important; }
 
 /*# sourceMappingURL=maps/rc-style.css.map */

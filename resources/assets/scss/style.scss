@@ -1402,8 +1402,14 @@ footer {
   //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
   box-shadow: 0 8px 10px $black_10;
   position: relative;
+  > .col-lg-12:first-of-type {
+    margin-bottom: 30px!important;
+  }
+  > .col-lg-12:nth-child(2) {
+    margin-bottom: 40px!important;
+  }
   .col-lg-12:not(:first-of-type) {
-    padding: 0 36px;
+    padding: 0 30px;
   }
   > .col-lg-12:not(:last-of-type) {
     margin-bottom: 70px;
@@ -1412,7 +1418,7 @@ footer {
 }
 .panel-contract-wrap {
   padding: 0;
-  margin-bottom: 70px;
+  margin-bottom: 40px;
   .panel-heading {
     @extend %extend_18;
   }
@@ -3007,3 +3013,9 @@ input.select2-search__field {
     }
   }
 }
+
+.metadata-note {
+  padding: 14px 30px!important;
+}
+
+
