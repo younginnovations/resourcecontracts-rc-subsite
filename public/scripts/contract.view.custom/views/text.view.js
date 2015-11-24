@@ -201,7 +201,7 @@ var TextViewer = React.createClass({
         this.props.pagesCollection.on("reset", function () {
             self.message = "";
             if (self.props.pagesCollection.models.length === 0) {
-                self.message = <div className="no-contract-error">{lang.sorry_loading}</div>;//'
+               self.message =  React.createElement('div', {class: "no-contract-error"}, lang.sorry_loading);
             }
             self.forceUpdate();
             self.loadAnnotations();
@@ -219,7 +219,7 @@ var TextViewer = React.createClass({
             <span className="pull-right link close" onClick={this.handleClickWarning}>x</span>
             {            lang.text_created_automatically
             }
-            <a href={app_url + "/faqs"}>Learn more</a>
+            <a target="_blank" href={app_url + "/faqs"}>Learn more</a>
         </div>);
 
         var pagesView = (this.message) ? this.message : lang.wait_while_loading;

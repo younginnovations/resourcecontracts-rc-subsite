@@ -65,10 +65,16 @@ var MetadataView = React.createClass({
             var sigYear = this.props.metadata.get("signature_year");
             var sigYearLink = app_url + "/contracts?year=" + sigYear;
 
-            var re = new RegExp(' ', 'g');
-            var contractType = this.props.metadata.get("type_of_contract");
-            var contractTypeLink = app_url + "/search?q=&contract_type%5B%5D=" + contractType.replace(re, '+');
+            var ct = this.props.metadata.get("type_of_contract");
+            var contractType = ct.map(function (contractType, i) {
+                if (i != ct.length - 1) {
+                    return React.createElement('a', {href: app_url + "/search?q=&contract_type%5B%5D=" + contractType, key: i}, contractType + ' | ');
+                } else {
+                    return React.createElement('a', {href: app_url + "/search?q=&contract_type%5B%5D=" + contractType, key: i}, contractType);
+                }
+            });
 
+            var re = new RegExp(' ', 'g');
             var resourceLinkBase = app_url + "/resources/";
             var resourceLength = this.props.metadata.get("resource").length;
             var resources = this.props.metadata.get("resource").map(function (resource, i) {
@@ -112,7 +118,7 @@ var MetadataView = React.createClass({
                         <div className="metadata-type-contract">
                             <span>{lang.type_contract}</span>
                             <span>
-                                <a href={contractTypeLink}>{this.props.metadata.get("type_of_contract") || "-"}</a>
+                               {contractType}
                             </span>
                         </div>
                         <div className="metadata-ocid">
