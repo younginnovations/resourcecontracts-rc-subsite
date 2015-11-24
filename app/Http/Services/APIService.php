@@ -410,7 +410,7 @@ class APIService
             $response = $this->client->send($request);
             $data     = $response->getBody()->getContents();
             $filename = "export" . date('Y-m-d');
-            header('Content-type: text/csv');
+            header('Content-type: text/csv; charset=utf-8');
             header('Content-Disposition: attachment; filename="' . $filename . '.csv"');
             print $data;
             die;

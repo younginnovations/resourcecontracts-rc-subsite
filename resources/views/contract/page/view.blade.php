@@ -7,6 +7,12 @@
       @if(env("CATEGORY")=="olc")
           <link href="{{url('css/olc-contract-view.css')}}" rel="stylesheet">
       @endif
+  <style>
+    .metadata-ocid a span {
+      display: inline !important;
+    }
+    .metadata-info span {color:rgba(64, 64, 64, 0.7)}
+  </style>
 @stop
 @section('content')
     <div id="content"></div>

@@ -55,7 +55,6 @@ return [
     'annotated'                   => 'Fr Annotated',
     'previous'                    => 'Fr Previous',
     'close_annotations'           => 'Close Annotations',
-
-
-
+    'note'                        => 'Fr Note',
+    'land_matrix_id'              => 'Land Matrix Id',
 ];
