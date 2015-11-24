@@ -136,6 +136,24 @@ use Illuminate\Support\Facades\Lang;
                             </span>
                             </li>
                         </ul>
+                        <ul>
+                            <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <label for="">@lang('global.note')</label>
+                                <span>@if(isset($contract->metadata->contract_note) && !empty($contract->metadata->contract_note))
+                                    {{ $contract->metadata->contract_note }}
+                                    @else
+                                        - @endif</span>
+                            </li>
+                            <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <label for="">@lang('global.land_matrix_id')</label>
+                                <span>@if(isset($contract->metadata->matrix_page) && isset($contract->metadata->deal_no) && !empty($contract->metadata->matrix_page) && !empty($contract->metadata->deal_no))
+                                        <a href="{{ $contract->metadata->matrix_page }}">#{{$contract->metadata->deal_no}}</a>
+                                    @else
+                                        - @endif</span>
+                            </li>
+
+                        </ul>
+
                     </div>
                 </div>
             </div>

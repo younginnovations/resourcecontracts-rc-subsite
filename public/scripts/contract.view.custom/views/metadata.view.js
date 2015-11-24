@@ -95,18 +95,13 @@ var MetadataView = React.createClass({
                     landmatrix +='<div className="metadata-matrix">'+
                     '<span>Land Matrix ID</span>'+
                     '<span>' +
-                        deallink
-
+                        deallink+
                     '</span>'+
                     '</div>';
             }
 
             var note = '';
 
-            if(this.props.metadata.get("contract_note"))
-            {
-                note = this.props.metadata.get("contract_note");
-            }
 
             return (
                 <div>
@@ -146,7 +141,8 @@ var MetadataView = React.createClass({
                             <span>{this.props.metadata.get("disclosure_mode")}</span>
                         </div>
 
-                           {landmatrix}
+
+                           {(landmatrix)}
                     </div>
                 </div>
             );
