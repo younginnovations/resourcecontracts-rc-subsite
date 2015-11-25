@@ -32,6 +32,7 @@ var MetadataToggleButton = React.createClass({
     }
 });
 
+
 var MetadataView = React.createClass({
     getInitialState: function () {
         return {
@@ -85,12 +86,15 @@ var MetadataView = React.createClass({
                 }
             });
 
+            if(this.props.metadata.get("contract_note") != "") {
+                    var note = React.createElement("div", {className: "metadata-info"},
+                    React.createElement("span", null, "Note"),
+                    React.createElement("p", null, this.props.metadata.get("contract_note"))
+                );
+            }
             return (
                 <div>
-                    <div className="metadata-info">
-                        <span>Note</span>
-                        <p>{this.props.metadata.get("contract_note") || "-"}</p>
-                    </div>
+                    {note}
                     <div className="metadata-view">
                         <div>
                             {lang.metadata}
