@@ -1167,7 +1167,8 @@ footer {
 
 .category-title {
   text-transform: uppercase;
-  margin-bottom: 18px; }
+  margin-bottom: 18px;
+  display: inline-block; }
 
 .sub-category {
   margin-top: 20px;
