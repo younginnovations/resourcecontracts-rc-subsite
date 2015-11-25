@@ -9,6 +9,7 @@ $(document).ready(function () {
     });
     //for tooltip
     $('[data-toggle="tooltip"]').tooltip();
+
     //slide effect for filter resource
     var sideslider = $('[data-toggle=collapse-side]');
     var sel = sideslider.attr('data-target');
