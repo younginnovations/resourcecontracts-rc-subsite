@@ -139,6 +139,7 @@ use Illuminate\Support\Facades\Lang;
                             </span>
                             </li>
                         </ul>
+                        @if(env('CATEGORY') =="olc")
                         <ul>
                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                 <label for="">@lang('global.land_matrix_id')</label>
@@ -147,9 +148,8 @@ use Illuminate\Support\Facades\Lang;
                                     @else
                                         - @endif</span>
                             </li>
-
                         </ul>
-
+                        @endif
                     </div>
                 </div>
             </div>
@@ -184,19 +184,17 @@ use Illuminate\Support\Facades\Lang;
                 </div>
             </div>
         </div>
+        @if(isset($contract->metadata->contract_note) && ($contract->metadata->contract_note != ""))
         <div class="col-lg-12">
             <div class="panel panel-default panel-wrap panel-contract-wrap">
                 <div class="panel-body metadata-note">
-                    <span>@lang('global.note')</span>
-                   @if(isset($contract->metadata->contract_note) && ($contract->metadata->contract_note != ""))
-                    {{$contract->metadata->contract_note}}
-                       @else
-                       -
-                       @endif
-
+                    <span>Note</span>
+                   {{$contract->metadata->contract_note}}
                 </div>
             </div>
         </div>
+        @endif
+
         <div class="col-lg-12">
             <div class="panel panel-default panel-wrap panel-contract-wrap">
                 <div class="panel-heading">
