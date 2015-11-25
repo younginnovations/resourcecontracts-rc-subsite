@@ -290,6 +290,9 @@ var AnnotationTopicList = React.createClass({
         $(".annotations-topic-list > span").removeClass("selected-topic");
         $(e.target).addClass("selected-topic");
     },
+    componentDidMount: function() {
+        $('.annotations-topic-list [data-toggle="tooltip"]').tooltip();
+    },
     render: function () {
         return (
             <div className="annotations-topic-list">
