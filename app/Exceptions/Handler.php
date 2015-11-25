@@ -35,7 +35,12 @@ class Handler extends ExceptionHandler
     {
         if ($e instanceof HttpException) {
             return $this->renderHttpException($e);
-        } else {
+        }
+        if (env('APP_ENV') === 'production') {
+            if (env('ADMIN_EMAIL')) {
+                $this->sendMail((string) $e);
+            }
+
             return view('errors.error');
         }
 
@@ -54,6 +59,22 @@ class Handler extends ExceptionHandler
         } else {
             return (new SymfonyDisplayer(config('app.debug')))->createResponse($e);
         }
+    }
+
+    /**
+     * Sends email when
+     * @param $message
+     */
+    protected function sendMail($message)
+    {
+        \Mail::raw(
+            $message,
+            function ($msg) use ($message) {
+                $msg->subject('Subsite has error.Please check and resolve.');
+                $msg->to([env('ADMIN_EMAIL')]);
+                $msg->from(['nrgi@yipl.com.np']);
+            }
+        );
     }
 
 }
