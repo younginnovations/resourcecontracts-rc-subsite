@@ -2,22 +2,7 @@
 
 @section('js')
     <script type="text/javascript" src="{{url('js/tinymce/tinymce.min.js')}}"></script>
-        <script>
-            tinymce.init({
-                selector: "textarea",
-                theme: "modern",
-                width: 700,
-                height: 300,
-                browser_spellcheck : true,
-                plugins: [
-                "advlist autolink link image lists charmap  hr anchor pagebreak",
-                "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-                "save table contextmenu directionality template paste textcolor colorpicker"
-                ],
-                content_css: "css/content.css",
-                toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image |  media fullpage | forecolor backcolor",
-                });
-    </script>
+    <script type="text/javascript" src="{{url('js/tinymce-init.js')}}"></script>
 @stop
 
 @section('content')
