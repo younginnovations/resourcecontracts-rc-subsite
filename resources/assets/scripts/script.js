@@ -6,6 +6,7 @@ $(document).ready(function () {
         $("select").val(null).trigger("change");
         $("select option").removeAttr('selected');
         $('#query').removeAttr('value');
+        $('#search_query').hide();
     });
     //slide effect for filter resource
     var sideslider = $('[data-toggle=collapse-side]');
