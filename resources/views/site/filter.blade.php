@@ -40,10 +40,12 @@
     <div class="row">
         <div class="col-lg-12 country-list-wrapper search-list-wrapper">
             <div style="margin-left: 63px;">
+                @if(isset($contracts->suggestion) && !empty($contracts->suggestion))
                 Other suggested word :
                 @foreach($contracts->suggestion as $suggestion)
-                   <a href="{{route('search',['q'=>$suggestion->text])}}">{{$suggestion->text}}({{$suggestion->freq}})</a> ,
+                   <a href="{{route('search',['q'=>$suggestion->text])}}">{{$suggestion->text}}</a> ,
                 @endforeach
+               @endif
 
             </div>
             <div class="panel panel-default panel-wrap country-list-wrap">
