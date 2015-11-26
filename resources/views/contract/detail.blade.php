@@ -221,8 +221,10 @@ use Illuminate\Support\Facades\Lang;
                         </span>
                             </li>
                             <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                <label for="">@lang('contract.registration_agency')</label>
-                                <span>{{_e($company,'registration_agency','-')}}</span>
+                                <label for="">@lang('contract.open_corporate_ID')</label>
+                                <span>@if(isset($company->open_corporate_id) && !empty($company->open_corporate_id))<a
+                                            href="{{$company->open_corporate_id}}">{{str_limit($company->open_corporate_id,25)}}</a> @else
+                                        - @endif</span>
                             </li>
                         </ul>
                         <ul>
@@ -241,12 +243,11 @@ use Illuminate\Support\Facades\Lang;
                                         - @endif                          </span>
                             </li>
                         </ul>
+                        @if(env('CATEGORY') != 'olc' )
                         <ul>
                             <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                <label for="">@lang('contract.open_corporate_ID')</label>
-                                <span>@if(isset($company->open_corporate_id) && !empty($company->open_corporate_id))<a
-                                            href="{{$company->open_corporate_id}}">{{str_limit($company->open_corporate_id,25)}}</a> @else
-                                        - @endif</span>
+                                <label for="">@lang('contract.registration_agency')</label>
+                                <span>{{_e($company,'registration_agency','-')}}</span>
                             </li>
                             <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                                 <label for="">@lang('contract.share')</label>
@@ -272,6 +273,7 @@ use Illuminate\Support\Facades\Lang;
                         </span>
                             </li>
                         </ul>
+                            @endif
                     </div>
                 @endforeach
             </div>
@@ -322,6 +324,7 @@ use Illuminate\Support\Facades\Lang;
             </div>
         </div>
 
+        @if(env('CATEGORY') != 'olc')
         <div class="col-lg-12">
             <div class="panel panel-default panel-wrap panel-contract-wrap">
                 <div class="panel-heading">
@@ -356,6 +359,7 @@ use Illuminate\Support\Facades\Lang;
                 </div>
             </div>
         </div>
+        @endif
         <div class="col-lg-12">
             <div class="panel panel-default panel-wrap panel-contract-wrap">
                 <div class="panel-heading">
