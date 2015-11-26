@@ -16,11 +16,12 @@ var Pdf = React.createClass({
   loadFile: function() {
     var self = this;
     var content = this.props.pdfPage.get("content");
+
     if(content === "-1" || !content) {
       this.setState({
         page: "",
         content: "",
-        message: <div className="no-contract-error">{lang.sorry_loading}</div> //'
+        message: <div className="no-contract-error">{ lang.sorry_loading }  <a href= "mailto: +{email} ">{email}</a> {lang.to_let_us_know}</div> //'
       });
     } else {
       if(content !== "-"){

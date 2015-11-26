@@ -7,14 +7,16 @@
                 @if(env('CATEGORY') == 'olc')
                     <h1><strong>OpenLandContracts.org @lang('global.temporarily_unavailable')</strong></h1>
                     <p style="font-size: 25px;width: 600px">
-                        @lang('global.fix_message')
+                        @lang('global.fix_message') {{ env('CONTACT_MAIL') }} @lang('if_problem_persists')
+                        @lang('global.apologize')
                     </p>
                 @endif
 
                 @if(env('CATEGORY') == 'rc')
                     <h1><strong>ResourceContracts.org @lang('global.temporarily_unavailable')</strong></h1>
                     <p style="font-size: 25px;width: 600px">
-                        @lang('global.fix_message')
+                        @lang('global.fix_message') {{ env('CONTACT_MAIL') }} @lang('if_problem_persists')
+                        @lang('global.apologize')
                     </p>
                 @endif
             </div>

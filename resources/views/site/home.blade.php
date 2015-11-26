@@ -42,7 +42,7 @@ use \Illuminate\Support\Facades\Lang as Lang;
                     <form action="{{route('search')}}" method="GET" class="contract-search-form">
                         <div class="form-group">
                             <input type="text" name="q" class="form-control pull-left"
-                                   placeholder="@lang('global.search') {{$contracts}} {{ Lang::choice('global.contracts' , $contracts) }} @lang('global.associated_documents')">
+                                   placeholder="@lang('global.search') {{$contracts}} {{ Lang::choice('global.contracts' , $contracts) }} @if(env('CATEGORY') != 'olc') @lang('global.associated_documents') @endif">
                             <button type="submit"
                                     class="btn btn-search">@lang('global.search')</button>
                         </div>
