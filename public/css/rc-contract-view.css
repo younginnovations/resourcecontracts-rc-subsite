@@ -73,7 +73,7 @@
 }
 
 .document-wrap {
-    padding: 0;
+    padding: 158px 0 0;
     clear: both;
     background: #f0f0f0;
     overflow: hidden;
@@ -821,4 +821,11 @@
   text-decoration: none;
   padding: 13px 25px 13px 44px;
   background: url(../../images/ic-sprite.png) no-repeat -152px -40px; 
+}
+
+.title-head-wrap {
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    width: 100%;
 }
