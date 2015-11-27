@@ -164,6 +164,7 @@
         render: function() {
           return (
             <div className="main-app">
+             <div className="title-head-wrap">
               <div className="title-wrap">
                 <div className="navbar-header">
                     @if(env("CATEGORY")=="rc")
@@ -197,6 +198,7 @@
                   style={this.getStyle(contractApp.getShowMeta())}                  
                   contractApp={contractApp} />
               </div>
+                     </div>
               <div className="document-wrap">
                 <AnnotationsViewer
                   style={this.getStyle(contractApp.isViewVisible("AnnotationsViewer"))}
