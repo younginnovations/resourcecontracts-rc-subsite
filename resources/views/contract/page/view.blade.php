@@ -96,6 +96,7 @@
           if(annotation_id) {
             contractApp.setSelectedAnnotation(annotation_id);
           }
+          this.scrollTo('title-pdf-wrapper');
           this.forceUpdate();
         },
         pdf: function(page_no, annotation_id) {
@@ -118,6 +119,7 @@
             contractApp.setView("pdf");
           } 
           contractApp.setView("pdf");
+          this.scrollTo('title-pdf-wrapper');
           this.forceUpdate();
         },
         search: function(query) {
@@ -141,6 +143,11 @@
         meta: function(action) {
           // this.forceUpdate();
         },
+        scrollTo:function(id){
+          $('html,body').animate({
+                    scrollTop: $("."+id).offset().top - 150},
+                  'slow');
+        },
         componentDidUpdate: function() {
         },
         componentDidMount: function() {
@@ -155,7 +162,7 @@
             '/meta/:action': this.meta
           });
           router.init();
-        },    
+        },
         getStyle: function(showFlag) {
           var style = { display: "none" };
           if(showFlag) style.display = "block";
@@ -169,25 +176,25 @@
                 <div className="navbar-header">
                     @if(env("CATEGORY")=="rc")
                       <a className="navbar-brand" href="{{url()}}" >Resource <span className="beta">Beta</span><span>Contracts</span></a>
-                    @else                        
+                    @else
                         <a className="navbar-brand" href="{{url()}}" >OPENLAND <span className="beta">Beta</span><span>Contracts</span></a>
                     @endif
-                </div>              
+                </div>
                 <span>{htmlDecode(contractTitle)}</span>
               </div>
               <div className="head-wrap">
                 <TextSearchForm
                   style={this.getStyle(contractApp.isViewVisible("TextSearchForm"))} />
-                <NavigationView 
+                <NavigationView
                   contractApp={contractApp} />
-                <TextPaginationView 
-                  style={this.getStyle(contractApp.isViewVisible("TextPaginationView"))} 
+                <TextPaginationView
+                  style={this.getStyle(contractApp.isViewVisible("TextPaginationView"))}
                   contractApp={contractApp}
                   pagesCollection={pagesCollection} />
-                <PdfPaginationView 
+                <PdfPaginationView
                   style={this.getStyle(contractApp.isViewVisible("PdfPaginationView"))}
                   contractApp={contractApp} />
-                <PdfZoom 
+                <PdfZoom
                   style={this.getStyle(contractApp.isViewVisible("PdfZoom"))}
                   contractApp={contractApp} />
 
@@ -195,7 +202,7 @@
                       <a  className="pdf-download-link" href="{{route('contract.download.pdf',['id'=> $contract->metadata->open_contracting_id])}}" >pdf download</a>
                   </div>
                 <MetadataToggleButton
-                  style={this.getStyle(contractApp.getShowMeta())}                  
+                  style={this.getStyle(contractApp.getShowMeta())}
                   contractApp={contractApp} />
               </div>
                      </div>
@@ -208,17 +215,19 @@
                   style={this.getStyle(contractApp.isViewVisible("TextSearchResultsList"))}
                   contractApp={contractApp}
                   searchResultsCollection={searchResultsCollection} />
-                <TextViewer 
+                      <div className="title-pdf-wrapper">
+                <TextViewer
                   style={this.getStyle(contractApp.isViewVisible("TextViewer"))}
                   contractApp={contractApp}
                   pagesCollection={pagesCollection}
                   metadata={contractApp.metadata}
                 />
-                <PdfViewer 
+                <PdfViewer
                   pdfPage={pdfPage}
-                  style={this.getStyle(contractApp.isViewVisible("PdfViewer"))}                  
+                  style={this.getStyle(contractApp.isViewVisible("PdfViewer"))}
                   contractApp={contractApp}
                   pagesCollection={pagesCollection} />
+                      </div>
                 <RightColumnView 
                   metadata={contractApp.metadata}
                   contractApp={contractApp} />

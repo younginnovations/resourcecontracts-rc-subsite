@@ -33,12 +33,24 @@ var PdfPaginationView = React.createClass({
     }
   },
   componentDidMount: function() {
+    function goToByScroll(id){
+      id = id.replace("link", "");
+      $('html,body').animate({
+            scrollTop: $("#"+id).offset().top - 150},
+          'slow');
+    }
+
+    $(".navigation .show-scroll").click(function(e) {
+      e.preventDefault();
+      goToByScroll($(this).attr("id"));
+    });
+
     var self = this;
-    self.setState({totalPages: self.props.contractApp.getTotalPages()});    
+    self.setState({totalPages: self.props.contractApp.getTotalPages()});
     this.props.contractApp.on("update-pdf-pagination-page", function(page_no) {
       self.refs.userInput.getDOMNode().value = page_no;
       self.setState({visiblePage: page_no});
-    });    
+    });
     this.refs.userInput.getDOMNode().value = this.state.visiblePage;
   },
   render: function() {
@@ -68,7 +80,7 @@ var PdfZoom = React.createClass({
     $('.pdf-zoom-options span').removeClass('scale-selected');
     $('.pdf-zoom-options .' + selectedClass).addClass('scale-selected');
     return (
-      <div className="pdf-zoom-options" style={this.props.style}> Zoom 
+      <div className="pdf-zoom-options" style={this.props.style}> Zoom
         <div>
           <span onClick={this.handleClick} className="scale-1 scale-selected">1</span>
           <span onClick={this.handleClick} className="scale-125">1.25</span>
@@ -83,8 +95,8 @@ var PdfViewer = React.createClass({
   getInitialState: function() {
     return {
       loadAnnotations: false
-    };  
-  },  
+    };
+  },
   componentDidMount: function() {
     this.loadAnnotationsFlag = false;
     var self = this;
@@ -105,7 +117,7 @@ var PdfViewer = React.createClass({
       var page_no = this.props.contractApp.getCurrentPage();
       var pdfUrl = this.props.contractApp.getPdfUrl();
       return (
-        <div className="pdf-viewer pdf-annotator" style={this.props.style}>
+        <div className="pdf-viewer pdf-annotator" id="pdfview" style={this.props.style}>
         <Pdf 
           contractApp={this.props.contractApp}
           pdfPage={this.props.pdfPage}

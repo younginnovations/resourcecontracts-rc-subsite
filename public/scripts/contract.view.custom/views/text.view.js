@@ -1,5 +1,6 @@
 var NavigationView = React.createClass({
     render: function () {
+
         if (this.props.contractApp.getView() === "pdf") {
             pdfClass = "active";
             textClass = "";
@@ -11,8 +12,8 @@ var NavigationView = React.createClass({
             <div className="navigation">
                 <a href="#/text" className={textClass}>{lang.text}</a>
                 <a href="#/pdf" className={pdfClass}>{lang.pdf}</a>
-                <a className="show-annotations" href="#" id="annotationslink">Annotation</a>
-                <a className="show-metadata" href="#metadata">Metadata</a>
+                <a className="show-scroll" href="#" id="annotationslink">Annotation</a>
+                <a className="show-scroll" href="#" id ="metadatalink">Metadata</a>
             </div>
         );
     }
@@ -248,7 +249,7 @@ var TextViewer = React.createClass({
         }
 
         return (
-            <div className="text-panel" style={this.props.style}>
+            <div className="text-panel" id="textview" style={this.props.style}>
         {warningText}
                 <div className="text-annotator">
                     <div></div>
