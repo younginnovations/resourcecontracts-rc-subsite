@@ -38,7 +38,7 @@ class Handler extends ExceptionHandler
         }
         if (env('APP_ENV') === 'production') {
             if (env('ADMIN_EMAIL')) {
-                $this->sendMail((string) $e);
+                $this->sendMail($e, $request);
             }
 
             return view('errors.error');
@@ -62,16 +62,20 @@ class Handler extends ExceptionHandler
     }
 
     /**
-     * Sends email when
-     * @param $message
+     * Sends email
+     * @param \Exception   $exception
+     * @param  \Illuminate\Http\Request $request
      */
-    protected function sendMail($message)
+    protected function sendMail($exception, $request)
     {
+        $error = $request->fullUrl();
         \Mail::raw(
-            $message,
-            function ($msg) use ($message) {
-                $msg->subject('Subsite has error.Please check and resolve.');
-                $msg->to([env('ADMIN_EMAIL')]);
+            (string) $exception,
+            function ($msg) use ($error) {
+                $site       = env('CATEGORY');
+                $recipients = [env('ADMIN_EMAIL')];
+                $msg->subject("{$site} Subsite has error.Please check and resolve." . $error);
+                $msg->to($recipients);
                 $msg->from(['nrgi@yipl.com.np']);
             }
         );
