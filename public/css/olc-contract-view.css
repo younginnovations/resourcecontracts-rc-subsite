@@ -781,6 +781,11 @@
     .tools {
         float: right!important;
     }
+
+    .annotation-inner-viewer {
+        height: 100%;
+        overflow: auto;
+    }
 }
 
 @media all and (max-width: 720px) {
