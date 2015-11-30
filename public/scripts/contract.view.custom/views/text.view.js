@@ -11,8 +11,8 @@ var NavigationView = React.createClass({
             <div className="navigation">
                 <a href="#/text" className={textClass}>{lang.text}</a>
                 <a href="#/pdf" className={pdfClass}>{lang.pdf}</a>
-                <a href="">Annotation</a>
-                <a href="">Metadata</a>
+                <a className="show-annotations" href="#annotations">Annotation</a>
+                <a className="show-metadata" href="#metadata">Metadata</a>
             </div>
         );
     }
