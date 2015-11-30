@@ -33,18 +33,6 @@ var PdfPaginationView = React.createClass({
     }
   },
   componentDidMount: function() {
-    function goToByScroll(id){
-      id = id.replace("link", "");
-      $('html,body').animate({
-            scrollTop: $("#"+id).offset().top - 150},
-          'slow');
-    }
-
-    $(".navigation .show-scroll").click(function(e) {
-      e.preventDefault();
-      goToByScroll($(this).attr("id"));
-    });
-
     var self = this;
     self.setState({totalPages: self.props.contractApp.getTotalPages()});
     this.props.contractApp.on("update-pdf-pagination-page", function(page_no) {

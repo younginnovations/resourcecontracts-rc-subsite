@@ -1,19 +1,27 @@
 var NavigationView = React.createClass({
     render: function () {
-
-        if (this.props.contractApp.getView() === "pdf") {
+    var textClass =null;
+    var pdfClass =null;
+    var annotationClass =null;
+    var metadataClass =null;
+    if (this.props.contractApp.getView() === "pdf") {
             pdfClass = "active";
-            textClass = "";
-        } else {
+    }
+    if(this.props.contractApp.getView() === "text"){
             textClass = "active";
-            pdfClass = "";
         }
+    if (this.props.contractApp.getView() === "annotation") {
+        annotationClass = "active";
+    }
+    if(this.props.contractApp.getView() === "metadata") {
+        metadataClass = "active";
+    }
         return (
             <div className="navigation">
                 <a href="#/text" className={textClass}>{lang.text}</a>
                 <a href="#/pdf" className={pdfClass}>{lang.pdf}</a>
-                <a className="show-scroll" href="#" id="annotationslink">Annotation</a>
-                <a className="show-scroll" href="#" id ="metadatalink">Metadata</a>
+                <a href="#/annotation" className={annotationClass}>Annotation</a>
+                <a href="#/metadata" className={metadataClass}>Metadata</a>
             </div>
         );
     }

@@ -96,7 +96,7 @@
           if(annotation_id) {
             contractApp.setSelectedAnnotation(annotation_id);
           }
-          this.scrollTo('title-pdf-wrapper');
+          this.scrollTo('.title-pdf-wrapper');
           this.forceUpdate();
         },
         pdf: function(page_no, annotation_id) {
@@ -119,7 +119,7 @@
             contractApp.setView("pdf");
           } 
           contractApp.setView("pdf");
-          this.scrollTo('title-pdf-wrapper');
+          this.scrollTo('.title-pdf-wrapper');
           this.forceUpdate();
         },
         search: function(query) {
@@ -143,9 +143,19 @@
         meta: function(action) {
           // this.forceUpdate();
         },
+        metadata: function() {
+          contractApp.setView("metadata");
+          this.scrollTo('#metadata');
+          this.forceUpdate();
+        },
+        annotation: function() {
+          contractApp.setView("annotation");
+          this.scrollTo('#annotations');
+          this.forceUpdate();
+        },
         scrollTo:function(id){
           $('html,body').animate({
-                    scrollTop: $("."+id).offset().top - 150},
+                    scrollTop: $(id).offset().top - 150},
                   'slow');
         },
         componentDidUpdate: function() {
@@ -156,6 +166,8 @@
             '/text/page/:page_no': this.text,
             '/text/page/:page_no/annotation/:annotation_id': this.text,
             '/pdf': this.pdf,
+            '/metadata': this.metadata,
+            '/annotation': this.annotation,
             '/pdf/page/:page_no': this.pdf,
             '/pdf/page/:page_no/annotation/:annotation_id': this.pdf,
             '/search/:query': this.search,
