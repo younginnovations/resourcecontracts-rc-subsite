@@ -31,7 +31,7 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $e)
     {
         if ($e instanceof HttpException) {
-            return parent::render($request, $e);
+            return $this->renderHttpException($e);
         }
 
         if (env('APP_ENV') === 'production') {

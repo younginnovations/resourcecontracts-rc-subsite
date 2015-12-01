@@ -49,8 +49,13 @@ class ContractController extends BaseController
     public function index(Request $request)
     {
         $currentPage = $request->get('page', 1);
-        $filter      = ['year' => $request->get('year'), 'from' => $currentPage,'sort_by'=>$request->get('sortby'),'order'=>$request->get('order')];
-        $contracts = $this->api->allContracts($filter);
+        $filter      = [
+            'year'    => $request->get('year'),
+            'from'    => $currentPage,
+            'sort_by' => $request->get('sortby'),
+            'order'   => $request->get('order')
+        ];
+        $contracts   = $this->api->allContracts($filter);
 
         return view('contract.index', compact('contracts', 'currentPage'));
     }
@@ -182,8 +187,8 @@ class ContractController extends BaseController
     public function download($contract_id)
     {
         $contract = $this->api->contractDetail($contract_id);
-        if (is_null($contract->metadata)) {
-            return abort(404);
+        if (empty($contract->metadata)) {
+            abort(404);
         }
 
         $text = $this->contract->getTextFromS3($contract->metadata->word_file);
@@ -219,8 +224,10 @@ class ContractController extends BaseController
      */
     public function downloadPdf($contract_id)
     {
-
         $contract = $this->api->metadata($contract_id);
+        if (empty($contract) || !isset($contract->file_url)) {
+            abort(404);
+        }
 
         $filename = sprintf(
             '%s-%s',
@@ -246,7 +253,7 @@ class ContractController extends BaseController
      */
     public function view($contract_id)
     {
-        $referrer    = \Request::server('HTTP_REFERER');
+        $referrer           = \Request::server('HTTP_REFERER');
         $back               = is_null($referrer) ? route('contract.view', ['id' => $contract_id]) : $referrer;
         $contract           = new \stdClass();
         $contract->metadata = $this->api->metadata($contract_id);
@@ -264,9 +271,14 @@ class ContractController extends BaseController
      */
     public function downloadMetadataAsCSV(Request $request)
     {
-        $filter      = ['country' => $request['country'],'resource'=>$request['resource'],'download'=>$request['download'],'from'=>1];
-        $contracts   = $this->api->allContracts($filter);
-        echo $contracts;
+        $filter = [
+            'country'  => $request['country'],
+            'resource' => $request['resource'],
+            'download' => $request['download'],
+            'from'     => 1
+        ];
+        $this->api->allContracts($filter);
+        die;
     }
 
 }
