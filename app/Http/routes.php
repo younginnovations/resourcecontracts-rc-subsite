@@ -73,7 +73,6 @@ $app->get('admin/page/create', ['as' => 'admin.page.create', 'uses' => 'Admin\Pa
 $app->post('admin/page/store', ['as' => 'admin.page.store', 'uses' => 'Admin\PageController@store']);
 $app->get('admin/page/{id}', ['as' => 'admin.page.edit', 'uses' => 'Admin\PageController@edit']);
 $app->post('admin/page/{id}', ['as' => 'admin.page.update', 'uses' => 'Admin\PageController@update']);
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
