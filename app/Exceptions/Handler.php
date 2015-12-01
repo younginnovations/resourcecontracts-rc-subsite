@@ -3,9 +3,6 @@
 use Exception;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
-use Symfony\Component\HttpKernel\HttpCache\HttpCache;
-use ErrorException;
 use Symfony\Component\Debug\ExceptionHandler as SymfonyDisplayer;
 
 class Handler extends ExceptionHandler
@@ -34,14 +31,11 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $e)
     {
         if ($e instanceof HttpException) {
-            return $this->renderHttpException($e);
+            return parent::render($request, $e);
         }
-        if (env('APP_ENV') === 'production') {
-            if (env('ADMIN_EMAIL')) {
-                $this->sendMail($e, $request);
-            }
 
-            return view('errors.error');
+        if (env('APP_ENV') === 'production') {
+            $this->sendMail($e, $request);
         }
 
         return parent::render($request, $e);
@@ -63,18 +57,20 @@ class Handler extends ExceptionHandler
 
     /**
      * Sends email
-     * @param \Exception   $exception
+     * @param \Exception                $exception
      * @param  \Illuminate\Http\Request $request
      */
     protected function sendMail($exception, $request)
     {
-        $error = $request->fullUrl();
+        $error       = $exception->getMessage();
+        $current_url = $request->fullUrl();
+        $message     = sprintf("Url: %s \n\rError: %s \n\rLog: %s", $current_url, $error, (string) $exception);
         \Mail::raw(
-            (string) $exception,
-            function ($msg) use ($error) {
+            $message,
+            function ($msg) use ($current_url) {
                 $site       = env('CATEGORY');
                 $recipients = [env('ADMIN_EMAIL')];
-                $msg->subject("{$site} Subsite has error.Please check and resolve." . $error);
+                $msg->subject("{$site} subsite has error - " . $current_url);
                 $msg->to($recipients);
                 $msg->from(['nrgi@yipl.com.np']);
             }
