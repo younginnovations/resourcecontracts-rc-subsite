@@ -2115,7 +2115,7 @@ input.select2-search__field {
   white-space: pre-wrap !important;
   word-break: break-all; }
 
-.resource-list a + a:before {
+.resource-list a + a:before, .contract-type-list a + a:before {
   content: ",";
   display: inline-block;
   padding-right: 3px;
@@ -2225,5 +2225,8 @@ input.select2-search__field {
   .metadata-note span {
     display: block;
     margin-bottom: 3px; }
+
+.select2-container--classic .select2-selection--multiple .select2-selection__choice {
+  word-break: break-word; }
 
 /*# sourceMappingURL=maps/rc-style.css.map */
