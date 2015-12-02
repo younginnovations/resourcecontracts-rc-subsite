@@ -1,3 +1,4 @@
+/** @jsx React.Dom **/
 var AnnotationHeader = React.createClass({
     componentDidMount: function () {
         var self = this;
