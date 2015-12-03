@@ -107,9 +107,8 @@ var MainApp = React.createClass({displayName: "MainApp",
                     React.createElement(PdfZoom, {
                         style: this.getStyle(contractApp.isViewVisible("PdfZoom")), 
                         contractApp: contractApp}), 
-
                     React.createElement("div", {className: "tools"}, 
-                        React.createElement("a", {className: "pdf-download-link", href: "{{route('contract.download.pdf',['id'=> $contract->metadata->open_contracting_id])}}"}, "pdf download")
+                        React.createElement("a", {className: "pdf-download-link", href: pdf_download_url}, "pdf download")
                     ), 
                     React.createElement(MetadataToggleButton, {
                         style: this.getStyle(contractApp.getShowMeta()), 

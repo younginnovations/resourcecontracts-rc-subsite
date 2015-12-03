@@ -41,6 +41,8 @@
       var back_url = '{!!$back!!}';
       var app_url = '{{url()}}';
       var category = '{{env('CATEGORY')=='rc' ? 'Resource' : 'Openland' }}';
+      var pdf_download_url = '{{route('contract.download.pdf',['id'=> $contract->metadata->open_contracting_id])}}';
+
       var contractTitle = "{{$contract->metadata->contract_name}}";
       var contractApp = new ContractApp({
         contract_id: '{{$contract->metadata->contract_id}}',
