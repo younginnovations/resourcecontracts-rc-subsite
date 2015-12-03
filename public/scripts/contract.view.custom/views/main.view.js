@@ -1,3 +1,32 @@
+var contractApp = new ContractApp({
+    contract_id: contract.metadata.contract_id,
+    guid: contract.metadata.open_contracting_id,
+    total_pages: contract.metadata.total_pages,
+    esapi: esapi
+});
+
+debug("initializing contract ", contractTitle, contractApp.get("contract_id"));
+
+var pagesCollection = new ViewerPageCollection();
+pagesCollection.url = contractApp.getAllPageUrl();
+pagesCollection.fetch({reset: true});
+pagesCollection.on("reset", function() {
+    debug("view.blade pageCollection reset, trigger change:page_no")
+    contractApp.trigger("change:page_no");
+});
+
+var annotationsCollection = new AnnotationsCollection();
+annotationsCollection.url = contractApp.getAllAnnotationsUrl();
+annotationsCollection.fetch({reset: true});
+
+
+var searchResultsCollection = new SearchResultsCollection();
+searchResultsCollection.url = contractApp.getSearchUrl();
+
+var pdfPage = new PdfPage({
+    contractApp: contractApp
+});
+
 /**
  * @jsx React.DOM
  */

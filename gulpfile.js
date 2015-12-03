@@ -37,7 +37,7 @@ var page_script = [
     './resources/assets/scripts/page.js'
 ];
 
-var annotation_component_script = [
+var contract_view_scripts = [
     './public/scripts/lib/underscore.js',
     './public/scripts/lib/backbone.js',
     './public/scripts/lib/director.min.js',
@@ -53,22 +53,18 @@ var annotation_component_script = [
     './public/scripts/contract.view.custom/annotation/annotator.plugin.event.js',
     './public/scripts/contract.view.custom/annotation/annotator.plugin.viewer.js',
     './public/scripts/contract.view.custom/annotation/rc.annotator.js',
-    './public/scripts/contract.view.custom/rc.utils.js'
-];
-
-var annotation_view_script =  [
+    './public/scripts/contract.view.custom/rc.utils.js',
+    './public/scripts/lib/react/react-with-addons.js',
     './public/scripts/contract.view.custom/views/react.waypoint.js',
     './public/scripts/contract.view.custom/views/react.pdf.js',
     './public/scripts/contract.view.custom/views/pdf.view.js',
     './public/scripts/contract.view.custom/views/metadata.view.js',
     './public/scripts/contract.view.custom/views/text.view.js',
     './public/scripts/contract.view.custom/views/text.search.js',
-    './public/scripts/contract.view.custom/views/annotations.view.js'
-];
-
-var annotation_main_script = [
+    './public/scripts/contract.view.custom/views/annotations.view.js',
     './public/scripts/contract.view.custom/views/main.view.js'
 ];
+
 
 /**
  * Compile files from _scss
@@ -92,9 +88,7 @@ gulp.task('watch', function () {
     gulp.watch(country_script, ['js-resource']);
     gulp.watch(resource_script, ['js-resource']);
     gulp.watch(page_script, ['js-page']);
-    gulp.watch(annotation_component_script, ['js-annotation-component']);
-    gulp.watch(annotation_view_script, ['react']);
-    gulp.watch(annotation_main_script, ['js-annotation-main']);
+    gulp.watch(contract_view_scripts, ['react']);
 });
 
 /*
@@ -143,31 +137,10 @@ gulp.task('js-page', function () {
         .pipe(notify({message: 'Js-page task complete'}));
 });
 
-gulp.task('js-annotation-component', function () {
-    return gulp.src(annotation_component_script)
-        .pipe(concat('contract-component.js'))
-        .pipe(gulp.dest('./public/js'))
-        .pipe(rename({suffix: '.min'}))
-        .pipe(uglify())
-        .pipe(gulp.dest('./public/js'))
-        .pipe(notify({message: 'Js-annotation component task complete'}));
-});
-
 gulp.task('react', function () {
-    return gulp.src(annotation_view_script)
+    return gulp.src(contract_view_scripts)
         .pipe(react())
         .pipe(concat('contract-view.js'))
-        .pipe(gulp.dest('./public/js'))
-        .pipe(rename({suffix: '.min'}))
-        .pipe(uglify())
-        .pipe(gulp.dest('./public/js'))
-        .pipe(notify({message: 'React task complete'}));
-});
-
-gulp.task('js-annotation-main', function () {
-    return gulp.src(annotation_main_script)
-        .pipe(react())
-        .pipe(concat('contract-main.js'))
         .pipe(gulp.dest('./public/js'))
         .pipe(rename({suffix: '.min'}))
         .pipe(uglify())
