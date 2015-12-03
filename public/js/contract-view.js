@@ -308,6 +308,7 @@ var PdfPaginationView = React.createClass({displayName: "PdfPaginationView",
     this.refs.userInput.getDOMNode().value = page_no;
     this.setState({visiblePage: page_no});
     this.props.contractApp.setCurrentPage(page_no);
+    $('.pdf-viewer').animate({scrollTop: 0}, 200);
   },
   clickPrevious: function(e) {
     e.preventDefault();
