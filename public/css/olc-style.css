@@ -2126,6 +2126,7 @@ input.select2-search__field {
   content: ",";
   display: inline-block;
   padding-right: 3px;
+  margin-left: -3px;
   color: #404040; }
 
 .editable-buttons > button {
