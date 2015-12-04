@@ -517,7 +517,7 @@ a {
 }
 .table {
   > {
-    tbody > tr > {
+    tbody > tr  {
       &:only-child {
         border: 0;
       }
@@ -606,7 +606,7 @@ a {
   border: 0;
 }
 .row-top-wrap {
-  background: $url_1 no-repeat center/cover;
+  background: no-repeat center/cover;
   margin: 0;
 }
 .navbar-brand {
