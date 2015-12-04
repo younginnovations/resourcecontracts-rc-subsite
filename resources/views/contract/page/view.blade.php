@@ -20,8 +20,8 @@
     <div id="content"> <div class="loading"><img src="{{url('images/loading.gif')}}"/> Loading ... </div></div>
 @endsection
 @section('js')
-<script src="{{ url('scripts/lib/pdfjs/pdf.js') }}"></script>
-<script src="{{ url('scripts/lib/pdfjs/pdf.worker.js') }}"></script>
+<script src="{{ url('js/pdfjs/pdf.js') }}"></script>
+<script src="{{ url('js/pdfjs/pdf.worker.js') }}"></script>
 <script>
   var debug = function() {
         var DEBUG = false;
