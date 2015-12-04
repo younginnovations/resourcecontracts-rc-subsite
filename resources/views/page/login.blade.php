@@ -1,5 +1,15 @@
 @extends('layout.app')
 
+@section('css')
+    @if(!empty($image))
+        <style>
+            .row-top-wrap {
+                background-image: url({{$image}});
+            }
+        </style>
+    @endif
+@stop
+
 @section('content')
     <div class="login-container">
         <div class="row row-top-wrap">
