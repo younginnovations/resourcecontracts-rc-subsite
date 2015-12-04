@@ -62,17 +62,8 @@
             $('#nav').css('position','fixed');
            }
         });
-
-     
-
-
         });
-
-
-    
-    
     </script>
-    </html>
 @stop
 
 
