@@ -55149,11 +55149,11 @@ var PdfPaginationView = React.createClass({displayName: "PdfPaginationView",
   },
   componentDidMount: function() {
     var self = this;
-    self.setState({totalPages: self.props.contractApp.getTotalPages()});    
+    self.setState({totalPages: self.props.contractApp.getTotalPages()});
     this.props.contractApp.on("update-pdf-pagination-page", function(page_no) {
       self.refs.userInput.getDOMNode().value = page_no;
       self.setState({visiblePage: page_no});
-    });    
+    });
     this.refs.userInput.getDOMNode().value = this.state.visiblePage;
   },
   render: function() {
@@ -55183,7 +55183,7 @@ var PdfZoom = React.createClass({displayName: "PdfZoom",
     $('.pdf-zoom-options span').removeClass('scale-selected');
     $('.pdf-zoom-options .' + selectedClass).addClass('scale-selected');
     return (
-      React.createElement("div", {className: "pdf-zoom-options", style: this.props.style}, " Zoom",  
+      React.createElement("div", {className: "pdf-zoom-options", style: this.props.style}, " Zoom", 
         React.createElement("div", null, 
           React.createElement("span", {onClick: this.handleClick, className: "scale-1 scale-selected"}, "1"), 
           React.createElement("span", {onClick: this.handleClick, className: "scale-125"}, "1.25"), 
@@ -55198,8 +55198,8 @@ var PdfViewer = React.createClass({displayName: "PdfViewer",
   getInitialState: function() {
     return {
       loadAnnotations: false
-    };  
-  },  
+    };
+  },
   componentDidMount: function() {
     this.loadAnnotationsFlag = false;
     var self = this;
@@ -55220,7 +55220,7 @@ var PdfViewer = React.createClass({displayName: "PdfViewer",
       var page_no = this.props.contractApp.getCurrentPage();
       var pdfUrl = this.props.contractApp.getPdfUrl();
       return (
-        React.createElement("div", {className: "pdf-viewer pdf-annotator", style: this.props.style}, 
+        React.createElement("div", {className: "pdf-viewer pdf-annotator", id: "pdfview", style: this.props.style}, 
         React.createElement(Pdf, {
           contractApp: this.props.contractApp, 
           pdfPage: this.props.pdfPage, 
@@ -55357,7 +55357,7 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                 );
             }
             return (
-                React.createElement("div", null, 
+                React.createElement("div", {id: "metadata"}, 
                     note, 
                     React.createElement("div", {className: "metadata-view"}, 
                         React.createElement("div", null, 
@@ -55604,17 +55604,28 @@ var RightColumnView = React.createClass({displayName: "RightColumnView",
 });
 var NavigationView = React.createClass({displayName: "NavigationView",
     render: function () {
-        if (this.props.contractApp.getView() === "pdf") {
+    var textClass =null;
+    var pdfClass =null;
+    var annotationClass =null;
+    var metadataClass =null;
+    if (this.props.contractApp.getView() === "pdf") {
             pdfClass = "active";
-            textClass = "";
-        } else {
+    }
+    if(this.props.contractApp.getView() === "text"){
             textClass = "active";
-            pdfClass = "";
         }
+    if (this.props.contractApp.getView() === "annotation") {
+        annotationClass = "active";
+    }
+    if(this.props.contractApp.getView() === "metadata") {
+        metadataClass = "active";
+    }
         return (
             React.createElement("div", {className: "navigation"}, 
                 React.createElement("a", {href: "#/text", className: textClass}, lang.text), 
-                React.createElement("a", {href: "#/pdf", className: pdfClass}, lang.pdf)
+                React.createElement("a", {href: "#/pdf", className: pdfClass}, lang.pdf), 
+                React.createElement("a", {href: "#/annotation", className: annotationClass}, "Annotation"), 
+                React.createElement("a", {href: "#/metadata", className: metadataClass}, "Metadata")
             )
         );
     }
@@ -55659,6 +55670,15 @@ var TextPaginationView = React.createClass({displayName: "TextPaginationView",
         }
     },
     componentDidMount: function () {
+        var titleHeadHeight = $('.title-wrap').height();
+        $(window).scroll(function(){
+            if ($(window).scrollTop() > titleHeadHeight) {
+                $('.title-head-wrap').addClass('fixed');
+            }
+            else {
+                $('.title-head-wrap').removeClass('fixed');
+            }
+        });
         var self = this;
         self.setState({totalPages: self.props.contractApp.getTotalPages()});
         this.props.contractApp.on("update-text-pagination-page", function (page_no) {
@@ -55850,7 +55870,7 @@ var TextViewer = React.createClass({displayName: "TextViewer",
         }
 
         return (
-            React.createElement("div", {className: "text-panel", style: this.props.style}, 
+            React.createElement("div", {className: "text-panel", id: "textview", style: this.props.style}, 
         warningText, 
                 React.createElement("div", {className: "text-annotator"}, 
                     React.createElement("div", null), 
@@ -56404,7 +56424,7 @@ var AnnotationsViewer = React.createClass({displayName: "AnnotationsViewer",
     },
     render: function () {
         return (
-            React.createElement("div", {className: "annotations-viewer", style: this.props.style}, 
+            React.createElement("div", {id: "annotations", className: "annotations-viewer", style: this.props.style}, 
                 React.createElement("div", {className: "annotation-inner-viewer", id: "annotations-box"}, 
                     React.createElement(AnnotationHeader, {
                         contractApp: this.props.contractApp, 
@@ -56427,7 +56447,6 @@ var contractApp = new ContractApp({
     total_pages: contract.metadata.total_pages,
     esapi: esapi
 });
-
 debug("initializing contract ", contractTitle, contractApp.get("contract_id"));
 
 var pagesCollection = new ViewerPageCollection();
@@ -56450,6 +56469,7 @@ var pdfPage = new PdfPage({
     contractApp: contractApp
 });
 
+
 /**
  * @jsx React.DOM
  */
@@ -56469,6 +56489,7 @@ var MainApp = React.createClass({displayName: "MainApp",
         if(annotation_id) {
             contractApp.setSelectedAnnotation(annotation_id);
         }
+        this.scrollTo('.title-pdf-wrapper');
         this.forceUpdate();
     },
     pdf: function(page_no, annotation_id) {
@@ -56491,6 +56512,7 @@ var MainApp = React.createClass({displayName: "MainApp",
             contractApp.setView("pdf");
         }
         contractApp.setView("pdf");
+        this.scrollTo('.title-pdf-wrapper');
         this.forceUpdate();
     },
     search: function(query) {
@@ -56514,6 +56536,21 @@ var MainApp = React.createClass({displayName: "MainApp",
     meta: function(action) {
         // this.forceUpdate();
     },
+    metadata: function() {
+        contractApp.setView("metadata");
+        this.scrollTo('#metadata');
+        this.forceUpdate();
+    },
+    annotation: function() {
+        contractApp.setView("annotation");
+        this.scrollTo('#annotations');
+        this.forceUpdate();
+    },
+    scrollTo:function(id){
+        $('html,body').animate({
+                scrollTop: $(id).offset().top - 150},
+            'slow');
+    },
     componentDidUpdate: function() {
     },
     componentDidMount: function() {
@@ -56522,6 +56559,8 @@ var MainApp = React.createClass({displayName: "MainApp",
             '/text/page/:page_no': this.text,
             '/text/page/:page_no/annotation/:annotation_id': this.text,
             '/pdf': this.pdf,
+            '/metadata': this.metadata,
+            '/annotation': this.annotation,
             '/pdf/page/:page_no': this.pdf,
             '/pdf/page/:page_no/annotation/:annotation_id': this.pdf,
             '/search/:query': this.search,
@@ -56535,36 +56574,40 @@ var MainApp = React.createClass({displayName: "MainApp",
         return style;
     },
     render: function() {
-
         return (
             React.createElement("div", {className: "main-app"}, 
-                React.createElement("div", {className: "title-wrap"}, 
-                    React.createElement("div", {className: "navbar-header"}, 
-                        React.createElement("a", {className: "navbar-brand", href: app_url}, category, React.createElement("span", {className: "beta"}, "Beta"), React.createElement("span", null, "Contracts"))
+                React.createElement("div", {className: "title-head-wrap"}, 
+                    React.createElement("div", {className: "title-wrap"}, 
+                        React.createElement("div", {className: "navbar-header"}, 
+                            React.createElement("a", {className: "navbar-brand", href: app_url}, category, React.createElement("span", {className: "beta"}, "Beta"), React.createElement("span", null, "Contracts"))
+
+                        ), 
+                        React.createElement("span", null, htmlDecode(contractTitle))
                     ), 
-                    React.createElement("span", null, htmlDecode(contractTitle))
-                ), 
-                React.createElement("div", {className: "head-wrap"}, 
-                    React.createElement(TextSearchForm, {
-                        style: this.getStyle(contractApp.isViewVisible("TextSearchForm"))}), 
-                    React.createElement(NavigationView, {
-                        contractApp: contractApp}), 
-                    React.createElement(TextPaginationView, {
-                        style: this.getStyle(contractApp.isViewVisible("TextPaginationView")), 
-                        contractApp: contractApp, 
-                        pagesCollection: pagesCollection}), 
-                    React.createElement(PdfPaginationView, {
-                        style: this.getStyle(contractApp.isViewVisible("PdfPaginationView")), 
-                        contractApp: contractApp}), 
-                    React.createElement(PdfZoom, {
-                        style: this.getStyle(contractApp.isViewVisible("PdfZoom")), 
-                        contractApp: contractApp}), 
-                    React.createElement("div", {className: "tools"}, 
-                        React.createElement("a", {className: "pdf-download-link", href: pdf_download_url}, "pdf download")
-                    ), 
-                    React.createElement(MetadataToggleButton, {
-                        style: this.getStyle(contractApp.getShowMeta()), 
-                        contractApp: contractApp})
+                    React.createElement("div", {className: "head-wrap"}, 
+                        React.createElement(TextSearchForm, {
+                            style: this.getStyle(contractApp.isViewVisible("TextSearchForm"))}), 
+                        React.createElement(NavigationView, {
+                            contractApp: contractApp}), 
+                        React.createElement(TextPaginationView, {
+                            style: this.getStyle(contractApp.isViewVisible("TextPaginationView")), 
+                            contractApp: contractApp, 
+                            pagesCollection: pagesCollection}), 
+                        React.createElement(PdfPaginationView, {
+                            style: this.getStyle(contractApp.isViewVisible("PdfPaginationView")), 
+                            contractApp: contractApp}), 
+                        React.createElement(PdfZoom, {
+                            style: this.getStyle(contractApp.isViewVisible("PdfZoom")), 
+                            contractApp: contractApp}), 
+
+                        React.createElement("div", {className: "tools"}, 
+                            React.createElement("a", {className: "pdf-download-link", href: pdf_download_url}, "pdf download")
+
+                        ), 
+                        React.createElement(MetadataToggleButton, {
+                            style: this.getStyle(contractApp.getShowMeta()), 
+                            contractApp: contractApp})
+                    )
                 ), 
                 React.createElement("div", {className: "document-wrap"}, 
                     React.createElement(AnnotationsViewer, {
@@ -56575,17 +56618,19 @@ var MainApp = React.createClass({displayName: "MainApp",
                         style: this.getStyle(contractApp.isViewVisible("TextSearchResultsList")), 
                         contractApp: contractApp, 
                         searchResultsCollection: searchResultsCollection}), 
-                    React.createElement(TextViewer, {
-                        style: this.getStyle(contractApp.isViewVisible("TextViewer")), 
-                        contractApp: contractApp, 
-                        pagesCollection: pagesCollection, 
-                        metadata: contractApp.metadata}
+                    React.createElement("div", {className: "title-pdf-wrapper"}, 
+                        React.createElement(TextViewer, {
+                            style: this.getStyle(contractApp.isViewVisible("TextViewer")), 
+                            contractApp: contractApp, 
+                            pagesCollection: pagesCollection, 
+                            metadata: contractApp.metadata}
+                        ), 
+                        React.createElement(PdfViewer, {
+                            pdfPage: pdfPage, 
+                            style: this.getStyle(contractApp.isViewVisible("PdfViewer")), 
+                            contractApp: contractApp, 
+                            pagesCollection: pagesCollection})
                     ), 
-                    React.createElement(PdfViewer, {
-                        pdfPage: pdfPage, 
-                        style: this.getStyle(contractApp.isViewVisible("PdfViewer")), 
-                        contractApp: contractApp, 
-                        pagesCollection: pagesCollection}), 
                     React.createElement(RightColumnView, {
                         metadata: contractApp.metadata, 
                         contractApp: contractApp})

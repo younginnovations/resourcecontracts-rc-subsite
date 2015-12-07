@@ -5,9 +5,17 @@ var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     concat = require('gulp-concat'),
     notify = require('gulp-notify'),
+    minifyCss = require('gulp-minify-css'),
     uglify = require('gulp-uglify'),
     rename = require('gulp-rename'),
     react = require('gulp-react');
+
+var css_files = [
+    './resources/assets/styles/bootstrap.css',
+    './resources/assets/styles/sb-admin-2.css',
+    './resources/assets/styles/font-awesome.css',
+    './resources/assets/styles/select2.css'
+];
 
 var base_script = [
     './resources/assets/scripts/jquery.js',
@@ -38,31 +46,31 @@ var page_script = [
 ];
 
 var contract_view_scripts = [
-    './public/scripts/lib/underscore.js',
-    './public/scripts/lib/backbone.js',
-    './public/scripts/lib/director.min.js',
-    './public/scripts/contract.view.custom/models/pages.js',
-    './public/scripts/contract.view.custom/models/annotations.js',
-    './public/scripts/contract.view.custom/models/search.js',
-    './public/scripts/contract.view.custom/models/metadata.js',
-    './public/scripts/contract.view.custom/models/contract.js',
-    './public/scripts/contract.view.custom/models/pdf.js',
-    './public/scripts/lib/annotator/annotator-full.min.js',
-    './public/scripts/lib/annotator.plugin.annotorious.js',
-    './public/scripts/contract.view.custom/annotation/annotator.utils.js',
-    './public/scripts/contract.view.custom/annotation/annotator.plugin.event.js',
-    './public/scripts/contract.view.custom/annotation/annotator.plugin.viewer.js',
-    './public/scripts/contract.view.custom/annotation/rc.annotator.js',
-    './public/scripts/contract.view.custom/rc.utils.js',
-    './public/scripts/lib/react/react-with-addons.js',
-    './public/scripts/contract.view.custom/views/react.waypoint.js',
-    './public/scripts/contract.view.custom/views/react.pdf.js',
-    './public/scripts/contract.view.custom/views/pdf.view.js',
-    './public/scripts/contract.view.custom/views/metadata.view.js',
-    './public/scripts/contract.view.custom/views/text.view.js',
-    './public/scripts/contract.view.custom/views/text.search.js',
-    './public/scripts/contract.view.custom/views/annotations.view.js',
-    './public/scripts/contract.view.custom/views/main.view.js'
+    './resources/assets/scripts/lib/underscore.js',
+    './resources/assets/scripts/lib/backbone.js',
+    './resources/assets/scripts/lib/director.min.js',
+    './resources/assets/scripts/contract.view.custom/models/pages.js',
+    './resources/assets/scripts/contract.view.custom/models/annotations.js',
+    './resources/assets/scripts/contract.view.custom/models/search.js',
+    './resources/assets/scripts/contract.view.custom/models/metadata.js',
+    './resources/assets/scripts/contract.view.custom/models/contract.js',
+    './resources/assets/scripts/contract.view.custom/models/pdf.js',
+    './resources/assets/scripts/lib/annotator/annotator-full.min.js',
+    './resources/assets/scripts/lib/annotator.plugin.annotorious.js',
+    './resources/assets/scripts/contract.view.custom/annotation/annotator.utils.js',
+    './resources/assets/scripts/contract.view.custom/annotation/annotator.plugin.event.js',
+    './resources/assets/scripts/contract.view.custom/annotation/annotator.plugin.viewer.js',
+    './resources/assets/scripts/contract.view.custom/annotation/rc.annotator.js',
+    './resources/assets/scripts/contract.view.custom/rc.utils.js',
+    './resources/assets/scripts/lib/react/react-with-addons.js',
+    './resources/assets/scripts/contract.view.custom/views/react.waypoint.js',
+    './resources/assets/scripts/contract.view.custom/views/react.pdf.js',
+    './resources/assets/scripts/contract.view.custom/views/pdf.view.js',
+    './resources/assets/scripts/contract.view.custom/views/metadata.view.js',
+    './resources/assets/scripts/contract.view.custom/views/text.view.js',
+    './resources/assets/scripts/contract.view.custom/views/text.search.js',
+    './resources/assets/scripts/contract.view.custom/views/annotations.view.js',
+    './resources/assets/scripts/contract.view.custom/views/main.view.js'
 ];
 
 
@@ -85,10 +93,11 @@ gulp.task('sass', function () {
 gulp.task('watch', function () {
     gulp.watch('./resources/assets/scss/*-style.scss', ['sass']);
     gulp.watch(base_script, ['js-base']);
-    gulp.watch(country_script, ['js-resource']);
+    gulp.watch(country_script, ['js-country']);
     gulp.watch(resource_script, ['js-resource']);
     gulp.watch(page_script, ['js-page']);
-    gulp.watch(contract_view_scripts, ['react']);
+    gulp.watch(contract_view_scripts, ['js-react']);
+    gulp.watch(css_files, ['css-main']);
 });
 
 /*
@@ -137,7 +146,7 @@ gulp.task('js-page', function () {
         .pipe(notify({message: 'Js-page task complete'}));
 });
 
-gulp.task('react', function () {
+gulp.task('js-react', function () {
     return gulp.src(contract_view_scripts)
         .pipe(react())
         .pipe(concat('contract-view.js'))
@@ -146,4 +155,15 @@ gulp.task('react', function () {
         .pipe(uglify())
         .pipe(gulp.dest('./public/js'))
         .pipe(notify({message: 'React task complete'}));
+});
+
+gulp.task('css-main', function () {
+    return gulp.src(css_files)
+        .pipe(sourcemaps.init())
+        .pipe(concat('main.css'))
+        .pipe(gulp.dest('./public/css'))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(minifyCss({compatibility: 'ie8'}))
+        .pipe(gulp.dest('./public/css'))
+        .pipe(notify({message: 'Min-css task complete'}));
 });

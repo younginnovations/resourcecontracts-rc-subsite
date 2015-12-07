@@ -18,15 +18,8 @@
     "gulp-install": "~0.6.0",
     "react": "~0.14.3",
     "gulp-react": "~3.1.0",
-    "gulp-rename": "~1.2.2"
-  },
-  "devDependencies": {
-    "gulp-babel": "~5.3.0",
-    "gulp-notify": "^2.2.0",
-    "gulp-react": "^3.1.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^1.4.2",
-    "gulp-util": "^3.0.7"
+    "gulp-rename": "~1.2.2",
+    "gulp-minify-css": "~1.2.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -4,7 +4,6 @@ var contractApp = new ContractApp({
     total_pages: contract.metadata.total_pages,
     esapi: esapi
 });
-
 debug("initializing contract ", contractTitle, contractApp.get("contract_id"));
 
 var pagesCollection = new ViewerPageCollection();
@@ -27,6 +26,7 @@ var pdfPage = new PdfPage({
     contractApp: contractApp
 });
 
+
 /**
  * @jsx React.DOM
  */
@@ -46,6 +46,7 @@ var MainApp = React.createClass({
         if(annotation_id) {
             contractApp.setSelectedAnnotation(annotation_id);
         }
+        this.scrollTo('.title-pdf-wrapper');
         this.forceUpdate();
     },
     pdf: function(page_no, annotation_id) {
@@ -68,6 +69,7 @@ var MainApp = React.createClass({
             contractApp.setView("pdf");
         }
         contractApp.setView("pdf");
+        this.scrollTo('.title-pdf-wrapper');
         this.forceUpdate();
     },
     search: function(query) {
@@ -91,6 +93,21 @@ var MainApp = React.createClass({
     meta: function(action) {
         // this.forceUpdate();
     },
+    metadata: function() {
+        contractApp.setView("metadata");
+        this.scrollTo('#metadata');
+        this.forceUpdate();
+    },
+    annotation: function() {
+        contractApp.setView("annotation");
+        this.scrollTo('#annotations');
+        this.forceUpdate();
+    },
+    scrollTo:function(id){
+        $('html,body').animate({
+                scrollTop: $(id).offset().top - 150},
+            'slow');
+    },
     componentDidUpdate: function() {
     },
     componentDidMount: function() {
@@ -99,6 +116,8 @@ var MainApp = React.createClass({
             '/text/page/:page_no': this.text,
             '/text/page/:page_no/annotation/:annotation_id': this.text,
             '/pdf': this.pdf,
+            '/metadata': this.metadata,
+            '/annotation': this.annotation,
             '/pdf/page/:page_no': this.pdf,
             '/pdf/page/:page_no/annotation/:annotation_id': this.pdf,
             '/search/:query': this.search,
@@ -112,36 +131,40 @@ var MainApp = React.createClass({
         return style;
     },
     render: function() {
-
         return (
             <div className="main-app">
-                <div className="title-wrap">
-                    <div className="navbar-header">
-                        <a className="navbar-brand" href={app_url} >{category}<span className="beta">Beta</span><span>Contracts</span></a>
+                <div className="title-head-wrap">
+                    <div className="title-wrap">
+                        <div className="navbar-header">
+                            <a className="navbar-brand" href={app_url} >{category}<span className="beta">Beta</span><span>Contracts</span></a>
+
+                        </div>
+                        <span>{htmlDecode(contractTitle)}</span>
                     </div>
-                    <span>{htmlDecode(contractTitle)}</span>
-                </div>
-                <div className="head-wrap">
-                    <TextSearchForm
-                        style={this.getStyle(contractApp.isViewVisible("TextSearchForm"))} />
-                    <NavigationView
-                        contractApp={contractApp} />
-                    <TextPaginationView
-                        style={this.getStyle(contractApp.isViewVisible("TextPaginationView"))}
-                        contractApp={contractApp}
-                        pagesCollection={pagesCollection} />
-                    <PdfPaginationView
-                        style={this.getStyle(contractApp.isViewVisible("PdfPaginationView"))}
-                        contractApp={contractApp} />
-                    <PdfZoom
-                        style={this.getStyle(contractApp.isViewVisible("PdfZoom"))}
-                        contractApp={contractApp} />
-                    <div className="tools">
-                        <a  className="pdf-download-link" href={pdf_download_url} >pdf download</a>
+                    <div className="head-wrap">
+                        <TextSearchForm
+                            style={this.getStyle(contractApp.isViewVisible("TextSearchForm"))} />
+                        <NavigationView
+                            contractApp={contractApp} />
+                        <TextPaginationView
+                            style={this.getStyle(contractApp.isViewVisible("TextPaginationView"))}
+                            contractApp={contractApp}
+                            pagesCollection={pagesCollection} />
+                        <PdfPaginationView
+                            style={this.getStyle(contractApp.isViewVisible("PdfPaginationView"))}
+                            contractApp={contractApp} />
+                        <PdfZoom
+                            style={this.getStyle(contractApp.isViewVisible("PdfZoom"))}
+                            contractApp={contractApp} />
+
+                        <div className="tools">
+                            <a  className="pdf-download-link" href={pdf_download_url} >pdf download</a>
+
+                        </div>
+                        <MetadataToggleButton
+                            style={this.getStyle(contractApp.getShowMeta())}
+                            contractApp={contractApp} />
                     </div>
-                    <MetadataToggleButton
-                        style={this.getStyle(contractApp.getShowMeta())}
-                        contractApp={contractApp} />
                 </div>
                 <div className="document-wrap">
                     <AnnotationsViewer
@@ -152,17 +175,19 @@ var MainApp = React.createClass({
                         style={this.getStyle(contractApp.isViewVisible("TextSearchResultsList"))}
                         contractApp={contractApp}
                         searchResultsCollection={searchResultsCollection} />
-                    <TextViewer
-                        style={this.getStyle(contractApp.isViewVisible("TextViewer"))}
-                        contractApp={contractApp}
-                        pagesCollection={pagesCollection}
-                        metadata={contractApp.metadata}
-                    />
-                    <PdfViewer
-                        pdfPage={pdfPage}
-                        style={this.getStyle(contractApp.isViewVisible("PdfViewer"))}
-                        contractApp={contractApp}
-                        pagesCollection={pagesCollection} />
+                    <div className="title-pdf-wrapper">
+                        <TextViewer
+                            style={this.getStyle(contractApp.isViewVisible("TextViewer"))}
+                            contractApp={contractApp}
+                            pagesCollection={pagesCollection}
+                            metadata={contractApp.metadata}
+                        />
+                        <PdfViewer
+                            pdfPage={pdfPage}
+                            style={this.getStyle(contractApp.isViewVisible("PdfViewer"))}
+                            contractApp={contractApp}
+                            pagesCollection={pagesCollection} />
+                    </div>
                     <RightColumnView
                         metadata={contractApp.metadata}
                         contractApp={contractApp} />
