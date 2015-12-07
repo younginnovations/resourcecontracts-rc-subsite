@@ -93,7 +93,7 @@ var MetadataView = React.createClass({
                 );
             }
             return (
-                <div>
+                <div id = "metadata">
                     {note}
                     <div className="metadata-view">
                         <div>
