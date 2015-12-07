@@ -29,5 +29,8 @@
     "url": "git@gitlab.yipl.com.np:web-apps/rc-nrgi.git"
   },
   "author": "",
-  "license": "BSD-2-Clause"
+  "license": "BSD-2-Clause",
+  "devDependencies": {
+    "gulp-minify-css": "^1.2.2"
+  }
 }
