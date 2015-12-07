@@ -1966,7 +1966,7 @@ nav.navbar {
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   font-size: 19px;
   color: #fff;
-  padding: 22px;
+  padding: 22px 20px 22px 22px;
   margin-bottom: 30px; }
 
 .not-front > .row {
