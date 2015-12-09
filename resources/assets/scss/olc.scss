@@ -55,6 +55,23 @@ $url_14: url(../../images/olc/error-bg.png);
   .row-top-content {
     margin: 152px 40px 200px;
   }
+
+  .tagline span {
+  	font-size: 56px!important;
+  	line-height: 70px!important;
+  }
+}
+
+@media (min-width: 768px) {
+	.tagline span {
+	    font-size: 68px!important;
+	}
+}
+
+@media (min-width: 830px) {
+	.homepage-wrapper > .col-md-9 {
+	    width: 830px;
+	}
 }
 
 .homepage-wrapper > .col-lg-8 {
