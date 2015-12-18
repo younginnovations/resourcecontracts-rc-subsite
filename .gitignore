@@ -1,7 +1,6 @@
 /vendor
 .env
 .idea
-/storage
 ._.DS_Store
 /node_modules
 /public/css/maps
