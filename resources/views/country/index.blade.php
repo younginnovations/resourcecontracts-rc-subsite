@@ -57,7 +57,7 @@
             <% if (contract > 1){%>
             @lang('countriespage.contracts')
             <% }else{ %>
-            @lang('countriespage.contract')
+            @lang('countriespage.contract')P
             <% } %>
 
         </div>
