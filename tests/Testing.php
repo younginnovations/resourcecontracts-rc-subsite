@@ -1,4 +1,4 @@
-<?php
+<?php namespace test;
 
 use \Illuminate\Support\Facades\Lang as Lang;
 use Laracasts\Integrated\Extensions\Goutte as IntegrationTest;
@@ -52,13 +52,15 @@ class Testing extends IntegrationTest
              ->andSee($totalCountries . '</span> Countries')
              ->andSee($totalResources . '</span> Resources');
 
-        $this->cliPrint('Completed !');
+        $this->cliPrint('Completed.');
 
     }
 
     /** @test */
     public function testItTestsCountriesPage()
     {
+        $this->cliPrint('Action: Testing the countries page');
+
         $getCountries = $this->api
             ->get($this->apiUrl . '/contracts/summary?category=olc')
             ->getJson()
@@ -71,12 +73,31 @@ class Testing extends IntegrationTest
             $countryCode = strtoupper($country->key);
             $countryName = Lang::get('country.' . $countryCode);
             $this->see($countryName);
+
         }
+
+        $this->cliPrint('Action: viewing the country page.');
+        $number        = rand(0, count($getCountries) - 1);
+        $randomCountry = $getCountries[$number];
+
+        $getRandomContract = $this->api->get($this->apiUrl . '/contracts?country_code=' . $randomCountry->key . '&category=olc')->getJson();
+        $randomContract    = $getRandomContract->results[0];
+
+        $this->cliPrint('Viewing contracts for ' . $randomContract->contract_name . ' for country ' . $randomCountry->key);
+
+        $this->visit('/countries/' . $randomCountry->key)
+             ->andSee($randomCountry->doc_count)
+             ->andSee($randomContract->contract_name);
+
+        $this->assertEquals('200', $this->statusCode());
+        $this->cliPrint('Completed.');
     }
 
     /** @test */
     public function testItTestsResourcesPage()
     {
+        $this->cliPrint('Action: Checking the resources page');
+
         $getResources = $this->api
             ->get($this->apiUrl . '/contracts/summary?category=olc')
             ->getJson()
@@ -95,9 +116,10 @@ class Testing extends IntegrationTest
                 $resourceName = $resource->key;
             }
 
-            $this->cliPrint('Checking for ' . $resourceName);
             $this->see($resourceName);
         }
+
+        $this->cliPrint('Completed.');
     }
 
 
