@@ -191,7 +191,7 @@ class ContractController extends BaseController
             abort(404);
         }
 
-        $text = $this->contract->getTextFromS3($contract->metadata->word_file);
+        $text = $this->contract->getTextFromS3($contract->metadata->file[1]->url);
 
         if (empty($text)) {
             abort(404);
@@ -199,8 +199,8 @@ class ContractController extends BaseController
 
         $filename = sprintf(
             '%s-%s',
-            $contract->metadata->contract_id,
-            str_limit(str_slug($contract->metadata->contract_name), 70)
+            $contract->metadata->id,
+            str_limit(str_slug($contract->metadata->name), 70)
         );
 
         header("Content-type: application/vnd.ms-wordx");
@@ -225,14 +225,14 @@ class ContractController extends BaseController
     public function downloadPdf($contract_id)
     {
         $contract = $this->api->metadata($contract_id);
-        if (empty($contract) || !isset($contract->file_url)) {
+        if (empty($contract) || !isset($contract->file[0]->url)) {
             abort(404);
         }
 
         $filename = sprintf(
             '%s-%s',
-            $contract->contract_id,
-            str_limit(str_slug($contract->contract_name), 70)
+            $contract->id,
+            str_limit(str_slug($contract->name), 70)
         );
         header('Content-Description: File Transfer');
         header('Content-Type: application/pdf');
@@ -240,7 +240,7 @@ class ContractController extends BaseController
         header('Expires: 0');
         header('Cache-Control: must-revalidate');
         header('Pragma: public');
-        readfile($contract->file_url);
+        readfile($contract->file[0]->url);
         exit;
     }
 

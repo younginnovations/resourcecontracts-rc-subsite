@@ -1,8 +1,8 @@
 <?php
 
 $url = Request::all();
-$order = \Illuminate\Support\Facades\Input::get('order', 'desc');
-$sortBy = \Illuminate\Support\Facades\Input::get('sortby', 'year');
+$order = \Illuminate\Support\Facades\Input::get('order', '');
+$sortBy = \Illuminate\Support\Facades\Input::get('sortby', '');
 $path = Request::path();
 $path = explode('/', $path);
 $url['key'] = $path[1];
@@ -31,14 +31,14 @@ if ($path[0] == "resource") {
     @forelse($contracts->results as $contract)
         <?php
         $api = app('App\Http\Services\APIService');
-        $annotations = $api->getAnnotations($contract->contract_id);
+        $annotations = $api->getAnnotations($contract->id);
 
         ?>
         <tr>
             <td></td>
             <td>
                 <a href="{{route('contract.detail',['id'=>$contract->open_contracting_id ])}}">
-                    {{ $contract->contract_name or ''}}
+                    {{ $contract->name or ''}}
                 </a>
                 @if($annotations->total>0)
                     <div class="annotate-text"> Annotated</div>
@@ -56,7 +56,7 @@ if ($path[0] == "resource") {
                             </div>
                             <ul class="dropdown-menu">
                                 <li><a href="{{route('contract.download.pdf',['id'=> $contract->open_contracting_id])}}" >Pdf</a></li>
-                                @if(env('CATEGORY')!= 'olc' && $contract->show_pdf_text == 1)
+                                @if(env('CATEGORY')!= 'olc' && $contract->is_ocr_reviewed == 1)
                                 <li><a href="{{route('contract.download',['id'=> $contract->open_contracting_id])}}" >Word File</a></li>
                                 @endif
                             </ul>
@@ -67,7 +67,7 @@ if ($path[0] == "resource") {
 
 
 
-            <td class="contract-date">{{$contract->signature_year}}</td>
+            <td class="contract-date">{{$contract->year_signed}}</td>
 
             <td>
 
@@ -94,14 +94,16 @@ if ($path[0] == "resource") {
             </td>
             <td>
 
-                @foreach($contract->contract_type as $contracttype)
-                    @if(!empty($contracttype))
-                        <li>{{$contracttype}}</li>
-                    @else
-                        -
-                    @endif
-                @endforeach
+               @if(is_array($contract->contract_type))
+                    @foreach($contract->contract_type as $contracttype)
+                        @if(!empty($contracttype))
+                            <li>{{$contracttype}}</li>
+                        @else
+                            -
+                        @endif
+                    @endforeach
 
+                @endif
             </td>
         </tr>
     @empty

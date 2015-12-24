@@ -2,8 +2,8 @@
 use Illuminate\Support\Facades\Lang;
 
 $url = Request::all();
-$order=\Illuminate\Support\Facades\Input::get('order','desc');
-$sortBy=\Illuminate\Support\Facades\Input::get('sortby','year');
+$order=\Illuminate\Support\Facades\Input::get('order','');
+$sortBy=\Illuminate\Support\Facades\Input::get('sortby','');
 $route=Request::path();
 ?>
 
@@ -25,15 +25,15 @@ $route=Request::path();
     @forelse($contracts->results as $contract)
         <?php
         $api = app('App\Http\Services\APIService');
-        $annotations = $api->getAnnotations($contract->contract_id);
+        $annotations = $api->getAnnotations($contract->id);
         ?>
         <tr>
             <td></td>
             <td>
 
                 @if(isset($show_advanc))<input type="checkbox" class="compare" name="compare[]" value="{{$contract->open_contracting_id}}" />@endif
-                <a class="title-{{$contract->contract_id}}" href="{{route('contract.detail',['id'=>$contract->open_contracting_id ])}}">
-                    {{ $contract->contract_name or ''}}
+                <a class="title-{{$contract->open_contracting_id}}" href="{{route('contract.detail',['id'=>$contract->open_contracting_id ])}}">
+                    {{ $contract->name or ''}}
                 </a>
                 @if($annotations->total>0)
                     <div class="annotate-text"> @lang('global.annotated')</div>
@@ -95,7 +95,7 @@ $route=Request::path();
                         </div>
                         <ul class="dropdown-menu">
                             <li><a href="{{route('contract.download.pdf',['id'=> $contract->open_contracting_id])}}" >Pdf</a></li>
-                            @if(env('CATEGORY')!="olc" && $contract->show_pdf_text == 1)
+                            @if(env('CATEGORY')!="olc" && $contract->is_ocr_reviewed == 1)
                                 <li><a href="{{route('contract.download',['id'=> $contract->open_contracting_id])}}" >Word File</a></li>
                             @endif
                         </ul>
@@ -110,8 +110,8 @@ $route=Request::path();
             @else
                 <td></td>
             @endif
-            @if($contract->signature_year !='')
-                <td>{{$contract->signature_year}}</td>
+            @if($contract->year_signed !='')
+                <td>{{$contract->year_signed}}</td>
             @else
                 <td></td>
             @endif
@@ -146,13 +146,15 @@ $route=Request::path();
                 </ul>
             </td>
             <td>
-                @foreach($contract->contract_type as $contracttype)
-                    @if(!empty($contracttype))
-                        <li>{{$contracttype}}</li>
-                    @else
-                        -
-                    @endif
-                @endforeach
+             @if(is_array($contract->contract_type))
+                    @foreach($contract->contract_type as $contracttype)
+                        @if(!empty($contracttype))
+                            <li>{{$contracttype}}</li>
+                        @else
+                            -
+                        @endif
+                    @endforeach
+             @endif
             </td>
         </tr>
     @empty

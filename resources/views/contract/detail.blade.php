@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Lang;
 @extends('layout.app-full')
 
 @section('content')
+
     <div class="row">
         <div class="col-lg-12 panel-top-wrapper">
             <div class="panel-top-content">
@@ -16,12 +17,12 @@ use Illuminate\Support\Facades\Lang;
                         <ul>
                             <li><a href="{{url()}}">@lang('global.home')</a></li>
                             <li><a href="{{route('contracts')}}">{{Lang::choice('global.contracts' , 2)}}</a></li>
-                            <li>{{str_limit($contract->metadata->contract_name, 100)}}</li>
+                            <li>{{str_limit($contract->metadata->name, 100)}}</li>
                         </ul>
                     </div>
 
                     <div class="panel-title contract-panel-title">
-                    {{$contract->metadata->contract_name}}
+                    {{$contract->metadata->name}}
                 </div>
                 </div>
                 <div class="action-links">
@@ -42,8 +43,8 @@ use Illuminate\Support\Facades\Lang;
                         </div>
 
                         <ul class="dropdown-menu">
-                            <li><a href="{{_e($contract->metadata, 'file_url')}}" target="_blank">Pdf</a></li>
-                            @if(_e($contract->metadata, 'word_file') !='' && env('CATEGORY')!="olc")
+                            <li><a href="{{_e($contract->metadata->file[0], 'url')}}" target="_blank">Pdf</a></li>
+                            @if(_e($contract->metadata->file[1], 'url') !='' && env('CATEGORY')!="olc")
                                 <li><a href="{{route('contract.download',['id'=> $contract->metadata->open_contracting_id])}}"
                                        target="_blank">Word File</a></li>
                             @endif
@@ -75,8 +76,8 @@ use Illuminate\Support\Facades\Lang;
                                 @if($code = strtolower(_e($contract->metadata->country,'code')))
                                     <span><a href="{{route('country.detail', ['key'=>$code])}}">{{ucfirst(_e($contract->metadata->country,'name'))}}</a>
                                         @if(env("CATEGORY")=="rc")
-                                            @if(isset($contract->metadata->amla_url) && !empty($contract->metadata->amla_url))
-                                                <span class="amla-link">See <a href="{{$contract->metadata->amla_url}}"
+                                            @if(isset($contract->metadata->url->amla) && !empty($contract->metadata->url->amla))
+                                                <span class="amla-link">See <a href="{{$contract->metadata->url->amla}}"
                                                                                target="_blank">Legislation</a> in African Mining Legislation Atlas</span>@endif</span>
                                 @endif
                                 @endif
@@ -89,8 +90,8 @@ use Illuminate\Support\Facades\Lang;
                                 @if(isset($contract->metadata->government_entity))
                                     @foreach($contract->metadata->government_entity as $governmentEntity)
                                         <span>
-                                        @if(isset($governmentEntity->entity) && isset($governmentEntity->identifier) && !empty($governmentEntity->entity))
-                                                {{$governmentEntity->entity}} @if($governmentEntity->identifier)
+                                        @if(isset($governmentEntity->name) && isset($governmentEntity->identifier) && !empty($governmentEntity->name))
+                                                {{$governmentEntity->name}} @if($governmentEntity->identifier)
                                                     ({{$governmentEntity->identifier}})@endif
                                             @endif
                                     </span>
@@ -105,7 +106,7 @@ use Illuminate\Support\Facades\Lang;
                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                 <label for="">@lang('global.signature_date')</label>
                                 <?php
-                                $date = $contract->metadata->signature_date;
+                                $date = $contract->metadata->date_signed;
                                 $date = strtotime($date);
                                 ?>
                                 <span>@if($date){{date('F',$date)}} {{date('d',$date)}}, {{date('Y',$date)}}@else
@@ -113,14 +114,14 @@ use Illuminate\Support\Facades\Lang;
                             </li>
                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                 <label for="">@lang('global.document_type')</label>
-                                <span>{{_e($contract->metadata,'document_type','-')}}</span>
+                                <span>{{_e($contract->metadata,'type','-')}}</span>
                             </li>
                         </ul>
                         <ul>
                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                 <label for="">@lang('global.type_contract')</label>
-                                <span class="contract-type-list">@if(isset($contract->metadata->type_of_contract) && !empty($contract->metadata->type_of_contract))
-                                          @foreach($contract->metadata->type_of_contract as $contractype)
+                                <span class="contract-type-list">@if(isset($contract->metadata->contract_type) && !empty($contract->metadata->contract_type) && is_array($contract->metadata->contract_type))
+                                          @foreach($contract->metadata->contract_type as $contractype)
                                             <a href="{{route("search",['contract_type'=>$contractype])}}">{{$contractype}}</a>
                                           @endforeach
                                         @endif
@@ -184,35 +185,34 @@ use Illuminate\Support\Facades\Lang;
                 </div>
             </div>
         </div>
-        @if(isset($contract->metadata->contract_note) && ($contract->metadata->contract_note != ""))
+        @if(isset($contract->metadata->note) && ($contract->metadata->note != ""))
         <div class="col-lg-12">
             <div class="panel panel-default panel-wrap panel-contract-wrap">
                 <div class="panel-body metadata-note">
                     <span>Note</span>
-                   {{$contract->metadata->contract_note}}
+                   {{$contract->metadata->note}}
                 </div>
             </div>
         </div>
         @endif
-
         <div class="col-lg-12">
             <div class="panel panel-default panel-wrap panel-contract-wrap">
                 <div class="panel-heading">
                 @lang('contract.company')
             </div>
-                @foreach($contract->metadata->company as $company)
+                @foreach($contract->metadata->participation as $company)
                     <div class="panel-body panel-col3-wrap">
                         <ul>
                             <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                                 <label for="">@lang('contract.company_name')</label>
-                                <span>@if(isset($company->name) && !empty($company->name)) <a
-                                            href="{{route("search",['company_name'=>$company->name])}}">{{$company->name}} </a> @else
+                                <span>@if(isset($company->name) && !empty($company->company->name)) <a
+                                            href="{{route("search",['company_name'=>$company->company->name])}}">{{$company->company->name}} </a> @else
                                         - @endif</span>
                             </li>
                             <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                                 <label for="">@lang('contract.jurisdiction')</label>
                         <span>
-                        <?php $ji = _e($company, 'jurisdiction_of_incorporation', null);?>
+                        <?php $ji = _e($company->company->identifier->creator, 'spatial', null);?>
                             @if(!is_null($ji))
                                 {{trans('country')[strtoupper($ji)]}}
                             @else
@@ -222,48 +222,49 @@ use Illuminate\Support\Facades\Lang;
                             </li>
                             <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                                 <label for="">@lang('contract.open_corporate_ID')</label>
-                                <span>@if(isset($company->open_corporate_id) && !empty($company->open_corporate_id))<a
-                                            href="{{$company->open_corporate_id}}">{{str_limit($company->open_corporate_id,25)}}</a> @else
+                                <span>@if(isset($company->company->opencorporates_link) && !empty($company->company->opencorporates_link))<a
+                                            href="{{$company->company->opencorporates_link}}">{{str_limit($company->company->opencorporates_link,25)}}</a> @else
                                         - @endif</span>
                             </li>
                         </ul>
                         <ul>
                             <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                                 <label for="">@lang('contract.company_add')</label>
-                                <span>{{_e($company,'company_address','-')}}</span>
+                                <span>{{_e($company->company,'address','-')}}</span>
                             </li>
                             <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                                 <label for="">@lang('contract.company_number')</label>
-                                <span>{{_e($company,'company_number','-')}}</span>
+                                <span>{{_e($company->company->identifier,'id','-')}}</span>
                             </li>
                             <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                                 <label for="">@lang('contract.corporate_grouping')</label>
-                                <span>@if(isset($company->parent_company) && !empty($company->parent_company)) <a
-                                            href="{{route("search",['corporate_group'=>$company->parent_company])}}">{{$company->parent_company}} </a> @else
-                                        - @endif                          </span>
+                                <span>@if(isset($company->company->corporate_grouping) && !empty($company->company->corporate_grouping))
+                                        <a href="{{route("search",['corporate_group'=>$company->company->corporate_grouping])}}">{{$company->company->corporate_grouping}} </a> @else
+                                        - @endif
+                                </span>
                             </li>
                         </ul>
                         @if(env('CATEGORY') != 'olc' )
                         <ul>
                             <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                                 <label for="">@lang('contract.registration_agency')</label>
-                                <span>{{_e($company,'registration_agency','-')}}</span>
+                                <span>{{_e($company->company->identifier->creator,'name','-')}}</span>
                             </li>
                             <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                                 <label for="">@lang('contract.share')</label>
                                 <span>
                                     <?php
-                                    $ps = _e($company,'participation_share','');
+                                    $ps = _e($company,'share','');
                                     echo ($ps =='') ? '-' : $ps*100 .'%';
                                     ?>
                                     </span>
                             </li>
                             <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                                 <label for="">@lang('contract.operator')</label>
-                        <span>@if(isset($company->operator))
-                                @if($company->operator==1)
+                        <span>@if(isset($company->is_operator))
+                                @if($company->is_operator==1)
                                     Yes
-                                @elseif($company->operator==0)
+                                @elseif($company->is_operator==0)
                                     No
                                 @else
                                     -
@@ -288,30 +289,30 @@ use Illuminate\Support\Facades\Lang;
                     <table class="table table-responsive table-contract table-associated-contract">
                         <tbody>
                         <tr>
-                            @foreach($contract->metadata->parent_document as $parentContract)
+                            @foreach($contract->metadata->parent as $parentContract)
 
                                 <td width="70%">
-                                    @if($parentContract->status=="published")
-                                        <a href="{{route('contract.detail',['id'=>$parentContract->open_contracting_id])}}">{{$parentContract->contract_name}}</a> &nbsp; (parent)
+                                    @if($parentContract->is_published==1)
+                                        <a href="{{route('contract.detail',['id'=>$parentContract->open_contracting_id])}}">{{$parentContract->name}}</a> &nbsp; (parent)
                                     @else
-                                        {{$parentContract->contract_name}} (parent)
+                                        {{$parentContract->name}} (parent)
                                     @endif
                                 </td>
                             @endforeach
                         </tr>
-                        <?php $supportingContracts = _e($contract->metadata, 'supporting_contracts', []);?>
-                        @foreach($contract->metadata->supporting_contracts as $supportingContract)
+                        <?php $supportingContracts = _e($contract->metadata, 'supporting', []);?>
+                        @foreach($contract->metadata->supporting as $supportingContract)
                             <tr>
                                 <td width="70%">
-                                    @if($supportingContract->status=="published")
-                                        <a href="{{route('contract.detail',['id'=>$supportingContract->id])}}"> {{$supportingContract->contract_name}}</a>
+                                    @if($supportingContract->is_published==1)
+                                        <a href="{{route('contract.detail',['id'=>$supportingContract->open_contracting_id])}}"> {{$supportingContract->name}}</a>
                                     @endif
                                 </td>
 
                             </tr>
                         @endforeach
 
-                        @if(empty($contract->metadata->parent_document) && empty($contract->metadata->supporting_contracts))
+                        @if(empty($contract->metadata->parent) && empty($contract->metadata->supporting))
                             <tr>
                                 <td class="no-data">
                                     @lang('contract.ass_doc_msg')
@@ -334,11 +335,11 @@ use Illuminate\Support\Facades\Lang;
                     <ul>
                         <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <label for="">@lang('contract.project_title')</label>
-                            <span>{{_e($contract->metadata,'project_title','-')}}</span>
+                            <span>{{_e($contract->metadata->project,'name','-')}}</span>
                         </li>
                         <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <label for="">@lang('contract.project_identifier')</label>
-                            <span>{{_e($contract->metadata,'project_identifier','-')}}</span>
+                            <span>{{_e($contract->metadata->project,'identifier','-')}}</span>
                         </li>
                     </ul>
                     <ul>
@@ -348,11 +349,11 @@ use Illuminate\Support\Facades\Lang;
                         @foreach($concessions as $concession)
                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                 <label for="">@lang('contract.license_name')</label>
-                                <span>{{_e($concession,'license_name','-')}}</span>
+                                <span>{{_e($concession,'name','-')}}</span>
                             </li>
                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                 <label for="">@lang('contract.license_identifier')</label>
-                                <span>{{_e($concession,'license_identifier','-')}}</span>
+                                <span>{{_e($concession,'identifier','-')}}</span>
                             </li>
                         @endforeach
                     </ul>
@@ -369,14 +370,14 @@ use Illuminate\Support\Facades\Lang;
                     <ul>
                         <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <label for="">@lang('contract.source_url')</label>
-                            <span>@if(!empty(_e($contract->metadata,'source_url')))<a
-                                        href="{{$contract->metadata->source_url}}"
-                                        target="_blank">{{str_limit($contract->metadata->source_url,50)}}</a>@else
+                            <span>@if(!empty(_e($contract->metadata->url,'source')))<a
+                                        href="{{$contract->metadata->url->source}}"
+                                        target="_blank">{{str_limit($contract->metadata->url->source,50)}}</a>@else
                                     -@endif</span>
                         </li>
                         <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <label for="">@lang('contract.disclosure_mode')</label>
-                            <span>{{_e($contract->metadata,'disclosure_mode','-')}}</span>
+                            <span>{{_e($contract->metadata,'publisher_type','-')}}</span>
                         </li>
                     </ul>
                 </div>
