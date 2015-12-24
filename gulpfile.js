@@ -148,6 +148,7 @@ gulp.task('js-page', function () {
 
 gulp.task('js-react', function () {
     return gulp.src(contract_view_scripts)
+        .pipe(sourcemaps.init())
         .pipe(react())
         .pipe(concat('contract-view.js'))
         .pipe(gulp.dest('./public/js'))

@@ -1,7 +1,7 @@
 var contractApp = new ContractApp({
-    contract_id: contract.metadata.contract_id,
+    contract_id: contract.metadata.id,
     guid: contract.metadata.open_contracting_id,
-    total_pages: contract.metadata.total_pages,
+    total_pages: contract.metadata.number_of_pages,
     esapi: esapi
 });
 debug("initializing contract ", contractTitle, contractApp.get("contract_id"));
@@ -74,7 +74,7 @@ var MainApp = React.createClass({
     },
     search: function(query) {
         contractApp.setView("search");
-        var show_pdf_text = contractApp.metadata.get('show_pdf_text');
+        var show_pdf_text = contractApp.metadata.get('is_ocr_reviewed');
         if(show_pdf_text ==1)
         {
             contractApp.setSearchQuery(query);

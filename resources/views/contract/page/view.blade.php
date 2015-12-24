@@ -39,7 +39,7 @@
   var category = '{{env('CATEGORY')=='rc' ? 'Resource' : 'Openland' }}';
   var pdf_download_url = '{{route('contract.download.pdf',['id'=> $contract->metadata->open_contracting_id])}}';
   var contract = {!!json_encode($contract)!!};
-  var contractTitle = contract.metadata.contract_name;
+  var contractTitle = contract.metadata.name;
   var esapi = '{{rtrim(env("ELASTIC_SEARCH_HOST"),'/')}}/';
 </script>
 <script src="{{ url('js/contract-view.min.js') }}"></script>
