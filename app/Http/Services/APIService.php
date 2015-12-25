@@ -193,7 +193,7 @@ class APIService
         $per_page = !empty($per_page) ? $per_page : 25;
         $query    = [
             'q'                   => urlencode($q),
-            'country'             => $country,
+            'country_code'        => $country_code,
             'corporate_group'     => $corporate_group,
             'company_name'        => $company_name,
             'contract_type'       => $contract_type,
