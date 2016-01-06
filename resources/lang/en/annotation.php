@@ -37,7 +37,7 @@ return [
     'text'                       => 'Text',
     'pdf'                        => 'Pdf',
     'of'                         => 'of',
-    'text_created_automatically' => 'The text below was created automatically and may contain errors and differences from the contract\'s original PDF file.',
+    'text_created_automatically' => 'The text below was created automatically and may contain errors and differences from the contract\'s original PDF file. ',
     'wait_while_loading'         => 'Please wait while loading ...',
     'processing_pdf_file'        => "We are currently processing the contract's PDF file, and a text version is not yet available.",
     'more'                       => '...more',
