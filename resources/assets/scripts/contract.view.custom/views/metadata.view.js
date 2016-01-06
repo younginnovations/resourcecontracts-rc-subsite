@@ -63,18 +63,21 @@ var MetadataView = React.createClass({
             var countryCode = this.props.metadata.get("country").code.toLowerCase();
             var countryLink = app_url + "/countries/" + countryCode;
 
-            var sigYear = this.props.metadata.get("signature_year");
+            var sigYear = this.props.metadata.get("year_signed");
             var sigYearLink = app_url + "/contracts?year=" + sigYear;
 
-            var ct = this.props.metadata.get("type_of_contract");
-            var contractType = ct.map(function (contractType, i) {
-                if (i != ct.length - 1) {
-                    return React.createElement('a', {href: app_url + "/search?q=&contract_type%5B%5D=" + contractType, key: i}, contractType + ' | ');
-                } else {
-                    return React.createElement('a', {href: app_url + "/search?q=&contract_type%5B%5D=" + contractType, key: i}, contractType);
-                }
-            });
+            var ct = this.props.metadata.get("contract_type");
+            var contractType ='';
 
+            if (typeof ct === 'object') {
+                contractType = ct.map(function (contractType, i) {
+                    if (i != ct.length - 1) {
+                        return React.createElement('a', {href: app_url + "/search?q=&contract_type%5B%5D=" + contractType, key: i}, contractType + ' | ');
+                    } else {
+                        return React.createElement('a', {href: app_url + "/search?q=&contract_type%5B%5D=" + contractType, key: i}, contractType);
+                    }
+                });
+            }
             var re = new RegExp(' ', 'g');
             var resourceLinkBase = app_url + "/resources/";
             var resourceLength = this.props.metadata.get("resource").length;
@@ -86,10 +89,10 @@ var MetadataView = React.createClass({
                 }
             });
 
-            if(this.props.metadata.get("contract_note") != "") {
+            if(this.props.metadata.get("note") != "") {
                     var note = React.createElement("div", {className: "metadata-info"},
                     React.createElement("span", null, "Note"),
-                    React.createElement("p", null, this.props.metadata.get("contract_note"))
+                    React.createElement("p", null, this.props.metadata.get("note"))
                 );
             }
             return (
@@ -112,7 +115,7 @@ var MetadataView = React.createClass({
                         <div className="metadata-signature-year">
                             <span>{lang.signature_year}</span>
                             <span>
-                                <a href={sigYearLink}>{this.props.metadata.get("signature_year") || "-"}</a>
+                                <a href={sigYearLink}>{this.props.metadata.get("year_signed") || "-"}</a>
                             </span>
                         </div>
                         <div className="metadata-resource">
@@ -131,7 +134,7 @@ var MetadataView = React.createClass({
                         </div>
                         <div className="metadata-ocid">
                             <span>{lang.disclosure_mode}</span>
-                            <span>{this.props.metadata.get("disclosure_mode") || "-"}</span>
+                            <span>{this.props.metadata.get("publisher_type") || "-"}</span>
                         </div>
 
                         <LandMatrixView
@@ -203,29 +206,29 @@ var RelatedDocumentsView = React.createClass({
         var parentContracts = "",
             supportingContracts = [],
             moreContracts = "";
-        if (this.props.metadata.get("parent_document")) {
-            parentContracts = this.props.metadata.get("parent_document").map(function (doc) {
+        if (this.props.metadata.get("parent")) {
+            parentContracts = this.props.metadata.get("parent").map(function (doc) {
                 var docUrl = app_url + "/contract/" + doc.open_contracting_id;
-                if (doc.status === "published") {
+                if (doc.is_published === 1) {
                     return (
                         <span>
-                            <a href={docUrl}>{doc.contract_name}</a>
+                            <a href={docUrl}>{doc._name}</a>
                         </span>
                     );
                 }
             });
             var MaxAllowed = 3;
-            var maxDocs = (this.props.metadata.get("supporting_contracts").length < MaxAllowed) ? this.props.metadata.get("supporting_contracts").length : MaxAllowed;
+            var maxDocs = (this.props.metadata.get("supporting").length < MaxAllowed) ? this.props.metadata.get("supporting").length : MaxAllowed;
             for (var i = 0; i < maxDocs; i++) {
-                var doc = this.props.metadata.get("supporting_contracts")[i];
-                if (doc.status === "published") {
-                    var docUrl = app_url + "/contract/" + doc.id;
+                var doc = this.props.metadata.get("supporting")[i];
+                if (doc.is_published === 1) {
+                    var docUrl = app_url + "/contract/" + doc.open_contracting_id;
                     supportingContracts.push(<span id={i}>
-                        <a href={docUrl}>{truncate(doc.contract_name)}</a>
+                        <a href={docUrl}>{truncate(doc.name)}</a>
                     </span>);
                 }
             }
-            if (this.props.metadata.get("supporting_contracts").length > MaxAllowed) {
+            if (this.props.metadata.get("supporting").length > MaxAllowed) {
                 moreContracts = (<span>
                     <a href={this.props.contractApp.getMetadataSummaryLink() + "#relateddocs"}>{lang.all_related}</a>
                 </span>);
@@ -297,7 +300,7 @@ var OtherSourcesView = React.createClass({
     },
     render: function () {
         if (this.props.metadata.get("company")) {
-            var amla_url = this.props.metadata.get("amla_url");
+            var amla_url = this.props.metadata.get("url").amla;
             var amlaUrlLink = (<span>
                 <a href={amla_url}>{this.props.metadata.get("country").name}</a>
                 Legislation</span>);

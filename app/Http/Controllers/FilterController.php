@@ -15,7 +15,7 @@ class FilterController
     protected $api;
 
     /**
-     * @param APIService      $api
+     * @param APIService $api
      */
     public function __construct(APIService $api)
     {
@@ -30,12 +30,13 @@ class FilterController
      */
     public function index(Request $request)
     {
-        $currentPage           = $request->get('page', 1);
-        $filter                = $this->processQueries($request);
-        $filter['from']        = $currentPage;
-        $contracts             = $this->api->filterSearch($filter);
-        $filter                = $this->updateFilterData($filter, $contracts, $request);
-        $show_advance          = true;
+        $currentPage    = $request->get('page', 1);
+        $filter         = $this->processQueries($request);
+        $filter['from'] = $currentPage;
+        $contracts      = $this->api->filterSearch($filter);
+        $filter         = $this->updateFilterData($filter, $contracts, $request);
+        $show_advance   = true;
+
         return view('site.filter', compact('contracts', 'filter', 'show_advance', 'total_contract', 'currentPage'));
     }
 
@@ -52,7 +53,7 @@ class FilterController
 
         return [
             'q'                   => $request->get('q', ''),
-            'country'             => is_array($request->get('country')) ? join(',', $request->get('country')) : $request->get('country'),
+            'country_code'        => is_array($request->get('country')) ? join(',', $request->get('country')) : $request->get('country'),
             'year'                => is_array($request->get('year')) ? join(',', $request->get('year')) : $request->get('year'),
             'from'                => is_array($request->get('from')) ? join(',', $request->get('from')) : $request->get('from'),
             'per_page'            => is_array($request->get('per_page')) ? join(',', $request->get('per_page')) : $request->get('per_page'),
@@ -112,10 +113,10 @@ class FilterController
     public function downloadSearchResultAsCSV(Request $request)
     {
 
-        $currentPage           = $request->get('page', 1);
-        $filter                = $this->processQueries($request);
-        $filter['from']        = $currentPage;
-        $contracts             = $this->api->filterSearch($filter);
+        $currentPage    = $request->get('page', 1);
+        $filter         = $this->processQueries($request);
+        $filter['from'] = $currentPage;
+        $contracts      = $this->api->filterSearch($filter);
         echo $contracts;
     }
 }
