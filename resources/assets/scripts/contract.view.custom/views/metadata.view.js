@@ -66,8 +66,14 @@ var MetadataView = React.createClass({
             var sigYear = this.props.metadata.get("year_signed");
             var sigYearLink = app_url + "/contracts?year=" + sigYear;
 
-            var ct = this.props.metadata.get("contract_type");
-            var contractType ='';
+            var ct =this.props.metadata.get("contract_type");
+            var contractType = ct.map(function (contractType, i) {
+                if (i != ct.length - 1) {
+                    return React.createElement('a', {href: app_url + "/search?q=&contract_type%5B%5D=" + contractType, key: i}, contractType + ' | ');
+                } else {
+                    return React.createElement('a', {href: app_url + "/search?q=&contract_type%5B%5D=" + contractType, key: i}, contractType);
+                }
+            });
 
             if (typeof ct === 'object') {
                 contractType = ct.map(function (contractType, i) {

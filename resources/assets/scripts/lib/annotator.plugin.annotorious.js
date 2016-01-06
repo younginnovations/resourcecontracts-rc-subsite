@@ -19650,9 +19650,9 @@ annotorious.modules.image.Viewer.prototype._onMouseMove = function(event) {
       // Mouse moved into annotation from empty space - highlight immediately
       this._currentAnnotation = topAnnotation;
       this._redraw(event);
-      // this._okfnAnnotator.publish("mouse-over-annotation", { annotation: this._currentAnnotation } );
+      this._okfnAnnotator.publish("annotorious:mouse-over-annotation", {mouseEvent: this._popup._okfnAnnotator.viewer, annotation: topAnnotation } );
       this._annotator.fireEvent(annotorious.events.EventType.MOUSE_OVER_ANNOTATION,
-        { annotation: this._currentAnnotation, mouseEvent: event });   
+        { annotation: this._currentAnnotation, mouseEvent: event });
     } else if (this._currentAnnotation != topAnnotation) {
       // Mouse changed from one annotation to another one
       this._eventsEnabled = false;

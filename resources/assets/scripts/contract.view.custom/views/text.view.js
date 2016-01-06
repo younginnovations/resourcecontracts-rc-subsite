@@ -196,6 +196,7 @@ var TextViewer = React.createClass({
                 enablePdfAnnotation: false,
                 contractApp: this.props.contractApp
             });
+            this.props.contractApp.setAnnotatorInstance(this.annotator);
         }
     },
     scrollToPage: function (page) {

@@ -33,6 +33,10 @@ var PdfPaginationView = React.createClass({
       }     
     }
   },
+  componentWillMount: function()
+  {
+    this.setState({visiblePage: this.props.contractApp.getCurrentPage()});
+  },
   componentDidMount: function() {
     var self = this;
     self.setState({totalPages: self.props.contractApp.getTotalPages()});
@@ -130,6 +134,7 @@ var PdfViewer = React.createClass({
         enablePdfAnnotation: true,
         contractApp: this.props.contractApp
       });
+      this.props.contractApp.setAnnotatorInstance(this.annotator);
     }
   },  
   _onPageRendered: function() {
