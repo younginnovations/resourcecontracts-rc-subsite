@@ -17,12 +17,12 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         $pages = [
-            ['title' => 'About', 'slug' => 'about', 'content' => 'About content'],
-            ['title' => 'Contact', 'slug' => 'contact', 'content' => 'Contact content'],
-            ['title' => 'Resources', 'slug' => 'resources', 'content' => 'Guide content'],
-            ['title' => 'FAQs', 'slug' => 'faqs', 'content' => 'FAQs content'],
-            ['title' => 'Glossary', 'slug' => 'glossary', 'content' => 'Glossary content'],
-            ['title' => 'Publish Contracts', 'slug' => 'publish-contracts', 'content' => 'Publish Contracts'],
+            ['title' => ['en' => 'About', 'fr' => 'Fr About'], 'slug' => 'about', 'content' => ['en' => 'About content', 'fr' => 'Fr About Content']],
+            ['title' => ['en' => 'Contact', 'fr' => 'Fr Contact'], 'slug' => 'contact', 'content' => ['en' => 'Contact content', 'fr' => 'Fr Contact Content']],
+            ['title' => ['en' => 'Resources', 'fr' => 'Fr Resources'], 'slug' => 'resources', 'content' => ['en' => 'Guide content', 'fr' => 'Fr Guide Content']],
+            ['title' => ['en' => 'FAQs', 'fr' => 'Fr Faqs'], 'slug' => 'faqs', 'content' => ['en' => 'FAQs content', 'fr' => 'Fr FAQS Content']],
+            ['title' => ['en' => 'Glossary', 'fr' => 'Fr Glossary'], 'slug' => 'glossary', 'content' => ['en' => 'Glossary content', 'fr' => 'Fr Glossary Content']],
+            ['title' => ['en' => 'Publish Contracts', 'fr' => 'Publish Contracts'], 'slug' => 'publish-contracts', 'content' => ['en' => 'Publish Contracts', 'fr' => 'Fr Publish Contracts1']],
         ];
 
         foreach ($pages as $page) {
