@@ -2,9 +2,9 @@
 use Illuminate\Support\Facades\Lang;
 
 $url = Request::all();
-$order=\Illuminate\Support\Facades\Input::get('order','');
-$sortBy=\Illuminate\Support\Facades\Input::get('sortby','');
-$route=Request::path();
+$order = \Illuminate\Support\Facades\Input::get('order', '');
+$sortBy = \Illuminate\Support\Facades\Input::get('sortby', '');
+$route = Request::path();
 ?>
 
 <table class="table table-responsive table-contract table-contract-list">
@@ -17,7 +17,7 @@ $route=Request::path();
 
     <th width="20%"><a href="{{appendInUrl($route,$url,"country",$order)}}">@lang('global.country') {!!show_arrow($order, $sortBy=='country')!!}</a></th>
     <th><a href="{{appendInUrl($route,$url,"year",$order)}}">@lang('global.year') {!!show_arrow($order, $sortBy=='year')!!}</a></th>
-    <th width="15%"><a href="{{appendInUrl($route,$url,"resource",$order)}}">@lang('global.resource') {!!show_arrow($order, $sortBy=='resource')!!}</a> </th>
+    <th width="15%"><a href="{{appendInUrl($route,$url,"resource",$order)}}">@lang('global.resource') {!!show_arrow($order, $sortBy=='resource')!!}</a></th>
     <th width="15%"><a href="{{appendInUrl($route,$url,"contract_type",$order)}}">@lang('contract.contract_type') {!!show_arrow($order, $sortBy=='contract_type')!!}</a></th>
 
     </thead>
@@ -31,7 +31,7 @@ $route=Request::path();
             <td></td>
             <td>
 
-                @if(isset($show_advanc))<input type="checkbox" class="compare" name="compare[]" value="{{$contract->open_contracting_id}}" />@endif
+                @if(isset($show_advanc))<input type="checkbox" class="compare" name="compare[]" value="{{$contract->open_contracting_id}}"/>@endif
                 <a class="title-{{$contract->open_contracting_id}}" href="{{route('contract.detail',['id'=>$contract->open_contracting_id ])}}">
                     {{ $contract->name or ''}}
                 </a>
@@ -69,7 +69,8 @@ $route=Request::path();
                                 <?php $annotation_type = isset($annotation['shapes']) ? 'pdf' : 'text'; ?>
                                 {{str_limit($category,50)}}-<span
                                         style="color: #404040;">{{str_limit($annotation['text'],50)}}</span>
-                                <a style="float: none" href="{{route('contract.detail',['id'=>$contract->open_contracting_id])}}#/{{$annotation_type}}/page/{{$annotation['page_no']}}/annotation/{{$annotation['id']}}">
+                                <a style="float: none"
+                                   href="{{route('contract.detail',['id'=>$contract->open_contracting_id])}}#/{{$annotation_type}}/page/{{$annotation['page_no']}}/annotation/{{$annotation['id']}}">
                                     [Pg {{$annotation['page_no']}}]</a>
                                 <br>
                             @endif
@@ -94,9 +95,9 @@ $route=Request::path();
                             <span>Download</span>
                         </div>
                         <ul class="dropdown-menu">
-                            <li><a href="{{route('contract.download.pdf',['id'=> $contract->open_contracting_id])}}" >Pdf</a></li>
+                            <li><a href="{{route('contract.download.pdf',['id'=> $contract->open_contracting_id])}}">Pdf</a></li>
                             @if(env('CATEGORY')!="olc" && $contract->is_ocr_reviewed == 1)
-                                <li><a href="{{route('contract.download',['id'=> $contract->open_contracting_id])}}" >Word File</a></li>
+                                <li><a href="{{route('contract.download',['id'=> $contract->open_contracting_id])}}">Word File</a></li>
                             @endif
                         </ul>
                     </div>
@@ -118,24 +119,24 @@ $route=Request::path();
             <td>
                 <?php
 
-                    if (isset($url['sortby']) && $url['sortby'] == "resource") {
-                        if ($url['order'] == "asc") {
-                            asort($contract->resource);
-                        }
-                        if ($url['order'] == "desc") {
-                            rsort($contract->resource);
-                        }
+                if (isset($url['sortby']) && $url['sortby'] == "resource") {
+                    if ($url['order'] == "asc") {
+                        asort($contract->resource);
                     }
+                    if ($url['order'] == "desc") {
+                        rsort($contract->resource);
+                    }
+                }
                 ?>
                 <ul>
                     @forelse($contract->resource as $resource)
                         @if(!empty($resource))
                             <li>
-                            @if(Lang::has('resources.'.$resource))
+                                @if(Lang::has('resources.'.$resource))
                                     @lang('resources.'.$resource)
-                            @else
-                                {{ $resource }}
-                            @endif
+                                @else
+                                    {{ $resource }}
+                                @endif
                             </li>
                         @else
                             -
@@ -146,7 +147,7 @@ $route=Request::path();
                 </ul>
             </td>
             <td>
-             @if(is_array($contract->contract_type))
+                @if(is_array($contract->contract_type))
                     @foreach($contract->contract_type as $contracttype)
                         @if(!empty($contracttype))
                             <li>{{$contracttype}}</li>
@@ -154,7 +155,7 @@ $route=Request::path();
                             -
                         @endif
                     @endforeach
-             @endif
+                @endif
             </td>
         </tr>
     @empty

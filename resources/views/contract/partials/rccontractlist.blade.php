@@ -47,24 +47,22 @@ if ($path[0] == "resource") {
                 <p class="country_name">- {{trans('country.'.strtoupper($contract->country_code))}}</p>
             </td>
 
-                <td>
-                    <div class="contract-info-section">
-                        <div class="download-main-wrap">
-                            <div class="download-wrap">
+            <td>
+                <div class="contract-info-section">
+                    <div class="download-main-wrap">
+                        <div class="download-wrap">
 
-                                <span>Download</span>
-                            </div>
-                            <ul class="dropdown-menu">
-                                <li><a href="{{route('contract.download.pdf',['id'=> $contract->open_contracting_id])}}" >Pdf</a></li>
-                                @if(env('CATEGORY')!= 'olc' && $contract->is_ocr_reviewed == 1)
-                                <li><a href="{{route('contract.download',['id'=> $contract->open_contracting_id])}}" >Word File</a></li>
-                                @endif
-                            </ul>
+                            <span>Download</span>
                         </div>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{route('contract.download.pdf',['id'=> $contract->open_contracting_id])}}">Pdf</a></li>
+                            @if(env('CATEGORY')!= 'olc' && $contract->is_ocr_reviewed == 1)
+                                <li><a href="{{route('contract.download',['id'=> $contract->open_contracting_id])}}">Word File</a></li>
+                            @endif
+                        </ul>
                     </div>
-                </td>
-
-
+                </div>
+            </td>
 
 
             <td class="contract-date">{{$contract->year_signed}}</td>
@@ -94,7 +92,7 @@ if ($path[0] == "resource") {
             </td>
             <td>
 
-               @if(is_array($contract->contract_type))
+                @if(is_array($contract->contract_type))
                     @foreach($contract->contract_type as $contracttype)
                         @if(!empty($contracttype))
                             <li>{{$contracttype}}</li>
