@@ -96,7 +96,7 @@ $route = Request::path();
                         </div>
                         <ul class="dropdown-menu">
                             <li><a href="{{route('contract.download.pdf',['id'=> $contract->open_contracting_id])}}">Pdf</a></li>
-                            @if(env('CATEGORY')!="olc" && $contract->is_ocr_reviewed == 1)
+                            @if(env('CATEGORY')!="olc" && $contract->is_ocr_reviewed == true)
                                 <li><a href="{{route('contract.download',['id'=> $contract->open_contracting_id])}}">Word File</a></li>
                             @endif
                         </ul>

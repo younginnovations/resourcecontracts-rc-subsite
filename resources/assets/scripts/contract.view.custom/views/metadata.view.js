@@ -209,26 +209,26 @@ var RelatedDocumentsView = React.createClass({
         if (this.props.metadata.get("parent")) {
             parentContracts = this.props.metadata.get("parent").map(function (doc) {
                 var docUrl = app_url + "/contract/" + doc.open_contracting_id;
-                if (doc.is_published === 1) {
+                if (doc.is_published) {
                     return (
                         <span>
-                            <a href={docUrl}>{doc._name}</a>
+                            <a href={docUrl}>{doc.name}</a>
                         </span>
                     );
                 }
             });
             var MaxAllowed = 3;
-            var maxDocs = (this.props.metadata.get("supporting").length < MaxAllowed) ? this.props.metadata.get("supporting").length : MaxAllowed;
+            var maxDocs = (this.props.metadata.get("associated").length < MaxAllowed) ? this.props.metadata.get("associated").length : MaxAllowed;
             for (var i = 0; i < maxDocs; i++) {
-                var doc = this.props.metadata.get("supporting")[i];
-                if (doc.is_published === 1) {
+                var doc = this.props.metadata.get("associated")[i];
+                if (doc.is_published) {
                     var docUrl = app_url + "/contract/" + doc.open_contracting_id;
                     supportingContracts.push(<span id={i}>
                         <a href={docUrl}>{truncate(doc.name)}</a>
                     </span>);
                 }
             }
-            if (this.props.metadata.get("supporting").length > MaxAllowed) {
+            if (this.props.metadata.get("associated").length > MaxAllowed) {
                 moreContracts = (<span>
                     <a href={this.props.contractApp.getMetadataSummaryLink() + "#relateddocs"}>{lang.all_related}</a>
                 </span>);
