@@ -75,8 +75,8 @@ use Illuminate\Support\Facades\Lang;
                                 @if($code = strtolower(_e($contract->metadata->country,'code')))
                                     <span><a href="{{route('country.detail', ['key'=>$code])}}">{{ucfirst(_e($contract->metadata->country,'name'))}}</a>
                                         @if(env("CATEGORY")=="rc")
-                                            @if(isset($contract->metadata->url->amla) && !empty($contract->metadata->url->amla))
-                                                <span class="amla-link">See <a href="{{$contract->metadata->url->amla}}"
+                                            @if(isset($contract->metadata->amla_url) && !empty($contract->metadata->amla_url))
+                                                <span class="amla-link">See <a href="{{$contract->metadata->amla_url}}"
                                                                                target="_blank">Legislation</a> in African Mining Legislation Atlas</span>@endif</span>
                                 @endif
                                 @endif
@@ -221,8 +221,8 @@ use Illuminate\Support\Facades\Lang;
                             </li>
                             <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                                 <label for="">@lang('contract.open_corporate_ID')</label>
-                                <span>@if(isset($company->company->opencorporates_link) && !empty($company->company->opencorporates_link))<a
-                                            href="{{$company->company->opencorporates_link}}">{{str_limit($company->company->opencorporates_link,25)}}</a> @else
+                                <span>@if(isset($company->company->opencorporates_url) && !empty($company->company->opencorporates_url))<a
+                                            href="{{$company->company->opencorporates_url}}">{{str_limit($company->company->opencorporates_url,25)}}</a> @else
                                         - @endif</span>
                             </li>
                         </ul>
@@ -261,9 +261,9 @@ use Illuminate\Support\Facades\Lang;
                             <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                                 <label for="">@lang('contract.operator')</label>
                         <span>@if(isset($company->is_operator))
-                                @if($company->is_operator==1)
+                                @if($company->is_operator==true)
                                     Yes
-                                @elseif($company->is_operator==0)
+                                @elseif($company->is_operator==false)
                                     No
                                 @else
                                     -
@@ -299,8 +299,8 @@ use Illuminate\Support\Facades\Lang;
                                 </td>
                             @endforeach
                         </tr>
-                        <?php $supportingContracts = _e($contract->metadata, 'supporting', []);?>
-                        @foreach($contract->metadata->supporting as $supportingContract)
+                        <?php $supportingContracts = _e($contract->metadata, 'associated', []);?>
+                        @foreach($contract->metadata->associated as $supportingContract)
                             <tr>
                                 <td width="70%">
                                     @if($supportingContract->is_published==1)
@@ -369,9 +369,9 @@ use Illuminate\Support\Facades\Lang;
                     <ul>
                         <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <label for="">@lang('contract.source_url')</label>
-                            <span>@if(!empty(_e($contract->metadata->url,'source')))<a
-                                        href="{{$contract->metadata->url->source}}"
-                                        target="_blank">{{str_limit($contract->metadata->url->source,50)}}</a>@else
+                            <span>@if(!empty(_e($contract->metadata,'source')))<a
+                                        href="{{$contract->metadata->source_url}}"
+                                        target="_blank">{{str_limit($contract->metadata->source_url,50)}}</a>@else
                                     -@endif</span>
                         </li>
                         <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
