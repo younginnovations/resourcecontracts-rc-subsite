@@ -287,9 +287,9 @@ use Illuminate\Support\Facades\Lang;
                 <div class="panel-body panel-table">
                     <table class="table table-responsive table-contract table-associated-contract">
                         <tbody>
-                        <tr>
-                            @foreach($contract->metadata->parent as $parentContract)
 
+                            @foreach($contract->metadata->parent as $parentContract)
+                                <tr>
                                 <td width="70%">
                                     @if($parentContract->is_published==1)
                                         <a href="{{route('contract.detail',['id'=>$parentContract->open_contracting_id])}}">{{$parentContract->name}}</a> &nbsp; (parent)
@@ -297,8 +297,9 @@ use Illuminate\Support\Facades\Lang;
                                         {{$parentContract->name}} (parent)
                                     @endif
                                 </td>
+                                </tr>
                             @endforeach
-                        </tr>
+
                         <?php $supportingContracts = _e($contract->metadata, 'associated', []);?>
                         @foreach($contract->metadata->associated as $supportingContract)
                             <tr>
@@ -311,7 +312,7 @@ use Illuminate\Support\Facades\Lang;
                             </tr>
                         @endforeach
 
-                        @if(empty($contract->metadata->parent) && empty($contract->metadata->supporting))
+                        @if(empty($contract->metadata->parent) && empty($contract->metadata->associated))
                             <tr>
                                 <td class="no-data">
                                     @lang('contract.ass_doc_msg')
