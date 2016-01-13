@@ -28,7 +28,7 @@ return [
     'show_less'                  => 'Fr Show Less',
     'previous'                   => 'Fr Previous',
     'next'                       => 'Fr Next',
-    'loading_page'               => 'Fr Loading pdf page',
+    'loading_page'               => 'Fr Loading PDF Page ',
     'search_in_this_document'    => 'Fr Search in this document',
     'searching'                  => 'fr searching ...',
     'no_results_found'           => 'Fr No results found',

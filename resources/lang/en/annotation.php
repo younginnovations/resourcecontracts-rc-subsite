@@ -30,7 +30,7 @@ return [
     'next'                       => 'Next',
     'sorry_loading'              => "We're sorry, there is a problem loading the contract. Please contact",
     'to_let_us_know'             => 'to let us know, or check back later.',
-    'loading_page'               => 'Loading pdf page',
+    'loading_page'               => 'Loading PDF Page ',
     'search_in_this_document'    => 'Search in this document',
     'searching'                  => 'searching ...',
     'no_results_found'           => 'No results found',
