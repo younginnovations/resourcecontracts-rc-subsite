@@ -233,7 +233,7 @@ var TextViewer = React.createClass({
     },
     render: function () {
         var self = this;
-        var show_pdf_text = this.props.metadata.get('show_pdf_text');
+        var show_pdf_text = this.props.metadata.get('is_ocr_reviewed');
 
         var warningText = (this.message) ? "" : (<div className="text-viewer-warning">
             <span className="pull-right link close" onClick={this.handleClickWarning}>x</span>
@@ -260,7 +260,7 @@ var TextViewer = React.createClass({
             warningText = '';
         }
 
-        if (show_pdf_text == 0) {
+        if (show_pdf_text == false) {
             warningText = (<div className="text-viewer-warning">{lang.processing_pdf_file}</div>);
             pagesView = "";
         }

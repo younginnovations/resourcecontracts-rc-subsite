@@ -55840,7 +55840,7 @@ var TextViewer = React.createClass({displayName: "TextViewer",
     },
     render: function () {
         var self = this;
-        var show_pdf_text = this.props.metadata.get('show_pdf_text');
+        var show_pdf_text = this.props.metadata.get('is_ocr_reviewed');
 
         var warningText = (this.message) ? "" : (React.createElement("div", {className: "text-viewer-warning"}, 
             React.createElement("span", {className: "pull-right link close", onClick: this.handleClickWarning}, "x"), 
@@ -55867,7 +55867,7 @@ var TextViewer = React.createClass({displayName: "TextViewer",
             warningText = '';
         }
 
-        if (show_pdf_text == 0) {
+        if (show_pdf_text == false) {
             warningText = (React.createElement("div", {className: "text-viewer-warning"}, lang.processing_pdf_file));
             pagesView = "";
         }
