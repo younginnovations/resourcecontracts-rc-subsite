@@ -219,6 +219,7 @@ var RelatedDocumentsView = React.createClass({
             });
             var MaxAllowed = 3;
             var maxDocs = (this.props.metadata.get("associated").length < MaxAllowed) ? this.props.metadata.get("associated").length : MaxAllowed;
+
             for (var i = 0; i < maxDocs; i++) {
                 var doc = this.props.metadata.get("associated")[i];
                 if (doc.is_published) {
@@ -228,11 +229,7 @@ var RelatedDocumentsView = React.createClass({
                     </span>);
                 }
             }
-            if (this.props.metadata.get("associated").length > MaxAllowed) {
-                moreContracts = (<span>
-                    <a href={this.props.contractApp.getMetadataSummaryLink() + "#relateddocs"}>{lang.all_related}</a>
-                </span>);
-            }
+          
             if (parentContracts.length || supportingContracts.length) {
                 return (
                     <div className="relateddocument-view">
