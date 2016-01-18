@@ -24,7 +24,7 @@ return [
     'contract_type'               => 'Contract Type',
     'filter_by_resource'          => 'Filter by resource...',
     'filter_by_countries'         => 'Filter by Countries',
-    'find_contract'               => 'Find contracts in',
+    'find_contract'               => 'Search within :tag contracts',
     'contracts_for'               => 'Contracts For',
     'go_back'                     => 'Go Back',
     'download'                    => 'Download',

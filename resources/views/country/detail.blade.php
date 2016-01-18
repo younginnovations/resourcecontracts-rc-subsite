@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Lang;
 
+$countryName = trans('country')[strtoupper($country)];
 ?>
 @extends('layout.app-full')
 
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Lang;
                         </ul>
                     </div>
                     <div class="panel-title">
-                        <img src="{{getFlagUrl($country)}}" />
+                        <img src="{{getFlagUrl($country)}}"/>
                         {{@trans('country')[strtoupper($country)]}}
                         @if(env("CATEGORY")=="rc")
                             @if(!empty(@trans('amla')[strtoupper($country)]))<a href="{{@trans('amla')[strtoupper($country)]}}" class="country-amla-link">AMLA</a>@endif
@@ -33,9 +34,10 @@ use Illuminate\Support\Facades\Lang;
                         <form action="{{url('search')}}" method="GET" class="search-form filter-form">
                             <div class="form-group">
                                 <button type="submit" class="btn btn-filter-search pull-left"></button>
-                                <input type="text" name="q" class="form-control pull-left" placeholder="@lang('countriespage.find_contract') {{@trans('country')[strtoupper($country)]}}...">
+                                <input type="text" name="q" class="form-control pull-left"
+                                       placeholder="@lang('countriespage.find_contract' , ['tag' => $countryName])">
 
-                                <input type="hidden" name="country" value="{{$country}}" />
+                                <input type="hidden" name="country" value="{{$country}}"/>
                             </div>
                         </form>
                     </div>
@@ -51,15 +53,15 @@ use Illuminate\Support\Facades\Lang;
         <div class="col-lg-12 country-detail-wrapper">
             <div class="col-md-8 col-lg-8">
                 <div class="panel panel-default panel-wrap country-contract-wrap">
-                        <?php
-                            $params = Request::all();
-                            $params['country']=$country;
-                            $params['resource']='';
-                            $params['download']=true;
-                        ?>
-                        <div class="download-csv">
-                            <a href="{{route('contract.metadata.download',$params)}}">@lang('global.download_as_csv')</a>
-                        </div>
+                    <?php
+                    $params = Request::all();
+                    $params['country'] = $country;
+                    $params['resource'] = '';
+                    $params['download'] = true;
+                    ?>
+                    <div class="download-csv">
+                        <a href="{{route('contract.metadata.download',$params)}}">@lang('global.download_as_csv')</a>
+                    </div>
 
                     <div class="panel-heading">@lang('countriespage.contracts_in') {{@trans('country')[strtoupper($country)]}}</div>
                     <div class="panel-body">
