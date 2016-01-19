@@ -1,5 +1,6 @@
 <?php namespace App\Exceptions;
 
+use ErrorException;
 use Exception;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -32,6 +33,10 @@ class Handler extends ExceptionHandler
     {
         if ($e instanceof HttpException) {
             return $this->renderHttpException($e);
+        }
+
+        if ($e instanceof ErrorException) {
+            return view('errors.error');
         }
 
         if (env('APP_ENV') === 'production') {
