@@ -42,5 +42,5 @@
   var contractTitle = contract.metadata.name;
   var esapi = '{{rtrim(env("ELASTIC_SEARCH_HOST"),'/')}}/';
 </script>
-<script src="{{ url('js/contract-view.min.js') }}"></script>
+<script src="{{ url('js/contract-view.js') }}"></script>
 @stop

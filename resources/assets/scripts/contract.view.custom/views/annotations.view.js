@@ -39,7 +39,7 @@ var AnnotationItem = React.createClass({
             var text = (annotation.get('text') || "") + "";
             var quote = (annotation.get('quote') || "") + "";
             if (text && quote) {
-                return text.trim() + " - " + quote.trim();
+                return text.trim();
             }
             if (text && text.trim()) {
                 return text.trim();
@@ -104,7 +104,7 @@ var AnnotationItem = React.createClass({
                     showMoreFlag: true,
                     highlight: true
                 });
-                location.hash = "#/pdf/page/" + self.state.pageNo + "/annotation/" + self.state.id;
+                location.hash = "#/"+self.state.annotationType+"/page/" + self.state.pageNo + "/annotation/" + self.state.id;
             } else {
                 self.setState({
                     showMoreFlag: false,
@@ -133,7 +133,6 @@ var AnnotationItem = React.createClass({
         switch (this.state.annotationType) {
             case "pdf":
                 this.props.contractApp.setView("pdf");
-                location.hash = "#/pdf/page/" + self.state.pageNo + "/annotation/" + self.state.id;
                 this.props.contractApp.setSelectedAnnotation(self.state.id);
                 this.props.contractApp.trigger("annotations:highlight", {id: self.state.id});
                 this.props.contractApp.setCurrentPage(self.state.pageNo);
@@ -141,11 +140,14 @@ var AnnotationItem = React.createClass({
                 // this.props.contractApp.trigger("annotationHighlight", this.props.annotation.attributes);
                 break
             case "text":
-                location.hash = "#/text/page/" + self.state.pageNo + "/annotation/" + self.state.id;
-                this.props.contractApp.trigger("annotations:highlight", {id: self.state.id});
                 this.props.contractApp.setView("text");
+                this.props.contractApp.trigger("annotations:highlight", {id: self.state.id});
                 this.props.contractApp.setCurrentPage(self.state.pageNo);
-                setTimeout(this.props.contractApp.triggerScrollToTextPage());
+                self = this;
+                setTimeout(function () {
+                    self.props.contractApp.showTextAnnotationPopup(self.state.id)
+                }, 300);
+                //setTimeout(this.props.contractApp.triggerScrollToTextPage());
                 break;
         }
     },

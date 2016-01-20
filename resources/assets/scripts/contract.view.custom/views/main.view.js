@@ -39,6 +39,7 @@ var MainApp = React.createClass({
     text: function(page_no, annotation_id) {
         debug("view.blade.php: setting text view");
         contractApp.setView("text");
+        contractApp.trigger("update-text-pagination-page", contractApp.getCurrentPage());
         contractApp.resetSelectedAnnotation();
         if(page_no) {
             contractApp.setCurrentPage(page_no);
@@ -46,17 +47,15 @@ var MainApp = React.createClass({
         if(annotation_id) {
             contractApp.setSelectedAnnotation(annotation_id);
         }
-        this.scrollTo('.title-pdf-wrapper');
         this.forceUpdate();
     },
     pdf: function(page_no, annotation_id) {
         debug("view.blade.php: setting pdf view");
+        contractApp.setView("pdf");
+        contractApp.trigger("update-pdf-pagination-page", contractApp.getCurrentPage());
         if(page_no) {
             contractApp.setCurrentPage(page_no);
             debug("view.blade.php: setting current page to", page_no);
-        } else {
-            // contractApp.trigger("change:page_no");
-            // this.forceUpdate();
         }
         if(annotation_id) {
             contractApp.setSelectedAnnotation(annotation_id);
@@ -68,8 +67,6 @@ var MainApp = React.createClass({
             debug("view.blade pdfPage init-none, trigger change:page_no")
             contractApp.setView("pdf");
         }
-        contractApp.setView("pdf");
-        this.scrollTo('.title-pdf-wrapper');
         this.forceUpdate();
     },
     search: function(query) {
@@ -110,7 +107,7 @@ var MainApp = React.createClass({
     },
     componentDidUpdate: function() {
     },
-    componentDidMount: function() {
+    componentWillMount: function() {
         var router = Router({
             '/text': this.text,
             '/text/page/:page_no': this.text,

@@ -3533,6 +3533,12 @@ var Metadata = Backbone.Model.extend({
       this.metadata = new Metadata();
       this.loadMetadata();
     },
+    setAnnotatorInstance:function(annotator){
+      return this.set({"annotator":annotator});
+    },
+    getAnnotatorInstance:function(annotator){
+      return this.get("annotator");
+    },
     loadMetadata: function() {
       var self = this;
       this.metadata.url = this.getMetadataUrl();
@@ -3646,6 +3652,50 @@ var Metadata = Backbone.Model.extend({
       if(this.get("view") === "pdf") {
         this.trigger("update-pdf-pagination-page", page_no);
       }
+    },
+    getBoxPosition: function(geo)
+    {
+      var canvas = $('.pdf-annotator').find('canvas').first();
+      geo.width = geo.width * canvas.width();
+      geo.height = geo.height * canvas.height();
+      geo.x = geo.x * canvas.width();
+      geo.y = geo.y * canvas.height();
+      return geo;
+    },
+    showPdfAnnotationPopup:function(id)
+    {
+      var wrapperEl = $('.pdf-annotator');
+      wrapperEl.find('.annotator-viewer').addClass('annotator-hide');
+      var annotators = this.getAnnotatorInstance().content.data('annotator').dumpAnnotations();
+      var self = this;
+      annotators.map(function (annotation, i) {
+        if (annotation.id == id) {
+          var geo = self.getBoxPosition(annotation.shapes[0].geometry);
+          var position = {top: (geo.y + geo.height / 2), left: (geo.x + geo.width / 2)};
+          setTimeout(function(){wrapperEl.animate({
+            scrollTop: position.top - 200
+          }, 'fast')}(position,wrapperEl), 300);
+          wrapperEl.annotator().annotator('showViewer', [annotation], position);
+        }
+      });
+    },
+    showTextAnnotationPopup: function(id){
+      var wrapperEl = $('.text-annotator');
+      wrapperEl.find('.annotator-viewer').addClass('annotator-hide');
+      wrapperEl.find('.annotator-hl').each(function (i, a) {
+        var a = $(a);
+        var annotation = a.data('annotation');
+        if (annotation.id == id) {
+          var position = a.position();
+          setTimeout(function(){wrapperEl.animate({
+            scrollTop: position.top-200
+          }, 'fast')}(position,wrapperEl), 300);
+
+          position.top = position.top + 15;
+          position.left = position.left + a.width() / 2;
+          wrapperEl.annotator().annotator('showViewer', [annotation], position);
+        }
+      })
     },
     isViewVisible: function(viewName) {
       switch(viewName) {
@@ -26649,9 +26699,9 @@ annotorious.modules.image.Viewer.prototype._onMouseMove = function(event) {
       // Mouse moved into annotation from empty space - highlight immediately
       this._currentAnnotation = topAnnotation;
       this._redraw(event);
-      // this._okfnAnnotator.publish("mouse-over-annotation", { annotation: this._currentAnnotation } );
+      this._okfnAnnotator.publish("annotorious:mouse-over-annotation", {mouseEvent: this._popup._okfnAnnotator.viewer, annotation: topAnnotation } );
       this._annotator.fireEvent(annotorious.events.EventType.MOUSE_OVER_ANNOTATION,
-        { annotation: this._currentAnnotation, mouseEvent: event });   
+        { annotation: this._currentAnnotation, mouseEvent: event });
     } else if (this._currentAnnotation != topAnnotation) {
       // Mouse changed from one annotation to another one
       this._eventsEnabled = false;
@@ -32927,7 +32977,9 @@ Annotator.Plugin.AnnotatorEvents = (function(_super) {
         'annotationCreated': 'onAnnotationCreated',
         'annotationDeleted': 'onAnnotationDeleted',
         'annotationUpdated': 'onAnnotationUpdated',
+        'annotationsLoaded' : 'annotationsLoaded',
         'annotorious:annotation-clicked': 'onAnnotationClicked',
+        'annotorious:mouse-over-annotation': 'onMouseOverAnnotation'
     };
     AnnotatorEvents.prototype.field = null;
     AnnotatorEvents.prototype.input = null;    
@@ -32938,7 +32990,10 @@ Annotator.Plugin.AnnotatorEvents = (function(_super) {
         }      
         annotator.viewer.addField({
             load: this.updateViewer,
-        });       
+        });
+        this.annotator
+            .subscribe("annotationEditorShown", onEditorShownHandler)
+            .subscribe("annotationViewerShown", onViewShownHandler);
     };
     AnnotatorEvents.prototype.options = {
         AnnotatorEvents: {}
@@ -32949,6 +33004,8 @@ Annotator.Plugin.AnnotatorEvents = (function(_super) {
         this.onAnnotationCreated = __bind(this.onAnnotationCreated, this);
         this.onAnnotationUpdated = __bind(this.onAnnotationUpdated, this);
         this.onAnnotationDeleted = __bind(this.onAnnotationDeleted, this);
+        this.annotationsLoaded   = __bind(this.annotationsLoaded, this);
+        this.onMouseOverAnnotation = __bind(this.onMouseOverAnnotation, this);
         AnnotatorEvents.__super__.constructor.apply(this, arguments);
     };
     AnnotatorEvents.prototype.onAnnotationClicked = function(obj) {
@@ -32977,6 +33034,91 @@ Annotator.Plugin.AnnotatorEvents = (function(_super) {
         this.collection.remove(annotation);
         this.collection.trigger('annotationDeleted');
     };
+
+
+
+    AnnotatorEvents.prototype.onMouseOverAnnotation = function (viewer) {
+        onViewShownHandler(viewer.mouseEvent)
+    };
+    AnnotatorEvents.prototype.annotationsLoaded = function (obj) {
+        var annotation_id =  contractApp.getSelectedAnnotation();
+        var hash = window.location.hash;
+
+        if (annotation_id === 0 && hash != '') {
+            if (typeof hash.split('annotation/')[1] !== 'undefined') {
+                annotation_id = hash.split('annotation/')[1];
+            }
+        }
+
+        if (contractApp.getView() == 'pdf') {
+            setTimeout( function(){contractApp.showPdfAnnotationPopup(annotation_id)}, 600);
+        }
+
+        if (contractApp.getView() == 'text') {
+            contractApp.showTextAnnotationPopup(annotation_id);
+        }
+    };
+
+    function onEditorShownHandler(viewer) {
+        var viewPort = contractApp.getView();
+        var viewerEl = $(viewer.element);
+        var position = viewerEl.position();
+        var wrapperEl = $('.' + viewPort + '-annotator');
+        var widgetEl = wrapperEl.find('form.annotator-widget');
+        var editorEl = wrapperEl.find('div.annotator-editor');
+        var widgetHeight = widgetEl.height() + 25;
+
+        if (wrapperEl.width() / 2 < position.left) {
+            viewerEl.addClass('annotator-invert-x');
+            editorEl.addClass('annotator-invert-x');
+        } else {
+            viewerEl.removeClass('annotator-invert-x');
+            editorEl.removeClass('annotator-invert-x');
+        }
+
+        var diff = position.top - wrapperEl.scrollTop();
+
+        if (diff < widgetHeight) {
+            viewerEl.addClass('annotator-invert-y');
+            editorEl.addClass('annotator-invert-y');
+        } else {
+            viewerEl.removeClass('annotator-invert-y');
+            editorEl.removeClass('annotator-invert-y');
+        }
+
+    }
+
+    function onViewShownHandler(viewer, annotations) {
+        var viewerEl = $(viewer.element);
+        var viewPort = contractApp.getView();
+        var position = viewerEl.position();
+        var wrapperEl = $('.'+viewPort+'-annotator');
+        var widgetEl = wrapperEl.find('ul.annotator-widget');
+        var widgetHeight = widgetEl.height() + 25;
+
+        if (wrapperEl.width() / 2 < position.left) {
+            viewerEl.addClass('annotator-invert-x');
+            widgetEl.addClass('annotator-invert-x');
+        } else {
+            viewerEl.removeClass('annotator-invert-x');
+            widgetEl.removeClass('annotator-invert-x');
+        }
+
+        var diff = position.top - wrapperEl.scrollTop();
+
+        if (diff < widgetHeight) {
+            viewerEl.addClass('annotator-invert-y');
+            widgetEl.addClass('annotator-invert-y');
+        } else {
+            viewerEl.removeClass('annotator-invert-y');
+            widgetEl.removeClass('annotator-invert-y');
+        }
+    }
+
+
+
+
+
     return AnnotatorEvents;
 })(Annotator.Plugin);
 Annotator.Plugin.AnnotatorNRGIViewer = (function(_super) {
@@ -33000,7 +33142,13 @@ Annotator.Plugin.AnnotatorNRGIViewer = (function(_super) {
         AnnotatorNRGIViewer.contractApp.trigger("annotations:highlight", obj.annotation);
     },
     AnnotatorNRGIViewer.prototype.updateViewer = function(field, annotation) {
-        var link = "";
+       var text = annotation.text;
+        if(text.length>100)
+        {
+            text = text.substring(0,100)+' ...';
+        }
+
+        var link = "#/text/page/"+annotation.page_no+"/annotation/"+annotation.id;
         if(annotation.shapes) {
             link="#/pdf/page/"+annotation.page_no+"/annotation/"+annotation.id;
         }
@@ -33008,7 +33156,7 @@ Annotator.Plugin.AnnotatorNRGIViewer = (function(_super) {
         var annotatinonCatEnglish = annotation.category.split('//')[0];
         var annotatinonCatFrench = annotation.category.split('//')[1];
 
-        textDiv.innerHTML = '<div class="annotation-viewer-category">' + annotatinonCatEnglish + '<br>' + 
+        textDiv.innerHTML = '<div class="annotation-viewer-text">'+text+'</div><div class="annotation-viewer-category">' + annotatinonCatEnglish + ' // ' +
                             '<i>' + annotatinonCatFrench + '</i></div>' + 
                             '<span>Page ' + annotation.page_no + '</span>' +
                             '<a href="' + link + '" class="annotation-viewer-more"> >> </a>';
@@ -33077,7 +33225,6 @@ var AnnotatorjsView = Backbone.View.extend({
             loadFromSearch: {
                 'url': self.api,
                 'contract': contract_id,
-                'page': page_no,
                 'document_page_no': page_no
             },
             annotationData: {
@@ -33098,7 +33245,6 @@ var AnnotatorjsView = Backbone.View.extend({
         store.options.loadFromSearch = {
             'url': self.api,
             'contract': contract_id,
-            'page': page_no,
             'document_page_no': page_no,
         };
         store.options.annotationData = {
@@ -33147,7 +33293,6 @@ var PdfAnnotatorjsView = AnnotatorjsView.extend({
             store.options.loadFromSearch = {
                 'url': self.api,
                 'contract': contract_id,
-                'page': page_no,
                 'document_page_no': page_no,
             };
             store.options.annotationData = {
@@ -55147,6 +55292,10 @@ var PdfPaginationView = React.createClass({displayName: "PdfPaginationView",
       }     
     }
   },
+  componentWillMount: function()
+  {
+    this.setState({visiblePage: this.props.contractApp.getCurrentPage()});
+  },
   componentDidMount: function() {
     var self = this;
     self.setState({totalPages: self.props.contractApp.getTotalPages()});
@@ -55244,6 +55393,7 @@ var PdfViewer = React.createClass({displayName: "PdfViewer",
         enablePdfAnnotation: true,
         contractApp: this.props.contractApp
       });
+      this.props.contractApp.setAnnotatorInstance(this.annotator);
     }
   },  
   _onPageRendered: function() {
@@ -55330,8 +55480,14 @@ var MetadataView = React.createClass({displayName: "MetadataView",
             var sigYear = this.props.metadata.get("year_signed");
             var sigYearLink = app_url + "/contracts?year=" + sigYear;
 
-            var ct = this.props.metadata.get("contract_type");
-            var contractType ='';
+            var ct =this.props.metadata.get("contract_type");
+            var contractType = ct.map(function (contractType, i) {
+                if (i != ct.length - 1) {
+                    return React.createElement('a', {href: app_url + "/search?q=&contract_type%5B%5D=" + contractType, key: i}, contractType + ' | ');
+                } else {
+                    return React.createElement('a', {href: app_url + "/search?q=&contract_type%5B%5D=" + contractType, key: i}, contractType);
+                }
+            });
 
             if (typeof ct === 'object') {
                 contractType = ct.map(function (contractType, i) {
@@ -55800,6 +55956,7 @@ var TextViewer = React.createClass({displayName: "TextViewer",
                 enablePdfAnnotation: false,
                 contractApp: this.props.contractApp
             });
+            this.props.contractApp.setAnnotatorInstance(this.annotator);
         }
     },
     scrollToPage: function (page) {
@@ -56006,7 +56163,7 @@ var AnnotationItem = React.createClass({displayName: "AnnotationItem",
             var text = (annotation.get('text') || "") + "";
             var quote = (annotation.get('quote') || "") + "";
             if (text && quote) {
-                return text.trim() + " - " + quote.trim();
+                return text.trim();
             }
             if (text && text.trim()) {
                 return text.trim();
@@ -56071,7 +56228,7 @@ var AnnotationItem = React.createClass({displayName: "AnnotationItem",
                     showMoreFlag: true,
                     highlight: true
                 });
-                location.hash = "#/pdf/page/" + self.state.pageNo + "/annotation/" + self.state.id;
+                location.hash = "#/"+self.state.annotationType+"/page/" + self.state.pageNo + "/annotation/" + self.state.id;
             } else {
                 self.setState({
                     showMoreFlag: false,
@@ -56100,7 +56257,6 @@ var AnnotationItem = React.createClass({displayName: "AnnotationItem",
         switch (this.state.annotationType) {
             case "pdf":
                 this.props.contractApp.setView("pdf");
-                location.hash = "#/pdf/page/" + self.state.pageNo + "/annotation/" + self.state.id;
                 this.props.contractApp.setSelectedAnnotation(self.state.id);
                 this.props.contractApp.trigger("annotations:highlight", {id: self.state.id});
                 this.props.contractApp.setCurrentPage(self.state.pageNo);
@@ -56108,11 +56264,14 @@ var AnnotationItem = React.createClass({displayName: "AnnotationItem",
                 // this.props.contractApp.trigger("annotationHighlight", this.props.annotation.attributes);
                 break
             case "text":
-                location.hash = "#/text/page/" + self.state.pageNo + "/annotation/" + self.state.id;
-                this.props.contractApp.trigger("annotations:highlight", {id: self.state.id});
                 this.props.contractApp.setView("text");
+                this.props.contractApp.trigger("annotations:highlight", {id: self.state.id});
                 this.props.contractApp.setCurrentPage(self.state.pageNo);
-                setTimeout(this.props.contractApp.triggerScrollToTextPage());
+                self = this;
+                setTimeout(function () {
+                    self.props.contractApp.showTextAnnotationPopup(self.state.id)
+                }, 300);
+                //setTimeout(this.props.contractApp.triggerScrollToTextPage());
                 break;
         }
     },
@@ -56482,6 +56641,7 @@ var MainApp = React.createClass({displayName: "MainApp",
     text: function(page_no, annotation_id) {
         debug("view.blade.php: setting text view");
         contractApp.setView("text");
+        contractApp.trigger("update-text-pagination-page", contractApp.getCurrentPage());
         contractApp.resetSelectedAnnotation();
         if(page_no) {
             contractApp.setCurrentPage(page_no);
@@ -56489,17 +56649,15 @@ var MainApp = React.createClass({displayName: "MainApp",
         if(annotation_id) {
             contractApp.setSelectedAnnotation(annotation_id);
         }
-        this.scrollTo('.title-pdf-wrapper');
         this.forceUpdate();
     },
     pdf: function(page_no, annotation_id) {
         debug("view.blade.php: setting pdf view");
+        contractApp.setView("pdf");
+        contractApp.trigger("update-pdf-pagination-page", contractApp.getCurrentPage());
         if(page_no) {
             contractApp.setCurrentPage(page_no);
             debug("view.blade.php: setting current page to", page_no);
-        } else {
-            // contractApp.trigger("change:page_no");
-            // this.forceUpdate();
         }
         if(annotation_id) {
             contractApp.setSelectedAnnotation(annotation_id);
@@ -56511,8 +56669,6 @@ var MainApp = React.createClass({displayName: "MainApp",
             debug("view.blade pdfPage init-none, trigger change:page_no")
             contractApp.setView("pdf");
         }
-        contractApp.setView("pdf");
-        this.scrollTo('.title-pdf-wrapper');
         this.forceUpdate();
     },
     search: function(query) {
@@ -56553,7 +56709,7 @@ var MainApp = React.createClass({displayName: "MainApp",
     },
     componentDidUpdate: function() {
     },
-    componentDidMount: function() {
+    componentWillMount: function() {
         var router = Router({
             '/text': this.text,
             '/text/page/:page_no': this.text,

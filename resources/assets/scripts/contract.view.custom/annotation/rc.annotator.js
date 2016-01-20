@@ -54,7 +54,6 @@ var AnnotatorjsView = Backbone.View.extend({
             loadFromSearch: {
                 'url': self.api,
                 'contract': contract_id,
-                'page': page_no,
                 'document_page_no': page_no
             },
             annotationData: {
@@ -75,7 +74,6 @@ var AnnotatorjsView = Backbone.View.extend({
         store.options.loadFromSearch = {
             'url': self.api,
             'contract': contract_id,
-            'page': page_no,
             'document_page_no': page_no,
         };
         store.options.annotationData = {
@@ -124,7 +122,6 @@ var PdfAnnotatorjsView = AnnotatorjsView.extend({
             store.options.loadFromSearch = {
                 'url': self.api,
                 'contract': contract_id,
-                'page': page_no,
                 'document_page_no': page_no,
             };
             store.options.annotationData = {

@@ -19,7 +19,13 @@ Annotator.Plugin.AnnotatorNRGIViewer = (function(_super) {
         AnnotatorNRGIViewer.contractApp.trigger("annotations:highlight", obj.annotation);
     },
     AnnotatorNRGIViewer.prototype.updateViewer = function(field, annotation) {
-        var link = "";
+       var text = annotation.text;
+        if(text.length>100)
+        {
+            text = text.substring(0,100)+' ...';
+        }
+
+        var link = "#/text/page/"+annotation.page_no+"/annotation/"+annotation.id;
         if(annotation.shapes) {
             link="#/pdf/page/"+annotation.page_no+"/annotation/"+annotation.id;
         }
@@ -27,7 +33,7 @@ Annotator.Plugin.AnnotatorNRGIViewer = (function(_super) {
         var annotatinonCatEnglish = annotation.category.split('//')[0];
         var annotatinonCatFrench = annotation.category.split('//')[1];
 
-        textDiv.innerHTML = '<div class="annotation-viewer-category">' + annotatinonCatEnglish + '<br>' + 
+        textDiv.innerHTML = '<div class="annotation-viewer-text">'+text+'</div><div class="annotation-viewer-category">' + annotatinonCatEnglish + ' // ' +
                             '<i>' + annotatinonCatFrench + '</i></div>' + 
                             '<span>Page ' + annotation.page_no + '</span>' +
                             '<a href="' + link + '" class="annotation-viewer-more"> >> </a>';
