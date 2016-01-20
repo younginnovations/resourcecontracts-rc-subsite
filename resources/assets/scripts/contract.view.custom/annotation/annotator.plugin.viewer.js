@@ -20,6 +20,10 @@ Annotator.Plugin.AnnotatorNRGIViewer = (function(_super) {
     },
     AnnotatorNRGIViewer.prototype.updateViewer = function(field, annotation) {
        var text = annotation.text;
+        if(text.length>100)
+        {
+            text = text.substring(0,100)+' ...';
+        }
 
         var link = "#/text/page/"+annotation.page_no+"/annotation/"+annotation.id;
         if(annotation.shapes) {
