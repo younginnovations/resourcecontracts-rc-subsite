@@ -21,7 +21,7 @@ return [
     'type_contract'              => 'Type of Contract',
     'open_contracting_id'        => 'Open Contracting Identifier',
     'loading'                    => 'Loading... ',
-    'related_docs'               => 'Related docs',
+    'related_docs'               => 'Associated Documents',
     'all_related'                => 'All related ...',
     'other_sources'              => 'Other Sources',
     'show_more'                  => 'Show More',
