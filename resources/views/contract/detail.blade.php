@@ -361,7 +361,7 @@ use Illuminate\Support\Facades\Lang;
             </div>
         </div>
         @endif
-        <div class="col-lg-12">
+        <div clas.s="col-lg-12">
             <div class="panel panel-default panel-wrap panel-contract-wrap">
                 <div class="panel-heading">
                 @lang('contract.source')

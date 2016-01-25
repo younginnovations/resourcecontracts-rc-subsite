@@ -32971,26 +32971,27 @@ var __bind = function(fn, me) {
         }
         return -1;
     };
-Annotator.Plugin.AnnotatorEvents = (function(_super) {
+Annotator.Plugin.AnnotatorEvents = (function (_super) {
     __extends(AnnotatorEvents, _super);
     AnnotatorEvents.prototype.events = {
         'annotationCreated': 'onAnnotationCreated',
         'annotationDeleted': 'onAnnotationDeleted',
         'annotationUpdated': 'onAnnotationUpdated',
-        'annotationsLoaded' : 'annotationsLoaded',
+        'annotationsLoaded': 'annotationsLoaded',
         'annotorious:annotation-clicked': 'onAnnotationClicked',
         'annotorious:mouse-over-annotation': 'onMouseOverAnnotation'
     };
     AnnotatorEvents.prototype.field = null;
-    AnnotatorEvents.prototype.input = null;    
-    AnnotatorEvents.prototype.pluginInit = function(options) {
+    AnnotatorEvents.prototype.input = null;
+    AnnotatorEvents.prototype.pluginInit = function (options) {
         var annotator = this.annotator;
         if (!Annotator.supported()) {
             return;
-        }      
+        }
         annotator.viewer.addField({
-            load: this.updateViewer,
+            load: this.updateViewer
         });
+
         this.annotator
             .subscribe("annotationEditorShown", onEditorShownHandler)
             .subscribe("annotationViewerShown", onViewShownHandler);
@@ -32999,49 +33000,38 @@ Annotator.Plugin.AnnotatorEvents = (function(_super) {
         AnnotatorEvents: {}
     };
     function AnnotatorEvents(element, options) {
-        // this.beforeAnnotationCreated = __bind(this.beforeAnnotationCreated, this);
         this.onAnnotationClicked = __bind(this.onAnnotationClicked, this);
         this.onAnnotationCreated = __bind(this.onAnnotationCreated, this);
         this.onAnnotationUpdated = __bind(this.onAnnotationUpdated, this);
         this.onAnnotationDeleted = __bind(this.onAnnotationDeleted, this);
-        this.annotationsLoaded   = __bind(this.annotationsLoaded, this);
+        this.annotationsLoaded = __bind(this.annotationsLoaded, this);
         this.onMouseOverAnnotation = __bind(this.onMouseOverAnnotation, this);
         AnnotatorEvents.__super__.constructor.apply(this, arguments);
-    };
-    AnnotatorEvents.prototype.onAnnotationClicked = function(obj) {
+    }
+
+    AnnotatorEvents.prototype.onAnnotationClicked = function (obj) {
         this.contractApp.trigger("annotations:highlight", obj.annotation);
-    };    
-    AnnotatorEvents.prototype.onAnnotationCreated = function(annotation) {
-        annotation.id = this.collection.length + 1;
-        if(this.currentPage) {
-            this.currentPage.trigger("")
-            annotation.page = this.currentPage.getPage();
-            // annotation.page_id = ;
-        }
+    };
+    AnnotatorEvents.prototype.onAnnotationCreated = function (annotation) {
+        annotation.page = this.contractApp.getCurrentPage();
+        annotation.category = annotation.category.trim();
         var self = this;
         setTimeout(function (event) {
-            self.collection.trigger('annotationCreated', annotation);    
-        }, 500);        
-        // this.collection.add(annotation);
+            self.contractApp.trigger('annotationCreated', annotation);
+        }, 500);
     };
-    AnnotatorEvents.prototype.onAnnotationUpdated = function(annotation) {
-        this.collection.add(annotation, {
-            merge: true
-        });
-        this.collection.trigger('annotationUpdated');
+    AnnotatorEvents.prototype.onAnnotationUpdated = function (annotation) {
+        this.contractApp.trigger('annotationUpdated', annotation);
     };
-    AnnotatorEvents.prototype.onAnnotationDeleted = function(annotation) {
-        this.collection.remove(annotation);
-        this.collection.trigger('annotationDeleted');
+    AnnotatorEvents.prototype.onAnnotationDeleted = function (annotation) {
+        this.contractApp.trigger('annotationDeleted', annotation);
     };
-
-
 
     AnnotatorEvents.prototype.onMouseOverAnnotation = function (viewer) {
         onViewShownHandler(viewer.mouseEvent)
     };
     AnnotatorEvents.prototype.annotationsLoaded = function (obj) {
-        var annotation_id =  contractApp.getSelectedAnnotation();
+        var annotation_id = contractApp.getSelectedAnnotation();
         var hash = window.location.hash;
 
         if (annotation_id === 0 && hash != '') {
@@ -33051,7 +33041,9 @@ Annotator.Plugin.AnnotatorEvents = (function(_super) {
         }
 
         if (contractApp.getView() == 'pdf') {
-            setTimeout( function(){contractApp.showPdfAnnotationPopup(annotation_id)}, 600);
+            setTimeout(function () {
+                contractApp.showPdfAnnotationPopup(annotation_id)
+            }, 600);
         }
 
         if (contractApp.getView() == 'text') {
@@ -33092,7 +33084,7 @@ Annotator.Plugin.AnnotatorEvents = (function(_super) {
         var viewerEl = $(viewer.element);
         var viewPort = contractApp.getView();
         var position = viewerEl.position();
-        var wrapperEl = $('.'+viewPort+'-annotator');
+        var wrapperEl = $('.' + viewPort + '-annotator');
         var widgetEl = wrapperEl.find('ul.annotator-widget');
         var widgetHeight = widgetEl.height() + 25;
 
@@ -33114,10 +33106,6 @@ Annotator.Plugin.AnnotatorEvents = (function(_super) {
             widgetEl.removeClass('annotator-invert-y');
         }
     }
-
-
-
-
 
     return AnnotatorEvents;
 })(Annotator.Plugin);
@@ -55450,7 +55438,8 @@ var MetadataToggleButton = React.createClass({displayName: "MetadataToggleButton
 var MetadataView = React.createClass({displayName: "MetadataView",
     getInitialState: function () {
         return {
-            showMoreMetadata: false
+            showMoreMetadata: false,
+            showMoreText:false
         }
     },
     componentDidMount: function () {
@@ -55467,6 +55456,13 @@ var MetadataView = React.createClass({displayName: "MetadataView",
         } else {
             $(".metadata-view .show-more-meta").hide(500);
         }
+    },
+    handleMoreText:function(e)
+    {
+        e.preventDefault();
+        this.setState({showMoreText:!this.state.showMoreText});
+        console.log(this.state.showMoreText);
+
     },
     render: function () {
         var showLabel = lang.show_more;
@@ -55509,16 +55505,33 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                 }
             });
 
-            if(this.props.metadata.get("note") != "") {
-                    var note = React.createElement("div", {className: "metadata-info"},
-                    React.createElement("span", null, "Note"),
-                    React.createElement("p", null, this.props.metadata.get("note"))
-                );
+
+            var note = this.props.metadata.get("note");
+            if(note != "" && !this.state.showMoreText) {
+                    var maxWord = 5;
+                    var noteArray = note.split(' ');
+                    var more = '';
+
+                    if (noteArray.length > maxWord)
+                    {
+                         note = noteArray.slice(0 , maxWord).join(' ') + '...';
+                         more = (React.createElement("a", {className: "ellipsis", href: "#", onClick: this.handleMoreText}, "More"));
+                    }
+
+                var noteHtml = '';
+                if(note !='')
+                {
+                    noteHtml = '<span>Note</span>';
+                    noteHtml +='<p class="note">'+note+'</p>';
+                    noteHtml = (React.createElement("span", {dangerouslySetInnerHTML: {__html: noteHtml}}));
+                }
+
             }
             return (
                 React.createElement("div", {id: "metadata"}, 
-                    note, 
-                    React.createElement("div", {className: "metadata-view"}, 
+                noteHtml, 
+                more, 
+                React.createElement("div", {className: "metadata-view"}, 
                         React.createElement("div", null, 
                             lang.metadata, 
                             React.createElement("div", {className: "metadata-view-footer pull-right"}, 
@@ -55649,7 +55662,7 @@ var RelatedDocumentsView = React.createClass({displayName: "RelatedDocumentsView
                     ));
                 }
             }
-          
+
             if (parentContracts.length || supportingContracts.length) {
                 return (
                     React.createElement("div", {className: "relateddocument-view"}, 
