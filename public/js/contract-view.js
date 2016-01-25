@@ -55441,7 +55441,8 @@ var MetadataToggleButton = React.createClass({displayName: "MetadataToggleButton
 var MetadataView = React.createClass({displayName: "MetadataView",
     getInitialState: function () {
         return {
-            showMoreMetadata: false
+            showMoreMetadata: false,
+            showMoreText:false
         }
     },
     componentDidMount: function () {
@@ -55458,6 +55459,13 @@ var MetadataView = React.createClass({displayName: "MetadataView",
         } else {
             $(".metadata-view .show-more-meta").hide(500);
         }
+    },
+    handleMoreText:function(e)
+    {
+        e.preventDefault();
+        this.setState({showMoreText:!this.state.showMoreText});
+        console.log(this.state.showMoreText);
+
     },
     render: function () {
         var showLabel = lang.show_more;
@@ -55500,16 +55508,33 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                 }
             });
 
-            if(this.props.metadata.get("note") != "") {
-                    var note = React.createElement("div", {className: "metadata-info"},
-                    React.createElement("span", null, "Note"),
-                    React.createElement("p", null, this.props.metadata.get("note"))
-                );
+
+            var note = this.props.metadata.get("note");
+            if(note != "" && !this.state.showMoreText) {
+                    var maxWord = 5;
+                    var noteArray = note.split(' ');
+                    var more = '';
+
+                    if (noteArray.length > maxWord)
+                    {
+                         note = noteArray.slice(0 , maxWord).join(' ') + '...';
+                         more = (React.createElement("a", {className: "ellipsis", href: "#", onClick: this.handleMoreText}, "More"));
+                    }
+
+                var noteHtml = '';
+                if(note !='')
+                {
+                    noteHtml = '<span>Note</span>';
+                    noteHtml +='<p class="note">'+note+'</p>';
+                    noteHtml = (React.createElement("span", {dangerouslySetInnerHTML: {__html: noteHtml}}));
+                }
+
             }
             return (
                 React.createElement("div", {id: "metadata"}, 
-                    note, 
-                    React.createElement("div", {className: "metadata-view"}, 
+                noteHtml, 
+                more, 
+                React.createElement("div", {className: "metadata-view"}, 
                         React.createElement("div", null, 
                             lang.metadata, 
                             React.createElement("div", {className: "metadata-view-footer pull-right"}, 
@@ -55640,7 +55665,7 @@ var RelatedDocumentsView = React.createClass({displayName: "RelatedDocumentsView
                     ));
                 }
             }
-          
+
             if (parentContracts.length || supportingContracts.length) {
                 return (
                     React.createElement("div", {className: "relateddocument-view"}, 
