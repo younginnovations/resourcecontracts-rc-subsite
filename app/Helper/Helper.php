@@ -1,4 +1,7 @@
 <?php
+
+use App\Http\Services\Admin\ImageService;
+
 /**
  * Get formatted file size
  * @param $bytes
@@ -108,12 +111,15 @@ function show_arrow($order, $show = false)
 function meta($meta = null)
 {
     try {
-        $category    = env('CATEGORY');
-        $data        = trans("meta/$category");
-        $title       = (isset($meta['title']) && $meta['title'] != '') ? $meta['title'] . ' - ' : '';
-        $description = (isset($meta['description']) && $meta['description'] != '') ? $meta['description'] : '';
-        $data['title']       = $title . $data['title'];
-        $data['category']    = $category;
+        $category         = env('CATEGORY');
+        $data             = trans("meta/$category");
+        $title            = (isset($meta['title']) && $meta['title'] != '') ? $meta['title'] . ' - ' : '';
+        $description      = (isset($meta['description']) && $meta['description'] != '') ? $meta['description'] : '';
+        $data['title']    = $title . $data['title'];
+        $data['category'] = $category;
+        $images   = app(ImageService::class);
+        $data['image'] = $images->getHomePageImageUrl();
+
 
         return (object) $data;
 
@@ -122,3 +128,4 @@ function meta($meta = null)
     }
 
 }
+

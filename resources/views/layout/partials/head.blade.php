@@ -13,10 +13,9 @@ if (empty($meta)) {
     <meta name="robots" content="noodp"/>
     <meta property="og:type" content="website"/>
     <meta property="og:title" content="{{ meta($meta)->title }}"/>
+    <meta property="og:image" content="{{ meta($meta)->image }}" />
     <meta property="og:description" content="{{ meta($meta)->description }}"/>
     <meta property="og:url" content="{{ \Illuminate\Support\Facades\Request::url() }}"/>
-    <meta name="twitter:description" content="{{ meta($meta)->description }}"/>
-    <meta name="twitter:title" content="{{ meta($meta)->title }}"/>
 
     @if(env("CATEGORY")=="rc")
         <link rel="icon" href="{{url('images/favicon.ico')}}">

@@ -53,8 +53,8 @@ class SiteController extends BaseController
         $contracts = $summary->contract_count;
 
         $meta = [
-            'title'       => 'Home',
-            'description' => 'Description'
+            'title'       => '',
+            'description' => 'Description',
         ];
 
         return view('site.home', compact('countries', 'resources', 'contracts', 'image', 'meta'));
