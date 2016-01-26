@@ -30,7 +30,7 @@ var PdfPaginationView = React.createClass({
         this.changePage(inputPage);
       } else {
         this.changePage(this.state.visiblePage);
-      }     
+      }
     }
   },
   componentWillMount: function()
@@ -111,13 +111,13 @@ var PdfViewer = React.createClass({
       var pdfUrl = this.props.contractApp.getPdfUrl();
       return (
         <div className="pdf-viewer pdf-annotator" id="pdfview" style={this.props.style}>
-        <Pdf 
+        <Pdf
           contractApp={this.props.contractApp}
           pdfPage={this.props.pdfPage}
           page={1}
           content={this.props.pdfPage.get("content")}
           scale={parseFloat(this.props.contractApp.getPdfScale())||1}
-          onPageRendered={this._onPageRendered} 
+          onPageRendered={this._onPageRendered}
           renderReady={this.state.renderReady} />
         </div>
       );
@@ -136,14 +136,14 @@ var PdfViewer = React.createClass({
       });
       this.props.contractApp.setAnnotatorInstance(this.annotator);
     }
-  },  
+  },
   _onPageRendered: function() {
     if(this.props.contractApp.getView() === "pdf" && this.loadAnnotationsFlag) {
       if(this.annotator) {
         this.annotator.pageUpdated();
         this.loadAnnotationsFlag = false;
         // this.setState({loadAnnotations: false});
-      } 
+      }
       else if($(".pdf-viewer").is(":visible")) {
           this.loadAnnotations();
           this.loadAnnotationsFlag = false;

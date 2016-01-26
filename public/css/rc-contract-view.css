@@ -342,7 +342,7 @@
     padding-top: 0 !important;
 }
 
-/*.selected-annotation {  
+/*.selected-annotation {
     border: 1px solid #C5C5C5;
     background: #F4F4F4;
     -webkit-box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
@@ -771,7 +771,7 @@
         border-right: 20px solid #f0f0f0;
         clear: both;
     }
-    
+
     .tools {
         float: right!important;
     }
@@ -823,7 +823,7 @@
   color: #F37356;
   text-decoration: none;
   padding: 13px 25px 13px 44px;
-  background: url(../../images/ic-sprite.png) no-repeat -152px -40px; 
+  background: url(../../images/ic-sprite.png) no-repeat -152px -40px;
 }
 
 .fixed .head-wrap {
@@ -835,4 +835,34 @@
 
 .fixed+.document-wrap {
     padding-top: 84px;
+}
+
+.note-wrapper {
+  background: #f9f9f9;
+  margin: 20px 14px 10px;
+  padding: 12px;
+  display: block;
+  overflow: hidden;
+}
+
+.metadata-note {
+  padding: 0 4px 3px 0!important;
+  font-family: "open-sans-bold";
+  color: #666;
+}
+
+.note {
+  display: block;
+  margin-top: 0;
+}
+
+.note-inner-wrapper+a {
+  float: right;
+}
+
+.note-inner-wrapper+a:focus {
+  text-decoration: none;
+}
+.note-wrapper:empty {
+    display: none;
 }

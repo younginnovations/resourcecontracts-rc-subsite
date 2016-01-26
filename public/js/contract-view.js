@@ -55280,7 +55280,7 @@ var PdfPaginationView = React.createClass({displayName: "PdfPaginationView",
         this.changePage(inputPage);
       } else {
         this.changePage(this.state.visiblePage);
-      }     
+      }
     }
   },
   componentWillMount: function()
@@ -55386,14 +55386,14 @@ var PdfViewer = React.createClass({displayName: "PdfViewer",
       });
       this.props.contractApp.setAnnotatorInstance(this.annotator);
     }
-  },  
+  },
   _onPageRendered: function() {
     if(this.props.contractApp.getView() === "pdf" && this.loadAnnotationsFlag) {
       if(this.annotator) {
         this.annotator.pageUpdated();
         this.loadAnnotationsFlag = false;
         // this.setState({loadAnnotations: false});
-      } 
+      }
       else if($(".pdf-viewer").is(":visible")) {
           this.loadAnnotations();
           this.loadAnnotationsFlag = false;
@@ -55441,7 +55441,8 @@ var MetadataToggleButton = React.createClass({displayName: "MetadataToggleButton
 var MetadataView = React.createClass({displayName: "MetadataView",
     getInitialState: function () {
         return {
-            showMoreMetadata: false
+            showMoreMetadata: false,
+            showMoreText: false
         }
     },
     componentDidMount: function () {
@@ -55459,6 +55460,10 @@ var MetadataView = React.createClass({displayName: "MetadataView",
             $(".metadata-view .show-more-meta").hide(500);
         }
     },
+    handleMoreText: function (e) {
+        e.preventDefault();
+        this.setState({showMoreText: !this.state.showMoreText});
+    },
     render: function () {
         var showLabel = lang.show_more;
         if (this.state.showMoreMetadata) {
@@ -55471,7 +55476,7 @@ var MetadataView = React.createClass({displayName: "MetadataView",
             var sigYear = this.props.metadata.get("year_signed");
             var sigYearLink = app_url + "/contracts?year=" + sigYear;
 
-            var ct =this.props.metadata.get("contract_type");
+            var ct = this.props.metadata.get("contract_type");
             var contractType = ct.map(function (contractType, i) {
                 if (i != ct.length - 1) {
                     return React.createElement('a', {href: app_url + "/search?q=&contract_type%5B%5D=" + contractType, key: i}, contractType + ' | ');
@@ -55500,15 +55505,30 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                 }
             });
 
-            if(this.props.metadata.get("note") != "") {
-                    var note = React.createElement("div", {className: "metadata-info"},
-                    React.createElement("span", null, "Note"),
-                    React.createElement("p", null, this.props.metadata.get("note"))
-                );
+            var note = this.props.metadata.get("note");
+            if (note != "") {
+                var noteHtml = "<span class='metadata-note'>Note:</span>";
+
+                if (!this.state.showMoreText) {
+                    var maxWord = 20;
+                    var noteArray = note.split(' ');
+                    var more = '';
+                    if (noteArray.length > maxWord) {
+                        note = noteArray.slice(0, maxWord).join(' ') + '... ';
+                        more = (React.createElement("a", {className: "ellipsis", href: "#", onClick: this.handleMoreText}, " More"));
+                    }
+                } else {
+                    more = (React.createElement("a", {className: "ellipsis", href: "#", onClick: this.handleMoreText}, " Less"));
+                }
+                noteHtml += '<span class="note">' + note + '</span>';
+                noteHtml = (React.createElement("span", {className: "note-inner-wrapper", dangerouslySetInnerHTML: {__html: noteHtml}}));
             }
             return (
                 React.createElement("div", {id: "metadata"}, 
-                    note, 
+                    React.createElement("div", {className: "note-wrapper"}, 
+                      noteHtml, 
+                      more
+                    ), 
                     React.createElement("div", {className: "metadata-view"}, 
                         React.createElement("div", null, 
                             lang.metadata, 
@@ -55640,7 +55660,7 @@ var RelatedDocumentsView = React.createClass({displayName: "RelatedDocumentsView
                     ));
                 }
             }
-          
+
             if (parentContracts.length || supportingContracts.length) {
                 return (
                     React.createElement("div", {className: "relateddocument-view"}, 
@@ -55749,6 +55769,7 @@ var RightColumnView = React.createClass({displayName: "RightColumnView",
         );
     }
 });
+
 var NavigationView = React.createClass({displayName: "NavigationView",
     render: function () {
     var textClass =null;
