@@ -102,7 +102,7 @@ var MetadataView = React.createClass({
 
             var note = this.props.metadata.get("note");
             if (note != "") {
-                var noteHtml = "<span class='metadata-note'>Note</span>";
+                var noteHtml = "<span class='metadata-note'>Note:</span>";
 
                 if (!this.state.showMoreText) {
                     var maxWord = 20;
@@ -115,13 +115,15 @@ var MetadataView = React.createClass({
                 } else {
                     more = (<a className="ellipsis" href="#" onClick={this.handleMoreText}> Less</a>);
                 }
-                noteHtml += '<span className="note">' + note + '</span>';
-                noteHtml = (<span className="note-wrapper" dangerouslySetInnerHTML={{__html: noteHtml}}></span>);
+                noteHtml += '<span class="note">' + note + '</span>';
+                noteHtml = (<span className="note-inner-wrapper" dangerouslySetInnerHTML={{__html: noteHtml}}></span>);
             }
             return (
                 <div id="metadata">
-                    {noteHtml}
-                    {more}
+                    <div className="note-wrapper">
+                      {noteHtml}
+                      {more}
+                    </div>
                     <div className="metadata-view">
                         <div>
                             {lang.metadata}
