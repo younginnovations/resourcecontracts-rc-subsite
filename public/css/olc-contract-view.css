@@ -867,3 +867,6 @@
 .note-inner-wrapper+a:focus {
   text-decoration: none;
 }
+.note-wrapper:empty {
+    display: none;
+}
