@@ -116,7 +116,7 @@ var MetadataView = React.createClass({
                     more = (<a className="ellipsis" href="#" onClick={this.handleMoreText}> Less</a>);
                 }
                 noteHtml += '<span className="note">' + note + '</span>';
-                noteHtml = (<span className="noteWrapper" dangerouslySetInnerHTML={{__html: noteHtml}}></span>);
+                noteHtml = (<span className="note-wrapper" dangerouslySetInnerHTML={{__html: noteHtml}}></span>);
             }
             return (
                 <div id="metadata">

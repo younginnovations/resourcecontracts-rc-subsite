@@ -26,7 +26,6 @@
     min-height: 37px;
     border-bottom: 1px solid rgb(220, 223, 226);
     border-bottom: 1px solid rgba(220, 223, 226, 0.7);
-    overflow: hidden;
 }
 
 .head-wrap > div {

@@ -99,6 +99,9 @@ $route = Request::path();
                             @if(env('CATEGORY')!="olc" && $contract->is_ocr_reviewed == true)
                                 <li><a href="{{route('contract.download',['id'=> $contract->open_contracting_id])}}">Word File</a></li>
                             @endif
+                            @if($annotations->total>0)
+                                <li><a href="{{route('contract.annotations.download',['id'=> $contract->open_contracting_id])}}">Annotations</a></li>
+                            @endif
                         </ul>
                     </div>
                 </div>

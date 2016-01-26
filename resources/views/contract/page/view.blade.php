@@ -18,6 +18,10 @@
 
 @section('content')
     <div id="content"> <div class="loading"><img src="{{url('images/loading.gif')}}"/> Loading ... </div></div>
+    <?php
+        $textDownloadUrl=($contract->metadata->is_ocr_reviewed && env('CATEGORY')!="olc")?route('contract.download',['id'=> $contract->metadata->open_contracting_id]):"";
+        $annotationsDownloadUrl=($contract->annotations->total>0)?route('contract.annotations.download',['id'=> $contract->metadata->open_contracting_id]):"";
+    ?>
 @endsection
 @section('js')
 <script src="{{ url('js/pdfjs/pdf.js') }}"></script>
@@ -38,6 +42,8 @@
   var app_url = '{{url()}}';
   var category = '{{env('CATEGORY')=='rc' ? 'Resource' : 'Openland' }}';
   var pdf_download_url = '{{route('contract.download.pdf',['id'=> $contract->metadata->open_contracting_id])}}';
+  var text_download_url = '{{$textDownloadUrl}}';
+  var annotations_download_url = '{{$annotationsDownloadUrl}}';
   var contract = {!!json_encode($contract)!!};
   var contractTitle = contract.metadata.name;
   var esapi = '{{rtrim(env("ELASTIC_SEARCH_HOST"),'/')}}/';
