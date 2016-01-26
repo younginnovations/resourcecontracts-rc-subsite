@@ -145,7 +145,7 @@ var MainApp = React.createClass({
     text: function(page_no, annotation_id) {
         debug("view.blade.php: setting text view");
         contractApp.setView("text");
-        contractApp.trigger("update-text-pagination-page", contractApp.getCurrentPage());
+        contractApp.setCurrentPage(contractApp.getCurrentPage());
         contractApp.resetSelectedAnnotation();
         if(page_no) {
             contractApp.setCurrentPage(page_no);
@@ -153,26 +153,22 @@ var MainApp = React.createClass({
         if(annotation_id) {
             contractApp.setSelectedAnnotation(annotation_id);
         }
+        contractApp.trigger("update-text-pagination-page", contractApp.getCurrentPage());
         this.forceUpdate();
+        contractApp.trigger('scroll-to-text-page');
     },
     pdf: function(page_no, annotation_id) {
         debug("view.blade.php: setting pdf view");
             contractApp.setView("pdf");
-        contractApp.trigger("update-pdf-pagination-page", contractApp.getCurrentPage());
         if(page_no) {
             contractApp.setCurrentPage(page_no);
-            debug("view.blade.php: setting current page to", page_no);
         }
         if(annotation_id) {
             contractApp.setSelectedAnnotation(annotation_id);
-            debug("view.blade.php: setting annotation to", annotation_id);
         } else {
             contractApp.resetSelectedAnnotation();
         }
-        if(!pdfPage.init && contractApp.getView() != "pdf") {
-            debug("view.blade pdfPage init-none, trigger change:page_no")
-            contractApp.setView("pdf");
-        }
+        contractApp.trigger("update-pdf-pagination-page", contractApp.getCurrentPage());
         this.forceUpdate();
     },
     search: function(query) {

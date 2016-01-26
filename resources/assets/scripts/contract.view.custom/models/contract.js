@@ -57,6 +57,12 @@ var ContractApp = Backbone.Model.extend({
     getSearchUrl: function () {
         return this.get('esapi') + "contract/" + this.getContractGuid() + "/searchtext"
     },
+    setPrevClick: function (click) {
+        this.set({"preClick": click});
+    },
+    isPrevClick: function () {
+        return this.get("preClick");
+    },
     getPdfUrl: function () {
         var page_no = parseInt(this.getCurrentPage());
         var pageModel = pagesCollection.where({page_no: page_no});
@@ -209,7 +215,6 @@ var ContractApp = Backbone.Model.extend({
         if (this.getShowMeta()) {
             show.push("RightColumnView");
         }
-
 
         if (show.indexOf(viewName) >= 0) {
             return true;

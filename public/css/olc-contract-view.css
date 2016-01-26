@@ -952,3 +952,31 @@
 .social-share li.twitter a:hover {
   background-position: 0 0;
 }
+
+.pdf-zoom-options > .btn-default  a {
+    line-height: 20px;
+    display: block;
+}
+
+.pdf-zoom-options {
+    padding: 7px 0;
+    border-left: 1px solid #DCDFE2  ;
+    float: left;
+    margin: 0;
+}
+
+.pdf-zoom-options > span {
+    font-size: 14px;
+    margin-left: 11px;
+    margin-top: 6px;
+}
+
+.pdf-zoom-options > .btn-default  {
+    width: 24px;
+    height: 22px;
+    background: #fff;
+    border: 1px solid #ccc;
+    text-align: center;
+    margin: 5px 10px;
+    padding: 0;
+}

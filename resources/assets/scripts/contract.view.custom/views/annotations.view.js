@@ -132,22 +132,27 @@ var AnnotationItem = React.createClass({
         e.preventDefault();
         switch (this.state.annotationType) {
             case "pdf":
+
+                this.props.contractApp.trigger("annotations:highlight", {id: self.state.id});
                 this.props.contractApp.setView("pdf");
                 this.props.contractApp.setSelectedAnnotation(self.state.id);
-                this.props.contractApp.trigger("annotations:highlight", {id: self.state.id});
+                if (self.props.contractApp.getCurrentPage() == self.state.pageNo) {
+                    var self = this;
+                    setTimeout(function () {
+                        self.props.contractApp.showPdfAnnotationPopup(self.state.id)
+                    }, 300);
+                }
                 this.props.contractApp.setCurrentPage(self.state.pageNo);
                 this.props.contractApp.triggerUpdatePdfPaginationPage(self.state.pageNo);
-                // this.props.contractApp.trigger("annotationHighlight", this.props.annotation.attributes);
                 break
             case "text":
-                this.props.contractApp.setView("text");
                 this.props.contractApp.trigger("annotations:highlight", {id: self.state.id});
-                this.props.contractApp.setCurrentPage(self.state.pageNo);
-                self = this;
+                var self = this;
                 setTimeout(function () {
                     self.props.contractApp.showTextAnnotationPopup(self.state.id)
                 }, 300);
-                //setTimeout(this.props.contractApp.triggerScrollToTextPage());
+                this.props.contractApp.setView("text");
+                this.props.contractApp.setCurrentPage(self.state.pageNo);
                 break;
         }
     },
