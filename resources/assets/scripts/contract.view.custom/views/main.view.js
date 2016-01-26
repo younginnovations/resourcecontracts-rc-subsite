@@ -27,6 +27,68 @@ var pdfPage = new PdfPage({
 });
 
 
+var DownloadUrl = React.createClass({
+
+    getInitialState : function(){
+    return {dropdown :false};
+},
+toggleDropdown : function()
+{
+    this.setState({dropdown:!this.state.dropdown})
+},
+
+render:function(){
+    var show = {'display':'block'};
+    var hide= {'display':'none'};
+    var style =  this.state.dropdown ? show :hide;
+
+    if(!this.props.annotations_url && !this.props.text_url)
+    {
+        return (
+            <div className="download-dropdown">
+            <a href="#" onClick={this.toggleDropdown}><span>Download</span></a>
+            <ul style={style} >
+            <li><a href={this.props.pdf_url}>PDF </a></li>
+            </ul>
+            </div>
+        );
+    }
+    else if(!this.props.text_url){
+        return (
+            <div className="download-dropdown">
+                <a href="#" onClick={this.toggleDropdown}><span>Download</span></a>
+                <ul style={style} >
+                <li><a href={this.props.pdf_url}>PDF </a></li>
+                <li><a href={this.props.annotations_url}> Annotations </a></li>
+                </ul>
+            </div>
+        );
+    }
+    else if(!this.props.annotations_url)
+    {
+        return (
+            <div className="download-dropdown">
+                <a href="#" onClick={this.toggleDropdown}><span>Download</span></a>
+                <ul style={style} >
+                <li><a href={this.props.pdf_url}>PDF </a></li>
+                <li><a href={this.props.text_url}> Text </a></li>
+                </ul>
+            </div>
+        );
+    }
+    else{
+        return (<div className="download-dropdown">
+            <a href="#" onClick={this.toggleDropdown}><span>Download</span></a>
+            <ul style={style} >
+                <li><a href={this.props.pdf_url}>PDF </a></li>
+                <li><a href={this.props.text_url}> Text </a></li>
+                <li><a href={this.props.annotations_url}> Annotations </a></li>
+            </ul>
+        </div>);
+    }
+   }
+})
+
 /**
  * @jsx React.DOM
  */
@@ -138,7 +200,7 @@ var MainApp = React.createClass({
                         </div>
                         <span>{htmlDecode(contractTitle)}</span>
                     </div>
-                    <div className="head-wrap">
+                    <div className="head-wrap clearfix">
                         <TextSearchForm
                             style={this.getStyle(contractApp.isViewVisible("TextSearchForm"))} />
                         <NavigationView
@@ -154,10 +216,12 @@ var MainApp = React.createClass({
                             style={this.getStyle(contractApp.isViewVisible("PdfZoom"))}
                             contractApp={contractApp} />
 
-                        <div className="tools">
-                            <a  className="pdf-download-link" href={pdf_download_url} >pdf download</a>
+                       <DownloadUrl
+                            pdf_url={pdf_download_url}
+                            text_url={text_download_url}
+                            annotations_url={annotations_download_url}
+                        />
 
-                        </div>
                         <MetadataToggleButton
                             style={this.getStyle(contractApp.getShowMeta())}
                             contractApp={contractApp} />

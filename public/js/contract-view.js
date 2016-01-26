@@ -56620,6 +56620,68 @@ var pdfPage = new PdfPage({
 });
 
 
+var DownloadUrl = React.createClass({displayName: "DownloadUrl",
+
+    getInitialState : function(){
+    return {dropdown :false};
+},
+toggleDropdown : function()
+{
+    this.setState({dropdown:!this.state.dropdown})
+},
+
+render:function(){
+    var show = {'display':'block'};
+    var hide= {'display':'none'};
+    var style =  this.state.dropdown ? show :hide;
+
+    if(!this.props.annotations_url && !this.props.text_url)
+    {
+        return (
+            React.createElement("div", {className: "download-dropdown"}, 
+            React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, "Download")), 
+            React.createElement("ul", {style: style}, 
+            React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF "))
+            )
+            )
+        );
+    }
+    else if(!this.props.text_url){
+        return (
+            React.createElement("div", {className: "download-dropdown"}, 
+                React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, "Download")), 
+                React.createElement("ul", {style: style}, 
+                React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF ")), 
+                React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, " Annotations "))
+                )
+            )
+        );
+    }
+    else if(!this.props.annotations_url)
+    {
+        return (
+            React.createElement("div", {className: "download-dropdown"}, 
+                React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, "Download")), 
+                React.createElement("ul", {style: style}, 
+                React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF ")), 
+                React.createElement("li", null, React.createElement("a", {href: this.props.text_url}, " Text "))
+                )
+            )
+        );
+    }
+    else{
+        return (React.createElement("div", {className: "download-dropdown"}, 
+            React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, "Download")), 
+            React.createElement("ul", {style: style}, 
+                React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF ")), 
+                React.createElement("li", null, React.createElement("a", {href: this.props.text_url}, " Text ")), 
+                React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, " Annotations "))
+            )
+        ));
+    }
+   }
+})
+
 /**
  * @jsx React.DOM
  */
@@ -56731,7 +56793,7 @@ var MainApp = React.createClass({displayName: "MainApp",
                         ), 
                         React.createElement("span", null, htmlDecode(contractTitle))
                     ), 
-                    React.createElement("div", {className: "head-wrap"}, 
+                    React.createElement("div", {className: "head-wrap clearfix"}, 
                         React.createElement(TextSearchForm, {
                             style: this.getStyle(contractApp.isViewVisible("TextSearchForm"))}), 
                         React.createElement(NavigationView, {
@@ -56747,10 +56809,12 @@ var MainApp = React.createClass({displayName: "MainApp",
                             style: this.getStyle(contractApp.isViewVisible("PdfZoom")), 
                             contractApp: contractApp}), 
 
-                        React.createElement("div", {className: "tools"}, 
-                            React.createElement("a", {className: "pdf-download-link", href: pdf_download_url}, "pdf download")
-
+                       React.createElement(DownloadUrl, {
+                            pdf_url: pdf_download_url, 
+                            text_url: text_download_url, 
+                            annotations_url: annotations_download_url}
                         ), 
+
                         React.createElement(MetadataToggleButton, {
                             style: this.getStyle(contractApp.getShowMeta()), 
                             contractApp: contractApp})

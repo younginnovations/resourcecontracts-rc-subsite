@@ -257,6 +257,7 @@ class ContractController extends BaseController
         $back               = is_null($referrer) ? route('contract.view', ['id' => $contract_id]) : $referrer;
         $contract           = new \stdClass();
         $contract->metadata = $this->api->metadata($contract_id);
+        $contract->annotations = $this->api->getAnnotations($contract_id);
 
         if (empty($contract->metadata)) {
             return abort(404);
@@ -278,6 +279,16 @@ class ContractController extends BaseController
             'from'     => 1
         ];
         $this->api->allContracts($filter);
+        die;
+    }
+
+    /**
+     * Annotations Download
+     * @param $id
+     */
+    public function downloadAnnotations($id)
+    {
+        $this->api->downloadAPI("contract/".$id."/annotations/download");
         die;
     }
 
