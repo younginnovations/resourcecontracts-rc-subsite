@@ -37,7 +37,11 @@ class FilterController
         $filter         = $this->updateFilterData($filter, $contracts, $request);
         $show_advance   = true;
 
-        return view('site.filter', compact('contracts', 'filter', 'show_advance', 'total_contract', 'currentPage'));
+        $meta = [
+            'title' => 'Search Results for '.$request->get('q')
+        ];
+
+        return view('site.filter', compact('contracts', 'filter', 'show_advance', 'total_contract', 'currentPage' , 'meta'));
     }
 
     /**

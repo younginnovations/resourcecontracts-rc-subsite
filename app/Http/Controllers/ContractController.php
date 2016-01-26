@@ -57,7 +57,12 @@ class ContractController extends BaseController
         ];
         $contracts   = $this->api->allContracts($filter);
 
-        return view('contract.index', compact('contracts', 'currentPage'));
+        $meta = [
+
+            'title' => 'All Contracts'
+        ];
+
+        return view('contract.index', compact('contracts', 'currentPage' , 'meta'));
     }
 
     /**
@@ -76,7 +81,11 @@ class ContractController extends BaseController
             return abort(404);
         }
 
-        return view('contract.detail', compact('contract', 'referrer'));
+        $meta = [
+           'title' => $contract->metadata->name
+        ];
+
+        return view('contract.detail', compact('contract', 'referrer' , 'meta'));
     }
 
     /**
@@ -263,7 +272,12 @@ class ContractController extends BaseController
             return abort(404);
         }
 
-        return view('contract.page.view', compact('contract', 'back'));
+        $meta = [
+            'title' => $contract->metadata->name
+        ];
+
+
+        return view('contract.page.view', compact('contract', 'back' , 'meta'));
     }
 
     /**

@@ -39,11 +39,17 @@ class ResourceController extends BaseController
         $resources = $this->api->allCountries();
         $resources = $resources->results;
 
+        $meta = [
+            'title' => 'Resources',
+            'description' => ''
+        ];
+
+
         foreach ($resources as &$country) {
             $country->name = trans('country')[strtoupper($country->code)];
         }
 
-        return view('resource.index', compact('resources'));
+        return view('resource.index', compact('resources' , 'meta'));
     }
 
     /**
@@ -64,7 +70,12 @@ class ResourceController extends BaseController
             return abort(404);
         }
 
-        return view('resource.detail', compact('contracts', 'resource', 'countries', 'currentPage'));
+        $meta = [
+            'title' => trans('resources.'. $resource).'- Resource',
+        ];
+
+
+        return view('resource.detail', compact('contracts', 'resource', 'countries', 'currentPage' , 'meta'));
     }
 
 }

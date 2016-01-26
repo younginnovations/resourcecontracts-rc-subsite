@@ -84,7 +84,7 @@ function searchInArray($arrays, $field, $value)
  * @param $order
  * @return string
  */
-function appendInUrl($route,$url, $sortby, $order)
+function appendInUrl($route, $url, $sortby, $order)
 {
     if (isset($url['sortby']) && $url['sortby'] == $sortby && isset($url['order']) && $url['order'] == "asc") {
         $url['order'] = "desc";
@@ -101,6 +101,24 @@ function appendInUrl($route,$url, $sortby, $order)
 function show_arrow($order, $show = false)
 {
     if ($show) {
-            return '<i class="fa fa-black   fa-sort-' . $order . '"></i> ';
+        return '<i class="fa fa-black   fa-sort-' . $order . '"></i> ';
     }
+}
+
+function meta($meta = null)
+{
+    try {
+        $category    = env('CATEGORY');
+        $data        = trans("meta/$category");
+        $title       = (isset($meta['title']) && $meta['title'] != '') ? $meta['title'] . ' - ' : '';
+        $description = (isset($meta['description']) && $meta['description'] != '') ? $meta['description'] : '';
+        $data['title']       = $title . $data['title'];
+        $data['category']    = $category;
+
+        return (object) $data;
+
+    } catch (exception $e) {
+        echo($e->getMessage());
+    }
+
 }
