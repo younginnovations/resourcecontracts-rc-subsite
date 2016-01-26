@@ -3026,3 +3026,33 @@ input.select2-search__field {
 .select2-container--classic .select2-selection--multiple .select2-selection__choice {
   word-break: break-word;
 }
+
+
+.download-dropdown {
+  position: relative;
+  span{
+    background: url(../../images/ic-sprite.png) no-repeat -152px -50px;
+    padding-left: 46px;
+    text-indent: -9999px;
+    display: inline-block;
+    white-space: nowrap;
+  }
+  > a{
+    margin-top: 12px;
+    display: inline-block;
+  }
+  ul{
+    display: none;
+    position: absolute;
+    top: 40px;
+    left: 10px;
+    list-style: none;
+    padding: 10px 15px;
+    border: 1px solid rgb(204, 204, 204);
+    z-index: 10;
+    border-radius: 4px;
+    width: 140px;
+    background: rgb(255, 255, 255);
+  }
+}
+

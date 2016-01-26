@@ -401,7 +401,7 @@ class APIService
      * @param bool  $array
      * @return null
      */
-    protected function downloadAPI($resource, array $query = [], $array = false)
+    public function downloadAPI($resource, array $query = [], $array = false)
     {
         try {
             $request           = new Request('GET', $this->apiURL($resource));

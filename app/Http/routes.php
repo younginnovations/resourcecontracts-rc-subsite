@@ -31,6 +31,7 @@ $app->get('/contract/{id}/download/word', ['as' => 'contract.download', 'uses' =
 $app->get('/contract/{id}/download/pdf', ['as' => 'contract.download.pdf', 'uses' => 'ContractController@downloadPdf']);
 $app->get('/contracts/download/searchresult', ['as' => 'contract.csv.download', 'uses' => 'FilterController@downloadSearchResultAsCSV']);
 $app->get('/contracts/download/csv', ['as' => 'contract.metadata.download', 'uses' => 'ContractController@downloadMetadataAsCSV']);
+$app->get('/contract/{id}/download/annotations', ['as' => 'contract.annotations.download', 'uses' => 'ContractController@downloadAnnotations']);
 $app->get('/contract/{id}/view', ['as' => 'contract.detail', 'uses' => 'ContractController@view']);
 
 /*
