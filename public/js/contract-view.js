@@ -55439,7 +55439,7 @@ var MetadataView = React.createClass({displayName: "MetadataView",
     getInitialState: function () {
         return {
             showMoreMetadata: false,
-            showMoreText:false
+            showMoreText: false
         }
     },
     componentDidMount: function () {
@@ -55457,12 +55457,9 @@ var MetadataView = React.createClass({displayName: "MetadataView",
             $(".metadata-view .show-more-meta").hide(500);
         }
     },
-    handleMoreText:function(e)
-    {
+    handleMoreText: function (e) {
         e.preventDefault();
-        this.setState({showMoreText:!this.state.showMoreText});
-        console.log(this.state.showMoreText);
-
+        this.setState({showMoreText: !this.state.showMoreText});
     },
     render: function () {
         var showLabel = lang.show_more;
@@ -55476,7 +55473,7 @@ var MetadataView = React.createClass({displayName: "MetadataView",
             var sigYear = this.props.metadata.get("year_signed");
             var sigYearLink = app_url + "/contracts?year=" + sigYear;
 
-            var ct =this.props.metadata.get("contract_type");
+            var ct = this.props.metadata.get("contract_type");
             var contractType = ct.map(function (contractType, i) {
                 if (i != ct.length - 1) {
                     return React.createElement('a', {href: app_url + "/search?q=&contract_type%5B%5D=" + contractType, key: i}, contractType + ' | ');
@@ -55505,33 +55502,29 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                 }
             });
 
-
             var note = this.props.metadata.get("note");
-            if(note != "" && !this.state.showMoreText) {
-                    var maxWord = 5;
+            if (note != "") {
+                var noteHtml = "<span class='metadata-note'>Note</span>";
+
+                if (!this.state.showMoreText) {
+                    var maxWord = 20;
                     var noteArray = note.split(' ');
                     var more = '';
-
-                    if (noteArray.length > maxWord)
-                    {
-                         note = noteArray.slice(0 , maxWord).join(' ') + '...';
-                         more = (React.createElement("a", {className: "ellipsis", href: "#", onClick: this.handleMoreText}, "More"));
+                    if (noteArray.length > maxWord) {
+                        note = noteArray.slice(0, maxWord).join(' ') + '... ';
+                        more = (React.createElement("a", {className: "ellipsis", href: "#", onClick: this.handleMoreText}, " More"));
                     }
-
-                var noteHtml = '';
-                if(note !='')
-                {
-                    noteHtml = '<span>Note</span>';
-                    noteHtml +='<p class="note">'+note+'</p>';
-                    noteHtml = (React.createElement("span", {dangerouslySetInnerHTML: {__html: noteHtml}}));
+                } else {
+                    more = (React.createElement("a", {className: "ellipsis", href: "#", onClick: this.handleMoreText}, " Less"));
                 }
-
+                noteHtml += '<span className="note">' + note + '</span>';
+                noteHtml = (React.createElement("span", {className: "noteWrapper", dangerouslySetInnerHTML: {__html: noteHtml}}));
             }
             return (
                 React.createElement("div", {id: "metadata"}, 
-                noteHtml, 
-                more, 
-                React.createElement("div", {className: "metadata-view"}, 
+                    noteHtml, 
+                    more, 
+                    React.createElement("div", {className: "metadata-view"}, 
                         React.createElement("div", null, 
                             lang.metadata, 
                             React.createElement("div", {className: "metadata-view-footer pull-right"}, 

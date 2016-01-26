@@ -37,7 +37,7 @@ var MetadataView = React.createClass({
     getInitialState: function () {
         return {
             showMoreMetadata: false,
-            showMoreText:false
+            showMoreText: false
         }
     },
     componentDidMount: function () {
@@ -55,12 +55,9 @@ var MetadataView = React.createClass({
             $(".metadata-view .show-more-meta").hide(500);
         }
     },
-    handleMoreText:function(e)
-    {
+    handleMoreText: function (e) {
         e.preventDefault();
-        this.setState({showMoreText:!this.state.showMoreText});
-        console.log(this.state.showMoreText);
-
+        this.setState({showMoreText: !this.state.showMoreText});
     },
     render: function () {
         var showLabel = lang.show_more;
@@ -74,7 +71,7 @@ var MetadataView = React.createClass({
             var sigYear = this.props.metadata.get("year_signed");
             var sigYearLink = app_url + "/contracts?year=" + sigYear;
 
-            var ct =this.props.metadata.get("contract_type");
+            var ct = this.props.metadata.get("contract_type");
             var contractType = ct.map(function (contractType, i) {
                 if (i != ct.length - 1) {
                     return React.createElement('a', {href: app_url + "/search?q=&contract_type%5B%5D=" + contractType, key: i}, contractType + ' | ');
@@ -103,33 +100,29 @@ var MetadataView = React.createClass({
                 }
             });
 
-
             var note = this.props.metadata.get("note");
-            if(note != "" && !this.state.showMoreText) {
-                    var maxWord = 5;
+            if (note != "") {
+                var noteHtml = "<span class='metadata-note'>Note</span>";
+
+                if (!this.state.showMoreText) {
+                    var maxWord = 20;
                     var noteArray = note.split(' ');
                     var more = '';
-
-                    if (noteArray.length > maxWord)
-                    {
-                         note = noteArray.slice(0 , maxWord).join(' ') + '...';
-                         more = (<a className="ellipsis" href="#" onClick={this.handleMoreText}>More</a>);
+                    if (noteArray.length > maxWord) {
+                        note = noteArray.slice(0, maxWord).join(' ') + '... ';
+                        more = (<a className="ellipsis" href="#" onClick={this.handleMoreText}> More</a>);
                     }
-
-                var noteHtml = '';
-                if(note !='')
-                {
-                    noteHtml = '<span>Note</span>';
-                    noteHtml +='<p class="note">'+note+'</p>';
-                    noteHtml = (<span dangerouslySetInnerHTML={{__html: noteHtml}}></span>);
+                } else {
+                    more = (<a className="ellipsis" href="#" onClick={this.handleMoreText}> Less</a>);
                 }
-
+                noteHtml += '<span className="note">' + note + '</span>';
+                noteHtml = (<span className="noteWrapper" dangerouslySetInnerHTML={{__html: noteHtml}}></span>);
             }
             return (
-                <div id = "metadata">
-                {noteHtml}
-                {more}
-                <div className="metadata-view">
+                <div id="metadata">
+                    {noteHtml}
+                    {more}
+                    <div className="metadata-view">
                         <div>
                             {lang.metadata}
                             <div className="metadata-view-footer pull-right">
@@ -169,7 +162,7 @@ var MetadataView = React.createClass({
                         </div>
 
                         <LandMatrixView
-                            metadata={this.props.metadata} />
+                            metadata={this.props.metadata}/>
                     </div>
                 </div>
             );
@@ -361,10 +354,10 @@ var RightColumnView = React.createClass({
             <div className="right-column-view">
                 <MetadataView
                     contractApp={this.props.contractApp}
-                    metadata={this.props.metadata} />
+                    metadata={this.props.metadata}/>
 
                 <RelatedDocumentsView
-                    metadata={this.props.metadata} />
+                    metadata={this.props.metadata}/>
             </div>
         );
     }
