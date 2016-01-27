@@ -2316,7 +2316,7 @@ td.contract-date {
     width: 100%;
     border-right: 0;
     border-bottom:1px solid rgba(220, 223, 226, 0.7);
-    border-bottom: 1px solid rgb(220, 223, 226); 
+    border-bottom: 1px solid rgb(220, 223, 226);
   }
 }
 
@@ -2648,7 +2648,7 @@ td.contract-date {
       display: inline-block;
       font-size: 22px;
     }
-  } 
+  }
   .contract-breadcrumb-wrapper {
     margin-top: -70px;
     margin-left: 60px;
@@ -2924,7 +2924,7 @@ input.select2-search__field {
   min-height: 200px !important;
 }
 
-.editable { 
+.editable {
   padding: 10px!important;
   margin: -6px -6px 14px -11px;
   width: 50%;
@@ -2968,26 +2968,26 @@ input.select2-search__field {
       top: 11em;
       width: 20.45em;
 }
-        
+
 .affix-bottom {
     position: absolute;
     width: 20.45em;
 }
-    
+
 @media (min-width: 1200px) {
     .affix-bottom {
         width: 28.45em;
     }
 }
-      
-        
+
+
 .side-link-nav .nav .active {
     background: #eee;
     .nav {
       display: block;
     }
 }
-        
+
 .side-link-nav .nav .nav {
   display: none;
   a {
@@ -2996,8 +2996,8 @@ input.select2-search__field {
     text-align: left;
   }
 }
-      
-        
+
+
 .side-link-nav .nav .nav .active a,
 .side-link-nav .nav .nav .active:hover a,
 .side-link-nav .nav .nav .active:focus a {
@@ -3056,4 +3056,3 @@ input.select2-search__field {
     background: rgb(255, 255, 255);
   }
 }
-

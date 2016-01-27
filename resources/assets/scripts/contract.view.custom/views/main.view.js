@@ -78,9 +78,9 @@ render:function() {
 
         </div>
         <ul className="social-share">
-        <li><a href={ facebook_share + current_url} target="_blank">FB</a></li>
-        <li><a href={ google_share + current_url} target="_blank">G+</a></li>
-        <li><a href={ twitter_share } target="_blank">T</a></li>
+        <li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
+        <li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a></li>
+        <li className="twitter"><a href={ twitter_share } target="_blank">T</a></li>
         </ul>
         </div>
     )

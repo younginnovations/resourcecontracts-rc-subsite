@@ -56692,9 +56692,9 @@ render:function() {
 
         ), 
         React.createElement("ul", {className: "social-share"}, 
-        React.createElement("li", null, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
-        React.createElement("li", null, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
-        React.createElement("li", null, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
+        React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
+        React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
+        React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
         )
         )
     )
