@@ -58,8 +58,7 @@
         var esapi = '{{rtrim(env("ELASTIC_SEARCH_HOST"),'/')}}/';
         var facebook_share = 'https://www.facebook.com/sharer/sharer.php?u=';
         var google_share = 'https://plus.google.com/share?url=';
-        var twitter_share = 'https://twitter.com/share';
-        //var current_url = '{{ \Illuminate\Support\Facades\Request::url() }}';
+        var twitter_share = 'https://twitter.com/share?text={{ meta($meta)->title }}';
 
     </script>
     <script src="{{ url('js/contract-view.min.js') }}"></script>

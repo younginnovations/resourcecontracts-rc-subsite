@@ -38,7 +38,7 @@ class CountryController extends BaseController
     {
         $meta = [
             'title' => 'Countries',
-            'description' => ''
+           
         ];
 
 
@@ -64,7 +64,7 @@ class CountryController extends BaseController
 
         $meta = [
             'title' => trans('country.'. strtoupper($country)).'- country',
-            'description' => ''
+
         ];
 
         return view('country.detail', compact('contracts', 'country', 'resources', 'currentPage'  , 'meta'));

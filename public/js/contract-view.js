@@ -56656,7 +56656,7 @@ render:function() {
     var show = {'display': 'block'};
     var hide = {'display': 'none'};
     var style = this.state.dropdown ? show : hide;
-    var current_url = window.location.href;
+    var current_url = encodeURIComponent(window.location.href);
     var pdf = '';
     var text = '';
     var annotation = '';
