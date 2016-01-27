@@ -474,11 +474,8 @@
     float: left;
 }
 
-.pdf-zoom-options > div {
-    background: url(../images/ic-zoom-bar.png) repeat-x 0 0;
-    float: right;
-    width: 88px;
-    margin-left: 15px;
+.pdf-zoom-options p {
+    display: inline-block;
 }
 
 .pdf-zoom-options span[class*="scale-"] {
@@ -959,7 +956,7 @@
 }
 
 .pdf-zoom-options {
-    padding: 7px 0;
+    padding: 4px 0;
     border-left: 1px solid #DCDFE2  ;
     float: left;
     margin: 0;
