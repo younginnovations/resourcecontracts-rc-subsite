@@ -425,6 +425,10 @@
   padding: 16px 10px 9px 0px;
 }
 
+.pdf-zoom-options+div {
+  float: none;
+}
+
 .pdf-zoom-options > span {
     font-size: 12px;
     float: left;
@@ -869,7 +873,7 @@
 
 .social-share {
     margin: 12px;
-    float: left;
+    float: right;
     padding: 0;
 }
 
@@ -893,7 +897,7 @@
 }
 
 .social-share li.twitter a {
-  background-position: 0 -41px;
+  background-position: 0 -40px;
 }
 
 .social-share li a:hover {
