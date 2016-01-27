@@ -16,6 +16,8 @@ if (empty($meta)) {
     <meta property="og:image" content="{{ meta($meta)->image }}" />
     <meta property="og:description" content="{{ meta($meta)->description }}"/>
     <meta property="og:url" content="{{ \Illuminate\Support\Facades\Request::url() }}"/>
+    <meta name="twitter:title" content="{{ meta($meta)->title }}"/>
+    <meta name="twitter:image" content="{{ meta($meta)->image }}"/>
 
     @if(env("CATEGORY")=="rc")
         <link rel="icon" href="{{url('images/favicon.ico')}}">

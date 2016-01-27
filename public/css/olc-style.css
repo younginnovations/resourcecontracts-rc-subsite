@@ -2275,7 +2275,7 @@ input.select2-search__field {
 
 .download-dropdown {
   position: relative; }
-  .download-dropdown span {
+  .download-dropdown a span {
     background: url(../../images/ic-sprite.png) no-repeat -152px -50px;
     padding-left: 46px;
     text-indent: -9999px;

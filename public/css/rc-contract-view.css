@@ -866,3 +866,19 @@
 .note-wrapper:empty {
     display: none;
 }
+
+.download-dropdown {
+    float: left;
+}
+
+.social-share {
+    margin: 12px;
+    float: left;
+    padding: 0;
+}
+
+.social-share li {
+    list-style: none;
+    float: left;
+    margin-right: 6px;
+}
