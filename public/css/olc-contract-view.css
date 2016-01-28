@@ -428,6 +428,10 @@
     padding: 16px 10px 9px 0px;
 }
 
+.pdf-zoom-options+div {
+  float: none;
+}
+
 .pdf-zoom-options > span {
     font-size: 12px;
     float: left;
@@ -869,4 +873,45 @@
 }
 .note-wrapper:empty {
     display: none;
+}
+
+.social-share {
+    margin: 12px;
+    float: right;
+    padding: 0;
+}
+
+.social-share li {
+    list-style: none;
+    float: left;
+    margin-right: 6px;
+}
+
+.social-share li a {
+  display: block;
+  text-indent: -9999px;
+  width: 21px;
+  height: 21px;
+  background: url(../images/share-sprite.png) no-repeat -22px -40px;
+}
+
+.social-share li.google-plus a {
+  background-position: -50px -40px;
+  margin-left: 4px;
+}
+
+.social-share li.twitter a {
+  background-position: 0 -40px;
+}
+
+.social-share li a:hover {
+  background-position: -22px 0;
+}
+
+.social-share li.google-plus a:hover {
+  background-position: -50px 0;
+}
+
+.social-share li.twitter a:hover {
+  background-position: 0 0;
 }

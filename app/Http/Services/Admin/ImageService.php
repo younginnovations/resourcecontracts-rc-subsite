@@ -2,6 +2,7 @@
 
 use Illuminate\Contracts\Filesystem\Factory as Filesystem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 /**
  * Class ImageService
@@ -82,4 +83,5 @@ class ImageService
                                 ->getClient()
                                 ->getObjectUrl(env('AWS_BUCKET'), $this->getName());
     }
+
 }

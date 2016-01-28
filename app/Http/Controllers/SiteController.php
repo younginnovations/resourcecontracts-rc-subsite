@@ -26,14 +26,14 @@ class SiteController extends BaseController
     protected $contract;
 
     /**
-     * @param APIService $api
-     * @param Request $request
+     * @param APIService      $api
+     * @param Request         $request
      * @param ContractService $contract
      */
     public function __construct(APIService $api, Request $request, ContractService $contract)
     {
-        $this->api = $api;
-        $this->request = $request;
+        $this->api      = $api;
+        $this->request  = $request;
         $this->contract = $contract;
 
     }
@@ -46,8 +46,8 @@ class SiteController extends BaseController
      */
     public function home(ImageService $image)
     {
-        $image = $image->getHomePageImageUrl();
-        $summary = $this->api->summary();
+        $image     = $image->getHomePageImageUrl();
+        $summary   = $this->api->summary();
         $countries = count($summary->country_summary);
         $resources = count($summary->resource_summary);
         $contracts = $summary->contract_count;

@@ -56651,56 +56651,57 @@ toggleDropdown : function()
     this.setState({dropdown:!this.state.dropdown})
 },
 
-render:function(){
-    var show = {'display':'block'};
-    var hide= {'display':'none'};
-    var style =  this.state.dropdown ? show :hide;
+render:function() {
+
+    var show = {'display': 'block'};
+    var hide = {'display': 'none'};
+    var style = this.state.dropdown ? show : hide;
+    var current_url = encodeURIComponent(window.location.href);
+    var pdf = '';
+    var text = '';
+    var annotation = '';
 
     if(!this.props.annotations_url && !this.props.text_url)
     {
-        return (
-            React.createElement("div", {className: "download-dropdown"}, 
-            React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, "Download")), 
-            React.createElement("ul", {style: style}, 
-            React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF "))
-            )
-            )
-        );
+        pdf = (React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF")));
     }
     else if(!this.props.text_url){
-        return (
-            React.createElement("div", {className: "download-dropdown"}, 
-                React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, "Download")), 
-                React.createElement("ul", {style: style}, 
-                React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF ")), 
-                React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, " Annotations "))
-                )
-            )
-        );
+        pdf =(React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF")));
+        annotation = (React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, "Annotations")));
     }
     else if(!this.props.annotations_url)
     {
-        return (
-            React.createElement("div", {className: "download-dropdown"}, 
-                React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, "Download")), 
-                React.createElement("ul", {style: style}, 
-                React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF ")), 
-                React.createElement("li", null, React.createElement("a", {href: this.props.text_url}, " Text "))
-                )
-            )
-        );
+        pdf = (React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF")));
+        text = (React.createElement("li", null, React.createElement("a", {href: this.props.text_url}, " Text ")))
     }
     else{
-        return (React.createElement("div", {className: "download-dropdown"}, 
-            React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, "Download")), 
-            React.createElement("ul", {style: style}, 
-                React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF ")), 
-                React.createElement("li", null, React.createElement("a", {href: this.props.text_url}, " Text ")), 
-                React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, " Annotations "))
-            )
-        ));
+        pdf = (React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF")));
+        text= (React.createElement("li", null, React.createElement("a", {href: this.props.text_url}, " Text ")));
+        annotation = (React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, " Annotations ")));
     }
-   }
+
+    return (
+        React.createElement("div", null, 
+        React.createElement("div", {className: "download-dropdown"}, 
+        React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, "Download")), 
+         React.createElement("ul", {style: style}, 
+         pdf, 
+        text, 
+        annotation
+        )
+
+        ), 
+        React.createElement("ul", {className: "social-share"}, 
+        React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
+        React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
+        React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
+        )
+        )
+    )
+}
+
+
+
 })
 
 /**

@@ -37,56 +37,57 @@ toggleDropdown : function()
     this.setState({dropdown:!this.state.dropdown})
 },
 
-render:function(){
-    var show = {'display':'block'};
-    var hide= {'display':'none'};
-    var style =  this.state.dropdown ? show :hide;
+render:function() {
+
+    var show = {'display': 'block'};
+    var hide = {'display': 'none'};
+    var style = this.state.dropdown ? show : hide;
+    var current_url = encodeURIComponent(window.location.href);
+    var pdf = '';
+    var text = '';
+    var annotation = '';
 
     if(!this.props.annotations_url && !this.props.text_url)
     {
-        return (
-            <div className="download-dropdown">
-            <a href="#" onClick={this.toggleDropdown}><span>Download</span></a>
-            <ul style={style} >
-            <li><a href={this.props.pdf_url}>PDF </a></li>
-            </ul>
-            </div>
-        );
+        pdf = (<li><a href={this.props.pdf_url}>PDF</a></li>);
     }
     else if(!this.props.text_url){
-        return (
-            <div className="download-dropdown">
-                <a href="#" onClick={this.toggleDropdown}><span>Download</span></a>
-                <ul style={style} >
-                <li><a href={this.props.pdf_url}>PDF </a></li>
-                <li><a href={this.props.annotations_url}> Annotations </a></li>
-                </ul>
-            </div>
-        );
+        pdf =(<li><a href={this.props.pdf_url}>PDF</a></li>);
+        annotation = (<li><a href={this.props.annotations_url}>Annotations</a></li>);
     }
     else if(!this.props.annotations_url)
     {
-        return (
-            <div className="download-dropdown">
-                <a href="#" onClick={this.toggleDropdown}><span>Download</span></a>
-                <ul style={style} >
-                <li><a href={this.props.pdf_url}>PDF </a></li>
-                <li><a href={this.props.text_url}> Text </a></li>
-                </ul>
-            </div>
-        );
+        pdf = (<li><a href={this.props.pdf_url}>PDF</a></li>);
+        text = (<li><a href={this.props.text_url}> Text </a></li>)
     }
     else{
-        return (<div className="download-dropdown">
-            <a href="#" onClick={this.toggleDropdown}><span>Download</span></a>
-            <ul style={style} >
-                <li><a href={this.props.pdf_url}>PDF </a></li>
-                <li><a href={this.props.text_url}> Text </a></li>
-                <li><a href={this.props.annotations_url}> Annotations </a></li>
-            </ul>
-        </div>);
+        pdf = (<li><a href={this.props.pdf_url}>PDF</a></li>);
+        text= (<li><a href={this.props.text_url}> Text </a></li>);
+        annotation = (<li><a href={this.props.annotations_url}> Annotations </a></li>);
     }
-   }
+
+    return (
+        <div>
+        <div className="download-dropdown">
+        <a href="#" onClick={this.toggleDropdown}><span>Download</span></a>
+         <ul style={style} >
+         {pdf}
+        {text}
+        {annotation}
+        </ul>
+
+        </div>
+        <ul className="social-share">
+        <li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
+        <li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a></li>
+        <li className="twitter"><a href={ twitter_share } target="_blank">T</a></li>
+        </ul>
+        </div>
+    )
+}
+
+
+
 })
 
 /**

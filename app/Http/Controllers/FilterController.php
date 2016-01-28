@@ -37,7 +37,14 @@ class FilterController
         $filter         = $this->updateFilterData($filter, $contracts, $request);
         $show_advance   = true;
 
-        return view('site.filter', compact('contracts', 'filter', 'show_advance', 'total_contract', 'currentPage'));
+        $category = env('CATEGORY');
+        $data     = trans("meta/$category");
+
+        $meta = [
+            'title' => $data['search_results_for'] . $request->get('q')
+        ];
+
+        return view('site.filter', compact('contracts', 'filter', 'show_advance', 'total_contract', 'currentPage', 'meta'));
     }
 
     /**
@@ -107,7 +114,7 @@ class FilterController
     }
 
     /**
-     * Download searchresult in csv
+     * Download Search Results in csv
      * @param Request $request
      */
     public function downloadSearchResultAsCSV(Request $request)

@@ -56,8 +56,16 @@ class ContractController extends BaseController
             'order'   => $request->get('order')
         ];
         $contracts   = $this->api->allContracts($filter);
+        $category    = env('CATEGORY');
+        $data        = trans("meta/$category");
 
-        return view('contract.index', compact('contracts', 'currentPage'));
+        $meta = [
+
+            'title' => $data['all_contracts']
+        ];
+
+
+        return view('contract.index', compact('contracts', 'currentPage', 'meta'));
     }
 
     /**
@@ -76,7 +84,11 @@ class ContractController extends BaseController
             return abort(404);
         }
 
-        return view('contract.detail', compact('contract', 'referrer'));
+        $meta = [
+            'title' => $contract->metadata->name
+        ];
+
+        return view('contract.detail', compact('contract', 'referrer', 'meta'));
     }
 
     /**
@@ -253,17 +265,22 @@ class ContractController extends BaseController
      */
     public function view($contract_id)
     {
-        $referrer           = \Request::server('HTTP_REFERER');
-        $back               = is_null($referrer) ? route('contract.view', ['id' => $contract_id]) : $referrer;
-        $contract           = new \stdClass();
-        $contract->metadata = $this->api->metadata($contract_id);
+        $referrer              = \Request::server('HTTP_REFERER');
+        $back                  = is_null($referrer) ? route('contract.view', ['id' => $contract_id]) : $referrer;
+        $contract              = new \stdClass();
+        $contract->metadata    = $this->api->metadata($contract_id);
         $contract->annotations = $this->api->getAnnotations($contract_id);
 
         if (empty($contract->metadata)) {
             return abort(404);
         }
 
-        return view('contract.page.view', compact('contract', 'back'));
+        $meta = [
+            'title' => $contract->metadata->name
+        ];
+
+
+        return view('contract.page.view', compact('contract', 'back', 'meta'));
     }
 
     /**
@@ -288,7 +305,7 @@ class ContractController extends BaseController
      */
     public function downloadAnnotations($id)
     {
-        $this->api->downloadAPI("contract/".$id."/annotations/download");
+        $this->api->downloadAPI("contract/" . $id . "/annotations/download");
         die;
     }
 

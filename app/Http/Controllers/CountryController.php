@@ -36,7 +36,13 @@ class CountryController extends BaseController
      */
     public function index()
     {
-        return view('country.index');
+        $meta = [
+            'title' => 'Countries',
+           
+        ];
+
+
+        return view('country.index' , compact('meta'));
     }
 
     /**
@@ -56,7 +62,12 @@ class CountryController extends BaseController
             return abort(404);
         }
 
-        return view('country.detail', compact('contracts', 'country', 'resources', 'currentPage'));
+        $meta = [
+            'title' => trans('country.'. strtoupper($country)).'- country',
+
+        ];
+
+        return view('country.detail', compact('contracts', 'country', 'resources', 'currentPage'  , 'meta'));
     }
 
 }

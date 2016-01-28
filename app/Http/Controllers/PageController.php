@@ -39,7 +39,11 @@ class PageController extends BaseController
         $page      = $this->page->get('about');
         $page_name = 'about';
 
-        return view('page.master', compact('page', 'page_name'));
+        $meta = [
+                'title' => 'About'
+        ];
+
+        return view('page.master', compact('page', 'page_name' , 'meta'));
     }
 
     /**
@@ -52,7 +56,13 @@ class PageController extends BaseController
         $page      = $this->page->get('contact');
         $page_name = 'contact';
 
-        return view('page.master', compact('page', 'page_name'));
+        $meta = [
+            'title' => 'Contact'
+        ];
+
+        dd(meta($meta)->title);
+
+        return view('page.master', compact('page', 'page_name' , 'meta'));
     }
 
     /**
@@ -65,7 +75,11 @@ class PageController extends BaseController
         $page      = $this->page->get('resources');
         $page_name = 'resources';
 
-        return view('page.master', compact('page', 'page_name'));
+        $meta = [
+            'title' => 'Resources'
+        ];
+
+        return view('page.master', compact('page', 'page_name' , 'meta'));
     }
 
     /**
@@ -78,7 +92,11 @@ class PageController extends BaseController
         $page      = $this->page->get('faqs');
         $page_name = 'faqs';
 
-        return view('page.master', compact('page', 'page_name'));
+        $meta = [
+            'title' => 'FAQS'
+        ];
+
+        return view('page.master', compact('page', 'page_name' , 'meta'));
     }
 
     /**
@@ -91,7 +109,11 @@ class PageController extends BaseController
         $page      = $this->page->get('glossary');
         $page_name = 'glossary';
 
-        return view('page.master', compact('page', 'page_name'));
+        $meta = [
+            'title' => 'Glossary'
+        ];
+
+        return view('page.master', compact('page', 'page_name' , 'meta'));
 
     }
 
@@ -105,8 +127,12 @@ class PageController extends BaseController
         $page      = $this->page->get('publish-contracts');
         $page_name = 'publish-contracts';
 
-        return view('page.master', compact('page', 'page_name'));
+        $meta = [
+            'title' => 'Publish Contracts'
+        ];
 
+        return view('page.master', compact('page', 'page_name' , 'meta'));
+    
     }
 
 }
