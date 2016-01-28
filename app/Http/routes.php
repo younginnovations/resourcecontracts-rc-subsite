@@ -12,6 +12,8 @@ $app->get('/countries/{key}', ['as' => 'country.detail', 'uses' => 'CountryContr
 $app->get('/resources', ['as' => 'resources', 'uses' => 'ResourceController@index']);
 $app->get('/resource/{key}', ['as' => 'resource.detail', 'uses' => 'ResourceController@detail']);
 
+$app->get('/sitemap' , ['as' => 'sitemap' , 'uses' => 'SiteController@sitemap']);
+
 /*
 |--------------------------------------------------------------------------
 | Contract Pages

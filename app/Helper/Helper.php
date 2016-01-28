@@ -108,24 +108,32 @@ function show_arrow($order, $show = false)
     }
 }
 
+/**
+ * write brief description
+ * @param null $meta
+ * @return object
+ */
 function meta($meta = null)
 {
-    try {
-        $category         = env('CATEGORY');
-        $data             = trans("meta/$category");
-        $title            = (isset($meta['title']) && $meta['title'] != '') ? $meta['title'] . ' - ' : '';
-        $description      = (isset($meta['description']) && $meta['description'] != '') ? $meta['description'] : '';
-        $data['title']    = $title . $data['title'];
-        $data['category'] = $category;
-        $images   = app(ImageService::class);
-        $data['image'] = $images->getHomePageImageUrl();
+    $category            = env('CATEGORY');
+    $data                = trans("meta/$category");
+    $title               = (isset($meta['title']) && $meta['title'] != '') ? ' - ' . $meta['title'] : '';
+    $description         = (isset($meta['description']) && $meta['description'] != '') ? $meta['description'] : $data['description'];
+    $data['title']       = $data['title'] . $title;
+    $data['description'] = $description;
+    $data['category']    = $category;
+    $images              = app(ImageService::class);
+    $data['image']       = $images->getHomePageImageUrl();
+
+    return (object) $data;
 
 
-        return (object) $data;
+}
 
-    } catch (exception $e) {
-        echo($e->getMessage());
-    }
+function getCategoryTitle()
+{
+    $categoryTitle = env('CATEGORY') == 'olc' ? 'OpenLandContracts.org' : ' ResourceContracts.org ';
 
+    return $categoryTitle;
 }
 

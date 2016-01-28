@@ -52,10 +52,13 @@ class APIService
         return $this->apiCall($resource);
     }
 
+
+
     /**
      * Get All Contracts
      *
-     * @return object|null
+     * @param array $filter
+     * @return null|object
      */
     public function allContracts(array $filter = [])
     {
@@ -157,8 +160,9 @@ class APIService
 
     /**
      * @param $contract_id
-     * @param $pageNo
+     * @param $page_no
      * @return array|false
+     * @internal param $pageNo
      */
     public function getAnnotationPage($contract_id, $page_no)
     {
