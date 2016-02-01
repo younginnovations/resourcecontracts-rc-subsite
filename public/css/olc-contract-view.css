@@ -239,6 +239,8 @@
     padding: 10px;
     border-radius: 50%;
     opacity: 1;
+    margin-right: -3px;
+    margin-top: -6px;
 }
 
 .search-results-list .close:hover {
@@ -359,10 +361,45 @@
     padding-bottom: 20px;
     margin-bottom: 20px;
     word-wrap: break-word;
+    overflow: hidden;
+    width: 100%;
 }
 
 .search-result-row:hover {
     color: #217B49;
+}
+
+.search-result-row:first-of-type {
+    margin-top: 14px;
+}
+
+.search-result-row > span > span:first-of-type {
+    float: left;
+    width: 88%;
+}
+
+.search-result-row .text,.search-result-row .annotations {
+    background: url(../images/ic-sprite-new.png) no-repeat -402px 2px;
+    text-indent: -9999px;
+    float: right;
+    width: 20px;
+    height: 20px;
+    opacity: 0.5;
+}
+
+.search-result-row .annotations {
+    background: url(../images/ic-annotate-title.png) no-repeat 0 0;
+    opacity: 1;
+}
+
+.search-result-title {
+    float: left;
+    width: 90%;
+    margin-bottom: 18px;
+}
+
+.search-result-title span:last-child {
+    font-family: open-sans-bold;
 }
 
 .right-column-view {

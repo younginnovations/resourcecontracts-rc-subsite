@@ -3496,10 +3496,23 @@ var SearchResultsCollection = Backbone.Collection.extend({
         }).done(function(response) {
             self.destroy();
             $.each(response.results, function(index, result) {
-                self.add({
-                    text: result.text,
-                    page_no: result.page_no
-                });
+
+                if(result.type=="annotation")
+                {
+                    self.add({
+                        text: result.text,
+                        page_no: result.page_no,
+                        type:result.type,
+                        annotation_type:result.annotation_type,
+                        annotation_id:result.annotation_id
+                    });
+                }else{
+                    self.add({
+                        text: result.text,
+                        page_no: result.page_no,
+                        type:result.type
+                    });
+                }
             });
             self.searchCompleted = true;
             self.trigger('reset');
@@ -3516,232 +3529,225 @@ var Metadata = Backbone.Model.extend({
 
 });
 
-  var ContractApp = Backbone.Model.extend({
+var ContractApp = Backbone.Model.extend({
     defaults: {
-      page_no: 1,
-      total_pages: 0,
-      view: "pdf",
-      search_query: "",
-      contract_id: 0,
-      guid: "",
-      selected_annotation_id: 0,
-      pdfscale: 1,
-      showMeta: true,
-      canrender: true
+        page_no: 1,
+        total_pages: 0,
+        view: "pdf",
+        search_query: "",
+        contract_id: 0,
+        guid: "",
+        selected_annotation_id: 0,
+        pdfscale: 1,
+        showMeta: true,
+        canrender: true,
+        isSearch: false
     },
-    initialize: function(options) {
-      this.metadata = new Metadata();
-      this.loadMetadata();
+    initialize: function (options) {
+        this.metadata = new Metadata();
+        this.loadMetadata();
     },
-    setAnnotatorInstance:function(annotator){
-      return this.set({"annotator":annotator});
+    setAnnotatorInstance: function (annotator) {
+        return this.set({"annotator": annotator});
     },
-    getAnnotatorInstance:function(annotator){
-      return this.get("annotator");
+    getAnnotatorInstance: function (annotator) {
+        return this.get("annotator");
     },
-    loadMetadata: function() {
-      var self = this;
-      this.metadata.url = this.getMetadataUrl();
-      this.metadata.fetch();
+    loadMetadata: function () {
+        var self = this;
+        this.metadata.url = this.getMetadataUrl();
+        this.metadata.fetch();
     },
-    getShowMeta: function() {
-      return this.get("showMeta");
+    setIsSearch: function (bool) {
+        return this.set({"isSearch": bool});
     },
-    getContractId: function() {
-      return this.get("contract_id");
+    getIsSearch: function () {
+        return this.get("isSearch");
     },
-    getContractGuid: function() {
-      return this.get("guid");
+    getShowMeta: function () {
+        return this.get("showMeta");
     },
-    getMetadataSummaryLink: function() {
-      return app_url + "/contract/" + this.getContractGuid();
+    getContractId: function () {
+        return this.get("contract_id");
     },
-    getMetadataUrl: function() {
-      return this.get('esapi') + "contract/" + this.getContractGuid() + "/metadata";
-    },  
-    getAllPageUrl: function() {
-      return this.get('esapi') + "contract/" + this.getContractGuid() + "/text";
+    getContractGuid: function () {
+        return this.get("guid");
     },
-    getAllAnnotationsUrl: function() {
-      return this.get('esapi') + "contract/" + this.getContractGuid() + "/annotations";
+    getMetadataSummaryLink: function () {
+        return app_url + "/contract/" + this.getContractGuid();
     },
-    getSearchUrl: function() {
-      return this.get('esapi') + "contract/" + this.getContractGuid() + "/searchtext"
+    getMetadataUrl: function () {
+        return this.get('esapi') + "contract/" + this.getContractGuid() + "/metadata";
     },
-    getPdfUrl: function() {
-      var page_no = parseInt(this.getCurrentPage());
-      var pageModel = pagesCollection.where({ page_no: page_no});
-      if(pageModel && pageModel[0] && pageModel[0].attributes) {
-          return pageModel[0].get("pdf_url");
-      }
-      return "";
+    getAllPageUrl: function () {
+        return this.get('esapi') + "contract/" + this.getContractGuid() + "/text";
     },
-    getFullPdfUrl: function() {
-      return "";
+    getAllAnnotationsUrl: function () {
+        return this.get('esapi') + "contract/" + this.getContractGuid() + "/annotations";
     },
-    getLoadAnnotationsUrl: function() {
-      return this.get('esapi') + "contract/" + this.getContractGuid() + "/annotations";
+    getSearchUrl: function () {
+        return this.get('esapi') + "contract/" + this.getContractGuid() + "/searchtext"
     },
-    getAnnotationsListAnchor: function() {
-      return app_url + "/contract/" + this.getContractGuid() + "#annotations";
-    },
-    renderStart: function() {
-      this.set({"canrender": true});
-    },
-    renderComplete: function() {
-      this.set({"canrender": false});
-    },
-    canRender: function() {
-      return this.get("canrender");
-    },
-    setCurrentPage: function(page_no) {
-      page_no = parseInt(page_no);
-      this.set({page_no: page_no});
-    },
-    getCurrentPage: function() {
-      return this.get("page_no");
-    },
-    getTotalPages: function() {
-      return this.get("total_pages");
-    },
-    setSelectedAnnotation: function(annotation_id) {
-      this.set("selected_annotation_id", annotation_id);
-    },
-    resetSelectedAnnotation: function(annotation_id) {
-      this.set("selected_annotation_id", 0);
-    },
-    getSelectedAnnotation: function() {
-      return this.get("selected_annotation_id");
-    },        
-    setView: function(view) {
-      if(view.trim() == "pdf" || view.trim() == "text" || view.trim() == "search") {            
-        this.set({view: view});
-      }
-    },
-    getView: function() {
-      return this.get("view");
-    },
-    getSearchQuery: function() {
-      return this.get("search_query");
-    },
-    setSearchQuery: function(query) {
-      this.set({search_query: query.trim()});
-    },
-    getPdfScale: function() {
-      return this.get("pdfscale");
-    },
-    setPdfScale: function(scale) {
-      return this.set({"pdfscale": scale});
-    },
-    triggerScrollToTextPage: function() {
-      if(this.get("view") === "text" || this.get("view") === "search") {
-        this.trigger('scroll-to-text-page');
-      }
-    },
-    triggerGoToPdfPage: function() {
-      if(this.get("view") === "pdf") {
-        this.trigger('scroll-to-pdf-page');
-      }
-    },
-    triggerUpdateTextPaginationPage: function(page_no) {
-      if(this.get("view") === "text" || this.get("view") === "search") {
-        this.trigger('update-text-pagination-page', page_no);
-      }
-    },
-    triggerUpdatePdfPaginationPage: function(page_no) {
-      if(this.get("view") === "pdf") {
-        this.trigger("update-pdf-pagination-page", page_no);
-      }
-    },
-    getBoxPosition: function(geo)
-    {
-      var canvas = $('.pdf-annotator').find('canvas').first();
-      geo.width = geo.width * canvas.width();
-      geo.height = geo.height * canvas.height();
-      geo.x = geo.x * canvas.width();
-      geo.y = geo.y * canvas.height();
-      return geo;
-    },
-    showPdfAnnotationPopup:function(id)
-    {
-      var wrapperEl = $('.pdf-annotator');
-      wrapperEl.find('.annotator-viewer').addClass('annotator-hide');
-      var annotators = this.getAnnotatorInstance().content.data('annotator').dumpAnnotations();
-      var self = this;
-      annotators.map(function (annotation, i) {
-        if (annotation.id == id) {
-          var geo = self.getBoxPosition(annotation.shapes[0].geometry);
-          var position = {top: (geo.y + geo.height / 2), left: (geo.x + geo.width / 2)};
-          setTimeout(function(){wrapperEl.animate({
-            scrollTop: position.top - 200
-          }, 'fast')}(position,wrapperEl), 300);
-          wrapperEl.annotator().annotator('showViewer', [annotation], position);
+    getPdfUrl: function () {
+        var page_no = parseInt(this.getCurrentPage());
+        var pageModel = pagesCollection.where({page_no: page_no});
+        if (pageModel && pageModel[0] && pageModel[0].attributes) {
+            return pageModel[0].get("pdf_url");
         }
-      });
+        return "";
     },
-    showTextAnnotationPopup: function(id){
-      var wrapperEl = $('.text-annotator');
-      wrapperEl.find('.annotator-viewer').addClass('annotator-hide');
-      wrapperEl.find('.annotator-hl').each(function (i, a) {
-        var a = $(a);
-        var annotation = a.data('annotation');
-        if (annotation.id == id) {
-          var position = a.position();
-          setTimeout(function(){wrapperEl.animate({
-            scrollTop: position.top-200
-          }, 'fast')}(position,wrapperEl), 300);
+    getFullPdfUrl: function () {
+        return "";
+    },
+    getLoadAnnotationsUrl: function () {
+        return this.get('esapi') + "contract/" + this.getContractGuid() + "/annotations";
+    },
+    getAnnotationsListAnchor: function () {
+        return app_url + "/contract/" + this.getContractGuid() + "#annotations";
+    },
+    renderStart: function () {
+        this.set({"canrender": true});
+    },
+    renderComplete: function () {
+        this.set({"canrender": false});
+    },
+    canRender: function () {
+        return this.get("canrender");
+    },
+    setCurrentPage: function (page_no) {
+        page_no = parseInt(page_no);
+        this.set({page_no: page_no});
+    },
+    getCurrentPage: function () {
+        return this.get("page_no");
+    },
+    getTotalPages: function () {
+        return this.get("total_pages");
+    },
+    setSelectedAnnotation: function (annotation_id) {
+        this.set("selected_annotation_id", annotation_id);
+    },
+    resetSelectedAnnotation: function (annotation_id) {
+        this.set("selected_annotation_id", 0);
+    },
+    getSelectedAnnotation: function () {
+        return this.get("selected_annotation_id");
+    },
+    setView: function (view) {
+        if (view.trim() == "pdf" || view.trim() == "text" || view.trim() == "search") {
+            this.set({view: view});
+        }
+    },
+    getView: function () {
+        return this.get("view");
+    },
+    getSearchQuery: function () {
+        return this.get("search_query");
+    },
+    setSearchQuery: function (query) {
+        this.set({search_query: query.trim()});
+    },
+    getPdfScale: function () {
+        return this.get("pdfscale");
+    },
+    setPdfScale: function (scale) {
+        return this.set({"pdfscale": scale});
+    },
+    triggerScrollToTextPage: function () {
+        if (this.get("view") === "text" || this.get("view") === "search") {
+            this.trigger('scroll-to-text-page');
+        }
+    },
+    triggerGoToPdfPage: function () {
+        if (this.get("view") === "pdf") {
+            this.trigger('scroll-to-pdf-page');
+        }
+    },
+    triggerUpdateTextPaginationPage: function (page_no) {
+        if (this.get("view") === "text" || this.get("view") === "search") {
+            this.trigger('update-text-pagination-page', page_no);
+        }
+    },
+    triggerUpdatePdfPaginationPage: function (page_no) {
+        if (this.get("view") === "pdf") {
+            this.trigger("update-pdf-pagination-page", page_no);
+        }
+    },
+    getBoxPosition: function (geo) {
+        var canvas = $('.pdf-annotator').find('canvas').first();
+        geo.width = geo.width * canvas.width();
+        geo.height = geo.height * canvas.height();
+        geo.x = geo.x * canvas.width();
+        geo.y = geo.y * canvas.height();
+        return geo;
+    },
+    showPdfAnnotationPopup: function (id) {
+        var wrapperEl = $('.pdf-annotator');
+        wrapperEl.find('.annotator-viewer').addClass('annotator-hide');
+        var annotators = this.getAnnotatorInstance().content.data('annotator').dumpAnnotations();
+        var self = this;
+        annotators.map(function (annotation, i) {
+            if (annotation.id == id) {
+                var geo = self.getBoxPosition(annotation.shapes[0].geometry);
+                var position = {top: (geo.y + geo.height / 2), left: (geo.x + geo.width / 2)};
+                setTimeout(function () {
+                    wrapperEl.animate({
+                        scrollTop: position.top - 200
+                    }, 'fast')
+                }(position, wrapperEl), 300);
+                wrapperEl.annotator().annotator('showViewer', [annotation], position);
+            }
+        });
+    },
+    showTextAnnotationPopup: function (id) {
+        var wrapperEl = $('.text-annotator');
+        wrapperEl.find('.annotator-viewer').addClass('annotator-hide');
+        wrapperEl.find('.annotator-hl').each(function (i, a) {
+            var a = $(a);
+            var annotation = a.data('annotation');
+            if (annotation.id == id) {
+                var position = a.position();
+                setTimeout(function () {
+                    wrapperEl.animate({
+                        scrollTop: position.top - 200
+                    }, 'fast')
+                }(position, wrapperEl), 300);
 
-          position.top = position.top + 15;
-          position.left = position.left + a.width() / 2;
-          wrapperEl.annotator().annotator('showViewer', [annotation], position);
-        }
-      })
+                position.top = position.top + 15;
+                position.left = position.left + a.width() / 2;
+                wrapperEl.annotator().annotator('showViewer', [annotation], position);
+            }
+        })
     },
-    isViewVisible: function(viewName) {
-      switch(viewName) {
-        case "TextPaginationView":
-        case "TextViewer":
-        case "TextSearchForm":
-          if("text" === this.getView() || "search" === this.getView() ) {
+    isViewVisible: function (viewName) {
+        var show = [];
+        if ("text" === this.getView() || "search" === this.getView()) {
+            show = ["TextPaginationView", "TextViewer", "TextSearchForm"];
+        }
+
+        if ('pdf' == this.getView()) {
+            show = ["PdfPaginationView", "PdfViewer", "PdfZoom"];
+        }
+
+        if ('search' == this.getView() || this.getIsSearch()) {
+            show.push("TextSearchResultsList");
+        }
+
+        if (['text', 'pdf'].indexOf(this.getView()) >= 0 && this.getIsSearch() == false) {
+            show.push("AnnotationsViewer");
+        }
+
+        if (this.getShowMeta()) {
+            show.push("RightColumnView");
+        }
+
+
+        if (show.indexOf(viewName) >= 0) {
             return true;
-          } else {
-            return false;
-          }
-          break;
-        case "TextSearchResultsList":
-          if("search" === this.getView()) {
-            return true;
-          } else {
-            return false;
-          }
-          break;              
-        case "PdfPaginationView":
-        case "PdfViewer":
-        case "PdfZoom":
-          if("pdf" === this.getView()) {
-            return true;
-          } else {
-            return false;
-          }
-          break;
-        case "AnnotationsViewer":
-          if("search" === this.getView()) {
-            return false;
-          } else {
-            return true;
-          }
-          break;
-        case "RightColumnView":
-          if(this.getShowMeta()) {
-            return true;
-          } else {
-            return false;
-          }
-        default:
-          return false;
-      }
+        }
+        return false;
     }
-  });
+});
 var PdfPage = Backbone.Model.extend({
     defaults: {
         content: ""
@@ -56074,10 +56080,44 @@ var TextSearchForm = React.createClass({displayName: "TextSearchForm",
     );
   }
 });
+
 var TextSearchResultRow = React.createClass({displayName: "TextSearchResultRow",
+
   handleClick: function() {
-    this.props.contractApp.setCurrentPage(this.props.resultRow.get("page_no"));
-    this.props.contractApp.triggerScrollToTextPage();
+
+  if(this.props.resultRow.get('type')=="text")
+    {
+      location.hash = "#/text";
+      this.props.contractApp.setIsSearch(true);
+      this.props.contractApp.setCurrentPage(this.props.resultRow.get("page_no"));
+      this.props.contractApp.triggerScrollToTextPage();
+    }
+
+  else {
+      location.hash = "#/"+this.props.resultRow.get("annotation_type")+"/page/"+this.props.resultRow.get("page_no")+"/annotation/"+this.props.resultRow.get("annotation_id");
+      switch (this.props.resultRow.get('annotation_type')) {
+        case "pdf":
+          self = this;
+          this.props.contractApp.setView("pdf");
+          this.props.contractApp.setIsSearch(true);
+          this.props.contractApp.setSelectedAnnotation(self.props.resultRow.get('annotation_id'));
+          this.props.contractApp.trigger("annotations:highlight", {id: self.props.resultRow.get('annotation_id')});
+          this.props.contractApp.setCurrentPage(self.props.resultRow.get('page_no'));
+          this.props.contractApp.triggerUpdatePdfPaginationPage(self.props.resultRow.get('page_no'));
+          //this.props.contractApp.trigger("annotationHighlight", this.props.annotation.attributes);
+          break;
+        case "text":
+          self = this;
+          this.props.contractApp.setView("text");
+          this.props.contractApp.setIsSearch(true);
+          this.props.contractApp.trigger("annotations:highlight", {id: self.props.resultRow.get('annotation_id')});
+          this.props.contractApp.setCurrentPage(self.props.resultRow.get('page_no'));
+
+          this.props.contractApp.showTextAnnotationPopup(self.props.resultRow.get('annotation_id'));
+          //setTimeout(this.props.contractApp.triggerScrollToTextPage());
+          break;
+      }
+  }
     // this.props.currentPage.set({"page_no": this.props.resultRow.get("page_no")});
     // this.props.currentPage.trigger("scroll-to-page");
   },
@@ -56088,9 +56128,16 @@ var TextSearchResultRow = React.createClass({displayName: "TextSearchResultRow",
   },
   render: function() {
     var text = this.highlightSearchQuery(this.props.resultRow.get("text"), this.props.contractApp.getSearchQuery());
-    text = "Pg " + this.props.resultRow.get("page_no") + "&nbsp;" + text;
+    var type = "<a class='text' title='Text'>Text</a>";
+    if(this.props.resultRow.get("type")=="annotation")
+    {
+       type = "<a class='annotations' title='Annotation'>Annotation</a>";
+    }
+    text = "<span>Pg " + this.props.resultRow.get("page_no") + "&nbsp;" + text+"</span>" +type;
     return(
+
       React.createElement("div", {className: "search-result-row link", onClick: this.handleClick}, 
+
         React.createElement("span", {dangerouslySetInnerHTML: {__html: text}})
       )
     );
@@ -56125,14 +56172,24 @@ var TextSearchResultsList = React.createClass({displayName: "TextSearchResultsLi
     else if(this.props.searchResultsCollection.searchCompleted === true || this.props.searchResultsCollection.length == 0) {
       resultsView = lang.no_results_found;
     }
-
+if(this.props.searchResultsCollection.models.length > 0) {
     return (
       React.createElement("div", {style: this.props.style, className: "search-results-list"}, 
-      React.createElement("span", {className: "pull-right link close", onClick: this.handleCloseSearchResults}, "x"), 
+       React.createElement("div", {className: "search-result-title"}, "Search result for ", decodeURI(this.props.contractApp.getSearchQuery())), 
+       React.createElement("span", {className: "pull-right link close", onClick: this.handleCloseSearchResults}, "x"), 
         resultsView
       )
     );
+    }else{
+      return (
+          React.createElement("div", {style: this.props.style, className: "search-results-list"}, 
+            React.createElement("span", {className: "pull-right link close", onClick: this.handleCloseSearchResults}, "x"), 
+          resultsView
+          )
+    );
+    }
   }
+
 });
 /** @jsx React.Dom **/
 var AnnotationHeader = React.createClass({displayName: "AnnotationHeader",
@@ -56653,56 +56710,99 @@ toggleDropdown : function()
 
 render:function() {
 
-    var show = {'display': 'block'};
-    var hide = {'display': 'none'};
-    var style = this.state.dropdown ? show : hide;
+    var show = {'display':'block'};
+    var hide= {'display':'none'};
+    var style =  this.state.dropdown ? show :hide;
     var current_url = encodeURIComponent(window.location.href);
-    var pdf = '';
-    var text = '';
-    var annotation = '';
 
     if(!this.props.annotations_url && !this.props.text_url)
     {
-        pdf = (React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF")));
+        return (
+            React.createElement("div", {className: "download-dropdown"}, 
+            React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, "Download")), 
+            React.createElement("ul", {style: style}, 
+            React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF "))
+            )
+            ),
+    React.createElement("div", null, 
+    React.createElement("ul", {className: "social-share"}, 
+React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
+React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
+React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
+)
+)
+
+            );
     }
     else if(!this.props.text_url){
-        pdf =(React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF")));
-        annotation = (React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, "Annotations")));
-    }
+        return (
+            React.createElement("div", null, 
+                React.createElement("div", {className: "download-dropdown"}, 
+                React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, "Download")), 
+                React.createElement("ul", {style: style}, 
+                React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF ")), 
+                React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, " ANNOTATION "))
+                )
+                ), 
+                React.createElement("div", null, 
+                React.createElement("ul", {className: "social-share"}, 
+                React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
+                React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
+                React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
+                )
+                )
+            )
+
+            );
+        }
     else if(!this.props.annotations_url)
     {
-        pdf = (React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF")));
-        text = (React.createElement("li", null, React.createElement("a", {href: this.props.text_url}, " Text ")))
-    }
+        return (
+            React.createElement("div", null, 
+                React.createElement("div", {className: "download-dropdown"}, 
+                React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, "Download")), 
+                React.createElement("ul", {style: style}, 
+                React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF ")), 
+                React.createElement("li", null, React.createElement("a", {href: this.props.text_url}, " WORD FILE "))
+                )
+                ), 
+                React.createElement("div", null, 
+                React.createElement("ul", {className: "social-share"}, 
+                React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
+                React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
+                React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
+                )
+                )
+            )
+
+            );
+         }
     else{
-        pdf = (React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF")));
-        text= (React.createElement("li", null, React.createElement("a", {href: this.props.text_url}, " Text ")));
-        annotation = (React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, " Annotations ")));
+        return (
+                React.createElement("div", null, 
+            React.createElement("div", {className: "download-dropdown"}, 
+            React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, "Download")), 
+            React.createElement("ul", {style: style}, 
+            React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF ")), 
+            React.createElement("li", null, React.createElement("a", {href: this.props.text_url}, " WORD FILE ")), 
+            React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, " ANNOTATION "))
+            )
+            ), 
+            React.createElement("div", null, 
+                React.createElement("ul", {className: "social-share"}, 
+                React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
+                React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
+                React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
+                )
+            )
+    )
+
+         );
+
+    }
     }
 
-    return (
-        React.createElement("div", null, 
-        React.createElement("div", {className: "download-dropdown"}, 
-        React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, "Download")), 
-         React.createElement("ul", {style: style}, 
-         pdf, 
-        text, 
-        annotation
-        )
-
-        ), 
-        React.createElement("ul", {className: "social-share"}, 
-        React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
-        React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
-        React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
-        )
-        )
-    )
-}
-
-
-
-})
+});
 
 /**
  * @jsx React.DOM
@@ -56728,7 +56828,7 @@ var MainApp = React.createClass({displayName: "MainApp",
     },
     pdf: function(page_no, annotation_id) {
         debug("view.blade.php: setting pdf view");
-        contractApp.setView("pdf");
+            contractApp.setView("pdf");
         contractApp.trigger("update-pdf-pagination-page", contractApp.getCurrentPage());
         if(page_no) {
             contractApp.setCurrentPage(page_no);
@@ -56783,6 +56883,7 @@ var MainApp = React.createClass({displayName: "MainApp",
             'slow');
     },
     componentDidUpdate: function() {
+       contractApp.setIsSearch(false);
     },
     componentWillMount: function() {
         var router = Router({
