@@ -401,15 +401,19 @@ class APIService
      * @param bool  $array
      * @return null
      */
-    public function downloadAPI($resource, array $query = [], $array = false)
+    public function downloadAPI($resource, array $query = [], $array = false, $id = "")
     {
         try {
+            $filename = "export" . date('Y-m-d');
+            if (!empty($id)) {
+                $metadata = $this->contractDetail($id);
+                $filename = $metadata->metadata->name . date('Y-m-d');
+            }
             $request           = new Request('GET', $this->apiURL($resource));
             $query['category'] = $this->category;
             $request->setQuery($query);
             $response = $this->client->send($request);
             $data     = $response->getBody()->getContents();
-            $filename = "export" . date('Y-m-d');
             header('Content-type: text/csv; charset=utf-8');
             header('Content-Disposition: attachment; filename="' . $filename . '.csv"');
             print $data;

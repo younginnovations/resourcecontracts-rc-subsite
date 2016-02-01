@@ -39,51 +39,85 @@ toggleDropdown : function()
 
 render:function() {
 
-    var show = {'display': 'block'};
-    var hide = {'display': 'none'};
-    var style = this.state.dropdown ? show : hide;
-    var current_url = encodeURIComponent(window.location.href);
-    var pdf = '';
-    var text = '';
-    var annotation = '';
+    var show = {'display':'block'};
+    var hide= {'display':'none'};
+    var style =  this.state.dropdown ? show :hide;
 
     if(!this.props.annotations_url && !this.props.text_url)
     {
-        pdf = (<li><a href={this.props.pdf_url}>PDF</a></li>);
+        return (
+            <div className="download-dropdown">
+    <a href="#" onClick={this.toggleDropdown}><span>Download</span></a>
+    <ul style={style} >
+    <li><a href={this.props.pdf_url}>PDF </a></li>
+    </ul>
+    </div>
+<div>
+<ul className="social-share">
+<li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
+<li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a></li>
+<li className="twitter"><a href={ twitter_share } target="_blank">T</a></li>
+</ul>
+</div>
+    );
     }
     else if(!this.props.text_url){
-        pdf =(<li><a href={this.props.pdf_url}>PDF</a></li>);
-        annotation = (<li><a href={this.props.annotations_url}>Annotations</a></li>);
+        return (
+            <div className="download-dropdown">
+        <a href="#" onClick={this.toggleDropdown}><span>Download</span></a>
+    <ul style={style} >
+    <li><a href={this.props.pdf_url}>PDF </a></li>
+    <li><a href={this.props.annotations_url}> ANNOTATION </a></li>
+    </ul>
+    </div>
+    <div>
+    <ul className="social-share">
+    <li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
+    <li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a></li>
+    <li className="twitter"><a href={ twitter_share } target="_blank">T</a></li>
+    </ul>
+    </div>
+    );
     }
     else if(!this.props.annotations_url)
     {
-        pdf = (<li><a href={this.props.pdf_url}>PDF</a></li>);
-        text = (<li><a href={this.props.text_url}> Text </a></li>)
+        return (
+            <div className="download-dropdown">
+    <a href="#" onClick={this.toggleDropdown}><span>Download</span></a>
+    <ul style={style} >
+    <li><a href={this.props.pdf_url}>PDF </a></li>
+    <li><a href={this.props.text_url}> WORD FILE </a></li>
+    </ul>
+    </div>
+    <div>
+    <ul className="social-share">
+    <li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
+    <li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a></li>
+    <li className="twitter"><a href={ twitter_share } target="_blank">T</a></li>
+    </ul>
+    </div>
+    );
     }
     else{
-        pdf = (<li><a href={this.props.pdf_url}>PDF</a></li>);
-        text= (<li><a href={this.props.text_url}> Text </a></li>);
-        annotation = (<li><a href={this.props.annotations_url}> Annotations </a></li>);
+        return (<div className="download-dropdown">
+        <a href="#" onClick={this.toggleDropdown}><span>Download</span></a>
+    <ul style={style} >
+    <li><a href={this.props.pdf_url}>PDF </a></li>
+    <li><a href={this.props.text_url}> WORD FILE </a></li>
+    <li><a href={this.props.annotations_url}> ANNOTATION </a></li>
+    </ul>
+    </div>
+    <div>
+    <ul className="social-share">
+    <li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
+    <li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a></li>
+    <li className="twitter"><a href={ twitter_share } target="_blank">T</a></li>
+    </ul>
+    </div>
+    );
+
     }
 
-    return (
-        <div>
-        <div className="download-dropdown">
-        <a href="#" onClick={this.toggleDropdown}><span>Download</span></a>
-         <ul style={style} >
-         {pdf}
-        {text}
-        {annotation}
-        </ul>
-
-        </div>
-        <ul className="social-share">
-        <li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
-        <li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a></li>
-        <li className="twitter"><a href={ twitter_share } target="_blank">T</a></li>
-        </ul>
-        </div>
-    )
 }
 
 
@@ -114,7 +148,7 @@ var MainApp = React.createClass({
     },
     pdf: function(page_no, annotation_id) {
         debug("view.blade.php: setting pdf view");
-        contractApp.setView("pdf");
+            contractApp.setView("pdf");
         contractApp.trigger("update-pdf-pagination-page", contractApp.getCurrentPage());
         if(page_no) {
             contractApp.setCurrentPage(page_no);
@@ -169,6 +203,7 @@ var MainApp = React.createClass({
             'slow');
     },
     componentDidUpdate: function() {
+       contractApp.setIsSearch(false);
     },
     componentWillMount: function() {
         var router = Router({

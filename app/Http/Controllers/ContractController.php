@@ -305,7 +305,7 @@ class ContractController extends BaseController
      */
     public function downloadAnnotations($id)
     {
-        $this->api->downloadAPI("contract/" . $id . "/annotations/download");
+        $this->api->downloadAPI("contract/".$id."/annotations/download",[],"",$id);
         die;
     }
 

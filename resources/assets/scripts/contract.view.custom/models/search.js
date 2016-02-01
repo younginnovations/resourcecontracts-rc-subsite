@@ -24,10 +24,23 @@ var SearchResultsCollection = Backbone.Collection.extend({
         }).done(function(response) {
             self.destroy();
             $.each(response.results, function(index, result) {
-                self.add({
-                    text: result.text,
-                    page_no: result.page_no
-                });
+
+                if(result.type=="annotation")
+                {
+                    self.add({
+                        text: result.text,
+                        page_no: result.page_no,
+                        type:result.type,
+                        annotation_type:result.annotation_type,
+                        annotation_id:result.annotation_id
+                    });
+                }else{
+                    self.add({
+                        text: result.text,
+                        page_no: result.page_no,
+                        type:result.type
+                    });
+                }
             });
             self.searchCompleted = true;
             self.trigger('reset');
