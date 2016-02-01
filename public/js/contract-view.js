@@ -56346,9 +56346,8 @@ var AnnotationItem = React.createClass({displayName: "AnnotationItem",
     handleAnnotationClick: function (e) {
         var self = this;
         e.preventDefault();
-        switch (this.state.annotationType) {
+        switch(this.state.annotationType) {
             case "pdf":
-
                 this.props.contractApp.trigger("annotations:highlight", {id: self.state.id});
                 this.props.contractApp.setView("pdf");
                 this.props.contractApp.setSelectedAnnotation(self.state.id);
@@ -56360,7 +56359,7 @@ var AnnotationItem = React.createClass({displayName: "AnnotationItem",
                 }
                 this.props.contractApp.setCurrentPage(self.state.pageNo);
                 this.props.contractApp.triggerUpdatePdfPaginationPage(self.state.pageNo);
-                break
+                break;
             case "text":
                 this.props.contractApp.trigger("annotations:highlight", {id: self.state.id});
                 var self = this;
@@ -56548,9 +56547,14 @@ var AnnotationsList = React.createClass({displayName: "AnnotationsList",
         this.props.contractApp.on("annotations:render", function (sortBy) {
             self.forceUpdate();
         });
-        this.props.contractApp.on("annotations:highlight", function (annotation) {
-            setTimeout(self.scrollToAnnotation(annotation.id), 1000);
+
+        this.props.contractApp.on("annotations:highlight", function(annotation) {
+            var that = self
+            setTimeout(function(){
+                that.scrollToAnnotation(annotation.id);
+            }, 100);
         });
+
         this.props.contractApp.on("annotations:scroll-to-selected-annotation", function () {
             self.scrollToAnnotation(self.props.contractApp.getSelectedAnnotation());
         });
@@ -56746,20 +56750,19 @@ render:function() {
     if(!this.props.annotations_url && !this.props.text_url)
     {
         return (
-            React.createElement("div", {className: "download-dropdown"}, 
-            React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, "Download")), 
-            React.createElement("ul", {style: style}, 
-            React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF "))
-            )
-            ),
-    React.createElement("div", null, 
-    React.createElement("ul", {className: "social-share"}, 
-React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
-React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
-React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
-)
-)
-
+            React.createElement("div", null, 
+                React.createElement("div", {className: "download-dropdown"}, 
+                    React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, "Download")), 
+                    React.createElement("ul", {style: style}, 
+                    React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF "))
+                    )
+                ), 
+                React.createElement("ul", {className: "social-share"}, 
+                    React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
+                    React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
+                    React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
+                )
+           )
             );
     }
     else if(!this.props.text_url){
@@ -56772,12 +56775,10 @@ React.createElement("li", {className: "twitter"}, React.createElement("a", {href
                 React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, " ANNOTATION "))
                 )
                 ), 
-                React.createElement("div", null, 
                 React.createElement("ul", {className: "social-share"}, 
                 React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
                 React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
                 React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
-                )
                 )
             )
 
@@ -56794,15 +56795,12 @@ React.createElement("li", {className: "twitter"}, React.createElement("a", {href
                 React.createElement("li", null, React.createElement("a", {href: this.props.text_url}, " WORD FILE "))
                 )
                 ), 
-                React.createElement("div", null, 
                 React.createElement("ul", {className: "social-share"}, 
                 React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
                 React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
                 React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
                 )
-                )
             )
-
             );
          }
     else{
@@ -56816,20 +56814,16 @@ React.createElement("li", {className: "twitter"}, React.createElement("a", {href
             React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, " ANNOTATION "))
             )
             ), 
-            React.createElement("div", null, 
                 React.createElement("ul", {className: "social-share"}, 
                 React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
                 React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
                 React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
                 )
-            )
-    )
-
+        )
          );
 
     }
     }
-
 });
 
 /**

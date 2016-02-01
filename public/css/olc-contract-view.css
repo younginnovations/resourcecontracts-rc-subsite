@@ -910,6 +910,7 @@
 }
 
 .social-share {
+    display: none;
     margin: 12px;
     float: right;
     padding: 0;

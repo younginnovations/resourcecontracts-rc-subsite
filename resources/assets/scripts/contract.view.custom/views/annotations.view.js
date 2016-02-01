@@ -130,9 +130,8 @@ var AnnotationItem = React.createClass({
     handleAnnotationClick: function (e) {
         var self = this;
         e.preventDefault();
-        switch (this.state.annotationType) {
+        switch(this.state.annotationType) {
             case "pdf":
-
                 this.props.contractApp.trigger("annotations:highlight", {id: self.state.id});
                 this.props.contractApp.setView("pdf");
                 this.props.contractApp.setSelectedAnnotation(self.state.id);
@@ -144,7 +143,7 @@ var AnnotationItem = React.createClass({
                 }
                 this.props.contractApp.setCurrentPage(self.state.pageNo);
                 this.props.contractApp.triggerUpdatePdfPaginationPage(self.state.pageNo);
-                break
+                break;
             case "text":
                 this.props.contractApp.trigger("annotations:highlight", {id: self.state.id});
                 var self = this;
@@ -332,9 +331,14 @@ var AnnotationsList = React.createClass({
         this.props.contractApp.on("annotations:render", function (sortBy) {
             self.forceUpdate();
         });
-        this.props.contractApp.on("annotations:highlight", function (annotation) {
-            setTimeout(self.scrollToAnnotation(annotation.id), 1000);
+
+        this.props.contractApp.on("annotations:highlight", function(annotation) {
+            var that = self
+            setTimeout(function(){
+                that.scrollToAnnotation(annotation.id);
+            }, 100);
         });
+
         this.props.contractApp.on("annotations:scroll-to-selected-annotation", function () {
             self.scrollToAnnotation(self.props.contractApp.getSelectedAnnotation());
         });

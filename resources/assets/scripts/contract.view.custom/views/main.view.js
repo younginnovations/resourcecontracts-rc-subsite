@@ -47,20 +47,19 @@ render:function() {
     if(!this.props.annotations_url && !this.props.text_url)
     {
         return (
-            <div className="download-dropdown">
-            <a href="#" onClick={this.toggleDropdown}><span>Download</span></a>
-            <ul style={style} >
-            <li><a href={this.props.pdf_url}>PDF </a></li>
-            </ul>
-            </div>,
-    <div>
-    <ul className="social-share">
-<li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
-<li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a></li>
-<li className="twitter"><a href={ twitter_share } target="_blank">T</a></li>
-</ul>
-</div>
-
+            <div>
+                <div className="download-dropdown">
+                    <a href="#" onClick={this.toggleDropdown}><span>Download</span></a>
+                    <ul style={style} >
+                    <li><a href={this.props.pdf_url}>PDF </a></li>
+                    </ul>
+                </div>
+                <ul className="social-share">
+                    <li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
+                    <li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a></li>
+                    <li className="twitter"><a href={ twitter_share } target="_blank">T</a></li>
+                </ul>
+           </div>
             );
     }
     else if(!this.props.text_url){
@@ -73,13 +72,11 @@ render:function() {
                 <li><a href={this.props.annotations_url}> ANNOTATION </a></li>
                 </ul>
                 </div>
-                <div>
                 <ul className="social-share">
                 <li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
                 <li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a></li>
                 <li className="twitter"><a href={ twitter_share } target="_blank">T</a></li>
                 </ul>
-                </div>
             </div>
 
             );
@@ -95,15 +92,12 @@ render:function() {
                 <li><a href={this.props.text_url}> WORD FILE </a></li>
                 </ul>
                 </div>
-                <div>
                 <ul className="social-share">
                 <li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
                 <li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a></li>
                 <li className="twitter"><a href={ twitter_share } target="_blank">T</a></li>
                 </ul>
-                </div>
             </div>
-
             );
          }
     else{
@@ -117,20 +111,16 @@ render:function() {
             <li><a href={this.props.annotations_url}> ANNOTATION </a></li>
             </ul>
             </div>
-            <div>
                 <ul className="social-share">
                 <li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
                 <li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a></li>
                 <li className="twitter"><a href={ twitter_share } target="_blank">T</a></li>
                 </ul>
-            </div>
-    </div>
-
+        </div>
          );
 
     }
     }
-
 });
 
 /**
