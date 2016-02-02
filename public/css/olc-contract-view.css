@@ -474,11 +474,8 @@
     float: left;
 }
 
-.pdf-zoom-options > div {
-    background: url(../images/ic-zoom-bar.png) repeat-x 0 0;
-    float: right;
-    width: 88px;
-    margin-left: 15px;
+.pdf-zoom-options p {
+    display: inline-block;
 }
 
 .pdf-zoom-options span[class*="scale-"] {
@@ -913,6 +910,7 @@
 }
 
 .social-share {
+    display: none;
     margin: 12px;
     float: right;
     padding: 0;
@@ -951,4 +949,32 @@
 
 .social-share li.twitter a:hover {
   background-position: 0 0;
+}
+
+.pdf-zoom-options > .btn-default  a {
+    line-height: 20px;
+    display: block;
+}
+
+.pdf-zoom-options {
+    padding: 4px 0;
+    border-left: 1px solid #DCDFE2  ;
+    float: left;
+    margin: 0;
+}
+
+.pdf-zoom-options > span {
+    font-size: 14px;
+    margin-left: 11px;
+    margin-top: 6px;
+}
+
+.pdf-zoom-options > .btn-default  {
+    width: 24px;
+    height: 22px;
+    background: #fff;
+    border: 1px solid #ccc;
+    text-align: center;
+    margin: 5px 10px;
+    padding: 0;
 }

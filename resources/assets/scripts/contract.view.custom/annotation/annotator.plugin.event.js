@@ -79,7 +79,7 @@ Annotator.Plugin.AnnotatorEvents = (function (_super) {
     };
 
     function onEditorShownHandler(viewer) {
-        var viewPort = contractApp.getView();
+        var viewPort = contractApp.getView() == 'pdf' ? 'pdf' : 'text';
         var viewerEl = $(viewer.element);
         var position = viewerEl.position();
         var wrapperEl = $('.' + viewPort + '-annotator');
@@ -109,7 +109,7 @@ Annotator.Plugin.AnnotatorEvents = (function (_super) {
 
     function onViewShownHandler(viewer, annotations) {
         var viewerEl = $(viewer.element);
-        var viewPort = contractApp.getView();
+        var viewPort = contractApp.getView() == 'pdf' ? 'pdf' : 'text';
         var position = viewerEl.position();
         var wrapperEl = $('.' + viewPort + '-annotator');
         var widgetEl = wrapperEl.find('ul.annotator-widget');
@@ -133,6 +133,5 @@ Annotator.Plugin.AnnotatorEvents = (function (_super) {
             widgetEl.removeClass('annotator-invert-y');
         }
     }
-
     return AnnotatorEvents;
 })(Annotator.Plugin);

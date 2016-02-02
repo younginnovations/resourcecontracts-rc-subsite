@@ -459,7 +459,11 @@
 }
 
 .pdf-zoom-options {
-  padding: 16px 10px 9px 0px;
+  padding: 4px 0px;
+    padding: 4px 0;
+    border-left: 1px solid #DCDFE2;
+    float: left;
+    margin: 0;
 }
 
 .pdf-zoom-options+div {
@@ -467,15 +471,13 @@
 }
 
 .pdf-zoom-options > span {
-    font-size: 12px;
-    float: left;
+    font-size: 14px;
+    margin-left: 11px;
+    margin-top: 6px;
 }
 
-.pdf-zoom-options > div {
-    background: url(../images/ic-zoom-bar.png) repeat-x 0 0;
-    float: right;
-    width: 88px;
-    margin-left: 15px;
+.pdf-zoom-options p {
+    display: inline-block;
 }
 
 .pdf-zoom-options span[class*="scale-"] {
@@ -485,6 +487,21 @@
     background-color: transparent;
     width: 6px;
     margin-left: 6px;
+}
+
+
+.pdf-zoom-options > .btn-default  {
+    width: 24px;
+    height: 22px;
+    background: #fff;
+    border: 1px solid #ccc;
+    text-align: center;
+    margin: 5px 10px;
+    padding: 0;
+}
+.pdf-zoom-options > .btn-default  a {
+    line-height: 20px;
+    display: block;
 }
 
 .pdf-zoom-options span[class*="scale-"]:nth-child(2) {
@@ -909,6 +926,7 @@
 }
 
 .social-share {
+    display: none;
     margin: 12px;
     float: right;
     padding: 0;

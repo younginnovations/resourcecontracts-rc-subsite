@@ -47,6 +47,11 @@ var TextPaginationView = React.createClass({
         e.preventDefault();
         if (this.state.visiblePage > 1) {
             this.changePage(this.state.visiblePage - 1);
+            if (this.props.contractApp.getView() == 'pdf') {
+                this.props.contractApp.setPrevClick(false);
+            } else {
+                this.props.contractApp.setPrevClick(true);
+            }
         }
     },
     clickNext: function (e) {
@@ -110,7 +115,10 @@ var TextPageView = React.createClass({
         };
     },
     _onEnter: function (msg, e) {
-        this.props.contractApp.triggerUpdateTextPaginationPage(this.props.page.get("page_no"));
+        if (!this.props.contractApp.isPrevClick()) {
+            this.props.contractApp.triggerUpdateTextPaginationPage(this.props.page.get("page_no"));
+        }
+        this.props.contractApp.setPrevClick(false);
     },
     _onLeave: function (e) {
     },
@@ -165,6 +173,8 @@ var TextPageView = React.createClass({
             }
         }
         var page_no = this.props.page.get('page_no');
+        var threshold = page_no == 1 ? 0 : -0.4;
+
         return (
             <span className={page_no} >
                 <span>{page_no}</span>
@@ -172,7 +182,7 @@ var TextPageView = React.createClass({
                 <Waypoint
                     onEnter={this._onEnter.bind(this, "enter" + page_no)}
                     onLeave={this._onLeave}
-                    threshold={-0.4}/>
+                    threshold={threshold}/>
             </span>
         );
     }

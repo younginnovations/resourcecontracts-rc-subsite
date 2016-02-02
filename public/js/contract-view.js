@@ -3588,6 +3588,12 @@ var ContractApp = Backbone.Model.extend({
     getSearchUrl: function () {
         return this.get('esapi') + "contract/" + this.getContractGuid() + "/searchtext"
     },
+    setPrevClick: function (click) {
+        this.set({"preClick": click});
+    },
+    isPrevClick: function () {
+        return this.get("preClick");
+    },
     getPdfUrl: function () {
         var page_no = parseInt(this.getCurrentPage());
         var pageModel = pagesCollection.where({page_no: page_no});
@@ -3740,7 +3746,6 @@ var ContractApp = Backbone.Model.extend({
         if (this.getShowMeta()) {
             show.push("RightColumnView");
         }
-
 
         if (show.indexOf(viewName) >= 0) {
             return true;
@@ -33058,7 +33063,7 @@ Annotator.Plugin.AnnotatorEvents = (function (_super) {
     };
 
     function onEditorShownHandler(viewer) {
-        var viewPort = contractApp.getView();
+        var viewPort = contractApp.getView() == 'pdf' ? 'pdf' : 'text';
         var viewerEl = $(viewer.element);
         var position = viewerEl.position();
         var wrapperEl = $('.' + viewPort + '-annotator');
@@ -33088,7 +33093,7 @@ Annotator.Plugin.AnnotatorEvents = (function (_super) {
 
     function onViewShownHandler(viewer, annotations) {
         var viewerEl = $(viewer.element);
-        var viewPort = contractApp.getView();
+        var viewPort = contractApp.getView() == 'pdf' ? 'pdf' : 'text';
         var position = viewerEl.position();
         var wrapperEl = $('.' + viewPort + '-annotator');
         var widgetEl = wrapperEl.find('ul.annotator-widget');
@@ -33112,7 +33117,6 @@ Annotator.Plugin.AnnotatorEvents = (function (_super) {
             widgetEl.removeClass('annotator-invert-y');
         }
     }
-
     return AnnotatorEvents;
 })(Annotator.Plugin);
 Annotator.Plugin.AnnotatorNRGIViewer = (function(_super) {
@@ -55255,158 +55259,167 @@ var Pdf = React.createClass({
   }
 });
 var PdfPaginationView = React.createClass({displayName: "PdfPaginationView",
-  getInitialState: function() {
-    return {
-      visiblePage: 1,
-      totalPages: 0
+    getInitialState: function () {
+        return {
+            visiblePage: 1,
+            totalPages: 0
+        }
+    },
+    changePage: function (page_no) {
+        this.refs.userInput.getDOMNode().value = page_no;
+        this.setState({visiblePage: page_no});
+        this.props.contractApp.setCurrentPage(page_no);
+        $('.pdf-viewer').animate({scrollTop: 0}, 200);
+    },
+    clickPrevious: function (e) {
+        e.preventDefault();
+        if (this.state.visiblePage > 1) {
+            this.changePage(this.state.visiblePage - 1);
+            this.props.contractApp.setPrevClick(true);
+        }
+    },
+    clickNext: function (e) {
+        e.preventDefault();
+        if (this.state.visiblePage < this.state.totalPages) {
+            this.changePage(this.state.visiblePage + 1);
+        }
+    },
+    handleKeyDown: function (e) {
+        if (e.keyCode == 13) {
+            var inputPage = parseInt(this.refs.userInput.getDOMNode().value);
+            if (inputPage > 0 && inputPage <= this.state.totalPages) {
+                this.changePage(inputPage);
+            } else {
+                this.changePage(this.state.visiblePage);
+            }
+        }
+    },
+    componentWillMount: function () {
+        this.setState({visiblePage: this.props.contractApp.getCurrentPage()});
+    },
+    componentDidMount: function () {
+        var self = this;
+        self.setState({totalPages: self.props.contractApp.getTotalPages()});
+        this.props.contractApp.on("update-pdf-pagination-page", function (page_no) {
+            self.refs.userInput.getDOMNode().value = page_no;
+            self.setState({visiblePage: page_no});
+        });
+        this.refs.userInput.getDOMNode().value = this.state.visiblePage;
+    },
+    render: function () {
+        return (
+            React.createElement("div", {className: "pdf-pagination pagination", style: this.props.style}, 
+                React.createElement("a", {href: "#", className: "previous", onClick: this.clickPrevious}, lang.previous), 
+                React.createElement("input", {type: "text", className: "goto", ref: "userInput", onKeyDown: this.handleKeyDown}), 
+                React.createElement("a", {href: "#", className: "next", onClick: this.clickNext}, lang.next), " ", lang.of, " ", this.state.totalPages
+            )
+        );
     }
-  },
-  changePage: function(page_no) {
-    this.refs.userInput.getDOMNode().value = page_no;
-    this.setState({visiblePage: page_no});
-    this.props.contractApp.setCurrentPage(page_no);
-    $('.pdf-viewer').animate({scrollTop: 0}, 200);
-  },
-  clickPrevious: function(e) {
-    e.preventDefault();
-    if(this.state.visiblePage > 1) {
-      this.changePage(this.state.visiblePage-1);
-    }
-  },
-  clickNext: function(e) {
-    e.preventDefault();
-    if(this.state.visiblePage < this.state.totalPages) {
-      this.changePage(this.state.visiblePage+1);
-    }
-  },
-  handleKeyDown: function(e) {
-    if(e.keyCode == 13) {
-      var inputPage = parseInt(this.refs.userInput.getDOMNode().value);
-      if(inputPage > 0 && inputPage <= this.state.totalPages) {
-        this.changePage(inputPage);
-      } else {
-        this.changePage(this.state.visiblePage);
-      }
-    }
-  },
-  componentWillMount: function()
-  {
-    this.setState({visiblePage: this.props.contractApp.getCurrentPage()});
-  },
-  componentDidMount: function() {
-    var self = this;
-    self.setState({totalPages: self.props.contractApp.getTotalPages()});
-    this.props.contractApp.on("update-pdf-pagination-page", function(page_no) {
-      self.refs.userInput.getDOMNode().value = page_no;
-      self.setState({visiblePage: page_no});
-    });
-    this.refs.userInput.getDOMNode().value = this.state.visiblePage;
-  },
-  render: function() {
-    return (
-      React.createElement("div", {className: "pdf-pagination pagination", style: this.props.style}, 
-        React.createElement("a", {href: "#", className: "previous", onClick: this.clickPrevious}, lang.previous), 
-        React.createElement("input", {type: "text", className: "goto", ref: "userInput", onKeyDown: this.handleKeyDown}), 
-        React.createElement("a", {href: "#", className: "next", onClick: this.clickNext}, lang.next), " ", lang.of, " ", this.state.totalPages
-      )
-    );
-  }
 });
 
 var PdfZoom = React.createClass({displayName: "PdfZoom",
-  getInitialState: function() {
-      return {
-          scale: '1'
-      }
-  },
-  handleClick: function(e) {
-    var scale = event.target.innerHTML
-    this.setState({scale: scale.replace(".","")});
-    this.props.contractApp.setPdfScale(e.target.innerHTML);
-  },
-  render: function() {
-    var selectedClass = "scale-" + this.state.scale;
-    $('.pdf-zoom-options span').removeClass('scale-selected');
-    $('.pdf-zoom-options .' + selectedClass).addClass('scale-selected');
-    return (
-      React.createElement("div", {className: "pdf-zoom-options", style: this.props.style}, " Zoom", 
-        React.createElement("div", null, 
-          React.createElement("span", {onClick: this.handleClick, className: "scale-1 scale-selected"}, "1"), 
-          React.createElement("span", {onClick: this.handleClick, className: "scale-125"}, "1.25"), 
-          React.createElement("span", {onClick: this.handleClick, className: "scale-15"}, "1.5")
-        )
-      )
-    );
-  }
-});
+    getInitialState: function () {
+        return {
+            scale: 1
+        }
+    },
+    handleClick: function (e, ev) {
+        var type = e.target.getAttribute('data-ref');
+        var int = this.state.scale;
+        if (int < 2 && type == 'increase') {
+            int = int + 0.25;
+        }
 
+        if (int > 0.5 && type == 'decrease') {
+            int = int - 0.25;
+        }
+        this.setState({scale: int});
+        this.props.contractApp.setPdfScale(int);
+    },
+    render: function () {
+        var selectedClass = "scale-" + this.state.scale;
+        $('.pdf-zoom-options span').removeClass('scale-selected');
+        $('.pdf-zoom-options .' + selectedClass).addClass('scale-selected');
+        var zoom = this.state.scale * 100;
+        return (
+            React.createElement("div", null, 
+                React.createElement("div", {className: "pdf-zoom-options", style: this.props.style}, 
+                    React.createElement("span", null, "Zoom"), 
+                    React.createElement("a", {className: "btn btn-default", "data-ref": "decrease", href: "#", onClick: this.handleClick}, "-"), 
+                    React.createElement("p", null, zoom, "%"), 
+                    React.createElement("a", {className: "btn btn-default", "data-ref": "increase", href: "#", onClick: this.handleClick}, "+")
+                )
+            )
+        );
+    }
+});
 var PdfViewer = React.createClass({displayName: "PdfViewer",
-  getInitialState: function() {
-    return {
-      loadAnnotations: false
-    };
-  },
-  componentDidMount: function() {
-    this.loadAnnotationsFlag = false;
-    var self = this;
-    this.props.pagesCollection.on("reset", function() {
-      debug("pdf.view.js pagesCollection reset called: triggering change:page_no");
-      self.props.contractApp.trigger("change:page_no");
-    });
-    this.props.contractApp.on("change:pdfscale", function() {
-      self.loadAnnotationsFlag = true;
-      self.forceUpdate();
-    });
-    this.props.pdfPage.on("change:content", function() {
-      self.loadAnnotationsFlag = true;
-      // self.setState({loadAnnotations: true});
-    });
-  },
-  render: function() {
-      var page_no = this.props.contractApp.getCurrentPage();
-      var pdfUrl = this.props.contractApp.getPdfUrl();
-      return (
-        React.createElement("div", {className: "pdf-viewer pdf-annotator", id: "pdfview", style: this.props.style}, 
-        React.createElement(Pdf, {
-          contractApp: this.props.contractApp, 
-          pdfPage: this.props.pdfPage, 
-          page: 1, 
-          content: this.props.pdfPage.get("content"), 
-          scale: parseFloat(this.props.contractApp.getPdfScale())||1, 
-          onPageRendered: this._onPageRendered, 
-          renderReady: this.state.renderReady})
-        )
-      );
-  },
-  loadAnnotations: function() {
-    if(!this.annotator) {
-      this.annotator = new PdfAnnotatorjsView({
-        el: ".pdf-annotator",
-        api: this.props.contractApp.getLoadAnnotationsUrl(),
-        // api: "http://localhost:8009",
-        availableTags: ["Country","Local-Company-Name"],
-        // collection: annotationCollection,
-        annotationCategories: ["General information","Country","Local company name"],
-        enablePdfAnnotation: true,
-        contractApp: this.props.contractApp
-      });
-      this.props.contractApp.setAnnotatorInstance(this.annotator);
-    }
-  },
-  _onPageRendered: function() {
-    if(this.props.contractApp.getView() === "pdf" && this.loadAnnotationsFlag) {
-      if(this.annotator) {
-        this.annotator.pageUpdated();
+    getInitialState: function () {
+        return {
+            loadAnnotations: false
+        };
+    },
+    componentDidMount: function () {
         this.loadAnnotationsFlag = false;
-        // this.setState({loadAnnotations: false});
-      }
-      else if($(".pdf-viewer").is(":visible")) {
-          this.loadAnnotations();
-          this.loadAnnotationsFlag = false;
-          // this.setState({loadAnnotations: false});
-      }
-    }
-  },
+        var self = this;
+        this.props.pagesCollection.on("reset", function () {
+            debug("pdf.view.js pagesCollection reset called: triggering change:page_no");
+            self.props.contractApp.trigger("change:page_no");
+        });
+        this.props.contractApp.on("change:pdfscale", function () {
+            self.loadAnnotationsFlag = true;
+            self.forceUpdate();
+        });
+        this.props.pdfPage.on("change:content", function () {
+            self.loadAnnotationsFlag = true;
+            // self.setState({loadAnnotations: true});
+        });
+    },
+    render: function () {
+        var page_no = this.props.contractApp.getCurrentPage();
+        var pdfUrl = this.props.contractApp.getPdfUrl();
+        return (
+            React.createElement("div", {className: "pdf-viewer pdf-annotator", id: "pdfview", style: this.props.style}, 
+                React.createElement(Pdf, {
+                    contractApp: this.props.contractApp, 
+                    pdfPage: this.props.pdfPage, 
+                    page: 1, 
+                    content: this.props.pdfPage.get("content"), 
+                    scale: parseFloat(this.props.contractApp.getPdfScale())||1, 
+                    onPageRendered: this._onPageRendered, 
+                    renderReady: this.state.renderReady})
+            )
+        );
+    },
+    loadAnnotations: function () {
+        if (!this.annotator) {
+            this.annotator = new PdfAnnotatorjsView({
+                el: ".pdf-annotator",
+                api: this.props.contractApp.getLoadAnnotationsUrl(),
+                // api: "http://localhost:8009",
+                availableTags: ["Country", "Local-Company-Name"],
+                // collection: annotationCollection,
+                annotationCategories: ["General information", "Country", "Local company name"],
+                enablePdfAnnotation: true,
+                contractApp: this.props.contractApp
+            });
+            this.props.contractApp.setAnnotatorInstance(this.annotator);
+        }
+    },
+    _onPageRendered: function () {
+        if (this.props.contractApp.getView() === "pdf" && this.loadAnnotationsFlag) {
+            if (this.annotator) {
+                this.annotator.pageUpdated();
+                this.loadAnnotationsFlag = false;
+                // this.setState({loadAnnotations: false});
+            }
+            else if ($(".pdf-viewer").is(":visible")) {
+                this.loadAnnotations();
+                this.loadAnnotationsFlag = false;
+                // this.setState({loadAnnotations: false});
+            }
+        }
+    },
 });
 
 var MetadataToggleButton = React.createClass({displayName: "MetadataToggleButton",
@@ -55825,6 +55838,11 @@ var TextPaginationView = React.createClass({displayName: "TextPaginationView",
         e.preventDefault();
         if (this.state.visiblePage > 1) {
             this.changePage(this.state.visiblePage - 1);
+            if (this.props.contractApp.getView() == 'pdf') {
+                this.props.contractApp.setPrevClick(false);
+            } else {
+                this.props.contractApp.setPrevClick(true);
+            }
         }
     },
     clickNext: function (e) {
@@ -55888,7 +55906,10 @@ var TextPageView = React.createClass({displayName: "TextPageView",
         };
     },
     _onEnter: function (msg, e) {
-        this.props.contractApp.triggerUpdateTextPaginationPage(this.props.page.get("page_no"));
+        if (!this.props.contractApp.isPrevClick()) {
+            this.props.contractApp.triggerUpdateTextPaginationPage(this.props.page.get("page_no"));
+        }
+        this.props.contractApp.setPrevClick(false);
     },
     _onLeave: function (e) {
     },
@@ -55943,6 +55964,8 @@ var TextPageView = React.createClass({displayName: "TextPageView",
             }
         }
         var page_no = this.props.page.get('page_no');
+        var threshold = page_no == 1 ? 0 : -0.4;
+
         return (
             React.createElement("span", {className: page_no}, 
                 React.createElement("span", null, page_no), 
@@ -55950,7 +55973,7 @@ var TextPageView = React.createClass({displayName: "TextPageView",
                 React.createElement(Waypoint, {
                     onEnter: this._onEnter.bind(this, "enter" + page_no), 
                     onLeave: this._onLeave, 
-                    threshold: -0.4})
+                    threshold: threshold})
             )
         );
     }
@@ -56323,24 +56346,28 @@ var AnnotationItem = React.createClass({displayName: "AnnotationItem",
     handleAnnotationClick: function (e) {
         var self = this;
         e.preventDefault();
-        switch (this.state.annotationType) {
+        switch(this.state.annotationType) {
             case "pdf":
+                this.props.contractApp.trigger("annotations:highlight", {id: self.state.id});
                 this.props.contractApp.setView("pdf");
                 this.props.contractApp.setSelectedAnnotation(self.state.id);
-                this.props.contractApp.trigger("annotations:highlight", {id: self.state.id});
+                if (self.props.contractApp.getCurrentPage() == self.state.pageNo) {
+                    var self = this;
+                    setTimeout(function () {
+                        self.props.contractApp.showPdfAnnotationPopup(self.state.id)
+                    }, 300);
+                }
                 this.props.contractApp.setCurrentPage(self.state.pageNo);
                 this.props.contractApp.triggerUpdatePdfPaginationPage(self.state.pageNo);
-                // this.props.contractApp.trigger("annotationHighlight", this.props.annotation.attributes);
-                break
+                break;
             case "text":
-                this.props.contractApp.setView("text");
                 this.props.contractApp.trigger("annotations:highlight", {id: self.state.id});
-                this.props.contractApp.setCurrentPage(self.state.pageNo);
-                self = this;
+                var self = this;
                 setTimeout(function () {
                     self.props.contractApp.showTextAnnotationPopup(self.state.id)
                 }, 300);
-                //setTimeout(this.props.contractApp.triggerScrollToTextPage());
+                this.props.contractApp.setView("text");
+                this.props.contractApp.setCurrentPage(self.state.pageNo);
                 break;
         }
     },
@@ -56520,9 +56547,14 @@ var AnnotationsList = React.createClass({displayName: "AnnotationsList",
         this.props.contractApp.on("annotations:render", function (sortBy) {
             self.forceUpdate();
         });
-        this.props.contractApp.on("annotations:highlight", function (annotation) {
-            setTimeout(self.scrollToAnnotation(annotation.id), 1000);
+
+        this.props.contractApp.on("annotations:highlight", function(annotation) {
+            var that = self
+            setTimeout(function(){
+                that.scrollToAnnotation(annotation.id);
+            }, 100);
         });
+
         this.props.contractApp.on("annotations:scroll-to-selected-annotation", function () {
             self.scrollToAnnotation(self.props.contractApp.getSelectedAnnotation());
         });
@@ -56718,20 +56750,19 @@ render:function() {
     if(!this.props.annotations_url && !this.props.text_url)
     {
         return (
-            React.createElement("div", {className: "download-dropdown"}, 
-            React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, "Download")), 
-            React.createElement("ul", {style: style}, 
-            React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF "))
-            )
-            ),
-    React.createElement("div", null, 
-    React.createElement("ul", {className: "social-share"}, 
-React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
-React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
-React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
-)
-)
-
+            React.createElement("div", null, 
+                React.createElement("div", {className: "download-dropdown"}, 
+                    React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, "Download")), 
+                    React.createElement("ul", {style: style}, 
+                    React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF "))
+                    )
+                ), 
+                React.createElement("ul", {className: "social-share"}, 
+                    React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
+                    React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
+                    React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
+                )
+           )
             );
     }
     else if(!this.props.text_url){
@@ -56744,12 +56775,10 @@ React.createElement("li", {className: "twitter"}, React.createElement("a", {href
                 React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, " ANNOTATION "))
                 )
                 ), 
-                React.createElement("div", null, 
                 React.createElement("ul", {className: "social-share"}, 
                 React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
                 React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
                 React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
-                )
                 )
             )
 
@@ -56766,15 +56795,12 @@ React.createElement("li", {className: "twitter"}, React.createElement("a", {href
                 React.createElement("li", null, React.createElement("a", {href: this.props.text_url}, " WORD FILE "))
                 )
                 ), 
-                React.createElement("div", null, 
                 React.createElement("ul", {className: "social-share"}, 
                 React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
                 React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
                 React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
                 )
-                )
             )
-
             );
          }
     else{
@@ -56788,20 +56814,16 @@ React.createElement("li", {className: "twitter"}, React.createElement("a", {href
             React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, " ANNOTATION "))
             )
             ), 
-            React.createElement("div", null, 
                 React.createElement("ul", {className: "social-share"}, 
                 React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
                 React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
                 React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
                 )
-            )
-    )
-
+        )
          );
 
     }
     }
-
 });
 
 /**
@@ -56816,7 +56838,7 @@ var MainApp = React.createClass({displayName: "MainApp",
     text: function(page_no, annotation_id) {
         debug("view.blade.php: setting text view");
         contractApp.setView("text");
-        contractApp.trigger("update-text-pagination-page", contractApp.getCurrentPage());
+        contractApp.setCurrentPage(contractApp.getCurrentPage());
         contractApp.resetSelectedAnnotation();
         if(page_no) {
             contractApp.setCurrentPage(page_no);
@@ -56824,26 +56846,22 @@ var MainApp = React.createClass({displayName: "MainApp",
         if(annotation_id) {
             contractApp.setSelectedAnnotation(annotation_id);
         }
+        contractApp.trigger("update-text-pagination-page", contractApp.getCurrentPage());
         this.forceUpdate();
+        contractApp.trigger('scroll-to-text-page');
     },
     pdf: function(page_no, annotation_id) {
         debug("view.blade.php: setting pdf view");
             contractApp.setView("pdf");
-        contractApp.trigger("update-pdf-pagination-page", contractApp.getCurrentPage());
         if(page_no) {
             contractApp.setCurrentPage(page_no);
-            debug("view.blade.php: setting current page to", page_no);
         }
         if(annotation_id) {
             contractApp.setSelectedAnnotation(annotation_id);
-            debug("view.blade.php: setting annotation to", annotation_id);
         } else {
             contractApp.resetSelectedAnnotation();
         }
-        if(!pdfPage.init && contractApp.getView() != "pdf") {
-            debug("view.blade pdfPage init-none, trigger change:page_no")
-            contractApp.setView("pdf");
-        }
+        contractApp.trigger("update-pdf-pagination-page", contractApp.getCurrentPage());
         this.forceUpdate();
     },
     search: function(query) {
