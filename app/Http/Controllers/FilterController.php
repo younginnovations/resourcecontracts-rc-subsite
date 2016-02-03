@@ -41,7 +41,8 @@ class FilterController
         $data     = trans("meta/$category");
 
         $meta = [
-            'title' => $data['search_results_for'] . $request->get('q')
+            'title'       => 'Search Contracts',
+            'description' => 'Search' . getCategoryTitle() . 'using different criteria - year signed, company name, contract type, annotation category.'
         ];
 
         return view('site.filter', compact('contracts', 'filter', 'show_advance', 'total_contract', 'currentPage', 'meta'));

@@ -40,10 +40,10 @@ class PageController extends BaseController
         $page_name = 'about';
 
         $meta = [
-                'title' => 'About'
+            'title' => 'About'
         ];
 
-        return view('page.master', compact('page', 'page_name' , 'meta'));
+        return view('page.master', compact('page', 'page_name', 'meta'));
     }
 
     /**
@@ -57,12 +57,11 @@ class PageController extends BaseController
         $page_name = 'contact';
 
         $meta = [
-            'title' => 'Contact'
+            'title'       => 'Contact',
+            'description' => 'Please send your questions, comments, and feedback by email at ' . env('CONTACT_MAIL')
         ];
 
-        dd(meta($meta)->title);
-
-        return view('page.master', compact('page', 'page_name' , 'meta'));
+        return view('page.master', compact('page', 'page_name', 'meta'));
     }
 
     /**
@@ -76,10 +75,11 @@ class PageController extends BaseController
         $page_name = 'resources';
 
         $meta = [
-            'title' => 'Resources'
+            'title'       => 'Resources',
+            'description' => 'See different guides and documents to learn more about the contracts.'
         ];
 
-        return view('page.master', compact('page', 'page_name' , 'meta'));
+        return view('page.master', compact('page', 'page_name', 'meta'));
     }
 
     /**
@@ -93,10 +93,11 @@ class PageController extends BaseController
         $page_name = 'faqs';
 
         $meta = [
-            'title' => 'FAQS'
+            'title'       => 'FAQS',
+            'description' => 'Frequently Asked Questions about ' . getCategoryTitle()
         ];
 
-        return view('page.master', compact('page', 'page_name' , 'meta'));
+        return view('page.master', compact('page', 'page_name', 'meta'));
     }
 
     /**
@@ -110,10 +111,12 @@ class PageController extends BaseController
         $page_name = 'glossary';
 
         $meta = [
-            'title' => 'Glossary'
+            'title'       => 'Glossary',
+            'description' => 'A number of key terms are critical for conducting contract analysis.' . getCategoryTitle(
+                ) . 'provides a growing glossary that can help you navigate the language of the contracts.'
         ];
 
-        return view('page.master', compact('page', 'page_name' , 'meta'));
+        return view('page.master', compact('page', 'page_name', 'meta'));
 
     }
 
@@ -128,11 +131,12 @@ class PageController extends BaseController
         $page_name = 'publish-contracts';
 
         $meta = [
-            'title' => 'Publish Contracts'
+            'title'       => 'Publish Contracts',
+            'description' => 'Learn more about how the' . getCategoryTitle() . 'team can support host governments, investors, and other relevant stakeholders in their efforts to disclose contracts.'
         ];
 
-        return view('page.master', compact('page', 'page_name' , 'meta'));
-    
+        return view('page.master', compact('page', 'page_name', 'meta'));
+
     }
 
 }

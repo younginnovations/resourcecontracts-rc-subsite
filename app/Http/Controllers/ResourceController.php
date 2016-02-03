@@ -39,9 +39,21 @@ class ResourceController extends BaseController
         $resources = $this->api->allCountries();
         $resources = $resources->results;
 
+        $resourceList = $this->api->summary()->resource_summary;
+
+        $reourceName = [];
+
+        foreach ($resourceList as $resource) {
+
+            $resourceCode = $resource->key;
+            array_push($reourceName, $resourceCode);
+        }
+
+        $reourceName = implode(',', $reourceName);
+
         $meta = [
-            'title' => 'Resources',
-            'description' => ''
+            'title'       => 'Resources',
+            'description' => 'See and search' . getCategoryTitle() . 'in different resources -' . $reourceName
         ];
 
 
@@ -49,7 +61,7 @@ class ResourceController extends BaseController
             $country->name = trans('country')[strtoupper($country->code)];
         }
 
-        return view('resource.index', compact('resources' , 'meta'));
+        return view('resource.index', compact('resources', 'meta'));
     }
 
     /**
@@ -63,7 +75,7 @@ class ResourceController extends BaseController
     {
         $resource    = urldecode($resource);
         $currentPage = $request->get('page', 1);
-        $filter      = ['resource' => $resource, 'from' => $currentPage,'sort_by'=>$request->get('sortby'),'order'=>$request->get('order')];
+        $filter      = ['resource' => $resource, 'from' => $currentPage, 'sort_by' => $request->get('sortby'), 'order' => $request->get('order')];
         $contracts   = $this->api->allContracts($filter);
         $countries   = $this->api->getCountryByResource($filter);
         if (!$contracts) {
@@ -71,11 +83,13 @@ class ResourceController extends BaseController
         }
 
         $meta = [
-            'title' => trans('resources.'. $resource).'- Resource',
+            'title'       => trans('resources.' . $resource),
+            'description' => 'See and search' . getCategoryTitle() . 'in resource -' . $resource
+
         ];
 
 
-        return view('resource.detail', compact('contracts', 'resource', 'countries', 'currentPage' , 'meta'));
+        return view('resource.detail', compact('contracts', 'resource', 'countries', 'currentPage', 'meta'));
     }
 
 }

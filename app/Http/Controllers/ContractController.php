@@ -56,12 +56,13 @@ class ContractController extends BaseController
             'order'   => $request->get('order')
         ];
         $contracts   = $this->api->allContracts($filter);
-        $category    = env('CATEGORY');
-        $data        = trans("meta/$category");
+
+        $category = env('CATEGORY');
+        $data     = trans("meta/$category");
 
         $meta = [
-
-            'title' => $data['all_contracts']
+            'title'       => 'Search Contracts',
+            'description' => 'Search' . getCategoryTitle() . 'using different criteria - year signed, company name, contract type, annotation category.'
         ];
 
 
@@ -169,6 +170,7 @@ class ContractController extends BaseController
     {
         $filter    = ['resource' => $request->get('resource')];
         $countries = $this->api->getCountryByResource($filter);
+
 
         foreach ($countries as &$country) {
             $country->name = trans('country')[strtoupper($country->code)];
@@ -305,7 +307,7 @@ class ContractController extends BaseController
      */
     public function downloadAnnotations($id)
     {
-        $this->api->downloadAPI("contract/".$id."/annotations/download",[],"",$id);
+        $this->api->downloadAPI("contract/" . $id . "/annotations/download", [], "", $id);
         die;
     }
 

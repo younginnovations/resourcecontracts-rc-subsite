@@ -31,18 +31,27 @@ class CountryController extends BaseController
 
     /**
      * All Countries
-     *
      * @return \Illuminate\View\View
+     * @internal param Request $request
      */
     public function index()
     {
-        $meta = [
-            'title' => 'Countries',
-           
+        $countries = $this->api->summary()->country_summary;
+
+        $countryName = [];
+        foreach ($countries as $country) {
+
+            $countryCode = trans('country.' . strtoupper($country->key));
+            array_push($countryName, $countryCode);
+        }
+        $countryName = implode(',', $countryName);
+        $meta        = [
+            'title'       => 'Countries',
+            'description' => 'See and search' . getCategoryTitle() . 'from different countries - ' . $countryName
         ];
 
 
-        return view('country.index' , compact('meta'));
+        return view('country.index', compact('meta'));
     }
 
     /**
@@ -55,19 +64,22 @@ class CountryController extends BaseController
     public function detail(Request $request, $country)
     {
         $currentPage = $request->get('page', 1);
-        $filter      = ['country' => urldecode($country), 'from' => $currentPage,'sort_by'=>$request->get('sortby'),'order'=>$request->get('order')];
+        $filter      = ['country' => urldecode($country), 'from' => $currentPage, 'sort_by' => $request->get('sortby'), 'order' => $request->get('order')];
         $contracts   = $this->api->allContracts($filter);
         $resources   = $this->api->getResourceByCountry($filter);
         if (!$contracts) {
             return abort(404);
         }
 
+        $countryName = trans('country.' . strtoupper($country));
+
         $meta = [
-            'title' => trans('country.'. strtoupper($country)).'- country',
+            'title' =>  $countryName,
+            'description' => 'See and search' . getCategoryTitle() . 'from ' . $countryName
 
         ];
 
-        return view('country.detail', compact('contracts', 'country', 'resources', 'currentPage'  , 'meta'));
+        return view('country.detail', compact('contracts', 'country', 'resources', 'currentPage', 'meta'));
     }
 
 }
