@@ -53,7 +53,6 @@ class APIService
     }
 
 
-
     /**
      * Get All Contracts
      *
@@ -410,8 +409,10 @@ class APIService
         try {
             $filename = "export" . date('Y-m-d');
             if (!empty($id)) {
-                $metadata = $this->contractDetail($id);
-                $filename = $metadata->metadata->name . date('Y-m-d');
+                $metadata     = $this->contractDetail($id);
+                $contractName = $metadata->metadata->name;
+                $contractName = str_replace(' ', '_', $contractName);
+                $filename     = "Annotations--" . $contractName . "--" . date('Ymdhis');
             }
             $request           = new Request('GET', $this->apiURL($resource));
             $query['category'] = $this->category;
@@ -420,7 +421,7 @@ class APIService
             $data     = $response->getBody()->getContents();
             header('Content-type: text/csv; charset=utf-8');
             header('Content-Disposition: attachment; filename="' . $filename . '.csv"');
-            print $data;
+            echo chr(255) . chr(254) . mb_convert_encoding($data, 'UTF-16LE', 'UTF-8');
             die;
         } catch (\Exception $e) {
             Log::error($resource . ":" . $e->getMessage(), $query);
