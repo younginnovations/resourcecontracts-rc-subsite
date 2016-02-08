@@ -5,6 +5,7 @@ $url = Request::all();
 $order = \Illuminate\Support\Facades\Input::get('order', '');
 $sortBy = \Illuminate\Support\Facades\Input::get('sortby', '');
 $route = Request::path();
+
 ?>
 
 <table class="table table-responsive table-contract table-contract-list">
@@ -81,8 +82,15 @@ $route = Request::path();
                 @if(isset($contract->group) && count($contract->group)>0)
                     <div class="contract-group">
                         <label for="">@lang('search.found_in'): </label>
+
                         @foreach($contract->group as $group)
-                            <a>{{$group}}</a>
+                            @if($group == "Metadata")
+                                <a href="{{ route('contract.view' , ['id' => $contract->open_contracting_id]) }}">{{$group}}</a>
+                            @elseif($group == "Text")
+                                <a href="{{ url(sprintf("/contract/%s/view#/search/%s", $contract->open_contracting_id , $url['q'] )) }}">{{ $group }} </a>
+                            @elseif($group == "Annotation")
+                                <a href="{{ route('contract.view' , ['id' => $contract->open_contracting_id]) }}">{{$group}}</a>
+                            @endif
                         @endforeach
                     </div>
                 @endif

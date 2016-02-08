@@ -136,4 +136,3 @@ function getCategoryTitle()
 
     return $categoryTitle;
 }
-
