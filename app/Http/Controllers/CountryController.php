@@ -74,7 +74,7 @@ class CountryController extends BaseController
         $countryName = trans('country.' . strtoupper($country));
 
         $meta = [
-            'title' =>  $countryName,
+            'title'       => $countryName,
             'description' => 'See and search' . getCategoryTitle() . 'from ' . $countryName
 
         ];

@@ -132,7 +132,7 @@ function meta($meta = null)
 
 function getCategoryTitle()
 {
-    $categoryTitle = env('CATEGORY') == 'olc' ? 'OpenLandContracts.org' : ' ResourceContracts.org ';
+    $categoryTitle = env('CATEGORY') == 'olc' ? ' OpenLandContracts.org ' : ' ResourceContracts.org ';
 
     return $categoryTitle;
 }
