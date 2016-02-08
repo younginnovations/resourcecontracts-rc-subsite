@@ -42,15 +42,18 @@ $route = Request::path();
 
                 <div class="search-text">
                     @if(isset($contract->text ) && $contract->text !='')
-                        <p>{!!$contract->text.'...'!!}</p>
+                        <p><a href="{{ url(sprintf("/contract/%s/view#/search/%s", $contract->open_contracting_id , $url['q'] )) }}">{!!$contract->text.'...'!!}</a></p>
                     @endif
 
-                    @if(isset($contract->annotations ) && $contract->annotations !='')
-                        <p>{!!$contract->annotations.'...'!!}</p>
+                    @if(isset($contract->annotations ) && !empty($contract->annotations))
+
+                        <p>
+                            <a href="{{ url(sprintf("/contract/%s/view#/pdf/page/%s/annotation/%s", $contract->open_contracting_id ,$contract->annotations->page_no , $contract->annotations->annotation_id  )) }}">{!! $contract->annotations->annotation_text ." pg " .$contract->annotations->page_no !!}</a>
+                        </p>
                     @endif
 
                     @if(isset($contract->metadata ) && $contract->metadata !='')
-                        <p>{!! $contract->metadata.'...' !!}</p>
+                        <p><a href="{{ route('contract.view' , ['id' => $contract->open_contracting_id]) }}">{!! $contract->metadata.'...' !!}</a></p>
                     @endif
                 </div>
                 @if($annotations->total>0)
@@ -84,13 +87,7 @@ $route = Request::path();
                         <label for="">@lang('search.found_in'): </label>
 
                         @foreach($contract->group as $group)
-                            @if($group == "Metadata")
-                                <a href="{{ route('contract.view' , ['id' => $contract->open_contracting_id]) }}">{{$group}}</a>
-                            @elseif($group == "Text")
-                                <a href="{{ url(sprintf("/contract/%s/view#/search/%s", $contract->open_contracting_id , $url['q'] )) }}">{{ $group }} </a>
-                            @elseif($group == "Annotation")
-                                <a href="{{ route('contract.view' , ['id' => $contract->open_contracting_id]) }}">{{$group}}</a>
-                            @endif
+                            <a>{{ $group }}</a>
                         @endforeach
                     </div>
                 @endif
