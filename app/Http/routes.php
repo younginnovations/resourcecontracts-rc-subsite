@@ -12,7 +12,7 @@ $app->get('/countries/{key}', ['as' => 'country.detail', 'uses' => 'CountryContr
 $app->get('/resources', ['as' => 'resources', 'uses' => 'ResourceController@index']);
 $app->get('/resource/{key}', ['as' => 'resource.detail', 'uses' => 'ResourceController@detail']);
 
-$app->get('/sitemap' , ['as' => 'sitemap' , 'uses' => 'SiteController@sitemap']);
+$app->get('/sitemap', ['as' => 'sitemap', 'uses' => 'SiteController@sitemap']);
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +35,6 @@ $app->get('/contracts/download/searchresult', ['as' => 'contract.csv.download', 
 $app->get('/contracts/download/csv', ['as' => 'contract.metadata.download', 'uses' => 'ContractController@downloadMetadataAsCSV']);
 $app->get('/contract/{id}/download/annotations', ['as' => 'contract.annotations.download', 'uses' => 'ContractController@downloadAnnotations']);
 $app->get('/contract/{id}/view', ['as' => 'contract.detail', 'uses' => 'ContractController@view']);
-
 /*
 |--------------------------------------------------------------------------
 | Static Pages
