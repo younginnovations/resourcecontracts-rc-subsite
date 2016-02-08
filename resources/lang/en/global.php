@@ -46,7 +46,7 @@ return [
     'temporarily_unavailable'     => ' is temporarily unavailable',
     'fix_message'                 => ' We are working to fix this. Please contact ',
     'if_problem_persists'         => ' if the problem persists.',
-    'apologize'                  => 'We apologize for any inconvenience.',
+    'apologize'                   => 'We apologize for any inconvenience.',
     'more'                        => 'More',
     'less'                        => 'Less',
     'prev'                        => 'Prev',
@@ -58,4 +58,9 @@ return [
     'close_annotations'           => 'Close Annotations',
     'note'                        => 'Note',
     'land_matrix_id'              => 'Land Matrix ID',
+    'is_pages_missing'            => 'Is Pages Missing',
+    'is_annexes_missing'          => 'Is Annexes Missing',
+    'annotation'                  => 'Annotation',
+    'text'                        => 'Text',
+    'metadata'                    => 'Metadata'
 ];

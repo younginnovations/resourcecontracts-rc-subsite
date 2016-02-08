@@ -237,8 +237,8 @@ var RelatedDocumentsView = React.createClass({
                 var docUrl = app_url + "/contract/" + doc.open_contracting_id;
                 if (doc.is_published) {
                     return (
-                        <span>
-                            <a href={docUrl}>{doc.name}</a>
+                        <span className="parent-contract">
+                            <a href={docUrl}>{doc.name}</a>(Main Contract)
                         </span>
                     );
                 }
@@ -260,7 +260,7 @@ var RelatedDocumentsView = React.createClass({
                 return (
                     <div className="relateddocument-view">
                         <div>{lang.related_docs}</div>
-                        {parentContracts}
+                        <span>{parentContracts}</span>
                         {supportingContracts}
                         {moreContracts}
                     </div>

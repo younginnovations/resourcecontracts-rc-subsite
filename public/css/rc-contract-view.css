@@ -966,3 +966,14 @@
 .social-share li.twitter a:hover {
   background-position: 0 0;
 }
+
+.parent-contract {
+    display: flex!important;
+    align-items: center;
+}
+
+.parent-contract > span:last-of-type {
+    font-size: 11px;
+    margin-left: 4px;
+    color: #888;
+}

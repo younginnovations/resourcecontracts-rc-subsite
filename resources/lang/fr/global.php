@@ -47,7 +47,7 @@ return [
     'temporarily_unavailable'     => 'Fr is temporarily unavailable',
     'fix_message'                 => ' We are working to fix this. Please contact ',
     'if_problem_persists'         => ' if the problem persists.',
-    'apologize'                  => 'We apologize for any inconvenience.',
+    'apologize'                   => 'We apologize for any inconvenience.',
     'more'                        => 'Fr More',
     'less'                        => 'Fr Less',
     'prev'                        => 'Fr Prev',
@@ -59,4 +59,9 @@ return [
     'close_annotations'           => 'Close Annotations',
     'note'                        => 'Fr Note',
     'land_matrix_id'              => 'Land Matrix Id',
+    'is_pages_missing'            => 'Fr Is Pages Missing',
+    'is_annexes_missing'          => 'Fr Is Annexes Missing',
+    'annotation'                  => 'Fr Annotation',
+    'text'                        => 'Text',
+    'metadata'                    => 'Metadata'
 ];
