@@ -53,7 +53,7 @@ class ResourceController extends BaseController
 
         $meta = [
             'title'       => 'Resources',
-            'description' => 'See and search' . getCategoryTitle() . 'in different resources -' . $reourceName
+            'description' => 'See and search' . getCategoryTitle() . 'in different resources - ' . $reourceName
         ];
 
 
@@ -84,7 +84,7 @@ class ResourceController extends BaseController
 
         $meta = [
             'title'       => trans('resources.' . $resource),
-            'description' => 'See and search' . getCategoryTitle() . 'in resource -' . $resource
+            'description' => 'See and search' . getCategoryTitle() . 'in resource - ' . $resource
 
         ];
 

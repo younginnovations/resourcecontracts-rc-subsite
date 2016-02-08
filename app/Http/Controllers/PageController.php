@@ -94,7 +94,7 @@ class PageController extends BaseController
 
         $meta = [
             'title'       => 'FAQS',
-            'description' => 'Frequently Asked Questions about ' . getCategoryTitle()
+            'description' => 'Frequently Asked Questions about' . getCategoryTitle()
         ];
 
         return view('page.master', compact('page', 'page_name', 'meta'));

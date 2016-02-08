@@ -411,8 +411,8 @@ class APIService
             if (!empty($id)) {
                 $metadata     = $this->contractDetail($id);
                 $contractName = $metadata->metadata->name;
-                $contractName = str_replace(' ', '_', $contractName);
-                $filename     = "Annotations--" . $contractName . "--" . date('Ymdhis');
+                $contractName = str_slug($contractName, "_");
+                $filename     = "Annotations_" . $contractName . "_" . date('Ymdhis');
             }
             $request           = new Request('GET', $this->apiURL($resource));
             $query['category'] = $this->category;
