@@ -109,7 +109,7 @@ var TextSearchResultsList = React.createClass({
         );
       });
     }
-    else if(this.props.searchResultsCollection.searchCompleted === true || this.props.searchResultsCollection.length == 0) {
+    else if(this.props.searchResultsCollection.searchCompleted === true && this.props.searchResultsCollection.length == 0) {
       resultsView = lang.no_results_found;
     }
 if(this.props.searchResultsCollection.models.length > 0) {

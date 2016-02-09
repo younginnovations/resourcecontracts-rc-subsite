@@ -164,18 +164,12 @@ var MainApp = React.createClass({
     search: function(query) {
         contractApp.setView("search");
         var show_pdf_text = contractApp.metadata.get('is_ocr_reviewed');
-        if(show_pdf_text ==1)
-        {
+
             contractApp.setSearchQuery(query);
             searchResultsCollection.fetch({
                 searchTerm: query,
                 reset: true
             });
-        }
-        else
-        {
-            searchResultsCollection.reset();
-        }
 
         this.forceUpdate();
     },
