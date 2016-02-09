@@ -61,5 +61,5 @@
         var twitter_share = 'https://twitter.com/share?text={{ meta($meta)->title }}';
 
     </script>
-    <script src="{{ url('js/contract-view.min.js') }}"></script>
+    <script src="{{ url('js/contract-view.js') }}"></script>
 @stop

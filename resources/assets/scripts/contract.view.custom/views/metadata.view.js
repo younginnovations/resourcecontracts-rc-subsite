@@ -197,7 +197,7 @@ var LandMatrixView = React.createClass({
             id = '#' + this.props.metadata.get("deal_number");
         }
 
-        if (this.props.metadata.get("category")[0] === 'olc') {
+        if (category === 'Openland') {
             return (
                 <div className="metadata-ocid">
                     <span>Land Matrix ID: </span>

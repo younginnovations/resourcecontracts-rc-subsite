@@ -55621,7 +55621,7 @@ var LandMatrixView = React.createClass({displayName: "LandMatrixView",
             id = '#' + this.props.metadata.get("deal_number");
         }
 
-        if (this.props.metadata.get("category")[0] === 'olc') {
+        if (category === 'Openland') {
             return (
                 React.createElement("div", {className: "metadata-ocid"}, 
                     React.createElement("span", null, "Land Matrix ID: "), 
@@ -56192,7 +56192,7 @@ var TextSearchResultsList = React.createClass({displayName: "TextSearchResultsLi
         );
       });
     }
-    else if(this.props.searchResultsCollection.searchCompleted === true || this.props.searchResultsCollection.length == 0) {
+    else if(this.props.searchResultsCollection.searchCompleted === true && this.props.searchResultsCollection.length == 0) {
       resultsView = lang.no_results_found;
     }
 if(this.props.searchResultsCollection.models.length > 0) {
@@ -56867,18 +56867,12 @@ var MainApp = React.createClass({displayName: "MainApp",
     search: function(query) {
         contractApp.setView("search");
         var show_pdf_text = contractApp.metadata.get('is_ocr_reviewed');
-        if(show_pdf_text ==1)
-        {
+
             contractApp.setSearchQuery(query);
             searchResultsCollection.fetch({
                 searchTerm: query,
                 reset: true
             });
-        }
-        else
-        {
-            searchResultsCollection.reset();
-        }
 
         this.forceUpdate();
     },
