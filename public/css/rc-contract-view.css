@@ -970,6 +970,7 @@
 .parent-contract {
     display: flex!important;
     align-items: center;
+    font-weight: bold;
 }
 
 .parent-contract > span:last-of-type {

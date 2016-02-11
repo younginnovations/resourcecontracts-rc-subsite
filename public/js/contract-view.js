@@ -55662,7 +55662,7 @@ var RelatedDocumentsView = React.createClass({displayName: "RelatedDocumentsView
                 if (doc.is_published) {
                     return (
                         React.createElement("span", {className: "parent-contract"}, 
-                            React.createElement("a", {href: docUrl}, doc.name), "(Main Contract)"
+                            React.createElement("a", {href: docUrl}, doc.name)
                         )
                     );
                 }
