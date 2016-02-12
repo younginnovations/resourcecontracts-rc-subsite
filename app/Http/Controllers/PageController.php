@@ -76,7 +76,7 @@ class PageController extends BaseController
 
         $meta = [
             'title'       => 'Resources',
-            'description' => 'See different guides and documents to learn more about the contracts.'
+            'description' => 'Guides and documents providing further information on reading, understanding, and assessing land contracts.'
         ];
 
         return view('page.master', compact('page', 'page_name', 'meta'));
@@ -94,7 +94,7 @@ class PageController extends BaseController
 
         $meta = [
             'title'       => 'FAQS',
-            'description' => 'Frequently Asked Questions about' . getCategoryTitle()
+            'description' => 'Frequently Asked Questions about' . getInformation('categoryTitle') .', an online repository of publicly available contracts for large-scale land, agriculture, and forestry projects.'
         ];
 
         return view('page.master', compact('page', 'page_name', 'meta'));
@@ -112,8 +112,7 @@ class PageController extends BaseController
 
         $meta = [
             'title'       => 'Glossary',
-            'description' => 'A number of key terms are critical for conducting contract analysis.' . getCategoryTitle(
-                ) . 'provides a growing glossary that can help you navigate the language of the contracts.'
+            'description' => 'A glossary of key terms to help navigate contracts and conduct analysis.'
         ];
 
         return view('page.master', compact('page', 'page_name', 'meta'));
@@ -132,7 +131,7 @@ class PageController extends BaseController
 
         $meta = [
             'title'       => 'Publish Contracts',
-            'description' => 'Learn more about how the' . getCategoryTitle() . 'team can support host governments, investors, and other relevant stakeholders in their efforts to disclose contracts.'
+            'description' => 'Learn more about disclosing contracts on' . getInformation('categoryTitle') .', and how we can support host governments, investors, and other relevant stakeholders in their efforts to disclose contracts.'
         ];
 
         return view('page.master', compact('page', 'page_name', 'meta'));

@@ -62,7 +62,7 @@ class ContractController extends BaseController
 
         $meta = [
             'title'       => 'Search Contracts',
-            'description' => 'Search' . getCategoryTitle() . 'using different criteria - year signed, company name, contract type, annotation category.'
+            'description' => 'Search' . getInformation('categoryTitle') . 'using different criteria - year signed, company name, contract type, annotation category.'
         ];
 
 
@@ -225,7 +225,10 @@ class ContractController extends BaseController
         $html = "<html>";
         $html .= "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">";
         $html .= "<body>";
-        $html .= sprintf('<h3>NOTICE: The text below was created automatically and may contain errors and differences from the contract\'s original PDF file. Learn more <a href="%s">here</a></h3>',$learn_more_url);
+        $html .= sprintf(
+            '<h3>NOTICE: The text below was created automatically and may contain errors and differences from the contract\'s original PDF file. Learn more <a href="%s">here</a></h3>',
+            $learn_more_url
+        );
         $html .= $text;
         $html .= "</body>";
         $html .= "</html>";

@@ -45,9 +45,11 @@ class CountryController extends BaseController
             array_push($countryName, $countryCode);
         }
         $countryName = implode(',', $countryName);
-        $meta        = [
+
+
+        $meta = [
             'title'       => 'Countries',
-            'description' => 'See and search' . getCategoryTitle() . 'from different countries - ' . $countryName
+            'description' => getInformation('countriesDescription') . $countryName
         ];
 
 
@@ -75,7 +77,7 @@ class CountryController extends BaseController
 
         $meta = [
             'title'       => $countryName,
-            'description' => 'See and search' . getCategoryTitle() . 'from ' . $countryName
+            'description' => getInformation('countryDescription') . $countryName
 
         ];
 
