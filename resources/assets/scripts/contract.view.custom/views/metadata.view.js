@@ -64,6 +64,7 @@ var MetadataView = React.createClass({
         if (this.state.showMoreMetadata) {
             showLabel = lang.show_less;
         }
+
         if (this.props.metadata.get("country")) {
             var countryCode = this.props.metadata.get("country").code.toLowerCase();
             var countryLink = app_url + "/countries/" + countryCode;
@@ -119,20 +120,25 @@ var MetadataView = React.createClass({
                 noteHtml = (<span className="note-inner-wrapper" dangerouslySetInnerHTML={{__html: noteHtml}}></span>);
             }
 
-            var pages_missing = this.props.metadata.get("is_pages_missing");
-            if(pages_missing === true)
+            var missing_html = '';
+
+            if(this.props.metadata.get("is_annexes_missing"))
             {
-                console.log('Yes');
+                missing_html += '<div class="metadata-ocid">'+
+                                    '<span>'+lang.annexes_missing+'</span>'+
+                                    '<span>Yes</span>'+
+                                '</div>';
             }
-            else if(pages_missing === false)
+
+            if(this.props.metadata.get("is_pages_missing"))
             {
-                console.log('No');
+                missing_html += '<div class="metadata-ocid">'+
+                    '<span>'+lang.pages_missing+'</span>'+
+                    '<span>Yes</span>'+
+                    '</div>';
             }
-            else if(pages_missing === null)
-            {
-                console.log('Not Available');
-            }
-            var annexes_missing = null;
+
+            missing_html = {__html: missing_html};
 
             return (
                 <div id="metadata">
@@ -179,10 +185,8 @@ var MetadataView = React.createClass({
                             <span>{this.props.metadata.get("publisher_type") || "-"}</span>
                         </div>
 
-                <div className ="metadata-ocid">
-                    <span>Is Pages Missing From Document </span>
-                    <span>Yes</span>
-                    </div>
+            <div dangerouslySetInnerHTML={missing_html}></div>
+
 
                         <LandMatrixView
                             metadata={this.props.metadata}/>

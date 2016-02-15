@@ -139,34 +139,7 @@ use Illuminate\Support\Facades\Lang;
                             </span>
                             </li>
                         </ul>
-                        <ul>
-                            <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <label for="">@lang('global.is_pages_missing')</label>
-                                <span>
-                                  @if($contract->metadata->is_pages_missing)
-                                        Yes
-                                    @elseif($contract->metadata->is_pages_missing === false)
-                                        No
-                                    @elseif(empty($contract->metadata->is_pages_missing))
-                                        Not Available
-                                    @endif
-
-                                </span>
-                            </li>
-
-                            <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <label for="">@lang('global.is_annexes_missing')</label>
-                                <span>
-                                    @if($contract->metadata->is_annexes_missing)
-                                        Yes
-                                    @elseif($contract->metadata->is_annexes_missing === false)
-                                        No
-                                    @elseif(empty($contract->metadata->is_annexes_missing))
-                                        Not Available
-                                    @endif
-                                </span>
-                            </li>
-                        </ul>
+                        
                         @if(env('CATEGORY') =="olc")
                             <ul>
                                 <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
