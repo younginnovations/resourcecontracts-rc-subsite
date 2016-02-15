@@ -64,6 +64,7 @@ var MetadataView = React.createClass({
         if (this.state.showMoreMetadata) {
             showLabel = lang.show_less;
         }
+
         if (this.props.metadata.get("country")) {
             var countryCode = this.props.metadata.get("country").code.toLowerCase();
             var countryLink = app_url + "/countries/" + countryCode;
@@ -118,6 +119,27 @@ var MetadataView = React.createClass({
                 noteHtml += '<span class="note">' + note + '</span>';
                 noteHtml = (<span className="note-inner-wrapper" dangerouslySetInnerHTML={{__html: noteHtml}}></span>);
             }
+
+            var missing_html = '';
+
+            if(this.props.metadata.get("is_annexes_missing"))
+            {
+                missing_html += '<div class="metadata-ocid">'+
+                                    '<span>'+lang.annexes_missing+'</span>'+
+                                    '<span>Yes</span>'+
+                                '</div>';
+            }
+
+            if(this.props.metadata.get("is_pages_missing"))
+            {
+                missing_html += '<div class="metadata-ocid">'+
+                    '<span>'+lang.pages_missing+'</span>'+
+                    '<span>Yes</span>'+
+                    '</div>';
+            }
+
+            missing_html = {__html: missing_html};
+
             return (
                 <div id="metadata">
                     <div className="note-wrapper">
@@ -162,6 +184,9 @@ var MetadataView = React.createClass({
                             <span>{lang.disclosure_mode}</span>
                             <span>{this.props.metadata.get("publisher_type") || "-"}</span>
                         </div>
+
+            <div dangerouslySetInnerHTML={missing_html}></div>
+
 
                         <LandMatrixView
                             metadata={this.props.metadata}/>
@@ -237,7 +262,7 @@ var RelatedDocumentsView = React.createClass({
                 var docUrl = app_url + "/contract/" + doc.open_contracting_id;
                 if (doc.is_published) {
                     return (
-                        <span>
+                        <span className="parent-contract">
                             <a href={docUrl}>{doc.name}</a>
                         </span>
                     );
@@ -260,7 +285,7 @@ var RelatedDocumentsView = React.createClass({
                 return (
                     <div className="relateddocument-view">
                         <div>{lang.related_docs}</div>
-                        {parentContracts}
+                        <span>{parentContracts}</span>
                         {supportingContracts}
                         {moreContracts}
                     </div>
