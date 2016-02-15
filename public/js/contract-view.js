@@ -55488,6 +55488,7 @@ var MetadataView = React.createClass({displayName: "MetadataView",
         if (this.state.showMoreMetadata) {
             showLabel = lang.show_less;
         }
+
         if (this.props.metadata.get("country")) {
             var countryCode = this.props.metadata.get("country").code.toLowerCase();
             var countryLink = app_url + "/countries/" + countryCode;
@@ -55542,6 +55543,27 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                 noteHtml += '<span class="note">' + note + '</span>';
                 noteHtml = (React.createElement("span", {className: "note-inner-wrapper", dangerouslySetInnerHTML: {__html: noteHtml}}));
             }
+
+            var missing_html = '';
+
+            if(this.props.metadata.get("is_annexes_missing"))
+            {
+                missing_html += '<div class="metadata-ocid">'+
+                                    '<span>'+lang.annexes_missing+'</span>'+
+                                    '<span>Yes</span>'+
+                                '</div>';
+            }
+
+            if(this.props.metadata.get("is_pages_missing"))
+            {
+                missing_html += '<div class="metadata-ocid">'+
+                    '<span>'+lang.pages_missing+'</span>'+
+                    '<span>Yes</span>'+
+                    '</div>';
+            }
+
+            missing_html = {__html: missing_html};
+
             return (
                 React.createElement("div", {id: "metadata"}, 
                     React.createElement("div", {className: "note-wrapper"}, 
@@ -55586,6 +55608,9 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                             React.createElement("span", null, lang.disclosure_mode), 
                             React.createElement("span", null, this.props.metadata.get("publisher_type") || "-")
                         ), 
+
+            React.createElement("div", {dangerouslySetInnerHTML: missing_html}), 
+
 
                         React.createElement(LandMatrixView, {
                             metadata: this.props.metadata})
@@ -55661,7 +55686,7 @@ var RelatedDocumentsView = React.createClass({displayName: "RelatedDocumentsView
                 var docUrl = app_url + "/contract/" + doc.open_contracting_id;
                 if (doc.is_published) {
                     return (
-                        React.createElement("span", null, 
+                        React.createElement("span", {className: "parent-contract"}, 
                             React.createElement("a", {href: docUrl}, doc.name)
                         )
                     );
@@ -55684,7 +55709,7 @@ var RelatedDocumentsView = React.createClass({displayName: "RelatedDocumentsView
                 return (
                     React.createElement("div", {className: "relateddocument-view"}, 
                         React.createElement("div", null, lang.related_docs), 
-                        parentContracts, 
+                        React.createElement("span", null, parentContracts), 
                         supportingContracts, 
                         moreContracts
                     )
@@ -56041,7 +56066,8 @@ var TextViewer = React.createClass({displayName: "TextViewer",
             React.createElement("span", {className: "pull-right link close", onClick: this.handleClickWarning}, "x"), 
                         lang.text_created_automatically, 
             
-            React.createElement("a", {target: "_blank", href: app_url + "/faqs"}, "Learn more")
+
+            React.createElement("a", {target: "_blank", href: learn_more_url}, "Learn more")
         ));
 
         var pagesView = (this.message) ? this.message : lang.wait_while_loading;

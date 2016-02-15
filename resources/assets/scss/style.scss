@@ -1142,7 +1142,6 @@ footer {
     }
     img+span {
       display: inline-block;
-      width: 80%;
       vertical-align: top;
       padding-top: 1px;
     }
@@ -1848,40 +1847,46 @@ footer {
   }
 }
 .search-text {
-  font-size: 14px;
+  font-size: 13px;
   word-wrap: break-word;
   clear: both;
   color: $color_cape_cod_70_approx;
-  padding-top: 4px;
+  margin-top: 4px;
   span {
     font-family: $font_1;
+  }
+  p {
+    margin-bottom: 5px;
+    a {
+      color: inherit;
+      &:hover {
+        color: $color_link_color;
+      }
+    }
   }
   strong {
     font-family: $font_1;
   }
 }
 .contract-group {
-  margin-top: 6px;
   label {
     font-style: italic;
     color: $color_cape_cod_50_approx;
-    font-size: 12px;
+    font-size: 1px;
   }
-  a {
-    font-size: 12px;
-    color: $color_mountain_mist_approx;
-    background: $color_cape_cod_approx;
-    background: $color_cape_cod_10_approx;
-    //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
-    border-radius: 11px;
-    display: inline-block;
-    padding: 1px 12px;
-    margin-left: 4px;
-    margin-bottom: 4px;
-    &:hover {
-      text-decoration: none;
-      background: $color_cape_cod_20_approx;
-    }
+  font-size: 11px;
+  color: $color_mountain_mist_approx;
+  background: $color_cape_cod_approx;
+  background: $color_cape_cod_10_approx;
+  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+  border-radius: 11px;
+  display: inline-block;
+  padding: 0 12px;
+  margin-left: 4px;
+  &:hover {
+    text-decoration: none;
+    background: $color_cape_cod_20_approx;
+    color: $color_cape_cod_approx!important;
   }
 }
 .contract-date {
@@ -1918,7 +1923,7 @@ td.contract-date {
   }
 }
 .annotate-text {
-  background: $url_11 no-repeat 5px;
+  background: url(../images/ic-annotate-title.png) no-repeat left;
   padding-left: 23px !important;
   display: inline-block;
   font-size: 12px;
@@ -2223,6 +2228,15 @@ td.contract-date {
   td:nth-child(3) {
     min-width: inherit!important;
   }
+}
+
+.table-contract-list td {
+  word-break: break-word;
+}
+
+.table-contract-list td > a {
+  font-family: $font_1;
+  margin-right: 4px;
 }
 #compare-block {
   background-color: $concrete;

@@ -780,7 +780,6 @@ footer {
     display: inline-block; }
   .country-list-wrap > div img + span {
     display: inline-block;
-    width: 80%;
     vertical-align: top;
     padding-top: 1px; }
 
@@ -1324,36 +1323,40 @@ footer {
     padding-top: 0; }
 
 .search-text {
-  font-size: 14px;
+  font-size: 13px;
   word-wrap: break-word;
   clear: both;
   color: rgba(64, 64, 64, 0.7);
-  padding-top: 4px; }
+  margin-top: 4px; }
   .search-text span {
     font-family: Open-Sans-Bold; }
+  .search-text p {
+    margin-bottom: 5px; }
+    .search-text p a {
+      color: inherit; }
+      .search-text p a:hover {
+        color: #F37356; }
   .search-text strong {
     font-family: Open-Sans-Bold; }
 
 .contract-group {
-  margin-top: 6px; }
+  font-size: 11px;
+  color: #999999;
+  background: #404040;
+  background: rgba(64, 64, 64, 0.1);
+  -webkit-border-radius: 11px;
+          border-radius: 11px;
+  display: inline-block;
+  padding: 0 12px;
+  margin-left: 4px; }
   .contract-group label {
     font-style: italic;
     color: rgba(64, 64, 64, 0.5);
-    font-size: 12px; }
-  .contract-group a {
-    font-size: 12px;
-    color: #999999;
-    background: #404040;
-    background: rgba(64, 64, 64, 0.1);
-    -webkit-border-radius: 11px;
-            border-radius: 11px;
-    display: inline-block;
-    padding: 1px 12px;
-    margin-left: 4px;
-    margin-bottom: 4px; }
-    .contract-group a:hover {
-      text-decoration: none;
-      background: rgba(64, 64, 64, 0.2); }
+    font-size: 1px; }
+  .contract-group:hover {
+    text-decoration: none;
+    background: rgba(64, 64, 64, 0.2);
+    color: #404040 !important; }
 
 .contract-date {
   min-width: 150px; }
@@ -1379,7 +1382,7 @@ td.contract-date {
     top: 43px; }
 
 .annotate-text {
-  background: url(../../images/ic-tick.png) no-repeat 5px;
+  background: url(../images/ic-annotate-title.png) no-repeat left;
   padding-left: 23px !important;
   display: inline-block;
   font-size: 12px;
@@ -1625,6 +1628,13 @@ td.contract-date {
 
 .table-contract-list td:nth-child(3) {
   min-width: inherit !important; }
+
+.table-contract-list td {
+  word-break: break-word; }
+
+.table-contract-list td > a {
+  font-family: Open-Sans-Bold;
+  margin-right: 4px; }
 
 #compare-block {
   background-color: #f2f2f2;

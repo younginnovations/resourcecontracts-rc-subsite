@@ -5,6 +5,7 @@ $url = Request::all();
 $order = \Illuminate\Support\Facades\Input::get('order', '');
 $sortBy = \Illuminate\Support\Facades\Input::get('sortby', '');
 $route = Request::path();
+
 ?>
 
 <table class="table table-responsive table-contract table-contract-list">
@@ -41,15 +42,22 @@ $route = Request::path();
 
                 <div class="search-text">
                     @if(isset($contract->text ) && $contract->text !='')
-                        <p>{!!$contract->text.'...'!!}</p>
+                        <p><a href="{{ url(sprintf("/contract/%s/view#/search/%s", $contract->open_contracting_id , $url['q'] )) }}">{!!$contract->text.'...'!!}<a class="contract-group">@lang('global.text')</a></a></p>
+
                     @endif
 
-                    @if(isset($contract->annotations ) && $contract->annotations !='')
-                        <p>{!!$contract->annotations.'...'!!}</p>
+                    @if(isset($contract->annotations ) && !empty($contract->annotations))
+                        <p>
+                            <a href="{{ url(sprintf("/contract/%s/view#/pdf/page/%s/annotation/%s", $contract->open_contracting_id ,$contract->annotations->page_no , $contract->annotations->annotation_id  )) }}">{!! $contract->annotations->annotation_text ." pg " .$contract->annotations->page_no !!} <a class="contract-group">@lang('global.annotation')</a></a>
+
+                        </p>
                     @endif
 
                     @if(isset($contract->metadata ) && $contract->metadata !='')
-                        <p>{!! $contract->metadata.'...' !!}</p>
+                        <p>
+                            <a href="{{ route('contract.view' , ['id' => $contract->open_contracting_id]) }}">{!! $contract->metadata.'...' !!} <a class="contract-group">@lang('global.metadata')</a></a>
+
+                        </p>
                     @endif
                 </div>
                 @if($annotations->total>0)
@@ -77,14 +85,6 @@ $route = Request::path();
                         @endforeach
 
                     @endif
-                @endif
-                @if(isset($contract->group) && count($contract->group)>0)
-                    <div class="contract-group">
-                        <label for="">@lang('search.found_in'): </label>
-                        @foreach($contract->group as $group)
-                            <a>{{$group}}</a>
-                        @endforeach
-                    </div>
                 @endif
             </td>
             <td>
