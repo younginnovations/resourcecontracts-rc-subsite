@@ -42,21 +42,21 @@ $route = Request::path();
 
                 <div class="search-text">
                     @if(isset($contract->text ) && $contract->text !='')
-                        <p><a href="{{ url(sprintf("/contract/%s/view#/search/%s", $contract->open_contracting_id , $url['q'] )) }}">{!!$contract->text.'...'!!}</a></p>
-                        <a class="contract-group">@lang('global.text')</a>
+                        <p><a href="{{ url(sprintf("/contract/%s/view#/search/%s", $contract->open_contracting_id , $url['q'] )) }}">{!!$contract->text.'...'!!}<a class="contract-group">@lang('global.text')</a></a></p>
+
                     @endif
 
                     @if(isset($contract->annotations ) && !empty($contract->annotations))
                         <p>
-                            <a href="{{ url(sprintf("/contract/%s/view#/pdf/page/%s/annotation/%s", $contract->open_contracting_id ,$contract->annotations->page_no , $contract->annotations->annotation_id  )) }}">{!! $contract->annotations->annotation_text ." pg " .$contract->annotations->page_no !!}</a>
-                            <a class="contract-group">@lang('global.annotation')</a>
+                            <a href="{{ url(sprintf("/contract/%s/view#/pdf/page/%s/annotation/%s", $contract->open_contracting_id ,$contract->annotations->page_no , $contract->annotations->annotation_id  )) }}">{!! $contract->annotations->annotation_text ." pg " .$contract->annotations->page_no !!} <a class="contract-group">@lang('global.annotation')</a></a>
+
                         </p>
                     @endif
 
                     @if(isset($contract->metadata ) && $contract->metadata !='')
                         <p>
-                            <a href="{{ route('contract.view' , ['id' => $contract->open_contracting_id]) }}">{!! $contract->metadata.'...' !!}</a>
-                            <a class="contract-group">@lang('global.metadata')</a>
+                            <a href="{{ route('contract.view' , ['id' => $contract->open_contracting_id]) }}">{!! $contract->metadata.'...' !!} <a class="contract-group">@lang('global.metadata')</a></a>
+
                         </p>
                     @endif
                 </div>
@@ -86,7 +86,6 @@ $route = Request::path();
 
                     @endif
                 @endif
-
             </td>
             <td>
                 <div class="contract-info-section">

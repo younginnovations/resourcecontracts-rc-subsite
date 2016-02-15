@@ -220,10 +220,12 @@ class ContractController extends BaseController
         header("Content-type: application/vnd.ms-wordx");
         header("Content-Disposition: attachment;Filename=$filename.doc");
 
+        $learn_more_url = url('/faqs#link_learn_more');
+
         $html = "<html>";
         $html .= "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">";
         $html .= "<body>";
-        $html .= "<h3>NOTICE: The text below was created automatically and may contain errors and differences from the contract's original PDF file. Learn more <a href=\"http://www.resourcecontracts.org/faqs#link_learn_more\">here</a></h3>";
+        $html .= sprintf('<h3>NOTICE: The text below was created automatically and may contain errors and differences from the contract\'s original PDF file. Learn more <a href="%s">here</a></h3>',$learn_more_url);
         $html .= $text;
         $html .= "</body>";
         $html .= "</html>";

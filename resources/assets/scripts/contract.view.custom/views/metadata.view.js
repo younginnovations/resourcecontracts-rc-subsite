@@ -118,6 +118,22 @@ var MetadataView = React.createClass({
                 noteHtml += '<span class="note">' + note + '</span>';
                 noteHtml = (<span className="note-inner-wrapper" dangerouslySetInnerHTML={{__html: noteHtml}}></span>);
             }
+
+            var pages_missing = this.props.metadata.get("is_pages_missing");
+            if(pages_missing === true)
+            {
+                console.log('Yes');
+            }
+            else if(pages_missing === false)
+            {
+                console.log('No');
+            }
+            else if(pages_missing === null)
+            {
+                console.log('Not Available');
+            }
+            var annexes_missing = null;
+
             return (
                 <div id="metadata">
                     <div className="note-wrapper">
@@ -162,6 +178,11 @@ var MetadataView = React.createClass({
                             <span>{lang.disclosure_mode}</span>
                             <span>{this.props.metadata.get("publisher_type") || "-"}</span>
                         </div>
+
+                <div className ="metadata-ocid">
+                    <span>Is Pages Missing From Document </span>
+                    <span>Yes</span>
+                    </div>
 
                         <LandMatrixView
                             metadata={this.props.metadata}/>

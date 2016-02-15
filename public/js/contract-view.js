@@ -55542,6 +55542,22 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                 noteHtml += '<span class="note">' + note + '</span>';
                 noteHtml = (React.createElement("span", {className: "note-inner-wrapper", dangerouslySetInnerHTML: {__html: noteHtml}}));
             }
+
+            var pages_missing = this.props.metadata.get("is_pages_missing");
+            if(pages_missing === true)
+            {
+                console.log('Yes');
+            }
+            else if(pages_missing === false)
+            {
+                console.log('No');
+            }
+            else if(pages_missing === null)
+            {
+                console.log('Not Available');
+            }
+            var annexes_missing = null;
+
             return (
                 React.createElement("div", {id: "metadata"}, 
                     React.createElement("div", {className: "note-wrapper"}, 
@@ -55586,6 +55602,11 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                             React.createElement("span", null, lang.disclosure_mode), 
                             React.createElement("span", null, this.props.metadata.get("publisher_type") || "-")
                         ), 
+
+                React.createElement("div", {className: "metadata-ocid"}, 
+                    React.createElement("span", null, "Is Pages Missing From Document "), 
+                    React.createElement("span", null, "Yes")
+                    ), 
 
                         React.createElement(LandMatrixView, {
                             metadata: this.props.metadata})
@@ -56041,7 +56062,7 @@ var TextViewer = React.createClass({displayName: "TextViewer",
             React.createElement("span", {className: "pull-right link close", onClick: this.handleClickWarning}, "x"), 
                         lang.text_created_automatically, 
             
-        
+
             React.createElement("a", {target: "_blank", href: learn_more_url}, "Learn more")
         ));
 
