@@ -59,5 +59,8 @@ return [
     'note'                        => 'Note',
     'land_matrix_id'              => 'Land Matrix ID',
     'is_pages_missing'            => 'Is Pages Missing',
-    'is_annexes_missing'          => 'Is Annexes Missing'
+    'is_annexes_missing'          => 'Is Annexes Missing',
+    'annotation'                  => 'Annotation',
+    'text'                        => 'Text',
+    'metadata'                    => 'Metadata'
 ];

@@ -1848,7 +1848,7 @@ footer {
   }
 }
 .search-text {
-  font-size: 14px;
+  font-size: 13px;
   word-wrap: break-word;
   clear: both;
   color: $color_cape_cod_70_approx;
@@ -1856,14 +1856,13 @@ footer {
     font-family: $font_1;
   }
   p {
-    margin-bottom: 0;
+    margin-bottom: 5px;
   }
   strong {
     font-family: $font_1;
   }
 }
 .contract-group {
-  margin-top: 6px;
   label {
     font-style: italic;
     color: $color_cape_cod_50_approx;
@@ -2226,7 +2225,7 @@ td.contract-date {
 }
 
 .table-contract-list td > a {
-  font-size:15px;
+  font-family: $font_1;
   margin-right: 4px;
 }
 #compare-block {

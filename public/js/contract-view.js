@@ -55661,7 +55661,7 @@ var RelatedDocumentsView = React.createClass({displayName: "RelatedDocumentsView
                 var docUrl = app_url + "/contract/" + doc.open_contracting_id;
                 if (doc.is_published) {
                     return (
-                        React.createElement("span", null, 
+                        React.createElement("span", {className: "parent-contract"}, 
                             React.createElement("a", {href: docUrl}, doc.name)
                         )
                     );
@@ -55684,7 +55684,7 @@ var RelatedDocumentsView = React.createClass({displayName: "RelatedDocumentsView
                 return (
                     React.createElement("div", {className: "relateddocument-view"}, 
                         React.createElement("div", null, lang.related_docs), 
-                        parentContracts, 
+                        React.createElement("span", null, parentContracts), 
                         supportingContracts, 
                         moreContracts
                     )

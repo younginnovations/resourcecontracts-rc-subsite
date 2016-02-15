@@ -323,9 +323,9 @@ use Illuminate\Support\Facades\Lang;
                             <tr>
                                 <td width="70%">
                                     @if($parentContract->is_published==1)
-                                        <a href="{{route('contract.detail',['id'=>$parentContract->open_contracting_id])}}">{{$parentContract->name}}</a> &nbsp; (parent)
+                                        <a href="{{route('contract.detail',['id'=>$parentContract->open_contracting_id])}}">{{$parentContract->name}}</a> &nbsp; (Main Contract)
                                     @else
-                                        {{$parentContract->name}} (parent)
+                                        {{$parentContract->name}} (Main Contract)
                                     @endif
                                 </td>
                             </tr>
