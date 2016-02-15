@@ -250,7 +250,8 @@ var TextViewer = React.createClass({
             <span className="pull-right link close" onClick={this.handleClickWarning}>x</span>
             {            lang.text_created_automatically
             }
-            <a target="_blank" href= {"http://www.resourcecontracts.org/faqs#link_learn_more"}>Learn more</a>
+
+            <a target="_blank" href= {learn_more_url}>Learn more</a>
         </div>);
 
         var pagesView = (this.message) ? this.message : lang.wait_while_loading;

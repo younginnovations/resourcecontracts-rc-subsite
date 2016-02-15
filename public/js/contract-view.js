@@ -56041,7 +56041,8 @@ var TextViewer = React.createClass({displayName: "TextViewer",
             React.createElement("span", {className: "pull-right link close", onClick: this.handleClickWarning}, "x"), 
                         lang.text_created_automatically, 
             
-            React.createElement("a", {target: "_blank", href: "http://www.resourcecontracts.org/faqs#link_learn_more"}, "Learn more")
+        
+            React.createElement("a", {target: "_blank", href: learn_more_url}, "Learn more")
         ));
 
         var pagesView = (this.message) ? this.message : lang.wait_while_loading;
