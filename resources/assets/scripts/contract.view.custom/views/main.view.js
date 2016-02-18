@@ -134,7 +134,7 @@ var DownloadUrl = React.createClass({
                     <ClipSwitchButton/>
                 </div>
 
-            );
+        );
         }
         else if (!this.props.annotations_url) {
             return (
@@ -526,7 +526,7 @@ var MainApp = React.createClass({
     render: function () {
         return (
             <div className="main-app">
-                <div className="title-head-wrap">
+            <div className="title-head-wrap">
                     <div className="head-wrap clearfix">
                         <TextSearchForm
                             style={this.getStyle(contractApp.isViewVisible("TextSearchForm"))}
@@ -543,14 +543,11 @@ var MainApp = React.createClass({
                         <PdfZoom
                             style={this.getStyle(contractApp.isViewVisible("PdfZoom"))}
                             contractApp={contractApp}/>
-
                         <DownloadUrl
                             pdf_url={pdf_download_url}
                             text_url={text_download_url}
                             annotations_url={annotations_download_url}
                         />
-
-
                         <MetadataToggleButton
                             style={this.getStyle(contractApp.getShowMeta())}
                             contractApp={contractApp}/>
@@ -588,6 +585,6 @@ var MainApp = React.createClass({
 });
 
 React.render(
-    <MainApp />,
+<MainApp />,
     document.getElementById('content')
 );

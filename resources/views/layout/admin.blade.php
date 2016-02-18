@@ -24,15 +24,18 @@
     <?php $url = \Request::getPathInfo();?>
     <div class="row">
         <div class="col-sm-4 col-md-3">
-            <div class="list-group">
 
+            <div class="list-group">
                 <a href="{{route('admin.page')}}" class="@if($url == '/admin' || strpos($url, 'page') != false) active @endif  list-group-item">
                     <i class="fa fa-file-archive-o"></i> @lang('admin.manage_pages')
                 </a>
 
-                <a href="{{route('admin.image')}}" class="@if(strpos($url, 'image') != false) active @endif list-group-item">
-                    <i class="fa fa-image"></i> @lang('admin.manage_image')
+                <a href="{{route('admin.theme')}}" class="@if(strpos($url, 'theme') != false) active @endif list-group-item">
+                    <i class="fa fa-image"></i> Theme Settings
                 </a>
+
+                <a href="{{ route('logout') }}" class="list-group-item"><i class="fa fa-sign-out"></i> Log Out ({{ loggedInUser() }})</a>
+
 
             </div>
         </div>

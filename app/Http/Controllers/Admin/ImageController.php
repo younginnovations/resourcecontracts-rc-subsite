@@ -32,19 +32,27 @@ class ImageController extends BaseController
      */
     public function index()
     {
-        $image = $this->image->getHomePageImageUrl();
+        $homePageImage = $this->image->getImageUrl('bg');
+        $sidebarImage  = $this->image->getImageUrl('sidebar');
 
-        return view('admin.image.index', compact('image'));
+        return view('admin.image.index', compact('homePageImage', 'sidebarImage'));
     }
 
     /**
      * Upload Image
-     *
+     * @param $type
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function upload()
+    public function upload($type)
     {
+        $method = 'upload_' . $type;
+
+        if (!method_exists($this->image, $method)) {
+            return redirect()->back()->with('error', 'Invalid request.');
+        }
+
         try {
-            $this->image->upload();
+            $this->image->$method();
 
             return redirect()->back()->with('success', 'Image successfully updated.');
         } catch (\Exception $e) {

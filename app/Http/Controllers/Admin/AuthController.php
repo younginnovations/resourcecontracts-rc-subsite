@@ -36,7 +36,7 @@ class AuthController extends BaseController
             return redirect()->route('admin.dashboard');
         }
 
-        $image = $image->getHomePageImageUrl();
+        $image = $image->getImageUrl('bg');
 
         return view('page.login', compact('image'));
     }

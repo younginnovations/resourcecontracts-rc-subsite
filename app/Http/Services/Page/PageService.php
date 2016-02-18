@@ -29,7 +29,7 @@ Class PageService
      */
     public function all()
     {
-        return $this->page->orderBy('id', 'DESC')->get();
+        return $this->page->where('country', get_country('code'))->get();
     }
 
     /**
@@ -41,7 +41,7 @@ Class PageService
      */
     public function get($page, $array = false)
     {
-        $page = $this->page->where('slug', $page)->first();
+        $page = $this->page->where('slug', $page)->country()->get()->first();
 
         if ($array) {
             return $page->toArray();
@@ -52,16 +52,18 @@ Class PageService
 
     /**
      * Save Page
-     * @param       $page_id
+     * @param       $slug
      * @param array $content
      * @return bool
+     * @internal param $page_id
      * @internal param $page
      */
-    public function save($page_id, array $content)
+    public function save($slug, array $content)
     {
-        $page          = $this->page->where('id', $page_id)->first();
+        $page          = $this->page->where('slug', $slug)->country()->first();
         $page->title   = (object) $content['title'];
         $page->content = (object) $content['content'];
+        $page->country = get_country('code');
 
         return $page->save();
     }
@@ -69,12 +71,18 @@ Class PageService
     /**
      * Find page
      *
-     * @param $id
+     * @param        $key
+     * @param string $column
      * @return Page
+     * @internal param $id
      */
-    public function find($id)
+    public function find($key, $column = 'slug')
     {
-        return $this->page->find($id);
+        if ($column == 'id') {
+            return $this->page->find($key);
+        }
+
+        return $this->page->where($column, $key);
     }
 
     /**
@@ -88,9 +96,28 @@ Class PageService
         $input = [
             'title'   => (object) $input['title'],
             'content' => (object) $input['content'],
-            'slug'    => str_slug($input['title']['en'])
+            'slug'    => str_slug($input['title']['en']),
+            'country' => get_country('code')
         ];
 
-        return $this->page->create($input);
+        $validate = $this->page->where('slug', $input['slug'])->country()->count();
+
+        if ($validate == 0) {
+            return $this->page->create($input);
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Delete the page.
+     * @param $id
+     * @return bool|null
+     */
+    public function destroy($id)
+    {
+        $pageId = $this->find($id, 'id');
+
+        return $pageId->delete();
     }
 }

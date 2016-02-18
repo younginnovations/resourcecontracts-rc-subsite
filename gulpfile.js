@@ -105,6 +105,16 @@ gulp.task('sass', function () {
         .pipe(gulp.dest('./public/css'));
 });
 
+gulp.task('country_sass', function () {
+    var country_style = gulp.src('./resources/assets/scss/country-site-scss/country-style.scss')
+        .pipe(sourcemaps.init())
+        .pipe(sass())
+        .pipe(postcss([autoprefixer({browsers: ['last 30 versions', '> 1%', 'ie 8', 'ie 7']})]))
+        .pipe(sourcemaps.write('./maps'))
+        .pipe(gulp.dest('./public/css/'));
+});
+
+
 /*
  * Watch scss files for changes & recompile
  * Watch html/md files, run jekyll & reload BrowserSync
@@ -114,6 +124,8 @@ gulp.task('watch', function () {
     gulp.watch('./resources/assets/scss/modal.scss', ['sass']);
     gulp.watch('./resources/assets/scss/newstyle.scss', ['sass']);
     gulp.watch('./resources/assets/scss/style.scss', ['sass']);
+    gulp.watch('./resources/assets/scss/contract-view.scss', ['sass','country_sass']);
+    gulp.watch('./resources/assets/scss/country-site-scss/**/*.scss', ['country_sass']);
     gulp.watch(base_script, ['js-base']);
     gulp.watch(country_script, ['js-country']);
     gulp.watch(resource_script, ['js-resource']);
@@ -126,7 +138,7 @@ gulp.task('watch', function () {
 /*
  * Default task, running just `gulp` will compile the sass,
  */
-gulp.task('default', ['sass', 'watch']);
+gulp.task('default', ['sass', 'country_sass', 'watch']);
 
 
 gulp.task('js-base', function () {

@@ -11,7 +11,7 @@
             <h3 class="panel-title">@lang('admin.edit_page') : {{$page->title()}}</h3>
         </div>
         <div class="panel-body">
-            <form class="" action="{{route('admin.page.update', ['id'=>$page->id])}}" method="POST">
+            <form class="" action="{{route('admin.page.update', ['slug'=>$page->slug])}}" method="POST">
                 <ul class="nav nav-tabs" role="tablist">
                     @foreach(config('language') as $code=>$lang)
                         <li role="page" @if($code == 'en') class="active" @endif ><a href="#{{$code}}" aria-controls="{{$code}}" role="tab" data-toggle="tab">{{$lang['name']}}</a></li>

@@ -2,7 +2,7 @@
 
 use Illuminate\Contracts\Filesystem\Factory as Filesystem;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
+use App\Http\Models\Page\Page;
 
 /**
  * Class ImageService
@@ -27,42 +27,82 @@ class ImageService
      */
     public function __construct(Request $request, Filesystem $filesystem)
     {
-        $this->request = $request;
+        $this->request    = $request;
         $this->filesystem = $filesystem;
     }
 
     /**
      * Get Bg Image Name
      *
+     * @param $type
      * @return string
      */
-    function getName()
+    function getName($type)
     {
-        $fileName = env('CATEGORY') . '-bg.jpg';
+        $fileName = env('COUNTRY') . '-' . $type . '.jpg';
 
         return $fileName;
     }
 
     /**
-     * Upload Image
-     *
+     * Upload Background Image.
      * @return bool
      * @throws \Exception
      */
-    function upload()
+    function upload_bg()
     {
+        $type                 = 'bg';
+        $details              = [];
+        $details['fileName']  = $this->getName($type);
+        $details['minWidth']  = 960;
+        $details['minHeight'] = 500;
+
+        return $this->upload($details);
+
+    }
+
+
+    /**
+     * Upload Sidebar Image.
+     * @return bool
+     * @throws \Exception
+     */
+    function upload_sidebar()
+    {
+        $type                 = 'sidebar';
+        $details              = [];
+        $details['fileName']  = $this->getName($type);
+        $details['minWidth']  = 240;
+        $details['minHeight'] = 200;
+
+        return $this->upload($details);
+
+    }
+
+
+    /**
+     * Upload Image
+     *
+     * @param $details
+     * @return bool
+     * @throws \Exception
+     */
+    function upload($details)
+    {
+
         if ($this->request->hasFile('image') && $this->request->file('image')->isValid()) {
-            if (in_array(strtolower($this->request->file('image')->getClientOriginalExtension()) , ['jpg','jpeg'])) {
-                $fileName = $this->getName();
+
+            if (in_array(strtolower($this->request->file('image')->getClientOriginalExtension()), ['jpg', 'jpeg', 'png'])) {
+                $fileName = $details['fileName'];
                 list($width, $height) = getimagesize($this->request->file('image'));
 
-                if ($width >= $this->minWidth && $height >= $this->minHeight) {
+                if ($width >= $details['minWidth'] && $height >= $details['minHeight']) {
                     $this->filesystem->disk('s3')->put($fileName, file_get_contents($this->request->file('image')), 'public');
-                }else{
-                    throw new \Exception(sprintf('Invalid image size (%sX%s px).',$width, $height));
+                } else {
+                    throw new \Exception(sprintf('Invalid image size (%sX%s px).', $width, $height));
                 }
 
-               return true;
+                return true;
             }
 
             throw new \Exception('Invalid file Format. Only jpeg format supported');
@@ -71,19 +111,26 @@ class ImageService
         throw new \Exception('Please upload image');
     }
 
+
     /**
      * Get Home Page Background Image Url
      *
+     * @param $type
      * @return string
      */
-    public function getHomePageImageUrl()
+    public function getImageUrl($type)
     {
-        return $this->filesystem->disk('s3')->getDriver()
-                                ->getAdapter()
-                                ->getClient()
-                                ->getObjectUrl(env('AWS_BUCKET'), $this->getName());
+        $getType = $type == 'bg' ? 'country' : 'country-sidebar';
+        $url     = url(sprintf('/images/%s.jpg', $getType));
+
+        if ($this->filesystem->disk('s3')->exists($this->getName($type))) {
+            $url = $this->filesystem->disk('s3')->getDriver()
+                                    ->getAdapter()
+                                    ->getClient()
+                                    ->getObjectUrl(env('AWS_BUCKET'), $this->getName($type));
+        }
+
+        return $url;
     }
-
-
 
 }

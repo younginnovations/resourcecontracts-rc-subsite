@@ -7,8 +7,6 @@
 |
 */
 $app->get('/', ['as' => 'home', 'uses' => 'SiteController@home']);
-$app->get('/countries', ['as' => 'countries', 'uses' => 'CountryController@index']);
-$app->get('/countries/{key}', ['as' => 'country.detail', 'uses' => 'CountryController@detail']);
 $app->get('/resources', ['as' => 'resources', 'uses' => 'ResourceController@index']);
 $app->get('/resource/{key}', ['as' => 'resource.detail', 'uses' => 'ResourceController@detail']);
 $app->get('/sitemap', ['as' => 'sitemap', 'uses' => 'SiteController@sitemap']);
@@ -75,15 +73,22 @@ $app->get('logout', ['as' => 'logout', 'uses' => 'Admin\AuthController@logout'])
 $app->post('page/save', ['as' => 'page', 'uses' => 'Admin\PageController@update']);
 $app->get('admin', ['as' => 'admin.dashboard', 'uses' => 'Admin\PageController@index']);
 
+
 $app->get('admin/image', ['as' => 'admin.image', 'uses' => 'Admin\ImageController@index']);
-$app->post('admin/image/upload', ['as' => 'admin.image.upload', 'uses' => 'Admin\ImageController@upload']);
+$app->get('admin/theme', ['as' => 'admin.theme', 'uses' => 'Admin\ThemeController@index']);
+$app->post('admin/theme/save', ['as' => 'theme.store', 'uses' => 'Admin\ThemeController@store']);
+
+$app->post('admin/image/upload/{type}', ['as' => 'admin.image.upload', 'uses' => 'Admin\ImageController@upload']);
+
+$app->get('admin/color', ['as' => 'admin.color', 'uses' => 'Admin\ColorController@index']);
 
 
 $app->get('admin/page', ['as' => 'admin.page', 'uses' => 'Admin\PageController@index']);
 $app->get('admin/page/create', ['as' => 'admin.page.create', 'uses' => 'Admin\PageController@create']);
 $app->post('admin/page/store', ['as' => 'admin.page.store', 'uses' => 'Admin\PageController@store']);
-$app->get('admin/page/{id}', ['as' => 'admin.page.edit', 'uses' => 'Admin\PageController@edit']);
-$app->post('admin/page/{id}', ['as' => 'admin.page.update', 'uses' => 'Admin\PageController@update']);
+$app->get('admin/page/{slug}', ['as' => 'admin.page.edit', 'uses' => 'Admin\PageController@edit']);
+$app->post('admin/page/{slug}', ['as' => 'admin.page.update', 'uses' => 'Admin\PageController@update']);
+$app->delete('admin/page/{id}', ['as' => 'admin.page.delete', 'uses' => 'Admin\PageController@delete']);
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -119,4 +124,3 @@ $app->get('clip/{key}', ['as' => 'clip.view', 'uses' => 'ClippingController@clip
 $app->post('clip/email', ['as' => 'clip.email', 'uses' => 'ClippingController@emailClip']);
 $app->post('/clip/save', ['as' => 'clip.save', 'uses' => 'ClippingController@saveClip']);
 $app->post('clip/zip', ['as' => 'clip.zip', 'uses' => 'ClippingController@getZipFile']);
-

@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Services\Admin\ImageService;
+use App\Http\Services\Admin\ThemeService;
 use App\Http\Services\APIService;
 use App\Http\Services\ContractService;
 use App\Http\Services\XmlService;
@@ -32,30 +33,34 @@ class SiteController extends BaseController
      * @param APIService      $api
      * @param Request         $request
      * @param ContractService $contract
+     * @param ThemeService    $themeService
      */
-    public function __construct(APIService $api, Request $request, ContractService $contract)
+    public function __construct(APIService $api, Request $request, ContractService $contract, ThemeService $themeService)
     {
-        $this->api      = $api;
-        $this->request  = $request;
-        $this->contract = $contract;
+        $this->api          = $api;
+        $this->request      = $request;
+        $this->contract     = $contract;
+        $this->themeservice = $themeService;
 
     }
 
     /**
      * Home Page
-     *
-     * @param ImageService $image
      * @return \Illuminate\View\View
+     * @internal param ThemeService $themeService
+     * @internal param ImageService $image
      */
-    public function home(ImageService $image)
+    public function home()
     {
-        $image     = $image->getHomePageImageUrl();
         $summary   = $this->api->summary();
         $countries = count($summary->country_summary);
         $resources = count($summary->resource_summary);
         $contracts = $summary->contract_count;
 
-        return view('site.home', compact('countries', 'resources', 'contracts', 'image'));
+        $footerText = getDefaultThemeProperties('footer-text');
+
+
+        return view('site.home', compact('countries', 'resources', 'contracts', 'footerText'));
     }
 
     /**

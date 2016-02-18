@@ -15,18 +15,46 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
+        $country = get_country('code');
+
 
         $pages = [
-            ['title' => ['en' => 'About', 'fr' => 'Fr About'], 'slug' => 'about', 'content' => ['en' => 'About content', 'fr' => 'Fr About Content']],
-            ['title' => ['en' => 'Contact', 'fr' => 'Fr Contact'], 'slug' => 'contact', 'content' => ['en' => 'Contact content', 'fr' => 'Fr Contact Content']],
-            ['title' => ['en' => 'Resources', 'fr' => 'Fr Resources'], 'slug' => 'resources', 'content' => ['en' => 'Guide content', 'fr' => 'Fr Guide Content']],
-            ['title' => ['en' => 'FAQs', 'fr' => 'Fr Faqs'], 'slug' => 'faqs', 'content' => ['en' => 'FAQs content', 'fr' => 'Fr FAQS Content']],
-            ['title' => ['en' => 'Glossary', 'fr' => 'Fr Glossary'], 'slug' => 'glossary', 'content' => ['en' => 'Glossary content', 'fr' => 'Fr Glossary Content']],
-            ['title' => ['en' => 'Publish Contracts', 'fr' => 'Publish Contracts'], 'slug' => 'publish-contracts', 'content' => ['en' => 'Publish Contracts', 'fr' => 'Fr Publish Contracts1']],
+            ['title' => ['en' => 'About', 'fr' => 'Fr About'], 'slug' => 'about', 'content' => ['en' => 'About content for country ' . $country, 'fr' => 'Fr About Content'], 'country' => $country],
+            [
+                'title'   => ['en' => 'Contact', 'fr' => 'Fr Contact'],
+                'slug'    => 'contact',
+                'content' => ['en' => 'Contact content for country ' . $country, 'fr' => 'Fr Contact Content'],
+                'country' => $country
+            ],
+            [
+                'title'   => ['en' => 'Resources', 'fr' => 'Fr Resources'],
+                'slug'    => 'resources',
+                'content' => ['en' => 'Guide content for country ' . $country, 'fr' => 'Fr Guide Content'],
+                'country' => $country
+            ],
+            ['title' => ['en' => 'FAQs', 'fr' => 'Fr Faqs'], 'slug' => 'faqs', 'content' => ['en' => 'FAQs content for country ' . $country, 'fr' => 'Fr FAQS Content'], 'country' => $country],
+            [
+                'title'   => ['en' => 'Glossary', 'fr' => 'Fr Glossary'],
+                'slug'    => 'glossary',
+                'content' => ['en' => 'Glossary content for country ' . $country, 'fr' => 'Fr Glossary Content'],
+                'country' => $country
+            ],
+            [
+                'title'   => ['en' => 'Publish Contracts', 'fr' => 'Publish Contracts'],
+                'slug'    => 'publish-contracts',
+                'content' => ['en' => 'Publish Contracts for country ' . $country, 'fr' => 'Fr Publish Contract Content'],
+                'country' => $country
+            ],
         ];
 
+
         foreach ($pages as $page) {
-            Page::create($page);
+
+            $validate = Page::where('slug', $page['slug'])->country()->count();
+
+            if ($validate == 0) {
+                Page::create($page);
+            }
         }
     }
 

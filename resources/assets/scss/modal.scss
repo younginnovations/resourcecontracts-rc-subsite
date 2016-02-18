@@ -111,9 +111,9 @@
   }
 
   input[type="submit"] {
-    background-color: #F37356;
+    background-color: $color_link_color;
     &:hover, &:focus, &:active {
-      background-color: #F46A4A;
+      background-color: $color_link_hover_color;
     }
   }
 }

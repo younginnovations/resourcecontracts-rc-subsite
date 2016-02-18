@@ -55,7 +55,8 @@ class FilterController
      */
     protected function processQueries(Request $request)
     {
-        $type = is_array($request->get('type')) ? join(',', $request->get('type')) : $request->get('type');
+
+        $type = is_array($request->get('type')) ? join('|', $request->get('type')) : $request->get('type');
         $type = $type == '' ? 'metadata|text|annotations' : $type;
 
         return [

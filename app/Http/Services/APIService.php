@@ -17,6 +17,7 @@ class APIService
      */
     public $client;
     public $category;
+    public $country;
 
     /**
      * @param Client $client
@@ -25,6 +26,7 @@ class APIService
     {
         $this->client   = $client;
         $this->category = trim(env('CATEGORY'));
+        $this->country = trim(env('COUNTRY'));
     }
 
     /**
@@ -281,8 +283,9 @@ class APIService
     public function apiCall($resource, array $query = [], $array = false)
     {
         try {
-            $request           = new Request('GET', $this->apiURL($resource));
-            $query['category'] = $this->category;
+            $request               = new Request('GET', $this->apiURL($resource));
+            $query['country_code'] = strtolower(env('COUNTRY'));
+            $query['category']     = strtolower(env('CATEGORY'));
             $request->setQuery($query);
             $response = $this->client->send($request);
             $data     = $response->getBody();
@@ -474,6 +477,7 @@ class APIService
             }
             $request           = new Request('GET', $this->apiURL($resource));
             $query['category'] = $this->category;
+            $query['country_code'] = $this->country;
             $request->setQuery($query);
             $response = $this->client->send($request);
             $data     = $response->getBody()->getContents();

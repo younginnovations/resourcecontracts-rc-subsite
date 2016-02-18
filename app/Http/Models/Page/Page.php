@@ -15,7 +15,7 @@ class Page extends Model
     /**
      * @var array
      */
-    protected $fillable = ['title', 'slug', 'content'];
+    protected $fillable = ['title', 'slug', 'content', 'country'];
 
     protected $casts = ['title' => 'object', 'content' => 'object'];
 
@@ -44,6 +44,11 @@ class Page extends Model
         $content = isset($this->content->$lang) ? $this->content->$lang : $this->content->en;
 
         return $content;
+    }
+
+    public function scopeCountry($query)
+    {
+        $query->where('country', get_country('code'));
     }
 
     /**

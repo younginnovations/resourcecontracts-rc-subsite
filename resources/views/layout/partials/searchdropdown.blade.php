@@ -71,7 +71,8 @@ $category = $api->getAnnotationsCategory();
                 <label for="">@lang('search.document_type')</label>
                 <select name="document_type[]" id="document_type" multiple="multiple">
                     @foreach(array_filter($attributes->document_type) as $type)
-                        <option @if(isset($filter['document_type']) && in_array($type, $filter['document_type'])) selected="selected" @endif value="{{$type}}">{{$type}}</option>
+                        <option @if(isset($filter['document_type']) && in_array($type, $filter['document_type'])) selected="selected"
+                                @endif value="{{$type}}">{{_l("codelist/document_type",$type)}}</option>
                     @endforeach
                 </select>
             </div>
@@ -79,7 +80,8 @@ $category = $api->getAnnotationsCategory();
                 <label for="">@lang('search.contract_type')</label>
                 <select name="contract_type[]" id="contract_type" multiple="multiple">
                     @foreach(array_filter($attributes->contract_type) as $type)
-                        <option @if(isset($filter['contract_type']) && in_array($type, $filter['contract_type'])) selected="selected" @endif value="{{$type}}">{{$type}}</option>
+                        <option @if(isset($filter['contract_type']) && in_array($type, $filter['contract_type'])) selected="selected"
+                                @endif value="{{$type}}">{{_l("codelist/contract_type",$type)}}</option>
                     @endforeach
                 </select>
             </div>
@@ -90,16 +92,15 @@ $category = $api->getAnnotationsCategory();
                 ?>
                 <select name="annotation_category[]" id="annotation_category" multiple="multiple">
                     @foreach(array_filter($annotation_category) as $cat)
-                        <option @if(isset($filter['annotation_category']) && in_array($cat, $filter['annotation_category'])) selected="selected" @endif value="{{$cat}}">{{$cat}}</option>
+                        <option @if(isset($filter['annotation_category']) && in_array($cat, $filter['annotation_category'])) selected="selected"
+                                @endif value="{{$cat}}">{{_l("codelist/annotation.search",$cat)}}</option>
                     @endforeach
                 </select>
             </div>
             @if(env('CATEGORY')=="rc")
                 <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
-
                     <label for="">@lang('search.annotated')</label>
                     <input type="checkbox" name="annotated" value="1" class="form-control" @if(isset($filter['annotated']) && $filter['annotated']==1) checked @endif>
-
                 </div>
             @endif
         </div>

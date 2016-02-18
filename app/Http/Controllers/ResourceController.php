@@ -61,7 +61,7 @@ class ResourceController extends BaseController
             $country->name = trans('country')[strtoupper($country->code)];
         }
 
-        return view('resource.index', compact('resources', 'meta'));
+        return view('resource.index', compact('resources', 'meta', ''));
     }
 
     /**

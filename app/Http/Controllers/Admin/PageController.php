@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers\Admin;
 
+use App\Http\Services\Admin\ThemeService;
 use App\Http\Services\Page\PageService;
 use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as BaseController;
@@ -14,14 +15,17 @@ class PageController extends BaseController
      * @var PageService
      */
     protected $page;
+    protected $themeservice;
 
     /**
-     * @param PageService $page
+     * @param PageService  $page
+     * @param ThemeService $themeService
      */
-    public function __construct(PageService $page)
+    public function __construct(PageService $page, ThemeService $themeService)
     {
         $this->page = $page;
         $this->middleware('user');
+        $this->themeservice = $themeService;
     }
 
     /**
@@ -31,7 +35,7 @@ class PageController extends BaseController
     public function index()
     {
         $pages = $this->page->all();
-
+        
         return view('admin.page.index', compact('pages'));
     }
 
@@ -54,25 +58,28 @@ class PageController extends BaseController
     {
         $input = [
             'title'   => $request->input('title'),
-            'content' => $request->input('content')
+            'content' => $request->input('content'),
+
         ];
+
 
         if ($this->page->create($input)) {
             return redirect()->route('admin.page')->withSuccess('Page successfully created.');
         }
 
-        return redirect()->route('admin.page')->withError('Page could not be created.');
+        return redirect()->route('admin.page')->withError('Sorry! Page you are trying to create already exists');
     }
 
     /**
      * Edit page
      *
-     * @param $id
+     * @param $slug
      * @return \Illuminate\View\View
+     * @internal param $id
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        $page = $this->page->find($id);
+        $page = $this->page->find($slug)->Country()->first();
 
         if (!$page) {
             abort(404);
@@ -85,22 +92,37 @@ class PageController extends BaseController
      * Update Page
      *
      * @param Request $request
+     * @param         $slug
      * @return bool
      * @internal param $page
-     *
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $slug)
     {
         $input = [
             'title'   => $request->input('title'),
             'content' => $request->input('content')
         ];
 
-        if ($this->page->save($id, $input)) {
+        if ($this->page->save($slug, $input)) {
             return redirect()->route('admin.page')->withSuccess('Page successfully updated.');
         }
 
         return redirect()->route('admin.page')->withError('Page could not be updated.');
+    }
+
+    /**
+     * Delete the page.
+     * @param $id
+     * @return mixed
+     */
+    public function delete($id)
+    {
+        if ($this->page->destroy($id)) {
+            return redirect()->route('admin.page')->withSuccess('Page successfully deleted.');
+        }
+
+        return redirect()->route('admin.page')->withError('Page could not be deleted');
+
     }
 
 }

@@ -146,9 +146,11 @@ var TextSearchResultRow = React.createClass({
         return text.replace(re, "<span class='search-highlight-word'>" + highlightword + "</span>");
     },
     render: function () {
+
         var text = this.highlightSearchQuery(this.props.resultRow.get("text"), this.props.contractApp.getSearchQuery());
         var type = "<span class='text' title='Text'>Text</span>";
         text = "<span class='link'>Pg " + this.props.resultRow.get("page_no") + "&nbsp;" + text + "</span>" + type;
+
         if (this.props.resultRow.get("type") == "annotation") {
             type = "<span class='annotations' title='Annotation'>" + lang.annotation + "</span>";
             text = this.getShowText(this.props.contractApp.getSearchQuery());
@@ -165,6 +167,7 @@ var TextSearchResultRow = React.createClass({
             return (
                 <div className="search-result-row" onClick={this.handleClick}>
                     <span dangerouslySetInnerHTML={{__html: text}}/>
+                    <span dangerouslySetInnerHTML={{__html: type}}/>
                 </div>
             );
         }

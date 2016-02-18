@@ -1,0 +1,68 @@
+a,.navbar-brand,
+.breadcrumb-wrapper ul li a,.download-csv a,
+.pagination > li > a,.navbar-brand span:first-of-type,
+.annotations-topic-list span  {
+  color: #0096E0;
+}
+
+.navbar-brand:hover {
+  color: #0096E0!important;
+}
+
+.btn-search,.btn-form-search, .btn-compare,
+.btn-login-block,
+.pagination > .active > a,
+.pagination > .active > span,.back,.pdf-zoom-options span.scale-selected:before,
+.annotations-topic-list > .selected-topic,.action-links ul li a {
+  background-color: #0096E0;
+}
+
+.pagination > .active > a ,.pagination > .active > span,
+.btn-search, .download-csv {
+  border: 1px solid #00AAFF!important;
+}
+
+.search-results-list .close {
+  border-color: #00AAFF!important;
+}
+
+#sidebar-wrapper {
+  background-image: -webkit-linear-gradient(-81deg, #001F2E 1%, #003D5C 100%);
+  background-image: -o-linear-gradient(-81deg, #001F2E 1%, #003D5C 100%);
+  background-image: linear-gradient(-81deg, #001F2E 1%, #003D5C 100%);
+}
+
+.sidebar-brand {
+  background-blend-mode: multiply;
+}
+
+/*hover effects*/
+
+a:hover,a:focus,
+.pagination > li > a:focus,.pagination > li > a:hover,
+.pagination > li > span:focus,.pagination > li > span:hover,
+.search-result-row:hover  {
+  color: #00AAFF;
+}
+
+.btn-search:hover,.btn-form-search:hover, .btn-search:focus,
+.btn-compare:hover,.btn-compare:focus,
+.btn-login-block:hover, .btn-login-block:hover:focus,
+.pagination > .active > a,.pagination > .active > a:focus,.pagination > .active > a:hover,
+.pagination > .active > span:focus,.pagination > .active > span:hover,
+.action-links ul li a:hover,
+.contract-back:hover,.back:hover,.search-results-list .close:hover {
+  background-color: #00AAFF;
+  text-decoration: none;
+}
+
+a.view-annotation-cluster:hover,a.view-annotation-cluster.active,.search-results-list .close:hover {
+  background-color: #00AAFF!important;
+}
+
+.pagination > .active > a:focus,.pagination > .active > a:hover,
+.pagination > .active > span:focus,.pagination > .active > span:hover,
+.btn-search:hover, .btn-search:focus {
+  border: 1px solid #00AAFF;
+}
+

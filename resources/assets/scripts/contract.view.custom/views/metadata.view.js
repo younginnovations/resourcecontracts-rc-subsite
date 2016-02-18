@@ -69,7 +69,10 @@ var MetadataView = React.createClass({
             if (anchor === true) {
                 return (<span><a href={link}>{res}</a>{separator}</span>);
             } else {
-                return (<nobr><nobr>{res}</nobr><nobr>{separator}</nobr></nobr>);
+                return (<nobr>
+                    <nobr>{res}</nobr>
+                    <nobr>{separator}</nobr>
+                </nobr>);
             }
         });
 
@@ -92,7 +95,7 @@ var MetadataView = React.createClass({
             var contractType = ct.map(function (contractType, i) {
                 var link = app_url + "/search?q=&contract_type%5B%5D=" + contractType;
                 var separator = (i != ct.length - 1) ? ' | ' : '';
-                return (<nobr><nobr>{contractType}</nobr><nobr>{separator}</nobr></nobr>);
+                return (<span>{contractType} {separator}</span>);
             });
 
             var re = new RegExp(' ', 'g');
@@ -143,12 +146,6 @@ var MetadataView = React.createClass({
                         <div>
                             {lang.metadata}
                         </div>
-                        <div className="metadata-country">
-                            <span>{lang.country}</span>
-                            <span>
-                               {getCountryName(this.props.metadata.get("country").code)}
-                            </span>
-                        </div>
                         <div className="metadata-signature-year">
                             <span>{lang.signature_year}</span>
                             <span>
@@ -161,7 +158,7 @@ var MetadataView = React.createClass({
                         </div>
                         <div className="metadata-type-contract">
                             <span>{lang.type_contract}</span>
-                            <p>{contractType}</p>
+                            <p className="spanInline">{contractType}</p>
                         </div>
                         <div className="metadata-ocid">
                             <span>{lang.open_contracting_id}</span>
@@ -176,7 +173,6 @@ var MetadataView = React.createClass({
                         <AmlaUrl metadata={this.props.metadata}/>
                         <LandMatrixView metadata={this.props.metadata}/>
                         <div className="metadata-ocid">
-                            <p><span></span><span>{lang.more_from}</span> <a href={countryLink}>{getCountryName(this.props.metadata.get("country").code)}</a></p>
                             <p><span></span><span>{lang.more_for}</span> {this.getResourceLang(this.props.metadata.get("resource"), true)}</p>
                         </div>
                     </div>
@@ -270,14 +266,14 @@ var RelatedDocumentsView = React.createClass({
             return words.join(" ") + ellipsis;
         }
 
-        var parentContracts = "",
+        var parentContracts = [],
             supportingContracts = [],
-            moreContracts = "";
+            moreContracts = [];
         if (this.props.metadata.get("parent")) {
-            parentContracts = this.props.metadata.get("parent").map(function (doc) {
+            this.props.metadata.get("parent").map(function (doc) {
                 var docUrl = app_url + "/contract/" + doc.open_contracting_id;
                 if (doc.is_published) {
-                    return (
+                    parentContracts.push(
                         <span className="parent-contract">
                             <a href={docUrl}>{doc.name}</a>
                         </span>
@@ -301,7 +297,7 @@ var RelatedDocumentsView = React.createClass({
                     href={this.props.contractApp.getMetadataSummaryLink()+'#associatedcontracts'}>More...</a></span>);
             }
 
-            if (parentContracts.length || supportingContracts.length) {
+            if (parentContracts.length > 0 || supportingContracts.length > 0) {
                 return (
                     <div className="relateddocument-view">
                         <div>{lang.related_docs}</div>

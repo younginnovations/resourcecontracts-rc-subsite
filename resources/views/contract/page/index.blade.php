@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="{{ url('css/annotation/annotator.css') }}">
 @stop
 @section('content')
+    gfdgfdgfdgfdgfdgfdfgfd
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="pull-left title-bar-left">

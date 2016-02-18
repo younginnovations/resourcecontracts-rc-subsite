@@ -22,15 +22,6 @@
                         </form>
                     </div>
                 </div>
-                <div class="right-content">
-                    <a class = "filter-resource-wrap filter-label" href={{url('/countries')}}  >
-                        @lang('global.view_by_country')
-                    </a>
-                    <div class="side-collapse in">
-                        <ul id="countries">
-                        </ul>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -42,9 +33,9 @@
 @stop
 
 @section('js')
-<script type="text/template" id="resource-template">
-    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-        <a href="{{url('resource')}}/<%= value %>">
+    <script type="text/template" id="resource-template">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+            <a href="{{url('resource')}}/<%= value %>">
             <div class="country-name resource-name pull-left">
                 <% if(typeof resource[name] == 'undefined') {%>
                     <%= name %>
@@ -76,7 +67,5 @@
     var resource = <?php echo json_encode(trans('resources'));?>;
     var country = <?php echo json_encode(trans('country'));?>;
 </script>
-
-<script type="text/javascript" src="{{url('js/resource.js')}}"></script>
+<script type="text/javascript" src="{{url('js/resource.min.js')}}"></script>
 @stop
-

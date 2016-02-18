@@ -2,6 +2,22 @@
 use Illuminate\Support\Facades\Lang;
 ?>
 
+@section('css')
+    <style>
+        .contract-back {
+            background-position: 28px -533px;
+            margin-left: -36px;
+            margin-right: 20px;
+            width: 82px;
+            height: 82px;
+            font-size: 12px;
+            text-align: center;
+            text-indent: 1px;
+            padding-top: 48px;
+        }
+    </style>
+@stop
+
 @extends('layout.app-full')
 
 @section('content')
@@ -76,10 +92,7 @@ use Illuminate\Support\Facades\Lang;
                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                 <label for="">@lang('global.country')</label>
                                 @if($code = strtolower(_e($contract->metadata->country,'code')))
-                                    <span><a href="{{route('country.detail', ['key'=>$code])}}">
-                                            <?php   $c = $contract->metadata->country;?>
-                                            {{trans('country')[$c->code]}}
-                                        </a>
+                                    <span>{{ucfirst(_e($contract->metadata->country,'name'))}}
                                         @if(env("CATEGORY")=="rc")
                                             @if(isset($contract->metadata->amla_url) && !empty($contract->metadata->amla_url))
                                                 <span class="amla-link">@lang('contract.see') <a
@@ -316,6 +329,7 @@ use Illuminate\Support\Facades\Lang;
                                         &nbsp; @lang('contract.main_contract')
                                     @else
                                         {{$parentContract->name}} @lang('contract.main_contract')
+
                                     @endif
                                 </td>
                             </tr>

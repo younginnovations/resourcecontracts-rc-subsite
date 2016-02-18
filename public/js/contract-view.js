@@ -26390,7 +26390,10 @@ var MetadataView = React.createClass({displayName: "MetadataView",
             if (anchor === true) {
                 return (React.createElement("span", null, React.createElement("a", {href: link}, res), separator));
             } else {
-                return (React.createElement("nobr", null, React.createElement("nobr", null, res), React.createElement("nobr", null, separator)));
+                return (React.createElement("nobr", null, 
+                    React.createElement("nobr", null, res), 
+                    React.createElement("nobr", null, separator)
+                ));
             }
         });
 
@@ -26413,7 +26416,7 @@ var MetadataView = React.createClass({displayName: "MetadataView",
             var contractType = ct.map(function (contractType, i) {
                 var link = app_url + "/search?q=&contract_type%5B%5D=" + contractType;
                 var separator = (i != ct.length - 1) ? ' | ' : '';
-                return (React.createElement("nobr", null, React.createElement("nobr", null, contractType), React.createElement("nobr", null, separator)));
+                return (React.createElement("span", null, contractType, " ", separator));
             });
 
             var re = new RegExp(' ', 'g');
@@ -26464,12 +26467,6 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                         React.createElement("div", null, 
                             lang.metadata
                         ), 
-                        React.createElement("div", {className: "metadata-country"}, 
-                            React.createElement("span", null, lang.country), 
-                            React.createElement("span", null, 
-                               getCountryName(this.props.metadata.get("country").code)
-                            )
-                        ), 
                         React.createElement("div", {className: "metadata-signature-year"}, 
                             React.createElement("span", null, lang.signature_year), 
                             React.createElement("span", null, 
@@ -26482,7 +26479,7 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                         ), 
                         React.createElement("div", {className: "metadata-type-contract"}, 
                             React.createElement("span", null, lang.type_contract), 
-                            React.createElement("p", null, contractType)
+                            React.createElement("p", {className: "spanInline"}, contractType)
                         ), 
                         React.createElement("div", {className: "metadata-ocid"}, 
                             React.createElement("span", null, lang.open_contracting_id), 
@@ -26497,7 +26494,6 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                         React.createElement(AmlaUrl, {metadata: this.props.metadata}), 
                         React.createElement(LandMatrixView, {metadata: this.props.metadata}), 
                         React.createElement("div", {className: "metadata-ocid"}, 
-                            React.createElement("p", null, React.createElement("span", null), React.createElement("span", null, lang.more_from), " ", React.createElement("a", {href: countryLink}, getCountryName(this.props.metadata.get("country").code))), 
                             React.createElement("p", null, React.createElement("span", null), React.createElement("span", null, lang.more_for), " ", this.getResourceLang(this.props.metadata.get("resource"), true))
                         )
                     )
@@ -26591,14 +26587,14 @@ var RelatedDocumentsView = React.createClass({displayName: "RelatedDocumentsView
             return words.join(" ") + ellipsis;
         }
 
-        var parentContracts = "",
+        var parentContracts = [],
             supportingContracts = [],
-            moreContracts = "";
+            moreContracts = [];
         if (this.props.metadata.get("parent")) {
-            parentContracts = this.props.metadata.get("parent").map(function (doc) {
+            this.props.metadata.get("parent").map(function (doc) {
                 var docUrl = app_url + "/contract/" + doc.open_contracting_id;
                 if (doc.is_published) {
-                    return (
+                    parentContracts.push(
                         React.createElement("span", {className: "parent-contract"}, 
                             React.createElement("a", {href: docUrl}, doc.name)
                         )
@@ -26622,7 +26618,7 @@ var RelatedDocumentsView = React.createClass({displayName: "RelatedDocumentsView
                     href: this.props.contractApp.getMetadataSummaryLink()+'#associatedcontracts'}, "More...")));
             }
 
-            if (parentContracts.length || supportingContracts.length) {
+            if (parentContracts.length > 0 || supportingContracts.length > 0) {
                 return (
                     React.createElement("div", {className: "relateddocument-view"}, 
                         React.createElement("div", null, lang.related_docs), 
@@ -27157,9 +27153,11 @@ var TextSearchResultRow = React.createClass({displayName: "TextSearchResultRow",
         return text.replace(re, "<span class='search-highlight-word'>" + highlightword + "</span>");
     },
     render: function () {
+
         var text = this.highlightSearchQuery(this.props.resultRow.get("text"), this.props.contractApp.getSearchQuery());
         var type = "<span class='text' title='Text'>Text</span>";
         text = "<span class='link'>Pg " + this.props.resultRow.get("page_no") + "&nbsp;" + text + "</span>" + type;
+
         if (this.props.resultRow.get("type") == "annotation") {
             type = "<span class='annotations' title='Annotation'>" + lang.annotation + "</span>";
             text = this.getShowText(this.props.contractApp.getSearchQuery());
@@ -27175,7 +27173,8 @@ var TextSearchResultRow = React.createClass({displayName: "TextSearchResultRow",
         else {
             return (
                 React.createElement("div", {className: "search-result-row", onClick: this.handleClick}, 
-                    React.createElement("span", {dangerouslySetInnerHTML: {__html: text}})
+                    React.createElement("span", {dangerouslySetInnerHTML: {__html: text}}), 
+                    React.createElement("span", {dangerouslySetInnerHTML: {__html: type}})
                 )
             );
         }
@@ -28040,7 +28039,7 @@ var DownloadUrl = React.createClass({displayName: "DownloadUrl",
                     React.createElement(ClipSwitchButton, null)
                 )
 
-            );
+        );
         }
         else if (!this.props.annotations_url) {
             return (
@@ -28432,7 +28431,7 @@ var MainApp = React.createClass({displayName: "MainApp",
     render: function () {
         return (
             React.createElement("div", {className: "main-app"}, 
-                React.createElement("div", {className: "title-head-wrap"}, 
+            React.createElement("div", {className: "title-head-wrap"}, 
                     React.createElement("div", {className: "head-wrap clearfix"}, 
                         React.createElement(TextSearchForm, {
                             style: this.getStyle(contractApp.isViewVisible("TextSearchForm")), 
@@ -28449,14 +28448,11 @@ var MainApp = React.createClass({displayName: "MainApp",
                         React.createElement(PdfZoom, {
                             style: this.getStyle(contractApp.isViewVisible("PdfZoom")), 
                             contractApp: contractApp}), 
-
                         React.createElement(DownloadUrl, {
                             pdf_url: pdf_download_url, 
                             text_url: text_download_url, 
                             annotations_url: annotations_download_url}
                         ), 
-
-
                         React.createElement(MetadataToggleButton, {
                             style: this.getStyle(contractApp.getShowMeta()), 
                             contractApp: contractApp})
@@ -28494,6 +28490,6 @@ var MainApp = React.createClass({displayName: "MainApp",
 });
 
 React.render(
-    React.createElement(MainApp, null),
+React.createElement(MainApp, null),
     document.getElementById('content')
 );

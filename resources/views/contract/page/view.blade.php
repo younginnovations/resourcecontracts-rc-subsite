@@ -1,13 +1,92 @@
 @extends('layout.app-blank')
 @section('css')
     <link rel="stylesheet" href="{{ url('css/annotation/annotator.css') }}">
-    @if(env("CATEGORY")=="rc")
-        <link href="{{url('css/rc-contract-view.css')}}" rel="stylesheet">
-    @endif
-    @if(env("CATEGORY")=="olc")
-        <link href="{{url('css/olc-contract-view.css')}}" rel="stylesheet">
-    @endif
     <style>
+
+        .note-wrapper {
+            background: #f9f9f9;
+            margin: 20px 14px 10px;
+            padding: 12px;
+            display: block;
+            overflow: hidden;
+        }
+
+        .metadata-note {
+            padding: 0 4px 3px 0!important;
+            font-family: "open-sans-bold";
+            color: #666;
+        }
+
+        .note {
+            display: block;
+            margin-top: 0;
+        }
+
+        .note-inner-wrapper+a {
+            float: right;
+        }
+
+        .note-inner-wrapper+a:focus {
+            text-decoration: none;
+        }
+        .note-wrapper:empty {
+            display: none;
+        }
+
+
+        .social-share li {
+            list-style: none;
+            float: left;
+            margin-right: 6px;
+        }
+
+        .pdf-zoom-options > .btn-default  a {
+            line-height: 20px;
+            display: block;
+        }
+        .pdf-zoom-options > span {
+            font-size: 12px;
+            float: left;
+        }
+
+        .pdf-zoom-options p {
+            display: inline-block;
+        }
+
+        .pdf-zoom-options {
+            padding: 4px 0;
+            border-left: 1px solid #DCDFE2  ;
+            float: left;
+            margin: 0;
+        }
+
+        .pdf-zoom-options > span {
+            font-size: 14px;
+            margin-left: 11px;
+            margin-top: 6px;
+        }
+
+        .pdf-zoom-options > .btn-default  {
+            width: 24px;
+            height: 22px;
+            background: #fff;
+            border: 1px solid #ccc;
+            text-align: center;
+            margin: 5px 10px;
+            padding: 0;
+        }
+
+        .parent-contract {
+            display: flex!important;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .parent-contract > span:last-of-type {
+            font-size: 11px;
+            margin-left: 4px;
+            color: #888;
+        }
         .metadata-ocid a span {
             display: inline !important;
         }
@@ -21,6 +100,7 @@
             text-align: center
         }
     </style>
+
 @stop
 
 @section('content')
@@ -35,7 +115,13 @@
         <nav class="clearfix navbar">
             <div class="navbar-header">
                 <span data-toggle="collapse-sidebar" data-target=".sidebar-collapse" data-target-2=".sidebar-collapse-container" class="pull-left trigger">trigger</span>
-                <a class="navbar-brand" href={{url('/')}} >{{env('CATEGORY')=='rc' ? 'Resource' : 'Openland' }}<span class="beta">Beta</span><span>Contracts</span></a>
+                <a class="navbar-brand" href="{{url()}}">
+                    <span class="country-flag">
+                        <img src="{{get_country('flag')}}"/>
+                    </span>
+                    {{ get_country('name') }}
+                    <span>Resource Contracts</span>
+                </a>
             </div>
 
             <div class="right-header-section navbar-right hidden">
@@ -47,29 +133,6 @@
                     <div class="clip-head">
                         <a href="{{route('clip.index')}}" id="annotation-count" style="display: none"></a>
                         <a class="" id="hide-annotation" style="display: none">@lang('clip.hide')</a>
-                    </div>
-                @endif
-                @if(config('localisation'))
-                    <div class="dropdown language-selector" >
-                        <button class="btn  dropdown-toggle"  data-toggle="dropdown" id="dropdownMenu2" aria-expanded="false">
-                            <img style="width: 16px ; height: 16px; margin-right: 6px;" src="{{getCountryByLang(app('translator')->getLocale())}}"/>{{config('language')[app('translator')->getLocale()]['name']}}
-                            <span class="caret"></span>
-                        </button>
-
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" style="min-width: 110px;">
-
-                            @foreach (config('language') as $locale => $language)
-                                @if(app('translator')->getLocale()!=$locale)
-                                    <li>
-                                        <a href={{lang_url($locale)}}>
-                                            <img style="width: 16px ; height: 16px; margin-right: 6px;" src="{{getCountryByLang($locale)}}"/>
-                                            {{$language['name']}}
-                                        </a>
-                                    </li>
-                                @endif
-                            @endforeach
-
-                        </ul>
                     </div>
                 @endif
             </div>
@@ -143,6 +206,7 @@
         var selectedLang = '{{config('language')[$local->getLanguage()]['name']}}';
         var currentUrl = '{{Request::url()}}';
         var country = '{{get_country('name')}}';
+
         var image_source = '{{get_country('flag')}}';
         var languageImage = '{{getCountryByLang($lang->getCurrentLang())}}';
         var currentLanguage = '{{$lang->getCurrentLang()}}';

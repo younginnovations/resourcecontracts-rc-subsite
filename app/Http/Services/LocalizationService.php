@@ -42,7 +42,7 @@ class LocalizationService
         if (!isset($_COOKIE[$this->key]) && array_key_exists($browserLang, $availableLang)) {
             $lang = $browserLang;
         }
-        
+
         if (is_null($lang)) {
             $lang = isset($_COOKIE[$this->key]) ? $_COOKIE[$this->key] : $this->defaultLang;
         }
@@ -95,6 +95,7 @@ class LocalizationService
     {
         return app('translator')->getLocale();
     }
+
 
     public function getDirection()
     {

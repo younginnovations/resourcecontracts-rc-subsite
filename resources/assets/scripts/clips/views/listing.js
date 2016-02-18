@@ -24,7 +24,7 @@ var Listing = React.createClass({
         var self = this;
         this.setState({loading: true});
         this.props.clipCollection.on('data:change', function () {
-            var annotid = self.getAnnotationId(self.props.clipCollection);
+            var annotid = self.getAnnotationop  Id(self.props.clipCollection);
             self.setState({check_data: annotid});
             self.setClips(self.props.clipCollection);
         });

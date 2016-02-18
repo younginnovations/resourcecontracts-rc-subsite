@@ -109,7 +109,6 @@ class PageController extends BaseController
     {
         $page      = $this->page->get('glossary');
         $page_name = 'glossary';
-
         $meta = [
             'title'       => 'Glossary',
             'description' => 'A glossary of key terms to help navigate contracts and conduct analysis.'

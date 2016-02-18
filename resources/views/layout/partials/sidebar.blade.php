@@ -1,42 +1,24 @@
 <?php
 if (!isset($summary)) {
-    $api     = app('App\Http\Services\APIService');
-    $summary = $api->sortSummaryCountry();
+    $api      = app('App\Http\Services\APIService');
+    $summary  = $api->sortSummaryCountry();
+    $image    = app('App\Http\Services\Admin\ImageService');
+    $barImage = $image->getImageUrl('sidebar');
 }
 ?>
 
 <div id="sidebar-wrapper" class="sidebar-collapse in">
     <ul class="sidebar-nav">
         <li class="sidebar-brand">
-            @if(env("CATEGORY")=="rc")
-                <a href="{{url()}}">Resource <span class="beta">Beta</span><span>Contracts</span></a>
-            @else
-                <a href="{{url()}}">OPENLAND <span class="beta">Beta</span><span>Contracts</span></a>
-            @endif
-
+            <a class="navbar-brand" href="{{url()}}">{{ get_country('name') }}<span>Resource Contracts</span></a>
         </li>
         <li class="contracts">
             <a href="{{url('contracts')}}">
                 <span>@lang('sidebar.all_contracts')</span>
-
-                <small class="label pull-right">{{$summary->contract_count}}</small>
+                <small style="margin-left:17px" class="label pull-right">{{$summary->contract_count}}</small>
             </a>
         </li>
-        <li class="countries">
-            <label>@lang('global.countries')</label>
-            <ul>
-                @foreach(array_slice($summary->country_summary, 0, 10, true) as $country)
 
-                    <li>
-                        <a href="{{route('country.detail', ['key'=>urlencode($country['key'])])}}">
-                            <span>{{$country['name']}}</span>
-                            <small class="label pull-right">{{$country['doc_count']}}</small>
-                        </a>
-                    </li>
-                @endforeach
-                <li><a href="{{route('countries')}}">@lang('sidebar.view_all')</a></li>
-            </ul>
-        </li>
         <li class="resources">
             <label>@lang('global.resources')</label>
             <ul>
@@ -48,7 +30,9 @@ if (!isset($summary)) {
                         </a>
                     </li>
                 @endforeach
-                <li><a href="{{route('resources')}}">@lang('sidebar.view_all')</a></li>
+                @if(count($summary->resource_summary)>10)
+                    <li><a href="{{route('resources')}}">@lang('sidebar.view_all')</a></li>
+                @endif
             </ul>
         </li>
         <li class="year">

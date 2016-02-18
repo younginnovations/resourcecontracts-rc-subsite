@@ -1,8 +1,8 @@
 <?php
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
-Dotenv::load(__DIR__ . '/../');
+Dotenv::load(__DIR__.'/../');
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +16,7 @@ Dotenv::load(__DIR__ . '/../');
 */
 
 $app = new Laravel\Lumen\Application(
-    realpath(__DIR__ . '/../')
+    realpath(__DIR__.'/../')
 );
 
 $app->withFacades();
@@ -63,13 +63,14 @@ $app->middleware(
         Illuminate\Session\Middleware\StartSession::class,
         // Illuminate\View\Middleware\ShareErrorsFromSession::class,
         // Laravel\Lumen\Http\Middleware\VerifyCsrfToken::class,
-        App\Http\Middleware\Localization::class
+        App\Http\Middleware\Localization::class,
+        App\Http\Middleware\GenerateCss::class,
     ]
 );
 
 $app->routeMiddleware(
     [
-        'user' => App\Http\Middleware\Authenticate::class
+        'user' => App\Http\Middleware\Authenticate::class,
     ]
 );
 
@@ -103,32 +104,31 @@ config(
     [
         'hoglog'       => [
             'rootPrefix' => 'logger/',
-            'logdir'     => storage_path() . '/logs'
+            'logdir'     => storage_path().'/logs',
         ],
         'language'     => [
             'en' => [
                 'code'         => 'en',
                 'name'         => 'English',
                 'country_code' => 'us',
-                'dir'          => 'ltr'
+                'dir'          => 'ltr',
             ],
             'fr' => [
                 'code'         => 'fr',
                 'country_code' => 'fr',
                 'name'         => 'French',
-                'dir'          => 'ltl'
+                'dir'          => 'ltr',
             ],
             'ar' => [
                 'code'         => 'ar',
                 'country_code' => 'tn',
                 'name'         => 'Arabic',
-                'dir'          => 'rtl'
-            ]
+                'dir'          => 'rtl',
+            ],
 
         ],
-        'localisation' => false,
-        'clip'         => false,
-
+        'localisation' => true,
+        'clip'         => true,
     ]
 );
 $app->register('HogLog\HogLogServiceProvider');
@@ -148,7 +148,7 @@ $app->register('HogLog\HogLogServiceProvider');
 $app->group(
     ['namespace' => 'App\Http\Controllers'],
     function ($app) {
-        require __DIR__ . '/../app/Http/routes.php';
+        require __DIR__.'/../app/Http/routes.php';
     }
 );
 

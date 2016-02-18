@@ -21,8 +21,6 @@ if($route=="contracts" && isset($url['year']))
         <a href="{{appendInUrl($route,$url,"contract_name",$order)}}">@lang('global.document') {!!show_arrow($order, $sortBy=='contract_name')!!}</a>
     </th>
     <th></th>
-
-    <th width="12%"><a href="{{appendInUrl($route,$url,"country",$order)}}">@lang('global.country') {!!show_arrow($order, $sortBy=='country')!!}</a></th>
     @if($showYear)
         <th><a href="{{appendInUrl($route,$url,"year",$order)}}">@lang('global.year') {!!show_arrow($order, $sortBy=='year')!!}</a></th>
     @endif
@@ -121,15 +119,6 @@ if($route=="contracts" && isset($url['year']))
                         </ul>
                     </div>
                 </div>
-            </td>
-            @if($contract->country_code !='')
-                <td>
-                    <img style="width: 24px ; height: auto" src="{{getFlagUrl($contract->country_code)}}"/>
-                    <span class="country-name-title">{{@trans('country')[$contract->country_code]}}</span>
-                </td>
-            @else
-                <td></td>
-            @endif
             @if($showYear)
                 @if($contract->year_signed !='')
                     <td>{{$contract->year_signed}}</td>
@@ -139,7 +128,6 @@ if($route=="contracts" && isset($url['year']))
             @endif
             <td>
                 <?php
-
                 if (isset($url['sortby']) && $url['sortby'] == "resource") {
                     if ($url['order'] == "asc") {
                         asort($contract->resource);

@@ -6,17 +6,15 @@
 |
 */
 return [
-
     "Contract"                        => "عقد",
     "Environmental Impact Assessment" => "تقييم الأثر البيئي",
-    "Feasiblity Study"                => "دراسة الجدوى",
+    "Feasibility Study"               => "دراسة الجدوى",
     "Financial information"           => "معلومات مالية",
     "Forest Management Plan"          => "خطة إدارة الغابات",
-    "Model Contract"                  => "العقد النموذجي",
+    "Model Contract"                  => "نموذج عقد",
     "Notice"                          => "إشعار",
     "Other"                           => "آخر",
     "Project Plan"                    => "خطة المشروع",
-    "Social Agreement"                => "اتفاق الاجتماعي",
-    "Social Impact Assessment"        => "تقييم الأثر الاجتماعي"
-
+    "Social Agreement"                => "اتفاق اجتماعي",
+    "Social Impact Assessment"        => "تقييم الأثر الاجتماعي",
 ];

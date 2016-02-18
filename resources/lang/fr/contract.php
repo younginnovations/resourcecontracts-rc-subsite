@@ -1,13 +1,11 @@
 <?php
-
 return [
-
     'resource_type'        => "Type de ressource",
     'contract_type'        => "Type de contrat ",
     'company'              => "Société",
     'company_name'         => "Nom de la société",
     'jurisdiction'         => "Territoire de constitution",
-    'registration_agency'  => "Agence des registres ",
+    'registration_agency'  => "Agence d'enregistrement",
     'company_add'          => "Adresse de la société ",
     'company_number'       => "Numéro de la société",
     'corporate_grouping'   => "Regroupement de sociétés",
@@ -31,7 +29,7 @@ return [
     'african_mining'       => "Dans la législation minière africaine Atlas",
     'main_contract'        => "(Contrat Principal)",
     'go_back'              => "Retour aux détails du contrat",
-    'view_pins'            => "Voir les Pins",
+    'view_pins'            => "voir les annotations épinglées",
     'export'               => "exportation",
     'view_annotations'     => "Voir Annotations",
     'view_metadata'        => "Voir Métadonnées",

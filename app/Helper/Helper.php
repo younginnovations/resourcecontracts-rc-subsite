@@ -162,7 +162,7 @@ function meta($meta = null)
     $data['description'] = $description;
     $data['category']    = $category;
     $images              = app(ImageService::class);
-    $data['image']       = $images->getHomePageImageUrl();
+    $data['image']       = $images->getImageUrl('bg');
 
     return (object) $data;
 }
@@ -211,8 +211,6 @@ function getCountryByLang($lang)
             return getFlagUrl($value['country_code']);
         }
     }
-
-    return getFlagUrl('us');
 }
 
 /**
@@ -325,4 +323,82 @@ function lang_url($code)
 function isClipOn()
 {
     return (config('clip') == true) ? true : false;
+}
+
+
+/**
+ * Check if the logged in user is super admin.
+ * @return bool
+ */
+function isAdmin()
+{
+    $auth = app('App\Http\Services\AuthService');
+    if (!$auth->guest() AND $auth->user()->email == 'admin@nrgi.app') {
+        return true;
+    }
+
+    return false;
+}
+
+/**
+ * Get name of current logged in user.
+ * @return mixed
+ */
+function loggedInUser()
+{
+    $auth = app('App\Http\Services\AuthService');
+    if (!$auth->guest()) {
+        return $auth->user()->name;
+    }
+
+}
+
+/**
+ * write brief description
+ *
+ * @param null $key
+ *
+ * @return mixed
+ */
+function getDefaultThemeProperties($key = null)
+{
+    $themeService = app('App\Http\Services\Admin\ThemeService');
+
+    $theme        = $themeService->getSetting();
+    $bgImage      = $themeService->getImage('bg');
+    $sidebarImage = $themeService->getImage('sidebar');
+
+    $properties['primary-color']    = (!empty($theme['primary-color'])) ? $theme['primary-color'] : '#0096E0';
+    $properties['secondary-color']  = (!empty($theme['secondary-color'])) ? $theme['secondary-color'] : '#00AAFF';
+    $properties['sidebar-color']    = (!empty($theme['sidebar-color'])) ? $theme['sidebar-color'] : '#181D11';
+    $properties['background-image'] = (!empty($bgImage)) ? $bgImage : '../../images/country.jpg';
+    $properties['sidebar-image']    = (!empty($sidebarImage)) ? $sidebarImage : '../../images/country-sidebar.jpg';
+    $properties['footer-text']      = (!empty($theme['footer-text'])) ? $theme['footer-text'] : 'This site provides summaries of contracts and their terms to facilitate understanding of important provisions in the documents. These summaries are not interpretations of the documents. Neither the summaries nor the full contracts are complete accounts of all legal obligations related to the projects in question. This site also includes document text that was created automatically; such text may contain errors and differences from the original PDF files. No warranty is made to the accuracy of any content on this website.';
+
+    return array_key_exists($key, $properties) ? $properties[$key] : $properties;
+}
+
+/**
+ * This function generates the theme-color.css file.
+ *
+ * @param $properties
+ *
+ * @return int
+ */
+function generateCssFile($properties)
+{
+    $cssTemplateFile = base_path().'/public/css/country-template';
+    $outputFile      = base_path().'/public/css/theme-color.css';
+    $templateFile    = file_get_contents($cssTemplateFile);
+
+    $updatedContents = str_replace('{primary-color}', $properties['primary-color'], $templateFile);
+    $updatedContents = str_replace('{secondary-color}', $properties['secondary-color'], $updatedContents);
+    $updatedContents = str_replace('{sidebar-color}', $properties['sidebar-color'], $updatedContents);
+    $updatedContents = str_replace('{background-image}', $properties['background-image'], $updatedContents);
+    $updatedContents = str_replace('{sidebar-image}', $properties['sidebar-image'], $updatedContents);
+
+    $newFile = file_put_contents($outputFile, $updatedContents);
+
+    return $newFile;
+
 }
