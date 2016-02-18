@@ -39,12 +39,14 @@ return [
     'of'                         => 'of',
     'text_created_automatically' => 'The text below was created automatically and may contain errors and differences from the contract\'s original PDF file. ',
     'wait_while_loading'         => 'Please wait while loading ...',
-    'processing_pdf_file'        => "We are currently processing the contract's PDF file, and a text version is not yet available.",
+    'processing_pdf_file'        => "We are currently processing the PDF contract in order to extract the text. The text version is not available yet. Please check again later or contact us at info-resourcecontracts@resourcegovernance.org for more information.",
+    "not_published"              => "The contract text or PDF has not been published yet. We are working to publish it soon. Please contact us at info-resourcecontracts@resourcegovernance.org for more information.",
+    "pdf_not_shown"              => "We are sorry. There is a problem loading the contract. Please contact info-resourcecontracts@resourcegovernance.org to let us know about the issue.",
     'more'                       => '...more',
     'less'                       => '...less',
     'select'                     => 'Select',
     'disclosure_mode'            => 'Disclosure Mode',
-    'pages_missing'           => 'Page(s) mising from document',
-    'annexes_missing'         => 'Annexe(s) missing from document'
+    'pages_missing'              => 'Page(s) mising from document',
+    'annexes_missing'            => 'Annexe(s) missing from document'
 ];
 
