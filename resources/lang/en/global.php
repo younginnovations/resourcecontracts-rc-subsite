@@ -59,7 +59,7 @@ return [
     'note'                        => 'Note',
     'land_matrix_id'              => 'Land Matrix ID',
     'is_pages_missing'            => 'Page(s) missing from document',
-    'is_annexes_missing'          => 'Annexe(s) missing from document',
+    'is_annexes_missing'          => 'Annex(es) missing from document',
     'annotation'                  => 'Annotation',
     'text'                        => 'Text',
     'metadata'                    => 'Metadata'

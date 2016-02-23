@@ -130,9 +130,21 @@ function meta($meta = null)
 
 }
 
-function getCategoryTitle()
+/**
+ * @param $key
+ * @return array
+ */
+function getInformation($key = null)
 {
-    $categoryTitle = env('CATEGORY') == 'olc' ? ' OpenLandContracts.org ' : ' ResourceContracts.org ';
+    $information[] = [];
+    $site          = env('CATEGORY');
 
-    return $categoryTitle;
+    $information['categoryTitle']        = $site == 'olc' ? ' OpenLandContracts.org ' : ' ResourceContracts.org ';
+    $information['countriesDescription'] = trans(sprintf('meta/%s.countries_description', $site));
+    $information['countryDescription']   = trans(sprintf('meta/%s.country_description', $site));
+    $information['resourcesDescription'] = trans(sprintf('meta/%s.resources_description', $site));
+    $information['resourceDescription']  = trans(sprintf('meta/%s.resource_description', $site));
+
+
+    return array_key_exists($key, $information) ? $information[$key] : $information;
 }

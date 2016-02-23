@@ -41,19 +41,19 @@ class ResourceController extends BaseController
 
         $resourceList = $this->api->summary()->resource_summary;
 
-        $reourceName = [];
+        $resourceName = [];
 
         foreach ($resourceList as $resource) {
 
             $resourceCode = $resource->key;
-            array_push($reourceName, $resourceCode);
+            array_push($resourceName, $resourceCode);
         }
 
-        $reourceName = implode(',', $reourceName);
+        $resourceName = implode(',', $resourceName);
 
         $meta = [
             'title'       => 'Resources',
-            'description' => 'See and search' . getCategoryTitle() . 'in different resources - ' . $reourceName
+            'description' => getInformation('resourcesDescription') . $resourceName
         ];
 
 
@@ -84,7 +84,7 @@ class ResourceController extends BaseController
 
         $meta = [
             'title'       => trans('resources.' . $resource),
-            'description' => 'See and search' . getCategoryTitle() . 'in resource - ' . $resource
+            'description' => getInformation('resourceDescription') . $resource
 
         ];
 
