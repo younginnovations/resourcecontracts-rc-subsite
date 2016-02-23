@@ -1,9 +1,18 @@
 <?php
 if (!isset($summary)) {
-    $api     = app('App\Http\Services\APIService');
-    $summary = $api->sortSummaryCountry();
+    $api      = app('App\Http\Services\APIService');
+    $summary  = $api->sortSummaryCountry();
+    $image    = app('App\Http\Services\Admin\ImageService');
+    $barImage = $image->getImageUrl('sidebar');
 }
 ?>
+@if(!empty($barImage))
+    <style>
+        .sidebar-nav > .sidebar-brand a, .sidebar-nav > .sidebar-brand a:hover {
+            background-image: url({{ $barImage  }});
+        }
+    </style>
+@endif
 
 <div id="sidebar-wrapper" class="sidebar-collapse in">
     <ul class="sidebar-nav">

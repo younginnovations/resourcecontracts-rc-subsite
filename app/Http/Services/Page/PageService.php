@@ -93,4 +93,16 @@ Class PageService
 
         return $this->page->create($input);
     }
+
+    /**
+     * Delete the page.
+     * @param $id
+     * @return bool|null
+     */
+    public function destroy($id)
+    {
+        $pageId = $this->find($id);
+
+        return $pageId->delete();
+    }
 }

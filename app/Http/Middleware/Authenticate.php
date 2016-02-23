@@ -3,7 +3,8 @@
 use App\Http\Services\AuthService;
 use Closure;
 
-class Authenticate {
+class Authenticate
+{
     /**
      * @var AuthService
      */
@@ -24,12 +25,13 @@ class Authenticate {
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure                 $next
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
+//        dd($this->auth->user());
         if ($this->auth->guest()) {
             return redirect()->route('login');
         }

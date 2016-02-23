@@ -65,7 +65,7 @@ $app->post('page/save', ['as' => 'page', 'uses' => 'Admin\PageController@update'
 $app->get('admin', ['as' => 'admin.dashboard', 'uses' => 'Admin\PageController@index']);
 
 $app->get('admin/image', ['as' => 'admin.image', 'uses' => 'Admin\ImageController@index']);
-$app->post('admin/image/upload', ['as' => 'admin.image.upload', 'uses' => 'Admin\ImageController@upload']);
+$app->post('admin/image/upload/{type}', ['as' => 'admin.image.upload', 'uses' => 'Admin\ImageController@upload']);
 
 
 $app->get('admin/page', ['as' => 'admin.page', 'uses' => 'Admin\PageController@index']);
@@ -73,6 +73,7 @@ $app->get('admin/page/create', ['as' => 'admin.page.create', 'uses' => 'Admin\Pa
 $app->post('admin/page/store', ['as' => 'admin.page.store', 'uses' => 'Admin\PageController@store']);
 $app->get('admin/page/{id}', ['as' => 'admin.page.edit', 'uses' => 'Admin\PageController@edit']);
 $app->post('admin/page/{id}', ['as' => 'admin.page.update', 'uses' => 'Admin\PageController@update']);
+$app->delete('admin/page/{id}', ['as' => 'admin.page.delete', 'uses' => 'Admin\PageController@delete']);
 /*
 |--------------------------------------------------------------------------
 | API Routes

@@ -1,5 +1,6 @@
 <?php
 use \Illuminate\Support\Facades\Lang as Lang;
+
 ?>
 @extends('layout.app-full')
 
@@ -10,6 +11,13 @@ use \Illuminate\Support\Facades\Lang as Lang;
                 background-image: url({{$image}});
             }
         </style>
+    @else
+        <style>
+            .row-top-wrap {
+                background-image: url({{sprintf('images/%s-bg.jpg' , env('CATEGORY'))}});
+            }
+        </style>
+
     @endif
 @stop
 @section('content')

@@ -26,8 +26,14 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($pages as $page) {
-            Page::create($page);
+
+            $validate = Page::where('slug', $page['slug'])->count();
+            if ($validate == 0) {
+                Page::create($page);
+
+            }
         }
+        print_r('Completed.');
     }
 
 }

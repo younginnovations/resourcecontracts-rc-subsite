@@ -49,13 +49,13 @@ class SiteController extends BaseController
      */
     public function home(ImageService $image)
     {
-        $image     = $image->getHomePageImageUrl();
+        $image     = $image->getImageUrl('bg');
         $summary   = $this->api->summary();
         $countries = count($summary->country_summary);
         $resources = count($summary->resource_summary);
         $contracts = $summary->contract_count;
 
-        return view('site.home', compact('countries', 'resources', 'contracts', 'image'));
+        return view('site.home', compact('countries', 'resources', 'contracts', 'image', 'sidebarImage'));
     }
 
     /**

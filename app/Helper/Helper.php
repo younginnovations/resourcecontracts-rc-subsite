@@ -123,7 +123,7 @@ function meta($meta = null)
     $data['description'] = $description;
     $data['category']    = $category;
     $images              = app(ImageService::class);
-    $data['image']       = $images->getHomePageImageUrl();
+    $data['image']       = $images->getImageUrl('bg');
 
     return (object) $data;
 
@@ -147,4 +147,19 @@ function getInformation($key = null)
 
 
     return array_key_exists($key, $information) ? $information[$key] : $information;
+}
+
+
+/**
+ * Check if the logged in user is super admin.
+ * @return bool
+ */
+function isAdmin()
+{
+    $auth = app('App\Http\Services\AuthService');
+    if (!$auth->guest() AND $auth->user()->email == 'admin@nrgi.app') {
+        return true;
+    }
+
+    return false;
 }
