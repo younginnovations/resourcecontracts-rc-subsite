@@ -4,6 +4,7 @@ namespace App\Http\Services;
 use GuzzleHttp\Client;
 use GuzzleHttp\Message\Request;
 use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
 
 /**
  * Class APIService
@@ -419,9 +420,15 @@ class APIService
             $request->setQuery($query);
             $response = $this->client->send($request);
             $data     = $response->getBody()->getContents();
-            header('Content-type: text/csv; charset=utf-8');
-            header('Content-Disposition: attachment; filename="' . $filename . '.csv"');
-            echo chr(255) . chr(254) . mb_convert_encoding($data, 'UTF-16LE', 'UTF-8');
+            $data=json_decode($data,true);
+
+            Excel::create($filename, function ($csv) use(&$data)
+            {
+                $csv->sheet('sheetname', function ($sheet) use(&$data)
+                {
+                    $sheet->fromArray($data);
+                });
+            })->download('xls');
             die;
         } catch (\Exception $e) {
             Log::error($resource . ":" . $e->getMessage(), $query);
@@ -431,3 +438,4 @@ class APIService
     }
 
 }
+

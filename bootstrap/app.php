@@ -87,9 +87,13 @@ $app->routeMiddleware(
 //$app->register('Collective\Html\HtmlServiceProvider');
 //$app->register('Laracasts\Utilities\UtilitiesServiceProvider');
 $app->register(App\Providers\AppServiceProvider::class);
+$app->register(Maatwebsite\Excel\ExcelServiceProvider::class);
+class_alias('Maatwebsite\Excel\Facades\Excel','Excel');
 //class_alias('Collective\Html\FormFacade', 'Form');
+class_alias('Illuminate\Support\Facades\Response', 'Response');
 
 // $app->register(App\Providers\EventServiceProvider::class);
+
 
 config(
     [
