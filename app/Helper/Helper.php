@@ -163,3 +163,11 @@ function isAdmin()
 
     return false;
 }
+
+function loggedInUser()
+{
+    $auth = app('App\Http\Services\AuthService');
+    if (!$auth->guest()) {
+        return $auth->user()->name;
+    }
+}

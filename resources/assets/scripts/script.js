@@ -212,7 +212,7 @@ $(document).ready(function () {
             $('.cluster-wrap').hide();
             $(href).show();
         }
-    })
+    });
 
     $('.confirm').on('click', function (e) {
         if (confirm($(this).data('confirm'))) {
@@ -221,6 +221,10 @@ $(document).ready(function () {
         else {
             return false;
         }
+    });
+
+    $('.upload').click(function() {
+        location.reload(true);
     });
 
 });

@@ -24,8 +24,8 @@
     <?php $url = \Request::getPathInfo();?>
     <div class="row">
         <div class="col-sm-4 col-md-3">
-            <div class="list-group">
 
+            <div class="list-group">
                 <a href="{{route('admin.page')}}" class="@if($url == '/admin' || strpos($url, 'page') != false) active @endif  list-group-item">
                     <i class="fa fa-file-archive-o"></i> Manage Pages
                 </a>
@@ -33,6 +33,9 @@
                 <a href="{{route('admin.image')}}" class="@if(strpos($url, 'image') != false) active @endif list-group-item">
                     <i class="fa fa-image"></i> Manage Image
                 </a>
+
+                <a href="{{ route('logout') }}" class="list-group-item"><i class="fa fa-sign-out"></i> Log Out ({{ loggedInUser() }})</a>
+
 
             </div>
         </div>

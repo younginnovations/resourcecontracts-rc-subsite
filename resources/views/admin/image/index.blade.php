@@ -12,7 +12,7 @@
                 <small>Image size must be minimum 960X500px</small>
                 </p>
                 <p><img width="200" src="{{$homePageImage}}"></p>
-                <button type="submit" class="btn btn-primary">Upload</button>
+                <button type="submit" class="btn btn-primary upload"><i class="fa fa-upload"></i> Upload</button>
             </form>
             <hr>
             <p><strong>Side Bar Image</strong></p>
@@ -21,7 +21,7 @@
                     <small>Image size must be minimum 260X200px</small>
                 </p>
                 <p><img width="200" src="{{$sidebarImage}}"></p>
-                <button type="submit" class="btn btn-primary">Upload</button>
+                <button type="submit" class="btn btn-primary upload"><i class="fa fa-upload"></i> Upload</button>
             </form>
 
 
