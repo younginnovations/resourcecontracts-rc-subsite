@@ -119,10 +119,18 @@ class ImageService
      */
     public function getImageUrl($type)
     {
-        return $this->filesystem->disk('s3')->getDriver()
-                                ->getAdapter()
-                                ->getClient()
-                                ->getObjectUrl(env('AWS_BUCKET'), $this->getName($type));
+        $category = env('CATEGORY');
+        $getType  = $type == 'bg' ? sprintf('%s-bg.jpg', $category) : sprintf('%s-sidebar.jpg', $category);
+        $url      = url(sprintf('/images/%s', $getType));
+
+        if ($this->filesystem->disk('s3')->exists($this->getName($type))) {
+            $url = $this->filesystem->disk('s3')->getDriver()
+                                    ->getAdapter()
+                                    ->getClient()
+                                    ->getObjectUrl(env('AWS_BUCKET'), $this->getName($type));
+        }
+
+        return $url;
     }
 
 }

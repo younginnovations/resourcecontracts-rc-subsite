@@ -214,6 +214,7 @@ $(document).ready(function () {
         }
     });
 
+    //Deleting the static pages.
     $('.confirm').on('click', function (e) {
         if (confirm($(this).data('confirm'))) {
             return true;
@@ -223,7 +224,8 @@ $(document).ready(function () {
         }
     });
 
-    $('.upload').click(function() {
+    //Delete cache after upload completes.
+    $('.upload').click(function () {
         location.reload(true);
     });
 

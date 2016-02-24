@@ -18,7 +18,7 @@
             <p><strong>Side Bar Image</strong></p>
             <form method="post" action="{{route('admin.image.upload' , ['type' => 'sidebar'])}}" enctype='multipart/form-data'>
                 <p><input type="file" name="image" />
-                    <small>Image size must be minimum 260X200px</small>
+                    <small>Image size must be minimum 200X100px</small>
                 </p>
                 <p><img width="200" src="{{$sidebarImage}}"></p>
                 <button type="submit" class="btn btn-primary upload"><i class="fa fa-upload"></i> Upload</button>

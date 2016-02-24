@@ -170,4 +170,5 @@ function loggedInUser()
     if (!$auth->guest()) {
         return $auth->user()->name;
     }
+
 }

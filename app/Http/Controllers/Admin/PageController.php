@@ -103,6 +103,11 @@ class PageController extends BaseController
         return redirect()->route('admin.page')->withError('Page could not be updated.');
     }
 
+    /**
+     * Delete the page.
+     * @param $id
+     * @return mixed
+     */
     public function delete($id)
     {
         if ($this->page->destroy($id)) {
