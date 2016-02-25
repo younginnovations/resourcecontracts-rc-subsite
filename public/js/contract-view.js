@@ -56087,7 +56087,11 @@ var TextViewer = React.createClass({displayName: "TextViewer",
         if (typeof show_pdf_text === 'undefined') {
             warningText = '';
         }
-
+        if(this.props.pagesCollection.models.length === 0)
+        {
+            warningText = (React.createElement("div", {className: "text-viewer-warning"}, lang.not_published));
+            pagesView = "";
+        }
         if (show_pdf_text == false) {
             warningText = (React.createElement("div", {className: "text-viewer-warning"}, lang.processing_pdf_file));
             pagesView = "";
