@@ -3,7 +3,6 @@ use \Illuminate\Support\Facades\Lang as Lang;
 
 ?>
 @extends('layout.app-full')
-{{ $image }}
 @section('css')
     @if(!empty($image))
         <style>

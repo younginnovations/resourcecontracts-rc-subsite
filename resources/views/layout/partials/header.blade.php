@@ -1,6 +1,10 @@
+<?php
+$currentPath = Illuminate\Support\Facades\Request::path();
+$currentPath = explode('/', $currentPath);
+?>
 <div class="row">
     <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-        @if(url('/admin'))
+        @if($currentPath[0] == "admin")
             <div class="navbar-header admin-navbar-header">
                 @else
                     <div class="navbar-header">
