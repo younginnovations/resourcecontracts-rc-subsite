@@ -148,3 +148,16 @@ function getInformation($key = null)
 
     return array_key_exists($key, $information) ? $information[$key] : $information;
 }
+
+
+if (!function_exists('config_path')) {
+    /**
+     * write brief description
+     * @param string $path
+     * @return string
+     */
+    function config_path($path = '')
+    {
+        return app()->basePath() . '/config' . ($path ? '/' . $path : $path);
+    }
+}

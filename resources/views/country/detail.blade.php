@@ -60,7 +60,7 @@ $countryName = trans('country')[strtoupper($country)];
                     $params['download'] = true;
                     ?>
                     <div class="download-csv">
-                        <a href="{{route('contract.metadata.download',$params)}}">@lang('global.download_as_csv')</a>
+                        <a href="{{route('contract.metadata.download',$params)}}">@lang('global.download')</a>
                     </div>
 
                     <div class="panel-heading">@lang('countriespage.contracts_in') {{@trans('country')[strtoupper($country)]}}</div>
