@@ -397,6 +397,12 @@ a {
   margin: 27px 10px 12px 12px;
   cursor: pointer; }
 
+.admin-navbar-header .trigger {
+  display: none; }
+
+.admin-navbar-header .navbar-brand {
+  margin-left: 14px; }
+
 .front-row-top-wrap .navbar-brand {
   color: #fff; }
   .front-row-top-wrap .navbar-brand:hover {
