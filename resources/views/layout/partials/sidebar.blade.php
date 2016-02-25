@@ -9,7 +9,7 @@ if (!isset($summary)) {
 @if(!empty($barImage))
     <style>
         .sidebar-nav > .sidebar-brand a, .sidebar-nav > .sidebar-brand a:hover {
-            background-image: url({{ $barImage  }});
+            background: url({{ $barImage  }}) 0 0/cover;
         }
     </style>
 @endif
