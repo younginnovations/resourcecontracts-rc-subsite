@@ -37,7 +37,7 @@ $route = Request::path();
                     {{ $contract->name or ''}}
                 </a>
                 @if($annotations->total>0)
-                    <div class="annotate-text"> @lang('global.annotated')</div>
+                    <div class="annotate-text"></div>
                 @endif
 
                 <div class="search-text">
