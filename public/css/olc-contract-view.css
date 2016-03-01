@@ -691,11 +691,13 @@
 }
 
 .annotation-item-page {
+    font-size: 13px;
+    position: relative;
+    top: 3px;
     float: left;
     display: inline-block !important;
     width: auto !important;
 }
-
 .annotation-item-preamble {
     padding-left: 10px;
     margin-bottom: 2px;
