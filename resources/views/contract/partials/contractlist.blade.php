@@ -36,26 +36,32 @@ $route = Request::path();
                 <a class="title-{{$contract->open_contracting_id}}" href="{{route('contract.detail',['id'=>$contract->open_contracting_id ])}}">
                     {{ $contract->name or ''}}
                 </a>
+                <?php
+                $link = sprintf('/contract/%s#annotations', $contract->open_contracting_id);
+                ?>
                 @if($annotations->total>0)
-                    <div class="annotate-text" title="@lang('global.annotated')" data-toggle="tooltip"></div>
+                    <div class="annotate-text" data-popover="true" data-html=true data-content="@lang('global.annotated' , ['link' => url($link)])"></div>
                 @endif
 
                 <div class="search-text">
                     @if(isset($contract->text ) && $contract->text !='')
-                        <p><a href="{{ url(sprintf("/contract/%s/view#/search/%s", $contract->open_contracting_id , $url['q'] )) }}">{!!$contract->text.'...'!!}<span class="contract-group">@lang('global.text')</span></a></p>
+                        <p><a href="{{ url(sprintf("/contract/%s/view#/search/%s", $contract->open_contracting_id , $url['q'] )) }}">{!!$contract->text.'...'!!}<span
+                                        class="contract-group">@lang('global.text')</span></a></p>
 
                     @endif
 
                     @if(isset($contract->annotations ) && !empty($contract->annotations))
                         <p>
-                            <a href="{{ url(sprintf("/contract/%s/view#/pdf/page/%s/annotation/%s", $contract->open_contracting_id ,$contract->annotations->page_no , $contract->annotations->annotation_id  )) }}">{!! $contract->annotations->annotation_text ." pg " .$contract->annotations->page_no !!} <span class="contract-group">@lang('global.annotation') </span> </a>
+                            <a href="{{ url(sprintf("/contract/%s/view#/pdf/page/%s/annotation/%s", $contract->open_contracting_id ,$contract->annotations->page_no , $contract->annotations->annotation_id  )) }}">{!! $contract->annotations->annotation_text ." pg " .$contract->annotations->page_no !!}
+                                <span class="contract-group">@lang('global.annotation') </span> </a>
 
                         </p>
                     @endif
 
                     @if(isset($contract->metadata ) && $contract->metadata !='')
                         <p>
-                            <a href="{{ route('contract.view' , ['id' => $contract->open_contracting_id]) }}">{!! $contract->metadata.'...' !!} <span class="contract-group">@lang('global.metadata')</span></a>
+                            <a href="{{ route('contract.view' , ['id' => $contract->open_contracting_id]) }}">{!! $contract->metadata.'...' !!} <span
+                                        class="contract-group">@lang('global.metadata')</span></a>
 
                         </p>
                     @endif

@@ -139,7 +139,7 @@ use Illuminate\Support\Facades\Lang;
                             </span>
                             </li>
                         </ul>
-                        
+
                         @if(env('CATEGORY') =="olc")
                             <ul>
                                 <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
@@ -209,7 +209,7 @@ use Illuminate\Support\Facades\Lang;
                                 <label for="">@lang('contract.company_name')</label>
                                 <span>@if(isset($company->company->name) && !empty($company->company->name)) <a
                                             href="{{route("search",['company_name'=>$company->company->name])}}">{{$company->company->name}} </a> @else
-                                           - @endif</span>
+                                        - @endif</span>
                             </li>
                             <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                                 <label for="">@lang('contract.jurisdiction')</label>
