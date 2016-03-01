@@ -212,7 +212,11 @@ $(document).ready(function () {
             $('.cluster-wrap').hide();
             $(href).show();
         }
-    })
+    });
 
+    var toolTip = $('[data-toggle="tooltip"]');
+    if (toolTip.length) {
+        toolTip.tooltip();
+    }
 
 });
