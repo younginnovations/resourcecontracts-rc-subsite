@@ -1329,7 +1329,7 @@ footer {
   color: rgba(64, 64, 64, 0.7);
   margin-top: 4px; }
   .search-text span {
-    font-family: Open-Sans-Bold; }
+    color: rgba(64, 64, 64, 0.7) !important; }
   .search-text p {
     margin-bottom: 5px; }
     .search-text p a {
@@ -1382,11 +1382,14 @@ td.contract-date {
     top: 43px; }
 
 .annotate-text {
-  background: url(../images/ic-annotate-title.png) no-repeat left;
+  background: url(../images/ic-annotate-title.png) no-repeat left 5px;
   padding-left: 23px !important;
   display: inline-block;
   font-size: 12px;
-  color: rgba(64, 64, 64, 0.7); }
+  color: rgba(64, 64, 64, 0.7);
+  width: 18px;
+  height: 22px;
+  text-indent: -9999px; }
 
 .search-page-form {
   overflow: hidden;
