@@ -53,7 +53,7 @@ return [
     'next'                        => 'Next',
     'last'                        => 'Last',
     'first'                       => 'First',
-    'annotated'                   => 'Annotated',
+    'annotated'                   => "This is annotated contract. <a href=':link' target='_blank'>View all annotations.</a>",
     'previous'                    => 'Previous',
     'close_annotations'           => 'Close Annotations',
     'note'                        => 'Note',
