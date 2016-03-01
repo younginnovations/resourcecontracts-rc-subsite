@@ -280,6 +280,10 @@ var RelatedDocumentsView = React.createClass({
                     </span>);
                 }
             }
+            if(this.props.metadata.get("associated").length > MaxAllowed)
+            {
+                supportingContracts.push(<span><a href={this.props.contractApp.getMetadataSummaryLink()+'#associatedcontracts'}>More...</a></span>);
+            }
 
             if (parentContracts.length || supportingContracts.length) {
                 return (
@@ -384,7 +388,8 @@ var RightColumnView = React.createClass({
                     metadata={this.props.metadata}/>
 
                 <RelatedDocumentsView
-                    metadata={this.props.metadata}/>
+                    metadata={this.props.metadata}
+                    contractApp={this.props.contractApp}/>
             </div>
         );
     }

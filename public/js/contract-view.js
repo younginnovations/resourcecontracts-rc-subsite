@@ -55704,6 +55704,10 @@ var RelatedDocumentsView = React.createClass({displayName: "RelatedDocumentsView
                     ));
                 }
             }
+            if(this.props.metadata.get("associated").length > MaxAllowed)
+            {
+                supportingContracts.push(React.createElement("span", null, React.createElement("a", {href: this.props.contractApp.getMetadataSummaryLink()+'#associatedcontracts'}, "More...")));
+            }
 
             if (parentContracts.length || supportingContracts.length) {
                 return (
@@ -55808,7 +55812,8 @@ var RightColumnView = React.createClass({displayName: "RightColumnView",
                     metadata: this.props.metadata}), 
 
                 React.createElement(RelatedDocumentsView, {
-                    metadata: this.props.metadata})
+                    metadata: this.props.metadata, 
+                    contractApp: this.props.contractApp})
             )
         );
     }

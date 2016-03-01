@@ -284,7 +284,7 @@ use Illuminate\Support\Facades\Lang;
 
 
         <div class="col-lg-12">
-            <div class="panel panel-default panel-wrap panel-contract-wrap">
+            <div class="panel panel-default panel-wrap panel-contract-wrap" id="associatedcontracts">
                 <div class="panel-heading">
                     @lang('contract.associated_documents')
                 </div>
