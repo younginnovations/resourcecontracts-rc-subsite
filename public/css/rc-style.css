@@ -925,8 +925,7 @@ footer {
 .table-contract td > ul {
   margin-left: 14px; }
   .table-contract td > ul li {
-    list-style: inherit;
-    text-indent: -6px; }
+    list-style: inherit; }
 
 .table-contract tbody td:first-child {
   background: url(../../images/ic-file.png) no-repeat 36px 16px;
