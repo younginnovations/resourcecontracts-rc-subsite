@@ -11,7 +11,7 @@ return [
     'company_add'          => 'Company Address',
     'company_number'       => 'Company Number',
     'corporate_grouping'   => 'Corporate Grouping',
-    'open_corporate_ID'    => 'Open Corporate ID',
+    'open_corporate_ID'    => 'OpenCorporates ID',
     'share'                => 'Participation Share',
     'operator'             => 'Operator',
     'associated_documents' => 'Associated Documents',
