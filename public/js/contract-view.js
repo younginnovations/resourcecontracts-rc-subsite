@@ -56093,11 +56093,11 @@ var TextViewer = React.createClass({displayName: "TextViewer",
         }
         if(this.props.pagesCollection.models.length === 0)
         {
-            warningText = (React.createElement("div", {className: "text-viewer-warning"}, lang.not_published));
+            warningText = (React.createElement("div", {className: "text-viewer-warning"}, not_published_message));
             pagesView = "";
         }
         if (show_pdf_text == false) {
-            warningText = (React.createElement("div", {className: "text-viewer-warning"}, lang.processing_pdf_file));
+            warningText = (React.createElement("div", {className: "text-viewer-warning"}, processing_pdf_file_message));
             pagesView = "";
         }
 

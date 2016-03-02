@@ -272,11 +272,11 @@ var TextViewer = React.createClass({
         }
         if(this.props.pagesCollection.models.length === 0)
         {
-            warningText = (<div className="text-viewer-warning">{lang.not_published}</div>);
+            warningText = (<div className="text-viewer-warning">{not_published_message}</div>);
             pagesView = "";
         }
         if (show_pdf_text == false) {
-            warningText = (<div className="text-viewer-warning">{lang.processing_pdf_file}</div>);
+            warningText = (<div className="text-viewer-warning">{processing_pdf_file_message}</div>);
             pagesView = "";
         }
 
