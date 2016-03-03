@@ -55945,7 +55945,7 @@ var TextPageView = React.createClass({displayName: "TextPageView",
     },
     sanitizeTxt: function (text) {
         //replace the <  and > with &lt;%gt if they are not one of the tags below
-        text = text.replace(/(<)(\/?)(?=span|div|br)([^>]*)(>)/g, "----lt----$2$3----gt----");
+        text = text.replace(/(<)(\/?)(?=span|div|br|p)([^>]*)(>)/g, "----lt----$2$3----gt----");
         text = text.replace(/</g, "&lt;");
         text = text.replace(/>/g, "&gt;");
         text = text.replace(/----lt----/g, "<");
@@ -55995,7 +55995,6 @@ var TextPageView = React.createClass({displayName: "TextPageView",
         }
         var page_no = this.props.page.get('page_no');
         var threshold = page_no == 1 ? 0 : -0.4;
-
         return (
             React.createElement("span", {className: page_no}, 
                 React.createElement("span", null, page_no), 
