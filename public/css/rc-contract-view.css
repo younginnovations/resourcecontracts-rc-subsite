@@ -160,9 +160,11 @@
     background-color: #404040;
 }
 
+.pdf-loading {
+    padding: 15px;
+}
 .text-panel {
-    width: 47%;
-    float: left;
+    width: 50%;
     background: #fff;
     border-radius: 4px;
     -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
@@ -170,7 +172,7 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     padding: 15px 30px;
     float: left;
-    margin: 20px;
+    margin: 10px;
 }
 
 .text-annotator {
