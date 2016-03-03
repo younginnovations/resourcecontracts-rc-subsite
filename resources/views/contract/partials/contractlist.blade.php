@@ -156,15 +156,17 @@ $route = Request::path();
                 </ul>
             </td>
             <td>
-                @if(is_array($contract->contract_type))
-                    @foreach($contract->contract_type as $contracttype)
-                        @if(!empty($contracttype))
-                            <li>{{$contracttype}}</li>
-                        @else
-                            -
-                        @endif
-                    @endforeach
-                @endif
+                <ul>
+                    @if(is_array($contract->contract_type))
+                        @foreach($contract->contract_type as $contracttype)
+                            @if(!empty($contracttype))
+                                <li>{{$contracttype}}</li>
+                            @else
+                                -
+                            @endif
+                        @endforeach
+                    @endif
+                </ul>
             </td>
         </tr>
     @empty

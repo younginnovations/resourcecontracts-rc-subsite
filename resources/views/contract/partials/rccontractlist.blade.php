@@ -93,17 +93,18 @@ if ($path[0] == "resource") {
                 </ul>
             </td>
             <td>
+                <ul>
+                    @if(is_array($contract->contract_type))
 
-                @if(is_array($contract->contract_type))
-                    @foreach($contract->contract_type as $contracttype)
-                        @if(!empty($contracttype))
-                            <li>{{$contracttype}}</li>
-                        @else
-                            -
-                        @endif
-                    @endforeach
-
-                @endif
+                        @foreach($contract->contract_type as $contracttype)
+                            @if(!empty($contracttype))
+                                <li>{{$contracttype}}</li>
+                            @else
+                                -
+                            @endif
+                        @endforeach
+                    @endif
+                </ul>
             </td>
         </tr>
     @empty
