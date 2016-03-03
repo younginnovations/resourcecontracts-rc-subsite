@@ -55241,7 +55241,7 @@ var Pdf = React.createClass({
     } else {
       var page_no = this.props.contractApp.getCurrentPage();
       debug("react.pdf showing page loader", page_no);
-      return (this.props.loading || React.createElement("div", null, lang.loading_page + page_no));
+      return (this.props.loading || React.createElement("div", {className:'pdf-loading'}, lang.loading_page + page_no));
     }
   },
   _onDocumentComplete: function(pdf){
