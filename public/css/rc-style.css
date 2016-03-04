@@ -2269,7 +2269,8 @@ input.select2-search__field {
     width: 140px;
     background: white; }
 
-.select2-results__option {
-  word-wrap: break-word; }
+.select2-container .select2-selection--multiple {
+  max-width: 100%; }
+
 
 /*# sourceMappingURL=maps/rc-style.css.map */
