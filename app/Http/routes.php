@@ -81,6 +81,6 @@ $app->post('admin/page/{id}', ['as' => 'admin.page.update', 'uses' => 'Admin\Pag
 */
 $app->get('contract/{id}/page', ['as' => 'contract.page.get', 'uses' => 'Contract\PageController@getText']);
 $app->get('contract/{id}/allpage', ['as' => 'contract.allpage.get', 'uses' => 'Contract\PageController@getAllText']);
-$app->post('contract/{id}/search', ['as' => 'contract.page.search', 'uses' => 'Contract\PageController@search']);
+
 $app->get('annotation/search', ['as' => 'contract.page.annotations.search', 'uses' => 'Contract\PageController@annotations']);
 $app->get('api/search', ['as' => 'api.search', 'uses' => 'Contract\PageController@annotations']);
