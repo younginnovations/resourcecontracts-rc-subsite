@@ -49,6 +49,13 @@ use Illuminate\Support\Facades\Lang;
                             @endif
                         </ul>
                     </div>
+                    <div class="social-share">
+                        <ul>
+                            <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u={{ url() }}" target="_blank">FB</a></li>
+                            <li class="google-plus"><a href="https://plus.google.com/share?url={{ url() }}" target="_blank">G+</a></li>
+                            <li class="twitter"><a href="https://twitter.com/share?text={{ meta($meta)->title }}" target="_blank">T</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

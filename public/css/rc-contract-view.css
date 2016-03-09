@@ -163,6 +163,7 @@
 .pdf-loading {
     padding: 15px;
 }
+
 .text-panel {
     width: 50%;
     background: #fff;
@@ -376,7 +377,7 @@
     width: 88%;
 }
 
-.search-result-row .text,.search-result-row .annotations {
+.search-result-row .text, .search-result-row .annotations {
     background: url(../images/ic-sprite-new.png) no-repeat -402px 2px;
     text-indent: -9999px;
     float: right;
@@ -459,15 +460,15 @@
 }
 
 .pdf-zoom-options {
-  padding: 4px 0px;
+    padding: 4px 0px;
     padding: 4px 0;
     border-left: 1px solid #DCDFE2;
     float: left;
     margin: 0;
 }
 
-.pdf-zoom-options+div {
-  float: none;
+.pdf-zoom-options + div {
+    float: none;
 }
 
 .pdf-zoom-options > span {
@@ -489,8 +490,7 @@
     margin-left: 6px;
 }
 
-
-.pdf-zoom-options > .btn-default  {
+.pdf-zoom-options > .btn-default {
     width: 24px;
     height: 22px;
     background: #fff;
@@ -499,7 +499,8 @@
     margin: 5px 10px;
     padding: 0;
 }
-.pdf-zoom-options > .btn-default  a {
+
+.pdf-zoom-options > .btn-default a {
     line-height: 20px;
     display: block;
 }
@@ -628,7 +629,7 @@
     padding-right: 10px;
 }
 
-.metadata-view-footer > a,.annotation-title span:last-child > a {
+.metadata-view-footer > a, .annotation-title span:last-child > a {
     font-size: 12px;
     text-transform: none;
 }
@@ -707,7 +708,7 @@
     display: none;
 }
 
-.annotation-item-page{
+.annotation-item-page {
     float: left;
     display: inline-block !important;
     width: auto !important;
@@ -779,7 +780,7 @@
 
     .pdf-zoom-options {
         margin: -45px 90px 0 0;
-        float: right!important;
+        float: right !important;
     }
 
     .text-search {
@@ -814,7 +815,7 @@
         display: block;
     }
 
-    .annotations-viewer,.pdf-annotator,.right-column-view,.text-panel,.search-results-list {
+    .annotations-viewer, .pdf-annotator, .right-column-view, .text-panel, .search-results-list {
         width: 100%;
         float: none;
     }
@@ -831,7 +832,7 @@
     }
 
     .tools {
-        float: right!important;
+        float: right !important;
     }
 
     .annotation-inner-viewer {
@@ -861,11 +862,11 @@
 
 @media all and (max-width: 540px) {
     .pdf-zoom-options {
-        display: none!important;
+        display: none !important;
     }
 }
 
-.tools .pdf-download-link  {
+.tools .pdf-download-link {
     display: block;
     font-size: 0px;
     text-decoration: none;
@@ -876,12 +877,12 @@
 }
 
 .download-pdf a {
-  display: block;
-  font-size: 12px;
-  color: #F37356;
-  text-decoration: none;
-  padding: 13px 25px 13px 44px;
-  background: url(../../images/ic-sprite.png) no-repeat -152px -40px;
+    display: block;
+    font-size: 12px;
+    color: #F37356;
+    text-decoration: none;
+    padding: 13px 25px 13px 44px;
+    background: url(../../images/ic-sprite.png) no-repeat -152px -40px;
 }
 
 .fixed .head-wrap {
@@ -891,42 +892,42 @@
     width: 100%;
 }
 
-.fixed+.document-wrap {
+.fixed + .document-wrap {
     padding-top: 84px;
 }
 
 .note-wrapper {
-  background: #f9f9f9;
-  margin: 20px 14px 10px;
-  padding: 12px;
-  display: block;
-  overflow: hidden;
+    background: #f9f9f9;
+    margin: 20px 14px 10px;
+    padding: 12px;
+    display: block;
+    overflow: hidden;
 }
 
 .metadata-note {
-  padding: 0 4px 3px 0!important;
-  font-family: "open-sans-bold";
-  color: #666;
+    padding: 0 4px 3px 0 !important;
+    font-family: "open-sans-bold";
+    color: #666;
 }
 
 .note {
-  display: block;
-  margin-top: 0;
+    display: block;
+    margin-top: 0;
 }
 
-.note-inner-wrapper+a {
-  float: right;
+.note-inner-wrapper + a {
+    float: right;
 }
 
-.note-inner-wrapper+a:focus {
-  text-decoration: none;
+.note-inner-wrapper + a:focus {
+    text-decoration: none;
 }
+
 .note-wrapper:empty {
     display: none;
 }
 
 .social-share {
-    display: none;
     margin: 12px;
     float: right;
     padding: 0;
@@ -939,36 +940,36 @@
 }
 
 .social-share li a {
-  display: block;
-  text-indent: -9999px;
-  width: 21px;
-  height: 21px;
-  background: url(../images/share-sprite.png) no-repeat -22px -40px;
+    display: block;
+    text-indent: -9999px;
+    width: 21px;
+    height: 21px;
+    background: url(../images/share-sprite.png) no-repeat -22px -40px;
 }
 
 .social-share li.google-plus a {
-  background-position: -50px -40px;
-  margin-left: 4px;
+    background-position: -50px -40px;
+    margin-left: 4px;
 }
 
 .social-share li.twitter a {
-  background-position: 0 -40px;
+    background-position: 0 -40px;
 }
 
 .social-share li a:hover {
-  background-position: -22px 0;
+    background-position: -22px 0;
 }
 
 .social-share li.google-plus a:hover {
-  background-position: -50px 0;
+    background-position: -50px 0;
 }
 
 .social-share li.twitter a:hover {
-  background-position: 0 0;
+    background-position: 0 0;
 }
 
 .parent-contract {
-    display: flex!important;
+    display: flex !important;
     align-items: center;
     font-weight: bold;
 }

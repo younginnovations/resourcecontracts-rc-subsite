@@ -9,7 +9,8 @@
                         <?php
                         $q = \Illuminate\Support\Facades\Input::get('q');
                         ?>
-                        @lang('global.search_results') <div id="search_query" style="font-weight: normal; display: inline"> @if($q)for @endif <span>{{$q}}</span> </div>
+                        @lang('global.search_results')
+                        <div id="search_query" style="font-weight: normal; display: inline"> @if($q)for @endif <span>{{$q}}</span></div>
                     </div>
                 </div>
             </div>
@@ -24,10 +25,18 @@
                 </div>
             </div>
             <?php
-                $params = Request::all();
-                $params['download'] = true;
+            $params = Request::all();
+            $params['download'] = true;
             ?>
             @if($contracts->total!=0)
+                Share:
+                <div class="social-share">
+                    <ul>
+                        <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u={{ url() }}" target="_blank">FB</a></li>
+                        <li class="google-plus"><a href="https://plus.google.com/share?url={{ url() }}" target="_blank">G+</a></li>
+                        <li class="twitter"><a href="https://twitter.com/share?text={{ meta($meta)->title }}" target="_blank">T</a></li>
+                    </ul>
+                </div>
                 <div class="download-csv"><a href="{{route('contract.csv.download',$params)}}">@lang('search.download')</a></div>
             @endif
 

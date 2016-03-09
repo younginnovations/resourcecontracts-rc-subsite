@@ -164,6 +164,7 @@
 .pdf-loading {
     padding: 15px;
 }
+
 .text-panel {
     width: 50%;
     background: #fff;
@@ -175,7 +176,6 @@
     float: left;
     margin: 10px;
 }
-
 
 .text-panel {
     width: 47%;
@@ -392,7 +392,7 @@
     width: 88%;
 }
 
-.search-result-row .text,.search-result-row .annotations {
+.search-result-row .text, .search-result-row .annotations {
     background: url(../images/ic-sprite-new.png) no-repeat -402px 2px;
     text-indent: -9999px;
     float: right;
@@ -479,8 +479,8 @@
     padding: 16px 10px 9px 0px;
 }
 
-.pdf-zoom-options+div {
-  float: none;
+.pdf-zoom-options + div {
+    float: none;
 }
 
 .pdf-zoom-options > span {
@@ -712,6 +712,7 @@
     display: inline-block !important;
     width: auto !important;
 }
+
 .annotation-item-preamble {
     padding-left: 10px;
     margin-bottom: 2px;
@@ -896,37 +897,37 @@
 }
 
 .note-wrapper {
-  background: #f9f9f9;
-  margin: 20px 14px 10px;
-  padding: 12px;
-  display: block;
-  overflow: hidden;
+    background: #f9f9f9;
+    margin: 20px 14px 10px;
+    padding: 12px;
+    display: block;
+    overflow: hidden;
 }
 
 .metadata-note {
-  padding: 0 4px 3px 0!important;
-  font-family: "open-sans-bold";
-  color: #666;
+    padding: 0 4px 3px 0 !important;
+    font-family: "open-sans-bold";
+    color: #666;
 }
 
 .note {
-  display: block;
-  margin-top: 0;
+    display: block;
+    margin-top: 0;
 }
 
-.note-inner-wrapper+a {
-  float: right;
+.note-inner-wrapper + a {
+    float: right;
 }
 
-.note-inner-wrapper+a:focus {
-  text-decoration: none;
+.note-inner-wrapper + a:focus {
+    text-decoration: none;
 }
+
 .note-wrapper:empty {
     display: none;
 }
 
 .social-share {
-    display: none;
     margin: 12px;
     float: right;
     padding: 0;
@@ -939,42 +940,42 @@
 }
 
 .social-share li a {
-  display: block;
-  text-indent: -9999px;
-  width: 21px;
-  height: 21px;
-  background: url(../images/share-sprite.png) no-repeat -22px -40px;
+    display: block;
+    text-indent: -9999px;
+    width: 21px;
+    height: 21px;
+    background: url(../images/share-sprite.png) no-repeat -22px -40px;
 }
 
 .social-share li.google-plus a {
-  background-position: -50px -40px;
-  margin-left: 4px;
+    background-position: -50px -40px;
+    margin-left: 4px;
 }
 
 .social-share li.twitter a {
-  background-position: 0 -40px;
+    background-position: 0 -40px;
 }
 
 .social-share li a:hover {
-  background-position: -22px 0;
+    background-position: -22px 0;
 }
 
 .social-share li.google-plus a:hover {
-  background-position: -50px 0;
+    background-position: -50px 0;
 }
 
 .social-share li.twitter a:hover {
-  background-position: 0 0;
+    background-position: 0 0;
 }
 
-.pdf-zoom-options > .btn-default  a {
+.pdf-zoom-options > .btn-default a {
     line-height: 20px;
     display: block;
 }
 
 .pdf-zoom-options {
     padding: 4px 0;
-    border-left: 1px solid #DCDFE2  ;
+    border-left: 1px solid #DCDFE2;
     float: left;
     margin: 0;
 }
@@ -985,7 +986,7 @@
     margin-top: 6px;
 }
 
-.pdf-zoom-options > .btn-default  {
+.pdf-zoom-options > .btn-default {
     width: 24px;
     height: 22px;
     background: #fff;
@@ -996,7 +997,7 @@
 }
 
 .parent-contract {
-    display: flex!important;
+    display: flex !important;
     align-items: center;
     font-weight: bold;
 }
