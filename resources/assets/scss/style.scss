@@ -3073,3 +3073,7 @@ input.select2-search__field {
     background: rgb(255, 255, 255);
   }
 }
+
+.select2-results__option {
+  word-wrap: break-word;
+}
