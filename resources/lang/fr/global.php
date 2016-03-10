@@ -6,6 +6,7 @@ return [
 
     'an_online_repository_of'     => 'Un en ligne dépôt de',
     'open_land_contracts'         => 'Ouvert Land Contrats',
+    'openland'                    => 'Ouverland',
     'search'                      => 'Recherche',
     'contracts'                   => 'Contrat|Contrats',
     'associated_documents'        => '(fr) and associated documents',
@@ -14,8 +15,7 @@ return [
     'country'                     => 'Pays',
     'view_all_countries'          => 'Vue all countrie fr',
     'contracts_related_to'        => 'CONTRAT DOCUMENTS ASSOCIÉ DE',
-    'resources'                   => 'Ressources',
-    'resource'                    => 'Ressource',
+    'resources'                   => 'Ressource|Ressources',
     'all_contracts'               => 'Tout Contrats',
     'view_all_resources'          => 'View all resource fr',
     'document'                    => 'Document',

@@ -5,6 +5,7 @@ return [
 
     'an_online_repository_of'     => 'An online repository of',
     'open_land_contracts'         => 'Open Land Contracts',
+    'openland'                    => 'Openland',
     'search'                      => 'Search',
     'contracts'                   => 'Contract|Contracts',
     'associated_documents'        => 'and Associated Documents',
@@ -13,8 +14,7 @@ return [
     'country'                     => 'Country',
     'view_all_countries'          => 'View All Countries',
     'contracts_related_to'        => 'CONTRACT DOCUMENTS RELATED TO',
-    'resources'                   => 'Resources',
-    'resource'                    => 'Resource',
+    'resources'                   => 'Resource|Resources',
     'all_contracts'               => 'All Contracts',
     'view_all_resources'          => 'View all resources',
     'document'                    => 'Document',

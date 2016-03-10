@@ -1,5 +1,6 @@
 <?php
 use \Illuminate\Support\Facades\Lang as Lang;
+
 ?>
 @extends('layout.app-full')
 
@@ -20,12 +21,14 @@ use \Illuminate\Support\Facades\Lang as Lang;
                     <span data-toggle="collapse-sidebar" data-target=".sidebar-collapse"
                           data-target-2=".sidebar-collapse-container" class="pull-left trigger">trigger</span>
                     @if(env("CATEGORY")=="rc")
-                        <a class="navbar-brand" href="{{url()}}">Resource <span
-                                    class="beta">Beta</span><span>Contracts</span></a>
+                        <a class="navbar-brand" href="{{url()}}">{{Lang::choice('global.resources' , 1)}} <span
+                                    class="beta">Beta</span><span>{{Lang::choice('global.contracts' ,2)}}</span></a>
                     @else
-                        <a class="navbar-brand" href="{{url()}}">OPENLAND <span
-                                    class="beta">Beta</span><span>Contracts</span></a>
+                        <a class="navbar-brand" href="{{url()}}">@lang('global.openland') <span
+                                    class="beta">Beta</span><span>{{Lang::choice('global.contracts' ,2)}}</span></a>
                     @endif
+                    <a href="{{ url() }}?lang=en">English</a></li>
+                    <a href="{{ url() }}?lang=fr">French</a></li>
                 </div>
             </nav>
 
@@ -66,7 +69,7 @@ use \Illuminate\Support\Facades\Lang as Lang;
             <div class="resource-wrap">
                 <div class="resource-inner-wrap">
                     <p>@lang('global.contracts_related_to')</p>
-                    <span>{{$resources or ''}}</span> @lang('global.resources')
+                    <span>{{$resources or ''}}</span> {{Lang::choice('global.resources' , $resources)}}
                 </div>
                 <a href="{{route('resources')}}" class="btn btn-view">@lang('global.view_all_resources')</a>
             </div>

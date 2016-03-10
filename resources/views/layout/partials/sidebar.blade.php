@@ -1,17 +1,21 @@
 <?php
+use \Illuminate\Support\Facades\Lang;
+
 if (!isset($summary)) {
     $api     = app('App\Http\Services\APIService');
     $summary = $api->sortSummaryCountry();
 }
+
+
 ?>
 
 <div id="sidebar-wrapper" class="sidebar-collapse in">
     <ul class="sidebar-nav">
         <li class="sidebar-brand">
             @if(env("CATEGORY")=="rc")
-                <a href="{{url()}}">Resource <span class="beta">Beta</span><span>Contracts</span></a>
+                <a href="{{url()}}">{{Lang::choice('global.resources' , 1)}} <span class="beta">Beta</span><span>{{Lang::choice('global.contracts' , 2)  }}</span></a>
             @else
-                <a href="{{url()}}">OPENLAND <span class="beta">Beta</span><span>Contracts</span></a>
+                <a href="{{url()}}">@lang('global.openland') <span class="beta">Beta</span><span>{{Lang::choice('global.contracts' , 2)  }}</span></a>
             @endif
 
         </li>
