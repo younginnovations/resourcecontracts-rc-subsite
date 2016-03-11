@@ -375,7 +375,6 @@ use Illuminate\Support\Facades\Lang;
                         <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <label for="">@lang('contract.source_url')</label>
                             <span>
-                                {{_e($contract->metadata,'source')}}
                                 @if(!empty($contract->metadata->source_url))
                                        <a href="{{ $contract->metadata->source_url }}"
                                            target="_blank">{{ str_limit($contract->metadata->source_url,50) }}</a>@else -
@@ -388,6 +387,7 @@ use Illuminate\Support\Facades\Lang;
                         </li>
                     </ul>
                 </div>
+
             </div>
         </div>
     </div>
