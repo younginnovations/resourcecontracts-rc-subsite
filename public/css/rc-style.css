@@ -109,10 +109,10 @@
   bottom: 0;
   right: 0;
   width: 100%;
-  -webkit-transition: width 0.4s;
-     -moz-transition: width 0.4s;
-       -o-transition: width 0.4s;
-          transition: width 0.4s;
+  -webkit-transition: width .4s;
+     -moz-transition: width .4s;
+       -o-transition: width .4s;
+          transition: width .4s;
   background: #f9f9f9;
   border-left: 1px solid #bcbcbc;
   position: absolute;
@@ -123,10 +123,10 @@
   width: 100%;
   position: relative !important;
   right: 0;
-  -webkit-transition: width 0.4s;
-     -moz-transition: width 0.4s;
-       -o-transition: width 0.4s;
-          transition: width 0.4s;
+  -webkit-transition: width .4s;
+     -moz-transition: width .4s;
+       -o-transition: width .4s;
+          transition: width .4s;
   background: #fff;
   min-height: 520px; }
 
@@ -848,10 +848,10 @@ footer {
 .sidebar-collapse-container {
   right: auto;
   left: 0;
-  -webkit-transition: left 0.4s;
-     -moz-transition: left 0.4s;
-       -o-transition: left 0.4s;
-          transition: left 0.4s; }
+  -webkit-transition: left .4s;
+     -moz-transition: left .4s;
+       -o-transition: left .4s;
+          transition: left .4s; }
   .sidebar-collapse-container.out {
     right: auto;
     left: 280px; }
@@ -925,7 +925,8 @@ footer {
 .table-contract td > ul {
   margin-left: 14px; }
   .table-contract td > ul li {
-    list-style: inherit; }
+    list-style: inherit;
+    text-indent: -6px; }
 
 .table-contract tbody td:first-child {
   background: url(../../images/ic-file.png) no-repeat 36px 16px;
@@ -2267,5 +2268,8 @@ input.select2-search__field {
             border-radius: 4px;
     width: 140px;
     background: white; }
+
+.select2-results__option {
+  word-wrap: break-word; }
 
 /*# sourceMappingURL=maps/rc-style.css.map */
