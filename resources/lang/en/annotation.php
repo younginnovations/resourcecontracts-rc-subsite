@@ -47,6 +47,6 @@ return [
     'select'                     => 'Select',
     'disclosure_mode'            => 'Disclosure Mode',
     'pages_missing'              => 'Page(s) mising from document',
-    'annexes_missing'            => 'Annexe(s) missing from document'
+    'annexes_missing'            => 'Annexe(s) missing from document',
 ];
 

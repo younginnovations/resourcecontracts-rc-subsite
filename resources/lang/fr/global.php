@@ -35,7 +35,7 @@ return [
     'signature_date'              => 'Signature Date Fr',
     'document_type'               => 'Document Type Fr',
     'type_contract'               => 'Type Of Contract Fr',
-    'annotations'                 => 'Annotations Fr',
+    'annotations'                 => 'Fr Annotations',
     'view_annotations'            => 'View all Annotations Fr',
     'download_as_csv'             => 'Fr Download as csv',
     'see'                         => 'See Fr',
@@ -54,7 +54,7 @@ return [
     'next'                        => 'Fr Next',
     'last'                        => 'Fr Last',
     'first'                       => 'Fr First',
-    'annotated'                   => 'Fr Annotated',
+    'annotated'                   => "Fr This is annotated contract. <a href=':link' target='_blank'>View all annotations.</a>",
     'previous'                    => 'Fr Previous',
     'close_annotations'           => 'Close Annotations',
     'note'                        => 'Fr Note',
@@ -63,5 +63,7 @@ return [
     'is_annexes_missing'          => 'Fr Is Annexes Missing',
     'annotation'                  => 'Fr Annotation',
     'text'                        => 'Text',
-    'metadata'                    => 'Metadata'
+    'metadata'                    => 'Metadata',
+    'pdf'                         => 'Fr PDF',
+    'word_file'                   => 'Fr Word File',
 ];

@@ -1,6 +1,6 @@
 $(document).ready(function () {
     if ($('select').length) {
-        $('select').select2({placeholder: "Select", allowClear: true, theme: "classic"});
+        $('select').select2({placeholder: lang.select, allowClear: true, theme: "classic"});
     }
     $('#searchclear').click(function () {
         $("select").val(null).trigger("change");

@@ -43,9 +43,9 @@ use Illuminate\Support\Facades\Lang;
                         </div>
 
                         <ul class="dropdown-menu">
-                            <li><a href="{{route('contract.download.pdf',['id'=> $contract->metadata->open_contracting_id])}}">Pdf</a></li>
+                            <li><a href="{{route('contract.download.pdf',['id'=> $contract->metadata->open_contracting_id])}}">@lang('global.pdf')</a></li>
                             @if(env('CATEGORY')!= 'olc' && $contract->metadata->is_ocr_reviewed == 1)
-                                <li><a href="{{route('contract.download',['id'=> $contract->metadata->open_contracting_id])}}">Word File</a></li>
+                                <li><a href="{{route('contract.download',['id'=> $contract->metadata->open_contracting_id])}}">@lang('global.word_file')</a></li>
                             @endif
                         </ul>
                     </div>
@@ -127,7 +127,7 @@ use Illuminate\Support\Facades\Lang;
                                 </span>
                             </li>
                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <label for="">@lang('global.resource')</label>
+                                <label for="">{{ Lang::choice('global.resources' , 2) }}</label>
                                 <?php
                                 $resource = _e($contract->metadata, 'resource', '-');
                                 $resource = is_array($resource) ? $resource : [];
@@ -158,7 +158,7 @@ use Illuminate\Support\Facades\Lang;
                 <div class="panel panel-default panel-wrap panel-annotation-wrap">
                     <div class="panel-body">
                         <div class="annotation-block">
-                            <div class="title">@lang('global.annotations')</div>
+                            <div class="title"> @lang('global.annotations')</div>
                             <ul>
                                 <?php $i = 0; ?>
                                 @forelse($contract->annotationsGroup as $category=>$annotation)
@@ -392,13 +392,13 @@ use Illuminate\Support\Facades\Lang;
         <div class="row annotation-list-wrapper" id="annotations">
             <div class="col-lg-12">
                 <div class="panel panel-default panel-wrap panel-annotation-list-wrap">
-                    <div class="panel-heading">Annotations</div>
+                    <div class="panel-heading">@lang('global.annotations')</div>
                     <div class="panel-body">
                         <div class="annotation-category-cluster">
                             <ul>
                                 <li><a class="view-annotation-cluster active" href="#cluster-all">All</a></li>
                                 @foreach($contract->annotationsCluster as $cluster=>$value)
-                                    <li><a class="view-annotation-cluster" href="#cluster-{{str_slug($cluster,40)}}">{{$cluster}}</a></li>
+                                    <li><a class="view-annotation-cluster" href="#cluster-{{str_slug($cluster,40)}}">@lang('annotation.'.strtolower($cluster))</a></li>
                                 @endforeach
                             </ul>
 
@@ -407,7 +407,7 @@ use Illuminate\Support\Facades\Lang;
                         @forelse($contract->annotationsCluster as $cluster  => $categories)
                             <div id="cluster-{{str_slug($cluster,'-')}}" class="cluster-wrap">
                                 <div class="category-title">
-                                    {{$cluster}}
+                                    @lang('annotation.'.strtolower($cluster))
                                 </div>
 
                                 @foreach($categories as $category => $annotations)

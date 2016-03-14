@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\Lang;
 $url = Request::all();
 $order = \Illuminate\Support\Facades\Input::get('order', '');
 $sortBy = \Illuminate\Support\Facades\Input::get('sortby', '');
@@ -23,9 +23,9 @@ if ($path[0] == "resource") {
     <th width="10%"><a href="{{appendInUrl($route,$url,"year",$order)}}">@lang('global.year') {!!show_arrow($order, $sortBy=='year')!!}</a></th>
 
     <th>
-        <a href="{{appendInUrl($route,$url,"resource",$order)}}">@lang('global.resource') {!!show_arrow($order, $sortBy=='resource')!!}</a>
+        <a href="{{appendInUrl($route,$url,"resource",$order)}}">{{Lang::choice('global.resources' , 1)}} {!!show_arrow($order, $sortBy=='resource')!!}</a>
     </th>
-    <th><a href="{{appendInUrl($route,$url,"contract_type",$order)}}">@lang('global.contract_type'){!!show_arrow($order, $sortBy=='contract_type')!!}</a></th>
+    <th><a href="{{appendInUrl($route,$url,"contract_type",$order)}}">@lang('contract.contract_type'){!!show_arrow($order, $sortBy=='contract_type')!!}</a></th>
     </thead>
     <tbody>
     @forelse($contracts->results as $contract)
@@ -39,8 +39,11 @@ if ($path[0] == "resource") {
                 <a href="{{route('contract.detail',['id'=>$contract->open_contracting_id ])}}">
                     {{ $contract->name or ''}}
                 </a>
+                <?php
+                $link = sprintf('/contract/%s#annotations', $contract->open_contracting_id);
+                ?>
                 @if($annotations->total>0)
-                    <div class="annotate-text"> Annotated</div>
+                    <div class="annotate-text" data-popover="true" data-html=true data-content="@lang('global.annotated' , ['link' => url($link)])"></div>
                 @endif
 
                 <p class="country_name">- {{trans('country.'.strtoupper($contract->country_code))}}</p>
@@ -54,12 +57,12 @@ if ($path[0] == "resource") {
                             <span>Download</span>
                         </div>
                         <ul class="dropdown-menu">
-                            <li><a href="{{route('contract.download.pdf',['id'=> $contract->open_contracting_id])}}">Pdf</a></li>
+                            <li><a href="{{route('contract.download.pdf',['id'=> $contract->open_contracting_id])}}">@lang('global.pdf')</a></li>
                             @if(env('CATEGORY')!= 'olc' && $contract->is_ocr_reviewed == true)
-                                <li><a href="{{route('contract.download',['id'=> $contract->open_contracting_id])}}">Word File</a></li>
+                                <li><a href="{{route('contract.download',['id'=> $contract->open_contracting_id])}}">@lang('global.word_file')</a></li>
                             @endif
                             @if($annotations->total>0)
-                                <li><a href="{{route('contract.annotations.download',['id'=> $contract->open_contracting_id])}}">Annotations</a></li>
+                                <li><a href="{{route('contract.annotations.download',['id'=> $contract->open_contracting_id])}}">@lang('global.annotations')</a></li>
                             @endif
                         </ul>
                     </div>
@@ -85,7 +88,7 @@ if ($path[0] == "resource") {
                 <ul>
                     @foreach($contract->resource as $resource)
                         @if(!empty($resource))
-                            <li>{{$resource}}</li>
+                            <li>@lang('resources.'.$resource)</li>
                         @else
                             -
                         @endif

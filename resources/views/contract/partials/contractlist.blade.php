@@ -18,7 +18,7 @@ $route = Request::path();
 
     <th width="20%"><a href="{{appendInUrl($route,$url,"country",$order)}}">@lang('global.country') {!!show_arrow($order, $sortBy=='country')!!}</a></th>
     <th><a href="{{appendInUrl($route,$url,"year",$order)}}">@lang('global.year') {!!show_arrow($order, $sortBy=='year')!!}</a></th>
-    <th width="15%"><a href="{{appendInUrl($route,$url,"resource",$order)}}">@lang('global.resource') {!!show_arrow($order, $sortBy=='resource')!!}</a></th>
+    <th width="15%"><a href="{{appendInUrl($route,$url,"resource",$order)}}">{{Lang::choice('global.resources' , 1)}} {!!show_arrow($order, $sortBy=='resource')!!}</a></th>
     <th width="15%"><a href="{{appendInUrl($route,$url,"contract_type",$order)}}">@lang('contract.contract_type') {!!show_arrow($order, $sortBy=='contract_type')!!}</a></th>
 
     </thead>
@@ -101,12 +101,12 @@ $route = Request::path();
                             <span>Download</span>
                         </div>
                         <ul class="dropdown-menu">
-                            <li><a href="{{route('contract.download.pdf',['id'=> $contract->open_contracting_id])}}">Pdf</a></li>
+                            <li><a href="{{route('contract.download.pdf',['id'=> $contract->open_contracting_id])}}">@lang('global.pdf')</a></li>
                             @if(env('CATEGORY')!="olc" && $contract->is_ocr_reviewed == true)
-                                <li><a href="{{route('contract.download',['id'=> $contract->open_contracting_id])}}">Word File</a></li>
+                                <li><a href="{{route('contract.download',['id'=> $contract->open_contracting_id])}}">@lang('global.word_file')</a></li>
                             @endif
                             @if($annotations->total>0)
-                                <li><a href="{{route('contract.annotations.download',['id'=> $contract->open_contracting_id])}}">Annotations</a></li>
+                                <li><a href="{{route('contract.annotations.download',['id'=> $contract->open_contracting_id])}}">@lang('global.annotations')</a></li>
                             @endif
                         </ul>
                     </div>

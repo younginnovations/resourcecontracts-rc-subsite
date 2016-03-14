@@ -42,7 +42,7 @@ if (!isset($summary)) {
             </ul>
         </li>
         <li class="resources">
-            <label>@lang('global.resources')</label>
+            <label>{{Lang::choice('global.resources' ,2)}}</label>
             <ul>
                 @foreach(array_slice($summary->resource_summary,0,10,true) as $resource)
                     <li>

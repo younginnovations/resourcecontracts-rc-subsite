@@ -2,12 +2,11 @@
 
 return [
 
-    'filter_by_contry_name' => 'Filter by country in french...',
-    'filter_by_resources' => 'Filter by resources (French)',
-    'contract' => 'Contrat',
-    'contracts' => 'Contrats',
-    'find_contract' => '(fr)Find a contract in',
-    'contracts_in' => 'Contrats en',
-    'resources_in' => 'Resources En',
+    'filter_by_contry_name' => 'Fr Filter by country name...',
+    'filter_by_resources'   => 'Fr Filter by Resources',
+    'find_contract'         => 'Fr Search within :tag contracts',
+    'contracts_in'          => 'Fr Contracts in',
+    'resources_in'          => 'Fr Resources In',
+
 
 ];

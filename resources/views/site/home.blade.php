@@ -27,7 +27,7 @@ use \Illuminate\Support\Facades\Lang as Lang;
                         <a class="navbar-brand" href="{{url()}}">@lang('global.openland') <span
                                     class="beta">Beta</span><span>{{Lang::choice('global.contracts' ,2)}}</span></a>
                     @endif
-                    <a href="{{ url() }}?lang=en">English</a></li>
+                    <a href="{{ url() }}?lang=en">English</a></li> |
                     <a href="{{ url() }}?lang=fr">French</a></li>
                 </div>
             </nav>
