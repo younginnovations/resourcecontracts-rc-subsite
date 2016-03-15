@@ -41,7 +41,7 @@
         <div class="col-lg-12 country-list-wrapper search-list-wrapper">
             <div style="margin-left: 63px;">
                 @if(isset($contracts->suggestion) && !empty($contracts->suggestion))
-                Similar word:
+                Also showing results for :
                 @foreach($contracts->suggestion as $suggestion)
                    <a href="{{route('search',['q'=>$suggestion->text])}}">{{$suggestion->text}}</a> ,
                 @endforeach
