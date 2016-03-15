@@ -88,14 +88,23 @@ $(document).ready(function () {
         $('.cluster-wrap').show();
         $('.view-annotation-cluster').removeClass('active');
         $('.annotation-category-cluster li:first-child a').addClass('active');
-
-        $('html, body').animate({
-            scrollTop: $(this.hash).offset().top - 25
-        }, 300, function () {
-            window.location.hash = href;
-        });
-
+        scrollToDiv(href);
     });
+
+    $(".annotation-category-cluster a").on('click', function (e) {
+        e.preventDefault();
+        var href = $(this).attr('href');
+        scrollToDiv(href);
+    });
+
+
+    function scrollToDiv(ID) {
+        $('html, body').animate({
+            scrollTop: $(ID).offset().top - 5
+        }, 300, function () {
+            window.location.hash = ID;
+        });
+    }
 
     // search form toggle
 
@@ -198,22 +207,6 @@ $(document).ready(function () {
         }
     });
 
-
-    $(document).on('click', '.view-annotation-cluster', function (e) {
-        e.preventDefault();
-        var href = $(this).attr('href');
-        $('.annotation-category-cluster .active').removeClass('active');
-
-        $(this).addClass('active');
-
-        if (href == '#cluster-all') {
-            $('.cluster-wrap').show();
-        } else {
-            $('.cluster-wrap').hide();
-            $(href).show();
-        }
-    });
-
     var toolTip = $('[data-toggle="tooltip"]');
     if (toolTip.length) {
         toolTip.tooltip();
@@ -263,6 +256,8 @@ $(document).ready(function () {
         }
 
     };
-    $(".annotate-text").popover(options);
-
+    var annotation = $(".annotate-text");
+    if (annotation.length) {
+        annotation.popover(options);
+    }
 });

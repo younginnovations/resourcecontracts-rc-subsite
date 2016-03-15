@@ -392,74 +392,159 @@ use Illuminate\Support\Facades\Lang;
         <div class="row annotation-list-wrapper" id="annotations">
             <div class="col-lg-12">
                 <div class="panel panel-default panel-wrap panel-annotation-list-wrap">
-                    <div class="panel-heading">Annotations</div>
+                    <div class="panel-heading"> {{count($contract->annotationsGroup)}} @if(count($contract->annotationsGroup) >1) Annotations @else Annotation @endif </div>
                     <div class="panel-body">
-                        <div class="annotation-category-cluster">
-                            <ul>
-                                <li><a class="view-annotation-cluster active" href="#cluster-all">All</a></li>
-                                @foreach($contract->annotationsCluster as $cluster=>$value)
-                                    <li><a class="view-annotation-cluster" href="#cluster-{{str_slug($cluster,40)}}">{{$cluster}}</a></li>
-                                @endforeach
-                            </ul>
+
+                        <div class="row">
+
+                            <div class="col-md-4">
+
+                                <div class="annotation-category-cluster">
+                                    <ul>
+                                        @foreach($contract->annotationsCluster as $cluster=>$value)
+                                            <li><a href="#cluster-{{str_slug($cluster,40)}}">{{$cluster}}</a></li>
+                                        @endforeach
+                                    </ul>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-8">
+
+                                @forelse($contract->annotationsCluster as $cluster => $annotations)
+
+                                    <div id="cluster-{{str_slug($cluster,'-')}}" class="cluster-wrap">
+                                        <div class="category-title">
+                                            {{$cluster}}
+                                        </div>
+                                        <?php ksort($annotations);?>
+                                        @foreach($annotations as $annotation)
+                                            <?php $annotation = array_values($annotation)[0][0];?>
+                                        <div>
+                                            <div id="{{str_slug($annotation->category,'-')}}" class="sub-category">
+                                                <a href="#{{str_slug($annotation->category,'-')}}"><i class='glyphicon glyphicon-link' style="display:none;"></i></a>
+                                                {{$annotation->category}}
+                                            </div>
+                                            <div class="annotation-text">
+                                                {{$annotation->text}}
+                                            </div>
+                                            @foreach($annotation->pages as $page)
+                                                <span>
+                                                <?php $page_type = isset($page->shapes) ? 'pdf' : 'text'; ?>
+                                                    <a href="{{route('contract.detail',['id'=>$contract->metadata->open_contracting_id])}}#/{{$page_type}}/page/{{$page->page_no}}/annotation/{{$page->id}}">
+                                                        Page {{_e($page,'page_no')}} -
+                                                        @if($page->article_reference !='')
+                                                            {{$page->article_reference}}
+                                                        @endif
+                                                    </a>
+                                                    ,
+                                            </span>
+                                        </div>
+                                            @endforeach
+                                        @endforeach
+                                    </div>
+
+                                @empty
+
+                                    <div class="category-wrap">
+                                        <ul>
+                                            <li class="no-data">@lang('contract.annotation_message')</li>
+                                        </ul>
+                                    </div>
+
+                                @endforelse
+
+                            </div>
 
                         </div>
 
-                        @forelse($contract->annotationsCluster as $cluster  => $categories)
-                            <div id="cluster-{{str_slug($cluster,'-')}}" class="cluster-wrap">
-                                <div class="category-title">
-                                    {{$cluster}}
-                                </div>
-
-                                @foreach($categories as $category => $annotations)
-                                    <div id="{{str_slug($category,'-')}}" class="sub-category">
-                                        <a href="#{{str_slug($category,'-')}}"><i class='glyphicon glyphicon-link' style="display:none;"></i></a>
-                                        {{$category}}
-                                    </div>
-                                    <ul class="row">
-                                        @foreach($annotations as $text => $annots)
-                                            <?php
-                                            $a = explode('--', $text);
-                                            $preamble = isset($a[1]) ? $a[1] : '';
-                                            $text = isset($a[0]) ? $a[0] : '';
-                                            ?>
-                                            <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                                <div class="pull-left">
-                                                    <div class="annotation-text">
-                                                        {{$text}}
-                                                    </div>
-
-                                                    <p class="annotation-preamle">
-                                                    @if($preamble !='')
-                                                        {{$preamble}}
-                                                    @endif
-                                                    <p>
-                                                        @foreach($annots as $key => $annotation)
-                                                            <?php $annotation_type = isset($annotation->shapes) ? 'pdf' : 'text'; ?>
-                                                            <a href="{{route('contract.detail',['id'=>$contract->metadata->open_contracting_id])}}#/{{$annotation_type}}/page/{{$annotation->page_no}}/annotation/{{$annotation->id}}">
-                                                                Page {{_e($annotation,'page_no')}}</a>@if($key >= 0 && $key < (count($annots)-1)), @endif
-                                                        @endforeach
-                                                    </p>
-                                                    </p>
-                                                </div>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                @endforeach
-                            </div>
-                        @empty
-
-                            <div class="category-wrap">
-                                <ul>
-                                    <li class="no-data">@lang('contract.annotation_message')</li>
-                                </ul>
-                            </div>
-                        @endforelse
                     </div>
                 </div>
             </div>
         </div>
-        <script>
-            var lang = <?php echo json_encode(trans('annotation'));?>;
-        </script>
     @endif
 @stop
+
+
+@section('js')
+    <script>
+        var lang = <?php echo json_encode(trans('annotation'));?>;
+
+        function isScrolledTo(elem) {
+            var docViewTop = $(window).scrollTop(); //num of pixels hidden above current screen
+            var docViewBottom = docViewTop + $(window).height();
+
+            var elemTop = $(elem).offset().top; //num of pixels above the elem
+            var elemBottom = elemTop + $(elem).height();
+
+            return ((elemTop <= docViewTop));
+        }
+
+        var catcher = $('.contract-detail-wrapper');
+        var sticky = $('.annotation-category-cluster');
+
+        $(document).on("ready scroll", onScroll);
+        $('.annotation-category-cluster a[href^="#"]').on('click', function (e) {
+            e.preventDefault();
+            $(document).off("scroll");
+
+            $('.annotation-category-cluster ul li a').removeClass('active');
+            $(this).addClass('active');
+
+            var target = this.hash,
+                    $target = $(target);
+            $('html, body').stop().animate({
+                'scrollTop': $target.offset().top + 2
+            }, 600, 'swing', function () {
+                window.location.hash = target;
+                $(document).on("scroll", onScroll);
+            });
+        });
+
+
+        function onScroll() {
+            var scrollPos = $(document).scrollTop();
+
+            $('.annotation-category-cluster ul li a').each(function () {
+                var currLink = $(this);
+                var refElement = $(currLink.attr("href"));
+                if (refElement.offset().top <= scrollPos && refElement.offset().top + refElement.height() > scrollPos) {
+                    $('.annotation-category-cluster ul li a').removeClass("active");
+                    currLink.addClass("active");
+                    return false;
+                }
+                else if ($($('.annotation-category-cluster ul li a').eq(0).attr('href')).offset().top > scrollPos) {
+                    $('.annotation-category-cluster ul li a').removeClass("active").eq(0).addClass("active");
+                }
+            });
+
+            if (isScrolledTo(sticky)) {
+                sticky.css({'position': 'fixed', 'left': '36px', 'top': '20px'});
+            }
+            var stopHeight = catcher.offset().top + catcher.height() + 240;
+            if (stopHeight > sticky.offset().top) {
+                sticky.css({'position': 'absolute', 'left': 0, 'top': 0});
+            }
+        }
+
+
+        var isScrolledIntoView = function(elem) {
+            var $elem = $(elem);
+            var $window = $(window);
+
+            var docViewTop = $window.scrollTop();
+            var docViewBottom = docViewTop + $window.height();
+
+            var elemTop = $elem.offset().top;
+            var elemBottom = elemTop + $elem.height();
+
+            return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+        };
+
+        $(window).on('scroll', function () {
+            $('.annotation-category-cluster').toggle(!isScrolledIntoView('footer'));
+        });
+    </script>
+@stop
+

@@ -164,8 +164,9 @@
 .pdf-loading {
     padding: 15px;
 }
-.text-panel {
-    width: 50%;
+
+.text-panel, .pdf-annotator {
+    width: 48%;
     background: #fff;
     border-radius: 4px;
     -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
@@ -173,42 +174,29 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     padding: 15px 30px;
     float: left;
-    margin: 10px;
-}
-
-
-.text-panel {
-    width: 47%;
-    float: left;
-    background: #fff;
-    border-radius: 4px;
-    -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    padding: 15px 30px;
-    float: left;
-    margin: 20px;
+    margin: 10px 10px 0 17px;
+    height: 85vh;
 }
 
 .text-annotator {
-    height: 85vh;
+    height: 72vh;
     position: relative;
     overflow: auto;
 }
 
-.pdf-annotator {
-    width: 50%;
-    background: #fff;
-    border-radius: 4px;
-    -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    height: 85vh;
-    overflow: auto;
-    position: relative;
-    float: left;
-    margin: 10px;
-}
+/*.pdf-annotator {*/
+/*width: 48%;*/
+/*background: #fff;*/
+/*border-radius: 4px;*/
+/*-webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);*/
+/*-moz-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);*/
+/*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);*/
+/*height: 85vh;*/
+/*overflow: auto;*/
+/*position: relative;*/
+/*float: left;*/
+/*margin: 10px;*/
+/*}*/
 
 .text-viewer > span {
     display: block;
@@ -233,10 +221,6 @@
     padding: 0 18px;
     border-right: 1px solid #DCDFE2;
     width: 25%;
-}
-
-.annotations-viewer {
-    padding: 0;
 }
 
 .search-results-list {
@@ -312,8 +296,8 @@
 
 .annotation-item {
     font-size: 12px;
-    border: 0;
     padding: 10px 20px 0;
+    border-bottom: 2px solid #E6E6E6;
 }
 
 .annotation-item .annotation-category-en {
@@ -392,7 +376,7 @@
     width: 88%;
 }
 
-.search-result-row .text,.search-result-row .annotations {
+.search-result-row .text, .search-result-row .annotations {
     background: url(../images/ic-sprite-new.png) no-repeat -402px 2px;
     text-indent: -9999px;
     float: right;
@@ -426,7 +410,7 @@
 }
 
 .annotation-sort {
-    margin: 0 18px 0;
+    margin: 0 18px 10px;
 }
 
 .annotation-sort > span {
@@ -436,7 +420,7 @@
     margin-right: 10px;
     margin-bottom: 10px;
     background: #C5C5C5;
-    line-height: 28px;
+    line-height: 31px;
     -webkit-border-radius: 14px;
     -moz-border-radius: 14px;
     border-radius: 14px;
@@ -479,8 +463,8 @@
     padding: 16px 10px 9px 0px;
 }
 
-.pdf-zoom-options+div {
-  float: none;
+.pdf-zoom-options + div {
+    float: none;
 }
 
 .pdf-zoom-options > span {
@@ -712,6 +696,7 @@
     display: inline-block !important;
     width: auto !important;
 }
+
 .annotation-item-preamble {
     padding-left: 10px;
     margin-bottom: 2px;
@@ -728,16 +713,24 @@
 }
 
 .annotations-viewer {
+    padding: 0;
     float: left;
     width: 25%;
     position: relative;
     border-right: 1px solid #DCDFE2;
-    background: #f0f0f0;
+    background: #f5f5f5;
 }
 
 .annotation-inner-viewer {
-    height: 87vh;
+    height: 88vh;
     overflow-y: scroll;
+}
+
+.annotation-inner-viewer .annotation-title {
+    background: url(../images/ic-annotate-full.png) no-repeat 0 21px;
+    padding-left: 32px;
+    border-bottom: 0;
+    padding-bottom: 10px;
 }
 
 .navigation a:nth-last-child(-n+2) {
@@ -892,35 +885,36 @@
 }
 
 .fixed + .document-wrap {
-    padding-top: 84px;
+    padding-top: 44px;
 }
 
 .note-wrapper {
-  background: #f9f9f9;
-  margin: 20px 14px 10px;
-  padding: 12px;
-  display: block;
-  overflow: hidden;
+    background: #f9f9f9;
+    margin: 20px 14px 10px;
+    padding: 12px;
+    display: block;
+    overflow: hidden;
 }
 
 .metadata-note {
-  padding: 0 4px 3px 0!important;
-  font-family: "open-sans-bold";
-  color: #666;
+    padding: 0 4px 3px 0 !important;
+    font-family: "open-sans-bold";
+    color: #666;
 }
 
 .note {
-  display: block;
-  margin-top: 0;
+    display: block;
+    margin-top: 0;
 }
 
-.note-inner-wrapper+a {
-  float: right;
+.note-inner-wrapper + a {
+    float: right;
 }
 
-.note-inner-wrapper+a:focus {
-  text-decoration: none;
+.note-inner-wrapper + a:focus {
+    text-decoration: none;
 }
+
 .note-wrapper:empty {
     display: none;
 }
@@ -939,42 +933,42 @@
 }
 
 .social-share li a {
-  display: block;
-  text-indent: -9999px;
-  width: 21px;
-  height: 21px;
-  background: url(../images/share-sprite.png) no-repeat -22px -40px;
+    display: block;
+    text-indent: -9999px;
+    width: 21px;
+    height: 21px;
+    background: url(../images/share-sprite.png) no-repeat -22px -40px;
 }
 
 .social-share li.google-plus a {
-  background-position: -50px -40px;
-  margin-left: 4px;
+    background-position: -50px -40px;
+    margin-left: 4px;
 }
 
 .social-share li.twitter a {
-  background-position: 0 -40px;
+    background-position: 0 -40px;
 }
 
 .social-share li a:hover {
-  background-position: -22px 0;
+    background-position: -22px 0;
 }
 
 .social-share li.google-plus a:hover {
-  background-position: -50px 0;
+    background-position: -50px 0;
 }
 
 .social-share li.twitter a:hover {
-  background-position: 0 0;
+    background-position: 0 0;
 }
 
-.pdf-zoom-options > .btn-default  a {
+.pdf-zoom-options > .btn-default a {
     line-height: 20px;
     display: block;
 }
 
 .pdf-zoom-options {
     padding: 4px 0;
-    border-left: 1px solid #DCDFE2  ;
+    border-left: 1px solid #DCDFE2;
     float: left;
     margin: 0;
 }
@@ -985,7 +979,7 @@
     margin-top: 6px;
 }
 
-.pdf-zoom-options > .btn-default  {
+.pdf-zoom-options > .btn-default {
     width: 24px;
     height: 22px;
     background: #fff;
@@ -996,7 +990,7 @@
 }
 
 .parent-contract {
-    display: flex!important;
+    display: flex !important;
     align-items: center;
     font-weight: bold;
 }
@@ -1005,4 +999,55 @@
     font-size: 11px;
     margin-left: 4px;
     color: #888;
+}
+
+.annotation-item.selected-annotation {
+    background-color: #dfdfdf;
+}
+
+.annotations-list {
+    background: #f0f0f0;
+    border: 1px solid #e6e6e6;
+    margin: 5px;
+}
+
+.annotation-item .category {
+    color: rgba(64, 64, 64, 0.7);
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.annotation-item .annotated-text {
+    background: url(../images/ic-dark-annotate-bg.png) no-repeat 0 5px;
+    font-size: 14px;
+    line-height: 22px;
+    padding-left: 18px;
+}
+
+.annotation-item .annotation-item-content {
+    padding-left: 0;
+}
+
+@media all and (min-width: 992px) {
+    .text-panel, .pdf-annotator {
+        margin: 10px 17px 0 22px;
+    }
+}
+
+@media all and (min-width: 1160px) {
+    .text-panel, .pdf-annotator {
+        width: 48.5%;
+    }
+}
+
+@media all and (min-width: 1360px) {
+    .text-panel, .pdf-annotator {
+        width: 49%;
+    }
+}
+
+@media all and (min-width: 1550px) {
+    .text-panel, .pdf-annotator {
+        margin-left: 26px;
+    }
 }

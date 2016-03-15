@@ -64,5 +64,5 @@
         var not_published_message = '{{sprintf(trans('annotation.not_published'),env('CONTACT_MAIL'))}}';
         var pdf_not_shown_message = '{{sprintf(trans('annotation.pdf_not_shown'),env('CONTACT_MAIL'))}}';
     </script>
-    <script src="{{ url('js/contract-view.min.js') }}"></script>
+    <script src="{{ url('js/contract-view.js') }}"></script>
 @stop

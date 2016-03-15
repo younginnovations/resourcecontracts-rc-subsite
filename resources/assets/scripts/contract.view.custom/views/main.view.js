@@ -1,3 +1,9 @@
+function nl2br (str, is_xhtml) {
+    var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
+    return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
+}
+
+
 var contractApp = new ContractApp({
     contract_id: contract.metadata.id,
     guid: contract.metadata.open_contracting_id,
@@ -227,7 +233,8 @@ var MainApp = React.createClass({
                     </div>
                     <div className="head-wrap clearfix">
                         <TextSearchForm
-                            style={this.getStyle(contractApp.isViewVisible("TextSearchForm"))} />
+                            style={this.getStyle(contractApp.isViewVisible("TextSearchForm"))}
+                            contractApp={contractApp} />
                         <NavigationView
                             contractApp={contractApp} />
                         <TextPaginationView
