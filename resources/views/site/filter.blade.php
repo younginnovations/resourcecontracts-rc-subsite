@@ -49,13 +49,6 @@
         <div class="col-lg-12 country-list-wrapper search-list-wrapper">
             <div class="panel panel-default panel-wrap country-list-wrap">
                 <div class="panel-body">
-                    <div style="display: none" id="compare-block">
-                        <h2>Compare</h2>
-                        <ul>
-                        </ul>
-                        <button class="btn btn-compare">Compare</button>
-                    </div>
-
                     @include('contract.partials.contractlist')
                     @include('contract.partials.pagination', ['total_item' => $contracts->total, 'per_page'=>$contracts->per_page, 'current_page' => $currentPage ])
                 </div>
@@ -68,7 +61,6 @@
     <script>
         var lang = <?php echo json_encode(trans('annotation'));?>;
         var contractURL = '{{url('contract')}}';
-
         $(function () {
             $('.filter-country-wrap').show();
         })

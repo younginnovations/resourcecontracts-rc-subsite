@@ -57,6 +57,12 @@ var ContractApp = Backbone.Model.extend({
     getSearchUrl: function () {
         return this.get('esapi') + "contract/" + this.getContractGuid() + "/searchtext"
     },
+    setPdfLoaded: function (bool) {
+        this.set({"pdfLoaded": bool});
+    },
+    isPdfLoaded: function () {
+        return this.get("pdfLoaded");
+    },
     setPrevClick: function (click) {
         this.set({"preClick": click});
     },

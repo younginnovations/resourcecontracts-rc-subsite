@@ -118,6 +118,7 @@ var PdfViewer = React.createClass({
     render: function () {
         var page_no = this.props.contractApp.getCurrentPage();
         var pdfUrl = this.props.contractApp.getPdfUrl();
+        this.props.contractApp.setPdfLoaded(false);
         return (
             <div className="pdf-viewer pdf-annotator" id="pdfview" style={this.props.style}>
                 <Pdf
@@ -131,15 +132,12 @@ var PdfViewer = React.createClass({
             </div>
         );
     },
+
     loadAnnotations: function () {
         if (!this.annotator) {
             this.annotator = new PdfAnnotatorjsView({
                 el: ".pdf-annotator",
                 api: this.props.contractApp.getLoadAnnotationsUrl(),
-                // api: "http://localhost:8009",
-                availableTags: ["Country", "Local-Company-Name"],
-                // collection: annotationCollection,
-                annotationCategories: ["General information", "Country", "Local company name"],
                 enablePdfAnnotation: true,
                 contractApp: this.props.contractApp
             });
@@ -151,13 +149,12 @@ var PdfViewer = React.createClass({
             if (this.annotator) {
                 this.annotator.pageUpdated();
                 this.loadAnnotationsFlag = false;
-                // this.setState({loadAnnotations: false});
             }
             else if ($(".pdf-viewer").is(":visible")) {
                 this.loadAnnotations();
                 this.loadAnnotationsFlag = false;
-                // this.setState({loadAnnotations: false});
             }
         }
+        this.props.contractApp.setPdfLoaded(true);
     },
 });

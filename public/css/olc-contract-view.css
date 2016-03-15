@@ -172,9 +172,11 @@
     -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    padding: 15px 30px;
+    padding: 10px 20px;
     float: left;
     margin: 10px 10px 0 17px;
+    height: 85vh;
+    overflow: hidden;
 }
 
 .text-annotator {
@@ -183,19 +185,9 @@
     overflow: auto;
 }
 
-/*.pdf-annotator {*/
-/*width: 48%;*/
-/*background: #fff;*/
-/*border-radius: 4px;*/
-/*-webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);*/
-/*-moz-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);*/
-/*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);*/
-/*height: 85vh;*/
-/*overflow: auto;*/
-/*position: relative;*/
-/*float: left;*/
-/*margin: 10px;*/
-/*}*/
+.pdf-annotator {
+    overflow: auto;
+}
 
 .text-viewer > span {
     display: block;
@@ -1029,13 +1021,13 @@
 
 @media all and (min-width: 992px) {
     .text-panel, .pdf-annotator {
-        margin: 10px 17px 0 22px;
+        margin: 10px;
     }
 }
 
 @media all and (min-width: 1160px) {
     .text-panel, .pdf-annotator {
-        width: 48.5%;
+        width: 50%;
     }
 }
 

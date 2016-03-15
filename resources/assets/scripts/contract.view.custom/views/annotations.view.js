@@ -1,4 +1,47 @@
-/** @jsx React.Dom **/
+var AnnotationsViewer = React.createClass({
+    getInitialState: function () {
+        return {
+            scrollBtnStyle: 'display:none'
+        }
+    },
+    componentDidMount: function () {
+        var offset = 150;
+        var duration = 200;
+
+        $("#annotations-box").scroll(function () {
+            if ($(this).scrollTop() > offset) {
+                $('.back-to-top').fadeIn(duration);
+            } else {
+                $('.back-to-top').fadeOut(duration);
+            }
+        });
+
+        $('.back-to-top').click(function (event) {
+            event.preventDefault();
+            $('.annotation-inner-viewer').animate({scrollTop: 0}, duration);
+            return false;
+        })
+    },
+    render: function () {
+        return (
+            <div id="annotations" className="annotations-viewer" style={this.props.style}>
+                <div className="annotation-inner-viewer" id="annotations-box">
+                    <AnnotationHeader
+                        contractApp={this.props.contractApp}
+                        annotationsCollection={this.props.annotationsCollection}/>
+                    <AnnotationsSort
+                        contractApp={this.props.contractApp}
+                        annotationsCollection={this.props.annotationsCollection}/>
+                    <AnnotationsList
+                        contractApp={this.props.contractApp}
+                        annotationsCollection={this.props.annotationsCollection}/>
+                </div>
+                <a href="#" className="back-to-top btn btn-primary"><i className="fa fa-arrow-up"></i></a>
+            </div>
+        );
+    }
+});
+
 var AnnotationHeader = React.createClass({
     componentDidMount: function () {
         var self = this;
@@ -7,228 +50,10 @@ var AnnotationHeader = React.createClass({
         });
     },
     render: function () {
-        var count = this.props.annotationsCollection.length;
-        if(count == 0){
-           return ( <div className="annotation-title">{count} {lang.annotations} </div>)
-        }
+        var count = this.props.annotationsCollection.totalAnnotations();
         return (
-            <div className="annotation-title">{count} {lang.annotations}
-            <span className="pull-right">
-                    <a href={this.props.contractApp.getAnnotationsListAnchor()}>{lang.see_all}</a>
-            </span>
-            </div>
+            <div className="annotation-title">{count} Annotations</div>
         );
-    }
-});
-
-var AnnotationItem = React.createClass({
-    getInitialState: function () {
-        return {
-            maxWords: 10,
-            showEllipse: false,
-            showMoreFlag: false,
-            annotationType: "",
-            text: ""
-        }
-    },
-    componentDidMount: function () {
-        var self = this;
-
-        function getText(annotation) {
-            //return text + quote if both present, else either text or quote
-            var text = (annotation.get('text') || "") + "";
-            var quote = (annotation.get('quote') || "") + "";
-            if (text && quote) {
-                return text.trim();
-            }
-            if (text && text.trim()) {
-                return text.trim();
-            }
-            if (quote && quote.trim()) {
-                return quote.trim();
-            }
-            return "";
-        }
-
-        function shallShowEllipse(text) {
-            var words = (text + "").split(' ');
-            if (words.length > self.state.maxWords) {
-                return true;
-            }
-            return false;
-        }
-
-        function truncate(text) {
-            var words = (text + "").split(" ");
-            words = words.splice(0, self.state.maxWords);
-            return words.join(" ");
-        }
-
-        var cluster = (this.props.annotation.get('cluster')) ? this.props.annotation.get('cluster') : "Other";
-        var category = this.props.annotation.get('category');
-        var categoryEn = category.split("//")[0];
-        var categoryFr = category.split("//")[1];
-        var id = this.props.annotation.get('id');
-        var text = getText(this.props.annotation);
-        var preamble = text.split("--")[1] || '';
-        text = text.split("--")[0];
-        var showEllipse = shallShowEllipse(text);
-        var pageNo = this.props.annotation.get('page_no');
-        var shortText = "";
-        if (showEllipse) {
-            shortText = truncate(text);
-        }
-        var annotationType = "text";
-        if (this.props.annotation.get('shapes')) {
-            annotationType = "pdf";
-        }
-        var highlight = (this.props.contractApp.getSelectedAnnotation() === id) ? true : false;
-        var showMoreFlag = (this.props.contractApp.getSelectedAnnotation() === id) ? true : false;
-        this.setState({
-            id: id,
-            text: text,
-            preamble: preamble,
-            cluster: cluster,
-            shortText: shortText,
-            categoryEn: categoryEn,
-            categoryFr: categoryFr,
-            pageNo: pageNo,
-            annotationType: annotationType,
-            showEllipse: showEllipse,
-            highlight: highlight,
-            showMoreFlag: showMoreFlag
-        });
-        this.props.contractApp.on("annotations:highlight", function (annotation) {
-            if (annotation.id === self.state.id) {
-                self.setState({
-                    showMoreFlag: true,
-                    highlight: true
-                });
-                location.hash = "#/"+self.state.annotationType+"/page/" + self.state.pageNo + "/annotation/" + self.state.id;
-            } else {
-                self.setState({
-                    showMoreFlag: false,
-                    highlight: false
-                });
-            }
-        });
-        this.props.contractApp.on("change:selected_annotation_id-1", function () {
-            if (self.props.contractApp.getSelectedAnnotation() === self.state.id) {
-                self.setState({
-                    showMoreFlag: true,
-                    highlight: true
-                });
-                location.hash = "#/pdf/page/" + self.state.pageNo + "/annotation/" + self.state.id;
-            } else {
-                self.setState({
-                    showMoreFlag: false,
-                    highlight: false
-                });
-            }
-        });
-    },
-    handleAnnotationClick: function (e) {
-        var self = this;
-        e.preventDefault();
-        switch(this.state.annotationType) {
-            case "pdf":
-                this.props.contractApp.trigger("annotations:highlight", {id: self.state.id});
-                this.props.contractApp.setView("pdf");
-                this.props.contractApp.setSelectedAnnotation(self.state.id);
-                if (self.props.contractApp.getCurrentPage() == self.state.pageNo) {
-                    var self = this;
-                    setTimeout(function () {
-                        self.props.contractApp.showPdfAnnotationPopup(self.state.id)
-                    }, 300);
-                }
-                this.props.contractApp.setCurrentPage(self.state.pageNo);
-                this.props.contractApp.triggerUpdatePdfPaginationPage(self.state.pageNo);
-                break;
-            case "text":
-                this.props.contractApp.trigger("annotations:highlight", {id: self.state.id});
-                var self = this;
-                setTimeout(function () {
-                    self.props.contractApp.showTextAnnotationPopup(self.state.id)
-                }, 300);
-                this.props.contractApp.setView("text");
-                this.props.contractApp.setCurrentPage(self.state.pageNo);
-                break;
-        }
-    },
-    handleEllipsis: function (e) {
-        e.preventDefault();
-        var text = e.target.innerHTML;
-        this.setState({showMoreFlag: !this.state.showMoreFlag});
-    },
-    render: function () {
-        var currentAnnotationClass = (this.state.highlight) ? "annotation-item selected-annotation" : "annotation-item";
-        var ellipsistext = "";
-        var showText = this.state.text;
-        if (this.state.showEllipse) {
-            showText = this.state.text;
-            ellipsistext = lang.less;
-            if (!this.state.showMoreFlag) {
-                ellipsistext = lang.more;
-                showText = this.state.shortText;
-            }
-        }
-        if (this.props.prevAnnotation === undefined || this.props.showClusterAnyway) {
-            return (
-                <div className={currentAnnotationClass} id={this.state.id}>
-                    <span className="header annotation-cluster">{this.state.cluster}</span>
-                    <span className="link annotation-category-en"><a href="#"
-                                                                     onClick={this.handleAnnotationClick}>{this.state.categoryEn}</a></span>
-                    <span className="link annotation-category-fr"
-                          onClick={this.handleAnnotationClick}>{this.state.categoryFr}</span>
-                    <span className="annotation-item-content">{showText}
-                        <nobr><a className="annotation-item-ellipsis" href="#" onClick={this.handleEllipsis}
-                                 dangerouslySetInnerHTML={{__html: ellipsistext}}></a></nobr></span>
-                    <span className="annotation-item-preamble">{this.state.preamble}</span>
-                    <span className="link annotation-item-page"
-                          onClick={this.handleAnnotationClick}>Page {this.state.pageNo}</span>
-                </div>
-            );
-        } else if (this.props.annotation.attributes.category_key !== this.props.prevAnnotation.attributes.category_key) {
-            return (
-                <div className={currentAnnotationClass} id={this.state.id}>
-                    <span className="link annotation-category-en"><a href="#"
-                                                                     onClick={this.handleAnnotationClick}>{this.state.categoryEn}</a></span>
-                    <span className="link annotation-category-fr"
-                          onClick={this.handleAnnotationClick}>{this.state.categoryFr}</span>
-                    <span className="annotation-item-content">{showText}
-                        <nobr><a className="annotation-item-ellipsis" href="#" onClick={this.handleEllipsis}
-                                 dangerouslySetInnerHTML={{__html: ellipsistext}}></a></nobr></span>
-                    <span className="annotation-item-preamble">{this.state.preamble}</span>
-                    <span className="link annotation-item-page"
-                          onClick={this.handleAnnotationClick}>Page {this.state.pageNo}</span>
-                </div>
-            );
-        } else if (this.props.annotation.attributes.text !== this.props.prevAnnotation.attributes.text) {
-            return (
-                <div className={currentAnnotationClass} id={this.state.id}>
-                    <span className="annotation-item-content">{showText}
-                        <nobr><a className="annotation-item-ellipsis" href="#" onClick={this.handleEllipsis}
-                                 dangerouslySetInnerHTML={{__html: ellipsistext}}></a></nobr></span>
-                    <span className="annotation-item-preamble">{this.state.preamble}</span>
-                    <span className="link annotation-item-page"
-                          onClick={this.handleAnnotationClick}>Page {this.state.pageNo}</span>
-                </div>
-            );
-        } else {
-            return (
-                <span id={this.state.id} className="link annotation-item-page"
-                      onClick={this.handleAnnotationClick}>, {this.state.pageNo}</span>
-            );
-        }
-        // return (
-        //     <div className={currentAnnotationClass} id={this.state.id}>
-        //         <span>{this.state.cluster}</span>
-        //         <span className="link annotation-category-en"><a href="#" onClick={this.handleAnnotationClick}>{this.state.categoryEn}</a></span>
-        //         <span className="link annotation-category-fr" onClick={this.handleAnnotationClick}>{this.state.categoryFr}</span>
-        //         <span className="annotation-item-content" >{showText}<nobr><a className="annotation-item-ellipsis" href="#" onClick={this.handleEllipsis} dangerouslySetInnerHTML={{__html: ellipsistext}}></a></nobr></span>
-        //         <span className="link annotation-item-page" onClick={this.handleAnnotationClick}>Page: {this.state.pageNo}</span>
-        //     </div>
-        // );
     }
 });
 
@@ -293,13 +118,20 @@ var AnnotationTopicList = React.createClass({
     },
     handleClick: function (e) {
         e.preventDefault();
-        this.props.contractApp.trigger("annotations:scroll-to-cluster", e.target.innerHTML);
+        var selected = e.target.innerHTML;
+        if (selected == 'All') {
+            $('.annotation-item').show();
+        } else {
+            $('.annotation-item').hide();
+            $('.' + selected).show();
+        }
         $(".annotations-topic-list > span").removeClass("selected-topic");
         $(e.target).addClass("selected-topic");
     },
     render: function () {
         return (
             <div className="annotations-topic-list">
+                <span className="selected-topic" onClick={this.handleClick}>All</span>
                 <span onClick={this.handleClick}>{lang.general}</span>
                 <span onClick={this.handleClick}>{lang.environment}</span>
                 <span onClick={this.handleClick}>{lang.fiscal}</span>
@@ -310,37 +142,41 @@ var AnnotationTopicList = React.createClass({
         );
     }
 });
+
 var AnnotationsList = React.createClass({
     getInitialState: function () {
         return {
-            message: lang.loading_annotations
+            message: "Loading annotations..."
         }
     },
     componentDidMount: function () {
         var self = this;
         this.props.annotationsCollection.on("reset", function () {
-            if (self.props.annotationsCollection.models.length > 0) {
+            if (self.props.annotationsCollection.totalAnnotations() > 0) {
                 self.setState({message: ""});
             } else {
-                self.setState({message: lang.no_annotation_msg});
+                self.setState({message: "There are no annotations associated with this contract."});
             }
             if (self.props.contractApp.getSelectedAnnotation()) {
                 self.props.contractApp.trigger("annotations:scroll-to-selected-annotation");
             }
         });
+
         this.props.contractApp.on("annotations:render", function (sortBy) {
             self.forceUpdate();
         });
-
-        this.props.contractApp.on("annotations:highlight", function(annotation) {
-            var that = self
-            setTimeout(function(){
-                that.scrollToAnnotation(annotation.id);
+        this.props.contractApp.on("annotations:highlight", function (annotation) {
+            var that = self;
+            var annotation_model = self.props.annotationsCollection.get(annotation.id);
+            setTimeout(function () {
+                that.scrollToAnnotation(annotation_model.get('id'));
             }, 100);
         });
-
         this.props.contractApp.on("annotations:scroll-to-selected-annotation", function () {
-            self.scrollToAnnotation(self.props.contractApp.getSelectedAnnotation());
+            var annotation = self.props.annotationsCollection.get(self.props.contractApp.getSelectedAnnotation());
+            if (annotation) {
+                self.scrollToAnnotation(annotation.get('id'));
+            }
         });
         this.props.contractApp.on("annotations:scroll-to-top", function () {
             self.scrollToTop();
@@ -353,135 +189,335 @@ var AnnotationsList = React.createClass({
         if ($('#' + cluster).offset()) {
             var pageOffsetTop = $('#' + cluster).offset().top;
             var parentTop = $('.annotation-inner-viewer').scrollTop();
-            var parentOffsetTop = $('.annotation-inner-viewer').offset().top
+            var parentOffsetTop = $('.annotation-inner-viewer').offset().top;
             $('.annotation-inner-viewer').animate({scrollTop: parentTop - parentOffsetTop + pageOffsetTop}, 200);
         }
     },
     scrollToAnnotation: function (annotation_id) {
         if (annotation_id) {
-            var pageOffsetTop = $('#' + annotation_id).offset().top;
+            var pageOffsetTop = $('.p-' + annotation_id).offset().top;
             var parentTop = $('.annotation-inner-viewer').scrollTop();
-            var parentOffsetTop = $('.annotation-inner-viewer').offset().top
-            $('.annotation-inner-viewer').animate({scrollTop: parentTop - parentOffsetTop + pageOffsetTop}, 200);
+            var parentOffsetTop = $('.annotation-inner-viewer').offset().top;
+            var vTop = parentTop - parentOffsetTop + pageOffsetTop - 5;
+            $('.annotation-inner-viewer').animate({scrollTop: vTop}, 200);
             this.props.contractApp.resetSelectedAnnotation();
         }
     },
     scrollToTop: function (e) {
         e.preventDefault();
-        $('.annotation-inner-viewer').animate({scrollTop: 0}, 500);
+        $('.annotations-viewer').animate({scrollTop: 0}, 500);
     },
     getAnnotationItemsComponent: function (annotationsCollectionForList, showClusterAnyway) {
         var annotationsList = [];
-        if (annotationsCollectionForList.models.length > 0) {
-            for (var i = 0; i < annotationsCollectionForList.models.length; i++) {
+        if (_.size(annotationsCollectionForList) > 0) {
+            for (var annotation_id in annotationsCollectionForList) {
                 annotationsList.push((<AnnotationItem
-                        showClusterAnyway={showClusterAnyway}
-                        key={annotationsCollectionForList.models[i].get("id")}
-                        contractApp={this.props.contractApp}
-                        prevAnnotation={annotationsCollectionForList.models[i-1]}
-                        annotation={annotationsCollectionForList.models[i]}/>
-                ));
+                    showClusterAnyway={showClusterAnyway}
+                    key={annotation_id}
+                    contractApp={this.props.contractApp}
+                    annotationsCollection={this.props.annotationsCollection}
+                    annotation={annotationsCollectionForList[annotation_id]}/>));
             }
         }
         return annotationsList;
+    },
+    getAnnotationItemsComponentByPage: function (annotationsCollectionForList, showClusterAnyway) {
+        var annotationsList = [];
+        if (_.size(annotationsCollectionForList) > 0) {
+            for (var page in annotationsCollectionForList) {
+                for (var key in annotationsCollectionForList[page]) {
+                    console.log(annotationsCollectionForList[page][key]);
+                    annotationsList.push((<AnnotationItem
+                        showClusterAnyway={showClusterAnyway}
+                        key={page+'-'+key}
+                        contractApp={this.props.contractApp}
+                        annotationsCollection={this.props.annotationsCollection}
+                        annotation={[annotationsCollectionForList[page][key]]}/>));
+
+                }
+
+            }
+        }
+        return annotationsList;
+
     },
     sortByPage: function () {
         if (this.props.annotationsCollection.models.length > 0) {
             this.props.annotationsCollection.sort();
             return (
                 <div className="annotations-list" id="id-annotations-list">
-                    {this.getAnnotationItemsComponent(this.props.annotationsCollection, true)}
-                    <div className="annotations-list-footer">
-                        <a href={this.props.contractApp.getAnnotationsListAnchor()}>{lang.see_all_annotations}</a>
-                    </div>
+                    {this.getAnnotationItemsComponentByPage(this.props.annotationsCollection.groupByPage(), true)}
                 </div>
             );
         }
         return [];
     },
-    sortByCluster: function () {
-        var annotationsList = [];
-        var self = this;
-        this.props.annotationsCollection.sort();
-        var clusters = ["General", "Environment", "Fiscal", "Operations", "Social", "Other"];
-        _.map(clusters, function (cluster) {
-            var filtered = self.props.annotationsCollection.filter(function (model) {
-                return model.get("cluster") === cluster;
-            });
-            if (filtered.length) {
-                var newCol = new AnnotationsCollection(filtered);
-                annotationsList.push(<div id={cluster}
-                                          key={cluster}>{self.getAnnotationItemsComponent(newCol, false)}</div>);
-            }
-        });
-        return (
-            <div className="annotations-list" id="id-annotations-list">
-                {annotationsList}
-            </div>
-        );
+    sortByCategory: function () {
+        if (this.props.annotationsCollection.models.length > 0) {
+            this.props.annotationsCollection.sort();
+            return (
+                <div className="annotations-list" id="id-annotations-list">
+                    {this.getAnnotationItemsComponent(this.props.annotationsCollection.groupByCategory(), true)}
+
+                </div>
+            );
+        }
     },
     render: function () {
-        var annotationsList = [];
-        var self = this;
         if (this.props.annotationsCollection.models.length > 0) {
             if (this.props.annotationsCollection.sort_key === "category") {
-                return this.sortByCluster();
+                return this.sortByCategory();
             }
             return this.sortByPage();
         } else {
             return (
                 <div className="annotations-list" id="id-annotations-list">
-                    {this.state.message}
+                    <p className="annotation-loading">{this.state.message}</p>
                 </div>
             );
         }
     }
 });
 
-var AnnotationsViewer = React.createClass({
+var PageLink = React.createClass({
     getInitialState: function () {
         return {
-            scrollBtnStyle: 'display:none'
+            id: '',
+            pageNo: '',
+            annotationType: ''
         }
     },
-    handleGotoTop: function (e) {
-        e.preventDefault();
-        this.props.contractApp.trigger("annotations:scroll-to-top");
-    },
     componentDidMount: function () {
-        var offset = 150;
-        var duration = 200;
-
-        $("#annotations-box").scroll(function () {
-            if ($(this).scrollTop() > offset) {
-                $('.back-to-top').fadeIn(duration);
-            } else {
-                $('.back-to-top').fadeOut(duration);
+        var self = this;
+        this.setPageState();
+        this.props.contractApp.on("annotations:highlight", function (annotation) {
+            if (annotation.id === self.state.id) {
+                if (self.state.annotationType === "pdf") {
+                    location.hash = "#/pdf/page/" + self.state.pageNo + "/annotation/" + self.state.id;
+                } else {
+                    location.hash = "#/text/page/" + self.state.pageNo + "/annotation/" + self.state.id;
+                }
             }
         });
+        this.props.contractApp.on("change:selected_annotation_id-1", function () {
+            if (self.props.contractApp.getSelectedAnnotation() === self.state.id) {
+                location.hash = "#/pdf/page/" + self.state.pageNo + "/annotation/" + self.state.id;
+            }
+        });
+    },
+    setPageState: function () {
+        var id = this.props.annotation.get('id');
+        var pageNo = this.props.annotation.get('page_no');
+        var annotationType = "text";
+        if (this.props.annotation.get('shapes')) {
+            annotationType = "pdf";
+        }
 
-        $('.back-to-top').click(function (event) {
-            event.preventDefault();
-            $('.annotation-inner-viewer').animate({scrollTop: 0}, duration);
-            return false;
-        })
+        this.setState({
+            id: id,
+            pageNo: pageNo,
+            annotationType: annotationType
+        });
+    },
+    handleAnnotationClick: function (e) {
+        var self = this;
+        e.preventDefault();
+        switch (this.state.annotationType) {
+            case "pdf":
+                this.props.contractApp.trigger("annotations:highlight", {id: self.state.id});
+                this.props.contractApp.setView("pdf");
+                this.props.contractApp.setSelectedAnnotation(self.state.id);
+                if (self.props.contractApp.getCurrentPage() == self.state.pageNo) {
+                    var self = this;
+                    setTimeout(function () {
+                        self.props.contractApp.showPdfAnnotationPopup(self.state.id)
+                    }, 300);
+                }
+                this.props.contractApp.setCurrentPage(self.state.pageNo);
+                this.props.contractApp.triggerUpdatePdfPaginationPage(self.state.pageNo);
+                break;
+            case "text":
+                this.props.contractApp.trigger("annotations:highlight", {id: self.state.id});
+                var self = this;
+                setTimeout(function () {
+                    self.props.contractApp.showTextAnnotationPopup(self.state.id)
+                }, 300);
+                this.props.contractApp.setView("text");
+                this.props.contractApp.setCurrentPage(self.state.pageNo);
+                break;
+        }
     },
     render: function () {
         return (
-            <div id="annotations" className="annotations-viewer" style={this.props.style}>
-                <div className="annotation-inner-viewer" id="annotations-box">
-                    <AnnotationHeader
-                        contractApp={this.props.contractApp}
-                        annotationsCollection={this.props.annotationsCollection}/>
-                    <AnnotationsSort
-                        contractApp={this.props.contractApp}
-                        annotationsCollection={this.props.annotationsCollection}/>
-                    <AnnotationsList
-                        contractApp={this.props.contractApp}
-                        annotationsCollection={this.props.annotationsCollection}/>
-                </div>
-                <a href="#" className="back-to-top btn btn-primary"><i className="fa fa-arrow-up"></i></a>
-            </div>
-        );
+            <div className="annotation-page">
+                <a href="#" onClick={this.handleAnnotationClick}>P {this.props.text}</a>
+            </div>);
     }
 });
+
+var AnnotationItem = React.createClass({
+    getInitialState: function () {
+        return {
+            maxWords: 10,
+            id: '',
+            annotation_id: '',
+            text: '',
+            shortText: '',
+            showEllipse: '',
+            showMoreFlag: '',
+            highlight: false,
+            annotationList: []
+        }
+    },
+    getCategory: function () {
+        var category = this.state.annotationList[0].get('category');
+        var en = category.split("//")[0];
+        var fr = (category.split("//")[1]) ? category.split("//")[1] : "";
+        return {'en': en, 'fr': fr};
+    },
+    shallShowEllipse: function (text) {
+        var words = (text + "").split(' ');
+        if (words.length >= this.state.maxWords) {
+            return true;
+        }
+        return false;
+    },
+    truncate: function (text) {
+        var words = (text + "").split(" ");
+        words = words.splice(0, this.state.maxWords);
+        return words.join(" ");
+    },
+    setAnnotationState: function () {
+        var firstAnnotation = this.state.annotationList[0];
+        var text = firstAnnotation.get('text') ? firstAnnotation.get('text').trim() : '';
+        var id = firstAnnotation.get('id');
+        var annotation_id = firstAnnotation.get('annotation_id');
+        var showEllipse = this.shallShowEllipse(text);
+        var shortText = "";
+        if (showEllipse) {
+            shortText = this.truncate(text);
+        }
+        var ann = this.props.annotationsCollection.get(this.props.contractApp.getSelectedAnnotation());
+        var showMoreFlag = (ann && ann.get('annotation_id') === annotation_id) ? true : false;
+
+        this.setState({
+            id: id,
+            text: text,
+            annotation_id: annotation_id,
+            shortText: shortText.trim(),
+            showEllipse: showEllipse,
+            showMoreFlag: showMoreFlag,
+            highlight: showMoreFlag
+        });
+    },
+    getPages: function () {
+        var self = this;
+        var length = this.props.annotation.length;
+        return this.props.annotation.map(function (annotation, index) {
+            var page = annotation.get('page_no');
+            page += (annotation.get('article_reference') != '') ? ' - ' + annotation.get('article_reference') : '';
+            var last = false;
+            if (index < (length - 1)) {
+                last = true;
+            }
+            return (<PageLink contractApp={self.props.contractApp} annotation={annotation} last={last} text={page}/>)
+        });
+    },
+    componentWillMount: function () {
+        this.setState({annotationList: this.props.annotation});
+    },
+    componentDidMount: function () {
+        this.setAnnotationState();
+        var self = this;
+        this.props.contractApp.on("annotations:highlight", function (annotation) {
+
+            var current = annotation.id;
+            var highlight = false;
+            self.state.annotationList.map(function (annotation, index) {
+                if (current == annotation.get('id')) {
+                    highlight = true;
+                }
+            });
+
+            if (highlight) {
+                self.setState({
+                    showMoreFlag: true,
+                    highlight: true
+                });
+            } else {
+                self.setState({
+                    showMoreFlag: false,
+                    highlight: false
+                });
+            }
+        });
+        this.props.contractApp.on("change:selected_annotation_id-1", function () {
+            var ann = self.props.annotationsCollection.get(self.props.contractApp.getSelectedAnnotation());
+            if (ann.get('annotation_id') === self.state.annotation_id) {
+                self.setState({
+                    showMoreFlag: true,
+                    highlight: true
+                });
+            } else {
+                self.setState({
+                    showMoreFlag: false,
+                    highlight: false
+                });
+            }
+        });
+    },
+    handleEllipsis: function (e) {
+        e.preventDefault();
+        this.setState({showMoreFlag: !this.state.showMoreFlag});
+    },
+    getShowText: function () {
+        var ellipsistext = "";
+        var firstAnnotation = this.props.annotation[0];
+        var showText = firstAnnotation.get('text') ? firstAnnotation.get('text').trim() : '';
+        if (this.state.showEllipse) {
+            showText = this.state.text + ' ';
+            ellipsistext = "less";
+            if (!this.state.showMoreFlag) {
+                ellipsistext = "more";
+                showText = this.state.shortText + '... ';
+            }
+        }
+
+        if (this.state.text != '') {
+            showText = (<span className="annotation-item-content">
+                <span dangerouslySetInnerHTML={{__html: nl2br(showText)}}></span>
+                <nobr><a className="annotation-item-ellipsis" href="#" onClick={this.handleEllipsis} dangerouslySetInnerHTML={{__html: ellipsistext}}></a></nobr></span>);
+        }
+        else {
+            showText = '';
+        }
+        return showText;
+    },
+    getPageClasses: function () {
+        var className = "";
+
+        this.props.annotation.map(function (annotation, index) {
+            className += ' p-' + annotation.get('id');
+        });
+
+        return className;
+    },
+    getCluster: function () {
+        return this.state.annotationList[0].get('cluster');
+    },
+    render: function () {
+        var currentAnnotationClass = (this.state.highlight) ? "annotation-item selected-annotation" : "annotation-item";
+
+        var category = this.getCategory();
+        return (
+            <div className={currentAnnotationClass +' ' +this.getCluster() + this.getPageClasses()} id={this.state.annotation_id}>
+                <p className="category">{category.en}</p>
+                <p className="category">{category.fr}</p>
+                <p className="annotated-text">{this.getShowText()}</p>
+                <p className="pages">{this.getPages()}</p>
+            </div>
+        )
+    }
+});
+
+

@@ -2,7 +2,8 @@
 namespace App\Http\Services;
 
 use Exception;
-use Log;
+use Illuminate\Support\Facades\Log;
+
 
 /**
  * Class APIService
@@ -10,10 +11,6 @@ use Log;
  */
 class ContractService
 {
-    /**
-     * @var Log
-     */
-    protected $logger;
     /**
      * @var APIService
      */
@@ -28,6 +25,12 @@ class ContractService
         $this->api = $api;
     }
 
+    /**
+     * Get Annotations
+     *
+     * @param $contractId
+     * @return array
+     */
     public function annotations($contractId)
     {
         $contractAnnotationsObj = $this->api->getAnnotations($contractId);
