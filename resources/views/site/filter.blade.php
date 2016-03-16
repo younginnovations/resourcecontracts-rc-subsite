@@ -43,7 +43,7 @@
                 @if(isset($contracts->suggestion) && !empty($contracts->suggestion))
                 Also showing results for :
                 @foreach($contracts->suggestion as $suggestion)
-                   <a href="{{route('search',['q'=>$suggestion->text])}}">{{$suggestion->text}}</a> ,
+                   <a href="{{route('search',['q'=>$suggestion->text,'fuzzy'=>0])}}">{{$suggestion->text}}</a> ,
                 @endforeach
                @endif
 

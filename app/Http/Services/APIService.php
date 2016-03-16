@@ -197,6 +197,7 @@ class APIService
         $per_page = !empty($per_page) ? $per_page : 25;
         $query    = [
             'q'                   => urlencode($q),
+            'fuzzy'               => $fuzzy,
             'country_code'        => $country_code,
             'corporate_group'     => $corporate_group,
             'company_name'        => $company_name,
@@ -218,6 +219,7 @@ class APIService
             echo $this->downloadAPI('contracts/search', $query);
         }
         $contract = $this->apiCall('contracts/search', $query);
+
         if ($contract) {
             return $contract;
         }
@@ -420,15 +422,19 @@ class APIService
             $request->setQuery($query);
             $response = $this->client->send($request);
             $data     = $response->getBody()->getContents();
-            $data=json_decode($data,true);
+            $data     = json_decode($data, true);
 
-            Excel::create($filename, function ($csv) use(&$data)
-            {
-                $csv->sheet('sheetname', function ($sheet) use(&$data)
-                {
-                    $sheet->fromArray($data);
-                });
-            })->download('xls');
+            Excel::create(
+                $filename,
+                function ($csv) use (&$data) {
+                    $csv->sheet(
+                        'sheetname',
+                        function ($sheet) use (&$data) {
+                            $sheet->fromArray($data);
+                        }
+                    );
+                }
+            )->download('xls');
             die;
         } catch (\Exception $e) {
             Log::error($resource . ":" . $e->getMessage(), $query);

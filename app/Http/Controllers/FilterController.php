@@ -61,6 +61,7 @@ class FilterController
 
         return [
             'q'                   => $request->get('q', ''),
+            'fuzzy'               => $request->get('fuzzy',1),
             'country_code'        => is_array($request->get('country')) ? join(',', $request->get('country')) : $request->get('country'),
             'year'                => is_array($request->get('year')) ? join(',', $request->get('year')) : $request->get('year'),
             'from'                => is_array($request->get('from')) ? join(',', $request->get('from')) : $request->get('from'),
