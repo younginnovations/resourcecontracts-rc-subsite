@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\Lang;
     <div class="row">
         <div class="col-lg-12 panel-top-wrapper">
             <div class="panel-top-content">
-                @if($referrer != '')
-                    <a href="{{$referrer}}" class="back contract-back"><span>@lang('global.go_back')</span></a>
-                @endif
                 <div class="pull-left">
+                    @if($referrer != '')
+                        <a href="{{$referrer}}" class="back contract-back"><span>@lang('global.go_back')</span></a>
+                    @endif
                     <div class="breadcrumb-wrapper contract-breadcrumb-wrapper">
                         <ul>
                             <li><a href="{{url()}}">@lang('global.home')</a></li>
@@ -49,13 +49,11 @@ use Illuminate\Support\Facades\Lang;
                             @endif
                         </ul>
                     </div>
-                    <div class="social-share">
-                        <ul>
-                            <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u={{ url() }}" target="_blank">FB</a></li>
-                            <li class="google-plus"><a href="https://plus.google.com/share?url={{ url() }}" target="_blank">G+</a></li>
-                            <li class="twitter"><a href="https://twitter.com/share?text={{ meta($meta)->title }}" target="_blank">T</a></li>
-                        </ul>
-                    </div>
+                    <ul class="pull-left social-share">
+                        <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u={{ url() }}" target="_blank">FB</a></li>
+                        <li class="google-plus"><a href="https://plus.google.com/share?url={{ url() }}" target="_blank">G+</a></li>
+                        <li class="twitter"><a href="https://twitter.com/share?text={{ meta($meta)->title }}" target="_blank">T</a></li>
+                    </ul>
                 </div>
             </div>
         </div>

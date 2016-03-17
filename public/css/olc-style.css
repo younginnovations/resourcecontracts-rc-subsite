@@ -177,7 +177,7 @@
   font-size: 11px;
   text-transform: uppercase;
   float: left;
-  width: 140px;
+  width: 122px;
   border-right: 1px solid #bcbcbc;
   border-right: 1px solid rgba(188, 188, 188, 0.5);
   cursor: pointer;
@@ -649,6 +649,8 @@ footer {
   border-bottom: 1px solid rgba(188, 188, 188, 0.5);
   overflow: hidden;
   padding: 0 10px 0 36px; }
+  .panel-top-content > .pull-left {
+    margin-top: 10px; }
 
 .breadcrumb-wrapper {
   padding: 12px 0 4px;
@@ -685,7 +687,8 @@ footer {
   overflow: hidden;
   white-space: nowrap;
   -o-text-overflow: ellipsis;
-     text-overflow: ellipsis; }
+     text-overflow: ellipsis;
+  margin-top: 3px; }
 
 .action-links {
   float: right;
@@ -725,7 +728,7 @@ footer {
     border-left: 0;
     padding-left: 0; }
 
-.download-csv {
+.download-csv, .advance-filter-wrapper .social-share {
   position: absolute;
   bottom: -20px;
   right: 40px;
@@ -734,13 +737,14 @@ footer {
   border: 1px solid rgba(243, 115, 86, 0.2);
   -webkit-border-radius: 22px;
           border-radius: 22px; }
-  .download-csv a {
-    display: block;
-    font-size: 12px;
-    color: #217B46;
-    text-decoration: none;
-    padding: 13px 25px 13px 44px;
-    background: url(../../images/ic-sprite.png) no-repeat -152px -40px; }
+
+.download-csv a {
+  display: block;
+  font-size: 12px;
+  color: #217B46;
+  text-decoration: none;
+  padding: 13px 25px 13px 44px;
+  background: url(../../images/ic-sprite.png) no-repeat -152px -40px; }
 
 .country-contract-wrap .download-csv {
   left: auto;
@@ -997,10 +1001,8 @@ footer {
   background: url(../../images/ic-sprite.png) no-repeat -174px 11px; }
 
 .download-wrap {
-  padding: 12px 0 12px 22px;
-  background: url(../../images/ic-sprite.png) no-repeat -174px 11px;
-  padding-left: 44px;
-  background: url(../../images/ic-sprite.png) no-repeat -152px -40px; }
+  padding: 12px 0 12px 28px;
+  background: url(../../images/ic-sprite.png) no-repeat -168px -40px; }
 
 .contract-info-section {
   display: inline-block;
@@ -1464,7 +1466,7 @@ td.contract-date {
   .search-page-input-wrapper button {
     width: 130px;
     margin: 0 0 24px;
-    padding: 5px 12px; }
+    padding: 10px 12px; }
 
 .country_name {
   font-size: 12px;
@@ -1718,18 +1720,19 @@ td.contract-date {
   float: left; }
 
 .contract-back {
-  background-position: 28px -533px;
-  margin-left: -36px;
-  margin-right: 20px;
-  width: 82px;
-  height: 82px;
+  background: #1C7041 url(../images/ic-back.png) no-repeat 11px;
+  margin: 5px 10px 0 0;
+  width: 80px;
+  height: auto;
   font-size: 12px;
   text-align: center;
   text-indent: 1px;
-  padding-top: 48px; }
+  padding: 6px 0 6px 11px;
+  -webkit-border-radius: 20px;
+          border-radius: 20px; }
   .contract-back span {
     color: #fff;
-    color: rgba(255, 255, 255, 0.4); }
+    color: rgba(255, 255, 255, 0.6); }
   .contract-back:hover {
     text-decoration: none;
     background-color: #1C7041; }
@@ -1745,6 +1748,49 @@ td.contract-date {
 
 .panel-top-content > .pull-left {
   width: 90%; }
+
+.social-share {
+  margin: 9px;
+  float: right;
+  padding: 0; }
+
+.social-share li {
+  list-style: none;
+  float: left;
+  margin-right: 10px; }
+
+.social-share li a {
+  display: block;
+  text-indent: -9999px;
+  width: 21px;
+  height: 21px;
+  background: url(../images/share-sprite.png) no-repeat -22px -40px; }
+
+.social-share li.google-plus a {
+  background-position: -50px -40px;
+  margin-left: 4px; }
+
+.social-share li.twitter a {
+  background-position: 0 -40px; }
+
+.social-share li a:hover {
+  background-position: -22px 0; }
+
+.social-share li.google-plus a:hover {
+  background-position: -50px 0; }
+
+.social-share li.twitter a:hover {
+  background-position: 0 0; }
+
+.advance-filter-wrapper .social-share {
+  margin: 9px;
+  right: 250px;
+  padding: 0;
+  bottom: -29px; }
+  .advance-filter-wrapper .social-share ul {
+    margin: 0;
+    padding: 11px 17px 11px 20px;
+    overflow: hidden; }
 
 @media all and (min-width: 380px) {
   .tagline span {
@@ -1931,7 +1977,6 @@ td.contract-date {
   tr {
     display: block; }
   .annotate-text {
-    background: url(../../images/ic-tick.png) no-repeat 0;
     padding-left: 20px !important;
     clear: both; }
   .table > tbody > tr > td {
@@ -1991,8 +2036,7 @@ td.contract-date {
     right: 10px;
     top: -4px; }
   .contract-panel-title {
-    margin-top: 26px;
-    margin-left: -26px; }
+    margin-top: 26px; }
   .action-links {
     float: left;
     margin: 0 0 20px -20px; }

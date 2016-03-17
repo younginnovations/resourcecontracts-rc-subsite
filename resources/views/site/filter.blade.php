@@ -29,7 +29,6 @@
             $params['download'] = true;
             ?>
             @if($contracts->total!=0)
-                Share:
                 <div class="social-share">
                     <ul>
                         <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u={{ url() }}" target="_blank">FB</a></li>
