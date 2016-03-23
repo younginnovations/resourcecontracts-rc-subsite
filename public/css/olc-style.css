@@ -685,9 +685,6 @@ footer {
 
 .contract-panel-title {
   overflow: hidden;
-  white-space: nowrap;
-  -o-text-overflow: ellipsis;
-     text-overflow: ellipsis;
   margin-top: 3px; }
 
 .action-links {
@@ -1822,8 +1819,6 @@ td.contract-date {
     margin-top: 0; } }
 
 @media all and (min-width: 550px) {
-  .panel-top-content > .pull-left {
-    width: 50%; }
   .breadcrumb-wrapper li:last-of-type {
     width: 50%;
     -o-text-overflow: ellipsis;
@@ -1840,6 +1835,8 @@ td.contract-date {
     padding: 0 36px; } }
 
 @media all and (min-width: 768px) {
+  .panel-top-content > .pull-left {
+    width: 80%; }
   .contract-search-form {
     width: 634px; }
     .contract-search-form .form-control {

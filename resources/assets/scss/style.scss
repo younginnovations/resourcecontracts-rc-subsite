@@ -1006,9 +1006,8 @@ footer {
 
 .contract-panel-title {
   overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
   margin-top: 3px;
+  font: 24px/32px Open-Sans-Light
 }
 
 .action-links {
@@ -2543,9 +2542,6 @@ td.contract-date {
 }
 
 @media all and (min-width: 550px) {
-  .panel-top-content > .pull-left {
-    width: 50%;
-  }
   .breadcrumb-wrapper li:last-of-type {
     width: 50%;
     text-overflow: ellipsis;
@@ -2567,6 +2563,9 @@ td.contract-date {
 }
 
 @media all and(min-width: 768px) {
+  .panel-top-content > .pull-left {
+    width: 80%;
+  }
   .contract-search-form {
     width: 634px;
     .form-control {
