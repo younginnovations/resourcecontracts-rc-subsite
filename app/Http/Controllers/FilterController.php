@@ -69,6 +69,8 @@ class FilterController
             'corporate_group'     => is_array($request->get('corporate_group')) ? join(',', $request->get('corporate_group')) : $request->get('corporate_group'),
             'company_name'        => is_array($request->get('company_name')) ? join(',', $request->get('company_name')) : $request->get('company_name'),
             'contract_type'       => is_array($request->get('contract_type')) ? join(',', $request->get('contract_type')) : $request->get('contract_type'),
+            'document_type'       => is_array($request->get('document_type')) ? join(',', $request->get('document_type')) : $request->get('document_type'),
+            'language'            => is_array($request->get('language')) ? join(',', $request->get('language')) : $request->get('language'),
             'annotation_category' => is_array($request->get('annotation_category')) ? join(',', $request->get('annotation_category')) : $request->get('annotation_category'),
             'sortby'              => $request->get('sortby'),
             'order'               => $request->get('order'),
@@ -96,9 +98,11 @@ class FilterController
 
         $filter['company_name'] = is_array($request->get('company_name')) ? $request->get('company_name') : [$request->get('company_name')];
 
-
         $filter['contract_type'] = is_array($request->get('contract_type')) ? $request->get('contract_type') : [$request->get('contract_type')];
 
+        $filter['document_type'] = is_array($request->get('document_type')) ? $request->get('document_type') : [$request->get('document_type')];
+
+        $filter['language'] = is_array($request->get('language')) ? $request->get('language') : [$request->get('language')];
 
         $filter['resource'] = is_array($request->get('resource')) ? $request->get('resource') : [$request->get('resource')];
 

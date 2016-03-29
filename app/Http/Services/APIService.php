@@ -201,6 +201,8 @@ class APIService
             'corporate_group'     => $corporate_group,
             'company_name'        => $company_name,
             'contract_type'       => $contract_type,
+            'document_type'       => $document_type,
+            'language'            => $language,
             'year'                => $year,
             'resource'            => $resource,
             'group'               => $group,

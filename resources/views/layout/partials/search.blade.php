@@ -12,14 +12,6 @@ $category = $api->getAnnotationsCategory();
     <div class="search-input-wrapper @if(isset($show_advance)) search-page-input-wrapper @endif">
         <div class="col-lg-12">
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
-                <label for="">@lang('search.year_signed')</label>
-                <select name="year[]" id="year" multiple="multiple">
-                    @foreach($summary->year_summary as $year)
-                        <option @if(isset($filter['year']) && in_array($year->key, $filter['year'])) selected="selected" @endif value="{{$year->key}}">{{$year->key}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
                 <label for="">@lang('global.country')</label>
                 <select name="country[]" id="country" multiple="multiple">
                     @foreach($summary->country_summary as $country)
@@ -36,6 +28,14 @@ $category = $api->getAnnotationsCategory();
                 </select>
             </div>
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
+                <label for="">@lang('search.year_signed')</label>
+                <select name="year[]" id="year" multiple="multiple">
+                    @foreach($summary->year_summary as $year)
+                        <option @if(isset($filter['year']) && in_array($year->key, $filter['year'])) selected="selected" @endif value="{{$year->key}}">{{$year->key}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
                 <label for="">@lang('search.company_name')</label>
                 <select name="company_name[]" id="company" multiple="multiple">
                     <?php $company_array = array_map('trim', (array) $attributes->company_name);
@@ -46,8 +46,6 @@ $category = $api->getAnnotationsCategory();
                     @endforeach
                 </select>
             </div>
-        </div>
-        <div class="col-lg-12">
             @if(env('CATEGORY')=="rc")
                 <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
                     <label for="">@lang('search.corporate_group')</label>
@@ -58,6 +56,24 @@ $category = $api->getAnnotationsCategory();
                     </select>
                 </div>
             @endif
+        </div>
+        <div class="col-lg-12">
+            <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
+                <label for="">@lang('search.language')</label>
+                <select name="language[]" id="language" multiple="multiple">
+                    @foreach(array_filter($attributes->language) as $language)
+                        <option @if(isset($filter['language']) && in_array($language, $filter['language'] )) selected="selected" @endif value="{{$language}}">{{trans('codelist/language')[$language]}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
+                <label for="">@lang('search.document_type')</label>
+                <select name="document_type[]" id="document_type" multiple="multiple">
+                    @foreach(array_filter($attributes->document_type) as $type)
+                        <option @if(isset($filter['document_type']) && in_array($type, $filter['document_type'])) selected="selected" @endif value="{{$type}}">{{$type}}</option>
+                    @endforeach
+                </select>
+            </div>
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
                 <label for="">@lang('search.contract_type')</label>
                 <select name="contract_type[]" id="contract_type" multiple="multiple">
