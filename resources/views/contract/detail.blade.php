@@ -411,9 +411,12 @@ use Illuminate\Support\Facades\Lang;
                                 </div>
 
                                 @foreach($categories as $category => $annotations)
-                                    <div id="{{str_slug($category,'-')}}" class="sub-category">
-                                        <a href="#{{str_slug($category,'-')}}"><i class='glyphicon glyphicon-link' style="display:none;"></i></a>
-                                        {{$category}}
+                                    <div>
+                                        <button annotation_id="1995">Clip</button>
+                                        <div id="{{str_slug($category,'-')}}" class="sub-category">
+                                            <a href="#{{str_slug($category,'-')}}"><i class='glyphicon glyphicon-link' style="display:none;"></i></a>
+                                            {{$category}}
+                                        </div>
                                     </div>
                                     <ul class="row">
                                         @foreach($annotations as $text => $annots)
