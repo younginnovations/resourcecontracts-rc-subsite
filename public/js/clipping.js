@@ -13295,7 +13295,7 @@ var data = clipCollection.localStorage.findAll();
 
 
 $(function() {
-    $( ".clip-annotation" ).click(function() {
+    $( ".annotation-clip-icon" ).click(function() {
         var id =$(this).attr('annotation_id');
         var clipped = false;
         var clip = new Clip({id:id});
@@ -13305,11 +13305,11 @@ $(function() {
         if (!clipped) {
             clipCollection.add(clip);
             clip.save();
-            $(this).css('color','red');
+            $(this).addClass('annotation-clipped');
         }
         else {
             clipCollection.localStorage.destroy(clip);
-            $(this).css('color','black');
+            $(this).removeClass('annotation-clipped');
         }
         $("#annotation-count").empty();
         $("#annotation-count").append("Clip (" + data.length +")");

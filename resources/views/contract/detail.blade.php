@@ -395,7 +395,7 @@ use Illuminate\Support\Facades\Lang;
             <div class="col-lg-12">
                 <div class="panel panel-default panel-wrap panel-annotation-list-wrap">
                     <div class="panel-heading">Annotations</div>
-                    <div><button id="clip-all-annotations">Clip all annotations</button></div>
+                    <button id="clip-all-annotations" class="annotation-clip">Clip all annotations</button>
                     <div class="panel-body">
                         <div class="annotation-category-cluster">
                             <ul>
@@ -409,26 +409,22 @@ use Illuminate\Support\Facades\Lang;
 
                         @forelse($contract->annotationsCluster as $cluster  => $categories)
                             <div id="cluster-{{str_slug($cluster,'-')}}" class="cluster-wrap">
-                                <div class="category-title">
-                                    {{$cluster}}
-                                </div>
-
                                 @foreach($categories as $category => $annotations)
                                     <?php
-                                        $annotationId = '';
-                                         foreach($annotations as $a)
-                                        {
-                                           $annotationId = $a[0]->id;
-                                        }
+                                    $annotationId = '';
+                                    foreach($annotations as $a)
+                                    {
+                                        $annotationId = $a[0]->id;
+                                    }
 
 
                                     ?>
-
-
-
+                                <div class="category-title">
+                                    <button annotation_id={{$annotationId}} class="annotation-clip-icon">Clip</button>
+                                    {{$cluster}}
+                                </div>
 
                                     <div class="annotations">
-                                        <button annotation_id={{$annotationId}} class="clip-annotation">Clip</button>
                                         <div id="{{str_slug($category,'-')}}" class="sub-category">
                                             <a href="#{{str_slug($category,'-')}}"><i class='glyphicon glyphicon-link' style="display:none;"></i></a>
                                             {{$category}}

@@ -37,7 +37,7 @@ class ClippingService
                         <td>" . $annotation->open_contracting_id . "</td>
                         <td>" . $annotation->category . "</td>
                         <td>" . $annotation->text . " pg [" . $annotation->page . "]</td>
-                        <td><button  annotation_id =" . $annotation->id . " class='remove-clip'>x</button></td>
+                        <td align='center'><button  annotation_id =" . $annotation->id . " class='remove-clip'>x</button></td>
                     </tr>";
         }
 
