@@ -13,7 +13,7 @@ var data = clipCollection.localStorage.findAll();
 
 
 $(function() {
-    $( ".clip-annotation" ).click(function() {
+    $( ".annotation-clip-icon" ).click(function() {
         var id =$(this).attr('annotation_id');
         var clipped = false;
         var clip = new Clip({id:id});
@@ -23,11 +23,11 @@ $(function() {
         if (!clipped) {
             clipCollection.add(clip);
             clip.save();
-            $(this).css('color','red');
+            $(this).addClass('annotation-clipped');
         }
         else {
             clipCollection.localStorage.destroy(clip);
-            $(this).css('color','black');
+            $(this).removeClass('annotation-clipped');
         }
         $("#annotation-count").empty();
         $("#annotation-count").append("Clip (" + data.length +")");
@@ -42,7 +42,7 @@ $(function() {
     });
 
     $(document).on('click',"#clip-all-annotations",function() {
-        var allAnnotations=  $(".annotations .clip-annotation");
+        var allAnnotations=  $(".annotation-clip-icon");
         allAnnotations.each(function(i){
             var annotationId = $(this).attr('annotation_id');
             var clipped = false;
@@ -53,14 +53,42 @@ $(function() {
             if (!clipped) {
                 clipCollection.add(clip);
                 clip.save();
-                $(this).css('color','red');
+                $(this).addClass('annotation-clipped');
             }
 
             $("#annotation-count").empty();
             $("#annotation-count").append("Clip (" + data.length +")");
 
         });
+        $("#clip-all-annotations").addClass('annotation-clipped');
+        $("#clip-all-annotations").attr('id','remove-all-annotations');
     });
+
+
+
+
+    $(document).on('click',"#remove-all-annotations",function() {
+        var allAnnotations=  $(".annotation-clip-icon");
+        allAnnotations.each(function(i){
+            var annotationId = $(this).attr('annotation_id');
+            var clipped = false;
+            var clip = new Clip({id:annotationId});
+            if(clipCollection.localStorage.find(clip)){
+                clipped=true;
+            }
+            if (clipped) {
+                clipCollection.localStorage.destroy(clip);
+                $(this).removeClass('annotation-clipped');
+            }
+
+            $("#annotation-count").empty();
+            $("#annotation-count").append("Clip (" + data.length +")");
+
+        });
+        $("#remove-all-annotations").removeClass('annotation-clipped');
+        $("#remove-all-annotations").attr('id','clip-all-annotations');
+    });
+
 
 });
 
@@ -76,24 +104,22 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     var isAllClipped=true;
-$(".annotations .clip-annotation").map(function() {
-    var t=  $(this).attr('annotation_id');
-    if (data.indexOf(t)>=0) {
-        $(this).css('color','red');
-    }
-    if(isAllClipped==true && data.indexOf(t)<0)
-    {
-        isAllClipped=false;
-    }
+    $(".annotation-clip-icon").map(function() {
+        var t=  $(this).attr('annotation_id');
+        if (data.indexOf(t)>=0) {
+            $(this).addClass('annotation-clipped');
+        }
+        if(isAllClipped==true && data.indexOf(t)<0)
+        {
+            isAllClipped=false;
+        }
 }).get();
 
-    console.log(isAllClipped);
     if(isAllClipped)
     {
-        $("#clip-all-annotations").css('color','red');
+        $("#clip-all-annotations").addClass('annotation-clipped');
         $("#clip-all-annotations").attr('id','remove-all-annotations');
     }
-
 
 });
 

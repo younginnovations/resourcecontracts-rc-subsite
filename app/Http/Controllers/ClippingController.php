@@ -35,4 +35,6 @@ class ClippingController extends BaseController
         $data = isset($data['data']) ? explode(',', $data['data']) : [];
         return $this->clip->getAllAnnotations($data);
     }
+
+
 }

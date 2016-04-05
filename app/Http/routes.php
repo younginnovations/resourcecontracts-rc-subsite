@@ -93,3 +93,4 @@ $app->get('api/search', ['as' => 'api.search', 'uses' => 'Contract\PageControlle
 
 $app->get('clip/view', ['as' => 'clip.index', 'uses' => 'ClippingController@index']);
 $app->get('/clip/annotations', ['as' => 'api.annotation', 'uses' => 'ClippingController@getAllAnnotations']);
+$app->get('/clip/download', ['as' => 'clip.download', 'uses' => 'ClippingController@downloadAnnotations']);

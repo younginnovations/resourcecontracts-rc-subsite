@@ -83,6 +83,8 @@ $url_13: url(../../images/ic-close.png);
 $url_15: url(../../images/paper-bg.png);
 $url_16: url(../../images/ic-amla.png);
 $url_17: url(../../images/ic-delete.png);
+$url_18: url(../../images/ic-clip.png);
+$url_19: url(../../images/ic-clip-hover.png);
 
 //gradients
 
@@ -1634,10 +1636,10 @@ footer {
 .category-title {
   text-transform: uppercase;
   margin-bottom: 18px;
+  margin-top: 10px;
 }
 .sub-category {
-  margin-top: 20px;
-  margin-bottom: 10px;
+  margin: 10px 0 8px;
 }
 .note {
   margin-top: 14px;
@@ -2316,6 +2318,76 @@ td.contract-date {
   width: 90%;
 }
 
+.annotation-table {
+  padding: 60px 0;
+  .table > thead > tr > th {
+    color: $color_cape_cod_approx;
+  }
+  .table tr:first-of-type td {
+    border: 1px solid #ddd;
+  }
+  .table > thead > tr > th,.table > tbody > tr > td {
+    padding: 8px 44px 8px 10px!important;
+  }
+}
+
+#annotation-count,.annotation-clip {
+  background: $color_gallery_approx $url_18 no-repeat 14px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  color: $color_cape_cod_approx !important;
+  border-radius: 20px;
+  line-height: 34px;
+  padding: 0 14px 0 29px;
+  display: inline-block;
+  margin-top: 20px;
+  min-width: 98px;
+  @include position(absolute,26px auto auto 228px);
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+#annotation-count {
+  @include position(absolute,-3px 10px auto auto);
+}
+
+.annotation-clip-icon {
+  text-indent: -9999px;
+  background: transparent $url_18 no-repeat 0 4px;
+  width: 9px;
+  height: 22px;
+  border: 0;
+}
+
+.annotation-clip-icon.annotation-clipped {
+  background: transparent $url_19 no-repeat 0 4px;
+  text-indent: -9999px;
+  width: 9px;
+  height: 22px;
+  border: 0;
+}
+
+.annotation-clip.annotation-clipped {
+  background: transparent $url_19 no-repeat 15px 8px;
+  border: 1px solid $color_link_color;
+  color: $color_link_color!important;
+}
+
+.remove-clip {
+  background: transparent;
+  border: 2px solid #bbb;
+  width: 24px;
+  line-height: 20px;
+  border-radius: 50%;
+  padding: 0;
+  color: #aaa;
+  &:hover {
+    color: $white;
+    background: $color_link_color;
+    border: 2px solid $color_link_color;
+  }
+}
 
 @media all and(min-width: 380px) {
   .tagline span {
