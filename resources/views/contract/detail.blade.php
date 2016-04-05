@@ -389,10 +389,13 @@ use Illuminate\Support\Facades\Lang;
         </div>
     </div>
     @if(count($contract->annotationsGroup)>0)
+
         <div class="row annotation-list-wrapper" id="annotations">
+
             <div class="col-lg-12">
                 <div class="panel panel-default panel-wrap panel-annotation-list-wrap">
                     <div class="panel-heading">Annotations</div>
+                    <div><button id="clip-all-annotations">Clip all annotations</button></div>
                     <div class="panel-body">
                         <div class="annotation-category-cluster">
                             <ul>
@@ -411,8 +414,21 @@ use Illuminate\Support\Facades\Lang;
                                 </div>
 
                                 @foreach($categories as $category => $annotations)
-                                    <div>
-                                        <button annotation_id="1995">Clip</button>
+                                    <?php
+                                        $annotationId = '';
+                                         foreach($annotations as $a)
+                                        {
+                                           $annotationId = $a[0]->id;
+                                        }
+
+
+                                    ?>
+
+
+
+
+                                    <div class="annotations">
+                                        <button annotation_id={{$annotationId}} class="clip-annotation">Clip</button>
                                         <div id="{{str_slug($category,'-')}}" class="sub-category">
                                             <a href="#{{str_slug($category,'-')}}"><i class='glyphicon glyphicon-link' style="display:none;"></i></a>
                                             {{$category}}
@@ -465,4 +481,17 @@ use Illuminate\Support\Facades\Lang;
             var lang = <?php echo json_encode(trans('annotation'));?>;
         </script>
     @endif
+
+@section('js')
+
+    <script>
+
+
+    </script>
+@endsection
+
+
 @stop
+
+
+

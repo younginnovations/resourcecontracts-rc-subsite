@@ -235,7 +235,7 @@ class APIService
      * @param bool  $array
      * @return array|object|null
      */
-    protected function apiCall($resource, array $query = [], $array = false)
+    public function apiCall($resource, array $query = [], $array = false)
     {
         try {
             $request           = new Request('GET', $this->apiURL($resource));

@@ -11,6 +11,9 @@
         <div class="col-sm-12 col-md-9 col-lg-10 navbar-right">
             @if(!isset($show_advance))
                 @include('layout.partials.search')
+                <div>
+                    <a href="{{route('clip.index')}}" id="annotation-count"></a>
+                </div>
             @endif
         </div>
     </nav>

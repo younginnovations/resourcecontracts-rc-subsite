@@ -37,7 +37,8 @@ if (empty($meta)) {
     <script>
         var app_url = '{{ url()}}';
     </script>
-    <![endif]-->
+        <![endif]-->
+    <script src="{{ url('js/clipping.js') }}"></script>
 </head>
 <body data-spy="scroll">
 <div id="wrapper">
