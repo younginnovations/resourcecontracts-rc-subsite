@@ -82,3 +82,12 @@ $app->get('contract/{id}/allpage', ['as' => 'contract.allpage.get', 'uses' => 'C
 $app->post('contract/{id}/search', ['as' => 'contract.page.search', 'uses' => 'Contract\PageController@search']);
 $app->get('annotation/search', ['as' => 'contract.page.annotations.search', 'uses' => 'Contract\PageController@annotations']);
 $app->get('api/search', ['as' => 'api.search', 'uses' => 'Contract\PageController@annotations']);
+/*
+ * ----------------------------------------------------------------------------------
+ * Clipping Routes
+ * ----------------------------------------------------------------------------------
+ */
+
+$app->get('clip/view', ['as' => 'clip.index', 'uses' => 'ClippingController@index']);
+$app->get('/clip/annotations', ['as' => 'api.annotation', 'uses' => 'ClippingController@getAllAnnotations']);
+$app->get('/clip/download', ['as' => 'clip.download', 'uses' => 'ClippingController@downloadAnnotations']);

@@ -36,8 +36,18 @@ var resource_script = [
     './resources/assets/scripts/lib/underscore.js',
     './resources/assets/scripts/lib/backbone.js',
     './resources/assets/scripts/lib/backbone.fetch-cache.min.js',
-    './resources/assets/scripts/resources.js'
+    './resources/assets/scripts/resources.js',
 ];
+
+var clipping_script = [
+    './resources/assets/scripts/lib/jquery.js',
+    './resources/assets/scripts/lib/underscore.js',
+    './resources/assets/scripts/lib/backbone.js',
+    './resources/assets/scripts/lib/backbone.localstorage.js',
+    './resources/assets/scripts/lib/backbone.fetch-cache.min.js',
+    './resources/assets/scripts/clipping.js'
+];
+
 
 var page_script = [
     './resources/assets/scripts/lib/summernote.js',
@@ -95,6 +105,7 @@ gulp.task('watch', function () {
     gulp.watch(base_script, ['js-base']);
     gulp.watch(country_script, ['js-country']);
     gulp.watch(resource_script, ['js-resource']);
+    gulp.watch(clipping_script,['js-clipping']);
     gulp.watch(page_script, ['js-page']);
     gulp.watch(contract_view_scripts, ['js-react']);
     gulp.watch(css_files, ['css-main']);
@@ -134,6 +145,16 @@ gulp.task('js-resource', function () {
         .pipe(uglify())
         .pipe(gulp.dest('./public/js'))
         .pipe(notify({message: 'Js-resource task complete'}));
+});
+
+gulp.task('js-clipping', function () {
+    return gulp.src(clipping_script)
+        .pipe(concat('clipping.js'))
+        .pipe(gulp.dest('./public/js'))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(uglify())
+        .pipe(gulp.dest('./public/js'))
+        .pipe(notify({message: 'Js-clipping task complete'}));
 });
 
 gulp.task('js-page', function () {

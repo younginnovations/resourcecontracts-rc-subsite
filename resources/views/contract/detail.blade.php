@@ -393,6 +393,7 @@ use Illuminate\Support\Facades\Lang;
             <div class="col-lg-12">
                 <div class="panel panel-default panel-wrap panel-annotation-list-wrap">
                     <div class="panel-heading"> {{count($contract->annotationsGroup)}} @if(count($contract->annotationsGroup) >1) Annotations @else Annotation @endif </div>
+                    <button id="clip-all-annotations" class="annotation-clip">Clip all annotations</button>
                     <div class="panel-body">
 
                         <div class="row">
@@ -413,7 +414,6 @@ use Illuminate\Support\Facades\Lang;
                             <div class="col-md-8">
 
                                 @forelse($contract->annotationsCluster as $cluster => $annotations)
-
                                     <div id="cluster-{{str_slug($cluster,'-')}}" class="cluster-wrap">
                                         <div class="category-title">
                                             {{$cluster}}
@@ -422,7 +422,9 @@ use Illuminate\Support\Facades\Lang;
                                         @foreach($annotations as $annotation)
                                             <?php $annotation = array_values($annotation)[0][0];?>
                                         <div>
+
                                             <div id="{{str_slug($annotation->category,'-')}}" class="sub-category">
+                                                <button annotation_id={{$annotation->id}} class="annotation-clip-icon">Clip</button>
                                                 <a href="#{{str_slug($annotation->category,'-')}}"><i class='glyphicon glyphicon-link' style="display:none;"></i></a>
                                                 {{$annotation->category}}
                                             </div>
