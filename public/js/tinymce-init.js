@@ -11,5 +11,5 @@ tinymce.init({
     "save table directionality template paste textcolor colorpicker"
   ],
   content_css: "css/content.css",
-  toolbar: "insertfile undo redo | styleselect | fontsizeselect| fontselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image |  media fullpage | forecolor backcolor",
+  toolbar: "insertfile undo redo | styleselect| fontselect | fontsizeselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image |  media fullpage | forecolor backcolor",
 });
