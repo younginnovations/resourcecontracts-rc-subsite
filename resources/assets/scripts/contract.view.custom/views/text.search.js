@@ -7,6 +7,9 @@ var TextSearchForm = React.createClass({
     }
     document.location.hash = '#/search/' + encodeURI(searchQuery);
   },
+  componentDidMount:function(){
+    React.findDOMNode(this.refs.searchInput).value =this.props.contractApp.getSearchQuery();
+  },
   render: function() {
     return (
       <div className="text-search-container">

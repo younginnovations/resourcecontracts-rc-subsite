@@ -108,7 +108,7 @@ class APIService
     {
         $contract                   = new \stdClass();
         $contract->metadata         = $this->metadata($contract_id);
-        $contract->annotations      = $this->getAnnotations($contract_id);
+        $contract->annotations      = $this->getAnnotationsGroup($contract_id);
         $contract->annotationsGroup = $this->groupAnnotationsByCategory($contract->annotations);
         $contract->pages            = $this->getTextPage($contract_id, 1);
 
@@ -144,6 +144,19 @@ class APIService
         return $response;
     }
 
+    /**
+     * Get Annotations by group
+     *
+     * @param $contract_id
+     * @return array
+     * @internal param $annotations
+     */
+    public function getAnnotationsGroup($contract_id)
+    {
+        $resource = sprintf('contract/%s/annotations/group', $contract_id);
+
+        return $this->apiCall($resource);
+    }
 
     /**
      * Get Text Page
@@ -159,6 +172,8 @@ class APIService
     }
 
     /**
+     * Get annotation by page
+     *
      * @param $contract_id
      * @param $page_no
      * @return array|false
@@ -334,15 +349,15 @@ class APIService
 
                 $data[$annotation->category] = [$annotation];
             }
-
         }
+
         ksort($data);
 
         return $data;
     }
 
     /**
-     * Get Search Atributes such as contract_type,corporate_grouping,company_name
+     * Get Search Attributes such as contract_type,corporate_grouping,company_name
      *
      * @return object|null
      */
@@ -367,7 +382,6 @@ class APIService
         return $response;
     }
 
-
     /**
      * Return all the metadata of given id
      * @param $id
@@ -380,6 +394,11 @@ class APIService
         return $contracts;
     }
 
+    /**
+     * Sort countries
+     *
+     * @return null|object
+     */
     public function sortSummaryCountry()
     {
         $summaries = $this->summary();
@@ -422,15 +441,19 @@ class APIService
             $request->setQuery($query);
             $response = $this->client->send($request);
             $data     = $response->getBody()->getContents();
-            $data=json_decode($data,true);
+            $data     = json_decode($data, true);
 
-            Excel::create($filename, function ($csv) use(&$data)
-            {
-                $csv->sheet('sheetname', function ($sheet) use(&$data)
-                {
-                    $sheet->fromArray($data);
-                });
-            })->download('xls');
+            Excel::create(
+                $filename,
+                function ($csv) use (&$data) {
+                    $csv->sheet(
+                        'sheetname',
+                        function ($sheet) use (&$data) {
+                            $sheet->fromArray($data);
+                        }
+                    );
+                }
+            )->download('xls');
             die;
         } catch (\Exception $e) {
             Log::error($resource . ":" . $e->getMessage(), $query);
