@@ -163,6 +163,9 @@ var ContractApp = Backbone.Model.extend({
         return geo;
     },
     showPdfAnnotationPopup: function (id) {
+        if (this.isPdfLoaded() == false) {
+            return true;
+        }
         var wrapperEl = $('.pdf-annotator');
         wrapperEl.find('.annotator-viewer').addClass('annotator-hide');
         var annotators = this.getAnnotatorInstance().content.data('annotator').dumpAnnotations();
