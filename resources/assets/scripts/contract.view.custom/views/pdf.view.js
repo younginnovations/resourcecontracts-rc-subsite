@@ -64,6 +64,7 @@ var PdfZoom = React.createClass({
         }
     },
     handleClick: function (e, ev) {
+        e.preventDefault();
         var type = e.target.getAttribute('data-ref');
         var int = this.state.scale;
         if (int < 2 && type == 'increase') {
