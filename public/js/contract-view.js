@@ -55458,6 +55458,7 @@ var PdfZoom = React.createClass({displayName: "PdfZoom",
         }
     },
     handleClick: function (e, ev) {
+        e.preventDefault();
         var type = e.target.getAttribute('data-ref');
         var int = this.state.scale;
         if (int < 2 && type == 'increase') {
@@ -56732,10 +56733,21 @@ var PageLink = React.createClass({displayName: "PageLink",
         }
     },
     render: function () {
-        return (
-            React.createElement("div", {className: "annotation-page"}, 
-                React.createElement("a", {href: "#", onClick: this.handleAnnotationClick}, "P ", this.props.text)
-            ));
+        if (this.props.article_reference != '') {
+            return (
+                React.createElement("span", {className: "page-gap"}, 
+                   React.createElement("a", {href: "#", onClick: this.handleAnnotationClick}, this.props.article_reference), 
+                    this.props.last? ', ' : ''
+               )
+            )
+        } else {
+            return (
+                React.createElement("span", {className: "page-gap"}, 
+                   React.createElement("a", {href: "#", onClick: this.handleAnnotationClick}, this.props.page), 
+                    this.props.last? ', ' : ''
+               )
+            )
+        }
     }
 });
 
@@ -56796,15 +56808,39 @@ var AnnotationItem = React.createClass({displayName: "AnnotationItem",
     },
     getPages: function () {
         var self = this;
-        var length = this.props.annotation.length;
-        return this.props.annotation.map(function (annotation, index) {
-            var page = annotation.get('page_no');
-            page += (annotation.get('article_reference') != '') ? ' - ' + annotation.get('article_reference') : '';
+        this.props.annotation.sort(function (a, b){
+            return a.get('page_no') - b.get('page_no');
+        });
+
+        var annotationGroupByPage = _.groupBy(this.props.annotation, function(a){
+            return a.get('page_no');
+        });
+
+        annotationGroupByPage = _.toArray(annotationGroupByPage);
+
+        var length = annotationGroupByPage.length;
+
+        return annotationGroupByPage.map(function (annotation, index) {
+            var page = annotation[0].get('page_no');
             var last = false;
             if (index < (length - 1)) {
                 last = true;
             }
-            return (React.createElement(PageLink, {contractApp: self.props.contractApp, annotation: annotation, last: last, text: page}))
+            var count = annotation.length;
+            var ref =  annotation.map(function(annotation, index){
+                var l = false;
+                if (index < (count - 1)) {
+                    l = true;
+                }
+                var article_reference = (annotation.get('article_reference') != '') ?  annotation.get('article_reference') : '';
+                return (React.createElement(PageLink, {contractApp: self.props.contractApp, annotation: annotation, last: l, page: page, article_reference: article_reference}))
+            });
+
+            return (
+                React.createElement("span", null, 
+                   "Page ", page, " (", ref, ")", last? ', ': ''
+                 )
+            );
         });
     },
     componentWillMount: function () {
@@ -56898,7 +56934,7 @@ var AnnotationItem = React.createClass({displayName: "AnnotationItem",
                 React.createElement("p", {className: "category"}, category.en), 
                 React.createElement("p", {className: "category"}, category.fr), 
                 React.createElement("p", {className: "annotated-text"}, this.getShowText()), 
-                React.createElement("p", {className: "pages"}, this.getPages())
+                React.createElement("div", {className: "annotation-page"}, this.getPages())
             )
         )
     }
