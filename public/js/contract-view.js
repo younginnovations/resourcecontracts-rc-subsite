@@ -57001,7 +57001,7 @@ render:function() {
                 React.createElement("div", {className: "download-dropdown"}, 
                     React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, "Download")), 
                     React.createElement("ul", {style: style}, 
-                    React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF "))
+                    React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF"))
                     )
                 ), 
                 React.createElement("ul", {className: "social-share"}, 
@@ -57018,8 +57018,8 @@ render:function() {
                 React.createElement("div", {className: "download-dropdown"}, 
                 React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, "Download")), 
                 React.createElement("ul", {style: style}, 
-                React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF ")), 
-                React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, " ANNOTATION "))
+                React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF")), 
+                React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, " ANNOTATIONS"))
                 )
                 ), 
                 React.createElement("ul", {className: "social-share"}, 
@@ -57038,8 +57038,8 @@ render:function() {
                 React.createElement("div", {className: "download-dropdown"}, 
                 React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, "Download")), 
                 React.createElement("ul", {style: style}, 
-                React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF ")), 
-                React.createElement("li", null, React.createElement("a", {href: this.props.text_url}, " WORD FILE "))
+                React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF")), 
+                React.createElement("li", null, React.createElement("a", {href: this.props.text_url}, " WORD FILE"))
                 )
                 ), 
                 React.createElement("ul", {className: "social-share"}, 
@@ -57056,9 +57056,9 @@ render:function() {
             React.createElement("div", {className: "download-dropdown"}, 
             React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, "Download")), 
             React.createElement("ul", {style: style}, 
-            React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF ")), 
-            React.createElement("li", null, React.createElement("a", {href: this.props.text_url}, " WORD FILE ")), 
-            React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, " ANNOTATION "))
+            React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, "PDF")), 
+            React.createElement("li", null, React.createElement("a", {href: this.props.text_url}, " WORD FILE")), 
+            React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, " ANNOTATIONS"))
             )
             ), 
                 React.createElement("ul", {className: "social-share"}, 

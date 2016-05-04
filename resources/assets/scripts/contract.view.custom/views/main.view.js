@@ -57,7 +57,7 @@ render:function() {
                 <div className="download-dropdown">
                     <a href="#" onClick={this.toggleDropdown}><span>Download</span></a>
                     <ul style={style} >
-                    <li><a href={this.props.pdf_url}>PDF </a></li>
+                    <li><a href={this.props.pdf_url}>PDF</a></li>
                     </ul>
                 </div>
                 <ul className="social-share">
@@ -74,8 +74,8 @@ render:function() {
                 <div className="download-dropdown">
                 <a href="#" onClick={this.toggleDropdown}><span>Download</span></a>
                 <ul style={style} >
-                <li><a href={this.props.pdf_url}>PDF </a></li>
-                <li><a href={this.props.annotations_url}> ANNOTATION </a></li>
+                <li><a href={this.props.pdf_url}>PDF</a></li>
+                <li><a href={this.props.annotations_url}> ANNOTATIONS</a></li>
                 </ul>
                 </div>
                 <ul className="social-share">
@@ -94,8 +94,8 @@ render:function() {
                 <div className="download-dropdown">
                 <a href="#" onClick={this.toggleDropdown}><span>Download</span></a>
                 <ul style={style} >
-                <li><a href={this.props.pdf_url}>PDF </a></li>
-                <li><a href={this.props.text_url}> WORD FILE </a></li>
+                <li><a href={this.props.pdf_url}>PDF</a></li>
+                <li><a href={this.props.text_url}> WORD FILE</a></li>
                 </ul>
                 </div>
                 <ul className="social-share">
@@ -112,9 +112,9 @@ render:function() {
             <div className="download-dropdown">
             <a href="#" onClick={this.toggleDropdown}><span>Download</span></a>
             <ul style={style}>
-            <li><a href={this.props.pdf_url}>PDF </a></li>
-            <li><a href={this.props.text_url}> WORD FILE </a></li>
-            <li><a href={this.props.annotations_url}> ANNOTATION </a></li>
+            <li><a href={this.props.pdf_url}>PDF</a></li>
+            <li><a href={this.props.text_url}> WORD FILE</a></li>
+            <li><a href={this.props.annotations_url}> ANNOTATIONS</a></li>
             </ul>
             </div>
                 <ul className="social-share">

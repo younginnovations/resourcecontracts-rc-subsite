@@ -434,17 +434,34 @@ use Illuminate\Support\Facades\Lang;
                                                 <div class="annotation-text">
                                                     {{$annotation->text}}
                                                 </div>
-                                                @foreach($annotation->pages as $page)
-                                                    <div class="annotation-page">
-                                                        <?php $page_type = isset($page->shapes) ? 'pdf' : 'text'; ?>
-                                                        <a href="{{route('contract.detail',['id'=>$contract->metadata->open_contracting_id])}}#/{{$page_type}}/page/{{$page->page_no}}/annotation/{{$page->id}}">
-                                                            P {{_e($page,'page_no')}}
-                                                            @if($page->article_reference !='')
-                                                                - {{$page->article_reference}}
+                                                <div class="annotation-page">
+                                                    <?php
+                                                    $pages = collect($annotation->pages);
+                                                    $pages = $pages->groupBy('page_no');
+                                                    $j = 0;
+                                                    ?>
+                                                    @foreach($pages as $refs)
+                                                        <?php  $page = $refs[0]; $j ++;?>
+                                                        Page {{_e($page,'page_no')}}
+
+                                                        @foreach($refs as $key => $ref)
+                                                            @if($ref->article_reference !='')
+                                                                <?php $page_type = isset($page->shapes) ? 'pdf' : 'text'; ?>
+                                                                (
+                                                                <a href="{{route('contract.detail',['id'=>$contract->metadata->open_contracting_id])}}#/{{$page_type}}/page/{{$ref->page_no}}/annotation/{{$ref->id}}">
+                                                                    {{$ref->article_reference}}
+                                                                </a>
+                                                                )
+                                                                @if($key < (count($refs)-1))
+                                                                    ,
+                                                                @endif
                                                             @endif
-                                                        </a>
-                                                    </div>
-                                                @endforeach
+                                                        @endforeach
+                                                        @if($j < ($pages->count()))
+                                                            ,
+                                                        @endif
+                                                    @endforeach
+                                                </div>
                                             </div>
                                         @endforeach
                                     </div>
