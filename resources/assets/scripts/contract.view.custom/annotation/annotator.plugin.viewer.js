@@ -74,6 +74,8 @@ Annotator.Plugin.AnnotatorNRGIViewer = (function (_super) {
     }
 
     function getPageNo(annotation) {
+
+        return "";
         var pageNo = annotation.page_no;
 
         if (annotation.shapes) {
@@ -96,32 +98,56 @@ Annotator.Plugin.AnnotatorNRGIViewer = (function (_super) {
         var annotations = annotationsCollection.relatedAnnotations(annotation);
 
         if (annotations.length > 0) {
-            html += '<p><strong>Related Annotations:</strong></p>';
             var page = [];
-            annotations.map(function (a) {
-                var pageNo = a.get('page_no');
-                var link = "";
-                var view = "";
-                if (a.get('shapes')) {
-                    view = 'pdf';
-                    link = "#/" + view + "/page/" + pageNo + "/annotation/" + a.get('id');
-                } else {
-                    view = 'text';
-                    link = "#/" + view + "/page/" + pageNo + "/annotation/" + a.get('id');
+
+            annotations.sort(function (a, b) {
+                return a.get('page_no') - b.get('page_no');
+            });
+
+            var annotationGroupByPage = _.groupBy(annotations, function (a) {
+                return a.get('page_no');
+            });
+
+            annotationGroupByPage = _.toArray(annotationGroupByPage);
+
+            annotationGroupByPage.map(function (anno, index) {
+                var a = anno[0];
+                var last = false;
+                if (index < (length - 1)) {
+                    last = true;
                 }
 
-                var text = pageNo;
-                var article_reference = a.get('article_reference');
-                if (article_reference != '') {
-                    text += ' - ' + article_reference;
-                }
-                page.push('<a style="margin-left: 5px" data-view="' + view + '" data-annotation="' + a.get('id') + '" class="parent_annotation_link" href="' + link + '"> Page ' + text + '</a>');
+                var ref = [];
+                anno.map(function (a, index) {
+                    var link = "";
+                    var view = "";
+                    if (a.get('shapes')) {
+                        view = 'pdf';
+                        link = "#/" + view + "/page/" + a.get('page_no') + "/annotation/" + a.get('id');
+                    } else {
+                        view = 'text';
+                        link = "#/" + view + "/page/" + a.get('page_no') + "/annotation/" + a.get('id');
+                    }
+
+                    var article_reference = (a.get('article_reference') != '') ?  a.get('article_reference') : a.get('page_no');
+                    ref.push('<a style="margin: 0px 3px" data-view="' + view + '" data-annotation="' + a.get('id') + '" class="parent_annotation_link" href="' + link + '">' + article_reference + '</a>');
+                });
+
+                var text = a.get('page_no');
+                text += ' ('+ref.join(', ')+')';
+                page.push(text);
             });
             html += '<p style="padding: 5px 0px">';
-            html += page.join(',');
+
+            if (annotationGroupByPage.length > 1) {
+                html += 'Pages: ';
+            } else {
+                html += 'Page: ';
+            }
+
+            html += page.join(', ');
             html += '</p>';
         }
-
         return html;
     }
 
