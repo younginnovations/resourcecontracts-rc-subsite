@@ -33237,6 +33237,8 @@ Annotator.Plugin.AnnotatorNRGIViewer = (function (_super) {
     }
 
     function getPageNo(annotation) {
+
+        return "";
         var pageNo = annotation.page_no;
 
         if (annotation.shapes) {
@@ -33259,32 +33261,56 @@ Annotator.Plugin.AnnotatorNRGIViewer = (function (_super) {
         var annotations = annotationsCollection.relatedAnnotations(annotation);
 
         if (annotations.length > 0) {
-            html += '<p><strong>Related Annotations:</strong></p>';
             var page = [];
-            annotations.map(function (a) {
-                var pageNo = a.get('page_no');
-                var link = "";
-                var view = "";
-                if (a.get('shapes')) {
-                    view = 'pdf';
-                    link = "#/" + view + "/page/" + pageNo + "/annotation/" + a.get('id');
-                } else {
-                    view = 'text';
-                    link = "#/" + view + "/page/" + pageNo + "/annotation/" + a.get('id');
+
+            annotations.sort(function (a, b) {
+                return a.get('page_no') - b.get('page_no');
+            });
+
+            var annotationGroupByPage = _.groupBy(annotations, function (a) {
+                return a.get('page_no');
+            });
+
+            annotationGroupByPage = _.toArray(annotationGroupByPage);
+
+            annotationGroupByPage.map(function (anno, index) {
+                var a = anno[0];
+                var last = false;
+                if (index < (length - 1)) {
+                    last = true;
                 }
 
-                var text = pageNo;
-                var article_reference = a.get('article_reference');
-                if (article_reference != '') {
-                    text += ' - ' + article_reference;
-                }
-                page.push('<a style="margin-left: 5px" data-view="' + view + '" data-annotation="' + a.get('id') + '" class="parent_annotation_link" href="' + link + '"> Page ' + text + '</a>');
+                var ref = [];
+                anno.map(function (a, index) {
+                    var link = "";
+                    var view = "";
+                    if (a.get('shapes')) {
+                        view = 'pdf';
+                        link = "#/" + view + "/page/" + a.get('page_no') + "/annotation/" + a.get('id');
+                    } else {
+                        view = 'text';
+                        link = "#/" + view + "/page/" + a.get('page_no') + "/annotation/" + a.get('id');
+                    }
+
+                    var article_reference = (a.get('article_reference') != '') ?  a.get('article_reference') : a.get('page_no');
+                    ref.push('<a style="margin: 0px 3px" data-view="' + view + '" data-annotation="' + a.get('id') + '" class="parent_annotation_link" href="' + link + '">' + article_reference + '</a>');
+                });
+
+                var text = a.get('page_no');
+                text += ' ('+ref.join(', ')+')';
+                page.push(text);
             });
             html += '<p style="padding: 5px 0px">';
-            html += page.join(',');
+
+            if (annotationGroupByPage.length > 1) {
+                html += 'Pages: ';
+            } else {
+                html += 'Page: ';
+            }
+
+            html += page.join(', ');
             html += '</p>';
         }
-
         return html;
     }
 
@@ -55322,6 +55348,7 @@ var Pdf = React.createClass({
   },
   render: function() {
     var self = this;
+    this.removeAnnotationFromCanvas();
     if (!!this.state.page) {
       setTimeout(function() {
         if(self.isMounted()) {
@@ -55365,19 +55392,19 @@ var Pdf = React.createClass({
     } else {
       var page_no = this.props.contractApp.getCurrentPage();
       debug("react.pdf showing page loader", page_no);
-      $('.annotator-viewer').addClass('annotator-hide');
-      var canvas = $('.annotorious-item:first');
-      $('.pdf-viewer').animate({scrollTop: 0},'slow');
-      if (canvas.length > 0) {
-        canvas = canvas[0];
-        var context = canvas.getContext('2d');
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        context.fill();
-      }
-
       return (this.props.loading || React.createElement("div", {className:'pdf-loading'}, lang.loading_page + page_no));
     }
   },
+  removeAnnotationFromCanvas : function(){
+    $('.annotator-viewer').addClass('annotator-hide');
+    var canvas = $('.annotorious-item');
+    canvas.each(function() {
+          c = $( this ).get(0);
+          var context = c.getContext('2d');
+          context.clearRect(0, 0, c.width, c.height);
+          context.fill();
+      });
+    },
   _onDocumentComplete: function(pdf){
     // this.setState({ pdf: pdf })
     if(!!this.props.onDocumentComplete && typeof this.props.onDocumentComplete === 'function'){
@@ -55403,6 +55430,7 @@ var PdfPaginationView = React.createClass({displayName: "PdfPaginationView",
         this.refs.userInput.getDOMNode().value = page_no;
         this.setState({visiblePage: page_no});
         this.props.contractApp.setCurrentPage(page_no);
+        console.log('ddd');
         $('.pdf-viewer').animate({scrollTop: 0}, 200);
     },
     clickPrevious: function (e) {
@@ -55992,9 +56020,6 @@ var TextPaginationView = React.createClass({displayName: "TextPaginationView",
         this.props.contractApp.setCurrentPage(page_no);
         this.setState({visiblePage: page_no});
         this.props.contractApp.triggerScrollToTextPage();
-        // this.props.contractApp.trigger("scroll-to-page");
-        // this.props.currentPage.set({"page_no": page_no});
-        // this.props.currentPage.trigger("scroll-to-page");
     },
     clickPrevious: function (e) {
         e.preventDefault();
@@ -56038,14 +56063,9 @@ var TextPaginationView = React.createClass({displayName: "TextPaginationView",
         this.props.contractApp.on("update-text-pagination-page", function (page_no) {
             self.refs.userInputText.getDOMNode().value = page_no;
             self.setState({visiblePage: page_no});
+            self.props.contractApp.setCurrentPage(page_no);
+            self.setState({visiblePage: page_no});
         });
-        // this.props.currentPage.on("update-pagination-page", function(page_no) {
-        //   self.refs.userInputText.getDOMNode().value = page_no;
-        //   self.setState({visiblePage: page_no});
-        // });
-        // this.props.pagesCollection.on("reset", function() {
-        //   self.setState({totalPages: self.props.pagesCollection.length});
-        // });
         this.refs.userInputText.getDOMNode().value = this.state.visiblePage;
     },
     render: function () {
@@ -57108,6 +57128,7 @@ var MainApp = React.createClass({displayName: "MainApp",
         } else {
             contractApp.resetSelectedAnnotation();
         }
+        contractApp.trigger("change:page_no");
         contractApp.trigger("update-pdf-pagination-page", contractApp.getCurrentPage());
         this.forceUpdate();
     },

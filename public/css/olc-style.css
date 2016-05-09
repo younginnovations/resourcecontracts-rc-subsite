@@ -41,6 +41,9 @@
 .homepage-wrapper > .col-lg-8 {
   padding: 0; }
 
+a.parent_annotation_link {
+  color: #1C7041; }
+
 .table > tbody > tr td, .table > tbody > tr th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
   border-top: 1px solid #eaeaea;
   padding: 14px 14px 14px 10px;

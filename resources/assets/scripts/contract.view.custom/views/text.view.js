@@ -39,9 +39,6 @@ var TextPaginationView = React.createClass({
         this.props.contractApp.setCurrentPage(page_no);
         this.setState({visiblePage: page_no});
         this.props.contractApp.triggerScrollToTextPage();
-        // this.props.contractApp.trigger("scroll-to-page");
-        // this.props.currentPage.set({"page_no": page_no});
-        // this.props.currentPage.trigger("scroll-to-page");
     },
     clickPrevious: function (e) {
         e.preventDefault();
@@ -85,14 +82,9 @@ var TextPaginationView = React.createClass({
         this.props.contractApp.on("update-text-pagination-page", function (page_no) {
             self.refs.userInputText.getDOMNode().value = page_no;
             self.setState({visiblePage: page_no});
+            self.props.contractApp.setCurrentPage(page_no);
+            self.setState({visiblePage: page_no});
         });
-        // this.props.currentPage.on("update-pagination-page", function(page_no) {
-        //   self.refs.userInputText.getDOMNode().value = page_no;
-        //   self.setState({visiblePage: page_no});
-        // });
-        // this.props.pagesCollection.on("reset", function() {
-        //   self.setState({totalPages: self.props.pagesCollection.length});
-        // });
         this.refs.userInputText.getDOMNode().value = this.state.visiblePage;
     },
     render: function () {

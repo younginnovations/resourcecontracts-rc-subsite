@@ -164,6 +164,7 @@ var MainApp = React.createClass({
         } else {
             contractApp.resetSelectedAnnotation();
         }
+        contractApp.trigger("change:page_no");
         contractApp.trigger("update-pdf-pagination-page", contractApp.getCurrentPage());
         this.forceUpdate();
     },
