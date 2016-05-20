@@ -49,12 +49,11 @@ var Pdf = React.createClass({
     this.props.contractApp.on("change:pdfscale", function() {
       debug("react.pdf.js pdfPage change:pdfscale called");
       self.forceUpdate();
-      // self.loadFile();
     });
   },
   render: function() {
     var self = this;
-    this.removeAnnotationFromCanvas();
+    this.removeAnnotations();
     if (!!this.state.page) {
       setTimeout(function() {
         if(self.isMounted()) {
@@ -101,16 +100,10 @@ var Pdf = React.createClass({
       return (this.props.loading || React.createElement("div", {className:'pdf-loading'}, lang.loading_page + page_no));
     }
   },
-  removeAnnotationFromCanvas : function(){
+  removeAnnotations : function(){
     $('.annotator-viewer').addClass('annotator-hide');
-    var canvas = $('.annotorious-item');
-    canvas.each(function() {
-          c = $( this ).get(0);
-          var context = c.getContext('2d');
-          context.clearRect(0, 0, c.width, c.height);
-          context.fill();
-      });
-    },
+    $('.annotator-pdf-hl').remove();
+  },
   _onDocumentComplete: function(pdf){
     // this.setState({ pdf: pdf })
     if(!!this.props.onDocumentComplete && typeof this.props.onDocumentComplete === 'function'){

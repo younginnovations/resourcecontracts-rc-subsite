@@ -3,7 +3,6 @@ var AnnotatorjsView = Backbone.View.extend({
         var self = this;
         this.options = options;
         this.api = options.api,
-        // this.listenTo(this.model, 'change:text', this.pageUpdated);
         this.content = $(this.options.el).annotator({
             readOnly: true
         });
@@ -13,16 +12,10 @@ var AnnotatorjsView = Backbone.View.extend({
             }
         };
         this.contractApp = options.contractApp;
-
-        // this.content.annotator('addPlugin', 'MyTags');
         this.content.annotator('addPlugin', 'AnnotatorEvents');
         this.content.annotator('addPlugin', 'AnnotatorNRGIViewer');
-        // this.content.data('annotator').plugins.MyTags.availableTags = options.availableTags
         this.content.data('annotator').plugins.AnnotatorEvents.contractApp = options.contractApp;
         this.content.data('annotator').plugins.AnnotatorNRGIViewer.contractApp = options.contractApp;
-        // this.content.data('annotator').plugins.AnnotatorEvents.currentPage = this.currentPage;
-        // this.annotationCategories = options.annotationCategories;
-        // this.populateCategories();
         this.setupStore();
         return this;
     },
@@ -91,28 +84,11 @@ var AnnotatorjsView = Backbone.View.extend({
 
 var PdfAnnotatorjsView = AnnotatorjsView.extend({
    initialize: function(options){
-       // _.extend(this.events, AnnotatorjsView.prototype.events);
        AnnotatorjsView.prototype.initialize(options);
        _.extend(this, AnnotatorjsView);
         if(options.enablePdfAnnotation) {
-            this.content.annotator('addPlugin', 'AnnotoriousImagePlugin');
+            this.content.annotator('addPlugin', 'PdfAnnotator');
         }
-        var self = this;
-        this.contractApp.on("annotationHighlight", function(annotation) {
-            // if(self.contractApp.getCurrentPage() === annotation.page_no) {
-            //     setTimeout(function() {
-            //         console.log("starting publishing annotationHighlight");
-            //         self.content.data('annotator').publish("annotationHighlight", annotation)
-            //     }, 2000);
-            // }
-            // console.log("start", annotation);
-            // setTimeout(function() {
-            //     console.log("starting publishing annotationHighlight");
-            //     self.content.data('annotator').publish("annotationHighlight", annotation)
-            // }, 4000);
-        });
-        // this.listenTo(this.currentPage, 'change:page', this.pageUpdated);
-        // this.pageUpdated();
    },
    pageUpdated: function() {
         var self = this;
