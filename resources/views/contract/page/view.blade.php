@@ -30,6 +30,9 @@
     <?php
     $textDownloadUrl = ($contract->metadata->is_ocr_reviewed && env('CATEGORY') != "olc") ? route('contract.download', ['id' => $contract->metadata->open_contracting_id]) : "";
     $annotationsDownloadUrl = ($contract->annotations->total > 0) ? route('contract.annotations.download', ['id' => $contract->metadata->open_contracting_id]) : "";
+    $local = app('App\Http\Services\LocalizationService');
+    $languages = json_encode(config('language'));
+
     ?>
 @endsection
 @section('js')
@@ -63,6 +66,10 @@
         var processing_pdf_file_message = '{{sprintf(trans('annotation.processing_pdf_file'),env('CONTACT_MAIL'))}}';
         var not_published_message = '{{sprintf(trans('annotation.not_published'),env('CONTACT_MAIL'))}}';
         var pdf_not_shown_message = '{{sprintf(trans('annotation.pdf_not_shown'),env('CONTACT_MAIL'))}}';
+        var languages = '{!! $languages !!}';
+        var selectedLang = '{{config('language')[$local->getLanguage()]['name']}}';
+        var currentUrl = '{{Request::url()}}';
+
     </script>
     <script src="{{ url('js/contract-view.js') }}"></script>
 @stop

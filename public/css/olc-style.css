@@ -156,7 +156,6 @@ a.parent_annotation_link {
   right: 0;
   width: 100%;
   -webkit-transition: width .4s;
-     -moz-transition: width .4s;
        -o-transition: width .4s;
           transition: width .4s;
   background: #f9f9f9;
@@ -170,7 +169,6 @@ a.parent_annotation_link {
   position: relative !important;
   right: 0;
   -webkit-transition: width .4s;
-     -moz-transition: width .4s;
        -o-transition: width .4s;
           transition: width .4s;
   background: #fff;
@@ -427,6 +425,25 @@ a {
 .navbar-brand span {
   display: block;
   color: rgba(64, 64, 64, 0.7); }
+
+/* ---------- style for language selector in header ----------- */
+.open > .dropdown-menu {
+  display: block !important; }
+
+.language-selector {
+  position: absolute;
+  right: 12px;
+  top: 15px;
+  z-index: 9999; }
+  .language-selector button {
+    background-color: #f2f2f2; }
+  .language-selector .dropdown-menu {
+    right: 0;
+    left: auto;
+    border: none;
+    padding: 0; }
+  .language-selector .dropdown-menu > li > a, .language-selector .dropdown-menu > div > li > a {
+    padding: 10px 12px; }
 
 .sidebar-brand .beta {
   top: 35px;
@@ -897,7 +914,6 @@ footer {
   right: auto;
   left: 0;
   -webkit-transition: left .4s;
-     -moz-transition: left .4s;
        -o-transition: left .4s;
           transition: left .4s; }
   .sidebar-collapse-container.out {
@@ -921,7 +937,7 @@ footer {
   text-align: center;
   text-transform: uppercase;
   padding-top: 25px;
-  z-index: 1000; }
+  z-index: 999; }
   .contract-number-wrap span {
     font: 42px/44px Open-Sans-Light;
     color: #404040;
@@ -1311,7 +1327,6 @@ footer {
 #wrapper {
   padding-left: 0;
   -webkit-transition: all 0.5s ease;
-     -moz-transition: all 0.5s ease;
        -o-transition: all 0.5s ease;
           transition: all 0.5s ease; }
   #wrapper.toggled {
@@ -1409,7 +1424,6 @@ footer {
 
 #sidebar-wrapper {
   background-image: -webkit-linear-gradient(171deg, #0a0b09 1%, #323e1f 100%);
-  background-image: -moz-linear-gradient(171deg, #0a0b09 1%, #323e1f 100%);
   background-image: -o-linear-gradient(171deg, #0a0b09 1%, #323e1f 100%);
   background-image: linear-gradient(-81deg, #0a0b09 1%, #323e1f 100%);
   top: 0; }
@@ -1634,7 +1648,6 @@ td.contract-date {
 
 .not-found-wrapper {
   background-image: -webkit-radial-gradient(50% 79%, #b7df74 32%, #94ba63 79%);
-  background-image: -moz-radial-gradient(50% 79%, #b7df74 32%, #94ba63 79%);
   background-image: -o-radial-gradient(50% 79%, #b7df74 32%, #94ba63 79%);
   background-image: radial-gradient(50% 79%, #b7df74 32%, #94ba63 79%); }
 
@@ -1789,8 +1802,7 @@ td.contract-date {
   text-indent: -9999px;
   width: 14px;
   margin-right: 3px;
-  -o-background-size: 9px;
-     background-size: 9px; }
+  background-size: 9px; }
 
 .back {
   background: #217B46 url(../images/ic-sprite-new.png) no-repeat 12px -543px;
@@ -1978,7 +1990,6 @@ td.contract-date {
   .panel-annotation-list-wrap .col-md-8 {
     float: right;
     width: -webkit-calc(100% - 290px);
-    width: -moz-calc(100% - 290px);
     width: calc(100% - 290px); }
   .annotation-category-cluster {
     display: block; } }

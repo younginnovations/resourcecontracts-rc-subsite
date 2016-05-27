@@ -631,6 +631,36 @@ a {
   }
 }
 
+/* ---------- style for language selector in header ----------- */
+
+.open>.dropdown-menu {
+  display: block !important;
+}
+
+.language-selector{
+  position: absolute;
+  right: 12px;
+  top: 15px;
+  z-index: 9999;
+
+  button{
+    background-color: #f2f2f2;
+  }
+
+  .dropdown-menu{
+    right: 0;
+    left: auto;
+    border: none;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .dropdown-menu > li > a, .dropdown-menu > div > li > a{
+    padding: 10px 12px;
+  }
+
+}
+
 .sidebar-brand {
   .beta {
     @extend %extend_4;
@@ -1315,7 +1345,7 @@ footer {
   text-align: center;
   text-transform: uppercase;
   padding-top: 25px;
-  z-index: 1000;
+  z-index: 999;
   span {
     font: 42px/44px $font_2;
     color: $color_cape_cod_approx;

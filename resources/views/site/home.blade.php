@@ -5,7 +5,7 @@ use \Illuminate\Support\Facades\Lang as Lang;
 
 @section('css')
     @if(!empty($image))
-        <style>
+        <style xmlns="http://www.w3.org/1999/html">
             .row-top-wrap {
                 background-image: url({{$image}});
             }
@@ -13,8 +13,23 @@ use \Illuminate\Support\Facades\Lang as Lang;
     @endif
 @stop
 @section('content')
-    <div class="row row-top-wrap front-row-top-wrap">
-        <div class="homepage-wrapper">
+    <?php $local = app('App\Http\Services\LocalizationService');
+    ?>
+            <div class="dropdown language-selector" >
+                <button class="btn  dropdown-toggle"  data-toggle="dropdown" id="dropdownMenu2" aria-expanded="false">
+                {{config('language')[$local->getLanguage()]['name']}}
+                    <span class="caret"></span>
+                </button>
+
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+
+                @foreach (config('language') as $locale => $language)
+                    <li><a href={{ url(Request::url().'?lang='.$locale)}}>{{$language['name']}}</a></li>
+                @endforeach
+
+            </ul>
+            </div>
+
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
                     <span data-toggle="collapse-sidebar" data-target=".sidebar-collapse"

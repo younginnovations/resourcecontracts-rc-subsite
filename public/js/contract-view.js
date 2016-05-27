@@ -31230,6 +31230,37 @@ render:function() {
     }
 });
 
+
+
+var SelectLanguage = React.createClass({displayName: "SelectLanguage",
+    handleChange: function(e){
+        console.log("hello",e);
+    },
+   render:function(){
+       var language = [];
+       language = JSON.parse(languages);
+       var availableLang=[];
+       _.each(language,function(value,key){
+                var url = currentUrl+'?lang='+key;
+               availableLang.push(React.createElement("li", null, React.createElement("a", {href: url}, value['name'])));
+
+       });
+
+       return (
+           React.createElement("div", {className: "dropdown language-selector"}, 
+               React.createElement("button", {className: "btn  dropdown-toggle", "data-toggle": "dropdown"}, 
+                    selectedLang, 
+                    React.createElement("span", {className: "caret"})
+                    ), 
+                    React.createElement("ul", {className: "dropdown-menu"}, 
+                        availableLang
+                    )
+           )
+
+       );
+   }
+});
+
 /**
  * @jsx React.DOM
  */
@@ -31328,10 +31359,12 @@ var MainApp = React.createClass({displayName: "MainApp",
                 React.createElement("div", {className: "title-head-wrap"}, 
                     React.createElement("div", {className: "title-wrap"}, 
                         React.createElement("div", {className: "navbar-header"}, 
+
                             React.createElement("a", {className: "navbar-brand", href: app_url}, category, React.createElement("span", {className: "beta"}, "Beta"), React.createElement("span", null, "Contracts"))
 
                         ), 
-                        React.createElement("span", null, htmlDecode(contractTitle))
+                        React.createElement("span", null, htmlDecode(contractTitle)), 
+                        React.createElement(SelectLanguage, null)
                     ), 
                     React.createElement("div", {className: "head-wrap clearfix"}, 
                         React.createElement(TextSearchForm, {

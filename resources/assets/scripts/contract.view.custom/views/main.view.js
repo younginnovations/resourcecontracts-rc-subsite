@@ -129,6 +129,37 @@ render:function() {
     }
 });
 
+
+
+var SelectLanguage = React.createClass({
+    handleChange: function(e){
+        console.log("hello",e);
+    },
+   render:function(){
+       var language = [];
+       language = JSON.parse(languages);
+       var availableLang=[];
+       _.each(language,function(value,key){
+                var url = currentUrl+'?lang='+key;
+               availableLang.push(<li><a href={url}>{value['name']}</a></li>);
+
+       });
+
+       return (
+           <div className="dropdown language-selector">
+               <button className="btn  dropdown-toggle"  data-toggle="dropdown" >
+                    {selectedLang}
+                    <span className="caret"></span>
+                    </button>
+                    <ul className="dropdown-menu">
+                        {availableLang}
+                    </ul>
+           </div>
+
+       );
+   }
+});
+
 /**
  * @jsx React.DOM
  */
@@ -227,10 +258,12 @@ var MainApp = React.createClass({
                 <div className="title-head-wrap">
                     <div className="title-wrap">
                         <div className="navbar-header">
+
                             <a className="navbar-brand" href={app_url} >{category}<span className="beta">Beta</span><span>Contracts</span></a>
 
                         </div>
                         <span>{htmlDecode(contractTitle)}</span>
+                        <SelectLanguage />
                     </div>
                     <div className="head-wrap clearfix">
                         <TextSearchForm
