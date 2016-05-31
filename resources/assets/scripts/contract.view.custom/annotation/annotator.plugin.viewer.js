@@ -29,6 +29,7 @@ Annotator.Plugin.AnnotatorNRGIViewer = (function (_super) {
             contractApp.trigger("annotations:highlight", annotation);
         });
 
+        $('.annotation-viewer-category').html(_lc(annotation.category_key,annotation.category));
 
         $(document).on('click', '.parent_annotation_link', function () {
             var $this = $(this);

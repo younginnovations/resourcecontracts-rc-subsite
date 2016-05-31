@@ -15,7 +15,10 @@ var AnnotationsCollection = Backbone.Collection.extend({
         return item.get(this.sort_key);
     },    
     parse: function(response) {
-        return response.result;
+        return response.result.map(function(ann){
+            ann.category = _lc(ann.category_key, ann.category);
+            return ann;
+        });
     },
     parentAnnotations: function (category) {
         var parents = [];
