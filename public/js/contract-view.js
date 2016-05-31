@@ -31177,7 +31177,7 @@ render:function() {
                 React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, lang.download)), 
                 React.createElement("ul", {style: style}, 
                 React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, lang.pdf)), 
-                React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, lang.annotations))
+                React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, " ", React.createElement("div", null, " MS EXCEL "), " ", React.createElement("i", null, "(Annotations Only)")))
                 )
                 ), 
                 React.createElement("ul", {className: "social-share"}, 
@@ -31196,8 +31196,9 @@ render:function() {
                 React.createElement("div", {className: "download-dropdown"}, 
                 React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, lang.download)), 
                 React.createElement("ul", {style: style}, 
-                React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, lang.pdf)), 
-                React.createElement("li", null, React.createElement("a", {href: this.props.text_url}, lang.word_file))
+
+                React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, " ", lang.pdf, " ")), 
+                React.createElement("li", null, React.createElement("a", {href: this.props.text_url}, " ", lang.ms_word, " "))
                 )
                 ), 
                 React.createElement("ul", {className: "social-share"}, 
@@ -31216,7 +31217,8 @@ render:function() {
             React.createElement("ul", {style: style}, 
             React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, lang.pdf)), 
             React.createElement("li", null, React.createElement("a", {href: this.props.text_url}, lang.word_file)), 
-            React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, lang.annotations))
+            React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, React.createElement("div", null, " MS EXCEL "), " ", React.createElement("i", null, "(Annotations Only)")))
+
             )
             ), 
                 React.createElement("ul", {className: "social-share"}, 

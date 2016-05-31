@@ -3389,6 +3389,15 @@ input.select2-search__field {
     display: inline-block;
     white-space: nowrap;
   }
+
+  ul span {
+    display: none;
+  }
+
+  ul i{
+    display: block;
+  }
+
   > a {
     margin-top: 12px;
     display: inline-block;

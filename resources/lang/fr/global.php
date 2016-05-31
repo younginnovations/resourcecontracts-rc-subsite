@@ -62,6 +62,9 @@ return [
     'is_pages_missing'            => 'Fr Is Pages Missing',
     'is_annexes_missing'          => 'Fr Is Annexes Missing',
     'annotation'                  => 'Fr Annotation',
-    'text'                        => 'Text',
-    'metadata'                    => 'Metadata'
+    'text'                        => 'Fr Text',
+    'metadata'                    => 'Fr Metadata',
+    'annotation_only'             => 'Fr Annotations Only',
+    'ms_word'                     => 'Fr MS WORD',
+    'ms_excel'                    => 'Fr MS EXCEL'
 ];

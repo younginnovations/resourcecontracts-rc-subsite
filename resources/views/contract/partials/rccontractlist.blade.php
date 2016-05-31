@@ -54,12 +54,12 @@ if ($path[0] == "resource") {
                             <span>Download</span>
                         </div>
                         <ul class="dropdown-menu">
-                            <li><a href="{{route('contract.download.pdf',['id'=> $contract->open_contracting_id])}}">Pdf</a></li>
+                            <li><a href="{{route('contract.download.pdf',['id'=> $contract->open_contracting_id])}}">@lang('annotation.pdf')</a></li>
                             @if(env('CATEGORY')!= 'olc' && $contract->is_ocr_reviewed == true)
-                                <li><a href="{{route('contract.download',['id'=> $contract->open_contracting_id])}}">Word File</a></li>
+                                <li><a href="{{route('contract.download',['id'=> $contract->open_contracting_id])}}">@lang('global.ms_word')</a></li>
                             @endif
                             @if($annotations->total>0)
-                                <li><a href="{{route('contract.annotations.download',['id'=> $contract->open_contracting_id])}}">Annotations</a></li>
+                                <li><a href="{{route('contract.annotations.download',['id'=> $contract->open_contracting_id])}}">@lang('global.ms_excel')<br><i>(@lang('global.annotation_only'))</i></a></li>
                             @endif
                         </ul>
                     </div>

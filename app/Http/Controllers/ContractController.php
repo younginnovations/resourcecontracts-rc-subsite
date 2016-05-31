@@ -275,6 +275,7 @@ class ContractController extends BaseController
         $referrer              = \Request::server('HTTP_REFERER');
         $back                  = is_null($referrer) ? route('contract.view', ['id' => $contract_id]) : $referrer;
         $contract              = new \stdClass();
+
         $contract->metadata    = $this->api->metadata($contract_id);
         $contract->annotations = $this->api->getAnnotations($contract_id);
 

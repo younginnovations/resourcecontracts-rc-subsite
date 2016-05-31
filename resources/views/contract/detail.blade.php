@@ -43,9 +43,9 @@ use Illuminate\Support\Facades\Lang;
                         </div>
 
                         <ul class="dropdown-menu">
-                            <li><a href="{{route('contract.download.pdf',['id'=> $contract->metadata->open_contracting_id])}}">Pdf</a></li>
+                            <li><a href="{{route('contract.download.pdf',['id'=> $contract->metadata->open_contracting_id])}}">@lang('annotation.pdf')</a></li>
                             @if(env('CATEGORY')!= 'olc' && $contract->metadata->is_ocr_reviewed == 1)
-                                <li><a href="{{route('contract.download',['id'=> $contract->metadata->open_contracting_id])}}">Word File</a></li>
+                                <li><a href="{{route('contract.download',['id'=> $contract->metadata->open_contracting_id])}}">@lang('global.ms_word')</a></li>
                             @endif
                         </ul>
                     </div>

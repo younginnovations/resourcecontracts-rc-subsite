@@ -75,7 +75,7 @@ render:function() {
                 <a href="#" onClick={this.toggleDropdown}><span>{lang.download}</span></a>
                 <ul style={style} >
                 <li><a href={this.props.pdf_url}>{lang.pdf}</a></li>
-                <li><a href={this.props.annotations_url}>{lang.annotations}</a></li>
+                <li><a href={this.props.annotations_url}> <div> MS EXCEL </div> <i>(Annotations Only)</i></a></li>
                 </ul>
                 </div>
                 <ul className="social-share">
@@ -94,8 +94,9 @@ render:function() {
                 <div className="download-dropdown">
                 <a href="#" onClick={this.toggleDropdown}><span>{lang.download}</span></a>
                 <ul style={style} >
-                <li><a href={this.props.pdf_url}>{lang.pdf}</a></li>
-                <li><a href={this.props.text_url}>{lang.word_file}</a></li>
+
+                <li><a href={this.props.pdf_url}> {lang.pdf} </a></li>
+                <li><a href={this.props.text_url}> {lang.ms_word} </a></li>
                 </ul>
                 </div>
                 <ul className="social-share">
@@ -114,7 +115,8 @@ render:function() {
             <ul style={style}>
             <li><a href={this.props.pdf_url}>{lang.pdf}</a></li>
             <li><a href={this.props.text_url}>{lang.word_file}</a></li>
-            <li><a href={this.props.annotations_url}>{lang.annotations}</a></li>
+            <li><a href={this.props.annotations_url}><div> MS EXCEL </div> <i>(Annotations Only)</i></a></li>
+
             </ul>
             </div>
                 <ul className="social-share">
