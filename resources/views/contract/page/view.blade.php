@@ -48,7 +48,13 @@
                 }
             }
         };
-        var lang = <?php echo json_encode(trans('annotation'));?>;
+        var lang_category = {!! json_encode(trans('codelist/annotation.categories')) !!};
+
+        var _lc = function(key, fallback){
+            return typeof lang_category[key] != 'undefined' ? lang_category[key] : fallback;
+        };
+
+        var lang =  {!!  json_encode(trans('annotation')) !!};
         var email = '<?php echo env('CONTACT_MAIL'); ?>';
         var back_url = '{!!$back!!}';
         var app_url = '{{url()}}';

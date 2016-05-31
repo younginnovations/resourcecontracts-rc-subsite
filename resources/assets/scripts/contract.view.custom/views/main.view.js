@@ -55,9 +55,9 @@ render:function() {
         return (
             <div>
                 <div className="download-dropdown">
-                    <a href="#" onClick={this.toggleDropdown}><span>Download</span></a>
+                    <a href="#" onClick={this.toggleDropdown}><span>{lang.download}</span></a>
                     <ul style={style} >
-                    <li><a href={this.props.pdf_url}>PDF</a></li>
+                    <li><a href={this.props.pdf_url}>{lang.pdf}</a></li>
                     </ul>
                 </div>
                 <ul className="social-share">
@@ -72,10 +72,10 @@ render:function() {
         return (
             <div>
                 <div className="download-dropdown">
-                <a href="#" onClick={this.toggleDropdown}><span>Download</span></a>
+                <a href="#" onClick={this.toggleDropdown}><span>{lang.download}</span></a>
                 <ul style={style} >
-                <li><a href={this.props.pdf_url}>PDF</a></li>
-                <li><a href={this.props.annotations_url}> ANNOTATIONS</a></li>
+                <li><a href={this.props.pdf_url}>{lang.pdf}</a></li>
+                <li><a href={this.props.annotations_url}>{lang.annotations}</a></li>
                 </ul>
                 </div>
                 <ul className="social-share">
@@ -92,10 +92,10 @@ render:function() {
         return (
             <div>
                 <div className="download-dropdown">
-                <a href="#" onClick={this.toggleDropdown}><span>Download</span></a>
+                <a href="#" onClick={this.toggleDropdown}><span>{lang.download}</span></a>
                 <ul style={style} >
-                <li><a href={this.props.pdf_url}>PDF</a></li>
-                <li><a href={this.props.text_url}> WORD FILE</a></li>
+                <li><a href={this.props.pdf_url}>{lang.pdf}</a></li>
+                <li><a href={this.props.text_url}>{lang.word_file}</a></li>
                 </ul>
                 </div>
                 <ul className="social-share">
@@ -110,11 +110,11 @@ render:function() {
         return (
                 <div>
             <div className="download-dropdown">
-            <a href="#" onClick={this.toggleDropdown}><span>Download</span></a>
+            <a href="#" onClick={this.toggleDropdown}><span>{lang.download}</span></a>
             <ul style={style}>
-            <li><a href={this.props.pdf_url}>PDF</a></li>
-            <li><a href={this.props.text_url}> WORD FILE</a></li>
-            <li><a href={this.props.annotations_url}> ANNOTATIONS</a></li>
+            <li><a href={this.props.pdf_url}>{lang.pdf}</a></li>
+            <li><a href={this.props.text_url}>{lang.word_file}</a></li>
+            <li><a href={this.props.annotations_url}>{lang.annotations}</a></li>
             </ul>
             </div>
                 <ul className="social-share">

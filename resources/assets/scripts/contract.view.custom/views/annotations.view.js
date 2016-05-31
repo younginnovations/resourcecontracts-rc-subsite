@@ -52,7 +52,7 @@ var AnnotationHeader = React.createClass({
     render: function () {
         var count = this.props.annotationsCollection.totalAnnotations();
         return (
-            <div className="annotation-title">{count} Annotations</div>
+            <div className="annotation-title">{count} {lang.annotations}</div>
         );
     }
 });
@@ -116,9 +116,9 @@ var AnnotationTopicList = React.createClass({
             show: false
         };
     },
-    handleClick: function (e) {
+    handleClick: function (cluster, e) {
         e.preventDefault();
-        var selected = e.target.innerHTML;
+        var selected = cluster;
         if (selected == 'All') {
             $('.annotation-item').show();
         } else {
@@ -131,13 +131,13 @@ var AnnotationTopicList = React.createClass({
     render: function () {
         return (
             <div className="annotations-topic-list">
-                <span className="selected-topic" onClick={this.handleClick}>All</span>
-                <span onClick={this.handleClick}>{lang.general}</span>
-                <span onClick={this.handleClick}>{lang.environment}</span>
-                <span onClick={this.handleClick}>{lang.fiscal}</span>
-                <span onClick={this.handleClick}>{lang.operations}</span>
-                <span onClick={this.handleClick}>{lang.social}</span>
-                <span onClick={this.handleClick}>{lang.other}</span>
+                <span className="selected-topic" onClick={this.handleClick.bind(this,'All')}>{lang.all}</span>
+                <span onClick={this.handleClick.bind(this,'General')}>{lang.general}</span>
+                <span onClick={this.handleClick.bind(this,'Environment')}>{lang.environment}</span>
+                <span onClick={this.handleClick.bind(this,'Fiscal')}>{lang.fiscal}</span>
+                <span onClick={this.handleClick.bind(this,'Operations')}>{lang.operations}</span>
+                <span onClick={this.handleClick.bind(this,'Social')}>{lang.social}</span>
+                <span onClick={this.handleClick.bind(this,'Other')}>{lang.other}</span>
             </div>
         );
     }
@@ -146,7 +146,7 @@ var AnnotationTopicList = React.createClass({
 var AnnotationsList = React.createClass({
     getInitialState: function () {
         return {
-            message: "Loading annotations..."
+            message: lang.loading_annotations
         }
     },
     componentDidMount: function () {
@@ -155,7 +155,7 @@ var AnnotationsList = React.createClass({
             if (self.props.annotationsCollection.totalAnnotations() > 0) {
                 self.setState({message: ""});
             } else {
-                self.setState({message: "There are no annotations associated with this contract."});
+                self.setState({message: lang.no_annotation});
             }
             if (self.props.contractApp.getSelectedAnnotation()) {
                 self.props.contractApp.trigger("annotations:scroll-to-selected-annotation");
@@ -352,14 +352,14 @@ var PageLink = React.createClass({
             return (
                 <span className="page-gap">
                    <a href="#" onClick={this.handleAnnotationClick}>{this.props.article_reference}</a>
-                    {this.props.last? ', ' : ''}
+                    {this.props.last ? ', ' : ''}
                </span>
             )
         } else {
             return (
                 <span className="page-gap">
                    <a href="#" onClick={this.handleAnnotationClick}>{this.props.page}</a>
-                    {this.props.last? ', ' : ''}
+                    {this.props.last ? ', ' : ''}
                </span>
             )
         }
@@ -381,10 +381,7 @@ var AnnotationItem = React.createClass({
         }
     },
     getCategory: function () {
-        var category = this.state.annotationList[0].get('category');
-        var en = category.split("//")[0];
-        var fr = (category.split("//")[1]) ? category.split("//")[1] : "";
-        return {'en': en, 'fr': fr};
+        return this.state.annotationList[0].get('category');
     },
     shallShowEllipse: function (text) {
         var words = (text + "").split(' ');
@@ -423,11 +420,11 @@ var AnnotationItem = React.createClass({
     },
     getPages: function () {
         var self = this;
-        this.props.annotation.sort(function (a, b){
+        this.props.annotation.sort(function (a, b) {
             return a.get('page_no') - b.get('page_no');
         });
 
-        var annotationGroupByPage = _.groupBy(this.props.annotation, function(a){
+        var annotationGroupByPage = _.groupBy(this.props.annotation, function (a) {
             return a.get('page_no');
         });
 
@@ -442,18 +439,19 @@ var AnnotationItem = React.createClass({
                 last = true;
             }
             var count = annotation.length;
-            var ref =  annotation.map(function(annotation, index){
+            var ref = annotation.map(function (annotation, index) {
                 var l = false;
                 if (index < (count - 1)) {
                     l = true;
                 }
-                var article_reference = (annotation.get('article_reference') != '') ?  annotation.get('article_reference') : '';
-                return (<PageLink contractApp={self.props.contractApp} annotation={annotation} last={l} page={page} article_reference={article_reference}/>)
+                var article_reference = (annotation.get('article_reference') != '') ? annotation.get('article_reference') : '';
+                return (<PageLink contractApp={self.props.contractApp} annotation={annotation} last={l} page={page}
+                                  article_reference={article_reference}/>)
             });
 
             return (
                 <span>
-                   Page {page} ({ref}){last? ', ': ''}
+                   {lang.page} {page} ({ref}){last ? ', ' : ''}
                  </span>
             );
         });
@@ -511,9 +509,9 @@ var AnnotationItem = React.createClass({
         var showText = firstAnnotation.get('text') ? firstAnnotation.get('text').trim() : '';
         if (this.state.showEllipse) {
             showText = this.state.text + ' ';
-            ellipsistext = "less";
+            ellipsistext = lang.less;
             if (!this.state.showMoreFlag) {
-                ellipsistext = "more";
+                ellipsistext = lang.more;
                 showText = this.state.shortText + '... ';
             }
         }
@@ -521,7 +519,8 @@ var AnnotationItem = React.createClass({
         if (this.state.text != '') {
             showText = (<span className="annotation-item-content">
                 <span dangerouslySetInnerHTML={{__html: nl2br(showText)}}></span>
-                <nobr><a className="annotation-item-ellipsis" href="#" onClick={this.handleEllipsis} dangerouslySetInnerHTML={{__html: ellipsistext}}></a></nobr></span>);
+                <nobr><a className="annotation-item-ellipsis" href="#" onClick={this.handleEllipsis}
+                         dangerouslySetInnerHTML={{__html: ellipsistext}}></a></nobr></span>);
         }
         else {
             showText = '';
@@ -545,14 +544,12 @@ var AnnotationItem = React.createClass({
 
         var category = this.getCategory();
         return (
-            <div className={currentAnnotationClass +' ' +this.getCluster() + this.getPageClasses()} id={this.state.annotation_id}>
-                <p className="category">{category.en}</p>
-                <p className="category">{category.fr}</p>
+            <div className={currentAnnotationClass +' ' +this.getCluster() + this.getPageClasses()}
+                 id={this.state.annotation_id}>
+                <p className="category">{category}</p>
                 <p className="annotated-text">{this.getShowText()}</p>
                 <div className="annotation-page">{this.getPages()}</div>
             </div>
         )
     }
 });
-
-
