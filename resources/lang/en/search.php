@@ -13,5 +13,6 @@ return [
     'found_in'             => 'Found In',
     'reset'                => 'Reset',
     'select'               => 'Select',
-    'refine_search'        => 'Change or refine your search'
+    'refine_search'        => 'Change or refine your search',
+    'annotated'            => "Annotated"
 ];

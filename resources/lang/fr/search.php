@@ -14,5 +14,6 @@ return [
     'download'             => "Télécharger",
     'reset'                => "Réinitialiser",
     'select'               => "Sélectionner",
-    'refine_search'        => 'Modifier ou affiner votre recherche'
+    'refine_search'        => 'Modifier ou affiner votre recherche',
+    'annotated'            => "Annotée"
 ];

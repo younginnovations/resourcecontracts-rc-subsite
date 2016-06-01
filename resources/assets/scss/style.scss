@@ -497,6 +497,37 @@ $url_17: url(../../images/ic-delete.png);
   }
 }
 
+/* --------- style for checkbox for annotation ------- */
+
+.search-form{
+
+  input[type='checkbox'] {
+    -webkit-appearance:none;
+    width:22px;
+    height:22px;
+    border: 1px solid #aaa;
+    position: relative;
+    margin-top: 11px;
+  }
+
+  input[type='checkbox']:checked {
+    background: $color_link_color;
+    border: 1px solid $color_link_color;
+
+    &:before{
+      content: "";
+      width: 16px;
+      height: 12px;
+      position: absolute;
+      top: 5px;
+      left: 2px;
+      background: transparent url(#{$img-path}/ic-sprite.svg) -48px -195px;
+    }
+  }
+}
+
+/* --------- style for checkbox for annotation (ends) ------- */
+
 html {
   height: 100%;
 }
@@ -3525,7 +3556,7 @@ input.select2-search__field {
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
 }
-  
+
 .social-share {
     margin: 13px 10px 10px 10px;
     position: relative;
@@ -3781,16 +3812,12 @@ input.select2-search__field {
   .panel-top-content > .pull-left {
      margin-top: 0;
   }
-  /*&.search-top-wrapper .panel-title{
-    padding: 0 0 0 10px;
-  }*/
 
   .panel-title{
     float: left;
     clear: none;
     margin: 15px 0 14px 65px;
     padding: 0;
-    //padding: 7px 0 0 56px;
     font-size: 21px;
     line-height: 27px;
     width: 80%;
