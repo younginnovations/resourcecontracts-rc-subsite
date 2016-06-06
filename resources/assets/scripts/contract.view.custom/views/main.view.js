@@ -139,22 +139,33 @@ var SelectLanguage = React.createClass({
        var language = [];
        language = JSON.parse(languages);
        var availableLang=[];
+       var imageStyle = {width: '16px' , height: '16px', 'margin-right': '6px'};
+       var ulStyle = {'min-width':'110px'};
        _.each(language,function(value,key){
-                var url = currentUrl+'?lang='+key;
-               availableLang.push(<li><a href={url}>{value['name']}</a></li>);
+           var url = currentUrl+'?lang='+key;
+           var flagUrl = "https://raw.githubusercontent.com/younginnovations/country-flags/master/png250px/"+value['country_code']+".png";
+           if(key!=currentLanguage){
+               availableLang.push(<li>
+               <a href={url}>
+               <img style={imageStyle} src={flagUrl} />
+               {value['name']}
+               </a>
+               </li>);
+
+           }
 
        });
 
        return (
            <div className="dropdown language-selector">
-               <button className="btn  dropdown-toggle"  data-toggle="dropdown" >
-                    {selectedLang}
-                    <span className="caret"></span>
-                    </button>
-                    <ul className="dropdown-menu">
-                        {availableLang}
-                    </ul>
-           </div>
+       <button className="btn  dropdown-toggle"  data-toggle="dropdown" >
+       <img style={imageStyle} src={languageImage}/>{selectedLang}
+       <span className="caret"></span>
+       </button>
+       <ul className="dropdown-menu" style={ulStyle}>
+       {availableLang}
+       </ul>
+       </div>
 
        );
    }

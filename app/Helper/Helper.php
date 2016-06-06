@@ -160,4 +160,28 @@ if (!function_exists('config_path')) {
     {
         return app()->basePath() . '/config' . ($path ? '/' . $path : $path);
     }
+
+
+    function getCountryByLang($lang)
+    {
+        $languages = config('language');
+        foreach ($languages as $key => $value) {
+            if ($lang == $key) {
+                return getFlagUrl( $value['country_code']);
+            }
+        }
+
+        return getFlagUrl('us');
+    }
+
+    function get_country($key = null)
+    {
+        $countryCode     = env('COUNTRY');
+        $country         = [];
+        $country['code'] = strtolower($countryCode);
+        $country['name'] = trans('country.' . strtoupper($country['code']));
+        $country['flag'] = sprintf("https://raw.githubusercontent.com/younginnovations/country-flags/master/png250px/%s.png", $country['code']);
+
+        return array_key_exists($key, $country) ? $country[$key] : $country;
+    }
 }
