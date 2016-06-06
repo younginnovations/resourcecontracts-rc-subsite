@@ -41,7 +41,7 @@ use Illuminate\Support\Facades\Lang;
             </div>
             <div class="contract-number-wrap">
 
-                <span>{{$contracts->total}}</span> {{ Lang::choice('global.contracts' , $contracts->total) }}
+                <span>{{$contracts->total}}</span> {{ Lang::choice('global.documents' , $contracts->total) }}
             </div>
         </div>
     </div>

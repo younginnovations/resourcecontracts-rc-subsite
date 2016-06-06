@@ -71,7 +71,7 @@ use \Illuminate\Support\Facades\Lang as Lang;
                             <button type="submit"
                                     class="btn btn-search">@lang('global.search')</button>
                         </div>
-                        <span class="advanced-search">Advanced Search</span>
+                        <span class="advanced-search">@lang('global.advanced_search')</span>
                     </form>
                 </div>
             </div>

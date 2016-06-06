@@ -41,7 +41,7 @@
 
         </div>
         <div class="contract-number-wrap contract-search-number-wrap">
-            <span>{{$contracts->total}}</span> {{ \Illuminate\Support\Facades\Lang::choice('global.contracts' , $contracts->total) }}
+            <span>{{$contracts->total}}</span> {{ \Illuminate\Support\Facades\Lang::choice('global.documents' , $contracts->total) }}
         </div>
     </div>
 
