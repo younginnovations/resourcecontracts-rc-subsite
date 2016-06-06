@@ -39,6 +39,6 @@ if (empty($meta)) {
     </script>
     <![endif]-->
 </head>
-<body data-spy="scroll">
+<body data-spy="scroll" class="lang-{{$lang->getCurrentLang()}}" dir="{{$lang->getDirection()}}" lang="{{$lang->getCurrentLang()}}">
 <div id="wrapper">
     <div id="page-wrapper" class="not-front sidebar-collapse-container">

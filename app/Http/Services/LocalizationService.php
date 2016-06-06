@@ -96,4 +96,13 @@ class LocalizationService
         return app('translator')->getLocale();
     }
 
+    public function getDirection()
+    {
+        $lang = $this->getCurrentLang();
+        $info = config('language')[$lang];
+
+        return $info['dir'];
+    }
+
+
 }

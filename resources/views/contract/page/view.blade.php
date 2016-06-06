@@ -76,6 +76,11 @@
         var selectedLang = '{{config('language')[$local->getLanguage()]['name']}}';
         var currentUrl = '{{Request::url()}}';
 
+        var country = '{{get_country('name')}}';
+        var image_source = '{{get_country('flag')}}';
+
+        var languageImage = '{{getCountryByLang($lang->getCurrentLang())}}';
+        var currentLanguage = '{{$lang->getCurrentLang()}}';
     </script>
     <script src="{{ url('js/contract-view.js') }}"></script>
 @stop

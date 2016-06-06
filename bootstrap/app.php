@@ -58,12 +58,12 @@ $app->singleton(
 
 $app->middleware(
     [
-    // Illuminate\Cookie\Middleware\EncryptCookies::class,
-    // Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-    Illuminate\Session\Middleware\StartSession::class,
-    // Illuminate\View\Middleware\ShareErrorsFromSession::class,
-    // Laravel\Lumen\Http\Middleware\VerifyCsrfToken::class,
-    App\Http\Middleware\Localization::class
+        // Illuminate\Cookie\Middleware\EncryptCookies::class,
+        // Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+        Illuminate\Session\Middleware\StartSession::class,
+        // Illuminate\View\Middleware\ShareErrorsFromSession::class,
+        // Laravel\Lumen\Http\Middleware\VerifyCsrfToken::class,
+        App\Http\Middleware\Localization::class
     ]
 );
 
@@ -88,7 +88,7 @@ $app->routeMiddleware(
 //$app->register('Laracasts\Utilities\UtilitiesServiceProvider');
 $app->register(App\Providers\AppServiceProvider::class);
 $app->register(Maatwebsite\Excel\ExcelServiceProvider::class);
-class_alias('Maatwebsite\Excel\Facades\Excel','Excel');
+class_alias('Maatwebsite\Excel\Facades\Excel', 'Excel');
 //class_alias('Collective\Html\FormFacade', 'Form');
 class_alias('Illuminate\Support\Facades\Response', 'Response');
 
@@ -103,12 +103,16 @@ config(
         ],
         'language' => [
             'en' => [
-                'code' => 'en',
-                'name' => 'English'
+                'code'         => 'en',
+                'name'         => 'English',
+                'country_code' => 'us',
+                'dir'          => 'ltr'
             ],
             'fr' => [
-                'code' => 'fr',
-                'name' => 'French'
+                'code'         => 'fr',
+                'country_code' => 'fr',
+                'name'         => 'French',
+                'dir'          => 'ltl'
             ]
         ]
 
@@ -128,8 +132,11 @@ $app->register('HogLog\HogLogServiceProvider');
 |
 */
 
-$app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
-    require __DIR__ . '/../app/Http/routes.php';
-});
+$app->group(
+    ['namespace' => 'App\Http\Controllers'],
+    function ($app) {
+        require __DIR__ . '/../app/Http/routes.php';
+    }
+);
 
 return $app;

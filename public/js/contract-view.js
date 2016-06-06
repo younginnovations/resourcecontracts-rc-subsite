@@ -31241,22 +31241,33 @@ var SelectLanguage = React.createClass({displayName: "SelectLanguage",
        var language = [];
        language = JSON.parse(languages);
        var availableLang=[];
+       var imageStyle = {width: '16px' , height: '16px', 'margin-right': '6px'};
+       var ulStyle = {'min-width':'110px'};
        _.each(language,function(value,key){
-                var url = currentUrl+'?lang='+key;
-               availableLang.push(React.createElement("li", null, React.createElement("a", {href: url}, value['name'])));
+           var url = currentUrl+'?lang='+key;
+           var flagUrl = "https://raw.githubusercontent.com/younginnovations/country-flags/master/png250px/"+value['country_code']+".png";
+           if(key!=currentLanguage){
+               availableLang.push(React.createElement("li", null, 
+               React.createElement("a", {href: url}, 
+               React.createElement("img", {style: imageStyle, src: flagUrl}), 
+               value['name']
+               )
+               ));
+
+           }
 
        });
 
        return (
            React.createElement("div", {className: "dropdown language-selector"}, 
-               React.createElement("button", {className: "btn  dropdown-toggle", "data-toggle": "dropdown"}, 
-                    selectedLang, 
-                    React.createElement("span", {className: "caret"})
-                    ), 
-                    React.createElement("ul", {className: "dropdown-menu"}, 
-                        availableLang
-                    )
-           )
+       React.createElement("button", {className: "btn  dropdown-toggle", "data-toggle": "dropdown"}, 
+       React.createElement("img", {style: imageStyle, src: languageImage}), selectedLang, 
+       React.createElement("span", {className: "caret"})
+       ), 
+       React.createElement("ul", {className: "dropdown-menu", style: ulStyle}, 
+       availableLang
+       )
+       )
 
        );
    }
