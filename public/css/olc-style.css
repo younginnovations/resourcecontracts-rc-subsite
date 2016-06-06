@@ -441,7 +441,8 @@ a {
     right: 0;
     left: auto;
     border: none;
-    padding: 0; }
+    padding: 0;
+    overflow: hidden; }
   .language-selector .dropdown-menu > li > a, .language-selector .dropdown-menu > div > li > a {
     padding: 10px 12px; }
 
@@ -802,6 +803,8 @@ footer {
         background: #404040;
         color: #fff;
         text-decoration: none; }
+      .pagination-wrapper ul li.num-text a {
+        width: auto; }
 
 .filter-resource-wrap {
   line-height: 24px; }
@@ -2482,5 +2485,9 @@ input.select2-search__field {
 .pdf-annotator .annotator-hl {
   border: 2px solid #E7D530;
   background: transparent !important; }
+
+/* ----- style for french language ------ */
+.lang-fr .advance-filter-wrapper .social-share {
+  right: 323px; }
 
 /*# sourceMappingURL=maps/olc-style.css.map */
