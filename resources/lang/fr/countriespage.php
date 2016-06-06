@@ -2,12 +2,12 @@
 
 return [
 
-    'filter_by_contry_name' => 'Filter by country in french...',
-    'filter_by_resources' => 'Filter by resources (French)',
-    'contract' => 'Contrat',
-    'contracts' => 'Contrats',
-    'find_contract' => '(fr)Find a contract in',
-    'contracts_in' => 'Contrats en',
-    'resources_in' => 'Resources En',
+    'filter_by_contry_name' => "Filtrer par nom de pays…",
+    'filter_by_resources'   => "Filtrer par ressource",
+    'contract'              => 'Contrat',
+    'contracts'             => 'Contrats',
+    'find_contract'         => "Trouver un contrat dans",
+    'contracts_in'          => "Contrats dans",
+    'resources_in'          => "Ressources dans",
 
 ];

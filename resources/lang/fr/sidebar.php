@@ -2,7 +2,6 @@
 
 return [
 
-    'all_contracts' => 'Tout Contrats',
-    'view_all' => 'Fr View All',
-
+    'all_contracts' => "Tout les contrats ",
+    'view_all'      => "Visualiser tout",
 ];
