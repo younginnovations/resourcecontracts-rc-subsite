@@ -30000,14 +30000,14 @@ var RelatedDocumentsView = React.createClass({displayName: "RelatedDocumentsView
                 var doc = this.props.metadata.get("associated")[i];
                 if (doc.is_published) {
                     var docUrl = app_url + "/contract/" + doc.open_contracting_id;
-                    supportingContracts.push(React.createElement("span", {id: i}, 
+                    supportingContracts.push(React.createElement("span", {id: i, className: "child-contract"}, 
                         React.createElement("a", {href: docUrl}, truncate(doc.name))
                     ));
                 }
             }
             if(this.props.metadata.get("associated").length > MaxAllowed)
             {
-                supportingContracts.push(React.createElement("span", null, React.createElement("a", {href: this.props.contractApp.getMetadataSummaryLink()+'#associatedcontracts'}, "More...")));
+                supportingContracts.push(React.createElement("span", {className: "child-contract"}, React.createElement("a", {href: this.props.contractApp.getMetadataSummaryLink()+'#associatedcontracts'}, "More...")));
             }
 
             if (parentContracts.length || supportingContracts.length) {
