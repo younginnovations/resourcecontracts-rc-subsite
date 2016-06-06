@@ -1156,6 +1156,11 @@ footer {
         color: $white;
         text-decoration: none;
       }
+      &.num-text{
+        a{
+          width: auto;
+        }
+      }
     }
   }
 }
