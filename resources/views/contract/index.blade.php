@@ -21,7 +21,7 @@
                     </div>
                     <div class="panel-title">
                         @if(\Illuminate\Support\Facades\Input::get('year') !='')
-                            Contracts in {{\Illuminate\Support\Facades\Input::get('year')}}
+                            @lang('global.contracts_in') {{\Illuminate\Support\Facades\Input::get('year')}}
                           @else
                             @lang('global.all_contracts')
                         @endif

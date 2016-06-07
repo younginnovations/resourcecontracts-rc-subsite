@@ -65,4 +65,5 @@ return [
     'text'                        => "Texte",
     'metadata'                    => "Métadonnées",
     'word_file'                   => "Fichier Word",
+    'contracts_in'                 => "Contrats en",
 ];

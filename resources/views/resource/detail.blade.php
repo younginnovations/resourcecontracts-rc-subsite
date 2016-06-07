@@ -19,8 +19,9 @@ use Illuminate\Support\Facades\Lang;
                         </ul>
                     </div>
 
+
                     <div class="panel-title">
-                        {{ucfirst($resource)}}
+                        {{ucfirst(trans('resources')[$resource])}}
                     </div>
                 </div>
             </div>
@@ -31,7 +32,7 @@ use Illuminate\Support\Facades\Lang;
                         <form action="{{url('search')}}" method="get" class="search-form filter-form">
                             <div class="form-group">
                                 <button type="submit" class="btn btn-filter-search pull-left"></button>
-                                <input type="text" name="q" class="form-control pull-left" placeholder="@lang('global.find_contract' , ['tag' => ucfirst($resource)])">
+                                <input type="text" name="q" class="form-control pull-left" placeholder="@lang('global.find_contract' , ['tag' => ucfirst(trans('resources')[$resource])])">
                                 <input type="hidden" name="resource" value="{{$resource}}"/>
                             </div>
                         </form>
@@ -57,7 +58,7 @@ use Illuminate\Support\Facades\Lang;
                     <div class="download-csv">
                         <a href="{{route('contract.metadata.download',$params)}}">@lang('global.download')</a>
                     </div>
-                    <div class="panel-heading">@lang('global.contracts_for') {{ucfirst($resource)}}</div>
+                    <div class="panel-heading">@lang('global.contracts_for') {{ucfirst(trans('resources')[$resource])}}</div>
                     <div class="panel-body">
                         @include('contract.partials.rccontractlist')
                         @include('contract.partials.pagination', ['total_item' => $contracts->total, 'per_page'=>$contracts->per_page, 'current_page' => $currentPage ])
