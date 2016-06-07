@@ -275,14 +275,14 @@ var RelatedDocumentsView = React.createClass({
                 var doc = this.props.metadata.get("associated")[i];
                 if (doc.is_published) {
                     var docUrl = app_url + "/contract/" + doc.open_contracting_id;
-                    supportingContracts.push(<span id={i}>
+                    supportingContracts.push(<span id={i} className="child-contract">
                         <a href={docUrl}>{truncate(doc.name)}</a>
                     </span>);
                 }
             }
             if(this.props.metadata.get("associated").length > MaxAllowed)
             {
-                supportingContracts.push(<span><a href={this.props.contractApp.getMetadataSummaryLink()+'#associatedcontracts'}>More...</a></span>);
+                supportingContracts.push(<span className="child-contract"><a href={this.props.contractApp.getMetadataSummaryLink()+'#associatedcontracts'}>More...</a></span>);
             }
 
             if (parentContracts.length || supportingContracts.length) {

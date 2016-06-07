@@ -277,8 +277,11 @@
 .metadata-view {
     padding: 0 18px;
     border-bottom: 1px solid #DCDFE2;
-    padding-bottom: 15px;
     margin-bottom: 15px;
+}
+.metadata-view > div:nth-last-child(3) {
+    border: none;
+    padding-bottom: 0;
 }
 
 .metadata-info {
@@ -566,9 +569,13 @@
     line-height: 18px;
 }
 
-.relateddocument-view > div:first-of-type, .relateddocument-more-view > div:first-of-type, .other-sources-view > div:first-of-type {
+.relateddocument-more-view > div:first-of-type, .other-sources-view > div:first-of-type {
     margin-top: 10px;
     font-weight: bold;
+}
+
+.relateddocument-view > div:first-of-type {
+    color: rgba(64,64,64,0.7);
 }
 
 .link {
@@ -1063,4 +1070,8 @@
     .text-panel, .pdf-annotator {
         margin-left: 26px;
     }
+}
+.child-contract {
+    padding-left: 10pt;
+    padding-right: 10pt;
 }
