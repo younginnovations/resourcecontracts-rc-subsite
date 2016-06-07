@@ -29,5 +29,6 @@ return [
     'see'                  => "See",
     'legislation'          => "Legislation",
     'african_mining'       => "in African Mining Legislation Atlas",
+    'main_contract'        => "(Main Contract)"
 
 ];
