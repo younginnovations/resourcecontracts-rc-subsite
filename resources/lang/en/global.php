@@ -62,5 +62,6 @@ return [
     'is_annexes_missing'          => 'Annex(es) missing from document',
     'annotation'                  => 'Annotation',
     'text'                        => 'Text',
-    'metadata'                    => 'Metadata'
+    'metadata'                    => 'Metadata',
+    'contracts_in'                => 'Contracts in',
 ];

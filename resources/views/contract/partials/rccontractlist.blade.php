@@ -40,7 +40,7 @@ if ($path[0] == "resource") {
                     {{ $contract->name or ''}}
                 </a>
                 @if($annotations->total>0)
-                    <div class="annotate-text"> Annotated</div>
+                    <div class="annotate-text">@lang('global.annotated')</div>
                 @endif
 
                 <p class="country_name">- {{trans('country.'.strtoupper($contract->country_code))}}</p>
@@ -51,7 +51,7 @@ if ($path[0] == "resource") {
                     <div class="download-main-wrap">
                         <div class="download-wrap">
 
-                            <span>Download</span>
+                            <span>@lang('global.download')</span>
                         </div>
                         <ul class="dropdown-menu">
                             <li><a href="{{route('contract.download.pdf',['id'=> $contract->open_contracting_id])}}">@lang('annotation.pdf')</a></li>
@@ -109,7 +109,7 @@ if ($path[0] == "resource") {
         </tr>
     @empty
         <tr>
-            <td colspan="2">{{'Contract result not found.'}}</td>
+            <td colspan="2">@lang('search.search_not_found')</td>
         </tr>
     @endforelse
     </tbody>
