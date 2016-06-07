@@ -10,8 +10,11 @@ return [
     'search_not_found'     => "Votre recherche a abouti à 0 résultat. Pour lancer une nouvelle recherche, insérer votre texte dans la barre de recherche ci-dessus. Vous pouvez aussi  <a href=:link> consulter la liste entière des contrats disponibles. </a>",
     'found_in'             => "Groupe de sociétés",
     'corporate_group'      => "Groupe d'entreprise",
-    'language'             => 'La langue',
-    'document_type'        => 'Type de document',
-    'download'             => 'Télécharger les résultats de recherche'
+    'language'             => "La langue",
+    'document_type'        => "Type de document",
+    'download'             => "Télécharger les résultats de recherche",
+    'reset'                => "Réinitialiser",
+    'select'               => "Sélectionner",
+
 
 ];

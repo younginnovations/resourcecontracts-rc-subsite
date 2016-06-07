@@ -98,7 +98,7 @@ $route = Request::path();
                     <div class="download-main-wrap">
                         <div class="download-wrap">
 
-                            <span>Download</span>
+                            <span>@lang('global.download')</span>
                         </div>
                         <ul class="dropdown-menu">
                             <li><a href="{{route('contract.download.pdf',['id'=> $contract->open_contracting_id])}}">@lang('annotation.pdf')</a></li>

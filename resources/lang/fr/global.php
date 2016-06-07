@@ -15,7 +15,7 @@ return [
     'view_all_countries'          => "visualiser tous les pays",
     'contracts_related_to'        => "Documents du contrat liés à",
     'resources'                   => "Ressources",
-    'resource'                    => "Resource",
+    'resource'                    => "Ressource",
     'all_contracts'               => "Tous les contrats ",
     'view_all_resources'          => "visualiser toutes les ressources",
     'document'                    => "Document",

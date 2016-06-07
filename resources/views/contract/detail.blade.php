@@ -81,8 +81,8 @@ use Illuminate\Support\Facades\Lang;
                                     <span><a href="{{route('country.detail', ['key'=>$code])}}">{{ucfirst(_e($contract->metadata->country,'name'))}}</a>
                                         @if(env("CATEGORY")=="rc")
                                             @if(isset($contract->metadata->amla_url) && !empty($contract->metadata->amla_url))
-                                                <span class="amla-link">See <a href="{{$contract->metadata->amla_url}}"
-                                                                               target="_blank">Legislation</a> in African Mining Legislation Atlas</span>@endif</span>
+                                                <span class="amla-link">@lang('contract.see') <a href="{{$contract->metadata->amla_url}}"
+                                                                               target="_blank">@lang('contract.legislation')</a>&nbsp;@lang('contract.african_mining')</span>@endif</span>
                                 @endif
                                 @endif
 
@@ -194,7 +194,7 @@ use Illuminate\Support\Facades\Lang;
             <div class="col-lg-12">
                 <div class="panel panel-default panel-wrap panel-contract-wrap">
                     <div class="panel-body metadata-note">
-                        <span>Note</span>
+                        <span>@lang('annotation.note')</span>
                         {{$contract->metadata->note}}
                     </div>
                 </div>

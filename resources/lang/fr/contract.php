@@ -26,6 +26,9 @@ return [
     'source_url'           => "Source URL",
     'disclosure_mode'      => "Mode de divulgation",
     'open_contracting_id'  => "Identifiant Open Contracting ",
+    'see'                  => "Voir",
+    'legislation'          => "Législation",
+    'african_mining'       => "dans la législation minière africaine Atlas",
 
 
 

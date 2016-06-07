@@ -2,6 +2,7 @@
 if (empty($meta)) {
     $meta = null;
 }
+$langSelect = trans('search.select');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,6 +39,9 @@ if (empty($meta)) {
         var app_url = '{{ url()}}';
     </script>
     <![endif]-->
+    <script>
+        var langSelect = '{{$langSelect}}';
+    </script>
 </head>
 <body data-spy="scroll" class="lang-{{$lang->getCurrentLang()}}" dir="{{$lang->getDirection()}}" lang="{{$lang->getCurrentLang()}}">
 <div id="wrapper">

@@ -5,6 +5,7 @@ return [
     'about'             => "A propos",
     'glossary'          => "Glossaire",
     'publish_contracts' => "Publier des contrats ",
-    'contact'           => "Contrat"
+    'contact'           => "Contrat",
+    'licensed'          => "Le contenu est distribué sous licence Attribution-ShareAlike 4.0 international"
 
 ];
