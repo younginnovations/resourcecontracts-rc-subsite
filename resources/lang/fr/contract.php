@@ -28,7 +28,9 @@ return [
     'open_contracting_id'  => "Identifiant Open Contracting ",
     'see'                  => "Voir",
     'legislation'          => "Législation",
-    'african_mining'       => "dans la législation minière africaine Atlas",
+    'african_mining'       => "Dans la législation minière africaine Atlas",
+    'main_contract'        => "(Contrat Principal)",
+
 
 
 
