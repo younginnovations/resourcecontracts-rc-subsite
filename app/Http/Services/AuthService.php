@@ -1,7 +1,6 @@
 <?php namespace App\Http\Services;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Message\Request;
 use Illuminate\Support\Facades\Session;
 
 /**
@@ -32,20 +31,18 @@ Class AuthService
      */
     public function login($username, $password)
     {
-        $loginUrl = sprintf('%s/site/login', trim(env('ADMIN_API_URL'), '/'));
+        $baseUrl = trim(env('ADMIN_API_URL'), '/');
 
         try {
-            $request = new Request('GET', $loginUrl);
-            $request->setQuery(
-                [
-                    'username' => $username,
-                    'password' => $password
-                ]
-            );
+            $client = new Client(['base_url' => $baseUrl]);
+            $credentials = [
+                'username' => $username,
+                'password' => $password
+            ];
 
-            $data = file_get_contents($request->getUrl());
+            $request = $client->post('/api/login', ['body'=> $credentials]);
 
-            $data = json_decode($data);
+            $data = json_decode($request->getBody()->getContents());
 
             if ($data->status == 'success') {
                 $this->setAuth($data);
@@ -111,5 +108,4 @@ Class AuthService
     {
         return session('user_auth');
     }
-
 }
