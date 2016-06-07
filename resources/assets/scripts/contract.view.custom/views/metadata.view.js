@@ -103,18 +103,19 @@ var MetadataView = React.createClass({
 
             var note = this.props.metadata.get("note");
             if (note != "") {
-                var noteHtml = "<span class='metadata-note'>Note:</span>";
+                var noteHtml = "<span class='metadata-note'>"+lang.note+"</span>";
 
                 if (!this.state.showMoreText) {
                     var maxWord = 20;
                     var noteArray = note.split(' ');
                     var more = '';
+
                     if (noteArray.length > maxWord) {
                         note = noteArray.slice(0, maxWord).join(' ') + '... ';
-                        more = (<a className="ellipsis" href="#" onClick={this.handleMoreText}> More</a>);
+                        more = (<a className="ellipsis" href="#" onClick={this.handleMoreText}>{{__html: lang.note_more }}</a>);
                     }
                 } else {
-                    more = (<a className="ellipsis" href="#" onClick={this.handleMoreText}> Less</a>);
+                    more = (<a className="ellipsis" href="#" onClick={this.handleMoreText}>{{__html: lang.note_less }}</a>);
                 }
                 noteHtml += '<span class="note">' + note + '</span>';
                 noteHtml = (<span className="note-inner-wrapper" dangerouslySetInnerHTML={{__html: noteHtml}}></span>);
@@ -126,7 +127,7 @@ var MetadataView = React.createClass({
             {
                 missing_html += '<div class="metadata-ocid">'+
                                     '<span>'+lang.annexes_missing+'</span>'+
-                                    '<span>Yes</span>'+
+                                    '<span>'+lang.yes+'</span>'+
                                 '</div>';
             }
 
@@ -134,7 +135,7 @@ var MetadataView = React.createClass({
             {
                 missing_html += '<div class="metadata-ocid">'+
                     '<span>'+lang.pages_missing+'</span>'+
-                    '<span>Yes</span>'+
+                    '<span>'+lang.yes+'</span>'+
                     '</div>';
             }
 
@@ -282,7 +283,7 @@ var RelatedDocumentsView = React.createClass({
             }
             if(this.props.metadata.get("associated").length > MaxAllowed)
             {
-                supportingContracts.push(<span className="child-contract"><a href={this.props.contractApp.getMetadataSummaryLink()+'#associatedcontracts'}>More...</a></span>);
+                supportingContracts.push(<span><a href={this.props.contractApp.getMetadataSummaryLink()+'#associatedcontracts'}>More...</a></span>);
             }
 
             if (parentContracts.length || supportingContracts.length) {

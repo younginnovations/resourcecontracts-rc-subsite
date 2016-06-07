@@ -53,5 +53,10 @@ return [
     'download'                   => 'Download',
     'word_file'                  => 'Word File',
     'zoom'                       => 'Zoom',
+    'note'                       => 'Note:',
+    'note_more'                  => 'More',
+    'note_less'                  => 'Less',
+    'yes'                        => 'Yes',
+    'learn_more'                 => 'Learn more'
 ];
 

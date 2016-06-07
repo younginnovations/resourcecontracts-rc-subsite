@@ -26,4 +26,8 @@ return [
     'source_url'           => 'Source URL',
     'disclosure_mode'      => 'Disclosure Mode',
     'open_contracting_id'  => 'Open Contracting ID :',
+    'see'                  => "See",
+    'legislation'          => "Legislation",
+    'african_mining'       => "in African Mining Legislation Atlas",
+
 ];

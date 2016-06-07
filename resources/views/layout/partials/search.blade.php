@@ -4,6 +4,7 @@ $summary = $api->sortSummaryCountry();
 $attributes = $api->searchAttributed();
 $category = $api->getAnnotationsCategory();
 ?>
+
 <form action="{{url('search')}}" method="get" class="search-form @if(isset($show_advance)) search-page-form @endif" id="search-form">
     <div class="form-group">
         <button type="submit" class="btn btn-navbar-search pull-left"></button>
@@ -12,7 +13,7 @@ $category = $api->getAnnotationsCategory();
     <div class="search-input-wrapper @if(isset($show_advance)) search-page-input-wrapper @endif">
         <div class="col-lg-12">
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
-                <label for="">@lang('global.country')</label>
+                <labePzl for="">@lang('global.country')</labePzl>
                 <select name="country[]" id="country" multiple="multiple">
                     @foreach($summary->country_summary as $country)
                         <option @if(isset($filter['country']) && in_array(strtoupper($country['key']), array_map('strtoupper',$filter['country'])))selected="selected" @endif value="{{$country['key']}}">{{$country['name']}}</option>
@@ -99,7 +100,7 @@ $category = $api->getAnnotationsCategory();
                 <button type="submit" class="btn btn-form-search">@lang('global.search')</button>
             </div>
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
-                <button type="reset" name="reset"  id="searchclear" class="btn btn-form-search btn-form-reset">Reset</button>
+                <button type="reset" name="reset"  id="searchclear" class="btn btn-form-search btn-form-reset">@lang('search.reset')</button>
             </div>
             @if(!isset($searchPage))
                 <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">

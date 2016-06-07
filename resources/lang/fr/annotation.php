@@ -53,5 +53,12 @@ return [
     'download'                   => "Télécharger",
     'word_file'                  => "Fichier Word",
     'zoom'                       => 'Zoom',
+    'note'                       => 'Remarque:',
+    'note_more'                  => 'Plus',
+    'note_less'                  => 'Moins',
+    'yes'                        => 'Oui',
+    'learn_more'                 => 'Apprendre encore plus',
+
+
 ];
 

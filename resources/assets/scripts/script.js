@@ -1,6 +1,12 @@
+`function htmlDecode(html) {
+    var a = document.createElement('a');
+    a.innerHTML = html;
+    return a.textContent;
+}
+
 $(document).ready(function () {
     if ($('select').length) {
-        $('select').select2({placeholder: "Select", allowClear: true, theme: "classic"});
+        $('select').select2({placeholder: htmlDecode(langSelect), allowClear: true, theme: "classic", language:"fr"});
     }
     $('#searchclear').click(function () {
         $("select").val(null).trigger("change");

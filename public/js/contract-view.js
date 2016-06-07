@@ -29828,18 +29828,19 @@ var MetadataView = React.createClass({displayName: "MetadataView",
 
             var note = this.props.metadata.get("note");
             if (note != "") {
-                var noteHtml = "<span class='metadata-note'>Note:</span>";
+                var noteHtml = "<span class='metadata-note'>"+lang.note+"</span>";
 
                 if (!this.state.showMoreText) {
                     var maxWord = 20;
                     var noteArray = note.split(' ');
                     var more = '';
+
                     if (noteArray.length > maxWord) {
                         note = noteArray.slice(0, maxWord).join(' ') + '... ';
-                        more = (React.createElement("a", {className: "ellipsis", href: "#", onClick: this.handleMoreText}, " More"));
+                        more = (React.createElement("a", {className: "ellipsis", href: "#", onClick: this.handleMoreText}, {__html: lang.note_more}));
                     }
                 } else {
-                    more = (React.createElement("a", {className: "ellipsis", href: "#", onClick: this.handleMoreText}, " Less"));
+                    more = (React.createElement("a", {className: "ellipsis", href: "#", onClick: this.handleMoreText}, {__html: lang.note_less}));
                 }
                 noteHtml += '<span class="note">' + note + '</span>';
                 noteHtml = (React.createElement("span", {className: "note-inner-wrapper", dangerouslySetInnerHTML: {__html: noteHtml}}));
@@ -29851,7 +29852,7 @@ var MetadataView = React.createClass({displayName: "MetadataView",
             {
                 missing_html += '<div class="metadata-ocid">'+
                                     '<span>'+lang.annexes_missing+'</span>'+
-                                    '<span>Yes</span>'+
+                                    '<span>'+lang.yes+'</span>'+
                                 '</div>';
             }
 
@@ -29859,7 +29860,7 @@ var MetadataView = React.createClass({displayName: "MetadataView",
             {
                 missing_html += '<div class="metadata-ocid">'+
                     '<span>'+lang.pages_missing+'</span>'+
-                    '<span>Yes</span>'+
+                    '<span>'+lang.yes+'</span>'+
                     '</div>';
             }
 
@@ -30007,7 +30008,7 @@ var RelatedDocumentsView = React.createClass({displayName: "RelatedDocumentsView
             }
             if(this.props.metadata.get("associated").length > MaxAllowed)
             {
-                supportingContracts.push(React.createElement("span", {className: "child-contract"}, React.createElement("a", {href: this.props.contractApp.getMetadataSummaryLink()+'#associatedcontracts'}, "More...")));
+                supportingContracts.push(React.createElement("span", null, React.createElement("a", {href: this.props.contractApp.getMetadataSummaryLink()+'#associatedcontracts'}, "More...")));
             }
 
             if (parentContracts.length || supportingContracts.length) {
@@ -30364,7 +30365,7 @@ var TextViewer = React.createClass({displayName: "TextViewer",
                         lang.text_created_automatically, 
             
 
-            React.createElement("a", {target: "_blank", href: learn_more_url}, "Learn more")
+            React.createElement("a", {target: "_blank", href: learn_more_url},  lang.learn_more)
         ));
 
         var pagesView = (this.message) ? this.message : lang.wait_while_loading;
