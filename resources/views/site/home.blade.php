@@ -38,7 +38,8 @@ use \Illuminate\Support\Facades\Lang as Lang;
             </ul>
         </div>
     @endif
-
+    <div class="row row-top-wrap front-row-top-wrap">
+        <div class="homepage-wrapper">
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
                     <span data-toggle="collapse-sidebar" data-target=".sidebar-collapse"
