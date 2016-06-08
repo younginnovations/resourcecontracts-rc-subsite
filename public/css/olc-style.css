@@ -184,7 +184,7 @@ a.parent_annotation_link {
   cursor: pointer;
   position: relative; }
 
-.view-pin-wrap:after, .download-wrap:after {
+.view-pin-wrap:after {
   content: " ";
   background: url(../../images/ic-sprite.png) no-repeat -176px -114px;
   width: 8px;
@@ -1031,13 +1031,9 @@ footer {
     width: auto;
     margin-right: 10px; }
   .contract-info-section .download-wrap {
-    padding: 2px 0 2px 27px;
+    padding: 2px 0 2px 10px;
     background-position: -169px -49px;
     text-indent: -9999px; }
-    .contract-info-section .download-wrap:after {
-      margin-left: -4px;
-      float: left;
-      margin-top: 8px; }
   .contract-info-section .dropdown-menu {
     margin-top: 2px; }
     .contract-info-section .dropdown-menu li {
@@ -1880,7 +1876,7 @@ td.contract-date {
 
 .advance-filter-wrapper .social-share {
   margin: 9px;
-  right: 250px;
+  right: 170px;
   padding: 0;
   bottom: -29px; }
   .advance-filter-wrapper .social-share ul {

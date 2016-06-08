@@ -10,7 +10,7 @@ return [
     'annotations_category' => 'Annotations Category',
     'language'             => 'Language',
     'document_type'        => 'Document Type',
-    'download'             => 'Download search results',
+    'download'             => 'Download',
     'search_not_found'     => "Your search has 0 results. To start a new search, enter your text in the search bar above. You can also <a href=:link> browse a full list of available contracts. </a>",
     'corporate_group'      => 'Corporate Group',
     'found_in'             => 'Found In',

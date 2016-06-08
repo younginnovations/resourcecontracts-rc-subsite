@@ -12,7 +12,7 @@ return [
     'corporate_group'      => "Groupe d'entreprise",
     'language'             => "La langue",
     'document_type'        => "Type de document",
-    'download'             => "Télécharger les résultats de recherche",
+    'download'             => "Télécharger",
     'reset'                => "Réinitialiser",
     'select'               => "Sélectionner",
 
