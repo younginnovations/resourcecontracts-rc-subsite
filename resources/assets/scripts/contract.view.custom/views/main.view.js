@@ -156,18 +156,23 @@ var SelectLanguage = React.createClass({
 
        });
 
+       if(localisationState)
+       {
        return (
-           <div className="dropdown language-selector">
-       <button className="btn  dropdown-toggle"  data-toggle="dropdown" >
-       <img style={imageStyle} src={languageImage}/>{selectedLang}
-       <span className="caret"></span>
-       </button>
-       <ul className="dropdown-menu" style={ulStyle}>
-       {availableLang}
-       </ul>
-       </div>
-
+               <div className="dropdown language-selector">
+                   <button className="btn  dropdown-toggle"  data-toggle="dropdown" >
+                   <img style={imageStyle} src={languageImage}/>{selectedLang}
+                   <span className="caret"></span>
+                   </button>
+                   <ul className="dropdown-menu" style={ulStyle}>
+                   {availableLang}
+                   </ul>
+                </div>
        );
+       }
+   else{
+        return(<div></div>);
+    }
    }
 });
 
