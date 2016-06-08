@@ -31259,18 +31259,23 @@ var SelectLanguage = React.createClass({displayName: "SelectLanguage",
 
        });
 
+       if(localisationState)
+       {
        return (
-           React.createElement("div", {className: "dropdown language-selector"}, 
-       React.createElement("button", {className: "btn  dropdown-toggle", "data-toggle": "dropdown"}, 
-       React.createElement("img", {style: imageStyle, src: languageImage}), selectedLang, 
-       React.createElement("span", {className: "caret"})
-       ), 
-       React.createElement("ul", {className: "dropdown-menu", style: ulStyle}, 
-       availableLang
-       )
-       )
-
+               React.createElement("div", {className: "dropdown language-selector"}, 
+                   React.createElement("button", {className: "btn  dropdown-toggle", "data-toggle": "dropdown"}, 
+                   React.createElement("img", {style: imageStyle, src: languageImage}), selectedLang, 
+                   React.createElement("span", {className: "caret"})
+                   ), 
+                   React.createElement("ul", {className: "dropdown-menu", style: ulStyle}, 
+                   availableLang
+                   )
+                )
        );
+       }
+   else{
+        return(React.createElement("div", null));
+    }
    }
 });
 

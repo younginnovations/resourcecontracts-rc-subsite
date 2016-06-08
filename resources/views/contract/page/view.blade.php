@@ -81,6 +81,7 @@
 
         var languageImage = '{{getCountryByLang($lang->getCurrentLang())}}';
         var currentLanguage = '{{$lang->getCurrentLang()}}';
+        var localisationState =  '{{config('localisation')}}';
     </script>
     <script src="{{ url('js/contract-view.js') }}"></script>
 @stop

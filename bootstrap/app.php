@@ -114,7 +114,8 @@ config(
                 'name'         => 'French',
                 'dir'          => 'ltl'
             ]
-        ]
+        ],
+        'localisation'=>false
 
     ]
 );
