@@ -30,13 +30,12 @@ return [
     'legislation'          => "Législation",
     'african_mining'       => "Dans la législation minière africaine Atlas",
     'main_contract'        => "(Contrat Principal)",
-
-
-
-
-
-
-
-
-
+    'go_back'              => "Retour aux détails du contrat",
+    'view_pins'            => "Voir les Pins",
+    'export'               => "exportation",
+    'view_annotations'     => "Voir Annotations",
+    'view_metadata'        => "Voir Métadonnées",
+    'search'               => "Chercher...",
+    'results'              => "Résultats",
+    'loading'              => "Chargement ...",
 ];

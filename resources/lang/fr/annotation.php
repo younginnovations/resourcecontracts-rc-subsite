@@ -58,6 +58,8 @@ return [
     'note_less'                  => 'Moins',
     'yes'                        => 'Oui',
     'learn_more'                 => 'Apprendre encore plus',
+    'search_result'              => 'Résultat de la recherche',
+    'annotation'                 => 'Annotation',
 
 
 ];

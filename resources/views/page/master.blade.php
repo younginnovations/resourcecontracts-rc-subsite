@@ -1,7 +1,7 @@
 @extends('layout.app')
 @section('content')
     @if(auth()->isloggedIn())
-        <div class="edit-mode"><div>You are in editing mode. Please <a target="_blank" href="{{route('admin.page.edit', ['id'=>$page->id])}}">click here</a> to edit page - <a href="{{url('logout')}}">Logout</a></div></div>
+        <div class="edit-mode"><div>@lang('admin.editing') <a target="_blank" href="{{route('admin.page.edit', ['id'=>$page->id])}}">@lang('admin.click_here')</a> @lang('admin.to_edit') - <a href="{{url('logout')}}">@lang('admin.logout')</a></div></div>
     @endif
 
     <div class="content-wrap">

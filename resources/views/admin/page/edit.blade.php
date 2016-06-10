@@ -8,7 +8,7 @@
 @section('content')
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">Edit Page : {{$page->title()}}</h3>
+            <h3 class="panel-title">@lang('admin.edit_page') : {{$page->title()}}</h3>
         </div>
         <div class="panel-body">
             <form class="" action="{{route('admin.page.update', ['id'=>$page->id])}}" method="POST">
@@ -22,14 +22,14 @@
                         <div role="tabpanel" class="tab-pane @if($code == 'en') active @endif " id="{{$code}}">
 
                             <div class="form-group" style="margin-bottom: 20px; overflow: hidden">
-                                <label class="col-md-12 control-label">Title:</label>
+                                <label class="col-md-12 control-label">@lang('admin.title'):</label>
                                 <div class="col-md-12">
                                     <input id="title" class="form-control" name="title[{{$code}}]" value="{{old('title', $page->title->$code)}}"/>
                                 </div>
                             </div>
 
                             <div class="form-group" style="overflow:hidden; margin-top: 20px;">
-                                <label class="col-md-12 control-label">Content:</label>
+                                <label class="col-md-12 control-label">@lang('admin.content'):</label>
                                 <div class="col-md-12">
                                     <textarea style="width:100%; height:500px" id="content" class="{{$code}}" name="content[{{$code}}]" >{{old('content', $page->content->$code)}}</textarea>
                                 </div>
@@ -40,8 +40,8 @@
 
                 <div class="form-group">
                     <div class="col-md-6">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        <a class="btn btn-default" href="{{route('admin.page')}}">Cancel</a>
+                        <button type="submit" class="btn btn-primary">@lang('admin.submit')</button>
+                        <a class="btn btn-default" href="{{route('admin.page')}}">@lang('global.cancel')</a>
                     </div>
                 </div>
             </form>

@@ -3,7 +3,7 @@
     <div class="panel panel-default">        
         <div class="panel-heading"> 
             <div class="pull-left">
-            <a href="{{route('contract.detail',['id'=>$contract['contract_id']])}}" class="go-back">Go back to contract detail</a>
+            <a href="{{route('contract.detail',['id'=>$contract['contract_id']])}}" class="go-back">@lang('admin.go_back')</a>
              <div class="title">{{$contract['metadata']['contract_name']}}</div>
             </div>       
             <div class=" pull-right contract-actions view-document-action">

@@ -8,7 +8,7 @@
 @section('content')
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">Add new page</h3>
+            <h3 class="panel-title">@lang('admin.add_new_page')</h3>
         </div>
         <div class="panel-body">
     <form class="form-horizontal" action="{{route('admin.page.store')}}" method="POST">
@@ -22,14 +22,14 @@
                 <div role="tabpanel" class="tab-pane @if($code == 'en') active @endif " id="{{$code}}">
 
                     <div class="form-group">
-                        <label class="col-md-2 control-label">Title:</label>
+                        <label class="col-md-2 control-label">@lang('admin.title'):</label>
                         <div class="col-md-6">
                             <input id="title" class="form-control" name="title[{{$code}}]" value="{{old('title')}}"/>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-md-2 control-label">Content:</label>
+                        <label class="col-md-2 control-label">@lang('admin.content'):</label>
                         <div class="col-md-6">
                             <textarea style="width:100%; height:500px" id="content" class="{{$code}}" name="content[{{$code}}]" >{{old('content')}}</textarea>
                         </div>
@@ -41,7 +41,7 @@
         <div class="form-group">
             <div class="col-md-6 col-md-offset-2">
                 <button type="submit" class="btn btn-primary">Submit</button>
-                <a class="btn btn-default" href="{{route('admin.page')}}">Cancel</a>
+                <a class="btn btn-default" href="{{route('admin.page')}}">@lang('global.cancel')</a>
             </div>
         </div>
     </form>

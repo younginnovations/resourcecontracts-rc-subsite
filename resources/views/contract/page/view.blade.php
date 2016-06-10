@@ -25,7 +25,7 @@
 
 @section('content')
     <div id="content">
-        <div class="loading"><img src="{{url('images/loading.gif')}}"/> Loading ...</div>
+        <div class="loading"><img src="{{url('images/loading.gif')}}"/>@lang('admin.loading')</div>
     </div>
     <?php
     $textDownloadUrl = ($contract->metadata->is_ocr_reviewed && env('CATEGORY') != "olc") ? route('contract.download', ['id' => $contract->metadata->open_contracting_id]) : "";

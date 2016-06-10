@@ -82,6 +82,7 @@
     var country = <?php echo json_encode(trans('country'));?>;
 </script>
 
-<script type="text/javascript" src="{{url('js/resource.min.js')}}"></script>
+<script type="text/javascript" src="{{url('js
+')}}"></script>
 @stop
 

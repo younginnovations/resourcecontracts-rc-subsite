@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Services\Admin\ImageService;
+use Illuminate\Support\Facades\Lang;
 
 /**
  * Get formatted file size
@@ -184,4 +185,39 @@ if (!function_exists('config_path')) {
 
         return array_key_exists($key, $country) ? $country[$key] : $country;
     }
+
+
+    /**
+     * get language
+     *
+     * @param String
+     * @return array
+     */
+    function _l($key)
+    {
+        if (Lang::has($key)) {
+            return Lang::get($key);
+        }
+        $array = explode('.', $key);
+
+        return end($array);
+    }
+
+    /**
+     * Trans Array List
+     *
+     * @param array $codeList
+     * @param       $path
+     *
+     * @return array
+     */
+    function trans_array(array $codeList, $path)
+    {
+        foreach ($codeList as $key => $code) {
+            $codeList[$key] = _l($path.'.'.$code);
+        }
+
+        return $codeList;
+    }
+
 }

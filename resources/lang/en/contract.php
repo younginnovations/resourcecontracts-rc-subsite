@@ -29,6 +29,13 @@ return [
     'see'                  => "See",
     'legislation'          => "Legislation",
     'african_mining'       => "in African Mining Legislation Atlas",
-    'main_contract'        => "(Main Contract)"
-
+    'main_contract'        => "(Main Contract)",
+    'go_back'              => "Go back to contract detail",
+    'view_pins'            => "View Pins",
+    'export'               => "export",
+    'view_annotations'     => "View Annotations",
+    'view_metadata'        => "View Metadata",
+    'search'               => "Search...",
+    'results'              => "Results",
+    'loading'              => "Loading ...",
 ];
