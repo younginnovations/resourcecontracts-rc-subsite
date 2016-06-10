@@ -27,11 +27,11 @@
             <div class="list-group">
 
                 <a href="{{route('admin.page')}}" class="@if($url == '/admin' || strpos($url, 'page') != false) active @endif  list-group-item">
-                    <i class="fa fa-file-archive-o"></i> Manage Pages
+                    <i class="fa fa-file-archive-o"></i> @lang('admin.manage_pages')
                 </a>
 
                 <a href="{{route('admin.image')}}" class="@if(strpos($url, 'image') != false) active @endif list-group-item">
-                    <i class="fa fa-image"></i> Manage Image
+                    <i class="fa fa-image"></i> @lang('admin.manage_image')
                 </a>
 
             </div>

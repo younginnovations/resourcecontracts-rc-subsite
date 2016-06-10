@@ -9,28 +9,27 @@
         <div class="panel-heading">
             <div class="pull-left title-bar-left">
                 <div class="title">{{$contract->metadata->contract_name}}</div>
-                <a href="{{route('contract.detail',['id'=>$contract->metadata->contract_id])}}" class="go-back">Go back to
-                    Contract detail</a>
+                <a href="{{route('contract.detail',['id'=>$contract->metadata->contract_id])}}" class="go-back">@lang('contract.go_back')</a>
             </div>
             <div class=" pull-right contract-actions view-document-action">
-                <a target="_blank" href="{{ $contract->metadata->file_url or ''}}" class="download">Download<span
+                <a target="_blank" href="{{ $contract->metadata->file_url or ''}}" class="download">@lang('global.download')<span
                             class="size">({{getFileSize($contract->metadata->file_size)}})</span></a>
                 <div class="contract-annotations annotation-pop-wrap">
 
-                    <a href="#" class="view-pins-button panel-info_button">View Pins</a>
+                    <a href="#" class="view-pins-button panel-info_button">@lang('conract.view_pins')</a>
                     <div id="pinList" class="pin-list" style="display:none">
                         <div class="pull-right pin-buttons">
-                            <button class="exportPins btn-primary">export</button>
+                            <button class="exportPins btn-primary">@lang('contract.export')</button>
                             <button class="removeAllPins btn-danger">clear all</button></div>
                             <div id="no-pin-message"></div>
                         </div>
                     </div>
                 <div class="contract-annotations annotation-pop-wrap">
-                    <a href="#" class="annotation_button">View Annotations</a>
+                    <a href="#" class="annotation_button">@lang('contract.view_annotations')</a>
                     <div id="annotations_list" class="annotation-list" style="display:none"></div>
                 </div>
                 <div class="contract-metadata annotation-pop-wrap">
-                    <a href="#" class="metadata_button">View Metadata</a>
+                    <a href="#" class="metadata_button">@lang('contractview_metadata')</a>
                     <div id="metadata" class="metadata" style="display:none"></div>
                 </div>
             </div>
@@ -39,11 +38,11 @@
             <form method="POST" action="{{route('contract.page.search', ["id"=>$contract->metadata->contract_id])}}" accept-charset="UTF-8" class="form-inline page-search pull-right">
                 <div class="form-group">
                     <div class="input-group">
-                        <input id="textfield" class="form-control" placeholder="Search..." name="q" type="text">
+                        <input id="textfield" class="form-control" placeholder=@lang('admin.search') name="q" type="text">
                     </div>
                 </div>
                 <input class="btn btn-primary" type="submit" value="Search">
-                <a href='#' id="search-results-cache" style="display:none;" class="pull-right">Results</a>
+                <a href='#' id="search-results-cache" style="display:none;" class="pull-right">@lang('admin.results')</a>
 
             </form>
         </div>

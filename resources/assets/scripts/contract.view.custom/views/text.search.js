@@ -74,7 +74,7 @@ var TextSearchResultRow = React.createClass({
     var type = "<a class='text' title='Text'>Text</a>";
     if(this.props.resultRow.get("type")=="annotation")
     {
-       type = "<a class='annotations' title='Annotation'>Annotation</a>";
+       type = "<a class='annotations' title='Annotation'>" + lang.annotation + "</a>";
     }
     text = "<span>Pg " + this.props.resultRow.get("page_no") + "&nbsp;" + text+"</span>" +type;
     return(
@@ -118,7 +118,7 @@ var TextSearchResultsList = React.createClass({
 if(this.props.searchResultsCollection.models.length > 0) {
     return (
       <div style={this.props.style} className="search-results-list">
-       <div className="search-result-title">Search result for {decodeURI(this.props.contractApp.getSearchQuery())}</div>
+       <div className="search-result-title"> {lang.search_result} {decodeURI(this.props.contractApp.getSearchQuery())}</div>
        <span className="pull-right link close" onClick={this.handleCloseSearchResults}>x</span>
         {resultsView}
       </div>

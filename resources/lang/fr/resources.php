@@ -143,6 +143,8 @@ return [
     "Opal"                             => "Opale",
     "Osmium"                           => "Osmium",
     "Other crops"                      => "Autres cultures",
+    "other"                            => "Autres",
+    "other minerals"                   => "Autres Minéraux",
     "Palladium"                        => "Palladium",
     "Palm oil"                         => "Huile de palme ",
     "Perlite"                          => "Perlite",

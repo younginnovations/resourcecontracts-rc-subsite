@@ -24,7 +24,7 @@ $category = $api->getAnnotationsCategory();
                 <label for="">@lang('global.resource')</label>
                 <select name="resource[]" id="resource" multiple="multiple">
                     @foreach($summary->resource_summary as $resource)
-                        <option @if(isset($filter['resource']) && in_array($resource->key, $filter['resource']))selected="selected" @endif value="{{$resource->key}}">{{$resource->key}}</option>
+                        <option @if(isset($filter['resource']) && in_array($resource->key, $filter['resource']))selected="selected" @endif value="{{$resource->key}}">{{_l("resources.$resource->key")}}</option>
                     @endforeach
                 </select>
             </div>

@@ -30485,7 +30485,7 @@ var TextSearchResultRow = React.createClass({displayName: "TextSearchResultRow",
     var type = "<a class='text' title='Text'>Text</a>";
     if(this.props.resultRow.get("type")=="annotation")
     {
-       type = "<a class='annotations' title='Annotation'>Annotation</a>";
+       type = "<a class='annotations' title='Annotation'>" + lang.annotation + "</a>";
     }
     text = "<span>Pg " + this.props.resultRow.get("page_no") + "&nbsp;" + text+"</span>" +type;
     return(
@@ -30529,7 +30529,7 @@ var TextSearchResultsList = React.createClass({displayName: "TextSearchResultsLi
 if(this.props.searchResultsCollection.models.length > 0) {
     return (
       React.createElement("div", {style: this.props.style, className: "search-results-list"}, 
-       React.createElement("div", {className: "search-result-title"}, "Search result for ", decodeURI(this.props.contractApp.getSearchQuery())), 
+       React.createElement("div", {className: "search-result-title"}, " ", lang.search_result, " ", decodeURI(this.props.contractApp.getSearchQuery())), 
        React.createElement("span", {className: "pull-right link close", onClick: this.handleCloseSearchResults}, "x"), 
         resultsView
       )

@@ -3,10 +3,10 @@
 @section('content')
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">Dashboard</h3>
+            <h3 class="panel-title">@lang('admin.dashboard')</h3>
         </div>
         <div class="panel-body">
-            Welcome
+            @lang('admin.welcome')
         </div>
     </div>
 @stop

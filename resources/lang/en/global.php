@@ -36,7 +36,6 @@ return [
     'type_contract'               => 'Type Of Contract',
     'annotations'                 => 'Annotations',
     'view_annotations'            => 'View all Annotations',
-    'download'                    => 'Download',
     'see'                         => 'See',
     'search_results'              => 'Search results',
     'a_directory_of'              => 'A directory of',

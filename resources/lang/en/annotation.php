@@ -57,6 +57,9 @@ return [
     'note_more'                  => 'More',
     'note_less'                  => 'Less',
     'yes'                        => 'Yes',
-    'learn_more'                 => 'Learn more'
+    'learn_more'                 => 'Learn more',
+    'search_result'              => 'Search result for',
+    'annotation'                 => 'Annotation',
 ];
+
 

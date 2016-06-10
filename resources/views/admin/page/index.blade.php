@@ -3,16 +3,16 @@
 @section('content')
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">Manage Pages</h3>
+            <h3 class="panel-title">@lang('admin.manage_pages')</h3>
         </div>
         <div class="panel-body">
             <table class="table">
                     <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Page Title</th>
-                        <th>Slug</th>
-                        <th>Action</th>
+                        <th>@lang('admin.id')</th>
+                        <th>@lang('admin.page_title')</th>
+                        <th>@lang('admin.slug')</th>
+                        <th>@lang('admin.action')</th>
                     </tr>
                     </thead>
                     <tbody>
