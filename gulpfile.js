@@ -92,6 +92,7 @@ gulp.task('sass', function () {
  */
 gulp.task('watch', function () {
     gulp.watch('./resources/assets/scss/*-style.scss', ['sass']);
+    gulp.watch('./resources/assets/scss/style.scss', ['sass']);
     gulp.watch(base_script, ['js-base']);
     gulp.watch(country_script, ['js-country']);
     gulp.watch(resource_script, ['js-resource']);

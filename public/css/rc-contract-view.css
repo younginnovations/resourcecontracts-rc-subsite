@@ -934,7 +934,7 @@
     text-indent: -9999px;
     width: 21px;
     height: 21px;
-    background: url(../images/share-sprite.png) no-repeat -22px -40px;
+    /*background: url(../images/share-sprite.png) no-repeat -22px -40px;*/
 }
 
 .social-share li.google-plus a {
@@ -947,7 +947,7 @@
 }
 
 .social-share li a:hover {
-    background-position: -22px 0;
+    /*background-position: -22px 0;*/
 }
 
 .social-share li.google-plus a:hover {

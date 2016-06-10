@@ -1092,7 +1092,8 @@ footer {
 }
 
 
-.download-csv, .advance-filter-wrapper .social-share {
+.download-csv,
+.advance-filter-wrapper .social-share {
   position: absolute;
   bottom: -20px;
   right: 40px;
@@ -2546,58 +2547,6 @@ td.contract-date {
   width: 90%;
 }
 
-.social-share {
-  margin: 9px;
-  float: right;
-  padding: 0;
-}
-
-.social-share li {
-  list-style: none;
-  float: left;
-  margin-right: 10px;
-}
-
-.social-share li a {
-  display: block;
-  text-indent: -9999px;
-  width: 21px;
-  height: 21px;
-  background: url(../images/share-sprite.png) no-repeat -22px -40px;
-}
-
-.social-share li.google-plus a {
-  background-position: -50px -40px;
-  margin-left: 4px;
-}
-
-.social-share li.twitter a {
-  background-position: 0 -40px;
-}
-
-.social-share li a:hover {
-  background-position: -22px 0;
-}
-
-.social-share li.google-plus a:hover {
-  background-position: -50px 0;
-}
-
-.social-share li.twitter a:hover {
-  background-position: 0 0;
-}
-
-.advance-filter-wrapper .social-share {
-  margin: 9px;
-  right: 170px;
-  padding: 0;
-  bottom: -29px;
-  ul {
-    margin: 0;
-    padding: 11px 17px 11px 20px;
-    overflow: hidden;
-  }
-}
 
 .panel-annotation-list-wrap .col-md-8 {
   padding: 0;
@@ -3471,5 +3420,213 @@ input.select2-search__field {
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
 }
+  /*
+  .social-share {
+    margin: 9px;
+    float: right;
+    padding: 0;
+  }
 
+  .social-share li {
+    list-style: none;
+    float: left;
+    margin-right: 10px;
+  }
+
+  .social-share li a {
+    display: block;
+    text-indent: -9999px;
+    width: 21px;
+    height: 21px;
+    background: url(../images/share-sprite.png) no-repeat -22px -40px;
+  }
+
+  .social-share li.google-plus a {
+    background-position: -50px -40px;
+    margin-left: 4px;
+  }
+
+  .social-share li.twitter a {
+    background-position: 0 -40px;
+  }
+
+  .social-share li a:hover {
+    background-position: -22px 0;
+  }
+
+  .social-share li.google-plus a:hover {
+    background-position: -50px 0;
+  }
+
+  .social-share li.twitter a:hover {
+    background-position: 0 0;
+  }
+  */
+
+  .social-share {
+    margin: 13px;
+    position: relative;
+    a, span {
+      display: block;
+    }
+    a {
+      background: url("../../images/ic-sprite.svg") -40px -11px no-repeat;
+      width: 18px;
+      height: 18px;
+    }
+    span {
+      text-indent: -9999px;
+      overflow: hidden;
+    }
+
+    ul {
+      position: absolute !important;
+      border: solid 1px;
+      top: 27px;
+      left: 50%;
+      margin: 0 0 0 -18px;
+      border: 1px solid #cccccc;
+      border-radius: 4px;
+      background: #fff;
+    }
+
+    li {
+      float: none !important;
+      margin: 0 !important;
+      padding: 6px;
+      border-bottom: dotted 1px #eee;
+      &:last-child {
+        border: none;
+      }
+    }
+  }
+
+  .social-share li a {
+    display: block;
+    text-indent: -9999px;
+    width: 21px;
+    height: 21px;
+    background: url(../images/share-sprite.png) no-repeat -22px -40px;
+  }
+
+.social-share li a:hover {
+  background-position: -24px 0;
+}
+
+.social-share li.twitter a {
+  background-position: 4px -40px;
+
+  &:hover {
+    background-position: 4px 0;
+  }
+}
+
+.social-share li.google-plus a {
+  background-position: -49px -40px;
+  margin-left: 0;
+
+  &:hover {
+    background-position: -49px 0;
+  }
+}
+
+/* --------- style for advance filter social share ------------ */
+
+.advance-filter-wrapper .social-share {
+  margin: 7px;
+  right: 170px;
+  bottom: -29px;
+  padding: 0;
+
+  > a{
+    display: block;
+    font-size: 12px;
+    color: $color_link_color;
+    width: auto;
+    text-decoration: none;
+    padding: 13px 25px 13px 44px;
+    background: url("../../images/ic-sprite.svg") -27px 2px no-repeat;
+    height: 43px;
+    border-radius: 50%;
+    position: relative;
+  }
+  span{
+    text-indent: 0;
+  }
+
+  .caret{
+    position: absolute;
+    top: 20px;
+    right: 12px;
+    color: #4a4a4a;
+  }
+
+  ul {
+    margin: 0;
+    padding: 11px 17px 11px 20px;
+    overflow: hidden;
+    padding: 0;
+    top: 50px;
+    z-index: 99;
+    background: #fff;
+    left: -6px;
+    margin-left: 0;
+    display: none;
+
+  }
+
+  li{
+    padding: 0;
+  }
+
+  li a{
+    text-indent: 0;
+    width: auto;
+    height: auto;
+    padding: 10px 15px 10px 40px;
+    background: none;
+    position: relative;
+    //text-decoration: none;
+    //color: #262626;
+
+    &:before{
+      content: "";
+      width: 21px;
+      height: 21px;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: url(../images/share-sprite.png) no-repeat -25px -40px;
+    }
+
+    &:hover:before{
+      background-position: -25px 0;
+    }
+  }
+
+  .social-share li.facebook a:before{
+    margin-left: -4px;
+  }
+
+  .google-plus a {
+    &:before{
+      background-position: -50px -40px;
+      margin-left: 0;
+    }
+
+    &:hover:before{
+      background-position: -50px 0;
+    }
+  }
+
+  .twitter a {
+    &:before{
+      background-position: 0 -40px;
+    }
+
+    &:hover:before{
+      background-position: 0 0;
+    }
+  }
+}
 

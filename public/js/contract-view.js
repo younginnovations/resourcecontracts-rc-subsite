@@ -31139,18 +31139,22 @@ var pdfPage = new PdfPage({
 var DownloadUrl = React.createClass({displayName: "DownloadUrl",
 
     getInitialState : function(){
-    return {dropdown :false};
+    return {dropdown :false, socialdropdown : false};
 },
 toggleDropdown : function()
 {
     this.setState({dropdown:!this.state.dropdown})
 },
-
+socialDropdown : function()
+{
+    this.setState({socialdropdown:! this.state.socialdropdown})
+},
 render:function() {
 
     var show = {'display':'block'};
     var hide= {'display':'none'};
     var style =  this.state.dropdown ? show :hide;
+    var socialStyle =  this.state.socialdropdown ? show :hide;
     var current_url = encodeURIComponent(window.location.href);
 
     if(!this.props.annotations_url && !this.props.text_url)
@@ -31163,10 +31167,13 @@ render:function() {
                     React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, lang.pdf))
                     )
                 ), 
-                React.createElement("ul", {className: "social-share"}, 
-                    React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
-                    React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
-                    React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
+                React.createElement("div", {className: "social-share"}, 
+                    React.createElement("a", {href: "#", onClick: this.socialDropdown}, React.createElement("span", null, "share")), 
+                    React.createElement("ul", {className: "social-share", style: socialStyle}, 
+                        React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
+                        React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
+                        React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
+                    )
                 )
            )
             );
@@ -31181,10 +31188,13 @@ render:function() {
                 React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, lang.annotations))
                 )
                 ), 
-                React.createElement("ul", {className: "social-share"}, 
-                React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
-                React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
-                React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
+                React.createElement("div", {className: "social-share"}, 
+                    React.createElement("a", {href: "#", onClick: this.socialDropdown}, React.createElement("span", null, "share")), 
+                    React.createElement("ul", {className: "social-share", style: socialStyle}, 
+                        React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
+                        React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
+                        React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
+                    )
                 )
             )
 
@@ -31201,17 +31211,19 @@ render:function() {
                 React.createElement("li", null, React.createElement("a", {href: this.props.text_url}, lang.word_file))
                 )
                 ), 
-                React.createElement("ul", {className: "social-share"}, 
-                React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
-                React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
-                React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
+                React.createElement("div", {className: "social-share"}, 
+                    React.createElement("a", {href: "#", onClick: this.socialDropdown}, React.createElement("span", null, "share")), React.createElement("ul", {className: "social-share", style: socialStyle}, 
+                        React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
+                        React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
+                        React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
+                    )
                 )
             )
             );
          }
     else{
         return (
-                React.createElement("div", null, 
+            React.createElement("div", null, 
             React.createElement("div", {className: "download-dropdown"}, 
             React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, lang.download)), 
             React.createElement("ul", {style: style}, 
@@ -31220,11 +31232,14 @@ render:function() {
             React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, lang.annotations))
             )
             ), 
-                React.createElement("ul", {className: "social-share"}, 
-                React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
-                React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
-                React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
+            React.createElement("div", {className: "social-share"}, 
+                React.createElement("a", {href: "#", onClick: this.socialDropdown}, React.createElement("span", null, "share")), 
+                React.createElement("ul", {style: socialStyle}, 
+                    React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
+                    React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
+                        React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
                 )
+            )
         )
          );
 

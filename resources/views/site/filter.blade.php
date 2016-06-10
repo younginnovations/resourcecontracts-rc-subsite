@@ -29,11 +29,12 @@
             $params['download'] = true;
             ?>
             @if($contracts->total!=0)
-                <div class="social-share">
-                    <ul>
-                        <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u={{ url() }}" target="_blank">FB</a></li>
-                        <li class="google-plus"><a href="https://plus.google.com/share?url={{ url() }}" target="_blank">G+</a></li>
-                        <li class="twitter"><a href="https://twitter.com/share?text={{ meta($meta)->title }}" target="_blank">T</a></li>
+                <div class="social-share" id="social-toggler">
+                    <a href="#"><span>Share</span><span class="caret"></span></a>
+                    <ul class="social-toggle">
+                        <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u={{ url() }}" target="_blank">Facebook</a></li>
+                        <li class="google-plus"><a href="https://plus.google.com/share?url={{ url() }}" target="_blank">Google</a></li>
+                        <li class="twitter"><a href="https://twitter.com/share?text={{ meta($meta)->title }}" target="_blank">Twitter</a></li>
                     </ul>
                 </div>
                 <div class="download-csv"><a href="{{route('contract.csv.download',$params)}}">@lang('search.download')</a></div>
@@ -63,6 +64,12 @@
         var contractURL = '{{url('contract')}}';
         $(function () {
             $('.filter-country-wrap').show();
-        })
+        });
+
+        $(document).ready(function(){
+            $("#social-toggler").click(function(){
+                $(".social-toggle").toggle();
+            });
+        });
     </script>
 @stop
