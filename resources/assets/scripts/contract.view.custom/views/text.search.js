@@ -170,7 +170,6 @@ var TextSearchResultRow = React.createClass({
                 </div>
             );
         }
-
     }
 });
 var TextSearchResultsList = React.createClass({
@@ -225,9 +224,7 @@ var TextSearchResultsList = React.createClass({
             );
         }
     }
-
 });
-
 
 var HighLight = React.createClass({
     render: function () {

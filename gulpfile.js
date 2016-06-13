@@ -65,6 +65,7 @@ var contract_view_scripts = [
     './resources/assets/scripts/lib/react/react-with-addons.js',
     './resources/assets/scripts/contract.view.custom/views/react.waypoint.js',
     './resources/assets/scripts/contract.view.custom/views/react.pdf.js',
+//    './resources/assets/scripts/contract.view.custom/views/ReactPDF.js',
     './resources/assets/scripts/contract.view.custom/views/pdf.view.js',
     './resources/assets/scripts/contract.view.custom/views/metadata.view.js',
     './resources/assets/scripts/contract.view.custom/views/text.view.js',

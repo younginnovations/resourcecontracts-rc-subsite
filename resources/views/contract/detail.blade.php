@@ -159,10 +159,9 @@ use Illuminate\Support\Facades\Lang;
                             <ul>
                                 <?php $i = 0; ?>
                                 @forelse($contract->annotationsGroup as $category=>$annotation)
-
                                     @if($i < 5 )
                                         <li><a class="view-annotation-category"
-                                               href="#{{str_slug($category,'-')}}">{{$category}}</a></li>
+                                               href="#{{str_slug($category,'-')}}">@lang('codelist/annotation.categories.'.$category)</a></li>
                                         <?php $i ++; ?>
                                     @endif
                                 @empty
@@ -406,7 +405,7 @@ use Illuminate\Support\Facades\Lang;
                                 <div class="annotation-category-cluster">
                                     <ul>
                                         @foreach($contract->annotationsCluster as $cluster=>$value)
-                                            <li><a href="#cluster-{{str_slug($cluster,40)}}">{{$cluster}}</a></li>
+                                            <li><a href="#cluster-{{str_slug($cluster,40)}}"> @lang('annotation.'.strtolower($cluster))</a></li>
                                         @endforeach
                                     </ul>
 
@@ -420,15 +419,15 @@ use Illuminate\Support\Facades\Lang;
 
                                     <div id="cluster-{{str_slug($cluster,'-')}}" class="cluster-wrap">
                                         <div class="category-title">
-                                            {{$cluster}}
+                                            @lang('annotation.'.strtolower($cluster))
                                         </div>
                                         <?php ksort($annotations);?>
                                         @foreach($annotations as $annotation)
                                             <?php $annotation = array_values($annotation)[0][0];?>
                                             <div>
-                                                <div id="{{str_slug($annotation->category,'-')}}" class="sub-category">
-                                                    <a href="#{{str_slug($annotation->category,'-')}}"><i class='glyphicon glyphicon-link' style="display:none;"></i></a>
-                                                    {{$annotation->category}}
+                                                <div id="{{str_slug($annotation->category_key,'-')}}" class="sub-category">
+                                                    <a href="#{{str_slug($annotation->category_key,'-')}}"><i class='glyphicon glyphicon-link' style="display:none;"></i></a>
+                                                    @lang('codelist/annotation.categories.'.$annotation->category_key)
                                                 </div>
                                                 <div class="annotation-text">
                                                     {{$annotation->text}}

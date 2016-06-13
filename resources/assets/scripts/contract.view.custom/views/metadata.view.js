@@ -66,15 +66,14 @@ var MetadataView = React.createClass({
             var link = app_url + '/resource/' + value;
 
             if (langResource[value] && index != resLength - 1) {
-                return React.createElement('a', {href: app_url + "/resource/" + value}, langResource[value] + ' | ');
+                return React.createElement('a', {href: app_url + "/resource/" + encodeURIComponent(value)}, langResource[value] + ' | ');
             }
-            else if (langResource[value] && index == resLength - 1) {
-                return React.createElement('a', {href: app_url + "/resource/" + value}, langResource[value]);
+            else if(langResource[value] && index == resLength - 1) {
+                return React.createElement('a', {href: app_url + "/resource/" + encodeURIComponent(value)}, langResource[value]);
             }
             else {
-                return React.createElement('a', {href: app_url + "/resource/" + value}, value);
+                return React.createElement('a', {href: app_url + "/resource/" + encodeURIComponent(value)}, value);
             }
-
         });
 
         return resLang;
@@ -145,24 +144,22 @@ var MetadataView = React.createClass({
                 noteHtml += '<span class="note">' + note + '</span>';
                 noteHtml = (<span className="note-inner-wrapper" dangerouslySetInnerHTML={{__html: noteHtml}}></span>);
             }
-
-            var missing_html = '';
-
-            if (this.props.metadata.get("is_annexes_missing")) {
-                missing_html += '<div class="metadata-ocid">' +
-                    '<span>' + lang.annexes_missing + '</span>' +
-                    '<span>' + lang.yes + '</span>' +
-                    '</div>';
+            var annexes_missing = null;
+            if(this.props.metadata.get("is_annexes_missing"))
+            {
+                annexes_missing =  (<div className="metadata-ocid">
+                                        <span>{lang.annexes_missing}</span>
+                                        <span>{lang.yes}</span>
+                                    </div>);
             }
-
-            if (this.props.metadata.get("is_pages_missing")) {
-                missing_html += '<div class="metadata-ocid">' +
-                    '<span>' + lang.pages_missing + '</span>' +
-                    '<span>' + lang.yes + '</span>' +
-                    '</div>';
+            var pages_missing = null;
+            if(this.props.metadata.get("is_pages_missing"))
+            {
+                pages_missing = (<div className="metadata-ocid">
+                                    <span>{lang.pages_missing}</span>
+                                    <span>{lang.yes}</span>
+                                    </div>);
             }
-
-            missing_html = {__html: missing_html};
 
             return (
                 <div id="metadata">
@@ -173,9 +170,7 @@ var MetadataView = React.createClass({
                     <div className="metadata-view">
                         <div>
                             {lang.metadata}
-
                         </div>
-
                         <div className="metadata-country">
                             <span>{lang.country}</span>
                             <span>
@@ -207,7 +202,8 @@ var MetadataView = React.createClass({
                             <span>{lang.disclosure_mode}</span>
                             <span>{this.props.metadata.get("publisher_type") || "-"}</span>
                         </div>
-                        <div dangerouslySetInnerHTML={missing_html}></div>
+                        {annexes_missing}
+                        {pages_missing}
                         <LandMatrixView metadata={this.props.metadata}/>
                     </div>
                 </div>
@@ -267,7 +263,7 @@ var LandMatrixView = React.createClass({
         if (isSite('olc')) {
             return (
                 <div className="metadata-ocid">
-                    <span>{lang.land_matrix_id}: </span>
+                    <span>{lang.land_matrix_id}</span>
                     <a target="_blank" href={this.props.metadata.get('matrix_page')}>{id}</a>
                 </div>
             );

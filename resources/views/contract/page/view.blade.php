@@ -29,7 +29,7 @@
     $annotationsDownloadUrl = ($contract->annotations->total > 0) ? route('contract.annotations.download', ['id' => $contract->metadata->open_contracting_id]) : "";
     $local = app('App\Http\Services\LocalizationService');
     $languages = json_encode(config('language'));
-
+    $contact_email = env('CONTACT_MAIL');
     ?>
     <div class="title-wrap">
         <nav class="clearfix navbar">
@@ -109,7 +109,7 @@
 
         var lang =  {!!  json_encode(trans('annotation')) !!};
         var langResource =  {!!  json_encode(trans('resources')) !!};
-        var email = '<?php echo env('CONTACT_MAIL'); ?>';
+        var email = '<?php echo $contact_email; ?>';
         var back_url = '{!!$back!!}';
         var app_url = '{{url()}}';
         var category = '{{env('CATEGORY')=='rc' ? 'Resource' : 'Openland' }}';
@@ -123,9 +123,9 @@
         var google_share = 'https://plus.google.com/share?url=';
         var twitter_share = 'https://twitter.com/share?text={{ meta($meta)->title }}';
         var text_version_url = '{{url('/faqs#learn_more')}}';
-        var processing_pdf_file_message = '{{sprintf(trans('annotation.processing_pdf_file'),env('CONTACT_MAIL'))}}';
-        var not_published_message = '{{sprintf(trans('annotation.not_published'),env('CONTACT_MAIL'))}}';
-        var pdf_not_shown_message = '{{sprintf(trans('annotation.pdf_not_shown'),env('CONTACT_MAIL'))}}';
+        var processing_pdf_file_message = "{!!sprintf(trans('annotation.processing_pdf_file'),'<a href=\"mailto:'.$contact_email.'\">'.$contact_email.'</a>')!!}";
+        var not_published_message = "{!!sprintf(trans('annotation.not_published'),'<a href=\"mailto:'.$contact_email.'\">'.$contact_email.'</a>')!!}";
+        var pdf_not_shown_message = "{!!sprintf(trans('annotation.pdf_not_shown'),'<a href=\"mailto:'.$contact_email.'\">'.$contact_email.'</a>')!!}";
         var languages = '{!! $languages !!}';
         var selectedLang = '{{config('language')[$local->getLanguage()]['name']}}';
         var currentUrl = '{{Request::url()}}';
