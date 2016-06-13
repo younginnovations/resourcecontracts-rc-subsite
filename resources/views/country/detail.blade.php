@@ -44,7 +44,7 @@ $countryName = trans('country')[strtoupper($country)];
                 </div>
             </div>
             <div class="contract-number-wrap">
-                <span>{{$contracts->total}}</span> {{ Lang::choice('global.contracts', $contracts->total) }}
+                <span>{{$contracts->total}}</span> {{ Lang::choice('global.documents', $contracts->total) }}
             </div>
         </div>
     </div>

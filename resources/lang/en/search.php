@@ -3,7 +3,7 @@
 $link = route('contracts');
 return [
 
-    'search_placeholder'   => 'Search for contracts...',
+    'search_placeholder'   => 'Search for documents...',
     'year_signed'          => 'Year Signed',
     'company_name'         => 'Company Name',
     'contract_type'        => 'Contract Type',

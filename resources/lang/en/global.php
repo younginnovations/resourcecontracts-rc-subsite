@@ -63,4 +63,7 @@ return [
     'text'                        => 'Text',
     'metadata'                    => 'Metadata',
     'contracts_in'                => 'Contracts in',
+    'documents'                   => 'Documents',
+    'advanced_search'             => "Advanced Search",
+
 ];
