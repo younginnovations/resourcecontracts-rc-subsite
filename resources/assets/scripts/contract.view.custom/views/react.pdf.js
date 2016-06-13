@@ -21,7 +21,7 @@ var Pdf = React.createClass({
       this.setState({
         page: "",
         content: "",
-        message: <div className="no-contract-error">{ lang.sorry_loading }  <a href= "mailto: +{email} ">{email}</a> {lang.to_let_us_know}</div> //'
+        message: <div className="no-contract-error">{ lang.sorry_loading } {' '} <a href= "mailto: +{email} ">{email}</a> {lang.to_let_us_know}</div>
       });
     } else {
       if(content !== "-"){

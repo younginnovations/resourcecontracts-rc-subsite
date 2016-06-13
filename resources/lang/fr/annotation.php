@@ -11,7 +11,7 @@ return [
     'fiscal'                     => "Budgétaire",
     'operations'                 => "Opérations",
     'social'                     => "Social",
-    'other'                      => "Autre",
+    'legal_rules'                => 'Règles juridiques',
     'no_annotation_msg'          => "Ancune annotation n'est associée à ce contrat",
     'metadata'                   => "Métadonnées",
     'see_summary'                => "Voir le résumé",
@@ -30,7 +30,7 @@ return [
     'next'                       => "Suivant",
     'sorry_loading'              => "Nous nous excusons, le chargement de ce contrat présent des problème. Prière de contacter ",
     'to_let_us_know'             => "Pour nous informer, ou bien vérifier plus tard",
-    'loading_page'               => "Chargement de la page PDF",
+    'loading_page'               => "Chargement de la page PDF ",
     'search_in_this_document'    => "Chercher dans ce document",
     'searching'                  => "Recherche en cours…",
     'no_results_found'           => "Aucun résultat trouvé",
@@ -61,8 +61,6 @@ return [
     'search_result'              => 'Résultat de la recherche',
     'annotation'                 => 'Annotation',
     'land_matrix_id'             => 'Terrain Matrice ID',
-
-
-
+    'other'                      => 'Règles juridiques'
 ];
 

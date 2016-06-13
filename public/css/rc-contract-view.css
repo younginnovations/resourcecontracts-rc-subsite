@@ -273,11 +273,10 @@
     border-bottom: 1px solid #DCDFE2;
     margin-bottom: 15px;
 }
-.metadata-view > div:nth-last-child(3) {
-    border: none;
-    padding-bottom: 0;
+.metadata-ocid:last-of-type{
+    border: 0px;
+    padding: 0px;
 }
-
 .metadata-info {
     font-size: 13px;
     padding: 18px 18px 10px;

@@ -171,7 +171,6 @@ var TextSearchResultRow = React.createClass({
                 </div>
             );
         }
-
     }
 });
 var TextSearchResultsList = React.createClass({
@@ -225,9 +224,7 @@ var TextSearchResultsList = React.createClass({
             );
         }
     }
-
 });
-
 
 var HighLight = React.createClass({
     render: function () {
@@ -235,12 +232,8 @@ var HighLight = React.createClass({
         var re = new RegExp(highlightword, "gi");
         var text = this.props.text;
         var texta = text.replace(re, "<span class\='search-highlight-word'>" + highlightword + "</span>");
-
         return (
-            <span
-                dangerouslySetInnerHTML={{
-          __html : texta
-    }}/>
+            <span dangerouslySetInnerHTML={{ __html : texta }}/>
         );
     }
 });

@@ -31,6 +31,7 @@ class APIService
      * Get Api full URL
      *
      * @param $request
+     *
      * @return string
      */
     public function apiURL($request)
@@ -58,6 +59,7 @@ class APIService
      * Get All Contracts
      *
      * @param array $filter
+     *
      * @return null|object
      */
     public function allContracts(array $filter = [])
@@ -70,7 +72,7 @@ class APIService
             'from'     => 0,
             'sort_by'  => '',
             'order'    => '',
-            'download' => false
+            'download' => false,
         ];
 
         $filter = array_merge($default, $filter);
@@ -83,7 +85,7 @@ class APIService
             'from'         => $filter['per_page'] * ($filter['from'] - 1),
             'sort_by'      => $filter['sort_by'],
             'order'        => $filter['order'],
-            'download'     => $filter['download']
+            'download'     => $filter['download'],
         ];
 
         if ($query['download']) {
@@ -102,6 +104,7 @@ class APIService
      * Get Contract Detail
      *
      * @param $contract_id
+     *
      * @return \stdClass
      */
     public function contractDetail($contract_id)
@@ -119,6 +122,7 @@ class APIService
      * Get Contract Metadata
      *
      * @param $contract_id
+     *
      * @return object|null
      */
     public function metadata($contract_id)
@@ -134,6 +138,7 @@ class APIService
      * Get Annotations
      *
      * @param $contract_id
+     *
      * @return object|null
      */
     public function getAnnotations($contract_id)
@@ -148,6 +153,7 @@ class APIService
      * Get Annotations by group
      *
      * @param $contract_id
+     *
      * @return array
      * @internal param $annotations
      */
@@ -162,6 +168,7 @@ class APIService
      * Get Text Page
      *
      * @param $contract_id
+     *
      * @return object|null
      */
     public function getTextPage($contract_id, $page_no)
@@ -176,8 +183,8 @@ class APIService
      *
      * @param $contract_id
      * @param $page_no
+     *
      * @return array|false
-     * @internal param $pageNo
      */
     public function getAnnotationPage($contract_id, $page_no)
     {
@@ -191,6 +198,7 @@ class APIService
      *
      * @param $contract_id
      * @param $query
+     *
      * @return mixed
      */
     public function getFullTextSearch($contract_id, $query)
@@ -204,6 +212,7 @@ class APIService
      * Full text search
      *
      * @param $filter
+     *
      * @return array
      */
     public function filterSearch($filter)
@@ -249,6 +258,7 @@ class APIService
      * @param       $resource
      * @param array $query
      * @param bool  $array
+     *
      * @return array|object|null
      */
     protected function apiCall($resource, array $query = [], $array = false)
@@ -267,7 +277,7 @@ class APIService
             return json_decode($data);
 
         } catch (\Exception $e) {
-            Log::error($resource . ":" . $e->getMessage(), $query);
+            Log::error($resource.":".$e->getMessage(), $query);
 
             return null;
         }
@@ -287,7 +297,9 @@ class APIService
 
     /**
      * Get Resource by Country
+     *
      * @param $filter
+     *
      * @return array
      */
     public function getResourceByCountry($filter)
@@ -297,7 +309,7 @@ class APIService
         ];
         $filter   = array_merge($default, $filter);
         $query    = [
-            'country' => $filter['country']
+            'country' => $filter['country'],
         ];
         $contract = $this->apiCall('contract/resources', $query);
 
@@ -312,6 +324,7 @@ class APIService
      * Get Country By resource
      *
      * @param $filter
+     *
      * @return array
      */
     public function getCountryByResource($filter)
@@ -321,7 +334,7 @@ class APIService
         ];
         $filter  = array_merge($default, $filter);
         $query   = [
-            'resource' => $filter['resource']
+            'resource' => $filter['resource'],
         ];
         $country = $this->apiCall('contract/countries', $query);
 
@@ -335,7 +348,9 @@ class APIService
 
     /**
      * Group the annotations by its category
+     *
      * @param $annotations
+     *
      * @return array
      */
     private function groupAnnotationsByCategory($annotations)
@@ -344,16 +359,15 @@ class APIService
         $data        = [];
         foreach ($annotations as $annotation) {
 
-            if (array_key_exists($annotation->category, $data)) {
-                array_push($data[$annotation->category], $annotation);
+            if (array_key_exists($annotation->category_key, $data)) {
+                array_push($data[$annotation->category_key], $annotation);
             } else {
 
-                $data[$annotation->category] = [$annotation];
+                $data[$annotation->category_key] = [$annotation];
             }
         }
 
         ksort($data);
-
         return $data;
     }
 
@@ -385,7 +399,9 @@ class APIService
 
     /**
      * Return all the metadata of given id
+     *
      * @param $id
+     *
      * @return array
      */
     public function getAllMetadata($id)
@@ -406,10 +422,10 @@ class APIService
         $data      = [];
         foreach ($summaries->country_summary as $summary) {
 
-            $data[trans('country.' . strtoupper($summary->key))] = [
+            $data[trans('country.'.strtoupper($summary->key))] = [
                 'key'       => $summary->key,
-                'name'      => trans('country.' . strtoupper($summary->key)),
-                'doc_count' => $summary->doc_count
+                'name'      => trans('country.'.strtoupper($summary->key)),
+                'doc_count' => $summary->doc_count,
             ];
         }
         ksort($data);
@@ -425,17 +441,18 @@ class APIService
      * @param       $resource
      * @param array $query
      * @param bool  $array
+     *
      * @return null
      */
     public function downloadAPI($resource, array $query = [], $array = false, $id = "")
     {
         try {
-            $filename = "export" . date('Y-m-d');
+            $filename = "export".date('Y-m-d');
             if (!empty($id)) {
                 $metadata     = $this->contractDetail($id);
                 $contractName = $metadata->metadata->name;
                 $contractName = str_slug($contractName, "_");
-                $filename     = "Annotations_" . $contractName . "_" . date('Ymdhis');
+                $filename     = "Annotations_".$contractName."_".date('Ymdhis');
             }
             $request           = new Request('GET', $this->apiURL($resource));
             $query['category'] = $this->category;
@@ -457,11 +474,47 @@ class APIService
             )->download('xls');
             die;
         } catch (\Exception $e) {
-            Log::error($resource . ":" . $e->getMessage(), $query);
+            Log::error($resource.":".$e->getMessage(), $query);
 
             return null;
         }
     }
 
-}
+    /**
+     * Get Annotation Detail
+     *
+     * @param $contract_id
+     * @param $annotation_id
+     *
+     * @return array
+     */
+    public function getAnnotationDetail($contract_id, $annotation_id)
+    {
+        try {
+            $metadata    = $this->metadata($contract_id);
+            $annotations = $this->getAnnotations($contract_id);
+            $annotations = collect($annotations->result);
+            $annotation  = $annotations->where('id', $annotation_id)->first();
 
+            return [
+                'contract_id'       => $metadata->id,
+                'contract_title'    => $metadata->name,
+                'id'                => $annotation->id,
+                'annotation_id'     => $annotation->annotation_id,
+                'total_pages'       => $metadata->number_of_pages,
+                'quote'             => $annotation->quote,
+                'text'              => $annotation->text,
+                'category'          => $annotation->category,
+                'category_key'      => $annotation->category_key,
+                'article_reference' => $annotation->article_reference,
+                'page_no'           => $annotation->page_no,
+                'cluster'           => $annotation->cluster,
+                'shapes'            => $annotation->shapes,
+            ];
+        } catch (\Exception $e) {
+            Log::error('Contract popup :'.$e->getMessage());
+            return null;
+        }
+    }
+
+}

@@ -26,7 +26,7 @@ var NavigationView = React.createClass({
         );
     }
 });
-//<a href="#/both">Both</a>
+
 var TextPaginationView = React.createClass({
     getInitialState: function () {
         return {
@@ -140,7 +140,6 @@ var TextPageView = React.createClass({
         this.props.contractApp.on("searchresults:ready", function () {
             if (self.props.contractApp.getSearchQuery()) {
                 var originalHtml = self.sanitizeTxt(self.props.page.get('text'));
-                // var originalHtml = (self.state.originalHtml !== "")?self.state.originalHtml:React.findDOMNode(self.refs.text_content).innerHTML;;
                 var searchresultsHtml = self.highlightSearchQuery(originalHtml, self.props.contractApp.getSearchQuery());
                 if (!self.state.originalHtml) {
                     self.setState({
@@ -194,7 +193,6 @@ var TextViewer = React.createClass({
                 el: ".text-annotator",
                 api: this.props.contractApp.getLoadAnnotationsUrl(),
                 availableTags: ["Country", "Local-Company-Name"],
-                // collection: annotationCollection,
                 annotationCategories: ["General information", "Country", "Local company name"],
                 enablePdfAnnotation: false,
                 contractApp: this.props.contractApp
@@ -237,17 +235,13 @@ var TextViewer = React.createClass({
     },
     render: function () {
         var self = this;
-
         var show_pdf_text = this.props.metadata.get('is_ocr_reviewed');
-
         var warningText = (this.message) ? "" : (<div className="text-viewer-warning">
             <span className="pull-right link close" onClick={this.handleClickWarning}>x</span>
             {lang.text_created_automatically}
             <a target="_blank" href={text_version_url}>{ lang.learn_more }</a>
         </div>);
-
         var pagesView = (this.message) ? this.message : lang.wait_while_loading;
-
         if (this.props.pagesCollection.models.length > 0) {
             pagesView = [];
             for (var i = 0; i < this.props.pagesCollection.models.length; i++) {
@@ -263,26 +257,26 @@ var TextViewer = React.createClass({
         if (typeof show_pdf_text === 'undefined') {
             warningText = '';
         }
-        if (this.props.pagesCollection.models.length === 0) {
-            warningText = (<div className="text-viewer-warning">{not_published_message}</div>);
-            pagesView = "";
-        }
-        if (show_pdf_text == false) {
-            warningText = (<div className="text-viewer-warning">{processing_pdf_file_message}</div>);
+        if(this.props.pagesCollection.models.length === 0) {
+            warningText = (
+                <div className="text-viewer-warning" dangerouslySetInnerHTML={{__html: not_published_message}}/>);
             pagesView = "";
         }
 
+        if (show_pdf_text == false) {
+            warningText = (<div className="text-viewer-warning" dangerouslySetInnerHTML={{__html:processing_pdf_file_message}}/>);
+            pagesView = "";
+        }
         return (
             <div className="text-panel" id="textview" style={this.props.style}>
-                {warningText}
+                    {warningText}
                 <div className="text-annotator">
                     <div></div>
                     <div className="text-viewer">
-                        {pagesView}
+                    {pagesView}
                     </div>
                 </div>
             </div>
         );
     }
-
 });

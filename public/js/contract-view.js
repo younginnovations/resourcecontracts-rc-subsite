@@ -29464,7 +29464,7 @@ var Pdf = React.createClass({
       this.setState({
         page: "",
         content: "",
-        message: React.createElement("div", {className: "no-contract-error"},  lang.sorry_loading, "  ", React.createElement("a", {href: "mailto: +{email} "}, email), " ", lang.to_let_us_know) //'
+        message: React.createElement("div", {className: "no-contract-error"},  lang.sorry_loading, " ", ' ', " ", React.createElement("a", {href: "mailto: +{email} "}, email), " ", lang.to_let_us_know)
       });
     } else {
       if(content !== "-"){
@@ -29708,7 +29708,7 @@ var PdfViewer = React.createClass({displayName: "PdfViewer",
         }
     },
     _onPageRendered: function () {
-        if (this.props.contractApp.getView() === "pdf" && this.loadAnnotationsFlag) {
+        if (this.props.contractApp.getView() === "pdf") {
             if (this.annotator) {
                 this.annotator.pageUpdated();
                 this.loadAnnotationsFlag = false;
@@ -29790,15 +29790,14 @@ var MetadataView = React.createClass({displayName: "MetadataView",
             var link=app_url+'/resource/'+value;
 
             if (langResource[value] && index != resLength - 1) {
-                return React.createElement('a', {href: app_url + "/resource/" + value}, langResource[value] + ' | ');
+                return React.createElement('a', {href: app_url + "/resource/" + encodeURIComponent(value)}, langResource[value] + ' | ');
             }
             else if(langResource[value] && index == resLength - 1) {
-                return React.createElement('a', {href: app_url + "/resource/" + value}, langResource[value]);
+                return React.createElement('a', {href: app_url + "/resource/" + encodeURIComponent(value)}, langResource[value]);
             }
             else {
-                return React.createElement('a', {href: app_url + "/resource/" + value}, value);
+                return React.createElement('a', {href: app_url + "/resource/" + encodeURIComponent(value)}, value);
             }
-
         });
 
         return resLang;
@@ -29855,26 +29854,22 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                 noteHtml += '<span class="note">' + note + '</span>';
                 noteHtml = (React.createElement("span", {className: "note-inner-wrapper", dangerouslySetInnerHTML: {__html: noteHtml}}));
             }
-
-            var missing_html = '';
-
+            var annexes_missing = null;
             if(this.props.metadata.get("is_annexes_missing"))
             {
-                missing_html += '<div class="metadata-ocid">'+
-                                    '<span>'+lang.annexes_missing+'</span>'+
-                                    '<span>'+lang.yes+'</span>'+
-                                '</div>';
+                annexes_missing =  (React.createElement("div", {className: "metadata-ocid"}, 
+                                        React.createElement("span", null, lang.annexes_missing), 
+                                        React.createElement("span", null, lang.yes)
+                                    ));
             }
-
+            var pages_missing = null;
             if(this.props.metadata.get("is_pages_missing"))
             {
-                missing_html += '<div class="metadata-ocid">'+
-                    '<span>'+lang.pages_missing+'</span>'+
-                    '<span>'+lang.yes+'</span>'+
-                    '</div>';
+                pages_missing = (React.createElement("div", {className: "metadata-ocid"}, 
+                                    React.createElement("span", null, lang.pages_missing), 
+                                    React.createElement("span", null, lang.yes)
+                                    ));
             }
-
-            missing_html = {__html: missing_html};
 
             return (
                 React.createElement("div", {id: "metadata"}, 
@@ -29885,9 +29880,7 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                     React.createElement("div", {className: "metadata-view"}, 
                         React.createElement("div", null, 
                             lang.metadata
-
                         ), 
-
                         React.createElement("div", {className: "metadata-country"}, 
                             React.createElement("span", null, lang.country), 
                             React.createElement("span", null, 
@@ -29918,12 +29911,9 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                             React.createElement("span", null, lang.disclosure_mode), 
                             React.createElement("span", null, this.props.metadata.get("publisher_type") || "-")
                         ), 
-
-            React.createElement("div", {dangerouslySetInnerHTML: missing_html}), 
-
-
-                        React.createElement(LandMatrixView, {
-                            metadata: this.props.metadata})
+                        annexes_missing, 
+                        pages_missing, 
+                        React.createElement(LandMatrixView, {metadata: this.props.metadata})
                     )
                 )
             );
@@ -29959,13 +29949,13 @@ var LandMatrixView = React.createClass({displayName: "LandMatrixView",
         if (category === 'Openland') {
             return (
                 React.createElement("div", {className: "metadata-ocid"}, 
-                    React.createElement("span", null, lang.land_matrix_id, ": "), 
+                    React.createElement("span", null, lang.land_matrix_id), 
                     React.createElement("a", {target: "_blank", href: this.props.metadata.get('matrix_page')}, id)
                 )
             );
         }
         else {
-            return (React.createElement("div", null));
+            return null;
         }
     }
 });
@@ -30157,7 +30147,7 @@ var NavigationView = React.createClass({displayName: "NavigationView",
         );
     }
 });
-//<a href="#/both">Both</a>
+
 var TextPaginationView = React.createClass({displayName: "TextPaginationView",
     getInitialState: function () {
         return {
@@ -30271,7 +30261,6 @@ var TextPageView = React.createClass({displayName: "TextPageView",
         this.props.contractApp.on("searchresults:ready", function () {
             if (self.props.contractApp.getSearchQuery()) {
                 var originalHtml = self.sanitizeTxt(self.props.page.get('text'));
-                // var originalHtml = (self.state.originalHtml !== "")?self.state.originalHtml:React.findDOMNode(self.refs.text_content).innerHTML;;
                 var searchresultsHtml = self.highlightSearchQuery(originalHtml, self.props.contractApp.getSearchQuery());
                 if (!self.state.originalHtml) {
                     self.setState({
@@ -30325,7 +30314,6 @@ var TextViewer = React.createClass({displayName: "TextViewer",
                 el: ".text-annotator",
                 api: this.props.contractApp.getLoadAnnotationsUrl(),
                 availableTags: ["Country", "Local-Company-Name"],
-                // collection: annotationCollection,
                 annotationCategories: ["General information", "Country", "Local company name"],
                 enablePdfAnnotation: false,
                 contractApp: this.props.contractApp
@@ -30368,17 +30356,13 @@ var TextViewer = React.createClass({displayName: "TextViewer",
     },
     render: function () {
         var self = this;
-
         var show_pdf_text = this.props.metadata.get('is_ocr_reviewed');
-
         var warningText = (this.message) ? "" : (React.createElement("div", {className: "text-viewer-warning"}, 
             React.createElement("span", {className: "pull-right link close", onClick: this.handleClickWarning}, "x"), 
             lang.text_created_automatically, 
             React.createElement("a", {target: "_blank", href: text_version_url},  lang.learn_more)
         ));
-
         var pagesView = (this.message) ? this.message : lang.wait_while_loading;
-
         if (this.props.pagesCollection.models.length > 0) {
             pagesView = [];
             for (var i = 0; i < this.props.pagesCollection.models.length; i++) {
@@ -30394,28 +30378,28 @@ var TextViewer = React.createClass({displayName: "TextViewer",
         if (typeof show_pdf_text === 'undefined') {
             warningText = '';
         }
-        if (this.props.pagesCollection.models.length === 0) {
-            warningText = (React.createElement("div", {className: "text-viewer-warning"}, not_published_message));
-            pagesView = "";
-        }
-        if (show_pdf_text == false) {
-            warningText = (React.createElement("div", {className: "text-viewer-warning"}, processing_pdf_file_message));
+        if(this.props.pagesCollection.models.length === 0) {
+            warningText = (
+                React.createElement("div", {className: "text-viewer-warning", dangerouslySetInnerHTML: {__html: not_published_message}}));
             pagesView = "";
         }
 
+        if (show_pdf_text == false) {
+            warningText = (React.createElement("div", {className: "text-viewer-warning", dangerouslySetInnerHTML: {__html:processing_pdf_file_message}}));
+            pagesView = "";
+        }
         return (
             React.createElement("div", {className: "text-panel", id: "textview", style: this.props.style}, 
-                warningText, 
+                    warningText, 
                 React.createElement("div", {className: "text-annotator"}, 
                     React.createElement("div", null), 
                     React.createElement("div", {className: "text-viewer"}, 
-                        pagesView
+                    pagesView
                     )
                 )
             )
         );
     }
-
 });
 var TextSearchForm = React.createClass({displayName: "TextSearchForm",
     handleSubmit: function (e) {
@@ -30590,7 +30574,6 @@ var TextSearchResultRow = React.createClass({displayName: "TextSearchResultRow",
                 )
             );
         }
-
     }
 });
 var TextSearchResultsList = React.createClass({displayName: "TextSearchResultsList",
@@ -30644,9 +30627,7 @@ var TextSearchResultsList = React.createClass({displayName: "TextSearchResultsLi
             );
         }
     }
-
 });
-
 
 var HighLight = React.createClass({displayName: "HighLight",
     render: function () {
@@ -30654,12 +30635,8 @@ var HighLight = React.createClass({displayName: "HighLight",
         var re = new RegExp(highlightword, "gi");
         var text = this.props.text;
         var texta = text.replace(re, "<span class\='search-highlight-word'>" + highlightword + "</span>");
-
         return (
-            React.createElement("span", {
-                dangerouslySetInnerHTML: {
-          __html : texta
-    }})
+            React.createElement("span", {dangerouslySetInnerHTML: { __html : texta}})
         );
     }
 });
@@ -30802,7 +30779,7 @@ var AnnotationTopicList = React.createClass({displayName: "AnnotationTopicList",
                 React.createElement("span", {onClick: this.handleClick.bind(this,'Fiscal')}, lang.fiscal), 
                 React.createElement("span", {onClick: this.handleClick.bind(this,'Operations')}, lang.operations), 
                 React.createElement("span", {onClick: this.handleClick.bind(this,'Social')}, lang.social), 
-                React.createElement("span", {onClick: this.handleClick.bind(this,'Other')}, lang.other)
+                React.createElement("span", {onClick: this.handleClick.bind(this,'Other')}, lang.legal_rules)
             )
         );
     }
@@ -30898,9 +30875,7 @@ var AnnotationsList = React.createClass({displayName: "AnnotationsList",
                         contractApp: this.props.contractApp, 
                         annotationsCollection: this.props.annotationsCollection, 
                         annotation: [annotationsCollectionForList[page][key]]})));
-
                 }
-
             }
         }
         return annotationsList;
@@ -30923,7 +30898,6 @@ var AnnotationsList = React.createClass({displayName: "AnnotationsList",
             return (
                 React.createElement("div", {className: "annotations-list", id: "id-annotations-list"}, 
                     this.getAnnotationItemsComponent(this.props.annotationsCollection.groupByCategory(), true)
-
                 )
             );
         }
