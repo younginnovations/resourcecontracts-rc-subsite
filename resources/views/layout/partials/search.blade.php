@@ -99,12 +99,16 @@ $category = $api->getAnnotationsCategory();
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
                 <button type="submit" class="btn btn-form-search">@lang('global.search')</button>
             </div>
-            <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
-                <button type="reset" name="reset"  id="searchclear" class="btn btn-form-search btn-form-reset">@lang('search.reset')</button>
-            </div>
             @if(!isset($searchPage))
                 <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
                     <button type="button" class="btn btn-form-search search-close">@lang('global.cancel')</button>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
+                    <button type="reset" name="reset"  id="searchclear" class="btn btn-form-search btn-form-reset">@lang('search.reset')</button>
+                </div>
+                @else
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
+                    <button type="submit" name="reset"  id="searchclear" class="btn btn-form-search btn-form-reset">@lang('search.reset')</button>
                 </div>
             @endif
         </div>
