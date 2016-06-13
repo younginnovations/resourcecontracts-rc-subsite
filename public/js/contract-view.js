@@ -30365,7 +30365,7 @@ var TextViewer = React.createClass({displayName: "TextViewer",
                         lang.text_created_automatically, 
             
 
-            React.createElement("a", {target: "_blank", href: learn_more_url},  lang.learn_more)
+            React.createElement("a", {target: "_blank", href: text_version_url},  lang.learn_more)
         ));
 
         var pagesView = (this.message) ? this.message : lang.wait_while_loading;

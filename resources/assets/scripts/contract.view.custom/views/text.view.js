@@ -242,7 +242,7 @@ var TextViewer = React.createClass({
             {            lang.text_created_automatically
             }
 
-            <a target="_blank" href= {learn_more_url}>{ lang.learn_more }</a>
+            <a target="_blank" href= {text_version_url}>{ lang.learn_more }</a>
         </div>);
 
         var pagesView = (this.message) ? this.message : lang.wait_while_loading;
