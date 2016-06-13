@@ -1470,9 +1470,6 @@ footer {
 .download-wrap {
   padding: 12px 0 12px 28px;
   background: $url_2 no-repeat -168px -40px;
-  &:after {
-    @extend %extend_17;
-  }
 }
 
 .contract-info-section {
@@ -1483,14 +1480,9 @@ footer {
     margin-right: 10px;
   }
   .download-wrap {
-    padding: 2px 0 2px 27px;
+    padding: 2px 0 2px 10px;
     background-position: -169px -49px;
     text-indent: -9999px;
-    &:after {
-      margin-left: -4px;
-      float: left;
-      margin-top: 8px;
-    }
   }
   .dropdown-menu {
     margin-top: 2px;
@@ -2598,7 +2590,7 @@ td.contract-date {
 
 .advance-filter-wrapper .social-share {
   margin: 9px;
-  right: 250px;
+  right: 170px;
   padding: 0;
   bottom: -29px;
   ul {
