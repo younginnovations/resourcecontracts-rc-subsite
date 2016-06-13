@@ -28,7 +28,7 @@
                     </div>
                 </div>
             </div>
-            <div class="contract-number-wrap" style="margin-top: -40px;">
+            <div class="contract-number-wrap">
                 <span>{{$contracts->total}}</span> {{ Lang::choice('global.documents' , $contracts->total) }}
             </div>
         </div>

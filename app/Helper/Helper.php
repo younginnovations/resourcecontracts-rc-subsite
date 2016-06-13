@@ -168,7 +168,7 @@ if (!function_exists('config_path')) {
         $languages = config('language');
         foreach ($languages as $key => $value) {
             if ($lang == $key) {
-                return getFlagUrl( $value['country_code']);
+                return getFlagUrl($value['country_code']);
             }
         }
 
@@ -216,10 +216,35 @@ if (!function_exists('config_path')) {
     function trans_array(array $codeList, $path)
     {
         foreach ($codeList as $key => $code) {
-            $codeList[$key] = _l($path.'.'.$code);
+            $codeList[$key] = _l($path . '.' . $code);
         }
 
         return $codeList;
     }
 
+    function showSearchQuery($requestParams, $filter)
+    {
+        $intersect = array_intersect_key($requestParams, $filter);
+        $q         = isset($intersect['q']) ? $intersect['q'] : '';
+        if (count($intersect) <= 1 && $q == '') {
+            return true;
+        }
+
+        return false;
+    }
+
 }
+
+/**
+ * Get Page Class Name
+ *
+ * @return string
+ */
+function getPageClass()
+{
+    $path = (explode('/', trim(app('request')->getPathInfo(), '/')));
+    $class = isset($path[0]) ? 'page-'.$path[0] : '';
+
+    return $class;
+}
+

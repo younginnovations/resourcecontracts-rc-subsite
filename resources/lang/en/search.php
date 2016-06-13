@@ -3,11 +3,11 @@
 $link = route('contracts');
 return [
 
-    'search_placeholder'   => 'Search for documents...',
+    'search_placeholder'   => 'Search for contracts',
     'year_signed'          => 'Year Signed',
     'company_name'         => 'Company Name',
     'contract_type'        => 'Contract Type',
-    'annotations_category' => 'Annotations Category',
+    'annotations_category' => 'Annotation Category',
     'language'             => 'Language',
     'document_type'        => 'Document Type',
     'download'             => 'Download',
@@ -16,4 +16,5 @@ return [
     'found_in'             => 'Found In',
     'reset'                => 'Reset',
     'select'               => 'Select',
+    'refine_search'        => 'Change or refine your search'
 ];

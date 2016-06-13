@@ -7,19 +7,9 @@ use Illuminate\Support\Facades\Lang;
 
 @section('content')
     <div class="row">
-        <div class="col-lg-12 panel-top-wrapper">
-
+        <div class="attached-top-wrapper panel-top-wrapper">
             <div class="panel-top-content">
                 <div class="pull-left">
-                    <div class="breadcrumb-wrapper">
-                        <ul>
-                            <li><a href="{{url()}}">@lang('global.home')</a></li>
-                            <li><a href="{{route('resources')}}">@lang('global.resource')</a></li>
-                            <li>{{_l("resources",$resource)}}</li>
-                        </ul>
-                    </div>
-
-
                     <div class="panel-title">
                         {{_l("resources",$resource)}}
                     </div>
@@ -39,6 +29,17 @@ use Illuminate\Support\Facades\Lang;
                     </div>
                 </div>
             </div>
+
+            <?php
+            $params = Request::all();
+            $params['country'] = '';
+            $params['resource'] = $resource;
+            $params['download'] = true;
+            ?>
+            <div class="download-csv">
+                <a href="{{route('contract.metadata.download',$params)}}">@lang('global.download')</a>
+            </div>
+
             <div class="contract-number-wrap">
 
                 <span>{{$contracts->total}}</span> {{ Lang::choice('global.documents' , $contracts->total) }}
@@ -49,15 +50,6 @@ use Illuminate\Support\Facades\Lang;
         <div class="col-lg-12 country-detail-wrapper">
             <div class="col-md-8 col-lg-8">
                 <div class="panel panel-default panel-wrap country-contract-wrap">
-                    <?php
-                    $params = Request::all();
-                    $params['country'] = '';
-                    $params['resource'] = $resource;
-                    $params['download'] = true;
-                    ?>
-                    <div class="download-csv">
-                        <a href="{{route('contract.metadata.download',$params)}}">@lang('global.download')</a>
-                    </div>
                     <div class="panel-heading">@lang('global.contracts_for') {{_l("resources",$resource)}}</div>
                     <div class="panel-body">
                         @include('contract.partials.rccontractlist')

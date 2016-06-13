@@ -2,15 +2,24 @@
 
 @section('content')
     <div class="row">
-        <div class="col-lg-12 panel-top-wrapper search-top-wrapper">
+        <div class="col-lg-12 panel-top-wrapper search-top-wrapper attached-top-wrapper">
             <div class="panel-top-content">
-                <div class="pull-left">
+                <div class="clearfix">
+                    <div class="back back-button">Back</div>
+
                     <div class="panel-title">
                         <?php
                         $q = \Illuminate\Support\Facades\Input::get('q');
+                        $params = Request::all();
+                        $showSearchQ=showSearchQuery($params,$filter);
                         ?>
-                        @lang('global.search_results')
+                        @if($showSearchQ)
+                                <div id="search_query" class="isolate" style="font-weight: normal; display: inline;">All Documents</div>
+                        @else
+                                @lang('global.search_results')
                         <div id="search_query" style="font-weight: normal; display: inline"> @if($q)for @endif <span>{{$q}}</span></div>
+                        @endif
+
                     </div>
                 </div>
             </div>
@@ -19,18 +28,19 @@
 
     <div class="row">
         <div class="filter-wrapper advance-filter-wrapper" style="min-height: 135px">
-            <div class="col-lg-12">
-                <div class="filter-country-wrap" style="display: none">
+            @if(!$showSearchQ)
+            <div class="col-lg-12 static-search">
+                <div class="filter-country-wrap " style="display: none">
                     @include('layout.partials.search', ['searchPage' => true])
                 </div>
             </div>
+           @endif
             <?php
-            $params = Request::all();
             $params['download'] = true;
             ?>
             @if($contracts->total!=0)
                 <div class="social-share" id="social-toggler">
-                    <a href="#"><span>Share</span><span class="caret"></span></a>
+                    <a href="#"><span>Share</span></a>
                     <ul class="social-toggle">
                         <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u={{ url() }}" target="_blank">Facebook</a></li>
                         <li class="google-plus"><a href="https://plus.google.com/share?url={{ url() }}" target="_blank">Google</a></li>
@@ -41,9 +51,16 @@
             @endif
 
         </div>
-        <div class="contract-number-wrap contract-search-number-wrap">
-            <span>{{$contracts->total}}</span> {{ \Illuminate\Support\Facades\Lang::choice('global.documents' , $contracts->total) }}
-        </div>
+        @if(!$showSearchQ)
+            <div class="contract-number-wrap contract-search-number-wrap has-static-search">
+                <span>{{$contracts->total}}</span> {{ \Illuminate\Support\Facades\Lang::choice('global.documents' , $contracts->total) }}
+            </div>
+            @else
+            <div class="contract-number-wrap contract-search-number-wrap">
+                <span>{{$contracts->total}}</span> {{ \Illuminate\Support\Facades\Lang::choice('global.documents' , $contracts->total) }}
+            </div>
+        @endif
+
     </div>
 
     <div class="row">
@@ -64,12 +81,6 @@
         var contractURL = '{{url('contract')}}';
         $(function () {
             $('.filter-country-wrap').show();
-        });
-
-        $(document).ready(function(){
-            $("#social-toggler").click(function(){
-                $(".social-toggle").toggle();
-            });
         });
     </script>
 @stop

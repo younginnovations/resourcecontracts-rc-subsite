@@ -2,15 +2,10 @@
 
 @section('content')
     <div class="row">
-        <div class="col-lg-12 panel-top-wrapper">
+        <div class="panel-top-wrapper attached-top-wrapper">
             <div class="panel-top-content">
                 <div class="pull-left">
-                    <div class="breadcrumb-wrapper">
-                        <ul>
-                            <li><a href="{{url()}}">@lang('global.home')</a></li>
-                            <li>@lang('global.countries')</li>
-                        </ul>
-                    </div>
+                    <div class="back back-button">Back</div>
                     <div class="panel-title">
                         @lang('global.countries')
                     </div>
@@ -22,14 +17,14 @@
                         <form class="search-form filter-form">
                             <div class="form-group">
                                 <button type="submit" class="btn btn-filter-search pull-left"></button>
-                          <input type="text" class="form-control search pull-left" placeholder="@lang('countriespage.filter_by_contry_name')">
+                          <input type="text" class="form-control search pull-left" placeholder="@lang('global.filter_by_countries')">
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="col-xs-5 col-sm-3 col-md-3 col-lg-2 pull-right">
                     <div class="filter-resource-wrap">
-                        <div class="filter-label" data-toggle="collapse-side" data-target=".side-collapse" data-target-2=".side-collapse-container">@lang('countriespage.filter_by_resources')<i></i></div>
+                       <a href={{url('/resources')}} class="filter-label">@lang('global.view_by_resource')</a>
                     </div>
                     <div class="side-collapse in">
                         <ul id="resources">

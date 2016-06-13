@@ -7,20 +7,10 @@ use Illuminate\Support\Facades\Lang;
 @section('content')
 
     <div class="row">
-        <div class="col-lg-12 panel-top-wrapper">
+        <div class="col-lg-12 panel-top-wrapper attached-top-wrapper">
             <div class="panel-top-content">
                 <div class="pull-left">
-                    @if($referrer != '')
-                        <a href="{{$referrer}}" class="back contract-back"><span>@lang('global.go_back')</span></a>
-                    @endif
-                    <div class="breadcrumb-wrapper contract-breadcrumb-wrapper">
-                        <ul>
-                            <li><a href="{{url()}}">@lang('global.home')</a></li>
-                            <li><a href="{{route('contracts')}}">{{Lang::choice('global.contracts' , 2)}}</a></li>
-                            <li>{{str_limit($contract->metadata->name, 100)}}</li>
-                        </ul>
-                    </div>
-
+                    <a href="#" class="back-button back"><span>@lang('global.go_back')</span></a>
                     <div class="panel-title contract-panel-title">
                         {{$contract->metadata->name}}
                     </div>
@@ -38,9 +28,9 @@ use Illuminate\Support\Facades\Lang;
             <div class="filter-wrapper actions-wrapper">
                 <div class="col-lg-12">
                     <div class="download-main-wrap">
-                        <div class="download-wrap">
-                            <span>@lang('global.download')</span>
-                        </div>
+                        <a class="download-wrap">
+                            @lang('global.download')
+                        </a>
 
                         <ul class="dropdown-menu">
                             <li><a href="{{route('contract.download.pdf',['id'=> $contract->metadata->open_contracting_id])}}">@lang('annotation.pdf')</a></li>
@@ -50,7 +40,7 @@ use Illuminate\Support\Facades\Lang;
                         </ul>
                     </div>
                     <div class="pull-left social-share" id="social-toggler">
-                        <a href="#"><span>Share</span><span class="caret"></span></a>
+                        <a href="#"><span>Share</span></a>
                         <ul class="social-toggle">
                             <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u={{ url() }}" target="_blank">Facebook</a></li>
                             <li class="google-plus"><a href="https://plus.google.com/share?url={{ url() }}" target="_blank">Google</a></li>
@@ -575,11 +565,6 @@ use Illuminate\Support\Facades\Lang;
             $('.annotation-category-cluster').toggle(!isScrolledIntoView('footer'));
         });
 
-        $(document).ready(function(){
-            $("#social-toggler").click(function(){
-                $(".social-toggle").toggle();
-            });
-        });
     </script>
 @stop
 

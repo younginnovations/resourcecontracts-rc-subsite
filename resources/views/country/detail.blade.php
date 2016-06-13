@@ -1,23 +1,23 @@
 <?php
 use Illuminate\Support\Facades\Lang;
 
-$countryName = trans('country')[strtoupper($country)];
+    $countryName = trans('country')[strtoupper($country)];
+    $params = Request::all();
+    $params['country'] = $country;
+    $params['resource'] = '';
+    $params['download'] = true;
 ?>
+
+
+
 @extends('layout.app-full')
 
 @section('content')
     <div class="row">
-        <div class="col-lg-12 panel-top-wrapper">
+        <div class="attached-top-wrapper panel-top-wrapper">
 
             <div class="panel-top-content">
                 <div class="pull-left">
-                    <div class="breadcrumb-wrapper">
-                        <ul>
-                            <li><a href="{{url()}}">@lang('global.home')</a></li>
-                            <li><a href="{{route('countries')}}">@lang('global.countries')</a></li>
-                            <li>{{@trans('country')[strtoupper($country)]}}</li>
-                        </ul>
-                    </div>
                     <div class="panel-title">
                         <img src="{{getFlagUrl($country)}}"/>
                         {{@trans('country')[strtoupper($country)]}}
@@ -41,11 +41,17 @@ $countryName = trans('country')[strtoupper($country)];
                             </div>
                         </form>
                     </div>
+
+                    <div class="download-csv">
+                        <a href="{{route('contract.metadata.download',$params)}}">@lang('global.download')</a>
+                    </div>
+
                 </div>
             </div>
             <div class="contract-number-wrap">
                 <span>{{$contracts->total}}</span> {{ Lang::choice('global.documents', $contracts->total) }}
             </div>
+
         </div>
     </div>
 
@@ -53,15 +59,6 @@ $countryName = trans('country')[strtoupper($country)];
         <div class="col-lg-12 country-detail-wrapper">
             <div class="col-md-8 col-lg-8">
                 <div class="panel panel-default panel-wrap country-contract-wrap">
-                    <?php
-                    $params = Request::all();
-                    $params['country'] = $country;
-                    $params['resource'] = '';
-                    $params['download'] = true;
-                    ?>
-                    <div class="download-csv">
-                        <a href="{{route('contract.metadata.download',$params)}}">@lang('global.download')</a>
-                    </div>
 
                     <div class="panel-heading">@lang('countriespage.contracts_in') {{@trans('country')[strtoupper($country)]}}</div>
                     <div class="panel-body">
