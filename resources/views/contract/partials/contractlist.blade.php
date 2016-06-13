@@ -33,9 +33,25 @@ $route = Request::path();
             <td>
 
                 @if(isset($show_advanc))<input type="checkbox" class="compare" name="compare[]" value="{{$contract->open_contracting_id}}"/>@endif
-                <a class="title-{{$contract->open_contracting_id}}" href="{{route('contract.detail',['id'=>$contract->open_contracting_id ])}}">
-                    {{ $contract->name or ''}}
-                </a>
+                    @if(isset($contract->text ) && !empty($contract->text))
+                        <a class="title-{{$contract->open_contracting_id}}" href="{{ url(sprintf("/contract/%s/view#/search/%s", $contract->open_contracting_id , $url['q'] )) }}">
+                            {{ $contract->name or ''}}
+                        </a>
+                    @elseif(isset($contract->annotations ) && !empty($contract->annotations))
+                        <a class="title-{{$contract->open_contracting_id}}"
+                           href="{{ url(sprintf("/contract/%s/view#/pdf/page/%s/annotation/%s", $contract->open_contracting_id ,$contract->annotations->page_no , $contract->annotations->annotation_id  )) }}">
+                            {{ $contract->name or ''}}
+                        </a>
+                    @elseif(isset($contract->metadata ) && !empty($contract->metadata))
+                        <a class="title-{{$contract->open_contracting_id}}"
+                           href="{{ route('contract.view' , ['id' => $contract->open_contracting_id]) }}">
+                            {{ $contract->name or ''}}
+                        </a>
+                    @else
+                        <a class="title-{{$contract->open_contracting_id}}" href="{{route('contract.detail',['id'=>$contract->open_contracting_id ])}}">
+                            {{ $contract->name or ''}}
+                        </a>
+                    @endif
                 <?php
                 $link = sprintf('/contract/%s#annotations', $contract->open_contracting_id);
                 ?>

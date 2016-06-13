@@ -62,6 +62,7 @@ return [
     'annotation'                  => 'Annotation',
     'text'                        => 'Text',
     'metadata'                    => 'Metadata',
+    'word_file'                   => "Word File",
     'contracts_in'                => 'Contracts in',
     'documents'                   => 'Documents',
     'advanced_search'             => "Advanced Search",
