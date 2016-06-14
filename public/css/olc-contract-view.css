@@ -116,11 +116,9 @@
 
 .pagination {
     display: block;
-    min-width: 146px;
     padding: 2px 0;
     position: relative;
     z-index: 1;
-    margin: 4px 2px;
 }
 
 .pagination .previous, .pagination .next {
@@ -137,14 +135,12 @@
 }
 
 .pagination input[type="text"] {
-    width: 50px;
     border: 1px solid #C0C0C0;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
     color: rgba(64, 64, 64, 0.4);
     text-align: center;
-    height: 28px;
     margin-top: 2px;
 }
 
@@ -420,20 +416,6 @@
     cursor: pointer;
 }
 
-.annotation-sort > .active {
-    background: #4797DF;
-}
-
-.annotation-sort > .active:after {
-    content: "";
-    position: absolute;
-    bottom: -6px;
-    left: 45%;
-    border-top: 6px solid #4797DF;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-}
-
 .annotations-topic-list {
     margin: 12px 0 0;
     padding: 8px 0;
@@ -451,7 +433,7 @@
 }
 
 .pdf-zoom-options {
-    padding: 16px 10px 9px 0px;
+    /*padding: 16px 10px 9px 0px;*/
 }
 
 .pdf-zoom-options + div {
@@ -958,7 +940,6 @@
 }
 
 .pdf-zoom-options {
-    padding: 4px 0;
     border-left: 1px solid #DCDFE2;
     float: left;
     margin: 0;
@@ -971,8 +952,6 @@
 }
 
 .pdf-zoom-options > .btn-default {
-    width: 24px;
-    height: 22px;
     background: #fff;
     border: 1px solid #ccc;
     text-align: center;

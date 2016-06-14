@@ -85,9 +85,8 @@ var PdfZoom = React.createClass({
         return (
             <div>
                 <div className="pdf-zoom-options" style={this.props.style}>
-                    <span>{lang.zoom}</span>
                     <a className="btn btn-default" data-ref="decrease" href="#" onClick={this.handleClick}>-</a>
-                    <p>{zoom}%</p>
+                    <p>image</p>
                     <a className="btn btn-default" data-ref="increase" href="#" onClick={this.handleClick}>+</a>
                 </div>
             </div>

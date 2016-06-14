@@ -235,6 +235,7 @@ var TextViewer = React.createClass({
     },
     render: function () {
         var self = this;
+
         var show_pdf_text = this.props.metadata.get('is_ocr_reviewed');
 
         var warningText = (this.message) ? "" : (<div className="text-viewer-warning">

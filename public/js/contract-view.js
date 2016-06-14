@@ -29648,9 +29648,8 @@ var PdfZoom = React.createClass({displayName: "PdfZoom",
         return (
             React.createElement("div", null, 
                 React.createElement("div", {className: "pdf-zoom-options", style: this.props.style}, 
-                    React.createElement("span", null, lang.zoom), 
                     React.createElement("a", {className: "btn btn-default", "data-ref": "decrease", href: "#", onClick: this.handleClick}, "-"), 
-                    React.createElement("p", null, zoom, "%"), 
+                    React.createElement("p", null, "image"), 
                     React.createElement("a", {className: "btn btn-default", "data-ref": "increase", href: "#", onClick: this.handleClick}, "+")
                 )
             )
@@ -30358,6 +30357,7 @@ var TextViewer = React.createClass({displayName: "TextViewer",
     },
     render: function () {
         var self = this;
+
         var show_pdf_text = this.props.metadata.get('is_ocr_reviewed');
 
         var warningText = (this.message) ? "" : (React.createElement("div", {className: "text-viewer-warning"}, 
