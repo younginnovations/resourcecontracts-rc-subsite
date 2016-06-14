@@ -190,18 +190,20 @@ if (!function_exists('config_path')) {
     /**
      * get language
      *
-     * @param String
+     * @param $key
      * @return array
      */
-    function _l($key)
+    function _l($lang,$key)
     {
-        if (Lang::has($key)) {
-            return Lang::get($key);
-        }
-        $array = explode('.', $key);
+        if (Lang::has($lang.'.'.$key)) {
 
-        return end($array);
+            return Lang::get($lang.'.'.$key);
+        }
+
+
+        return $key;
     }
+
 
     /**
      * Trans Array List

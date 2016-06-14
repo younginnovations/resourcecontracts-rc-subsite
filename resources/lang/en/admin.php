@@ -25,4 +25,5 @@ return [
     "login"         => "Login",
     "sign_in"       => "Please Sign In",
     "close"         => "Close",
+    "loading"       => "Loading"
 ];

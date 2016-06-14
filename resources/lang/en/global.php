@@ -66,5 +66,7 @@ return [
     'contracts_in'                => 'Contracts in',
     'documents'                   => 'Documents',
     'advanced_search'             => "Advanced Search",
+    'yes'                         => "Yes",
+    'no'                          => "No",
 
 ];

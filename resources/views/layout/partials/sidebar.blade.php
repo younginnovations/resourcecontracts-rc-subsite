@@ -43,7 +43,7 @@ if (!isset($summary)) {
                 @foreach(array_slice($summary->resource_summary,0,10,true) as $resource)
                     <li>
                         <a href="{{route('resource.detail', ['key'=>urlencode($resource->key)])}}">
-                            <span>@lang('resources.'.ucfirst($resource->key))</span>
+                            <span>{{ _l("resources",$resource->key) }}</span>
                             <small class="label pull-right">{{$resource->doc_count}}</small>
                         </a>
                     </li>

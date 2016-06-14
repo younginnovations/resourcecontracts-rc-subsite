@@ -85,7 +85,7 @@ if ($path[0] == "resource") {
                 <ul>
                     @foreach($contract->resource as $resource)
                         @if(!empty($resource))
-                            <li>{{$resource}}</li>
+                            <li>{{_l("resources",$resource)}}</li>
                         @else
                             -
                         @endif

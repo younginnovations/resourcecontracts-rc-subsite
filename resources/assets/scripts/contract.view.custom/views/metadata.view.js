@@ -59,6 +59,26 @@ var MetadataView = React.createClass({
         e.preventDefault();
         this.setState({showMoreText: !this.state.showMoreText});
     },
+    getResourceLang:function(resources){
+        var resLang=[];
+        var resLength=resources.length;
+        var resLang=_.map(resources,function(value,index){
+            var link=app_url+'/resource/'+value;
+
+            if (langResource[value] != 'undefined' && index != resLength - 1) {
+                return React.createElement('a', {href: app_url + "/resource/" + value}, langResource[value] + ' | ');
+            }
+            else if (langResource[value] != 'undefined' && index == resLength - 1) {
+                return React.createElement('a', {href: app_url + "/resource/" + value}, langResource[value]);
+            }
+            else {
+                return React.createElement('a', {href: app_url + "/resource/" + value}, value);
+            }
+
+        });
+
+        return resLang;
+    },
     render: function () {
         var showLabel = lang.show_more;
         if (this.state.showMoreMetadata) {
@@ -91,15 +111,6 @@ var MetadataView = React.createClass({
                 });
             }
             var re = new RegExp(' ', 'g');
-            var resourceLinkBase = app_url + "/resources/";
-            var resourceLength = this.props.metadata.get("resource").length;
-            var resources = this.props.metadata.get("resource").map(function (resource, i) {
-                if (i != resourceLength - 1) {
-                    return React.createElement('a', {href: app_url + "/resource/" + resource, key: i}, resource + ' | ');
-                } else {
-                    return React.createElement('a', {href: app_url + "/resource/" + resource, key: i}, resource);
-                }
-            });
 
             var note = this.props.metadata.get("note");
             if (note != "") {
@@ -169,7 +180,7 @@ var MetadataView = React.createClass({
                         </div>
                         <div className="metadata-resource">
                             <span>{lang.resource}</span>
-                            <span>{resources}</span>
+                            <span>{this.getResourceLang(this.props.metadata.get("resource"))}</span>
                         </div>
                         <div className="metadata-type-contract">
                             <span>{lang.type_contract}</span>
