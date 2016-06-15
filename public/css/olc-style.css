@@ -2543,7 +2543,9 @@ input.select2-search__field {
     border: 1px solid #cccccc;
     -webkit-border-radius: 4px;
             border-radius: 4px;
-    background: #fff; }
+    background: #fff;
+    padding: 0;
+    z-index: 88; }
   .social-share li {
     float: none !important;
     margin: 0 !important;
@@ -2557,7 +2559,7 @@ input.select2-search__field {
   text-indent: -9999px;
   width: 21px;
   height: 21px;
-  background: url(../images/share-sprite.png) no-repeat -22px -40px; }
+  background: url(../images/share-sprite.png) no-repeat -24px -40px; }
 
 .social-share li a:hover {
   background-position: -24px 0; }
@@ -2574,31 +2576,36 @@ input.select2-search__field {
     background-position: -49px 0; }
 
 /* --------- style for advance filter social share ------------ */
-.advance-filter-wrapper .social-share {
+.advance-filter-wrapper .social-share,
+.actions-wrapper .social-share {
   margin: 7px;
   right: 170px;
   bottom: -29px;
   padding: 0; }
-  .advance-filter-wrapper .social-share > a {
+  .advance-filter-wrapper .social-share > a,
+  .actions-wrapper .social-share > a {
     display: block;
     font-size: 12px;
     color: #217B46;
     width: auto;
     text-decoration: none;
-    padding: 13px 25px 13px 44px;
+    padding: 13px 25px 13px 40px;
     background: url("../../images/ic-sprite.svg") -27px 2px no-repeat;
     height: 43px;
     -webkit-border-radius: 50%;
             border-radius: 50%;
     position: relative; }
-  .advance-filter-wrapper .social-share span {
+  .advance-filter-wrapper .social-share span,
+  .actions-wrapper .social-share span {
     text-indent: 0; }
-  .advance-filter-wrapper .social-share .caret {
+  .advance-filter-wrapper .social-share .caret,
+  .actions-wrapper .social-share .caret {
     position: absolute;
     top: 20px;
     right: 12px;
     color: #4a4a4a; }
-  .advance-filter-wrapper .social-share ul {
+  .advance-filter-wrapper .social-share ul,
+  .actions-wrapper .social-share ul {
     margin: 0;
     padding: 11px 17px 11px 20px;
     overflow: hidden;
@@ -2609,16 +2616,19 @@ input.select2-search__field {
     left: -6px;
     margin-left: 0;
     display: none; }
-  .advance-filter-wrapper .social-share li {
+  .advance-filter-wrapper .social-share li,
+  .actions-wrapper .social-share li {
     padding: 0; }
-  .advance-filter-wrapper .social-share li a {
+  .advance-filter-wrapper .social-share li a,
+  .actions-wrapper .social-share li a {
     text-indent: 0;
     width: auto;
     height: auto;
     padding: 10px 15px 10px 40px;
     background: none;
     position: relative; }
-    .advance-filter-wrapper .social-share li a:before {
+    .advance-filter-wrapper .social-share li a:before,
+    .actions-wrapper .social-share li a:before {
       content: "";
       width: 21px;
       height: 21px;
@@ -2626,19 +2636,61 @@ input.select2-search__field {
       top: 10px;
       left: 10px;
       background: url(../images/share-sprite.png) no-repeat -25px -40px; }
-    .advance-filter-wrapper .social-share li a:hover:before {
+    .advance-filter-wrapper .social-share li a:hover:before,
+    .actions-wrapper .social-share li a:hover:before {
       background-position: -25px 0; }
-  .advance-filter-wrapper .social-share .social-share li.facebook a:before {
+  .advance-filter-wrapper .social-share .social-share li.facebook a:before,
+  .actions-wrapper .social-share .social-share li.facebook a:before {
     margin-left: -4px; }
-  .advance-filter-wrapper .social-share .google-plus a:before {
+  .advance-filter-wrapper .social-share .google-plus a:before,
+  .actions-wrapper .social-share .google-plus a:before {
     background-position: -50px -40px;
     margin-left: 0; }
-  .advance-filter-wrapper .social-share .google-plus a:hover:before {
+  .advance-filter-wrapper .social-share .google-plus a:hover:before,
+  .actions-wrapper .social-share .google-plus a:hover:before {
     background-position: -50px 0; }
-  .advance-filter-wrapper .social-share .twitter a:before {
+  .advance-filter-wrapper .social-share .twitter a:before,
+  .actions-wrapper .social-share .twitter a:before {
     background-position: 0 -40px; }
-  .advance-filter-wrapper .social-share .twitter a:hover:before {
+  .advance-filter-wrapper .social-share .twitter a:hover:before,
+  .actions-wrapper .social-share .twitter a:hover:before {
     background-position: 0 0; }
+
+.actions-wrapper .social-share {
+  margin: 0;
+  position: relative;
+  right: auto;
+  bottom: auto; }
+  .actions-wrapper .social-share > a {
+    height: auto;
+    padding: 11px 25px 11px 40px;
+    background: url("../../images/ic-sprite.svg") -27px 0px no-repeat; }
+  .actions-wrapper .social-share ul {
+    top: 100%;
+    left: 0; }
+  .actions-wrapper .social-share .caret {
+    position: absolute;
+    top: 18px; }
+
+.dropdown-menu {
+  border: solid 1px #ccc;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  margin: 0;
+  padding: 0; }
+
+.dropdown-menu > li > a,
+.dropdown-menu > div > li > a {
+  padding: 10px 15px;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  color: #217B46; }
+  .dropdown-menu > li > a:hover,
+  .dropdown-menu > div > li > a:hover {
+    text-decoration: underline;
+    color: #217B46;
+    background: none; }
 
 /* ----- style for french language ------ */
 .lang-fr .advance-filter-wrapper .social-share {

@@ -3488,6 +3488,8 @@ input.select2-search__field {
       border: 1px solid #cccccc;
       border-radius: 4px;
       background: #fff;
+      padding: 0;
+      z-index: 88;
     }
 
     li {
@@ -3506,7 +3508,7 @@ input.select2-search__field {
     text-indent: -9999px;
     width: 21px;
     height: 21px;
-    background: url(../images/share-sprite.png) no-repeat -22px -40px;
+    background: url(../images/share-sprite.png) no-repeat -24px -40px;
   }
 
 .social-share li a:hover {
@@ -3532,7 +3534,8 @@ input.select2-search__field {
 
 /* --------- style for advance filter social share ------------ */
 
-.advance-filter-wrapper .social-share {
+.advance-filter-wrapper .social-share,
+.actions-wrapper .social-share{
   margin: 7px;
   right: 170px;
   bottom: -29px;
@@ -3544,7 +3547,7 @@ input.select2-search__field {
     color: $color_link_color;
     width: auto;
     text-decoration: none;
-    padding: 13px 25px 13px 44px;
+    padding: 13px 25px 13px 40px;
     background: url("../../images/ic-sprite.svg") -27px 2px no-repeat;
     height: 43px;
     border-radius: 50%;
@@ -3630,3 +3633,48 @@ input.select2-search__field {
   }
 }
 
+.actions-wrapper .social-share{
+  margin: 0;
+  position: relative;
+  right: auto;
+  bottom: auto;
+
+  > a{
+    height: auto;
+    padding: 11px 25px 11px 40px;
+    background: url("../../images/ic-sprite.svg") -27px 0px no-repeat;
+  }
+
+  ul{
+    top: 100%;
+    left: 0;
+  }
+
+ .caret {
+   position: absolute;
+   top: 18px;
+ }
+
+}
+
+.dropdown-menu{
+  border: solid 1px #ccc;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-menu > li > a,
+.dropdown-menu > div > li > a {
+  padding: 10px 15px;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  color: $color_link_color;
+
+  &:hover{
+    text-decoration: underline;
+    color: $color_link_color;
+    background: none;
+  }
+}
