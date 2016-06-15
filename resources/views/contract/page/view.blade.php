@@ -55,6 +55,7 @@
         };
 
         var lang =  {!!  json_encode(trans('annotation')) !!};
+        var langResource =  {!!  json_encode(trans('resources')) !!};
         var email = '<?php echo env('CONTACT_MAIL'); ?>';
         var back_url = '{!!$back!!}';
         var app_url = '{{url()}}';

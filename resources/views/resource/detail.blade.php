@@ -15,13 +15,13 @@ use Illuminate\Support\Facades\Lang;
                         <ul>
                             <li><a href="{{url()}}">@lang('global.home')</a></li>
                             <li><a href="{{route('resources')}}">@lang('global.resource')</a></li>
-                            <li>{{ucfirst($resource)}}</li>
+                            <li>{{_l("resources",$resource)}}</li>
                         </ul>
                     </div>
 
 
                     <div class="panel-title">
-                        {{ucfirst(trans('resources')[$resource])}}
+                        {{_l("resources",$resource)}}
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@ use Illuminate\Support\Facades\Lang;
                     <div class="download-csv">
                         <a href="{{route('contract.metadata.download',$params)}}">@lang('global.download')</a>
                     </div>
-                    <div class="panel-heading">@lang('global.contracts_for') {{ucfirst(trans('resources')[$resource])}}</div>
+                    <div class="panel-heading">@lang('global.contracts_for') {{_l("resources",$resource)}}</div>
                     <div class="panel-body">
                         @include('contract.partials.rccontractlist')
                         @include('contract.partials.pagination', ['total_item' => $contracts->total, 'per_page'=>$contracts->per_page, 'current_page' => $currentPage ])

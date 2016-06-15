@@ -78,7 +78,7 @@ $countryName = trans('country')[strtoupper($country)];
                         <ul>
                             @foreach($resources as $resource)
                                 <li>
-                                    <span><a href="{{route("search")}}?q=&country%5B%5D={{$country}}&resource%5B%5D={{urlencode($resource->resource)}}">{{ucfirst($resource->resource)}}</a></span>
+                                    <span><a href="{{route("search")}}?q=&country%5B%5D={{$country}}&resource%5B%5D={{urlencode($resource->resource)}}">{{_l("resources",$resource->resource)}}</a></span>
                                     <span class="count pull-right">{{$resource->contract}}</span>
                                 </li>
                             @endforeach

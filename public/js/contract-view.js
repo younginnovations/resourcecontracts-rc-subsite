@@ -29783,6 +29783,26 @@ var MetadataView = React.createClass({displayName: "MetadataView",
         e.preventDefault();
         this.setState({showMoreText: !this.state.showMoreText});
     },
+    getResourceLang:function(resources){
+        var resLang=[];
+        var resLength=resources.length;
+        var resLang=_.map(resources,function(value,index){
+            var link=app_url+'/resource/'+value;
+
+            if (langResource[value] != 'undefined' && index != resLength - 1) {
+                return React.createElement('a', {href: app_url + "/resource/" + value}, langResource[value] + ' | ');
+            }
+            else if (langResource[value] != 'undefined' && index == resLength - 1) {
+                return React.createElement('a', {href: app_url + "/resource/" + value}, langResource[value]);
+            }
+            else {
+                return React.createElement('a', {href: app_url + "/resource/" + value}, value);
+            }
+
+        });
+
+        return resLang;
+    },
     render: function () {
         var showLabel = lang.show_more;
         if (this.state.showMoreMetadata) {
@@ -29815,15 +29835,6 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                 });
             }
             var re = new RegExp(' ', 'g');
-            var resourceLinkBase = app_url + "/resources/";
-            var resourceLength = this.props.metadata.get("resource").length;
-            var resources = this.props.metadata.get("resource").map(function (resource, i) {
-                if (i != resourceLength - 1) {
-                    return React.createElement('a', {href: app_url + "/resource/" + resource, key: i}, resource + ' | ');
-                } else {
-                    return React.createElement('a', {href: app_url + "/resource/" + resource, key: i}, resource);
-                }
-            });
 
             var note = this.props.metadata.get("note");
             if (note != "") {
@@ -29893,7 +29904,7 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                         ), 
                         React.createElement("div", {className: "metadata-resource"}, 
                             React.createElement("span", null, lang.resource), 
-                            React.createElement("span", null, resources)
+                            React.createElement("span", null, this.getResourceLang(this.props.metadata.get("resource")))
                         ), 
                         React.createElement("div", {className: "metadata-type-contract"}, 
                             React.createElement("span", null, lang.type_contract), 

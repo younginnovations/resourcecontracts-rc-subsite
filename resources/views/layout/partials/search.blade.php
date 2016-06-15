@@ -22,9 +22,11 @@ $category = $api->getAnnotationsCategory();
             </div>
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
                 <label for="">@lang('global.resource')</label>
+
                 <select name="resource[]" id="resource" multiple="multiple">
                     @foreach($summary->resource_summary as $resource)
-                        <option @if(isset($filter['resource']) && in_array($resource->key, $filter['resource']))selected="selected" @endif value="{{$resource->key}}">{{_l("resources.$resource->key")}}</option>
+
+                        <option @if(isset($filter['resource']) && in_array($resource->key, $filter['resource']))selected="selected" @endif value="{{$resource->key}}">{{_l("resources",$resource->key)}}</option>
                     @endforeach
                 </select>
             </div>

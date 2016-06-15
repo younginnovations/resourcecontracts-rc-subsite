@@ -16,4 +16,14 @@ return [
     "page_title"    => "Titre de la page",
     "slug"          => "Limace",
     "action"        => "Action",
+    "editing"       => "Vous êtes en mode d'édition. S'il vous plaît",
+    "click_here"    => "cliquez ici",
+    "to_edit"       => "à la page modifier",
+    "logout"        => "Se déconnecter",
+    "email"         => "Email",
+    "password"      => "Mot de passe",
+    "login"         => "S'identifier",
+    "sign_in"       => "S'il vous plaît Connectez-vous",
+    "close"         => "Fermer",
+    "loading"       => "Chargement"
 ];

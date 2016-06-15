@@ -142,10 +142,9 @@ use Illuminate\Support\Facades\Lang;
                                 ?>
                                 <span class="resource-list">
                                 @foreach($resource as $res)
-                                        <a href="{{route("resource.detail",['key'=>urlencode($res)])}}">{{$res}}</a>
+                                        <a href="{{route("resource.detail",['key'=>urlencode($res)])}}">{{_l("resources",$res)}}</a>
                                     @endforeach
-                            </span>
-                            </li>
+                            </span>                            </li>
                         </ul>
 
                         @if(env('CATEGORY') =="olc")
@@ -273,9 +272,10 @@ use Illuminate\Support\Facades\Lang;
                                     <label for="">@lang('contract.operator')</label>
                         <span>@if(isset($company->is_operator))
                                 @if($company->is_operator==true)
-                                    Yes
+                                    @lang('global.yes')
                                 @elseif($company->is_operator==false)
-                                    No
+                                    @lang('global.no')
+
                                 @else
                                     -
                                 @endif
@@ -389,7 +389,13 @@ use Illuminate\Support\Facades\Lang;
                         </li>
                         <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <label for="">@lang('contract.disclosure_mode')</label>
-                            <span>{{_e($contract->metadata,'publisher_type','-')}}</span>
+                            <span>
+                                @if(!empty($contract->metadata->publisher_type))
+                                <?php $a = $contract->metadata->publisher_type ?>
+                                     {{_l("codelist/disclosure",$a)}}
+                                @else -
+                                @endif
+                            </span>
                         </li>
                     </ul>
                 </div>

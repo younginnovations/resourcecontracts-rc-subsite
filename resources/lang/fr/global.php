@@ -68,5 +68,7 @@ return [
     'contracts_in'                => "Contrats en",
     'documents'                   => "Documents",
     'advanced_search'             => "Recherche Avancée",
+    'yes'                         => "Oui",
+    'no'                          => "Non",
 
 ];
