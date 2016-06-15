@@ -113,7 +113,14 @@ config(
                 'country_code' => 'fr',
                 'name'         => 'French',
                 'dir'          => 'ltl'
+            ],
+            'ar' => [
+                'code'         => 'ar',
+                'country_code' => 'tn',
+                'name'         => 'Arabic',
+                'dir'          => 'rtl'
             ]
+
         ],
         'localisation'=>false
 
