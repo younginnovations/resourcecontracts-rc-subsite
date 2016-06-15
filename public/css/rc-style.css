@@ -701,7 +701,8 @@ footer {
     border-left: 0;
     padding-left: 0; }
 
-.download-csv, .advance-filter-wrapper .social-share {
+.download-csv,
+.advance-filter-wrapper .social-share {
   position: absolute;
   bottom: -20px;
   right: 40px;
@@ -1793,49 +1794,6 @@ td.contract-date {
 .panel-top-content > .pull-left {
   width: 90%; }
 
-.social-share {
-  margin: 9px;
-  float: right;
-  padding: 0; }
-
-.social-share li {
-  list-style: none;
-  float: left;
-  margin-right: 10px; }
-
-.social-share li a {
-  display: block;
-  text-indent: -9999px;
-  width: 21px;
-  height: 21px;
-  background: url(../images/share-sprite.png) no-repeat -22px -40px; }
-
-.social-share li.google-plus a {
-  background-position: -50px -40px;
-  margin-left: 4px; }
-
-.social-share li.twitter a {
-  background-position: 0 -40px; }
-
-.social-share li a:hover {
-  background-position: -22px 0; }
-
-.social-share li.google-plus a:hover {
-  background-position: -50px 0; }
-
-.social-share li.twitter a:hover {
-  background-position: 0 0; }
-
-.advance-filter-wrapper .social-share {
-  margin: 9px;
-  right: 170px;
-  padding: 0;
-  bottom: -29px; }
-  .advance-filter-wrapper .social-share ul {
-    margin: 0;
-    padding: 11px 17px 11px 20px;
-    overflow: hidden; }
-
 .panel-annotation-list-wrap .col-md-8 {
   padding: 0; }
   .panel-annotation-list-wrap .col-md-8 .category-title ~ div {
@@ -2475,6 +2433,218 @@ input.select2-search__field {
   border-top: 6px solid #F37356;
   border-left: 6px solid transparent;
   border-right: 6px solid transparent; }
+
+/*
+  .social-share {
+    margin: 9px;
+    float: right;
+    padding: 0;
+  }
+
+  .social-share li {
+    list-style: none;
+    float: left;
+    margin-right: 10px;
+  }
+
+  .social-share li a {
+    display: block;
+    text-indent: -9999px;
+    width: 21px;
+    height: 21px;
+    background: url(../images/share-sprite.png) no-repeat -22px -40px;
+  }
+
+  .social-share li.google-plus a {
+    background-position: -50px -40px;
+    margin-left: 4px;
+  }
+
+  .social-share li.twitter a {
+    background-position: 0 -40px;
+  }
+
+  .social-share li a:hover {
+    background-position: -22px 0;
+  }
+
+  .social-share li.google-plus a:hover {
+    background-position: -50px 0;
+  }
+
+  .social-share li.twitter a:hover {
+    background-position: 0 0;
+  }
+  */
+.social-share {
+  margin: 13px;
+  position: relative; }
+  .social-share a, .social-share span {
+    display: block; }
+  .social-share a {
+    background: url("../../images/ic-sprite.svg") -40px -11px no-repeat;
+    width: 18px;
+    height: 18px; }
+  .social-share span {
+    text-indent: -9999px;
+    overflow: hidden; }
+  .social-share ul {
+    position: absolute !important;
+    border: solid 1px;
+    top: 27px;
+    left: 50%;
+    margin: 0 0 0 -18px;
+    border: 1px solid #cccccc;
+    -webkit-border-radius: 4px;
+            border-radius: 4px;
+    background: #fff;
+    padding: 0;
+    z-index: 88; }
+  .social-share li {
+    float: none !important;
+    margin: 0 !important;
+    padding: 6px;
+    border-bottom: dotted 1px #eee; }
+    .social-share li:last-child {
+      border: none; }
+
+.social-share li a {
+  display: block;
+  text-indent: -9999px;
+  width: 21px;
+  height: 21px;
+  background: url(../images/share-sprite.png) no-repeat -24px -40px; }
+
+.social-share li a:hover {
+  background-position: -24px 0; }
+
+.social-share li.twitter a {
+  background-position: 4px -40px; }
+  .social-share li.twitter a:hover {
+    background-position: 4px 0; }
+
+.social-share li.google-plus a {
+  background-position: -49px -40px;
+  margin-left: 0; }
+  .social-share li.google-plus a:hover {
+    background-position: -49px 0; }
+
+/* --------- style for advance filter social share ------------ */
+.advance-filter-wrapper .social-share,
+.actions-wrapper .social-share {
+  margin: 7px;
+  right: 170px;
+  bottom: -29px;
+  padding: 0; }
+  .advance-filter-wrapper .social-share > a,
+  .actions-wrapper .social-share > a {
+    display: block;
+    font-size: 12px;
+    color: #F37356;
+    width: auto;
+    text-decoration: none;
+    padding: 13px 25px 13px 40px;
+    background: url("../../images/ic-sprite.svg") -27px 2px no-repeat;
+    height: 43px;
+    -webkit-border-radius: 50%;
+            border-radius: 50%;
+    position: relative; }
+  .advance-filter-wrapper .social-share span,
+  .actions-wrapper .social-share span {
+    text-indent: 0; }
+  .advance-filter-wrapper .social-share .caret,
+  .actions-wrapper .social-share .caret {
+    position: absolute;
+    top: 20px;
+    right: 12px;
+    color: #4a4a4a; }
+  .advance-filter-wrapper .social-share ul,
+  .actions-wrapper .social-share ul {
+    margin: 0;
+    padding: 11px 17px 11px 20px;
+    overflow: hidden;
+    padding: 0;
+    top: 50px;
+    z-index: 99;
+    background: #fff;
+    left: -6px;
+    margin-left: 0;
+    display: none; }
+  .advance-filter-wrapper .social-share li,
+  .actions-wrapper .social-share li {
+    padding: 0; }
+  .advance-filter-wrapper .social-share li a,
+  .actions-wrapper .social-share li a {
+    text-indent: 0;
+    width: auto;
+    height: auto;
+    padding: 10px 15px 10px 40px;
+    background: none;
+    position: relative; }
+    .advance-filter-wrapper .social-share li a:before,
+    .actions-wrapper .social-share li a:before {
+      content: "";
+      width: 21px;
+      height: 21px;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: url(../images/share-sprite.png) no-repeat -25px -40px; }
+    .advance-filter-wrapper .social-share li a:hover:before,
+    .actions-wrapper .social-share li a:hover:before {
+      background-position: -25px 0; }
+  .advance-filter-wrapper .social-share .social-share li.facebook a:before,
+  .actions-wrapper .social-share .social-share li.facebook a:before {
+    margin-left: -4px; }
+  .advance-filter-wrapper .social-share .google-plus a:before,
+  .actions-wrapper .social-share .google-plus a:before {
+    background-position: -50px -40px;
+    margin-left: 0; }
+  .advance-filter-wrapper .social-share .google-plus a:hover:before,
+  .actions-wrapper .social-share .google-plus a:hover:before {
+    background-position: -50px 0; }
+  .advance-filter-wrapper .social-share .twitter a:before,
+  .actions-wrapper .social-share .twitter a:before {
+    background-position: 0 -40px; }
+  .advance-filter-wrapper .social-share .twitter a:hover:before,
+  .actions-wrapper .social-share .twitter a:hover:before {
+    background-position: 0 0; }
+
+.actions-wrapper .social-share {
+  margin: 0;
+  position: relative;
+  right: auto;
+  bottom: auto; }
+  .actions-wrapper .social-share > a {
+    height: auto;
+    padding: 11px 25px 11px 40px;
+    background: url("../../images/ic-sprite.svg") -27px 0px no-repeat; }
+  .actions-wrapper .social-share ul {
+    top: 100%;
+    left: 0; }
+  .actions-wrapper .social-share .caret {
+    position: absolute;
+    top: 18px; }
+
+.dropdown-menu {
+  border: solid 1px #ccc;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  margin: 0;
+  padding: 0; }
+
+.dropdown-menu > li > a,
+.dropdown-menu > div > li > a {
+  padding: 10px 15px;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  color: #F37356; }
+  .dropdown-menu > li > a:hover,
+  .dropdown-menu > div > li > a:hover {
+    text-decoration: underline;
+    color: #F37356;
+    background: none; }
 
 /* ---- style for french language ------- */
 .lang-fr .advance-filter-wrapper .social-share {

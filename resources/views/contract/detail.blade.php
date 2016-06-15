@@ -49,11 +49,14 @@ use Illuminate\Support\Facades\Lang;
                             @endif
                         </ul>
                     </div>
-                    <ul class="pull-left social-share">
-                        <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u={{ url() }}" target="_blank">FB</a></li>
-                        <li class="google-plus"><a href="https://plus.google.com/share?url={{ url() }}" target="_blank">G+</a></li>
-                        <li class="twitter"><a href="https://twitter.com/share?text={{ meta($meta)->title }}" target="_blank">T</a></li>
-                    </ul>
+                    <div class="pull-left social-share" id="social-toggler">
+                        <a href="#"><span>Share</span><span class="caret"></span></a>
+                        <ul class="social-toggle">
+                            <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u={{ url() }}" target="_blank">Facebook</a></li>
+                            <li class="google-plus"><a href="https://plus.google.com/share?url={{ url() }}" target="_blank">Google</a></li>
+                            <li class="twitter"><a href="https://twitter.com/share?text={{ meta($meta)->title }}" target="_blank">Twitter</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -564,6 +567,12 @@ use Illuminate\Support\Facades\Lang;
 
         $(window).on('scroll', function () {
             $('.annotation-category-cluster').toggle(!isScrolledIntoView('footer'));
+        });
+
+        $(document).ready(function(){
+            $("#social-toggler").click(function(){
+                $(".social-toggle").toggle();
+            });
         });
     </script>
 @stop
