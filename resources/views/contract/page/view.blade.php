@@ -24,9 +24,6 @@
 @stop
 
 @section('content')
-    <div id="content">
-        <div class="loading"><img src="{{url('images/loading.gif')}}"/>@lang('admin.loading')</div>
-    </div>
     <?php
     $textDownloadUrl = ($contract->metadata->is_ocr_reviewed && env('CATEGORY') != "olc") ? route('contract.download', ['id' => $contract->metadata->open_contracting_id]) : "";
     $annotationsDownloadUrl = ($contract->annotations->total > 0) ? route('contract.annotations.download', ['id' => $contract->metadata->open_contracting_id]) : "";
@@ -34,6 +31,62 @@
     $languages = json_encode(config('language'));
 
     ?>
+    <div class="title-wrap">
+        <nav class="clearfix navbar">
+            <div class="navbar-header">
+                <span data-toggle="collapse-sidebar" data-target=".sidebar-collapse" data-target-2=".sidebar-collapse-container" class="pull-left trigger">trigger</span>
+                <a class="navbar-brand" href={{url('/')}} >{{env('CATEGORY')=='rc' ? 'Resource' : 'Openland' }}<span class="beta">Beta</span><span>Contracts</span></a>
+            </div>
+
+            <div class="col-sm-12 col-md-9 col-lg-10 navbar-right">
+                    @include('layout.partials.search')
+            </div>
+
+            @if(config('localisation'))
+                <div class="dropdown language-selector" >
+                    <button class="btn  dropdown-toggle"  data-toggle="dropdown" id="dropdownMenu2" aria-expanded="false">
+                        <img style="width: 16px ; height: 16px; margin-right: 6px;" src="{{getCountryByLang(app('translator')->getLocale())}}"/>{{config('language')[app('translator')->getLocale()]['name']}}
+                        <span class="caret"></span>
+                    </button>
+
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" style="min-width: 110px;">
+
+                        @foreach (config('language') as $locale => $language)
+                            @if(app('translator')->getLocale()!=$locale)
+                                <li>
+                                    <a href={{ url(Request::url().'?lang='.$locale)}}>
+                                        <img style="width: 16px ; height: 16px; margin-right: 6px;" src="{{getCountryByLang($locale)}}"/>
+                                        {{$language['name']}}
+                                    </a>
+                                </li>
+                            @endif
+                        @endforeach
+
+                    </ul>
+                </div>
+            @endif
+        </nav>
+        <div class="col-lg-12 panel-top-wrapper attached-top-wrapper">
+            <div class="panel-top-content">
+                <div class="pull-left clearfix">
+                    <div class="back back-button">Back</div>
+                    <div class="panel-title">
+                        {{$contract->metadata->name}}
+                    </div>
+                </div>
+
+                <div class="pull-right action-links">
+                    <ul><li>
+                            <a  class="view-summary-btn" href={{route('contract.view',['id'=>$contract->metadata->open_contracting_id])}}>@lang('global.view_summary')</a>
+                        </li></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="content">
+        <div class="loading"><img src="{{url('images/loading.gif')}}"/>@lang('admin.loading')</div>
+    </div>
+
 @endsection
 @section('js')
     <script src="{{ url('js/pdfjs/pdf.js') }}"></script>

@@ -1,8 +1,5 @@
 <?php
-
-
 return [
-
     'an_online_repository_of'     => 'An online repository of',
     'open_land_contracts'         => 'Open Land Contracts',
     'search'                      => 'Search',
@@ -69,5 +66,6 @@ return [
     'yes'                         => "Yes",
     'no'                          => "No",
     'view_by_country'             => 'View by Country',
-    'view_by_resource'            => 'View by Resource'
+    'view_by_resource'            => 'View by Resource',
+    'view_summary'                => 'View Summary',
 ];

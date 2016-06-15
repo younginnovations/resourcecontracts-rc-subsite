@@ -660,8 +660,8 @@
 }
 
 .navbar-header {
-    border-right: 1px solid rgb(220, 223, 226);
-    border-right: 1px solid rgba(220, 223, 226, 0.7);
+   /* border-right: 1px solid rgb(220, 223, 226);
+    border-right: 1px solid rgba(220, 223, 226, 0.7);*/
     padding: 0 16px;
 }
 
@@ -670,7 +670,7 @@
 }
 
 .navbar-brand, .navbar-brand:hover {
-    font-size: 15px;
+    font-size: 19px;
 }
 
 .title-wrap > span {

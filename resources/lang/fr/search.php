@@ -1,7 +1,6 @@
 <?php
-
 return [
-    'search_placeholder'   => "Recherche des contrats",
+    'search_placeholder'   => "Rechercher tous les documents",
     'year_signed'          => "Année de signature",
     'company_name'         => "Nom de la société",
     'contract_type'        => "Type de contrat",
@@ -16,5 +15,4 @@ return [
     'reset'                => "Réinitialiser",
     'select'               => "Sélectionner",
     'refine_search'        => 'Modifier ou affiner votre recherche'
-
 ];
