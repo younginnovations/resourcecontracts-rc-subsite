@@ -135,6 +135,7 @@ return [
     "Nickel"                           => "Nickel",
     "Nickel Pig Iron"                  => "Nickel ferreux de basse qualité",
     "Niobium"                          => "Niobium",
+    "Not Specified"                    => "Non précisé",
     "Oil"                              => "Huile",
     "Oil crops"                        => "cultures oléagineuses",
     "Oil palm or palm oils"            => "Palmier à huile ou huiles de palme ",
