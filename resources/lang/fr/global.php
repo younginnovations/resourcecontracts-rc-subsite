@@ -64,7 +64,7 @@ return [
     'annotation'                  => "Annotation ",
     'text'                        => "Texte",
     'metadata'                    => "Métadonnées",
-    'word_file'                   => "Fichier Word",
+    'word_file'                   => "WORD",
     'contracts_in'                => "Contrats en",
     'documents'                   => "Documents",
     'advanced_search'             => "Recherche Avancée",
