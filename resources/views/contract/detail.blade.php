@@ -116,7 +116,7 @@ use Illuminate\Support\Facades\Lang;
                                 $date = $contract->metadata->date_signed;
                                 $date = strtotime($date);
                                 ?>
-                                <span>@if($date){{date('F',$date)}} {{date('d',$date)}}, {{date('Y',$date)}}@else
+                                <span>@if($date) <?php $m = date('F',$date);?>{{ trans('codelist/month')[$m] }} {{date('d',$date)}}, {{date('Y',$date)}}@else
                                         - @endif</span>
                             </li>
                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
