@@ -31,8 +31,11 @@ class Localization
      */
     public function handle($request, Closure $next)
     {
-        $lang = $this->localization->getLanguage($request->input('lang'));
-        $this->localization->setLanguage($lang);
+        if (config('localisation')) {
+            $lang = $this->localization->getLanguage($request->input('lang'));
+            $this->localization->setLanguage($lang);
+        }
+
 
         return $next($request);
     }

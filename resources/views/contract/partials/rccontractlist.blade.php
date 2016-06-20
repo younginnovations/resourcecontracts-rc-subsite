@@ -39,8 +39,11 @@ if ($path[0] == "resource") {
                 <a href="{{route('contract.detail',['id'=>$contract->open_contracting_id ])}}">
                     {{ $contract->name or ''}}
                 </a>
+                <?php
+                $link = sprintf('/contract/%s#annotations', $contract->open_contracting_id);
+                ?>
                 @if($annotations->total>0)
-                    <div class="annotate-text">@lang('global.annotated')</div>
+                    <div class="annotate-text" data-popover="true" data-html="true" data-content="@lang('global.annotated' , ['link' => url($link)])"></div>
                 @endif
 
                 <p class="country_name">- {{trans('country.'.strtoupper($contract->country_code))}}</p>
