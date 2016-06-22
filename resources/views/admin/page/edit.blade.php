@@ -24,14 +24,14 @@
                             <div class="form-group" style="margin-bottom: 20px; overflow: hidden">
                                 <label class="col-md-12 control-label">@lang('admin.title'):</label>
                                 <div class="col-md-12">
-                                    <input id="title" class="form-control" name="title[{{$code}}]" value="{{old('title', $page->title->$code)}}"/>
+                                    <input id="title" class="form-control" name="title[{{$code}}]" value="{{old('title', isset($page->title->$code)?$page->title->$code:'')}}"/>
                                 </div>
                             </div>
 
                             <div class="form-group" style="overflow:hidden; margin-top: 20px;">
                                 <label class="col-md-12 control-label">@lang('admin.content'):</label>
                                 <div class="col-md-12">
-                                    <textarea style="width:100%; height:500px" id="content" class="{{$code}}" name="content[{{$code}}]" >{{old('content', $page->content->$code)}}</textarea>
+                                    <textarea style="width:100%; height:500px" id="content" class="{{$code}}" name="content[{{$code}}]" >{{old('content', isset($page->content->$code)?$page->content->$code:'')}}</textarea>
                                 </div>
                             </div>
                         </div>
