@@ -362,9 +362,13 @@
     margin-top: 14px;
 }
 
-.search-result-row > span > span:first-of-type {
-    float: left;
+.search-result-row > span:first-of-type {
     width: 88%;
+    display: inline-block;
+}
+
+.search-result-row{
+    position: relative;
 }
 
 .search-result-row .text, .search-result-row .annotations {
@@ -374,6 +378,9 @@
     width: 20px;
     height: 20px;
     opacity: 0.5;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 .search-result-row .annotations {

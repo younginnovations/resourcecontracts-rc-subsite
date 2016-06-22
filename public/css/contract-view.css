@@ -657,7 +657,6 @@
     overflow-y: scroll;
 }
 
-
 @media all and (max-width: 900px) {
     .document-wrap {
         display: block;
