@@ -28,7 +28,9 @@ class Page extends Model
     {
         $lang = app('translator')->getLocale();
 
-        return $this->title->$lang;
+        $title = isset($this->title->$lang) ? $this->title->$lang : $this->title->en;
+
+        return $title;
     }
 
     /**
@@ -38,9 +40,10 @@ class Page extends Model
      */
     public function content()
     {
-        $lang = app('translator')->getLocale();
+        $lang    = app('translator')->getLocale();
+        $content = isset($this->content->$lang) ? $this->content->$lang : $this->content->en;
 
-        return $this->content->$lang;
+        return $content;
     }
 
     /**
