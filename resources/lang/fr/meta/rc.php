@@ -1,13 +1,13 @@
 <?php
 
 return [
-    'title'                 => 'ResourceContracts.org',
-    'description'           => 'An online repository of publicly available contracts for large-scale land, agriculture, and forestry projects. The repository includes the full text of contracts; plain language summaries of each contract’s key social, environmental, human rights, fiscal, and operational terms; and tools for searching and comparing contracts.',
-    'all_contracts'         => 'All Contracts',
-    'search_results_for'    => 'Search Results For',
-    'countries_description' => 'Find resource contracts from multiple countries - ',
-    'country_description'   => 'Find resource contracts from country - ',
-    'resources_description' => 'Find resource contracts for different resources -',
-    'resource_description'  => 'Find resource contracts for resource -'
+    'title'                 => "ResourceContracts.org",
+    'description'           => "Recueil en ligne des contracts disponibles au public relatifs aux projets d'agriculture et de foresterie à grande échelle. Le recueil comprend le texte intégral des contrats, des résumés en language simple des conditions principales sociales, environmentales, relatives aux droits de l'homme, fiscales et opérationnelles dans chaque contrat, et des outils pour rechercher et comparer les contrats.",
+    'all_contracts'         => "Tous les contrats",
+    'search_results_for'    => "Résultats de recherche concernant",
+    'countries_description' => "Trouver les contrats ressources de différents pays -",
+    'country_description'   => "Trouver les contrats ressources du pays -",
+    'resources_description' => "Trouver les contrats ressources pour différentes ressources -",
+    'resource_description'  => "Trouves des contarts de ressources pour ressource -",
 
 ];
