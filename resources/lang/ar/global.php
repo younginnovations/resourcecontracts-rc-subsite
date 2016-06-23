@@ -63,10 +63,10 @@ return [
     'text'                        => "النص",
     'metadata'                    => "البيانات الوصفيّة ",
     'word_file'                   => "ملف Word",
-    'contracts_in'                => 'Contracts in',
-    'documents'                   => 'Documents',
-    'advanced_search'             => "Advanced Search",
-    'yes'                         => "Yes",
-    'no'                          => "No",
+    'contracts_in'                => "ملفّات في",
+    'documents'                   => "وثائق",
+    'advanced_search'             => "بحث متقدّم",
+    'yes'                         => "نعم",
+    'no'                          => "لا",
 
 ];

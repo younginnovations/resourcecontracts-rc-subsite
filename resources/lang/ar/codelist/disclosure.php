@@ -1,7 +1,7 @@
 <?php
 return
     [
-        'Government' => "Government",
-        'Company'    => "Company",
-        'Other'      => "Other",
+        'Government' => "حكومة",
+        'Company'    => "شركة",
+        'Other'      => "غير",
     ];
