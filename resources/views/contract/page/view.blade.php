@@ -69,7 +69,6 @@
         var facebook_share = 'https://www.facebook.com/sharer/sharer.php?u=';
         var google_share = 'https://plus.google.com/share?url=';
         var twitter_share = 'https://twitter.com/share?text={{ meta($meta)->title }}';
-        var learn_more_url = '{{url('/faqs#link_learn_more')}}';
         var text_version_url = '{{url('/faqs#learn_more')}}';
         var processing_pdf_file_message = '{{sprintf(trans('annotation.processing_pdf_file'),env('CONTACT_MAIL'))}}';
         var not_published_message = '{{sprintf(trans('annotation.not_published'),env('CONTACT_MAIL'))}}';
