@@ -56,7 +56,7 @@ $route = Request::path();
                 $link = sprintf('/contract/%s#annotations', $contract->open_contracting_id);
                 ?>
                 @if($annotations->total>0)
-                    <div class="annotate-text" data-popover="true" data-html=true data-content="@lang('global.annotated' , ['link' => url($link)])"></div>
+                    <div class="annotate-text" data-popover="true" data-html=true data-content="@lang('global.annotated_no_link' , ['link' => url($link)])"></div>
                 @endif
 
                 <div class="search-text">

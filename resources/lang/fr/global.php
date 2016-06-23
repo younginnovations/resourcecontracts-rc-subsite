@@ -55,6 +55,7 @@ return [
     'last'                        => "Dernier",
     'first'                       => "Premier",
     'annotated'                   => "Ce contrat est annoté. <a href=':link' target='_blank'>visualiser toutes les annotations.</a>",
+    'annotated_no_link'           => "Ce contrat est annoté.",
     'previous'                    => "Précédent",
     'close_annotations'           => "Fermer les annotations",
     'note'                        => "Note",
