@@ -4,8 +4,6 @@
     display: inline-block;
     width: 100%;
     background-color: #fff;
-    font-size: 21px;
-    line-height: 28px;
     color: #404040 !important;
 }
 
@@ -68,7 +66,7 @@
 }
 
 .navigation {
-    line-height: 44px;
+    line-height: 45px;
 }
 
 .document-wrap {
@@ -669,7 +667,6 @@
 .navbar-header {
    /* border-right: 1px solid rgb(220, 223, 226);
     border-right: 1px solid rgba(220, 223, 226, 0.7);*/
-    padding: 0 16px;
 }
 
 .navbar-brand span:first-of-type {

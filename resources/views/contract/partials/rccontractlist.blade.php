@@ -43,7 +43,7 @@ if ($path[0] == "resource") {
                 $link = sprintf('/contract/%s#annotations', $contract->open_contracting_id);
                 ?>
                 @if($annotations->total>0)
-                    <div class="annotate-text" data-popover="true" data-html="true" data-content="@lang('global.annotated' , ['link' => url($link)])"></div>
+                    <div class="annotate-text" data-popover="true" data-html="true" data-content="@lang('global.annotated_no_link' , ['link' => url($link)])"></div>
                 @endif
 
                 <p class="country_name">- {{trans('country.'.strtoupper($contract->country_code))}}</p>

@@ -4,8 +4,6 @@
     display: inline-block;
     width: 100%;
     background-color: #fff;
-    font-size: 21px;
-    line-height: 28px;
     color: #404040 !important;
 }
 
@@ -68,7 +66,7 @@
 }
 
 .navigation {
-    line-height: 44px;
+    line-height: 45px;
 }
 
 .document-wrap {
