@@ -227,6 +227,7 @@ class APIService
             'per_page'            => $per_page,
             'from'                => $per_page * ($from - 1),
             'download'            => $download,
+            'annotated'           => $annotated
 
         ];
 
