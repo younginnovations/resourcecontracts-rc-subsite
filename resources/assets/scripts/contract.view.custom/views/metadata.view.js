@@ -235,7 +235,7 @@ var LandMatrixView = React.createClass({
         if (category === 'Openland') {
             return (
                 <div className="metadata-ocid">
-                    <span>Land Matrix ID: </span>
+                    <span>{lang.land_matrix_id}: </span>
                     <a target="_blank" href={this.props.metadata.get('matrix_page')}>{id}</a>
                 </div>
             );

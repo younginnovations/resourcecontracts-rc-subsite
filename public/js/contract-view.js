@@ -29959,7 +29959,7 @@ var LandMatrixView = React.createClass({displayName: "LandMatrixView",
         if (category === 'Openland') {
             return (
                 React.createElement("div", {className: "metadata-ocid"}, 
-                    React.createElement("span", null, "Land Matrix ID: "), 
+                    React.createElement("span", null, lang.land_matrix_id, ": "), 
                     React.createElement("a", {target: "_blank", href: this.props.metadata.get('matrix_page')}, id)
                 )
             );
