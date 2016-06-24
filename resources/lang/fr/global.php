@@ -69,5 +69,7 @@ return [
     'no'                          => "Non",
     'view_by_country'             => 'Voir par pays',
     'view_by_resource'            => 'Voir par Ressource',
-    'view_summary'                => "Afficher le résumé"
+    'view_summary'                => "Afficher le résumé",
+    'all_documents'               => 'Tous les documents',
+    'documents_of'                => 'Documents de',
 ];

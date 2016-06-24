@@ -248,3 +248,18 @@ function getPageClass()
     return $class;
 }
 
+/**
+ * Get Language Url
+ *
+ * @param $code
+ *
+ * @return string
+ */
+function lang_url($code)
+{
+    $query = ['lang' => $code];
+
+    return count(\Request::query()) > 0
+        ? \Request::url().'?'.http_build_query(array_merge(\Request::query(), $query))
+        : \Request::fullUrl().'?'.http_build_query($query);
+}
