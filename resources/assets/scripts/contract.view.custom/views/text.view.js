@@ -1,21 +1,21 @@
 var NavigationView = React.createClass({
     render: function () {
-    var textClass =null;
-    var pdfClass =null;
-    var annotationClass =null;
-    var metadataClass =null;
-    if (this.props.contractApp.getView() === "pdf") {
+        var textClass = null;
+        var pdfClass = null;
+        var annotationClass = null;
+        var metadataClass = null;
+        if (this.props.contractApp.getView() === "pdf") {
             pdfClass = "active";
-    }
-    if(this.props.contractApp.getView() === "text"){
+        }
+        if (this.props.contractApp.getView() === "text") {
             textClass = "active";
         }
-    if (this.props.contractApp.getView() === "annotation") {
-        annotationClass = "active";
-    }
-    if(this.props.contractApp.getView() === "metadata") {
-        metadataClass = "active";
-    }
+        if (this.props.contractApp.getView() === "annotation") {
+            annotationClass = "active";
+        }
+        if (this.props.contractApp.getView() === "metadata") {
+            metadataClass = "active";
+        }
         return (
             <div className="navigation">
                 <a href="#/text" className={textClass}>{lang.text}</a>
@@ -69,7 +69,7 @@ var TextPaginationView = React.createClass({
     },
     componentDidMount: function () {
         var titleHeadHeight = $('.title-wrap').height();
-        $(window).scroll(function(){
+        $(window).scroll(function () {
             if ($(window).scrollTop() > titleHeadHeight) {
                 $('.title-head-wrap').addClass('fixed');
             }
@@ -82,7 +82,9 @@ var TextPaginationView = React.createClass({
         this.props.contractApp.on("update-text-pagination-page", function (page_no) {
             self.refs.userInputText.getDOMNode().value = page_no;
             self.setState({visiblePage: page_no});
-            self.props.contractApp.setCurrentPage(page_no);
+            if (page_no > 1) {
+                self.props.contractApp.setCurrentPage(page_no);
+            }
             self.setState({visiblePage: page_no});
         });
         this.refs.userInputText.getDOMNode().value = this.state.visiblePage;
@@ -91,7 +93,7 @@ var TextPaginationView = React.createClass({
         return (
             <div className="text-pagination pagination" style={this.props.style}>
                 <a href="#" className="previous" onClick={this.clickPrevious}>{lang.previous}</a>
-                <input type="text" className="goto" ref="userInputText" onKeyDown={this.handleKeyDown} />
+                <input type="text" className="goto" ref="userInputText" onKeyDown={this.handleKeyDown}/>
                 <a href="#" className="next" onClick={this.clickNext}>{lang.next}</a>
                 {lang.of} {this.state.totalPages}
             </div>
@@ -167,9 +169,9 @@ var TextPageView = React.createClass({
         var page_no = this.props.page.get('page_no');
         var threshold = page_no == 1 ? 0 : -0.4;
         return (
-            <span className={page_no} >
+            <span className={page_no}>
                 <span>{page_no}</span>
-                <span ref="text_content" dangerouslySetInnerHTML={{__html: text}} />
+                <span ref="text_content" dangerouslySetInnerHTML={{__html: text}}/>
                 <Waypoint
                     onEnter={this._onEnter.bind(this, "enter" + page_no)}
                     onLeave={this._onLeave}
@@ -223,7 +225,7 @@ var TextViewer = React.createClass({
         this.props.pagesCollection.on("reset", function () {
             self.message = "";
             if (self.props.pagesCollection.models.length === 0) {
-               self.message =  React.createElement('div', {class: "no-contract-error"}, lang.sorry_loading);
+                self.message = React.createElement('div', {class: "no-contract-error"}, lang.sorry_loading);
             }
             self.forceUpdate();
             self.loadAnnotations();
@@ -240,10 +242,8 @@ var TextViewer = React.createClass({
 
         var warningText = (this.message) ? "" : (<div className="text-viewer-warning">
             <span className="pull-right link close" onClick={this.handleClickWarning}>x</span>
-            {            lang.text_created_automatically
-            }
-
-            <a target="_blank" href= {text_version_url}>{ lang.learn_more }</a>
+            {lang.text_created_automatically}
+            <a target="_blank" href={text_version_url}>{ lang.learn_more }</a>
         </div>);
 
         var pagesView = (this.message) ? this.message : lang.wait_while_loading;
@@ -253,9 +253,9 @@ var TextViewer = React.createClass({
             for (var i = 0; i < this.props.pagesCollection.models.length; i++) {
                 var model = this.props.pagesCollection.models[i];
                 pagesView.push(<TextPageView
-                        key={i}
-                        contractApp={self.props.contractApp}
-                        page={model} />
+                    key={i}
+                    contractApp={self.props.contractApp}
+                    page={model}/>
                 );
             }
         }
@@ -263,8 +263,7 @@ var TextViewer = React.createClass({
         if (typeof show_pdf_text === 'undefined') {
             warningText = '';
         }
-        if(this.props.pagesCollection.models.length === 0)
-        {
+        if (this.props.pagesCollection.models.length === 0) {
             warningText = (<div className="text-viewer-warning">{not_published_message}</div>);
             pagesView = "";
         }
@@ -275,11 +274,11 @@ var TextViewer = React.createClass({
 
         return (
             <div className="text-panel" id="textview" style={this.props.style}>
-        {warningText}
+                {warningText}
                 <div className="text-annotator">
                     <div></div>
                     <div className="text-viewer">
-          {pagesView}
+                        {pagesView}
                     </div>
                 </div>
             </div>
