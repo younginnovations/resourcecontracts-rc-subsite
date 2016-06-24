@@ -1,9 +1,5 @@
 <?php
-
-//this needs to be edited by those who can translate english to french
-
 return [
-
     'an_online_repository_of'     => "Un recueil en ligne de",
     'open_land_contracts'         => "Open Land Contracts ",
     'search'                      => "Recherche",
@@ -71,5 +67,6 @@ return [
     'yes'                         => "Oui",
     'no'                          => "Non",
     'view_by_country'             => 'Voir par pays',
-    'view_by_resource'            => 'Voir par Ressource'
+    'view_by_resource'            => 'Voir par Ressource',
+    'view_summary'                => "Afficher le résumé"
 ];

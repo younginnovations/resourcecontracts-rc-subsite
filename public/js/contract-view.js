@@ -29884,10 +29884,8 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                     ), 
                     React.createElement("div", {className: "metadata-view"}, 
                         React.createElement("div", null, 
-                            lang.metadata, 
-                            React.createElement("div", {className: "metadata-view-footer pull-right"}, 
-                                React.createElement("a", {href: this.props.contractApp.getMetadataSummaryLink()}, lang.see_summary)
-                            )
+                            lang.metadata
+
                         ), 
 
                         React.createElement("div", {className: "metadata-country"}, 
@@ -30435,7 +30433,6 @@ var TextSearchForm = React.createClass({displayName: "TextSearchForm",
   render: function() {
     return (
       React.createElement("div", {className: "text-search-container"}, 
-      React.createElement("a", {className: "back back-button", href: "#"}, "Back"), 
       React.createElement("div", {className: "text-search"}, 
       React.createElement("form", {onSubmit: this.handleSubmit}, 
         React.createElement("input", {type: "text", className: "", ref: "searchInput", placeholder: lang.search_in_this_document})
@@ -31171,7 +31168,7 @@ render:function() {
     if(!this.props.annotations_url && !this.props.text_url)
     {
         return (
-            React.createElement("div", null, 
+            React.createElement("div", {className: "right-column-view"}, 
                 React.createElement("div", {className: "download-dropdown"}, 
                     React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, lang.download)), 
                     React.createElement("ul", {className: "dropdown-menu", style: style}, 
@@ -31191,7 +31188,7 @@ render:function() {
     }
     else if(!this.props.text_url){
         return (
-            React.createElement("div", null, 
+            React.createElement("div", {className: "right-column-view"}, 
                 React.createElement("div", {className: "download-dropdown"}, 
                 React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, lang.download)), 
                 React.createElement("ul", {className: "dropdown-menu", style: style}, 
@@ -31214,7 +31211,7 @@ render:function() {
     else if(!this.props.annotations_url)
     {
         return (
-            React.createElement("div", null, 
+            React.createElement("div", {className: "right-column-view"}, 
                 React.createElement("div", {className: "download-dropdown"}, 
                 React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, lang.download)), 
                 React.createElement("ul", {className: "dropdown-menu", style: style}, 
@@ -31235,7 +31232,7 @@ render:function() {
          }
     else{
         return (
-            React.createElement("div", null, 
+            React.createElement("div", {className: "right-column-view"}, 
             React.createElement("div", {className: "download-dropdown"}, 
             React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, lang.download)), 
             React.createElement("ul", {className: "dropdown-menu", style: style}, 
@@ -31402,15 +31399,6 @@ var MainApp = React.createClass({displayName: "MainApp",
         return (
             React.createElement("div", {className: "main-app"}, 
                 React.createElement("div", {className: "title-head-wrap"}, 
-                    React.createElement("div", {className: "title-wrap"}, 
-                        React.createElement("div", {className: "navbar-header"}, 
-
-                            React.createElement("a", {className: "navbar-brand", href: app_url}, category, React.createElement("span", {className: "beta"}, "Beta"), React.createElement("span", null, "Contracts"))
-
-                        ), 
-                        React.createElement("span", null, htmlDecode(contractTitle)), 
-                        React.createElement(SelectLanguage, null)
-                    ), 
                     React.createElement("div", {className: "head-wrap clearfix"}, 
                         React.createElement(TextSearchForm, {
                             style: this.getStyle(contractApp.isViewVisible("TextSearchForm")), 
@@ -31432,11 +31420,8 @@ var MainApp = React.createClass({displayName: "MainApp",
                             pdf_url: pdf_download_url, 
                             text_url: text_download_url, 
                             annotations_url: annotations_download_url}
-                        ), 
+                        )
 
-                        React.createElement(MetadataToggleButton, {
-                            style: this.getStyle(contractApp.getShowMeta()), 
-                            contractApp: contractApp})
                     )
                 ), 
                 React.createElement("div", {className: "document-wrap"}, 

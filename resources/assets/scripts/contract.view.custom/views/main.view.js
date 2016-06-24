@@ -57,7 +57,7 @@ render:function() {
     if(!this.props.annotations_url && !this.props.text_url)
     {
         return (
-            <div>
+            <div className="right-column-view">
                 <div className="download-dropdown">
                     <a href="#" onClick={this.toggleDropdown}><span>{lang.download}</span></a>
                     <ul className="dropdown-menu" style={style} >
@@ -77,7 +77,7 @@ render:function() {
     }
     else if(!this.props.text_url){
         return (
-            <div>
+            <div className="right-column-view">
                 <div className="download-dropdown">
                 <a href="#" onClick={this.toggleDropdown}><span>{lang.download}</span></a>
                 <ul className="dropdown-menu" style={style} >
@@ -100,7 +100,7 @@ render:function() {
     else if(!this.props.annotations_url)
     {
         return (
-            <div>
+            <div className="right-column-view">
                 <div className="download-dropdown">
                 <a href="#" onClick={this.toggleDropdown}><span>{lang.download}</span></a>
                 <ul className="dropdown-menu" style={style} >
@@ -121,7 +121,7 @@ render:function() {
          }
     else{
         return (
-            <div>
+            <div className="right-column-view">
             <div className="download-dropdown">
             <a href="#" onClick={this.toggleDropdown}><span>{lang.download}</span></a>
             <ul className="dropdown-menu" style={style}>
@@ -288,15 +288,6 @@ var MainApp = React.createClass({
         return (
             <div className="main-app">
                 <div className="title-head-wrap">
-                    <div className="title-wrap">
-                        <div className="navbar-header">
-
-                            <a className="navbar-brand" href={app_url} >{category}<span className="beta">Beta</span><span>Contracts</span></a>
-
-                        </div>
-                        <span>{htmlDecode(contractTitle)}</span>
-                        <SelectLanguage />
-                    </div>
                     <div className="head-wrap clearfix">
                         <TextSearchForm
                             style={this.getStyle(contractApp.isViewVisible("TextSearchForm"))}
@@ -320,9 +311,6 @@ var MainApp = React.createClass({
                             annotations_url={annotations_download_url}
                         />
 
-                        <MetadataToggleButton
-                            style={this.getStyle(contractApp.getShowMeta())}
-                            contractApp={contractApp} />
                     </div>
                 </div>
                 <div className="document-wrap">

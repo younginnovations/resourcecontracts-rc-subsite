@@ -125,8 +125,8 @@ $url_17: url(../../images/ic-delete.png);
   font-size: 12px;
   right: -4px;
   top: 13px;
-  color: $color_cape_cod_approx;
-  color: $black_50;
+  color: $color_cape_cod_approx !important;
+  color: $black_50 !important;
   text-transform: none;
   font-family: $font_0;
 }
@@ -907,7 +907,7 @@ footer {
   padding: 34px 0;
   display: none;
   margin: 0;
-  z-index: 1;
+  z-index: 3;
   .col-lg-12 {
     padding: 0 21px;
     overflow: hidden;
@@ -1062,18 +1062,27 @@ footer {
     li {
       list-style: none;
       a {
+        //background: $color_link_color;
         background: $color_link_color $url_2 no-repeat -154px -254px;
         //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
         border-radius: 19px;
         font-size: 13px;
+        padding: 10px 20px;
+        line-height: 18px;
         color: $white;
         display: block;
         padding: 10px 30px 10px 45px;
+        //padding: 10px 30px;
         &:hover {
           text-decoration: none;
           background-color: $color_link_hover_color;
         }
       }
+
+      a.view-summary-btn{
+        background: $color_link_color url(../images/ic-sprite.svg) no-repeat -26px -130px;
+      }
+
     }
   }
 }
@@ -1888,6 +1897,36 @@ a.filter-label{
   position: absolute;
   padding: 15px;
 }
+
+/* ----------- style to place share and download button at right side ----------- */
+
+.head-wrap{
+  .right-column-view{
+    min-height: 46px;
+    height: auto;
+    float: right;
+    padding-left: 15px;
+
+    .social-share{
+      float: left;
+      a{
+        background: url("../../images/ic-sprite.svg") -40px -10px no-repeat;
+        height: 19px;
+      }
+    }
+
+    .download-dropdown span{
+      background: url(../../images/ic-sprite.png) no-repeat -168px -50px;
+      padding: 0;
+      height: 20px;
+      width: 24px;
+    }
+
+  }
+}
+
+/* ----------- style to place share and download button at right side (ends) ----------- */
+
 
 .sidebar-nav {
   position: absolute;
@@ -3001,6 +3040,8 @@ nav.navbar {
   //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
   box-shadow: 0 2px 4px $black_10;
   border: 0;
+  margin-bottom: 0;
+  z-index: 1000;
 }
 
 .contract-search-form .form-control {
@@ -3728,7 +3769,6 @@ input.select2-search__field {
   }
 }
 
-
 .attached-top-wrapper{
   position: relative;
   .back{
@@ -3866,4 +3906,3 @@ input.select2-search__field {
     margin-top: 60px;
   }
 }
-

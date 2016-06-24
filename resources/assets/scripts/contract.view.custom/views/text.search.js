@@ -13,7 +13,6 @@ var TextSearchForm = React.createClass({
   render: function() {
     return (
       <div className="text-search-container">
-      <a className="back back-button" href="#">Back</a>
       <div className="text-search">
       <form onSubmit={this.handleSubmit}>
         <input type="text" className="" ref="searchInput" placeholder= {lang.search_in_this_document} />
