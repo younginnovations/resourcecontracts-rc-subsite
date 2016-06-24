@@ -30444,7 +30444,99 @@ var TextSearchForm = React.createClass({displayName: "TextSearchForm",
 });
 
 var TextSearchResultRow = React.createClass({displayName: "TextSearchResultRow",
+  getInitialState : function(){
+    return {
+      maxWords:30,
+      text: '',
+      shortText: '',
+      showEllipse: '',
+      showMoreFlag: ''
+    };
+  },
+  componentDidMount:function(){
+    if(this.props.resultRow.get('type')=="annotation")
+    {
+      var text = this.props.resultRow.get('text');
+      var showEllipse = this.shallShowEllipse(text);
+      var shortText = "";
+      if (showEllipse) {
+        shortText = this.truncate(text);
+      }
 
+      this.setState({
+        text:text,
+        showEllipse:showEllipse,
+        shortText:shortText,
+        showMoreFlag:true
+      });
+    }
+  },
+  componentWillReceiveProps: function(prev){
+    var result=prev.resultRow;
+    console.log(result);
+    var text = result.get('text');
+    var showEllipse = this.shallShowEllipse(text);
+    var shortText = "";
+    if (showEllipse) {
+      shortText = this.truncate(text);
+    }
+
+    this.setState({
+      text:text,
+      showEllipse:showEllipse,
+      shortText:shortText,
+      showMoreFlag:true
+    });
+  },
+  truncate: function (text) {
+
+    var words = (text + "").split(" ");
+    words = words.splice(0, this.state.maxWords);
+
+    return words.join(" ");
+  },
+  shallShowEllipse: function (text) {
+    var words = (text + "").split(' ');
+    if (words.length >= this.state.maxWords) {
+      return true;
+    }
+    return false;
+  },
+  handleClickLessMore : function(e){
+    e.preventDefault();
+    this.toggleShowMore();
+  },
+  toggleShowMore : function()
+  {
+    this.setState({showMoreFlag:!this.state.showMoreFlag})
+  },
+  getShowText : function(highlight)
+  {
+    var more='';
+    var texToShow="";
+    var textToReturn='';
+
+    if(this.state.showMoreFlag && this.state.shortText.length >0)
+    {
+      texToShow = this.state.shortText;
+      more = "...more";
+    }
+    if(!this.state.showMoreFlag && this.state.text.length > 0){
+
+      texToShow = this.state.text;
+
+      more = " less";
+    }
+    if(texToShow.length == 0)
+    {
+      texToShow = this.state.text;
+    }
+
+    texToShow= React.createElement(HighLight, {highlight: highlight, text: texToShow});
+    more = (React.createElement("a", {onClick: this.handleClickLessMore}, more));
+    textToReturn = (React.createElement("span", null, texToShow, " ", more, " "));
+  return textToReturn;
+  },
   handleClick: function() {
 
   if(this.props.resultRow.get('type')=="text")
@@ -30491,18 +30583,34 @@ var TextSearchResultRow = React.createClass({displayName: "TextSearchResultRow",
   render: function() {
     var text = this.highlightSearchQuery(this.props.resultRow.get("text"), this.props.contractApp.getSearchQuery());
     var type = "<a class='text' title='Text'>Text</a>";
+    text = "<span>Pg " + this.props.resultRow.get("page_no") + "&nbsp;" + text+"</span>" +type;
     if(this.props.resultRow.get("type")=="annotation")
     {
        type = "<a class='annotations' title='Annotation'>" + lang.annotation + "</a>";
+       text=this.getShowText(this.props.contractApp.getSearchQuery());
     }
-    text = "<span>Pg " + this.props.resultRow.get("page_no") + "&nbsp;" + text+"</span>" +type;
+
+  if(this.props.resultRow.get('type')=="annotation")
+
+  {
     return(
 
-      React.createElement("div", {className: "search-result-row link", onClick: this.handleClick}, 
+        React.createElement("div", {className: "search-result-row link", onClick: this.handleClick}, 
 
-        React.createElement("span", {dangerouslySetInnerHTML: {__html: text}})
-      )
-    );
+                text, "  ", React.createElement("span", {dangerouslySetInnerHTML: {__html: type}})
+        )
+);
+  }
+    else{
+    return(
+
+        React.createElement("div", {className: "search-result-row link", onClick: this.handleClick}, 
+
+          React.createElement("span", {dangerouslySetInnerHTML: {__html: text}})
+        )
+);
+  }
+
   }
 });
 var TextSearchResultsList = React.createClass({displayName: "TextSearchResultsList",
@@ -30521,6 +30629,7 @@ var TextSearchResultsList = React.createClass({displayName: "TextSearchResultsLi
   render: function() {
     var self = this;
     var resultsView = lang.searching;
+    console.log("modelsssssssss",this.props.searchResultsCollection.models);
     if(this.props.searchResultsCollection.models.length > 0) {
       resultsView = this.props.searchResultsCollection.models.map(function(model, i) {
         return (
@@ -30550,6 +30659,26 @@ if(this.props.searchResultsCollection.models.length > 0) {
           )
     );
     }
+  }
+
+});
+
+
+
+var HighLight = React.createClass({displayName: "HighLight",
+
+  render : function(){
+    var highlightword = decodeURI(this.props.highlight);
+    var re = new RegExp(highlightword, "gi");
+    var text= this.props.text;
+    var texta = text.replace(re,"<span class\='search-highlight-word'>"+highlightword+"</span>");
+
+    return(
+        React.createElement("span", {
+          dangerouslySetInnerHTML: {
+          __html : texta
+    }})
+    );
   }
 
 });
