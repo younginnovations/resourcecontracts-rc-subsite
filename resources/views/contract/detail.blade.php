@@ -172,9 +172,9 @@ use Illuminate\Support\Facades\Lang;
                         </div>
                         <div class="view-all-annotations">
                             @if(count($contract->annotationsGroup)>0)
-                                <a href="#annotations" class="view-annotation">@lang('global.view_annotations')</a>
+                                <a href="#annotations" class="view-annotation"><span>@lang('global.view_annotations')</span></a>
                             @else
-                                <a href="javascript:void();" class="view-annotation disabled">@lang('global.view_annotations')</a>
+                                <a href="javascript:void();" class="view-annotation disabled"><span>@lang('global.view_annotations')</span></a>
                             @endif
 
                         </div>

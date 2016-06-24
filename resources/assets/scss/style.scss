@@ -164,13 +164,26 @@ $url_17: url(../../images/ic-delete.png);
 //original selectors
 //.btn-view, .btn-view:hover, .btn-view:focus
 %extend_8 {
-  background: $white $url_2 no-repeat 136px -74px;
-  background: $white_10 $url_2 no-repeat 136px -74px;
   //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+
+  background-color: $white;
+  background-color: $white_10;
   border-radius: 16px;
   color: $white;
   color: $white_70;
   padding: 6px 32px 6px 18px;
+  position: relative;
+
+  &:after{
+    content: "";
+    background: transparent url(#{$img-path}/ic-sprite.svg) -6px -383px;
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    height: 9px;
+    width: 5px;
+  }
+
 }
 
 //original selectors
@@ -248,7 +261,8 @@ $url_17: url(../../images/ic-delete.png);
   border-left: 1px solid $color_silver_approx;
   position: absolute;
   z-index: 1;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 //original selectors
@@ -508,6 +522,8 @@ $url_17: url(../../images/ic-delete.png);
     border: 1px solid #aaa;
     position: relative;
     margin-top: 11px;
+    padding: 0;
+    cursor: pointer;
   }
 
   input[type='checkbox']:checked {
@@ -839,10 +855,15 @@ a {
 .resource-wrapper {
   background: $color_athens_gray_approx $url_4 no-repeat bottom right;
   .btn-view {
-    background: $color_cape_cod_approx $url_2 no-repeat 138px -121px;
-    background: $color_cape_cod_10_approx $url_2 no-repeat 138px -121px;
+    background-color: $color_cape_cod_approx;
+    background-color: $color_cape_cod_10_approx;
     color: $color_cape_cod_approx;
     color: $color_cape_cod_70_approx;
+
+    &:after{
+      background: transparent url(#{$img-path}/ic-sprite.svg) -6px -344px;
+    }
+
     &:hover {
       background-color: $color_cape_cod_20_approx;
     }
@@ -1779,9 +1800,7 @@ a.filter-label{
   a {
     display: block;
     font-family: $font_1;
-    padding: 21px 32px;
     color: $color_cape_cod_approx;
-    background: $url_2 no-repeat 180px -441px;
     border-top: 1px solid $color_westar_approx;
     &:hover {
       text-decoration: none;
@@ -1792,6 +1811,28 @@ a.filter-label{
       border-top: 1px solid $color_westar_approx;
       color: $color_quill_gray_approx;
       pointer-events: none;
+
+      span{
+        &:after{
+          background-position: -6px -425px;
+        }
+      }
+    }
+
+    span{
+      padding: 21px 32px;
+      display: inline-block;
+      position: relative;
+
+      &:after{
+        content: "";
+        width: 10px;
+        height: 6px;
+        position: absolute;
+        top: 31px;
+        right: 10px;
+        background: transparent url(#{$img-path}/ic-sprite.svg) -6px -462px;
+      }
     }
   }
 }
@@ -1933,17 +1974,14 @@ a.filter-label{
 
 .head-wrap{
   .right-column-view{
-    min-height: 46px;
+    min-height: 45px;
     height: auto;
     float: right;
     padding-left: 15px;
+    overflow: visible;
 
     .social-share{
       float: left;
-      a{
-        background: url("../../images/ic-sprite.svg") -40px -10px no-repeat;
-        height: 19px;
-      }
     }
 
     .download-dropdown span{
@@ -2562,7 +2600,7 @@ td.contract-date {
   word-break: break-word;
 }
 
-.table-contract-list td > a {
+.table td > a {
   font-family: $font_1;
   margin-right: 4px;
 }
@@ -2733,7 +2771,7 @@ td.contract-date {
 
 @media all and(min-width: 768px) {
   .panel-top-content > .pull-left {
-    width: 80%;
+    width: 70%;
   }
   .contract-search-form {
     width: 634px;
@@ -3308,6 +3346,7 @@ h1 + .editable-container.editable-inline {
 input.select2-search__field {
   min-width: 60px;
   background: transparent;
+  width: 100% !important;
 }
 
 .select2-container .select2-selection--multiple .select2-selection__rendered {
@@ -3477,7 +3516,7 @@ input.select2-search__field {
     display: none;
     position: absolute;
     top: 40px;
-    left: 10px;
+    left: 0; //b4 it wz 10px
     list-style: none;
     padding: 10px 15px;
     border: 1px solid rgb(204, 204, 204);
@@ -3511,6 +3550,7 @@ input.select2-search__field {
 }
 
 .pdf-pagination.pagination  span,
+.text-pagination span,
 .pagination input[type="text"]{
     font-size: 11px;
     line-height: 17px;
@@ -3598,6 +3638,14 @@ input.select2-search__field {
       }
     }
   }
+
+.social-share ul.dropdown-menu li{
+  border-bottom: dotted 1px #ccc;
+  &:last-child {
+    border: none;
+  }
+}
+
 
 .social-share ul li > a {
   display: block;
@@ -3932,4 +3980,8 @@ input.select2-search__field {
   .search-list-wrapper{
     margin-top: 60px;
   }
+}
+
+.title-wrap .panel-top-content{
+  border-bottom: none;
 }

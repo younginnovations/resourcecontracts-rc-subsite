@@ -8,3 +8,4 @@
 /.public
 npm-debug.log
 bourbon
+.DS_Store

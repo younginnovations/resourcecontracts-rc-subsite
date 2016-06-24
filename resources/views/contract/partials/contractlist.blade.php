@@ -16,9 +16,9 @@ $route = Request::path();
     </th>
     <th></th>
 
-    <th width="10%"><a href="{{appendInUrl($route,$url,"country",$order)}}">@lang('global.country') {!!show_arrow($order, $sortBy=='country')!!}</a></th>
+    <th width="12%"><a href="{{appendInUrl($route,$url,"country",$order)}}">@lang('global.country') {!!show_arrow($order, $sortBy=='country')!!}</a></th>
     <th><a href="{{appendInUrl($route,$url,"year",$order)}}">@lang('global.year') {!!show_arrow($order, $sortBy=='year')!!}</a></th>
-    <th width="15%"><a href="{{appendInUrl($route,$url,"resource",$order)}}">@lang('global.resource') {!!show_arrow($order, $sortBy=='resource')!!}</a></th>
+    <th width="13%"><a href="{{appendInUrl($route,$url,"resource",$order)}}">@lang('global.resource') {!!show_arrow($order, $sortBy=='resource')!!}</a></th>
     <th width="25%"><a href="{{appendInUrl($route,$url,"contract_type",$order)}}">@lang('contract.contract_type') {!!show_arrow($order, $sortBy=='contract_type')!!}</a></th>
 
     </thead>
@@ -56,7 +56,7 @@ $route = Request::path();
                 $link = sprintf('/contract/%s#annotations', $contract->open_contracting_id);
                 ?>
                 @if($annotations->total>0)
-                    <div class="annotate-text" data-popover="true" data-html=true data-content="@lang('global.annotated' , ['link' => url($link)])"></div>
+                    <div class="annotate-text" data-popover="true" data-html=true data-content="@lang('global.annotated_no_link' , ['link' => url($link)])"></div>
                 @endif
 
                 <div class="search-text">
