@@ -176,7 +176,7 @@ $url_17: url(../../images/ic-delete.png);
 //original selectors
 //.btn-navbar-search, .btn-navbar-search:hover, .btn-navbar-search:active
 %extend_9 {
-  background: $url_2 no-repeat -3px -392px;
+  background: $url_2 no-repeat -175px -392px;
   text-indent: -9999px;
   width: 20px;
   margin: 26px 0;
@@ -267,7 +267,7 @@ $url_17: url(../../images/ic-delete.png);
 //.view-main-pin-wrap, .download-main-wrap
 %extend_16 {
   font-size: 11px;
-  text-transform: uppercase;
+  //text-transform: uppercase;
   float: left;
   width: 122px;
   border-right: 1px solid $color_silver_approx;
@@ -275,6 +275,18 @@ $url_17: url(../../images/ic-delete.png);
   cursor: pointer;
   position: relative;
 }
+
+.actions-wrapper .download-main-wrap{
+  float: none;
+  width: auto;
+  border: none !important;
+  display: inline-block;
+  position: absolute;
+  right: 36px;
+  bottom: -20px;
+  z-index: 100;
+}
+
 
 //original selectors
 //.view-pin-wrap:after, .download-wrap:after
@@ -1093,10 +1105,13 @@ footer {
 
 
 .download-csv,
-.advance-filter-wrapper .social-share {
+.actions-wrapper a.download-wrap,
+.advance-filter-wrapper .social-share,
+.actions-wrapper .social-share{
   position: absolute;
   bottom: -20px;
-  right: 40px;
+  //right: 40px;
+  right: 178px;
   background: $white;
   border: 1px solid $color_link_color;
   border: 1px solid $color_burnt_sienna_20_approx;
@@ -1104,6 +1119,9 @@ footer {
   border-radius: 22px;
 }
 
+.filter-country-wrap ~ .download-csv{
+  right: 181px;
+}
 
 .download-csv a {
   display: block;
@@ -1191,12 +1209,15 @@ footer {
   }
 }
 
-.country-list-wrapper {
-  padding: 0;
+a.filter-label{
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #404040;
 }
 
 .country-list-wrap {
-  padding: 30px 0 50px !important;
+  padding: 60px 0 50px 0 !important;
   min-height: 500px;
   .col-lg-2 {
     @extend %extend_12;
@@ -1230,7 +1251,7 @@ footer {
       display: inline-block;
     }
     img + span {
-      display: inline-block;
+      //display: inline-block; country flag section text dropped
       vertical-align: top;
       padding-top: 1px;
     }
@@ -1342,7 +1363,7 @@ footer {
   height: 134px;
   position: absolute;
   right: 20px;
-  top: 10px;
+  top: 24px;
   background: $white;
   border: 10px solid $color_concrete_approx;
   //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
@@ -1358,6 +1379,10 @@ footer {
     color: $color_cape_cod_approx;
     display: block;
   }
+}
+
+.contract-number-wrap.has-static-search{
+  top: 90px;
 }
 
 .panel-wrap {
@@ -1470,8 +1495,8 @@ footer {
 }
 
 .download-wrap {
-  padding: 12px 0 12px 28px;
-  background: $url_2 no-repeat -168px -40px;
+  padding: 8px 0 0px 22px;
+  background: $url_2 no-repeat -167px -47px;
 }
 
 .contract-info-section {
@@ -1485,7 +1510,7 @@ footer {
     text-indent: -9999px;
   }
   .dropdown-menu {
-    margin-top: 2px;
+    //margin-top: 2px;
     li {
       width: 100%;
       border: 0;
@@ -2184,8 +2209,9 @@ td.contract-date {
 }
 
 .contract-search-number-wrap {
-  top: 70px;
-  display: block !important;
+  top: 67px;
+  display: block;
+  z-index: 1000;
 }
 
 .panel-content {
@@ -2509,6 +2535,7 @@ td.contract-date {
   height: 46px;
   text-indent: -9999px;
   float: left;
+  cursor: pointer;
 }
 
 .contract-back {
@@ -2530,6 +2557,7 @@ td.contract-date {
     background-color: $color_link_hover_color;
   }
 }
+
 
 .license-buttons {
   margin-top: 10px;
@@ -2673,7 +2701,7 @@ td.contract-date {
     }
   }
   .contract-number-wrap {
-    right: 32px;
+    right: 36px;
   }
   .panel-contract-wrap {
     li {
@@ -2734,7 +2762,7 @@ td.contract-date {
     }
   }
   .contract-number-wrap {
-    right: 102px;
+    //right: 102px;
   }
   .footer-note {
     padding: 0 15px 10px;
@@ -3034,7 +3062,42 @@ nav.navbar {
 
 .actions-wrapper > .col-lg-12 {
   padding: 0 0 0 36px !important;
+  min-height: 46px;
 }
+
+.actions-wrapper{
+  a{
+    z-index: 99;
+  }
+
+  .social-share{
+    right: 168px;
+    height: 43px;
+  }
+
+  a.download-wrap{
+   font-size: 12px;
+    line-height: 18px;
+    background: none;
+    display: block;
+    width: auto;
+    padding: 0;
+
+      position: static;
+      right: auto;
+      padding: 13px 25px 13px 44px;
+      background: #fff url(../../images/ic-sprite.png) no-repeat -152px -40px;
+      border-radius: 22px;
+      text-decoration: none;
+      z-index: 99;
+  }
+
+  .download-csv{
+    right: 36px;
+    top: 21px;
+  }
+}
+
 
 .tags a {
   background: $color_gray_nurse_approx;
@@ -3328,7 +3391,7 @@ input.select2-search__field {
   position: relative;
   float: left;
   span {
-    background: url(../../images/ic-sprite.png) no-repeat -152px -50px;
+    background: url(../../images/ic-sprite.png) no-repeat -152px -51px;
     padding-left: 46px;
     text-indent: -9999px;
     display: inline-block;
@@ -3388,14 +3451,15 @@ input.select2-search__field {
 
 .pdf-zoom-options{
   padding: 7px 0 8px;
+  border-right: 1px solid #DCDFE2;
 
   p{
     text-indent: -999px;
     overflow: hidden;
     height: 19px;
-    width: 23px;
+    width: 18px;
     vertical-align: middle;
-    background: transparent url(#{$img-path}/ic-sprite.svg) 0 0 no-repeat;
+    background: transparent url(#{$img-path}/ic-sprite.svg) -42px -79px no-repeat;
     margin: 0 0 0;
   }
 }
@@ -3420,57 +3484,15 @@ input.select2-search__field {
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
 }
-  /*
-  .social-share {
-    margin: 9px;
-    float: right;
-    padding: 0;
-  }
-
-  .social-share li {
-    list-style: none;
-    float: left;
-    margin-right: 10px;
-  }
-
-  .social-share li a {
-    display: block;
-    text-indent: -9999px;
-    width: 21px;
-    height: 21px;
-    background: url(../images/share-sprite.png) no-repeat -22px -40px;
-  }
-
-  .social-share li.google-plus a {
-    background-position: -50px -40px;
-    margin-left: 4px;
-  }
-
-  .social-share li.twitter a {
-    background-position: 0 -40px;
-  }
-
-  .social-share li a:hover {
-    background-position: -22px 0;
-  }
-
-  .social-share li.google-plus a:hover {
-    background-position: -50px 0;
-  }
-
-  .social-share li.twitter a:hover {
-    background-position: 0 0;
-  }
-  */
-
-  .social-share {
-    margin: 13px;
+  
+.social-share {
+    margin: 13px 10px 10px 10px;
     position: relative;
     a, span {
       display: block;
     }
     a {
-      background: url("../../images/ic-sprite.svg") -40px -11px no-repeat;
+      background: url("../../images/ic-sprite.svg") -40px -10px no-repeat;;
       width: 18px;
       height: 18px;
     }
@@ -3480,6 +3502,7 @@ input.select2-search__field {
     }
 
     ul {
+      display: none;
       position: absolute !important;
       border: solid 1px;
       top: 27px;
@@ -3490,32 +3513,34 @@ input.select2-search__field {
       background: #fff;
       padding: 0;
       z-index: 88;
+      min-width: auto;
     }
 
     li {
       float: none !important;
       margin: 0 !important;
       padding: 6px;
-      border-bottom: dotted 1px #eee;
+      border-bottom: dotted 1px #ccc;
       &:last-child {
         border: none;
       }
     }
   }
 
-  .social-share li a {
-    display: block;
-    text-indent: -9999px;
-    width: 21px;
-    height: 21px;
-    background: url(../images/share-sprite.png) no-repeat -24px -40px;
-  }
-
-.social-share li a:hover {
-  background-position: -24px 0;
+.social-share ul li > a {
+  display: block;
+  text-indent: -9999px;
+  width: 21px;
+  height: 21px;
+  background: url(../images/share-sprite.png) no-repeat -22px -40px;
+  padding: 13px 14px;
 }
 
-.social-share li.twitter a {
+.social-share ul li a:hover {
+  background: url(../images/share-sprite.png) no-repeat -22px 0;
+}
+
+.social-share ul li.twitter a {
   background-position: 4px -40px;
 
   &:hover {
@@ -3523,12 +3548,12 @@ input.select2-search__field {
   }
 }
 
-.social-share li.google-plus a {
-  background-position: -49px -40px;
+.social-share ul li.google-plus a {
+  background-position: -44px -40px;
   margin-left: 0;
 
   &:hover {
-    background-position: -49px 0;
+    background-position: -44px 0;
   }
 }
 
@@ -3538,7 +3563,7 @@ input.select2-search__field {
 .actions-wrapper .social-share{
   margin: 7px;
   right: 170px;
-  bottom: -29px;
+  bottom: -27px;
   padding: 0;
 
   > a{
@@ -3547,8 +3572,8 @@ input.select2-search__field {
     color: $color_link_color;
     width: auto;
     text-decoration: none;
-    padding: 13px 25px 13px 40px;
-    background: url("../../images/ic-sprite.svg") -27px 2px no-repeat;
+    padding: 13px 22px 13px 47px;
+    background: url("../../images/ic-sprite.svg") -20px 2px no-repeat;
     height: 43px;
     border-radius: 50%;
     position: relative;
@@ -3560,7 +3585,7 @@ input.select2-search__field {
   .caret{
     position: absolute;
     top: 20px;
-    right: 12px;
+    right: 20px;
     color: #4a4a4a;
   }
 
@@ -3572,8 +3597,7 @@ input.select2-search__field {
     top: 50px;
     z-index: 99;
     background: #fff;
-    left: -6px;
-    margin-left: 0;
+    left: 19px;
     display: none;
 
   }
@@ -3583,10 +3607,9 @@ input.select2-search__field {
   }
 
   li a{
-    text-indent: 0;
     width: auto;
     height: auto;
-    padding: 10px 15px 10px 40px;
+    padding: 10px 15px 10px 25px;
     background: none;
     position: relative;
     //text-decoration: none;
@@ -3607,54 +3630,80 @@ input.select2-search__field {
     }
   }
 
-  .social-share li.facebook a:before{
+  .social-share ul li.facebook a:before{
     margin-left: -4px;
   }
 
-  .google-plus a {
-    &:before{
-      background-position: -50px -40px;
-      margin-left: 0;
+  ul li{
+    a:hover{
+      background: none !important;
+    }
+    &.google-plus a {
+      &:before{
+        background-position: -50px -40px;
+        margin-left: 0;
+      }
+
+      &:hover:before{
+        background-position: -50px 0;
+      }
     }
 
-    &:hover:before{
-      background-position: -50px 0;
+    &.twitter a {
+      &:before{
+        background-position: 0 -40px;
+      }
+
+      &:hover:before{
+        background-position: 0 0;
+      }
     }
   }
 
-  .twitter a {
-    &:before{
-      background-position: 0 -40px;
-    }
+}
 
-    &:hover:before{
-      background-position: 0 0;
-    }
+.filter-wrapper.actions-wrapper{
+  .col-lg-12{
+    padding: 0 36px 0 36px !important;
+  }
+
+  .social-share ul,.download-main-wrap .dropdown-menu{
+    top: calc(100% + 6px);
+  }
+
+}
+
+.filter-wrapper{
+
+  .download-main-wrap{
+    border-left: 1px solid rgba(188, 188, 188, 1.5);
+    border-right: none;
+    //padding-left: 10px;
   }
 }
 
 .actions-wrapper .social-share{
-  margin: 0;
+  /*margin: 0;
   position: relative;
   right: auto;
-  bottom: auto;
+  bottom: auto;*/
+
+  span{
+    text-indent: 0;
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 18px;
+  }
 
   > a{
     height: auto;
-    padding: 11px 25px 11px 40px;
-    background: url("../../images/ic-sprite.svg") -27px 0px no-repeat;
+    width: auto;
+    text-decoration: none;
   }
 
   ul{
     top: 100%;
-    left: 0;
   }
-
- .caret {
-   position: absolute;
-   top: 18px;
- }
-
 }
 
 .dropdown-menu{
@@ -3666,7 +3715,7 @@ input.select2-search__field {
 
 .dropdown-menu > li > a,
 .dropdown-menu > div > li > a {
-  padding: 10px 15px;
+  padding: 8px 15px;
   font-weight: normal;
   font-size: 14px;
   line-height: 20px;
@@ -3678,3 +3727,143 @@ input.select2-search__field {
     background: none;
   }
 }
+
+
+.attached-top-wrapper{
+  position: relative;
+  .back{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-position: 12px -530px;
+    height: calc(100% - 1px);
+  }
+  .panel-top-content > .pull-left {
+     margin-top: 0;
+  }
+  /*&.search-top-wrapper .panel-title{
+    padding: 0 0 0 10px;
+  }*/
+
+  .panel-title{
+    float: left;
+    clear: none;
+    margin: 15px 0 14px 65px;
+    padding: 0;
+    //padding: 7px 0 0 56px;
+    font-size: 21px;
+    line-height: 27px;
+    width: 80%;
+    font: 28px/38px Open-Sans-Light;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .pull-left .panel-title{
+    width: 92%;
+  }
+
+  .has-no-backbtn + .panel-title{
+    margin: 15px 0 14px 36px;
+  }
+
+  @media (min-width: 699px){
+    .panel-top-content {
+      padding: 0;
+      min-height: 46px;
+    }
+  }
+
+  .action-links{
+    margin: 16px 36px 0 10px;
+  }
+}
+
+
+.static-search{
+  overflow: hidden;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #bcbcbc;
+  border-bottom: 1px solid rgba(188, 188, 188, 0.5);
+
+  .form-control {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  > .form-group {
+    overflow: hidden;
+    padding-bottom: 10px;
+  }
+
+  .form-group button {
+    margin: 0;
+  }
+
+  .search-input-wrapper{
+    top: 44px;
+    background: #f9f9f9;
+    padding: 26px 0 16px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    display: block !important;
+    position: static;
+    border: 0;
+    overflow: hidden;
+    border-top: 1px solid #e7e9eb;
+  }
+
+}
+
+.page-search .advance-filter-wrapper .static-search {
+  ~ .social-share{
+    right: 168px;
+  }
+
+ ~ .download-csv{
+    right: 36px;
+  }
+}
+
+.page-resource{
+  .attached-top-wrapper .download-csv{
+    right: 182px;
+    bottom: -65px;
+  }
+}
+
+
+  .title-head-wrap ul.dropdown-menu {
+  padding: 0;
+}
+
+/* style to make total doc logo consitent*/
+
+
+.page-search{
+
+  @media (min-width: 992px){
+    .contract-number-wrap {
+      right: 36px;
+    }
+  }
+
+  .filter-wrapper{
+    min-height: 0 !important;
+    border-bottom: none;
+  }
+
+  .advance-filter-wrapper .social-share, .actions-wrapper .social-share{
+    right: 313px;
+  }
+
+  .download-csv{
+    right: 182px;
+  }
+
+  .search-list-wrapper{
+    margin-top: 60px;
+  }
+}
+

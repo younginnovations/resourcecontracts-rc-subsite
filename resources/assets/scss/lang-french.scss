@@ -1,3 +1,11 @@
 .lang-fr .advance-filter-wrapper .social-share{
   right: 323px;
 }
+
+.page-search.lang-fr .advance-filter-wrapper .social-share{
+  //right: 355px;
+}
+
+.page-search.lang-fr .advance-filter-wrapper .static-search ~ .social-share{
+  right: 176px;
+}

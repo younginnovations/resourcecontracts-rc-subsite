@@ -23,8 +23,8 @@ return [
     'cancel'                      => "Annuler",
     'home'                        => "Page d'accueil ",
     'contract_type'               => "Type de contrat ",
-    'filter_by_resource'          => "Filtrer par ressource",
-    'filter_by_countries'         => "Filtrer par pays",
+    'filter_by_resource'          => "Entrez le nom ou sélectionnez Resource Resource ci-dessous",
+    'filter_by_countries'         => "Entrez le nom ou sélectionnez Pays Pays-dessous",
     'find_contract'               => "Chercher dans: Contrats marqués",
     'contracts_for'               => "Contrats pour",
     'go_back'                     => "Retourner",
@@ -64,11 +64,12 @@ return [
     'annotation'                  => "Annotation ",
     'text'                        => "Texte",
     'metadata'                    => "Métadonnées",
-    'word_file'                   => "Fichier Word",
+    'word_file'                   => "Word",
     'contracts_in'                => "Contrats en",
     'documents'                   => "Documents",
     'advanced_search'             => "Recherche Avancée",
     'yes'                         => "Oui",
     'no'                          => "Non",
-
+    'view_by_country'             => 'Voir par pays',
+    'view_by_resource'            => 'Voir par Ressource'
 ];

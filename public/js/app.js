@@ -7841,10 +7841,13 @@ $(document).ready(function () {
 
     // search form toggle
 
-    $('#search-form:not(.search-page-form) input[type="text"]').focus(function () {
-        $('.search-input-wrapper').show();
-        $('.contract-number-wrap').hide();
-
+    ($('#search-form:not(.search-page-form) input[type="text"]')).focus(function () {
+        if ($(this).parent().parent().parent().parent().hasClass("static-search")){
+            return;
+        }else {
+            $('.search-input-wrapper').show();
+            $('.contract-number-wrap').hide();
+        }
     });
 
     $(document).on('click', '.search-close', function () {
@@ -7852,7 +7855,7 @@ $(document).ready(function () {
         $('.contract-number-wrap').show();
     });
 
-    $('#search-form input[type="text"]').keyup(function () {
+    $('#search-form:not(.static-search .filter-country-wrap > #search-form) input[type="text"]').keyup(function () {
         if ($(this).val() == '') {
             $('.search-input-wrapper').hide();
             $('.contract-number-wrap').show();
@@ -7867,6 +7870,10 @@ $(document).ready(function () {
         $(this).siblings('ul').toggle();
     });
 
+    $('#social-toggler').click(function () {
+        $('.social-toggle').toggle();
+    });
+
     $('.search-click').click(function () {
         $('#search-form input[type="text"]').focus();
     });
@@ -7878,6 +7885,14 @@ $(document).ready(function () {
     else {
         $('.panel-annotation-wrap').css('height', 'auto');
     }
+
+    $(".language-selector").click(function(){
+        if(!$(this).hasClass("open")){
+            $(".navbar-static-top").css("z-index",1002);
+        }else{
+            $(".navbar-static-top").css("z-index",1000);
+        }
+    });
 
     $(window).on('resize', function () {
         if ($(window).width() > 992) {
@@ -7919,6 +7934,14 @@ $(document).ready(function () {
         }
         if (!$(e.target).closest('.view-pin-wrap, #pinLists').length) {
             $("#pinLists").hide();
+        }
+
+        if (!$(e.target).closest('#social-toggler').length) {
+            $(".social-toggle").hide();
+        }
+
+        if(!$(".language-selector").hasClass("open")){
+            $(".navbar-static-top").css("z-index",1000);
         }
     });
 
@@ -7993,6 +8016,18 @@ $(document).ready(function () {
     if (annotation.length) {
         annotation.popover(options);
     }
+
+    if(document.referrer == '')
+    {
+        $('.back-button').addClass("has-no-backbtn").hide();
+        $('.back-button').hide();
+    }
+    $('.back-button').on('click',function(){
+        if(document.referrer != '') {
+            window.history.go(-1);
+        }
+    });
+
 });
 $(function () {
     if ($('#side-menu').length) {

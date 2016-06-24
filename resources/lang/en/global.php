@@ -22,8 +22,8 @@ return [
     'cancel'                      => 'Cancel',
     'home'                        => 'Home',
     'contract_type'               => 'Contract Type',
-    'filter_by_resource'          => 'Filter by resource...',
-    'filter_by_countries'         => 'Filter by Countries',
+    'filter_by_resource'          => 'Enter Resource name or select Resource below',
+    'filter_by_countries'         => 'Enter Country name or select Country below',
     'find_contract'               => 'Search within :tag contracts',
     'contracts_for'               => 'Contracts For',
     'go_back'                     => 'Go Back',
@@ -62,11 +62,12 @@ return [
     'annotation'                  => 'Annotation',
     'text'                        => 'Text',
     'metadata'                    => 'Metadata',
-    'word_file'                   => "Word File",
+    'word_file'                   => "Word",
     'contracts_in'                => 'Contracts in',
     'documents'                   => 'Documents',
     'advanced_search'             => "Advanced Search",
     'yes'                         => "Yes",
     'no'                          => "No",
-
+    'view_by_country'             => 'View by Country',
+    'view_by_resource'            => 'View by Resource'
 ];

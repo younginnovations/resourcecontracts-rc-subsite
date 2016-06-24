@@ -43,6 +43,7 @@ $langSelect = trans('search.select');
         var langSelect = '{{$langSelect}}';
     </script>
 </head>
-<body data-spy="scroll" class="lang-{{$lang->getCurrentLang()}}" dir="{{$lang->getDirection()}}" lang="{{$lang->getCurrentLang()}}">
+
+<body data-spy="scroll" class="lang-{{$lang->getCurrentLang()}} {{getPageClass()}}" dir="{{$lang->getDirection()}}" lang="{{$lang->getCurrentLang()}}">
 <div id="wrapper">
     <div id="page-wrapper" class="not-front sidebar-collapse-container">
