@@ -57,16 +57,16 @@ render:function() {
     if(!this.props.annotations_url && !this.props.text_url)
     {
         return (
-            <div>
+            <div className="right-column-view">
                 <div className="download-dropdown">
                     <a href="#" onClick={this.toggleDropdown}><span>{lang.download}</span></a>
-                    <ul style={style} >
+                    <ul className="dropdown-menu" style={style} >
                     <li><a href={this.props.pdf_url}>{lang.pdf}</a></li>
                     </ul>
                 </div>
-                <div className="social-share">
+                <div className="social-share download-wrap">
                     <a href="#"  onClick={this.socialDropdown}><span>share</span></a>
-                    <ul className="social-share" style={socialStyle}>
+                    <ul className="dropdown-menu" style={socialStyle}>
                         <li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
                         <li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a></li>
                         <li className="twitter"><a href={ twitter_share } target="_blank">T</a></li>
@@ -77,17 +77,17 @@ render:function() {
     }
     else if(!this.props.text_url){
         return (
-            <div>
+            <div className="right-column-view">
                 <div className="download-dropdown">
                 <a href="#" onClick={this.toggleDropdown}><span>{lang.download}</span></a>
-                <ul style={style} >
+                <ul className="dropdown-menu" style={style} >
                 <li><a href={this.props.pdf_url}>{lang.pdf}</a></li>
                 <li><a href={this.props.annotations_url}>{lang.annotations}</a></li>
                 </ul>
                 </div>
-                <div className="social-share">
+                <div className="social-share dropdown-wrap">
                     <a href="#"  onClick={this.socialDropdown}><span>share</span></a>
-                    <ul className="social-share" style={socialStyle}>
+                    <ul className="dropdown-menu" style={socialStyle}>
                         <li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
                         <li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a></li>
                         <li className="twitter"><a href={ twitter_share } target="_blank">T</a></li>
@@ -100,16 +100,17 @@ render:function() {
     else if(!this.props.annotations_url)
     {
         return (
-            <div>
+            <div className="right-column-view">
                 <div className="download-dropdown">
                 <a href="#" onClick={this.toggleDropdown}><span>{lang.download}</span></a>
-                <ul style={style} >
+                <ul className="dropdown-menu" style={style} >
                 <li><a href={this.props.pdf_url}>{lang.pdf}</a></li>
                 <li><a href={this.props.text_url}>{lang.word_file}</a></li>
                 </ul>
                 </div>
-                <div className="social-share">
-                    <a href="#"  onClick={this.socialDropdown}><span>share</span></a><ul className="social-share" style={socialStyle}>
+                <div className="social-share dropdown-wrap">
+                    <a href="#"  onClick={this.socialDropdown}><span>share</span></a>
+                    <ul className="dropdown-menu" style={socialStyle}>
                         <li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
                         <li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a></li>
                         <li className="twitter"><a href={ twitter_share } target="_blank">T</a></li>
@@ -120,18 +121,18 @@ render:function() {
          }
     else{
         return (
-            <div>
+            <div className="right-column-view">
             <div className="download-dropdown">
             <a href="#" onClick={this.toggleDropdown}><span>{lang.download}</span></a>
-            <ul style={style}>
+            <ul className="dropdown-menu" style={style}>
             <li><a href={this.props.pdf_url}>{lang.pdf}</a></li>
             <li><a href={this.props.text_url}>{lang.word_file}</a></li>
             <li><a href={this.props.annotations_url}>{lang.annotations}</a></li>
             </ul>
             </div>
-            <div className="social-share">
+            <div className="social-share dropdown-wrap">
                 <a href="#"  onClick={this.socialDropdown}><span>share</span></a>
-                <ul style={socialStyle}>
+                <ul className="dropdown-menu" style={socialStyle}>
                     <li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
                     <li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a></li>
                         <li className="twitter"><a href={ twitter_share } target="_blank">T</a></li>
@@ -287,15 +288,6 @@ var MainApp = React.createClass({
         return (
             <div className="main-app">
                 <div className="title-head-wrap">
-                    <div className="title-wrap">
-                        <div className="navbar-header">
-
-                            <a className="navbar-brand" href={app_url} >{category}<span className="beta">Beta</span><span>Contracts</span></a>
-
-                        </div>
-                        <span>{htmlDecode(contractTitle)}</span>
-                        <SelectLanguage />
-                    </div>
                     <div className="head-wrap clearfix">
                         <TextSearchForm
                             style={this.getStyle(contractApp.isViewVisible("TextSearchForm"))}
@@ -319,9 +311,6 @@ var MainApp = React.createClass({
                             annotations_url={annotations_download_url}
                         />
 
-                        <MetadataToggleButton
-                            style={this.getStyle(contractApp.getShowMeta())}
-                            contractApp={contractApp} />
                     </div>
                 </div>
                 <div className="document-wrap">

@@ -5,15 +5,15 @@ $attributes = $api->searchAttributed();
 $category = $api->getAnnotationsCategory();
 ?>
 
-<form action="{{url('search')}}" method="get" class="search-form @if(isset($show_advance)) search-page-form @endif" id="search-form">
+<form action="{{url('search')}}" method="get" class="search-form" id="search-form">
     <div class="form-group">
         <button type="submit" class="btn btn-navbar-search pull-left"></button>
-        <input  type="text" autocomplete="off" value="{{\Illuminate\Support\Facades\Input::get('q')}}" name="q" id="query"  class="form-control pull-left" placeholder="@lang('search.search_placeholder')">
+        <input  type="text" autocomplete="off" value="{{\Illuminate\Support\Facades\Input::get('q')}}" name="q" id="query"  class="form-control pull-left" placeholder='@if(isset($q) && $q!='' && $show_advance) @lang('search.refine_search') @else @lang('search.search_placeholder')  @endif' >
     </div>
-    <div class="search-input-wrapper @if(isset($show_advance)) search-page-input-wrapper @endif">
+    <div class="search-input-wrapper">
         <div class="col-lg-12">
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
-                <labePzl for="">@lang('global.country')</labePzl>
+                <label for="">@lang('global.country')</label>
                 <select name="country[]" id="country" multiple="multiple">
                     @foreach($summary->country_summary as $country)
                         <option @if(isset($filter['country']) && in_array(strtoupper($country['key']), array_map('strtoupper',$filter['country'])))selected="selected" @endif value="{{$country['key']}}">{{$country['name']}}</option>
@@ -95,6 +95,12 @@ $category = $api->getAnnotationsCategory();
                         <option @if(isset($filter['annotation_category']) && in_array($cat, $filter['annotation_category'])) selected="selected" @endif value="{{$cat}}">{{$cat}}</option>
                     @endforeach
                 </select>
+            </div>
+            <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
+
+                <label for="">@lang('search.annotated')</label>
+                <input type="checkbox" name="annotated" value="1" class="form-control" @if(isset($filter['annotated']) && $filter['annotated']==1) checked @endif>
+
             </div>
     </div>
         <div class="col-lg-12">

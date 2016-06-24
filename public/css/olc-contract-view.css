@@ -358,9 +358,9 @@
     margin-top: 14px;
 }
 
-.search-result-row > span > span:first-of-type {
-    float: left;
+.search-result-row > span:first-of-type {
     width: 88%;
+    display: inline-block;
 }
 
 .search-result-row .text, .search-result-row .annotations {
@@ -633,8 +633,8 @@
 }
 
 .navbar-header {
-    border-right: 1px solid rgb(220, 223, 226);
-    border-right: 1px solid rgba(220, 223, 226, 0.7);
+   /* border-right: 1px solid rgb(220, 223, 226);
+    border-right: 1px solid rgba(220, 223, 226, 0.7);*/
     padding: 0 16px;
 }
 

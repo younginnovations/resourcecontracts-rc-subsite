@@ -48,7 +48,6 @@
         </div>
     </div>        
         <div class="panel-body panel-view-wrapper">
-            <!-- <div id="auto-scroll" class="pull-left">AutoScroll <input type="checkbox" name='autoscroll' value="On"></div> -->
             <div id="pagination"></div>
             <div class="document-wrap">
                 <div id="annotatorjs" class="left-document-wrap">

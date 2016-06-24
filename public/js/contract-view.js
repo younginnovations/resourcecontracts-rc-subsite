@@ -29884,10 +29884,8 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                     ), 
                     React.createElement("div", {className: "metadata-view"}, 
                         React.createElement("div", null, 
-                            lang.metadata, 
-                            React.createElement("div", {className: "metadata-view-footer pull-right"}, 
-                                React.createElement("a", {href: this.props.contractApp.getMetadataSummaryLink()}, lang.see_summary)
-                            )
+                            lang.metadata
+
                         ), 
 
                         React.createElement("div", {className: "metadata-country"}, 
@@ -30435,7 +30433,6 @@ var TextSearchForm = React.createClass({displayName: "TextSearchForm",
   render: function() {
     return (
       React.createElement("div", {className: "text-search-container"}, 
-      React.createElement("a", {className: "back", href: back_url}, "Back"), 
       React.createElement("div", {className: "text-search"}, 
       React.createElement("form", {onSubmit: this.handleSubmit}, 
         React.createElement("input", {type: "text", className: "", ref: "searchInput", placeholder: lang.search_in_this_document})
@@ -30447,7 +30444,99 @@ var TextSearchForm = React.createClass({displayName: "TextSearchForm",
 });
 
 var TextSearchResultRow = React.createClass({displayName: "TextSearchResultRow",
+  getInitialState : function(){
+    return {
+      maxWords:30,
+      text: '',
+      shortText: '',
+      showEllipse: '',
+      showMoreFlag: ''
+    };
+  },
+  componentDidMount:function(){
+    if(this.props.resultRow.get('type')=="annotation")
+    {
+      var text = this.props.resultRow.get('text');
+      var showEllipse = this.shallShowEllipse(text);
+      var shortText = "";
+      if (showEllipse) {
+        shortText = this.truncate(text);
+      }
 
+      this.setState({
+        text:text,
+        showEllipse:showEllipse,
+        shortText:shortText,
+        showMoreFlag:true
+      });
+    }
+  },
+  componentWillReceiveProps: function(prev){
+    var result=prev.resultRow;
+    console.log(result);
+    var text = result.get('text');
+    var showEllipse = this.shallShowEllipse(text);
+    var shortText = "";
+    if (showEllipse) {
+      shortText = this.truncate(text);
+    }
+
+    this.setState({
+      text:text,
+      showEllipse:showEllipse,
+      shortText:shortText,
+      showMoreFlag:true
+    });
+  },
+  truncate: function (text) {
+
+    var words = (text + "").split(" ");
+    words = words.splice(0, this.state.maxWords);
+
+    return words.join(" ");
+  },
+  shallShowEllipse: function (text) {
+    var words = (text + "").split(' ');
+    if (words.length >= this.state.maxWords) {
+      return true;
+    }
+    return false;
+  },
+  handleClickLessMore : function(e){
+    e.preventDefault();
+    this.toggleShowMore();
+  },
+  toggleShowMore : function()
+  {
+    this.setState({showMoreFlag:!this.state.showMoreFlag})
+  },
+  getShowText : function(highlight)
+  {
+    var more='';
+    var texToShow="";
+    var textToReturn='';
+
+    if(this.state.showMoreFlag && this.state.shortText.length >0)
+    {
+      texToShow = this.state.shortText;
+      more = "...more";
+    }
+    if(!this.state.showMoreFlag && this.state.text.length > 0){
+
+      texToShow = this.state.text;
+
+      more = " less";
+    }
+    if(texToShow.length == 0)
+    {
+      texToShow = this.state.text;
+    }
+
+    texToShow= React.createElement(HighLight, {highlight: highlight, text: texToShow});
+    more = (React.createElement("a", {onClick: this.handleClickLessMore}, more));
+    textToReturn = (React.createElement("span", null, texToShow, " ", more, " "));
+  return textToReturn;
+  },
   handleClick: function() {
 
   if(this.props.resultRow.get('type')=="text")
@@ -30494,18 +30583,34 @@ var TextSearchResultRow = React.createClass({displayName: "TextSearchResultRow",
   render: function() {
     var text = this.highlightSearchQuery(this.props.resultRow.get("text"), this.props.contractApp.getSearchQuery());
     var type = "<a class='text' title='Text'>Text</a>";
+    text = "<span>Pg " + this.props.resultRow.get("page_no") + "&nbsp;" + text+"</span>" +type;
     if(this.props.resultRow.get("type")=="annotation")
     {
        type = "<a class='annotations' title='Annotation'>" + lang.annotation + "</a>";
+       text=this.getShowText(this.props.contractApp.getSearchQuery());
     }
-    text = "<span>Pg " + this.props.resultRow.get("page_no") + "&nbsp;" + text+"</span>" +type;
+
+  if(this.props.resultRow.get('type')=="annotation")
+
+  {
     return(
 
-      React.createElement("div", {className: "search-result-row link", onClick: this.handleClick}, 
+        React.createElement("div", {className: "search-result-row link", onClick: this.handleClick}, 
 
-        React.createElement("span", {dangerouslySetInnerHTML: {__html: text}})
-      )
-    );
+                text, "  ", React.createElement("span", {dangerouslySetInnerHTML: {__html: type}})
+        )
+);
+  }
+    else{
+    return(
+
+        React.createElement("div", {className: "search-result-row link", onClick: this.handleClick}, 
+
+          React.createElement("span", {dangerouslySetInnerHTML: {__html: text}})
+        )
+);
+  }
+
   }
 });
 var TextSearchResultsList = React.createClass({displayName: "TextSearchResultsList",
@@ -30524,6 +30629,7 @@ var TextSearchResultsList = React.createClass({displayName: "TextSearchResultsLi
   render: function() {
     var self = this;
     var resultsView = lang.searching;
+    console.log("modelsssssssss",this.props.searchResultsCollection.models);
     if(this.props.searchResultsCollection.models.length > 0) {
       resultsView = this.props.searchResultsCollection.models.map(function(model, i) {
         return (
@@ -30553,6 +30659,26 @@ if(this.props.searchResultsCollection.models.length > 0) {
           )
     );
     }
+  }
+
+});
+
+
+
+var HighLight = React.createClass({displayName: "HighLight",
+
+  render : function(){
+    var highlightword = decodeURI(this.props.highlight);
+    var re = new RegExp(highlightword, "gi");
+    var text= this.props.text;
+    var texta = text.replace(re,"<span class\='search-highlight-word'>"+highlightword+"</span>");
+
+    return(
+        React.createElement("span", {
+          dangerouslySetInnerHTML: {
+          __html : texta
+    }})
+    );
   }
 
 });
@@ -31171,16 +31297,16 @@ render:function() {
     if(!this.props.annotations_url && !this.props.text_url)
     {
         return (
-            React.createElement("div", null, 
+            React.createElement("div", {className: "right-column-view"}, 
                 React.createElement("div", {className: "download-dropdown"}, 
                     React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, lang.download)), 
-                    React.createElement("ul", {style: style}, 
+                    React.createElement("ul", {className: "dropdown-menu", style: style}, 
                     React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, lang.pdf))
                     )
                 ), 
-                React.createElement("div", {className: "social-share"}, 
+                React.createElement("div", {className: "social-share download-wrap"}, 
                     React.createElement("a", {href: "#", onClick: this.socialDropdown}, React.createElement("span", null, "share")), 
-                    React.createElement("ul", {className: "social-share", style: socialStyle}, 
+                    React.createElement("ul", {className: "dropdown-menu", style: socialStyle}, 
                         React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
                         React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
                         React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
@@ -31191,17 +31317,17 @@ render:function() {
     }
     else if(!this.props.text_url){
         return (
-            React.createElement("div", null, 
+            React.createElement("div", {className: "right-column-view"}, 
                 React.createElement("div", {className: "download-dropdown"}, 
                 React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, lang.download)), 
-                React.createElement("ul", {style: style}, 
+                React.createElement("ul", {className: "dropdown-menu", style: style}, 
                 React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, lang.pdf)), 
                 React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, lang.annotations))
                 )
                 ), 
-                React.createElement("div", {className: "social-share"}, 
+                React.createElement("div", {className: "social-share dropdown-wrap"}, 
                     React.createElement("a", {href: "#", onClick: this.socialDropdown}, React.createElement("span", null, "share")), 
-                    React.createElement("ul", {className: "social-share", style: socialStyle}, 
+                    React.createElement("ul", {className: "dropdown-menu", style: socialStyle}, 
                         React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
                         React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
                         React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
@@ -31214,16 +31340,17 @@ render:function() {
     else if(!this.props.annotations_url)
     {
         return (
-            React.createElement("div", null, 
+            React.createElement("div", {className: "right-column-view"}, 
                 React.createElement("div", {className: "download-dropdown"}, 
                 React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, lang.download)), 
-                React.createElement("ul", {style: style}, 
+                React.createElement("ul", {className: "dropdown-menu", style: style}, 
                 React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, lang.pdf)), 
                 React.createElement("li", null, React.createElement("a", {href: this.props.text_url}, lang.word_file))
                 )
                 ), 
-                React.createElement("div", {className: "social-share"}, 
-                    React.createElement("a", {href: "#", onClick: this.socialDropdown}, React.createElement("span", null, "share")), React.createElement("ul", {className: "social-share", style: socialStyle}, 
+                React.createElement("div", {className: "social-share dropdown-wrap"}, 
+                    React.createElement("a", {href: "#", onClick: this.socialDropdown}, React.createElement("span", null, "share")), 
+                    React.createElement("ul", {className: "dropdown-menu", style: socialStyle}, 
                         React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
                         React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
                         React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
@@ -31234,18 +31361,18 @@ render:function() {
          }
     else{
         return (
-            React.createElement("div", null, 
+            React.createElement("div", {className: "right-column-view"}, 
             React.createElement("div", {className: "download-dropdown"}, 
             React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, lang.download)), 
-            React.createElement("ul", {style: style}, 
+            React.createElement("ul", {className: "dropdown-menu", style: style}, 
             React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, lang.pdf)), 
             React.createElement("li", null, React.createElement("a", {href: this.props.text_url}, lang.word_file)), 
             React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, lang.annotations))
             )
             ), 
-            React.createElement("div", {className: "social-share"}, 
+            React.createElement("div", {className: "social-share dropdown-wrap"}, 
                 React.createElement("a", {href: "#", onClick: this.socialDropdown}, React.createElement("span", null, "share")), 
-                React.createElement("ul", {style: socialStyle}, 
+                React.createElement("ul", {className: "dropdown-menu", style: socialStyle}, 
                     React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
                     React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
                         React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
@@ -31401,15 +31528,6 @@ var MainApp = React.createClass({displayName: "MainApp",
         return (
             React.createElement("div", {className: "main-app"}, 
                 React.createElement("div", {className: "title-head-wrap"}, 
-                    React.createElement("div", {className: "title-wrap"}, 
-                        React.createElement("div", {className: "navbar-header"}, 
-
-                            React.createElement("a", {className: "navbar-brand", href: app_url}, category, React.createElement("span", {className: "beta"}, "Beta"), React.createElement("span", null, "Contracts"))
-
-                        ), 
-                        React.createElement("span", null, htmlDecode(contractTitle)), 
-                        React.createElement(SelectLanguage, null)
-                    ), 
                     React.createElement("div", {className: "head-wrap clearfix"}, 
                         React.createElement(TextSearchForm, {
                             style: this.getStyle(contractApp.isViewVisible("TextSearchForm")), 
@@ -31431,11 +31549,8 @@ var MainApp = React.createClass({displayName: "MainApp",
                             pdf_url: pdf_download_url, 
                             text_url: text_download_url, 
                             annotations_url: annotations_download_url}
-                        ), 
+                        )
 
-                        React.createElement(MetadataToggleButton, {
-                            style: this.getStyle(contractApp.getShowMeta()), 
-                            contractApp: contractApp})
                     )
                 ), 
                 React.createElement("div", {className: "document-wrap"}, 

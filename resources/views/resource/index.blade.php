@@ -2,17 +2,12 @@
 
 @section('content')
     <div class="row">
-        <div class="col-lg-12 panel-top-wrapper">
+        <div class="col-lg-12 panel-top-wrapper attached-top-wrapper">
             <div class="panel-top-content">
-                <div class="pull-left">
-                    <div class="breadcrumb-wrapper">
-                        <ul>
-                            <li><a href="{{url()}}">@lang('global.home')</a></li>
-                            <li>@lang('global.resource')</li>
-                        </ul>
-                    </div>
+                <div class="clearfix">
+                    <div class="back back-button">Back</div>
                     <div class="panel-title">
-                        @lang('global.resource')
+                        @lang('global.resources')
                     </div>
                 </div>
             </div>
@@ -28,9 +23,9 @@
                     </div>
                 </div>
                 <div class="col-xs-5 col-sm-3 col-md-3 col-lg-2 pull-right">
-                    <div class="filter-resource-wrap">
-                        <div class="filter-label" data-toggle="collapse-side" data-target=".side-collapse" data-target-2=".side-collapse-container">@lang('global.filter_by_countries')<i></i></div>
-                    </div>
+                    <a class = "filter-resource-wrap filter-label" href={{url('/countries')}}  >
+                        @lang('global.view_by_country')
+                    </a>
                     <div class="side-collapse in">
                         <ul id="countries">
                         </ul>
@@ -82,7 +77,6 @@
     var country = <?php echo json_encode(trans('country'));?>;
 </script>
 
-<script type="text/javascript" src="{{url('js
-')}}"></script>
+<script type="text/javascript" src="{{url('js/resource.js')}}"></script>
 @stop
 
