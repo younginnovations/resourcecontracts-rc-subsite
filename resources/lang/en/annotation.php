@@ -60,6 +60,7 @@ return [
     'learn_more'                 => 'Learn more',
     'search_result'              => 'Search result for',
     'annotation'                 => 'Annotation',
+    'land_matrix_id'             => 'Land Matrix ID',
 ];
 
 
