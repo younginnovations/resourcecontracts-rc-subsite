@@ -96,12 +96,14 @@ $category = $api->getAnnotationsCategory();
                     @endforeach
                 </select>
             </div>
+            @if(env('CATEGORY')=="rc")
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
 
                 <label for="">@lang('search.annotated')</label>
                 <input type="checkbox" name="annotated" value="1" class="form-control" @if(isset($filter['annotated']) && $filter['annotated']==1) checked @endif>
 
             </div>
+             @endif
     </div>
         <div class="col-lg-12">
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
