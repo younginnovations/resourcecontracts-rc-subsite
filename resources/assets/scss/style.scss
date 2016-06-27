@@ -125,8 +125,8 @@ $url_17: url(../../images/ic-delete.png);
   font-size: 12px;
   right: -4px;
   top: 13px;
-  color: $color_cape_cod_approx !important;
-  color: $black_50 !important;
+  color: $color_cape_cod_approx;
+  color: $black_50;
   text-transform: none;
   font-family: $font_0;
 }
@@ -2316,10 +2316,19 @@ td.contract-date {
   clear: both;
 }
 
-.contract-search-number-wrap {
-  top: 67px;
+.contract-number-wrap{
   display: block;
   z-index: 1000;
+}
+
+.contract-search-number-wrap{
+  top: 67px;
+}
+
+.page-contracts {
+  .contract-number-wrap{
+    top: -4px;
+  }
 }
 
 .panel-content {
