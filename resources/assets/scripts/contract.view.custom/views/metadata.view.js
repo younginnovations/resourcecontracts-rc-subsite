@@ -65,10 +65,10 @@ var MetadataView = React.createClass({
         var resLang=_.map(resources,function(value,index){
             var link=app_url+'/resource/'+value;
 
-            if (langResource[value] != 'undefined' && index != resLength - 1) {
+            if (langResource[value] && index != resLength - 1) {
                 return React.createElement('a', {href: app_url + "/resource/" + value}, langResource[value] + ' | ');
             }
-            else if (langResource[value] != 'undefined' && index == resLength - 1) {
+            else if(langResource[value] && index == resLength - 1) {
                 return React.createElement('a', {href: app_url + "/resource/" + value}, langResource[value]);
             }
             else {
