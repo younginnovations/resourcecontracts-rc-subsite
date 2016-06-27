@@ -216,7 +216,6 @@ class ContractController extends BaseController
             $contract->metadata->id,
             str_limit(str_slug($contract->metadata->name), 70)
         );
-
         header("Content-type: application/vnd.ms-wordx");
         header("Content-Disposition: attachment;Filename=$filename.doc");
 
