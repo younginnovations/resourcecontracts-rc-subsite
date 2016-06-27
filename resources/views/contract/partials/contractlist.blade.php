@@ -2,10 +2,16 @@
 use Illuminate\Support\Facades\Lang;
 
 $url = Request::all();
+$path = Request::path();
 $order = \Illuminate\Support\Facades\Input::get('order', '');
 $sortBy = \Illuminate\Support\Facades\Input::get('sortby', '');
 $route = Request::path();
+$showYear=true;
 
+if($route=="contracts" && isset($url['year']))
+{
+    $showYear=false;
+}
 ?>
 
 <table class="table table-responsive table-contract table-contract-list">
@@ -17,7 +23,9 @@ $route = Request::path();
     <th></th>
 
     <th width="12%"><a href="{{appendInUrl($route,$url,"country",$order)}}">@lang('global.country') {!!show_arrow($order, $sortBy=='country')!!}</a></th>
-    <th><a href="{{appendInUrl($route,$url,"year",$order)}}">@lang('global.year') {!!show_arrow($order, $sortBy=='year')!!}</a></th>
+    @if($showYear)
+        <th><a href="{{appendInUrl($route,$url,"year",$order)}}">@lang('global.year') {!!show_arrow($order, $sortBy=='year')!!}</a></th>
+    @endif
     <th width="13%"><a href="{{appendInUrl($route,$url,"resource",$order)}}">@lang('global.resource') {!!show_arrow($order, $sortBy=='resource')!!}</a></th>
     <th width="25%"><a href="{{appendInUrl($route,$url,"contract_type",$order)}}">@lang('contract.contract_type') {!!show_arrow($order, $sortBy=='contract_type')!!}</a></th>
 
@@ -134,10 +142,12 @@ $route = Request::path();
             @else
                 <td></td>
             @endif
-            @if($contract->year_signed !='')
-                <td>{{$contract->year_signed}}</td>
-            @else
-                <td></td>
+            @if($showYear)
+                @if($contract->year_signed !='')
+                    <td>{{$contract->year_signed}}</td>
+                @else
+                    <td></td>
+                @endif
             @endif
             <td>
                 <?php
