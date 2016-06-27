@@ -5,25 +5,15 @@
 
 @section('content')
     <div class="row">
-        <div class="col-lg-12 panel-top-wrapper">
+        <div class="col-lg-12 panel-top-wrapper attached-top-wrapper">
             <div class="panel-top-content">
-                <div class="pull-left">
-                    <div class="breadcrumb-wrapper">
-                        <ul>
-                            <li><a href="{{url()}}">@lang('global.home')</a></li>
-                            @if(\Illuminate\Support\Facades\Input::get('year') =='')
-                                <li>@lang('global.all_contracts')</li>
-                            @else
-                                <li><a href="{{url('contracts')}}">@lang('global.all_contracts')</a></li>
-                                <li>{{\Illuminate\Support\Facades\Input::get('year')}}</li>
-                            @endif
-                        </ul>
-                    </div>
+                <div class="clearfix">
+                    <div class="back back-button">Back</div>
                     <div class="panel-title">
                         @if(\Illuminate\Support\Facades\Input::get('year') !='')
-                            @lang('global.contracts_in') {{\Illuminate\Support\Facades\Input::get('year')}}
+                            @lang('global.documents_of') {{\Illuminate\Support\Facades\Input::get('year')}}
                           @else
-                            @lang('global.all_contracts')
+                            @lang('global.all_documents')
                         @endif
                     </div>
                 </div>

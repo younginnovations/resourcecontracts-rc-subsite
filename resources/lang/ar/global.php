@@ -68,5 +68,7 @@ return [
     'advanced_search'             => "بحث متقدّم",
     'yes'                         => "نعم",
     'no'                          => "لا",
+    'all_documents'               => 'جميع المستندات',
+    'documents_of'                => 'وثائق',
 
 ];

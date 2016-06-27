@@ -7,9 +7,10 @@ use Illuminate\Support\Facades\Lang;
 
 @section('content')
     <div class="row">
-        <div class="attached-top-wrapper panel-top-wrapper">
+        <div class="attached-top-wrapper panel-top-wrapper attached-top-wrapper">
             <div class="panel-top-content">
-                <div class="pull-left">
+                <div class="clearfix">
+                    <div class="back back-button">Back</div>
                     <div class="panel-title">
                         {{_l("resources",$resource)}}
                     </div>

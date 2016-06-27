@@ -27,7 +27,7 @@
                     @foreach (config('language') as $locale => $language)
                         @if(app('translator')->getLocale()!=$locale)
                             <li>
-                                <a href={{ url(Request::url().'?lang='.$locale)}}>
+                                <a href={{lang_url($locale)}}>
                                     <img style="width: 16px ; height: 16px; margin-right: 6px;" src="{{getCountryByLang($locale)}}"/>
                                     {{$language['name']}}
                                 </a>

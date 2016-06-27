@@ -69,4 +69,6 @@ return [
     'view_by_country'             => 'View by Country',
     'view_by_resource'            => 'View by Resource',
     'view_summary'                => 'View Summary',
+    'all_documents'               => 'All Documents',
+    'documents_of'                => 'Documents of'
 ];

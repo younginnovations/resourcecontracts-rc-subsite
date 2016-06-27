@@ -14,7 +14,7 @@
                         $showSearchQ=showSearchQuery($params,$filter);
                         ?>
                         @if($showSearchQ)
-                                <div id="search_query" class="isolate" style="font-weight: normal; display: inline;">All Documents</div>
+                                <div id="search_query" class="isolate" style="font-weight: normal; display: inline;">@lang('global.all_documents')</div>
                         @else
                                 @lang('global.search_results')
                         <div id="search_query" style="font-weight: normal; display: inline"> @if($q)for @endif <span>{{$q}}</span></div>
