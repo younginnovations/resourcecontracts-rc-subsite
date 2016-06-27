@@ -31,8 +31,6 @@ $route = Request::path();
         <tr>
             <td></td>
             <td>
-
-                @if(isset($show_advanc))<input type="checkbox" class="compare" name="compare[]" value="{{$contract->open_contracting_id}}"/>@endif
                     @if(isset($contract->text ) && !empty($contract->text))
                         <a class="title-{{$contract->open_contracting_id}}" href="{{ url(sprintf("/contract/%s/view#/search/%s", $contract->open_contracting_id , $url['q'] )) }}">
                             {{ $contract->name or ''}}

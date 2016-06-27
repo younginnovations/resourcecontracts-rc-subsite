@@ -3663,6 +3663,7 @@ var ContractApp = Backbone.Model.extend({
         return this.get("canrender");
     },
     setCurrentPage: function (page_no) {
+        console.log(page_no);
         page_no = parseInt(page_no);
         this.set({page_no: page_no});
     },
@@ -30131,22 +30132,22 @@ var RightColumnView = React.createClass({displayName: "RightColumnView",
 
 var NavigationView = React.createClass({displayName: "NavigationView",
     render: function () {
-    var textClass =null;
-    var pdfClass =null;
-    var annotationClass =null;
-    var metadataClass =null;
-    if (this.props.contractApp.getView() === "pdf") {
+        var textClass = null;
+        var pdfClass = null;
+        var annotationClass = null;
+        var metadataClass = null;
+        if (this.props.contractApp.getView() === "pdf") {
             pdfClass = "active";
-    }
-    if(this.props.contractApp.getView() === "text"){
+        }
+        if (this.props.contractApp.getView() === "text") {
             textClass = "active";
         }
-    if (this.props.contractApp.getView() === "annotation") {
-        annotationClass = "active";
-    }
-    if(this.props.contractApp.getView() === "metadata") {
-        metadataClass = "active";
-    }
+        if (this.props.contractApp.getView() === "annotation") {
+            annotationClass = "active";
+        }
+        if (this.props.contractApp.getView() === "metadata") {
+            metadataClass = "active";
+        }
         return (
             React.createElement("div", {className: "navigation"}, 
                 React.createElement("a", {href: "#/text", className: textClass}, lang.text), 
@@ -30200,7 +30201,7 @@ var TextPaginationView = React.createClass({displayName: "TextPaginationView",
     },
     componentDidMount: function () {
         var titleHeadHeight = $('.title-wrap').height();
-        $(window).scroll(function(){
+        $(window).scroll(function () {
             if ($(window).scrollTop() > titleHeadHeight) {
                 $('.title-head-wrap').addClass('fixed');
             }
@@ -30213,7 +30214,9 @@ var TextPaginationView = React.createClass({displayName: "TextPaginationView",
         this.props.contractApp.on("update-text-pagination-page", function (page_no) {
             self.refs.userInputText.getDOMNode().value = page_no;
             self.setState({visiblePage: page_no});
-            self.props.contractApp.setCurrentPage(page_no);
+            if (page_no > 1) {
+                self.props.contractApp.setCurrentPage(page_no);
+            }
             self.setState({visiblePage: page_no});
         });
         this.refs.userInputText.getDOMNode().value = this.state.visiblePage;
@@ -30354,7 +30357,7 @@ var TextViewer = React.createClass({displayName: "TextViewer",
         this.props.pagesCollection.on("reset", function () {
             self.message = "";
             if (self.props.pagesCollection.models.length === 0) {
-               self.message =  React.createElement('div', {class: "no-contract-error"}, lang.sorry_loading);
+                self.message = React.createElement('div', {class: "no-contract-error"}, lang.sorry_loading);
             }
             self.forceUpdate();
             self.loadAnnotations();
@@ -30371,9 +30374,7 @@ var TextViewer = React.createClass({displayName: "TextViewer",
 
         var warningText = (this.message) ? "" : (React.createElement("div", {className: "text-viewer-warning"}, 
             React.createElement("span", {className: "pull-right link close", onClick: this.handleClickWarning}, "x"), 
-                        lang.text_created_automatically, 
-            
-
+            lang.text_created_automatically, 
             React.createElement("a", {target: "_blank", href: text_version_url},  lang.learn_more)
         ));
 
@@ -30384,9 +30385,9 @@ var TextViewer = React.createClass({displayName: "TextViewer",
             for (var i = 0; i < this.props.pagesCollection.models.length; i++) {
                 var model = this.props.pagesCollection.models[i];
                 pagesView.push(React.createElement(TextPageView, {
-                        key: i, 
-                        contractApp: self.props.contractApp, 
-                        page: model})
+                    key: i, 
+                    contractApp: self.props.contractApp, 
+                    page: model})
                 );
             }
         }
@@ -30394,8 +30395,7 @@ var TextViewer = React.createClass({displayName: "TextViewer",
         if (typeof show_pdf_text === 'undefined') {
             warningText = '';
         }
-        if(this.props.pagesCollection.models.length === 0)
-        {
+        if (this.props.pagesCollection.models.length === 0) {
             warningText = (React.createElement("div", {className: "text-viewer-warning"}, not_published_message));
             pagesView = "";
         }
@@ -30406,11 +30406,11 @@ var TextViewer = React.createClass({displayName: "TextViewer",
 
         return (
             React.createElement("div", {className: "text-panel", id: "textview", style: this.props.style}, 
-        warningText, 
+                warningText, 
                 React.createElement("div", {className: "text-annotator"}, 
                     React.createElement("div", null), 
                     React.createElement("div", {className: "text-viewer"}, 
-          pagesView
+                        pagesView
                     )
                 )
             )
@@ -30419,267 +30419,259 @@ var TextViewer = React.createClass({displayName: "TextViewer",
 
 });
 var TextSearchForm = React.createClass({displayName: "TextSearchForm",
-  handleSubmit: function(e) {
-    e.preventDefault();
-    var searchQuery = React.findDOMNode(this.refs.searchInput).value.trim();
-    if(!searchQuery) {
-      return;
+    handleSubmit: function (e) {
+        e.preventDefault();
+        var searchQuery = React.findDOMNode(this.refs.searchInput).value.trim();
+        if (!searchQuery) {
+            return;
+        }
+        document.location.hash = '#/search/' + encodeURI(searchQuery);
+    },
+    componentDidMount: function () {
+        React.findDOMNode(this.refs.searchInput).value = this.props.contractApp.getSearchQuery();
+    },
+    render: function () {
+        return (
+            React.createElement("div", {className: "text-search-container"}, 
+                React.createElement("div", {className: "text-search"}, 
+                    React.createElement("form", {onSubmit: this.handleSubmit}, 
+                        React.createElement("input", {type: "text", className: "", ref: "searchInput", placeholder: lang.search_in_this_document})
+                    )
+                )
+            )
+        );
     }
-    document.location.hash = '#/search/' + encodeURI(searchQuery);
-  },
-  componentDidMount:function(){
-    React.findDOMNode(this.refs.searchInput).value =this.props.contractApp.getSearchQuery();
-  },
-  render: function() {
-    return (
-      React.createElement("div", {className: "text-search-container"}, 
-      React.createElement("div", {className: "text-search"}, 
-      React.createElement("form", {onSubmit: this.handleSubmit}, 
-        React.createElement("input", {type: "text", className: "", ref: "searchInput", placeholder: lang.search_in_this_document})
-      )
-      )
-      )
-    );
-  }
 });
 
 var TextSearchResultRow = React.createClass({displayName: "TextSearchResultRow",
-  getInitialState : function(){
-    return {
-      maxWords:30,
-      text: '',
-      shortText: '',
-      showEllipse: '',
-      showMoreFlag: ''
-    };
-  },
-  componentDidMount:function(){
-    if(this.props.resultRow.get('type')=="annotation")
-    {
-      var text = this.props.resultRow.get('text');
-      var showEllipse = this.shallShowEllipse(text);
-      var shortText = "";
-      if (showEllipse) {
-        shortText = this.truncate(text);
-      }
+    getInitialState: function () {
+        return {
+            maxWords: 30,
+            text: '',
+            shortText: '',
+            showEllipse: '',
+            showMoreFlag: ''
+        };
+    },
+    componentDidMount: function () {
+        if (this.props.resultRow.get('type') == "annotation") {
+            var text = this.props.resultRow.get('text');
+            var showEllipse = this.shallShowEllipse(text);
+            var shortText = "";
+            if (showEllipse) {
+                shortText = this.truncate(text);
+            }
 
-      this.setState({
-        text:text,
-        showEllipse:showEllipse,
-        shortText:shortText,
-        showMoreFlag:true
-      });
+            this.setState({
+                text: text,
+                showEllipse: showEllipse,
+                shortText: shortText,
+                showMoreFlag: true
+            });
+        }
+    },
+    componentWillReceiveProps: function (prev) {
+        var result = prev.resultRow;
+        var text = result.get('text');
+        var showEllipse = this.shallShowEllipse(text);
+        var shortText = "";
+        if (showEllipse) {
+            shortText = this.truncate(text);
+        }
+
+        this.setState({
+            text: text,
+            showEllipse: showEllipse,
+            shortText: shortText,
+            showMoreFlag: true
+        });
+    },
+    truncate: function (text) {
+
+        var words = (text + "").split(" ");
+        words = words.splice(0, this.state.maxWords);
+
+        return words.join(" ");
+    },
+    shallShowEllipse: function (text) {
+        var words = (text + "").split(' ');
+        if (words.length >= this.state.maxWords) {
+            return true;
+        }
+        return false;
+    },
+    handleClickLessMore: function (e) {
+        e.preventDefault();
+        this.toggleShowMore();
+    },
+    toggleShowMore: function () {
+        this.setState({showMoreFlag: !this.state.showMoreFlag})
+    },
+    getShowText: function (highlight) {
+        var more = '';
+        var texToShow = "";
+        var textToReturn = '';
+
+        if (this.state.showMoreFlag && this.state.shortText.length > 0) {
+            texToShow = this.state.shortText;
+            more = "...more";
+        }
+        if (!this.state.showMoreFlag && this.state.text.length > 0) {
+
+            texToShow = this.state.text;
+
+            more = " less";
+        }
+        if (texToShow.length == 0) {
+            texToShow = this.state.text;
+        }
+
+        texToShow = React.createElement(HighLight, {highlight: highlight, text: texToShow});
+        more = (React.createElement("a", {onClick: this.handleClickLessMore}, more));
+        textToReturn = (React.createElement("span", null, texToShow, " ", more, " "));
+        return textToReturn;
+    },
+    handleClick: function () {
+
+        if (this.props.resultRow.get('type') == "text") {
+            location.hash = "#/text";
+            this.props.contractApp.setIsSearch(true);
+            this.props.contractApp.setCurrentPage(this.props.resultRow.get("page_no"));
+            this.props.contractApp.triggerScrollToTextPage();
+        }
+
+        else {
+            location.hash = "#/" + this.props.resultRow.get("annotation_type") + "/page/" + this.props.resultRow.get("page_no") + "/annotation/" + this.props.resultRow.get("annotation_id");
+            switch (this.props.resultRow.get('annotation_type')) {
+                case "pdf":
+                    self = this;
+                    this.props.contractApp.setView("pdf");
+                    this.props.contractApp.setIsSearch(true);
+                    this.props.contractApp.setSelectedAnnotation(self.props.resultRow.get('annotation_id'));
+                    this.props.contractApp.trigger("annotations:highlight", {id: self.props.resultRow.get('annotation_id')});
+                    this.props.contractApp.setCurrentPage(self.props.resultRow.get('page_no'));
+                    this.props.contractApp.triggerUpdatePdfPaginationPage(self.props.resultRow.get('page_no'));
+                    //this.props.contractApp.trigger("annotationHighlight", this.props.annotation.attributes);
+                    break;
+                case "text":
+                    self = this;
+                    this.props.contractApp.setView("text");
+                    this.props.contractApp.setIsSearch(true);
+                    this.props.contractApp.trigger("annotations:highlight", {id: self.props.resultRow.get('annotation_id')});
+                    this.props.contractApp.setCurrentPage(self.props.resultRow.get('page_no'));
+                    this.props.contractApp.showTextAnnotationPopup(self.props.resultRow.get('annotation_id'));
+                    //setTimeout(this.props.contractApp.triggerScrollToTextPage());
+                    break;
+            }
+        }
+        // this.props.currentPage.set({"page_no": this.props.resultRow.get("page_no")});
+        // this.props.currentPage.trigger("scroll-to-page");
+    },
+    highlightSearchQuery: function (text, highlightword) {
+        highlightword = decodeURI(highlightword);
+        var re = new RegExp(highlightword, "gi");
+        return text.replace(re, "<span class='search-highlight-word'>" + highlightword + "</span>");
+    },
+    render: function () {
+        var text = this.highlightSearchQuery(this.props.resultRow.get("text"), this.props.contractApp.getSearchQuery());
+        var type = "<a class='text' title='Text'>Text</a>";
+        text = "<span>Pg " + this.props.resultRow.get("page_no") + "&nbsp;" + text + "</span>" + type;
+        if (this.props.resultRow.get("type") == "annotation") {
+            type = "<a class='annotations' title='Annotation'>" + lang.annotation + "</a>";
+            text = this.getShowText(this.props.contractApp.getSearchQuery());
+        }
+
+        if (this.props.resultRow.get('type') == "annotation") {
+            return (
+
+                React.createElement("div", {className: "search-result-row link", onClick: this.handleClick}, 
+
+                    text, " ", React.createElement("span", {dangerouslySetInnerHTML: {__html: type}})
+                )
+            );
+        }
+        else {
+            return (
+
+                React.createElement("div", {className: "search-result-row link", onClick: this.handleClick}, 
+
+                    React.createElement("span", {dangerouslySetInnerHTML: {__html: text}})
+                )
+            );
+        }
+
     }
-  },
-  componentWillReceiveProps: function(prev){
-    var result=prev.resultRow;
-    console.log(result);
-    var text = result.get('text');
-    var showEllipse = this.shallShowEllipse(text);
-    var shortText = "";
-    if (showEllipse) {
-      shortText = this.truncate(text);
-    }
-
-    this.setState({
-      text:text,
-      showEllipse:showEllipse,
-      shortText:shortText,
-      showMoreFlag:true
-    });
-  },
-  truncate: function (text) {
-
-    var words = (text + "").split(" ");
-    words = words.splice(0, this.state.maxWords);
-
-    return words.join(" ");
-  },
-  shallShowEllipse: function (text) {
-    var words = (text + "").split(' ');
-    if (words.length >= this.state.maxWords) {
-      return true;
-    }
-    return false;
-  },
-  handleClickLessMore : function(e){
-    e.preventDefault();
-    this.toggleShowMore();
-  },
-  toggleShowMore : function()
-  {
-    this.setState({showMoreFlag:!this.state.showMoreFlag})
-  },
-  getShowText : function(highlight)
-  {
-    var more='';
-    var texToShow="";
-    var textToReturn='';
-
-    if(this.state.showMoreFlag && this.state.shortText.length >0)
-    {
-      texToShow = this.state.shortText;
-      more = "...more";
-    }
-    if(!this.state.showMoreFlag && this.state.text.length > 0){
-
-      texToShow = this.state.text;
-
-      more = " less";
-    }
-    if(texToShow.length == 0)
-    {
-      texToShow = this.state.text;
-    }
-
-    texToShow= React.createElement(HighLight, {highlight: highlight, text: texToShow});
-    more = (React.createElement("a", {onClick: this.handleClickLessMore}, more));
-    textToReturn = (React.createElement("span", null, texToShow, " ", more, " "));
-  return textToReturn;
-  },
-  handleClick: function() {
-
-  if(this.props.resultRow.get('type')=="text")
-    {
-      location.hash = "#/text";
-      this.props.contractApp.setIsSearch(true);
-      this.props.contractApp.setCurrentPage(this.props.resultRow.get("page_no"));
-      this.props.contractApp.triggerScrollToTextPage();
-    }
-
-  else {
-      location.hash = "#/"+this.props.resultRow.get("annotation_type")+"/page/"+this.props.resultRow.get("page_no")+"/annotation/"+this.props.resultRow.get("annotation_id");
-      switch (this.props.resultRow.get('annotation_type')) {
-        case "pdf":
-          self = this;
-          this.props.contractApp.setView("pdf");
-          this.props.contractApp.setIsSearch(true);
-          this.props.contractApp.setSelectedAnnotation(self.props.resultRow.get('annotation_id'));
-          this.props.contractApp.trigger("annotations:highlight", {id: self.props.resultRow.get('annotation_id')});
-          this.props.contractApp.setCurrentPage(self.props.resultRow.get('page_no'));
-          this.props.contractApp.triggerUpdatePdfPaginationPage(self.props.resultRow.get('page_no'));
-          //this.props.contractApp.trigger("annotationHighlight", this.props.annotation.attributes);
-          break;
-        case "text":
-          self = this;
-          this.props.contractApp.setView("text");
-          this.props.contractApp.setIsSearch(true);
-          this.props.contractApp.trigger("annotations:highlight", {id: self.props.resultRow.get('annotation_id')});
-          this.props.contractApp.setCurrentPage(self.props.resultRow.get('page_no'));
-
-          this.props.contractApp.showTextAnnotationPopup(self.props.resultRow.get('annotation_id'));
-          //setTimeout(this.props.contractApp.triggerScrollToTextPage());
-          break;
-      }
-  }
-    // this.props.currentPage.set({"page_no": this.props.resultRow.get("page_no")});
-    // this.props.currentPage.trigger("scroll-to-page");
-  },
-  highlightSearchQuery: function(text, highlightword) {
-    highlightword = decodeURI(highlightword);
-    var re = new RegExp(highlightword, "gi");
-    return text.replace(re,"<span class='search-highlight-word'>" + highlightword + "</span>");
-  },
-  render: function() {
-    var text = this.highlightSearchQuery(this.props.resultRow.get("text"), this.props.contractApp.getSearchQuery());
-    var type = "<a class='text' title='Text'>Text</a>";
-    text = "<span>Pg " + this.props.resultRow.get("page_no") + "&nbsp;" + text+"</span>" +type;
-    if(this.props.resultRow.get("type")=="annotation")
-    {
-       type = "<a class='annotations' title='Annotation'>" + lang.annotation + "</a>";
-       text=this.getShowText(this.props.contractApp.getSearchQuery());
-    }
-
-  if(this.props.resultRow.get('type')=="annotation")
-
-  {
-    return(
-
-        React.createElement("div", {className: "search-result-row link", onClick: this.handleClick}, 
-
-                text, "  ", React.createElement("span", {dangerouslySetInnerHTML: {__html: type}})
-        )
-);
-  }
-    else{
-    return(
-
-        React.createElement("div", {className: "search-result-row link", onClick: this.handleClick}, 
-
-          React.createElement("span", {dangerouslySetInnerHTML: {__html: text}})
-        )
-);
-  }
-
-  }
 });
 var TextSearchResultsList = React.createClass({displayName: "TextSearchResultsList",
-  componentDidMount: function() {
-    var self = this;
-    this.props.searchResultsCollection.on("reset", function() {
-      self.forceUpdate();
-      self.props.contractApp.trigger("searchresults:ready");
-    });
-  },
-  handleCloseSearchResults: function() {
-    this.props.contractApp.trigger("searchresults:close");
-    document.location.hash = '#/text';
-    this.props.contractApp.setView("text");
-  },
-  render: function() {
-    var self = this;
-    var resultsView = lang.searching;
-    console.log("modelsssssssss",this.props.searchResultsCollection.models);
-    if(this.props.searchResultsCollection.models.length > 0) {
-      resultsView = this.props.searchResultsCollection.models.map(function(model, i) {
-        return (
-          React.createElement(TextSearchResultRow, {
-            key: i, 
-            contractApp: self.props.contractApp, 
-            resultRow: model})
-        );
-      });
+    componentDidMount: function () {
+        var self = this;
+        this.props.searchResultsCollection.on("reset", function () {
+            self.forceUpdate();
+            self.props.contractApp.trigger("searchresults:ready");
+            if (self.props.searchResultsCollection.models.length > 0) {
+                self.props.contractApp.trigger("update-text-pagination-page", self.props.searchResultsCollection.models[0].get('page_no'));
+                self.props.contractApp.triggerScrollToTextPage();
+            }
+        });
+    },
+    handleCloseSearchResults: function () {
+        this.props.contractApp.trigger("searchresults:close");
+        document.location.hash = '#/text';
+        this.props.contractApp.setView("text");
+    },
+    render: function () {
+        var self = this;
+        var resultsView = lang.searching;
+        if (this.props.searchResultsCollection.models.length > 0) {
+            resultsView = this.props.searchResultsCollection.models.map(function (model, i) {
+                return (
+                    React.createElement(TextSearchResultRow, {
+                        key: i, 
+                        contractApp: self.props.contractApp, 
+                        resultRow: model})
+                );
+            });
+        }
+        else if (this.props.searchResultsCollection.searchCompleted === true && this.props.searchResultsCollection.length == 0) {
+            resultsView = lang.no_results_found;
+        }
+        if (this.props.searchResultsCollection.models.length > 0) {
+            return (
+                React.createElement("div", {style: this.props.style, className: "search-results-list"}, 
+                    React.createElement("div", {
+                        className: "search-result-title"}, " ", lang.search_result, " ", decodeURI(this.props.contractApp.getSearchQuery())), 
+                    React.createElement("span", {className: "pull-right link close", onClick: this.handleCloseSearchResults}, "x"), 
+                    resultsView
+                )
+            );
+        } else {
+            return (
+                React.createElement("div", {style: this.props.style, className: "search-results-list"}, 
+                    React.createElement("span", {className: "pull-right link close", onClick: this.handleCloseSearchResults}, "x"), 
+                    resultsView
+                )
+            );
+        }
     }
-    else if(this.props.searchResultsCollection.searchCompleted === true && this.props.searchResultsCollection.length == 0) {
-      resultsView = lang.no_results_found;
-    }
-if(this.props.searchResultsCollection.models.length > 0) {
-    return (
-      React.createElement("div", {style: this.props.style, className: "search-results-list"}, 
-       React.createElement("div", {className: "search-result-title"}, " ", lang.search_result, " ", decodeURI(this.props.contractApp.getSearchQuery())), 
-       React.createElement("span", {className: "pull-right link close", onClick: this.handleCloseSearchResults}, "x"), 
-        resultsView
-      )
-    );
-    }else{
-      return (
-          React.createElement("div", {style: this.props.style, className: "search-results-list"}, 
-            React.createElement("span", {className: "pull-right link close", onClick: this.handleCloseSearchResults}, "x"), 
-          resultsView
-          )
-    );
-    }
-  }
 
 });
-
 
 
 var HighLight = React.createClass({displayName: "HighLight",
 
-  render : function(){
-    var highlightword = decodeURI(this.props.highlight);
-    var re = new RegExp(highlightword, "gi");
-    var text= this.props.text;
-    var texta = text.replace(re,"<span class\='search-highlight-word'>"+highlightword+"</span>");
+    render: function () {
+        var highlightword = decodeURI(this.props.highlight);
+        var re = new RegExp(highlightword, "gi");
+        var text = this.props.text;
+        var texta = text.replace(re, "<span class\='search-highlight-word'>" + highlightword + "</span>");
 
-    return(
-        React.createElement("span", {
-          dangerouslySetInnerHTML: {
+        return (
+            React.createElement("span", {
+                dangerouslySetInnerHTML: {
           __html : texta
     }})
-    );
-  }
+        );
+    }
 
 });
 var AnnotationsViewer = React.createClass({displayName: "AnnotationsViewer",
@@ -31474,13 +31466,11 @@ var MainApp = React.createClass({displayName: "MainApp",
     search: function(query) {
         contractApp.setView("search");
         var show_pdf_text = contractApp.metadata.get('is_ocr_reviewed');
-
             contractApp.setSearchQuery(query);
             searchResultsCollection.fetch({
                 searchTerm: query,
                 reset: true
             });
-
         this.forceUpdate();
     },
     meta: function(action) {
