@@ -3663,7 +3663,6 @@ var ContractApp = Backbone.Model.extend({
         return this.get("canrender");
     },
     setCurrentPage: function (page_no) {
-        console.log(page_no);
         page_no = parseInt(page_no);
         this.set({page_no: page_no});
     },
@@ -29790,10 +29789,10 @@ var MetadataView = React.createClass({displayName: "MetadataView",
         var resLang=_.map(resources,function(value,index){
             var link=app_url+'/resource/'+value;
 
-            if (langResource[value] != 'undefined' && index != resLength - 1) {
+            if (langResource[value] && index != resLength - 1) {
                 return React.createElement('a', {href: app_url + "/resource/" + value}, langResource[value] + ' | ');
             }
-            else if (langResource[value] != 'undefined' && index == resLength - 1) {
+            else if(langResource[value] && index == resLength - 1) {
                 return React.createElement('a', {href: app_url + "/resource/" + value}, langResource[value]);
             }
             else {
@@ -30551,7 +30550,6 @@ var TextSearchResultRow = React.createClass({displayName: "TextSearchResultRow",
                     this.props.contractApp.trigger("annotations:highlight", {id: self.props.resultRow.get('annotation_id')});
                     this.props.contractApp.setCurrentPage(self.props.resultRow.get('page_no'));
                     this.props.contractApp.triggerUpdatePdfPaginationPage(self.props.resultRow.get('page_no'));
-                    //this.props.contractApp.trigger("annotationHighlight", this.props.annotation.attributes);
                     break;
                 case "text":
                     self = this;
@@ -30560,12 +30558,9 @@ var TextSearchResultRow = React.createClass({displayName: "TextSearchResultRow",
                     this.props.contractApp.trigger("annotations:highlight", {id: self.props.resultRow.get('annotation_id')});
                     this.props.contractApp.setCurrentPage(self.props.resultRow.get('page_no'));
                     this.props.contractApp.showTextAnnotationPopup(self.props.resultRow.get('annotation_id'));
-                    //setTimeout(this.props.contractApp.triggerScrollToTextPage());
                     break;
             }
         }
-        // this.props.currentPage.set({"page_no": this.props.resultRow.get("page_no")});
-        // this.props.currentPage.trigger("scroll-to-page");
     },
     highlightSearchQuery: function (text, highlightword) {
         highlightword = decodeURI(highlightword);
@@ -30583,18 +30578,14 @@ var TextSearchResultRow = React.createClass({displayName: "TextSearchResultRow",
 
         if (this.props.resultRow.get('type') == "annotation") {
             return (
-
                 React.createElement("div", {className: "search-result-row link", onClick: this.handleClick}, 
-
                     text, " ", React.createElement("span", {dangerouslySetInnerHTML: {__html: type}})
                 )
             );
         }
         else {
             return (
-
                 React.createElement("div", {className: "search-result-row link", onClick: this.handleClick}, 
-
                     React.createElement("span", {dangerouslySetInnerHTML: {__html: text}})
                 )
             );
@@ -30658,7 +30649,6 @@ var TextSearchResultsList = React.createClass({displayName: "TextSearchResultsLi
 
 
 var HighLight = React.createClass({displayName: "HighLight",
-
     render: function () {
         var highlightword = decodeURI(this.props.highlight);
         var re = new RegExp(highlightword, "gi");
@@ -30672,7 +30662,6 @@ var HighLight = React.createClass({displayName: "HighLight",
     }})
         );
     }
-
 });
 var AnnotationsViewer = React.createClass({displayName: "AnnotationsViewer",
     getInitialState: function () {
