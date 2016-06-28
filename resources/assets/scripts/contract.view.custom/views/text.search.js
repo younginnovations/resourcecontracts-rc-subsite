@@ -106,8 +106,9 @@ var TextSearchResultRow = React.createClass({
         if (texToShow.length == 0) {
             texToShow = this.state.text;
         }
+        console.log(texToShow);
 
-        texToShow = <HighLight highlight={highlight} text={texToShow}/>;
+        texToShow = <HighLight  text={texToShow}/>;
         more = (<a onClick={this.handleClickLessMore}>{more}</a>);
         textToReturn = (<span>{texToShow} {more} </span>);
         return textToReturn;
@@ -232,16 +233,11 @@ var TextSearchResultsList = React.createClass({
 
 var HighLight = React.createClass({
     render: function () {
-        var highlightword = decodeURI(this.props.highlight);
-        var re = new RegExp(highlightword, "gi");
-        var text = this.props.text;
-        var texta = text.replace(re, "<span class\='search-highlight-word'>" + highlightword + "</span>");
-
         return (
             <span
                 dangerouslySetInnerHTML={{
-          __html : texta
-    }}/>
+          __html : this.props.text
+            }}/>
         );
     }
 });

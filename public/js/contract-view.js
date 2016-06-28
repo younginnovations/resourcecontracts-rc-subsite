@@ -30525,8 +30525,9 @@ var TextSearchResultRow = React.createClass({displayName: "TextSearchResultRow",
         if (texToShow.length == 0) {
             texToShow = this.state.text;
         }
+        console.log(texToShow);
 
-        texToShow = React.createElement(HighLight, {highlight: highlight, text: texToShow});
+        texToShow = React.createElement(HighLight, {text: texToShow});
         more = (React.createElement("a", {onClick: this.handleClickLessMore}, more));
         textToReturn = (React.createElement("span", null, texToShow, " ", more, " "));
         return textToReturn;
@@ -30601,7 +30602,6 @@ var TextSearchResultsList = React.createClass({displayName: "TextSearchResultsLi
             self.forceUpdate();
             self.props.contractApp.trigger("searchresults:ready");
             if (self.props.searchResultsCollection.models.length > 0) {
-                console.log(self.props.searchResultsCollection.models[0].get('page_no'));
                 self.props.contractApp.trigger("update-text-pagination-page", self.props.searchResultsCollection.models[0].get('page_no'));
                 self.props.contractApp.triggerScrollToTextPage();
             }
@@ -30652,16 +30652,11 @@ var TextSearchResultsList = React.createClass({displayName: "TextSearchResultsLi
 
 var HighLight = React.createClass({displayName: "HighLight",
     render: function () {
-        var highlightword = decodeURI(this.props.highlight);
-        var re = new RegExp(highlightword, "gi");
-        var text = this.props.text;
-        var texta = text.replace(re, "<span class\='search-highlight-word'>" + highlightword + "</span>");
-
         return (
             React.createElement("span", {
                 dangerouslySetInnerHTML: {
-          __html : texta
-    }})
+          __html : this.props.text
+            }})
         );
     }
 });
