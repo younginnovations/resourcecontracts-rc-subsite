@@ -40,7 +40,8 @@ if($route=="contracts" && isset($url['year']))
             <td></td>
             <td>
                     @if(isset($contract->text ) && !empty($contract->text))
-                        <a class="title-{{$contract->open_contracting_id}}" href="{{ url(sprintf("/contract/%s/view#/search/%s", $contract->open_contracting_id , $url['q'] )) }}">
+                        <a class="title-{{$contract->open_contracting_id}}" href="{{ url(sprintf
+                        ("/contract/%s/view#/search/%s", $contract->open_contracting_id , rawurlencode($url['q']))) }}">
                             {{ $contract->name or ''}}
                         </a>
                     @elseif(isset($contract->annotations ) && !empty($contract->annotations))
@@ -67,7 +68,8 @@ if($route=="contracts" && isset($url['year']))
 
                 <div class="search-text">
                     @if(isset($contract->text ) && $contract->text !='')
-                        <p><a href="{{ url(sprintf("/contract/%s/view#/search/%s", $contract->open_contracting_id , $url['q'] )) }}">{!!$contract->text.'...'!!}<span
+                        <p><a href="{{ url(sprintf("/contract/%s/view#/search/%s", $contract->open_contracting_id ,
+                        rawurlencode($url['q']))) }}">{!!$contract->text.'...'!!}<span
                                         class="contract-group">@lang('global.text')</span></a></p>
 
                     @endif
