@@ -49,8 +49,8 @@ return [
     'next'                        => 'Next',
     'last'                        => 'Last',
     'first'                       => 'First',
-    'annotated'                   => "This is annotated contract. <a href=':link' target='_blank'>View all annotations.</a>",
-    'annotated_no_link'                   => "This is annotated contract.",
+    'annotated'                   => "This contract has annotations. <a href=':link' target='_blank'>View all annotations.</a>",
+    'annotated_no_link'           => "This contract has annotations.",
     'previous'                    => 'Previous',
     'close_annotations'           => 'Close Annotations',
     'note'                        => 'Note',
@@ -70,5 +70,5 @@ return [
     'view_by_resource'            => 'View by Resource',
     'view_summary'                => 'View Summary',
     'all_documents'               => 'All Documents',
-    'documents_of'                => 'Documents of'
+    'documents_of'                => 'Documents of',
 ];
