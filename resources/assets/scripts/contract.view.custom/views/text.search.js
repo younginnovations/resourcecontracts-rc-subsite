@@ -8,7 +8,8 @@ var TextSearchForm = React.createClass({
         document.location.hash = '#/search/' + encodeURI(searchQuery);
     },
     componentDidMount: function () {
-        React.findDOMNode(this.refs.searchInput).value = this.props.contractApp.getSearchQuery();
+        console.log('cmd',this.props.contractApp.getSearchQuery());
+        React.findDOMNode(this.refs.searchInput).value = decodeURI(this.props.contractApp.getSearchQuery());
     },
     render: function () {
         return (
