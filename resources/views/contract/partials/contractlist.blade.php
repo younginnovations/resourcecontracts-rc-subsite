@@ -186,7 +186,14 @@ if($route=="contracts" && isset($url['year']))
                     @if(is_array($contract->contract_type))
                         @foreach($contract->contract_type as $contracttype)
                             @if(!empty($contracttype))
-                                <li>{{$contracttype}}</li>
+                                <li>
+                                    @if(Lang::has('codelist/contract_type.'.$contracttype))
+                                        {{ trans('codelist/contract_type')[$contracttype] }}
+                                    @else
+                                        {{ $contracttype }}
+                                    @endif
+                                </li>
+
                             @else
                                 -
                             @endif

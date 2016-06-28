@@ -2,8 +2,8 @@
 
 return [
 
-    'resource_type'        => 'Resource Type',
-    'contract_type'        => 'Contract Type',
+    'resource_type'        => 'نوع الموارد',
+    'contract_type'        => 'نوع العقد',
     'company'              => "الشركة",
     'company_name'         => "إسم الشركة",
     'jurisdiction'         => "الولاية القضائيّة حيث تمّ التأسيس",
@@ -38,4 +38,5 @@ return [
     'search'               => "بحث...",
     'results'              => "النتائج",
     'loading'              => "جاري التحميل...",
+    'social_share'         => "شارك",
 ];

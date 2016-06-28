@@ -145,7 +145,7 @@
 		}
 
         function getCountryName(code) {
-            var countryList = '{{json_encode(trans('country'))}}';
+            var countryList = {!! json_encode(trans('country')) !!};
             return countryList[code.toUpperCase()];
         }
     </script>

@@ -5,7 +5,7 @@ return [
 
     'an_online_repository_of'     => "مستودع على الإنترنت ل",
     'open_land_contracts'         => "Open Land Contracts",
-    'search'                      => "Search",
+    'search'                      => "بحث",
     'contracts'                   => "بحث",
     'associated_documents'        => "عقود",
     'contract_doc_from'           => "والوثائق ذات الصلة",
@@ -72,5 +72,6 @@ return [
     'all_documents'               => 'جميع المستندات',
     'documents_of'                => 'وثائق',
     'view_summary'                => 'عرض الملخص',
-
+    'view_by_country'             => 'عرض حسب الدولة',
+    'view_by_resource'            => 'الرأي الموارد',
 ];

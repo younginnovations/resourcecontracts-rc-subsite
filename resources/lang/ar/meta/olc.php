@@ -3,11 +3,11 @@
 return [
     'name'                  => 'OpenLand',
     'title'                 => "OpenLandContracts.org",
-    'description'           => "An online repository of publicly available contracts for large-scale land agriculture and forestry projects. The repository includes the full text of contracts; plain language summaries of each contract’s key social environmental human rights fiscal and operational terms; and tools for searching and comparing contracts.",
-    'all_contracts'         => "All Contracts",
-    'search_results_for'    => "Search Results For",
-    'countries_description' => "Find land contracts from multiple countries - ",
-    'country_description'   => "Find land contracts from country- ",
-    'resources_description' => "Find land contracts for different resources -",
-    'resource_description'  => "Find land contracts for resource -",
+    'description'           => "مستودع على الانترنت للعقود العلنيّة المتعلّقة بمشاريع الزراعة والحراجة واسعة النطاق. يتضمّن المستودع نصّ العقود كاملاً، وملخّص بلغة سهلة عن الشروط الرئيسيّة الاجتماعيّة والبيئيّة والمتعلّقة بحقوق الانسان والماليّة والتشغيليّة في كلّ عقد، وأدوات للبحث عن العقود ومقارنتها.",
+    'all_contracts'         => "كلّ العقود",
+    'search_results_for'    => "نتائج البحث عن",
+    'countries_description' => "البحث عن عقود الأراضي من بلدان متعددة - ",
+    'country_description'   => "البحث عن عقود الأراضي من البلاد- ",
+    'resources_description' => "البحث عن عقود الأراضي للموارد مختلفة -",
+    'resource_description'  => "البحث عن عقود الأراضي للموارد -",
 ];

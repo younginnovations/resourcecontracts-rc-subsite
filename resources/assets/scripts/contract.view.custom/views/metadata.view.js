@@ -174,7 +174,7 @@ var MetadataView = React.createClass({
                         <div className="metadata-country">
                             <span>{lang.country}</span>
                             <span>
-                                <a href={countryLink}>{this.props.metadata.get("country").name}</a>
+                                <a href={countryLink}>{getCountryName(this.props.metadata.get("country").code)}</a>
                             </span>
                             <AmlaUrl metadata={this.props.metadata}/>
                         </div>
