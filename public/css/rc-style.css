@@ -759,7 +759,6 @@ footer {
   right: 178px;
   background: #fff;
   border: 1px solid #F37356;
-  border: 1px solid rgba(243, 115, 86, 0.2);
   -webkit-border-radius: 22px;
           border-radius: 22px; }
 
@@ -2772,10 +2771,60 @@ input.select2-search__field {
     white-space: nowrap;
     -o-text-overflow: ellipsis;
        text-overflow: ellipsis; }
-  .attached-top-wrapper .pull-left .panel-title {
-    width: 92%; }
+  .attached-top-wrapper .left-top-content {
+    width: -webkit-calc(100% - 250px);
+    width: calc(100% - 250px); }
+    .attached-top-wrapper .left-top-content .panel-title {
+      width: -webkit-calc(100% - 50px);
+      width: calc(100% - 50px); }
   .attached-top-wrapper .has-no-backbtn + .panel-title {
     margin: 15px 0 14px 36px; }
+  .attached-top-wrapper .title-pop {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    background: #fff;
+    z-index: 888;
+    max-width: 80%;
+    font-size: 14px;
+    line-height: 24px;
+    padding: 8px 12px;
+    -webkit-box-shadow: 2px 2px 43px -10px rgba(0, 0, 0, 0.6);
+            box-shadow: 2px 2px 43px -10px rgba(0, 0, 0, 0.6);
+    -webkit-border-radius: 4px;
+            border-radius: 4px;
+    white-space: normal;
+    border: solid 1px #ccc;
+    top: 60px;
+    left: 18%;
+    -webkit-transition: all 0.3s ease-in-out;
+         -o-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out; }
+    .attached-top-wrapper .title-pop:before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      margin-left: -6px;
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 10px solid #ccc;
+      top: -11px; }
+    .attached-top-wrapper .title-pop:after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      margin-left: -5px;
+      width: 0;
+      height: 0;
+      border-left: 9px solid transparent;
+      border-right: 9px solid transparent;
+      border-bottom: 9px solid #fff;
+      top: -9px; }
+  .attached-top-wrapper .show-full-title .title-pop {
+    visibility: visible;
+    opacity: 1; }
   @media (min-width: 699px) {
     .attached-top-wrapper .panel-top-content {
       padding: 0;

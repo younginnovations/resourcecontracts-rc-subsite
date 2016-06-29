@@ -301,4 +301,31 @@ $(document).ready(function () {
         }
     });
 
+    function showFullTitle(){
+        //check if the div has ellipsis or not
+        $("#show-full-title").on({
+            mouseenter: function () {
+                //stuff to do on mouse enter
+                if ($('#show-full-title')[0].scrollWidth >  $('#show-full-title').innerWidth()) {
+                    if($(".title-pop").length < 1) {
+                        $("#show-full-title").append('<div class="title-pop">' + $('#show-full-title').html().trim() + '</div>');
+                    }
+                    $('#show-full-title').addClass("show-full-title");
+                }
+            },
+            mouseleave: function () {
+                //stuff to do on mouse leave
+                $('#show-full-title').removeClass("show-full-title");
+            }
+        });
+
+    }
+
+    showFullTitle();
+
+    $(window).resize(function(){
+        showFullTitle();
+    });
+
+
 });
