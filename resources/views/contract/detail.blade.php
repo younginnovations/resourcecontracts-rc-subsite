@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Lang;
     <div class="row">
         <div class="col-lg-12 panel-top-wrapper attached-top-wrapper">
             <div class="panel-top-content">
-                <div class="pull-left">
+                <div class="pull-left left-top-content">
                     <a href="#" class="back-button back"><span>@lang('global.go_back')</span></a>
-                    <div class="panel-title contract-panel-title">
+                    <div class="panel-title contract-panel-title" id="show-full-title">
                         {{$contract->metadata->name}}
                     </div>
                 </div>

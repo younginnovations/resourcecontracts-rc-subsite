@@ -68,9 +68,9 @@
         </nav>
         <div class="col-lg-12 panel-top-wrapper attached-top-wrapper">
             <div class="panel-top-content">
-                <div class="pull-left clearfix">
+                <div class="pull-left clearfix left-top-content">
                     <div class="back back-button">Back</div>
-                    <div class="panel-title">
+                    <div class="panel-title" id="show-full-title">
                         {{$contract->metadata->name}}
                     </div>
                 </div>
