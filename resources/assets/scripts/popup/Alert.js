@@ -30,5 +30,5 @@ class Alert extends Component {
 
     }
 }
-
 export default Alert;
+

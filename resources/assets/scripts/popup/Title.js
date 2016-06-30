@@ -9,14 +9,15 @@ class Title extends Component {
 
     render() {
         return (
-            <div className="title-head-wrap">
-                <div className="title-wrap">
+            <nav className="navbar navbar-static-top no--search--wrap">
                     <div className="navbar-header">
                         <a className="navbar-brand" href={APP_URL} >{this.props.site_name}<span className="beta">Beta</span><span>Contracts</span></a>
                     </div>
-                    <span>{this.props.title}</span>
-                </div>
+
+            <div className="navbar-right">
+                <span>{this.props.title}</span>
             </div>
+            </nav>
         );
     }
 }
