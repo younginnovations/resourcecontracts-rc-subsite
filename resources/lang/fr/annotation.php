@@ -61,8 +61,8 @@ return [
     'search_result'              => 'Résultat de la recherche',
     'annotation'                 => 'Annotation',
     'land_matrix_id'             => 'Terrain Matrice ID',
-
-
-
+    'see'                        => "Voir",
+    'legislation'                => "Législation",
+    'african_mining'             => "dans la législation minière africaine Atlas",
 ];
 

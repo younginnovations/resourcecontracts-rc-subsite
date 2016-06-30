@@ -1,8 +1,7 @@
-function nl2br (str, is_xhtml) {
+function nl2br(str, is_xhtml) {
     var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
     return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
 }
-
 
 var contractApp = new ContractApp({
     contract_id: contract.metadata.id,
@@ -15,7 +14,7 @@ debug("initializing contract ", contractTitle, contractApp.get("contract_id"));
 var pagesCollection = new ViewerPageCollection();
 pagesCollection.url = contractApp.getAllPageUrl();
 pagesCollection.fetch({reset: true});
-pagesCollection.on("reset", function() {
+pagesCollection.on("reset", function () {
     debug("view.blade pageCollection reset, trigger change:page_no")
     contractApp.trigger("change:page_no");
 });
@@ -35,194 +34,165 @@ var pdfPage = new PdfPage({
 
 var DownloadUrl = React.createClass({
 
-    getInitialState : function(){
-    return {dropdown :false, socialdropdown : false};
-},
-toggleDropdown : function()
-{
-    this.setState({dropdown:!this.state.dropdown})
-},
-socialDropdown : function()
-{
-    this.setState({socialdropdown:! this.state.socialdropdown})
-},
-render:function() {
+    getInitialState: function () {
+        return {dropdown: false, socialdropdown: false};
+    },
+    toggleDropdown: function () {
+        this.setState({dropdown: !this.state.dropdown})
+    },
+    socialDropdown: function () {
+        this.setState({socialdropdown: !this.state.socialdropdown})
+    },
 
-    var show = {'display':'block'};
-    var hide= {'display':'none'};
-    var style =  this.state.dropdown ? show :hide;
-    var socialStyle =  this.state.socialdropdown ? show :hide;
-    var current_url = encodeURIComponent(window.location.href);
+    componentDidMount: function () {
+        var self = this;
+        $(document).click(function (event) {
+            if (!$(event.target).closest('.social-share').length && !$(event.target).is('.social-share')) {
+                if ($('.social-share').is(":visible")) {
+                    self.setState({socialdropdown: false});
+                }
+            }
 
-    if(!this.props.annotations_url && !this.props.text_url)
-    {
-        return (
-            <div className="right-column-view">
-                <div className="download-dropdown">
-                    <a href="#" onClick={this.toggleDropdown}><span>{lang.download}</span></a>
-                    <ul className="dropdown-menu" style={style} >
-                    <li><a href={this.props.pdf_url}>{lang.pdf}</a></li>
-                    </ul>
+            if (!$(event.target).closest('.download-dropdown').length && !$(event.target).is('.download-dropdown')) {
+                if ($('.download-dropdown').is(":visible")) {
+                    self.setState({dropdown: false});
+                }
+            }
+
+            self.setState({dropdown: false});
+        });
+    },
+    render: function () {
+        var show = {'display': 'block'};
+        var hide = {'display': 'none'};
+        var style = this.state.dropdown ? show : hide;
+        var socialStyle = this.state.socialdropdown ? show : hide;
+        var current_url = encodeURIComponent(window.location.href);
+
+        if (!this.props.annotations_url && !this.props.text_url) {
+            return (
+                <div className="right-column-view">
+                    <div className="download-dropdown">
+                        <a href="#" onClick={this.toggleDropdown}><span>{lang.download}</span></a>
+                        <ul className="dropdown-menu" style={style}>
+                            <li><a href={this.props.pdf_url}>{lang.pdf}</a></li>
+                        </ul>
+                    </div>
+                    <div className="social-share download-wrap">
+                        <a href="#" onClick={this.socialDropdown}><span>share</span></a>
+                        <ul className="dropdown-menu" style={socialStyle}>
+                            <li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
+                            <li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a>
+                            </li>
+                            <li className="twitter"><a href={ twitter_share } target="_blank">T</a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div className="social-share download-wrap">
-                    <a href="#"  onClick={this.socialDropdown}><span>share</span></a>
-                    <ul className="dropdown-menu" style={socialStyle}>
-                        <li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
-                        <li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a></li>
-                        <li className="twitter"><a href={ twitter_share } target="_blank">T</a></li>
-                    </ul>
-                </div>
-           </div>
             );
-    }
-    else if(!this.props.text_url){
-        return (
-            <div className="right-column-view">
-                <div className="download-dropdown">
-                <a href="#" onClick={this.toggleDropdown}><span>{lang.download}</span></a>
-                <ul className="dropdown-menu" style={style} >
-                <li><a href={this.props.pdf_url}>{lang.pdf}</a></li>
-                <li><a href={this.props.annotations_url}>{lang.annotations}</a></li>
-                </ul>
+        }
+        else if (!this.props.text_url) {
+            return (
+                <div className="right-column-view">
+                    <div className="download-dropdown">
+                        <a href="#" onClick={this.toggleDropdown}><span>{lang.download}</span></a>
+                        <ul className="dropdown-menu" style={style}>
+                            <li><a href={this.props.pdf_url}>{lang.pdf}</a></li>
+                            <li><a href={this.props.annotations_url}>{lang.annotations}</a></li>
+                        </ul>
+                    </div>
+                    <div className="social-share dropdown-wrap">
+                        <a href="#" onClick={this.socialDropdown}><span>share</span></a>
+                        <ul className="dropdown-menu" style={socialStyle}>
+                            <li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
+                            <li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a>
+                            </li>
+                            <li className="twitter"><a href={ twitter_share } target="_blank">T</a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div className="social-share dropdown-wrap">
-                    <a href="#"  onClick={this.socialDropdown}><span>share</span></a>
-                    <ul className="dropdown-menu" style={socialStyle}>
-                        <li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
-                        <li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a></li>
-                        <li className="twitter"><a href={ twitter_share } target="_blank">T</a></li>
-                    </ul>
-                </div>
-            </div>
 
             );
         }
-    else if(!this.props.annotations_url)
-    {
-        return (
-            <div className="right-column-view">
-                <div className="download-dropdown">
-                <a href="#" onClick={this.toggleDropdown}><span>{lang.download}</span></a>
-                <ul className="dropdown-menu" style={style} >
-                <li><a href={this.props.pdf_url}>{lang.pdf}</a></li>
-                <li><a href={this.props.text_url}>{lang.word_file}</a></li>
-                </ul>
+        else if (!this.props.annotations_url) {
+            return (
+                <div className="right-column-view">
+                    <div className="download-dropdown">
+                        <a href="#" onClick={this.toggleDropdown}><span>{lang.download}</span></a>
+                        <ul className="dropdown-menu" style={style}>
+                            <li><a href={this.props.pdf_url}>{lang.pdf}</a></li>
+                            <li><a href={this.props.text_url}>{lang.word_file}</a></li>
+                        </ul>
+                    </div>
+                    <div className="social-share dropdown-wrap">
+                        <a href="#" onClick={this.socialDropdown}><span>share</span></a>
+                        <ul className="dropdown-menu" style={socialStyle}>
+                            <li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
+                            <li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a>
+                            </li>
+                            <li className="twitter"><a href={ twitter_share } target="_blank">T</a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div className="social-share dropdown-wrap">
-                    <a href="#"  onClick={this.socialDropdown}><span>share</span></a>
-                    <ul className="dropdown-menu" style={socialStyle}>
-                        <li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
-                        <li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a></li>
-                        <li className="twitter"><a href={ twitter_share } target="_blank">T</a></li>
-                    </ul>
-                </div>
-            </div>
             );
-         }
-    else{
-        return (
-            <div className="right-column-view">
-            <div className="download-dropdown">
-            <a href="#" onClick={this.toggleDropdown}><span>{lang.download}</span></a>
-            <ul className="dropdown-menu" style={style}>
-            <li><a href={this.props.pdf_url}>{lang.pdf}</a></li>
-            <li><a href={this.props.text_url}>{lang.word_file}</a></li>
-            <li><a href={this.props.annotations_url}>{lang.annotations}</a></li>
-            </ul>
-            </div>
-            <div className="social-share dropdown-wrap">
-                <a href="#"  onClick={this.socialDropdown}><span>share</span></a>
-                <ul className="dropdown-menu" style={socialStyle}>
-                    <li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
-                    <li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a></li>
-                        <li className="twitter"><a href={ twitter_share } target="_blank">T</a></li>
-                </ul>
-            </div>
-        </div>
-         );
-
-    }
-    }
-});
-
-
-
-var SelectLanguage = React.createClass({
-    handleChange: function(e){
-        console.log("hello",e);
-    },
-   render:function(){
-       var language = [];
-       language = JSON.parse(languages);
-       var availableLang=[];
-       var imageStyle = {width: '16px' , height: '16px', 'margin-right': '6px'};
-       var ulStyle = {'min-width':'110px'};
-       _.each(language,function(value,key){
-           var url = currentUrl+'?lang='+key;
-           var flagUrl = "https://raw.githubusercontent.com/younginnovations/country-flags/master/png250px/"+value['country_code']+".png";
-           if(key!=currentLanguage){
-               availableLang.push(<li>
-               <a href={url}>
-               <img style={imageStyle} src={flagUrl} />
-               {value['name']}
-               </a>
-               </li>);
-
-           }
-
-       });
-
-       if(localisationState)
-       {
-       return (
-               <div className="dropdown language-selector">
-                   <button className="btn  dropdown-toggle"  data-toggle="dropdown" >
-                   <img style={imageStyle} src={languageImage}/>{selectedLang}
-                   <span className="caret"></span>
-                   </button>
-                   <ul className="dropdown-menu" style={ulStyle}>
-                   {availableLang}
-                   </ul>
+        }
+        else {
+            return (
+                <div className="right-column-view">
+                    <div className="download-dropdown">
+                        <a href="#" onClick={this.toggleDropdown}><span>{lang.download}</span></a>
+                        <ul className="dropdown-menu" style={style}>
+                            <li><a href={this.props.pdf_url}>{lang.pdf}</a></li>
+                            <li><a href={this.props.text_url}>{lang.word_file}</a></li>
+                            <li><a href={this.props.annotations_url}>{lang.annotations}</a></li>
+                        </ul>
+                    </div>
+                    <div className="social-share dropdown-wrap">
+                        <a href="#" onClick={this.socialDropdown}><span>share</span></a>
+                        <ul className="dropdown-menu" style={socialStyle}>
+                            <li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
+                            <li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a>
+                            </li>
+                            <li className="twitter"><a href={ twitter_share } target="_blank">T</a></li>
+                        </ul>
+                    </div>
                 </div>
-       );
-       }
-   else{
-        return(<div></div>);
+            );
+
+        }
     }
-   }
 });
 
 /**
  * @jsx React.DOM
  */
 var MainApp = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
         return {
             currentView: 'pdf'
         }
     },
-    text: function(page_no, annotation_id) {
+    text: function (page_no, annotation_id) {
         debug("view.blade.php: setting text view");
         contractApp.setView("text");
         contractApp.setCurrentPage(contractApp.getCurrentPage());
         contractApp.resetSelectedAnnotation();
-        if(page_no) {
+        if (page_no) {
             contractApp.setCurrentPage(page_no);
         }
-        if(annotation_id) {
+        if (annotation_id) {
             contractApp.setSelectedAnnotation(annotation_id);
         }
         contractApp.trigger("update-text-pagination-page", contractApp.getCurrentPage());
         this.forceUpdate();
         contractApp.trigger('scroll-to-text-page');
     },
-    pdf: function(page_no, annotation_id) {
+    pdf: function (page_no, annotation_id) {
         debug("view.blade.php: setting pdf view");
-            contractApp.setView("pdf");
-        if(page_no) {
+        contractApp.setView("pdf");
+        if (page_no) {
             contractApp.setCurrentPage(page_no);
         }
-        if(annotation_id) {
+        if (annotation_id) {
             contractApp.setSelectedAnnotation(annotation_id);
         } else {
             contractApp.resetSelectedAnnotation();
@@ -231,38 +201,44 @@ var MainApp = React.createClass({
         contractApp.trigger("update-pdf-pagination-page", contractApp.getCurrentPage());
         this.forceUpdate();
     },
-    search: function(query) {
+    search: function (queryText) {
+        var query = typeof queryText != 'undefined' ? queryText : '';
         contractApp.setView("search");
         var show_pdf_text = contractApp.metadata.get('is_ocr_reviewed');
-            contractApp.setSearchQuery(query);
-            searchResultsCollection.fetch({
-                searchTerm: query,
-                reset: true
-            });
+        contractApp.setSearchQuery(query);
+        searchResultsCollection.fetch({
+            searchTerm: query,
+            reset: true
+        });
         this.forceUpdate();
     },
-    meta: function(action) {
+    meta: function (action) {
         // this.forceUpdate();
     },
-    metadata: function() {
+    metadata: function () {
         contractApp.setView("metadata");
         this.scrollTo('#metadata');
         this.forceUpdate();
     },
-    annotation: function() {
+    annotation: function () {
         contractApp.setView("annotation");
         this.scrollTo('#annotations');
         this.forceUpdate();
     },
-    scrollTo:function(id){
+    scrollTo: function (id) {
         $('html,body').animate({
-                scrollTop: $(id).offset().top - 150},
+                scrollTop: $(id).offset().top - 150
+            },
             'slow');
     },
-    componentDidUpdate: function() {
-       contractApp.setIsSearch(false);
+    componentDidUpdate: function () {
+        contractApp.setIsSearch(false);
+        var self = this;
+        contractApp.on("searchresults:close", function () {
+            self.text();
+        });
     },
-    componentWillMount: function() {
+    componentWillMount: function () {
         var router = Router({
             '/text': this.text,
             '/text/page/:page_no': this.text,
@@ -277,33 +253,33 @@ var MainApp = React.createClass({
         });
         router.init();
     },
-    getStyle: function(showFlag) {
-        var style = { display: "none" };
-        if(showFlag) style.display = "block";
+    getStyle: function (showFlag) {
+        var style = {display: "none"};
+        if (showFlag) style.display = "block";
         return style;
     },
-    render: function() {
+    render: function () {
         return (
             <div className="main-app">
                 <div className="title-head-wrap">
                     <div className="head-wrap clearfix">
                         <TextSearchForm
                             style={this.getStyle(contractApp.isViewVisible("TextSearchForm"))}
-                            contractApp={contractApp} />
+                            contractApp={contractApp}/>
                         <NavigationView
-                            contractApp={contractApp} />
+                            contractApp={contractApp}/>
                         <TextPaginationView
                             style={this.getStyle(contractApp.isViewVisible("TextPaginationView"))}
                             contractApp={contractApp}
-                            pagesCollection={pagesCollection} />
+                            pagesCollection={pagesCollection}/>
                         <PdfPaginationView
                             style={this.getStyle(contractApp.isViewVisible("PdfPaginationView"))}
-                            contractApp={contractApp} />
+                            contractApp={contractApp}/>
                         <PdfZoom
                             style={this.getStyle(contractApp.isViewVisible("PdfZoom"))}
-                            contractApp={contractApp} />
+                            contractApp={contractApp}/>
 
-                       <DownloadUrl
+                        <DownloadUrl
                             pdf_url={pdf_download_url}
                             text_url={text_download_url}
                             annotations_url={annotations_download_url}
@@ -315,11 +291,11 @@ var MainApp = React.createClass({
                     <AnnotationsViewer
                         style={this.getStyle(contractApp.isViewVisible("AnnotationsViewer"))}
                         contractApp={contractApp}
-                        annotationsCollection={annotationsCollection} />
+                        annotationsCollection={annotationsCollection}/>
                     <TextSearchResultsList
                         style={this.getStyle(contractApp.isViewVisible("TextSearchResultsList"))}
                         contractApp={contractApp}
-                        searchResultsCollection={searchResultsCollection} />
+                        searchResultsCollection={searchResultsCollection}/>
                     <div className="title-pdf-wrapper">
                         <TextViewer
                             style={this.getStyle(contractApp.isViewVisible("TextViewer"))}
@@ -331,11 +307,11 @@ var MainApp = React.createClass({
                             pdfPage={pdfPage}
                             style={this.getStyle(contractApp.isViewVisible("PdfViewer"))}
                             contractApp={contractApp}
-                            pagesCollection={pagesCollection} />
+                            pagesCollection={pagesCollection}/>
                     </div>
                     <RightColumnView
                         metadata={contractApp.metadata}
-                        contractApp={contractApp} />
+                        contractApp={contractApp}/>
                 </div>
             </div>
         );
