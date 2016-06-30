@@ -58,28 +58,24 @@ const Pagination = React.createClass({
         let prev = (<span>{LANG.previous}</span>);
         if (this.state.current != 1) {
             prev = (
-                <a onClick={this.prevPage} href="#">{LANG.previous}</a>
+                <a className="previous" onClick={this.prevPage} href="#">{LANG.previous}</a>
             );
         }
 
         let next = (<span>{LANG.next}</span>);
         if (this.state.current != this.state.total) {
             next = (
-                <a onClick={this.nextPage} href="#">{LANG.next}</a>
+                <a className="next" onClick={this.nextPage} href="#">{LANG.next}</a>
             );
         }
 
         return (
             <div className="pdf-pagination pagination">
-                <span className="previous">
-                    {prev}
-                </span>
+                {prev}
                 <span>
                     <input type="text" onChange={e => this.changeHandler(e)} name="page_no" value={this.state.input}/>
                 </span>
-                <span className="next">
-                    {next}
-                </span>
+                {next}
             </div>
         );
     }
