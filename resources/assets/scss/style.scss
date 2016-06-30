@@ -4047,11 +4047,19 @@ input.select2-search__field {
 /* --------- style for cliping overview popup page ------------ */
 
 .no--search--wrap{
+  clear: both;
+  .navbar-header{
+    margin-left: 15px;
+    width: 145px;
+  }
+
   .navbar-right{
-    padding: 26px 12px;
+    padding: 22px 12px;
+    width: calc(100% - 165px);
+    float: left;
 
     .title{
-      font: 21px/28px Open-Sans-Light;
+      font: 18px/24px Open-Sans-Light;
     }
   }
 }
@@ -4068,41 +4076,53 @@ input.select2-search__field {
 
   .col-md-6:nth-child(2){
     padding-left: 0;
+    vertical-align: middle;
   }
 
   .detail{
     border-right: solid 1px #DCDFE2;
-
+    font-size: 12px;
+    line-height: 18px;
+    padding: 6px 10px 7px 0;
     p{
-      display: inline-block;
-      vertical-align: middle;
-      margin: 0;
-      padding: 13px 0;
-
       &:nth-child(1){
-        max-width: 400px;
-        border-right: solid 1px #DCDFE2;
+        margin: 0 0 2px;
+        max-width: 100%;
         padding-right: 10px;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
       }
 
       &:nth-child(2){
         min-width: 142px;
-        padding: 10px;
+        margin: 0;
       }
     }
   }
 
   .pdf-zoom-options {
-    border-left: none;
+    display: inline-block;
+    min-width: 0;
+    float: none;
+    padding: 10px 0 10px;
+    border-right: 1px solid #DCDFE2;
+    border-left: 1px solid #DCDFE2;
+    float: none !important;
+    margin: 0;
     > span {
       float: none;
       margin-left: 0;
       vertical-align: middle;
+      font-size: 12px;
+      line-height: 18px;
     }
   }
+
+  .pagination{
+    min-width: 76px;
+    padding: 12px 10px;
+    margin: 0;
+    vertical-align: middle;
+  }
+
 
   .pdf-pagination.pagination span, .text-pagination span, .pagination input[type="text"] {
     line-height: 21px;
@@ -4125,5 +4145,33 @@ input.select2-search__field {
     padding: 10px 20px;
     border-radius: 4px;
     background-color: #fff;
+    min-height: 60vh;
+    max-width: 800px;
+  }
+}
+
+@media (max-width: 540px) {
+  .info.head-wrap .pdf-zoom-options {
+    display: inline-block !important;
+  }
+}
+
+
+@media (max-width: 950px){
+  .canvas-wrap{
+    width: 100%;
+    overflow: scroll;
+  }
+}
+
+@media (max-width: 480px){
+  .info.head-wrap .col-md-6,
+  .no--search--wrap .navbar-right{
+    width: 100%;
+  }
+
+  .info.head-wrap .col-md-6:nth-child(1){
+    border-bottom: solid 1px #e7e9eb;
+
   }
 }

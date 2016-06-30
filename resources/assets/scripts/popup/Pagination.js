@@ -55,14 +55,14 @@ const Pagination = React.createClass({
     },
     render()
     {
-        let prev = (<span>{LANG.previous}</span>);
+        let prev = (<span className="previous inactive">{LANG.previous}</span>);
         if (this.state.current != 1) {
             prev = (
                 <a className="previous" onClick={this.prevPage} href="#">{LANG.previous}</a>
             );
         }
 
-        let next = (<span>{LANG.next}</span>);
+        let next = (<span className="next inactive">{LANG.next}</span>);
         if (this.state.current != this.state.total) {
             next = (
                 <a className="next" onClick={this.nextPage} href="#">{LANG.next}</a>

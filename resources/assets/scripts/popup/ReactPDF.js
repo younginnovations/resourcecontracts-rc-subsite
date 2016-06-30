@@ -82,7 +82,7 @@ const ReactPDF = React.createClass({
     render()
     {
         return (
-            <div>
+            <div className="canvas-wrap">
                 <canvas ref="pdfCanvas"></canvas>
             </div>
         );
