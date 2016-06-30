@@ -61,6 +61,9 @@ return [
     'search_result'              => 'Search result for',
     'annotation'                 => 'Annotation',
     'land_matrix_id'             => 'Land Matrix ID',
+    'see'                        => "See",
+    'legislation'                => "Legislation",
+    'african_mining'             => "in African Mining Legislation Atlas",
 ];
 
 

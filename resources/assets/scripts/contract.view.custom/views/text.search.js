@@ -8,7 +8,6 @@ var TextSearchForm = React.createClass({
         document.location.hash = '#/search/' + encodeURI(searchQuery);
     },
     componentDidMount: function () {
-        console.log('cmd',this.props.contractApp.getSearchQuery());
         React.findDOMNode(this.refs.searchInput).value = decodeURI(this.props.contractApp.getSearchQuery());
     },
     render: function () {
@@ -106,8 +105,7 @@ var TextSearchResultRow = React.createClass({
         if (texToShow.length == 0) {
             texToShow = this.state.text;
         }
-
-        texToShow = <HighLight highlight={highlight} text={texToShow}/>;
+        texToShow = <HighLight  text={texToShow}/>;
         more = (<a onClick={this.handleClickLessMore}>{more}</a>);
         textToReturn = (<span>{texToShow} {more} </span>);
         return textToReturn;
@@ -189,6 +187,7 @@ var TextSearchResultsList = React.createClass({
     },
     handleCloseSearchResults: function () {
         this.props.contractApp.trigger("searchresults:close");
+        this.props.contractApp.setIsSearch(false);
         document.location.hash = '#/text';
         this.props.contractApp.setView("text");
     },
@@ -232,16 +231,11 @@ var TextSearchResultsList = React.createClass({
 
 var HighLight = React.createClass({
     render: function () {
-        var highlightword = decodeURI(this.props.highlight);
-        var re = new RegExp(highlightword, "gi");
-        var text = this.props.text;
-        var texta = text.replace(re, "<span class\='search-highlight-word'>" + highlightword + "</span>");
-
         return (
             <span
                 dangerouslySetInnerHTML={{
-          __html : texta
-    }}/>
+          __html : this.props.text
+            }}/>
         );
     }
 });

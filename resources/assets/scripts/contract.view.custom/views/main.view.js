@@ -3,7 +3,6 @@ function nl2br(str, is_xhtml) {
     return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
 }
 
-
 var contractApp = new ContractApp({
     contract_id: contract.metadata.id,
     guid: contract.metadata.open_contracting_id,
@@ -44,12 +43,30 @@ var DownloadUrl = React.createClass({
     socialDropdown: function () {
         this.setState({socialdropdown: !this.state.socialdropdown})
     },
-    render: function () {
+    componentDidMount: function () {
+        var self = this;
+        $(document).click(function (event) {
+            if (!$(event.target).closest('.social-share').length && !$(event.target).is('.social-share')) {
+                if ($('.social-share').is(":visible")) {
+                    self.setState({socialdropdown: false});
+                }
+            }
 
+            if (!$(event.target).closest('.download-dropdown').length && !$(event.target).is('.download-dropdown')) {
+                if ($('.download-dropdown').is(":visible")) {
+                    self.setState({dropdown: false});
+                }
+            }
+
+            self.setState({dropdown: false});
+        });
+    },
+    render: function () {
         var show = {'display': 'block'};
         var hide = {'display': 'none'};
         var style = this.state.dropdown ? show : hide;
         var socialStyle = this.state.socialdropdown ? show : hide;
+        var socialClass = this.state.socialdropdown ? 'cl-active' : '';
         var current_url = encodeURIComponent(window.location.href);
 
         if (!this.props.annotations_url && !this.props.text_url) {
@@ -57,13 +74,13 @@ var DownloadUrl = React.createClass({
                 <div className="right-column-view">
                     <div className="download-dropdown">
                         <a href="#" onClick={this.toggleDropdown}><span>{lang.download}</span></a>
-                        <ul className="dropdown-menu" style={style}>
+                        <ul ref="downlodRef" className={'dropdown-menu ' + socialClass } style={style}>
                             <li><a href={this.props.pdf_url}>{lang.pdf}</a></li>
                         </ul>
                     </div>
                     <div className="social-share download-wrap">
                         <a href="#" onClick={this.socialDropdown}><span>share</span></a>
-                        <ul className="dropdown-menu" style={socialStyle}>
+                        <ul ref="socialRef" className={'dropdown-menu ' + socialClass } style={socialStyle}>
                             <li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
                             <li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a>
                             </li>
@@ -78,14 +95,14 @@ var DownloadUrl = React.createClass({
                 <div className="right-column-view">
                     <div className="download-dropdown">
                         <a href="#" onClick={this.toggleDropdown}><span>{lang.download}</span></a>
-                        <ul className="dropdown-menu" style={style}>
+                        <ul ref="downlodRef" className="dropdown-menu" style={style}>
                             <li><a href={this.props.pdf_url}>{lang.pdf}</a></li>
                             <li><a href={this.props.annotations_url}>{lang.annotations}</a></li>
                         </ul>
                     </div>
                     <div className="social-share dropdown-wrap">
                         <a href="#" onClick={this.socialDropdown}><span>share</span></a>
-                        <ul className="dropdown-menu" style={socialStyle}>
+                        <ul ref="socialRef" className={'dropdown-menu ' + socialClass } style={socialStyle}>
                             <li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
                             <li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a>
                             </li>
@@ -101,14 +118,14 @@ var DownloadUrl = React.createClass({
                 <div className="right-column-view">
                     <div className="download-dropdown">
                         <a href="#" onClick={this.toggleDropdown}><span>{lang.download}</span></a>
-                        <ul className="dropdown-menu" style={style}>
+                        <ul ref="downlodRef" className="dropdown-menu" style={style}>
                             <li><a href={this.props.pdf_url}>{lang.pdf}</a></li>
                             <li><a href={this.props.text_url}>{lang.word_file}</a></li>
                         </ul>
                     </div>
                     <div className="social-share dropdown-wrap">
                         <a href="#" onClick={this.socialDropdown}><span>share</span></a>
-                        <ul className="dropdown-menu" style={socialStyle}>
+                        <ul ref="socialRef" className={'dropdown-menu ' + socialClass } style={socialStyle}>
                             <li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
                             <li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a>
                             </li>
@@ -123,7 +140,7 @@ var DownloadUrl = React.createClass({
                 <div className="right-column-view">
                     <div className="download-dropdown">
                         <a href="#" onClick={this.toggleDropdown}><span>{lang.download}</span></a>
-                        <ul className="dropdown-menu" style={style}>
+                        <ul ref="downlodRef" className="dropdown-menu" style={style}>
                             <li><a href={this.props.pdf_url}>{lang.pdf}</a></li>
                             <li><a href={this.props.text_url}>{lang.word_file}</a></li>
                             <li><a href={this.props.annotations_url}>{lang.annotations}</a></li>
@@ -131,7 +148,7 @@ var DownloadUrl = React.createClass({
                     </div>
                     <div className="social-share dropdown-wrap">
                         <a href="#" onClick={this.socialDropdown}><span>share</span></a>
-                        <ul className="dropdown-menu" style={socialStyle}>
+                        <ul ref="socialRef" className={'dropdown-menu ' + socialClass } style={socialStyle}>
                             <li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
                             <li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a>
                             </li>
@@ -216,6 +233,10 @@ var MainApp = React.createClass({
     },
     componentDidUpdate: function () {
         contractApp.setIsSearch(false);
+        var self = this;
+        contractApp.on("searchresults:close", function () {
+            self.text();
+        });
     },
     componentWillMount: function () {
         var router = Router({
