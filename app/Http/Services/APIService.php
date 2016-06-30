@@ -495,7 +495,6 @@ class APIService
             $annotations = $this->getAnnotations($contract_id);
             $annotations = collect($annotations->result);
             $annotation  = $annotations->where('id', $annotation_id)->first();
-
             return [
                 'contract_id'       => $metadata->id,
                 'contract_title'    => $metadata->name,

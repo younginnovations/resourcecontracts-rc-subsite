@@ -2895,6 +2895,11 @@ input.select2-search__field {
 .lang-fr .advance-filter-wrapper .social-share {
   right: 323px; }
 
+.lang-fr .attached-top-wrapper .left-top-content {
+  width: -webkit-calc(100% - 250px);
+  width: -webkit-calc(100% - 284px);
+  width: calc(100% - 284px); }
+
 .page-search.lang-fr .advance-filter-wrapper .static-search ~ .social-share {
   right: 176px; }
 
