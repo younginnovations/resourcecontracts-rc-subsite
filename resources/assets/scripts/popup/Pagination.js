@@ -70,16 +70,16 @@ const Pagination = React.createClass({
         }
 
         return (
-            <div>
-                <div className="col-lg-4">
+            <div className="pdf-pagination pagination">
+                <span className="previous">
                     {prev}
-                </div>
-                <div className="col-lg-4">
-                    <input onChange={e => this.changeHandler(e)} name="page_no" value={this.state.input}/>
-                </div>
-                <div className="col-lg-4">
+                </span>
+                <span>
+                    <input type="text" onChange={e => this.changeHandler(e)} name="page_no" value={this.state.input}/>
+                </span>
+                <span className="next">
                     {next}
-                </div>
+                </span>
             </div>
         );
     }

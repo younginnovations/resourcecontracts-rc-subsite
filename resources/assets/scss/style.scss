@@ -3908,14 +3908,12 @@ input.select2-search__field {
     border-radius: 4px;
     white-space: normal;
     border: solid 1px #ccc;
-    top: 60px;
-    left: 18%;
+    right: 218px;
     transition: all 0.3s ease-in-out;
     &:before{
       content: "";
       position: absolute;
-      left: 50%;
-      margin-left: -6px;
+      right: 23px;
       width: 0;
       height: 0;
       border-left: 10px solid transparent;
@@ -3927,8 +3925,7 @@ input.select2-search__field {
     &:after{
       content: "";
       position: absolute;
-      left: 50%;
-      margin-left: -5px;
+      right: 24px;
       width: 0;
       height: 0;
       border-left: 9px solid transparent;
@@ -4052,5 +4049,81 @@ input.select2-search__field {
 .no--search--wrap{
   .navbar-right{
     padding: 26px 12px;
+
+    .title{
+      font: 21px/28px Open-Sans-Light;
+    }
+  }
+}
+
+.info.head-wrap{
+
+  .col-md-6{
+    width: auto;
+  }
+
+  .col-md-6:nth-child(1){
+    padding-right: 0;
+  }
+
+  .col-md-6:nth-child(2){
+    padding-left: 0;
+  }
+
+  .detail{
+    border-right: solid 1px #DCDFE2;
+
+    p{
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0;
+      padding: 13px 0;
+
+      &:nth-child(1){
+        max-width: 400px;
+        border-right: solid 1px #DCDFE2;
+        padding-right: 10px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+      &:nth-child(2){
+        min-width: 142px;
+        padding: 10px;
+      }
+    }
+  }
+
+  .pdf-zoom-options {
+    border-left: none;
+    > span {
+      float: none;
+      margin-left: 0;
+      vertical-align: middle;
+    }
+  }
+
+  .pdf-pagination.pagination span, .text-pagination span, .pagination input[type="text"] {
+    line-height: 21px;
+  }
+
+  .pagination input[type="text"] {
+    margin-top: 3px;
+  }
+
+}
+
+.pdf-wrapper{
+  clear: both;
+  background: #f0f0f0;
+  overflow: hidden;
+  canvas{
+    margin: 10px auto;
+    display: block;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    padding: 10px 20px;
+    border-radius: 4px;
+    background-color: #fff;
   }
 }
