@@ -29783,16 +29783,16 @@ var MetadataView = React.createClass({displayName: "MetadataView",
         e.preventDefault();
         this.setState({showMoreText: !this.state.showMoreText});
     },
-    getResourceLang:function(resources){
-        var resLang=[];
-        var resLength=resources.length;
-        var resLang=_.map(resources,function(value,index){
-            var link=app_url+'/resource/'+value;
+    getResourceLang: function (resources) {
+        var resLang = [];
+        var resLength = resources.length;
+        var resLang = _.map(resources, function (value, index) {
+            var link = app_url + '/resource/' + value;
 
             if (langResource[value] && index != resLength - 1) {
                 return React.createElement('a', {href: app_url + "/resource/" + value}, langResource[value] + ' | ');
             }
-            else if(langResource[value] && index == resLength - 1) {
+            else if (langResource[value] && index == resLength - 1) {
                 return React.createElement('a', {href: app_url + "/resource/" + value}, langResource[value]);
             }
             else {
@@ -29819,18 +29819,30 @@ var MetadataView = React.createClass({displayName: "MetadataView",
             var ct = this.props.metadata.get("contract_type");
             var contractType = ct.map(function (contractType, i) {
                 if (i != ct.length - 1) {
-                    return React.createElement('a', {href: app_url + "/search?q=&contract_type%5B%5D=" + contractType, key: i}, contractType + ' | ');
+                    return React.createElement('a', {
+                        href: app_url + "/search?q=&contract_type%5B%5D=" + contractType,
+                        key: i
+                    }, contractType + ' | ');
                 } else {
-                    return React.createElement('a', {href: app_url + "/search?q=&contract_type%5B%5D=" + contractType, key: i}, contractType);
+                    return React.createElement('a', {
+                        href: app_url + "/search?q=&contract_type%5B%5D=" + contractType,
+                        key: i
+                    }, contractType);
                 }
             });
 
             if (typeof ct === 'object') {
                 contractType = ct.map(function (contractType, i) {
                     if (i != ct.length - 1) {
-                        return React.createElement('a', {href: app_url + "/search?q=&contract_type%5B%5D=" + contractType, key: i}, contractType + ' | ');
+                        return React.createElement('a', {
+                            href: app_url + "/search?q=&contract_type%5B%5D=" + contractType,
+                            key: i
+                        }, contractType + ' | ');
                     } else {
-                        return React.createElement('a', {href: app_url + "/search?q=&contract_type%5B%5D=" + contractType, key: i}, contractType);
+                        return React.createElement('a', {
+                            href: app_url + "/search?q=&contract_type%5B%5D=" + contractType,
+                            key: i
+                        }, contractType);
                     }
                 });
             }
@@ -29838,7 +29850,7 @@ var MetadataView = React.createClass({displayName: "MetadataView",
 
             var note = this.props.metadata.get("note");
             if (note != "") {
-                var noteHtml = "<span class='metadata-note'>"+lang.note+"</span>";
+                var noteHtml = "<span class='metadata-note'>" + lang.note + "</span>";
 
                 if (!this.state.showMoreText) {
                     var maxWord = 20;
@@ -29847,10 +29859,12 @@ var MetadataView = React.createClass({displayName: "MetadataView",
 
                     if (noteArray.length > maxWord) {
                         note = noteArray.slice(0, maxWord).join(' ') + '... ';
-                        more = (React.createElement("a", {className: "ellipsis", href: "#", onClick: this.handleMoreText}, {__html: lang.note_more}));
+                        more = (React.createElement("a", {className: "ellipsis", href: "#", 
+                                   onClick: this.handleMoreText}, {__html: lang.note_more}));
                     }
                 } else {
-                    more = (React.createElement("a", {className: "ellipsis", href: "#", onClick: this.handleMoreText}, {__html: lang.note_less}));
+                    more = (
+                        React.createElement("a", {className: "ellipsis", href: "#", onClick: this.handleMoreText}, {__html: lang.note_less}));
                 }
                 noteHtml += '<span class="note">' + note + '</span>';
                 noteHtml = (React.createElement("span", {className: "note-inner-wrapper", dangerouslySetInnerHTML: {__html: noteHtml}}));
@@ -29858,19 +29872,17 @@ var MetadataView = React.createClass({displayName: "MetadataView",
 
             var missing_html = '';
 
-            if(this.props.metadata.get("is_annexes_missing"))
-            {
-                missing_html += '<div class="metadata-ocid">'+
-                                    '<span>'+lang.annexes_missing+'</span>'+
-                                    '<span>'+lang.yes+'</span>'+
-                                '</div>';
+            if (this.props.metadata.get("is_annexes_missing")) {
+                missing_html += '<div class="metadata-ocid">' +
+                    '<span>' + lang.annexes_missing + '</span>' +
+                    '<span>' + lang.yes + '</span>' +
+                    '</div>';
             }
 
-            if(this.props.metadata.get("is_pages_missing"))
-            {
-                missing_html += '<div class="metadata-ocid">'+
-                    '<span>'+lang.pages_missing+'</span>'+
-                    '<span>'+lang.yes+'</span>'+
+            if (this.props.metadata.get("is_pages_missing")) {
+                missing_html += '<div class="metadata-ocid">' +
+                    '<span>' + lang.pages_missing + '</span>' +
+                    '<span>' + lang.yes + '</span>' +
                     '</div>';
             }
 
@@ -29879,8 +29891,8 @@ var MetadataView = React.createClass({displayName: "MetadataView",
             return (
                 React.createElement("div", {id: "metadata"}, 
                     React.createElement("div", {className: "note-wrapper"}, 
-                      noteHtml, 
-                      more
+                        noteHtml, 
+                        more
                     ), 
                     React.createElement("div", {className: "metadata-view"}, 
                         React.createElement("div", null, 
@@ -29892,7 +29904,8 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                             React.createElement("span", null, lang.country), 
                             React.createElement("span", null, 
                                 React.createElement("a", {href: countryLink}, this.props.metadata.get("country").name)
-                            )
+                            ), 
+                            React.createElement(AmlaUrl, {metadata: this.props.metadata})
                         ), 
                         React.createElement("div", {className: "metadata-signature-year"}, 
                             React.createElement("span", null, lang.signature_year), 
@@ -29918,12 +29931,8 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                             React.createElement("span", null, lang.disclosure_mode), 
                             React.createElement("span", null, this.props.metadata.get("publisher_type") || "-")
                         ), 
-
-            React.createElement("div", {dangerouslySetInnerHTML: missing_html}), 
-
-
-                        React.createElement(LandMatrixView, {
-                            metadata: this.props.metadata})
+                        React.createElement("div", {dangerouslySetInnerHTML: missing_html}), 
+                        React.createElement(LandMatrixView, {metadata: this.props.metadata})
                     )
                 )
             );
@@ -29938,7 +29947,30 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                 )
             );
         }
+    }
+});
 
+
+var AmlaUrl = React.createClass({displayName: "AmlaUrl",
+    componentDidMount: function () {
+        var self = this;
+        this.props.metadata.on("sync", function () {
+            self.forceUpdate();
+        });
+    },
+    getAmlaLink: function () {
+        var link = null;
+        var amla_url = this.props.metadata.get("amla_url");
+        if (amla_url != '' && (isSite('country') || isSite('rc'))) {
+            link = lang.see + '<a href="'+amla_url+'" target="_blank" > ' + lang.legislation + ' </a> ' + lang.african_mining;
+        }
+
+        return {__html: link};
+    },
+    render: function () {
+        return (
+            React.createElement("div", {className: "amla-legislation", dangerouslySetInnerHTML: this.getAmlaLink()})
+        );
     }
 });
 
@@ -29956,7 +29988,7 @@ var LandMatrixView = React.createClass({displayName: "LandMatrixView",
             id = '#' + this.props.metadata.get("deal_number");
         }
 
-        if (category === 'Openland') {
+        if (isSite('olc')) {
             return (
                 React.createElement("div", {className: "metadata-ocid"}, 
                     React.createElement("span", null, lang.land_matrix_id, ": "), 
@@ -29965,7 +29997,7 @@ var LandMatrixView = React.createClass({displayName: "LandMatrixView",
             );
         }
         else {
-            return (React.createElement("div", null));
+            return null;
         }
     }
 });
@@ -30014,9 +30046,9 @@ var RelatedDocumentsView = React.createClass({displayName: "RelatedDocumentsView
                     ));
                 }
             }
-            if(this.props.metadata.get("associated").length > MaxAllowed)
-            {
-                supportingContracts.push(React.createElement("span", null, React.createElement("a", {href: this.props.contractApp.getMetadataSummaryLink()+'#associatedcontracts'}, "More...")));
+            if (this.props.metadata.get("associated").length > MaxAllowed) {
+                supportingContracts.push(React.createElement("span", null, React.createElement("a", {
+                    href: this.props.contractApp.getMetadataSummaryLink()+'#associatedcontracts'}, "More...")));
             }
 
             if (parentContracts.length || supportingContracts.length) {
@@ -30029,7 +30061,7 @@ var RelatedDocumentsView = React.createClass({displayName: "RelatedDocumentsView
                     )
                 );
             } else {
-                return (React.createElement("div", null));
+                return null;
             }
         } else {
             return (
@@ -30053,7 +30085,7 @@ var RelatedDocumentsMoreView = React.createClass({displayName: "RelatedDocuments
         if (this.props.metadata.get("country")) {
             var countryCode = this.props.metadata.get("country").code.toLowerCase();
             var countryLink = app_url + "/countries/" + countryCode;
-            var country = React.createElement('a', {href: countryLink}, this.props.metadata.get("country").name);
+            var country = React.createElement('a', {href: countryLink}, getCountryName(countryCode));
             var resourceLinkBase = app_url + "/resources/";
             var resources = this.props.metadata.get("resource").map(function (resource, i) {
                 return React.createElement('a', {href: app_url + "/resource/" + resource, key: i}, resource);
@@ -30101,7 +30133,7 @@ var OtherSourcesView = React.createClass({displayName: "OtherSourcesView",
                     )
                 );
             } else {
-                return (React.createElement("div", null));
+                return null;
             }
         } else {
             return (
@@ -30427,7 +30459,6 @@ var TextSearchForm = React.createClass({displayName: "TextSearchForm",
         document.location.hash = '#/search/' + encodeURI(searchQuery);
     },
     componentDidMount: function () {
-        console.log('cmd',this.props.contractApp.getSearchQuery());
         React.findDOMNode(this.refs.searchInput).value = decodeURI(this.props.contractApp.getSearchQuery());
     },
     render: function () {
@@ -30525,8 +30556,6 @@ var TextSearchResultRow = React.createClass({displayName: "TextSearchResultRow",
         if (texToShow.length == 0) {
             texToShow = this.state.text;
         }
-        console.log(texToShow);
-
         texToShow = React.createElement(HighLight, {text: texToShow});
         more = (React.createElement("a", {onClick: this.handleClickLessMore}, more));
         textToReturn = (React.createElement("span", null, texToShow, " ", more, " "));
@@ -30602,7 +30631,6 @@ var TextSearchResultsList = React.createClass({displayName: "TextSearchResultsLi
             self.forceUpdate();
             self.props.contractApp.trigger("searchresults:ready");
             if (self.props.searchResultsCollection.models.length > 0) {
-                console.log(self.props.searchResultsCollection.models[0].get('page_no'));
                 self.props.contractApp.trigger("update-text-pagination-page", self.props.searchResultsCollection.models[0].get('page_no'));
                 self.props.contractApp.triggerScrollToTextPage();
             }
@@ -30610,6 +30638,7 @@ var TextSearchResultsList = React.createClass({displayName: "TextSearchResultsLi
     },
     handleCloseSearchResults: function () {
         this.props.contractApp.trigger("searchresults:close");
+        this.props.contractApp.setIsSearch(false);
         document.location.hash = '#/text';
         this.props.contractApp.setView("text");
     },
@@ -31222,7 +31251,6 @@ function nl2br(str, is_xhtml) {
     return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
 }
 
-
 var contractApp = new ContractApp({
     contract_id: contract.metadata.id,
     guid: contract.metadata.open_contracting_id,
@@ -31263,8 +31291,26 @@ var DownloadUrl = React.createClass({displayName: "DownloadUrl",
     socialDropdown: function () {
         this.setState({socialdropdown: !this.state.socialdropdown})
     },
-    render: function () {
 
+    componentDidMount: function () {
+        var self = this;
+        $(document).click(function (event) {
+            if (!$(event.target).closest('.social-share').length && !$(event.target).is('.social-share')) {
+                if ($('.social-share').is(":visible")) {
+                    self.setState({socialdropdown: false});
+                }
+            }
+
+            if (!$(event.target).closest('.download-dropdown').length && !$(event.target).is('.download-dropdown')) {
+                if ($('.download-dropdown').is(":visible")) {
+                    self.setState({dropdown: false});
+                }
+            }
+
+            self.setState({dropdown: false});
+        });
+    },
+    render: function () {
         var show = {'display': 'block'};
         var hide = {'display': 'none'};
         var style = this.state.dropdown ? show : hide;
@@ -31435,6 +31481,10 @@ var MainApp = React.createClass({displayName: "MainApp",
     },
     componentDidUpdate: function () {
         contractApp.setIsSearch(false);
+        var self = this;
+        contractApp.on("searchresults:close", function () {
+            self.text();
+        });
     },
     componentWillMount: function () {
         var router = Router({

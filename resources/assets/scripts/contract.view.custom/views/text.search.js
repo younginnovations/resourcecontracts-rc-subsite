@@ -8,7 +8,6 @@ var TextSearchForm = React.createClass({
         document.location.hash = '#/search/' + encodeURI(searchQuery);
     },
     componentDidMount: function () {
-        console.log('cmd',this.props.contractApp.getSearchQuery());
         React.findDOMNode(this.refs.searchInput).value = decodeURI(this.props.contractApp.getSearchQuery());
     },
     render: function () {
@@ -106,8 +105,6 @@ var TextSearchResultRow = React.createClass({
         if (texToShow.length == 0) {
             texToShow = this.state.text;
         }
-        console.log(texToShow);
-
         texToShow = <HighLight  text={texToShow}/>;
         more = (<a onClick={this.handleClickLessMore}>{more}</a>);
         textToReturn = (<span>{texToShow} {more} </span>);
@@ -190,6 +187,7 @@ var TextSearchResultsList = React.createClass({
     },
     handleCloseSearchResults: function () {
         this.props.contractApp.trigger("searchresults:close");
+        this.props.contractApp.setIsSearch(false);
         document.location.hash = '#/text';
         this.props.contractApp.setView("text");
     },

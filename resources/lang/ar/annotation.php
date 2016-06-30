@@ -60,8 +60,10 @@ return [
     'learn_more'                 => "معرفة المزيد",
     'search_result'              => "نتيجة البحث عن",
     'annotation'                 => "تعليق",
-    'land_matrix_id'             => 'Land Matrix ID',
-
+    'land_matrix_id'             => 'أرض معرف ماتريكس',
+    'see'                        => "يرى",
+    'legislation'                => "تشريع",
+    'african_mining'             => "في التعدين الإفريقي التشريع أطلس",
 ];
 
 

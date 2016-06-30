@@ -71,5 +71,6 @@ return [
     'no'                          => "لا",
     'all_documents'               => 'جميع المستندات',
     'documents_of'                => 'وثائق',
+    'view_summary'                => 'عرض الملخص',
 
 ];

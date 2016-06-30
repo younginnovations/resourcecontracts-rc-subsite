@@ -129,13 +129,25 @@
         var languages = '{!! $languages !!}';
         var selectedLang = '{{config('language')[$local->getLanguage()]['name']}}';
         var currentUrl = '{{Request::url()}}';
-
         var country = '{{get_country('name')}}';
         var image_source = '{{get_country('flag')}}';
-
         var languageImage = '{{getCountryByLang($lang->getCurrentLang())}}';
         var currentLanguage = '{{$lang->getCurrentLang()}}';
         var localisationState =  '{{config('localisation')}}';
+
+		function isSite(type){
+			var country_code =  '{{env('COUNTRY','')}}';
+			var site ='{{env('CATEGORY')}}';
+			if(country_code != ''){
+				site = 'country'
+			}
+			return (site == type);
+		}
+
+        function getCountryName(code) {
+            var countryList = '{{json_encode(trans('country'))}}';
+            return countryList[code.toUpperCase()];
+        }
     </script>
     <script src="{{ url('js/contract-view.js') }}"></script>
 @stop

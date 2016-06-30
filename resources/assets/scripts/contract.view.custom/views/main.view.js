@@ -3,7 +3,6 @@ function nl2br(str, is_xhtml) {
     return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
 }
 
-
 var contractApp = new ContractApp({
     contract_id: contract.metadata.id,
     guid: contract.metadata.open_contracting_id,
@@ -44,8 +43,26 @@ var DownloadUrl = React.createClass({
     socialDropdown: function () {
         this.setState({socialdropdown: !this.state.socialdropdown})
     },
-    render: function () {
 
+    componentDidMount: function () {
+        var self = this;
+        $(document).click(function (event) {
+            if (!$(event.target).closest('.social-share').length && !$(event.target).is('.social-share')) {
+                if ($('.social-share').is(":visible")) {
+                    self.setState({socialdropdown: false});
+                }
+            }
+
+            if (!$(event.target).closest('.download-dropdown').length && !$(event.target).is('.download-dropdown')) {
+                if ($('.download-dropdown').is(":visible")) {
+                    self.setState({dropdown: false});
+                }
+            }
+
+            self.setState({dropdown: false});
+        });
+    },
+    render: function () {
         var show = {'display': 'block'};
         var hide = {'display': 'none'};
         var style = this.state.dropdown ? show : hide;
@@ -216,6 +233,10 @@ var MainApp = React.createClass({
     },
     componentDidUpdate: function () {
         contractApp.setIsSearch(false);
+        var self = this;
+        contractApp.on("searchresults:close", function () {
+            self.text();
+        });
     },
     componentWillMount: function () {
         var router = Router({
