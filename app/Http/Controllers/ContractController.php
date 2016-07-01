@@ -44,6 +44,7 @@ class ContractController extends BaseController
      * All Contracts
      *
      * @param Request $request
+     *
      * @return \Illuminate\View\View
      */
     public function index(Request $request)
@@ -53,7 +54,7 @@ class ContractController extends BaseController
             'year'    => $request->get('year'),
             'from'    => $currentPage,
             'sort_by' => $request->get('sortby'),
-            'order'   => $request->get('order')
+            'order'   => $request->get('order'),
         ];
         $contracts   = $this->api->allContracts($filter);
 
@@ -62,7 +63,9 @@ class ContractController extends BaseController
 
         $meta = [
             'title'       => 'Search Contracts',
-            'description' => 'Search' . getInformation('categoryTitle') . 'using different criteria - year signed, company name, contract type, annotation category.'
+            'description' => 'Search'.getInformation(
+                    'categoryTitle'
+                ).'using different criteria - year signed, company name, contract type, annotation category.',
         ];
 
 
@@ -73,6 +76,7 @@ class ContractController extends BaseController
      * Show Contract detail
      *
      * @param $contract_id
+     *
      * @return \Illuminate\View\View
      */
     public function detail($contract_id)
@@ -86,7 +90,7 @@ class ContractController extends BaseController
         }
 
         $meta = [
-            'title' => $contract->metadata->name
+            'title' => $contract->metadata->name,
         ];
 
         return view('contract.detail', compact('contract', 'referrer', 'meta'));
@@ -97,6 +101,7 @@ class ContractController extends BaseController
      *
      * @param $id
      * @param $page_no
+     *
      * @return \Illuminate\View\View
      */
     public function pageDetail($id, $page_no)
@@ -117,6 +122,7 @@ class ContractController extends BaseController
      * Get Page list
      *
      * @param $id
+     *
      * @return \Illuminate\View\View
      */
     public function pageIndex($id, Request $request)
@@ -140,6 +146,7 @@ class ContractController extends BaseController
      *
      * @param $contractId1
      * @param $contractId2
+     *
      * @return \Illuminate\View\View
      */
     public function compare($contractId1, $contractId2)
@@ -164,6 +171,7 @@ class ContractController extends BaseController
      * Get Countries
      *
      * @param Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function getCountries(Request $request)
@@ -183,6 +191,7 @@ class ContractController extends BaseController
      * Get Resources
      *
      * @param Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function getResources(Request $request)
@@ -254,7 +263,7 @@ class ContractController extends BaseController
         );
         header('Content-Description: File Transfer');
         header('Content-Type: application/pdf');
-        header('Content-Disposition: attachment; filename="' . basename($filename) . '.pdf"');
+        header('Content-Disposition: attachment; filename="'.basename($filename).'.pdf"');
         header('Expires: 0');
         header('Cache-Control: must-revalidate');
         header('Pragma: public');
@@ -267,6 +276,7 @@ class ContractController extends BaseController
      *
      * @param         $contract_id
      * @param Request $request
+     *
      * @return \Illuminate\View\View|void
      */
     public function view($contract_id)
@@ -282,7 +292,7 @@ class ContractController extends BaseController
         }
 
         $meta = [
-            'title' => $contract->metadata->name
+            'title' => $contract->metadata->name,
         ];
 
 
@@ -291,6 +301,7 @@ class ContractController extends BaseController
 
     /**
      * Download metadata in csv
+     *
      * @param Request $request
      */
     public function downloadMetadataAsCSV(Request $request)
@@ -299,7 +310,7 @@ class ContractController extends BaseController
             'country'  => $request['country'],
             'resource' => $request['resource'],
             'download' => $request['download'],
-            'from'     => 1
+            'from'     => 1,
         ];
         $this->api->allContracts($filter);
         die;
@@ -307,12 +318,31 @@ class ContractController extends BaseController
 
     /**
      * Annotations Download
+     *
      * @param $id
      */
     public function downloadAnnotations($id)
     {
-        $this->api->downloadAPI("contract/" . $id . "/annotations/download", [], "", $id);
+        $this->api->downloadAPI("contract/".$id."/annotations/download", [], "", $id);
         die;
     }
 
+    /**
+     * Display contract popup view
+     *
+     * @param $contract_id
+     * @param $annotation_id
+     *
+     * @return \Illuminate\View\View
+     */
+    public function popup($contract_id, $annotation_id)
+    {
+        $annotation = $this->api->getAnnotationDetail($contract_id, $annotation_id);
+
+        if (empty($annotation)) {
+            return abort(404);
+        }
+
+        return view('contract.page.popup', compact('annotation'));
+    }
 }

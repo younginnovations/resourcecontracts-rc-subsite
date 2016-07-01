@@ -11,7 +11,7 @@ return [
     'fiscal'                     => 'Fiscal',
     'operations'                 => 'Operations',
     'social'                     => 'Social',
-    'other'                      => 'Other',
+    'legal_rules'                => 'Legal Rules',
     'no_annotation_msg'          => 'There are no annotations associated with this contract.',
     'metadata'                   => 'Metadata',
     'see_summary'                => 'See Summary',
@@ -46,7 +46,7 @@ return [
     'less'                       => '...less',
     'select'                     => 'Select',
     'disclosure_mode'            => 'Disclosure Mode',
-    'pages_missing'              => 'Page(s) mising from document',
+    'pages_missing'              => 'Page(s) missing from document',
     'annexes_missing'            => 'Annexe(s) missing from document',
     'all'                        => 'All',
     'no_annotation'              => "There are no annotations associated with this contract.",
@@ -64,6 +64,7 @@ return [
     'see'                        => "See",
     'legislation'                => "Legislation",
     'african_mining'             => "in African Mining Legislation Atlas",
+    'other'                      => "Legal Rules"
 ];
 
 

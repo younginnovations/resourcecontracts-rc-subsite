@@ -137,7 +137,7 @@ var AnnotationTopicList = React.createClass({
                 <span onClick={this.handleClick.bind(this,'Fiscal')}>{lang.fiscal}</span>
                 <span onClick={this.handleClick.bind(this,'Operations')}>{lang.operations}</span>
                 <span onClick={this.handleClick.bind(this,'Social')}>{lang.social}</span>
-                <span onClick={this.handleClick.bind(this,'Other')}>{lang.other}</span>
+                <span onClick={this.handleClick.bind(this,'Other')}>{lang.legal_rules}</span>
             </div>
         );
     }
@@ -233,9 +233,7 @@ var AnnotationsList = React.createClass({
                         contractApp={this.props.contractApp}
                         annotationsCollection={this.props.annotationsCollection}
                         annotation={[annotationsCollectionForList[page][key]]}/>));
-
                 }
-
             }
         }
         return annotationsList;
@@ -258,7 +256,6 @@ var AnnotationsList = React.createClass({
             return (
                 <div className="annotations-list" id="id-annotations-list">
                     {this.getAnnotationItemsComponent(this.props.annotationsCollection.groupByCategory(), true)}
-
                 </div>
             );
         }

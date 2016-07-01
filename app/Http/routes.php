@@ -11,7 +11,6 @@ $app->get('/countries', ['as' => 'countries', 'uses' => 'CountryController@index
 $app->get('/countries/{key}', ['as' => 'country.detail', 'uses' => 'CountryController@detail']);
 $app->get('/resources', ['as' => 'resources', 'uses' => 'ResourceController@index']);
 $app->get('/resource/{key}', ['as' => 'resource.detail', 'uses' => 'ResourceController@detail']);
-
 $app->get('/sitemap', ['as' => 'sitemap', 'uses' => 'SiteController@sitemap']);
 
 /*
@@ -29,10 +28,24 @@ $app->get('/contract/{id}/pages', ['as' => 'contract.pages', 'uses' => 'Contract
 $app->get('/contract/{id}/page/{page_no}', ['as' => 'contract.page.detail', 'uses' => 'ContractController@pageDetail']);
 $app->get('/contract/{id}/download/word', ['as' => 'contract.download', 'uses' => 'ContractController@download']);
 $app->get('/contract/{id}/download/pdf', ['as' => 'contract.download.pdf', 'uses' => 'ContractController@downloadPdf']);
-$app->get('/contracts/download/searchresult', ['as' => 'contract.csv.download', 'uses' => 'FilterController@downloadSearchResultAsCSV']);
-$app->get('/contracts/download/csv', ['as' => 'contract.metadata.download', 'uses' => 'ContractController@downloadMetadataAsCSV']);
-$app->get('/contract/{id}/download/annotations', ['as' => 'contract.annotations.download', 'uses' => 'ContractController@downloadAnnotations']);
+$app->get(
+    '/contracts/download/searchresult',
+    ['as' => 'contract.csv.download', 'uses' => 'FilterController@downloadSearchResultAsCSV']
+);
+$app->get(
+    '/contracts/download/csv',
+    ['as' => 'contract.metadata.download', 'uses' => 'ContractController@downloadMetadataAsCSV']
+);
+$app->get(
+    '/contract/{id}/download/annotations',
+    ['as' => 'contract.annotations.download', 'uses' => 'ContractController@downloadAnnotations']
+);
 $app->get('/contract/{id}/view', ['as' => 'contract.detail', 'uses' => 'ContractController@view']);
+$app->get(
+    'contract/{contract_id}/popup/{annotation_id}',
+    ['as' => 'contract.popup', 'uses' => 'ContractController@popup']
+);
+
 /*
 |--------------------------------------------------------------------------
 | Static Pages
@@ -80,5 +93,8 @@ $app->post('admin/page/{id}', ['as' => 'admin.page.update', 'uses' => 'Admin\Pag
 $app->get('contract/{id}/page', ['as' => 'contract.page.get', 'uses' => 'Contract\PageController@getText']);
 $app->get('contract/{id}/allpage', ['as' => 'contract.allpage.get', 'uses' => 'Contract\PageController@getAllText']);
 $app->post('contract/{id}/search', ['as' => 'contract.page.search', 'uses' => 'Contract\PageController@search']);
-$app->get('annotation/search', ['as' => 'contract.page.annotations.search', 'uses' => 'Contract\PageController@annotations']);
+$app->get(
+    'annotation/search',
+    ['as' => 'contract.page.annotations.search', 'uses' => 'Contract\PageController@annotations']
+);
 $app->get('api/search', ['as' => 'api.search', 'uses' => 'Contract\PageController@annotations']);

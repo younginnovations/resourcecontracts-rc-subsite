@@ -1,5 +1,12 @@
-.lang-fr .advance-filter-wrapper .social-share{
-  right: 323px;
+.lang-fr{
+  .advance-filter-wrapper .social-share{
+    right: 323px;
+  }
+
+  .attached-top-wrapper .left-top-content {
+    width: -webkit-calc(100% - 250px);
+    width: calc(100% - 284px);
+  }
 }
 
 .page-search.lang-fr .advance-filter-wrapper .social-share{
@@ -9,3 +16,6 @@
 .page-search.lang-fr .advance-filter-wrapper .static-search ~ .social-share{
   right: 176px;
 }
+
+
+
