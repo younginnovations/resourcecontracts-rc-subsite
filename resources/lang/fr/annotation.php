@@ -3,7 +3,8 @@ return [
     'page'                       => "page",
     'see_all'                    => "Voir tout",
     'loading_annotations'        => "chargement des annotations en cours ",
-    'annotations'                => "MS EXCEL '.<br><i>Annotations Seulement</i>'",
+    'annotations'                => "Annotations ",
+    'annotations_excel'          => "MS EXCEL <br><i>Annotations Seulement</i>",
     'by_page'                    => "par page",
     'by_topic'                   => "par thème",
     'general'                    => "Général",
@@ -65,6 +66,6 @@ return [
     'legislation'                => "Législation",
     'african_mining'             => "dans la législation minière africaine Atlas",
     'other'                      => 'Règles juridiques',
-    'annotation_count'          => "annotations",
+    'annotation_count'           => "annotations",
 
 ];
