@@ -29783,11 +29783,11 @@ var MetadataView = React.createClass({displayName: "MetadataView",
         e.preventDefault();
         this.setState({showMoreText: !this.state.showMoreText});
     },
-    getResourceLang:function(resources){
-        var resLang=[];
-        var resLength=resources.length;
-        var resLang=_.map(resources,function(value,index){
-            var link=app_url+'/resource/'+value;
+    getResourceLang: function (resources) {
+        var resLang = [];
+        var resLength = resources.length;
+        var resLang = _.map(resources, function (value, index) {
+            var link = app_url + '/resource/' + value;
 
             if (langResource[value] && index != resLength - 1) {
                 return React.createElement('a', {href: app_url + "/resource/" + encodeURIComponent(value)}, langResource[value] + ' | ');
@@ -29818,18 +29818,30 @@ var MetadataView = React.createClass({displayName: "MetadataView",
             var ct = this.props.metadata.get("contract_type");
             var contractType = ct.map(function (contractType, i) {
                 if (i != ct.length - 1) {
-                    return React.createElement('a', {href: app_url + "/search?q=&contract_type%5B%5D=" + contractType, key: i}, contractType + ' | ');
+                    return React.createElement('a', {
+                        href: app_url + "/search?q=&contract_type%5B%5D=" + contractType,
+                        key: i
+                    }, contractType + ' | ');
                 } else {
-                    return React.createElement('a', {href: app_url + "/search?q=&contract_type%5B%5D=" + contractType, key: i}, contractType);
+                    return React.createElement('a', {
+                        href: app_url + "/search?q=&contract_type%5B%5D=" + contractType,
+                        key: i
+                    }, contractType);
                 }
             });
 
             if (typeof ct === 'object') {
                 contractType = ct.map(function (contractType, i) {
                     if (i != ct.length - 1) {
-                        return React.createElement('a', {href: app_url + "/search?q=&contract_type%5B%5D=" + contractType, key: i}, contractType + ' | ');
+                        return React.createElement('a', {
+                            href: app_url + "/search?q=&contract_type%5B%5D=" + contractType,
+                            key: i
+                        }, contractType + ' | ');
                     } else {
-                        return React.createElement('a', {href: app_url + "/search?q=&contract_type%5B%5D=" + contractType, key: i}, contractType);
+                        return React.createElement('a', {
+                            href: app_url + "/search?q=&contract_type%5B%5D=" + contractType,
+                            key: i
+                        }, contractType);
                     }
                 });
             }
@@ -29837,7 +29849,7 @@ var MetadataView = React.createClass({displayName: "MetadataView",
 
             var note = this.props.metadata.get("note");
             if (note != "") {
-                var noteHtml = "<span class='metadata-note'>"+lang.note+"</span>";
+                var noteHtml = "<span class='metadata-note'>" + lang.note + "</span>";
 
                 if (!this.state.showMoreText) {
                     var maxWord = 20;
@@ -29846,10 +29858,12 @@ var MetadataView = React.createClass({displayName: "MetadataView",
 
                     if (noteArray.length > maxWord) {
                         note = noteArray.slice(0, maxWord).join(' ') + '... ';
-                        more = (React.createElement("a", {className: "ellipsis", href: "#", onClick: this.handleMoreText}, {__html: lang.note_more}));
+                        more = (React.createElement("a", {className: "ellipsis", href: "#", 
+                                   onClick: this.handleMoreText}, {__html: lang.note_more}));
                     }
                 } else {
-                    more = (React.createElement("a", {className: "ellipsis", href: "#", onClick: this.handleMoreText}, {__html: lang.note_less}));
+                    more = (
+                        React.createElement("a", {className: "ellipsis", href: "#", onClick: this.handleMoreText}, {__html: lang.note_less}));
                 }
                 noteHtml += '<span class="note">' + note + '</span>';
                 noteHtml = (React.createElement("span", {className: "note-inner-wrapper", dangerouslySetInnerHTML: {__html: noteHtml}}));
@@ -29874,8 +29888,8 @@ var MetadataView = React.createClass({displayName: "MetadataView",
             return (
                 React.createElement("div", {id: "metadata"}, 
                     React.createElement("div", {className: "note-wrapper"}, 
-                      noteHtml, 
-                      more
+                        noteHtml, 
+                        more
                     ), 
                     React.createElement("div", {className: "metadata-view"}, 
                         React.createElement("div", null, 
@@ -29885,7 +29899,8 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                             React.createElement("span", null, lang.country), 
                             React.createElement("span", null, 
                                 React.createElement("a", {href: countryLink}, this.props.metadata.get("country").name)
-                            )
+                            ), 
+                            React.createElement(AmlaUrl, {metadata: this.props.metadata})
                         ), 
                         React.createElement("div", {className: "metadata-signature-year"}, 
                             React.createElement("span", null, lang.signature_year), 
@@ -29928,7 +29943,30 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                 )
             );
         }
+    }
+});
 
+
+var AmlaUrl = React.createClass({displayName: "AmlaUrl",
+    componentDidMount: function () {
+        var self = this;
+        this.props.metadata.on("sync", function () {
+            self.forceUpdate();
+        });
+    },
+    getAmlaLink: function () {
+        var link = null;
+        var amla_url = this.props.metadata.get("amla_url");
+        if (amla_url != '' && (isSite('country') || isSite('rc'))) {
+            link = lang.see + '<a href="'+amla_url+'" target="_blank" > ' + lang.legislation + ' </a> ' + lang.african_mining;
+        }
+
+        return {__html: link};
+    },
+    render: function () {
+        return (
+            React.createElement("div", {className: "amla-legislation", dangerouslySetInnerHTML: this.getAmlaLink()})
+        );
     }
 });
 
@@ -29946,7 +29984,7 @@ var LandMatrixView = React.createClass({displayName: "LandMatrixView",
             id = '#' + this.props.metadata.get("deal_number");
         }
 
-        if (category === 'Openland') {
+        if (isSite('olc')) {
             return (
                 React.createElement("div", {className: "metadata-ocid"}, 
                     React.createElement("span", null, lang.land_matrix_id), 
@@ -30004,9 +30042,9 @@ var RelatedDocumentsView = React.createClass({displayName: "RelatedDocumentsView
                     ));
                 }
             }
-            if(this.props.metadata.get("associated").length > MaxAllowed)
-            {
-                supportingContracts.push(React.createElement("span", null, React.createElement("a", {href: this.props.contractApp.getMetadataSummaryLink()+'#associatedcontracts'}, "More...")));
+            if (this.props.metadata.get("associated").length > MaxAllowed) {
+                supportingContracts.push(React.createElement("span", null, React.createElement("a", {
+                    href: this.props.contractApp.getMetadataSummaryLink()+'#associatedcontracts'}, "More...")));
             }
 
             if (parentContracts.length || supportingContracts.length) {
@@ -30019,7 +30057,7 @@ var RelatedDocumentsView = React.createClass({displayName: "RelatedDocumentsView
                     )
                 );
             } else {
-                return (React.createElement("div", null));
+                return null;
             }
         } else {
             return (
@@ -30043,7 +30081,7 @@ var RelatedDocumentsMoreView = React.createClass({displayName: "RelatedDocuments
         if (this.props.metadata.get("country")) {
             var countryCode = this.props.metadata.get("country").code.toLowerCase();
             var countryLink = app_url + "/countries/" + countryCode;
-            var country = React.createElement('a', {href: countryLink}, this.props.metadata.get("country").name);
+            var country = React.createElement('a', {href: countryLink}, getCountryName(countryCode));
             var resourceLinkBase = app_url + "/resources/";
             var resources = this.props.metadata.get("resource").map(function (resource, i) {
                 return React.createElement('a', {href: app_url + "/resource/" + resource, key: i}, resource);
@@ -30091,7 +30129,7 @@ var OtherSourcesView = React.createClass({displayName: "OtherSourcesView",
                     )
                 );
             } else {
-                return (React.createElement("div", null));
+                return null;
             }
         } else {
             return (
@@ -30411,7 +30449,7 @@ var TextSearchForm = React.createClass({displayName: "TextSearchForm",
         document.location.hash = '#/search/' + encodeURI(searchQuery);
     },
     componentDidMount: function () {
-        React.findDOMNode(this.refs.searchInput).value = this.props.contractApp.getSearchQuery();
+        React.findDOMNode(this.refs.searchInput).value = decodeURI(this.props.contractApp.getSearchQuery());
     },
     render: function () {
         return (
@@ -30508,8 +30546,7 @@ var TextSearchResultRow = React.createClass({displayName: "TextSearchResultRow",
         if (texToShow.length == 0) {
             texToShow = this.state.text;
         }
-
-        texToShow = React.createElement(HighLight, {highlight: highlight, text: texToShow});
+        texToShow = React.createElement(HighLight, {text: texToShow});
         more = (React.createElement("a", {onClick: this.handleClickLessMore}, more));
         textToReturn = (React.createElement("span", null, texToShow, " ", more, " "));
         return textToReturn;
@@ -30590,6 +30627,7 @@ var TextSearchResultsList = React.createClass({displayName: "TextSearchResultsLi
     },
     handleCloseSearchResults: function () {
         this.props.contractApp.trigger("searchresults:close");
+        this.props.contractApp.setIsSearch(false);
         document.location.hash = '#/text';
         this.props.contractApp.setView("text");
     },
@@ -30631,12 +30669,12 @@ var TextSearchResultsList = React.createClass({displayName: "TextSearchResultsLi
 
 var HighLight = React.createClass({displayName: "HighLight",
     render: function () {
-        var highlightword = decodeURI(this.props.highlight);
-        var re = new RegExp(highlightword, "gi");
-        var text = this.props.text;
-        var texta = text.replace(re, "<span class\='search-highlight-word'>" + highlightword + "</span>");
+
         return (
-            React.createElement("span", {dangerouslySetInnerHTML: { __html : texta}})
+            React.createElement("span", {
+                dangerouslySetInnerHTML: {
+          __html : this.props.text
+            }})
         );
     }
 });
@@ -31193,11 +31231,10 @@ var AnnotationItem = React.createClass({displayName: "AnnotationItem",
     }
 });
 
-function nl2br (str, is_xhtml) {
+function nl2br(str, is_xhtml) {
     var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
     return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
 }
-
 
 var contractApp = new ContractApp({
     contract_id: contract.metadata.id,
@@ -31210,7 +31247,7 @@ debug("initializing contract ", contractTitle, contractApp.get("contract_id"));
 var pagesCollection = new ViewerPageCollection();
 pagesCollection.url = contractApp.getAllPageUrl();
 pagesCollection.fetch({reset: true});
-pagesCollection.on("reset", function() {
+pagesCollection.on("reset", function () {
     debug("view.blade pageCollection reset, trigger change:page_no")
     contractApp.trigger("change:page_no");
 });
@@ -31230,194 +31267,165 @@ var pdfPage = new PdfPage({
 
 var DownloadUrl = React.createClass({displayName: "DownloadUrl",
 
-    getInitialState : function(){
-    return {dropdown :false, socialdropdown : false};
-},
-toggleDropdown : function()
-{
-    this.setState({dropdown:!this.state.dropdown})
-},
-socialDropdown : function()
-{
-    this.setState({socialdropdown:! this.state.socialdropdown})
-},
-render:function() {
+    getInitialState: function () {
+        return {dropdown: false, socialdropdown: false};
+    },
+    toggleDropdown: function () {
+        this.setState({dropdown: !this.state.dropdown})
+    },
+    socialDropdown: function () {
+        this.setState({socialdropdown: !this.state.socialdropdown})
+    },
 
-    var show = {'display':'block'};
-    var hide= {'display':'none'};
-    var style =  this.state.dropdown ? show :hide;
-    var socialStyle =  this.state.socialdropdown ? show :hide;
-    var current_url = encodeURIComponent(window.location.href);
+    componentDidMount: function () {
+        var self = this;
+        $(document).click(function (event) {
+            if (!$(event.target).closest('.social-share').length && !$(event.target).is('.social-share')) {
+                if ($('.social-share').is(":visible")) {
+                    self.setState({socialdropdown: false});
+                }
+            }
 
-    if(!this.props.annotations_url && !this.props.text_url)
-    {
-        return (
-            React.createElement("div", {className: "right-column-view"}, 
-                React.createElement("div", {className: "download-dropdown"}, 
-                    React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, lang.download)), 
-                    React.createElement("ul", {className: "dropdown-menu", style: style}, 
-                    React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, lang.pdf))
-                    )
-                ), 
-                React.createElement("div", {className: "social-share download-wrap"}, 
-                    React.createElement("a", {href: "#", onClick: this.socialDropdown}, React.createElement("span", null, "share")), 
-                    React.createElement("ul", {className: "dropdown-menu", style: socialStyle}, 
-                        React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
-                        React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
-                        React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
+            if (!$(event.target).closest('.download-dropdown').length && !$(event.target).is('.download-dropdown')) {
+                if ($('.download-dropdown').is(":visible")) {
+                    self.setState({dropdown: false});
+                }
+            }
+
+            self.setState({dropdown: false});
+        });
+    },
+    render: function () {
+        var show = {'display': 'block'};
+        var hide = {'display': 'none'};
+        var style = this.state.dropdown ? show : hide;
+        var socialStyle = this.state.socialdropdown ? show : hide;
+        var current_url = encodeURIComponent(window.location.href);
+
+        if (!this.props.annotations_url && !this.props.text_url) {
+            return (
+                React.createElement("div", {className: "right-column-view"}, 
+                    React.createElement("div", {className: "download-dropdown"}, 
+                        React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, lang.download)), 
+                        React.createElement("ul", {className: "dropdown-menu", style: style}, 
+                            React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, lang.pdf))
+                        )
+                    ), 
+                    React.createElement("div", {className: "social-share download-wrap"}, 
+                        React.createElement("a", {href: "#", onClick: this.socialDropdown}, React.createElement("span", null, "share")), 
+                        React.createElement("ul", {className: "dropdown-menu", style: socialStyle}, 
+                            React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
+                            React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")
+                            ), 
+                            React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
+                        )
                     )
                 )
-           )
             );
-    }
-    else if(!this.props.text_url){
-        return (
-            React.createElement("div", {className: "right-column-view"}, 
-                React.createElement("div", {className: "download-dropdown"}, 
-                React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, lang.download)), 
-                React.createElement("ul", {className: "dropdown-menu", style: style}, 
-                React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, lang.pdf)), 
-                React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, lang.annotations))
-                )
-                ), 
-                React.createElement("div", {className: "social-share dropdown-wrap"}, 
-                    React.createElement("a", {href: "#", onClick: this.socialDropdown}, React.createElement("span", null, "share")), 
-                    React.createElement("ul", {className: "dropdown-menu", style: socialStyle}, 
-                        React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
-                        React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
-                        React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
+        }
+        else if (!this.props.text_url) {
+            return (
+                React.createElement("div", {className: "right-column-view"}, 
+                    React.createElement("div", {className: "download-dropdown"}, 
+                        React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, lang.download)), 
+                        React.createElement("ul", {className: "dropdown-menu", style: style}, 
+                            React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, lang.pdf)), 
+                            React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, lang.annotations))
+                        )
+                    ), 
+                    React.createElement("div", {className: "social-share dropdown-wrap"}, 
+                        React.createElement("a", {href: "#", onClick: this.socialDropdown}, React.createElement("span", null, "share")), 
+                        React.createElement("ul", {className: "dropdown-menu", style: socialStyle}, 
+                            React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
+                            React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")
+                            ), 
+                            React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
+                        )
                     )
                 )
-            )
 
             );
         }
-    else if(!this.props.annotations_url)
-    {
-        return (
-            React.createElement("div", {className: "right-column-view"}, 
-                React.createElement("div", {className: "download-dropdown"}, 
-                React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, lang.download)), 
-                React.createElement("ul", {className: "dropdown-menu", style: style}, 
-                React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, lang.pdf)), 
-                React.createElement("li", null, React.createElement("a", {href: this.props.text_url}, lang.word_file))
-                )
-                ), 
-                React.createElement("div", {className: "social-share dropdown-wrap"}, 
-                    React.createElement("a", {href: "#", onClick: this.socialDropdown}, React.createElement("span", null, "share")), 
-                    React.createElement("ul", {className: "dropdown-menu", style: socialStyle}, 
-                        React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
-                        React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
-                        React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
+        else if (!this.props.annotations_url) {
+            return (
+                React.createElement("div", {className: "right-column-view"}, 
+                    React.createElement("div", {className: "download-dropdown"}, 
+                        React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, lang.download)), 
+                        React.createElement("ul", {className: "dropdown-menu", style: style}, 
+                            React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, lang.pdf)), 
+                            React.createElement("li", null, React.createElement("a", {href: this.props.text_url}, lang.word_file))
+                        )
+                    ), 
+                    React.createElement("div", {className: "social-share dropdown-wrap"}, 
+                        React.createElement("a", {href: "#", onClick: this.socialDropdown}, React.createElement("span", null, "share")), 
+                        React.createElement("ul", {className: "dropdown-menu", style: socialStyle}, 
+                            React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
+                            React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")
+                            ), 
+                            React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
+                        )
                     )
                 )
-            )
             );
-         }
-    else{
-        return (
-            React.createElement("div", {className: "right-column-view"}, 
-            React.createElement("div", {className: "download-dropdown"}, 
-            React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, lang.download)), 
-            React.createElement("ul", {className: "dropdown-menu", style: style}, 
-            React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, lang.pdf)), 
-            React.createElement("li", null, React.createElement("a", {href: this.props.text_url}, lang.word_file)), 
-            React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, lang.annotations))
-            )
-            ), 
-            React.createElement("div", {className: "social-share dropdown-wrap"}, 
-                React.createElement("a", {href: "#", onClick: this.socialDropdown}, React.createElement("span", null, "share")), 
-                React.createElement("ul", {className: "dropdown-menu", style: socialStyle}, 
-                    React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
-                    React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")), 
-                        React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
+        }
+        else {
+            return (
+                React.createElement("div", {className: "right-column-view"}, 
+                    React.createElement("div", {className: "download-dropdown"}, 
+                        React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, lang.download)), 
+                        React.createElement("ul", {className: "dropdown-menu", style: style}, 
+                            React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, lang.pdf)), 
+                            React.createElement("li", null, React.createElement("a", {href: this.props.text_url}, lang.word_file)), 
+                            React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, lang.annotations))
+                        )
+                    ), 
+                    React.createElement("div", {className: "social-share dropdown-wrap"}, 
+                        React.createElement("a", {href: "#", onClick: this.socialDropdown}, React.createElement("span", null, "share")), 
+                        React.createElement("ul", {className: "dropdown-menu", style: socialStyle}, 
+                            React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
+                            React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")
+                            ), 
+                            React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T"))
+                        )
+                    )
                 )
-            )
-        )
-         );
+            );
 
+        }
     }
-    }
-});
-
-
-
-var SelectLanguage = React.createClass({displayName: "SelectLanguage",
-    handleChange: function(e){
-        console.log("hello",e);
-    },
-   render:function(){
-       var language = [];
-       language = JSON.parse(languages);
-       var availableLang=[];
-       var imageStyle = {width: '16px' , height: '16px', 'margin-right': '6px'};
-       var ulStyle = {'min-width':'110px'};
-       _.each(language,function(value,key){
-           var url = currentUrl+'?lang='+key;
-           var flagUrl = "https://raw.githubusercontent.com/younginnovations/country-flags/master/png250px/"+value['country_code']+".png";
-           if(key!=currentLanguage){
-               availableLang.push(React.createElement("li", null, 
-               React.createElement("a", {href: url}, 
-               React.createElement("img", {style: imageStyle, src: flagUrl}), 
-               value['name']
-               )
-               ));
-
-           }
-
-       });
-
-       if(localisationState)
-       {
-       return (
-               React.createElement("div", {className: "dropdown language-selector"}, 
-                   React.createElement("button", {className: "btn  dropdown-toggle", "data-toggle": "dropdown"}, 
-                   React.createElement("img", {style: imageStyle, src: languageImage}), selectedLang, 
-                   React.createElement("span", {className: "caret"})
-                   ), 
-                   React.createElement("ul", {className: "dropdown-menu", style: ulStyle}, 
-                   availableLang
-                   )
-                )
-       );
-       }
-   else{
-        return(React.createElement("div", null));
-    }
-   }
 });
 
 /**
  * @jsx React.DOM
  */
 var MainApp = React.createClass({displayName: "MainApp",
-    getInitialState: function() {
+    getInitialState: function () {
         return {
             currentView: 'pdf'
         }
     },
-    text: function(page_no, annotation_id) {
+    text: function (page_no, annotation_id) {
         debug("view.blade.php: setting text view");
         contractApp.setView("text");
         contractApp.setCurrentPage(contractApp.getCurrentPage());
         contractApp.resetSelectedAnnotation();
-        if(page_no) {
+        if (page_no) {
             contractApp.setCurrentPage(page_no);
         }
-        if(annotation_id) {
+        if (annotation_id) {
             contractApp.setSelectedAnnotation(annotation_id);
         }
         contractApp.trigger("update-text-pagination-page", contractApp.getCurrentPage());
         this.forceUpdate();
         contractApp.trigger('scroll-to-text-page');
     },
-    pdf: function(page_no, annotation_id) {
+    pdf: function (page_no, annotation_id) {
         debug("view.blade.php: setting pdf view");
-            contractApp.setView("pdf");
-        if(page_no) {
+        contractApp.setView("pdf");
+        if (page_no) {
             contractApp.setCurrentPage(page_no);
         }
-        if(annotation_id) {
+        if (annotation_id) {
             contractApp.setSelectedAnnotation(annotation_id);
         } else {
             contractApp.resetSelectedAnnotation();
@@ -31426,38 +31434,44 @@ var MainApp = React.createClass({displayName: "MainApp",
         contractApp.trigger("update-pdf-pagination-page", contractApp.getCurrentPage());
         this.forceUpdate();
     },
-    search: function(query) {
+    search: function (queryText) {
+        var query = typeof queryText != 'undefined' ? queryText : '';
         contractApp.setView("search");
         var show_pdf_text = contractApp.metadata.get('is_ocr_reviewed');
-            contractApp.setSearchQuery(query);
-            searchResultsCollection.fetch({
-                searchTerm: query,
-                reset: true
-            });
+        contractApp.setSearchQuery(query);
+        searchResultsCollection.fetch({
+            searchTerm: query,
+            reset: true
+        });
         this.forceUpdate();
     },
-    meta: function(action) {
+    meta: function (action) {
         // this.forceUpdate();
     },
-    metadata: function() {
+    metadata: function () {
         contractApp.setView("metadata");
         this.scrollTo('#metadata');
         this.forceUpdate();
     },
-    annotation: function() {
+    annotation: function () {
         contractApp.setView("annotation");
         this.scrollTo('#annotations');
         this.forceUpdate();
     },
-    scrollTo:function(id){
+    scrollTo: function (id) {
         $('html,body').animate({
-                scrollTop: $(id).offset().top - 150},
+                scrollTop: $(id).offset().top - 150
+            },
             'slow');
     },
-    componentDidUpdate: function() {
-       contractApp.setIsSearch(false);
+    componentDidUpdate: function () {
+        contractApp.setIsSearch(false);
+        var self = this;
+        contractApp.on("searchresults:close", function () {
+            self.text();
+        });
     },
-    componentWillMount: function() {
+    componentWillMount: function () {
         var router = Router({
             '/text': this.text,
             '/text/page/:page_no': this.text,
@@ -31472,12 +31486,12 @@ var MainApp = React.createClass({displayName: "MainApp",
         });
         router.init();
     },
-    getStyle: function(showFlag) {
-        var style = { display: "none" };
-        if(showFlag) style.display = "block";
+    getStyle: function (showFlag) {
+        var style = {display: "none"};
+        if (showFlag) style.display = "block";
         return style;
     },
-    render: function() {
+    render: function () {
         return (
             React.createElement("div", {className: "main-app"}, 
                 React.createElement("div", {className: "title-head-wrap"}, 
@@ -31498,7 +31512,7 @@ var MainApp = React.createClass({displayName: "MainApp",
                             style: this.getStyle(contractApp.isViewVisible("PdfZoom")), 
                             contractApp: contractApp}), 
 
-                       React.createElement(DownloadUrl, {
+                        React.createElement(DownloadUrl, {
                             pdf_url: pdf_download_url, 
                             text_url: text_download_url, 
                             annotations_url: annotations_download_url}

@@ -59,11 +59,11 @@ var MetadataView = React.createClass({
         e.preventDefault();
         this.setState({showMoreText: !this.state.showMoreText});
     },
-    getResourceLang:function(resources){
-        var resLang=[];
-        var resLength=resources.length;
-        var resLang=_.map(resources,function(value,index){
-            var link=app_url+'/resource/'+value;
+    getResourceLang: function (resources) {
+        var resLang = [];
+        var resLength = resources.length;
+        var resLang = _.map(resources, function (value, index) {
+            var link = app_url + '/resource/' + value;
 
             if (langResource[value] && index != resLength - 1) {
                 return React.createElement('a', {href: app_url + "/resource/" + encodeURIComponent(value)}, langResource[value] + ' | ');
@@ -94,18 +94,30 @@ var MetadataView = React.createClass({
             var ct = this.props.metadata.get("contract_type");
             var contractType = ct.map(function (contractType, i) {
                 if (i != ct.length - 1) {
-                    return React.createElement('a', {href: app_url + "/search?q=&contract_type%5B%5D=" + contractType, key: i}, contractType + ' | ');
+                    return React.createElement('a', {
+                        href: app_url + "/search?q=&contract_type%5B%5D=" + contractType,
+                        key: i
+                    }, contractType + ' | ');
                 } else {
-                    return React.createElement('a', {href: app_url + "/search?q=&contract_type%5B%5D=" + contractType, key: i}, contractType);
+                    return React.createElement('a', {
+                        href: app_url + "/search?q=&contract_type%5B%5D=" + contractType,
+                        key: i
+                    }, contractType);
                 }
             });
 
             if (typeof ct === 'object') {
                 contractType = ct.map(function (contractType, i) {
                     if (i != ct.length - 1) {
-                        return React.createElement('a', {href: app_url + "/search?q=&contract_type%5B%5D=" + contractType, key: i}, contractType + ' | ');
+                        return React.createElement('a', {
+                            href: app_url + "/search?q=&contract_type%5B%5D=" + contractType,
+                            key: i
+                        }, contractType + ' | ');
                     } else {
-                        return React.createElement('a', {href: app_url + "/search?q=&contract_type%5B%5D=" + contractType, key: i}, contractType);
+                        return React.createElement('a', {
+                            href: app_url + "/search?q=&contract_type%5B%5D=" + contractType,
+                            key: i
+                        }, contractType);
                     }
                 });
             }
@@ -113,7 +125,7 @@ var MetadataView = React.createClass({
 
             var note = this.props.metadata.get("note");
             if (note != "") {
-                var noteHtml = "<span class='metadata-note'>"+lang.note+"</span>";
+                var noteHtml = "<span class='metadata-note'>" + lang.note + "</span>";
 
                 if (!this.state.showMoreText) {
                     var maxWord = 20;
@@ -122,10 +134,12 @@ var MetadataView = React.createClass({
 
                     if (noteArray.length > maxWord) {
                         note = noteArray.slice(0, maxWord).join(' ') + '... ';
-                        more = (<a className="ellipsis" href="#" onClick={this.handleMoreText}>{{__html: lang.note_more }}</a>);
+                        more = (<a className="ellipsis" href="#"
+                                   onClick={this.handleMoreText}>{{__html: lang.note_more}}</a>);
                     }
                 } else {
-                    more = (<a className="ellipsis" href="#" onClick={this.handleMoreText}>{{__html: lang.note_less }}</a>);
+                    more = (
+                        <a className="ellipsis" href="#" onClick={this.handleMoreText}>{{__html: lang.note_less}}</a>);
                 }
                 noteHtml += '<span class="note">' + note + '</span>';
                 noteHtml = (<span className="note-inner-wrapper" dangerouslySetInnerHTML={{__html: noteHtml}}></span>);
@@ -150,8 +164,8 @@ var MetadataView = React.createClass({
             return (
                 <div id="metadata">
                     <div className="note-wrapper">
-                      {noteHtml}
-                      {more}
+                        {noteHtml}
+                        {more}
                     </div>
                     <div className="metadata-view">
                         <div>
@@ -162,6 +176,7 @@ var MetadataView = React.createClass({
                             <span>
                                 <a href={countryLink}>{this.props.metadata.get("country").name}</a>
                             </span>
+                            <AmlaUrl metadata={this.props.metadata}/>
                         </div>
                         <div className="metadata-signature-year">
                             <span>{lang.signature_year}</span>
@@ -204,7 +219,30 @@ var MetadataView = React.createClass({
                 </div>
             );
         }
+    }
+});
 
+
+var AmlaUrl = React.createClass({
+    componentDidMount: function () {
+        var self = this;
+        this.props.metadata.on("sync", function () {
+            self.forceUpdate();
+        });
+    },
+    getAmlaLink: function () {
+        var link = null;
+        var amla_url = this.props.metadata.get("amla_url");
+        if (amla_url != '' && (isSite('country') || isSite('rc'))) {
+            link = lang.see + '<a href="'+amla_url+'" target="_blank" > ' + lang.legislation + ' </a> ' + lang.african_mining;
+        }
+
+        return {__html: link};
+    },
+    render: function () {
+        return (
+            <div className="amla-legislation" dangerouslySetInnerHTML={this.getAmlaLink()}/>
+        );
     }
 });
 
@@ -222,7 +260,7 @@ var LandMatrixView = React.createClass({
             id = '#' + this.props.metadata.get("deal_number");
         }
 
-        if (category === 'Openland') {
+        if (isSite('olc')) {
             return (
                 <div className="metadata-ocid">
                     <span>{lang.land_matrix_id}</span>
@@ -280,9 +318,9 @@ var RelatedDocumentsView = React.createClass({
                     </span>);
                 }
             }
-            if(this.props.metadata.get("associated").length > MaxAllowed)
-            {
-                supportingContracts.push(<span><a href={this.props.contractApp.getMetadataSummaryLink()+'#associatedcontracts'}>More...</a></span>);
+            if (this.props.metadata.get("associated").length > MaxAllowed) {
+                supportingContracts.push(<span><a
+                    href={this.props.contractApp.getMetadataSummaryLink()+'#associatedcontracts'}>More...</a></span>);
             }
 
             if (parentContracts.length || supportingContracts.length) {
@@ -295,7 +333,7 @@ var RelatedDocumentsView = React.createClass({
                     </div>
                 );
             } else {
-                return (<div></div>);
+                return null;
             }
         } else {
             return (
@@ -319,7 +357,7 @@ var RelatedDocumentsMoreView = React.createClass({
         if (this.props.metadata.get("country")) {
             var countryCode = this.props.metadata.get("country").code.toLowerCase();
             var countryLink = app_url + "/countries/" + countryCode;
-            var country = React.createElement('a', {href: countryLink}, this.props.metadata.get("country").name);
+            var country = React.createElement('a', {href: countryLink}, getCountryName(countryCode));
             var resourceLinkBase = app_url + "/resources/";
             var resources = this.props.metadata.get("resource").map(function (resource, i) {
                 return React.createElement('a', {href: app_url + "/resource/" + resource, key: i}, resource);
@@ -367,7 +405,7 @@ var OtherSourcesView = React.createClass({
                     </div>
                 );
             } else {
-                return (<div></div>);
+                return null;
             }
         } else {
             return (

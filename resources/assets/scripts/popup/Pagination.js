@@ -56,6 +56,7 @@ const Pagination = React.createClass({
     render()
     {
         let prev = (<span className="previous inactive">{LANG.previous}</span>);
+
         if (this.state.current != 1) {
             prev = (
                 <a className="previous" onClick={this.prevPage} href="#">{LANG.previous}</a>

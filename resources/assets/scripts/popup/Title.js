@@ -15,6 +15,7 @@ class Title extends Component {
                 </div>
 
                 <div className="navbar-right">
+
                     <span className="title">{this.props.title}</span>
                 </div>
             </nav>

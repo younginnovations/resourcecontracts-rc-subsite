@@ -52,7 +52,8 @@ return [
     'next'                        => "اللاحق",
     'last'                        => "الأخير",
     'first'                       => "الأوّل",
-    'annotated'                   => "هذا العقد يضمّ شروحًا. عرض لكلّ الشروح",
+    'annotated'                   => ".هذا العقد قد شروحه <a href=':link' target='_blank'>.عرض جميع الشروح </a>",
+    'annotated_no_link'           => ".هذا العقد قد شروحه",
     'previous'                    => "السابق",
     'close_annotations'           => "إغلاق الشروح",
     'note'                        => "ملاحظة",
@@ -70,5 +71,6 @@ return [
     'no'                          => "لا",
     'all_documents'               => 'جميع المستندات',
     'documents_of'                => 'وثائق',
+    'view_summary'                => 'عرض الملخص',
 
 ];
