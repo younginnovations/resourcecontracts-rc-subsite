@@ -13,7 +13,7 @@
         </div>
         <div class="col-sm-12 col-md-9 col-lg-10 navbar-right">
 
-                @include('layout.partials.search')
+                @include('layout.partials.searchdropdown')
         </div>
         @if(config('localisation'))
             <div class="dropdown language-selector" >
