@@ -60,7 +60,7 @@ if ($path[0] == "resource") {
                                 <li><a href="{{route('contract.download',['id'=> $contract->open_contracting_id])}}">@lang('global.word_file')</a></li>
                             @endif
                             @if($annotations->total>0)
-                                <li><a href="{{route('contract.annotations.download',['id'=> $contract->open_contracting_id])}}">@lang('global.annotations')</a></li>
+                                <li><a href="{{route('contract.annotations.download',['id'=> $contract->open_contracting_id])}}">@lang('global.annotations_excel')</a></li>
                             @endif
                         </ul>
                     </div>

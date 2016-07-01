@@ -68,7 +68,6 @@ var DownloadUrl = React.createClass({
         var style = this.state.dropdown ? show : hide;
         var socialStyle = this.state.socialdropdown ? show : hide;
         var current_url = encodeURIComponent(window.location.href);
-
         if (!this.props.annotations_url && !this.props.text_url) {
             return (
                 <div className="right-column-view">
@@ -97,7 +96,7 @@ var DownloadUrl = React.createClass({
                         <a href="#" onClick={this.toggleDropdown}><span>{lang.download}</span></a>
                         <ul className="dropdown-menu" style={style}>
                             <li><a href={this.props.pdf_url}>{lang.pdf}</a></li>
-                            <li><a href={this.props.annotations_url}><div dangerouslySetInnerHTML={{__html: lang.annotations}} /></a></li>
+                            <li><a href={this.props.annotations_url}><div dangerouslySetInnerHTML={{__html: lang.annotations_excel}} /></a></li>
                         </ul>
                     </div>
                     <div className="social-share dropdown-wrap">
@@ -143,7 +142,7 @@ var DownloadUrl = React.createClass({
                         <ul className="dropdown-menu" style={style}>
                             <li><a href={this.props.pdf_url}>{lang.pdf}</a></li>
                             <li><a href={this.props.text_url}>{lang.word_file}</a></li>
-                            <li><a href={this.props.annotations_url}><div dangerouslySetInnerHTML={{__html: lang.annotations}} /></a></li>
+                            <li><a href={this.props.annotations_url}><div dangerouslySetInnerHTML={{__html: lang.annotations_excel}} /></a></li>
                         </ul>
                     </div>
                     <div className="social-share dropdown-wrap">
