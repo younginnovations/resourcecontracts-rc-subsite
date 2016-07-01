@@ -3,7 +3,7 @@ return [
     'page'                       => "page",
     'see_all'                    => "Voir tout",
     'loading_annotations'        => "chargement des annotations en cours ",
-    'annotations'                => "Annotations",
+    'annotations'                => "MS EXCEL '.<br><i>Annotations Seulement</i>'",
     'by_page'                    => "par page",
     'by_topic'                   => "par thème",
     'general'                    => "Général",
@@ -35,7 +35,7 @@ return [
     'searching'                  => "Recherche en cours…",
     'no_results_found'           => "Aucun résultat trouvé",
     'text'                       => "Texte",
-    'pdf'                        => "Pdf",
+    'pdf'                        => "PDF",
     'of'                         => "de",
     'text_created_automatically' => "Le texte ci-dessous à été créé automatiquent et pourrait comporter des erreurs et diverger du document PDF original",
     'wait_while_loading'         => "Chargement en cours, prière d'attendre ",
@@ -51,7 +51,7 @@ return [
     'all'                        => "Tout",
     'no_annotation'              => "Il n'y a pas d'annotations associées à ce contrat.",
     'download'                   => "Télécharger",
-    'word_file'                  => "Fichier Word",
+    'word_file'                  => "MS WORD",
     'zoom'                       => 'Zoom',
     'note'                       => 'Remarque:',
     'note_more'                  => 'Plus',
@@ -64,6 +64,7 @@ return [
     'see'                        => "Voir",
     'legislation'                => "Législation",
     'african_mining'             => "dans la législation minière africaine Atlas",
-    'other'                      => 'Règles juridiques'
-];
+    'other'                      => 'Règles juridiques',
+    'annotation_count'          => "annotations",
 
+];

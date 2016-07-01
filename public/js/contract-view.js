@@ -30732,7 +30732,7 @@ var AnnotationHeader = React.createClass({displayName: "AnnotationHeader",
     render: function () {
         var count = this.props.annotationsCollection.totalAnnotations();
         return (
-            React.createElement("div", {className: "annotation-title"}, count, " ", lang.annotations)
+            React.createElement("div", {className: "annotation-title"}, count, " ", lang.annotation_count)
         );
     }
 });
@@ -31330,7 +31330,7 @@ var DownloadUrl = React.createClass({displayName: "DownloadUrl",
                         React.createElement("a", {href: "#", onClick: this.toggleDropdown}, React.createElement("span", null, lang.download)), 
                         React.createElement("ul", {className: "dropdown-menu", style: style}, 
                             React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, lang.pdf)), 
-                            React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, lang.annotations))
+                            React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, React.createElement("div", {dangerouslySetInnerHTML: {__html: lang.annotations}})))
                         )
                     ), 
                     React.createElement("div", {className: "social-share dropdown-wrap"}, 
@@ -31376,7 +31376,7 @@ var DownloadUrl = React.createClass({displayName: "DownloadUrl",
                         React.createElement("ul", {className: "dropdown-menu", style: style}, 
                             React.createElement("li", null, React.createElement("a", {href: this.props.pdf_url}, lang.pdf)), 
                             React.createElement("li", null, React.createElement("a", {href: this.props.text_url}, lang.word_file)), 
-                            React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, lang.annotations))
+                            React.createElement("li", null, React.createElement("a", {href: this.props.annotations_url}, React.createElement("div", {dangerouslySetInnerHTML: {__html: lang.annotations}})))
                         )
                     ), 
                     React.createElement("div", {className: "social-share dropdown-wrap"}, 

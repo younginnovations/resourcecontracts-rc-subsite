@@ -97,7 +97,7 @@ var DownloadUrl = React.createClass({
                         <a href="#" onClick={this.toggleDropdown}><span>{lang.download}</span></a>
                         <ul className="dropdown-menu" style={style}>
                             <li><a href={this.props.pdf_url}>{lang.pdf}</a></li>
-                            <li><a href={this.props.annotations_url}>{lang.annotations}</a></li>
+                            <li><a href={this.props.annotations_url}><div dangerouslySetInnerHTML={{__html: lang.annotations}} /></a></li>
                         </ul>
                     </div>
                     <div className="social-share dropdown-wrap">
@@ -143,7 +143,7 @@ var DownloadUrl = React.createClass({
                         <ul className="dropdown-menu" style={style}>
                             <li><a href={this.props.pdf_url}>{lang.pdf}</a></li>
                             <li><a href={this.props.text_url}>{lang.word_file}</a></li>
-                            <li><a href={this.props.annotations_url}>{lang.annotations}</a></li>
+                            <li><a href={this.props.annotations_url}><div dangerouslySetInnerHTML={{__html: lang.annotations}} /></a></li>
                         </ul>
                     </div>
                     <div className="social-share dropdown-wrap">
