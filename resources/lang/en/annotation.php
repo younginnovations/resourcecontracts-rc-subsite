@@ -3,7 +3,7 @@ return [
     'page'                       => 'page',
     'see_all'                    => 'See All',
     'loading_annotations'        => 'Loading Annotations',
-    'annotations'                => 'Annotations',
+    'annotations'                => 'MS EXCEL <br><i>Annotations Only</i>',
     'by_page'                    => 'By Page',
     'by_topic'                   => 'By Topic',
     'general'                    => 'General',
@@ -35,7 +35,7 @@ return [
     'searching'                  => 'searching ...',
     'no_results_found'           => 'No results found',
     'text'                       => 'Text',
-    'pdf'                        => 'Pdf',
+    'pdf'                        => 'PDF',
     'of'                         => 'of',
     'text_created_automatically' => 'The text below was created automatically and may contain errors and differences from the contract\'s original PDF file. ',
     'wait_while_loading'         => 'Please wait while loading ...',
@@ -51,7 +51,7 @@ return [
     'all'                        => 'All',
     'no_annotation'              => "There are no annotations associated with this contract.",
     'download'                   => 'Download',
-    'word_file'                  => 'Word File',
+    'word_file'                  => 'MS WORD',
     'zoom'                       => 'Zoom',
     'note'                       => 'Note:',
     'note_more'                  => 'More',
@@ -64,7 +64,9 @@ return [
     'see'                        => "See",
     'legislation'                => "Legislation",
     'african_mining'             => "in African Mining Legislation Atlas",
-    'other'                      => "Legal Rules"
+    'other'                      => "Legal Rules",
+    'annotation_count'           => "annotations",
+
 ];
 
 
