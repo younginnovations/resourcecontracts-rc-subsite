@@ -40,7 +40,7 @@ use Illuminate\Support\Facades\Lang;
                         </ul>
                     </div>
                     <div class="pull-left social-share" id="social-toggler">
-                        <a href="#"><span>Share</span></a>
+                        <a href="#"><span>@lang('contract.social_share')</span></a>
                         <ul class="social-toggle">
                             <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u={{ url() }}" target="_blank">Facebook</a></li>
                             <li class="google-plus"><a href="https://plus.google.com/share?url={{ url() }}" target="_blank">Google</a></li>
@@ -66,12 +66,18 @@ use Illuminate\Support\Facades\Lang;
                         <ul>
                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                 <label for="">@lang('global.language')</label>
-                                <span>{{strtoupper(_e($contract->metadata,'language','-'))}}</span>
+                                <span>@if((_e($contract->metadata,'language','-')))
+                                        {{ trans('codelist/language')[$contract->metadata->language] }}
+                                      @endif
+                                </span>
                             </li>
                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                 <label for="">@lang('global.country')</label>
                                 @if($code = strtolower(_e($contract->metadata->country,'code')))
-                                    <span><a href="{{route('country.detail', ['key'=>$code])}}">{{ucfirst(_e($contract->metadata->country,'name'))}}</a>
+                                    <span><a href="{{route('country.detail', ['key'=>$code])}}">
+                                            <?php   $c = $contract->metadata->country;?>
+                                                    {{trans('country')[$c->code]}}
+                                        </a>
                                         @if(env("CATEGORY")=="rc")
                                             @if(isset($contract->metadata->amla_url) && !empty($contract->metadata->amla_url))
                                                 <span class="amla-link">@lang('contract.see') <a href="{{$contract->metadata->amla_url}}"
@@ -111,7 +117,9 @@ use Illuminate\Support\Facades\Lang;
                             </li>
                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                 <label for="">@lang('global.document_type')</label>
-                                <span>{{_e($contract->metadata,'type','-')}}</span>
+                                <span><?php $d = _e($contract->metadata,'type','-')?>
+                                        {{ _l('codelist/document_type',$d) }}
+                                </span>
                             </li>
                         </ul>
                         <ul>
@@ -119,7 +127,7 @@ use Illuminate\Support\Facades\Lang;
                                 <label for="">@lang('global.type_contract')</label>
                                 <span class="contract-type-list">@if(isset($contract->metadata->contract_type) && !empty($contract->metadata->contract_type) && is_array($contract->metadata->contract_type))
                                         @foreach($contract->metadata->contract_type as $contractype)
-                                            <a href="{{route("search",['contract_type'=>$contractype])}}">{{$contractype}}</a>
+                                            <a href="{{route("search",['contract_type'=>$contractype])}}">{{_l('codelist/contract_type',$contractype) }}</a>
                                         @endforeach
                                     @endif
                                 </span>

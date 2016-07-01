@@ -40,7 +40,7 @@
             ?>
             @if($contracts->total!=0)
                 <div class="social-share" id="social-toggler">
-                    <a href="#"><span>Share</span></a>
+                    <a href="#"><span>@lang('contract.social_share')</span></a>
                     <ul class="social-toggle">
                         <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u={{ url() }}" target="_blank">Facebook</a></li>
                         <li class="google-plus"><a href="https://plus.google.com/share?url={{ url() }}" target="_blank">Google</a></li>

@@ -1,0 +1,33 @@
+<?php
+return [
+    "Agricultural Development Agreement"     => "اتفاقية تنمية الزراعية",
+    "Asset Sale and Purchase Agreement"      => "بيع الأصول واتفاقية شراء",
+    "Autre"                                  => "آخر",
+    "Bail Foncier"                           => "تأجير الأراضي",
+    "Cahier des Charges"                     => "كراس الشروط",
+    "Concession Agreement"                   => "اتفاقية امتياز",
+    "Contract Amendment"                     => "تعديل العقد",
+    "Contract Annex"                         => "الملحق العقد",
+    "Contrat de Concession Agricole"         => "عقد امتياز الزراعة",
+    "Contrat de Concession Forestière"       => "اتفاق الغابات الامتياز",
+    "Establishment Convention"               => "اتفاقية إنشاء",
+    "Exploitation Permit/License"            => "استغلال تصريح / رخصة",
+    "Exploration Permit/License"             => "استكشاف تصريح / رخصة",
+    "Forest Management Contract"             => "عقد إدارة الغابات",
+    "Forest Management Plan"                 => "خطة إدارة الغابات",
+    "Investment Incentive Contract"          => "عقد حوافز الاستثمار",
+    "Investment Promotion Agreement"         => "اتفاقية تشجيع الاستثمار",
+    "Joint Venture Agreement"                => "اتفاق المشروع المشترك",
+    "Land Lease Agreement"                   => "اتفاقية تأجير أرض",
+    "Memorandum of Understanding"            => "مذكرة تفاهم",
+    "Other"                                  => "آخر",
+    "Production or Profit Sharing Agreement" => "الإنتاج أو اتفاق تقاسم الأرباح",
+    "Protocole d'Accord"                     => "مذكرة تفاهم",
+    "Service Contract"                       => "عقد الخدمة",
+    "Stabilization Agreements"               => "اتفاقيات لتحقيق الاستقرار",
+    "Sub Contract"                           => "دون عقد",
+    "Sub-lease"                              => "تأجير من الباطن",
+    "Timber Sale Contract"                   => "عقد بيع الأخشاب",
+    "Translated Contract"                    => "عقد الترجمة"
+];
+

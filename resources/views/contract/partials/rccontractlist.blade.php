@@ -1,5 +1,4 @@
 <?php
-
 $url = Request::all();
 $order = \Illuminate\Support\Facades\Input::get('order', '');
 $sortBy = \Illuminate\Support\Facades\Input::get('sortby', '');
@@ -10,8 +9,6 @@ $route = "country.detail";
 if ($path[0] == "resource") {
     $route = "resource.detail";
 }
-
-
 ?>
 <table class="table table-responsive table-contract">
     <thead>
@@ -72,11 +69,8 @@ if ($path[0] == "resource") {
 
 
             <td class="contract-date">{{$contract->year_signed}}</td>
-
             <td>
-
                 <?php
-
                 if (isset($url['sortby']) && $url['sortby'] == "resource") {
                     if ($url['order'] == "asc") {
                         asort($contract->resource);
@@ -99,10 +93,11 @@ if ($path[0] == "resource") {
             <td>
                 <ul>
                     @if(is_array($contract->contract_type))
-
                         @foreach($contract->contract_type as $contracttype)
                             @if(!empty($contracttype))
-                                <li>{{$contracttype}}</li>
+                                <li>
+                                    {{_l('codelist/contract_type.',$contracttype)}}
+                                </li>
                             @else
                                 -
                             @endif

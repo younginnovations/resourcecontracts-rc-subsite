@@ -29898,7 +29898,7 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                         React.createElement("div", {className: "metadata-country"}, 
                             React.createElement("span", null, lang.country), 
                             React.createElement("span", null, 
-                                React.createElement("a", {href: countryLink}, this.props.metadata.get("country").name)
+                                React.createElement("a", {href: countryLink}, getCountryName(this.props.metadata.get("country").code))
                             ), 
                             React.createElement(AmlaUrl, {metadata: this.props.metadata})
                         ), 

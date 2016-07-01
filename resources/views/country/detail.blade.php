@@ -7,15 +7,11 @@ use Illuminate\Support\Facades\Lang;
     $params['resource'] = '';
     $params['download'] = true;
 ?>
-
-
-
 @extends('layout.app-full')
 
 @section('content')
     <div class="row">
         <div class="attached-top-wrapper panel-top-wrapper attached-top-wrapper">
-
             <div class="panel-top-content">
                 <div class="clearfix">
                     <div class="back back-button">Back</div>

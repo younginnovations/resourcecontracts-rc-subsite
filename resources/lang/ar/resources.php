@@ -145,7 +145,7 @@ return [
     "Osmium"                           => "أوزميوم",
     "other"                            => "Other",
     "Other crops"                      => "محاصيل أخرى",
-    "other minerals"                   => "Other Minerals",
+    "other minerals"                   => "المعادن الأخرى",
     "Palladium"                        => "بالاديوم",
     "Palm oil"                         => "زيت النخيل",
     "Perlite"                          => "بيرلايت",

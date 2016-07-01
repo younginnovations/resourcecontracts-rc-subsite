@@ -38,4 +38,6 @@ return [
     'search'               => "Search...",
     'results'              => "Results",
     'loading'              => "Loading ...",
+    'social_share'         => "Share",
+
 ];
