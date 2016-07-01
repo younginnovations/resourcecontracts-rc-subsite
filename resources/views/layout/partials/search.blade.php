@@ -118,12 +118,9 @@ $category = $api->getAnnotationsCategory();
                 </div>
                 @else
                 <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
-                    <button type="submit" id="searchclear" class="btn btn-form-search btn-form-reset">@lang('search.reset')</button>
+                   <a href="{{url('search')}}" class="btn btn-form-search btn-form-reset">@lang('search.reset')</a>
                 </div>
             @endif
         </div>
     </div>
-    <script>
-        var lang = <?php echo json_encode(trans('annotation'));?>;
-    </script>
 </form>

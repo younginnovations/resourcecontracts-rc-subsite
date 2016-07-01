@@ -618,7 +618,7 @@ footer {
       margin-bottom: 20px; }
       .search-input-wrapper .col-lg-12:last-child > div {
         margin-bottom: 0; }
-    .search-input-wrapper .col-lg-12 button {
+    .search-input-wrapper .col-lg-12 button, .search-input-wrapper .col-lg-12 .btn {
       margin: 0 6px 0 0;
       width: 100%; }
   .search-input-wrapper .col-lg-2 {
