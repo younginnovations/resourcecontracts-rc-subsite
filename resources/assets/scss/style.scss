@@ -4101,7 +4101,6 @@ input.select2-search__field {
   .pdf-zoom-options {
     display: inline-block;
     min-width: 0;
-    float: none;
     padding: 10px 0 10px;
     border-right: 1px solid #DCDFE2;
     border-left: 1px solid #DCDFE2;
@@ -4124,11 +4123,11 @@ input.select2-search__field {
   }
 
   .pdf-pagination.pagination span, .text-pagination span, .pagination input[type="text"] {
-    line-height: 21px;
+    line-height: 17px;
   }
 
   .pagination input[type="text"] {
-    margin-top: 3px;
+    margin-top: 4px;
   }
 
 }

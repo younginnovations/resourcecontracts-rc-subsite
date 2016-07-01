@@ -55,7 +55,7 @@ const Pagination = React.createClass({
     },
     render()
     {
-        let prev = (<span className="previous inactive">{LANG.previous}</span>);
+        let prev = (<a href="#" className="previous inactive">{LANG.previous}</a>);
 
         if (this.state.current != 1) {
             prev = (
@@ -63,7 +63,7 @@ const Pagination = React.createClass({
             );
         }
 
-        let next = (<span className="next inactive">{LANG.next}</span>);
+        let next = (<a href="#" className="next inactive">{LANG.next}</a>);
         if (this.state.current != this.state.total) {
             next = (
                 <a className="next" onClick={this.nextPage} href="#">{LANG.next}</a>
@@ -77,6 +77,7 @@ const Pagination = React.createClass({
                     <input type="text" onChange={e => this.changeHandler(e)} name="page_no" value={this.state.input}/>
                 </span>
                 {next}
+                <span>of {this.state.total}</span>
             </div>
         );
     }

@@ -35,7 +35,7 @@ const Zoom = React.createClass({
         return (
             <div className="pdf-zoom-options">
                 <a className="btn btn-default" href="#" onClick={this.out}>+</a>
-                <span>{this.getPercentage()}</span>
+                <p>image</p>
                 <a className="btn btn-default" href="#" onClick={this.in}>-</a>
             </div>
         )
