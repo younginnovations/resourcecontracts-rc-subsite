@@ -29899,8 +29899,7 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                             React.createElement("span", null, lang.country), 
                             React.createElement("span", null, 
                                 React.createElement("a", {href: countryLink}, getCountryName(this.props.metadata.get("country").code))
-                            ), 
-                            React.createElement(AmlaUrl, {metadata: this.props.metadata})
+                            )
                         ), 
                         React.createElement("div", {className: "metadata-signature-year"}, 
                             React.createElement("span", null, lang.signature_year), 
@@ -29928,6 +29927,7 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                         ), 
                         annexes_missing, 
                         pages_missing, 
+                        React.createElement(AmlaUrl, {metadata: this.props.metadata}), 
                         React.createElement(LandMatrixView, {metadata: this.props.metadata})
                     )
                 )
