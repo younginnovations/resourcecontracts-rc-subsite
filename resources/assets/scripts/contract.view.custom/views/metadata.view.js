@@ -176,7 +176,6 @@ var MetadataView = React.createClass({
                             <span>
                                 <a href={countryLink}>{getCountryName(this.props.metadata.get("country").code)}</a>
                             </span>
-                            <AmlaUrl metadata={this.props.metadata}/>
                         </div>
                         <div className="metadata-signature-year">
                             <span>{lang.signature_year}</span>
@@ -204,6 +203,7 @@ var MetadataView = React.createClass({
                         </div>
                         {annexes_missing}
                         {pages_missing}
+                        <AmlaUrl metadata={this.props.metadata}/>
                         <LandMatrixView metadata={this.props.metadata}/>
                     </div>
                 </div>

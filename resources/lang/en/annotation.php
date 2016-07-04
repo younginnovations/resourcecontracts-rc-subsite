@@ -48,7 +48,7 @@ return [
     'select'                     => 'Select',
     'disclosure_mode'            => 'Disclosure Mode',
     'pages_missing'              => 'Page(s) missing from document',
-    'annexes_missing'            => 'Annexe(s) missing from document',
+    'annexes_missing'            => 'Annex(es) missing from document',
     'all'                        => 'All',
     'no_annotation'              => "There are no annotations associated with this contract.",
     'download'                   => 'Download',
