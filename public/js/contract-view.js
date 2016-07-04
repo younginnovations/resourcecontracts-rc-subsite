@@ -30534,21 +30534,21 @@ var TextSearchResultRow = React.createClass({displayName: "TextSearchResultRow",
         var textToReturn = '';
 
         if (this.state.showMoreFlag && this.state.shortText.length > 0) {
-            texToShow = this.state.shortText;
-            more = "...more";
+            texToShow = this.state.shortText + '...';
+            more = lang.more;
         }
         if (!this.state.showMoreFlag && this.state.text.length > 0) {
 
             texToShow = this.state.text;
 
-            more = " less";
+            more = lang.less;
         }
         if (texToShow.length == 0) {
             texToShow = this.state.text;
         }
         texToShow = React.createElement(HighLight, {text: texToShow});
         more = (React.createElement("a", {onClick: this.handleClickLessMore}, more));
-        textToReturn = (React.createElement("span", null, texToShow, " ", more, " "));
+        textToReturn = (React.createElement("span", null, " ", React.createElement("span", {onClick: this.handleClick}, " ", texToShow, " "), " ", more, " "));
         return textToReturn;
     },
     handleClick: function () {
@@ -30590,16 +30590,16 @@ var TextSearchResultRow = React.createClass({displayName: "TextSearchResultRow",
     },
     render: function () {
         var text = this.highlightSearchQuery(this.props.resultRow.get("text"), this.props.contractApp.getSearchQuery());
-        var type = "<a class='text' title='Text'>Text</a>";
+        var type = "<span class='text' title='Text'>Text</span>";
         text = "<span>Pg " + this.props.resultRow.get("page_no") + "&nbsp;" + text + "</span>" + type;
         if (this.props.resultRow.get("type") == "annotation") {
-            type = "<a class='annotations' title='Annotation'>" + lang.annotation + "</a>";
+            type = "<span class='annotations' title='Annotation'>" + lang.annotation + "</span>";
             text = this.getShowText(this.props.contractApp.getSearchQuery());
         }
 
         if (this.props.resultRow.get('type') == "annotation") {
             return (
-                React.createElement("div", {className: "search-result-row link", onClick: this.handleClick}, 
+                React.createElement("div", {className: "search-result-row link"}, 
                     text, " ", React.createElement("span", {dangerouslySetInnerHTML: {__html: type}})
                 )
             );
@@ -30669,9 +30669,9 @@ var TextSearchResultsList = React.createClass({displayName: "TextSearchResultsLi
 
 var HighLight = React.createClass({displayName: "HighLight",
     render: function () {
-
         return (
             React.createElement("span", {
+                onClick: this.props.handleClick, 
                 dangerouslySetInnerHTML: {
           __html : this.props.text
             }})
