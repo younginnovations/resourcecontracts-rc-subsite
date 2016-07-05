@@ -34,7 +34,6 @@ return [
     'signature_date'              => "تاريخ التوقيع",
     'document_type'               => "نوع الوثيقة",
     'type_contract'               => "نوع العقد",
-    'annotations'                 => "الشروح",
     'view_annotations'            => "عرض جميع الشروح",
     'see'                         => "أنظر",
     'search_results'              => "نتائج البحث",
@@ -63,7 +62,6 @@ return [
     'annotation'                  => "الشرح ",
     'text'                        => "النص",
     'metadata'                    => "البيانات الوصفيّة ",
-    'word_file'                   => "MS WORD",
     'contracts_in'                => "ملفّات في",
     'documents'                   => "وثائق",
     'advanced_search'             => "بحث متقدّم",
@@ -74,5 +72,4 @@ return [
     'view_summary'                => 'عرض الملخص',
     'view_by_country'             => 'عرض حسب الدولة',
     'view_by_resource'            => 'الرأي الموارد',
-    'annotations_excel'           => 'MS EXCEL <br><i>شروح الوحيدة</i>',
 ];
