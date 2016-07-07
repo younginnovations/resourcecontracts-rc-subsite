@@ -98,3 +98,19 @@ $app->get(
     ['as' => 'contract.page.annotations.search', 'uses' => 'Contract\PageController@annotations']
 );
 $app->get('api/search', ['as' => 'api.search', 'uses' => 'Contract\PageController@annotations']);
+
+/*
+ * ----------------------------------------------------------------------------------
+ * Clipping Routes
+ * ----------------------------------------------------------------------------------
+*/
+
+$app->get('clip', ['as' => 'clip.index', 'uses' => 'ClippingController@index']);
+$app->get('/clip/annotations', ['as' => 'api.annotation', 'uses' => 'ClippingController@getAllAnnotations']);
+$app->get('/clip/download', ['as' => 'clip.download', 'uses' => 'ClippingController@downloadAnnotations']);
+$app->get('clip/api', ['as' => 'clip.api', 'uses' => 'ClippingController@getClippedData']);
+$app->get('clip/{key}', ['as' => 'clip.view', 'uses' => 'ClippingController@clipView']);
+$app->post('clip/email', ['as' => 'clip.email', 'uses' => 'ClippingController@emailClip']);
+$app->post('/clip/save', ['as' => 'clip.save', 'uses' => 'ClippingController@saveClip']);
+$app->post('clip/zip', ['as' => 'clip.zip', 'uses' => 'ClippingController@getZipFile']);
+

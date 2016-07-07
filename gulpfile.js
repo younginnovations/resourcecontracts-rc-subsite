@@ -19,6 +19,13 @@ var css_files = [
 
 var base_script = [
     './resources/assets/scripts/jquery.js',
+    './resources/assets/scripts/lib/jquery.cookie.js',
+    './resources/assets/scripts/lib/underscore.js',
+    './resources/assets/scripts/lib/backbone.js',
+    './resources/assets/scripts/lib/backbone.localstorage.js',
+    './resources/assets/scripts/clips/collection/clip.local.js',
+    './resources/assets/scripts/clips/main.js',
+
     './resources/assets/scripts/bootstrap.js',
     './resources/assets/scripts/select2.js',
     './resources/assets/scripts/script.js',
@@ -26,18 +33,31 @@ var base_script = [
 ];
 
 var country_script = [
-    './resources/assets/scripts/lib/underscore.js',
-    './resources/assets/scripts/lib/backbone.js',
     './resources/assets/scripts/lib/backbone.fetch-cache.min.js',
     './resources/assets/scripts/countries.js'
 ];
 
 var resource_script = [
-    './resources/assets/scripts/lib/underscore.js',
-    './resources/assets/scripts/lib/backbone.js',
     './resources/assets/scripts/lib/backbone.fetch-cache.min.js',
-    './resources/assets/scripts/resources.js'
+    './resources/assets/scripts/resources.js',
 ];
+
+var clipping_script = [
+    './resources/assets/scripts/lib/react/react-with-addons.js',
+    './resources/assets/scripts/lib/backbone.paginator.min.js',
+    './resources/assets/scripts/clips/collection/clip.js',
+    './resources/assets/scripts/clips/views/filter.js',
+    './resources/assets/scripts/clips/views/clipselectcount.js',
+    './resources/assets/scripts/clips/views/download.js',
+    './resources/assets/scripts/clips/views/share.js',
+    './resources/assets/scripts/clips/views/pagination.js',
+    './resources/assets/scripts/clips/views/item.js',
+    './resources/assets/scripts/clips/views/listing.js',
+    './resources/assets/scripts/clips/views/main.js',
+    './resources/assets/scripts/clips/views/clip.main.js',
+    './resources/assets/scripts/clips/clip.main.js'
+];
+
 
 var page_script = [
     './resources/assets/scripts/lib/summernote.js',
@@ -46,8 +66,6 @@ var page_script = [
 ];
 
 var contract_view_scripts = [
-    './resources/assets/scripts/lib/underscore.js',
-    './resources/assets/scripts/lib/backbone.js',
     './resources/assets/scripts/lib/director.min.js',
     './resources/assets/scripts/contract.view.custom/models/pages.js',
     './resources/assets/scripts/contract.view.custom/models/annotations.js',
@@ -93,12 +111,13 @@ gulp.task('sass', function () {
  */
 gulp.task('watch', function () {
     gulp.watch('./resources/assets/scss/*-style.scss', ['sass']);
-    gulp.watch('./resources/assets/scss/contract-view.scss', ['sass']);
-    gulp.watch('./resources/assets/scss/responsive.scss', ['sass']);
+    gulp.watch('./resources/assets/scss/modal.scss', ['sass']);
+    gulp.watch('./resources/assets/scss/newstyle.scss', ['sass']);
     gulp.watch('./resources/assets/scss/style.scss', ['sass']);
     gulp.watch(base_script, ['js-base']);
     gulp.watch(country_script, ['js-country']);
     gulp.watch(resource_script, ['js-resource']);
+    gulp.watch(clipping_script,['js-clipping']);
     gulp.watch(page_script, ['js-page']);
     gulp.watch(contract_view_scripts, ['js-react']);
     gulp.watch(css_files, ['css-main']);
@@ -112,6 +131,7 @@ gulp.task('default', ['sass', 'watch']);
 
 gulp.task('js-base', function () {
     return gulp.src(base_script)
+        .pipe(react())
         .pipe(concat('app.js'))
         .pipe(gulp.dest('./public/js'))
         .pipe(rename({suffix: '.min'}))
@@ -138,6 +158,17 @@ gulp.task('js-resource', function () {
         .pipe(uglify())
         .pipe(gulp.dest('./public/js'))
         .pipe(notify({message: 'Js-resource task complete'}));
+});
+
+gulp.task('js-clipping', function () {
+    return gulp.src(clipping_script)
+        .pipe(react())
+        .pipe(concat('clipping.js'))
+        .pipe(gulp.dest('./public/js'))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(uglify())
+        .pipe(gulp.dest('./public/js'))
+        .pipe(notify({message: 'Js-clipping task complete'}));
 });
 
 gulp.task('js-page', function () {

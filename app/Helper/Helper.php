@@ -13,19 +13,19 @@ function getFileSize($bytes)
 {
     switch ($bytes):
         case ($bytes >= 1073741824):
-            $bytes = number_format($bytes / 1073741824, 2).' GB';
+            $bytes = number_format($bytes / 1073741824, 2) . ' GB';
             break;
         case ($bytes >= 1048576):
-            $bytes = number_format($bytes / 1048576, 2).' MB';
+            $bytes = number_format($bytes / 1048576, 2) . ' MB';
             break;
         case ($bytes >= 1024):
-            $bytes = number_format($bytes / 1024, 2).' KB';
+            $bytes = number_format($bytes / 1024, 2) . ' KB';
             break;
         case ($bytes > 1):
-            $bytes = $bytes.' bytes';
+            $bytes = $bytes . ' bytes';
             break;
         case ($bytes == 1):
-            $bytes = $bytes.' byte';
+            $bytes = $bytes . ' byte';
             break;
     endswitch;
 
@@ -42,7 +42,7 @@ function getFileSize($bytes)
 function getFlagUrl($code = '')
 {
     if ($code != '') {
-        $code = strtolower($code).'.png';
+        $code = strtolower($code) . '.png';
     }
 
     return sprintf("https://raw.githubusercontent.com/younginnovations/country-flags/master/png250px/%s", $code);
@@ -141,7 +141,7 @@ function appendInUrl($route, $url, $sortby, $order)
 function show_arrow($order, $show = false)
 {
     if ($show) {
-        return '<i class="fa fa-black   fa-sort-'.$order.'"></i> ';
+        return '<i class="fa fa-black   fa-sort-' . $order . '"></i> ';
     }
 }
 
@@ -156,9 +156,9 @@ function meta($meta = null)
 {
     $category            = env('CATEGORY');
     $data                = trans("meta/$category");
-    $title               = (isset($meta['title']) && $meta['title'] != '') ? ' - '.$meta['title'] : '';
+    $title               = (isset($meta['title']) && $meta['title'] != '') ? ' - ' . $meta['title'] : '';
     $description         = (isset($meta['description']) && $meta['description'] != '') ? $meta['description'] : $data['description'];
-    $data['title']       = $data['title'].$title;
+    $data['title']       = $data['title'] . $title;
     $data['description'] = $description;
     $data['category']    = $category;
     $images              = app(ImageService::class);
@@ -193,7 +193,7 @@ function getInformation($key = null)
  */
 function config_path($path = '')
 {
-    return app()->basePath().'/config'.($path ? '/'.$path : $path);
+    return app()->basePath() . '/config' . ($path ? '/' . $path : $path);
 }
 
 /**
@@ -224,9 +224,9 @@ function getCountryByLang($lang)
  */
 function _l($lang, $key)
 {
-    if (Lang::has($lang.'.'.$key)) {
+    if (Lang::has($lang . '.' . $key)) {
 
-        return Lang::get($lang.'.'.$key);
+        return Lang::get($lang . '.' . $key);
     }
 
     return $key;
@@ -243,7 +243,7 @@ function _l($lang, $key)
 function trans_array(array $codeList, $path)
 {
     foreach ($codeList as $key => $code) {
-        $codeList[$key] = _l($path.'.'.$code);
+        $codeList[$key] = _l($path . '.' . $code);
     }
 
     return $codeList;
@@ -261,7 +261,7 @@ function get_country($key = null)
     $countryCode     = env('COUNTRY');
     $country         = [];
     $country['code'] = strtolower($countryCode);
-    $country['name'] = trans('country.'.strtoupper($country['code']));
+    $country['name'] = trans('country.' . strtoupper($country['code']));
     $country['flag'] = sprintf(
         "https://raw.githubusercontent.com/younginnovations/country-flags/master/png250px/%s.png",
         $country['code']
@@ -297,7 +297,7 @@ function showSearchQuery($requestParams, $filter)
 function getPageClass()
 {
     $path  = (explode('/', trim(app('request')->getPathInfo(), '/')));
-    $class = isset($path[0]) ? 'page-'.$path[0] : '';
+    $class = isset($path[0]) ? 'page-' . $path[0] : '';
 
     return $class;
 }
@@ -314,6 +314,15 @@ function lang_url($code)
     $query = ['lang' => $code];
 
     return count(\Request::query()) > 0
-        ? \Request::url().'?'.http_build_query(array_merge(\Request::query(), $query))
-        : \Request::fullUrl().'?'.http_build_query($query);
+        ? \Request::url() . '?' . http_build_query(array_merge(\Request::query(), $query))
+        : \Request::fullUrl() . '?' . http_build_query($query);
+}
+
+/**
+ * Determine if clip is on or not
+ * @return bool
+ */
+function isClipOn()
+{
+    return (config('clip') == true) ? true : false;
 }

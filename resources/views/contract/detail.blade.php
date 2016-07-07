@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Lang;
 
     <div class="row">
         <div class="col-lg-12 panel-top-wrapper attached-top-wrapper">
-            <div class="panel-top-content">
-                <div class="pull-left left-top-content">
+            <div class="panel-top-content clearfix">
+                <div class="pull-left left-top-content clearfix">
                     <a href="#" class="back-button back"><span>@lang('global.go_back')</span></a>
                     <div class="panel-title contract-panel-title" id="show-full-title">
                         {{$contract->metadata->name}}
@@ -25,35 +25,37 @@ use Illuminate\Support\Facades\Lang;
                     </ul>
                 </div>
             </div>
-            <div class="filter-wrapper actions-wrapper">
-                <div class="col-lg-12">
-                    <div class="download-main-wrap">
-                        <a class="download-wrap">
-                            @lang('global.download')
-                        </a>
 
-                        <ul class="dropdown-menu">
-                            <li><a href="{{route('contract.download.pdf',['id'=> $contract->metadata->open_contracting_id])}}">@lang('annotation.pdf')</a></li>
-                            @if(env('CATEGORY')!= 'olc' && $contract->metadata->is_ocr_reviewed == 1 && $contract->pages->total > 0)
-                                <li><a href="{{route('contract.download',['id'=> $contract->metadata->open_contracting_id])}}">@lang('annotation.word_file')</a></li>
-                            @endif
-                        </ul>
-                    </div>
-                    <div class="pull-left social-share" id="social-toggler">
-                        <a href="#"><span>@lang('contract.social_share')</span></a>
-                        <ul class="social-toggle">
-                            <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u={{ url() }}" target="_blank">Facebook</a></li>
-                            <li class="google-plus"><a href="https://plus.google.com/share?url={{ url() }}" target="_blank">Google</a></li>
-                            <li class="twitter"><a href="https://twitter.com/share?text={{ meta($meta)->title }}" target="_blank">Twitter</a></li>
-                        </ul>
-                    </div>
+            <div class="head-wrap">
+                <div class="right-column-view">
+                        <div class="download-main-wrap">
+                            <a class="download-wrap"> </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="{{route('contract.download.pdf',['id'=> $contract->metadata->open_contracting_id])}}">@lang('annotation.pdf')</a>
+                                </li>
+                                @if(env('CATEGORY')!= 'olc' && $contract->metadata->is_ocr_reviewed == 1 && $contract->pages->total > 0)
+                                    <li>
+                                        <a href="{{route('contract.download',['id'=> $contract->metadata->open_contracting_id])}}">@lang('global.word_file')</a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </div>
+                        <div class="social-share" id="social-toggler">
+                            <a><span>@lang('contract.social_share')</span></a>
+                            @include('contract.partials.share')
+                        </div>
+                        @if(isClipOn())
+                        <button class="clip-btn" id="on-annotation">@lang('clip.clip_on')</button>
+                         @endif
                 </div>
             </div>
+
         </div>
     </div>
 
     <div class="row contract-detail-wrapper">
-        <div class="col-lg-12">
+        <div class="col-lg-12 remove-buffer-side">
             <div class="col-md-6 col-lg-6">
                 <div class="panel panel-default panel-wrap panel-contract-wrap">
                     <div class="panel-body">
@@ -68,7 +70,7 @@ use Illuminate\Support\Facades\Lang;
                                 <label for="">@lang('global.language')</label>
                                 <span>@if((_e($contract->metadata,'language','-')))
                                         {{ trans('codelist/language')[$contract->metadata->language] }}
-                                      @endif
+                                    @endif
                                 </span>
                             </li>
                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
@@ -76,12 +78,13 @@ use Illuminate\Support\Facades\Lang;
                                 @if($code = strtolower(_e($contract->metadata->country,'code')))
                                     <span><a href="{{route('country.detail', ['key'=>$code])}}">
                                             <?php   $c = $contract->metadata->country;?>
-                                                    {{trans('country')[$c->code]}}
+                                            {{trans('country')[$c->code]}}
                                         </a>
                                         @if(env("CATEGORY")=="rc")
                                             @if(isset($contract->metadata->amla_url) && !empty($contract->metadata->amla_url))
-                                                <span class="amla-link">@lang('contract.see') <a href="{{$contract->metadata->amla_url}}"
-                                                                               target="_blank">@lang('contract.legislation')</a>&nbsp;@lang('contract.african_mining')</span>@endif</span>
+                                                <span class="amla-link">@lang('contract.see') <a
+                                                            href="{{$contract->metadata->amla_url}}"
+                                                            target="_blank">@lang('contract.legislation')</a>&nbsp;@lang('contract.african_mining')</span>@endif</span>
                                 @endif
                                 @endif
 
@@ -112,13 +115,16 @@ use Illuminate\Support\Facades\Lang;
                                 $date = $contract->metadata->date_signed;
                                 $date = strtotime($date);
                                 ?>
-                                <span>@if($date) <?php $m = date('F',$date);?>{{ trans('codelist/month')[$m] }} {{date('d',$date)}}, {{date('Y',$date)}}@else
+                                <span>@if($date) <?php $m = date(
+                                            'F',
+                                            $date
+                                    );?>{{ trans('codelist/month')[$m] }} {{date('d',$date)}}, {{date('Y',$date)}}@else
                                         - @endif</span>
                             </li>
                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                 <label for="">@lang('global.document_type')</label>
-                                <span><?php $d = _e($contract->metadata,'type','-')?>
-                                        {{ _l('codelist/document_type',$d) }}
+                                <span><?php $d = _e($contract->metadata, 'type', '-')?>
+                                    {{ _l('codelist/document_type',$d) }}
                                 </span>
                             </li>
                         </ul>
@@ -142,7 +148,7 @@ use Illuminate\Support\Facades\Lang;
                                 @foreach($resource as $res)
                                         <a href="{{route("resource.detail",['key'=>urlencode($res)])}}">{{_l("resources",$res)}}</a>
                                     @endforeach
-                            </span>                            </li>
+                            </span></li>
                         </ul>
 
                         @if(env('CATEGORY') =="olc")
@@ -150,7 +156,8 @@ use Illuminate\Support\Facades\Lang;
                                 <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                     <label for="">@lang('global.land_matrix_id')</label>
                                 <span>@if(isset($contract->metadata->matrix_page) && isset($contract->metadata->deal_number) && !empty($contract->metadata->matrix_page) && !empty($contract->metadata->deal_number))
-                                        <a target="_blank" href="{{ $contract->metadata->matrix_page }}">#{{$contract->metadata->deal_number}}</a>
+                                        <a target="_blank"
+                                           href="{{ $contract->metadata->matrix_page }}">#{{$contract->metadata->deal_number}}</a>
                                     @else
                                         - @endif</span>
                                 </li>
@@ -169,8 +176,9 @@ use Illuminate\Support\Facades\Lang;
                                 @forelse($contract->annotationsGroup as $category=>$annotation)
                                     @if($i < 5 )
                                         <li><a class="view-annotation-category"
-                                               href="#{{str_slug($category,'-')}}">@lang('codelist/annotation.categories.'.$category)</a></li>
-                                        <?php $i ++; ?>
+                                               href="#{{str_slug($category,'-')}}">@lang('codelist/annotation.categories.'.$category)</a>
+                                        </li>
+                                        <?php $i++; ?>
                                     @endif
                                 @empty
                                     <div class="no-data">@lang('contract.annotation_message')</div>
@@ -179,9 +187,11 @@ use Illuminate\Support\Facades\Lang;
                         </div>
                         <div class="view-all-annotations">
                             @if(count($contract->annotationsGroup)>0)
-                                <a href="#annotations" class="view-annotation"><span>@lang('global.view_annotations')</span></a>
+                                <a href="#annotations"
+                                   class="view-annotation"><span>@lang('global.view_annotations')</span></a>
                             @else
-                                <a href="javascript:void();" class="view-annotation disabled"><span>@lang('global.view_annotations')</span></a>
+                                <a href="javascript:void();"
+                                   class="view-annotation disabled"><span>@lang('global.view_annotations')</span></a>
                             @endif
 
                         </div>
@@ -228,8 +238,9 @@ use Illuminate\Support\Facades\Lang;
                             </li>
                             <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                                 <label for="">@lang('contract.open_corporate_ID')</label>
-                                <span>@if(isset($company->company->opencorporates_url) && !empty($company->company->opencorporates_url))<a
-                                            href="{{$company->company->opencorporates_url}}">{{str_limit($company->company->opencorporates_url,25)}}</a> @else
+                                <span>@if(isset($company->company->opencorporates_url) && !empty($company->company->opencorporates_url))
+                                        <a
+                                                href="{{$company->company->opencorporates_url}}">{{str_limit($company->company->opencorporates_url,25)}}</a> @else
                                         - @endif</span>
                             </li>
                         </ul>
@@ -261,7 +272,7 @@ use Illuminate\Support\Facades\Lang;
                                 <span>
                                     <?php
                                     $ps = _e($company, 'share', '');
-                                    echo ($ps == '') ? '-' : $ps * 100 . '%';
+                                    echo ($ps == '') ? '-' : $ps * 100 .'%';
                                     ?>
                                     </span>
                                 </li>
@@ -301,7 +312,8 @@ use Illuminate\Support\Facades\Lang;
                             <tr>
                                 <td width="70%">
                                     @if($parentContract->is_published==1)
-                                        <a href="{{route('contract.detail',['id'=>$parentContract->open_contracting_id])}}">{{$parentContract->name}}</a> &nbsp; @lang('contract.main_contract')
+                                        <a href="{{route('contract.detail',['id'=>$parentContract->open_contracting_id])}}">{{$parentContract->name}}</a>
+                                        &nbsp; @lang('contract.main_contract')
                                     @else
                                         {{$parentContract->name}} @lang('contract.main_contract')
                                     @endif
@@ -387,8 +399,8 @@ use Illuminate\Support\Facades\Lang;
                             <label for="">@lang('contract.disclosure_mode')</label>
                             <span>
                                 @if(!empty($contract->metadata->publisher_type))
-                                <?php $a = $contract->metadata->publisher_type ?>
-                                     {{_l("codelist/disclosure",$a)}}
+                                    <?php $a = $contract->metadata->publisher_type ?>
+                                    {{_l("codelist/disclosure",$a)}}
                                 @else -
                                 @endif
                             </span>
@@ -402,7 +414,17 @@ use Illuminate\Support\Facades\Lang;
         <div class="row annotation-list-wrapper" id="annotations">
             <div class="col-lg-12">
                 <div class="panel panel-default panel-wrap panel-annotation-list-wrap">
-                    <div class="panel-heading"> {{count($contract->annotationsGroup)}} @if(count($contract->annotationsGroup) >1) Annotations @else Annotation @endif </div>
+                    <div class="panel-heading clearfix">
+                        <div class="annotation-left">
+                            {{count($contract->annotationsGroup)}}
+                            @if(count($contract->annotationsGroup) >1) Annotations @else Annotation @endif
+                        </div>
+                        @if(isClipOn())
+                        <button id="clip-all-annotations" class="pull-right annotation-clip"
+                                title="Clip all annotations"><span class="link">@lang('clip.clip_all')</span>
+                        </button>
+                        @endif
+                    </div>
                     <div class="panel-body">
 
                         <div class="row">
@@ -421,9 +443,7 @@ use Illuminate\Support\Facades\Lang;
                             </div>
 
                             <div class="col-md-8">
-
                                 @forelse($contract->annotationsCluster as $cluster => $annotations)
-
                                     <div id="cluster-{{str_slug($cluster,'-')}}" class="cluster-wrap">
                                         <div class="category-title">
                                            {{_l('annotation', snake_case($cluster))}}
@@ -432,9 +452,21 @@ use Illuminate\Support\Facades\Lang;
                                         @foreach($annotations as $annotation)
                                             <?php $annotation = array_values($annotation)[0][0];?>
                                             <div>
-                                                <div id="{{str_slug($annotation->category_key,'-')}}" class="sub-category">
-                                                    <a href="#{{str_slug($annotation->category_key,'-')}}"><i class='glyphicon glyphicon-link' style="display:none;"></i></a>
-                                                    @lang('codelist/annotation.categories.'.$annotation->category_key)
+
+                                                <div id="{{str_slug($annotation->category,'-')}}" class="sub-category clearfix">
+
+                                                    <a href="#{{str_slug($annotation->category,'-')}}"><i
+                                                                class='glyphicon glyphicon-link'
+                                                                style="display:none;"></i></a>
+                                                    <div class="annotation-left">
+                                                        {{$annotation->category}}
+                                                    </div>
+                                                    @if(isClipOn())
+                                                        <button data-id={{$annotation->id}} class="pull-right
+                                                                annotation-clip-icon
+                                                        " title=@lang('clip.clip_annotation') style="display:
+                                                        none">@lang('clip.clips')</button>
+                                                    @endif
                                                 </div>
                                                 <div class="annotation-text">
                                                     {{$annotation->text}}
@@ -446,7 +478,7 @@ use Illuminate\Support\Facades\Lang;
                                                     $j = 0;
                                                     ?>
                                                     @foreach($pages as $refs)
-                                                        <?php  $page = $refs[0]; $j ++;?>
+                                                        <?php  $page = $refs[0]; $j++;?>
                                                         Page {{_e($page,'page_no')}}
 
                                                         @foreach($refs as $key => $ref)
@@ -467,6 +499,7 @@ use Illuminate\Support\Facades\Lang;
                                                         @endif
                                                     @endforeach
                                                 </div>
+
                                             </div>
                                         @endforeach
                                     </div>
@@ -489,6 +522,8 @@ use Illuminate\Support\Facades\Lang;
             </div>
         </div>
     @endif
+
+    @include('contract.partials.emailModal')
 @stop
 
 
@@ -544,9 +579,9 @@ use Illuminate\Support\Facades\Lang;
                 }
             });
 
-            if (isScrolledTo(sticky)) {
-                sticky.css({'position': 'fixed', 'left': '36px', 'top': '20px'});
-            }
+
+            sticky.css({'position': 'fixed', 'left': '36px', 'top': '20px'});
+
             var stopHeight = catcher.offset().top + catcher.height() + 240;
             if (stopHeight > sticky.offset().top) {
                 sticky.css({'position': 'absolute', 'left': 0, 'top': 0});

@@ -156,6 +156,7 @@ Annotator.Plugin.AnnotatorNRGIViewer = (function (_super) {
             html += page.join(', ');
             html += '</p>';
         }
+
         return html;
     }
 

@@ -16,4 +16,6 @@ return [
     'found_in'             => "تم إيجاده في",
     'reset'                => "إعادة ضبط",
     'select'               => "اختيار",
+    'refine_search'        => 'تغيير أو تنقيح بحثك',
+    'annotated'            => "المشروح"
 ];

@@ -1,7 +1,6 @@
 .title-wrap {
   border-bottom: 1px solid rgb(220, 223, 226);
   border-bottom: 1px solid rgba(220, 223, 226, 0.7);
-  display: inline-block;
   width: 100%;
   background-color: #fff;
   color: #404040 !important;
@@ -18,7 +17,7 @@
 
 .head-wrap {
   border: none;
-  margin-top: -5px;
+  //margin-top: -5px;
   background: #f9f9f9;
   min-height: 37px;
   border-bottom: 1px solid rgb(220, 223, 226);
@@ -223,6 +222,13 @@
   padding: 20px 20px 14px 27px;
   margin-bottom: 20px !important;
   border-bottom: 1px solid #DCDFE2;
+}
+
+.annotation-item .category {
+  color: rgba(64, 64, 64, 0.7);
+  font-size: 12px;
+  margin-bottom: 5px;
+  padding-right: 35px;
 }
 
 .metadata-view {
@@ -698,8 +704,12 @@ div > .annotation-item:first-of-type .annotation-cluster {
   }
 
   .panel-top-content{
-    padding: 0  20px;
+    padding: 0  15px;
     position: relative;
+  }
+
+  .attached-top-wrapper .panel-top-content .back{
+    left: -20px;
   }
 
   .attached-top-wrapper .left-top-content {
@@ -835,7 +845,7 @@ div > .annotation-item:first-of-type .annotation-cluster {
 @media all and (max-width: 480px){
   .panel-top-content {
     padding: 0 15px;
-    overflow: visible;
+    //overflow: visible;
   }
 
   .attached-top-wrapper .left-top-content{

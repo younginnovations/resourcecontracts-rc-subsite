@@ -6,13 +6,16 @@ $category = $api->getAnnotationsCategory();
 ?>
 
 <form action="{{url('search')}}" method="get" class="search-form" id="search-form">
+  @if(!$show_advance)
     <div class="form-group hide--small-screen">
         <button type="submit" class="btn btn-navbar-search pull-left"></button>
         <input type="text" autocomplete="off" value="{{\Illuminate\Support\Facades\Input::get('q')}}" name="q"
                id="query" class="form-control pull-left"
-               placeholder='@if(isset($q) && $q!='' && $show_advance) @lang('search.refine_search') @else @lang('search.search_placeholder')  @endif'>
+               placeholder='@if(isset($q) && $q!='' && $show_advance) @lang('search.refine_search') @else @lang('search.search_placeholder') @endif'>
     </div>
+  @endif
     <div class="search-input-wrapper">
+
         <div class="col-lg-12">
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
                 <label for="">@lang('global.country')</label>

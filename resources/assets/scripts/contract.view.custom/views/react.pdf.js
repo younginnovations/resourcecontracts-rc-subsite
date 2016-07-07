@@ -97,6 +97,16 @@ var Pdf = React.createClass({
     } else {
       var page_no = this.props.contractApp.getCurrentPage();
       debug("react.pdf showing page loader", page_no);
+      $('.annotator-viewer').addClass('annotator-hide');
+      var canvas = $('.annotorious-item:first');
+      $('.pdf-viewer').animate({scrollTop: 0},'slow');
+      if (canvas.length > 0) {
+        canvas = canvas[0];
+        var context = canvas.getContext('2d');
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.fill();
+      }
+
       return (this.props.loading || React.createElement("div", {className:'pdf-loading'}, lang.loading_page + page_no));
     }
   },

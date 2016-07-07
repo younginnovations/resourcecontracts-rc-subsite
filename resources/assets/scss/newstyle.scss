@@ -1,0 +1,90 @@
+.page-contract {
+  .head-wrap {
+    min-height: 47px;
+  }
+
+  .download-main-wrap{
+    width: auto;
+    border: none;
+  }
+
+  .download-wrap {
+    background: url(../../images/ic-sprite.png) no-repeat -168px -50px;
+    padding: 0;
+    height: 20px;
+    width: 24px;
+    margin-top: 12px;
+    display: inline-block;
+  }
+}
+
+.static-search .search-input-wrapper{
+  border-top: none;
+}
+
+.language-selector button{
+  padding: 8px 12px;
+}
+
+#annotation-count {
+  color: #fff !important;
+  background: $color_blue;
+  position: relative;
+  -webkit-border-radius: 19px;
+  border-radius: 19px;
+  font-size: 13px;
+  padding: 10px 20px;
+  line-height: 18px;
+  display: block;
+  padding: 10px 30px 10px 45px;
+  margin-right: 36px;
+
+  &:before{
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 8px;
+    left: 15px;
+    background:  url(#{$img-path}/ic-sprite.svg) no-repeat no-repeat -285px -400px;
+  }
+
+  &:hover{
+    background-color: $color_blue_hover;
+  }
+}
+
+.floated-top-div .clip-head #hide-annotation{
+  top: 10px;
+  right: 0;
+  font-size: 14px;
+}
+
+#clip-all-annotations{
+  &:after{
+    background: transparent url(#{$img-path}/ic-sprite.svg) no-repeat  -357px -480px
+  }
+}
+
+.no--search--wrap{
+  display: table;
+  vertical-align: middle;
+  height: 100%;
+  width: 100%;
+  .navbar-header{
+    display: table-cell;
+    vertical-align: middle;
+    float: none;
+    padding-left: 15px;
+  }
+
+  .navbar-right{
+    width: 100%;
+  }
+}
+
+html {
+  overflow: -moz-scrollbars-vertical;
+}
+
+

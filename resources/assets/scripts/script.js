@@ -1,12 +1,117 @@
+
 function htmlDecode(html) {
     var a = document.createElement('a');
     a.innerHTML = html;
     return a.textContent;
 }
 
+var emailManager = {
+    formEl: '#send-email',
+    errors: 0,
+    processing: false,
+    emailPostUrl: app_url + '/clip/email',
+    validateEmail: function (email) {
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    },
+    init: function () {
+        $(this.formEl).find('#subject').val(document.title);
+        $('#send-email').on('submit', function (event) {
+            event.preventDefault();
+            emailManager.submit();
+        });
+    },
+    isValidEmails: function (emails) {
+        emails = emails.split(',');
+        var valid = 0;
+        var self = this;
+        emails.map(function (val) {
+            if (!self.validateEmail(val.trim())) {
+                valid = valid + 1;
+            }
+        });
+        return valid == 0;
+    },
+    setError: function (key, err) {
+        $('#' + key).after('<span class="required">' + err + '</span>');
+        this.errors++;
+    },
+    input: function (id) {
+        return $(this.formEl).find('#' + id).val();
+    },
+    validationInputs: function () {
+        this.errors = 0;
+        $(this.formEl).find('span.required').remove();
+        if (this.input('to') == '' || !this.isValidEmails(this.input('to'))) {
+            this.setError('to', 'Please enter valid email address.');
+        }
+
+        if (this.input('from') == '' || !this.validateEmail(this.input('from'))) {
+            this.setError('from', 'Please enter valid email address.');
+        }
+
+        if (this.input('subject') == '') {
+            this.setError('subject', 'Subject is required');
+        }
+
+        if (this.input('body') == '') {
+            this.setError('body', 'Message is required');
+        }
+        return this.errors > 0;
+    },
+    resetInput: function () {
+        $(this.formEl).find('#to').val('');
+    },
+    getUrl: function () {
+        return window.location.href;
+    },
+    setProcessing: function (status) {
+        if (status) {
+            this.processing = true;
+            $(this.formEl).find('.btn-submit').attr('disabled', 'disabled');
+        } else {
+            this.processing = false;
+            $(this.formEl).find('.btn-submit').removeAttr('disabled');
+        }
+    },
+    submit: function () {
+        if (this.validationInputs() || this.processing) {
+            return false;
+        }
+
+        var formData = {
+            to: this.input('to'),
+            from: this.input('from'),
+            subject: this.input('subject'),
+            body: this.input('body'),
+            url: this.getUrl()
+        };
+
+        this.setProcessing(true);
+        var self = this;
+        $.ajax({
+            type: "POST",
+            url: self.emailPostUrl,
+            data: formData
+        }).error(function () {
+            $('.email-result').append("<div class='alert alert-danger'>Something went wrong.</div>");
+            self.setProcessing(false);
+        }).success(function (res) {
+            if (res.status) {
+                $('.email-result').append("<div class='alert alert-success'>" + res.message + "</div>");
+            } else {
+                $('.email-result').append("<div class='alert alert-danger'>" + res.message + "</div>");
+            }
+            self.setProcessing(false);
+            self.resetInput();
+        })
+
+    }
+};
+
 $(document).ready(function () {
     if ($('select').length) {
-        $('select').select2({placeholder: htmlDecode(langSelect), allowClear: true, theme: "classic", language:"fr"});
+        $('select').select2({placeholder: htmlDecode(langSelect), allowClear: true, theme: "classic", language: "fr"});
     }
     $('#searchclear').click(function () {
         $("select").val(null).trigger("change");
@@ -115,9 +220,9 @@ $(document).ready(function () {
     // search form toggle
 
     ($('#search-form:not(.search-page-form) input[type="text"]')).focus(function () {
-        if ($(this).parent().parent().parent().parent().hasClass("static-search")){
+        if ($(this).parent().parent().parent().parent().hasClass("static-search")) {
             return;
-        }else {
+        } else {
             $('.search-input-wrapper').show();
             $('.contract-number-wrap').hide();
         }
@@ -159,11 +264,11 @@ $(document).ready(function () {
         $('.panel-annotation-wrap').css('height', 'auto');
     }
 
-    $(".language-selector").click(function(){
-        if(!$(this).hasClass("open")){
-            $(".navbar-static-top").css("z-index",1002);
-        }else{
-            $(".navbar-static-top").css("z-index",1000);
+    $(".language-selector").click(function () {
+        if (!$(this).hasClass("open")) {
+            $(".navbar-static-top").css("z-index", 1002);
+        } else {
+            $(".navbar-static-top").css("z-index", 1000);
         }
     });
 
@@ -206,6 +311,7 @@ $(document).ready(function () {
             leftWidth = $(window).width() - rightWidth;
         $(".right-header-section").width(leftWidth - 50);
         $(".navbar .search-input-wrapper").width(leftWidth - 22);
+        $(".right-header-section").removeClass("hidden");
     }
     if($(window).width() > 768) {
         calWidth();
@@ -229,8 +335,8 @@ $(document).ready(function () {
             $(".social-toggle").hide();
         }
 
-        if(!$(".language-selector").hasClass("open")){
-            $(".navbar-static-top").css("z-index",1000);
+        if (!$(".language-selector").hasClass("open")) {
+            $(".navbar-static-top").css("z-index", 1000);
         }
     });
 
@@ -301,18 +407,18 @@ $(document).ready(function () {
         }
 
     };
+
     var annotation = $(".annotate-text");
     if (annotation.length) {
         annotation.popover(options);
     }
 
-    if(document.referrer == '')
-    {
+    if (document.referrer == '') {
         $('.back-button').addClass("has-no-backbtn").hide();
         $('.back-button').hide();
     }
-    $('.back-button').on('click',function(){
-        if(document.referrer != '') {
+    $('.back-button').on('click', function () {
+        if (document.referrer != '') {
             window.history.go(-1);
         }
     });
@@ -342,8 +448,14 @@ $(document).ready(function () {
 
     showFullTitle();
 
-    $(window).resize(function(){
+    $(window).resize(function () {
         showFullTitle();
     });
 
+    emailManager.init();
+
+    $('a.share-link').on('click', function(e){
+        e.preventDefault();
+        window.open($(this).attr('href'), "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=650,height=400");
+    });
 });

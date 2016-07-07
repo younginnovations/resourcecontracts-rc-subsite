@@ -40,12 +40,8 @@
             ?>
             @if($contracts->total!=0)
                 <div class="social-share" id="social-toggler">
-                    <a href="#"><span>@lang('contract.social_share')</span></a>
-                    <ul class="social-toggle">
-                        <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u={{ url() }}" target="_blank">Facebook</a></li>
-                        <li class="google-plus"><a href="https://plus.google.com/share?url={{ url() }}" target="_blank">Google</a></li>
-                        <li class="twitter"><a href="https://twitter.com/share?text={{ meta($meta)->title }}" target="_blank">Twitter</a></li>
-                    </ul>
+                    <a><span>@lang('contract.social_share')</span></a>
+                    @include('contract.partials.share')
                 </div>
                 <div class="download-csv"><a href="{{route('contract.csv.download',$params)}}">@lang('search.download')</a></div>
             @endif
@@ -64,7 +60,7 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-12 country-list-wrapper search-list-wrapper">
+        <div class="col-lg-12 country-list-wrapper">
             <div class="panel panel-default panel-wrap country-list-wrap">
                 <div class="panel-body">
                     @include('contract.partials.contractlist')
@@ -73,6 +69,7 @@
             </div>
         </div>
     </div>
+    @include('contract.partials.emailModal')
 @stop
 
 @section('js')
@@ -84,3 +81,4 @@
         });
     </script>
 @stop
+

@@ -31,6 +31,29 @@
   }
 }
 
+@media (min-width: 800px){
+  #table-annotation {
+    padding: 0;
+  }
+}
+
+@media(max-width: 800px){
+  .search-list-wrapper {
+    margin-top: 40px;
+    border-top: solid 1px #eaeaea;
+    padding-top: 0;
+  }
+
+  .page-clip .action-btn{
+    margin-right: 0;
+  }
+
+  #clip-annotation-list{
+    padding-top: 15px;
+  }
+
+}
+
 @media (min-width: 768px){
   .page-search .filter-wrapper{
     min-height: 0 !important;
@@ -39,6 +62,11 @@
 }
 
 @media (max-width: 768px){
+
+  .search-input-wrapper{
+    top: 67px;
+  }
+
   .hide--small-screen{
     display: none;
   }
@@ -80,7 +108,7 @@
   }
 
   .country-list-wrap{
-    padding: 0 !important;
+    padding: 40px 0 30px  !important;
   }
 
   .page-countries,.page-resource,.page-contracts{
@@ -125,8 +153,23 @@
     padding-top: 44px;
   }
 
-  .page-search .download-csv {
-    right: 36px;
+  .download-csv,.actions-wrapper .download-main-wrap {
+    right: 15px !important;
+  }
+
+  .advance-filter-wrapper .social-share,
+  .actions-wrapper .social-share{
+    right: 149px;
+  }
+
+
+  .remove-buffer-side{
+    padding: 0;
+  }
+
+
+  .filter-wrapper .clip-btn{
+    right: 269px;
   }
 
   #countries{
@@ -146,6 +189,12 @@
   .download-dropdown ul{
     left: auto;
     right: 0;
+  }
+}
+
+@media all and (max-width: 500px){
+  #print-clip-filter,#save-clipping{
+    display: none;
   }
 }
 

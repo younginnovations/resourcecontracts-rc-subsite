@@ -97,9 +97,7 @@ var TextSearchResultRow = React.createClass({
             more = lang.more;
         }
         if (!this.state.showMoreFlag && this.state.text.length > 0) {
-
             texToShow = this.state.text;
-
             more = lang.less;
         }
         if (texToShow.length == 0) {

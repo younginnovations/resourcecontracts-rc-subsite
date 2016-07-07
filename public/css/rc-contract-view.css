@@ -29,7 +29,6 @@
 .pdf-loading {
     padding: 15px;
 }
-
 .search-results-list .close:hover {
     background: #F46A4A url(../images/ic-close-link.png) no-repeat center;
 }
@@ -139,7 +138,7 @@
 }
 
 .annotation-sort {
-    margin: 0 18px 10px;
+    margin: 0 18px 4px;
 }
 
 .annotation-sort > span {
@@ -175,9 +174,11 @@
 }
 
 .pdf-zoom-options {
+    padding: 4px 0;
     border-left: 1px solid #DCDFE2;
     float: left;
     margin: 0;
+    padding: 16px 10px 9px 0px;
 }
 
 .pdf-zoom-options + div {
@@ -444,6 +445,7 @@
     padding-left: 32px;
     border-bottom: 0;
     padding-bottom: 10px;
+    margin-bottom: 0!important;
 }
 
 .navigation a:nth-last-child(-n+2) {
@@ -499,7 +501,7 @@
     margin-top: 0;
 }
 
-.note-inner-wrapper + a {
+.note-inner-wrapper+a {
     float: right;
 }
 
@@ -514,6 +516,9 @@
 .social-share {
     float: right;
     padding: 0;
+    position: static;
+    border: 0;
+    background: transparent;
 }
 
 .social-share li {
@@ -578,9 +583,13 @@
 }
 
 .annotation-item .category {
-    color: rgba(64,64,64,0.7);
-    font-size: 12px;
-    margin-bottom: 5px;
+     color: rgba(64, 64, 64, 0.7);
+     font-size: 12px;
+     margin-bottom: 5px;
+}
+
+.annotation-item.selected-annotation {
+    background-color: #dfdfdf;
 }
 
 .annotation-item .annotated-text {
@@ -588,6 +597,7 @@
     font-size: 14px;
     line-height: 22px;
     padding-left: 18px;
+    padding-right: 18px;
 }
 
 .annotation-item .annotation-item-content {
@@ -598,6 +608,7 @@
     padding-left: 5pt;
     padding-right: 5pt;
 }
+
 
 .amla-legislation {
     margin: 10px 0px;
