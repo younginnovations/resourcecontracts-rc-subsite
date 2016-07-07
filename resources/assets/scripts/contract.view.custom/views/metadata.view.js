@@ -68,7 +68,7 @@ var MetadataView = React.createClass({
             if (langResource[value] && index != resLength - 1) {
                 return React.createElement('a', {href: app_url + "/resource/" + encodeURIComponent(value)}, langResource[value] + ' | ');
             }
-            else if(langResource[value] && index == resLength - 1) {
+            else if (langResource[value] && index == resLength - 1) {
                 return React.createElement('a', {href: app_url + "/resource/" + encodeURIComponent(value)}, langResource[value]);
             }
             else {
@@ -145,20 +145,18 @@ var MetadataView = React.createClass({
                 noteHtml = (<span className="note-inner-wrapper" dangerouslySetInnerHTML={{__html: noteHtml}}></span>);
             }
             var annexes_missing = null;
-            if(this.props.metadata.get("is_annexes_missing"))
-            {
-                annexes_missing =  (<div className="metadata-ocid">
-                                        <span>{lang.annexes_missing}</span>
-                                        <span>{lang.yes}</span>
-                                    </div>);
+            if (this.props.metadata.get("is_annexes_missing")) {
+                annexes_missing = (<div className="metadata-ocid">
+                    <span>{lang.annexes_missing}</span>
+                    <span>{lang.yes}</span>
+                </div>);
             }
             var pages_missing = null;
-            if(this.props.metadata.get("is_pages_missing"))
-            {
+            if (this.props.metadata.get("is_pages_missing")) {
                 pages_missing = (<div className="metadata-ocid">
-                                    <span>{lang.pages_missing}</span>
-                                    <span>{lang.yes}</span>
-                                    </div>);
+                    <span>{lang.pages_missing}</span>
+                    <span>{lang.yes}</span>
+                </div>);
             }
 
             return (
@@ -210,11 +208,12 @@ var MetadataView = React.createClass({
             );
         } else {
             return (
-                <div className="metadata-view">
-                    <div>{lang.metadata}</div>
-                    <span>{lang.loading}</span>
-                    <div className="metadata-view-footer">
-                        <a href={this.props.contractApp.getMetadataSummaryLink()}>{lang.see_summary}</a>
+                <div id="metadata">
+                    <div className="metadata-view">
+                        <div>
+                            {lang.metadata}
+                        </div>
+                        <span className="metadataLoading">{lang.loading}</span>
                     </div>
                 </div>
             );
@@ -234,12 +233,15 @@ var AmlaUrl = React.createClass({
         var link = null;
         var amla_url = this.props.metadata.get("amla_url");
         if (amla_url != '' && (isSite('country') || isSite('rc'))) {
-            link = lang.see + '<a href="'+amla_url+'" target="_blank" > ' + lang.legislation + ' </a> ' + lang.african_mining;
+            link = lang.see + '<a href="' + amla_url + '" target="_blank" > ' + lang.legislation + ' </a> ' + lang.african_mining;
         }
 
         return {__html: link};
     },
     render: function () {
+        if (this.props.metadata.get("amla_url") == '') {
+            return null;
+        }
         return (
             <div className="amla-legislation" dangerouslySetInnerHTML={this.getAmlaLink()}/>
         );
@@ -336,12 +338,7 @@ var RelatedDocumentsView = React.createClass({
                 return null;
             }
         } else {
-            return (
-                <div className="relateddocument-view">
-                    <div>{lang.related_docs}</div>
-                    {lang.loading}
-                </div>
-            );
+            return null;
         }
 
     }

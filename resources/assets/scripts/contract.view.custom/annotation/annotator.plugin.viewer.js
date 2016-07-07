@@ -29,21 +29,21 @@ Annotator.Plugin.AnnotatorNRGIViewer = (function (_super) {
             contractApp.trigger("annotations:highlight", annotation);
         });
 
-        $('.annotation-viewer-category').html(_lc(annotation.category_key,annotation.category));
+        $('.annotation-viewer-category').html(_lc(annotation.category_key, annotation.category));
 
         $(document).on('click', '.parent_annotation_link', function () {
             var $this = $(this);
             if ($this.data('view') == 'text') {
                 setTimeout(function () {
                     contractApp.showTextAnnotationPopup($this.data('annotation'));
-                    contractApp.trigger("annotations:highlight", {id:$this.data('annotation')});
+                    contractApp.trigger("annotations:highlight", {id: $this.data('annotation')});
                 }, 300);
             }
 
             if ($this.data('view') == 'pdf') {
                 setTimeout(function () {
                     contractApp.showPdfAnnotationPopup($this.data('annotation'));
-                    contractApp.trigger("annotations:highlight", {id:$this.data('annotation')});
+                    contractApp.trigger("annotations:highlight", {id: $this.data('annotation')});
                 }, 300);
             }
         });
@@ -71,7 +71,14 @@ Annotator.Plugin.AnnotatorNRGIViewer = (function (_super) {
             article_reference = ' - ' + annotation.article_reference;
         }
 
-        return '<div class="annotation-viewer-text">' + text + article_reference + '</div>';
+        var link = "";
+        var viewPort = 'text';
+        if (annotation.shapes) {
+            viewPort = 'pdf';
+        }
+        link = ' <a class="annotation-viewer-more" href="#/' + viewPort + '/page/' + annotation.page_no + '/annotation/' + annotation.id + '">>></a>';
+
+        return '<div class="annotation-viewer-text">' + text + article_reference + link + '</div>';
     }
 
     function getPageNo(annotation) {
@@ -84,14 +91,14 @@ Annotator.Plugin.AnnotatorNRGIViewer = (function (_super) {
             link = "#/" + view + "/page/" + pageNo + "/annotation/" + annotation.id;
         } else {
             view = 'text';
-            link = "#/" + view + "/page/" + pageNo + "/annotation/"  + annotation.id;
+            link = "#/" + view + "/page/" + pageNo + "/annotation/" + annotation.id;
         }
 
-        return '<div class="annotation-viewer-page"><a href="'+link+'" class="annotation-viewer-more"> Page ' + annotation.page_no + ' >> </a></div>';
+        return '<div class="annotation-viewer-page"><a href="' + link + '" class="annotation-viewer-more"> Page ' + annotation.page_no + ' >> </a></div>';
     }
 
     function getCategory(annotation) {
-        return '<div class="annotation-viewer-category">'+annotation.category+'</div>';
+        return '<div class="annotation-viewer-category">' + annotation.category + '</div>';
     }
 
     function getRelatedDocuments(annotation) {
@@ -130,12 +137,12 @@ Annotator.Plugin.AnnotatorNRGIViewer = (function (_super) {
                         link = "#/" + view + "/page/" + a.get('page_no') + "/annotation/" + a.get('id');
                     }
 
-                    var article_reference = (a.get('article_reference') != '') ?  a.get('article_reference') : a.get('page_no');
+                    var article_reference = (a.get('article_reference') != '') ? a.get('article_reference') : a.get('page_no');
                     ref.push('<a style="margin: 0px 3px" data-view="' + view + '" data-annotation="' + a.get('id') + '" class="parent_annotation_link" href="' + link + '">' + article_reference + '</a>');
                 });
 
                 var text = a.get('page_no');
-                text += ' ('+ref.join(', ')+')';
+                text += ' (' + ref.join(', ') + ')';
                 page.push(text);
             });
             html += '<p style="padding: 5px 0px">';

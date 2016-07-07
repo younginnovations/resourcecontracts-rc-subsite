@@ -7296,21 +7296,21 @@ Annotator.Plugin.AnnotatorNRGIViewer = (function (_super) {
             contractApp.trigger("annotations:highlight", annotation);
         });
 
-        $('.annotation-viewer-category').html(_lc(annotation.category_key,annotation.category));
+        $('.annotation-viewer-category').html(_lc(annotation.category_key, annotation.category));
 
         $(document).on('click', '.parent_annotation_link', function () {
             var $this = $(this);
             if ($this.data('view') == 'text') {
                 setTimeout(function () {
                     contractApp.showTextAnnotationPopup($this.data('annotation'));
-                    contractApp.trigger("annotations:highlight", {id:$this.data('annotation')});
+                    contractApp.trigger("annotations:highlight", {id: $this.data('annotation')});
                 }, 300);
             }
 
             if ($this.data('view') == 'pdf') {
                 setTimeout(function () {
                     contractApp.showPdfAnnotationPopup($this.data('annotation'));
-                    contractApp.trigger("annotations:highlight", {id:$this.data('annotation')});
+                    contractApp.trigger("annotations:highlight", {id: $this.data('annotation')});
                 }, 300);
             }
         });
@@ -7338,7 +7338,14 @@ Annotator.Plugin.AnnotatorNRGIViewer = (function (_super) {
             article_reference = ' - ' + annotation.article_reference;
         }
 
-        return '<div class="annotation-viewer-text">' + text + article_reference + '</div>';
+        var link = "";
+        var viewPort = 'text';
+        if (annotation.shapes) {
+            viewPort = 'pdf';
+        }
+        link = ' <a class="annotation-viewer-more" href="#/' + viewPort + '/page/' + annotation.page_no + '/annotation/' + annotation.id + '">>></a>';
+
+        return '<div class="annotation-viewer-text">' + text + article_reference + link + '</div>';
     }
 
     function getPageNo(annotation) {
@@ -7351,14 +7358,14 @@ Annotator.Plugin.AnnotatorNRGIViewer = (function (_super) {
             link = "#/" + view + "/page/" + pageNo + "/annotation/" + annotation.id;
         } else {
             view = 'text';
-            link = "#/" + view + "/page/" + pageNo + "/annotation/"  + annotation.id;
+            link = "#/" + view + "/page/" + pageNo + "/annotation/" + annotation.id;
         }
 
-        return '<div class="annotation-viewer-page"><a href="'+link+'" class="annotation-viewer-more"> Page ' + annotation.page_no + ' >> </a></div>';
+        return '<div class="annotation-viewer-page"><a href="' + link + '" class="annotation-viewer-more"> Page ' + annotation.page_no + ' >> </a></div>';
     }
 
     function getCategory(annotation) {
-        return '<div class="annotation-viewer-category">'+annotation.category+'</div>';
+        return '<div class="annotation-viewer-category">' + annotation.category + '</div>';
     }
 
     function getRelatedDocuments(annotation) {
@@ -7397,12 +7404,12 @@ Annotator.Plugin.AnnotatorNRGIViewer = (function (_super) {
                         link = "#/" + view + "/page/" + a.get('page_no') + "/annotation/" + a.get('id');
                     }
 
-                    var article_reference = (a.get('article_reference') != '') ?  a.get('article_reference') : a.get('page_no');
+                    var article_reference = (a.get('article_reference') != '') ? a.get('article_reference') : a.get('page_no');
                     ref.push('<a style="margin: 0px 3px" data-view="' + view + '" data-annotation="' + a.get('id') + '" class="parent_annotation_link" href="' + link + '">' + article_reference + '</a>');
                 });
 
                 var text = a.get('page_no');
-                text += ' ('+ref.join(', ')+')';
+                text += ' (' + ref.join(', ') + ')';
                 page.push(text);
             });
             html += '<p style="padding: 5px 0px">';
@@ -29792,7 +29799,7 @@ var MetadataView = React.createClass({displayName: "MetadataView",
             if (langResource[value] && index != resLength - 1) {
                 return React.createElement('a', {href: app_url + "/resource/" + encodeURIComponent(value)}, langResource[value] + ' | ');
             }
-            else if(langResource[value] && index == resLength - 1) {
+            else if (langResource[value] && index == resLength - 1) {
                 return React.createElement('a', {href: app_url + "/resource/" + encodeURIComponent(value)}, langResource[value]);
             }
             else {
@@ -29869,20 +29876,18 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                 noteHtml = (React.createElement("span", {className: "note-inner-wrapper", dangerouslySetInnerHTML: {__html: noteHtml}}));
             }
             var annexes_missing = null;
-            if(this.props.metadata.get("is_annexes_missing"))
-            {
-                annexes_missing =  (React.createElement("div", {className: "metadata-ocid"}, 
-                                        React.createElement("span", null, lang.annexes_missing), 
-                                        React.createElement("span", null, lang.yes)
-                                    ));
+            if (this.props.metadata.get("is_annexes_missing")) {
+                annexes_missing = (React.createElement("div", {className: "metadata-ocid"}, 
+                    React.createElement("span", null, lang.annexes_missing), 
+                    React.createElement("span", null, lang.yes)
+                ));
             }
             var pages_missing = null;
-            if(this.props.metadata.get("is_pages_missing"))
-            {
+            if (this.props.metadata.get("is_pages_missing")) {
                 pages_missing = (React.createElement("div", {className: "metadata-ocid"}, 
-                                    React.createElement("span", null, lang.pages_missing), 
-                                    React.createElement("span", null, lang.yes)
-                                    ));
+                    React.createElement("span", null, lang.pages_missing), 
+                    React.createElement("span", null, lang.yes)
+                ));
             }
 
             return (
@@ -29934,11 +29939,12 @@ var MetadataView = React.createClass({displayName: "MetadataView",
             );
         } else {
             return (
-                React.createElement("div", {className: "metadata-view"}, 
-                    React.createElement("div", null, lang.metadata), 
-                    React.createElement("span", null, lang.loading), 
-                    React.createElement("div", {className: "metadata-view-footer"}, 
-                        React.createElement("a", {href: this.props.contractApp.getMetadataSummaryLink()}, lang.see_summary)
+                React.createElement("div", {id: "metadata"}, 
+                    React.createElement("div", {className: "metadata-view"}, 
+                        React.createElement("div", null, 
+                            lang.metadata
+                        ), 
+                        React.createElement("span", {className: "metadataLoading"}, lang.loading)
                     )
                 )
             );
@@ -29958,12 +29964,15 @@ var AmlaUrl = React.createClass({displayName: "AmlaUrl",
         var link = null;
         var amla_url = this.props.metadata.get("amla_url");
         if (amla_url != '' && (isSite('country') || isSite('rc'))) {
-            link = lang.see + '<a href="'+amla_url+'" target="_blank" > ' + lang.legislation + ' </a> ' + lang.african_mining;
+            link = lang.see + '<a href="' + amla_url + '" target="_blank" > ' + lang.legislation + ' </a> ' + lang.african_mining;
         }
 
         return {__html: link};
     },
     render: function () {
+        if (this.props.metadata.get("amla_url") == '') {
+            return null;
+        }
         return (
             React.createElement("div", {className: "amla-legislation", dangerouslySetInnerHTML: this.getAmlaLink()})
         );
@@ -30060,12 +30069,7 @@ var RelatedDocumentsView = React.createClass({displayName: "RelatedDocumentsView
                 return null;
             }
         } else {
-            return (
-                React.createElement("div", {className: "relateddocument-view"}, 
-                    React.createElement("div", null, lang.related_docs), 
-                    lang.loading
-                )
-            );
+            return null;
         }
 
     }
