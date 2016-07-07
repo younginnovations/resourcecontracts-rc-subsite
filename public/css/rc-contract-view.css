@@ -1045,3 +1045,8 @@
 .amla-legislation {
     margin: 10px 0px;
 }
+
+.metadataLoading{
+    margin-bottom: 10px;
+    display: block;
+}
