@@ -107,7 +107,7 @@ var TextSearchResultRow = React.createClass({
         }
         texToShow = <HighLight  text={texToShow}/>;
         more = (<a onClick={this.handleClickLessMore}>{more}</a>);
-        textToReturn = (<span> <span onClick={this.handleClick}> {texToShow} </span> {more} </span>);
+        textToReturn = (<span> <span className="link" onClick={this.handleClick}> {texToShow} </span> {more} </span>);
         return textToReturn;
     },
     handleClick: function () {
@@ -150,7 +150,7 @@ var TextSearchResultRow = React.createClass({
     render: function () {
         var text = this.highlightSearchQuery(this.props.resultRow.get("text"), this.props.contractApp.getSearchQuery());
         var type = "<span class='text' title='Text'>Text</span>";
-        text = "<span>Pg " + this.props.resultRow.get("page_no") + "&nbsp;" + text + "</span>" + type;
+        text = "<span class='link'>Pg " + this.props.resultRow.get("page_no") + "&nbsp;" + text + "</span>" + type;
         if (this.props.resultRow.get("type") == "annotation") {
             type = "<span class='annotations' title='Annotation'>" + lang.annotation + "</span>";
             text = this.getShowText(this.props.contractApp.getSearchQuery());
@@ -158,14 +158,14 @@ var TextSearchResultRow = React.createClass({
 
         if (this.props.resultRow.get('type') == "annotation") {
             return (
-                <div className="search-result-row link">
-                    {text} <span dangerouslySetInnerHTML={{__html: type}}/>
+                <div className="search-result-row">
+                    {text} <span  dangerouslySetInnerHTML={{__html: type}}/>
                 </div>
             );
         }
         else {
             return (
-                <div className="search-result-row link" onClick={this.handleClick}>
+                <div className="search-result-row" onClick={this.handleClick}>
                     <span dangerouslySetInnerHTML={{__html: text}}/>
                 </div>
             );

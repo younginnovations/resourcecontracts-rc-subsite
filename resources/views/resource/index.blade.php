@@ -11,8 +11,8 @@
                     </div>
                 </div>
             </div>
-            <div class="filter-wrapper">
-                <div class="col-xs-6 col-sm-6 col-md-9 col-lg-8">
+            <div class="filter-wrapper" id= "filter-by-category">
+                <div class="left-content">
                     <div class="filter-country-wrap">
                         <form class="search-form filter-form">
                             <div class="form-group">
@@ -22,7 +22,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="col-xs-5 col-sm-3 col-md-3 col-lg-2 pull-right">
+                <div class="right-content">
                     <a class = "filter-resource-wrap filter-label" href={{url('/countries')}}  >
                         @lang('global.view_by_country')
                     </a>

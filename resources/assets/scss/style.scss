@@ -85,6 +85,10 @@ $url_15: url(../../images/paper-bg.png);
 $url_16: url(../../images/ic-amla.png);
 $url_17: url(../../images/ic-delete.png);
 
+a{
+  cursor: pointer;
+}
+
 //gradients
 
 @import "bourbon/bourbon";
@@ -106,6 +110,11 @@ $url_17: url(../../images/ic-delete.png);
   min-width: 54px;
 }
 
+.table.table-associated-contract > tbody > tr td:first-child{
+  width: auto;
+  min-width: 54px;
+}
+
 //original selectors
 //.navbar-brand, .navbar-brand:hover
 %extend_3 {
@@ -117,6 +126,13 @@ $url_17: url(../../images/ic-delete.png);
   height: auto;
   position: relative;
 }
+
+@media (min-width: 600px){
+  .right-header-section{
+    min-width: 500px;
+  }
+}
+
 
 //original selectors
 //.navbar-brand .beta, .sidebar-brand .beta
@@ -189,10 +205,10 @@ $url_17: url(../../images/ic-delete.png);
 //original selectors
 //.btn-navbar-search, .btn-navbar-search:hover, .btn-navbar-search:active
 %extend_9 {
-  background: $url_2 no-repeat -175px -392px;
+  background: url(#{$img-path}/ic-sprite.svg) no-repeat -356px -398px;
   text-indent: -9999px;
   width: 20px;
-  margin: 26px 0;
+  margin: 24px 0;
   height: 20px;
   //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
   box-shadow: none;
@@ -979,6 +995,9 @@ footer {
   }
   .col-lg-2 {
     margin-bottom: 20px;
+    float: none;
+    display: inline-block;
+    vertical-align: top;
   }
   .col-lg-5 {
     padding-left: 36px;
@@ -999,6 +1018,16 @@ footer {
     }
     .select2-selection__arrow {
       height: 31px !important;
+    }
+  }
+
+  .col-xs-6 {
+    width: 49%;
+  }
+
+  @media (min-width: 768px){
+    .col-sm-3 {
+      width: 24%;
     }
   }
 }
@@ -1048,6 +1077,7 @@ footer {
 .panel-top-wrapper {
   background: $color_alabaster_approx;
   padding: 0;
+  min-height: 55px;
 }
 
 .panel-top-content {
@@ -1174,7 +1204,7 @@ footer {
   //right: 40px;
   right: 178px;
   background: $white;
-  border: 1px solid $color_link_color;
+  border: 1px solid rgba($color_link_color,0.2);
   //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
   border-radius: 22px;
 }
@@ -1200,8 +1230,9 @@ footer {
 }
 
 .btn-filter-search {
-  background: $url_2 no-repeat -174px -392px;
+  background: url(#{$img-path}/ic-sprite.svg) no-repeat -356px -398px;
   height: 20px;
+  margin-top: -3px;
 }
 
 .filter-country-wrap {
@@ -1441,8 +1472,10 @@ a.filter-label{
   }
 }
 
-.contract-number-wrap.has-static-search{
-  top: 90px;
+@media (min-width: 551px) {
+  .contract-number-wrap.has-static-search{
+    top: 90px;
+  }
 }
 
 .panel-wrap {
@@ -1482,7 +1515,9 @@ a.filter-label{
 }
 
 .country-detail-wrapper {
-  padding: 0;
+  @media all and (min-width: 480px){
+    padding: 0;
+  }
   > div {
     padding: 0;
     > div {
@@ -1806,7 +1841,6 @@ a.filter-label{
       background-color: $color_bon_jour_approx;
     }
     &.disabled {
-      background: $color_cararra_approx $url_7 no-repeat 185px center;
       border-top: 1px solid $color_westar_approx;
       color: $color_quill_gray_approx;
       pointer-events: none;
@@ -1839,7 +1873,7 @@ a.filter-label{
 .table-associated-contract {
   margin: 0;
   tbody td:first-child {
-    background-position: 22px center;
+    background-position: 22px 10px;
     font-size: 14px;
     padding-left: 48px !important;
   }
@@ -1973,7 +2007,7 @@ a.filter-label{
 
 .head-wrap{
   .right-column-view{
-    min-height: 45px;
+    min-height: 47px;
     height: auto;
     float: right;
     padding-left: 15px;
@@ -2251,7 +2285,7 @@ td.contract-date {
     }
   }
   .country-list-wrap {
-    padding-top: 0 !important;
+    padding: 0 0 30px !important;
   }
   .search-input-wrapper {
     top: 43px;
@@ -2532,9 +2566,12 @@ td.contract-date {
 }
 
 .search-not-found {
-  background: none !important;
+  background: #f5f5f5 !important;
   padding-left: 36px !important;
   font-size: 14px !important;
+  text-align: center;
+  padding: 10px !important;
+  min-width: 100% !important;
   a {
     padding-left: 0 !important;
     text-decoration: underline;
@@ -2927,7 +2964,10 @@ td.contract-date {
   table {
     display: block;
     tr {
-      border-bottom: 1px solid $color_gray_nurse_approx;
+      border: 1px solid $color_gray_nurse_approx !important;
+      margin-bottom: 15px;
+      box-shadow: 2px 2px 40px -20px rgba(0,0,0,0.6);
+      border-radius: 8px;
       &:only-child {
         border: 0;
       }
@@ -2940,7 +2980,7 @@ td.contract-date {
         &:before {
           position: absolute;
           top: 17px;
-          left: 36px;
+          left: 15px;
           width: 45%;
           padding-right: 10px;
           white-space: nowrap;
@@ -3032,13 +3072,16 @@ td.contract-date {
     &:nth-of-type(2):before {
       content: "Document";
     }
-    &:nth-of-type(3):before {
+    &:nth-of-type(4):before {
       content: "Year";
     }
-    &:nth-of-type(4):before {
+    &:nth-of-type(3):before {
+      content: "";
+    }
+    &:nth-of-type(6):before {
       content: "Resource Type";
     }
-    &:nth-of-type(5):before {
+    &:nth-of-type(6):before {
       content: "Contract Type";
     }
   }
@@ -3047,7 +3090,7 @@ td.contract-date {
       margin-top: 25px;
     }
     .col-xs-6:last-child {
-      margin-top: 10px;
+      //margin-top: 10px;
     }
   }
 }
@@ -3058,20 +3101,9 @@ td.contract-date {
   }
 }
 
+
 @media all and(max-width: 551px) {
-  .contract-number-wrap {
-    width: 100%;
-    border-radius: 0;
-    border: 0;
-    left: 0;
-    top: 129px;
-    height: auto;
-    padding: 0;
-    span {
-      display: inline-block;
-      font-size: 22px;
-    }
-  }
+
   .contract-breadcrumb-wrapper {
     margin-top: -70px;
     margin-left: 60px;
@@ -3080,11 +3112,11 @@ td.contract-date {
     top: auto;
   }
   .advance-filter-wrapper {
-    margin-top: 47px;
+    //margin-top: 47px;
     min-height: 135px;
   }
   .country-detail-wrapper {
-    padding-top: 60px;
+    //padding-top: 60px;
   }
   .country-contract-wrap .download-csv {
     right: 10px;
@@ -3093,10 +3125,7 @@ td.contract-date {
   .contract-panel-title {
     margin-top: 26px;
   }
-  .action-links {
-    float: left;
-    margin: 0 0 20px -20px;
-  }
+
   .search-input-wrapper .col-lg-12 .col-lg-4 {
     float: none;
     clear: both;
@@ -3697,7 +3726,7 @@ input.select2-search__field {
   > a{
     display: block;
     font-size: 12px;
-    color: $color_link_color;
+    color: $color_link_color,0.2;
     width: auto;
     text-decoration: none;
     padding: 13px 22px 13px 47px;
@@ -3863,7 +3892,7 @@ input.select2-search__field {
     top: 0;
     left: 0;
     background-position: 12px -530px;
-    height: calc(100% - 1px);
+    height:100%;
   }
   .panel-top-content > .pull-left {
      margin-top: 0;
@@ -3872,8 +3901,8 @@ input.select2-search__field {
   .panel-title{
     float: left;
     clear: none;
-    margin: 15px 0 14px 65px;
-    padding: 0;
+    margin: 0px 0 14px 50px;
+    padding: 15px 0 0 15px;
     font-size: 21px;
     line-height: 27px;
     width: 80%;
@@ -3891,68 +3920,69 @@ input.select2-search__field {
   }
 
   .has-no-backbtn + .panel-title{
-    margin: 15px 0 14px 36px;
+    margin: 0 0 14px 36px;
   }
+
 
   .title-pop{
-    visibility: hidden;
-    opacity: 0;
     position: absolute;
-    background: #fff;
     z-index: 888;
-    max-width: 80%;
-    font-size: 14px;
-    line-height: 24px;
-    padding: 8px 12px;
-    box-shadow: 2px 2px 43px -10px rgba(0,0,0,0.6);
-    border-radius: 4px;
+    max-width: calc(80% - 50px);
+    padding-bottom: 10px;
+    overflow: visible;
     white-space: normal;
-    border: solid 1px #ccc;
-    right: 218px;
-    transition: all 0.3s ease-in-out;
-    &:before{
-      content: "";
-      position: absolute;
-      right: 23px;
-      width: 0;
-      height: 0;
-      border-left: 10px solid transparent;
-      border-right: 10px solid transparent;
-      border-bottom: 10px solid #ccc;
-      top: -11px;
-    }
+    background: #f8f8f8;
+    box-shadow: 0 20px 40px -30px rgba(0,0,0,0.6);
 
-    &:after{
-      content: "";
-      position: absolute;
-      right: 24px;
-      width: 0;
-      height: 0;
-      border-left: 9px solid transparent;
-      border-right: 9px solid transparent;
-      border-bottom: 9px solid #fff;
-      top: -9px;
+    span{
+      display: inline;
+      background: #f8f8f8;
+      box-shadow: 12px 0px 0 #f8f8f8,-15px 2px #f8f8f8;
+      padding-bottom: 10px;
     }
-
   }
 
-  .show-full-title .title-pop{
-    visibility: visible;
-    opacity: 1;
-  }
-
-  @media (min-width: 699px){
+  @media (min-width: 768px){
     .panel-top-content {
       padding: 0;
-      min-height: 46px;
+      min-height: 67px;
     }
   }
 
   .action-links{
-    margin: 16px 36px 0 10px;
+    margin: 16px 36px 13px 10px;
   }
 }
 
+@media all and (min-width: 768px){
+  .attached-top-wrapper .back{
+    min-height: 67px;
+  }
+}
+
+@media all and (max-width: 768px){
+  .attached-top-wrapper .back{
+    min-height: 55px;
+  }
+}
+
+
+#filter-by-category{
+  .left-content{
+    width: calc(100% - 213px);
+    float: left;
+
+    input{
+      width: calc(100% - 27px);
+    }
+  }
+
+  .right-content{
+    width: 212px;
+    float: left;
+    border-left: 1px solid rgba(188, 188, 188, 0.5);
+  }
+}
 
 .static-search{
   overflow: hidden;
@@ -4023,12 +4053,13 @@ input.select2-search__field {
   }
 
   .filter-wrapper{
-    min-height: 0 !important;
-    border-bottom: none;
+    min-height: 90px !important;
   }
 
-  .advance-filter-wrapper .social-share, .actions-wrapper .social-share{
-    right: 313px;
+  @media(min-width: 768px){
+    .advance-filter-wrapper .social-share, .actions-wrapper .social-share{
+      right: 313px;
+    }
   }
 
   .download-csv{
@@ -4042,6 +4073,7 @@ input.select2-search__field {
 
 .title-wrap .panel-top-content{
   border-bottom: none;
+  overflow: visible;
 }
 
 /* --------- style for cliping overview popup page ------------ */
@@ -4171,4 +4203,21 @@ input.select2-search__field {
   .info.head-wrap .col-md-6:nth-child(1){
     border-bottom: solid 1px #e7e9eb;
   }
+
+  #filter-by-category{
+    .left-content{
+      width: 100%;
+      float: none;
+
+      input{
+        width: calc(100% - 46px);
+      }
+    }
+
+    .right-content{
+     display: none;
+    }
+  }
 }
+
+

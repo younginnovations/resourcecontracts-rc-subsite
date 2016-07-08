@@ -342,10 +342,6 @@
     word-wrap: break-word;
 }
 
-.search-result-row:hover {
-    color: #217B49;
-}
-
 .right-column-view {
     font-size: 12px;
     float: right;
@@ -551,15 +547,6 @@
 
 .metadata-view-footer > a {
     font-size: 12px
-}
-
-.back {
-    background: #217B49 url(../images/ic-sprite-new.png) no-repeat 12px -543px;
-    width: 50px;
-    display: block;
-    height: 46px;
-    text-indent: -9999px;
-    float: left;
 }
 
 .annotation-item-page {

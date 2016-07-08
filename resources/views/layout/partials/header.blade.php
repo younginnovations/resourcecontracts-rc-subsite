@@ -1,7 +1,6 @@
 <?php $local = app('App\Http\Services\LocalizationService');
 ?>
 <div class="row">
-
     <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
             <span data-toggle="collapse-sidebar" data-target=".sidebar-collapse" data-target-2=".sidebar-collapse-container" class="pull-left trigger">trigger</span>
@@ -11,7 +10,7 @@
             <a class="navbar-brand" href="{{url()}}" >OPENLAND <span class="beta">Beta</span><span>Contracts</span></a>
             @endif
         </div>
-        <div class="col-sm-12 col-md-9 col-lg-10 navbar-right">
+        <div class="right-header-section navbar-right">
 
                 @include('layout.partials.searchdropdown')
         </div>

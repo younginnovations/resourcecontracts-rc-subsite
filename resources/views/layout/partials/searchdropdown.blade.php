@@ -59,8 +59,6 @@ $category = $api->getAnnotationsCategory();
                     </select>
                 </div>
             @endif
-        </div>
-        <div class="col-lg-12">
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
                 <label for="">@lang('search.language')</label>
                 <select name="language[]" id="language" multiple="multiple">

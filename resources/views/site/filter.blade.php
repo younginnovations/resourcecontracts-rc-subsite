@@ -26,7 +26,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row relative--small-screen">
         <div class="filter-wrapper advance-filter-wrapper" style="min-height: 135px">
             @if(!$showSearchQ)
             <div class="col-lg-12 static-search">

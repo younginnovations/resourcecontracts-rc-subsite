@@ -11,8 +11,8 @@
                     </div>
                 </div>
             </div>
-            <div class="filter-wrapper">
-                <div class="col-xs-6 col-sm-6 col-md-9 col-lg-8">
+            <div class="filter-wrapper" id= "filter-by-category">
+                <div class="left-content">
                     <div class="filter-country-wrap">
                         <form class="search-form filter-form">
                             <div class="form-group">
@@ -22,7 +22,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="col-xs-5 col-sm-3 col-md-3 col-lg-2 pull-right">
+                <div class="right-content">
                     <div class="filter-resource-wrap">
                        <a href={{url('/resources')}} class="filter-label">@lang('global.view_by_resource')</a>
                     </div>
@@ -36,7 +36,7 @@
     </div>
 
     <div class="row side-collapse-container">
-        <div id="countries" class="col-lg-12 country-list-wrap">
+        <div id="countries" class="col-lg-12 country-list-wrap clearfix">
         </div>
     </div>
 @stop
