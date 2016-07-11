@@ -78,6 +78,13 @@ var MetadataView = React.createClass({
 
         return resLang;
     },
+    getDisclosureMode :  function(disclosure)
+    {
+        if(langDisclosure[disclosure]){
+            return langDisclosure[disclosure];
+        }
+        return "-";
+    },
     render: function () {
         var showLabel = lang.show_more;
         if (this.state.showMoreMetadata) {
@@ -112,12 +119,12 @@ var MetadataView = React.createClass({
                         return React.createElement('a', {
                             href: app_url + "/search?q=&contract_type%5B%5D=" + contractType,
                             key: i
-                        }, contractType + ' | ');
+                        }, langContractType[contractType] + ' | ');
                     } else {
                         return React.createElement('a', {
                             href: app_url + "/search?q=&contract_type%5B%5D=" + contractType,
                             key: i
-                        }, contractType);
+                        }, langContractType[contractType]);
                     }
                 });
             }
@@ -159,6 +166,7 @@ var MetadataView = React.createClass({
                 </div>);
             }
 
+
             return (
                 <div id="metadata">
                     <div className="note-wrapper">
@@ -187,9 +195,7 @@ var MetadataView = React.createClass({
                         </div>
                         <div className="metadata-type-contract">
                             <span>{lang.type_contract}</span>
-                            <span>
-                               {contractType}
-                            </span>
+                            <span>{contractType}</span>
                         </div>
                         <div className="metadata-ocid">
                             <span>{lang.open_contracting_id}</span>
@@ -197,7 +203,7 @@ var MetadataView = React.createClass({
                         </div>
                         <div className="metadata-ocid">
                             <span>{lang.disclosure_mode}</span>
-                            <span>{this.props.metadata.get("publisher_type") || "-"}</span>
+                            <span>{this.getDisclosureMode(this.props.metadata.get("publisher_type"))}</span>
                         </div>
                         {annexes_missing}
                         {pages_missing}

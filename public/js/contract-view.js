@@ -29809,6 +29809,13 @@ var MetadataView = React.createClass({displayName: "MetadataView",
 
         return resLang;
     },
+    getDisclosureMode :  function(disclosure)
+    {
+        if(langDisclosure[disclosure]){
+            return langDisclosure[disclosure];
+        }
+        return "-";
+    },
     render: function () {
         var showLabel = lang.show_more;
         if (this.state.showMoreMetadata) {
@@ -29843,12 +29850,12 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                         return React.createElement('a', {
                             href: app_url + "/search?q=&contract_type%5B%5D=" + contractType,
                             key: i
-                        }, contractType + ' | ');
+                        }, langContractType[contractType] + ' | ');
                     } else {
                         return React.createElement('a', {
                             href: app_url + "/search?q=&contract_type%5B%5D=" + contractType,
                             key: i
-                        }, contractType);
+                        }, langContractType[contractType]);
                     }
                 });
             }
@@ -29890,6 +29897,7 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                 ));
             }
 
+
             return (
                 React.createElement("div", {id: "metadata"}, 
                     React.createElement("div", {className: "note-wrapper"}, 
@@ -29918,9 +29926,7 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                         ), 
                         React.createElement("div", {className: "metadata-type-contract"}, 
                             React.createElement("span", null, lang.type_contract), 
-                            React.createElement("span", null, 
-                               contractType
-                            )
+                            React.createElement("span", null, contractType)
                         ), 
                         React.createElement("div", {className: "metadata-ocid"}, 
                             React.createElement("span", null, lang.open_contracting_id), 
@@ -29928,7 +29934,7 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                         ), 
                         React.createElement("div", {className: "metadata-ocid"}, 
                             React.createElement("span", null, lang.disclosure_mode), 
-                            React.createElement("span", null, this.props.metadata.get("publisher_type") || "-")
+                            React.createElement("span", null, this.getDisclosureMode(this.props.metadata.get("publisher_type")))
                         ), 
                         annexes_missing, 
                         pages_missing, 

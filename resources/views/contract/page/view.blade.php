@@ -108,6 +108,8 @@
         };
 
         var lang =  {!!  json_encode(trans('annotation')) !!};
+        var langDisclosure =  {!!  json_encode(trans('codelist/disclosure')) !!};
+        var langContractType = {!! json_encode(trans('codelist/contract_type')) !!};
         var langResource =  {!!  json_encode(trans('resources')) !!};
         var email = '<?php echo $contact_email; ?>';
         var back_url = '{!!$back!!}';
