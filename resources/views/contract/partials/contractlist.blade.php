@@ -63,7 +63,7 @@ if($route=="contracts" && isset($url['year']))
                 $link = sprintf('/contract/%s#annotations', $contract->open_contracting_id);
                 ?>
                 @if($annotations->total>0)
-                    <div class="annotate-text" data-popover="true" data-html=true data-content="@lang('global.annotated' , ['link' => url($link)])"></div>
+                    <div class="annotate-text" data-popover="true" data-html=true data-content="@if(env('CATEGORY')=='rc')@lang('global.annotated' , ['link' => url($link)]) @else @lang('global.annotated_no_link') @endif "></div>
                 @endif
 
                 <div class="search-text">
