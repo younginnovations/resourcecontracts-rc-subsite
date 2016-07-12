@@ -30816,12 +30816,12 @@ var AnnotationTopicList = React.createClass({displayName: "AnnotationTopicList",
         return (
             React.createElement("div", {className: "annotations-topic-list"}, 
                 React.createElement("span", {className: "selected-topic", onClick: this.handleClick.bind(this,'All')}, lang.all), 
-                React.createElement("span", {onClick: this.handleClick.bind(this,'General')}, lang.general), 
-                React.createElement("span", {onClick: this.handleClick.bind(this,'Environment')}, lang.environment), 
-                React.createElement("span", {onClick: this.handleClick.bind(this,'Fiscal')}, lang.fiscal), 
-                React.createElement("span", {onClick: this.handleClick.bind(this,'Operations')}, lang.operations), 
-                React.createElement("span", {onClick: this.handleClick.bind(this,'Social')}, lang.social), 
-                React.createElement("span", {onClick: this.handleClick.bind(this,'Other')}, lang.legal_rules)
+                React.createElement("span", {onClick: this.handleClick.bind(this,'general')}, lang.general), 
+                React.createElement("span", {onClick: this.handleClick.bind(this,'environment')}, lang.environment), 
+                React.createElement("span", {onClick: this.handleClick.bind(this,'fiscal')}, lang.fiscal), 
+                React.createElement("span", {onClick: this.handleClick.bind(this,'operations')}, lang.operations), 
+                React.createElement("span", {onClick: this.handleClick.bind(this,'social')}, lang.social), 
+                React.createElement("span", {onClick: this.handleClick.bind(this,'legal_rules')}, lang.legal_rules)
             )
         );
     }
@@ -31218,7 +31218,11 @@ var AnnotationItem = React.createClass({displayName: "AnnotationItem",
         return className;
     },
     getCluster: function () {
-        return this.state.annotationList[0].get('cluster');
+        return this.getSlugName(this.state.annotationList[0].get('cluster'));
+    },
+    getSlugName :function(string)
+    {
+        return string.toLowerCase().trim().replace(' ', '_');
     },
     render: function () {
         var currentAnnotationClass = (this.state.highlight) ? "annotation-item selected-annotation" : "annotation-item";

@@ -311,14 +311,13 @@ use Illuminate\Support\Facades\Lang;
 
                         <?php $supportingContracts = _e($contract->metadata, 'associated', []);?>
                         @foreach($contract->metadata->associated as $supportingContract)
-                            <tr>
-                                <td width="70%">
-                                    @if($supportingContract->is_published==1)
-                                        <a href="{{route('contract.detail',['id'=>$supportingContract->open_contracting_id])}}"> {{$supportingContract->name}}</a>
-                                    @endif
-                                </td>
-
-                            </tr>
+                            @if($supportingContract->is_published==1)
+                                <tr>
+                                    <td width="70%">
+                                            <a href="{{route('contract.detail',['id'=>$supportingContract->open_contracting_id])}}"> {{$supportingContract->name}}</a>
+                                    </td>
+                                </tr>
+                            @endif
                         @endforeach
 
                         @if(empty($contract->metadata->parent) && empty($contract->metadata->associated))
@@ -413,7 +412,7 @@ use Illuminate\Support\Facades\Lang;
                                 <div class="annotation-category-cluster">
                                     <ul>
                                         @foreach($contract->annotationsCluster as $cluster=>$value)
-                                            <li><a href="#cluster-{{str_slug($cluster,40)}}"> @lang('annotation.'.strtolower($cluster))</a></li>
+                                            <li><a href="#cluster-{{str_slug($cluster,'-')}}">  {{_l('annotation', snake_case($cluster))}}</a></li>
                                         @endforeach
                                     </ul>
 
@@ -427,7 +426,7 @@ use Illuminate\Support\Facades\Lang;
 
                                     <div id="cluster-{{str_slug($cluster,'-')}}" class="cluster-wrap">
                                         <div class="category-title">
-                                            @lang('annotation.'.strtolower($cluster))
+                                           {{_l('annotation', snake_case($cluster))}}
                                         </div>
                                         <?php ksort($annotations);?>
                                         @foreach($annotations as $annotation)
