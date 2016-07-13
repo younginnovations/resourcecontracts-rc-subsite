@@ -38,7 +38,7 @@
                 <a class="navbar-brand" href={{url('/')}} >{{env('CATEGORY')=='rc' ? 'Resource' : 'Openland' }}<span class="beta">Beta</span><span>Contracts</span></a>
             </div>
 
-            <div class="col-sm-12 col-md-9 col-lg-10 navbar-right">
+            <div class="right-header-section navbar-right">
                     @include('layout.partials.search')
             </div>
 

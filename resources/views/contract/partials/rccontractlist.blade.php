@@ -108,7 +108,7 @@ if ($path[0] == "resource") {
         </tr>
     @empty
         <tr>
-            <td colspan="2">@lang('search.search_not_found')</td>
+            <td colspan="100%">@lang('search.search_not_found')</td>
         </tr>
     @endforelse
     </tbody>

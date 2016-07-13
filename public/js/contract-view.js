@@ -30552,7 +30552,7 @@ var TextSearchResultRow = React.createClass({displayName: "TextSearchResultRow",
         }
         texToShow = React.createElement(HighLight, {text: texToShow});
         more = (React.createElement("a", {onClick: this.handleClickLessMore}, more));
-        textToReturn = (React.createElement("span", null, " ", React.createElement("span", {onClick: this.handleClick}, " ", texToShow, " "), " ", more, " "));
+        textToReturn = (React.createElement("span", null, " ", React.createElement("span", {className: "link", onClick: this.handleClick}, " ", texToShow, " "), " ", more, " "));
         return textToReturn;
     },
     handleClick: function () {
@@ -30595,7 +30595,7 @@ var TextSearchResultRow = React.createClass({displayName: "TextSearchResultRow",
     render: function () {
         var text = this.highlightSearchQuery(this.props.resultRow.get("text"), this.props.contractApp.getSearchQuery());
         var type = "<span class='text' title='Text'>Text</span>";
-        text = "<span>Pg " + this.props.resultRow.get("page_no") + "&nbsp;" + text + "</span>" + type;
+        text = "<span class='link'>Pg " + this.props.resultRow.get("page_no") + "&nbsp;" + text + "</span>" + type;
         if (this.props.resultRow.get("type") == "annotation") {
             type = "<span class='annotations' title='Annotation'>" + lang.annotation + "</span>";
             text = this.getShowText(this.props.contractApp.getSearchQuery());
@@ -30603,14 +30603,14 @@ var TextSearchResultRow = React.createClass({displayName: "TextSearchResultRow",
 
         if (this.props.resultRow.get('type') == "annotation") {
             return (
-                React.createElement("div", {className: "search-result-row link"}, 
+                React.createElement("div", {className: "search-result-row"}, 
                     text, " ", React.createElement("span", {dangerouslySetInnerHTML: {__html: type}})
                 )
             );
         }
         else {
             return (
-                React.createElement("div", {className: "search-result-row link", onClick: this.handleClick}, 
+                React.createElement("div", {className: "search-result-row", onClick: this.handleClick}, 
                     React.createElement("span", {dangerouslySetInnerHTML: {__html: text}})
                 )
             );

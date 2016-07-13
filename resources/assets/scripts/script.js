@@ -201,6 +201,22 @@ $(document).ready(function () {
         }
     });
 
+    var calWidth = function(){
+        var rightWidth = $(".navbar-header").outerWidth(),
+            leftWidth = $(window).width() - rightWidth;
+        $(".right-header-section").width(leftWidth - 50);
+        $(".navbar .search-input-wrapper").width(leftWidth - 22);
+    }
+    if($(window).width() > 768) {
+        calWidth();
+    }
+
+    $(window).resize(function(){
+        if($(window).width() > 768) {
+            calWidth();
+        }
+    });
+
     $(document).click(function (e) {
         if (!$(e.target).closest('.download-wrap, .dropdown-menu').length) {
             $(".dropdown-menu").hide();
@@ -301,24 +317,27 @@ $(document).ready(function () {
         }
     });
 
-    function showFullTitle(){
+    function showFullTitle() {
         //check if the div has ellipsis or not
         $("#show-full-title").on({
             mouseenter: function () {
                 //stuff to do on mouse enter
-                if ($('#show-full-title')[0].scrollWidth >  $('#show-full-title').innerWidth()) {
-                    if($(".title-pop").length < 1) {
-                        $("#show-full-title").append('<div class="title-pop">' + $('#show-full-title').html().trim() + '</div>');
-                    }
-                    $('#show-full-title').addClass("show-full-title");
+                if ($('#show-full-title')[0].scrollWidth > $('#show-full-title').innerWidth()) {
+                    $("#show-full-title").addClass("title-pop");
                 }
+                /*if ($('#show-full-title')[0].scrollWidth >  $('#show-full-title').innerWidth()) {
+                 if($(".title-pop").length < 1) {
+                 $("#show-full-title").append('<div class="title-pop">' + $('#show-full-title').html().trim() + '</div>');
+                 }
+                 $('#show-full-title').addClass("show-full-title");
+                 }*/
             },
             mouseleave: function () {
                 //stuff to do on mouse leave
-                $('#show-full-title').removeClass("show-full-title");
+                //$('#show-full-title').removeClass("show-full-title");
+                $("#show-full-title").removeClass("title-pop");
             }
         });
-
     }
 
     showFullTitle();
@@ -326,6 +345,5 @@ $(document).ready(function () {
     $(window).resize(function(){
         showFullTitle();
     });
-
 
 });

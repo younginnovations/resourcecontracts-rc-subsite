@@ -93,6 +93,8 @@ gulp.task('sass', function () {
  */
 gulp.task('watch', function () {
     gulp.watch('./resources/assets/scss/*-style.scss', ['sass']);
+    gulp.watch('./resources/assets/scss/contract-view.scss', ['sass']);
+    gulp.watch('./resources/assets/scss/responsive.scss', ['sass']);
     gulp.watch('./resources/assets/scss/style.scss', ['sass']);
     gulp.watch(base_script, ['js-base']);
     gulp.watch(country_script, ['js-country']);

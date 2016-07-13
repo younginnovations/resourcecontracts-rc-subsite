@@ -204,7 +204,7 @@ if($route=="contracts" && isset($url['year']))
         </tr>
     @empty
         <tr>
-            <td colspan="6" class="search-not-found">@lang('search.search_not_found' , ['link' => route('contracts')])</td>
+            <td colspan="100%" class="search-not-found">@lang('search.search_not_found' , ['link' => route('contracts')])</td>
         </tr>
     @endforelse
     </tbody>
