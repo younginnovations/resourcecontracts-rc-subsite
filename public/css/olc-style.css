@@ -3257,8 +3257,7 @@ input.select2-search__field {
 
 .annotation-item {
   font-size: 12px;
-  border: 0;
-  padding: 10px 20px 0; }
+  border: 0; }
   .annotation-item .annotation-category-en {
     cursor: pointer;
     color: rgba(64, 64, 64, 0.7);
@@ -3273,10 +3272,10 @@ input.select2-search__field {
     display: inline-block;
     width: 90%;
     line-height: 18px; }
+  .annotation-item .annotation-page {
+    margin: 0 18px; }
 
 .annotations-list {
-  background: #f0f0f0;
-  border: 1px solid #e6e6e6;
   margin: 5px 18px; }
 
 .annotation-item .annotation-cluster,
@@ -3303,27 +3302,22 @@ div > .annotation-item:first-of-type .annotation-cluster {
           box-shadow: none !important;
   padding-top: 0 !important; }
 
-.selected-annotation {
-  border: 1px solid #C5C5C5;
-  background: #F4F4F4;
-  -webkit-box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
-  -webkit-border-top-right-radius: 4px;
-          border-top-right-radius: 4px;
-  -webkit-border-bottom-right-radius: 4px;
-          border-bottom-right-radius: 4px; }
-
 .search-results-list {
   padding: 18px; }
 
-.search-result-row {
-  border-bottom: 1px solid rgba(220, 223, 226, 0.7);
+.search-result-row,
+.annotation-item {
   word-wrap: break-word;
   padding: 18px 0;
   clear: both;
   overflow: hidden;
   position: relative; }
-  .search-result-row:hover {
+  .search-result-row:not(:last-child),
+  .annotation-item:not(:last-child) {
+    border-bottom: 1px solid rgba(220, 223, 226, 0.7); }
+  .search-result-row.selected-annotation, .search-result-row:hover,
+  .annotation-item.selected-annotation,
+  .annotation-item:hover {
     -webkit-box-shadow: 18px 0 0 #dfdfdf,-18px 0 0 #dfdfdf;
             box-shadow: 18px 0 0 #dfdfdf,-18px 0 0 #dfdfdf;
     background: #dfdfdf; }
@@ -3345,7 +3339,9 @@ div > .annotation-item:first-of-type .annotation-cluster {
 
 .search-result-title {
   width: -webkit-calc(100% - 42px);
-  width: calc(100% - 42px); }
+  width: calc(100% - 42px);
+  float: left;
+  margin-bottom: 18px; }
 
 .right-column-view {
   font-size: 12px;
