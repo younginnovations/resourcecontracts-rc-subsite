@@ -132,12 +132,12 @@ var AnnotationTopicList = React.createClass({
         return (
             <div className="annotations-topic-list">
                 <span className="selected-topic" onClick={this.handleClick.bind(this,'All')}>{lang.all}</span>
-                <span onClick={this.handleClick.bind(this,'General')}>{lang.general}</span>
-                <span onClick={this.handleClick.bind(this,'Environment')}>{lang.environment}</span>
-                <span onClick={this.handleClick.bind(this,'Fiscal')}>{lang.fiscal}</span>
-                <span onClick={this.handleClick.bind(this,'Operations')}>{lang.operations}</span>
-                <span onClick={this.handleClick.bind(this,'Social')}>{lang.social}</span>
-                <span onClick={this.handleClick.bind(this,'Other')}>{lang.legal_rules}</span>
+                <span onClick={this.handleClick.bind(this,'general')}>{lang.general}</span>
+                <span onClick={this.handleClick.bind(this,'environment')}>{lang.environment}</span>
+                <span onClick={this.handleClick.bind(this,'fiscal')}>{lang.fiscal}</span>
+                <span onClick={this.handleClick.bind(this,'operations')}>{lang.operations}</span>
+                <span onClick={this.handleClick.bind(this,'social')}>{lang.social}</span>
+                <span onClick={this.handleClick.bind(this,'legal_rules')}>{lang.legal_rules}</span>
             </div>
         );
     }
@@ -534,7 +534,11 @@ var AnnotationItem = React.createClass({
         return className;
     },
     getCluster: function () {
-        return this.state.annotationList[0].get('cluster');
+        return this.getSlugName(this.state.annotationList[0].get('cluster'));
+    },
+    getSlugName :function(string)
+    {
+        return string.toLowerCase().trim().replace(' ', '_');
     },
     render: function () {
         var currentAnnotationClass = (this.state.highlight) ? "annotation-item selected-annotation" : "annotation-item";
