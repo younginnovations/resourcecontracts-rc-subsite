@@ -1,26 +1,3 @@
-.navigation > a:nth-child(2) {
-    background-position: -474px 13px;
-}
-
-.navigation > a:nth-child(3) {
-    background: url(../images/ic-nav-annotate.png) no-repeat 16px 14px;
-}
-
-.navigation > a:nth-child(4) {
-    background: url(../images/ic-nav-metadata.png) no-repeat 16px 14px;
-}
-
-.navigation > a:hover {
-    opacity: 1;
-    background-color: #f0f0f0;
-}
-
-.navigation > a.active {
-    opacity: 1;
-    border-bottom: 1px solid transparent;
-    margin-bottom: -1px;
-    background-color: #f0f0f0;
-}
 
 .metadata-toggle-button span {
     background: #4797DF url(../images/metadata-trigger.png) no-repeat center;
@@ -386,15 +363,6 @@
 
 #content {
     min-height: 400px;
-}
-
-.navbar-header {
-   /* border-right: 1px solid rgb(220, 223, 226);
-    border-right: 1px solid rgba(220, 223, 226, 0.7);*/
-}
-
-.navbar-brand span:first-of-type {
-    color: #F37356;
 }
 
 .navbar-brand, .navbar-brand:hover {

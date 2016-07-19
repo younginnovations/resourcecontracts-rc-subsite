@@ -7,5 +7,9 @@ return [
     'publish_contracts' => 'Publish Contracts',
     'contact'           => 'Contact',
     'licensed'          => 'Content is licensed under Attribution-ShareAlike 4.0 International',
-
+    'founding_partners' => 'Founding Partners',
+    'donors'            => 'Donors',
+    'content_partner'   => 'Content Partner',
+    'menu'              => 'Menu',
+    'faqs'              => 'FAQs',
 ];

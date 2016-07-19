@@ -29890,6 +29890,17 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                 ));
             }
 
+            var countryBlock = '';
+
+            if(!isSite('country'))
+            {
+                countryBlock =(React.createElement("div", {className: "metadata-country"}, 
+                                    React.createElement("span", null, lang.country), 
+                                            React.createElement("span", null, 
+                                                React.createElement("a", {href: countryLink}, getCountryName(this.props.metadata.get("country").code))
+                                            )
+                                ));
+            }
             return (
                 React.createElement("div", {id: "metadata"}, 
                     React.createElement("div", {className: "note-wrapper"}, 
@@ -29900,12 +29911,7 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                         React.createElement("div", null, 
                             lang.metadata
                         ), 
-                        React.createElement("div", {className: "metadata-country"}, 
-                            React.createElement("span", null, lang.country), 
-                            React.createElement("span", null, 
-                                React.createElement("a", {href: countryLink}, getCountryName(this.props.metadata.get("country").code))
-                            )
-                        ), 
+                        countryBlock, 
                         React.createElement("div", {className: "metadata-signature-year"}, 
                             React.createElement("span", null, lang.signature_year), 
                             React.createElement("span", null, 

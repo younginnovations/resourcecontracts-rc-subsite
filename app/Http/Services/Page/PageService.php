@@ -37,6 +37,7 @@ Class PageService
      *
      * @param      $page
      * @param bool $array
+     *
      * @return null|object
      */
     public function get($page, $array = false)
@@ -52,8 +53,10 @@ Class PageService
 
     /**
      * Save Page
+     *
      * @param       $page_id
      * @param array $content
+     *
      * @return bool
      * @internal param $page
      */
@@ -70,6 +73,7 @@ Class PageService
      * Find page
      *
      * @param $id
+     *
      * @return Page
      */
     public function find($id)
@@ -81,6 +85,7 @@ Class PageService
      * Create new Page
      *
      * @param $input
+     *
      * @return static
      */
     public function create($input)
@@ -88,9 +93,23 @@ Class PageService
         $input = [
             'title'   => (object) $input['title'],
             'content' => (object) $input['content'],
-            'slug'    => str_slug($input['title']['en'])
+            'slug'    => str_slug($input['title']['en']),
         ];
 
         return $this->page->create($input);
+    }
+
+    /**
+     * Delete the page.
+     *
+     * @param $id
+     *
+     * @return bool|null
+     */
+    public function destroy($id)
+    {
+        $pageId = $this->find($id);
+
+        return $pageId->delete();
     }
 }

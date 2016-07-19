@@ -10,5 +10,8 @@ return [
     'country_description'   => "إيجاد عقود موارد من بلد -",
     'resources_description' => "إيجاد عقود موارد لموارد مختلفة -",
     'resource_description'  => "إيجاد عقود موارد لمورد -",
-
+    'tagline'               => '<p class="repo-description">دليل لل </p> <div class="large-title"><span>عقود البترول والثروة المعدنية</span></div>',
+    'intro_text'            => 'في استخراج واستغلال الثروات البترولية والتعدينية ، يتم تعريف العلاقة بين الحكومات و النفط والغاز و شركات التعدين التي العقود والاتفاقيات و عقود الإيجار والتنازلات .',
+    'associated_documents'    => "عقود",
+    'about'                 => 'About OpenLandContracts',
 ];

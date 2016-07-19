@@ -10,9 +10,17 @@ use Illuminate\Http\Request;
 class LocalizationService
 {
     /**
-     * @var
+     * @var Request
      */
     protected $request;
+    /**
+     * @var string
+     */
+    protected $key = 'lang';
+    /**
+     * @var string
+     */
+    protected $defaultLang = "en";
 
     /**
      * @param Request $request
@@ -23,26 +31,41 @@ class LocalizationService
     }
 
     /**
-     * @var string
+     * Determine if Language is enabled.
+     *
+     * @return bool
      */
-    protected $key = 'lang';
-    protected $defaultLang = "en";
+    public function isEnabled()
+    {
+        return config('localisation');
+    }
+
+    /**
+     * Get list of available languages
+     *
+     * @return array
+     */
+    public function getAllLang()
+    {
+        return config('language');
+    }
 
     /**
      * Get Language code
      *
      * @param null $lang
+     *
      * @return string
      */
     public function getLanguage($lang = null)
     {
-
         $availableLang = config('language');
         $browserLang   = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+
         if (!isset($_COOKIE[$this->key]) && array_key_exists($browserLang, $availableLang)) {
             $lang = $browserLang;
         }
-        
+
         if (is_null($lang)) {
             $lang = isset($_COOKIE[$this->key]) ? $_COOKIE[$this->key] : $this->defaultLang;
         }
@@ -58,6 +81,7 @@ class LocalizationService
      * Set Language code
      *
      * @param $lang
+     *
      * @return Void
      */
     public function setLanguage($lang)
@@ -73,6 +97,7 @@ class LocalizationService
      * Check for valid lang code
      *
      * @param $lang
+     *
      * @return string
      */
     public function isValidLangCode($lang)
@@ -89,13 +114,29 @@ class LocalizationService
     /**
      * Get Current Language Code
      *
+     * @param string $key
+     *
      * @return string
      */
-    public function getCurrentLang()
+    public function getCurrentLang($key = 'code')
     {
-        return app('translator')->getLocale();
+        $currentLang = app('translator')->getLocale();
+
+        if ($key != 'code') {
+            $lang = $this->getAllLang();
+
+            return isset($lang[$currentLang][$key]) ? $lang[$currentLang][$key] : '';
+        }
+
+        return $currentLang;
     }
 
+
+    /**
+     * Get Content Direction
+     *
+     * @return string
+     */
     public function getDirection()
     {
         $lang = $this->getCurrentLang();
@@ -103,6 +144,4 @@ class LocalizationService
 
         return $info['dir'];
     }
-
-
 }

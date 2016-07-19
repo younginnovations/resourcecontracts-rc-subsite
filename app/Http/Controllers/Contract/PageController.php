@@ -4,12 +4,16 @@ use App\Http\Services\APIService;
 use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
+/**
+ * Class PageController
+ * @package App\Http\Controllers\Contract
+ */
 class PageController extends BaseController
 {
     /**
      * @var APIService
      */
-    private $api;
+    protected $api;
     /**
      * @var Request
      */
@@ -27,8 +31,10 @@ class PageController extends BaseController
 
     /**
      * Get Page Text
+     *
      * @param         $contractId
-     * @return json
+     *
+     * @return string
      */
     public function getText($contractId)
     {
@@ -40,8 +46,10 @@ class PageController extends BaseController
 
     /**
      * Get Search  Text
+     *
      * @param         $contractId
-     * @return json
+     *
+     * @return string
      */
     public function search($contractId)
     {
@@ -50,8 +58,7 @@ class PageController extends BaseController
 
     /**
      * Get Annotations
-     * @param  $contractId
-     * @return json
+     * @return string
      */
     public function annotations()
     {
@@ -68,8 +75,10 @@ class PageController extends BaseController
 
     /**
      * Get All Page Text
+     *
      * @param         $contractId
-     * @return json
+     *
+     * @return string
      */
     public function getAllText($contractId)
     {

@@ -159,6 +159,17 @@ var MetadataView = React.createClass({
                 </div>);
             }
 
+            var countryBlock = '';
+
+            if(!isSite('country'))
+            {
+                countryBlock =(<div className="metadata-country">
+                                    <span>{lang.country}</span>
+                                            <span>
+                                                <a href={countryLink}>{getCountryName(this.props.metadata.get("country").code)}</a>
+                                            </span>
+                                </div>);
+            }
             return (
                 <div id="metadata">
                     <div className="note-wrapper">
@@ -169,12 +180,7 @@ var MetadataView = React.createClass({
                         <div>
                             {lang.metadata}
                         </div>
-                        <div className="metadata-country">
-                            <span>{lang.country}</span>
-                            <span>
-                                <a href={countryLink}>{getCountryName(this.props.metadata.get("country").code)}</a>
-                            </span>
-                        </div>
+                        {countryBlock}
                         <div className="metadata-signature-year">
                             <span>{lang.signature_year}</span>
                             <span>

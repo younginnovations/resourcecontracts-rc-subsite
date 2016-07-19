@@ -1,0 +1,463 @@
+/* -------------------- ------------------------ --------------------*/
+/* -------------------- style for table           -------------------- */
+
+.table {
+  > {
+    tbody > tr {
+      &:only-child {
+        border: 0;
+      }
+      td {
+        @extend %extend_1;
+        &:first-child {
+          @extend %extend_2;
+        }
+        &.no-data {
+          background: none !important;
+          padding-left: 30px !important;
+          border: 0;
+          min-width: inherit;
+          width: inherit;
+          border: 0;
+        }
+        > a {
+          color: $color_cape_cod_approx;
+        }
+      }
+      th {
+        @extend %extend_1;
+        > a {
+          color: $color_cape_cod_approx;
+        }
+      }
+    }
+    tfoot > tr > {
+      td {
+        @extend %extend_1;
+      }
+      th {
+        @extend %extend_1;
+      }
+    }
+    thead > tr > {
+      td {
+        @extend %extend_1;
+      }
+      th {
+        @extend %extend_1;
+        font-family: $font_1;
+        font-weight: normal;
+        text-transform: uppercase;
+        color: $color_cape_cod_60_approx;
+        font-size: 12px;
+        border-bottom: 1px solid $color_gray_nurse_approx;
+        padding: 8px 44px 8px 10px;
+        white-space: nowrap;
+        &:first-child {
+          @extend %extend_2;
+        }
+      }
+    }
+  }
+  .label-default {
+    background: $color_mercury_approx;
+    width: 30px;
+    line-height: 18px;
+    height: 18px;
+    //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+    border-radius: 9px;
+    font-size: 11px;
+    text-align: center;
+    margin-left: 10px;
+    color: $color_cape_cod_60_approx;
+    font-weight: normal;
+    padding: 0;
+    display: inline-block;
+  }
+  tr:first-of-type td {
+    border: 0;
+  }
+}
+
+//@extend-elements
+//original selectors
+//.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th
+%extend_1 {
+  border-top: 1px solid $color_gray_nurse_approx;
+  padding: 14px 14px 14px 10px;
+  line-height: 22px;
+}
+
+//original selectors
+//.table > thead > tr > th:first-child, .table > tbody > tr > td:first-child
+%extend_2 {
+  padding: 8px 0 8px 32px;
+  width: 54px;
+  min-width: 54px;
+}
+
+//original selectors
+//.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th
+%extend_31 {
+  padding-top: 14px;
+  padding-left: 50%;
+  padding-bottom: 14px;
+}
+
+.table.table-associated-contract > tbody > tr td:first-child{
+  width: auto;
+  min-width: 54px;
+}
+
+//original selectors
+//.search-list-wrapper td:first-child > a, .table-contract td:first-child > a
+%extend_23 {
+  font-size: 14px;
+  float: left;
+  line-height: 22px;
+}
+
+.panel-wrap {
+  padding: 50px 0 30px;
+  box-shadow: none;
+  border: 0;
+  border-radius: 0;
+  margin-bottom: 0;
+  background: transparent;
+  ul {
+    padding: 0;
+    margin: 0;
+    li {
+      list-style: none;
+    }
+  }
+  .panel-heading {
+    font: 22px/28px $font_2;
+    margin: 0 0 10px;
+    background: transparent;
+    padding: 0 0 0 36px;
+    border: 0;
+    cursor: pointer;
+  }
+  .panel-body {
+    padding: 0;
+  }
+}
+
+.panel-content {
+  padding: 0;
+  box-shadow: none;
+  border: 0;
+  .panel-heading {
+    @extend %extend_25;
+  }
+  .panel-body {
+    @extend %extend_26;
+  }
+  p {
+    @extend %extend_27;
+  }
+  strong {
+    font-family: $font_1;
+  }
+  label {
+    font-family: $font_1;
+    vertical-align: top;
+  }
+  ol {
+    padding-left: 20px;
+    > li {
+      font-family: $font_1;
+      > *:not(label) {
+        font-family: $font_0;
+      }
+    }
+  }
+  ul {
+    padding-left: 20px;
+    padding-bottom: 14px;
+    li {
+      list-style-type: disc;
+      padding-bottom: 6px;
+    }
+  }
+}
+
+.country-contract-wrap {
+  position: relative;
+  .panel-heading {
+    cursor: auto;
+  }
+}
+
+.country-detail-wrapper {
+  @media all and (min-width: 480px){
+    padding: 0;
+  }
+  > div {
+    padding: 0;
+    > div {
+      min-height: 500px;
+    }
+  }
+}
+
+.table-contract {
+  td {
+    &:not(:first-child) {
+      font-size: 14px;
+    }
+    &:not(:nth-child(2)) {
+      font-size: 12px;
+      color: $color_cape_cod_70_approx;
+    }
+    > ul {
+      margin-left: 14px;
+      li {
+        list-style: inherit;
+        text-indent: -6px;
+      }
+    }
+  }
+  &:first-child > a {
+    @extend %extend_23;
+  }
+  tbody td:first-child {
+    background: $url_5 no-repeat 36px 16px;
+    padding-left: 60px;
+  }
+}
+
+.contract-year-list {
+  padding: 0;
+  background: $color_wild_sand_approx;
+}
+
+.contract-year-wrap {
+  background: $color_wild_sand_approx;
+  padding-bottom: 60px;
+  .panel-heading {
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 60px;
+  }
+  .panel-body {
+    padding-left: 36px;
+  }
+}
+
+.search-container {
+  min-height: 300px;
+}
+
+#resources {
+  padding-top: 0 !important;
+  > {
+    div {
+      border-bottom: 1px solid $color_iron_approx;
+      border-bottom: 1px solid $color_iron_70_approx;
+      padding: 20px 36px;
+      border-right: 1px solid $color_iron_70_approx;
+      overflow: hidden;
+      margin-top: 0;
+    }
+    .col-lg-4:first-child {
+      padding-top: 0;
+    }
+  }
+}
+
+.search-text {
+  font-size: 13px;
+  word-wrap: break-word;
+  clear: both;
+  color: $color_cape_cod_70_approx;
+  margin-top: 4px;
+  span {
+    color: $color_cape_cod_70_approx !important;
+  }
+  p {
+    margin-bottom: 5px;
+    a {
+      color: inherit;
+      &:hover {
+        color: $color_link_color;
+      }
+    }
+  }
+  strong {
+    font-family: $font_1;
+  }
+}
+
+.contract-group {
+  label {
+    font-style: italic;
+    color: $color_cape_cod_50_approx;
+    font-size: 1px;
+  }
+  font-size: 11px;
+  color: $color_mountain_mist_approx;
+  background: $color_cape_cod_approx;
+  background: $color_cape_cod_10_approx;
+  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+  border-radius: 11px;
+  display: inline-block;
+  padding: 0 12px;
+  margin-left: 4px;
+  &:hover {
+    text-decoration: none;
+    background: $color_cape_cod_20_approx;
+    color: $color_cape_cod_approx !important;
+  }
+}
+
+.contract-date {
+  min-width: 150px;
+}
+
+td.contract-date {
+  min-width: 100%;
+}
+
+.contract-type {
+  font-size: 12px;
+}
+
+
+
+.search-list-wrapper {
+  margin-top: 40px;
+  td {
+    &:nth-child(3) {
+      min-width: 140px;
+    }
+    &:first-child {
+      color: $color_boulder_approx;
+      font-size: 12px;
+      line-height: 20px;
+      overflow: hidden;
+      > a {
+        @extend %extend_23;
+      }
+    }
+  }
+  .country-list-wrap {
+    padding: 0 0 30px !important;
+  }
+  .search-input-wrapper {
+    top: 43px;
+  }
+}
+
+.pagination-wrapper {
+  margin-top: 30px;
+  ul {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    li {
+      list-style: none;
+      display: inline-block;
+      a {
+        font-size: 12px;
+        color: $color_cape_cod_approx;
+        width: 24px;
+        line-height: 24px;
+        display: block;
+        text-align: center;
+      }
+      &.active a {
+        //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+        border-radius: 50%;
+        background: $color_cape_cod_approx;
+        color: $white;
+        text-decoration: none;
+      }
+      &.num-text{
+        a{
+          width: auto;
+        }
+      }
+    }
+  }
+}
+
+.num-text {
+  margin-left: 10px;
+  &.first {
+    margin-left: 0;
+  }
+  &.next {
+    margin-left: 0;
+  }
+}
+
+.table-responsive {
+  border: 0;
+}
+
+.table-contract-list {
+  input[type="checkbox"] {
+    float: left;
+    margin-left: -49px;
+    margin-top: 5px;
+  }
+  td:first-child {
+    background-position: 50px 33px;
+    padding-left: 60px;
+    > a {
+      padding-left: 13px;
+    }
+  }
+  th {
+    a {
+      position: relative;
+      display: inline-block;
+      &:before {
+        content: "";
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-bottom: 4px solid #404040;
+        border-bottom: 4px solid rgba(64, 64, 64, 0.2);
+        position: absolute;
+        top: 5px;
+        right: -12px;
+      }
+      &:after {
+        content: "";
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-top: 4px solid #404040;
+        border-top: 4px solid rgba(64, 64, 64, 0.2);
+        top: auto;
+        position: absolute;
+        bottom: 7px;
+        right: -12px;
+      }
+    }
+    .fa-sort-desc, .fa-sort-asc {
+      position: absolute;
+      bottom: 14px;
+      right: -12px;
+      width: 8px;
+      height: 4px;
+    }
+  }
+  td:nth-child(3) {
+    min-width: inherit !important;
+  }
+}
+
+.table-contract-list td {
+  word-break: break-word;
+}
+
+.table td > a {
+  font-family: $font_1;
+  margin-right: 4px;
+}
+
+tr:empty {
+  display: none;
+}
