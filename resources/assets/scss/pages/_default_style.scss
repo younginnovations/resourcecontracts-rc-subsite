@@ -62,6 +62,20 @@ $color_valencia_approx: #d43f3a;
 $color_persian_red_approx: #c9302c;
 $color_mexican_red_approx: #ac2925;
 $mercury: #e5e5e5;
+$color_sea_blue : #288d94;
+$color_light_gray: #e0e0dc;
+$color_danger: #d9534f;
+$color_danger_hover: #d6403b;
+$black: #000;
+$border-color:#bcb5b9;
+$light-black: #484848;
+$cloud: #ebfeff;
+$explore-contracts: #288d94;
+$country-partners: #4a4a4a;
+$icon-border-right: #979797;
+$grey: #171717;
+$dark-grey: #404040;
+
 $img-path: "../images";
 
 //fonts
@@ -69,6 +83,7 @@ $font_0: Open-Sans-Regular;
 $font_1: Open-Sans-Bold;
 $font_2: Open-Sans-Light;
 $font_3: Open-Sans-Regular !important;
+$font_4: Open-Sans-Italic;
 
 //urls
 $url_2: url(../../images/ic-sprite.png);
@@ -96,6 +111,7 @@ a{
 @include font-face($font_0, "../../fonts/opensans-regular-webfont", $file-formats: eot svg woff woff2);
 @include font-face($font_1, "../../fonts/opensans-bold-webfont", $file-formats: eot svg woff woff2);
 @include font-face($font_2, "../../fonts/opensans-light-webfont", $file-formats: eot svg woff woff2);
+@include font-face($font_4, "../../fonts/opensans-italic", $file-formats: eot svg tff woff woff2);
 
 html {
   height: 100%;
@@ -137,6 +153,14 @@ body {
   color: $color_cape_cod_70_approx;
   line-height: 48px;
   padding: 0;
+}
+
+//original selectors
+//.country-list-wrap .col-lg-2, .country-list-wrap .col-lg-3
+%extend_12 {
+  text-align: center;
+  margin-top: 60px;
+  min-height: 150px;
 }
 
 //original selectors

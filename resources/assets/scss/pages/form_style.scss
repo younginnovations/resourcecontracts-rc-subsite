@@ -39,7 +39,20 @@
     }
   }
   .form-control::-moz-placeholder {
-    color: $color_cape_cod_50_approx;
+/*    color: $color_cape_cod_50_approx;
+   background: transparent;
+    &:-webkit-input-placeholder {
+      color: #fff;
+    }
+    &:-moz-placeholder {
+      color: #fff;
+    }
+    &:-ms-input-placeholder {
+      color: #fff;
+    }
+  }
+  .form-control::-moz-placeholder {
+    color: #fff;*/
   }
   > .form-group {
     margin: 0;
@@ -118,8 +131,7 @@
 
 /* --------- style for checkbox for annotation ------- */
 
-.search-form{
-
+.search-form,.navbar .search-form{
   input[type='checkbox'] {
     -webkit-appearance:none;
     width:22px;
@@ -170,7 +182,8 @@
   background: url(#{$img-path}/ic-sprite.svg) no-repeat -356px -398px;
   text-indent: -9999px;
   width: 20px;
-  margin: 24px 0;
+  //margin: 24px 0;
+  margin: 30px 0;
   height: 20px;
   box-shadow: none;
 }
@@ -329,14 +342,14 @@
 }
 
 button.search-close {
-  background: $color_pink_swan_approx;
+  background: $color_danger;
   margin-left: 10px;
   &:hover {
-    background: $color_silver_chalice_approx;
+    background: $color_danger_hover;
     color: $white;
   }
   &:focus {
-    background: $color_silver_chalice_approx;
+    background: $color_danger_hover;
     color: $white;
   }
 }
@@ -512,7 +525,7 @@ input.select2-search__field {
 }
 
 .select2-container--classic .select2-selection--multiple .select2-selection__choice {
-  word-break: break-word;
+  word-break: break-all;
 }
 
 .select2-container .select2-selection--multiple {

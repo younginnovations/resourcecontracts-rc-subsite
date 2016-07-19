@@ -11,6 +11,9 @@ $color_russett_approx: #785a53;
 $color_salmon_approx: #f99172;
 $color_copperfield_approx: #df8a71;
 
+$flame-pea: #c2614c;
+$list-item: #9b4f3d;
+$list-bg: #7d3f31;
 
 // url
 $url_1: url(../../images/ic-home-bg.png);
@@ -19,7 +22,8 @@ $url_10: url(../../images/ic-folder.png);
 $url_14: url(../../images/error-bg.png);
 
 // gradients
-$linear_gradient_1: linear-gradient(81deg, $color_cape_cod_approx 1%, $color_russett_approx 100%);
+
+$linear_gradient_1: linear-gradient(-81deg, #291212 1%, #40302C 100%);
 $radial_gradient_1: radial-gradient(50% 79%, $color_salmon_approx 32%, $color_copperfield_approx 79%);
 
 @import "../main.scss";

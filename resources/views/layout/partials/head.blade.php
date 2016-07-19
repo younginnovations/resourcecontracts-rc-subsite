@@ -28,7 +28,10 @@ $langSelect = trans('search.select');
 
 
     <title> {{ meta($meta)->title }}</title>
+    <link href="{{url('css/homepage.min.css')}}" rel="stylesheet">
+
     <link href="{{url('css/style.min.css')}}" rel="stylesheet">
+    {{--<link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css">--}}
 
     @yield('css')
     <!--[if lt IE 9]>

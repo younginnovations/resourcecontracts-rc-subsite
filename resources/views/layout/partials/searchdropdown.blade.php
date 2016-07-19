@@ -103,7 +103,7 @@ $category = $api->getAnnotationsCategory();
                 </div>
             @endif
         </div>
-        <div class="col-lg-12">
+     {{--   <div class="col-lg-12">
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
                 <button type="submit" class="btn btn-form-search">@lang('global.search')</button>
             </div>
@@ -119,6 +119,28 @@ $category = $api->getAnnotationsCategory();
                     <button type="submit" id="searchclear" class="btn btn-form-search btn-form-reset">@lang('search.reset')</button>
                 </div>
             @endif
+        </div>--}}
+
+        <div class="col-lg-12">
+            <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
+                <button type="submit" class="btn btn-form-search">@lang('global.search')</button>
+            </div>
+
+            @if(!isset($searchPage))
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
+                    <button type="reset" id="searchclear"  class="btn btn-form-search btn-form-reset">@lang('search.reset')</button>
+                </div>
+
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
+                    <button type="button" class="btn btn-form-search search-close">@lang('global.cancel')</button>
+                </div>
+
+            @else
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
+                    <a href="{{url('search')}}" class="btn btn-form-search btn-form-reset">@lang('search.reset')</a>
+                </div>
+            @endif
+
         </div>
     </div>
     <script>

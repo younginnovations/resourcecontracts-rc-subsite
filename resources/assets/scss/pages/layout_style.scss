@@ -2,11 +2,10 @@
 /* -------------------- style for navigation bar starts -------------------- */
 
 .trigger {
-  background: $url_2 no-repeat 0 -47px;
-  width: 17px;
-  height: 10px;
+  background: url(../../images/ic-menu.png) no-repeat center;
   text-indent: -9999px;
-  margin: 27px 10px 12px 12px;
+  padding: 31px 28px 29px 28px;
+  border-right: 1px solid rgba(216, 216, 216, 0.5);
   cursor: pointer;
 }
 
@@ -17,9 +16,10 @@
   font-family: $font_1;
   color: $color_link_color;
   text-transform: uppercase;
-  padding: 16px 20px 12px 0;
   height: auto;
   position: relative;
+  padding: 0 20px 0 0;
+  margin: 20px 15px;
 }
 
 @media (min-width: 600px){
@@ -34,7 +34,7 @@
   position: absolute;
   font-size: 12px;
   right: -4px;
-  top: 13px;
+  top: 0;
   color: $color_cape_cod_approx;
   color: $black_50;
   text-transform: none;
@@ -78,6 +78,38 @@ nav.navbar {
   padding-left: 30px;
 }
 
+.navbar .search-form {
+  .form-control::-webkit-input-placeholder {
+    color: $color_cape_cod_50_approx;
+  }
+  .form-control {
+    border: 0;
+    //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+    box-shadow: none;
+    width: 90%;
+    font-size: 13px;
+    line-height: 18px;
+    height: auto;
+    padding-top: 31px;
+    padding-bottom: 31px;
+    background: transparent;
+    &:-webkit-input-placeholder {
+      color: $color_cape_cod_50_approx;
+    }
+    &:-moz-placeholder {
+      color: $color_cape_cod_50_approx;
+    }
+    &:-ms-input-placeholder {
+      color: $color_cape_cod_50_approx;
+    }
+  }
+  .form-control::-moz-placeholder {
+    color: $color_cape_cod_50_approx;
+  }
+  > .form-group {
+    margin: 0;
+  }
+}
 
   /* ---------- style for language selector in header ----------- */
 
@@ -155,12 +187,11 @@ nav.navbar {
     color: $color_silver_chalice_approx;
     line-height: normal;
     text-indent: inherit;
-    a {
+    a{
       display: block;
       text-decoration: none;
       color: $color_mountain_mist_approx;
-      font-size: 13px;
-      padding: 10px 14px 10px 32px;
+      padding: 18px 14px 18px 32px;
       color: $white;
       &:hover {
         text-decoration: none;
@@ -168,24 +199,20 @@ nav.navbar {
         background: $white_20;
         background: transparent;
       }
-      &:active {
+      &:active, &:focus {
         text-decoration: none;
       }
-      &:focus {
-        text-decoration: none;
-      }
+
       span {
         width: 71%;
         display: inline-block;
       }
     }
     &:hover {
-      background: $color_iron_10_approx;
-      background: $color_iron_10_approx;
+      background: $color_link_color;
     }
     &.active {
-      background: $color_iron_10_approx;
-      background: $color_iron_10_approx;
+      background: $color_link_color;
     }
     .label {
       font-size: 12px;
@@ -471,3 +498,13 @@ footer {
     }
   }
 }
+
+.sidebar-nav{
+  li:not(.sidebar-brand){
+      border-bottom: solid 1px rgba(255,255,255,0.1);
+  }
+}
+
+/* -------------------- style for sidebar ends -------------------- */
+/* -------------------- ------------------------ --------------------*/
+
