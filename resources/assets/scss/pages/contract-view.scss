@@ -1,3 +1,61 @@
+.pdf-annotator .annotator-hl{
+  border :  2px solid #E7D530;
+  background: transparent !important
+}
+
+.pagination{
+  min-width: 125px;
+  margin: 9px 6px 7px;
+}
+
+.pdf-pagination.pagination  span,
+.text-pagination span,
+.pagination input[type="text"]{
+  font-size: 11px;
+  line-height: 17px;
+}
+
+.pagination input[type="text"]{
+  width: 40px;
+  height: 20px;
+}
+
+.pdf-zoom-options{
+  padding: 7px 0 8px;
+  border-right: 1px solid #DCDFE2;
+
+  p{
+    text-indent: -999px;
+    overflow: hidden;
+    height: 19px;
+    width: 18px;
+    vertical-align: middle;
+    background: transparent url(#{$img-path}/ic-sprite.svg) -42px -79px no-repeat;
+    margin: 0 0 0;
+  }
+}
+
+.pdf-zoom-options > .btn-default {
+  width: 20px;
+  height: 20px;
+  line-height: 18px;
+  background: #fff;
+}
+
+.annotation-sort > .active {
+  background: $color_link_color;
+}
+
+.annotation-sort > .active:after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 45%;
+  border-top: 6px solid $color_link_color;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+}
+
 .title-wrap {
   border-bottom: 1px solid rgb(220, 223, 226);
   border-bottom: 1px solid rgba(220, 223, 226, 0.7);

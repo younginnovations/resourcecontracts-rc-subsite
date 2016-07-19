@@ -1,0 +1,176 @@
+.front-row-top-wrap {
+  .navbar-brand {
+    color: $white;
+    &:hover {
+      color: $white;
+    }
+    span {
+      color: $white_70;
+    }
+  }
+  .trigger {
+    background: $url_2 no-repeat 0 0;
+  }
+  nav.navbar {
+    border-bottom: 1px solid $concrete;
+    border-bottom: 1px solid $concrete_20;
+    //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+    box-shadow: none;
+  }
+}
+
+//original selectors
+//.country-inner-wrap, .resource-inner-wrap
+%extend_6 {
+  color: $white;
+  font: 52px/76px $font_2;
+  margin-bottom: 20px;
+}
+
+//original selectors
+//.country-inner-wrap p, .resource-inner-wrap p
+%extend_7 {
+  font: 14px/19px $font_0;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+//original selectors
+//.country-list-wrap .col-lg-2, .country-list-wrap .col-lg-3
+%extend_12 {
+  text-align: center;
+  margin-top: 60px;
+  min-height: 150px;
+}
+
+
+//original selectors
+//.btn-view, .btn-view:hover, .btn-view:focus
+%extend_8 {
+  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+
+  background-color: $white;
+  background-color: $white_10;
+  border-radius: 16px;
+  color: $white;
+  color: $white_70;
+  padding: 6px 32px 6px 18px;
+  position: relative;
+
+  &:after{
+    content: "";
+    background: transparent url(#{$img-path}/ic-sprite.svg) -6px -383px;
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    height: 9px;
+    width: 5px;
+  }
+
+}
+
+.row-top-wrap {
+  background: no-repeat center/cover;
+  margin: 0;
+}
+
+
+.row-top-content {
+  padding: 100px 40px;
+}
+
+.tagline {
+  font-size: 26px;
+  line-height: 50px;
+  color: $white;
+  margin-bottom: 36px;
+  word-wrap: break-word;
+  span {
+    font-size: 50px;
+    font-family: $font_2;
+    line-height: 60px;
+    display: block;
+  }
+}
+
+.btn-search {
+  @extend %extend_5;
+  &:hover {
+    @extend %extend_5;
+    background: $color_link_hover_color;
+  }
+  &:focus {
+    @extend %extend_5;
+  }
+}
+
+.advanced-search {
+  font-size: 14px;
+  color: $white;
+  color: $white_50;
+  text-decoration: underline;
+  cursor: pointer;
+  display: none;
+  &:hover {
+    color: $white;
+  }
+}
+
+.row-content {
+  margin: 0;
+  > div[class*=col-lg] {
+    padding: 0;
+    > div {
+      padding: 148px 32px 72px;
+    }
+  }
+}
+
+.country-wrapper {
+  background: $color_calypso_approx $url_3 no-repeat center;
+}
+
+.country-inner-wrap {
+  @extend %extend_6;
+  p {
+    @extend %extend_7;
+  }
+}
+
+.resource-inner-wrap {
+  @extend %extend_6;
+  color: $color_cape_cod_approx;
+  p {
+    @extend %extend_7;
+  }
+}
+
+.btn-view {
+  @extend %extend_8;
+  &:hover {
+    @extend %extend_8;
+    background-color: $white_40;
+  }
+  &:focus {
+    @extend %extend_8;
+    background-color: $white_40;
+  }
+}
+
+.resource-wrapper {
+  background: $color_athens_gray_approx $url_4 no-repeat bottom right;
+  .btn-view {
+    background-color: $color_cape_cod_approx;
+    background-color: $color_cape_cod_10_approx;
+    color: $color_cape_cod_approx;
+    color: $color_cape_cod_70_approx;
+
+    &:after{
+      background: transparent url(#{$img-path}/ic-sprite.svg) -6px -344px;
+    }
+
+    &:hover {
+      background-color: $color_cape_cod_20_approx;
+    }
+  }
+}

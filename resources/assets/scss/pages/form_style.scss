@@ -1,0 +1,519 @@
+.form-control {
+  &::-webkit-input-placeholder {
+    color: $white_50;
+    font-size: 16px;
+  }
+  &::-moz-placeholder {
+    color: $white_50;
+    font-size: 16px;
+  }
+  &::-ms-input-placeholder {
+    color: $white_50;
+    font-size: 16px;
+  }
+}
+
+.search-form {
+  .form-control::-webkit-input-placeholder {
+    color: $color_cape_cod_50_approx;
+  }
+  .form-control {
+    border: 0;
+    //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+    box-shadow: none;
+    width: 90%;
+    font-size: 13px;
+    line-height: 18px;
+    height: auto;
+    padding-top: 26px;
+    padding-bottom: 26px;
+    background: transparent;
+    &:-webkit-input-placeholder {
+      color: $color_cape_cod_50_approx;
+    }
+    &:-moz-placeholder {
+      color: $color_cape_cod_50_approx;
+    }
+    &:-ms-input-placeholder {
+      color: $color_cape_cod_50_approx;
+    }
+  }
+  .form-control::-moz-placeholder {
+    color: $color_cape_cod_50_approx;
+  }
+  > .form-group {
+    margin: 0;
+  }
+}
+
+.filter-form .form-control {
+  width: 80%;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.static-search{
+  overflow: hidden;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #bcbcbc;
+  border-bottom: 1px solid rgba(188, 188, 188, 0.5);
+
+  .form-control {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  > .form-group {
+    overflow: hidden;
+    padding-bottom: 10px;
+  }
+
+  .form-group button {
+    margin: 0;
+  }
+
+  .search-input-wrapper{
+    top: 44px;
+    background: #f9f9f9;
+    padding: 26px 0 16px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    display: block !important;
+    position: static;
+    border: 0;
+    overflow: hidden;
+    border-top: 1px solid #e7e9eb;
+  }
+
+}
+
+.login-container .row-top-wrap {
+  height: 100vh;
+}
+
+.login-panel {
+  background: $white_70;
+  margin-top: 50%;
+  .form-control::-webkit-input-placeholder {
+    color: $color_cape_cod_50_approx;
+  }
+  .form-control {
+    &:-moz-placeholder {
+      color: $color_cape_cod_50_approx;
+    }
+    &:-ms-input-placeholder {
+      color: $color_cape_cod_50_approx;
+    }
+  }
+  .form-control::-moz-placeholder {
+    color: $color_cape_cod_50_approx;
+  }
+  .panel-heading {
+    background: $white;
+  }
+  .checkbox label {
+    color: $color_tapa_approx;
+  }
+}
+
+/* --------- style for checkbox for annotation ------- */
+
+.search-form{
+
+  input[type='checkbox'] {
+    -webkit-appearance:none;
+    width:22px;
+    height:22px;
+    border: 1px solid #aaa;
+    position: relative;
+    margin-top: 11px;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  input[type='checkbox']:checked {
+    background: $color_link_color;
+    border: 1px solid $color_link_color;
+
+    &:before{
+      content: "";
+      width: 16px;
+      height: 12px;
+      position: absolute;
+      top: 5px;
+      left: 2px;
+      background: transparent url(#{$img-path}/ic-sprite.svg) -48px -195px;
+    }
+  }
+}
+
+/* --------- style for checkbox for annotation (ends) ------- */
+
+//original selectors
+//.btn-search, .btn-search:hover, .btn-search:focus
+%extend_5 {
+  height: 70px;
+  background: $color_link_color;
+  border: 1px solid $color_link_color;
+  font-size: 19px;
+  color: $white;
+  padding: 0 22px;
+  width: 100%;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+
+//original selectors
+//.btn-navbar-search, .btn-navbar-search:hover, .btn-navbar-search:active
+%extend_9 {
+  background: url(#{$img-path}/ic-sprite.svg) no-repeat -356px -398px;
+  text-indent: -9999px;
+  width: 20px;
+  margin: 24px 0;
+  height: 20px;
+  box-shadow: none;
+}
+
+//original selectors
+//.input-wrapper input, .input-wrapper select
+%extend_10 {
+  background: $color_alabaster_approx;
+  border: 1px solid $color_celeste_approx;
+  border-radius: 4px;
+  width: 80%;
+  height: auto;
+}
+
+//original selectors
+//.btn-form-search, .btn-compare
+%extend_11 {
+  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+  border-radius: 4px;
+  background: $color_link_color;
+  color: $white;
+  width: 138px;
+  padding: 6px 12px;
+  text-transform: capitalize;
+  margin-top: 24px;
+}
+
+.input-wrapper label {
+  display: block;
+  color: #5c5c5c;
+  font-weight: normal;
+}
+
+.select2-container {
+  width: 100% !important;
+}
+
+.btn-navbar-search {
+  @extend %extend_9;
+  &:hover {
+    @extend %extend_9;
+  }
+  &:active {
+    @extend %extend_9;
+  }
+}
+
+.search-input-wrapper {
+  position: absolute;
+  top: 72px;
+  left: 0;
+  width: 100%;
+  background: $white;
+  border: 1px solid $color_mystic_approx;
+  box-shadow: 0 4px 4px $black_20;
+  padding: 34px 0;
+  display: none;
+  margin: 0;
+  z-index: 3;
+  .col-lg-12 {
+    padding: 0 21px;
+    overflow: hidden;
+    .col-lg-12 {
+      padding-left: 15px;
+    }
+    &:last-child {
+      margin-bottom: 20px;
+      > div {
+        margin-bottom: 0;
+      }
+    }
+    button,.btn {
+      margin: 0 6px 0 0;
+      width: 100%;
+    }
+  }
+  .col-lg-2 {
+    margin-bottom: 20px;
+    float: none;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .col-lg-5 {
+    padding-left: 36px;
+    clear: both;
+    .btn {
+      margin-top: 0;
+    }
+  }
+  &:not(.search-page-input-wrapper) > .col-lg-12 > .col-lg-3 {
+    float: none;
+  }
+  .select2-container .select2-selection--single {
+    height: 33px !important;
+  }
+  .select2-container--classic .select2-selection--single {
+    .select2-selection__rendered {
+      line-height: 32px !important;
+    }
+    .select2-selection__arrow {
+      height: 31px !important;
+    }
+  }
+
+  .col-xs-6 {
+    width: 49%;
+  }
+
+  @media (min-width: 768px){
+    .col-sm-3 {
+      width: 24%;
+    }
+  }
+}
+
+.input-wrapper {
+  padding-bottom: 0;
+  input {
+    @extend %extend_10;
+  }
+  select {
+    @extend %extend_10;
+  }
+}
+
+.btn-form-search {
+  @extend %extend_11;
+  &:hover {
+    color: $white;
+    background: $color_link_hover_color;
+  }
+  &:focus {
+    color: $white;
+    background: $color_link_hover_color;
+  }
+}
+
+.btn-form-reset {
+  background: #777;
+  &:hover, &:focus {
+    background: #666;
+  }
+}
+
+.btn-compare {
+  @extend %extend_11;
+  margin: 4px 0 10px;
+  &:hover {
+    color: $white;
+    background: $color_link_hover_color;
+  }
+  &:focus {
+    color: $white;
+    background: $color_link_hover_color;
+  }
+}
+
+button.search-close {
+  background: $color_pink_swan_approx;
+  margin-left: 10px;
+  &:hover {
+    background: $color_silver_chalice_approx;
+    color: $white;
+  }
+  &:focus {
+    background: $color_silver_chalice_approx;
+    color: $white;
+  }
+}
+
+.search-page-form {
+  overflow: hidden;
+  padding-bottom: 10px;
+  .form-control {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  > .form-group {
+    overflow: hidden;
+    padding-bottom: 10px;
+  }
+  .form-group button {
+    margin: 0;
+    &:focus {
+      margin: 0;
+    }
+  }
+  .form-froup button:hover {
+    margin: 0;
+  }
+}
+
+.search-page-input-wrapper {
+  top: 44px;
+  background: $color_alabaster_approx;
+  padding: 26px 0 16px;
+  //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+  box-shadow: none;
+  display: block !important;
+  position: static;
+  border: 0;
+  overflow: hidden;
+  border-top: 1px solid $color_mystic_approx;
+  button {
+    width: 130px;
+    margin: 0 0 24px;
+    padding: 10px 12px;
+  }
+}
+
+.sort-wrapper {
+  margin: 20px 0 20px 36px;
+  select {
+    background: $color_alabaster_approx;
+    border: 1px solid $color_blumine_approx;
+    border: 1px solid $color_blumine_20_approx;
+    border-radius: 13px;
+    font-size: 12px;
+    color: $color_aluminium_approx;
+    min-width: 120px;
+  }
+  label {
+    margin-right: 6px;
+  }
+  .select2-container {
+    width: 120px !important;
+  }
+}
+
+.contract-search-form .form-control {
+  height: 70px;
+  background: $white;
+  background: $white_40;
+  border: 1px solid $white;
+  border: 1px solid $white_30;
+  box-shadow: 0 2px 4px $black_10;
+  font-size: 19px;
+  color: $white;
+  padding: 22px 20px 22px 22px;
+  margin-bottom: 30px;
+}
+
+.editable-container.editable-inline {
+  width: 50% !important;
+  margin-bottom: 15px;
+  margin-left: -11px;
+  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+  border-radius: 4px;
+  line-height: 22px;
+  color: $color_cape_cod_approx;
+  .form-group {
+    width: 100%;
+  }
+  .editable-input {
+    width: 100%;
+    > input {
+      font-size: 24px;
+      color: $color_cape_cod_approx;
+      height: auto;
+      border: 0;
+      //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+      box-shadow: none;
+    }
+  }
+  textarea {
+    width: 100%;
+  }
+}
+
+.form-inline .form-control {
+  outline: none;
+  //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+  box-shadow: none;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+h1 + .editable-container.editable-inline {
+  border: 1px solid $color_celeste_approx;
+}
+
+.pagination > {
+  li > {
+    a {
+      color: $color_link_color;
+      &:focus {
+        color: $color_link_color;
+      }
+      &:hover {
+        color: $color_link_color;
+      }
+    }
+    span {
+      &:focus {
+        color: $color_link_color;
+      }
+      &:hover {
+        color: $color_link_color;
+      }
+    }
+  }
+  .active > {
+    a {
+      background: $color_link_hover_color;
+      border-color: $color_link_hover_color;
+      &:focus {
+        background: $color_link_hover_color;
+        border-color: $color_link_hover_color;
+      }
+      &:hover {
+        background: $color_link_hover_color;
+        border-color: $color_link_hover_color;
+      }
+    }
+    span {
+      background: $color_link_hover_color;
+      border-color: $color_link_hover_color;
+      &:focus {
+        background: $color_link_hover_color;
+        border-color: $color_link_hover_color;
+      }
+      &:hover {
+        background: $color_link_hover_color;
+        border-color: $color_link_hover_color;
+      }
+    }
+  }
+}
+
+input.select2-search__field {
+  min-width: 60px;
+  background: transparent;
+  width: 100% !important;
+}
+
+.select2-container .select2-selection--multiple .select2-selection__rendered {
+  white-space: pre-wrap !important;
+  word-break: break-all;
+}
+
+.select2-container--classic .select2-selection--multiple .select2-selection__choice {
+  word-break: break-word;
+}
+
+.select2-container .select2-selection--multiple {
+  max-width: 100%;  }
