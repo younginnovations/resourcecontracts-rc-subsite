@@ -74,6 +74,22 @@ var contract_view_scripts = [
     './resources/assets/scripts/contract.view.custom/views/main.view.js'
 ];
 
+/*
+ * Watch scss files for changes & recompile
+ * Watch html/md files, run jekyll & reload BrowserSync
+ */
+gulp.task('watch', function () {
+    gulp.watch('./resources/assets/scss/*-style.scss', ['sass']);
+    gulp.watch('./resources/assets/scss/contract-view.scss', ['sass']);
+    gulp.watch('./resources/assets/scss/style.scss', ['sass']);
+    gulp.watch('./resources/assets/scss/*_.scss', ['sass']);
+    gulp.watch(base_script, ['js-base']);
+    gulp.watch(country_script, ['js-country']);
+    gulp.watch(resource_script, ['js-resource']);
+    gulp.watch(page_script, ['js-page']);
+    gulp.watch(contract_view_scripts, ['js-react']);
+    gulp.watch(css_files, ['css-main']);
+});
 
 /**
  * Compile files from _scss
@@ -85,23 +101,6 @@ gulp.task('sass', function () {
         .pipe(postcss([autoprefixer({browsers: ['last 30 versions', '> 1%', 'ie 8', 'ie 7']})]))
         .pipe(sourcemaps.write('./maps'))
         .pipe(gulp.dest('./public/css'));
-});
-
-/*
- * Watch scss files for changes & recompile
- * Watch html/md files, run jekyll & reload BrowserSync
- */
-gulp.task('watch', function () {
-    gulp.watch('./resources/assets/scss/*-style.scss', ['sass']);
-    gulp.watch('./resources/assets/scss/contract-view.scss', ['sass']);
-    gulp.watch('./resources/assets/scss/responsive.scss', ['sass']);
-    gulp.watch('./resources/assets/scss/style.scss', ['sass']);
-    gulp.watch(base_script, ['js-base']);
-    gulp.watch(country_script, ['js-country']);
-    gulp.watch(resource_script, ['js-resource']);
-    gulp.watch(page_script, ['js-page']);
-    gulp.watch(contract_view_scripts, ['js-react']);
-    gulp.watch(css_files, ['css-main']);
 });
 
 /*

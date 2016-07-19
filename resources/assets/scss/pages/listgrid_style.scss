@@ -1,0 +1,163 @@
+/* ------------ style used in country and resource pages ----------- */
+/* ------------ ---------------------------------------- ----------- */
+
+.btn-filter-search {
+  background: url(#{$img-path}/ic-sprite.svg) no-repeat -356px -398px;
+  height: 20px;
+  margin-top: -3px;
+}
+
+.filter-country-wrap {
+  overflow: hidden;
+  .form-group {
+    padding: 14px 0 10px 36px;
+    overflow: hidden;
+  }
+}
+
+.filter-resource-wrap {
+  line-height: 24px;
+}
+
+.filter-label {
+  padding: 6px 24px 7px 36px;
+  &:hover {
+    background: $color_gallery_approx;
+  }
+  i {
+    background: $url_2 no-repeat -164px -179px;
+    width: 24px;
+    display: inline-block;
+    height: 24px;
+  }
+  &.active {
+    color: $white;
+    background: $color_mine_shaft_approx;
+    i {
+      background: $url_2 no-repeat 2px -179px;
+    }
+  }
+}
+
+a.filter-label{
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #404040;
+}
+
+.country-list-wrap {
+  padding: 60px 0 50px 0 !important;
+  min-height: 500px;
+  .col-lg-2 {
+    @extend %extend_12;
+    &:nth-child(-n+2) {
+      margin-top: 0;
+    }
+    a {
+      &:hover {
+        text-decoration: none;
+      }
+      &:focus {
+        text-decoration: none;
+      }
+    }
+  }
+  .col-lg-3 {
+    @extend %extend_12;
+    &:nth-child(-n+4) {
+      margin-top: 0;
+    }
+  }
+  a:hover {
+    text-decoration: none;
+  }
+  > div {
+    img {
+      width: 128px;
+      height: 90px;
+      //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+      box-shadow: 0 2px 4px $black_30;
+      display: inline-block;
+    }
+    img + span {
+      //display: inline-block; country flag section text dropped
+      vertical-align: top;
+      padding-top: 1px;
+    }
+  }
+}
+
+.country-name {
+  margin-top: 10px;
+  font-family: $font_1;
+  line-height: 16px;
+  color: $color_cape_cod_approx;
+}
+
+.resource-name {
+  width: 70%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.country-resource-wrap ul {
+  padding: 0 24px;
+  margin: 0;
+  li {
+    list-style: none;
+    border-bottom: 1px solid $color_iron_70_approx;
+    padding: 14px;
+    &:last-child {
+      border-bottom: 0;
+    }
+    &.highest-count {
+      font-family: $font_1;
+      border: 0;
+      padding-top: 0;
+      &:nth-child(3) {
+        border-bottom: 1px solid $color_iron_70_approx;
+      }
+      .count {
+        font-size: 26px;
+      }
+      span:first-child {
+        padding-top: 10px;
+        display: inline-block;
+      }
+    }
+    span:first-child {
+      width: 88%;
+      display: inline-block;
+      vertical-align: top;
+    }
+  }
+}
+
+#filter-by-category{
+  .left-content{
+    width: calc(100% - 213px);
+    float: left;
+
+    input{
+      width: calc(100% - 27px);
+    }
+  }
+
+  .right-content{
+    width: 212px;
+    float: left;
+    border-left: 1px solid rgba(188, 188, 188, 0.5);
+  }
+}
+
+@media (max-width: 480px){
+  #filter-by-category .right-content {
+    display: none;
+  }
+
+  #filter-by-category .left-content input {
+    width: calc(100% - 46px);
+  }
+}

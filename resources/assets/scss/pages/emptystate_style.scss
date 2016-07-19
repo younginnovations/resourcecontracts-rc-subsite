@@ -1,0 +1,139 @@
+.content-wrap {
+  margin-left: 5%;
+  min-height: 500px;
+  #title {
+    @extend %extend_25;
+    padding-top: 0;
+    padding-left: 15px;
+    margin-bottom: 14px;
+  }
+  #content {
+    @extend %extend_26;
+    width: 95%;
+    padding-top: 30px;
+    p {
+      @extend %extend_27;
+    }
+    strong {
+      font-family: $font_1;
+    }
+  }
+  .glyphicon-ok {
+    @extend %extend_29;
+    &:before {
+      display: none;
+    }
+  }
+  .glyphicon-remove {
+    @extend %extend_29;
+    background: $url_13 no-repeat center !important;
+    &:before {
+      display: none;
+    }
+  }
+  .editable-buttons button:last-of-type {
+    background: $color_chestnut_rose_approx;
+    border: 1px solid $color_valencia_approx;
+    &:hover {
+      background: $color_persian_red_approx;
+      border-color: $color_mexican_red_approx;
+    }
+  }
+}
+
+.content-note {
+  font-style: italic;
+  color: $color_cape_cod_70_approx;
+}
+
+.panel-login-title {
+  padding: 0;
+  font: 18px/24px $font_0;
+  color: $color_cape_cod_70_approx;
+}
+
+.btn-login-block {
+  @extend %extend_28;
+  &:hover {
+    @extend %extend_28;
+    background: $color_link_hover_color;
+    &:focus {
+      @extend %extend_28;
+    }
+  }
+  &:focus {
+    background: $color_link_hover_color;
+  }
+}
+
+.edit-mode {
+  background-color: $color_mine_shaft_approx;
+  padding: 10px 20px;
+  color: $white;
+  margin: 20px 0;
+  > div {
+    margin-left: 21.5%;
+  }
+}
+
+.note-editor {
+  border-color: $color_celeste_approx !important;
+}
+
+.not-found-wrapper {
+  background-image: $radial_gradient_1;
+}
+
+.not-found-container {
+  background: $url_14 no-repeat bottom;
+}
+
+.not-found-content {
+  background: $url_15 no-repeat center;
+  text-align: center;
+  color: $white;
+  padding: 40px 0 270px;
+  p {
+    font-size: 18px;
+    color: $white_70;
+    &:last-of-type {
+      font-size: 16px;
+      color: $white_50;
+      width: 300px;
+      margin: 70px auto 0;
+    }
+  }
+}
+
+.service-not-found-content {
+  height: 100vh;
+}
+
+.error-text {
+  font: 100px/136px $font_1;
+}
+
+.no-data {
+  color: $color_cape_cod_70_approx;
+  font-style: italic;
+}
+
+.search-not-found {
+  background: #f5f5f5 !important;
+  padding-left: 36px !important;
+  font-size: 14px !important;
+  text-align: center;
+  padding: 10px !important;
+  min-width: 100% !important;
+  a {
+    padding-left: 0 !important;
+    text-decoration: underline;
+    float: none !important;
+  }
+}
+
+@media all and (max-height: 820px) {
+  .not-found-content {
+    padding: 0 0 150px;
+  }
+}
