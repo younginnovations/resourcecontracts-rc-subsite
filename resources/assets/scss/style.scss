@@ -1,17 +1,2 @@
-@import "pages/_default_style";
-@import "pages/layout_style";
-@import "pages/homepage_style";
-@import "pages/dropdown_style";
-@import "pages/form_style";
-@import "pages/common_style";
-@import "pages/emptystate_style";
-@import "pages/listpage_style";
-@import "pages/listgrid_style";
-@import "pages/detailpage_style";
-@import "pages/staticpage_style";
-@import "pages/contract-view";
-@import "pages/responsive";
-
-/* ---- style for french language ------- */
-
-@import "pages/lang-french";
+@import "themes/default-theme";
+@import "pageStyle";
