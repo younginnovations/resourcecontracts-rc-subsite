@@ -5,7 +5,7 @@ var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     concat = require('gulp-concat'),
     notify = require('gulp-notify'),
-    minifyCss = require('gulp-minify-css'),
+    uglifycss = require('gulp-uglifycss'),
     uglify = require('gulp-uglify'),
     rename = require('gulp-rename'),
     react = require('gulp-react');
@@ -95,11 +95,15 @@ gulp.task('watch', function () {
  * Compile files from _scss
  */
 gulp.task('sass', function () {
-    return gulp.src('./resources/assets/scss/*-style.scss')
+    return gulp.src('./resources/assets/scss/style.scss')
         .pipe(sourcemaps.init())
         .pipe(sass())
         .pipe(postcss([autoprefixer({browsers: ['last 30 versions', '> 1%', 'ie 8', 'ie 7']})]))
         .pipe(sourcemaps.write('./maps'))
+        .pipe(uglifycss({
+         "max-line-len": 80
+         }))
+         .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest('./public/css'));
 });
 
