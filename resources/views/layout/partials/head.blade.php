@@ -28,7 +28,6 @@ $langSelect = trans('search.select');
 
 
     <title> {{ meta($meta)->title }}</title>
-    <link href="{{url('css/main.min.css')}}" rel="stylesheet">
     <link href="{{url('css/style.min.css')}}" rel="stylesheet">
 
     @yield('css')

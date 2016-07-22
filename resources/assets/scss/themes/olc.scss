@@ -16,6 +16,8 @@ $url_9: url(../../images/olc/ic-title-bg.png);
 $url_10: url(../../images/olc/ic-folder.png);
 $url_14: url(../../images/olc/error-bg.png);
 
+@import "../main.scss";
+
 .row-top-content {
 	background: rgba(64,64,64,0.8);
 	border-radius: 4px;
@@ -74,3 +76,4 @@ $url_14: url(../../images/olc/error-bg.png);
 a.parent_annotation_link {
 	color:#1C7041;
 }
+

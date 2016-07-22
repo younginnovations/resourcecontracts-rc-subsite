@@ -1,3 +1,51 @@
+.navigation > a:nth-child(2) {
+  background-position: -474px 13px;
+}
+
+.navigation > a:nth-child(3) {
+  background: url(../images/ic-nav-annotate.png) no-repeat 16px 14px;
+}
+
+.navigation > a:nth-child(4) {
+  background: url(../images/ic-nav-metadata.png) no-repeat 16px 14px;
+}
+
+.navigation {
+  line-height: 46px;
+  > a {
+    color: rgb(64, 64, 64);
+    background: url(../images/ic-sprite-new.png) no-repeat -388px 13px;
+    font-size: 11px;
+    text-transform: uppercase;
+    padding: 0 15px 0 44px;
+    opacity: 0.5;
+    text-decoration: none;
+    border-right: 1px solid #DCDFE2;
+    display: inline-block;
+
+    &.active {
+      opacity: 1;
+    }
+
+    &:last-child {
+      background-position: -474px 13px;
+    }
+
+    &:hover{
+      opacity: 1;
+      background-color: #f0f0f0;
+    }
+
+  }
+}
+
+.navigation > a.active {
+  opacity: 1;
+  border-bottom: 1px solid transparent;
+  margin-bottom: -1px;
+  background-color: #f0f0f0;
+}
+
 .pdf-annotator .annotator-hl{
   border :  2px solid #E7D530;
   background: transparent !important
@@ -120,34 +168,6 @@
   width: 100%;
   margin-left: 6px;
   font-size: 13px;
-}
-
-.navigation {
-  line-height: 46px;
-  > a {
-    color: rgb(64, 64, 64);
-    background: url(../images/ic-sprite-new.png) no-repeat -388px 13px;
-    font-size: 11px;
-    text-transform: uppercase;
-    padding: 0 15px 0 44px;
-    opacity: 0.5;
-    text-decoration: none;
-    border-right: 1px solid #DCDFE2;
-    display: inline-block;
-
-    &.active {
-      opacity: 1;
-    }
-
-    &:last-child {
-      background-position: -474px 13px;
-    }
-
-    &:hover, .navigation > &:active {
-      opacity: 1;
-    }
-
-  }
 }
 
 .document-wrap {
