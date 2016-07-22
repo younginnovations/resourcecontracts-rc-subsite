@@ -30181,8 +30181,8 @@ var NavigationView = React.createClass({displayName: "NavigationView",
         }
         return (
             React.createElement("div", {className: "navigation"}, 
-                React.createElement("a", {href: "#/text", className: textClass}, lang.text), 
-                React.createElement("a", {href: "#/pdf", className: pdfClass}, lang.pdf), 
+                React.createElement("a", {href: "#/text", className: textClass, id: "prompt"}, lang.text), 
+                React.createElement("a", {href: "#/pdf", className: pdfClass, id: "prompt1"}, lang.pdf), 
                 React.createElement("a", {href: "#/annotation", className: annotationClass}, "Annotation"), 
                 React.createElement("a", {href: "#/metadata", className: metadataClass}, "Metadata")
             )
@@ -30784,8 +30784,8 @@ var AnnotationsSort = React.createClass({displayName: "AnnotationsSort",
         if (this.state.show) {
             return (
                 React.createElement("div", {className: "annotation-sort"}, 
-                    React.createElement("span", {className: pageClassName, onClick: this.onClickPage}, lang.by_page), 
-                    React.createElement("span", {className: topicClassName, onClick: this.onClickTopic}, lang.by_topic), 
+                    React.createElement("span", {className: pageClassName, onClick: this.onClickPage, title: lang.annotPagePrompt}, lang.by_page), 
+                    React.createElement("span", {className: topicClassName, onClick: this.onClickTopic, title: lang.annotPageTopic}, lang.by_topic), 
                     topicList
                 )
             );
@@ -30816,13 +30816,13 @@ var AnnotationTopicList = React.createClass({displayName: "AnnotationTopicList",
     render: function () {
         return (
             React.createElement("div", {className: "annotations-topic-list"}, 
-                React.createElement("span", {className: "selected-topic", onClick: this.handleClick.bind(this,'All')}, lang.all), 
-                React.createElement("span", {onClick: this.handleClick.bind(this,'general')}, lang.general), 
-                React.createElement("span", {onClick: this.handleClick.bind(this,'environment')}, lang.environment), 
-                React.createElement("span", {onClick: this.handleClick.bind(this,'fiscal')}, lang.fiscal), 
-                React.createElement("span", {onClick: this.handleClick.bind(this,'operations')}, lang.operations), 
-                React.createElement("span", {onClick: this.handleClick.bind(this,'social')}, lang.social), 
-                React.createElement("span", {onClick: this.handleClick.bind(this,'legal_rules')}, lang.legal_rules)
+                React.createElement("span", {className: "selected-topic", onClick: this.handleClick.bind(this,'All'), title: lang.annotAll}, lang.all), 
+                React.createElement("span", {onClick: this.handleClick.bind(this,'general'), title: lang.annotGeneral}, lang.general), 
+                React.createElement("span", {onClick: this.handleClick.bind(this,'environment'), title: lang.annotEnvironment}, lang.environment), 
+                React.createElement("span", {onClick: this.handleClick.bind(this,'fiscal'), title: lang.annotFiscal}, lang.fiscal), 
+                React.createElement("span", {onClick: this.handleClick.bind(this,'operations'), title: lang.annotSocial}, lang.operations), 
+                React.createElement("span", {onClick: this.handleClick.bind(this,'social'), title: lang.annotOperations}, lang.social), 
+                React.createElement("span", {onClick: this.handleClick.bind(this,'legal_rules'), title: lang.annotLegalRules}, lang.legal_rules)
             )
         );
     }

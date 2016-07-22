@@ -28,10 +28,11 @@ use Illuminate\Support\Facades\Lang;
             <div class="filter-wrapper actions-wrapper">
                 <div class="col-lg-12">
                     <div class="download-main-wrap">
+                        <span data-toggle="popover"  class="tooltiptext" data-content="@lang('hovertext.download_hover')" style="display: inline;">
                         <a class="download-wrap">
                             @lang('global.download')
                         </a>
-
+                         </span>
                         <ul class="dropdown-menu">
                             <li><a href="{{route('contract.download.pdf',['id'=> $contract->metadata->open_contracting_id])}}">@lang('annotation.pdf')</a></li>
                             @if(env('CATEGORY')!= 'olc' && $contract->metadata->is_ocr_reviewed == 1 && $contract->pages->total > 0)
@@ -59,7 +60,10 @@ use Illuminate\Support\Facades\Lang;
                     <div class="panel-body">
                         <ul>
                             <li class="col-lg-12 open-contracting-id">
+                                <span data-toggle="popover"  class="tooltiptext" data-content="@lang('hovertext.open_contracting_hover')"
+                                      style="display:inline;">
                                 <label for="">@lang('contract.open_contracting_id')</label>
+                                    </span>
                                 <span>{{_e($contract->metadata,'open_contracting_id','-')}}</span>
                             </li>
                         </ul>
@@ -124,7 +128,10 @@ use Illuminate\Support\Facades\Lang;
                         </ul>
                         <ul>
                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <label for="">@lang('global.type_contract')</label>
+                                <span data-toggle="popover"  class="tooltiptext" data-content="@lang('hovertext.type_contract_hover')" style="display:inline;">
+                                    <label for="">@lang('global.type_contract')
+                                    </label>
+                                </span>
                                 <span class="contract-type-list">@if(isset($contract->metadata->contract_type) && !empty($contract->metadata->contract_type) && is_array($contract->metadata->contract_type))
                                         @foreach($contract->metadata->contract_type as $contractype)
                                             <a href="{{route("search",['contract_type'=>$contractype])}}">{{_l('codelist/contract_type',$contractype) }}</a>
@@ -571,6 +578,33 @@ use Illuminate\Support\Facades\Lang;
             $('.annotation-category-cluster').toggle(!isScrolledIntoView('footer'));
         });
 
+    </script>
+    <script>
+        var options = {
+            placement: function (context, source) {
+                var position = $(source).position();
+
+                if (position.left > 515) {
+                    return "left";
+                }
+
+                if (position.left < 515) {
+                    return "right";
+                }
+
+                if (position.top < 110) {
+                    return "bottom";
+                }
+
+                return "top";
+            },
+            trigger: "click hover"
+
+        };
+        var popup = $(".tooltiptext");
+        if (popup.length) {
+            popup.popover(options);
+        }
     </script>
 @stop
 

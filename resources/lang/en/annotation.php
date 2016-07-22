@@ -67,7 +67,4 @@ return [
     'african_mining'             => "in African Mining Legislation Atlas",
     'other'                      => "Legal Rules",
     'annotation_count'           => "annotations",
-
 ];
-
-

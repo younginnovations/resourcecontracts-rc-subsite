@@ -99,8 +99,8 @@ var AnnotationsSort = React.createClass({
         if (this.state.show) {
             return (
                 <div className="annotation-sort">
-                    <span className={pageClassName} onClick={this.onClickPage}>{lang.by_page}</span>
-                    <span className={topicClassName} onClick={this.onClickTopic}>{lang.by_topic}</span>
+                    <span className={pageClassName} onClick={this.onClickPage} title={lang.annotPagePrompt}>{lang.by_page}</span>
+                    <span className={topicClassName} onClick={this.onClickTopic} title={lang.annotPageTopic} >{lang.by_topic}</span>
                     {topicList}
                 </div>
             );
@@ -131,13 +131,13 @@ var AnnotationTopicList = React.createClass({
     render: function () {
         return (
             <div className="annotations-topic-list">
-                <span className="selected-topic" onClick={this.handleClick.bind(this,'All')}>{lang.all}</span>
-                <span onClick={this.handleClick.bind(this,'general')}>{lang.general}</span>
-                <span onClick={this.handleClick.bind(this,'environment')}>{lang.environment}</span>
-                <span onClick={this.handleClick.bind(this,'fiscal')}>{lang.fiscal}</span>
-                <span onClick={this.handleClick.bind(this,'operations')}>{lang.operations}</span>
-                <span onClick={this.handleClick.bind(this,'social')}>{lang.social}</span>
-                <span onClick={this.handleClick.bind(this,'legal_rules')}>{lang.legal_rules}</span>
+                <span className="selected-topic" onClick={this.handleClick.bind(this,'All')} title={lang.annotAll}>{lang.all}</span>
+                <span onClick={this.handleClick.bind(this,'general')} title={lang.annotGeneral}>{lang.general}</span>
+                <span onClick={this.handleClick.bind(this,'environment')} title={lang.annotEnvironment}>{lang.environment}</span>
+                <span onClick={this.handleClick.bind(this,'fiscal')} title={lang.annotFiscal}>{lang.fiscal}</span>
+                <span onClick={this.handleClick.bind(this,'operations')} title={lang.annotSocial}>{lang.operations}</span>
+                <span onClick={this.handleClick.bind(this,'social')} title={lang.annotOperations}>{lang.social}</span>
+                <span onClick={this.handleClick.bind(this,'legal_rules')} title={lang.annotLegalRules}>{lang.legal_rules}</span>
             </div>
         );
     }

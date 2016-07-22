@@ -47,7 +47,13 @@
                         <li class="twitter"><a href="https://twitter.com/share?text={{ meta($meta)->title }}" target="_blank">Twitter</a></li>
                     </ul>
                 </div>
-                <div class="download-csv"><a href="{{route('contract.csv.download',$params)}}">@lang('search.download')</a></div>
+                <div class="download-csv">
+                    <span data-toggle="popover"  class="tooltiptext" data-content="@lang('hovertext.download_hover')" style="display: inline;">
+                        <a href="{{route('contract.csv.download',$params)}}">
+                            @lang('search.download')
+                        </a>
+                    </span>
+                </div>
             @endif
 
         </div>
@@ -82,5 +88,32 @@
         $(function () {
             $('.filter-country-wrap').show();
         });
+    </script>
+    <script>
+        var options = {
+            placement: function (context, source) {
+                var position = $(source).position();
+
+                if (position.left > 515) {
+                    return "left";
+                }
+
+                if (position.left < 515) {
+                    return "right";
+                }
+
+                if (position.top < 110) {
+                    return "bottom";
+                }
+
+                return "top";
+            },
+            trigger: "click hover"
+
+        };
+        var popup = $(".tooltiptext");
+        if (popup.length) {
+            popup.popover(options);
+        }
     </script>
 @stop
