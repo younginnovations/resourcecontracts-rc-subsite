@@ -10,4 +10,6 @@ return [
     'country_description'   => 'Find resource contracts from country - ',
     'resources_description' => 'Find resource contracts for different resources -',
     'resource_description'  => 'Find resource contracts for resource -',
+    'tagline'               => 'A directory of <span>Petroleum &amp; Mineral Contracts</span>',
+    'associated_documents'  => 'and Associated Documents',
 ];
