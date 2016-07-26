@@ -72,4 +72,6 @@ return [
     'view_summary'                => 'عرض الملخص',
     'view_by_country'             => 'عرض حسب الدولة',
     'view_by_resource'            => 'الرأي الموارد',
+    'view_all'                    => 'مشاهدة الكل',
+
 ];
