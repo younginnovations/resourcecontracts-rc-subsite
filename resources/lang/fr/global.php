@@ -70,4 +70,6 @@ return [
     'view_summary'                => "Afficher le résumé",
     'all_documents'               => 'Tous les documents',
     'documents_of'                => 'Documents de',
+    'view_all'                    => 'Voir tout',
+
 ];

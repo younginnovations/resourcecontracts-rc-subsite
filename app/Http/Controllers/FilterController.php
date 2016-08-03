@@ -39,7 +39,6 @@ class FilterController
 
         $category = env('CATEGORY');
         $data     = trans("meta/$category");
-
         $meta = [
             'title'       => 'Search Contracts',
             'description' => 'Search' . getInformation('categoryTitle') . 'using different criteria - year signed, company name, contract type, annotation category.'
@@ -76,6 +75,7 @@ class FilterController
             'sortby'              => $request->get('sortby'),
             'order'               => $request->get('order'),
             'group'               => $type,
+            'all'                 =>$request->get('all','0'),
             'download'            => $request->get('download', false)
         ];
     }

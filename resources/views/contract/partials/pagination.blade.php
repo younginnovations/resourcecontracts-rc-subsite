@@ -1,5 +1,5 @@
 <?php
-$total_page  = ceil($total_item / $per_page);
+$total_page  = ceil($total_item / 25);
 $no_of_pages = 6;
 $current_url = \Illuminate\Support\Facades\Input::url();
 $queries     = \Illuminate\Support\Facades\Input::get();
@@ -46,6 +46,8 @@ $current_url .= (http_build_query($queries) == '') ? '' : http_build_query($quer
                         <a href="{{ $current_url }}page={{ $current_page < $total_page ? $current_page + 1 : $current_page }}">@lang('global.next')</a>
                     </li>
                     <li class="num-text"><a href="{{ $current_url }}page={{ $total_page }}">@lang('global.last')</a></li>
+                    <li class="num-text"><a href="{{ $current_url }}page={{ $total_page+1 }}&all={{true}}">@lang('global.view_all')</a></li>
+
                 @endif
             </ul>
         </div>

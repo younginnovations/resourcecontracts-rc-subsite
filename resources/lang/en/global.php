@@ -69,4 +69,5 @@ return [
     'view_summary'                => 'View Summary',
     'all_documents'               => 'All Documents',
     'documents_of'                => 'Documents of',
+    'view_all'                    => 'View All',
 ];

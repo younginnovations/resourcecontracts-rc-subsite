@@ -68,7 +68,7 @@
             <div class="panel panel-default panel-wrap country-list-wrap">
                 <div class="panel-body">
                     @include('contract.partials.contractlist')
-                    @include('contract.partials.pagination', ['total_item' => $contracts->total, 'per_page'=>$contracts->per_page, 'current_page' => $currentPage ])
+                    @include('contract.partials.pagination', ['total_item' => $contracts->total, 'per_page'=>$contracts->per_page, 'current_page' => $currentPage,'contracts' => $contracts ])
                 </div>
             </div>
         </div>

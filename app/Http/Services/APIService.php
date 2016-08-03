@@ -217,6 +217,7 @@ class APIService
      */
     public function filterSearch($filter)
     {
+
         extract($filter);
         $per_page = !empty($per_page) ? $per_page : 25;
         $query    = [
@@ -233,13 +234,12 @@ class APIService
             'annotation_category' => $annotation_category,
             'sort_by'             => $sortby,
             'order'               => $order,
-            'per_page'            => $per_page,
-            'from'                => $per_page * ($from - 1),
+            'per_page'            => $all ? $from * 25 : $per_page,
+            'from'                => $all ? 0 : $per_page * ($from - 1),
             'download'            => $download,
-            'annotated'           => $annotated
+            'annotated'           => $annotated,
 
         ];
-
 
         if ($filter['download']) {
             echo $this->downloadAPI('contracts/search', $query);
@@ -368,6 +368,7 @@ class APIService
         }
 
         ksort($data);
+
         return $data;
     }
 
@@ -495,6 +496,7 @@ class APIService
             $annotations = $this->getAnnotations($contract_id);
             $annotations = collect($annotations->result);
             $annotation  = $annotations->where('id', $annotation_id)->first();
+
             return [
                 'contract_id'       => $metadata->id,
                 'contract_title'    => $metadata->name,
@@ -512,6 +514,7 @@ class APIService
             ];
         } catch (\Exception $e) {
             Log::error('Contract popup :'.$e->getMessage());
+
             return null;
         }
     }
