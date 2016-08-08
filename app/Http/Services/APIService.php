@@ -24,7 +24,7 @@ class APIService
     public function __construct(Client $client)
     {
         $this->client   = $client;
-        $this->category = trim(env('CATEGORY'));
+        $this->category = strtolower(site()->getCategory());
     }
 
     /**
@@ -128,7 +128,6 @@ class APIService
     public function metadata($contract_id)
     {
         $resource = sprintf('contract/%s/metadata', $contract_id);
-
         $contract = $this->apiCall($resource);
 
         return $contract;
@@ -236,7 +235,7 @@ class APIService
             'per_page'            => $per_page,
             'from'                => $per_page * ($from - 1),
             'download'            => $download,
-            'annotated'           => $annotated
+            'annotated'           => $annotated,
 
         ];
 
@@ -266,10 +265,13 @@ class APIService
         try {
             $request           = new Request('GET', $this->apiURL($resource));
             $query['category'] = $this->category;
+
+            if (site()->isCountrySite()) {
+                $query['country_code'] = strtolower(site()->getCountryCode());
+            }
             $request->setQuery($query);
             $response = $this->client->send($request);
             $data     = $response->getBody();
-
             if ($array) {
                 return json_decode($data, true);
             }
@@ -368,6 +370,7 @@ class APIService
         }
 
         ksort($data);
+
         return $data;
     }
 
@@ -495,6 +498,7 @@ class APIService
             $annotations = $this->getAnnotations($contract_id);
             $annotations = collect($annotations->result);
             $annotation  = $annotations->where('id', $annotation_id)->first();
+
             return [
                 'contract_id'       => $metadata->id,
                 'contract_title'    => $metadata->name,
@@ -512,6 +516,7 @@ class APIService
             ];
         } catch (\Exception $e) {
             Log::error('Contract popup :'.$e->getMessage());
+
             return null;
         }
     }

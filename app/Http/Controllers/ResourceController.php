@@ -47,7 +47,7 @@ class ResourceController extends BaseController
         $resourceName = implode(',', $resourceName);
         $meta         = [
             'title'       => 'Resources',
-            'description' => site()->meta('resource_descriptions').$resourceName,
+            'description' => trans('global.meta.resources').$resourceName,
         ];
 
         foreach ($resources as &$country) {
@@ -83,9 +83,8 @@ class ResourceController extends BaseController
         }
 
         $meta = [
-            'title'       => trans('resources.'.$resource),
-            'description' => site()->meta('resource_description').$resource,
-
+            'title'       => 'Resource - '.trans('resources.'.$resource),
+            'description' => trans('global.meta.resource').$resource,
         ];
 
         return view('resource.detail', compact('contracts', 'resource', 'countries', 'currentPage', 'meta'));

@@ -1,5 +1,5 @@
 <?php
-use \Illuminate\Support\Facades\Lang as Lang;
+use \Illuminate\Support\Facades\Lang;
 
 $local = app('App\Http\Services\LocalizationService');
 $image = site()->meta('bgImage');
@@ -28,7 +28,8 @@ $image = site()->meta('bgImage');
 					@if(app('translator')->getLocale()!=$locale)
 						<li>
 							<a href={{ url(Request::url().'?lang='.$locale)}}>
-								<img style="width: 16px ; height: 16px; margin-right: 6px;" src="{{getCountryByLang($locale)}}"/>
+								<img style="width: 16px ; height: 16px; margin-right: 6px;"
+									 src="{{getCountryByLang($locale)}}"/>
 								{{$language['name']}}
 							</a>
 						</li>
@@ -40,12 +41,7 @@ $image = site()->meta('bgImage');
 	<div class="row row-top-wrap front-row-top-wrap">
 		<div class="homepage-wrapper">
 			<nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-				<div class="navbar-header">
-					<span data-toggle="collapse-sidebar" data-target=".sidebar-collapse"
-						  data-target-2=".sidebar-collapse-container" class="pull-left trigger">Menu</span>
-					<a class="navbar-brand" href="{{url()}}"> {{site()->meta('name')}}<span
-								class="beta">Beta</span><span>Contracts</span></a>
-				</div>
+				@include('layout.partials.logo')
 			</nav>
 
 			<div class="row row-top-content">
@@ -67,11 +63,13 @@ $image = site()->meta('bgImage');
 	<div class="row row-content">
 		<div class="col-sm-6 col-md-6 col-lg-6 country-wrapper">
 			<div class="country-wrap">
-				<div class="country-inner-wrap">
-					<p>@lang('global.contract_doc_from')</p>
-					<span>{{$countries or ''}}</span> @lang('global.countries')
-				</div>
-				<a href="{{route('countries')}}" class="btn btn-view">@lang('global.view_all_countries')</a>
+				@if(!site()->isCountrySite())
+					<div class="country-inner-wrap">
+						<p>@lang('global.contract_doc_from')</p>
+						<span>{{$countries or ''}}</span> @lang('global.countries')
+					</div>
+					<a href="{{route('countries')}}" class="btn btn-view">@lang('global.view_all_countries')</a>
+				@endif
 			</div>
 		</div>
 		<div class="col-sm-6 col-md-6 col-lg-6 resource-wrapper">

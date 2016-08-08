@@ -17,21 +17,23 @@ class SiteService
     {
         $category = env('CATEGORY', null);
 
-        return strtoupper($category);
+        return trim(strtoupper($category));
     }
 
     /**
-     * Get Site Type
+     * Get Site Key
      *
      * @return string
      */
-    public function getSiteType()
+    public function getSiteKey()
     {
+        $key = $this->getCategory();
+
         if ($this->isCountrySite()) {
-            return 'country';
-        } else {
-            return $this->getCategory();
+            $key = 'country';
         }
+
+        return strtolower($key);
     }
 
     /**
@@ -79,9 +81,12 @@ class SiteService
         $data['bgImage'] = $images->getHomePageImageUrl();
 
         if ($this->isCountrySite()) {
-            $this->getCountryDetail();
-            $data['name'] = $data['title'];
-            $data['flag'] = $data['logo'];
+            $country      = $this->getCountryDetail();
+            $data['code'] = $country['code'];
+            $data['name'] = $country['name'];
+            $data['tagline'] = str_replace(':name', $country['name'], $data['tagline']);
+            $data['logo'] = $country['flag'];
+            $data['title'] = $country['name'];
         }
 
         if (is_null($key)) {
@@ -120,29 +125,53 @@ class SiteService
     }
 
     /**
-     * Get Site Key
-     *
-     * @return string
-     */
-    public function getSiteKey()
-    {
-        $key = $this->getCategory();
-
-        if ($this->isCountrySite()) {
-            $key = $this->getCountryCode();
-        }
-
-        return strtolower($key);
-    }
-
-    /**
      * Can download Word file
      *
      * @return bool
      */
     public function canDownloadWordFile()
     {
-        return $this->getCategory() != 'olc';
+        return !$this->isOLC();
+    }
+
+    /**
+     * Determine whether to annotation link.
+     *
+     * @return bool
+     */
+    public function showAnnotationLink()
+    {
+        return $this->isRC();
+    }
+
+    /**
+     * Determine to show land matrix
+     *
+     * @return bool
+     */
+    public function showLandMatrix()
+    {
+        return !$this->isOLC();
+    }
+
+    /**
+     * Determine OLC site
+     *
+     * @return bool
+     */
+    public function isOLC()
+    {
+        return $this->getCategory() == "olc";
+    }
+
+    /**
+     * Determine RC site.
+     *
+     * @return bool
+     */
+    public function isRC()
+    {
+        return $this->getCategory() == 'rc';
     }
 
     /**
@@ -150,7 +179,7 @@ class SiteService
      *
      * @return array
      */
-    protected function getCountryDetail()
+    public function getCountryDetail()
     {
         if (!$this->isCountrySite()) {
             return [];
@@ -165,4 +194,45 @@ class SiteService
             'flag' => getFlagUrl($code),
         ];
     }
+
+    /**
+     * Contract Email
+     *
+     * @return string
+     */
+    public function contactEmail()
+    {
+        return trim(env('CONTACT_MAIL'));
+    }
+
+    /**
+     * Admin email.
+     *
+     * @return string
+     */
+    public function adminEmail()
+    {
+        return trim(env('ADMIN_EMAIL'));
+    }
+
+    /**
+     * From Email.
+     *
+     * @return string
+     */
+    public function fromEmail()
+    {
+        return trim(env('FROM_EMAIL'));
+    }
+
+    /**
+     * Determine to show Amla url
+     *
+     * @return bool
+     */
+    public function showAmlaUrl()
+    {
+        return $this->isRC();
+    }
+
 }

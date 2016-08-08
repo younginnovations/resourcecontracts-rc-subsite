@@ -40,8 +40,7 @@ class FilterController
 
         $meta = [
             'title'       => 'Search Contracts',
-            'description' => 'Search '.site()->meta('title').' using different criteria - year signed, company name,
-            contract type, annotation category.',
+            'description' => trans('global.meta.search', ['name' => site()->meta('contract')]),
         ];
 
         return view(

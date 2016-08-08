@@ -2,20 +2,23 @@
 
 import React, {Component} from "react";
 
-class Title extends Component {
+class Header extends Component {
     constructor(props) {
         super(props);
     }
 
+    siteName() {
+        return {__html: this.props.site_name};
+    }
+
     render() {
+        var site_name = (this.props.site_name);
         return (
             <nav className="navbar navbar-static-top no--search--wrap">
                 <div className="navbar-header">
-                    <a className="navbar-brand" href={APP_URL} >{this.props.site_name}<span className="beta">Beta</span><span>Contracts</span></a>
+                    <a className="navbar-brand" href={APP_URL} dangerouslySetInnerHTML={this.siteName()}/>
                 </div>
-
                 <div className="navbar-right">
-
                     <span className="title">{this.props.title}</span>
                 </div>
             </nav>
@@ -23,4 +26,4 @@ class Title extends Component {
     }
 }
 
-export default Title;
+export default Header;

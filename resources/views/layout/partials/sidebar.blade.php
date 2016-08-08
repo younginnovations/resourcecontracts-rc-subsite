@@ -8,7 +8,16 @@ if (!isset($summary)) {
 <div id="sidebar-wrapper" class="sidebar-collapse in">
     <ul class="sidebar-nav">
         <li class="sidebar-brand">
-                <a href="{{url()}}"> {{site()->meta('name')}} <span class="beta">Beta</span><span>Contracts</span></a>
+              <a class="navbar-brand" href="{{url()}}" >
+                  {{site()->meta('name')}}
+                  <span  class="beta">Beta</span>
+                  <span>
+                      @if(site()->isCountrySite())
+                          {{site()->meta('contract')}}
+                      @endif
+                          Contracts
+                  </span>
+              </a>
         </li>
         <li class="contracts">
             <a href="{{url('contracts')}}">
@@ -16,6 +25,7 @@ if (!isset($summary)) {
                 <small class="label pull-right">{{$summary->contract_count}}</small>
             </a>
         </li>
+        @if(!site()->isCountrySite())
         <li class="countries">
             <label>@lang('global.countries')</label>
             <ul>
@@ -30,6 +40,7 @@ if (!isset($summary)) {
                 <li><a href="{{route('countries')}}">@lang('sidebar.view_all')</a></li>
             </ul>
         </li>
+        @endif
         <li class="resources">
             <label>@lang('global.resources')</label>
             <ul>

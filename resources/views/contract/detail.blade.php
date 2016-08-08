@@ -84,7 +84,7 @@ use Illuminate\Support\Facades\Lang;
 											<?php $c = $contract->metadata->country;?>
 											{{trans('country')[$c->code]}}
 										</a>
-										@if(env("CATEGORY")=="rc")
+										@if(site()->isRC())
 											@if(isset($contract->metadata->amla_url) && !empty($contract->metadata->amla_url))
 												<span class="amla-link">@lang('contract.see')
 													<a href="{{$contract->metadata->amla_url}}" target="_blank">
@@ -159,7 +159,7 @@ use Illuminate\Support\Facades\Lang;
                             </span></li>
 						</ul>
 
-						@if(env('CATEGORY') =="olc")
+						@if(site()->showLandMatrix())
 							<ul>
 								<li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 									<label for="">@lang('global.land_matrix_id')</label>
@@ -269,7 +269,7 @@ use Illuminate\Support\Facades\Lang;
                                 </span>
 							</li>
 						</ul>
-						@if(env('CATEGORY') != 'olc' )
+						@if(!site()->isOLC())
 							<ul>
 								<li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
 									<label for="">@lang('contract.registration_agency')</label>
@@ -353,7 +353,7 @@ use Illuminate\Support\Facades\Lang;
 			</div>
 		</div>
 
-		@if(env('CATEGORY') != 'olc')
+		@if(!site()->isOLC())
 			<div class="col-lg-12">
 				<div class="panel panel-default panel-wrap panel-contract-wrap">
 					<div class="panel-heading">

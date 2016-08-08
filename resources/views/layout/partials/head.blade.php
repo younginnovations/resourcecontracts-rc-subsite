@@ -36,7 +36,6 @@ $description = (isset($meta['description'])) ? $meta['description'] : site()->me
 	</script>
 </head>
 
-<body data-spy="scroll" class="lang-{{$lang->getCurrentLang()}} {{getPageClass()}}" dir="{{$lang->getDirection()}}"
-	  lang="{{$lang->getCurrentLang()}}">
+<body data-spy="scroll" class="lang-{{$lang->getCurrentLang()}} {{getPageClass()}} @if(site()->isCountrySite())country-site country-{{strtolower(site()->getCountryCode())}}@endif" dir="{{$lang->getDirection()}}" lang="{{$lang->getCurrentLang()}}">
 <div id="wrapper">
 	<div id="page-wrapper" class="not-front sidebar-collapse-container">

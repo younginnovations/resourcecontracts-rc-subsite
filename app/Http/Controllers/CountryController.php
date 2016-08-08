@@ -36,6 +36,10 @@ class CountryController extends BaseController
      */
     public function index()
     {
+        if (site()->isCountrySite()) {
+            return abort(404);
+        }
+
         $countries   = $this->api->summary()->country_summary;
         $countryName = [];
         foreach ($countries as $country) {
@@ -46,7 +50,7 @@ class CountryController extends BaseController
 
         $meta = [
             'title'       => 'Countries',
-            'description' => site()->meta('country_descriptions').$countryName,
+            'description' => trans('global.meta.countries').$countryName,
         ];
 
         return view('country.index', compact('meta'));
@@ -62,6 +66,10 @@ class CountryController extends BaseController
      */
     public function detail(Request $request, $country)
     {
+        if (site()->isCountrySite()) {
+            return abort(404);
+        }
+
         $currentPage = $request->get('page', 1);
         $filter      = [
             'country' => urldecode($country),
@@ -76,8 +84,8 @@ class CountryController extends BaseController
         }
         $countryName = trans('country.'.strtoupper($country));
         $meta        = [
-            'title'       => $countryName,
-            'description' => site()->meta('country_description').$countryName,
+            'title'       => 'Country - '.$countryName,
+            'description' => trans('global.meta.country').$countryName,
         ];
 
         return view('country.detail', compact('contracts', 'country', 'resources', 'currentPage', 'meta'));

@@ -168,7 +168,7 @@ var CountryList = Backbone.View.extend({
 });
 
 var collection = new ResourceCollection(APP_URL + '/contract/resources');
-collection.fetch({reset: true, cache: true, expires: 60000});
+collection.fetch({reset: true, cache: true, expires: 3600});
 
 var resourceList = new ResourceList({
     el: '#resources',
@@ -177,11 +177,7 @@ var resourceList = new ResourceList({
 }).el;
 
 var rCollection = new CountryController(APP_URL + '/contract/countries');
-//rCollection.fetch({reset: true, cache: true, expires: 60000});
-
-rCollection.fetch({'reset': true, cache: true, expires: 60000});
-
-
+rCollection.fetch({'reset': true, cache: true, expires: 3600});
 
 var countryList = new CountryList({
     el: '#countries',
@@ -196,7 +192,7 @@ $(function () {
         });
 
         collection.url = APP_URL + '/contract/resources?country=' + country.join();
-        collection.fetch({'reset': true, cache: true, expires: 60000, success:function(){
+        collection.fetch({'reset': true, cache: true, expires: 3600, success:function(){
             $('#resources').find('.col-lg-4').removeClass('col-lg-4').addClass('col-lg-6');
             $('.side-collapse').css('height', $('#resources').height()+150 + 'px');
         }

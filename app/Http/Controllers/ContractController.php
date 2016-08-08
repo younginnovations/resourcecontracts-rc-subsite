@@ -60,8 +60,7 @@ class ContractController extends BaseController
 
         $meta = [
             'title'       => 'Search Contracts',
-            'description' => 'Search '.site()->meta('title').' using different criteria - year signed, company name,
-            contract type, annotation category.',
+            'description' => trans('global.meta.search', ['name' => site()->meta('contract')]),
         ];
 
         return view('contract.index', compact('contracts', 'currentPage', 'meta'));
@@ -265,7 +264,7 @@ class ContractController extends BaseController
             'title' => $contract->metadata->name,
         ];
 
-        return view('contract.page.view', compact('contract', 'back', 'meta'));
+        return view('contract.page.new_view', compact('contract', 'back', 'meta'));
     }
 
     /**

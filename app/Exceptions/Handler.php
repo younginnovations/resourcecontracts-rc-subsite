@@ -15,6 +15,7 @@ class Handler extends ExceptionHandler
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
      * @param  \Exception $e
+     *
      * @return void
      */
     public function report(Exception $e)
@@ -27,6 +28,7 @@ class Handler extends ExceptionHandler
      *
      * @param  \Illuminate\Http\Request $request
      * @param  \Exception               $e
+     *
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $e)
@@ -48,13 +50,15 @@ class Handler extends ExceptionHandler
 
     /**
      * Render exception according to exception code
+     *
      * @param HttpException $e
+     *
      * @return mixed
      */
     private function renderHttpException(HttpException $e)
     {
-        if (view()->exists('errors.' . $e->getStatusCode())) {
-            return view('errors.' . $e->getStatusCode());
+        if (view()->exists('errors.'.$e->getStatusCode())) {
+            return view('errors.'.$e->getStatusCode());
         } else {
             return (new SymfonyDisplayer(config('app.debug')))->createResponse($e);
         }
@@ -62,6 +66,7 @@ class Handler extends ExceptionHandler
 
     /**
      * Sends email
+     *
      * @param \Exception                $exception
      * @param  \Illuminate\Http\Request $request
      */
@@ -73,11 +78,11 @@ class Handler extends ExceptionHandler
         \Mail::raw(
             $message,
             function ($msg) use ($current_url) {
-                $site       = env('CATEGORY');
-                $recipients = [env('ADMIN_EMAIL')];
-                $msg->subject("{$site} subsite has error - " . $current_url);
+                $site       = site()->meta('title');
+                $recipients = [site()->adminEmail()];
+                $msg->subject("{$site} subsite has error - ".$current_url);
                 $msg->to($recipients);
-                $msg->from(['nrgi@yipl.com.np']);
+                $msg->from([site()->fromEmail()]);
             }
         );
     }

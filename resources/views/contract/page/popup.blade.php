@@ -1,37 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title> {{ meta('')->title }}</title>
+	<title> {{ site()->meta('title')}}</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	@if(env("CATEGORY")=="rc")
-		<link rel="icon" href="{{url('images/favicon.ico')}}">
-	@else
-		<link rel="icon" href="{{url('images/olc/favicon.ico')}}">
-	@endif
-
+	<link rel="icon" href="{{url('images/favicon.ico')}}">
 	<link rel="stylesheet" href="{{ url('css/annotation/annotator.css') }}">
-	<link href="{{url('css/'.meta()->category.'-contract-view.css')}}" rel="stylesheet">
-
-	<link href="{{url('css/main.min.css')}}" rel="stylesheet">
-	<link href="{{url('css/'.meta()->category.'-style.css')}}" rel="stylesheet">
-
+	<link href="{{url('css/style.min.css')}}" rel="stylesheet">
 	<!--[if lt IE 9]>
 	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	<![endif]-->
 	<script>
-		const APP_URL = '{{ url()}}';
-		const LANG = {!! json_encode(trans('annotation')) !!};
-		const SITE_NAME = '{{meta()->name}}';
-		const Annotation = {!!json_encode($annotation)!!};
-		const lang_category = {!! json_encode(trans('codelist/annotation.categories')) !!};
-		const AWS_URL = "https://rc-stage.s3-us-west-2.amazonaws.com";
-		const CONTACT_EMAIL = '{{env('CONTACT_MAIL')}}';
+		var APP_URL = '{{ url()}}';
+		var LANG = {!! json_encode(trans('annotation')) !!};
+		var SITE_NAME = '{{site()->meta('name')}} <span class="beta">Beta</span><span>Contracts</span>';
+		@if(site()->isCountrySite())
+		SITE_NAME = '{{site()->meta('name')}} <span class="beta">Beta</span><span> {{site()->meta('contract')}} Contracts</span>';
+		@endif
+		var Annotation = {!!json_encode($annotation)!!};
+		var lang_category = {!! json_encode(trans('codelist/annotation.categories')) !!};
+		var AWS_URL = "https://rc-stage.s3-us-west-2.amazonaws.com";
+		var CONTACT_EMAIL = '{{site()->contactEmail()}}';
 	</script>
-
 	<style>
 		.loading {
 			position: absolute;
