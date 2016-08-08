@@ -178,10 +178,6 @@ var TextSearchResultsList = React.createClass({
         this.props.searchResultsCollection.on("reset", function () {
             self.forceUpdate();
             self.props.contractApp.trigger("searchresults:ready");
-            if (self.props.searchResultsCollection.models.length > 0) {
-                self.props.contractApp.trigger("update-text-pagination-page", self.props.searchResultsCollection.models[0].get('page_no'));
-                self.props.contractApp.triggerScrollToTextPage();
-            }
         });
     },
     handleCloseSearchResults: function () {
