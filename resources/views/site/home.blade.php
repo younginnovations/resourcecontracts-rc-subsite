@@ -88,15 +88,15 @@ use \Illuminate\Support\Facades\Lang as Lang;
                     <div class="row">
                         <div class="col-md-4 col-sm-4 col-xs-4 petroleum-list-each">
                             <h2 class="petroleum-list-title">1052</h2>
-                            <small>documents</small>
+                            <small><a href="{{route('contracts')}}">documents</a></small>
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-4 petroleum-list-each">
                             <h2 class="petroleum-list-title">72</h2>
-                            <small>countries</small>
+                            <small><a href="{{route('contract.countries')}}">countries</a></small>
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-4">
                             <h2 class="petroleum-list-title">41</h2>
-                            <small>resources</small>
+                            <small><a href="{{route('contract.resources')}}">resources</a></small>
                         </div>
                     </div>
                 </div>

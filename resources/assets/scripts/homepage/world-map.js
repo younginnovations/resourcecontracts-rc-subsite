@@ -15,14 +15,14 @@ function initmap() {
     var osmUrl = '';//http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
     var osmAttrib = '';
     var osm = new L.TileLayer(osmUrl, {minZoom: zoom_level, maxZoom: 16, attribution: osmAttrib, transparent: true});
-    var selectedCountries = ["Senegal", "Nepal"];
+    var selectedCountries = ["NP", "US"];
     // start the map in Nepal
     map.setView(new L.LatLng(country_latitude, country_longitude), zoom_level);
     map.addLayer(osm);
     L.geoJson(geoData, {
         style: function(feature) {
-            console.log(feature.properties.name, $.inArray(feature.properties.name, selectedCountries));
-            if($.inArray(feature.properties.name, selectedCountries) !== -1) {
+            console.log(feature.properties.code, $.inArray(feature.properties.code, selectedCountries));
+            if($.inArray(feature.properties.code, selectedCountries) !== -1) {
                 return {
                     color: "#FCCE99"
                 };

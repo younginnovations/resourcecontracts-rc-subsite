@@ -171,7 +171,6 @@
   }
 
   .advance-search a,
-  .petroleum-list a,
   footer a {
     color: rgba(255, 255, 255, 0.69);
     &:focus,
@@ -180,6 +179,17 @@
       color: inherit;
     }
   }
+
+
+
+.petroleum-list a{
+  color: #484848;
+  &:focus,
+  &:hover,
+  &:active {
+    color: inherit;
+  }
+}
 
   .wrapper {
     width: 950px;
