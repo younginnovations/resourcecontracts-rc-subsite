@@ -40,3 +40,18 @@
     border-bottom: 1px solid rgba(0,0,0,0.1);
   }
 }
+
+.info.leaflet-control{
+  top: -240%;
+  position: absolute;
+  right: 0;
+
+  .info-text{
+    padding: 10px 14px;
+    color: rgba(255,255,255,0.7);
+    min-width: 100px;
+    display: inline-block;
+  }
+
+}
+

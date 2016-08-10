@@ -65,7 +65,7 @@ function highlightFeature(e)
 
     layer.setStyle({
         weight: 5,
-        color: '#666',
+        color: '#144a4e',
         dashArray: '',
         fillOpacity: 0.7
     });
@@ -90,7 +90,7 @@ function resetHighlight(e) {
     };
 
     info.update = function (props) {
-        this._div.innerHTML = props ?'<h4>' + props.name + '</h4>': '';
+        this._div.innerHTML = props ?'<span class="info-text">' + props.name + '</span>': '';
     };
 
     info.addTo(map);
