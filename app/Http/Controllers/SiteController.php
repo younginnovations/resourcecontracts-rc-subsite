@@ -54,8 +54,8 @@ class SiteController extends BaseController
         $countries = count($summary->country_summary);
         $resources = count($summary->resource_summary);
         $contracts = $summary->contract_count;
-
-        return view('site.home', compact('countries', 'resources', 'contracts', 'image'));
+        $countryList = $this->contract->getListOfCountry($summary);
+        return view('site.home', compact('countries', 'resources', 'contracts', 'countryList','image'));
     }
 
     /**

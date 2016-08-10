@@ -5,7 +5,7 @@ use \Illuminate\Support\Facades\Lang as Lang;
 
 @section('css')
     @if(!empty($image))
-        <style xmlns="http://www.w3.org/1999/html">m
+        <style xmlns="http://www.w3.org/1999/html">
             /*.hero-image {
                 background-image: url({{$image}});
             }*/
@@ -87,16 +87,16 @@ use \Illuminate\Support\Facades\Lang as Lang;
                 <div class="col-md-12 col-sm-12 col-xs-12 text-center petroleum-list-inner">
                     <div class="row">
                         <div class="col-md-4 col-sm-4 col-xs-4 petroleum-list-each">
-                            <h2 class="petroleum-list-title">1052</h2>
+                            <h2 class="petroleum-list-title">{{$contracts}}</h2>
                             <small><a href="{{route('contracts')}}">documents</a></small>
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-4 petroleum-list-each">
-                            <h2 class="petroleum-list-title">72</h2>
-                            <small><a href="{{route('contract.countries')}}">countries</a></small>
+                            <h2 class="petroleum-list-title">{{$countries}}</h2>
+                            <small><a href="{{route('countries')}}">countries</a></small>
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-4">
-                            <h2 class="petroleum-list-title">41</h2>
-                            <small><a href="{{route('contract.resources')}}">resources</a></small>
+                            <h2 class="petroleum-list-title">{{$resources}}</h2>
+                            <small><a href="{{route('resources')}}">resources</a></small>
                         </div>
                     </div>
                 </div>
@@ -106,13 +106,13 @@ use \Illuminate\Support\Facades\Lang as Lang;
                         <label class="group-item-title">Explore contract terms:</label>
                         <ul class="list-group">
                             <li class="list-group-item">
-                                <a href="#">Arbitration and dispute resolution</a>
+                                <a href="{{route('search',["q"=>"Arbitration and dispute resolution"])}}">Arbitration and dispute resolution</a>
                             </li>
                             <li class="list-group-item">
-                                <a href="#">Environmental impact assessment</a>
+                                <a href="{{route('search',["q"=>"Environmental impact assessment"])}}">Environmental impact assessment</a>
                             </li>
                             <li class="list-group-item">
-                                <a href="#">Income tax: exemptions</a>
+                                <a href="{{route('search',["q"=>"Income tax: exemptions"])}}">Income tax: exemptions</a>
                             </li>
                         </ul>
                     </div>
@@ -151,5 +151,12 @@ use \Illuminate\Support\Facades\Lang as Lang;
                 </div>
             </div>
         </div>
+
     </section>
+    <script>
+        var selectedCountries = '{!! json_encode($countryList) !!}';
+        var standardCountry = {!! json_encode(trans('country')) !!};
+    </script>
+
 @stop
+

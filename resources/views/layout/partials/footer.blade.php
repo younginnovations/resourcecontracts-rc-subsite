@@ -54,7 +54,7 @@
     </div>
 </div>
 <script src="{{url('js/app.min.js')}}"></script>
-<script src="{{url('js/homepage.min.js')}}"></script>
+<script src="{{url('js/homepage.js')}}"></script>
 @yield('js')
 {{--<script src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js">--}}
 </script>

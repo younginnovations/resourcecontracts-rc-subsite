@@ -65,4 +65,20 @@ class ContractService
             return null;
         }
     }
+
+    /**
+     * Return array of country code
+     * @param $summary
+     * @return array
+     */
+    public function getListOfCountry($summary)
+    {
+        $countries = isset($summary->country_summary) ? $summary->country_summary : [];
+        $codeList  = [];
+        foreach ($countries as $country) {
+            array_push($codeList, strtoupper($country->key));
+        }
+
+        return $codeList;
+    }
 }

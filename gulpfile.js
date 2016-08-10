@@ -84,6 +84,15 @@ var contract_view_scripts = [
     './resources/assets/scripts/contract.view.custom/views/main.view.js'
 ];
 
+
+var homepage_script = [
+    './resources/assets/scripts/homepage/leaflet.js',
+    './resources/assets/scripts/homepage/geoJson/geoJsonData.js',
+    './resources/assets/scripts/homepage/world-map.js',
+    './resources/assets/scripts/homepage/slick.js',
+];
+
+
 /*
  * Watch scss files for changes & recompile
  * Watch html/md files, run jekyll & reload BrowserSync
@@ -95,6 +104,7 @@ gulp.task('watch', function () {
     gulp.watch(resource_script, ['js-resource']);
     gulp.watch(page_script, ['js-page']);
     gulp.watch(contract_view_scripts, ['js-react']);
+    gulp.watch(homepage_script, ['js-homepage']);
 });
 
 /**
@@ -154,12 +164,6 @@ gulp.task('olc', function () {
         .pipe(gulp.dest('./public/css'));
 });
 
-var homepage_script = [
-    './resources/assets/scripts/homepage/leaflet.js',
-    './resources/assets/scripts/homepage/geoJson/geoJsonData.js',
-    './resources/assets/scripts/homepage/world-map.js',
-    './resources/assets/scripts/homepage/slick.js',
-];
 
 
 /*
@@ -173,6 +177,7 @@ gulp.task('watch', function () {
     gulp.watch(resource_script, ['js-resource']);
     gulp.watch(page_script, ['js-page']);
     gulp.watch(contract_view_scripts, ['js-react']);
+    gulp.watch(homepage_script, ['js-homepage']);
 });
 
 /**
