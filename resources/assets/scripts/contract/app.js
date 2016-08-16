@@ -20,33 +20,24 @@ class App extends Component {
     componentDidMount() {
         debug('App init');
         var routeName = Contract.getViewName(this.props.location.pathname);
+        Contract.setView(routeName);
+        if (routeName == 'pdf') {
+            Contract.setPdfPageNumber(this.props.location.pathname);
+        }
+
         Event.publish('route:location', routeName);
         debug('app : publish: route:location', routeName);
-        this.subscribe = Event.subscribe('pagination:change', this.paginationHandler);
-    }
-
-    paginationHandler(page_no) {
-        debug('subscribe pagination:change', page_no);
-        var view = Contract.getView();
-        var page = $('#' + view + '-' + page_no);
-        var parentWindow = $('.' + view + '-annotator');
-        if (page.offset()) {
-            var pageOffsetTop = page.offset().top;
-            var parentTop = parentWindow.scrollTop();
-            var parentOffsetTop = parentWindow.offset().top;
-            parentWindow.animate({scrollTop: parentTop - parentOffsetTop + pageOffsetTop}, 300);
-        }
     }
 
     componentWillReceiveProps(props) {
         var routeName = Contract.getViewName(props.location.pathname);
+        if (routeName == 'pdf') {
+            Contract.setPdfPageNumber(this.props.location.pathname);
+        }
         if (Contract.getView() != routeName) {
+            Contract.setView(routeName);
             Event.publish('route:location', routeName);
         }
-    }
-
-    componentWillUnmount() {
-        this.subscribe.remove();
     }
 
     render() {
@@ -67,7 +58,7 @@ class App extends Component {
                 </div>
                 <div className="document-wrap">
                     <Annotations/>
-                    <Search>
+                    <Search />
                     <div className="view-container">
                         {this.props.children}
                     </div>

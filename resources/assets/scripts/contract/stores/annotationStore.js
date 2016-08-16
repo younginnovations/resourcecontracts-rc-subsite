@@ -5,7 +5,7 @@ import Contract from '../contract';
 
 var AnnotationStore = Reflux.createStore({
     listenables: [AnnotationActions],
-    getList: function (id) {
+    getList: function () {
         this.trigger('annotations:loaded', Contract.getAnnotations());
     }
 });

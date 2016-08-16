@@ -9,7 +9,7 @@ class Title extends Component {
     }
 
     componentWillMount() {
-        this.setState({title:Contract.metadata.name});
+        this.setState({title:Contract.getMetadata().name});
     }
 
     render() {

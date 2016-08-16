@@ -1,9 +1,22 @@
 import React, {Component} from "react";
+import Contract from "../../contract";
+import Event from "../../event";
 
 class Zoom extends Component {
     constructor(props) {
         super(props);
-        this.state = ({scale: 1});
+        this.state = ({scale: 1, active: false});
+    }
+
+    componentDidMount() {
+        this.setState({scale: Contract.getPdfScale(), active: this.isPdfView()});
+        Event.subscribe('route:location', view=> {
+            this.setState({active: this.isPdfView()});
+        });
+    }
+
+    isPdfView() {
+        return (Contract.getView() == 'pdf');
     }
 
     handleClick(e, ev) {
@@ -18,20 +31,25 @@ class Zoom extends Component {
             int = int - 0.25;
         }
 
-        this.setState({scale: int});
+        if (this.state.scale != int) {
+            this.setState({scale: int});
+            Contract.setPdfScale(int);
+            Event.publish('zoom:change', int);
+            debug('pdf zoom publish zoom:change', int);
+        }
     }
 
     render() {
-        var selectedClass = "scale-" + this.state.scale;
-        $('.pdf-zoom-options span').removeClass('scale-selected');
-        $('.pdf-zoom-options .' + selectedClass).addClass('scale-selected');
-        var zoom = this.state.scale * 100;
+        if (!this.state.active) return null;
+
         return (
             <div>
                 <div className="pdf-zoom-options">
-                    <a className="btn btn-default" data-ref="decrease" href="#" onClick={this.handleClick.bind(this)}>-</a>
+                    <a className="btn btn-default" data-ref="decrease" href="#"
+                       onClick={this.handleClick.bind(this)}>-</a>
                     <p>image</p>
-                    <a className="btn btn-default" data-ref="increase" href="#" onClick={this.handleClick.bind(this)}>+</a>
+                    <a className="btn btn-default" data-ref="increase" href="#"
+                       onClick={this.handleClick.bind(this)}>+</a>
                 </div>
             </div>
         );

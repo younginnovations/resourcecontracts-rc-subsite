@@ -67,7 +67,7 @@ var List = React.createClass({
         return active;
     },
     renderItems(){
-        debug('Rendering Annotation List', this.getAnnotations());
+        debug('Annotation List :', this.getAnnotations());
         var annotations = this.getAnnotations();
         return _map(annotations, function (annotations, key) {
             return (

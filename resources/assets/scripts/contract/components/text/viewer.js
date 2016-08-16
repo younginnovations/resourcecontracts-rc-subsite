@@ -3,17 +3,19 @@ import Page from './page';
 import _map from "lodash/map"
 import Event from '../../event';
 import AnnotationLoader from '../../annotator/loader';
+import Contract from '../../contract';
 
 class Viewer extends Component {
     constructor(props) {
         super(props);
-        this.state = ({pages: {}});
+        this.state = ({pages: {}, isLoading: true});
         this.annotator = '';
     }
 
     componentWillReceiveProps(props) {
         this.setState({
-            pages: props.pages
+            pages: props.pages,
+            isLoading: false
         });
     }
 
@@ -36,12 +38,16 @@ class Viewer extends Component {
     }
 
     render() {
+        var content = 'Loading OCR Text...';
+        if (!this.state.isLoading) {
+            content = this.renderPages();
+        }
         return (
             <div className="text-panel">
                 <div className="text-annotator">
                     <div></div>
                     <div className="text-viewer">
-                        {this.renderPages()}
+                        {content}
                     </div>
                 </div>
             </div>
@@ -49,6 +55,4 @@ class Viewer extends Component {
     }
 }
 
-export
-default
-Viewer;
+export default Viewer;

@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import ReactDOM from 'react-dom';
 import Contract from '../../contract';
+import Event from '../../event';
 
 class Form extends Component {
     handleSubmit(e) {
@@ -12,8 +13,23 @@ class Form extends Component {
         window.location.hash = '#/search/' + encodeURI(searchQuery);
     }
 
+    fireEvent(query) {
+        Event.publish('search:change', query);
+        debug('Search form publish search:change', query);
+    }
+
     componentDidMount() {
         this.refs.searchQuery.value = Contract.getSearchQuery();
+        if ("onhashchange" in window) {
+            var locationHashChanged = () => {
+                if (Contract.getView() == 'search') {
+                    var query = Contract.getSearchQuery();
+                    this.refs.searchQuery.value = query;
+                    this.fireEvent(query);
+                }
+            };
+            window.onhashchange = locationHashChanged;
+        }
     }
 
     render() {

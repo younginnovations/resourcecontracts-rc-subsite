@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Config from '../../config';
 
 var PdfJS = React.createClass({
     propTypes: {
@@ -8,23 +9,22 @@ var PdfJS = React.createClass({
         scale: React.PropTypes.number,
         onPageRendered: React.PropTypes.func
     },
-
-    getInitialState: function () {
+    getInitialState() {
         return {
             pageNum: 1,
             page: 1,
             pageRendering: false,
             filePending: null,
             scale: 1,
+            message: ''
         };
     },
-    renderPage: function (file) {
+    renderPage (file) {
         this.setState({pageRendering: true});
-        var self = this;
-        var loadingTask = PDFJS.getDocument(file).then(function (pdfDoc) {
-            pdfDoc.getPage(self.state.pageNum).then(function (page) {
-                var viewport = page.getViewport(self.state.scale);
-                var canvas = ReactDOM.findDOMNode(self.refs.pdfCanvas);
+        var loadingTask = PDFJS.getDocument(file).then((pdfDoc) => {
+            pdfDoc.getPage(this.state.pageNum).then((page) => {
+                var viewport = page.getViewport(this.state.scale);
+                var canvas = ReactDOM.findDOMNode(this.refs.pdfCanvas);
                 var ctx = canvas.getContext('2d');
                 canvas.height = viewport.height;
                 canvas.width = viewport.width;
@@ -33,41 +33,30 @@ var PdfJS = React.createClass({
                     viewport: viewport
                 };
                 var renderTask = page.render(renderContext);
-                renderTask.promise.then(function () {
-                    self.state.pageRendering = false;
-                    self.notice('');
-                    self.props.onPageRendered();
-                    if (self.state.filePending !== null) {
-                        self.renderPage(self.state.filePending);
-                        self.setState({filePending: null});
+                renderTask.promise.then(()=> {
+                    this.state.pageRendering = false;
+                    this.notice('');
+                    this.props.onPageRendered();
+                    if (this.state.filePending !== null) {
+                        this.renderPage(this.state.filePending);
+                        this.setState({filePending: null});
                     }
                 });
             });
-        }, function (exception) {
-            var loadingErrorMessage = 'An error occurred while loading the PDF.';
-            if (exception.name == 'InvalidPDFException') {
-                loadingErrorMessage = 'Invalid or corrupted PDF file.';
-            } else if (exception.name == 'MissingPDFException') {
-                loadingErrorMessage = 'Missing PDF file.';
-            } else if (exception.name == 'UnexpectedResponseException') {
-                loadingErrorMessage = 'Unexpected server response.';
-            }
-            self.state.pageRendering = false;
-            self.notice('<div class="no-contract-error">' + LANG.sorry_loading + ' <a href= "mailto:' + email + '">' + email + '</a> ' + LANG.to_let_us_know + '</div>', true);
+        }, (exception) => {
+            this.state.pageRendering = false;
+            this.notice('<div class="no-contract-error">' + Config.message.pdf_not_loading + '</div>', true);
         });
     },
-
-    notice: function (msg, clear) {
-        ReactDOM.findDOMNode(this.refs.notice).innerHTML = msg;
-
+    notice (msg, clear) {
+        this.setState({message: msg});
         if (clear) {
             var canvas = ReactDOM.findDOMNode(this.refs.pdfCanvas);
             var context = canvas.getContext('2d');
             context.clearRect(0, 0, canvas.width, canvas.height);
         }
     },
-
-    queueRenderPage: function (file, scale) {
+    queueRenderPage (file, scale) {
         if (this.state.pageRendering) {
             this.setState({filePending: file, scale: scale});
         } else {
@@ -75,21 +64,26 @@ var PdfJS = React.createClass({
             this.renderPage(file);
         }
     },
-
-    componentDidMount: function () {
+    componentDidMount () {
         PDFJS.disableWorker = true;
+        PDFJS.verbosity = 0;
     },
-    componentWillMount: function () {
-        debug('Loading PDF ' + this.props.page);
-        this.queueRenderPage(this.props.file, this.props.scale);
-        console.log('componentWillMount');
+    loadPdf (props) {
+        debug('PDF JS Loading PDF ' + props.page);
+        this.notice('Loading PDF ' + props.page);
+        this.queueRenderPage(props.file, props.scale);
     },
-
-
-    render: function () {
+    componentWillMount () {
+        this.loadPdf(this.props);
+    },
+    componentWillReceiveProps (props) {
+        this.loadPdf(props);
+    },
+    render () {
+        var message = (<div className="message">{this.state.message}</div>);
         return (
             <div>
-                <div ref="notice"></div>
+                {message}
                 <canvas ref="pdfCanvas"></canvas>
             </div>
         );

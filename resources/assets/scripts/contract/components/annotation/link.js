@@ -33,10 +33,10 @@ var Link = React.createClass({
     },
     getLink () {
         if (this.state.type == "pdf") {
-            return '#/pdf/page/' + this.state.annotation.contract_id + '/annotation/' + this.state.annotation.id;
+            return '#/pdf/page/' + this.state.annotation.page_no + '/annotation/' + this.state.annotation.id;
         }
 
-        return '#/text/page/' + this.state.annotation.contract_id + '/annotation/' + this.state.annotation.id;
+        return '#/text/page/' + this.state.annotation.page_no + '/annotation/' + this.state.annotation.id;
     },
     render () {
         var displayText = this.state.page;

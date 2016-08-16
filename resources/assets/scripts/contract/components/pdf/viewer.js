@@ -1,30 +1,44 @@
 import React, {Component} from "react";
 import Page from './page';
 import _map from "lodash/map";
+import _isEmpty from "lodash/isEmpty";
+import Contract from "../../contract";
 
 class Viewer extends Component {
 
     constructor(props) {
         super(props);
-        this.state = ({pages: {}});
+        this.state = ({pages: {}, currentPage: 1, scale: 1});
     }
 
     componentWillReceiveProps(props) {
         this.setState({
-            pages: props.pages
+            pages: props.pages,
+            currentPage: Contract.getCurrentPage(),
+            scale: Contract.getPdfScale()
         });
     }
 
-    renderPdfs() {
-        return _map(this.state.pages, function (page) {
-            return (<Page key={page.id} page={page}/>);
+    getPage() {
+        var page = {};
+        _map(this.state.pages, (p) => {
+            if (p.page_no == this.state.currentPage) {
+                page = p;
+            }
         });
+
+        return page;
     }
 
     render() {
+        var pageView = null;
+        var page = this.getPage();
+        if (!_isEmpty(page)) {
+            pageView = (<Page scale={this.state.scale} page={this.getPage()}/>);
+        }
         return (
             <div className="pdf-viewer pdf-annotator">
-                {this.renderPdfs()}
+                {pageView}
             </div>
         );
     }

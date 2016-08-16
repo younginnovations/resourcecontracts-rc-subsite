@@ -3,19 +3,15 @@ import Event from './event';
 
 class Contract {
     constructor() {
-        this.metadata = this.getMetadata();
-
         this.options = {
             view: '',
-            defaultView: 'text',
+            defaultView: 'pdf',
             currentPage: 1,
-            selectedAnnotation: 0
+            selectedAnnotation: 0,
+            pdfScale: 1,
+            annotator: {},
+            paginationClick: false
         };
-
-        Event.subscribe('route:location', view=> {
-            this.setView(view);
-            debug('contract : subscribe: route:location', view);
-        });
     }
 
     getMetadata() {
@@ -24,6 +20,30 @@ class Contract {
 
     getAnnotations() {
         return Config.contract.annotations;
+    }
+
+    getCurrentPage() {
+        return this.options.currentPage;
+    }
+
+    setCurrentPage(page) {
+        return this.options.currentPage = page;
+    }
+
+    setAnnotatorInstance(annotator) {
+        return this.options.annotator = annotator;
+    }
+
+    setPaginationClick(click) {
+        this.options.paginationClick = click;
+    }
+
+    isPaginationClick() {
+        return this.options.paginationClick;
+    }
+
+    getAnnotatorInstance() {
+        return this.options.annotator;
     }
 
     getViewName(routeName) {
@@ -35,6 +55,26 @@ class Contract {
         return name;
     }
 
+    setPdfPageNumber(route) {
+        route = route.split('annotation')[0];
+        var reg = /pdf\/page\/(.*?)\/(?:\s|$)/g;
+        var match = reg.exec(route);
+
+        if (match !== null) {
+            console.log(match);
+            this.setCurrentPage(parseInt(match[1]));
+        }
+        console.log(this.getCurrentPage());
+    }
+
+    setPdfScale(scale) {
+        this.options.pdfScale = scale;
+    }
+
+    getPdfScale() {
+        return this.options.pdfScale;
+    }
+
     setView(view) {
         this.options.view = view;
     }
@@ -44,15 +84,15 @@ class Contract {
     }
 
     getID() {
-        return this.metadata.id;
+        return this.getMetadata().id;
     }
 
     getGuid() {
-        return this.metadata.open_contracting_id;
+        return this.getMetadata().open_contracting_id;
     }
 
     getSummaryUrl() {
-        return Config.APP_URL + 'contract/' + this.getGuid();
+        return Config.APP_URL + '/contract/' + this.getGuid();
     }
 
     getAllPageUrl() {
@@ -68,7 +108,7 @@ class Contract {
     }
 
     getTotalPages() {
-        return this.metadata.number_of_pages;
+        return this.getMetadata().number_of_pages;
     }
 
     setSelectedAnnotation(annotation_id) {
@@ -119,12 +159,9 @@ class Contract {
     }
 
     showPdfAnnotationPopup(id) {
-        if (this.isPdfLoaded() == false) {
-            return true;
-        }
         var wrapperEl = $('.pdf-annotator');
         wrapperEl.find('.annotator-viewer').addClass('annotator-hide');
-        var annotators = this.getAnnotatorInstance().content.data('annotator').dumpAnnotations();
+        var annotators = this.getAnnotations().result;
         var self = this;
         annotators.map(function (annotation, i) {
             if (annotation.id == id) {

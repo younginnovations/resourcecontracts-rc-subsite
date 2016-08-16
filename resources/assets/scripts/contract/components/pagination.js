@@ -10,21 +10,23 @@ class Pagination extends Component {
     }
 
     componentDidMount() {
-        this.setState({total: Contract.getTotalPages()});
+        this.setState({total: Contract.getTotalPages(), page: Contract.getCurrentPage()});
         this.refs.pageNumber.value = this.state.page;
 
         this.subscribeScroll = Event.subscribe('pagination:scroll', number=> {
             if (this.state.page != number) {
                 this.refs.pageNumber.value = number;
                 this.setState({page: number});
+                ///   Contract.setCurrentPage(number);
+                debug('subscribe pagination:scroll', number);
             }
         });
 
         this.subscribeUpdate = Event.subscribe('pagination:update', number=> {
             if (this.state.page != number) {
                 this.changePage(number);
+                debug('subscribe pagination:update', number);
             }
-            debug('subscribe pagination:update', number);
         })
     }
 
@@ -35,6 +37,7 @@ class Pagination extends Component {
 
     changePage(page_no) {
         this.refs.pageNumber.value = page_no;
+        Contract.setCurrentPage(page_no);
         this.setState({page: page_no});
         Event.publish('pagination:change', page_no);
         debug('publish pagination:change', page_no);

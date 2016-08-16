@@ -22,7 +22,11 @@ class Loader {
         this.content.data('annotator').plugins.AnnotatorNRGIViewer.nl2br = nl2br;
         this.content.data('annotator').plugins.AnnotatorNRGIViewer._lc = _lc;
 
-        this.setupStore();
+        if (Contract.getView() == 'pdf') {
+            this.content.annotator('addPlugin', 'PdfAnnotator');
+        } else {
+            this.setupStore();
+        }
     }
 
     setupStore() {

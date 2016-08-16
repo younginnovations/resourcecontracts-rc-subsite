@@ -3,13 +3,17 @@
 	<link href="{{url('css/rc-contract-view.css')}}" rel="stylesheet">
 	<link href="{{url('css/annotation/annotator.css')}}" rel="stylesheet">
 	<style>
-		.text-wrapper, .pdf-wrapper {
+		.text-wrapper {
 			display: block;
 			background: #F9F9F9;
 			padding: 10px;
 			margin-bottom: 30px;
 			border: 1px solid #E2E2E2;
 			margin-right: 10px;
+		}
+
+		.pdf-wrapper canvas {
+			border: 1px solid #ccc;
 		}
 	</style>
 @stop
@@ -20,8 +24,15 @@
 @stop
 @section('js')
 	<?php
-		$textDownloadUrl = ($contract->metadata->is_ocr_reviewed && site()->canDownloadWordFile()) ? route('contract.download', ['id' => $contract->metadata->open_contracting_id]) : "";
-		$annotationsDownloadUrl = ($contract->annotations->total > 0) ? route('contract.annotations.download', ['id' => $contract->metadata->open_contracting_id]) : "";
+	$textDownloadUrl = ($contract->metadata->is_ocr_reviewed && site()->canDownloadWordFile()) ? route(
+			'contract.download',
+			['id' => $contract->metadata->open_contracting_id]
+	) : "";
+	$annotationsDownloadUrl = ($contract->annotations->total > 0) ? route(
+			'contract.annotations.download',
+			['id' => $contract->metadata->open_contracting_id]
+	) : "";
+	$contact_email = site()->contactEmail();
 	?>
 	<script>
 		var config = {};
@@ -42,6 +53,11 @@
 			'text': '{{$textDownloadUrl}}',
 			'annotation': '{{$annotationsDownloadUrl}}'
 		};
+		config.message = {
+			text_not_published: "{!!sprintf(trans('annotation.processing_pdf_file'),'<a href=\"mailto:'.$contact_email.'\">'.$contact_email.'</a>')!!}",
+			pdf_not_loading: "{!!sprintf(trans('annotation.pdf_not_shown'),'<a href=\"mailto:'.$contact_email.'\">'.$contact_email.'</a>')!!}"
+		};
+
 		LANG = {!! json_encode(trans('annotation')) !!};
 		LANG.resourceLang = {!! json_encode(trans('resources')) !!};
 
@@ -58,7 +74,7 @@
 	<script src="{{url('js/annotator/annotator.utils.js')}}"></script>
 	<script src="{{url('js/annotator/annotator.plugin.event.js')}}"></script>
 	<script src="{{url('js/annotator/annotator.plugin.viewer.js')}}"></script>
-
+	<script src="{{url('js/annotator/pdf-annotator.js')}}"></script>
 	<script src="{{url('js/pdfjs/pdf.js')}}"></script>
 	<script src="{{ url('js/contract_view.js') }}"></script>
 @stop

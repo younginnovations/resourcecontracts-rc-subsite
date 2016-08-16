@@ -4,7 +4,8 @@ import Viewer from '../components/pdf/viewer';
 import Reflux from "reflux";
 import TextStore from '../stores/textStore';
 import TextAction from '../actions/textAction';
-import _ from  'lodash';
+import _sortBy from  'lodash/sortBy';
+import Event from '../event';
 
 var Pdf = React.createClass({
     mixins: [Reflux.listenTo(TextStore, 'onChange')],
@@ -15,11 +16,24 @@ var Pdf = React.createClass({
             total: 0
         }
     },
+    componentDidMount(){
+        this.subscribe = Event.subscribe('pagination:change', this.paginationHandler);
+    },
+    paginationHandler(page_no) {
+        var view = Contract.getView();
+        if (view == 'pdf') {
+            debug('subscribe Pdf pagination:change', page_no);
+            this.forceUpdate();
+        }
+    },
+    componentWillUnmount() {
+        this.subscribe.remove();
+    },
     componentWillMount: function () {
         TextAction.getPages(Contract.getGuid());
     },
     onChange: function (event, response) {
-        var pages = _.sortBy(response.result, function (page) {
+        var pages = _sortBy(response.result, function (page) {
             return page.page_no;
         });
         this.setState({pages: pages, total: response.total, isLoading: false})
