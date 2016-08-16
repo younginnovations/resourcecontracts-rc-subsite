@@ -1,13 +1,38 @@
+#map {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  max-height: 486px;
+}
+
+@media (max-width: 925px){
+  #map{
+    max-height: 366px;
+  }
+}
+
 .map-wrap{
   &.leaflet-container{
     background: none;
   }
   path {
     stroke: #288d94;
-    stroke-opacity: 1;
-    stroke-width: 1;
-    fill-opacity: 1;
   }
+
+  .foreground{
+    fill: none;
+  }
+}
+
+.tooltip {
+  position: absolute;
+  text-align: center;
+  padding: 8px;
+  font-size: 11px;
+  background: #fff;
+  border: solid 1px #aaa;
+  border-radius: 8px;
+  pointer-events: none;
 }
 
 .leaflet-control-attribution a{

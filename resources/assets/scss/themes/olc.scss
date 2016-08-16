@@ -6,8 +6,10 @@ $color_rangitoto_approx: #323e1f;
 $color_yellow_green_approx: #b7df74;
 $color_olivine_approx: #94ba63;
 $flame-pea: #3c4a42;
-$list-item: #296f46;
-$list-bg: #1f3c2b;
+$list-item: #1c8246;
+$list-bg: #274a35;
+$color_overlay_green: #3D891E;
+
 
 // gradient
 $linear_gradient_1: linear-gradient(-81deg, $color_cod_gray_approx 1%, $color_rangitoto_approx 100%);
@@ -18,8 +20,14 @@ $url_1: url(../../images/olc/ic-home-bg.jpg);
 $url_9: url(../../images/olc/ic-title-bg.png);
 $url_10: url(../../images/olc/ic-folder.png);
 $url_14: url(../../images/olc/error-bg.png);
+$url_hero_image: url(../../images/olc/heroimage.jpg);
 
 @import "../main.scss";
+
+.petroleum-wrapper {
+	background: linear-gradient(rgba(28,112,65,1),rgba(28,112,65,1)),$url_hero_image no-repeat top left/cover;
+	background-blend-mode: multiply;
+}
 
 .row-top-content {
 	background: rgba(64,64,64,0.8);

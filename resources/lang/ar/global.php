@@ -6,7 +6,7 @@ return [
     'an_online_repository_of'     => "مستودع على الإنترنت ل",
     'open_land_contracts'         => "Open Land Contracts",
     'search'                      => "بحث",
-    'contracts'                   => "بحث",
+    'contracts'                   => "عقود",
     'associated_documents'        => "عقود",
     'contract_doc_from'           => "والوثائق ذات الصلة",
     'countries'                   => "وثائق عقد",

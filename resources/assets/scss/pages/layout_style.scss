@@ -9,6 +9,13 @@
   cursor: pointer;
 }
 
+body.page-{
+  .trigger {
+    background: url(../../images/ic-menu-white.png) no-repeat center;
+    border-right: 1px solid rgba(242,242,242,0.2);
+  }
+}
+
 //original selectors
 //.navbar-brand, .navbar-brand:hover
 %extend_3 {
@@ -52,6 +59,22 @@
   span {
     display: block;
     color: $color_cape_cod_70_approx;
+  }
+}
+
+body.page-{
+  .navbar-brand {
+   color: #fff;
+    &:hover {
+      color: #fff;
+    }
+    .beta {
+     color: rgba(255, 255, 255, 0.7);
+    }
+    span {
+      display: block;
+      color: rgba(255, 255, 255, 0.7);
+    }
   }
 }
 
@@ -424,7 +447,6 @@ footer {
   clear: both;
   background: $color_cape_cod_approx;
   padding: 40px 0 20px;
-  text-align: center;
   ul {
     margin: 0;
     padding: 0;

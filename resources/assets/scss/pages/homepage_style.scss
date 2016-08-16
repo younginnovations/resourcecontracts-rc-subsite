@@ -57,6 +57,12 @@
 
 }
 
+body.page-{
+  nav.navbar{
+    background: transparent;
+  }
+}
+
 .row-top-wrap {
   background: no-repeat center/cover;
   margin: 0;
@@ -180,14 +186,13 @@
     }
   }
 
-
-
 .petroleum-list a{
   color: #484848;
+  text-decoration: underline;
   &:focus,
   &:hover,
   &:active {
-    color: inherit;
+    color: #000;
   }
 }
 
@@ -198,20 +203,22 @@
 
   .hero-image {
     position: relative;
+    margin-top: -81px;
   }
 
   .petroleum-wrapper {
-    background: linear-gradient(rgba($color_link_color, 0.45), rgba($color_link_hover_color, 0.45)), url(../images/img-heroimage.png) no-repeat top left/cover;
+    background: linear-gradient(rgba($color_link_color, 0.45), rgba($color_link_hover_color, 0.45)), $url_hero_image no-repeat top left/cover;
   }
 
   .section-wrap {
-    padding: 52px 0 20px 0;
+    padding: 133px 0 20px 0;
     margin: 0 60px;
   }
 
   @media (min-width: 992px) {
     .section-wrap {
-      min-height: 645px;
+      //min-height: 726px;
+      min-height: 642px;
     }
   }
 
@@ -309,12 +316,12 @@
     position: absolute;
     z-index: 999;
     width: 387px;
-    top: 170px;
+    top: 285px;
     background-color: $white;
     left: 610px;
     border-radius: 4px;
     .petroleum-list-inner {
-      padding: 29px 28px;
+      padding: 20px 25px;
       color: $light-black;
       .col-md-4 {
         padding-left: 0;
@@ -336,12 +343,12 @@
     }
   }
   .list-item-wrap {
-    padding: 19px 30px 30px;
+    padding: 20px;
     background-image: radial-gradient(circle at 50% 38%, $flame-pea, $list-item);
     border-radius: 0 0 4px 4px;
     .inner-list-item {
       background: $list-bg;
-      padding: 29px 42px 56px 19px;
+      padding: 30px 20px 35px;
       .group-item-title {
         font-size: 18px;
         line-height: 24px;
@@ -389,7 +396,7 @@
       font-size: 24px;
       line-height: 30px;
       font-family: $font_4;
-      padding: 79px 0 44px 0;
+      padding: 90px 0 55px 0;
       max-width: 960px;
       margin: 0 auto;
       a {
@@ -418,10 +425,15 @@
     background-color: $country-partners;
     padding: 40px 0 86px 0;
   }
+
   .heading2 {
     margin: 0;
-    padding-bottom: 47px;
+    padding-bottom: 30px;
     color: $cloud;
+  }
+
+  .map-wrapper .heading2{
+    padding-bottom: 10px;
   }
 
   .bx-wrapper {
@@ -464,10 +476,19 @@
     width: 36px;
     border-radius: 50%;
     background: rgba($grey, 0.7) url(../images/previous.png) no-repeat center;
-    display: none !important;
+    position: absolute;
+    top: 50%;
+    margin-top: -18px;
+    text-indent: -999px;
+    overflow: hidden;
+    z-index: 99;
+    border: none;
+    //display: none !important;
   }
 
+
   .slick-slider .slick-prev {
+    left: -18px;
     &:hover {
       background-color: $grey;
     }
@@ -475,17 +496,18 @@
 
   .slick-slider .slick-next {
     transform: rotate(180deg);
+    right: -18px;
     overflow: hidden;
     &:hover {
       background-color: $grey;
     }
   }
 
-  #map {
-    max-width: 950px;
-    width: 100%;
-    height: 500px;
-  }
+.slick-slide img{
+  margin: 0 auto;
+  width: 100%;
+}
+
 
   footer {
     background-color: $dark-grey;
@@ -513,12 +535,70 @@
     }
     li {
       list-style: none;
-      margin-top: 20px;
+      margin-top: 25px;
     }
     .partner-inner-heading {
       color: rgba(237, 239, 241, 0.4);
     }
   }
+
+.partner-inner-each{
+  .img-responsive{
+    &.logo__cu{
+      width: 166px;
+      height: 42px;
+      background: transparent url(../images/logo_columbia_university.png) 0 0 no-repeat;
+      @include background-image-retina(transparent,"../images/logo_columbia_university", "png",0,0);
+      background-size: 166px 42px !important;
+    }
+    &.logo__wb{
+      width: 193px;
+      height: 38px;
+      background: transparent url(../images/logo_wb.png) 0 0 no-repeat;
+      @include background-image-retina(transparent,"../images/logo_wb", "png",0,0);
+      background-size: 193px 38px !important;
+    }
+    &.logo__nrgi{
+      width: 114px;
+      height: 45px;
+      background: transparent url(../images/logo_nrgi.png) 0 0 no-repeat;
+      @include background-image-retina(transparent,"../images/logo_nrgi", "png",0,0);
+      background-size: 114px 45px !important;
+    }
+    &.logo__alsf{
+      width: 56px;
+      height: 68px;
+      background: transparent url(../images/logo_alsf.png) 0 0 no-repeat;
+      @include background-image-retina(transparent,"../images/logo_alsf", "png",0,0);
+      background-size: 56px 68px !important;
+    }
+    &.logo__ukaid{
+      width: 138px;
+      height: 47px;
+      background: transparent url(../images/logo_ukaid.png) 0 0 no-repeat;
+      @include background-image-retina(transparent,"../images/logo_ukaid", "png",0,0);
+      background-size: 138px 47px !important;
+    }
+
+    &.logo__ukaid{
+      width: 138px;
+      height: 47px;
+      background: transparent url(../images/logo_ukaid.png) 0 0 no-repeat;
+      @include background-image-retina(transparent,"../images/logo_ukaid", "png",0,0);
+      background-size: 138px 47px !important;
+    }
+
+    &.logo__oo{
+      width: 54px;
+      height:49px;
+      background: transparent url(../images/logo_oo.png) 0 0 no-repeat;
+      @include background-image-retina(transparent,"../images/logo_oo", "png",0,0);
+      background-size: 54px 49px !important;
+    }
+
+  }
+}
+
   .menu-list {
     .menu-list-each a {
       color: rgba(255, 255, 255, 0.7)
@@ -536,6 +616,11 @@
   @media only screen and (min-width: 768px) {
     .partner-wrapper li {
       display: block;
+     /* border-left: 1px solid #fff;
+      border-left: 1px solid rgba(255, 255, 255, 0.7);
+      line-height: 12px;
+      padding-left: 4px;
+      margin-left: 4px;*/
     }
   }
 
@@ -588,7 +673,7 @@
   @media only screen and (max-width: 768px) {
 
     .section-wrap {
-      padding: 30px 0 10px 0;
+      padding: 121px 0 10px 0;
       margin: 0 30px;
     }
 
@@ -646,7 +731,7 @@
 
   @media only screen and (max-width: 480px) {
     .section-wrap {
-      padding: 20px 0 20px 0;
+      padding: 101px 0 20px 0;
       margin: 0 15px;
     }
 

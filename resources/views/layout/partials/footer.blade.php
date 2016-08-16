@@ -5,35 +5,41 @@
             <div class="col-md-10 partner-inner row">
                 <div class="row">
                     <div class="col-md-4 col-sm-4 col-xs-12 partner-inner-each">
-                        <h5 class="partner-inner-heading">FOUNDING PARTNERS</h5>
+                        {{--<h5 class="partner-inner-heading">FOUNDING PARTNERS</h5>--}}
                         <ul>
                             @if(env("CATEGORY")=="rc")
-                                <li><a href="http://www.resourcegovernance.org/" class="img-responsive" target="_blank"><img src="{{url('images/logo_nrgi.png')}}"  width="142" height="72" /></a></li>
+                                <li><a href="http://www.resourcegovernance.org/" class="img-responsive logo__nrgi" target="_blank">
+                                        nrgi
+                                    </a></li>
                             @endif
-                            <li><a href="http://ccsi.columbia.edu/" class="img-responsive" target="_blank"><img src="{{url('images/logo_columbia_university.png')}}" width="194" height="49" /></a></li>
-                            <li><a href="http://www.worldbank.org/en/topic/governance" class="img-responsive" target="_blank"><img src="{{url('images/logo_wb.png')}}" width="218" height="43" /></a></li>
+                            <li><a href="http://ccsi.columbia.edu/" class="img-responsive logo__cu" target="_blank">
+                                </a></li>
+                            <li><a href="http://www.worldbank.org/en/topic/governance" class="img-responsive logo__wb" target="_blank">
+                                </a></li>
 
                         </ul>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-12 partner-inner-each">
-                        <h5 class="partner-inner-heading">DONORS</h5>
+                        {{--<h5 class="partner-inner-heading">DONORS</h5>--}}
                         <ul>
-                            <li><a href="http://www.dfid.gov.uk"  class="img-responsive" target="_blank"><img src="{{url('images/logo_ukaid.png')}}" width="147" height="50" /></a></li>
+                            <li><a href="http://www.dfid.gov.uk"  class="img-responsive logo__ukaid" target="_blank">
+                                </a></li>
                             @if(env("CATEGORY")=="rc")
-                                <li><a href="http://www.afdb.org/en/topics-and-sectors/initiatives-partnerships/african-legal-support-facility/"  class="img-responsive" target="_blank"><img src="{{url('images/logo_alsf.png')}}" width="56" height="68" /></a></li>
+                                <li><a href="http://www.afdb.org/en/topics-and-sectors/initiatives-partnerships/african-legal-support-facility/"  class="img-responsive logo__alsf" target="_blank">
+                                    </a></li>
                             @endif
                         </ul>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-12 partner-inner-each">
-                        <h5 class="partner-inner-heading">CONTENT PARTNER</h5>
+                        {{--<h5 class="partner-inner-heading">CONTENT PARTNER</h5>--}}
                         <ul>
-                            <li><a href="http://openoil.net/"  class="img-responsive" target="_blank"><img src="{{url('images/logo_oo.png')}}" width="54" height="49" /></a></li>
+                            <li><a href="http://openoil.net/"  class="img-responsive logo__oo" target="_blank"> </a></li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="col-md-2 menu-list row">
-                <h5 class="partner-inner-heading">MENU</h5>
+                {{--<h5 class="partner-inner-heading">MENU</h5>--}}
                 <ul class="menu-list-each">
                     <li><a href="{{url('about')}}">@lang('footer.about')</a></li>
                     <li><a href="{{url('faqs')}}">FAQs</a></li>
@@ -56,20 +62,7 @@
 <script src="{{url('js/app.min.js')}}"></script>
 <script src="{{url('js/homepage.js')}}"></script>
 @yield('js')
-{{--<script src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js">--}}
-</script>
-<script>
-    $(document).ready(function(){
-        $('.autoplay').slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            /*autoplay: true,
-            autoplaySpeed: 2000,*/
 
-        });
-
-    });
-</script>
 @if(env('TRACKING_ID') != '')
 
 <script>

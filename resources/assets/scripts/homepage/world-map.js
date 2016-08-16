@@ -1,105 +1,66 @@
-var country_latitude = 40.75;
-var country_longitude = 0;
-var zoom_level = 1.5;
-var countryList = JSON.parse(selectedCountries);
 
+var tooltip = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
 
+function draw(ht) {
+    $("#map").html("<svg id='map' xmlns='http://www.w3.org/2000/svg' width='100%' height='" + ht + "'></svg>");
+    map = d3.select("svg");
+    var width = $("svg").parent().width();
+    var height = ht;
 
-var map = new L.Map("map", {
-    zoomControl: false
-});
-map.scrollWheelZoom.disable();
-
-// create the tile layer with correct attribution
-var osmUrl = '';//http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-var osmAttrib = '';
-var osm = new L.TileLayer(osmUrl, {minZoom: zoom_level, maxZoom: 16, attribution: osmAttrib, transparent: true});
-
-// start the map in Nepal
-map.setView(new L.LatLng(country_latitude, country_longitude), zoom_level);
-map.addLayer(osm);
-geojson=L.geoJson(geoData, {
-    style: style,
-    onEachFeature:onEachFeature
-}).addTo(map);
-
-
-var info = L.control();
-
-function style(feature) {
-    if($.inArray(feature.properties.code, countryList) !== -1) {
-        return {
-            color: "#FCCE99",
-            weight:2,
-            opacity: 1,
-            fillOpacity: 0.7
-        };
-    }
-    else{
-        return{
-            color: "#E0E0DC"
-        }
-    }
-}
-
-function onEachFeature(feature, layer) {
-    if($.inArray(feature.properties.code, countryList) !== -1) {
-        layer.on({
-            mouseover: highlightFeature,
-            mouseout: resetHighlight,
-            click: clickCountry
-        });
-    }
-}
-
-function clickCountry(e)
-{
-    var code = e.target.feature.properties.code;
-    var win = window.open(app_url+'/countries/'+code.toLowerCase(), '_blank');
-    win.focus();
-}
-
-function highlightFeature(e)
-{
-    var layer = e.target;
-
-    layer.setStyle({
-        weight: 5,
-        color: '#144a4e',
-        dashArray: '',
-        fillOpacity: 0.7
+    projection = d3.geo.equirectangular().scale((width / 640) * 100).translate([width / 2, height / 2]);
+    var path = d3.geo.path().projection(projection);
+    var newObj = {};
+    console.log(selectedCountries);
+    var changingType = JSON.parse(selectedCountries);
+    changingType.forEach(function(d){
+        newObj[d] = d;
     });
-
-    if (!L.Browser.ie && !L.Browser.opera) {
-        layer.bringToFront();
-    }
-
-    info.update(layer.feature.properties);
+    map.selectAll('path').data(geoNew.features).enter()
+        .append('path')
+        .attr('d', path)
+        .attr("width", width)
+        .attr("height", width / 2)
+        .attr("fill", function (d,i) {
+            if (newObj[d.properties.code] != undefined) {
+                return '#FCCE99';
+            }
+            return '#ccc';
+        })
+        .on("mouseover", function(d) {
+            tooltip.transition()
+                .duration(200)
+                .style("opacity", 0.9);
+            var str = d.properties.name;
+            tooltip.html(str)
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 30) + "px");
+        })
+        .on("mouseout", function(d) {
+            tooltip.transition()
+                .duration(500)
+                .style("opacity", 0);
+        });
 }
 
-function resetHighlight(e) {
-    geojson.resetStyle(e.target);
-    info.update();
-}
-
-
-    info.onAdd = function (map) {
-        this._div = L.DomUtil.create('div', 'info');
-        this.update();
-        return this._div;
-    };
-
-    info.update = function (props) {
-        this._div.innerHTML = props ?'<span class="info-text">' + props.name + '</span>': '';
-    };
-
-    info.addTo(map);
-L.control.zoom({
-    position:'topright'
-}).addTo(map);
 
 
 
 
+draw(($("#map").width())/2);
 
+$(window).resize(function() {
+    if(this.resizeTO) clearTimeout(this.resizeTO);
+    this.resizeTO = setTimeout(function() {
+        $(this).trigger('resizeEnd');
+    }, 500);
+});
 
+$(window).bind('resizeEnd', function() {
+    var height = $("#map").width()/2;
+    $("#map svg").css("height", height);
+    draw(height);
+});
+
+/* #FCCE99 */

@@ -39,21 +39,19 @@ use \Illuminate\Support\Facades\Lang as Lang;
         </div>
     @endif
     <div class="row front-row-top-wrap">
-        <div class="bigger-block">
-            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-                <div class="navbar-header">
-                    <span data-toggle="collapse-sidebar" data-target=".sidebar-collapse"
-                          data-target-2=".sidebar-collapse-container" class="pull-left trigger">trigger</span>
-                    @if(env("CATEGORY")=="rc")
-                        <a class="navbar-brand" href="{{url()}}">Resource <span
-                                    class="beta">Beta</span><span>Contracts</span></a>
-                    @else
-                        <a class="navbar-brand" href="{{url()}}">OPENLAND <span
-                                    class="beta">Beta</span><span>Contracts</span></a>
-                    @endif
-                </div>
-            </nav>
-        </div>
+        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <span data-toggle="collapse-sidebar" data-target=".sidebar-collapse"
+                      data-target-2=".sidebar-collapse-container" class="pull-left trigger">trigger</span>
+                @if(env("CATEGORY")=="rc")
+                    <a class="navbar-brand" href="{{url()}}">Resource <span
+                                class="beta">Beta</span><span>Contracts</span></a>
+                @else
+                    <a class="navbar-brand" href="{{url()}}">OPENLAND <span
+                                class="beta">Beta</span><span>Contracts</span></a>
+                @endif
+            </div>
+        </nav>
     </div>
 
     <section class="hero-image">
@@ -70,7 +68,7 @@ use \Illuminate\Support\Facades\Lang as Lang;
                 <div class="clearfix">
                     <form  action="{{route('search')}}" method="GET" class="search-form" role="search">
                         <div class="form-group clearfix">
-                            <input type="text" name="q" class="form-control" placeholder= " @lang('global.search') {{$contracts}} @lang('global.associated_documents')">
+                            <input type="text" name="q" class="form-control" placeholder= " @lang('global.search') {{$contracts}} @lang('global.contracts')@lang('global.associated_documents')">
                             <button type="submit" class="btn btn-default search-button">@lang('global.search')</button>
                         </div>
                     </form>
@@ -122,12 +120,12 @@ use \Illuminate\Support\Facades\Lang as Lang;
     </section>
     <section class="img-intro">
         <div class="img-intro-text">
-            <p>The site applies extensive machine based processing of each PDF contract added to the site in order to it searchable and enable download as text based document. <a href="about">Learn More</a>
+            <p>OpenLandContracts.org is a repository of publicly available investment contracts for land, agriculture, and forestry projects. It features plain language summaries of key provisions and provides tools for searching and comparing contracts. <a href="about">Learn more</a>
             </p>
         </div>
     </section>
     <section class="explore-contracts">
-        <div class="wrapper map-wrapper">
+        <div class="map-wrapper">
             <h2 class="heading2">Explore Contracts</h2>
             <div id="map" class="map-wrap"></div>
             {{--<img src="img/map.png" class="img-responsive map">
@@ -141,12 +139,9 @@ use \Illuminate\Support\Facades\Lang as Lang;
             <div class="col-md-12 col-sm-12">
                 <div class="countrypartner">
                     <div class="slider autoplay">
-                        <div class="multiple"><img src="./images/img-countrypartner-1.png"></div>
-                        <div class="multiple"><img src="./images/img-countrypartner-2.png"></div>
-                        <div class="multiple"><img src="./images/img-countrypartner-3.png"></div>
-                        <div class="multiple"><h3>4</h3></div>
-                        <div class="multiple"><h3>5</h3></div>
-                        <div class="multiple"><h3>6</h3></div>
+                        <div class="multiple"><a href="http://contracts.ph-eiti.org/"> <img src="./images/img-eiti.png"></a></div>
+                        <div class="multiple"><a href="http://www.nma.gov.sl/resourcecontracts/ "><img src="./images/img-serraleone.png"></a></div>
+                        <div class="multiple"><img src="./images/img-australlia.png"></div>
                     </div>
                 </div>
             </div>
