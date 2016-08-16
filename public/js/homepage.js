@@ -1602,7 +1602,7 @@ function draw(ht) {
     projection = d3.geo.equirectangular().scale((width / 640) * 100).translate([width / 2, height / 2]);
     var path = d3.geo.path().projection(projection);
     var newObj = {};
-    console.log(selectedCountries);
+
     var changingType = JSON.parse(selectedCountries);
     changingType.forEach(function(d){
         newObj[d] = d;
@@ -1618,6 +1618,11 @@ function draw(ht) {
             }
             return '#ccc';
         })
+        .attr("cursor", function (d,i) {
+            if (newObj[d.properties.code] != undefined) {
+                return 'pointer';
+            }
+        })
         .on("mouseover", function(d) {
             tooltip.transition()
                 .duration(200)
@@ -1631,6 +1636,13 @@ function draw(ht) {
             tooltip.transition()
                 .duration(500)
                 .style("opacity", 0);
+        })
+        .on("click", function(e) {
+            if (newObj[e.properties.code] != undefined) {
+                var code = e.properties.code;
+                var win = window.open(app_url + '/countries/' + code.toLowerCase(), '_blank');
+                win.focus();
+            }
         });
 }
 

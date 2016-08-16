@@ -218,12 +218,12 @@ body.page-{
   @media (min-width: 992px) {
     .section-wrap {
       //min-height: 726px;
-      min-height: 642px;
+      min-height: 610px;
     }
   }
 
   .petroleum-mineral {
-    padding: 150px 224px 84px 31px;
+    padding: 140px 224px 84px 31px;
     color: $white;
     background: linear-gradient(rgba($black, 0.45), rgba($black, 0.45));
     width: 747px;
@@ -316,13 +316,14 @@ body.page-{
     position: absolute;
     z-index: 999;
     width: 387px;
-    top: 285px;
-    background-color: $white;
+    top: 264px;
     left: 610px;
     border-radius: 4px;
     .petroleum-list-inner {
       padding: 20px 25px;
       color: $light-black;
+      background-color: $white;
+      border-radius: 4px 4px 0 0;
       .col-md-4 {
         padding-left: 0;
         padding-right: 0;
@@ -332,6 +333,7 @@ body.page-{
         margin-bottom: 0;
         font-size: 40px;
         font-weight: bold;
+        margin-top: 10px;
       }
       small {
         font-size: 14px;

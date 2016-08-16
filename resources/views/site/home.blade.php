@@ -68,7 +68,7 @@ use \Illuminate\Support\Facades\Lang as Lang;
                 <div class="clearfix">
                     <form  action="{{route('search')}}" method="GET" class="search-form" role="search">
                         <div class="form-group clearfix">
-                            <input type="text" name="q" class="form-control" placeholder= " @lang('global.search') {{$contracts}} @lang('global.contracts')@lang('global.associated_documents')">
+                            <input type="text" name="q" class="form-control" placeholder= " @lang('global.search') {{$contracts}} @lang('global.contracts')&nbsp;@lang('global.associated_documents')">
                             <button type="submit" class="btn btn-default search-button">@lang('global.search')</button>
                         </div>
                     </form>

@@ -25,8 +25,7 @@ $url_hero_image: url(../../images/olc/heroimage.jpg);
 @import "../main.scss";
 
 .petroleum-wrapper {
-	background: linear-gradient(rgba(28,112,65,1),rgba(28,112,65,1)),$url_hero_image no-repeat top left/cover;
-	background-blend-mode: multiply;
+	background: $url_hero_image no-repeat top left/cover;
 }
 
 .row-top-content {
