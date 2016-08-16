@@ -81,11 +81,23 @@ function _e($arrayOrObject, $key, $default = null, $echo = false)
 }
 
 /**
- * @return \Laravel\Lumen\Application|mixed
+ * Get Auth class
+ *
+ * @return App\Http\Services\AuthService
  */
 function auth()
 {
     return app('App\Http\Services\AuthService');
+}
+
+/**
+ * Get Site Config
+ *
+ * @return App\Http\Services\SiteService
+ */
+function site()
+{
+    return app('App\Http\Services\SiteService');
 }
 
 /**
@@ -143,47 +155,6 @@ function show_arrow($order, $show = false)
     if ($show) {
         return '<i class="fa fa-black   fa-sort-'.$order.'"></i> ';
     }
-}
-
-/**
- * Get site Meta
- *
- * @param null $meta
- *
- * @return object
- */
-function meta($meta = null)
-{
-    $category            = env('CATEGORY');
-    $data                = trans("meta/$category");
-    $title               = (isset($meta['title']) && $meta['title'] != '') ? ' - '.$meta['title'] : '';
-    $description         = (isset($meta['description']) && $meta['description'] != '') ? $meta['description'] : $data['description'];
-    $data['title']       = $data['title'].$title;
-    $data['description'] = $description;
-    $data['category']    = $category;
-    $images              = app(ImageService::class);
-    $data['image']       = $images->getHomePageImageUrl();
-
-    return (object) $data;
-}
-
-/**
- * @param $key
- *
- * @return array
- */
-function getInformation($key = null)
-{
-    $information[] = [];
-    $site          = env('CATEGORY');
-
-    $information['categoryTitle']        = $site == 'olc' ? ' OpenLandContracts.org ' : ' ResourceContracts.org ';
-    $information['countriesDescription'] = trans(sprintf('meta/%s.countries_description', $site));
-    $information['countryDescription']   = trans(sprintf('meta/%s.country_description', $site));
-    $information['resourcesDescription'] = trans(sprintf('meta/%s.resources_description', $site));
-    $information['resourceDescription']  = trans(sprintf('meta/%s.resource_description', $site));
-
-    return array_key_exists($key, $information) ? $information[$key] : $information;
 }
 
 /**
@@ -247,27 +218,6 @@ function trans_array(array $codeList, $path)
     }
 
     return $codeList;
-}
-
-/**
- * Get Country Detail
- *
- * @param null $key
- *
- * @return array
- */
-function get_country($key = null)
-{
-    $countryCode     = env('COUNTRY');
-    $country         = [];
-    $country['code'] = strtolower($countryCode);
-    $country['name'] = trans('country.'.strtoupper($country['code']));
-    $country['flag'] = sprintf(
-        "https://raw.githubusercontent.com/younginnovations/country-flags/master/png250px/%s.png",
-        $country['code']
-    );
-
-    return array_key_exists($key, $country) ? $country[$key] : $country;
 }
 
 /**

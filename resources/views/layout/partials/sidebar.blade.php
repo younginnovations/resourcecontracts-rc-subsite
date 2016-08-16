@@ -8,17 +8,11 @@ if (!isset($summary)) {
 <div id="sidebar-wrapper" class="sidebar-collapse in">
     <ul class="sidebar-nav">
         <li class="sidebar-brand">
-            @if(env("CATEGORY")=="rc")
-                <a href="{{url()}}">Resource <span class="beta">Beta</span><span>Contracts</span></a>
-            @else
-                <a href="{{url()}}">OPENLAND <span class="beta">Beta</span><span>Contracts</span></a>
-            @endif
-
+                <a href="{{url()}}"> {{site()->meta('name')}} <span class="beta">Beta</span><span>Contracts</span></a>
         </li>
         <li class="contracts">
             <a href="{{url('contracts')}}">
                 <span>@lang('sidebar.all_contracts')</span>
-
                 <small class="label pull-right">{{$summary->contract_count}}</small>
             </a>
         </li>
@@ -26,7 +20,6 @@ if (!isset($summary)) {
             <label>@lang('global.countries')</label>
             <ul>
                 @foreach(array_slice($summary->country_summary, 0, 10, true) as $country)
-
                     <li>
                         <a href="{{route('country.detail', ['key'=>urlencode($country['key'])])}}">
                             <span>{{$country['name']}}</span>

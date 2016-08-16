@@ -12,6 +12,9 @@ class ImageService
 {
     protected $minWidth = 960;
     protected $minHeight = 500;
+
+    protected $key = 'default';
+
     /**
      * @var Request
      */
@@ -27,8 +30,28 @@ class ImageService
      */
     public function __construct(Request $request, Filesystem $filesystem)
     {
-        $this->request = $request;
+        $this->request    = $request;
         $this->filesystem = $filesystem;
+    }
+
+    /**
+     * Set Key
+     *
+     * @param $key
+     */
+    public function setKey($key)
+    {
+        $this->key = $key;
+    }
+
+    /**
+     * Get Key
+     *
+     * @return string
+     */
+    public function getKey()
+    {
+        return $this->key;
     }
 
     /**
@@ -38,7 +61,7 @@ class ImageService
      */
     function getName()
     {
-        $fileName = env('CATEGORY') . '-bg.jpg';
+        $fileName = sprintf('%s-bg.jpg', $this->getKey());
 
         return $fileName;
     }

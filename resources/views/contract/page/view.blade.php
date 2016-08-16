@@ -121,7 +121,7 @@
         var esapi = '{{rtrim(env("ELASTIC_SEARCH_HOST"),'/')}}/';
         var facebook_share = 'https://www.facebook.com/sharer/sharer.php?u=';
         var google_share = 'https://plus.google.com/share?url=';
-        var twitter_share = 'https://twitter.com/share?text={{ meta($meta)->title }}';
+        var twitter_share = 'https://twitter.com/share?text={{ site()->meta('title')}}';
         var text_version_url = '{{url('/faqs#learn_more')}}';
         var processing_pdf_file_message = "{!!sprintf(trans('annotation.processing_pdf_file'),'<a href=\"mailto:'.$contact_email.'\">'.$contact_email.'</a>')!!}";
         var not_published_message = "{!!sprintf(trans('annotation.not_published'),'<a href=\"mailto:'.$contact_email.'\">'.$contact_email.'</a>')!!}";
@@ -129,8 +129,6 @@
         var languages = '{!! $languages !!}';
         var selectedLang = '{{config('language')[$local->getLanguage()]['name']}}';
         var currentUrl = '{{Request::url()}}';
-        var country = '{{get_country('name')}}';
-        var image_source = '{{get_country('flag')}}';
         var languageImage = '{{getCountryByLang($lang->getCurrentLang())}}';
         var currentLanguage = '{{$lang->getCurrentLang()}}';
         var localisationState =  '{{config('localisation')}}';
