@@ -30,3 +30,40 @@
     }
   }
 }
+
+/* -------- style for aboutpage -------- */
+
+.static__content-wrap{
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.static__content-wrap #content{
+  width: 100%;
+}
+
+.static__content-wrap  p {
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 20px;
+  white-space: initial !important;
+}
+
+.static__content-wrap h1{
+  margin-top: 30px;
+  margin-bottom: 20px;
+  font-size: 26px;
+  line-height: 34px;
+}
+
+@media (min-width: 992px) {
+  .static__content-wrap h1{
+    padding: 0;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    font-size: 32px;
+    line-height: 40px;
+  }
+}
+
