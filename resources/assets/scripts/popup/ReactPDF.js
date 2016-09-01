@@ -36,13 +36,13 @@ const ReactPDF = React.createClass({
                 });
             });
         }, (exception) => {
-            var loadingErrorMessage = 'An error occurred while loading the PDF.';
+            var loadingErrorMessage = lang.loading_error;
             if (exception.name == 'InvalidPDFException') {
-                loadingErrorMessage = 'Invalid or corrupted PDF file.';
+                loadingErrorMessage = lang.corrupted_pdf;
             } else if (exception.name == 'MissingPDFException') {
-                loadingErrorMessage = 'Missing PDF file.';
+                loadingErrorMessage = lang.missing_pdf;
             } else if (exception.name == 'UnexpectedResponseException') {
-                loadingErrorMessage = 'Unexpected server response.';
+                loadingErrorMessage = LANG.unexpected_server;
             }
             Event.publish('loading', false);
             this.setState({pageRendering : false});

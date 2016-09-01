@@ -37,7 +37,8 @@
         </footer>
     </div>
 </div>
-<script src="{{url('js/app.min.js')}}"></script>
+<script src="{{url('js/app.js')}}"></script>
+
 @yield('js')
 @if(env('TRACKING_ID') != '')
 

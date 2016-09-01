@@ -70,4 +70,5 @@ return [
     'all_documents'               => 'All Documents',
     'documents_of'                => 'Documents of',
     'view_all'                    => 'View All',
+    'word_file'                   => "MS WORD"
 ];

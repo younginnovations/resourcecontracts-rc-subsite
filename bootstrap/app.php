@@ -88,20 +88,24 @@ $app->routeMiddleware(
 //$app->register('Laracasts\Utilities\UtilitiesServiceProvider');
 $app->register(App\Providers\AppServiceProvider::class);
 $app->register(Maatwebsite\Excel\ExcelServiceProvider::class);
+$app->register(LynX39\LaraPdfMerger\PdfMergerServiceProvider::class);
+
 class_alias('Maatwebsite\Excel\Facades\Excel', 'Excel');
 //class_alias('Collective\Html\FormFacade', 'Form');
 class_alias('Illuminate\Support\Facades\Response', 'Response');
+class_alias('LynX39\LaraPdfMerger\Facades\PdfMerger', 'PdfMerger');
+
 
 // $app->register(App\Providers\EventServiceProvider::class);
 
 
 config(
     [
-        'hoglog'   => [
+        'hoglog'       => [
             'rootPrefix' => 'logger/',
             'logdir'     => storage_path() . '/logs'
         ],
-        'language' => [
+        'language'     => [
             'en' => [
                 'code'         => 'en',
                 'name'         => 'English',
@@ -122,7 +126,8 @@ config(
             ]
 
         ],
-        'localisation'=>false
+        'localisation' => false,
+        'clip'         => false,
 
     ]
 );

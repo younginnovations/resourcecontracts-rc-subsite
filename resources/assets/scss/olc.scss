@@ -16,6 +16,7 @@ $url_1: url(../../images/olc/ic-home-bg.jpg);
 $url_9: url(../../images/olc/ic-title-bg.png);
 $url_10: url(../../images/olc/ic-folder.png);
 $url_14: url(../../images/olc/error-bg.png);
+$url_19: url(../../images/olc/ic-switch.png);
 
 
 
@@ -78,6 +79,31 @@ $url_14: url(../../images/olc/error-bg.png);
 	padding: 0;
 }
 
+
 a.parent_annotation_link {
-	color:#1C7041;
+	color: $color_link_hover_color;
+}
+
+.clip-head button {
+	background: $url_19 no-repeat 0 -38px !important;
+	&.active {
+		background: $url_19 no-repeat 0 0 !important;
+	}
+}
+
+.modal{
+	input,textarea{
+		&:focus{
+			border-bottom: 1px solid $color_link_color !important;
+			box-shadow: 0 1px 0 0 $color_link_color !important;
+
+		}
+	}
+
+	input[type="submit"] {
+		background-color: $color_link_color !important;
+		&:hover{
+			background-color: $color_link_hover_color !important;
+		}
+	}
 }

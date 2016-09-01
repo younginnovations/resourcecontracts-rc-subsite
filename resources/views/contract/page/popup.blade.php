@@ -35,15 +35,23 @@
 	<style>
 		.loading {
 			position: absolute;
-			top: 0px;
+			top: 30%;
 			border: 0px;
 			left: 0px;
 			right: 0px;
 			text-align: center;
+			width: auto;
+			background: none;
 		}
 
 		.loading p {
-			margin-top: 200px;
+			text-indent: 0;
+		}
+
+		@media (max-width: 600px){
+			.loading {
+				top: 45%;
+			}
 		}
 	</style>
 </head>
@@ -51,7 +59,7 @@
 <div id="wrapper">
 	<div id="page-wrapper" class="not-front sidebar-collapse-container">
 		<div id="app" class="main-app">
-			<div class="loading"><p><img src="{{url('images/loading.gif')}}"/> Loading ...</p></div>
+			<div class="loading"><p>@lang('annotation.loading')</p></div>
 		</div>
 	</div>
 </div>

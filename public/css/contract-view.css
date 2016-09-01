@@ -46,7 +46,7 @@
 }
 
 .text-search:before {
-    background: url(../images/ic-sprite-new.png) no-repeat 3px -389px;
+    background: url(../../images/ic-sprite.png) no-repeat -167px -388px;
     content: "";
     width: 26px;
     height: 24px;

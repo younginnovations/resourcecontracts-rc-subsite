@@ -286,6 +286,7 @@ class ContractController extends BaseController
         $contract              = new \stdClass();
         $contract->metadata    = $this->api->metadata($contract_id);
         $contract->annotations = $this->api->getAnnotations($contract_id);
+        $show_advance   = false;
 
         if (empty($contract->metadata)) {
             return abort(404);
@@ -296,7 +297,7 @@ class ContractController extends BaseController
         ];
 
 
-        return view('contract.page.view', compact('contract', 'back', 'meta'));
+        return view('contract.page.view', compact('contract', 'back', 'meta','show_advance'));
     }
 
     /**

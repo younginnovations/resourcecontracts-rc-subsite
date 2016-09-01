@@ -4457,7 +4457,9 @@ var React = {
   isValidElement: ReactElement.isValidElement,
   withContext: ReactContext.withContext,
 
-  // Hook for JSX spread, don't use this for anything else.
+  // Hook for
+  //
+  // spread, don't use this for anything else.
   __spread: assign
 };
 

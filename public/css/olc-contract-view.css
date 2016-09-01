@@ -156,7 +156,7 @@
 }
 
 .annotation-sort {
-    margin: 0 18px 10px;
+    margin: 0 18px 0;
 }
 
 .annotation-sort > span {
@@ -518,6 +518,9 @@
     margin: 12px;
     float: right;
     padding: 0;
+    position: static;
+    border: 0;
+    background: transparent;
 }
 
 .social-share li {
@@ -598,11 +601,16 @@
     margin-bottom: 5px;
 }
 
+.annotation-item.selected-annotation {
+    background-color: #dfdfdf;
+}
+
 .annotation-item .annotated-text {
     background: url(../images/ic-dark-annotate-bg.png) no-repeat 0 5px;
     font-size: 14px;
     line-height: 22px;
     padding-left: 18px;
+    padding-right: 18px;
 }
 
 .annotation-item .annotation-item-content {
@@ -616,4 +624,35 @@
 
 .amla-legislation {
     margin: 10px 0px;
+}
+.clip-label {
+    position: absolute;
+    top: 25px;
+    right: 140px;
+}
+
+.clip-label button {
+    background: url(../../images/ic-switch.png) no-repeat 0 -38px !important;
+    -webkit-box-shadow: none!important;
+    -moz-box-shadow: none!important;
+    box-shadow: none!important;
+    border: none !important;
+    padding-left: 40px;
+    width: 36px;
+    height: 18px;
+    margin-left: 4px;
+    line-height: 4px;
+    outline: 0!important;
+}
+
+.clip-label button:focus,.clip-label button:active {
+    outline: 0!important;
+}
+
+.clip-label button.active {
+    background: url(../../images/olc/ic-switch.png) no-repeat 0 0 !important;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border: none !important;
 }

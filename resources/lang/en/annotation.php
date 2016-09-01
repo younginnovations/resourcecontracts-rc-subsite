@@ -67,6 +67,10 @@ return [
     'african_mining'             => "in African Mining Legislation Atlas",
     'other'                      => "Legal Rules",
     'annotation_count'           => "annotations",
+    'missing_pdf'                => "Missing PDF file.",
+    'corrupted_pdf'              => "Invalid or corrupted PDF file.",
+    'unexpected_server'          => "Unexpected server response",
+    'loading_error'              => "An error occurred while loading the PDF.",
 
 ];
 

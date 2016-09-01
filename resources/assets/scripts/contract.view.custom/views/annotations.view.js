@@ -32,6 +32,9 @@ var AnnotationsViewer = React.createClass({
                     <AnnotationsSort
                         contractApp={this.props.contractApp}
                         annotationsCollection={this.props.annotationsCollection}/>
+                    <ClipAll
+                        contractApp={this.props.contractApp}
+                        annotationsCollection={this.props.annotationsCollection}/>
                     <AnnotationsList
                         contractApp={this.props.contractApp}
                         annotationsCollection={this.props.annotationsCollection}/>
@@ -50,10 +53,66 @@ var AnnotationHeader = React.createClass({
         });
     },
     render: function () {
+
         var count = this.props.annotationsCollection.totalAnnotations();
         return (
-            <div className="annotation-title">{count} {lang.annotation_count}</div>
+            <div>
+            <div className="annotation-title">{count} {lang.annotations}</div>
+
+            </div>
         );
+    }
+});
+
+var ClipAll = React.createClass({
+    componentDidMount: function () {
+        var self = this;
+        this.props.annotationsCollection.on("reset", function () {
+            self.forceUpdate();
+        });
+
+    },
+    componentDidUpdate : function(){
+        if(!this.checkAllClipped()){
+            $(this.getDOMNode()).find('.annotation-clip').removeClass('annotation-clipped');
+            $(this.getDOMNode()).find('.annotation-clip').attr('id','clip-all-annotations');
+        }
+
+    },
+    checkAllClipped:function(){
+        var clipCollection = window.getClipLocalCollection();
+        var allAnnotations = this.props.annotationsCollection;
+        var clipCollectionData=clipCollection.localStorage.findAll();
+        var clippedData = [];
+        clipCollectionData.map(function(d){
+            clippedData.push(parseInt(d.id));
+        });
+        var isAllClipped = false;
+        allAnnotations.map(function(d){
+            if(clippedData.indexOf(parseInt(d.get('annotation_id'))) > -1)
+            {
+                isAllClipped=true;
+            }else{
+                isAllClipped=false;
+            }
+        });
+        return isAllClipped;
+
+    },
+    render : function(){
+        if(isClipOn==true)
+        {
+            return(
+                <div className="clearfix">
+                <a id="clip-all-annotations" className="annotation-clip" title="Clip all annotations">
+                <span className="link">{langClip.clip_all}</span>
+                </a>
+                </div>
+                );
+        }
+    else{
+        return (<div></div>);
+    }
     }
 });
 
@@ -301,6 +360,7 @@ var PageLink = React.createClass({
                 location.hash = "#/pdf/page/" + self.state.pageNo + "/annotation/" + self.state.id;
             }
         });
+
     },
     setPageState: function () {
         var id = this.props.annotation.get('id');
@@ -540,17 +600,57 @@ var AnnotationItem = React.createClass({
     {
         return string.toLowerCase().trim().replace(' ', '_');
     },
+
     render: function () {
         var currentAnnotationClass = (this.state.highlight) ? "annotation-item selected-annotation" : "annotation-item";
 
         var category = this.getCategory();
         return (
-            <div className={currentAnnotationClass +' ' +this.getCluster() + this.getPageClasses()}
-                 id={this.state.annotation_id}>
-                <p className="category">{category}</p>
+
+            <div className={currentAnnotationClass +' ' +this.getCluster() + this.getPageClasses()} id={this.state.annotation_id}>
+                <ClipButton annotationid = {this.state.annotation_id}/>
+                <div className="category-clip-wrap">
+                    <p className="category">{category}</p>
+                </div>
                 <p className="annotated-text">{this.getShowText()}</p>
                 <div className="annotation-page">{this.getPages()}</div>
             </div>
         )
     }
 });
+
+
+
+var ClipButton = React.createClass({
+    componentDidUpdate:function(){
+        console.log("clipstate",$.cookie("clipstate")=="undefined");
+        if($.cookie("clipstate")!=0)
+        {
+            loadSingleClipedItem(this.getDOMNode());
+        }
+
+        if($.cookie("clipstate")==0 || typeof $.cookie("clipstate")=='undefined')
+        {
+
+            $(this.getDOMNode()).css('display','none');
+        }
+    },
+
+    clickHandler : function(e)
+    {
+        window.clipAnnotations(parseInt(this.props.annotationid), e.target);
+    },
+    render: function(){
+        if(isClipOn==true)
+        {
+            return (
+                <button data-id={this.props.annotationid} onClick={this.clickHandler} className="annotation-clip-icon" title="Clip annotation.">langClip.clip</button>
+            );
+        }
+    else{
+        return (<div></div>);
+    }
+    }
+});
+
+
