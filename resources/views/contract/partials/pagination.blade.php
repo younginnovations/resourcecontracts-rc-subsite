@@ -1,4 +1,5 @@
 <?php
+
 $total_page  = ceil($total_item / 25);
 $no_of_pages = 6;
 $current_url = \Illuminate\Support\Facades\Input::url();
@@ -8,7 +9,7 @@ $current_url .= "?";
 $current_url .= (http_build_query($queries) == '') ? '' : http_build_query($queries) . '&';
 ?>
 
-@if($total_page > 1 && $current_page <= $total_page)
+@if($total_page > 1 && $current_page <= $total_page && !(isset($queries['all']) && $queries['all']==1))
     <div class="text-center">
         <div class="pagination-wrapper">
             <ul>
@@ -46,7 +47,7 @@ $current_url .= (http_build_query($queries) == '') ? '' : http_build_query($quer
                         <a href="{{ $current_url }}page={{ $current_page < $total_page ? $current_page + 1 : $current_page }}">@lang('global.next')</a>
                     </li>
                     <li class="num-text"><a href="{{ $current_url }}page={{ $total_page }}">@lang('global.last')</a></li>
-                    <li class="num-text"><a href="{{ $current_url }}page={{ $total_page+1 }}&all={{true}}">@lang('global.view_all')</a></li>
+                    <li class="num-text"><a href="{{ $current_url }}all={{true}}">@lang('global.view_all')</a></li>
 
                 @endif
             </ul>
