@@ -75,7 +75,7 @@ class ResourceController extends BaseController
     {
         $resource    = urldecode($resource);
         $currentPage = $request->get('page', 1);
-        $filter      = ['resource' => $resource, 'from' => $currentPage, 'sort_by' => $request->get('sortby'), 'order' => $request->get('order')];
+        $filter      = ['resource' => $resource, 'from' => $currentPage, 'sort_by' => $request->get('sortby'), 'order' => $request->get('order'), 'all'=>$request->get('all','0'),];
         $contracts   = $this->api->allContracts($filter);
         $countries   = $this->api->getCountryByResource($filter);
         if (!$contracts) {

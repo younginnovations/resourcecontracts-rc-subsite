@@ -66,7 +66,7 @@ class CountryController extends BaseController
     public function detail(Request $request, $country)
     {
         $currentPage = $request->get('page', 1);
-        $filter      = ['country' => urldecode($country), 'from' => $currentPage, 'sort_by' => $request->get('sortby'), 'order' => $request->get('order')];
+        $filter      = ['country' => urldecode($country), 'from' => $currentPage, 'sort_by' => $request->get('sortby'), 'order' => $request->get('order'),'all'=>$request->get('all','0'),];
         $contracts   = $this->api->allContracts($filter);
         $resources   = $this->api->getResourceByCountry($filter);
         if (!$contracts) {
