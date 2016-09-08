@@ -1,7 +1,5 @@
 <?php
-
 return [
-
     'resource_type'        => "Type de ressource",
     'contract_type'        => "Type de contrat ",
     'company'              => "Société",

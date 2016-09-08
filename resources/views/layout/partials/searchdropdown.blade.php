@@ -12,6 +12,7 @@ $category = $api->getAnnotationsCategory();
     </div>
     <div class="search-input-wrapper">
         <div class="col-lg-12">
+            @if(!site()->isCountrySite())
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
                 <label for="">@lang('global.country')</label>
                 <select name="country[]" id="country" multiple="multiple">
@@ -20,6 +21,7 @@ $category = $api->getAnnotationsCategory();
                     @endforeach
                 </select>
             </div>
+            @endif
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
                 <label for="">@lang('global.resource')</label>
 
@@ -49,7 +51,7 @@ $category = $api->getAnnotationsCategory();
                     @endforeach
                 </select>
             </div>
-            @if(env('CATEGORY')=="rc")
+            @if(site()->isRC())
                 <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
                     <label for="">@lang('search.corporate_group')</label>
                     <select name="corporate_group[]" id="corporate_group" multiple="multiple">
@@ -94,7 +96,7 @@ $category = $api->getAnnotationsCategory();
                     @endforeach
                 </select>
             </div>
-            @if(env('CATEGORY')=="rc")
+            @if(site()->isRC())
                 <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
 
                     <label for="">@lang('search.annotated')</label>
@@ -107,18 +109,22 @@ $category = $api->getAnnotationsCategory();
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
                 <button type="submit" class="btn btn-form-search">@lang('global.search')</button>
             </div>
+
             @if(!isset($searchPage))
                 <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
-                    <button type="button" class="btn btn-form-search search-close">@lang('global.cancel')</button>
+                    <button type="reset" id="searchclear"  class="btn btn-form-search btn-form-reset">@lang('search.reset')</button>
                 </div>
+
                 <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
-                    <button type="reset" id="searchclear" class="btn btn-form-search btn-form-reset">@lang('search.reset')</button>
+                    <button type="button" class="btn btn-form-search search-close">@lang('global.hide')</button>
                 </div>
+
             @else
                 <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
-                    <button type="submit" id="searchclear" class="btn btn-form-search btn-form-reset">@lang('search.reset')</button>
+                    <a href="{{url('search')}}" class="btn btn-form-search btn-form-reset">@lang('search.reset')</a>
                 </div>
             @endif
+
         </div>
     </div>
     <script>

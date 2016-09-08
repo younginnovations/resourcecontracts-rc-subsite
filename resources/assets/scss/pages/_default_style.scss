@@ -1,0 +1,323 @@
+//colors
+$color_silver_approx: rgb(188, 188, 188);
+$color_silver_50_approx: rgba(188, 188, 188, 0.5);
+$color_cararra_approx: rgb(235, 235, 235);
+$color_cararra_70_approx: rgba(235, 235, 235, 0.7);
+$color_gray_nurse_approx: #eaeaea;
+$color_wild_sand_approx: #f5f5f5;
+$color_cape_cod_60_approx: rgba(64, 64, 64, 0.6);
+$white_50: rgba(255, 255, 255, 0.5);
+$color_cape_cod_50_approx: rgba(64, 64, 64, 0.5);
+$color_cape_cod_approx: #404040;
+$white: #fff;
+$color_mercury_approx: #e3e3e3;
+$black_50: rgba(0, 0, 0, 0.5);
+$color_cape_cod_70_approx: rgba(64, 64, 64, 0.7);
+$white_70: rgba(255, 255, 255, 0.7);
+$color_mystic_approx: #e7e9eb;
+$black_10: rgba(0, 0, 0, 0.1);
+$concrete: rgb(242, 242, 242);
+$concrete_20: rgba(242, 242, 242, 0.2);
+$white_40: rgba(255, 255, 255, 0.4);
+$white_30: rgba(255, 255, 255, 0.3);
+$color_calypso_approx: #356f90;
+$white_10: rgba(255, 255, 255, 0.1);
+$color_athens_gray_approx: #edeff1;
+$color_cape_cod_10_approx: rgba(64, 64, 64, 0.1);
+$color_cape_cod_20_approx: rgba(64, 64, 64, 0.2);
+$black_20: rgba(0, 0, 0, 0.2);
+$color_alabaster_approx: #f9f9f9;
+$color_celeste_approx: #cecece;
+$black_30: rgba(0, 0, 0, 0.3);
+$color_burnt_sienna_20_approx: rgba(243, 115, 86, 0.2);
+$color_gallery_approx: #eee;
+$color_mine_shaft_approx: #303030;
+$color_alabaster_20_approx: rgba(249, 249, 249, 0.2);
+$color_blumine_approx: rgb(35, 82, 124);
+$color_blumine_20_approx: rgba(35, 82, 124, 0.2);
+$color_blumine_60_approx: rgba(35, 82, 124, 0.6);
+$color_concrete_approx: #f3f3f3;
+$color_iron_70_approx: rgba(209, 214, 219, 0.7);
+$color_spring_wood_approx: #faf9ef;
+$color_westar_approx: #e0dfd2;
+$color_satin_linen_approx: #e6e5d5;
+$color_bon_jour_approx: #e6e5dd;
+$color_quill_gray_approx: #d5d5ce;
+$color_cape_cod_80_approx: rgba(64, 64, 64, 0.8);
+$color_alto_approx: #dadada;
+$color_monsoon_approx: #898989;
+$color_mountain_mist_approx: #999999;
+$white_20: rgba(255, 255, 255, 0.2);
+$color_russett_approx: #785a53;
+$color_silver_chalice_approx: #aaa;
+$color_iron_10_approx: rgba(216, 216, 216, 0.1);
+$color_mountain_mist_10_approx: rgba(151, 151, 151, 0.1);
+$color_aluminium_approx: #a8aeb3;
+$color_iron_approx: rgb(209, 214, 219);
+$color_boulder_approx: #787878;
+$color_pink_swan_approx: #bbb;
+$color_tapa_approx: #777;
+$color_chestnut_rose_approx: #d9534f;
+$color_valencia_approx: #d43f3a;
+$color_persian_red_approx: #c9302c;
+$color_mexican_red_approx: #ac2925;
+$mercury: #e5e5e5;
+$color_sea_blue : #288d94;
+$color_light_gray: #e0e0dc;
+$color_danger: #d9534f;
+$color_danger_hover: #d6403b;
+$black: #000;
+$border-color:#bcb5b9;
+$light-black: #484848;
+$cloud: #ebfeff;
+$explore-contracts: #288d94;
+$country-partners: #4a4a4a;
+$icon-border-right: #979797;
+$grey: #171717;
+$dark-grey: #404040;
+$color_blue: #0096E0;
+$color_blue_hover: #019fec;
+
+
+$img-path: "../images";
+
+$font_0: Open-Sans-Regular;
+$font_1: Open-Sans-Bold;
+$font_2: Open-Sans-Light;
+$font_3: Open-Sans-Regular !important;
+$font_4: Open-Sans-Italic;
+
+//urls
+$url_2: url(../../images/ic-sprite.png);
+$url_3: url(../../images/ic-map.png);
+$url_4: url(../../images/ic-resources-bg.png);
+$url_5: url(../../images/ic-file.png);
+$url_6: url(../../images/ic-annotate.png);
+$url_7: url(../../images/ic-disabled-arrow.png);
+$url_8: url(../../images/ic-annotation.png);
+$url_11: url(../../images/ic-tick.png);
+$url_12: url(../images/ic-ok.png);
+$url_13: url(../../images/ic-close.png);
+$url_15: url(../../images/paper-bg.png);
+$url_16: url(../../images/ic-amla.png);
+$url_17: url(../../images/ic-delete.png);
+$url_18: url(../../images/ic-clip.png);
+$url_19: url(../../images/ic-clip-hover.png);
+$url_20: url(../../images/loading.gif);
+$url_21: url(../../images/ic-view.png);
+
+a{
+  cursor: pointer;
+}
+
+//gradients
+
+@import "bourbon/bourbon";
+
+@include font-face($font_0, "../../fonts/opensans-regular-webfont", $file-formats: eot svg woff woff2);
+@include font-face($font_1, "../../fonts/opensans-bold-webfont", $file-formats: eot svg woff woff2);
+@include font-face($font_2, "../../fonts/opensans-light-webfont", $file-formats: eot svg woff woff2);
+@include font-face($font_4, "../../fonts/opensans-italic", $file-formats: eot svg tff woff woff2);
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  font-family: $font_0;
+  color: $color_cape_cod_approx;
+  background: $white;
+  position: relative;
+  overflow-x: hidden;
+  margin: 0;
+}
+
+* {
+  -webkit-padding-start: 0px;
+  margin: 0;
+  padding: 0;
+}
+
+.search-click {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+:focus {
+  outline: 0 !important;
+}
+
+.quote {
+  color: $color_cape_cod_60_approx !important;
+  margin-bottom: 12px !important;
+}
+
+//original selectors
+//.btn-load-more, .btn-load-more:hover
+%extend_13 {
+  background: $color_alabaster_approx;
+  background: $color_alabaster_20_approx;
+  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+  border-radius: 24px;
+  border: 1px solid $color_blumine_approx;
+  border: 1px solid $color_blumine_20_approx;
+  display: block;
+  font-size: 17px;
+  color: $color_cape_cod_70_approx;
+  line-height: 48px;
+  padding: 0;
+}
+
+//original selectors
+//.country-list-wrap .col-lg-2, .country-list-wrap .col-lg-3
+%extend_12 {
+  text-align: center;
+  margin-top: 60px;
+  min-height: 150px;
+}
+
+//original selectors
+//.btn-login-block, .btn-login-block:hover, .btn-login-block:hover:focus
+%extend_28 {
+  background: $color_link_color;
+  color: $white;
+  padding: 7px;
+}
+
+.load-more {
+  width: 234px;
+  margin: 0 auto 90px;
+  clear: both;
+}
+
+.btn-load-more {
+  @extend %extend_13;
+  &:hover {
+    @extend %extend_13;
+    background: $color_blumine_approx;
+    background: $color_blumine_20_approx;
+    color: $color_blumine_60_approx;
+  }
+}
+
+//original selectors
+//.btn-search, .btn-search:hover, .btn-search:focus
+%extend_30 {
+  width: 200px;
+  //Instead of the line below you could use @include border-top-left-radius($radius)
+  border-top-left-radius: 0;
+  //Instead of the line below you could use @include border-bottom-left-radius($radius)
+  border-bottom-left-radius: 0;
+}
+
+//original selectors
+//.panel-content .panel-heading, .content-wrap #title
+%extend_25 {
+  background: none;
+  border: 0;
+  font-size: 24px;
+  padding-top: 20px;
+  margin-bottom: 20px;
+}
+
+//original selectors
+//.panel-content .panel-body, .content-wrap #content
+%extend_26 {
+  white-space: initial !important;
+  width: 50%;
+  margin-bottom: 40px;
+  line-height: 22px;
+  border: 0;
+}
+
+//original selectors
+//.panel-content p, .content-wrap #content p
+%extend_27 {
+  line-height: 22px;
+  margin-bottom: 20px;
+  white-space: initial !important;
+}
+
+
+//original selectors
+//.content-wrap .glyphicon-ok, .content-wrap .glyphicon-remove
+%extend_29 {
+  background: $url_12 no-repeat center !important;
+  width: 24px;
+  height: 22px;
+  display: block;
+  top: 0;
+}
+
+@mixin background-image-retina($color,$file, $type,$x-position,$y-position) {
+  @media only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (-moz-min-device-pixel-ratio: 2),
+  only screen and (-o-min-device-pixel-ratio: 2/1),
+  only screen and (min-device-pixel-ratio: 2),
+  only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx){
+    & {
+      background: $color url($file + '@2x.' + $type) $x-position $y-position no-repeat;
+    }
+  }
+}
+
+
+.not-front > .row {
+  margin: 0;
+}
+
+
+.editable-buttons > button {
+  padding: 0;
+  line-height: normal;
+  font-size: inherit;
+}
+
+.page-edit-button {
+  font-size: 17px !important;
+  color: $white;
+  padding: 6px 10px;
+  top: 0;
+}
+
+.note-editable.panel-body {
+  min-height: 200px !important;
+}
+
+.editable {
+  padding: 10px !important;
+  margin: -6px -6px 14px -11px;
+  width: 50%;
+  border: 1px solid transparent !important;
+  box-sizing: border-box;
+  overflow: hidden;
+  &:hover {
+    border: dashed 1px #0088cc !important;
+  }
+  > div {
+    text-align: inherit !important;
+  }
+}
+
+.affix, .affix-top {
+  top: 11em;
+  width: 20.45em;
+}
+
+.affix-bottom {
+  position: absolute;
+  width: 20.45em;
+}
+
+@media (min-width: 1200px) {
+  .affix-bottom {
+    width: 28.45em;
+  }
+}
+
+/*
+a.parent_annotation_link {
+  color:#1C7041;
+}*/

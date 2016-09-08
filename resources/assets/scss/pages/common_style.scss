@@ -1,0 +1,331 @@
+a {
+  color: $color_link_color;
+  &:hover {
+    color: $color_link_hover_color;
+    outline: 0 !important;
+  }
+  &:focus {
+    color: $color_link_hover_color;
+    outline: 0 !important;
+  }
+  &.view-annotation-cluster {
+    &:hover {
+      background-color: $color_link_color !important;
+      color: $white;
+    }
+    &.active {
+      background-color: $color_link_color !important;
+      color: $white;
+    }
+  }
+}
+
+.panel-top-wrapper {
+  background: $color_alabaster_approx;
+  padding: 0;
+  min-height: 55px;
+}
+
+.panel-top-content {
+  border-bottom: 1px solid $color_silver_approx;
+  border-bottom: 1px solid $color_silver_50_approx;
+  overflow: hidden;
+  padding: 0 10px 0 36px;
+  > .pull-left {
+    margin-top: 10px;
+  }
+}
+
+.panel-title {
+  clear: both;
+  font: 28px/38px $font_2;
+  padding-bottom: 10px;
+  img {
+    margin-right: 5px;
+    width: 52px;
+    //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+    box-shadow: 0 2px 4px $black_30;
+  }
+}
+
+.attached-top-wrapper{
+  position: relative;
+  .back{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-position: 12px -530px;
+    //height:100%;
+  }
+  .panel-top-content > .pull-left {
+    margin-top: 0;
+  }
+
+  .panel-title{
+    float: left;
+    clear: none;
+    margin: 0px 0 0 50px;
+    padding: 15px 0 0 15px;
+    font-size: 21px;
+    line-height: 27px;
+    width: 80%;
+    font: 28px/38px Open-Sans-Light;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .left-top-content {
+    width: calc(100% - 250px);
+    .panel-title {
+      width: calc(100% - 50px);
+    }
+  }
+
+  .has-no-backbtn + .panel-title{
+    margin: 0 0 14px 20px;
+  }
+
+
+  .title-pop{
+    position: absolute;
+    z-index: 888;
+    max-width: calc(80% - 50px);
+    padding-bottom: 10px;
+    overflow: visible;
+    white-space: normal;
+    background: #f8f8f8;
+    box-shadow: 0 20px 40px -30px rgba(0,0,0,0.6);
+
+    span{
+      display: inline;
+      background: #f8f8f8;
+      box-shadow: 12px 0px 0 #f8f8f8,-15px 2px #f8f8f8;
+      padding-bottom: 10px;
+    }
+  }
+
+  @media (min-width: 768px){
+    .panel-top-content {
+      padding: 0;
+      min-height: 67px;
+    }
+  }
+
+  .action-links{
+    margin: 16px 36px 13px 10px;
+  }
+}
+
+@media all and (min-width: 768px){
+  .attached-top-wrapper .back{
+    min-height: 67px;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .attached-top-wrapper .back {
+    min-height: 55px;
+  }
+}
+
+.contract-panel-title {
+  overflow: hidden;
+  margin-top: 3px;
+  font: 24px/32px Open-Sans-Light
+}
+
+.action-links {
+  float: right;
+  margin: 21px 0;
+  ul {
+    padding: 0;
+    margin: 0;
+    li {
+      list-style: none;
+      a {
+        //background: $color_link_color;
+        background: $color_link_color $url_2 no-repeat -154px -254px;
+        //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+        border-radius: 19px;
+        font-size: 13px;
+        padding: 10px 20px;
+        line-height: 18px;
+        color: $white;
+        display: block;
+        padding: 10px 30px 10px 45px;
+        //padding: 10px 30px;
+        &:hover {
+          text-decoration: none;
+          background-color: $color_link_hover_color;
+        }
+      }
+
+      a.view-summary-btn{
+        background: $color_link_color url(../images/ic-sprite.svg) no-repeat -26px -130px;
+      }
+
+    }
+  }
+}
+
+.filter-wrapper {
+  border-bottom: 1px solid $color_silver_approx;
+  border-bottom: 1px solid $color_silver_50_approx;
+  float: left;
+  width: 100%;
+  background: $color_alabaster_approx;
+  position: relative;
+  > {
+    .col-lg-12 {
+      padding-right: 0;
+    }
+    .col-lg-2 {
+      border-top: 1px solid $color_silver_approx;
+      border-top: 1px solid $color_silver_50_approx;
+    }
+    .col-xs-6:first-child {
+      width: 100%;
+    }
+    div[class*=col-lg]:first-of-type {
+      border-left: 0;
+      padding-left: 0;
+    }
+  }
+}
+
+.panel-top-content > .pull-left {
+  //width: 90%;
+}
+
+.search-top-wrapper .panel-title {
+  span {
+    font-family: $font_1;
+  }
+}
+
+/* -------------- style for back button --------------- */
+/* -------------- ------------------------ --------------- */
+
+.back {
+  background: $color_link_color url(../images/ic-sprite-new.png) no-repeat 12px -543px;
+  width: 50px;
+  display: block;
+  height: 46px;
+  text-indent: -9999px;
+  float: left;
+  cursor: pointer;
+}
+
+.contract-back {
+  background: $color_link_hover_color url(../images/ic-back.png) no-repeat 11px;
+  margin: 5px 10px 0 0;
+  width: 80px;
+  height: auto;
+  font-size: 12px;
+  text-align: center;
+  text-indent: 1px;
+  padding: 6px 0 6px 11px;
+  border-radius: 20px;
+  span {
+    color: $white;
+    color: rgba(255, 255, 255, 0.4);
+  }
+  &:hover {
+    text-decoration: none;
+    background-color: $color_link_hover_color;
+  }
+}
+
+/* -------------- style for contract count --------------- */
+/* -------------- ------------------------ --------------- */
+
+.contract-count {
+  font-size: 12px;
+  color: $color_cape_cod_70_approx;
+  &.pull-right {
+    margin-top: 10px;
+  }
+}
+
+.contract-number-wrap {
+  width: 134px;
+  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+  border-radius: 50%;
+  height: 134px;
+  position: absolute;
+  right: 20px;
+  top: 24px;
+  background: $white;
+  border: 10px solid $color_concrete_approx;
+  //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+  box-shadow: 0 2px 4px $black_20;
+  font-size: 12px;
+  color: $color_cape_cod_70_approx;
+  text-align: center;
+  text-transform: uppercase;
+  padding-top: 25px;
+  display: block;
+  z-index: 1000;
+  span {
+    font: 42px/44px $font_2;
+    color: $color_cape_cod_approx;
+    display: block;
+  }
+}
+
+@media (min-width: 551px) {
+  .contract-number-wrap.has-static-search{
+    top: 90px;
+  }
+}
+
+.contract-search-number-wrap{
+  top: 67px;
+}
+
+.page-contracts {
+  .contract-number-wrap{
+    top: -4px;
+  }
+}
+
+/* style to make total doc logo consitent*/
+.page-search{
+
+  @media (min-width: 992px){
+    .contract-number-wrap {
+      right: 36px;
+    }
+  }
+
+  .filter-wrapper{
+    min-height: 90px !important;
+  }
+
+  @media(min-width: 768px){
+    .advance-filter-wrapper .social-share, .actions-wrapper .social-share{
+      right: 313px;
+    }
+  }
+
+  .download-csv{
+    right: 182px;
+  }
+
+  .search-list-wrapper{
+    margin-top: 60px;
+  }
+}
+
+.title-wrap .panel-top-content{
+  border-bottom: none;
+  overflow: visible;
+}
+
+
+@media all and (min-width: 551px) and (max-width: 992px) {
+  .country-contract-wrap .download-csv {
+    right: 156px;
+  }
+}

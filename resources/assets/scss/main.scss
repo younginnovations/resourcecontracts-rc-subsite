@@ -1,0 +1,32 @@
+// files from vendor
+
+@import "../styles/bootstrap";
+@import "../styles/sb-admin-2";
+@import "../styles/font-awesome";
+@import "../styles/select2";
+
+
+// files from custom
+@import "pages/_default_style";
+@import "pages/layout_style";
+@import "pages/homepage_style";
+@import "pages/map_style";
+@import "pages/dropdown_style";
+@import "pages/form_style";
+@import "pages/common_style";
+@import "pages/emptystate_style";
+@import "pages/listpage_style";
+@import "pages/listgrid_style";
+@import "pages/detailpage_style";
+@import "pages/staticpage_style";
+@import "pages/contract-view";
+@import "pages/clip_style";
+@import "pages/clippage_style";
+@import "pages/modal_style";
+@import "pages/windowpopup_style";
+@import "pages/new_style";
+@import "pages/responsive_style";
+
+/* ---- style for french language ------- */
+
+@import "pages/lang-french";

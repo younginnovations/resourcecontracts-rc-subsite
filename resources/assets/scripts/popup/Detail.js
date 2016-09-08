@@ -18,8 +18,8 @@ class Detail extends Component {
         return (
             <div className="detail">
                 <p>{this.getCategory()}</p>
-                <p>{LANG.page} {this.props.annotation.page_no} ( <a
-                    href={link}>{this.props.annotation.article_reference}</a>)
+                <p>{LANG.page} {this.props.annotation.page_no}
+                    ( <a href={link}>{this.props.annotation.article_reference} </a>)
                 </p>
             </div>
         );

@@ -34,6 +34,7 @@
 @media (min-width: 800px){
   #table-annotation {
     padding: 0;
+    border: solid 4px red;
   }
 }
 
@@ -186,6 +187,13 @@
 }
 
 @media  all and (max-width: 600px) {
+
+  .language-selector{
+    ul li a{
+
+    }
+  }
+
   .download-dropdown ul{
     left: auto;
     right: 0;

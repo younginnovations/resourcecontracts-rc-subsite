@@ -28,6 +28,6 @@ return [
     "Sub Contract"                           => "Sub Contract",
     "Sub-lease"                              => "Sub-lease",
     "Timber Sale Contract"                   => "Timber Sale Contract",
-    "Translated Contract"                    => "Translated Contract"
+    "Translated Contract"                    => "Translated Contract",
 ];
 

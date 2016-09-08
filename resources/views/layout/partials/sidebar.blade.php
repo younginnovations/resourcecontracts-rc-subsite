@@ -1,91 +1,48 @@
 <?php
 if (!isset($summary)) {
-    $api     = app('App\Http\Services\APIService');
-    $summary = $api->sortSummaryCountry();
+	$api     = app('App\Http\Services\APIService');
+	$summary = $api->sortSummaryCountry();
 }
 ?>
 
+<?php
+$image   = app('App\Http\Services\Admin\ImageService');
+$sidebar = $image->getImageUrl('sidebar');
+?>
+
+@if($sidebar != '')
+	<style>
+		.sidebar-nav > .sidebar-brand a, .sidebar-nav > .sidebar-brand a:hover {
+			background: url('{{$sidebar}}');
+		}
+	</style>
+@endif
+
 <div id="sidebar-wrapper" class="sidebar-collapse in">
-    <ul class="sidebar-nav">
-        <li class="sidebar-brand">
-            @if(env("CATEGORY")=="rc")
-                <a href="{{url()}}">Resource <span class="beta">Beta</span><span>Contracts</span></a>
-            @else
-                <a href="{{url()}}">OPENLAND <span class="beta">Beta</span><span>Contracts</span></a>
-            @endif
-
-        </li>
-        <li class="contracts">
-            <a href="{{url('contracts')}}">
-                <span>@lang('sidebar.all_contracts')</span>
-
-                <small class="label pull-right">{{$summary->contract_count}}</small>
-            </a>
-        </li>
-        <li class="countries">
-            <label>@lang('global.countries')</label>
-            <ul>
-                @foreach(array_slice($summary->country_summary, 0, 10, true) as $country)
-
-                    <li>
-                        <a href="{{route('country.detail', ['key'=>urlencode($country['key'])])}}">
-                            <span>{{$country['name']}}</span>
-                            <small class="label pull-right">{{$country['doc_count']}}</small>
-                        </a>
-                    </li>
-                @endforeach
-                <li><a href="{{route('countries')}}">@lang('sidebar.view_all')</a></li>
-            </ul>
-        </li>
-        <li class="resources">
-            <label>@lang('global.resources')</label>
-            <ul>
-                @foreach(array_slice($summary->resource_summary,0,10,true) as $resource)
-                    <li>
-                        <a href="{{route('resource.detail', ['key'=>urlencode($resource->key)])}}">
-                            <span>{{ _l("resources",$resource->key) }}</span>
-                            <small class="label pull-right">{{$resource->doc_count}}</small>
-                        </a>
-                    </li>
-                @endforeach
-                <li><a href="{{route('resources')}}">@lang('sidebar.view_all')</a></li>
-            </ul>
-        </li>
-        <li class="year">
-            <label>@lang('global.year')</label>
-            <ul>
-                @foreach(array_slice($summary->year_summary, 0, 10, true) as $year)
-                    <li>
-                        <a href="{{route('contracts')}}?year={{$year->key}}">
-                            <span>{{trans($year->key)}}</span>
-                            <small class="label pull-right">{{$year->doc_count}}</small>
-                        </a>
-                    </li>
-                @endforeach
-            </ul>
-
-            @if(count($summary->year_summary)>10)
-                <ul id="year-more" style="display: none">
-                    @foreach(array_slice($summary->year_summary, 10, null, true) as $year)
-                        <li>
-                            <a href="{{route('contracts')}}?year={{$year->key}}">
-                                <span>{{$year->key}}</span>
-                                <small class="label pull-right">{{$year->doc_count}}</small>
-                            </a>
-                        </li>
-                    @endforeach
-                </ul>
-            @endif
-
-            @if(count($summary->year_summary)>10)
-                <div><a href="#year-more" class="toggle-all">@lang('global.more')</a></div>
-            @endif
-        </li>
-
-    </ul>
+	<ul class="sidebar-nav">
+		<li class="sidebar-brand">
+			<a href="{{url()}}">
+				{{site()->meta('name')}}
+				@if(!site()->isRC())
+					<span class="beta">Beta</span>
+				@endif
+				<span>Contracts</span>
+			</a>
+		</li>
+		<li><a href="{{url('/')}}" @if(isActiveMenu('')) class="active" @endif > @lang('sidebar.home') </a></li>
+		<li><a href="{{url('contracts')}}"
+			   @if(isActiveMenu('contracts')) class="active" @endif >@lang('sidebar.all_contracts')</a></li>
+		@if(!site()->isCountrySite())
+			<li><a href="{{url('countries')}}"
+				   @if(isActiveMenu('countries')) class="active" @endif>@lang('sidebar.view_by_country')</a></li>
+		@endif
+		<li><a href="{{url('resources')}}"
+			   @if(isActiveMenu('resources')) class="active" @endif>@lang('sidebar.view_by_resource')</a></li>
+		<li><a href="{{url('about')}}" @if(isActiveMenu('about')) class="active" @endif>{{site()->meta('about')}}</a>
+		</li>
+		<li><a href="{{url('glossary')}}"
+			   @if(isActiveMenu('glossary')) class="active" @endif>@lang('sidebar.glossary')</a></li>
+		<li><a href="{{url('guides')}}" @if(isActiveMenu('guides')) class="active" @endif>@lang('sidebar.guides')</a>
+		</li>
+	</ul>
 </div>
-<script>
-    var localization = [];
-    localization.more = "@lang('global.more')";
-    localization.less = "@lang('global.less')";
-</script>

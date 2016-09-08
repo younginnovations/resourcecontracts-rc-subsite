@@ -28,6 +28,6 @@ return [
     "Sub Contract"                           => "دون عقد",
     "Sub-lease"                              => "تأجير من الباطن",
     "Timber Sale Contract"                   => "عقد بيع الأخشاب",
-    "Translated Contract"                    => "عقد الترجمة"
+    "Translated Contract"                    => "عقد الترجمة",
 ];
 

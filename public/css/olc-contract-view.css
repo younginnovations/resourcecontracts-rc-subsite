@@ -397,10 +397,6 @@
     padding: 0 16px;
 }
 
-.navbar-brand span:first-of-type {
-    color: #217B46;
-}
-
 .navbar-brand, .navbar-brand:hover {
     font-size: 15px;
 }
@@ -655,4 +651,25 @@
     -moz-box-shadow: none;
     box-shadow: none;
     border: none !important;
+}
+
+.loading {
+    position: absolute;
+    top: 30%;
+    border: 0px;
+    left: 0px;
+    right: 0px;
+    text-align: center;
+    width: auto;
+    background: none;
+}
+
+.loading p {
+    text-indent: 0;
+}
+
+@media (max-width: 600px) {
+    .loading {
+        top: 45%;
+    }
 }

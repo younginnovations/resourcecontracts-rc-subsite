@@ -1,8 +1,5 @@
 <?php
-
-$link = route('contracts');
 return [
-
     'search_placeholder'   => "بحث عن العقود",
     'year_signed'          => "سنة التوقيع",
     'company_name'         => "إسم الشركة",
@@ -17,5 +14,5 @@ return [
     'reset'                => "إعادة ضبط",
     'select'               => "اختيار",
     'refine_search'        => 'تغيير أو تنقيح بحثك',
-    'annotated'            => "المشروح"
+    'annotated'            => "المشروح",
 ];

@@ -60,6 +60,7 @@ class PageController extends BaseController
      * Get Annotations
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     * @return string
      */
     public function annotations()
     {

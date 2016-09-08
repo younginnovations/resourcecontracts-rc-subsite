@@ -5,398 +5,400 @@ use Illuminate\Support\Facades\Lang;
 @extends('layout.app-full')
 
 @section('content')
+	<div class="row">
+		<div class="col-lg-12 panel-top-wrapper attached-top-wrapper">
+			<div class="panel-top-content clearfix">
+				<div class="pull-left left-top-content clearfix">
+					<a href="#" class="back-button back"><span>@lang('global.go_back')</span></a>
+					<div class="panel-title contract-panel-title" id="show-full-title">
+						{{$contract->metadata->name}}
+					</div>
+				</div>
+				<div class="action-links">
+					<ul>
+						@if($contract->pages->total>0)
+							<li class="pull-left">
+								<a href="{{route('contract.detail',['id'=>$contract->metadata->open_contracting_id])}}">@lang('global.view_document')</a>
+							</li>
+						@endif
+					</ul>
+				</div>
+			</div>
+			<div class="head-wrap">
+				<div class="right-column-view">
+					<div class="download-main-wrap">
+						<a class="download-wrap"> </a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="{{route('contract.download.pdf',['id'=> $contract->metadata->open_contracting_id])}}">@lang('annotation.pdf')</a>
+							</li>
+							@if(env('CATEGORY')!= 'olc' && $contract->metadata->is_ocr_reviewed == 1 && $contract->pages->total > 0)
+								<li>
+									<a href="{{route('contract.download',['id'=> $contract->metadata->open_contracting_id])}}">@lang('global.word_file')</a>
+								</li>
+							@endif
+						</ul>
+					</div>
+					<div class="social-share" id="social-toggler">
+						<a><span>@lang('contract.social_share')</span></a>
+						@include('contract.partials.share')
+					</div>
+					@if(site()->isClipEnabled())
+						<button class="clip-btn" id="on-annotation">@lang('clip.clip_on')</button>
+					@endif
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <div class="row">
-        <div class="col-lg-12 panel-top-wrapper attached-top-wrapper">
-            <div class="panel-top-content clearfix">
-                <div class="pull-left left-top-content clearfix">
-                    <a href="#" class="back-button back"><span>@lang('global.go_back')</span></a>
-                    <div class="panel-title contract-panel-title" id="show-full-title">
-                        {{$contract->metadata->name}}
-                    </div>
-                </div>
-                <div class="action-links">
-                    <ul>
-                        @if($contract->pages->total>0)
-                            <li class="pull-left">
-                                <a href="{{route('contract.detail',['id'=>$contract->metadata->open_contracting_id])}}">@lang('global.view_document')</a>
-                            </li>
-                        @endif
-                    </ul>
-                </div>
-            </div>
-
-            <div class="head-wrap">
-                <div class="right-column-view">
-                        <div class="download-main-wrap">
-                            <a class="download-wrap"> </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="{{route('contract.download.pdf',['id'=> $contract->metadata->open_contracting_id])}}">@lang('annotation.pdf')</a>
-                                </li>
-                                @if(env('CATEGORY')!= 'olc' && $contract->metadata->is_ocr_reviewed == 1 && $contract->pages->total > 0)
-                                    <li>
-                                        <a href="{{route('contract.download',['id'=> $contract->metadata->open_contracting_id])}}">@lang('global.word_file')</a>
-                                    </li>
-                                @endif
-                            </ul>
-                        </div>
-                        <div class="social-share" id="social-toggler">
-                            <a><span>@lang('contract.social_share')</span></a>
-                            @include('contract.partials.share')
-                        </div>
-                        @if(isClipOn())
-                        <button class="clip-btn" id="on-annotation">@lang('clip.clip_on')</button>
-                         @endif
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="row contract-detail-wrapper">
-        <div class="col-lg-12 remove-buffer-side">
-            <div class="col-md-6 col-lg-6">
-                <div class="panel panel-default panel-wrap panel-contract-wrap">
-                    <div class="panel-body">
-                        <ul>
-                            <li class="col-lg-12 open-contracting-id">
-                                <label for="">@lang('contract.open_contracting_id')</label>
-                                <span>{{_e($contract->metadata,'open_contracting_id','-')}}</span>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <label for="">@lang('global.language')</label>
+	<div class="row contract-detail-wrapper">
+		<div class="col-lg-12 remove-buffer-side">
+			<div class="col-md-6 col-lg-6">
+				<div class="panel panel-default panel-wrap panel-contract-wrap">
+					<div class="panel-body">
+						<ul>
+							<li class="col-lg-12 open-contracting-id">
+								<label for="">@lang('contract.open_contracting_id')</label>
+								<span>{{_e($contract->metadata,'open_contracting_id','-')}}</span>
+							</li>
+						</ul>
+						<ul>
+							<li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+								<label for="">@lang('global.language')</label>
                                 <span>@if((_e($contract->metadata,'language','-')))
-                                        {{ trans('codelist/language')[$contract->metadata->language] }}
-                                    @endif
+										{{ trans('codelist/language')[$contract->metadata->language] }}
+									@endif
                                 </span>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <label for="">@lang('global.country')</label>
-                                @if($code = strtolower(_e($contract->metadata->country,'code')))
-                                    <span><a href="{{route('country.detail', ['key'=>$code])}}">
-                                            <?php   $c = $contract->metadata->country;?>
-                                            {{trans('country')[$c->code]}}
-                                        </a>
-                                        @if(env("CATEGORY")=="rc")
-                                            @if(isset($contract->metadata->amla_url) && !empty($contract->metadata->amla_url))
-                                                <span class="amla-link">@lang('contract.see') <a
-                                                            href="{{$contract->metadata->amla_url}}"
-                                                            target="_blank">@lang('contract.legislation')</a>&nbsp;@lang('contract.african_mining')</span>@endif</span>
-                                @endif
-                                @endif
-
-                            </li>
-                        </ul>
-                        <ul class="government-entity-wrap">
-                            <li class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <label for="">@lang('global.government_entity')</label>
-                                @if(isset($contract->metadata->government_entity))
-                                    @foreach($contract->metadata->government_entity as $governmentEntity)
-                                        <span>
+							</li>
+							<li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+								<label for="">@lang('global.country')</label>
+								@if($code = strtolower(_e($contract->metadata->country,'code')))
+									<span>
+										<a href="{{route('country.detail', ['key'=>$code])}}">
+											<?php $c = $contract->metadata->country;?>
+											{{trans('country')[$c->code]}}
+										</a>
+										@if(site()->isRC())
+											@if(isset($contract->metadata->amla_url) && !empty($contract->metadata->amla_url))
+												<span class="amla-link">@lang('contract.see')
+													<a href="{{$contract->metadata->amla_url}}" target="_blank">
+														@lang('contract.legislation')
+													</a>
+													&nbsp;@lang('contract.african_mining')
+												</span>
+											@endif
+										@endif
+									</span>
+								@endif
+							</li>
+						</ul>
+						<ul class="government-entity-wrap">
+							<li class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+								<label for="">@lang('global.government_entity')</label>
+								@if(isset($contract->metadata->government_entity))
+									@foreach($contract->metadata->government_entity as $governmentEntity)
+										<span>
                                         @if(isset($governmentEntity->name) && isset($governmentEntity->identifier) && !empty($governmentEntity->name))
-                                                {{$governmentEntity->name}} @if($governmentEntity->identifier)
-                                                    ({{$governmentEntity->identifier}})@endif
-                                            @endif
-                                    </span>
-                                    @endforeach
-                                @else
-                                    -
-                                @endif
-                            </li>
+											{{$governmentEntity->name}} @if($governmentEntity->identifier)
+												({{$governmentEntity->identifier}})@endif
+										@endif
+                                    	</span>
+									@endforeach
+								@else
+									-
+								@endif
+							</li>
 
-                        </ul>
-                        <ul>
-                            <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <label for="">@lang('global.signature_date')</label>
-                                <?php
-                                $date = $contract->metadata->date_signed;
-                                $date = strtotime($date);
-                                ?>
-                                <span>@if($date) <?php $m = date(
-                                            'F',
-                                            $date
-                                    );?>{{ trans('codelist/month')[$m] }} {{date('d',$date)}}, {{date('Y',$date)}}@else
-                                        - @endif</span>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <label for="">@lang('global.document_type')</label>
+						</ul>
+						<ul>
+							<li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+								<label for="">@lang('global.signature_date')</label>
+								<?php
+								$date = $contract->metadata->date_signed;
+								$date = strtotime($date);
+								?>
+								<span>@if($date) <?php $m = date(
+											'F',
+											$date
+									);?>{{ trans('codelist/month')[$m] }} {{date('d',$date)}}, {{date('Y',$date)}}@else
+										- @endif</span>
+							</li>
+							<li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+								<label for="">@lang('global.document_type')</label>
                                 <span><?php $d = _e($contract->metadata, 'type', '-')?>
-                                    {{ _l('codelist/document_type',$d) }}
+									{{ _l('codelist/document_type',$d) }}
                                 </span>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <label for="">@lang('global.type_contract')</label>
+							</li>
+						</ul>
+						<ul>
+							<li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+								<label for="">@lang('global.type_contract')</label>
                                 <span class="contract-type-list">@if(isset($contract->metadata->contract_type) && !empty($contract->metadata->contract_type) && is_array($contract->metadata->contract_type))
-                                        @foreach($contract->metadata->contract_type as $contractype)
-                                            <a href="{{route("search",['contract_type'=>$contractype])}}">{{_l('codelist/contract_type',$contractype) }}</a>
-                                        @endforeach
-                                    @endif
+										@foreach($contract->metadata->contract_type as $contractype)
+											<a href="{{route("search",['contract_type'=>$contractype])}}">{{_l('codelist/contract_type',$contractype) }}</a>
+										@endforeach
+									@endif
                                 </span>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <label for="">@lang('global.resource')</label>
-                                <?php
-                                $resource = _e($contract->metadata, 'resource', '-');
-                                $resource = is_array($resource) ? $resource : [];
-                                ?>
-                                <span class="resource-list">
+							</li>
+							<li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+								<label for="">@lang('global.resource')</label>
+								<?php
+								$resource = _e($contract->metadata, 'resource', '-');
+								$resource = is_array($resource) ? $resource : [];
+								?>
+								<span class="resource-list">
                                 @foreach($resource as $res)
-                                        <a href="{{route("resource.detail",['key'=>urlencode($res)])}}">{{_l("resources",$res)}}</a>
-                                    @endforeach
+										<a href="{{route("resource.detail",['key'=>urlencode($res)])}}">{{_l("resources",$res)}}</a>
+									@endforeach
                             </span></li>
-                        </ul>
+						</ul>
 
-                        @if(env('CATEGORY') =="olc")
-                            <ul>
-                                <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                    <label for="">@lang('global.land_matrix_id')</label>
+						@if(site()->isOLC())
+							<ul>
+								<li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+									<label for="">@lang('global.land_matrix_id')</label>
                                 <span>@if(isset($contract->metadata->matrix_page) && isset($contract->metadata->deal_number) && !empty($contract->metadata->matrix_page) && !empty($contract->metadata->deal_number))
-                                        <a target="_blank"
-                                           href="{{ $contract->metadata->matrix_page }}">#{{$contract->metadata->deal_number}}</a>
-                                    @else
-                                        - @endif</span>
-                                </li>
-                            </ul>
-                        @endif
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-6">
-                <div class="panel panel-default panel-wrap panel-annotation-wrap">
-                    <div class="panel-body">
-                        <div class="annotation-block">
-                            <div class="title">@lang('annotation.annotations')</div>
-                            <ul>
-                                <?php $i = 0; ?>
-                                @forelse($contract->annotationsGroup as $category=>$annotation)
-                                    @if($i < 5 )
-                                        <li><a class="view-annotation-category"
-                                               href="#{{str_slug($category,'-')}}">@lang('codelist/annotation.categories.'.$category)</a>
-                                        </li>
-                                        <?php $i++; ?>
-                                    @endif
-                                @empty
-                                    <div class="no-data">@lang('contract.annotation_message')</div>
-                                @endforelse
-                            </ul>
-                        </div>
-                        <div class="view-all-annotations">
-                            @if(count($contract->annotationsGroup)>0)
-                                <a href="#annotations"
-                                   class="view-annotation"><span>@lang('global.view_annotations')</span></a>
-                            @else
-                                <a href="javascript:void();"
-                                   class="view-annotation disabled"><span>@lang('global.view_annotations')</span></a>
-                            @endif
+										<a target="_blank"
+										   href="{{ $contract->metadata->matrix_page }}">#{{$contract->metadata->deal_number}}</a>
+									@else
+										- @endif</span>
+								</li>
+							</ul>
+						@endif
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 col-lg-6">
+				<div class="panel panel-default panel-wrap panel-annotation-wrap">
+					<div class="panel-body">
+						<div class="annotation-block">
+							<div class="title">@lang('annotation.annotations')</div>
+							<ul>
+								<?php $i = 0; ?>
+								@forelse($contract->annotationsGroup as $category=>$annotation)
+									@if($i < 5 )
+										<li><a class="view-annotation-category"
+											   href="#{{str_slug($category,'-')}}">@lang('codelist/annotation.categories.'.$category)</a>
+										</li>
+										<?php $i++; ?>
+									@endif
+								@empty
+									<div class="no-data">@lang('contract.annotation_message')</div>
+								@endforelse
+							</ul>
+						</div>
+						<div class="view-all-annotations">
+							@if(count($contract->annotationsGroup)>0)
+								<a href="#annotations"
+								   class="view-annotation"><span>@lang('global.view_annotations')</span></a>
+							@else
+								<a href="javascript:void();"
+								   class="view-annotation disabled"><span>@lang('global.view_annotations')</span></a>
+							@endif
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @if(isset($contract->metadata->note) && ($contract->metadata->note != ""))
-            <div class="col-lg-12">
-                <div class="panel panel-default panel-wrap panel-contract-wrap">
-                    <div class="panel-body metadata-note">
-                        <span>@lang('annotation.note')</span>
-                        {{$contract->metadata->note}}
-                    </div>
-                </div>
-            </div>
-        @endif
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		@if(isset($contract->metadata->note) && ($contract->metadata->note != ""))
+			<div class="col-lg-12">
+				<div class="panel panel-default panel-wrap panel-contract-wrap">
+					<div class="panel-body metadata-note">
+						<span>@lang('annotation.note')</span>
+						{{$contract->metadata->note}}
+					</div>
+				</div>
+			</div>
+		@endif
 
 
-        <div class="col-lg-12">
-            <div class="panel panel-default panel-wrap panel-contract-wrap">
-                <div class="panel-heading">
-                    @lang('contract.company')
-                </div>
-                @foreach($contract->metadata->participation as $company)
-                    <div class="panel-body panel-col3-wrap">
-                        <ul>
-                            <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                <label for="">@lang('contract.company_name')</label>
+		<div class="col-lg-12">
+			<div class="panel panel-default panel-wrap panel-contract-wrap">
+				<div class="panel-heading">
+					@lang('contract.company')
+				</div>
+				@foreach($contract->metadata->participation as $company)
+					<div class="panel-body panel-col3-wrap">
+						<ul>
+							<li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+								<label for="">@lang('contract.company_name')</label>
                                 <span>@if(isset($company->company->name) && !empty($company->company->name)) <a
-                                            href="{{route("search",['company_name'=>$company->company->name])}}">{{$company->company->name}} </a> @else
-                                        - @endif</span>
-                            </li>
-                            <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                <label for="">@lang('contract.jurisdiction')</label>
+											href="{{route("search",['company_name'=>$company->company->name])}}">{{$company->company->name}} </a> @else
+										- @endif</span>
+							</li>
+							<li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+								<label for="">@lang('contract.jurisdiction')</label>
                         <span>
                         <?php $ji = _e($company->company->identifier->creator, 'spatial', null);?>
-                            @if(!is_null($ji))
-                                {{trans('country')[strtoupper($ji)]}}
-                            @else
-                                -
-                            @endif
+							@if(!is_null($ji))
+								{{trans('country')[strtoupper($ji)]}}
+							@else
+								-
+							@endif
                         </span>
-                            </li>
-                            <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                <label for="">@lang('contract.open_corporate_ID')</label>
+							</li>
+							<li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+								<label for="">@lang('contract.open_corporate_ID')</label>
                                 <span>@if(isset($company->company->opencorporates_url) && !empty($company->company->opencorporates_url))
-                                        <a
-                                                href="{{$company->company->opencorporates_url}}">{{str_limit($company->company->opencorporates_url,25)}}</a> @else
-                                        - @endif</span>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                <label for="">@lang('contract.company_add')</label>
-                                <span>{{_e($company->company,'address','-')}}</span>
-                            </li>
-                            <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                <label for="">@lang('contract.company_number')</label>
-                                <span>{{_e($company->company->identifier,'id','-')}}</span>
-                            </li>
-                            <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                <label for="">@lang('contract.corporate_grouping')</label>
+										<a
+												href="{{$company->company->opencorporates_url}}">{{str_limit($company->company->opencorporates_url,25)}}</a> @else
+										- @endif</span>
+							</li>
+						</ul>
+						<ul>
+							<li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+								<label for="">@lang('contract.company_add')</label>
+								<span>{{_e($company->company,'address','-')}}</span>
+							</li>
+							<li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+								<label for="">@lang('contract.company_number')</label>
+								<span>{{_e($company->company->identifier,'id','-')}}</span>
+							</li>
+							<li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+								<label for="">@lang('contract.corporate_grouping')</label>
                                 <span>@if(isset($company->company->corporate_grouping) && !empty($company->company->corporate_grouping))
-                                        <a href="{{route("search",['corporate_group'=>$company->company->corporate_grouping])}}">{{$company->company->corporate_grouping}} </a> @else
-                                        - @endif
+										<a href="{{route("search",['corporate_group'=>$company->company->corporate_grouping])}}">{{$company->company->corporate_grouping}} </a> @else
+										- @endif
                                 </span>
-                            </li>
-                        </ul>
-                        @if(env('CATEGORY') != 'olc' )
-                            <ul>
-                                <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                    <label for="">@lang('contract.registration_agency')</label>
-                                    <span>{{_e($company->company->identifier->creator,'name','-')}}</span>
-                                </li>
-                                <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                    <label for="">@lang('contract.share')</label>
+							</li>
+						</ul>
+						@if(!site()->isOLC())
+							<ul>
+								<li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+									<label for="">@lang('contract.registration_agency')</label>
+									<span>{{_e($company->company->identifier->creator,'name','-')}}</span>
+								</li>
+								<li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+									<label for="">@lang('contract.share')</label>
                                 <span>
                                     <?php
-                                    $ps = _e($company, 'share', '');
-                                    echo ($ps == '') ? '-' : $ps * 100 .'%';
-                                    ?>
+									$ps = _e($company, 'share', '');
+									echo ($ps == '') ? '-' : $ps * 100 .'%';
+									?>
                                     </span>
-                                </li>
-                                <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                    <label for="">@lang('contract.operator')</label>
+								</li>
+								<li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+									<label for="">@lang('contract.operator')</label>
                         <span>@if(isset($company->is_operator))
-                                @if($company->is_operator==true)
-                                    @lang('global.yes')
-                                @elseif($company->is_operator==false)
-                                    @lang('global.no')
+								@if($company->is_operator==true)
+									@lang('global.yes')
+								@elseif($company->is_operator==false)
+									@lang('global.no')
 
-                                @else
-                                    -
-                                @endif
-                            @endif
+								@else
+									-
+								@endif
+							@endif
 
                         </span>
-                                </li>
-                            </ul>
-                        @endif
-                    </div>
-                @endforeach
-            </div>
-        </div>
+								</li>
+							</ul>
+						@endif
+					</div>
+				@endforeach
+			</div>
+		</div>
 
 
-        <div class="col-lg-12">
-            <div class="panel panel-default panel-wrap panel-contract-wrap" id="associatedcontracts">
-                <div class="panel-heading">
-                    @lang('contract.associated_documents')
-                </div>
-                <div class="panel-body panel-table">
-                    <table class="table table-responsive table-contract table-associated-contract">
-                        <tbody>
+		<div class="col-lg-12">
+			<div class="panel panel-default panel-wrap panel-contract-wrap" id="associatedcontracts">
+				<div class="panel-heading">
+					@lang('contract.associated_documents')
+				</div>
+				<div class="panel-body panel-table">
+					<table class="table table-responsive table-contract table-associated-contract">
+						<tbody>
 
-                        @foreach($contract->metadata->parent as $parentContract)
-                            <tr>
-                                <td width="70%">
-                                    @if($parentContract->is_published==1)
-                                        <a href="{{route('contract.detail',['id'=>$parentContract->open_contracting_id])}}">{{$parentContract->name}}</a>
-                                        &nbsp; @lang('contract.main_contract')
-                                    @else
-                                        {{$parentContract->name}} @lang('contract.main_contract')
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
+						@foreach($contract->metadata->parent as $parentContract)
+							<tr>
+								<td width="70%">
+									@if($parentContract->is_published==1)
+										<a href="{{route('contract.detail',['id'=>$parentContract->open_contracting_id])}}">{{$parentContract->name}}</a>
+										&nbsp; @lang('contract.main_contract')
+									@else
+										{{$parentContract->name}} @lang('contract.main_contract')
+									@endif
+								</td>
+							</tr>
+						@endforeach
 
-                        <?php $supportingContracts = _e($contract->metadata, 'associated', []);?>
-                        @foreach($contract->metadata->associated as $supportingContract)
-                            @if($supportingContract->is_published==1)
-                                <tr>
-                                    <td width="70%">
-                                            <a href="{{route('contract.detail',['id'=>$supportingContract->open_contracting_id])}}"> {{$supportingContract->name}}</a>
-                                    </td>
-                                </tr>
-                            @endif
-                        @endforeach
+						<?php $supportingContracts = _e($contract->metadata, 'associated', []);?>
+						@foreach($contract->metadata->associated as $supportingContract)
+							@if($supportingContract->is_published==1)
+								<tr>
+									<td width="70%">
+										<a href="{{route('contract.detail',['id'=>$supportingContract->open_contracting_id])}}"> {{$supportingContract->name}}</a>
+									</td>
+								</tr>
+							@endif
+						@endforeach
 
-                        @if(empty($contract->metadata->parent) && empty($contract->metadata->associated))
-                            <tr>
-                                <td class="no-data">
-                                    @lang('contract.ass_doc_msg')
-                                </td>
-                            </tr>
-                        @endif
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+						@if(empty($contract->metadata->parent) && empty($contract->metadata->associated))
+							<tr>
+								<td class="no-data">
+									@lang('contract.ass_doc_msg')
+								</td>
+							</tr>
+						@endif
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
 
-        @if(env('CATEGORY') != 'olc')
-            <div class="col-lg-12">
-                <div class="panel panel-default panel-wrap panel-contract-wrap">
-                    <div class="panel-heading">
-                        @lang('contract.concession')
-                    </div>
-                    <div class="panel-body">
-                        <ul>
-                            <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <label for="">@lang('contract.project_title')</label>
-                                <span>{{_e($contract->metadata->project,'name','-')}}</span>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <label for="">@lang('contract.project_identifier')</label>
-                                <span>{{_e($contract->metadata->project,'identifier','-')}}</span>
-                            </li>
-                        </ul>
-                        <ul>
-                            <?php
-                            $concessions = _e($contract->metadata, 'concession', []);
-                            ?>
-                            @foreach($concessions as $concession)
-                                <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                    <label for="">@lang('contract.license_name')</label>
-                                    <span>{{_e($concession,'name','-')}}</span>
-                                </li>
-                                <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                    <label for="">@lang('contract.license_identifier')</label>
-                                    <span>{{_e($concession,'identifier','-')}}</span>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        @endif
-        <div class="col-lg-12">
-            <div class="panel panel-default panel-wrap panel-contract-wrap">
-                <div class="panel-heading">
-                    @lang('contract.source')
-                </div>
-                <div class="panel-body">
-                    <ul>
-                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                            <label for="">@lang('contract.source_url')</label>
+		@if(!site()->isOLC())
+			<div class="col-lg-12">
+				<div class="panel panel-default panel-wrap panel-contract-wrap">
+					<div class="panel-heading">
+						@lang('contract.concession')
+					</div>
+					<div class="panel-body">
+						<ul>
+							<li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+								<label for="">@lang('contract.project_title')</label>
+								<span>{{_e($contract->metadata->project,'name','-')}}</span>
+							</li>
+							<li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+								<label for="">@lang('contract.project_identifier')</label>
+								<span>{{_e($contract->metadata->project,'identifier','-')}}</span>
+							</li>
+						</ul>
+						<ul>
+							<?php
+							$concessions = _e($contract->metadata, 'concession', []);
+							?>
+							@foreach($concessions as $concession)
+								<li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+									<label for="">@lang('contract.license_name')</label>
+									<span>{{_e($concession,'name','-')}}</span>
+								</li>
+								<li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+									<label for="">@lang('contract.license_identifier')</label>
+									<span>{{_e($concession,'identifier','-')}}</span>
+								</li>
+							@endforeach
+						</ul>
+					</div>
+				</div>
+			</div>
+		@endif
+		<div class="col-lg-12">
+			<div class="panel panel-default panel-wrap panel-contract-wrap">
+				<div class="panel-heading">
+					@lang('contract.source')
+				</div>
+				<div class="panel-body">
+					<ul>
+						<li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+							<label for="">@lang('contract.source_url')</label>
                             <span>@if(!empty(_e($contract->metadata,'source_url')))<a
-                                        href="{{$contract->metadata->source_url}}"
-                                        target="_blank">{{str_limit($contract->metadata->source_url,50)}}</a>@else
-                                    -@endif</span>
-                        </li>
-                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                            <label for="">@lang('contract.disclosure_mode')</label>
+										href="{{$contract->metadata->source_url}}"
+										target="_blank">{{str_limit($contract->metadata->source_url,50)}}</a>@else
+									-@endif</span>
+						</li>
+						<li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+							<label for="">@lang('contract.disclosure_mode')</label>
                             <span>
                                 @if(!empty($contract->metadata->publisher_type))
                                     <?php $a = $contract->metadata->publisher_type ?>
@@ -419,7 +421,7 @@ use Illuminate\Support\Facades\Lang;
                             {{count($contract->annotationsGroup)}}
                             @if(count($contract->annotationsGroup) >1) Annotations @else Annotation @endif
                         </div>
-                        @if(isClipOn())
+                        @if(site()->isClipEnabled())
                         <button id="clip-all-annotations" class="pull-right annotation-clip"
                                 title="Clip all annotations"><span class="link">@lang('clip.clip_all')</span>
                         </button>
@@ -461,7 +463,7 @@ use Illuminate\Support\Facades\Lang;
                                                     <div class="annotation-left">
                                                         {{$annotation->category}}
                                                     </div>
-                                                    @if(isClipOn())
+                                                    @if(site()->isClipEnabled())
                                                         <button data-id={{$annotation->id}} class="pull-right
                                                                 annotation-clip-icon
                                                         " title=@lang('clip.clip_annotation') style="display:
@@ -524,88 +526,89 @@ use Illuminate\Support\Facades\Lang;
     @endif
 
     @include('contract.partials.emailModal')
+
 @stop
 
 
 @section('js')
-    <script>
-        var lang = <?php echo json_encode(trans('annotation'));?>;
+	<script>
+		var lang = <?php echo json_encode(trans('annotation'));?>;
 
-        function isScrolledTo(elem) {
-            var docViewTop = $(window).scrollTop(); //num of pixels hidden above current screen
-            var docViewBottom = docViewTop + $(window).height();
+		function isScrolledTo(elem) {
+			var docViewTop = $(window).scrollTop(); //num of pixels hidden above current screen
+			var docViewBottom = docViewTop + $(window).height();
 
-            var elemTop = $(elem).offset().top; //num of pixels above the elem
-            var elemBottom = elemTop + $(elem).height();
+			var elemTop = $(elem).offset().top; //num of pixels above the elem
+			var elemBottom = elemTop + $(elem).height();
 
-            return ((elemTop <= docViewTop));
-        }
+			return ((elemTop <= docViewTop));
+		}
 
-        var catcher = $('.contract-detail-wrapper');
-        var sticky = $('.annotation-category-cluster');
+		var catcher = $('.contract-detail-wrapper');
+		var sticky = $('.annotation-category-cluster');
 
-        $(document).on("ready scroll", onScroll);
-        $('.annotation-category-cluster a[href^="#"]').on('click', function (e) {
-            e.preventDefault();
-            $(document).off("scroll");
+		$(document).on("ready scroll", onScroll);
+		$('.annotation-category-cluster a[href^="#"]').on('click', function (e) {
+			e.preventDefault();
+			$(document).off("scroll");
 
-            $('.annotation-category-cluster ul li a').removeClass('active');
-            $(this).addClass('active');
+			$('.annotation-category-cluster ul li a').removeClass('active');
+			$(this).addClass('active');
 
-            var target = this.hash,
-                    $target = $(target);
-            $('html, body').stop().animate({
-                'scrollTop': $target.offset().top + 2
-            }, 600, 'swing', function () {
-                window.location.hash = target;
-                $(document).on("scroll", onScroll);
-            });
-        });
-
-
-        function onScroll() {
-            var scrollPos = $(document).scrollTop();
-
-            $('.annotation-category-cluster ul li a').each(function () {
-                var currLink = $(this);
-                var refElement = $(currLink.attr("href"));
-                if (refElement.offset().top <= scrollPos && refElement.offset().top + refElement.height() > scrollPos) {
-                    $('.annotation-category-cluster ul li a').removeClass("active");
-                    currLink.addClass("active");
-                    return false;
-                }
-                else if ($($('.annotation-category-cluster ul li a').eq(0).attr('href')).offset().top > scrollPos) {
-                    $('.annotation-category-cluster ul li a').removeClass("active").eq(0).addClass("active");
-                }
-            });
+			var target = this.hash,
+					$target = $(target);
+			$('html, body').stop().animate({
+				'scrollTop': $target.offset().top + 2
+			}, 600, 'swing', function () {
+				window.location.hash = target;
+				$(document).on("scroll", onScroll);
+			});
+		});
 
 
-            sticky.css({'position': 'fixed', 'left': '36px', 'top': '20px'});
+		function onScroll() {
+			var scrollPos = $(document).scrollTop();
 
-            var stopHeight = catcher.offset().top + catcher.height() + 240;
-            if (stopHeight > sticky.offset().top) {
-                sticky.css({'position': 'absolute', 'left': 0, 'top': 0});
-            }
-        }
+			$('.annotation-category-cluster ul li a').each(function () {
+				var currLink = $(this);
+				var refElement = $(currLink.attr("href"));
+				if (refElement.offset().top <= scrollPos && refElement.offset().top + refElement.height() > scrollPos) {
+					$('.annotation-category-cluster ul li a').removeClass("active");
+					currLink.addClass("active");
+					return false;
+				}
+				else if ($($('.annotation-category-cluster ul li a').eq(0).attr('href')).offset().top > scrollPos) {
+					$('.annotation-category-cluster ul li a').removeClass("active").eq(0).addClass("active");
+				}
+			});
+
+			if (isScrolledTo(sticky)) {
+				sticky.css({'position': 'fixed', 'left': '36px', 'top': '20px'});
+			}
+			var stopHeight = catcher.offset().top + catcher.height() + 240;
+			if (stopHeight > sticky.offset().top) {
+				sticky.css({'position': 'absolute', 'left': 0, 'top': 0});
+			}
+		}
 
 
-        var isScrolledIntoView = function (elem) {
-            var $elem = $(elem);
-            var $window = $(window);
+		var isScrolledIntoView = function (elem) {
+			var $elem = $(elem);
+			var $window = $(window);
 
-            var docViewTop = $window.scrollTop();
-            var docViewBottom = docViewTop + $window.height();
+			var docViewTop = $window.scrollTop();
+			var docViewBottom = docViewTop + $window.height();
 
-            var elemTop = $elem.offset().top;
-            var elemBottom = elemTop + $elem.height();
+			var elemTop = $elem.offset().top;
+			var elemBottom = elemTop + $elem.height();
 
-            return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
-        };
+			return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+		};
 
-        $(window).on('scroll', function () {
-            $('.annotation-category-cluster').toggle(!isScrolledIntoView('footer'));
-        });
+		$(window).on('scroll', function () {
+			$('.annotation-category-cluster').toggle(!isScrolledIntoView('footer'));
+		});
 
-    </script>
+	</script>
 @stop
 
