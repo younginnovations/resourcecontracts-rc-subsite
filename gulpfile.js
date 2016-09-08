@@ -113,8 +113,7 @@ var homepage_script = [
     './resources/assets/scripts/homepage/slider.js',
 ];
 
-/* Compile files from _scss
- */
+/* Compile files from _scss */
 gulp.task('default_theme', function () {
     return gulp.src(theme_default)
         .pipe(sourcemaps.init())
@@ -134,6 +133,7 @@ gulp.task('default_theme', function () {
 
 gulp.task('rc', function () {
     return gulp.src(theme_rc)
+
         .pipe(sourcemaps.init())
         .pipe(sass())
         .pipe(postcss([autoprefixer({browsers: ['last 30 versions', '> 1%', 'ie 8', 'ie 7']})]))
@@ -165,6 +165,8 @@ gulp.task('olc', function () {
         }))
         .pipe(gulp.dest('./public/css'));
 });
+
+
 
 /*
  * Watch scss files for changes & recompile
