@@ -1,0 +1,91 @@
+#map {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  max-height: 486px;
+}
+
+@media (max-width: 925px){
+  #map{
+    max-height: 366px;
+  }
+}
+
+.map-wrap{
+  &.leaflet-container{
+    background: none;
+  }
+  path {
+    stroke: #288d94;
+  }
+
+  .foreground{
+    fill: none;
+  }
+}
+
+.olc{
+  path {
+    stroke: #796C58;
+  }
+
+  .explore-contracts{
+    background: #796C58;
+  }
+}
+
+.tooltip {
+  position: absolute;
+  text-align: center;
+  font-size: 11px;
+  background: #fff;
+  border: solid 1px #aaa;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.leaflet-control-attribution a{
+  display: none;
+}
+
+.leaflet-control-container {
+
+  .leaflet-top{
+    top: 50%;
+    margin-top: -54px;
+  }
+
+  .leaflet-control{
+    border-radius: 4px;
+    box-shadow: 0px 2px 4px 0 rgba(0,0,0,0.5);
+  }
+
+
+  .leaflet-control-zoom a,
+  .leaflet-control-zoom a:hover{
+    background-color: rgba(255,255,255,0.7);
+    color: rgba(72,72,72,0.8);
+  }
+
+  .leaflet-bar a, .leaflet-bar a:hover{
+    width: 37px;
+    height: 38px;
+    line-height: 38px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+}
+
+.info.leaflet-control{
+  top: -240%;
+  position: absolute;
+  right: 0;
+
+  .info-text{
+    padding: 10px 14px;
+    color: rgba(255,255,255,0.7);
+    min-width: 100px;
+    display: inline-block;
+  }
+
+}
+

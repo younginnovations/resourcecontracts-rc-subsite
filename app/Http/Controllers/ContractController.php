@@ -59,16 +59,11 @@ class ContractController extends BaseController
         ];
         $contracts   = $this->api->allContracts($filter);
 
-        $category = env('CATEGORY');
-        $data     = trans("meta/$category");
-
         $meta = [
             'title'       => 'Search Contracts',
-            'description' => 'Search' . getInformation(
-                    'categoryTitle'
-                ) . 'using different criteria - year signed, company name, contract type, annotation category.',
+            'description' => 'Search '.site()->meta('title').' using different criteria - year signed, company name,
+            contract type, annotation category.',
         ];
-
 
         return view('contract.index', compact('contracts', 'currentPage', 'meta'));
     }
@@ -122,7 +117,9 @@ class ContractController extends BaseController
     /**
      * Get Page list
      *
-     * @param $id
+     * @param         $id
+     *
+     * @param Request $request
      *
      * @return \Illuminate\View\View
      */
@@ -140,32 +137,6 @@ class ContractController extends BaseController
         }
 
         return view('contract.page.index', compact('page', 'contract', 'annotations'));
-    }
-
-    /**
-     * Compare Contract Document
-     *
-     * @param $contractId1
-     * @param $contractId2
-     *
-     * @return \Illuminate\View\View
-     */
-    public function compare($contractId1, $contractId2)
-    {
-        $contractId1 = $this->api->getRealContractId($contractId1);
-        $contractId2 = $this->api->getRealContractId($contractId2);
-
-        $contract1            = new \stdClass();
-        $contract2            = new \stdClass();
-        $contract1Annotations = $this->contract->annotations($contractId1);
-        $contract2Annotations = $this->contract->annotations($contractId2);
-        $contract1->metadata  = $this->api->metadata($contractId1);
-        $contract2->metadata  = $this->api->metadata($contractId2);
-
-        return view(
-            'contract.page.compare',
-            compact('contract1Annotations', 'contract2Annotations', 'contract1', 'contract2')
-        );
     }
 
     /**
@@ -276,7 +247,6 @@ class ContractController extends BaseController
      * Contract View page
      *
      * @param         $contract_id
-     * @param Request $request
      *
      * @return \Illuminate\View\View|void
      */
@@ -296,7 +266,6 @@ class ContractController extends BaseController
         $meta = [
             'title' => $contract->metadata->name,
         ];
-
 
         return view('contract.page.view', compact('contract', 'back', 'meta', 'show_advance'));
     }

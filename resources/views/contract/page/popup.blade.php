@@ -15,7 +15,7 @@
 	<link rel="stylesheet" href="{{ url('css/annotation/annotator.css') }}">
 	<link href="{{url('css/'.meta()->category.'-contract-view.css')}}" rel="stylesheet">
 
-	<link href="{{url('css/main.min.css')}}" rel="stylesheet">
+	<link href="{{url('css/style.min.css')}}" rel="stylesheet"/>
 	<link href="{{url('css/'.meta()->category.'-style.css')}}" rel="stylesheet">
 
 	<!--[if lt IE 9]>

@@ -243,6 +243,20 @@ $(document).ready(function () {
         }
     });
 
+    $(document).on('click', function (e) {
+        var container = $("#search-form");
+
+        if (!container.is(e.target) // if the target of the click isn't the container...
+            && container.has(e.target).length === 0) // ... nor a descendant of the container
+        {
+            $(".search-input-wrapper").hide();
+            $('.contract-number-wrap').show();
+        }
+        else if($(".search-input-wrapper").is(':hidden')){
+            $('.contract-number-wrap').show();
+        }
+    });
+
 
     $('.download-wrap,.view-pin-wrap').click(function () {
         $(this).siblings('ul').toggle();
@@ -313,6 +327,7 @@ $(document).ready(function () {
         $(".navbar .search-input-wrapper").width(leftWidth - 22);
         $(".right-header-section").removeClass("hidden");
     }
+
     if($(window).width() > 768) {
         calWidth();
     }
@@ -330,6 +345,10 @@ $(document).ready(function () {
         if (!$(e.target).closest('.view-pin-wrap, #pinLists').length) {
             $("#pinLists").hide();
         }
+
+      /*  if (!$(e.target).closest('.search-input-wrapper').length) {
+            $(".search-input-wrapper").hide();
+        }*/
 
         if (!$(e.target).closest('#social-toggler').length) {
             $(".social-toggle").hide();

@@ -7,5 +7,9 @@ return [
     'publish_contracts' => "نشر عقود",
     'contact'           => "عقد",
     'licensed'          => "المحتوى مرخّص بموجب Attribution-ShareAlike 4.0 International",
-
+    'founding_partners' => 'الشركاء المؤسسين',
+    'donors'            => 'الجهات المانحة',
+    'content_partner'   => 'شريك المحتوى',
+    'menu'              => 'قائمة طعام',
+    'faqs'              => 'الأسئلة الأكثر شيوعا',
 ];

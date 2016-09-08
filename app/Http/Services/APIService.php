@@ -15,16 +15,20 @@ class APIService
     /**
      * @var Client
      */
-    public $client;
-    public $category;
+    protected $client;
+    /**
+     * @var SiteService
+     */
+    private $site;
 
     /**
-     * @param Client $client
+     * @param Client      $client
+     * @param SiteService $site
      */
-    public function __construct(Client $client)
+    public function __construct(Client $client, SiteService $site)
     {
-        $this->client   = $client;
-        $this->category = trim(env('CATEGORY'));
+        $this->client = $client;
+        $this->site   = $site;
     }
 
     /**
@@ -36,7 +40,7 @@ class APIService
      */
     public function apiURL($request)
     {
-        $host    = trim(env('ELASTIC_SEARCH_HOST'), '/');
+        $host    = trim(site()->esUrl(), '/');
         $request = trim($request, '/');
 
         return sprintf('%s/%s', $host, $request);
@@ -266,8 +270,13 @@ class APIService
     public function apiCall($resource, array $query = [], $array = false)
     {
         try {
-            $request           = new Request('GET', $this->apiURL($resource));
-            $query['category'] = $this->category;
+            $request = new Request('GET', $this->apiURL($resource));
+
+            if ($this->site->isCountrySite()) {
+                $query['country_code'] = strtolower($this->site->getCountryCode());
+            }
+
+            $query['category'] = strtolower($this->site->getCategory());
             $request->setQuery($query);
             $response = $this->client->send($request);
             $data     = $response->getBody();
@@ -458,7 +467,13 @@ class APIService
                 $filename     = "Annotations_" . $contractName . "_" . date('Ymdhis');
             }
             $request           = new Request('GET', $this->apiURL($resource));
-            $query['category'] = $this->category;
+
+            if ($this->site->isCountrySite()) {
+                $query['country_code'] = strtolower($this->site->getCountryCode());
+            }
+
+            $query['category'] = strtolower($this->site->getCategory());
+
             $request->setQuery($query);
             $response = $this->client->send($request);
             $data     = $response->getBody()->getContents();

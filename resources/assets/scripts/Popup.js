@@ -22,7 +22,7 @@ class Popup extends Component {
                 <Loading />
                 <Header site_name={this.state.site} title={this.props.annotation.contract_title}/>
                 <Alert />
-                <div className="head-wrap clearfix info">
+                <div className="info head-wrap clearfix">
                     <div className="col-md-6">
                         <Detail annotation={this.props.annotation}/>
                     </div>

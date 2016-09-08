@@ -397,10 +397,6 @@
     padding: 0 16px;
 }
 
-.navbar-brand span:first-of-type {
-    color: #217B46;
-}
-
 .navbar-brand, .navbar-brand:hover {
     font-size: 15px;
 }

@@ -126,9 +126,8 @@ config(
             ]
 
         ],
-        'localisation' => false,
-        'clip'         => false,
-
+        'localisation' => true,
+        'clip'         => true,
     ]
 );
 $app->register('HogLog\HogLogServiceProvider');

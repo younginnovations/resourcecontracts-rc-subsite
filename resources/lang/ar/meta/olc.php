@@ -10,4 +10,7 @@ return [
     'country_description'   => "البحث عن عقود الأراضي من البلاد- ",
     'resources_description' => "البحث عن عقود الأراضي للموارد مختلفة -",
     'resource_description'  => "البحث عن عقود الأراضي للموارد -",
+    'tagline'               => '<p class="repo-description"> و التخزين الإلكتروني ل</p> <div class="large-title olc-title"><span>عقود الاراضى المفتوحة</span></div>',
+    'intro_text'            => 'OpenLandContracts.org هو مستودع لل عقود الاستثمارات المتاحة للجمهور لمشاريع الأراضي والزراعة ، والغابات. ويضم ملخصات بلغة واضحة الأحكام الرئيسية و يوفر أدوات للبحث و المقارنة بين العقود.',
+    'about'                 => 'About OpenLandContracts',
 ];

@@ -10,5 +10,8 @@ return [
     'country_description'   => "Trouver les contrats ressources du pays -",
     'resources_description' => "Trouver les contrats ressources pour différentes ressources -",
     'resource_description'  => "Trouves des contarts de ressources pour ressource -",
-
+    'tagline'               => '<p class="repo-description">Un répertoire des </p> <div class="large-title"><span>contrats pétroliers et miniers</span></div>',
+    'intro_text'            => 'Dans l\'extraction et l\'exploitation des ressources minérales et pétrolières , la relation entre les gouvernements et le pétrole , le gaz et les sociétés minières est défini par les contrats, les accords , les baux et concessions.',
+    'associated_documents'    => "et les documents connexes",
+    'about'                 => 'About ResourceContracts',
 ];

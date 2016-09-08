@@ -6,6 +6,10 @@ return [
     'glossary'          => "Glossaire",
     'publish_contracts' => "Publier des contrats ",
     'contact'           => "Contrat",
-    'licensed'          => "Le contenu est distribué sous licence Attribution-ShareAlike 4.0 international"
-
+    'licensed'          => "Le contenu est distribué sous licence Attribution-ShareAlike 4.0 international",
+    'founding_partners' => 'Partenaires fondateurs',
+    'donors'            => 'Les bailleurs de fonds',
+    'content_partner'   => 'Partner Content',
+    'menu'              => 'le menu',
+    'faqs'              => 'FAQ',
 ];

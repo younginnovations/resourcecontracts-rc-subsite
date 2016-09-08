@@ -1,0 +1,514 @@
+/* ---------  style for clip button and icon -------  */
+
+.annotation-table {
+  padding: 60px 0;
+  .col-lg-12 {
+    padding: 0 40px;
+  }
+  .table > thead > tr > th {
+    color: $color_link_color;
+    &:first-child {
+      min-width: 100%;
+    }
+  }
+  .table tr:first-of-type td {
+    border: 1px solid #ddd;
+  }
+  .table > thead > tr > th, .table > tbody > tr > td {
+    padding: 8px 44px 8px 10px !important;
+  }
+}
+
+#annotation-count, .annotation-clip {
+  font-size: 14px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-top: 20px;
+  min-width: 98px;
+  @include position(absolute, 26px auto auto 258px);
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+#annotation-count {
+  color: #fff !important;
+  background: $color_blue;
+  padding: 0 18px 0 36px;
+  line-height: 34px;
+  position: relative;
+
+  &:before{
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 7px;
+    left: 12px;
+    background: url(#{$img-path}/ic-sprite.svg) no-repeat no-repeat -285px -400px;
+  }
+
+  &:hover{
+    background-color: $color_blue_hover;
+  }
+}
+
+.annotation-clip-icon,.clip-btn {
+  text-indent: -9999px;
+  background: transparent url(#{$img-path}/ic-sprite.svg) no-repeat -79px -402px;
+  height: 18px;
+  width: 29px;
+  border: 0;
+  margin: 2px 0 0;
+}
+
+.annotation-clip-icon.annotation-clipped,
+.clip-btn.active{
+  background: transparent url(#{$img-path}/ic-sprite.svg) no-repeat  -185px -403px;
+  text-indent: -9999px;
+  color: $color_blue !important;
+}
+
+.clip-btn{
+  margin-top: 14px;
+  width: 20px;
+}
+
+#clip-all-annotations,
+#remove-all-annotations{
+  background: transparent;
+  color: $color_blue !important;
+  padding: 0 34px 0 0px;
+  position: relative !important;
+  left: auto;
+  right: auto;
+  bottom: auto;
+  top: auto;
+  float: right;
+  margin-right: 20px;
+  border-bottom: solid 1px;
+  border-radius: 0;
+  width: auto;
+  min-width: auto;
+  display: block;
+  border: none;
+  cursor: pointer;
+
+  &:after{
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 28px;
+    height: 19px;
+  }
+}
+#clip-all-annotations{
+  &:after{
+    background: transparent url(#{$img-path}/ic-sprite.svg) no-repeat -79px -402px;
+  }
+}
+
+.annotation-clip.annotation-clipped {
+  &:after{
+    background: transparent url(#{$img-path}/ic-sprite.svg) no-repeat  -186px -403px;
+  }
+}
+
+.annotation-clip:hover{
+  .link{
+    border-bottom: solid 1px $color_blue;
+  }
+}
+
+.remove-clip {
+  background: transparent;
+  border: 2px solid #bbb;
+  width: 24px;
+  line-height: 20px;
+  border-radius: 50%;
+  padding: 0;
+  color: #aaa;
+  &:hover {
+    color: $white;
+    background: $color_link_color;
+    border: 2px solid $color_link_color;
+  }
+}
+
+.table > #annotationsresults tr td:first-child, .table > #annotationsresults tr th:first-child {
+  width: 20%;
+  min-width: 100%;
+  padding-left: 64px;
+  padding-top: 15px;
+}
+
+.clip-panel-row {
+  position: relative;
+  .print {
+    right: 180px;
+    a {
+      background: url(../../images/ic-print.png) no-repeat 16px;
+    }
+  }
+}
+
+
+.clip-panel-row{
+  .attached-top-wrapper .panel-title{
+    width: calc(100% - 50px);
+  }
+}
+
+.clip-head {
+  button {
+    border: 0;
+    padding-left: 40px;
+    width: 36px;
+    height: 18px;
+    margin-left: 4px;
+    line-height: 4px;
+    &:hover, &:focus, &:active {
+      box-shadow: none;
+      border: none !important;
+    }
+    &.active {
+      box-shadow: none;
+      border: none !important
+    }
+  }
+}
+
+.clip-label span {
+  line-height: 15px;
+}
+
+#clip-annotations > div > div.row {
+  margin: 0 0 30px;
+  padding: 30px 32px 40px;
+  background: $color_alabaster_approx;
+}
+
+.loading {
+  background: $url_20 no-repeat 0 0;
+  width: 32px;
+  height: 32px;
+  text-indent: -9999px;
+  margin: 0 auto;
+  display: block;
+}
+
+.search-list-wrapper {
+  padding-top: 30px;
+}
+
+.view-clip span {
+  background: $url_21 no-repeat 0 0;
+  display: block;
+  text-indent: -9999px;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  margin-left: 6px;
+  a {
+    display: block;
+  }
+}
+
+.annotations-topic-list{
+  padding: 8px 0 0 !important;
+}
+
+.annotation-item .annotation-clip-icon {
+  float: right;
+}
+
+.category-clip-wrap {
+  padding-left: 20px;
+}
+
+.annotations-viewer .annotation-clip {
+  position: static;
+  margin-bottom: 10px;
+  margin-left: 22px;
+  margin-top: 0;
+}
+
+.clip-search-row {
+  border-bottom: 1px solid $color_silver_50_approx;;
+}
+
+.action-btn {
+  float: right;
+  margin-top: -53px;
+  #print-clip-filter, #save-clipping,
+  .download-dropdown > a {
+    font-size: 12px;
+    color: $color_link_color;
+    text-decoration: none;
+    padding: 13px 25px 13px 44px;
+    background: $white $url_2 no-repeat -152px -40px;
+    z-index: 1;
+    border: 1px solid $color_link_color;
+    border: 1px solid $color_burnt_sienna_20_approx;
+    border-radius: 22px;
+    float: left;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+
+  .download-dropdown > a {
+    background: $white url(../../images/ic-sprite.png) no-repeat -153px -40px;
+  }
+}
+
+.action-btn {
+  #print-clip-filter {
+    background: $white url(../../images/ic-print.png) no-repeat 19px;
+  }
+  #save-clipping {
+    background: $white url(../../images/ic-save.png) no-repeat 21px;
+  }
+}
+
+#clip-annotations{
+  .action-btn{
+    .social-share{
+      margin: 0 10px;
+      background: #fff;
+      right: auto;
+      bottom: auto;
+      position: relative;
+    }
+  }
+}
+
+#clip-annotations {
+  div.modal-social-share-wrap {
+    float: left;
+    margin-right: 10px;
+    padding: 0;
+    border: none;
+    .social-share {
+      margin: 0;
+    }
+  }
+}
+
+.table-contract-list td:nth-child(3) {
+  font-size: 14px;
+  a {
+    //margin-left: -42px; makes dropdown in table distort
+  }
+}
+
+.table-contract tbody td:first-child {
+  /*width: 82px;
+  background-position: 38px 16px;*/
+}
+
+.clip-search-row ~ .social-share {
+  position: static;
+  float: right;
+  margin-top: -53px;
+  margin-right: 264px;
+}
+
+.clip-panel-row .panel-top-content {
+  padding: 0 15px 0 0;
+  > .pull-left {
+    width: 100%;
+  }
+}
+
+#clip-view-url {
+  float: right;
+  font-size: 11px;
+  border: 1px solid #ddd;
+  border-radius: 22px;
+  padding: 4px 0 4px 4px;
+  line-height: normal;
+  margin-top: -5px;
+  margin-right: 24px;
+  a {
+    background: $color_link_color;
+    color: $white;
+    padding: 4px 14px;
+    border-radius: 0 22px 22px 0;
+    &:hover {
+      background: $color_link_hover_color;
+      text-decoration: none;
+    }
+  }
+}
+
+.action-btn .download-dropdown {
+  > a {
+    margin-top: 0;
+    span {
+      background: none;
+      text-indent: 1px;
+      padding-left: 0;
+    }
+  }
+
+  ul {
+    top: 49px;
+    width: 124px;
+    padding: 0;
+    border: 1px solid #ccc;
+    li {
+      padding: 6px 0;
+      border-bottom: 1px solid #f5f5f5;
+      &:first-child {
+        padding-top: 0;
+      }
+      &:last-child {
+        border-bottom: 0;
+        padding-bottom: 0;
+      }
+    }
+  }
+}
+
+.count-select {
+  margin-left: 10px;
+  font-size: 12px;
+  color: $color_cape_cod_approx;
+  text-decoration: none;
+  padding: 13px 25px 13px 23px;
+  z-index: 1;
+  background: 1px solid rgba($color_cape_cod_approx, 0.2);
+  -webkit-border-radius: 22px;
+  border-radius: 22px;
+  margin-right: 12px;
+  cursor: pointer;
+  &:empty {
+    display: none;
+  }
+  span:last-child {
+    font-family: $font_1;
+  }
+}
+
+/*style for clip list table*/
+
+.table.table-contract-list {
+  th .count-select {
+    padding: 0;
+    color: $color_link_color;
+    font-family: Open-Sans-Regular;
+
+    & > span:first-of-type {
+      text-transform: capitalize;
+      font-size: 10px;
+    }
+  }
+
+  & > tbody > tr td:first-child {
+    width: 75px;
+  }
+
+  & > thead > tr > th:first-child {
+    padding: 8px 0 6px 0;
+  }
+}
+
+#clip-annotation-list {
+  clear: both;
+  padding-top: 6px;
+}
+
+.page-clip{
+  .action-btn{
+    margin-top: -25px;
+    margin-right: 24px;
+  }
+}
+
+/*style for clip list table*/
+
+.table.table-contract-list {
+  th .count-select {
+    padding: 0;
+    color: $color_link_color;
+    font-family: Open-Sans-Regular;
+
+    & > span:first-of-type {
+      text-transform: capitalize;
+      font-size: 10px;
+    }
+  }
+
+  & > tbody > tr td:first-child {
+    width: 75px;
+  }
+
+  & > thead > tr > th:first-child {
+    padding: 8px 0 6px 0;
+  }
+}
+
+#clip-annotation-list {
+  clear: both;
+  padding-top: 6px;
+}
+
+.annotation-left{
+  float: left;
+  width: calc(100% - 120px);
+}
+
+.annotation-left + .annotation-clip{
+  margin-top: 0;
+  display: none;
+}
+
+.filter-wrapper{
+  .clip-btn{
+    position: absolute;
+    bottom: -20px;
+    right: 291px;
+    background: #fff;
+    border: 1px solid rgba($color_link_color, 0.2);
+    -webkit-border-radius: 22px;
+    border-radius: 22px;
+    z-index: 1;
+    padding: 12px 22px 13px 43px;
+    text-indent: initial;
+    height: auto;
+    width: auto;
+    background: #fff url(../images/ic-sprite.svg) no-repeat -272px -471px;
+    margin-top: 0;
+    font-size: 11px;
+    line-height: 17px;
+    color: $color_link_color !important;
+    min-width: 45px;
+
+    &.active{
+      color: $color_link_color !important;
+      background: #fff url(../images/ic-sprite.svg) no-repeat -171px -471px;
+    }
+  }
+}
+
+span.required {
+  color: #E21616;
+  font-size: 12px;
+}
+
+.panel-wrap .panel-body {
+  padding: 0;
+}
+
+.clip-panel-row .panel-top-content {
+  > .pull-left {
+    margin-top: 0;
+  }
+}
+
+@media(min-width: 768px){
+  .clip-panel-row .panel-top-content{
+    min-height: 67px;
+  }
+}

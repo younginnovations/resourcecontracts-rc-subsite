@@ -1,6 +1,5 @@
 <?php namespace App\Http\Controllers\Admin;
 
-use App\Http\Services\Admin\ImageService;
 use App\Http\Services\AuthService;
 use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as BaseController;
@@ -27,16 +26,15 @@ class AuthController extends BaseController
     /**
      * Login page
      *
-     * @param ImageService $image
      * @return \Illuminate\View\View
      */
-    public function login(ImageService $image)
+    public function login()
     {
         if ($this->auth->isLoggedIn()) {
             return redirect()->route('admin.dashboard');
         }
 
-        $image = $image->getHomePageImageUrl();
+        $image = site()->getImageUrl('bg');
 
         return view('page.login', compact('image'));
     }

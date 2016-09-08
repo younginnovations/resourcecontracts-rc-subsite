@@ -10,4 +10,7 @@ return [
     'country_description'   => "Trouver les contrats fonciers du pays -",
     'resources_description' => "Trouver les contrats fonciers pour différentes ressources -",
     'resource_description'  => "Trouver des contrats fonciers pour ressource -",
+    'tagline'               => '<p class="repo-description">Un dépôt en ligne de</p> <div class="large-title olc-title"><span>Ouvert Land Contracts</span></div>',
+    'intro_text'            => 'OpenLandContracts.org is a repository of publicly available investment contracts for land, agriculture, and forestry projects. It features plain language summaries of key provisions and provides tools for searching and comparing contracts.',
+    'about'                 => 'About OpenLandContracts',
 ];

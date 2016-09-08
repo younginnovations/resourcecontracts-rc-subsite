@@ -1,5 +1,4 @@
 <?php
-use App\Http\Services\Admin\ImageService;
 use Illuminate\Support\Facades\Lang;
 
 /**
@@ -81,11 +80,23 @@ function _e($arrayOrObject, $key, $default = null, $echo = false)
 }
 
 /**
- * @return \Laravel\Lumen\Application|mixed
+ * Get Auth class
+ *
+ * @return App\Http\Services\AuthService
  */
 function auth()
 {
     return app('App\Http\Services\AuthService');
+}
+
+/**
+ * Get Site Config
+ *
+ * @return App\Http\Services\SiteService
+ */
+function site()
+{
+    return app('App\Http\Services\SiteService');
 }
 
 /**
@@ -161,8 +172,8 @@ function meta($meta = null)
     $data['title']       = $data['title'] . $title;
     $data['description'] = $description;
     $data['category']    = $category;
-    $images              = app(ImageService::class);
-    $data['image']       = $images->getHomePageImageUrl();
+    //$images              = app(ImageService::class);
+    //$data['image']       = $images->getHomePageImageUrl();
 
     return (object) $data;
 }
@@ -271,6 +282,7 @@ function get_country($key = null)
 }
 
 /**
+
  * Show search query
  *
  * @param $requestParams
@@ -296,10 +308,9 @@ function showSearchQuery($requestParams, $filter)
  */
 function getPageClass()
 {
-    $path  = (explode('/', trim(app('request')->getPathInfo(), '/')));
-    $class = isset($path[0]) ? 'page-' . $path[0] : '';
-
-    return $class;
+    $seg  = \Request::segments();
+    $page = count($seg) > 0 ? $seg[0] : 'home';
+    return sprintf('page-%s', $page);
 }
 
 /**
@@ -325,4 +336,52 @@ function lang_url($code)
 function isClipOn()
 {
     return (config('clip') == true) ? true : false;
+}
+
+/**
+ * Determine active menu
+ *
+ * @param string $url
+ *
+ * @return bool
+ *
+ */
+function isActiveMenu($url = '')
+{
+    $seg = \Request::segments();
+
+    if ($url == '' && count($seg) == 0) {
+        return true;
+    }
+
+    return in_array($url, $seg);
+}
+
+/**
+ * Get option
+ *
+ * @param $key
+ *
+ * @return string|object
+ */
+function getOption($key)
+{
+    $option = app()->make('App\Http\Services\Admin\OptionService');
+
+    return $option->get($key);
+}
+
+/**
+ * Get Text Option
+ *
+ * @param $key
+ *
+ * @return string
+ */
+function getOptionText($key)
+{
+    $currentLang = app('translator')->getLocale();
+    $option      = getOption($key);
+
+    return isset($option->$currentLang) ? $option->$currentLang : '';
 }

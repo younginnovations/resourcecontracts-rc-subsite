@@ -1,0 +1,170 @@
+/* --------- style for cliping overview popup page ------------ */
+
+#page-wrapper {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+nav.navbar {
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 0;
+  margin-bottom: 0;
+  z-index: 1000;
+}
+
+.no--search--wrap {
+  clear: both;
+  .navbar-header {
+    margin-left: 15px;
+    width: 145px;
+
+    .navbar-brand, .navbar-brand:hover{
+      font-size: 15px;
+      margin: 0;
+    }
+  }
+
+  .navbar-right {
+    padding: 22px 12px;
+    width: calc(100% - 165px);
+    float: left;
+  }
+
+  .title {
+    font: 18px/24px Open-Sans-Light;
+  }
+}
+
+.info.head-wrap {
+
+  .col-md-6 {
+    width: auto;
+  }
+
+  .col-md-6:nth-child(1) {
+    padding-right: 0;
+  }
+
+  .col-md-6:nth-child(2) {
+    padding-left: 0;
+    vertical-align: middle;
+  }
+
+  .detail {
+    border-right: solid 1px #DCDFE2;
+    font-size: 12px;
+    line-height: 18px;
+    padding: 6px 10px 7px 0;
+
+    p{
+      line-height: 18px;
+    }
+
+    p {
+      &:nth-child(1) {
+        margin: 0 0 2px;
+        max-width: 100%;
+        padding-right: 10px;
+      }
+
+      &:nth-child(2) {
+        min-width: 142px;
+        margin: 0;
+      }
+    }
+  }
+
+  .pdf-zoom-options {
+    display: inline-block;
+    min-width: 0;
+    padding: 10px 0 10px;
+    border-right: 1px solid #DCDFE2;
+    border-left: 1px solid #DCDFE2;
+    float: none !important;
+    margin: 0;
+    > span {
+      float: none;
+      margin-left: 0;
+      vertical-align: middle;
+      font-size: 12px;
+      line-height: 18px;
+    }
+  }
+
+  .pagination {
+    min-width: 76px;
+    padding: 12px 10px;
+    margin: 0;
+    vertical-align: middle;
+    display: inline-block;
+  }
+
+  .pdf-pagination.pagination span, .text-pagination span, .pagination input[type="text"] {
+    line-height: 17px;
+  }
+
+  .pagination input[type="text"] {
+    margin-top: 4px;
+  }
+}
+
+.canvas-wrap {
+  float: none;
+  clear: both;
+  background: #f0f0f0;
+  padding: 10px;
+
+  canvas {
+    margin: 0 auto;
+    display: block;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    padding: 10px 20px;
+    border-radius: 4px;
+    background-color: #fff;
+    min-height: 60vh;
+    max-width: 800px;
+  }
+}
+
+
+@media (max-width: 540px) {
+  .info.head-wrap .pdf-zoom-options {
+    display: inline-block !important;
+  }
+}
+
+@media (max-width: 950px) {
+  .canvas-wrap {
+    width: 100%;
+    overflow: scroll;
+  }
+}
+
+@media (max-width: 480px) {
+  .info.head-wrap .col-md-6,
+  .no--search--wrap .navbar-right {
+    width: 100%;
+  }
+
+  .info.head-wrap .col-md-6:nth-child(1) {
+    border-bottom: solid 1px #e7e9eb;
+  }
+
+  #filter-by-category{
+    .left-content{
+      width: 100%;
+      float: none;
+
+      input{
+        width: calc(100% - 46px);
+      }
+    }
+
+    .right-content{
+      display: none;
+    }
+  }
+}
+/* --------- end of style for cliping overview popup page ------------ */

@@ -1,103 +1,142 @@
 <?php
-use \Illuminate\Support\Facades\Lang as Lang;
+$image_main = site()->getImageUrl('bg');
+$image_intro = site()->getImageUrl('intro_bg');
 ?>
 @extends('layout.app-full')
-
 @section('css')
-    @if(!empty($image))
-        <style xmlns="http://www.w3.org/1999/html">
-            .row-top-wrap {
-                background-image: url({{$image}});
-            }
-        </style>
-    @endif
+	<style>
+		.petroleum-wrapper {
+			background-image: url({{$image_main}});
+		}
+
+		.img-intro {
+			background-image: url({{$image_intro}});
+		}
+	</style>
 @stop
 @section('content')
-    <?php $local = app('App\Http\Services\LocalizationService');
-    ?>
+	@include('layout.partials.language')
+	<div class="row front-row-top-wrap">
+		<nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+			<div class="navbar-header">
+				<span data-toggle="collapse-sidebar" data-target=".sidebar-collapse"
+					  data-target-2=".sidebar-collapse-container"
+					  class="pull-left trigger">
+				</span>
+				@include('layout.partials.logo')
+			</div>
+		</nav>
+	</div>
+	<section class="hero-image">
+		<div class="petroleum-wrapper">
+			<div class="section-wrap">
+				<div class="petroleum-mineral">
+					{!! site()->meta('tagline') !!}
+					<div class="clearfix">
+						<form action="{{route('search')}}" method="GET" class="search-form" role="search">
+							<div class="form-group clearfix">
+								<input type="text" name="q" class="form-control"
+									   placeholder="@lang('global.search') {{$contracts}} @lang('global.contracts')&nbsp;{{site()->meta('associated_documents')}}">
+								<button type="submit" class="btn btn-default search-button">
+									@lang('global.search')
+								</button>
+							</div>
+						</form>
+						<div class="advance-search">
+							<a href="{{url('search')}}">@lang('global.advanced_search')</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="petroleum-list">
+			<div class="col-md-12 col-sm-12 col-xs-12 text-center petroleum-list-inner">
+				<div class="row">
+					<div class="col-md-4 col-sm-4 col-xs-4 petroleum-list-each">
+						<a href="{{route('contracts')}}">
+							<h2 class="petroleum-list-title">{{$contracts}}</h2>
+							<small>{{trans('global.documents')}}</small>
+						</a>
+					</div>
+					@if(!site()->isCountrySite())
+						<div class="col-md-4 col-sm-4 col-xs-4 petroleum-list-each">
+							<a href="{{route('countries')}}">
+								<h2 class="petroleum-list-title">{{$countries}}</h2>
+								<small>{{trans('global.countries')}}</small>
+							</a>
+						</div>
+					@endif
+					<div class="col-md-4 col-sm-4 col-xs-4">
+						<a href="{{route('resources')}}">
+							<h2 class="petroleum-list-title">{{$resources}}</h2>
+							<small>{{trans('global.resources')}}</small>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+			<div class="list-item-wrap">
+				<div class="inner-list-item">
+					<label class="group-item-title">{{trans('global.explore_contract_terms')}}:</label>
+					<ul class="list-group">
+						@foreach($links as $link)
+							<li class="list-group-item">
+								<a href="{{$link['url']}}">{{$link['title']}}</a>
+							</li>
+						@endforeach
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+	<?php $homepage_text = getOptionText('homepage_text');?>
+	@if($homepage_text != '')
+		<section class="img-intro">
+			<div class="img-intro-text">
+				<p>
+					{{$homepage_text}}
+					<a href="{{route('about')}}">{{trans('global.learn_more')}}</a>
+				</p>
+			</div>
+		</section>
+	@endif
 
-    @if(config('localisation'))
-        <div class="floated-top-div">
-            <div class="dropdown language-selector" >
-                <button class="btn  dropdown-toggle"  data-toggle="dropdown" id="dropdownMenu2" aria-expanded="false">
-                    <img style="width: 16px ; height: 16px; margin-right: 6px;" src="{{getCountryByLang(app('translator')->getLocale())}}"/>{{config('language')[app('translator')->getLocale()]['name']}}
-                    <span class="caret"></span>
-                </button>
-
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" style="min-width: 110px;">
-
-                    @foreach (config('language') as $locale => $language)
-                        @if(app('translator')->getLocale()!=$locale)
-                            <li>
-                                <a href={{ url(Request::url().'?lang='.$locale)}}>
-                                    <img style="width: 16px ; height: 16px; margin-right: 6px;" src="{{getCountryByLang($locale)}}"/>
-                                    {{$language['name']}}
-                                </a>
-                            </li>
-                        @endif
-                    @endforeach
-
-                </ul>
-            </div>
-        </div>
-    @endif
-    <div class="row row-top-wrap front-row-top-wrap">
-        <div class="homepage-wrapper">
-            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-                <div class="navbar-header">
-                    <span data-toggle="collapse-sidebar" data-target=".sidebar-collapse"
-                          data-target-2=".sidebar-collapse-container" class="pull-left trigger">trigger</span>
-                    @if(env("CATEGORY")=="rc")
-                        <a class="navbar-brand" href="{{url()}}">Resource <span
-                                    class="beta">Beta</span><span>Contracts</span></a>
-                    @else
-                        <a class="navbar-brand" href="{{url()}}">OPENLAND <span
-                                    class="beta">Beta</span><span>Contracts</span></a>
-                    @endif
-                </div>
-            </nav>
-
-            <div @if(env("CATEGORY")=="rc") class="col-lg-7 col-md-9" @else class="col-lg-8 col-md-9" @endif>
-
-                <div class="row row-top-content">
-                    <div class="tagline">
-                        @if(env("CATEGORY")=="rc")
-                            @lang('global.a_directory_of') <span>@lang('global.petroleum_mineral_contracts')</span>
-                        @else
-                            @lang('global.an_online_repository_of') <span>@lang('global.open_land_contracts')</span>
-                        @endif
-                    </div>
-                    <form action="{{route('search')}}" method="GET" class="contract-search-form">
-                        <div class="form-group">
-                            <input type="text" name="q" class="form-control pull-left"
-                                   placeholder="@lang('global.search') {{$contracts}} {{ Lang::choice('global.contracts' , $contracts) }} @if(env('CATEGORY') != 'olc') @lang('global.associated_documents') @endif">
-                            <button type="submit"
-                                    class="btn btn-search">@lang('global.search')</button>
-                        </div>
-                        <span class="advanced-search">@lang('global.advanced_search')</span>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row row-content">
-        <div class="col-sm-6 col-md-6 col-lg-6 country-wrapper">
-            <div class="country-wrap">
-                <div class="country-inner-wrap">
-                    <p>@lang('global.contract_doc_from')</p>
-                    <span>{{$countries or ''}}</span> @lang('global.countries')
-                </div>
-                <a href="{{route('countries')}}" class="btn btn-view">@lang('global.view_all_countries')</a>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-6 col-lg-6 resource-wrapper">
-            <div class="resource-wrap">
-                <div class="resource-inner-wrap">
-                    <p>@lang('global.contracts_related_to')</p>
-                    <span>{{$resources or ''}}</span> @lang('global.resources')
-                </div>
-                <a href="{{route('resources')}}" class="btn btn-view">@lang('global.view_all_resources')</a>
-            </div>
-        </div>
-    </div>
+	@if( !site()->isCountrySite())
+		<section class="explore-contracts">
+			<div class="map-wrapper">
+				<h2 class="heading2">@lang('global.explore_contracts')</h2>
+				<div id="map" class="map-wrap"></div>
+			</div>
+		</section>
+		@if(isset($countryPartners) && count($countryPartners) > 0)
+			<section class="country-partners">
+				<div class="container wrapper country-partners-wrapper">
+					<h2 class="heading2">{{trans('global.country_partners')}}</h2>
+					<div class="col-md-12 col-sm-12">
+						<div class="countrypartner">
+							<div class="slider autoplay">
+								@foreach($countryPartners as $partner)
+									<div class="multiple">
+										<a target="_blank" href="{{$partner->link}}">
+											<img src="{{$partner->image}}">
+										</a>
+									</div>
+								@endforeach
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		@endif
+	@endif
 @stop
+
+@if( !site()->isCountrySite())
+@section('js')
+	<script>
+		var selectedCountries = '{!! json_encode($countryList) !!}';
+		var standardCountry = {!! json_encode(trans('country')) !!};
+	</script>
+	<script src="{{url('js/homepage.js')}}"></script>
+@stop
+@endif
