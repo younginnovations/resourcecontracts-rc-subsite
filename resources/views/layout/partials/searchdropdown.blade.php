@@ -12,20 +12,21 @@ $category = $api->getAnnotationsCategory();
     </div>
     <div class="search-input-wrapper">
         <div class="col-lg-12">
+            @if(!site()->isCountrySite())
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
-                <label for="">@lang('global.country')</label>
-                <select name="country[]" id="country" multiple="multiple">
+                <label for="search_country">@lang('global.country')</label>
+                <select name="country[]" id="search_country" multiple="multiple">
                     @foreach($summary->country_summary as $country)
                         <option @if(isset($filter['country']) && in_array(strtoupper($country['key']), array_map('strtoupper',$filter['country'])))selected="selected" @endif value="{{$country['key']}}">{{$country['name']}}</option>
                     @endforeach
                 </select>
             </div>
+            @endif
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
                 <label for="">@lang('global.resource')</label>
 
                 <select name="resource[]" id="resource" multiple="multiple">
                     @foreach($summary->resource_summary as $resource)
-
                         <option @if(isset($filter['resource']) && in_array($resource->key, $filter['resource']))selected="selected" @endif value="{{$resource->key}}">{{_l("resources",$resource->key)}}</option>
                     @endforeach
                 </select>
@@ -49,7 +50,7 @@ $category = $api->getAnnotationsCategory();
                     @endforeach
                 </select>
             </div>
-            @if(env('CATEGORY')=="rc")
+            @if(site()->isRC())
                 <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
                     <label for="">@lang('search.corporate_group')</label>
                     <select name="corporate_group[]" id="corporate_group" multiple="multiple">
@@ -71,7 +72,7 @@ $category = $api->getAnnotationsCategory();
                 <label for="">@lang('search.document_type')</label>
                 <select name="document_type[]" id="document_type" multiple="multiple">
                     @foreach(array_filter($attributes->document_type) as $type)
-                        <option @if(isset($filter['document_type']) && in_array($type, $filter['document_type'])) selected="selected" @endif value="{{$type}}">{{$type}}</option>
+                        <option @if(isset($filter['document_type']) && in_array($type, $filter['document_type'])) selected="selected" @endif value="{{$type}}">{{_l('codelist/document_type',$type)}}</option>
                     @endforeach
                 </select>
             </div>
@@ -79,7 +80,7 @@ $category = $api->getAnnotationsCategory();
                 <label for="">@lang('search.contract_type')</label>
                 <select name="contract_type[]" id="contract_type" multiple="multiple">
                     @foreach(array_filter($attributes->contract_type) as $type)
-                        <option @if(isset($filter['contract_type']) && in_array($type, $filter['contract_type'])) selected="selected" @endif value="{{$type}}">{{$type}}</option>
+                        <option @if(isset($filter['contract_type']) && in_array($type, $filter['contract_type'])) selected="selected" @endif value="{{$type}}">{{_l('codelist/contract_type',$type)}}</option>
                     @endforeach
                 </select>
             </div>
@@ -90,13 +91,13 @@ $category = $api->getAnnotationsCategory();
                 ?>
                 <select name="annotation_category[]" id="annotation_category" multiple="multiple">
                     @foreach(array_filter($annotation_category) as $cat)
-                        <option @if(isset($filter['annotation_category']) && in_array($cat, $filter['annotation_category'])) selected="selected" @endif value="{{$cat}}">{{$cat}}</option>
+                        <option @if(isset($filter['annotation_category']) && in_array($cat,
+                        $filter['annotation_category'])) selected="selected" @endif value="{{$cat}}">{{_l('codelist/annotation.search',$cat)}}</option>
                     @endforeach
                 </select>
             </div>
-            @if(env('CATEGORY')=="rc")
+            @if(site()->isRC())
                 <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
-
                     <label for="">@lang('search.annotated')</label>
                     <input type="checkbox" name="annotated" value="1" class="form-control" @if(isset($filter['annotated']) && $filter['annotated']==1) checked @endif>
 
@@ -107,18 +108,22 @@ $category = $api->getAnnotationsCategory();
             <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
                 <button type="submit" class="btn btn-form-search">@lang('global.search')</button>
             </div>
+
             @if(!isset($searchPage))
                 <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
-                    <button type="button" class="btn btn-form-search search-close">@lang('global.cancel')</button>
+                    <button type="reset" id="searchclear"  class="btn btn-form-search btn-form-reset">@lang('search.reset')</button>
                 </div>
+
                 <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
-                    <button type="reset" id="searchclear" class="btn btn-form-search btn-form-reset">@lang('search.reset')</button>
+                    <button type="button" class="btn btn-form-search search-close">@lang('global.hide')</button>
                 </div>
+
             @else
                 <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
-                    <button type="submit" id="searchclear" class="btn btn-form-search btn-form-reset">@lang('search.reset')</button>
+                    <a href="{{url('search')}}" class="btn btn-form-search btn-form-reset">@lang('search.reset')</a>
                 </div>
             @endif
+
         </div>
     </div>
     <script>

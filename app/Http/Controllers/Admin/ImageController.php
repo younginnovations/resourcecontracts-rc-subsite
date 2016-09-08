@@ -1,8 +1,6 @@
 <?php namespace App\Http\Controllers\Admin;
 
 use App\Http\Services\Admin\ImageService;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
 /**
@@ -32,7 +30,12 @@ class ImageController extends BaseController
      */
     public function index()
     {
-        $image = $this->image->getHomePageImageUrl();
+        $image = [
+            'sidebar'  => $this->image->getImageUrl('sidebar'),
+            'bg'       => $this->image->getImageUrl('bg'),
+            'favicon'  => $this->image->getImageUrl('favicon', 'ico'),
+            'intro_bg' => $this->image->getImageUrl('intro_bg'),
+        ];
 
         return view('admin.image.index', compact('image'));
     }
@@ -40,11 +43,19 @@ class ImageController extends BaseController
     /**
      * Upload Image
      *
+     * @param $type
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function upload()
+    public function upload($type)
     {
+        $method = 'upload_'.$type;
+        if (!method_exists($this->image, $method)) {
+            return redirect()->back()->with('error', 'Invalid request.');
+        }
+
         try {
-            $this->image->upload();
+            $this->image->$method();
 
             return redirect()->back()->with('success', 'Image successfully updated.');
         } catch (\Exception $e) {

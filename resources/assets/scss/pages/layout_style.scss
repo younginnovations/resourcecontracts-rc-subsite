@@ -1,0 +1,628 @@
+/* -------------------- ------------------------ --------------------*/
+/* -------------------- style for navigation bar starts -------------------- */
+
+.trigger {
+  background: url(../../images/ic-menu.png) no-repeat center;
+  text-indent: -9999px;
+  padding: 40px 28px;
+  border-right: 1px solid rgba(216, 216, 216, 0.5);
+  cursor: pointer;
+}
+
+body.page-home{
+  .trigger {
+    background: url(../../images/ic-menu-white.png) no-repeat center;
+    border-right: 1px solid rgba(242,242,242,0.2);
+    padding: 40px 28px;
+  }
+}
+
+//original selectors
+//.navbar-brand, .navbar-brand:hover
+%extend_3 {
+  font-size: 19px;
+  font-family: $font_1;
+  color: $color_link_color;
+  text-transform: uppercase;
+  height: auto;
+  position: relative;
+  padding: 0 20px 0 0;
+  margin: 20px 15px;
+}
+
+@media (min-width: 600px){
+  .right-header-section{
+    min-width: 500px;
+  }
+}
+
+//original selectors
+//.navbar-brand .beta, .sidebar-brand .beta
+%extend_4 {
+  position: absolute;
+  font-size: 12px;
+  right: -4px;
+  top: 0;
+  color: $color_cape_cod_approx;
+  color: $black_50;
+  text-transform: none;
+  font-family: $font_0;
+}
+
+.navbar-brand {
+  @extend %extend_3;
+  &:hover {
+    @extend %extend_3;
+  }
+  .beta {
+    @extend %extend_4;
+  }
+  span {
+    display: block;
+    color: $color_cape_cod_70_approx;
+  }
+}
+
+.rc{
+  .navbar-brand, .navbar-brand:hover{
+    padding: 0;
+  }
+}
+
+body.page-home{
+  .navbar-brand {
+   color: #fff;
+    &:hover {
+      color: #fff;
+    }
+    .beta {
+     color: rgba(255, 255, 255, 0.7);
+    }
+    span {
+      display: block;
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+}
+
+nav.navbar {
+  //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+  box-shadow: 0 2px 4px $black_10;
+  border: 0;
+  margin-bottom: 0;
+  z-index: 1000;
+}
+
+.navbar-brand {
+  span {
+    display: block;
+    color: $color_cape_cod_70_approx;
+  }
+}
+
+.navbar-right {
+  margin: 0;
+  position: relative;
+  border-left: 1px solid $color_mystic_approx;
+  border-top: 1px solid $color_mystic_approx;
+  padding-left: 30px;
+}
+
+.navbar .search-form {
+  .form-control::-webkit-input-placeholder {
+    color: $color_cape_cod_50_approx;
+  }
+  .form-control {
+    border: 0;
+    //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+    box-shadow: none;
+    width: 90%;
+    font-size: 13px;
+    line-height: 18px;
+    height: auto;
+    padding-top: 31px;
+    padding-bottom: 31px;
+    background: transparent;
+    &:-webkit-input-placeholder {
+      color: $color_cape_cod_50_approx;
+    }
+    &:-moz-placeholder {
+      color: $color_cape_cod_50_approx;
+    }
+    &:-ms-input-placeholder {
+      color: $color_cape_cod_50_approx;
+    }
+  }
+  .form-control::-moz-placeholder {
+    color: $color_cape_cod_50_approx;
+  }
+  > .form-group {
+    margin: 0;
+  }
+}
+
+/* ---------- style for language selector in header ----------- */
+
+.open>.dropdown-menu {
+  display: block !important;
+}
+
+.language-selector{
+  float: left;
+  margin-top: 5px;
+  z-index: 9999;
+
+  ul {
+    box-sizing: border-box;
+    li {
+      display: inline-block;
+      list-style: none;
+
+      &:not(:last-child) {
+
+      }
+
+      a {
+        padding: 1px 4px;
+        text-transform: uppercase;
+        display: block;
+        font-size: 13px;
+        line-height: 21px;
+
+        &.active {
+          background: $color_link_color;
+          border-radius: 2px;
+          padding: 2px 6px;
+          color: #fff;
+        }
+
+        &:hover{
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+}
+
+
+.page-home{
+  .language-selector{
+    float: right;
+    margin-top: 25px;
+  }
+}
+
+.footer__wrap .language-selector{
+  float: right;
+  position: static;
+  margin: 20px 0;
+}
+
+body.page-home .language-selector ul li a,
+body.page-home .clip-head #hide-annotation{
+  color: #eee;
+}
+
+.clip-head {
+  position: relative;
+  float: right;
+  z-index: 9999;
+  margin-right: 15px;
+
+  #annotation-count {
+    position: relative;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    &:before{
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      top: 8px;
+      left: 15px;
+      background: url(../images/ic-sprite.svg) no-repeat no-repeat -285px -400px;
+    }
+  }
+
+  #hide-annotation {
+    position: absolute;
+    font-size: 11px;
+    right: 18px;
+    color: $color_blue;
+  }
+
+  #hide-annotation{
+    top: 28px;
+    right: 0;
+    font-size: 14px;
+  }
+}
+
+body:not(.page-home){
+  .clip-head {
+    position: absolute;
+    right: 0;
+  }
+}
+
+@media (max-width: 480px){
+  .language-selector {
+    top: 28px;
+    ul li a{
+      font-size: 12px;
+      padding: 2px 6px;
+      line-height: 20px;
+    }
+  }
+}
+
+
+
+/* -------------------- ------------------------ --------------------*/
+/* -------------------- style for search form at navigation ends -------------------- */
+
+/* -------------------- ------------------------ --------------------*/
+/* -------------------- style for sidebar starts -------------------- */
+
+#page-wrapper {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+#wrapper {
+  padding-left: 0;
+  transition: all 0.5s ease;
+  &.toggled {
+    padding-left: 250px;
+    #sidebar-wrapper {
+      width: 250px;
+    }
+    #page-content-wrapper {
+      position: absolute;
+      margin-right: -250px;
+    }
+  }
+}
+
+#page-content-wrapper {
+  width: 100%;
+  position: absolute;
+  padding: 15px;
+}
+
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 280px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  li {
+    text-indent: 20px;
+    line-height: 40px;
+    color: $color_silver_chalice_approx;
+    line-height: normal;
+    text-indent: inherit;
+    a{
+      display: block;
+      text-decoration: none;
+      color: $color_mountain_mist_approx;
+      padding: 18px 14px 18px 32px;
+      color: $white;
+      &:hover {
+        text-decoration: none;
+        color: $white;
+        background: $white_20;
+        background: transparent;
+      }
+      &.active {
+        background: $color_link_color;
+        color: #fff;
+      }
+      &:active, &:focus {
+        text-decoration: none;
+      }
+      span {
+        width: 71%;
+        display: inline-block;
+      }
+    }
+    &:hover {
+      background: $color_link_color;
+    }
+
+    .label {
+      font-size: 12px;
+      line-height: normal;
+      font-weight: normal;
+      color: $white_50;
+    }
+    label {
+      font-weight: normal;
+      text-transform: uppercase;
+      color: $white;
+      color: $white_40;
+      padding: 0 32px 14px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    &.contracts a {
+      background: $url_10 no-repeat 32px;
+      padding: 12px 20px 12px 58px;
+    }
+    > .load-more > a {
+      color: $white;
+      color: $white_70;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  > {
+    .sidebar-brand {
+      height: 65px;
+      line-height: 20px;
+      height: auto;
+      a {
+        @extend %extend_21;
+        &:hover {
+          @extend %extend_21;
+        }
+        span {
+          font-weight: normal;
+          display: block;
+          color: $white;
+          color: $white_70;
+        }
+      }
+    }
+    li {
+      &.contracts {
+        @extend %extend_22;
+      }
+      &.countries {
+        @extend %extend_22;
+        background: transparent;
+        &:hover {
+          background: transparent;
+        }
+      }
+      &.year {
+        @extend %extend_22;
+        &:hover {
+          background: transparent;
+        }
+      }
+      &.resources {
+        @extend %extend_22;
+        &:hover {
+          background: transparent;
+        }
+      }
+    }
+  }
+}
+
+#sidebar-wrapper {
+  background-image: $linear_gradient_1;
+  top: 0;
+}
+
+.sidebar-brand {
+  .beta {
+    @extend %extend_4;
+    top: 40px;
+    right: -60px;
+  }
+  a {
+    position: relative;
+  }
+}
+
+//original selectors
+//.side-collapse, .sidebar-collapse
+%extend_14 {
+  top: 44px;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  //Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+  transition: width .4s;
+  background: $color_alabaster_approx;
+  border-left: 1px solid $color_silver_approx;
+  position: absolute;
+  z-index: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+//original selectors
+//.side-collapse-container, .sidebar-collapse-container
+%extend_15 {
+  width: 100%;
+  position: relative !important;
+  right: 0;
+  //Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+  transition: width .4s;
+  background: $white;
+  min-height: 520px;
+}
+
+//original selectors
+//.sidebar-nav > .sidebar-brand a, .sidebar-nav > .sidebar-brand a:hover
+%extend_21 {
+  color: $white;
+  text-transform: uppercase;
+  background: $url_9 no-repeat 0 0/cover;
+  font-size: 19px;
+  font-family: Open-Sans-Bold;
+  padding: 40px 32px;
+}
+
+//original selectors
+//.sidebar-nav > li.contracts, .sidebar-nav > li.countries, .sidebar-nav > li.year, .sidebar-nav > li.resources
+%extend_22 {
+  margin-bottom: 22px;
+  border-bottom: 1px solid $color_mountain_mist_approx;
+  border-bottom: 1px solid $color_mountain_mist_10_approx;
+}
+
+.side-collapse {
+  @extend %extend_14;
+  ul, ul#resources {
+    margin: 0;
+    padding: 20px 12px 20px 28px !important;
+    li {
+      list-style: none;
+      font-size: 13px;
+      margin-bottom: 14px;
+      label {
+        width: 86%;
+        vertical-align: top;
+      }
+      input {
+        margin-right: 6px;
+      }
+      a {
+        color: $color_cape_cod_approx;
+      }
+    }
+  }
+  &.in {
+    width: 0;
+    border: 0;
+  }
+}
+
+.sidebar-collapse {
+  @extend %extend_14;
+  right: auto;
+  left: 0;
+  width: 280px;
+  position: fixed;
+  border-left: 0;
+  z-index: 10000;
+  &.in {
+    width: 0;
+    border: 0;
+  }
+}
+
+.side-collapse-container {
+  @extend %extend_15;
+  &.out {
+    width: 84%;
+  }
+}
+
+.sidebar-collapse-container {
+  @extend %extend_15;
+  right: auto;
+  left: 0;
+  //Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+  transition: left .4s;
+  &.out {
+    right: auto;
+    left: 280px;
+  }
+}
+
+
+/* -------------------- style for sidebar ends -------------------- */
+/* -------------------- ------------------------ --------------------*/
+
+/* -------------------- ------------------------ --------------------*/
+/* -------------------- style for footer starts -------------------- */
+
+footer {
+  clear: both;
+  background: $color_cape_cod_approx;
+  padding: 40px 0 20px;
+  ul {
+    margin: 0;
+    padding: 0;
+    li {
+      list-style: none;
+      display: inline-block;
+      vertical-align: middle;
+      a {
+        font-size: 13px;
+        color: $white;
+        color: $white_70;
+        &:hover {
+          color: $white;
+        }
+      }
+    }
+  }
+  > .row {
+    margin: 0;
+  }
+}
+
+.footer-note {
+  padding: 0 20px 10px;
+  color: rgba(255, 255, 255, 0.36);
+  text-align: left;
+}
+
+.footer-left-wrap {
+  padding-top: 20px;
+  padding-left: 15px;
+  margin-bottom: 40px;
+  float: none;
+  width: 100%;
+  li {
+    border-left: 1px solid $white;
+    border-left: 1px solid $white_70;
+    line-height: 12px;
+    padding-left: 4px;
+    margin-left: 4px;
+    &:first-child {
+      border-left: 0;
+      padding-left: 0;
+      margin-left: 0;
+    }
+  }
+}
+
+.footer-right-wrap {
+  padding-right: 15px;
+  padding-left: 0;
+  float: none;
+  width: 100%;
+  li {
+    margin-left: 24px;
+    margin-bottom: 20px;
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+.license-buttons {
+  margin-top: 10px;
+  p {
+    color: rgba(255, 255, 255, 0.36);
+    font-size: 11px;
+    padding: 0 26px;
+    a {
+      color: rgba(255, 255, 255, 0.36);
+    }
+  }
+}
+
+.sidebar-nav{
+  li:not(.sidebar-brand){
+      border-bottom: solid 1px rgba(255,255,255,0.1);
+  }
+}
+
+/* -------------------- style for sidebar ends -------------------- */
+/* -------------------- ------------------------ --------------------*/

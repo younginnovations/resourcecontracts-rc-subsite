@@ -37,13 +37,12 @@ class PageController extends BaseController
     public function about()
     {
         $page      = $this->page->get('about');
-        $page_name = 'about';
 
         $meta = [
-            'title' => 'About'
+            'title' => $page->title()
         ];
 
-        return view('page.master', compact('page', 'page_name', 'meta'));
+        return view('page.master', compact('page',  'meta'));
     }
 
     /**
@@ -54,14 +53,13 @@ class PageController extends BaseController
     public function contact()
     {
         $page      = $this->page->get('contact');
-        $page_name = 'contact';
 
         $meta = [
-            'title'       => 'Contact',
-            'description' => 'Please send your questions, comments, and feedback by email at ' . env('CONTACT_MAIL')
+            'title'       => $page->title(),
+            'description' => 'Please send your questions, comments, and feedback by email at ' . site()->contactEmail()
         ];
 
-        return view('page.master', compact('page', 'page_name', 'meta'));
+        return view('page.master', compact('page',  'meta'));
     }
 
     /**
@@ -71,15 +69,14 @@ class PageController extends BaseController
      */
     public function resources()
     {
-        $page      = $this->page->get('resources');
-        $page_name = 'resources';
+        $page      = $this->page->get('guides');
 
         $meta = [
-            'title'       => 'Resources',
+            'title'       => $page->title(),
             'description' => 'Guides and documents providing further information on reading, understanding, and assessing land contracts.'
         ];
 
-        return view('page.master', compact('page', 'page_name', 'meta'));
+        return view('page.master', compact('page',  'meta'));
     }
 
     /**
@@ -90,14 +87,14 @@ class PageController extends BaseController
     public function faqs()
     {
         $page      = $this->page->get('faqs');
-        $page_name = 'faqs';
 
         $meta = [
-            'title'       => 'FAQS',
-            'description' => 'Frequently Asked Questions about' . getInformation('categoryTitle') .', an online repository of publicly available contracts for large-scale land, agriculture, and forestry projects.'
+            'title'       => $page->title(),
+            'description' => 'Frequently Asked Questions about' . site()->meta('name') .', an online repository of publicly available
+            contracts for large-scale land, agriculture, and forestry projects.'
         ];
 
-        return view('page.master', compact('page', 'page_name', 'meta'));
+        return view('page.master', compact('page',  'meta'));
     }
 
     /**
@@ -108,14 +105,13 @@ class PageController extends BaseController
     public function glossary()
     {
         $page      = $this->page->get('glossary');
-        $page_name = 'glossary';
 
         $meta = [
-            'title'       => 'Glossary',
+            'title'       => $page->title(),
             'description' => 'A glossary of key terms to help navigate contracts and conduct analysis.'
         ];
 
-        return view('page.master', compact('page', 'page_name', 'meta'));
+        return view('page.master', compact('page',  'meta'));
 
     }
 
@@ -127,15 +123,12 @@ class PageController extends BaseController
     public function publishContracts()
     {
         $page      = $this->page->get('publish-contracts');
-        $page_name = 'publish-contracts';
-
         $meta = [
-            'title'       => 'Publish Contracts',
-            'description' => 'Learn more about disclosing contracts on' . getInformation('categoryTitle') .', and how we can support host governments, investors, and other relevant stakeholders in their efforts to disclose contracts.'
+            'title'       => $page->title(),
+            'description' => 'Learn more about disclosing contracts on' . site()->meta('name') .', and how we can support host governments, investors, and other relevant stakeholders in their efforts to disclose contracts.'
         ];
 
-        return view('page.master', compact('page', 'page_name', 'meta'));
-
+        return view('page.master', compact('page',  'meta'));
     }
 
 }

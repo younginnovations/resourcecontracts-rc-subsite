@@ -1,6 +1,6 @@
 <?php
 return [
-    'page'                       => 'page',
+    'page'                       => 'Page',
     'see_all'                    => 'See All',
     'loading_annotations'        => 'Loading Annotations',
     'annotations'                => 'Annotations',

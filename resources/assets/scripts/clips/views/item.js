@@ -124,10 +124,10 @@ var Item = React.createClass({
                               checkData={this.props.checkData}/>
                 </td>
                 <td>
-                    <a href={docUrl}>{this.props.item.get('name')}</a>
+                    {this.props.item.get('name')}
                 </td>
                 <td>
-                    {this.props.item.get('category')}
+                    <a href={docUrl}><strong>{this.props.item.get('category')}</strong></a>
                 </td>
                 <td>
                     {this.getShowText()}<br/>

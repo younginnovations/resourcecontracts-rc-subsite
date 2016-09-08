@@ -1,8 +1,6 @@
 @extends('layout.app-full')
 @section('css')
-    <link rel="stylesheet" href="{{ url('css/annotation/pages.css') }}">
-    <link rel="stylesheet" href="{{ url('css/annotation/pagination.css') }}"/>
-    <link rel="stylesheet" href="{{ url('css/annotation/annotator.css') }}">
+    <link rel="stylesheet" href="{{ url('css/contract.css') }}">
 @stop
 @section('content')
     <div class="panel panel-default">

@@ -36,22 +36,18 @@ class CountryController extends BaseController
      */
     public function index()
     {
-        $countries = $this->api->summary()->country_summary;
-
+        $countries   = $this->api->summary()->country_summary;
         $countryName = [];
         foreach ($countries as $country) {
-
-            $countryCode = trans('country.' . strtoupper($country->key));
+            $countryCode = trans('country.'.strtoupper($country->key));
             array_push($countryName, $countryCode);
         }
         $countryName = implode(',', $countryName);
 
-
         $meta = [
             'title'       => 'Countries',
-            'description' => getInformation('countriesDescription') . $countryName
+            'description' => site()->meta('country_descriptions').$countryName,
         ];
-
 
         return view('country.index', compact('meta'));
     }
@@ -61,6 +57,7 @@ class CountryController extends BaseController
      *
      * @param         $country
      * @param Request $request
+     *
      * @return \Illuminate\View\View
      */
     public function detail(Request $request, $country)
@@ -72,13 +69,10 @@ class CountryController extends BaseController
         if (!$contracts) {
             return abort(404);
         }
-
-        $countryName = trans('country.' . strtoupper($country));
-
-        $meta = [
+        $countryName = trans('country.'.strtoupper($country));
+        $meta        = [
             'title'       => $countryName,
-            'description' => getInformation('countryDescription') . $countryName
-
+            'description' => site()->meta('country_description').$countryName,
         ];
 
         return view('country.detail', compact('contracts', 'country', 'resources', 'currentPage', 'meta'));
