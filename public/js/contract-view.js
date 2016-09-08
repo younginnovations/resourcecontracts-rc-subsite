@@ -26380,20 +26380,17 @@ var MetadataView = React.createClass({displayName: "MetadataView",
         e.preventDefault();
         this.setState({showMoreText: !this.state.showMoreText});
     },
-    getResourceLang: function (resources) {
+    getResourceLang: function (resources, anchor) {
         var resLang = [];
         var resLength = resources.length;
         var resLang = _.map(resources, function (value, index) {
-            var link = app_url + '/resource/' + value;
-
-            if (langResource[value] && index != resLength - 1) {
-                return React.createElement('a', {href: app_url + "/resource/" + encodeURIComponent(value)}, langResource[value] + ' | ');
-            }
-            else if (langResource[value] && index == resLength - 1) {
-                return React.createElement('a', {href: app_url + "/resource/" + encodeURIComponent(value)}, langResource[value]);
-            }
-            else {
-                return React.createElement('a', {href: app_url + "/resource/" + encodeURIComponent(value)}, value);
+            var link = app_url + '/resource/' + encodeURIComponent(value);
+            var res = langResource[value] ? langResource[value] : value;
+            var separator = (index != resLength - 1) ? ' | ' : '';
+            if (anchor === true) {
+                return (React.createElement("span", null, React.createElement("a", {href: link}, res), separator));
+            } else {
+                return (React.createElement("nobr", null, React.createElement("nobr", null, res), React.createElement("nobr", null, separator)));
             }
         });
 
@@ -26414,34 +26411,11 @@ var MetadataView = React.createClass({displayName: "MetadataView",
 
             var ct = this.props.metadata.get("contract_type");
             var contractType = ct.map(function (contractType, i) {
-                if (i != ct.length - 1) {
-                    return React.createElement('a', {
-                        href: app_url + "/search?q=&contract_type%5B%5D=" + contractType,
-                        key: i
-                    }, contractType + ' | ');
-                } else {
-                    return React.createElement('a', {
-                        href: app_url + "/search?q=&contract_type%5B%5D=" + contractType,
-                        key: i
-                    }, contractType);
-                }
+                var link = app_url + "/search?q=&contract_type%5B%5D=" + contractType;
+                var separator = (i != ct.length - 1) ? ' | ' : '';
+                return (React.createElement("nobr", null, React.createElement("nobr", null, contractType), React.createElement("nobr", null, separator)));
             });
 
-            if (typeof ct === 'object') {
-                contractType = ct.map(function (contractType, i) {
-                    if (i != ct.length - 1) {
-                        return React.createElement('a', {
-                            href: app_url + "/search?q=&contract_type%5B%5D=" + contractType,
-                            key: i
-                        }, contractType + ' | ');
-                    } else {
-                        return React.createElement('a', {
-                            href: app_url + "/search?q=&contract_type%5B%5D=" + contractType,
-                            key: i
-                        }, contractType);
-                    }
-                });
-            }
             var re = new RegExp(' ', 'g');
 
             var note = this.props.metadata.get("note");
@@ -26493,24 +26467,22 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                         React.createElement("div", {className: "metadata-country"}, 
                             React.createElement("span", null, lang.country), 
                             React.createElement("span", null, 
-                                React.createElement("a", {href: countryLink}, getCountryName(this.props.metadata.get("country").code))
+                               getCountryName(this.props.metadata.get("country").code)
                             )
                         ), 
                         React.createElement("div", {className: "metadata-signature-year"}, 
                             React.createElement("span", null, lang.signature_year), 
                             React.createElement("span", null, 
-                                React.createElement("a", {href: sigYearLink}, this.props.metadata.get("year_signed") || "-")
+                                this.props.metadata.get("year_signed") || "-"
                             )
                         ), 
                         React.createElement("div", {className: "metadata-resource"}, 
                             React.createElement("span", null, lang.resource), 
-                            React.createElement("span", null, this.getResourceLang(this.props.metadata.get("resource")))
+                            this.getResourceLang(this.props.metadata.get("resource"), false)
                         ), 
                         React.createElement("div", {className: "metadata-type-contract"}, 
                             React.createElement("span", null, lang.type_contract), 
-                            React.createElement("span", null, 
-                               contractType
-                            )
+                            React.createElement("p", null, contractType)
                         ), 
                         React.createElement("div", {className: "metadata-ocid"}, 
                             React.createElement("span", null, lang.open_contracting_id), 
@@ -26523,7 +26495,11 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                         annexes_missing, 
                         pages_missing, 
                         React.createElement(AmlaUrl, {metadata: this.props.metadata}), 
-                        React.createElement(LandMatrixView, {metadata: this.props.metadata})
+                        React.createElement(LandMatrixView, {metadata: this.props.metadata}), 
+                        React.createElement("div", {className: "metadata-ocid"}, 
+                            React.createElement("p", null, React.createElement("span", null), React.createElement("span", null, lang.more_in), " ", React.createElement("a", {href: countryLink}, getCountryName(this.props.metadata.get("country").code))), 
+                            React.createElement("p", null, React.createElement("span", null), React.createElement("span", null, lang.more_in), " ", this.getResourceLang(this.props.metadata.get("resource"), true))
+                        )
                     )
                 )
             );

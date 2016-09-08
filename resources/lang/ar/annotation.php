@@ -66,6 +66,5 @@ return [
     'legislation'                => "تشريع",
     'african_mining'             => "في التعدين الإفريقي التشريع أطلس",
     'annotation_count'           => "الشروح",
+    'more_in'                    => 'أكثر في',
 ];
-
-

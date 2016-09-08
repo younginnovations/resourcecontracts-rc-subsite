@@ -67,5 +67,5 @@ return [
     'african_mining'             => "dans la législation minière africaine Atlas",
     'other'                      => 'Règles juridiques',
     'annotation_count'           => "annotations",
-
-];
+    'more_in'                    => 'Plus dans',
+];  
