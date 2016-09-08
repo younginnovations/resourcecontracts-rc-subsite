@@ -4,7 +4,7 @@ return [
     'see_all'                    => 'See All',
     'loading_annotations'        => 'Loading Annotations',
     'annotations'                => 'Annotations',
-    'annotations_excel'           => "MS EXCEL <br><i>Annotations Only</i>",
+    'annotations_excel'          => "MS EXCEL <br><i>Annotations Only</i>",
     'by_page'                    => 'By Page',
     'by_topic'                   => 'By Topic',
     'general'                    => 'General',
@@ -71,7 +71,5 @@ return [
     'corrupted_pdf'              => "Invalid or corrupted PDF file.",
     'unexpected_server'          => "Unexpected server response",
     'loading_error'              => "An error occurred while loading the PDF.",
-
+    'more_in'                    => 'More in',
 ];
-
-

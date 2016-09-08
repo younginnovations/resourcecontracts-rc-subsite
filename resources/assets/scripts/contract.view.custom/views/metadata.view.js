@@ -59,20 +59,17 @@ var MetadataView = React.createClass({
         e.preventDefault();
         this.setState({showMoreText: !this.state.showMoreText});
     },
-    getResourceLang: function (resources) {
+    getResourceLang: function (resources, anchor) {
         var resLang = [];
         var resLength = resources.length;
         var resLang = _.map(resources, function (value, index) {
-            var link = app_url + '/resource/' + value;
-
-            if (langResource[value] && index != resLength - 1) {
-                return React.createElement('a', {href: app_url + "/resource/" + encodeURIComponent(value)}, langResource[value] + ' | ');
-            }
-            else if (langResource[value] && index == resLength - 1) {
-                return React.createElement('a', {href: app_url + "/resource/" + encodeURIComponent(value)}, langResource[value]);
-            }
-            else {
-                return React.createElement('a', {href: app_url + "/resource/" + encodeURIComponent(value)}, value);
+            var link = app_url + '/resource/' + encodeURIComponent(value);
+            var res = langResource[value] ? langResource[value] : value;
+            var separator = (index != resLength - 1) ? ' | ' : '';
+            if (anchor === true) {
+                return (<span><a href={link}>{res}</a>{separator}</span>);
+            } else {
+                return (<nobr><nobr>{res}</nobr><nobr>{separator}</nobr></nobr>);
             }
         });
 
@@ -93,34 +90,11 @@ var MetadataView = React.createClass({
 
             var ct = this.props.metadata.get("contract_type");
             var contractType = ct.map(function (contractType, i) {
-                if (i != ct.length - 1) {
-                    return React.createElement('a', {
-                        href: app_url + "/search?q=&contract_type%5B%5D=" + contractType,
-                        key: i
-                    }, contractType + ' | ');
-                } else {
-                    return React.createElement('a', {
-                        href: app_url + "/search?q=&contract_type%5B%5D=" + contractType,
-                        key: i
-                    }, contractType);
-                }
+                var link = app_url + "/search?q=&contract_type%5B%5D=" + contractType;
+                var separator = (i != ct.length - 1) ? ' | ' : '';
+                return (<nobr><nobr>{contractType}</nobr><nobr>{separator}</nobr></nobr>);
             });
 
-            if (typeof ct === 'object') {
-                contractType = ct.map(function (contractType, i) {
-                    if (i != ct.length - 1) {
-                        return React.createElement('a', {
-                            href: app_url + "/search?q=&contract_type%5B%5D=" + contractType,
-                            key: i
-                        }, contractType + ' | ');
-                    } else {
-                        return React.createElement('a', {
-                            href: app_url + "/search?q=&contract_type%5B%5D=" + contractType,
-                            key: i
-                        }, contractType);
-                    }
-                });
-            }
             var re = new RegExp(' ', 'g');
 
             var note = this.props.metadata.get("note");
@@ -172,24 +146,22 @@ var MetadataView = React.createClass({
                         <div className="metadata-country">
                             <span>{lang.country}</span>
                             <span>
-                                <a href={countryLink}>{getCountryName(this.props.metadata.get("country").code)}</a>
+                               {getCountryName(this.props.metadata.get("country").code)}
                             </span>
                         </div>
                         <div className="metadata-signature-year">
                             <span>{lang.signature_year}</span>
                             <span>
-                                <a href={sigYearLink}>{this.props.metadata.get("year_signed") || "-"}</a>
+                                {this.props.metadata.get("year_signed") || "-"}
                             </span>
                         </div>
                         <div className="metadata-resource">
                             <span>{lang.resource}</span>
-                            <span>{this.getResourceLang(this.props.metadata.get("resource"))}</span>
+                            {this.getResourceLang(this.props.metadata.get("resource"), false)}
                         </div>
                         <div className="metadata-type-contract">
                             <span>{lang.type_contract}</span>
-                            <span>
-                               {contractType}
-                            </span>
+                            <p>{contractType}</p>
                         </div>
                         <div className="metadata-ocid">
                             <span>{lang.open_contracting_id}</span>
@@ -203,6 +175,10 @@ var MetadataView = React.createClass({
                         {pages_missing}
                         <AmlaUrl metadata={this.props.metadata}/>
                         <LandMatrixView metadata={this.props.metadata}/>
+                        <div className="metadata-ocid">
+                            <p><span></span><span>{lang.more_in}</span> <a href={countryLink}>{getCountryName(this.props.metadata.get("country").code)}</a></p>
+                            <p><span></span><span>{lang.more_in}</span> {this.getResourceLang(this.props.metadata.get("resource"), true)}</p>
+                        </div>
                     </div>
                 </div>
             );
