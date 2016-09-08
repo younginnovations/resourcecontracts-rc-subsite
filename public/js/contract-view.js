@@ -26454,6 +26454,17 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                 ));
             }
 
+            var countryBlock = '';
+
+            if(!isSite('country'))
+            {
+                countryBlock =(React.createElement("div", {className: "metadata-country"}, 
+                                    React.createElement("span", null, lang.country), 
+                                            React.createElement("span", null, 
+                                                React.createElement("a", {href: countryLink}, getCountryName(this.props.metadata.get("country").code))
+                                            )
+                                ));
+            }
             return (
                 React.createElement("div", {id: "metadata"}, 
                     React.createElement("div", {className: "note-wrapper"}, 
@@ -26464,12 +26475,7 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                         React.createElement("div", null, 
                             lang.metadata
                         ), 
-                        React.createElement("div", {className: "metadata-country"}, 
-                            React.createElement("span", null, lang.country), 
-                            React.createElement("span", null, 
-                               getCountryName(this.props.metadata.get("country").code)
-                            )
-                        ), 
+                        countryBlock, 
                         React.createElement("div", {className: "metadata-signature-year"}, 
                             React.createElement("span", null, lang.signature_year), 
                             React.createElement("span", null, 
@@ -27691,7 +27697,8 @@ var AnnotationItem = React.createClass({displayName: "AnnotationItem",
     },
     shallShowEllipse: function (text) {
         var words = (text + "").split(' ');
-        if (words.length >= this.state.maxWords) {
+        var margin = 5;
+        if (words.length >= this.state.maxWords + margin) {
             return true;
         }
         return false;
@@ -27751,7 +27758,7 @@ var AnnotationItem = React.createClass({displayName: "AnnotationItem",
                     l = true;
                 }
                 var article_reference = (annotation.get('article_reference') != '') ? annotation.get('article_reference') : '';
-                return (React.createElement(PageLink, {contractApp: self.props.contractApp, annotation: annotation, last: l, page: page, 
+                return (React.createElement(PageLink, {key: index, contractApp: self.props.contractApp, annotation: annotation, last: l, page: page, 
                                   article_reference: article_reference}))
             });
 
@@ -27999,13 +28006,13 @@ var DownloadUrl = React.createClass({displayName: "DownloadUrl",
                     React.createElement("div", {className: "social-share download-wrap"}, 
                         React.createElement("a", {href: "#", onClick: this.socialDropdown}, React.createElement("span", null, "share")), 
                         React.createElement("ul", {className: "dropdown-menu", style: socialStyle}, 
-                            React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
-                            React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")
+                            React.createElement("li", {className: "facebook"}, React.createElement("a", {className: "share-link", href: "#facebook", target: "_blank"}, "FB")
                             ), 
-                            React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T")), 
+                            React.createElement("li", {className: "google-plus"}, React.createElement("a", {className: "share-link", href: "#google", target: "_blank"}, "G+")
+                            ), 
+                            React.createElement("li", {className: "twitter"}, React.createElement("a", {className: "share-link", href: "#twitter", target: "_blank"}, "T")), 
                             React.createElement("li", {className: "email"}, React.createElement("a", {onClick: this.handleShowModal}, "1Email")
                             )
-
                         )
                     ), 
                     this.state.view.showModal ? React.createElement(Email, {handleHideModal: this.handleHideModal}) : null, 
@@ -28028,11 +28035,12 @@ var DownloadUrl = React.createClass({displayName: "DownloadUrl",
                     React.createElement("div", {className: "social-share dropdown-wrap"}, 
                         React.createElement("a", {href: "#", onClick: this.socialDropdown}, React.createElement("span", null, "share")), 
                         React.createElement("ul", {className: "dropdown-menu", style: socialStyle}, 
-                            React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
-                            React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")
+                            React.createElement("li", {className: "facebook"}, React.createElement("a", {className: "share-link", href: "#facebook", target: "_blank"}, "FB")
                             ), 
-                            React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T")), 
-                            React.createElement("li", {className: "email"}, React.createElement("a", {onClick: this.handleShowModal}, "2Email")
+                            React.createElement("li", {className: "google-plus"}, React.createElement("a", {className: "share-link", href: "#google", target: "_blank"}, "G+")
+                            ), 
+                            React.createElement("li", {className: "twitter"}, React.createElement("a", {className: "share-link", href: "#twitter", target: "_blank"}, "T")), 
+                            React.createElement("li", {className: "email"}, React.createElement("a", {onClick: this.handleShowModal}, "Email")
                             )
                         )
                     ), 
@@ -28055,10 +28063,11 @@ var DownloadUrl = React.createClass({displayName: "DownloadUrl",
                     React.createElement("div", {className: "social-share dropdown-wrap"}, 
                         React.createElement("a", {href: "#", onClick: this.socialDropdown}, React.createElement("span", null, "share")), 
                         React.createElement("ul", {className: "dropdown-menu", style: socialStyle}, 
-                            React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
-                            React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")
+                            React.createElement("li", {className: "facebook"}, React.createElement("a", {className: "share-link", href: "#facebook", target: "_blank"}, "FB")
                             ), 
-                            React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T")), 
+                            React.createElement("li", {className: "google-plus"}, React.createElement("a", {className: "share-link", href: "#google", target: "_blank"}, "G+")
+                            ), 
+                            React.createElement("li", {className: "twitter"}, React.createElement("a", {className: "share-link", href: "#twitter", target: "_blank"}, "T")), 
                             React.createElement("li", {className: "email"}, React.createElement("a", {onClick: this.handleShowModal}, "3Email")
                             )
                         )
@@ -28085,17 +28094,17 @@ var DownloadUrl = React.createClass({displayName: "DownloadUrl",
                     React.createElement("div", {className: "social-share dropdown-wrap"}, 
                         React.createElement("a", {href: "#", onClick: this.socialDropdown}, React.createElement("span", null, "share")), 
                         React.createElement("ul", {className: "dropdown-menu", style: socialStyle}, 
-                            React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  facebook_share + current_url, target: "_blank"}, "FB")), 
-                            React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  google_share + current_url, target: "_blank"}, "G+")
+                            React.createElement("li", {className: "facebook"}, React.createElement("a", {className: "share-link", href: "#facebook", target: "_blank"}, "FB")
                             ), 
-                            React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  twitter_share, target: "_blank"}, "T")), 
+                            React.createElement("li", {className: "google-plus"}, React.createElement("a", {className: "share-link", href: "#google", target: "_blank"}, "G+")
+                            ), 
+                            React.createElement("li", {className: "twitter"}, React.createElement("a", {className: "share-link", href: "#twitter", target: "_blank"}, "T")), 
                             React.createElement("li", {className: "email"}, React.createElement("a", {onClick: this.handleShowModal}, "Email")
                             )
                         )
                     ), 
                     this.state.view.showModal ?
                         React.createElement(Email, {handleHideModal: this.handleHideModal}) : null, 
-
                     React.createElement(ClipSwitchButton, null)
                 )
             );
@@ -28317,16 +28326,15 @@ var ClipCount = React.createClass({displayName: "ClipCount",
 
 var ClipSwitchButton = React.createClass({displayName: "ClipSwitchButton",
     render: function () {
-        if(isClipOn == true)
-        {
+        if (isClipOn == true) {
             return (
-             React.createElement("div", {classNames: "pull-left"}, 
-                React.createElement("button", {className: "clip-btn", id: "on-annotation"}, "On")
-            )
-        );
+                React.createElement("div", {classNames: "pull-left"}, 
+                    React.createElement("button", {className: "clip-btn", id: "on-annotation"}, "On")
+                )
+            );
         }
-        else{
-            return(React.createElement("div", null));
+        else {
+            return (React.createElement("div", null));
         }
 
     }

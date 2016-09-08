@@ -93,13 +93,13 @@ var DownloadUrl = React.createClass({
                     <div className="social-share download-wrap">
                         <a href="#" onClick={this.socialDropdown}><span>share</span></a>
                         <ul className="dropdown-menu" style={socialStyle}>
-                            <li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
-                            <li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a>
+                            <li className="facebook"><a className="share-link" href='#facebook' target="_blank">FB</a>
                             </li>
-                            <li className="twitter"><a href={ twitter_share } target="_blank">T</a></li>
+                            <li className="google-plus"><a className="share-link" href='#google' target="_blank">G+</a>
+                            </li>
+                            <li className="twitter"><a className="share-link" href='#twitter' target="_blank">T</a></li>
                             <li className="email"><a onClick={this.handleShowModal}>1Email</a>
                             </li>
-
                         </ul>
                     </div>
                     {this.state.view.showModal ? <Email handleHideModal={this.handleHideModal}/> : null}
@@ -122,11 +122,12 @@ var DownloadUrl = React.createClass({
                     <div className="social-share dropdown-wrap">
                         <a href="#" onClick={this.socialDropdown}><span>share</span></a>
                         <ul className="dropdown-menu" style={socialStyle}>
-                            <li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
-                            <li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a>
+                            <li className="facebook"><a className="share-link" href='#facebook' target="_blank">FB</a>
                             </li>
-                            <li className="twitter"><a href={ twitter_share } target="_blank">T</a></li>
-                            <li className="email"><a onClick={this.handleShowModal}>2Email</a>
+                            <li className="google-plus"><a className="share-link" href='#google' target="_blank">G+</a>
+                            </li>
+                            <li className="twitter"><a className="share-link" href='#twitter' target="_blank">T</a></li>
+                            <li className="email"><a onClick={this.handleShowModal}>Email</a>
                             </li>
                         </ul>
                     </div>
@@ -149,10 +150,11 @@ var DownloadUrl = React.createClass({
                     <div className="social-share dropdown-wrap">
                         <a href="#" onClick={this.socialDropdown}><span>share</span></a>
                         <ul className="dropdown-menu" style={socialStyle}>
-                            <li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
-                            <li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a>
+                            <li className="facebook"><a className="share-link" href='#facebook' target="_blank">FB</a>
                             </li>
-                            <li className="twitter"><a href={ twitter_share } target="_blank">T</a></li>
+                            <li className="google-plus"><a className="share-link" href='#google' target="_blank">G+</a>
+                            </li>
+                            <li className="twitter"><a className="share-link" href='#twitter' target="_blank">T</a></li>
                             <li className="email"><a onClick={this.handleShowModal}>3Email</a>
                             </li>
                         </ul>
@@ -179,17 +181,17 @@ var DownloadUrl = React.createClass({
                     <div className="social-share dropdown-wrap">
                         <a href="#" onClick={this.socialDropdown}><span>share</span></a>
                         <ul className="dropdown-menu" style={socialStyle}>
-                            <li className="facebook"><a href={ facebook_share + current_url} target="_blank">FB</a></li>
-                            <li className="google-plus"><a href={ google_share + current_url} target="_blank">G+</a>
+                            <li className="facebook"><a className="share-link" href='#facebook' target="_blank">FB</a>
                             </li>
-                            <li className="twitter"><a href={ twitter_share } target="_blank">T</a></li>
+                            <li className="google-plus"><a className="share-link" href='#google' target="_blank">G+</a>
+                            </li>
+                            <li className="twitter"><a className="share-link" href='#twitter' target="_blank">T</a></li>
                             <li className="email"><a onClick={this.handleShowModal}>Email</a>
                             </li>
                         </ul>
                     </div>
                     {this.state.view.showModal ?
                         <Email handleHideModal={this.handleHideModal}/> : null}
-
                     <ClipSwitchButton/>
                 </div>
             );
@@ -411,16 +413,15 @@ var ClipCount = React.createClass({
 
 var ClipSwitchButton = React.createClass({
     render: function () {
-        if(isClipOn == true)
-        {
+        if (isClipOn == true) {
             return (
-             <div classNames="pull-left">
-                <button className="clip-btn" id="on-annotation">On</button>
-            </div>
-        );
+                <div classNames="pull-left">
+                    <button className="clip-btn" id="on-annotation">On</button>
+                </div>
+            );
         }
-        else{
-            return(<div></div>);
+        else {
+            return (<div></div>);
         }
 
     }

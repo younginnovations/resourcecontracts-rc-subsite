@@ -1,0 +1,644 @@
+/* ----------- media queries here after ------------- */
+
+@media all and(min-width: 380px) {
+  .tagline span {
+    font-size: 64px;
+    line-height: 82px;
+  }
+
+  .row-top-content {
+    padding: 152px 40px 200px;
+  }
+}
+
+@media all and(max-width: 380px) {
+  .navbar-header {
+    width: 100%;
+    border-right: 0;
+    border-bottom: 1px solid rgba(220, 223, 226, 0.7);
+    border-bottom: 1px solid rgb(220, 223, 226);
+  }
+}
+
+@media all and(min-width: 480px) {
+  .filter-label {
+    padding: 6px 24px 7px 20px;
+  }
+  .filter-wrapper > {
+    .col-lg-2 {
+      border-top: 0;
+      border-left: 1px solid $color_silver_approx;
+      border-left: 1px solid $color_silver_50_approx;
+      padding: 0;
+    }
+    .col-xs-6:first-child {
+      width: 50%;
+    }
+  }
+  .country-list-wrap .col-sm-6 {
+    &:nth-child(n) {
+      margin-top: 60px;
+    }
+    &:nth-child(-n+1) {
+      margin-top: 0;
+    }
+  }
+}
+
+@media all and(min-width: 699px) {
+  .panel-top-content > .pull-left {
+    width: 60%;
+  }
+  .breadcrumb-wrapper li:last-of-type {
+    width: 69%;
+  }
+  .panel-top-content {
+    padding: 0 36px;
+  }
+}
+
+@media all and(min-width: 768px) {
+  .panel-top-content > .pull-left {
+    width: 70%;
+  }
+  .contract-search-form {
+    width: 634px;
+    .form-control {
+      width: 410px;
+      //Instead of the line below you could use @include border-top-right-radius($radius)
+      border-top-right-radius: 0;
+      //Instead of the line below you could use @include border-bottom-right-radius($radius)
+      border-bottom-right-radius: 0;
+    }
+  }
+  .country-detail-wrapper {
+    display: inline-block;
+  }
+  .btn-search, .btn-search:hover, .btn-search:focus {
+    width: 200px;
+  }
+  .search-page-input-wrapper button {
+    margin-top: 24px;
+  }
+  .country-list-wrap {
+    .col-md-6 {
+      &:nth-child(-n+4) {
+        margin-top: 60px;
+      }
+      &:nth-child(-n+2) {
+        margin-top: 0;
+      }
+    }
+    .col-lg-2:nth-child(-n+3) {
+      margin-top: 0;
+    }
+    .col-lg-3:nth-child(-n+4) {
+      margin-top: 0;
+    }
+  }
+  .contract-number-wrap {
+    right: 36px;
+  }
+  .panel-contract-wrap {
+    li {
+      border-left: 1px solid $color_cararra_approx;
+      border-left: 1px solid $color_cararra_70_approx;
+      border-bottom: 0;
+    }
+    .panel-body:not(.panel-col3-wrap) li:nth-last-child(-n+2) {
+      border-bottom: 0;
+    }
+    .panel-col3-wrap li:last-of-type {
+      border-bottom: 0;
+    }
+  }
+  .tagline span {
+    font-size: 75px;
+  }
+  #resources > .col-lg-4:nth-child(-n+2) {
+    padding-top: 20px;
+  }
+  .category-wrap li {
+    &:nth-child(odd) {
+      padding-left: 0;
+    }
+    &:nth-child(-n+2) {
+      padding-top: 0;
+    }
+  }
+  .panel-annotation-list-wrap .col-md-8 {
+    float: right;
+    width: calc(100% - 290px);
+  }
+
+  .annotation-category-cluster {
+    display: block;
+  }
+}
+
+
+@media all and (min-width: 1300px){
+  .section-wrap {
+    min-height: 610px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .petroleum-mineral{
+    width: 920px;
+  }
+
+
+  .petroleum-list {
+    left: 820px;
+    bottom: auto;
+    left: calc(50% + 120px);
+    top: calc(50% - 145px);
+    //left: calc(920px - 195px);
+  }
+
+  .hero-image .search-form{
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 1110px) and (min-width: 992px){
+  .petroleum-mineral {
+    width: 560px;
+    padding: 140px 180px 84px 31px;
+
+    .large-title{
+      font-size: 42px;
+      line-height: 50px;
+    }
+  }
+
+  .petroleum-list{
+    left: 505px;
+  }
+}
+
+@media all and(min-width: 992px) {
+
+  .navbar-right {
+    border-top: 0;
+  }
+  .panel-annotation-wrap {
+    min-height: 285px;
+  }
+  .annotation-block {
+    min-height: 184px;
+  }
+  .view-all-annotations {
+    position: absolute;
+  }
+  .country-list-wrap {
+    .col-md-6:nth-child(-n+2) {
+      margin-top: 0;
+    }
+    .col-md-3:nth-child(-n+4) {
+      margin-top: 0;
+    }
+  }
+  .contract-number-wrap {
+    //right: 102px;
+  }
+  .footer-note {
+    padding: 0 15px 10px;
+  }
+  .country-contract-wrap {
+    border-right: 1px solid $concrete;
+  }
+  .content-wrap #title {
+    padding-left: 26px;
+  }
+}
+
+@media all and(min-width: 1200px) {
+  .country-list-wrap {
+    .col-lg-2:nth-child(-n+6) {
+      margin-top: 0;
+    }
+    .col-lg-3:nth-child(-n+4) {
+      margin-top: 0;
+    }
+  }
+  .panel-contract-wrap {
+    margin-bottom: 0;
+  }
+  #resources > .col-lg-4:nth-child(-n+3) {
+    padding-top: 20px;
+  }
+}
+
+@media all and(min-width: 1500px) {
+  .footer-note {
+    max-width: 940px;
+  }
+}
+
+@media all and(max-width: 767px) {
+  table {
+    display: block;
+    tr {
+      border: 1px solid $color_gray_nurse_approx !important;
+      margin-bottom: 15px;
+      box-shadow: 2px 2px 40px -20px rgba(0,0,0,0.6);
+      border-radius: 8px;
+      &:only-child {
+        border: 0;
+      }
+      td {
+        display: block;
+        border: none;
+        position: relative;
+        padding-left: 50% !important;
+        border-top: 1px solid $color_wild_sand_approx !important;
+        &:before {
+          position: absolute;
+          top: 17px;
+          left: 15px;
+          width: 45%;
+          padding-right: 10px;
+          white-space: nowrap;
+          font: 12px $font_1;
+          text-transform: uppercase;
+          color: $color_cape_cod_60_approx;
+        }
+        &:empty {
+          display: none;
+        }
+        &:nth-of-type(1):before {
+          content: "";
+        }
+        &:nth-of-type(2):before {
+          content: "Document";
+        }
+        &:nth-of-type(3):before {
+          content: "";
+        }
+        &:nth-of-type(4):before {
+          content: "Country";
+        }
+        &:nth-of-type(5):before {
+          content: "Year";
+        }
+        &:nth-of-type(6):before {
+          content: "Resource Type";
+        }
+        &:nth-of-type(7):before {
+          content: "Contract Type";
+        }
+      }
+    }
+    td:first-child {
+      overflow: hidden;
+    }
+  }
+  thead {
+    display: block;
+    tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+  }
+  tbody {
+    display: block;
+  }
+  th {
+    display: block;
+  }
+
+  tr {
+    display: block;
+  }
+  .annotate-text {
+    padding-left: 20px !important;
+    clear: both;
+  }
+  .table > {
+    tbody > tr > {
+      td {
+        // @extend %extend_31;
+        min-height: 51px;
+      }
+      th {
+        // @extend %extend_31;
+      }
+    }
+  }
+  .table-contract td {
+    &:first-child {
+      background-position: 36px 17px;
+    }
+    &:nth-child(2) > a {
+      background: $url_5 no-repeat 0 4px;
+      padding-left: 20px;
+      display: inline-block;
+    }
+  }
+  .table-contract-list input[type="checkbox"] {
+    margin-left: -20px;
+    margin-right: 5px;
+  }
+  .country-contract-wrap td {
+    &:nth-of-type(1):before {
+      content: "";
+    }
+    &:nth-of-type(2):before {
+      content: "Document";
+    }
+    &:nth-of-type(4):before {
+      content: "Year";
+    }
+    &:nth-of-type(3):before {
+      content: "";
+    }
+    &:nth-of-type(6):before {
+      content: "Resource Type";
+    }
+    &:nth-of-type(6):before {
+      content: "Contract Type";
+    }
+  }
+  .search-input-wrapper .col-lg-12 {
+    .col-lg-4 {
+      margin-top: 25px;
+    }
+    .col-xs-6:last-child {
+      //margin-top: 10px;
+    }
+  }
+}
+
+@media all and (max-width: 500px){
+  #print-clip-filter,#save-clipping{
+    display: none;
+  }
+}
+
+@media (min-width: 800px) {
+  #table-annotation {
+    padding: 0;
+  }
+}
+
+
+@media all and(max-width: 480px) {
+  .filter-wrapper > .col-lg-2 {
+    display: none;
+  }
+}
+
+
+@media all and(max-width: 551px) {
+
+  .contract-breadcrumb-wrapper {
+    margin-top: -70px;
+    margin-left: 60px;
+  }
+  .contract-search-number-wrap {
+    top: auto;
+  }
+  .advance-filter-wrapper {
+    //margin-top: 47px;
+    min-height: 135px;
+  }
+  .country-detail-wrapper {
+    //padding-top: 60px;
+  }
+  .country-contract-wrap .download-csv {
+    right: 10px;
+    top: -4px;
+  }
+  .contract-panel-title {
+    margin-top: 26px;
+  }
+
+  .search-input-wrapper .col-lg-12 .col-lg-4 {
+    float: none;
+    clear: both;
+  }
+}
+
+@media all and(min-width: 1200px) and(max-width: 1300px) {
+  .search-input-wrapper .col-lg-2 {
+    width: 20%;
+  }
+}
+
+
+.search-input-wrapper{
+  .col-lg-12{
+    max-width: 960px;
+  }
+}
+
+@media all and (max-width: 1024px) {
+  .input-wrapper label{
+    font-size: 13px;
+    line-height: 19px;
+  }
+}
+
+@media (min-width: 768px){
+  .search-input-wrapper .col-lg-12{
+    max-width: 700px;
+  }
+}
+
+@media (min-width: 1024px){
+  .search-input-wrapper .col-lg-12{
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1530px){
+  .search-input-wrapper .col-lg-12{
+    max-width: 1400px;
+  }
+}
+
+@media (min-width: 768px){
+  .page-search .filter-wrapper{
+    min-height: 0 !important;
+    border-bottom: none;
+  }
+}
+
+@media (max-width: 768px){
+  .hide--small-screen{
+    display: none;
+  }
+
+  nav .form-group.hide--small-screen{
+    display: block;
+  }
+
+  nav .search-input-wrapper .col-lg-12 .btn-form-reset{
+    margin-top: 15px;
+  }
+
+  .right-header-section,.search-input-wrapper{
+    width: 100% !important;
+    clear: both;
+    float: none;
+  }
+
+  .contract-number-wrap {
+    width: 100%;
+    border-radius: 0;
+    border: 0;
+    left: 0;
+    top: 129px;
+    height: auto;
+    padding: 5px;
+    background: #f3f3f3;
+    border-bottom: 1px solid #e7e9eb;
+
+    span {
+      display: inline-block;
+      font-size: 22px;
+    }
+  }
+
+  .contract-number-wrap{
+    display: block !important;
+    z-index: 88;
+  }
+
+  .country-list-wrap{
+    padding: 40px 0 30px  !important;
+  }
+
+  .page-countries,.page-resource,.page-contracts{
+    .contract-number-wrap {
+      position: static;
+      top: auto;
+      left: auto;
+      right: auto;
+    }
+  }
+
+  .page-countries,.page-resource {
+    .attached-top-wrapper {
+      padding-bottom: 40px;
+      border-bottom: solid 1px  rgba(188, 188, 188, 0.5);
+    }
+  }
+
+  .page-countries{
+    .download-csv,.filter-country-wrap ~ .download-csv {
+      right: 20px;
+      bottom: -105px;
+    }
+  }
+
+  .page-resource{
+    .attached-top-wrapper .download-csv{
+      bottom: -22px;
+      right: 20px;
+    }
+  }
+
+  .relative--small-screen{
+    position: relative;
+    .contract-number-wrap{
+      top: 0;
+    }
+  }
+
+  .advance-filter-wrapper{
+    position: relative;
+    padding-top: 44px;
+  }
+
+  .page-search .download-csv {
+    right: 36px;
+  }
+
+  #countries{
+    padding: 30px 0 !important;
+  }
+
+  .country-list-wrap .col-lg-2, .country-list-wrap .col-lg-3 {
+    margin-top: 20px;
+    min-height: 140px;
+    display: inline-block;
+    float: none;
+    width: 49%;
+  }
+}
+
+@media (max-width: 800px){
+  .search-list-wrapper {
+    margin-top: 40px;
+    border-top: solid 1px #eaeaea;
+    padding-top: 0;
+  }
+
+  .page-clip .action-btn {
+    margin-right: 0;
+  }
+
+  #clip-annotation-list {
+    padding-top: 15px;
+  }
+}
+
+@media  all and (max-width: 600px) {
+  .download-dropdown ul{
+    left: auto;
+    right: 0;
+  }
+}
+
+@media all and (max-width: 480px){
+
+  .navbar-right{
+    padding-left: 15px;
+  }
+
+  .btn-navbar-search,
+  .btn-navbar-search:hover, .btn-navbar-search:active{
+    margin: 18px 0;
+  }
+
+  .search-form .form-control{
+    width: calc(100% - 26px);
+    padding: 20px 0;
+  }
+
+  .search-input-wrapper{
+    top: 57px;
+    padding: 20px 0;
+
+    .col-lg-12{
+      padding: 0;
+    }
+  }
+
+  .table > tbody > tr td{
+    padding-right: 0;
+  }
+
+  .filter-country-wrap {
+    .form-group{
+      padding: 0;
+    }
+
+    .search-form input{
+      padding: 15px 2px;
+      width: calc(100% - 43px);
+    }
+  }
+
+  .btn-filter-search{
+    background: url(#{$img-path}/ic-sprite.svg) no-repeat -356px -398px;
+    height: 20px;
+    margin-top: 12px;
+    margin-left: 15px;
+  }
+
+}

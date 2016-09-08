@@ -34,7 +34,7 @@ return [
     'less'               => "less",
     'more'               => "more",
     'page'               => "Page",
-    'emial'              => "Email",
+    'email'              => "Email",
     'subjectClip'        => "Clipped Annotations",
     'sendEmail'          => "Send Email",
     'shareEmail'         => "Share via email",
@@ -55,7 +55,5 @@ return [
     "all_clip"           => "All Clips",
     'view_all_clips'     => "View Clips",
     "all_clips"          => "All Clips",
-    'shareViaEmail'         => "Share via email",
-
-
+    'shareViaEmail'      => "Share via email",
 ];

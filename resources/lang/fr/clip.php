@@ -34,7 +34,7 @@ return [
     'less'               => "Moins",
     'more'               => "plus",
     'page'               => "Page",
-    'emial'              => "Email",
+    'email'              => "Email",
     'subjectClip'        => "Coupé Annotations",
     'sendEmail'          => "Envoyer Email",
     'shareEmail'         => "Partager par emaill",
@@ -52,9 +52,8 @@ return [
     'clipAllAnnotations' => "Clips toutes les annotations",
     'offClip'            => "De",
     'onClip'             => "Sur",
+    "all_clip"           => "Tout clip",
     'view_all_clips'     => "Voir Clips",
     "all_clips"          => "Tous les clips",
-    'shareViaEmail'      => "Partager par email"
-
-
+    'shareViaEmail'      => "Partager par email",
 ];

@@ -12,7 +12,7 @@ return [
     'fiscal'                     => "مالي",
     'operations'                 => "عمليات",
     'social'                     => "إجتماعي",
-    'other'                      => "غير ذلك",
+    'legal_rules'                => 'Legal Rules',
     'no_annotation_msg'          => "لا شروح خاصّة بهذا العقد",
     'metadata'                   => "بيانات وصفيّة",
     'see_summary'                => "عرض للملخّص",
@@ -65,7 +65,12 @@ return [
     'see'                        => "يرى",
     'legislation'                => "تشريع",
     'african_mining'             => "في التعدين الإفريقي التشريع أطلس",
+    'other'                      => "غير ذلك",
     'annotation_count'           => "الشروح",
+    'missing_pdf'                => "في عداد المفقودين ملف PDF .",
+    'corrupted_pdf'              => "تالفة أو غير صالحة ملف PDF .",
+    'unexpected_server'          => "استجابة الخادم غير متوقعة",
+    'loading_error'              => "حدث خطأ أثناء تحميل PDF .",
     'more_from'                  => 'اكثر من',
-    'more_for'                   => 'أكثر ل'
+    'more_for'                   => 'أكثر ل',
 ];

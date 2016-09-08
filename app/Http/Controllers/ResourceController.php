@@ -36,26 +36,19 @@ class ResourceController extends BaseController
      */
     public function index()
     {
-        $resources = $this->api->allCountries();
-        $resources = $resources->results;
-
+        $resources    = $this->api->allCountries();
+        $resources    = $resources->results;
         $resourceList = $this->api->summary()->resource_summary;
-
         $resourceName = [];
-
         foreach ($resourceList as $resource) {
-
             $resourceCode = $resource->key;
             array_push($resourceName, $resourceCode);
         }
-
         $resourceName = implode(',', $resourceName);
-
-        $meta = [
+        $meta         = [
             'title'       => 'Resources',
-            'description' => getInformation('resourcesDescription') . $resourceName
+            'description' => site()->meta('resource_descriptions').$resourceName,
         ];
-
 
         foreach ($resources as &$country) {
             $country->name = trans('country')[strtoupper($country->code)];
@@ -69,6 +62,7 @@ class ResourceController extends BaseController
      *
      * @param Request $request
      * @param         $resource
+     *
      * @return \Illuminate\View\View
      */
     public function detail(Request $request, $resource)
@@ -78,16 +72,16 @@ class ResourceController extends BaseController
         $filter      = ['resource' => $resource, 'from' => $currentPage, 'sort_by' => $request->get('sortby'), 'order' => $request->get('order'), 'all'=>$request->get('all','0'),];
         $contracts   = $this->api->allContracts($filter);
         $countries   = $this->api->getCountryByResource($filter);
+
         if (!$contracts) {
             return abort(404);
         }
 
         $meta = [
-            'title'       => trans('resources.' . $resource),
-            'description' => getInformation('resourceDescription') . $resource
+            'title'       => trans('resources.'.$resource),
+            'description' => site()->meta('resource_description').$resource,
 
         ];
-
 
         return view('resource.detail', compact('contracts', 'resource', 'countries', 'currentPage', 'meta'));
     }

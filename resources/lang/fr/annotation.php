@@ -1,6 +1,6 @@
 <?php
 return [
-    'page'                       => "page",
+    'page'                       => "Page",
     'see_all'                    => "Voir tout",
     'loading_annotations'        => "chargement des annotations en cours ",
     'annotations'                => "Annotations ",
@@ -66,6 +66,11 @@ return [
     'legislation'                => "Législation",
     'african_mining'             => "dans la législation minière africaine Atlas",
     'other'                      => 'Règles juridiques',
+    'annotation_count'           => "annotations",
+    'missing_pdf'                => "Manquant fichier PDF .",
+    'corrupted_pdf'              => "fichier PDF non valide ou corrompu .",
+    'unexpected_server'          => "Réponse inattendue du serveur",
+    'loading_error'              => "Une erreur est survenue lors du chargement du PDF .",
     'more_from'                  => 'Plus de',
-    'more_for'                   => 'Plus de'
+    'more_for'                   => 'Plus de',
 ];

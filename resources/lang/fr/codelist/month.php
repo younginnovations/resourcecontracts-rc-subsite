@@ -1,7 +1,5 @@
 <?php
-
-return[
-
+return [
     "January"   => "Janvier",
     "February"  => "Février",
     "March"     => "Mars",

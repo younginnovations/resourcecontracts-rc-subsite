@@ -2,7 +2,6 @@
 
 use Illuminate\Contracts\Filesystem\Factory as Filesystem;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 
 /**
  * Class ImageService
@@ -10,8 +9,6 @@ use Illuminate\Support\Facades\App;
  */
 class ImageService
 {
-    protected $minWidth = 960;
-    protected $minHeight = 500;
     /**
      * @var Request
      */
@@ -27,42 +24,117 @@ class ImageService
      */
     public function __construct(Request $request, Filesystem $filesystem)
     {
-        $this->request = $request;
+        $this->request    = $request;
         $this->filesystem = $filesystem;
     }
 
     /**
-     * Get Bg Image Name
+     * Get Image Name
+     *
+     * @param        $type
+     * @param string $ext
      *
      * @return string
+     * @internal param $type
      */
-    function getName()
+    function getName($type, $ext = 'jpg')
     {
-        $fileName = env('CATEGORY') . '-bg.jpg';
+        $fileName = site()->getSiteKey().'/'.$type.'.'.$ext;
 
         return $fileName;
     }
 
     /**
+     * Upload Background Image.
+     * @return bool
+     * @throws \Exception
+     */
+    function upload_favicon()
+    {
+        $type                 = 'favicon';
+        $details              = [];
+        $details['fileName']  = $this->getName($type, 'ico');
+        $details['minWidth']  = 9;
+        $details['minHeight'] = 5;
+
+        return $this->upload($details);
+    }
+
+    /**
+     * Upload Main Background Image.
+     * @return bool
+     * @throws \Exception
+     */
+    function upload_bg()
+    {
+        $type                 = 'bg';
+        $details              = [];
+        $details['fileName']  = $this->getName($type);
+        $details['minWidth']  = 960;
+        $details['minHeight'] = 500;
+
+        return $this->upload($details);
+    }
+
+    /**
+     * Upload Intro Section Background Image.
+     * @return bool
+     * @throws \Exception
+     */
+    function upload_intro_bg()
+    {
+        $type                 = 'intro_bg';
+        $details              = [];
+        $details['fileName']  = $this->getName($type);
+        $details['minWidth']  = 1024;
+        $details['minHeight'] = 200;
+
+        return $this->upload($details);
+    }
+
+    /**
+     * Upload Sidebar Image.
+     * @return bool
+     * @throws \Exception
+     */
+    function upload_sidebar()
+    {
+        $type                 = 'sidebar';
+        $details              = [];
+        $details['fileName']  = $this->getName($type);
+        $details['minWidth']  = 200;
+        $details['minHeight'] = 100;
+
+        return $this->upload($details);
+    }
+
+    /**
      * Upload Image
+     *
+     * @param $details
      *
      * @return bool
      * @throws \Exception
      */
-    function upload()
+    function upload($details)
     {
         if ($this->request->hasFile('image') && $this->request->file('image')->isValid()) {
-            if (in_array(strtolower($this->request->file('image')->getClientOriginalExtension()) , ['jpg','jpeg'])) {
-                $fileName = $this->getName();
+            if (in_array(
+                strtolower($this->request->file('image')->getClientOriginalExtension()),
+                ['jpg', 'jpeg', 'png', 'gif', 'ico']
+            )) {
+                $fileName = $details['fileName'];
                 list($width, $height) = getimagesize($this->request->file('image'));
 
-                if ($width >= $this->minWidth && $height >= $this->minHeight) {
-                    $this->filesystem->disk('s3')->put($fileName, file_get_contents($this->request->file('image')), 'public');
-                }else{
-                    throw new \Exception(sprintf('Invalid image size (%sX%s px).',$width, $height));
+                if ($width >= $details['minWidth'] && $height >= $details['minHeight']) {
+                    return $this->filesystem->disk('s3')->put(
+                        $fileName,
+                        file_get_contents($this->request->file('image')),
+                        'public'
+                    );
+                } else {
+                    throw new \Exception(sprintf('Invalid image size (%sX%s px).', $width, $height));
                 }
-
-               return true;
             }
 
             throw new \Exception('Invalid file Format. Only jpeg format supported');
@@ -72,18 +144,23 @@ class ImageService
     }
 
     /**
-     * Get Home Page Background Image Url
+     * Get Image URL.
      *
-     * @return string
+     * @param        $type
+     * @param string $ext
+     *
+     * @return mixed
      */
-    public function getHomePageImageUrl()
+    public function getImageUrl($type, $ext = 'jpg')
     {
-        return $this->filesystem->disk('s3')->getDriver()
-                                ->getAdapter()
-                                ->getClient()
-                                ->getObjectUrl(env('AWS_BUCKET'), $this->getName());
+        $url = '';
+        if ($this->filesystem->disk('s3')->exists($this->getName($type, $ext))) {
+            $url = $this->filesystem->disk('s3')->getDriver()
+                                    ->getAdapter()
+                                    ->getClient()
+                                    ->getObjectUrl(env('AWS_BUCKET'), $this->getName($type, $ext));
+        }
+
+        return $url;
     }
-
-
-
 }
