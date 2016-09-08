@@ -80,7 +80,6 @@ class OptionService
                 return $this->option->select('value')->where('key', $key)->first();
             }
         );
-
         if (empty($option)) {
             return null;
         }

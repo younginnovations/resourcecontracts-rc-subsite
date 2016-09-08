@@ -18,6 +18,11 @@ nav.navbar {
   clear: both;
   .navbar-header {
     width: 145px;
+
+    .navbar-brand, .navbar-brand:hover{
+      font-size: 15px;
+      margin: 0;
+    }
   }
 
   .navbar-right {

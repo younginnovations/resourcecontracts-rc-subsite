@@ -130,6 +130,7 @@ config(
         ],
         'localisation' => true,
         'clip'         => false,
+
     ]
 );
 

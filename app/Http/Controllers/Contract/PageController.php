@@ -34,7 +34,11 @@ class PageController extends BaseController
      *
      * @param         $contractId
      *
+<<<<<<< HEAD
      * @return \Symfony\Component\HttpFoundation\Response
+=======
+     * @return string
+>>>>>>> 934-UIrefactor merged with clip file and olc ui update
      */
     public function getText($contractId)
     {
@@ -49,7 +53,7 @@ class PageController extends BaseController
      *
      * @param         $contractId
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return string
      */
     public function search($contractId)
     {
@@ -59,7 +63,6 @@ class PageController extends BaseController
     /**
      * Get Annotations
      *
-     * @return \Symfony\Component\HttpFoundation\Response
      * @return string
      */
     public function annotations()

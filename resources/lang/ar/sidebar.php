@@ -7,4 +7,5 @@ return [
     'glossary'         => 'قاموس مصطلحات',
     'guides'           => 'أدلة',
     'view_all'         => "عرض شامل ",
+
 ];

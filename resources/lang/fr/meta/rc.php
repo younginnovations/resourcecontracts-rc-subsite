@@ -10,4 +10,5 @@ return [
     'tagline'               => '<p class="repo-description">Un répertoire des </p> <div class="large-title"><span>Petroleum &amp; <div>Contrats miniers</div> </span></div>',
     'intro_text'            => 'Dans l\'extraction et l\'exploitation des ressources minérales et pétrolières , la relation entre les gouvernements et le pétrole , le gaz et les sociétés minières est défini par les contrats, les ententes , les baux et concessions .',
     'about'                 => 'A propos de ResourceContracts',
+
 ];

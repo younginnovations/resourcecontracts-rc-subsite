@@ -9,4 +9,5 @@ return [
     'intro_text'            => 'In the extraction and exploitation of mineral and petroleum resources, the relationship between governments and oil, gas and mining companies is defined by contracts, agreements, leases and concessions.',
     'associated_documents'  => 'and associated documents',
     'about'                 => 'About',
+
 ];

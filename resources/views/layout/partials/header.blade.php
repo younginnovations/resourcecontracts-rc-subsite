@@ -1,5 +1,6 @@
 <?php $local = app('App\Http\Services\LocalizationService'); ?>
 @include('layout.partials.clip')
+
 <div class="row title-wrap clearfix">
     <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
@@ -9,6 +10,7 @@
         <div class="right-header-section navbar-right hidden">
                 @include('layout.partials.searchdropdown')
         </div>
+
     </nav>
 
 </div>

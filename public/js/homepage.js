@@ -1614,9 +1614,15 @@ function draw(ht) {
         .attr("height", width / 2)
         .attr("fill", function (d, i) {
             if (newObj[d.properties.code] != undefined) {
+<<<<<<< HEAD
                 return highlightColor;
             }
             return '#f1f1f1';
+=======
+                return '#FCCE99';
+            }
+            return '#ccc';
+>>>>>>> 934-UIrefactor merged with clip file and olc ui update
         })
         .attr("cursor", function (d, i) {
             if (newObj[d.properties.code] != undefined) {

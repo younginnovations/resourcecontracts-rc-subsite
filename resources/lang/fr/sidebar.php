@@ -7,4 +7,5 @@ return [
     'glossary'                 => 'Glossaire',
     'guides'                   => 'Guides',
     'view_all'                 => "Visualiser tout",
+
 ];

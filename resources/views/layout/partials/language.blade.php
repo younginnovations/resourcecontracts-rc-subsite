@@ -1,6 +1,7 @@
 <?php
 $language = app('App\Http\Services\LocalizationService');
 ?>
+
 	@if($language->isEnabled())
 		<div class="dropdown language-selector">
 			<ul>

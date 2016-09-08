@@ -7,4 +7,5 @@ return [
     'glossary'                 => 'Glossary',
     'guides'                   => 'Guides',
     'view_all'                 => 'See All',
+
 ];

@@ -166,6 +166,7 @@
     background-image: radial-gradient(circle at 50% 38%, #4a715a, #05632c);
   }
 
+
   .advance-search a,
   footer a {
     color: rgba(255, 255, 255, 0.69);
@@ -412,7 +413,6 @@
   }
 
   .img-intro {
-    //background: linear-gradient(rgba(25, 90, 94, 0.6), rgba(25, 90, 94, 0.6)), url(../images/img_intro.png) no-repeat center center/cover;
 
     p {
       color: rgba(255, 255, 255, 0.69);
@@ -512,7 +512,6 @@
   }
 }
 
-
 @media (min-width: 400px){
   .slider .multiple{
     padding: 0 8px;
@@ -539,8 +538,6 @@ footer {
   }
 }
 
-
-
 p {
   font-size: 12px;
   line-height: 22px;
@@ -552,6 +549,7 @@ p {
   }
   li {
     list-style: none;
+    margin-top: 25px;
   }
   .partner-inner-heading {
     color: rgba(237, 239, 241, 0.4);
@@ -781,7 +779,6 @@ p {
       font-size: 24px;
     }
     .partner-inner-each {
-
     }
     .menu-list-each li {
       display: inline-block;

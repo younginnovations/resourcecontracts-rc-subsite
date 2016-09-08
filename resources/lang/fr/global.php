@@ -1,5 +1,6 @@
 <?php
 return [
+
     'search'                  => "Chercher",
     'associated_documents'    => 'et les documents associés',
     'contracts'               => "contrats",
