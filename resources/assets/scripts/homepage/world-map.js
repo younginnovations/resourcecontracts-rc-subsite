@@ -24,7 +24,7 @@ function draw(ht) {
         .attr("height", width / 2)
         .attr("fill", function (d, i) {
             if (newObj[d.properties.code] != undefined) {
-                return '#FCCE99';
+                return highlightColor;
             }
             return '#ccc';
         })

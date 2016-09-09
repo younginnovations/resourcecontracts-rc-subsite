@@ -7,9 +7,9 @@
 
 			<div class="mini__menu clearfix">
 
-		<div class="col-md-10 partner-inner row">
-			<div class="row">
-				<div class="col-md-4 col-sm-4 col-xs-12 partner-inner-each">
+		<div class="partner-inner">
+			<div class="">
+				<div class="partner-inner-each">
 
 					<ul>
 						@if(site()->isRC())
@@ -29,7 +29,7 @@
 						@endif
 					</ul>
 				</div>
-				<div class="col-md-4 col-sm-4 col-xs-12 partner-inner-each">
+				<div class="partner-inner-each">
 					<ul>
 						<li>
 							<a href="http://www.dfid.gov.uk" class="img-responsive logo__ukaid" target="_blank"></a>
@@ -42,10 +42,9 @@
 						@endif
 					</ul>
 				</div>
-
 			</div>
 		</div>
-		<div class="col-md-2 menu-list row">
+		<div class="menu-list clearfix">
 			<ul class="menu-list-each">
 				<li><a href="{{url('about')}}">@lang('footer.about')</a></li>
 				<li><a href="{{url('faqs')}}">@lang('footer.faqs')</a></li>
@@ -55,6 +54,7 @@
 				<li><a href="{{url('contact')}}">@lang('footer.contact')</a></li>
 				<li><a href="https://github.com/NRGI/resourcecontracts.org/wiki/API" target="_blank">API</a></li>
 			</ul>
+			@include('layout.partials.language')
 		</div>
 	</div>
 	<div class="footer-bottom">

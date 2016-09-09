@@ -191,8 +191,10 @@ nav.navbar {
       a {
         padding: 4px 8px;
         text-transform: uppercase;
-        color:  #333;
+        //color:  #333;
         display: block;
+        font-size: 13px;
+        line-height: 21px;
 
         &.active {
           background: $color_link_color;
@@ -210,7 +212,24 @@ nav.navbar {
 
 }
 
-body.page-home .language-selector ul li a{
+.page-home .footer__wrap  .floated-top-div{
+  display: none;
+}
+
+.footer__wrap{
+  .floated-top-div{
+    position: static;
+  }
+}
+
+.footer__wrap .language-selector{
+  float: right;
+  position: static;
+  margin-top: 20px;
+}
+
+body.page-home .language-selector ul li a,
+body.page-home .floated-top-div .clip-head #hide-annotation{
   color: #eee;
 }
 

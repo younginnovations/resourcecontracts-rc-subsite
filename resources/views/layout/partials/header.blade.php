@@ -8,7 +8,6 @@
         <div class="right-header-section navbar-right hidden">
                 @include('layout.partials.searchdropdown')
         </div>
-       @include('layout.partials.language')
     </nav>
 
 </div>
