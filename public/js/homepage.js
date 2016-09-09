@@ -1615,11 +1615,15 @@ function draw(ht) {
         .attr("fill", function (d, i) {
             if (newObj[d.properties.code] != undefined) {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 return highlightColor;
             }
             return '#f1f1f1';
 =======
                 return '#FCCE99';
+=======
+                return highlightColor;
+>>>>>>> 934-UIrefactor changes update on olc map and language selector
             }
             return '#ccc';
 >>>>>>> 934-UIrefactor merged with clip file and olc ui update
