@@ -71,5 +71,6 @@ return [
     'corrupted_pdf'              => "Invalid or corrupted PDF file.",
     'unexpected_server'          => "Unexpected server response",
     'loading_error'              => "An error occurred while loading the PDF.",
-    'more_in'                    => 'More in',
+    'more_from'                  => 'More from',
+    'more_for'                   => 'More for',
 ];
