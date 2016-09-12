@@ -26497,8 +26497,8 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                         React.createElement(AmlaUrl, {metadata: this.props.metadata}), 
                         React.createElement(LandMatrixView, {metadata: this.props.metadata}), 
                         React.createElement("div", {className: "metadata-ocid"}, 
-                            React.createElement("p", null, React.createElement("span", null), React.createElement("span", null, lang.more_in), " ", React.createElement("a", {href: countryLink}, getCountryName(this.props.metadata.get("country").code))), 
-                            React.createElement("p", null, React.createElement("span", null), React.createElement("span", null, lang.more_in), " ", this.getResourceLang(this.props.metadata.get("resource"), true))
+                            React.createElement("p", null, React.createElement("span", null), React.createElement("span", null, lang.more_from), " ", React.createElement("a", {href: countryLink}, getCountryName(this.props.metadata.get("country").code))), 
+                            React.createElement("p", null, React.createElement("span", null), React.createElement("span", null, lang.more_for), " ", this.getResourceLang(this.props.metadata.get("resource"), true))
                         )
                     )
                 )

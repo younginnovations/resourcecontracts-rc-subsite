@@ -176,8 +176,8 @@ var MetadataView = React.createClass({
                         <AmlaUrl metadata={this.props.metadata}/>
                         <LandMatrixView metadata={this.props.metadata}/>
                         <div className="metadata-ocid">
-                            <p><span></span><span>{lang.more_in}</span> <a href={countryLink}>{getCountryName(this.props.metadata.get("country").code)}</a></p>
-                            <p><span></span><span>{lang.more_in}</span> {this.getResourceLang(this.props.metadata.get("resource"), true)}</p>
+                            <p><span></span><span>{lang.more_from}</span> <a href={countryLink}>{getCountryName(this.props.metadata.get("country").code)}</a></p>
+                            <p><span></span><span>{lang.more_for}</span> {this.getResourceLang(this.props.metadata.get("resource"), true)}</p>
                         </div>
                     </div>
                 </div>
