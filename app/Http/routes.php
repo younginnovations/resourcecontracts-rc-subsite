@@ -99,6 +99,12 @@ $app->get(
 );
 $app->get('api/search', ['as' => 'api.search', 'uses' => 'Contract\PageController@annotations']);
 
+$app->get('api/contract/{id}/metadata', 'Contract\ApiController@metadata');
+$app->get('api/contract/{id}/text', 'Contract\ApiController@text');
+$app->get('api/contract/{id}/annotations', 'Contract\ApiController@annotations');
+$app->get('api/contract/{id}/searchtext', 'Contract\ApiController@searchText');
+$app->get('api/contract/{id}/annotations/search', 'Contract\ApiController@annotationSearch');
+
 /*
  * ----------------------------------------------------------------------------------
  * Clipping Routes

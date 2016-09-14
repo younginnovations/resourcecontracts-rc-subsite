@@ -129,7 +129,7 @@
         var annotations_download_url = '{{$annotationsDownloadUrl}}';
         var contract = {!!json_encode($contract)!!};
         var contractTitle = contract.metadata.name;
-        var esapi = '{{rtrim(env("ELASTIC_SEARCH_HOST"),'/')}}/';
+        var esapi = '{{url('api')}}/';
         var facebook_share = 'https://www.facebook.com/sharer/sharer.php?u=';
         var google_share = 'https://plus.google.com/share?url=';
         var twitter_share = 'https://twitter.com/share?text={{ meta($meta)->title }}';
