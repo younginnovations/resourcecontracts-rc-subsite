@@ -88,3 +88,22 @@ html {
 }
 
 
+/**** new style for comment   ************/
+
+.suggestion{
+  padding: 8px 10px;
+  background: #eee;
+  border-radius: 2px;
+  margin-bottom: 20px;
+  color: #666;
+
+  .suggested-word{
+    font-style: italic;
+    position: relative;
+    font-weight: bold;
+
+    &:not(:last-child):after{
+      content: ",";
+    }
+  }
+}

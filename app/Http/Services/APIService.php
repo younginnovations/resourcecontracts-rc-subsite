@@ -240,6 +240,7 @@ class APIService
             'all'                 => $all,
             'download'            => $download,
             'annotated'           => $annotated,
+            'fuzzy'               => $fuzzy
 
         ];
 
