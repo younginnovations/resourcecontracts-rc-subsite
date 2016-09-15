@@ -7,6 +7,8 @@ return [
     'contract_doc_from'       => "Documents du contrat de",
     'countries'               => "Pays",
     'country'                 => "Pays",
+    'resource'                => "Ressurs",
+    'resources'               => "Ressources",
     'view_all_countries'      => "visualiser tous les pays",
     'contracts_related_to'    => "Documents du contrat liés à",
     'all_contracts'           => "Tous les contrats ",

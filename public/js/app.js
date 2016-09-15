@@ -3852,7 +3852,10 @@ $(document).ready(function () {
     var allData = clipLocalCollection.localStorage.findAll();
     if (allData.length != 0)
     {
+        var clearall = $("<a id='clear-all'>Clear Clips</a>");
         $("#all-clip-count").append("(" + allData.length + ")");
+        $("#clip-panel-title").append(clearall);
+
     }
 
 
@@ -3871,6 +3874,15 @@ $(document).ready(function () {
     $(".annotation-clip-icon").click(function () {
         var id = $(this).attr('data-id');
         clipAnnotations(id, this);
+    });
+    $(document).on('click',"#clear-all",function(){
+        confirm("Are you sure, you want to remove all clips?");
+
+        data.map(function (d, index) {
+            var clip = new ClipLocal({id: d});
+            clipLocalCollection.localStorage.destroy(clip);
+        })
+        location.reload();
     });
 
     $(document).on('click', ".remove-clip", function () {
@@ -12002,11 +12014,7 @@ $(document).ready(function () {
             $(".search-input-wrapper").hide();
             $('.contract-number-wrap').show();
         }
-<<<<<<< HEAD
         else if ($(".search-input-wrapper").is(':hidden')) {
-=======
-        else if($(".search-input-wrapper").is(':hidden')){
->>>>>>> 934-UIrefactor merged with clip file and olc ui update
             $('.contract-number-wrap').show();
         }
     });
@@ -12082,11 +12090,7 @@ $(document).ready(function () {
         $(".right-header-section").removeClass("hidden");
     }
 
-<<<<<<< HEAD
     if ($(window).width() > 768) {
-=======
-    if($(window).width() > 768) {
->>>>>>> 934-UIrefactor merged with clip file and olc ui update
         calWidth();
     }
 
@@ -12104,15 +12108,9 @@ $(document).ready(function () {
             $("#pinLists").hide();
         }
 
-<<<<<<< HEAD
         /*  if (!$(e.target).closest('.search-input-wrapper').length) {
          $(".search-input-wrapper").hide();
          }*/
-=======
-      /*  if (!$(e.target).closest('.search-input-wrapper').length) {
-            $(".search-input-wrapper").hide();
-        }*/
->>>>>>> 934-UIrefactor merged with clip file and olc ui update
 
         if (!$(e.target).closest('#social-toggler').length) {
             $(".social-toggle").hide();

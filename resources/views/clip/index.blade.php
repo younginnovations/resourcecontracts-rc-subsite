@@ -17,7 +17,7 @@
             <div class="panel-top-content attached-top-wrapper">
                 <div class="pull-left">
                     <a href="#" class="back-button back"><span>@lang('global.go_back')</span></a>
-                    <div class="panel-title">
+                    <div class="panel-title" id="clip-panel-title">
                         @lang('clip.all_clips') <span id="all-clip-count"></span>
                     </div>
                 </div>

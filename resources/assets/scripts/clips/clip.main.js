@@ -3,7 +3,6 @@ $(function () {
     data.map(function (d) {
         clipData.push(d.id);
     });
-
     if (key != '') {
         var clipCollection = new ClipCollection(app_url + '/clip/api?key=' + key);
         clipCollection.fetch({reset: true});

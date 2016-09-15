@@ -39,6 +39,7 @@
 		var key ='{{$key}}';
 		var langResource =  {!!  json_encode(trans('resources')) !!};
 		var langCountry =  {!!  json_encode(trans('country')) !!};
+		var langClip = {!! json_encode(trans('category')) !!};
 	</script>
 	<script src="{{url('js/clipping.js')}}"></script>
 @stop

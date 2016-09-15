@@ -103,7 +103,7 @@ var Item = React.createClass({
         var openContractingId = this.props.item.get('open_contracting_id');
         _.map(pages, function (page) {
             var url = app_url + "/contract/" + openContractingId + '/view#/' + page.type + '/page/' + page.page + '/annotation/' + page.id;
-            pageUrl += '<a href=' + url + '>'+ langClip.page + page.page + articleRef + '</a>';
+            pageUrl += '<a href=' + url + '>'+ langClip.page+" " + page.page + articleRef + '</a>';
         });
         return pageUrl;
     },

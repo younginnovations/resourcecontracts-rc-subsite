@@ -10,7 +10,8 @@ var Listing = React.createClass({
             check_data: [],
             sort_by: 'name',
             'order': 'asc',
-            'loading': false
+            'loading': false,
+            'allclip':true
         }
     },
     getFilters: function (filter) {
@@ -22,6 +23,8 @@ var Listing = React.createClass({
     },
     componentDidMount: function () {
         var self = this;
+
+
         this.setState({loading: true});
         this.props.clipCollection.on('data:change', function () {
             var annotid = self.getAnnotationId(self.props.clipCollection);
@@ -62,6 +65,28 @@ var Listing = React.createClass({
             self.setClips(clips);
         });
 
+
+        var clipPage = window.getCookie('clippage');
+
+        if(clipPage != '')
+        {
+            var totalPage =  window.getCookie('totalpages');
+            console.log("totalaaa",totalPage);
+            if (clipPage == "Prev") {
+                clipPage = self.state.current_page - 2;
+            }
+            if (clipPage == "Next") {
+                clipPage = self.state.current_page + 2;
+            }
+            if (clipPage == "First") {
+                clipPage = 1;
+            }
+            if (clipPage == "Last") {
+                clipPage = parseInt(totalPage);
+            }
+            this.setState({current_page:clipPage-1});
+        }
+
     },
     getAnnotationId: function (clips) {
         var annotationID = [];
@@ -89,29 +114,70 @@ var Listing = React.createClass({
     filterOnCheck: function (annotationID) {
         var filterClips = this.props.clipCollection.filterCheckData(annotationID);
         this.props.clipCollection.trigger('selectedData', annotationID);
-        if (annotationID.length < 1) {
-            filterClips = this.props.clipCollection;
-        }
-        if (annotationID.length < 1 && this.state.filters.length > 0) {
-            filterClips = this.props.clipCollection.withFilter(this.state.filters);
-        }
         this.props.clipCollection.trigger('filterData', filterClips);
     },
     handleSort: function (field) {
+        console.log(field);
         var orderby = 'asc';
         if (field == this.state.sort_by && this.state.order == "asc") {
             orderby = 'desc';
         }
         this.state.order = orderby;
         this.state.sort_by = field;
-        var clips = this.props.clipCollection.clipSort(this.state.sort_by, this.state.order);
+
+        if(field=="checkbox")
+        {
+            var clips = this.props.clipCollection.clipSortForCheckBox(this.state.check_data,this.state.order);
+        }
+        else{
+            var clips = this.props.clipCollection.clipSort(this.state.sort_by, this.state.order);
+        }
+
         this.setClips(clips);
     },
+
     showSortArrow: function (field) {
         var order = 'fa fa-black fa-sort-' + this.state.order;
         if (field == this.state.sort_by) {
             return (<i className={order}></i>);
         }
+    },
+    toggleDropdown: function () {
+        this.setState({dropdown: !this.state.dropdown})
+
+    },
+    uncheckDocs :  function()
+    {
+        var self = this;
+        self.setState({check_data: []})
+        self.filterOnCheck([]);
+    },
+    checkAllDocs : function()
+    {
+        var self = this;
+        var data=[];
+        _.map(self.state.clips['models'], function (clips) {
+            data.push(clips.get('annotation_id'));
+        });
+
+        self.setState({check_data:_.uniq(data)});
+        self.filterOnCheck(self.state.check_data);
+    },
+
+    toggleCheckBox : function()
+    {
+        var self=this;
+        var data=[];
+        self.state.allclip=!this.state.allclip;
+        if(self.state.allclip)
+      {
+          _.map(self.state.clips['models'], function (clips) {
+              data.push(clips.get('annotation_id'));
+          });
+      }
+        self.setState({check_data:  _.uniq(data)});
+        self.state.check_data=_.uniq(data);
+        self.filterOnCheck(self.state.check_data);
     },
 
     render: function () {
@@ -123,6 +189,7 @@ var Listing = React.createClass({
                               checkData={self.state.check_data}/>)
             });
         }
+
         if (!this.state.loading) {
             if (this.state.clips.length < 1) {
                 return (<div className="no-record">There is no clipped annotations.</div>);
@@ -131,12 +198,22 @@ var Listing = React.createClass({
             if (this.state.total_pages > 1) {
                 pagination = (<Pagination clipCollection={this.props.clipCollection} pageState={this.state}/>);
             }
+            var isBoxChecked =  this.state.allclip?"checked":null;
+            console.log("ischecked",isBoxChecked);
             return (
                 <div id="clip-annotation-list">
                     <table className="table table-responsive table-contract table-contract-list">
                         <thead>
                         <tr>
-                            <th width="75px"><ClipSelectCount clipCollection={this.props.clipCollection}/></th>
+
+                            <th width="75px">
+                                    <ClipSelectCount clipCollection={this.props.clipCollection}/>
+                                    <input type="checkbox" checked={isBoxChecked} onClick={this.toggleCheckBox.bind()} />
+                                    <a onClick={this.handleSort.bind(this,'checkbox')}>
+                                    {this.showSortArrow('checkbox')}</a>
+
+                            </th>
+
                             <th width="20%"><a onClick={this.handleSort.bind(this,'name')}>
                                 Document {this.showSortArrow('name')}</a></th>
                             <th><a

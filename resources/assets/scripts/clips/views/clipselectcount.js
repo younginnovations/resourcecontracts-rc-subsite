@@ -19,7 +19,7 @@ var ClipSelectCount = React.createClass({
         else{
             return (
                 <div className="count-select">
-                    Selected: <span>{this.state.count}</span>
+                     <span>{this.state.count}</span>
                 </div>
             );
         }

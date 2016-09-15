@@ -119,7 +119,10 @@ $(document).ready(function () {
     var allData = clipLocalCollection.localStorage.findAll();
     if (allData.length != 0)
     {
+        var clearall = $("<a id='clear-all'>Clear Clips</a>");
         $("#all-clip-count").append("(" + allData.length + ")");
+        $("#clip-panel-title").append(clearall);
+
     }
 
 
@@ -138,6 +141,15 @@ $(document).ready(function () {
     $(".annotation-clip-icon").click(function () {
         var id = $(this).attr('data-id');
         clipAnnotations(id, this);
+    });
+    $(document).on('click',"#clear-all",function(){
+        confirm("Are you sure, you want to remove all clips?");
+
+        data.map(function (d, index) {
+            var clip = new ClipLocal({id: d});
+            clipLocalCollection.localStorage.destroy(clip);
+        })
+        location.reload();
     });
 
     $(document).on('click', ".remove-clip", function () {

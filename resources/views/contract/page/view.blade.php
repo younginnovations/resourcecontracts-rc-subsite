@@ -43,20 +43,6 @@
 	</div>
 @stop
 
-                <div class="pull-right action-links">
-                    <ul><li>
-                            <a  class="view-summary-btn" href={{route('contract.view',['id'=>$contract->metadata->open_contracting_id])}}>@lang('global.view_summary')</a>
-                        </li></ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="content">
-        <div class="loading"><img src="{{url('images/loading.gif')}}"/>@lang('admin.loading')</div>
-    </div>
-
-@endsection
 @section('js')
 	<script src="{{ url('js/pdfjs/pdf.js') }}"></script>
 	<script>

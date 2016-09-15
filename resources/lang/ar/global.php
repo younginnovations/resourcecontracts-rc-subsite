@@ -6,6 +6,8 @@ return [
     'contract_doc_from'       => "والوثائق ذات الصلة",
     'countries'               => "وثائق عقد",
     'country'                 => "البلدان",
+    'resource'                => "مورد",
+    'resources'                => 'موارد',
     'view_all_countries'      => "البلد ",
     'contracts_related_to'    => "مشاهدة جميع البلدان",
     'all_contracts'           => "جميع العقود",
