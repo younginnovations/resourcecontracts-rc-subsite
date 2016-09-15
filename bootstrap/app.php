@@ -95,16 +95,19 @@ class_alias('Maatwebsite\Excel\Facades\Excel', 'Excel');
 class_alias('Illuminate\Support\Facades\Response', 'Response');
 class_alias('LynX39\LaraPdfMerger\Facades\PdfMerger', 'PdfMerger');
 
-
 // $app->register(App\Providers\EventServiceProvider::class);
+
+$app->register(Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class);
+$app->register(\App\Providers\LogServiceProvider::class);
+
+if (env('APP_DEBUG')) {
+    $app->register(Barryvdh\Debugbar\LumenServiceProvider::class);
+    $app->configure('debugbar');
+}
 
 
 config(
     [
-        'hoglog'       => [
-            'rootPrefix' => 'logger/',
-            'logdir'     => storage_path() . '/logs'
-        ],
         'language'     => [
             'en' => [
                 'code'         => 'en',
@@ -124,14 +127,11 @@ config(
                 'name'         => 'Arabic',
                 'dir'          => 'rtl'
             ]
-
         ],
         'localisation' => true,
-        'clip'         => true,
+        'clip'         => false,
     ]
 );
-$app->register('HogLog\HogLogServiceProvider');
-
 
 /*
 |--------------------------------------------------------------------------

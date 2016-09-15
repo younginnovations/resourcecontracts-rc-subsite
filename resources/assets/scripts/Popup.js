@@ -18,7 +18,7 @@ class Popup extends Component {
 
     render() {
         return (
-            <div>
+            <div className="popup-wrapper">
                 <Loading />
                 <Header site_name={this.state.site} title={this.props.annotation.contract_title}/>
                 <Alert />

@@ -1,6 +1,7 @@
 <?php namespace App\Http\Services\Page;
 
 use App\Http\Models\Page\Page;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * Class Page
@@ -12,15 +13,16 @@ Class PageService
      * @var Page
      */
     protected $page;
+    protected $cacheDuration;
 
     /**
      * @param Page $page
      */
     public function __construct(Page $page)
     {
-        $this->page = $page;
+        $this->page          = $page;
+        $this->cacheDuration = 24 * 60 * 60;
     }
-
 
     /**
      * Get All Pages
@@ -29,7 +31,13 @@ Class PageService
      */
     public function all()
     {
-        return $this->page->orderBy('id', 'DESC')->get();
+        return Cache::remember(
+            'all',
+            $this->cacheDuration,
+            function () {
+                return $this->page->orderBy('id', 'DESC')->get();
+            }
+        );
     }
 
     /**
@@ -42,7 +50,13 @@ Class PageService
      */
     public function get($page, $array = false)
     {
-        $page = $this->page->where('slug', $page)->first();
+        $page = Cache::remember(
+            $page,
+            $this->cacheDuration,
+            function () use ($page) {
+                return $this->page->where('slug', $page)->first();
+            }
+        );
 
         if ($array) {
             return $page->toArray();
@@ -66,6 +80,10 @@ Class PageService
         $page->title   = (object) $content['title'];
         $page->content = (object) $content['content'];
 
+        Cache::forget('all');
+        Cache::forget($page_id);
+        Cache::forget($page->slug);
+
         return $page->save();
     }
 
@@ -78,7 +96,13 @@ Class PageService
      */
     public function find($id)
     {
-        return $this->page->find($id);
+        return Cache::remember(
+            $id,
+            $this->cacheDuration,
+            function () use ($id) {
+                return $this->page->find($id);
+            }
+        );
     }
 
     /**
@@ -95,6 +119,7 @@ Class PageService
             'content' => (object) $input['content'],
             'slug'    => str_slug($input['title']['en']),
         ];
+        Cache::forget('all');
 
         return $this->page->create($input);
     }
@@ -109,6 +134,7 @@ Class PageService
     public function destroy($id)
     {
         $pageId = $this->find($id);
+        Cache::forget($id);
 
         return $pageId->delete();
     }

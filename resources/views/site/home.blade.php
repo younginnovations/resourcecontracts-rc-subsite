@@ -136,7 +136,6 @@ $image_intro = site()->getImageUrl('intro_bg');
 		var highlightColor = '{!! site()->isRC()?'#FCCE99':'#417505' !!}';
 		var selectedCountries = '{!! json_encode($countryList) !!}';
 		var standardCountry = {!! json_encode(trans('country')) !!};
-
 	</script>
 	<script src="{{url('js/homepage.js')}}"></script>
 @stop

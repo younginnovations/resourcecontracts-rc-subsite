@@ -1,6 +1,7 @@
 <?php namespace App\Http\Services\Admin;
 
 use App\Http\Models\Option\Option;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * Class OptionService
@@ -12,6 +13,10 @@ class OptionService
      * @var Option
      */
     protected $option;
+    /**
+     * @var int
+     */
+    protected $cacheDuration;
 
     /**
      * OptionService constructor.
@@ -20,7 +25,8 @@ class OptionService
      */
     public function __construct(Option $option)
     {
-        $this->option = $option;
+        $this->option        = $option;
+        $this->cacheDuration = 24 * 60 * 60;
     }
 
     /**
@@ -41,8 +47,12 @@ class OptionService
         $option = $this->isKeyUnique($key);
 
         if (!$option) {
-            return $this->option->where('key', $key)->update(['value' => $value, 'group' => $group]);
+            $update = $this->option->where('key', $key)->update(['value' => $value, 'group' => $group]);
+            Cache::forget($key);
+
+            return $update;
         }
+        Cache::forget($group);
 
         return $this->option->create(
             [
@@ -63,7 +73,13 @@ class OptionService
      */
     public function get($key, $array = false)
     {
-        $option = $this->option->select('value')->where('key', $key)->first();
+        $option = Cache::remember(
+            $key,
+            $this->cacheDuration,
+            function () use ($key) {
+                return $this->option->select('value')->where('key', $key)->first();
+            }
+        );
 
         if (empty($option)) {
             return null;
@@ -113,7 +129,14 @@ class OptionService
      */
     public function getByGroup($group)
     {
-        $data  = $this->option->where('group', $group)->get();
+        $data = Cache::remember(
+            $group,
+            $this->cacheDuration,
+            function () use ($group) {
+                return $data = $this->option->where('group', $group)->get();
+            }
+        );
+
         $group = new \stdClass();
         if (!empty($data)) {
             foreach ($data as $v) {
@@ -129,9 +152,8 @@ class OptionService
         return $group;
     }
 
-
     /**
-     * write brief description
+     * Update option by Group
      *
      * @param $options
      * @param $group
@@ -143,6 +165,8 @@ class OptionService
         foreach ($options as $key => $option) {
             $this->update($key, $option, $group);
         }
+
+        Cache::forget($group);
 
         return true;
     }

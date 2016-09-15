@@ -43,7 +43,7 @@ use Illuminate\Support\Facades\Lang;
 						<a><span>@lang('contract.social_share')</span></a>
 						@include('contract.partials.share')
 					</div>
-					@if(isClipOn())
+					@if(site()->isClipEnabled())
 						<button class="clip-btn" id="on-annotation">@lang('clip.clip_on')</button>
 					@endif
 				</div>
@@ -421,7 +421,7 @@ use Illuminate\Support\Facades\Lang;
                             {{count($contract->annotationsGroup)}}
                             @if(count($contract->annotationsGroup) >1) Annotations @else Annotation @endif
                         </div>
-                        @if(isClipOn())
+                        @if(site()->isClipEnabled())
                         <button id="clip-all-annotations" class="pull-right annotation-clip"
                                 title="Clip all annotations"><span class="link">@lang('clip.clip_all')</span>
                         </button>
@@ -463,7 +463,7 @@ use Illuminate\Support\Facades\Lang;
                                                     <div class="annotation-left">
                                                         {{$annotation->category}}
                                                     </div>
-                                                    @if(isClipOn())
+                                                    @if(site()->isClipEnabled())
                                                         <button data-id={{$annotation->id}} class="pull-right
                                                                 annotation-clip-icon
                                                         " title=@lang('clip.clip_annotation') style="display:

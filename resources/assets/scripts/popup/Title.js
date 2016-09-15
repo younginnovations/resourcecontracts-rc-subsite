@@ -11,8 +11,8 @@ class Title extends Component {
         return (
             <nav className="navbar navbar-static-top no--search--wrap">
                 <div className="navbar-header">
-                    <div className="navbar-brand" href={APP_URL} >
-                        <span>{this.props.site_name}<span className="beta">Beta</span>
+                    <div className="navbar-brand" href={APP_URL}>
+                        {this.props.site_name}
                         <span>Contracts</span>
                     </div>
                 </div>

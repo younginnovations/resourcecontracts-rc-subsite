@@ -276,5 +276,13 @@ class SiteService
         ];
     }
 
-
+    /**
+     * Determine if clip is on or not
+     *
+     * @return bool
+     */
+    function isClipEnabled()
+    {
+        return (config('clip') == true);
+    }
 }

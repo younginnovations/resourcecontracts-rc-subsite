@@ -1,6 +1,6 @@
 <?php
 return [
-    'page'                       => "page",
+    'page'                       => "Page",
     'see_all'                    => "Voir tout",
     'loading_annotations'        => "chargement des annotations en cours ",
     'annotations'                => "Annotations ",

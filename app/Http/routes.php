@@ -15,6 +15,12 @@ $app->get('/resources', ['as' => 'resources', 'uses' => 'ResourceController@inde
 $app->get('/resource/{key}', ['as' => 'resource.detail', 'uses' => 'ResourceController@detail']);
 $app->get('/sitemap', ['as' => 'sitemap', 'uses' => 'SiteController@sitemap']);
 
+$app->group(
+    ['namespace' => '\Rap2hpoutre\LaravelLogViewer'],
+    function () use ($app) {
+        $app->get(getUserIP().'/logs', 'LogViewerController@index');
+    }
+);
 /*
 |--------------------------------------------------------------------------
 | Contract Pages
@@ -117,13 +123,13 @@ $app->get('api/search', ['as' => 'api.search', 'uses' => 'Contract\PageControlle
  * Clipping Routes
  * ----------------------------------------------------------------------------------
 */
-
-$app->get('clip', ['as' => 'clip.index', 'uses' => 'ClippingController@index']);
-$app->get('/clip/annotations', ['as' => 'api.annotation', 'uses' => 'ClippingController@getAllAnnotations']);
-$app->get('/clip/download', ['as' => 'clip.download', 'uses' => 'ClippingController@downloadAnnotations']);
-$app->get('clip/api', ['as' => 'clip.api', 'uses' => 'ClippingController@getClippedData']);
-$app->get('clip/{key}', ['as' => 'clip.view', 'uses' => 'ClippingController@clipView']);
-$app->post('clip/email', ['as' => 'clip.email', 'uses' => 'ClippingController@emailClip']);
-$app->post('/clip/save', ['as' => 'clip.save', 'uses' => 'ClippingController@saveClip']);
-$app->post('clip/zip', ['as' => 'clip.zip', 'uses' => 'ClippingController@getZipFile']);
-
+if (site()->isClipEnabled()) {
+    $app->get('clip', ['as' => 'clip.index', 'uses' => 'ClippingController@index']);
+    $app->get('/clip/annotations', ['as' => 'api.annotation', 'uses' => 'ClippingController@getAllAnnotations']);
+    $app->get('/clip/download', ['as' => 'clip.download', 'uses' => 'ClippingController@downloadAnnotations']);
+    $app->get('clip/api', ['as' => 'clip.api', 'uses' => 'ClippingController@getClippedData']);
+    $app->get('clip/{key}', ['as' => 'clip.view', 'uses' => 'ClippingController@clipView']);
+    $app->post('clip/email', ['as' => 'clip.email', 'uses' => 'ClippingController@emailClip']);
+    $app->post('/clip/save', ['as' => 'clip.save', 'uses' => 'ClippingController@saveClip']);
+    $app->post('clip/zip', ['as' => 'clip.zip', 'uses' => 'ClippingController@getZipFile']);
+}

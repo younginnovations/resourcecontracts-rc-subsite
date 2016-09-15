@@ -1,74 +1,77 @@
 <footer>
 	<div class="footer__wrap">
-	<p class="partner-description">
-		{{getOptionText('footer_text')}}
-	</p>
-	<div class="partner-wrapper clearfix">
+		<p class="partner-description">
+			{{getOptionText('footer_text')}}
+		</p>
+		<div class="partner-wrapper clearfix">
 
 			<div class="mini__menu clearfix">
 
-		<div class="partner-inner">
-			<div class="">
-				<div class="partner-inner-each">
+				<div class="partner-inner">
+					<div class="">
+						<div class="partner-inner-each">
 
-					<ul>
-						@if(site()->isRC())
-							<li>
-								<a href="http://www.resourcegovernance.org/" class="img-responsive logo__nrgi"
-								   target="_blank"></a>
-							</li>
-						@endif
-						<li>
-							<a href="http://ccsi.columbia.edu/" class="img-responsive logo__cu" target="_blank"></a>
-						</li>
-						@if(site()->isRC())
-							<li>
-								<a href="http://www.worldbank.org/en/topic/governance" class="img-responsive logo__wb"
-								   target="_blank"></a>
-							</li>
-						@endif
-					</ul>
+							<ul>
+								@if(site()->isRC())
+									<li>
+										<a href="http://www.resourcegovernance.org/" class="img-responsive logo__nrgi"
+										   target="_blank"></a>
+									</li>
+								@endif
+								<li>
+									<a href="http://ccsi.columbia.edu/" class="img-responsive logo__cu"
+									   target="_blank"></a>
+								</li>
+								@if(site()->isRC())
+									<li>
+										<a href="http://www.worldbank.org/en/topic/governance"
+										   class="img-responsive logo__wb"
+										   target="_blank"></a>
+									</li>
+								@endif
+							</ul>
+						</div>
+						<div class="partner-inner-each">
+							<ul>
+								<li>
+									<a href="http://www.dfid.gov.uk" class="img-responsive logo__ukaid"
+									   target="_blank"></a>
+								</li>
+								@if(site()->isRC())
+									<li>
+										<a href="http://www.afdb.org/en/topics-and-sectors/initiatives-partnerships/african-legal-support-facility/"
+										   class="img-responsive logo__alsf" target="_blank"></a>
+									</li>
+								@endif
+							</ul>
+						</div>
+					</div>
 				</div>
-				<div class="partner-inner-each">
-					<ul>
-						<li>
-							<a href="http://www.dfid.gov.uk" class="img-responsive logo__ukaid" target="_blank"></a>
+				<div class="menu-list clearfix">
+					<ul class="menu-list-each">
+						<li><a href="{{url('about')}}">@lang('footer.about')</a></li>
+						<li><a href="{{url('faqs')}}">@lang('footer.faqs')</a></li>
+						<li><a href="{{url('guides')}}">@lang('sidebar.guides')</a></li>
+						<li><a href="{{url('glossary')}}">@lang('footer.glossary')</a></li>
+						<li><a href="{{url('publish-contracts')}}">@lang('footer.publish_contracts')</a></li>
+						<li><a href="{{url('contact')}}">@lang('footer.contact')</a></li>
+						<li><a href="https://github.com/NRGI/resourcecontracts.org/wiki/API" target="_blank">API</a>
 						</li>
-						@if(site()->isRC())
-							<li>
-								<a href="http://www.afdb.org/en/topics-and-sectors/initiatives-partnerships/african-legal-support-facility/"
-								   class="img-responsive logo__alsf" target="_blank"></a>
-							</li>
-						@endif
 					</ul>
+					@include('layout.partials.language')
 				</div>
 			</div>
-		</div>
-		<div class="menu-list clearfix">
-			<ul class="menu-list-each">
-				<li><a href="{{url('about')}}">@lang('footer.about')</a></li>
-				<li><a href="{{url('faqs')}}">@lang('footer.faqs')</a></li>
-				<li><a href="{{url('guides')}}">@lang('sidebar.guides')</a></li>
-				<li><a href="{{url('glossary')}}">@lang('footer.glossary')</a></li>
-				<li><a href="{{url('publish-contracts')}}">@lang('footer.publish_contracts')</a></li>
-				<li><a href="{{url('contact')}}">@lang('footer.contact')</a></li>
-				<li><a href="https://github.com/NRGI/resourcecontracts.org/wiki/API" target="_blank">API</a></li>
-			</ul>
-			@include('layout.partials.language')
-		</div>
-	</div>
-	<div class="footer-bottom">
-		<p class="footer-description">@lang('footer.licensed')
-			<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">(CC BY-SA 4.0)</a>
-		</p>
-		<img src="{{url('images/license-buttons.png')}}" width="88" height="31">
-	</div>
+			<div class="footer-bottom">
+				<p class="footer-description">@lang('footer.licensed')
+					<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">(CC BY-SA 4.0)</a>
+				</p>
+				<img src="{{url('images/license-buttons.png')}}" width="88" height="31">
+			</div>
 
 		</div>
 
 	</div>
 </footer>
-
 <script src="{{url('js/app.min.js')}}"></script>
 @yield('js')
 @if(site()->hasTracking())

@@ -442,7 +442,8 @@ var AnnotationItem = React.createClass({
     },
     shallShowEllipse: function (text) {
         var words = (text + "").split(' ');
-        if (words.length >= this.state.maxWords) {
+        var margin = 5;
+        if (words.length >= this.state.maxWords + margin) {
             return true;
         }
         return false;
@@ -502,7 +503,7 @@ var AnnotationItem = React.createClass({
                     l = true;
                 }
                 var article_reference = (annotation.get('article_reference') != '') ? annotation.get('article_reference') : '';
-                return (<PageLink contractApp={self.props.contractApp} annotation={annotation} last={l} page={page}
+                return (<PageLink key={index} contractApp={self.props.contractApp} annotation={annotation} last={l} page={page}
                                   article_reference={article_reference}/>)
             });
 
