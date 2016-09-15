@@ -21,5 +21,18 @@
   right: 176px;
 }
 
+@media (min-width: 895px){
+  .lang-fr {
+    .menu-list {
+      width: 485px;
+    }
+
+    .partner-inner {
+      width: calc(100% - 485px);
+    }
+  }
+}
+
+
 
 

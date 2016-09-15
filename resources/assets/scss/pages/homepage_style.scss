@@ -637,6 +637,7 @@ p {
 
     &:last-child {
       margin-right: 0;
+      padding-right: 0;
       border-right: none;
       &:after {
         content: none;
@@ -752,6 +753,11 @@ p {
       }
     }
 
+    .footer__wrap .language-selector{
+      margin: 20px auto 0;
+      float: none;
+    }
+
     .heading2 {
       font-size: 24px;
     }
@@ -771,9 +777,29 @@ p {
   }
 
   @media only screen and (max-width: 480px) {
+
+    .hero-image .search-form .form-group input{
+      width: 100%;
+      border-radius: 4px 4px;
+      padding: 15px 10px;
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    .hero-image .search-form .search-button{
+      border-radius: 4px 4px;
+      width: 100%;
+      padding: 10px 12px;
+    }
+
+    .petroleum-wrapper .petroleum-mineral{
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
     .section-wrap {
-      padding: 100px 0 20px 0;
-      margin: 0 15px;
+      padding: 81px 0 0 0;
+      margin: 0;
     }
 
     .list-item-wrap {
@@ -802,11 +828,38 @@ p {
     .partner-inner-each {
       width: 100%;
     }
+
+    .img-intro p{
+      padding: 0;
+      font-size: 16px;
+      line-height: 24px;
+    }
+
+    .country-partners{
+      padding: 0;
+    }
+
+    .heading2{
+      margin-bottom: 20px;
+    }
+
+    .img-intro .img-intro-text,
+    .explore-contracts .map-wrapper,
+    .country-partners-wrapper, footer{
+      padding: 20px 15px;
+    }
+
+
+
   }
 
 @media (min-width: 599px){
   .partner-inner ul li {
     margin: 10px;
+  }
+
+  #map {
+    max-height: 245px;
   }
 }
 

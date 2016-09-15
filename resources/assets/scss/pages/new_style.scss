@@ -54,32 +54,11 @@
   }
 }
 
-.floated-top-div .clip-head #hide-annotation{
-  top: 10px;
-  right: 0;
-  font-size: 14px;
-}
+
 
 #clip-all-annotations{
   &:after{
     background: transparent url(#{$img-path}/ic-sprite.svg) no-repeat  -357px -480px
-  }
-}
-
-.no--search--wrap{
-  display: table;
-  vertical-align: middle;
-  height: 100%;
-  width: 100%;
-  .navbar-header{
-    display: table-cell;
-    vertical-align: middle;
-    float: none;
-    padding-left: 15px;
-  }
-
-  .navbar-right{
-    width: 100%;
   }
 }
 

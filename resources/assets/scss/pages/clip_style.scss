@@ -74,6 +74,10 @@
   width: 20px;
 }
 
+.olc .clip-btn{
+  margin-left: 8px;
+}
+
 #clip-all-annotations,
 #remove-all-annotations{
   background: transparent;
@@ -250,7 +254,7 @@
     background: $white $url_2 no-repeat -152px -40px;
     z-index: 1;
     border: 1px solid $color_link_color;
-    border: 1px solid $color_burnt_sienna_20_approx;
+    border: 1px solid rgba($color_link_color, 0.2);
     border-radius: 22px;
     float: left;
     margin-right: 10px;

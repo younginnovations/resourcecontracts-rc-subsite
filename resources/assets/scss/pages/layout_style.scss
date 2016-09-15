@@ -147,34 +147,8 @@ nav.navbar {
   display: block !important;
 }
 
-.floated-top-div{
-  position: absolute;
-  right: 12px;
-  top: 20px;
-  z-index: 9999;
-
-  .clip-head{
-    float: left;
-    position: relative;
-
-    #annotation-count{
-      position: static;
-      margin-top: 0;
-    }
-
-    #hide-annotation{
-      position: absolute;
-      font-size: 11px;
-      right: 18px;
-      color: $color_blue;
-    }
-  }
-
-}
-
 .language-selector{
   float: left;
-  margin-left: 12px;
   margin-top: 5px;
   z-index: 9999;
 
@@ -191,7 +165,6 @@ nav.navbar {
       a {
         padding: 4px 8px;
         text-transform: uppercase;
-        //color:  #333;
         display: block;
         font-size: 13px;
         line-height: 21px;
@@ -212,13 +185,11 @@ nav.navbar {
 
 }
 
-.page-home .footer__wrap  .floated-top-div{
-  display: none;
-}
 
-.footer__wrap{
-  .floated-top-div{
-    position: static;
+.page-home{
+  .language-selector{
+    float: right;
+    margin-top: 25px;
   }
 }
 
@@ -229,8 +200,52 @@ nav.navbar {
 }
 
 body.page-home .language-selector ul li a,
-body.page-home .floated-top-div .clip-head #hide-annotation{
+body.page-home .clip-head #hide-annotation{
   color: #eee;
+}
+
+.clip-head {
+  position: relative;
+  float: right;
+  z-index: 9999;
+  margin-right: 15px;
+
+  #annotation-count {
+    position: relative;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    &:before{
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      top: 8px;
+      left: 15px;
+      background: url(../images/ic-sprite.svg) no-repeat no-repeat -285px -400px;
+    }
+  }
+
+  #hide-annotation {
+    position: absolute;
+    font-size: 11px;
+    right: 18px;
+    color: $color_blue;
+  }
+
+  #hide-annotation{
+    top: 28px;
+    right: 0;
+    font-size: 14px;
+  }
+}
+
+body:not(.page-home){
+  .clip-head {
+    position: absolute;
+    right: 0;
+  }
 }
 
 @media (max-width: 480px){

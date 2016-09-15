@@ -15,7 +15,6 @@ $image_intro = site()->getImageUrl('intro_bg');
 	</style>
 @stop
 @section('content')
-	@include('layout.partials.language')
 	<div class="row front-row-top-wrap">
 		<nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
 			<div class="navbar-header">

@@ -17,23 +17,29 @@ nav.navbar {
 .no--search--wrap {
   clear: both;
   .navbar-header {
-    margin-left: 15px;
     width: 145px;
-
-    .navbar-brand, .navbar-brand:hover{
-      font-size: 15px;
-      margin: 0;
-    }
   }
 
   .navbar-right {
-    padding: 22px 12px;
-    width: calc(100% - 165px);
+    padding: 28px 12px;
+    width: 100%;
     float: left;
   }
 
   .title {
     font: 18px/24px Open-Sans-Light;
+  }
+}
+
+.no--search--wrap{
+  display: table;
+  vertical-align: middle;
+  height: 100%;
+  width: 100%;
+  .navbar-header{
+    display: table-cell;
+    vertical-align: middle;
+    float: none;
   }
 }
 
