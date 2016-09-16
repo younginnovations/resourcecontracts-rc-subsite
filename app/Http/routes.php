@@ -18,7 +18,7 @@ $app->get('/sitemap', ['as' => 'sitemap', 'uses' => 'SiteController@sitemap']);
 $app->group(
     ['namespace' => '\Rap2hpoutre\LaravelLogViewer'],
     function () use ($app) {
-        $app->get(getUserIP().'/logs', 'LogViewerController@index');
+        $app->get('/logs', 'LogViewerController@index');
     }
 );
 /*

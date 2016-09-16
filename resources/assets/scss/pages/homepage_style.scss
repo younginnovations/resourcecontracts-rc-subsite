@@ -166,10 +166,6 @@
     background-image: radial-gradient(circle at 50% 38%, #4a715a, #05632c);
   }
 
-  body {
-    font-family: 'Open Sans', sans-serif;
-  }
-
   .advance-search a,
   footer a {
     color: rgba(255, 255, 255, 0.69);
@@ -219,7 +215,6 @@
 
   @media (min-width: 992px) {
     .section-wrap {
-      //min-height: 726px;
       min-height: 610px;
     }
   }
@@ -236,6 +231,7 @@
       line-height: 34px;
     }
     .large-title {
+      font-family: $font_2;
       font-size: 56px;
       line-height: 66px;
 
@@ -259,6 +255,7 @@
         input {
           width: calc(100% - 126px);
           border: none;
+          line-height: 18px;
           background: linear-gradient(rgba($white, 0.45), rgba($white, 0.45));
           float: left;
           padding: 19px;
@@ -286,25 +283,43 @@
   .petroleum-mineral {
     input::-webkit-input-placeholder {
       color: rgba(255, 255, 255, 0.4) !important;
-      font-size: 13px !important;
     }
     input {
       &:-webkit-input-placeholder {
         color: rgba(255, 255, 255, 0.4) !important;
-        font-size: 13px !important;
       }
       &:-moz-placeholder {
         color: rgba(255, 255, 255, 0.4) !important;
-        font-size: 13px !important;
       }
       &:-ms-input-placeholder {
         color: rgba(255, 255, 255, 0.4) !important;
-        font-size: 13px !important;
       }
     }
     input::-moz-placeholder {
       color: rgba(255, 255, 255, 0.4) !important;
-      font-size: 13px !important;
+    }
+  }
+
+
+  @media (max-width: 1024px){
+    .petroleum-mineral {
+      input::-webkit-input-placeholder {
+        font-size: 13px !important;
+      }
+      input {
+        &:-webkit-input-placeholder {
+          font-size: 13px !important;
+        }
+        &:-moz-placeholder {
+          font-size: 13px !important;
+        }
+        &:-ms-input-placeholder {
+          font-size: 13px !important;
+        }
+      }
+      input::-moz-placeholder {
+        font-size: 13px !important;
+      }
     }
   }
 
@@ -495,7 +510,12 @@
     max-width: 700px;
     margin: 0 auto;
   }
+
+  .hero-image .search-form .form-group input{
+    font-size: 13px;
+  }
 }
+
 
 @media (min-width: 400px){
   .slider .multiple{
@@ -568,11 +588,11 @@ p {
       background-size: 114px 45px !important;
     }
     &.logo__alsf{
-      width: 56px;
-      height: 68px;
+      width: 136px;
+      height: 54px;
       background: transparent url(../images/logo_alsf.png) 0 0 no-repeat;
       @include background-image-retina(transparent,"../images/logo_alsf", "png",0,0);
-      background-size: 56px 68px !important;
+      background-size: 136px 54px !important;
     }
     &.logo__ukaid{
       width: 138px;
@@ -608,10 +628,13 @@ p {
 }
 .footer-bottom {
   float: right;
-  margin-top: 30px;
+  margin-top: 0;
   .footer-description {
     float: left;
     margin-right: 10px;
+    img{
+      margin-left: 4px;
+    }
   }
 }
 
@@ -754,7 +777,7 @@ p {
     }
 
     .footer__wrap .language-selector{
-      margin: 20px auto 0;
+      margin: 20px auto;
       float: none;
     }
 
@@ -908,8 +931,6 @@ p {
     }
   }
 }
-
-
 
 @media (max-width: 895px){
   .partner-inner ul li {

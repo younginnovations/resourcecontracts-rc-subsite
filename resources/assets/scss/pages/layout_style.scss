@@ -163,7 +163,7 @@ nav.navbar {
       }
 
       a {
-        padding: 4px 8px;
+        padding: 1px 4px;
         text-transform: uppercase;
         display: block;
         font-size: 13px;
@@ -172,8 +172,8 @@ nav.navbar {
         &.active {
           background: $color_link_color;
           border-radius: 2px;
+          padding: 2px 6px;
           color: #fff;
-          box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
         }
 
         &:hover{
@@ -196,7 +196,7 @@ nav.navbar {
 .footer__wrap .language-selector{
   float: right;
   position: static;
-  margin-top: 20px;
+  margin: 20px 0;
 }
 
 body.page-home .language-selector ul li a,

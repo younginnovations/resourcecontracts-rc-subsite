@@ -1616,7 +1616,7 @@ function draw(ht) {
             if (newObj[d.properties.code] != undefined) {
                 return highlightColor;
             }
-            return '#ccc';
+            return '#f1f1f1';
         })
         .attr("cursor", function (d, i) {
             if (newObj[d.properties.code] != undefined) {

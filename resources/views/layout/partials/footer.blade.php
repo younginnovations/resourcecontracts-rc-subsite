@@ -58,14 +58,17 @@
 						<li><a href="https://github.com/NRGI/resourcecontracts.org/wiki/API" target="_blank">API</a>
 						</li>
 					</ul>
-					@include('layout.partials.language')
+					<div class="clearfix">
+						@include('layout.partials.language')
+					</div>
 				</div>
 			</div>
 			<div class="footer-bottom">
 				<p class="footer-description">@lang('footer.licensed')
 					<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">(CC BY-SA 4.0)</a>
-				</p>
+
 				<img src="{{url('images/license-buttons.png')}}" width="88" height="31">
+				</p>
 			</div>
 
 		</div>
