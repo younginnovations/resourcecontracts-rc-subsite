@@ -7,7 +7,8 @@
 }
 
 .navigation > a:nth-child(4) {
-  background: url(../images/ic-nav-metadata.png) no-repeat 16px 14px;
+  background: url(../images/ic-nav-metadata.png) no-repeat 16px 14px !important;
+  display: none; /* hide metadata for large screen */
 }
 
 .navigation {
@@ -89,6 +90,55 @@
   line-height: 18px;
   background: #fff;
 }
+
+.pdf-zoom-options > .btn-default  a {
+  line-height: 20px;
+  display: block;
+}
+
+.pdf-zoom-options > span {
+  font-size: 14px;
+  margin-left: 11px;
+  margin-top: 6px;
+}
+
+.pdf-zoom-options > .btn-default  {
+  background: #fff;
+  border: 1px solid #ccc;
+  text-align: center;
+  margin: 5px 10px;
+  padding: 0;
+}
+
+.pdf-zoom-options > .btn-default a {
+  line-height: 20px;
+  display: block;
+}
+
+.pdf-zoom-options span[class*="scale-"]:nth-child(2) {
+  margin-right: 19px;
+}
+
+.pdf-zoom-options span[class*="scale-"]:last-child {
+  margin-right: 0;
+}
+
+.pdf-zoom-options span.scale-selected {
+  position: relative;
+}
+
+.pdf-zoom-options span.scale-selected:before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -2px;
+  width: 10px;
+  height: 10px;
+  background: $color_link_color;
+  border-radius: 50%;
+}
+
+
 
 .annotation-sort > .active {
   background: $color_link_color;
@@ -231,13 +281,6 @@
   margin: 15px;
 }
 
-@media all and (min-width: 768px){
-  .text-panel, .pdf-annotator {
-    width: calc(54% - 40px);
-    margin: 20px;
-  }
-}
-
 .pdf-annotator,.text-annotator {
   height: 85vh;
   position: relative;
@@ -315,10 +358,12 @@
   margin-bottom: 15px;
 }
 
+
 .metadata-view > div:first-child {
   background: transparent;
   padding-left: 0;
   padding-right: 0;
+  overflow: hidden;
 
   &:before {
     content: "";
@@ -471,16 +516,31 @@ div > .annotation-item:first-of-type .annotation-cluster {
   cursor: pointer;
 }
 
+.annotations-topic-list {
+  margin: 12px 0 0;
+  padding: 8px 0;
+}
 
 .annotations-topic-list span {
-  color: #217B49;
+  color:  $color_link_color;
   display: inline-block;
   cursor: pointer;
-  margin: 0 13px 13px 0;
+  margin: 0 13px 9px 0;
+  font-size: 12px;
+  border-radius: 12px;
+  padding: 2px 14px;
+  background: #e5e5e5;
+}
+
+.pdf-loading {
+  padding: 15px;
 }
 
 .pdf-zoom-options {
   margin: 12px 0;
+  p {
+    display: inline-block;
+  }
 }
 
 .pdf-zoom-options > span {
@@ -527,6 +587,29 @@ div > .annotation-item:first-of-type .annotation-cluster {
   border-radius: 50%;
 }
 
+.pdf-zoom-options {
+  border-left: 1px solid #DCDFE2;
+  float: left;
+  margin: 0;
+}
+
+.pdf-zoom-options + div {
+  padding: 16px 10px 9px 0px;
+}
+
+.pdf-zoom-options+div {
+  float: none;
+}
+
+.pdf-zoom-options > span {
+  font-size: 12px;
+  float: left;
+}
+
+.pdf-zoom-options p {
+  display: inline-block;
+}
+
 #annotation-sort-by {
   background-color: #4797DF;
   border-radius: 11px;
@@ -534,6 +617,16 @@ div > .annotation-item:first-of-type .annotation-cluster {
   border: 0;
   font-size: 12px;
   height: 22px;
+}
+
+.metadata-ocid:last-of-type{
+  border: 0px;
+  padding: 0px;
+}
+
+.metadata-info {
+  font-size: 13px;
+  padding: 18px 18px 10px;
 }
 
 .metadata-country, .metadata-signature-year, .metadata-type-contract, .metadata-resource, .metadata-ocid {
@@ -614,7 +707,8 @@ div > .annotation-item:first-of-type .annotation-cluster {
 }
 
 .annotations-topic-list > .selected-topic {
-  background-color: rgb(198, 241, 204);
+  background-color: $color_link_color;
+  color: #fff;
 }
 
 .annotations-list-footer {
@@ -707,6 +801,76 @@ div > .annotation-item:first-of-type .annotation-cluster {
   overflow-y: scroll;
 }
 
+.parent-contract {
+  display: flex !important;
+  align-items: center;
+  font-weight: bold;
+}
+
+.parent-contract > span:last-of-type {
+  font-size: 11px;
+  margin-left: 4px;
+  color: #888;
+}
+
+.annotation-item .category {
+  color: rgba(64, 64, 64, 0.7);
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.annotation-item.selected-annotation {
+  background-color: #dfdfdf;
+}
+
+.annotation-item .annotated-text {
+  background: url(../images/ic-dark-annotate-bg.png) no-repeat 0 5px;
+  font-size: 14px;
+  line-height: 22px;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+.annotation-item .annotation-item-content {
+  padding-left: 0;
+}
+
+.child-contract {
+  padding-left: 5pt;
+  padding-right: 5pt;
+}
+
+
+.amla-legislation {
+  margin: 10px 0px;
+}
+
+.metadataLoading{
+  margin-bottom: 10px;
+  display: block;
+}
+
+.loading {
+  position: absolute;
+  top: 30%;
+  border: 0px;
+  left: 0px;
+  right: 0px;
+  text-align: center;
+  width: auto;
+  background: none;
+}
+
+.loading p {
+  text-indent: 0;
+}
+
+@media all and (max-width: 1040px) {
+  .navigation > a:nth-child(n){
+    text-indent: -999px;
+  }
+}
+
 @media all and (max-width: 900px) {
   .document-wrap {
     display: block;
@@ -726,10 +890,6 @@ div > .annotation-item:first-of-type .annotation-cluster {
     margin-left: 180px;
     margin-top: -40px;
   }
-
-  .pdf-zoom-options {
-    margin: -30px 0 0 320px;
-  }
 }
 
 @media all and (max-width: 720px) {
@@ -743,8 +903,11 @@ div > .annotation-item:first-of-type .annotation-cluster {
   .title-wrap > span {
     width: 62%;
   }
-}
 
+  .loading {
+    top: 45%;
+  }
+}
 
 @media all and (max-width: 480px) {
   .pdf-zoom-options {
@@ -800,6 +963,106 @@ div > .annotation-item:first-of-type .annotation-cluster {
 .pdf-zoom-options {
   padding: 9px 0 8px;
 }
+
+.tools .pdf-download-link {
+  display: block;
+  font-size: 0px;
+  text-decoration: none;
+  height: 44px;
+  padding: 13px 25px 13px 30px;
+  background: url(../../images/ic-sprite.png) no-repeat -152px -40px;
+  border-left: 1px solid #ccc;
+}
+
+.download-pdf a {
+  display: block;
+  font-size: 12px;
+  color: #F37356;
+  text-decoration: none;
+  padding: 13px 25px 13px 44px;
+  background: url(../../images/ic-sprite.png) no-repeat -152px -40px;
+}
+
+.fixed .head-wrap {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+}
+
+.fixed + .document-wrap {
+  padding-top: 44px;
+}
+
+.note-wrapper {
+  background: #f9f9f9;
+  margin: 20px 14px 10px;
+  padding: 12px;
+  display: block;
+  overflow: hidden;
+}
+
+.metadata-note {
+  padding: 0 4px 3px 0!important;
+  font-family: "open-sans-bold";
+  color: #666;
+}
+
+.note {
+  display: block;
+  margin-top: 0;
+}
+
+.note-inner-wrapper+a {
+  float: right;
+}
+
+.note-inner-wrapper+a:focus {
+  text-decoration: none;
+}
+
+.note-wrapper:empty {
+  display: none;
+}
+
+.social-share {
+  float: right;
+  padding: 0;
+  position: static;
+  border: 0;
+  background: transparent;
+}
+
+.social-share li {
+  list-style: none;
+  float: left;
+  margin-right: 6px;
+}
+
+.social-share li a {
+  display: block;
+  text-indent: -9999px;
+  width: 21px;
+  height: 21px;
+  /*background: url(../images/share-sprite.png) no-repeat -22px -40px;*/
+}
+
+.social-share li.twitter a {
+  background-position: 0 -40px;
+}
+
+.social-share li a:hover {
+  /*background-position: -22px 0;*/
+}
+
+.social-share li.google-plus a:hover {
+  background-position: -50px 0;
+}
+
+.social-share li.twitter a:hover {
+  background-position: 0 0;
+}
+
 
 /* --------- responsive for contract view --------- */
 
@@ -898,6 +1161,13 @@ div > .annotation-item:first-of-type .annotation-cluster {
   }
 }
 
+@media all and (min-width: 768px){
+  .text-panel, .pdf-annotator {
+    width: calc(54% - 40px);
+    margin: 20px;
+  }
+}
+
 @media all and (max-width: 720px) {
 
   .title-wrap > span {
@@ -942,3 +1212,4 @@ div > .annotation-item:first-of-type .annotation-cluster {
   }
 
 }
+

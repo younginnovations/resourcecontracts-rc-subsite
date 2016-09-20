@@ -1,12 +1,6 @@
 @extends('layout.app-full')
 @section('css')
 	<link rel="stylesheet" href="{{ url('css/annotation/annotator.css') }}">
-	@if(site()->isRC() || site()->isCountrySite())
-		<link href="{{url('css/rc-contract-view.css')}}" rel="stylesheet">
-	@endif
-	@if(site()->isOLC())
-		<link href="{{url('css/olc-contract-view.css')}}" rel="stylesheet">
-	@endif
 	<style>
 		.metadata-ocid a span {
 			display: inline !important;

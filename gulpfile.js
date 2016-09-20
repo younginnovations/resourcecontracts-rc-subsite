@@ -24,7 +24,6 @@ var theme_olc = [
 
 var homepage_style = [
     './resources/assets/styles/slick.css',
-    //'./resources/assets/styles/leaflet.css',
 ];
 
 var base_script = [
