@@ -118,6 +118,15 @@
 
 /* ----------- style to place share and download button at right side ----------- */
 
+.right-column-view {
+  font-size: 12px;
+  float: right;
+  overflow-y: auto;
+  width: 21%;
+  border-left: 1px solid #DCDFE2;
+  height: 88vh;
+}
+
 .head-wrap{
   .right-column-view{
     min-height: 47px;

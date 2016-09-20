@@ -1,9 +1,12 @@
+$img-path: "../images";
+
 .navigation > a:nth-child(2) {
   background-position: -474px 13px;
 }
 
 .navigation > a:nth-child(3) {
   background: url(../images/ic-nav-annotate.png) no-repeat 16px 14px;
+  display: none; /* hide metadata for large screen */
 }
 
 .navigation > a:nth-child(4) {
@@ -53,8 +56,7 @@
 }
 
 .pagination{
-  min-width: 125px;
-  margin: 9px 6px 7px;
+  margin: 9px 8px 7px 6px;
 }
 
 .pdf-pagination.pagination  span,
@@ -134,14 +136,7 @@
   left: -2px;
   width: 10px;
   height: 10px;
-  background: $color_link_color;
   border-radius: 50%;
-}
-
-
-
-.annotation-sort > .active {
-  background: $color_link_color;
 }
 
 .annotation-sort > .active:after {
@@ -149,7 +144,6 @@
   position: absolute;
   bottom: -6px;
   left: 45%;
-  border-top: 6px solid $color_link_color;
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
 }
@@ -316,15 +310,10 @@
     width: 10px;
     height: 10px;
     text-indent: -9999px;
-    border: 2px solid $color_link_color;
     display: block;
     padding: 10px;
     border-radius: 50%;
     opacity: 1;
-
-    &hover {
-      background: $color_link_color url(../images/ic-close-link.png) no-repeat center;
-    }
   }
 }
 
@@ -487,16 +476,6 @@ div > .annotation-item:first-of-type .annotation-cluster {
   margin-bottom: 18px;
 }
 
-
-.right-column-view {
-  font-size: 12px;
-  float: right;
-  overflow-y: auto;
-  width: 21%;
-  border-left: 1px solid #DCDFE2;
-  height: 88vh;
-}
-
 .annotation-sort {
   margin: 0 18px 20px;
 }
@@ -522,7 +501,6 @@ div > .annotation-item:first-of-type .annotation-cluster {
 }
 
 .annotations-topic-list span {
-  color:  $color_link_color;
   display: inline-block;
   cursor: pointer;
   margin: 0 13px 9px 0;
@@ -624,6 +602,14 @@ div > .annotation-item:first-of-type .annotation-cluster {
   padding: 0px;
 }
 
+ .metadata-ocid a span {
+   display: inline !important;
+ }
+
+.metadata-info span {
+  color: rgba(64, 64, 64, 0.7)
+}
+
 .metadata-info {
   font-size: 13px;
   padding: 18px 18px 10px;
@@ -707,7 +693,6 @@ div > .annotation-item:first-of-type .annotation-cluster {
 }
 
 .annotations-topic-list > .selected-topic {
-  background-color: $color_link_color;
   color: #fff;
 }
 
@@ -850,16 +835,6 @@ div > .annotation-item:first-of-type .annotation-cluster {
   display: block;
 }
 
-.loading {
-  position: absolute;
-  top: 30%;
-  border: 0px;
-  left: 0px;
-  right: 0px;
-  text-align: center;
-  width: auto;
-  background: none;
-}
 
 .loading p {
   text-indent: 0;
@@ -1202,7 +1177,6 @@ div > .annotation-item:first-of-type .annotation-cluster {
   }
 
   .action-links ul li a{
-    background: $color_link_color !important;
     padding: 10px 12px;
     font-size: 10px;
   }

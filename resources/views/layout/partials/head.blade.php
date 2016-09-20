@@ -24,8 +24,8 @@ $favicon     = site()->getImageUrl('favicon', 'ico');
 	<meta name="twitter:title" content="{{ $title }}"/>
 	<meta name="twitter:image" content="{{ site()->meta('bgImage')}}"/>
 	<link rel="icon" href="{{$favicon}}">
-	<link href="{{url('css/style.min.css')}}" rel="stylesheet"/>
-	<link href="{{url('css/homepage.min.css')}}" rel="stylesheet">
+	<link href="{{url('css/style.css')}}" rel="stylesheet"/>
+	<link href="{{url('css/homepage.css')}}" rel="stylesheet">
 	@yield('css')
     <!--[if lt IE 9]>
 	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>

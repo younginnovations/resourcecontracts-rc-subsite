@@ -13,9 +13,8 @@ if (!site()->isRC()) {
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="{{$favicon}}">
-	<link rel="stylesheet" href="{{ url('css/annotation/annotator.css') }}">
-	<link href="{{url('css/'.meta()->category.'-contract-view.css')}}" rel="stylesheet">
-	<link href="{{url('css/style.min.css')}}" rel="stylesheet"/>
+	<link href="{{url('css/style.css')}}" rel="stylesheet"/>
+	<link href="{{url('css/contract.css')}}" rel="stylesheet"/>
 
 	<!--[if lt IE 9]>
 	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>

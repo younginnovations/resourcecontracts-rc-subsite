@@ -1,20 +1,6 @@
 @extends('layout.app-full')
 @section('css')
-	<link rel="stylesheet" href="{{ url('css/annotation/annotator.css') }}">
-	<style>
-		.metadata-ocid a span {
-			display: inline !important;
-		}
-
-		.metadata-info span {
-			color: rgba(64, 64, 64, 0.7)
-		}
-
-		.loading {
-			margin-top: 250px;
-			text-align: center
-		}
-	</style>
+	<link rel="stylesheet" href="{{ url('css/contract.css') }}">
 @stop
 
 @section('content')

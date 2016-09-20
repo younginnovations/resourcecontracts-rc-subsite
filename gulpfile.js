@@ -22,6 +22,10 @@ var theme_olc = [
     './resources/assets/scss/themes/olc.scss',
 ];
 
+var contract_style = [
+    './resources/assets/scss/contract/contract.scss',
+];
+
 var homepage_style = [
     './resources/assets/styles/slick.css',
 ];
@@ -123,7 +127,6 @@ gulp.task('default_theme', function () {
         .pipe(rename({
             basename: "",
             prefix: "style",
-            suffix: ".min",
             extname: ".css"
         }))
         .pipe(gulp.dest('./public/css'));
@@ -141,7 +144,6 @@ gulp.task('rc', function () {
         .pipe(rename({
             basename: "",
             prefix: "style",
-            suffix: ".min",
             extname: ".css"
         }))
         .pipe(gulp.dest('./public/css'));
@@ -159,13 +161,10 @@ gulp.task('olc', function () {
         .pipe(rename({
             basename: "",
             prefix: "style",
-            suffix: ".min",
             extname: ".css"
         }))
         .pipe(gulp.dest('./public/css'));
 });
-
-
 
 /*
  * Watch scss files for changes & recompile
@@ -173,6 +172,7 @@ gulp.task('olc', function () {
  */
 gulp.task('watch', function () {
     gulp.watch('./resources/assets/scss/pages/*.scss', ['rc']);
+    gulp.watch(contract_style, ['contract-style']);
     gulp.watch(base_script, ['js-base']);
     gulp.watch(country_script, ['js-country']);
     gulp.watch(resource_script, ['js-resource']);
@@ -186,13 +186,31 @@ gulp.task('homepage-style',function(){
     return gulp.src(homepage_style)
         .pipe(concat('homepage.css'))
         .pipe(gulp.dest('./public/css'))
-        .pipe(rename({suffix: '.min'}))
         .pipe(uglifycss({
             "max-line-len": 80
         }))
         .pipe(gulp.dest('./public/css'))
         .pipe(notify({message: 'css-homepage task complete'}));
 });
+
+gulp.task('contract-style',function(){
+    return gulp.src(contract_style)
+        .pipe(sourcemaps.init())
+        .pipe(sass())
+        .pipe(postcss([autoprefixer({browsers: ['last 30 versions', '> 1%', 'ie 8', 'ie 7']})]))
+        .pipe(sourcemaps.write('./maps'))
+        .pipe(uglifycss({
+            "max-line-len": 80
+        }))
+        .pipe(rename({
+            basename: "",
+            prefix: "contract",
+            extname: ".css"
+        }))
+        .pipe(gulp.dest('./public/css'))
+        .pipe(notify({message: 'css-contract task complete'}));
+});
+
 
 /*
  * Default task, running just `gulp` will compile the sass,
