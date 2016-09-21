@@ -415,6 +415,7 @@ td.contract-date {
     a {
       position: relative;
       display: inline-block;
+      min-height: 22px;
       &:before {
         content: "";
         border-left: 4px solid transparent;
