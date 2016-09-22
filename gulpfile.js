@@ -171,7 +171,7 @@ gulp.task('olc', function () {
  * Watch html/md files, run jekyll & reload BrowserSync
  */
 gulp.task('watch', function () {
-    gulp.watch('./resources/assets/scss/pages/*.scss', ['rc']);
+    gulp.watch('./resources/assets/scss/pages/*.scss', ['olc']);
     gulp.watch(contract_style, ['contract-style']);
     gulp.watch(base_script, ['js-base']);
     gulp.watch(country_script, ['js-country']);

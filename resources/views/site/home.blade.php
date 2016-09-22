@@ -27,28 +27,66 @@ $image_intro = site()->getImageUrl('intro_bg');
 		</nav>
 	</div>
 	<section class="hero-image">
-		<div class="petroleum-wrapper">
-			<div class="section-wrap">
-				<div class="petroleum-mineral">
-					{!! site()->meta('tagline') !!}
-					<div class="clearfix">
-						<form action="{{route('search')}}" method="GET" class="search-form" role="search">
-							<div class="form-group clearfix">
-								<input type="text" name="q" class="form-control"
-									   placeholder="@lang('global.search') {{$contracts}} @lang('global.contracts')&nbsp;{{site()->meta('associated_documents')}}">
-								<button type="submit" class="btn btn-default search-button">
-									@lang('global.search')
-								</button>
+			<div class="petroleum-wrapper">
+				<div class="section-wrap">
+					<div class="petroleum-mineral">
+						{!! site()->meta('tagline') !!}
+						<div class="clearfix">
+							<form action="{{route('search')}}" method="GET" class="search-form" role="search">
+								<div class="form-group clearfix">
+									<input type="text" name="q" class="form-control" placeholder="@lang('global.search') {{$contracts}} @lang('global.contracts') @lang('global.associated_documents')">
+									<button type="submit" class="btn btn-default search-button">
+										@lang('global.search')
+									</button>
+								</div>
+							</form>
+							<div class="advance-search">
+								<a href="{{url('search')}}">@lang('global.advanced_search')</a>
 							</div>
-						</form>
-						<div class="advance-search">
-							<a href="{{url('search')}}">@lang('global.advanced_search')</a>
+						</div>
+					</div>
+					<div class="petroleum-list show-in-bigger-screen">
+						<div class="col-md-12 col-sm-12 col-xs-12 text-center petroleum-list-inner">
+							<div class="row">
+								<div class="col-md-4 col-sm-4 col-xs-4 petroleum-list-each">
+									<a href="{{route('contracts')}}">
+										<h2 class="petroleum-list-title">{{$contracts}}</h2>
+										<small>{{trans('global.documents')}}</small>
+									</a>
+								</div>
+								@if(!site()->isCountrySite())
+									<div class="col-md-4 col-sm-4 col-xs-4 petroleum-list-each">
+										<a href="{{route('countries')}}">
+											<h2 class="petroleum-list-title">{{$countries}}</h2>
+											<small>{{trans('global.countries')}}</small>
+										</a>
+									</div>
+								@endif
+								<div class="col-md-4 col-sm-4 col-xs-4">
+									<a href="{{route('resources')}}">
+										<h2 class="petroleum-list-title">{{$resources}}</h2>
+										<small>{{trans('global.resources')}}</small>
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="clear"></div>
+						<div class="list-item-wrap">
+							<div class="inner-list-item">
+								<label class="group-item-title">{{trans('global.explore_contract_terms')}}:</label>
+								<ul class="list-group">
+									@foreach($links as $link)
+										<li class="list-group-item">
+											<a href="{{$link['url']}}">{{$link['title']}}</a>
+										</li>
+									@endforeach
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="petroleum-list">
+		<div class="petroleum-list show-in-small-screen">
 			<div class="col-md-12 col-sm-12 col-xs-12 text-center petroleum-list-inner">
 				<div class="row">
 					<div class="col-md-4 col-sm-4 col-xs-4 petroleum-list-each">

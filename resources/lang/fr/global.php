@@ -1,6 +1,7 @@
 <?php
 return [
     'search'                  => "Chercher",
+    'associated_documents'    => 'et les documents associés',
     'contracts'               => "contrats",
     'contract_doc_from'       => "Documents du contrat de",
     'countries'               => "Pays",
@@ -69,4 +70,5 @@ return [
     'explore_contracts'       => 'Explorez les contrats',
     'explore_contract_terms'  => 'Explorez les termes du contrat',
     'country_partners'        => 'Partenaires pays',
+    'resources'               => 'Ressources',
 ];

@@ -1,6 +1,7 @@
 <?php
 return [
     'search'                  => 'Search',
+    'associated_documents'    => 'and associated documents',
     'contracts'               => 'contracts',
     'contract_doc_from'       => 'CONTRACT DOCUMENTS FROM',
     'countries'               => 'Countries',
@@ -69,4 +70,5 @@ return [
     'explore_contracts'       => 'Explore Contracts',
     'explore_contract_terms'  => 'Explore contract terms',
     'country_partners'        => 'Country Partners',
+    'resources'               => 'Resources',
 ];

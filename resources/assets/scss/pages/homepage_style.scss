@@ -227,18 +227,13 @@
     border-radius: 4px;
     margin-bottom: 20px;
     .repo-description {
-      font-size: 24px;
+      font-size: 26px;
       line-height: 34px;
     }
     .large-title {
       font-family: $font_2;
-      font-size: 56px;
+      font-size: 58px;
       line-height: 66px;
-
-      &.olc-title {
-        font-size: 48px;
-        line-height: 66px;
-      }
 
       span {
         display: block;
@@ -251,6 +246,7 @@
     .search-form {
       padding: 0;
       margin-top: 38px;
+      max-width: 600px;
       .form-group {
         input {
           width: calc(100% - 126px);
@@ -282,21 +278,21 @@
 
   .petroleum-mineral {
     input::-webkit-input-placeholder {
-      color: rgba(255, 255, 255, 0.4) !important;
+      color: rgba(255,255,255,0.8) !important;
     }
     input {
       &:-webkit-input-placeholder {
-        color: rgba(255, 255, 255, 0.4) !important;
+        color: rgba(255,255,255,0.8) !important;
       }
       &:-moz-placeholder {
-        color: rgba(255, 255, 255, 0.4) !important;
+        color: rgba(255,255,255,0.8) !important;
       }
       &:-ms-input-placeholder {
-        color: rgba(255, 255, 255, 0.4) !important;
+        color: rgba(255,255,255,0.8) !important;
       }
     }
     input::-moz-placeholder {
-      color: rgba(255, 255, 255, 0.4) !important;
+      color: rgba(255,255,255,0.8) !important;
     }
   }
 
@@ -944,5 +940,27 @@ p {
   }
 }
 
+@media (min-width: 1200px){
+  .section-wrap{
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
 
+.show-in-small-screen{
+  display: block;
+}
+
+@media (min-width: 992px){
+  .show-in-small-screen{
+    display: none;
+  }
+}
+
+@media (max-width: 992px) {
+  .show-in-bigger-screen {
+    display: none;
+  }
+}
 

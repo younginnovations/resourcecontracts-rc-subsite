@@ -140,7 +140,7 @@
 @media all and (min-width: 1300px){
   .section-wrap {
     min-height: 610px;
-    max-width: 1200px;
+    max-width: 1200px !important;
     margin: 0 auto;
   }
 
@@ -152,20 +152,19 @@
   .petroleum-list {
     left: 820px;
     bottom: auto;
-    left: calc(50% + 120px);
-    top: calc(50% - 145px);
-    //left: calc(920px - 195px);
+    top: calc(50% - 65px);
   }
 
   .hero-image .search-form{
     max-width: 600px;
   }
 }
+/*@media (max-width: 1110px) and (min-width: 992px){*/
 
-@media (max-width: 1110px) and (min-width: 992px){
+@media (min-width: 992px){
   .petroleum-mineral {
-    width: 560px;
-    padding: 140px 180px 84px 31px;
+    width: calc(100% - 186px);
+    padding: 140px 227px 84px 30px;
 
     .large-title{
       font-size: 42px;
@@ -174,7 +173,14 @@
   }
 
   .petroleum-list{
-    left: 505px;
+    left: calc(100% - 417px);
+    top: calc(50% - 145px)
+  }
+
+  .section-wrap{
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 133px 20px 20px 20px;
   }
 }
 

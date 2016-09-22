@@ -27312,7 +27312,7 @@ var AnnotationHeader = React.createClass({displayName: "AnnotationHeader",
         var count = this.props.annotationsCollection.totalAnnotations();
         return (
             React.createElement("div", null, 
-            React.createElement("div", {className: "annotation-title"}, count, " ", lang.annotations)
+                React.createElement("div", {className: "annotation-title"}, count, " ", lang.annotations)
 
             )
         );
@@ -27327,47 +27327,45 @@ var ClipAll = React.createClass({displayName: "ClipAll",
         });
 
     },
-    componentDidUpdate : function(){
-        if(!this.checkAllClipped()){
+    componentDidUpdate: function () {
+        if (!this.checkAllClipped()) {
             $(this.getDOMNode()).find('.annotation-clip').removeClass('annotation-clipped');
-            $(this.getDOMNode()).find('.annotation-clip').attr('id','clip-all-annotations');
+            $(this.getDOMNode()).find('.annotation-clip').attr('id', 'clip-all-annotations');
         }
 
     },
-    checkAllClipped:function(){
+    checkAllClipped: function () {
         var clipCollection = window.getClipLocalCollection();
         var allAnnotations = this.props.annotationsCollection;
-        var clipCollectionData=clipCollection.localStorage.findAll();
+        var clipCollectionData = clipCollection.localStorage.findAll();
         var clippedData = [];
-        clipCollectionData.map(function(d){
+        clipCollectionData.map(function (d) {
             clippedData.push(parseInt(d.id));
         });
         var isAllClipped = false;
-        allAnnotations.map(function(d){
-            if(clippedData.indexOf(parseInt(d.get('annotation_id'))) > -1)
-            {
-                isAllClipped=true;
-            }else{
-                isAllClipped=false;
+        allAnnotations.map(function (d) {
+            if (clippedData.indexOf(parseInt(d.get('annotation_id'))) > -1) {
+                isAllClipped = true;
+            } else {
+                isAllClipped = false;
             }
         });
         return isAllClipped;
 
     },
-    render : function(){
-        if(isClipOn==true)
-        {
-            return(
+    render: function () {
+        if (isClipOn == true) {
+            return (
                 React.createElement("div", {className: "clearfix"}, 
-                React.createElement("a", {id: "clip-all-annotations", className: "annotation-clip", title: "Clip all annotations"}, 
-                React.createElement("span", {className: "link"}, langClip.clip_all)
+                    React.createElement("a", {id: "clip-all-annotations", className: "annotation-clip", title: "Clip all annotations"}, 
+                        React.createElement("span", {className: "link"}, langClip.clip_all)
+                    )
                 )
-                )
-                );
+            );
         }
-    else{
-        return (React.createElement("div", null));
-    }
+        else {
+            return (React.createElement("div", null));
+        }
     }
 });
 
@@ -27758,7 +27756,8 @@ var AnnotationItem = React.createClass({displayName: "AnnotationItem",
                     l = true;
                 }
                 var article_reference = (annotation.get('article_reference') != '') ? annotation.get('article_reference') : '';
-                return (React.createElement(PageLink, {key: index, contractApp: self.props.contractApp, annotation: annotation, last: l, page: page, 
+                return (React.createElement(PageLink, {key: index, contractApp: self.props.contractApp, annotation: annotation, last: l, 
+                                  page: page, 
                                   article_reference: article_reference}))
             });
 
@@ -27852,8 +27851,7 @@ var AnnotationItem = React.createClass({displayName: "AnnotationItem",
     getCluster: function () {
         return this.getSlugName(this.state.annotationList[0].get('cluster'));
     },
-    getSlugName :function(string)
-    {
+    getSlugName: function (string) {
         return string.toLowerCase().trim().replace(' ', '_');
     },
 
@@ -27863,7 +27861,8 @@ var AnnotationItem = React.createClass({displayName: "AnnotationItem",
         var category = this.getCategory();
         return (
 
-            React.createElement("div", {className: currentAnnotationClass +' ' +this.getCluster() + this.getPageClasses(), id: this.state.annotation_id}, 
+            React.createElement("div", {className: currentAnnotationClass +' ' +this.getCluster() + this.getPageClasses(), 
+                 id: this.state.annotation_id}, 
                 React.createElement(ClipButton, {annotationid: this.state.annotation_id}), 
                 React.createElement("div", {className: "category-clip-wrap"}, 
                     React.createElement("p", {className: "category"}, category)
@@ -27875,37 +27874,30 @@ var AnnotationItem = React.createClass({displayName: "AnnotationItem",
     }
 });
 
-
-
 var ClipButton = React.createClass({displayName: "ClipButton",
-    componentDidUpdate:function(){
-        console.log("clipstate",$.cookie("clipstate")=="undefined");
-        if($.cookie("clipstate")!=0)
-        {
+    componentDidUpdate: function () {
+        if ($.cookie("clipstate") != 0) {
             loadSingleClipedItem(this.getDOMNode());
         }
 
-        if($.cookie("clipstate")==0 || typeof $.cookie("clipstate")=='undefined')
-        {
-
-            $(this.getDOMNode()).css('display','none');
+        if ($.cookie("clipstate") == 0 || typeof $.cookie("clipstate") == 'undefined') {
+            $(this.getDOMNode()).css('display', 'none');
         }
     },
 
-    clickHandler : function(e)
-    {
+    clickHandler: function (e) {
         window.clipAnnotations(parseInt(this.props.annotationid), e.target);
     },
-    render: function(){
-        if(isClipOn==true)
-        {
+    render: function () {
+        if (isClipOn == true) {
             return (
-                React.createElement("button", {"data-id": this.props.annotationid, onClick: this.clickHandler, className: "annotation-clip-icon", title: "Clip annotation."}, "langClip.clip")
+                React.createElement("button", {"data-id": this.props.annotationid, onClick: this.clickHandler, className: "annotation-clip-icon", 
+                        title: "Clip annotation."}, "langClip.clip")
             );
         }
-    else{
-        return (React.createElement("div", null));
-    }
+        else {
+            return (React.createElement("div", null));
+        }
     }
 });
 

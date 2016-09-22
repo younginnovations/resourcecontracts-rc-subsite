@@ -9,6 +9,5 @@ return [
     'resource_description'  => 'Find resource contracts for resource -',
     'tagline'               => '<p class="repo-description">A directory of </p> <div class="large-title"><span>Petroleum &amp; <div>Mineral Contracts</div> </span></div>',
     'intro_text'            => 'In the extraction and exploitation of mineral and petroleum resources, the relationship between governments and oil, gas and mining companies is defined by contracts, agreements, leases and concessions.',
-    'associated_documents'  => 'and associated documents',
     'about'                 => 'About ResourceContracts',
 ];

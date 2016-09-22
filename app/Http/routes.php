@@ -135,7 +135,8 @@ if (site()->isClipEnabled()) {
     $app->get('/clip/download', ['as' => 'clip.download', 'uses' => 'ClippingController@downloadAnnotations']);
     $app->get('clip/api', ['as' => 'clip.api', 'uses' => 'ClippingController@getClippedData']);
     $app->get('clip/{key}', ['as' => 'clip.view', 'uses' => 'ClippingController@clipView']);
-    $app->post('clip/email', ['as' => 'clip.email', 'uses' => 'ClippingController@emailClip']);
     $app->post('/clip/save', ['as' => 'clip.save', 'uses' => 'ClippingController@saveClip']);
     $app->post('clip/zip', ['as' => 'clip.zip', 'uses' => 'ClippingController@getZipFile']);
 }
+
+$app->post('clip/email', ['as' => 'clip.email', 'uses' => 'ClippingController@emailClip']);

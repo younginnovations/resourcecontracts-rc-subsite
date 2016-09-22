@@ -18,11 +18,11 @@ $favicon     = site()->getImageUrl('favicon', 'ico');
 	<meta name="robots" content="noodp"/>
 	<meta property="og:type" content="website"/>
 	<meta property="og:title" content="{{ $title }}"/>
-	<meta property="og:image" content="{{ site()->meta('bgImage')}}"/>
+	<meta property="og:image" content="{{ site()->getImageUrl('bg')}}"/>
 	<meta property="og:description" content="{{ $description}}"/>
 	<meta property="og:url" content="{{ Request::url() }}"/>
 	<meta name="twitter:title" content="{{ $title }}"/>
-	<meta name="twitter:image" content="{{ site()->meta('bgImage')}}"/>
+	<meta name="twitter:image" content="{{ site()->getImageUrl('bg')}}"/>
 	<link rel="icon" href="{{$favicon}}">
 	<link href="{{url('css/style.css')}}" rel="stylesheet"/>
 	<link href="{{url('css/homepage.css')}}" rel="stylesheet">

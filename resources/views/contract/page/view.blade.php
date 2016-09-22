@@ -4,22 +4,28 @@
 @stop
 
 @section('content')
-    <?php
-    $textDownloadUrl = ($contract->metadata->is_ocr_reviewed && !site()->isOLC()) ? route('contract.download', ['id' =>$contract->metadata->open_contracting_id]) : "";
-    $annotationsDownloadUrl = ($contract->annotations->total > 0) ? route('contract.annotations.download', ['id' => $contract->metadata->open_contracting_id]) : "";
-    $local = app('App\Http\Services\LocalizationService');
-    $languages = json_encode(config('language'));
-    $contact_email = site()->contactEmail();
-    ?>
-    <div class="row">
-        <div class="col-lg-12 panel-top-wrapper attached-top-wrapper">
-            <div class="panel-top-content">
-                <div class="pull-left clearfix left-top-content">
-                    <div class="back back-button">Back</div>
-                    <div class="panel-title" id="show-full-title">
-                             {{$contract->metadata->name}}
-                    </div>
-                </div>
+	<?php
+	$textDownloadUrl = ($contract->metadata->is_ocr_reviewed && !site()->isOLC()) ? route(
+			'contract.download',
+			['id' => $contract->metadata->open_contracting_id]
+	) : "";
+	$annotationsDownloadUrl = ($contract->annotations->total > 0) ? route(
+			'contract.annotations.download',
+			['id' => $contract->metadata->open_contracting_id]
+	) : "";
+	$local = app('App\Http\Services\LocalizationService');
+	$languages = json_encode(config('language'));
+	$contact_email = site()->contactEmail();
+	?>
+	<div class="row">
+		<div class="col-lg-12 panel-top-wrapper attached-top-wrapper">
+			<div class="panel-top-content">
+				<div class="pull-left clearfix left-top-content">
+					<div class="back back-button">Back</div>
+					<div class="panel-title" id="show-full-title">
+						{{$contract->metadata->name}}
+					</div>
+				</div>
 				<div class="pull-right action-links">
 					<ul>
 						<li>
@@ -39,8 +45,8 @@
 
 @section('js')
 	<script src="{{ url('js/pdfjs/pdf.js') }}"></script>
-	<script src="{{ url('js/pdfjs/pdf.worker.js') }}"></script>
 	<script>
+		PDFJS.workerSrc = '{{url('js/pdfjs/pdf.worker.js')}}';
 		var debug = function () {
 			var DEBUG = false;
 			if (DEBUG) {
@@ -56,9 +62,9 @@
 			return typeof lang_category[key] != 'undefined' ? lang_category[key] : fallback;
 		};
 
-        var lang =  {!!  json_encode(trans('annotation')) !!};
-        var langResource =  {!!  json_encode(trans('resources')) !!};
-        var langClip = {!! json_encode(trans('clip'))  !!};
+		var lang =  {!!  json_encode(trans('annotation')) !!};
+		var langResource =  {!!  json_encode(trans('resources')) !!};
+		var langClip = {!! json_encode(trans('clip'))  !!};
 		var clipUrl = '{{url('clip')}}';
 		var email = '{{site()->contactEmail()}}';
 		var back_url = '{!!$back!!}';
@@ -72,7 +78,7 @@
 		var esapi = '{{rtrim(site()->esUrl(),'/')}}/';
 		var facebook_share = 'https://www.facebook.com/sharer/sharer.php?u=';
 		var google_share = 'https://plus.google.com/share?url=';
-		var twitter_share = 'https://twitter.com/share?text='+document.title;
+		var twitter_share = 'https://twitter.com/share?text=' + document.title;
 		var text_version_url = '{{url('/faqs#learn_more')}}';
 
 		var processing_pdf_file_message = '{{sprintf(trans('annotation.processing_pdf_file'),env('CONTACT_MAIL'))}}';
@@ -97,5 +103,5 @@
 			return countryList[code.toUpperCase()];
 		}
 	</script>
-	<script src="{{ url('js/contract-view.js') }}"></script>
+	<script src="{{ url('js/contract-view.min.js') }}"></script>
 @stop

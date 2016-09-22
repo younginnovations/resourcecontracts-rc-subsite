@@ -9,6 +9,5 @@ return [
     'resource_description'  => 'البحث عن عقود الموارد من أجل الموارد -',
     'tagline'               => '<p class="repo-description">دليل لل </p> <div class="large-title"><span>البترول و &amp; <div>العقود المعدنية</div> </span></div>',
     'intro_text'            => 'في استخراج واستغلال الثروات البترولية والتعدينية ، يتم تعريف العلاقة بين الحكومات و النفط والغاز و شركات التعدين التي العقود والاتفاقيات و عقود الإيجار والتنازلات .',
-    'associated_documents'  => 'والوثائق المرتبطة',
     'about'                 => 'حول ResourceContracts',
 ];

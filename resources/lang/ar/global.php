@@ -1,6 +1,7 @@
 <?php
 return [
     'search'                  => "بحث",
+    'associated_documents'    => 'والوثائق المرتبطة',
     'contracts'               => "عقود",
     'contract_doc_from'       => "والوثائق ذات الصلة",
     'countries'               => "وثائق عقد",
@@ -69,4 +70,5 @@ return [
     'explore_contracts'       => 'استكشاف العقود',
     'explore_contract_terms'  => 'استكشاف شروط العقد',
     'country_partners'        => 'شركاء البلاد',
+    'resources'               => 'موارد',
 ];
