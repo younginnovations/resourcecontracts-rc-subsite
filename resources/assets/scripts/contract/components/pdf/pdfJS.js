@@ -69,21 +69,20 @@ var PdfJS = React.createClass({
         PDFJS.verbosity = 0;
     },
     loadPdf (props) {
-        debug('PDF JS Loading PDF ' + props.page);
+        debug('PDF JS Loading PDF ', props.page, props.file, props.scale);
         this.notice('Loading PDF ' + props.page);
         this.queueRenderPage(props.file, props.scale);
     },
-    componentWillMount () {
-        this.loadPdf(this.props);
+    shouldComponentUpdate: function(nextProps, nextState) {
+        return JSON.stringify(nextProps) !== JSON.stringify(nextState)
     },
     componentWillReceiveProps (props) {
         this.loadPdf(props);
     },
     render () {
-        var message = (<div className="message">{this.state.message}</div>);
         return (
-            <div>
-                {message}
+            <div className="pdf-container">
+                <div className="message" dangerouslySetInnerHTML={{__html: this.state.message}}/>
                 <canvas ref="pdfCanvas"></canvas>
             </div>
         );

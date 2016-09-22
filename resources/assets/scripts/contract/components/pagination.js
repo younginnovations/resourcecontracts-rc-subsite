@@ -11,13 +11,18 @@ class Pagination extends Component {
 
     componentDidMount() {
         this.setState({total: Contract.getTotalPages(), page: Contract.getCurrentPage()});
-        this.refs.pageNumber.value = this.state.page;
+        this.refs.pageNumber.value = Contract.getCurrentPage();
+
+        this.subscribeLocation = Event.subscribe('pagination:change', ()=> {
+            this.setState({total: Contract.getTotalPages(), page: Contract.getCurrentPage()});
+            this.refs.pageNumber.value = Contract.getCurrentPage();
+        });
 
         this.subscribeScroll = Event.subscribe('pagination:scroll', number=> {
             if (this.state.page != number) {
                 this.refs.pageNumber.value = number;
                 this.setState({page: number});
-                ///   Contract.setCurrentPage(number);
+                Contract.setCurrentPage(number);
                 debug('subscribe pagination:scroll', number);
             }
         });
@@ -33,14 +38,13 @@ class Pagination extends Component {
     componentWillUnmount() {
         this.subscribeScroll.remove();
         this.subscribeUpdate.remove();
+        this.subscribeLocation.remove();
     }
 
     changePage(page_no) {
         this.refs.pageNumber.value = page_no;
-        Contract.setCurrentPage(page_no);
         this.setState({page: page_no});
-        Event.publish('pagination:change', page_no);
-        debug('publish pagination:change', page_no);
+        Contract.setCurrentPage(page_no);
     }
 
     clickPrevious(e) {

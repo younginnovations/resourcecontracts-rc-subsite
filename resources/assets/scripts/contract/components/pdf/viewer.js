@@ -8,7 +8,7 @@ class Viewer extends Component {
 
     constructor(props) {
         super(props);
-        this.state = ({pages: {}, currentPage: 1, scale: 1});
+        this.state = ({pages: {}, currentPage: 1});
     }
 
     componentWillReceiveProps(props) {
@@ -34,7 +34,7 @@ class Viewer extends Component {
         var pageView = null;
         var page = this.getPage();
         if (!_isEmpty(page)) {
-            pageView = (<Page scale={this.state.scale} page={this.getPage()}/>);
+            pageView = (<Page page={this.getPage()}/>);
         }
         return (
             <div className="pdf-viewer pdf-annotator">

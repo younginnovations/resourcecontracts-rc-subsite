@@ -12,6 +12,32 @@ class Viewer extends Component {
         this.annotator = '';
     }
 
+    componentDidMount() {
+        this.subscribe = Event.subscribe('pagination:change', this.paginationHandler);
+        Contract.setDisablePagination(true);
+    }
+
+    paginationHandler(page_no) {
+        var view = Contract.getView();
+        if (view == 'text' || view == 'search') {
+            debug('subscribe Text pagination:change', page_no);
+            var page = $('#text-' + page_no);
+            var parentWindow = $('.text-annotator');
+            if (page.offset()) {
+                var pageOffsetTop = page.offset().top;
+                var parentTop = parentWindow.scrollTop();
+                var parentOffsetTop = parentWindow.offset().top;
+                parentWindow.animate({scrollTop: parentTop - parentOffsetTop + pageOffsetTop}, 300, ()=> {
+                    Contract.setDisablePagination(false);
+                });
+            }
+        }
+    }
+
+    componentWillUnmount() {
+        this.subscribe.remove();
+    }
+
     componentWillReceiveProps(props) {
         this.setState({
             pages: props.pages,
@@ -20,6 +46,7 @@ class Viewer extends Component {
     }
 
     componentDidUpdate() {
+        this.paginationHandler(Contract.getCurrentPage());
         if (!this.annotator && this.state.pages.length > 0) {
             this.annotator = new AnnotationLoader('.text-annotator');
             this.annotator.init();

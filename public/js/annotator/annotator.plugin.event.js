@@ -19,7 +19,7 @@ Annotator.Plugin.AnnotatorEvents = (function (_super) {
     }
 
     AnnotatorEvents.prototype.annotationsLoaded = function () {
-        var contract = this.contract;
+       /* var contract = this.contract;
         var hash = window.location.hash;
         var annotation_id = 0;
         if (hash != '' && typeof hash.split('annotation/')[1] !== 'undefined') {
@@ -29,8 +29,8 @@ Annotator.Plugin.AnnotatorEvents = (function (_super) {
         if (annotation_id < 1) {
             return;
         }
-        contract.showPopup(annotation_id);
-        contract.trigger('annotation:highlight', annotation_id);
+      //  contract.showPopup(annotation_id);
+        contract.trigger('annotation:highlight', annotation_id);*/
     };
     AnnotatorEvents.prototype.annotationViewerShown = function (viewer, annotations) {
         var viewerEl = $(viewer.element);

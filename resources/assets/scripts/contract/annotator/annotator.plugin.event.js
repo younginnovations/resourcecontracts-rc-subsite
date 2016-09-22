@@ -1,12 +1,7 @@
 Annotator.Plugin.AnnotatorEvents = (function (_super) {
     __extends(AnnotatorEvents, _super);
     AnnotatorEvents.prototype.events = {
-        'annotationCreated': 'onAnnotationCreated',
-        'annotationDeleted': 'onAnnotationDeleted',
-        'annotationUpdated': 'onAnnotationUpdated',
         'annotationsLoaded': 'annotationsLoaded',
-        'annotorious:annotation-clicked': 'onAnnotationClicked',
-        'annotorious:mouse-over-annotation': 'onMouseOverAnnotation'
     };
     AnnotatorEvents.prototype.field = null;
     AnnotatorEvents.prototype.input = null;
@@ -27,55 +22,15 @@ Annotator.Plugin.AnnotatorEvents = (function (_super) {
         AnnotatorEvents: {}
     };
     function AnnotatorEvents(element, options) {
-        this.onAnnotationClicked = __bind(this.onAnnotationClicked, this);
-        this.onAnnotationCreated = __bind(this.onAnnotationCreated, this);
-        this.onAnnotationUpdated = __bind(this.onAnnotationUpdated, this);
-        this.onAnnotationDeleted = __bind(this.onAnnotationDeleted, this);
         this.annotationsLoaded = __bind(this.annotationsLoaded, this);
-        this.onMouseOverAnnotation = __bind(this.onMouseOverAnnotation, this);
         AnnotatorEvents.__super__.constructor.apply(this, arguments);
     }
-
-    AnnotatorEvents.prototype.onAnnotationClicked = function (obj) {
-        this.contractApp.trigger("annotations:highlight", obj.annotation);
-    };
-    AnnotatorEvents.prototype.onAnnotationCreated = function (annotation) {
-        annotation.page = this.contractApp.getCurrentPage();
-        annotation.category = annotation.category.trim();
-        var self = this;
-        setTimeout(function (event) {
-            self.contractApp.trigger('annotationCreated', annotation);
-        }, 500);
-    };
-    AnnotatorEvents.prototype.onAnnotationUpdated = function (annotation) {
-        this.contractApp.trigger('annotationUpdated', annotation);
-    };
-    AnnotatorEvents.prototype.onAnnotationDeleted = function (annotation) {
-        this.contractApp.trigger('annotationDeleted', annotation);
-    };
 
     AnnotatorEvents.prototype.onMouseOverAnnotation = function (viewer) {
         onViewShownHandler(viewer.mouseEvent)
     };
     AnnotatorEvents.prototype.annotationsLoaded = function (obj) {
-        var annotation_id = contractApp.getSelectedAnnotation();
-        var hash = window.location.hash;
-
-        if (annotation_id === 0 && hash != '') {
-            if (typeof hash.split('annotation/')[1] !== 'undefined') {
-                annotation_id = hash.split('annotation/')[1];
-            }
-        }
-
-        if (contractApp.getView() == 'pdf') {
-            setTimeout(function () {
-                contractApp.showPdfAnnotationPopup(annotation_id)
-            }, 600);
-        }
-
-        if (contractApp.getView() == 'text') {
-            contractApp.showTextAnnotationPopup(annotation_id);
-        }
+     console.log('loaded');
     };
 
     function onEditorShownHandler(viewer) {

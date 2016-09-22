@@ -29,8 +29,7 @@ var Page = React.createClass({
         this.sub.remove();
     },
     updateState(props){
-        this.setState({pdf_url: props.page.pdf_url, page_no: props.page.page_no, scale: props.scale});
-        $('annotator-wrapper')
+        this.setState({pdf_url: props.page.pdf_url, page_no: props.page.page_no, scale: Contract.getPdfScale()});
     },
     componentWillMount() {
         this.updateState(this.props);
@@ -52,14 +51,18 @@ var Page = React.createClass({
     },
     onPageRendered() {
         var annotations = this.getAnnotations();
-        if (!this.annotator && annotations.length > 0) {
+        if (!this.annotator) {
             this.annotator = new AnnotationLoader('.pdf-annotator');
             this.annotator.init();
+            Contract.setAnnotatorInstance(this.annotator);
         }
-        this.annotator.content.annotator("loadAnnotations", annotations);
-        Contract.setAnnotatorInstance(this.annotator);
-        Event.publish('annotation:loaded');
+
+        if (annotations.length > 0) {
+            this.annotator.content.annotator("loadAnnotations", annotations);
+        }
         debug('PDF Viewer publish annotation:loaded');
+
+        Contract.showPopup();
     },
     getPageID() {
         return 'pdf-' + this.state.page_no;

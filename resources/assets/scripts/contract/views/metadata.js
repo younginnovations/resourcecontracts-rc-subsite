@@ -24,62 +24,42 @@ var Metadata = React.createClass({
             this.setState({metadata: data, loading: false});
         }
     },
-    getCountry() {
+    getCountry(more = false) {
         if (isSite('country')) {
             return null;
         }
-
         var code = this.state.metadata.country.code.toLowerCase();
         var link = Config.APP_URL + "/countries/" + code;
-
-        return (<div className="metadata-ocid">
-            <span>{LANG.country}</span>
-            <a href={link}>{getCountryName(code)}</a>
-        </div>);
+        if (more) {
+            return (<div className="metadata-ocid">
+                <span>{LANG.more_from} <a href={link}>{getCountryName(code)}</a></span>
+            </div>);
+        } else {
+            return (<div className="metadata-ocid">
+                <span>{LANG.country}</span>
+                {getCountryName(code)}
+            </div>);
+        }
     },
     getSignatureYear()
     {
         var year = this.state.metadata.year_signed;
-        var year_link = Config.APP_URL + "/contracts?year=" + year;
         if (year != '') {
-            return (<a href={year_link}>{year}</a>)
+            return year;
         }
         return '<span>-</span>';
     },
     getContractType()
     {
         var ct = this.state.metadata.contract_type;
-        var contractType = ct.map(function (contractType, i) {
+
+        return ct.map(function (contractType, i) {
+            var sep = '';
             if (i != ct.length - 1) {
-                return React.createElement('a', {
-                    href: app_url + "/search?q=&contract_type%5B%5D=" + contractType,
-                    key: i
-                }, contractType + ' | ');
-            } else {
-                return React.createElement('a', {
-                    href: app_url + "/search?q=&contract_type%5B%5D=" + contractType,
-                    key: i
-                }, contractType);
+                sep = ' | ';
             }
+            return (<span>{contractType} {sep}</span>);
         });
-
-        if (typeof ct === 'object') {
-            contractType = ct.map(function (contractType, i) {
-                if (i != ct.length - 1) {
-                    return React.createElement('a', {
-                        href: app_url + "/search?q=&contract_type%5B%5D=" + contractType,
-                        key: i
-                    }, contractType + ' | ');
-                } else {
-                    return React.createElement('a', {
-                        href: app_url + "/search?q=&contract_type%5B%5D=" + contractType,
-                        key: i
-                    }, contractType);
-                }
-            });
-        }
-
-        return contractType;
     },
     handleMoreText(e) {
         e.preventDefault();
@@ -103,28 +83,30 @@ var Metadata = React.createClass({
                     <a className="ellipsis" href="#" onClick={this.handleMoreText}>{{__html: LANG.note_less}}</a>);
             }
             noteHtml += '<span class="note">' + note + '</span>';
-            noteHtml = (<span className="note-inner-wrapper" dangerouslySetInnerHTML={{__html: noteHtml}} />);
+            noteHtml = (<span className="note-inner-wrapper" dangerouslySetInnerHTML={{__html: noteHtml}}/>);
             return noteHtml;
         }
 
         return null;
     },
-    getResource() {
+    getResource(more = false) {
         var resources = this.state.metadata.resource;
-        var resourceCount = resource.length;
-        var resourceArr = [];
-
-        resources.forEach(function (value, index) {
-            if (LANG.resourceLang[value] && index != resourceCount - 1) {
-                resourceArr.push(React.createElement('a', {href: Config.APP_URL + "/resource/" + encodeURIComponent(value)}, LANG.resourceLang[value] + ' | '));
-            } else if (LANG.resourceLang[value] && index == resourceCount - 1) {
-                resourceArr.push(React.createElement('a', {href: Config.APP_URL + "/resource/" + encodeURIComponent(value)}, LANG.resourceLang[value]));
-            } else {
-                resourceArr.push(React.createElement('a', {href: Config.APP_URL + "/resource/" + encodeURIComponent(value)}, value));
+        var resourceCount = resources.length;
+        return resources.map(function (value, index) {
+            var link = Config.APP_URL + "/resource/" + encodeURIComponent(value);
+            var text = LANG.resourceLang[value];
+            var sep = '';
+            if (index != resourceCount - 1) {
+                sep = ' | ';
             }
+            if (typeof text == 'undefined') {
+                text = value;
+            }
+            if (more) {
+                return (<span><a href={link}>{text}</a> {sep}</span>);
+            }
+            return (<span>{text} {sep}</span>);
         });
-
-        return resourceArr;
     },
     getAnnexesMissing(){
         var annexes_missing = null;
@@ -150,7 +132,7 @@ var Metadata = React.createClass({
         var amla_url = this.state.metadata.amla_url;
         if (amla_url != '' && (isSite('country') || isSite('rc'))) {
             link = LANG.see + '<a href="' + amla_url + '" target="_blank" > ' + LANG.legislation + ' </a> ' + LANG.african_mining;
-            return (<span className="metadata-ocid"  dangerouslySetInnerHTML={{__html: link}} />);
+            return (<span className="metadata-ocid" dangerouslySetInnerHTML={{__html: link}}/>);
         } else {
             return null;
         }
@@ -188,7 +170,7 @@ var Metadata = React.createClass({
                 return (
                     <span className="parent-contract">
                             <a href={docUrl}>{doc.name}</a>
-                        </span>
+                    </span>
                 );
             }
         });
@@ -267,6 +249,10 @@ var Metadata = React.createClass({
                     {this.getPagesMissing()}
                     {this.getAmlaLink()}
                     {this.getLandMatrix()}
+                    {this.getCountry(true)}
+                    <div className="metadata-ocid">
+                        <span>{LANG.more_for} {this.getResource(true)}</span>
+                    </div>
                     {this.getRelatedDocuments()}
                 </div>
             </div>

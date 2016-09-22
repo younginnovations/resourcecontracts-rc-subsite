@@ -1,11 +1,16 @@
 import React, {Component} from "react";
 import { Link } from 'react-router'
 import  Event from '../event';
+import Contract from '../contract';
 
 class Tab extends Component {
     constructor(props) {
         super(props);
         this.state = ({activeTextClass: ''});
+    }
+
+    componentWillMount() {
+        this.activeTab(Contract.getView());
     }
 
     componentDidMount() {

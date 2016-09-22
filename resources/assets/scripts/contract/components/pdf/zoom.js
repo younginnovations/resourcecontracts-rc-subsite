@@ -10,7 +10,7 @@ class Zoom extends Component {
 
     componentDidMount() {
         this.setState({scale: Contract.getPdfScale(), active: this.isPdfView()});
-        Event.subscribe('route:location', view=> {
+        Event.subscribe('route:location', ()=> {
             this.setState({active: this.isPdfView()});
         });
     }

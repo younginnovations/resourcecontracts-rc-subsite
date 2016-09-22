@@ -16,26 +16,6 @@ var Text = React.createClass({
             total: 0
         }
     },
-    componentDidMount(){
-        this.subscribe = Event.subscribe('pagination:change', this.paginationHandler);
-    },
-    paginationHandler(page_no) {
-        var view = Contract.getView();
-        if (view == 'text' || view == 'search') {
-            debug('subscribe Text pagination:change', page_no);
-            var page = $('#text-' + page_no);
-            var parentWindow = $('.text-annotator');
-            if (page.offset()) {
-                var pageOffsetTop = page.offset().top;
-                var parentTop = parentWindow.scrollTop();
-                var parentOffsetTop = parentWindow.offset().top;
-                parentWindow.animate({scrollTop: parentTop - parentOffsetTop + pageOffsetTop}, 300);
-            }
-        }
-    },
-    componentWillUnmount() {
-        this.subscribe.remove();
-    },
     componentWillMount() {
         TextAction.getPages(Contract.getGuid());
     },
@@ -44,7 +24,6 @@ var Text = React.createClass({
             return page.page_no;
         });
         this.setState({pages: pages, total: response.total, isLoading: false});
-        this.paginationHandler(Contract.getCurrentPage());
     },
     render() {
         return (

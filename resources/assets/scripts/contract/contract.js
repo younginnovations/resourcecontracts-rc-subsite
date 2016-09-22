@@ -10,7 +10,7 @@ class Contract {
             selectedAnnotation: 0,
             pdfScale: 1,
             annotator: {},
-            paginationClick: false
+            disablePagination: false
         };
     }
 
@@ -27,19 +27,20 @@ class Contract {
     }
 
     setCurrentPage(page) {
-        return this.options.currentPage = page;
+        this.options.currentPage = page;
+        this.trigger('pagination:change', page);
     }
 
     setAnnotatorInstance(annotator) {
         return this.options.annotator = annotator;
     }
 
-    setPaginationClick(click) {
-        this.options.paginationClick = click;
+    setDisablePagination(boolean) {
+        this.options.disablePagination = boolean;
     }
 
-    isPaginationClick() {
-        return this.options.paginationClick;
+    isDisablePagination() {
+        return this.options.disablePagination;
     }
 
     getAnnotatorInstance() {
@@ -55,16 +56,20 @@ class Contract {
         return name;
     }
 
-    setPdfPageNumber(route) {
+    setPageNumber(route) {
         route = route.split('annotation')[0];
         var reg = /pdf\/page\/(.*?)\/(?:\s|$)/g;
         var match = reg.exec(route);
-
         if (match !== null) {
-            console.log(match);
             this.setCurrentPage(parseInt(match[1]));
         }
-        console.log(this.getCurrentPage());
+
+        reg = /text\/page\/(.*?)\/(?:\s|$)/g;
+        match = reg.exec(route);
+
+        if (match !== null) {
+            this.setCurrentPage(parseInt(match[1]));
+        }
     }
 
     setPdfScale(scale) {
@@ -77,6 +82,7 @@ class Contract {
 
     setView(view) {
         this.options.view = view;
+        this.trigger('route:location', view)
     }
 
     getView() {
@@ -130,6 +136,7 @@ class Contract {
 
     getBoxPosition(geo) {
         var canvas = $('.pdf-annotator').find('canvas').first();
+        console.log(geo.width, canvas.width(),geo.height, canvas.height());
         geo.width = geo.width * canvas.width();
         geo.height = geo.height * canvas.height();
         geo.x = geo.x * canvas.width();
@@ -148,7 +155,19 @@ class Contract {
         return query;
     }
 
-    showPopup(id) {
+    showPopup(id = null) {
+        if (id == null) {
+            var hash = window.location.hash;
+            if (hash != '' && typeof hash.split('annotation/')[1] !== 'undefined') {
+                id = hash.split('annotation/')[1];
+            }
+            if (id == null) {
+                return;
+            }
+        }
+
+        this.trigger('annotation:highlight', id);
+
         if (this.getView() == 'pdf') {
             this.showPdfAnnotationPopup(id);
         }
@@ -162,10 +181,10 @@ class Contract {
         var wrapperEl = $('.pdf-annotator');
         wrapperEl.find('.annotator-viewer').addClass('annotator-hide');
         var annotators = this.getAnnotations().result;
-        var self = this;
-        annotators.map(function (annotation, i) {
+        annotators.map((annotation, i) => {
             if (annotation.id == id) {
-                var geo = self.getBoxPosition(annotation.shapes[0].geometry);
+                console.log(annotation);
+                var geo = this.getBoxPosition(annotation.shapes[0].geometry);
                 var position = {top: (geo.y + geo.height / 2), left: (geo.x + geo.width / 2)};
                 setTimeout(function () {
                     wrapperEl.animate({
@@ -200,4 +219,3 @@ class Contract {
 }
 
 export default new Contract();
-

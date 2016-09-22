@@ -8,8 +8,8 @@ var APP_DIR = path.resolve(__dirname, 'resources/assets/scripts');
 
 var config = {
     cache: true,
-    //devtool: 'eval',
-    devtool: 'cheap-module-source-map',
+    devtool: 'eval',
+    //devtool: 'cheap-module-source-map',
     entry: {
         popup: [
             APP_DIR + '/popup/index.js',
@@ -27,6 +27,7 @@ var config = {
             {
                 test: /[\.js?$|\.jsx?$]/,
                 include: APP_DIR,
+                exclude: /node_modules/,
                 loader: 'babel',
                 query: {
                     cacheDirectory: true, //important for performance
@@ -42,11 +43,13 @@ var config = {
     plugins: [
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.DedupePlugin(),
+/*
         new webpack.optimize.UglifyJsPlugin({
           compress: { warnings: false },
           comments: false,
           minimize: true
         }),
+*/
         new WebpackNotifierPlugin({title: 'Webpack'}),
         new webpack.NoErrorsPlugin(),
         new webpack.DefinePlugin({

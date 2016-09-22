@@ -3,17 +3,8 @@
 	<link href="{{url('css/rc-contract-view.css')}}" rel="stylesheet">
 	<link href="{{url('css/annotation/annotator.css')}}" rel="stylesheet">
 	<style>
-		.text-wrapper {
-			display: block;
-			background: #F9F9F9;
-			padding: 10px;
-			margin-bottom: 30px;
-			border: 1px solid #E2E2E2;
-			margin-right: 10px;
-		}
-
-		.pdf-wrapper canvas {
-			border: 1px solid #ccc;
+		.pdf-annotator, .text-annotator{
+			padding-right: 5px;
 		}
 	</style>
 @stop
@@ -37,7 +28,7 @@
 	<script>
 		var config = {};
 		config.debug = true;
-		config.ES_URL = '{{ env('ELASTIC_SEARCH_HOST')}}';
+		config.ES_URL = '{{ url('api') }}/';
 		config.APP_URL = '{{ url() }}';
 		config.contract = {!!json_encode($contract)!!};
 		config.countryList = {!! json_encode(trans('country')) !!};
@@ -76,5 +67,8 @@
 	<script src="{{url('js/annotator/annotator.plugin.viewer.js')}}"></script>
 	<script src="{{url('js/annotator/pdf-annotator.js')}}"></script>
 	<script src="{{url('js/pdfjs/pdf.js')}}"></script>
+	<script>
+		PDFJS.workerSrc = "{{url('js/pdfjs/pdf.worker.js')}}"
+	</script>
 	<script src="{{ url('js/contract_view.js') }}"></script>
 @stop

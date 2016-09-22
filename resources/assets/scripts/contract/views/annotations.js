@@ -28,7 +28,15 @@ var Annotations = React.createClass({
         e.preventDefault();
         $('.annotations-viewer').animate({scrollTop: 0}, 500);
     },
-
+    componentWillMount()
+    {
+        var name = Contract.getView();
+        if (name == 'search') {
+            this.setState({'display': false});
+        } else {
+            this.setState({'display': true});
+        }
+    },
     componentDidMount() {
         this.subscribe = Event.subscribe('annotation:highlight', annotation => {
             debug('annotation annotation:highlight listening', annotation);

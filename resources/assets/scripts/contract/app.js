@@ -17,27 +17,26 @@ class App extends Component {
         super(props);
     }
 
-    componentDidMount() {
+    componentWillMount() {
         debug('App init');
         var routeName = Contract.getViewName(this.props.location.pathname);
         Contract.setView(routeName);
-        if (routeName == 'pdf') {
-            Contract.setPdfPageNumber(this.props.location.pathname);
-        }
 
-        Event.publish('route:location', routeName);
-        debug('app : publish: route:location', routeName);
+        if (routeName == 'pdf' || routeName == 'text') {
+            Contract.setPageNumber(this.props.location.pathname);
+        }
     }
 
     componentWillReceiveProps(props) {
         var routeName = Contract.getViewName(props.location.pathname);
-        if (routeName == 'pdf') {
-            Contract.setPdfPageNumber(this.props.location.pathname);
+        if (routeName == 'pdf' || routeName == 'text') {
+            Contract.setPageNumber(props.location.pathname);
         }
+
         if (Contract.getView() != routeName) {
             Contract.setView(routeName);
-            Event.publish('route:location', routeName);
         }
+
     }
 
     render() {
