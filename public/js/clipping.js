@@ -22037,7 +22037,7 @@ var DownloadManager = React.createClass({displayName: "DownloadManager",
                 React.createElement("div", {className: "download-dropdown"}, 
                     React.createElement("a", {onClick: this.toggleDropdown}, React.createElement("span", null, langClip.download)), 
                     React.createElement("ul", {style: style, className: "dropdown-menu"}, 
-                        React.createElement("li", null, React.createElement("a", {id: "download-clip-filter", onClick: this.handleDownload}, langClip.clip)), 
+                        React.createElement("li", null, React.createElement("a", {id: "download-clip-filter", onClick: this.handleDownload}, langClip.csv)), 
                         React.createElement("li", null, React.createElement("a", {id: "pdf-zip-download", onClick: this.handleZipDownload}, langClip.pdfClip))
                     )
                 ), 
@@ -22609,12 +22609,12 @@ var Listing = React.createClass({displayName: "Listing",
         });
 
 
+
         var clipPage = window.getCookie('clippage');
 
         if(clipPage != '')
         {
             var totalPage =  window.getCookie('totalpages');
-            console.log("totalaaa",totalPage);
             if (clipPage == "Prev") {
                 clipPage = self.state.current_page - 2;
             }
@@ -22627,8 +22627,23 @@ var Listing = React.createClass({displayName: "Listing",
             if (clipPage == "Last") {
                 clipPage = parseInt(totalPage);
             }
-            this.setState({current_page:clipPage-1});
+            self.setState({current_page:clipPage-1});
         }
+
+        var sortField = window.getCookie('sortfield');
+        var sortOrder = window.getCookie('sortorder');
+
+        if(sortOrder != '')
+        {
+            self.state.order=sortOrder;
+        }
+
+        if(sortField != '')
+        {
+            self.state.sort_by=sortField;
+            self.sorting();
+        }
+
 
     },
     getAnnotationId: function (clips) {
@@ -22665,18 +22680,33 @@ var Listing = React.createClass({displayName: "Listing",
         if (field == this.state.sort_by && this.state.order == "asc") {
             orderby = 'desc';
         }
+
         this.state.order = orderby;
         this.state.sort_by = field;
 
-        if(field=="checkbox")
+        $.cookie("sortfield", field, {
+            path: '/'
+        });
+        $.cookie("sortorder", orderby, {
+            path: '/'
+        });
+
+        this.sorting();
+
+    },
+
+    sorting: function()
+    {
+        console.log(this.state.sort_by,this.state.order,"sortingg");
+        if(this.state.sort_by=="checkbox")
         {
             var clips = this.props.clipCollection.clipSortForCheckBox(this.state.check_data,this.state.order);
         }
         else{
             var clips = this.props.clipCollection.clipSort(this.state.sort_by, this.state.order);
         }
-
         this.setClips(clips);
+
     },
 
     showSortArrow: function (field) {
@@ -22711,13 +22741,16 @@ var Listing = React.createClass({displayName: "Listing",
     {
         var self=this;
         var data=[];
+        var clips = self.props.clipCollection;
+
         self.state.allclip=!this.state.allclip;
         if(self.state.allclip)
-      {
-          _.map(self.state.clips['models'], function (clips) {
-              data.push(clips.get('annotation_id'));
-          });
-      }
+          {
+              _.map(clips['models'], function (clip) {
+                  data.push(clip.get('annotation_id'));
+              });
+          }
+        console.log("annotation id",data);
         self.setState({check_data:  _.uniq(data)});
         self.state.check_data=_.uniq(data);
         self.filterOnCheck(self.state.check_data);
@@ -22735,7 +22768,7 @@ var Listing = React.createClass({displayName: "Listing",
 
         if (!this.state.loading) {
             if (this.state.clips.length < 1) {
-                return (React.createElement("div", {className: "no-record"}, "There is no clipped annotations."));
+                return (React.createElement("div", {className: "no-record"}, langClip.currently_no_clips));
             }
             var pagination = '';
             if (this.state.total_pages > 1) {

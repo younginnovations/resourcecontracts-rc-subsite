@@ -3849,6 +3849,8 @@ function setAnnotationOnOff() {
 $(document).ready(function () {
     var off =langClip.offClip;
     var on =langClip.onClip;
+    var clipEnable = langClip.click_to_enable_clip;
+    var clipDisable = langClip.click_to_disable_clip;
     var allData = clipLocalCollection.localStorage.findAll();
     if (allData.length != 0)
     {
@@ -3863,12 +3865,14 @@ $(document).ready(function () {
         $(".annotation-clip-icon , .annotation-clip, #hide-annotation, #annotation-count").hide();
         $('#on-annotation').html(off);
         $('#on-annotation').removeClass('active');
+        $('#on-annotation').attr('title',clipEnable);
 
     } else {
 
         $(".annotation-clip-icon , .annotation-clip, #hide-annotation, #annotation-count").show();
         $('#on-annotation').html(on);
         $('#on-annotation').addClass('active');
+        $('#on-annotation').attr('title',clipDisable);
     }
 
     $(".annotation-clip-icon").click(function () {
@@ -3876,13 +3880,16 @@ $(document).ready(function () {
         clipAnnotations(id, this);
     });
     $(document).on('click',"#clear-all",function(){
-        confirm("Are you sure, you want to remove all clips?");
+        var conf=confirm("Are you sure, you want to remove all clips?");
+        if(conf)
+        {
+            data.map(function (d, index) {
+                var clip = new ClipLocal({id: d});
+                clipLocalCollection.localStorage.destroy(clip);
+            })
+            location.reload();
+        }
 
-        data.map(function (d, index) {
-            var clip = new ClipLocal({id: d});
-            clipLocalCollection.localStorage.destroy(clip);
-        })
-        location.reload();
     });
 
     $(document).on('click', ".remove-clip", function () {
@@ -4017,11 +4024,13 @@ $(document).ready(function () {
         if (!$(this).hasClass('active')) {
             $(".annotation-clip-icon , .annotation-clip,  #hide-annotation, #annotation-count").show();
             $(this).addClass('active');
+            $(this).attr('title',clipDisable);
             $(this).html(langClip.onClip);
         }
         else {
             $(".annotation-clip-icon , .annotation-clip, #hide-annotation, #annotation-count").hide();
             $(this).removeClass('active');
+            $(this).attr('title',clipEnable);
             $(this).html(langClip.offClip);
         }
 
@@ -4032,8 +4041,8 @@ $(document).ready(function () {
         setAnnotationOnOff();
         $(".annotation-clip-icon , .annotation-clip, #annotation-count").hide();
         $("#hide-annotation").hide();
-        console.log("dfasd", $("#hide-annotation").hide());
         $("#on-annotation").removeClass('active');
+        $("#on-annotation").attr('title',clipEnable);
         $("#on-annotation").html(langClip.onClip);
     });
 

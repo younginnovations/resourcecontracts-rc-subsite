@@ -66,12 +66,12 @@ var Listing = React.createClass({
         });
 
 
+
         var clipPage = window.getCookie('clippage');
 
         if(clipPage != '')
         {
             var totalPage =  window.getCookie('totalpages');
-            console.log("totalaaa",totalPage);
             if (clipPage == "Prev") {
                 clipPage = self.state.current_page - 2;
             }
@@ -84,8 +84,23 @@ var Listing = React.createClass({
             if (clipPage == "Last") {
                 clipPage = parseInt(totalPage);
             }
-            this.setState({current_page:clipPage-1});
+            self.setState({current_page:clipPage-1});
         }
+
+        var sortField = window.getCookie('sortfield');
+        var sortOrder = window.getCookie('sortorder');
+
+        if(sortOrder != '')
+        {
+            self.state.order=sortOrder;
+        }
+
+        if(sortField != '')
+        {
+            self.state.sort_by=sortField;
+            self.sorting();
+        }
+
 
     },
     getAnnotationId: function (clips) {
@@ -122,18 +137,33 @@ var Listing = React.createClass({
         if (field == this.state.sort_by && this.state.order == "asc") {
             orderby = 'desc';
         }
+
         this.state.order = orderby;
         this.state.sort_by = field;
 
-        if(field=="checkbox")
+        $.cookie("sortfield", field, {
+            path: '/'
+        });
+        $.cookie("sortorder", orderby, {
+            path: '/'
+        });
+
+        this.sorting();
+
+    },
+
+    sorting: function()
+    {
+        console.log(this.state.sort_by,this.state.order,"sortingg");
+        if(this.state.sort_by=="checkbox")
         {
             var clips = this.props.clipCollection.clipSortForCheckBox(this.state.check_data,this.state.order);
         }
         else{
             var clips = this.props.clipCollection.clipSort(this.state.sort_by, this.state.order);
         }
-
         this.setClips(clips);
+
     },
 
     showSortArrow: function (field) {
@@ -168,13 +198,16 @@ var Listing = React.createClass({
     {
         var self=this;
         var data=[];
+        var clips = self.props.clipCollection;
+
         self.state.allclip=!this.state.allclip;
         if(self.state.allclip)
-      {
-          _.map(self.state.clips['models'], function (clips) {
-              data.push(clips.get('annotation_id'));
-          });
-      }
+          {
+              _.map(clips['models'], function (clip) {
+                  data.push(clip.get('annotation_id'));
+              });
+          }
+        console.log("annotation id",data);
         self.setState({check_data:  _.uniq(data)});
         self.state.check_data=_.uniq(data);
         self.filterOnCheck(self.state.check_data);
@@ -192,7 +225,7 @@ var Listing = React.createClass({
 
         if (!this.state.loading) {
             if (this.state.clips.length < 1) {
-                return (<div className="no-record">There is no clipped annotations.</div>);
+                return (<div className="no-record">{langClip.currently_no_clips}</div>);
             }
             var pagination = '';
             if (this.state.total_pages > 1) {

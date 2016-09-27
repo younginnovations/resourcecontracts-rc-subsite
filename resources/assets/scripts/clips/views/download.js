@@ -153,7 +153,7 @@ var DownloadManager = React.createClass({
                 <div className="download-dropdown">
                     <a onClick={this.toggleDropdown}><span>{langClip.download}</span></a>
                     <ul style={style} className="dropdown-menu">
-                        <li><a id="download-clip-filter" onClick={this.handleDownload}>{langClip.clip}</a></li>
+                        <li><a id="download-clip-filter" onClick={this.handleDownload}>{langClip.csv}</a></li>
                         <li><a id="pdf-zip-download" onClick={this.handleZipDownload}>{langClip.pdfClip}</a></li>
                     </ul>
                 </div>
