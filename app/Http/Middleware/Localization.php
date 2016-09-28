@@ -27,14 +27,12 @@ class Localization
      *
      * @param  \Illuminate\Http\Request $request
      * @param  \Closure                 $next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
-        if (config('localisation')) {
-            $lang = $this->localization->getLanguage($request->input('lang'));
-            $this->localization->setLanguage($lang);
-        }
+        $this->localization->setup();
 
 
         return $next($request);

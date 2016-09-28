@@ -22424,7 +22424,7 @@ var Item = React.createClass({displayName: "Item",
         return pageUrl;
     },
     openViewPage: function () {
-        var newwindow = window.open(this.props.item.get('page_url'), '_blank', 'toolbar=0,width=650,height=500,location=0,menubar=0, scrollbars=1');
+        var newwindow = window.open(this.props.item.get('page_url'), '_blank', 'toolbar=0,width=650,height=500,location=0,menubar=0, scrollbars=yes');
         if (window.focus) {
             newwindow.focus()
         }
@@ -22440,10 +22440,10 @@ var Item = React.createClass({displayName: "Item",
                               checkData: this.props.checkData})
                 ), 
                 React.createElement("td", null, 
-                    React.createElement("a", {href: docUrl}, this.props.item.get('name'))
+                    this.props.item.get('name')
                 ), 
                 React.createElement("td", null, 
-                    this.props.item.get('category')
+                    React.createElement("a", {href: docUrl}, React.createElement("strong", null, this.props.item.get('category')))
                 ), 
                 React.createElement("td", null, 
                     this.getShowText(), React.createElement("br", null), 

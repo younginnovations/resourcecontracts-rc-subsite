@@ -1,0 +1,26 @@
+// colors
+$color_link-color:  #0096E0;
+$color_link_hover_color: #23527c;
+$color_cape_cod_approx: #0a0b09;
+$color_russett_approx: #323e1f;
+$color_salmon_approx: #b7df74;
+$color_copperfield_approx: #94ba63;
+
+$flame-pea: #181D11;
+$list-item: #181D11;
+$list-bg: #181D11;
+
+
+// url
+$url_1: url(../../images/ic-home-bg.png);
+$url_9: url(../../images/ic-title-bg.png);
+$url_10: url(../../images/ic-folder.png);
+$url_14: url(../../images/error-bg.png);
+
+// gradients
+$linear_gradient_1: linear-gradient(-81deg, #181D11 1%, #181D11 100%);
+$radial_gradient_1: radial-gradient(50% 79%, #b7df74 32%, #94ba63 79%);
+
+@import "../../main.scss";
+
+

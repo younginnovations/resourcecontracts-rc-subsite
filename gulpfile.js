@@ -5,16 +5,34 @@ var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     concat = require('gulp-concat'),
     notify = require('gulp-notify'),
-    minifyCss = require('gulp-minify-css'),
+    uglifycss = require('gulp-uglifycss'),
     uglify = require('gulp-uglify'),
     rename = require('gulp-rename'),
     react = require('gulp-react');
 
-var css_files = [
-    './resources/assets/styles/bootstrap.css',
-    './resources/assets/styles/sb-admin-2.css',
-    './resources/assets/styles/font-awesome.css',
-    './resources/assets/styles/select2.css'
+var theme_default = [
+    './resources/assets/scss/themes/default.scss',
+];
+
+var theme_rc = [
+    './resources/assets/scss/themes/rc.scss',
+];
+
+var theme_olc = [
+    './resources/assets/scss/themes/olc.scss',
+];
+
+
+var theme_tn = [
+    './resources/assets/scss/themes/countries/tn.scss',
+];
+
+var contract_style = [
+    './resources/assets/scss/contract/contract.scss',
+];
+
+var homepage_style = [
+    './resources/assets/styles/slick.css',
 ];
 
 var base_script = [
@@ -92,17 +110,100 @@ var contract_view_scripts = [
     './resources/assets/scripts/contract.view.custom/views/main.view.js'
 ];
 
+var homepage_script = [
+    './resources/assets/scripts/homepage/d3.min.js',
+    './resources/assets/scripts/homepage/geoJson/geoJsonData.js',
+    './resources/assets/scripts/homepage/world-map.js',
+    './resources/assets/scripts/homepage/slick.js',
+    './resources/assets/scripts/homepage/slider.js',
+];
 
-/**
- * Compile files from _scss
+/* Compile files from _scss
  */
-gulp.task('sass', function () {
-    return gulp.src('./resources/assets/scss/*-style.scss')
+gulp.task('default_theme', function () {
+    return gulp.src(theme_default)
         .pipe(sourcemaps.init())
         .pipe(sass())
         .pipe(postcss([autoprefixer({browsers: ['last 30 versions', '> 1%', 'ie 8', 'ie 7']})]))
         .pipe(sourcemaps.write('./maps'))
+        .pipe(uglifycss({
+            "max-line-len": 80
+        }))
+        .pipe(rename({
+            basename: "",
+            prefix: "style",
+            extname: ".css"
+        }))
         .pipe(gulp.dest('./public/css'));
+});
+
+gulp.task('rc', function () {
+    return gulp.src(theme_rc)
+        .pipe(sourcemaps.init())
+        .pipe(sass())
+        .pipe(postcss([autoprefixer({browsers: ['last 30 versions', '> 1%', 'ie 8', 'ie 7']})]))
+        .pipe(sourcemaps.write('./maps'))
+        .pipe(uglifycss({
+            "max-line-len": 80
+        }))
+        .pipe(rename({
+            basename: "",
+            prefix: "style",
+            extname: ".css"
+        }))
+        .pipe(gulp.dest('./public/css'));
+});
+
+gulp.task('olc', function () {
+    return gulp.src(theme_olc)
+        .pipe(sourcemaps.init())
+        .pipe(sass())
+        .pipe(postcss([autoprefixer({browsers: ['last 30 versions', '> 1%', 'ie 8', 'ie 7']})]))
+        .pipe(sourcemaps.write('./maps'))
+        .pipe(uglifycss({
+            "max-line-len": 80
+        }))
+        .pipe(rename({
+            basename: "",
+            prefix: "style",
+            extname: ".css"
+        }))
+        .pipe(gulp.dest('./public/css'));
+});
+
+gulp.task('tn', function () {
+    return gulp.src(theme_tn)
+        .pipe(sourcemaps.init())
+        .pipe(sass())
+        .pipe(postcss([autoprefixer({browsers: ['last 30 versions', '> 1%', 'ie 8', 'ie 7']})]))
+        .pipe(sourcemaps.write('./maps'))
+        .pipe(uglifycss({
+            "max-line-len": 80
+        }))
+        .pipe(rename({
+            basename: "",
+            prefix: "style",
+            extname: ".css"
+        }))
+        .pipe(gulp.dest('./public/css'));
+});
+
+gulp.task('contract-style',function(){
+    return gulp.src(contract_style)
+        .pipe(sourcemaps.init())
+        .pipe(sass())
+        .pipe(postcss([autoprefixer({browsers: ['last 30 versions', '> 1%', 'ie 8', 'ie 7']})]))
+        .pipe(sourcemaps.write('./maps'))
+        .pipe(uglifycss({
+            "max-line-len": 80
+        }))
+        .pipe(rename({
+            basename: "",
+            prefix: "contract",
+            extname: ".css"
+        }))
+        .pipe(gulp.dest('./public/css'))
+        .pipe(notify({message: 'css-contract task complete'}));
 });
 
 /*
@@ -110,23 +211,33 @@ gulp.task('sass', function () {
  * Watch html/md files, run jekyll & reload BrowserSync
  */
 gulp.task('watch', function () {
-    gulp.watch('./resources/assets/scss/*-style.scss', ['sass']);
-    gulp.watch('./resources/assets/scss/modal.scss', ['sass']);
-    gulp.watch('./resources/assets/scss/newstyle.scss', ['sass']);
-    gulp.watch('./resources/assets/scss/style.scss', ['sass']);
+    gulp.watch('./resources/assets/scss/pages/*.scss', ['olc']);
+    gulp.watch(contract_style, ['contract-style']);
     gulp.watch(base_script, ['js-base']);
     gulp.watch(country_script, ['js-country']);
     gulp.watch(resource_script, ['js-resource']);
     gulp.watch(clipping_script,['js-clipping']);
     gulp.watch(page_script, ['js-page']);
     gulp.watch(contract_view_scripts, ['js-react']);
-    gulp.watch(css_files, ['css-main']);
+    gulp.watch(homepage_script, ['js-homepage']);
+});
+
+gulp.task('homepage-style',function(){
+    return gulp.src(homepage_style)
+        .pipe(concat('homepage.css'))
+        .pipe(gulp.dest('./public/css'))
+        .pipe(uglifycss({
+            "max-line-len": 80
+        }))
+        .pipe(gulp.dest('./public/css'))
+        .pipe(notify({message: 'css-homepage task complete'}));
 });
 
 /*
  * Default task, running just `gulp` will compile the sass,
  */
-gulp.task('default', ['sass', 'watch']);
+
+gulp.task('default', ['watch']);
 
 
 gulp.task('js-base', function () {
@@ -193,13 +304,11 @@ gulp.task('js-react', function () {
         .pipe(notify({message: 'React task complete'}));
 });
 
-gulp.task('css-main', function () {
-    return gulp.src(css_files)
-        .pipe(sourcemaps.init())
-        .pipe(concat('main.css'))
-        .pipe(gulp.dest('./public/css'))
-        .pipe(rename({suffix: '.min'}))
-        .pipe(minifyCss({compatibility: 'ie8'}))
-        .pipe(gulp.dest('./public/css'))
-        .pipe(notify({message: 'Min-css task complete'}));
+gulp.task('js-homepage', function () {
+    return gulp.src(homepage_script)
+        .pipe(concat('homepage.js'))
+        .pipe(gulp.dest('./public/js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('./public/js'))
+        .pipe(notify({message: 'Js-homepage task complete'}));
 });

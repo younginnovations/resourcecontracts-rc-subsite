@@ -1,0 +1,46 @@
+body.country{
+  .petroleum-list{
+    display: none !important;
+  }
+}
+
+@media (min-width: 600px) {
+  body.country .country-wrap {
+    padding-bottom: 201px !important;
+  }
+}
+
+@media (min-width: 992px) {
+  body.country .petroleum-mineral {
+    padding: 140px 30px 84px 30px !important;
+    margin: 0 auto 30px !important;
+  }
+}
+
+@media (max-width: 600px){
+
+  body.country .resource-wrap{
+    padding: 50px 20px !important;
+  }
+
+  body.country .country-wrap{
+    background-size: contain;
+  }
+
+  body.country .country-wrapper {
+    background-size: contain;
+    padding: 40px 20px !important;
+  }
+
+  .country-inner-wrap, .resource-inner-wrap{
+    font: 40px/46px Open-Sans-Light;
+  }
+
+}
+
+@media (max-width: 480px){
+  body.country .country-wrapper {
+    padding: 0 !important;
+  }
+}
+
