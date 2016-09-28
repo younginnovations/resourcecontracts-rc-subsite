@@ -30,6 +30,21 @@ var Listing = React.createClass({
             var annotid = self.getAnnotationId(self.props.clipCollection);
             self.setState({check_data: annotid});
             self.setClips(self.props.clipCollection);
+            var sortField = window.getCookie('sortfield');
+            var sortOrder = window.getCookie('sortorder');
+
+            if(sortOrder != '')
+            {
+                self.state.order=sortOrder;
+            }
+
+            if(sortField != '')
+            {
+                self.state.sort_by=sortField;
+            }
+
+            self.sorting();
+
         });
 
         this.props.clipCollection.on('checkbox:click', function (data) {
@@ -87,20 +102,11 @@ var Listing = React.createClass({
             self.setState({current_page:clipPage-1});
         }
 
-        var sortField = window.getCookie('sortfield');
-        var sortOrder = window.getCookie('sortorder');
 
-        if(sortOrder != '')
-        {
-            self.state.order=sortOrder;
-        }
-
-        if(sortField != '')
-        {
-            self.state.sort_by=sortField;
-            self.sorting();
-        }
-
+    },
+    componentWillMount:function()
+    {
+        var self=this;
 
     },
     getAnnotationId: function (clips) {
@@ -132,7 +138,6 @@ var Listing = React.createClass({
         this.props.clipCollection.trigger('filterData', filterClips);
     },
     handleSort: function (field) {
-        console.log(field);
         var orderby = 'asc';
         if (field == this.state.sort_by && this.state.order == "asc") {
             orderby = 'desc';
@@ -154,7 +159,6 @@ var Listing = React.createClass({
 
     sorting: function()
     {
-        console.log(this.state.sort_by,this.state.order,"sortingg");
         if(this.state.sort_by=="checkbox")
         {
             var clips = this.props.clipCollection.clipSortForCheckBox(this.state.check_data,this.state.order);
@@ -207,7 +211,6 @@ var Listing = React.createClass({
                   data.push(clip.get('annotation_id'));
               });
           }
-        console.log("annotation id",data);
         self.setState({check_data:  _.uniq(data)});
         self.state.check_data=_.uniq(data);
         self.filterOnCheck(self.state.check_data);
@@ -232,7 +235,6 @@ var Listing = React.createClass({
                 pagination = (<Pagination clipCollection={this.props.clipCollection} pageState={this.state}/>);
             }
             var isBoxChecked =  this.state.allclip?"checked":null;
-            console.log("ischecked",isBoxChecked);
             return (
                 <div id="clip-annotation-list">
                     <table className="table table-responsive table-contract table-contract-list">

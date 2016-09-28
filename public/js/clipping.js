@@ -22570,9 +22570,25 @@ var Listing = React.createClass({displayName: "Listing",
 
         this.setState({loading: true});
         this.props.clipCollection.on('data:change', function () {
+            console.log("data change");
             var annotid = self.getAnnotationId(self.props.clipCollection);
             self.setState({check_data: annotid});
             self.setClips(self.props.clipCollection);
+            var sortField = window.getCookie('sortfield');
+            var sortOrder = window.getCookie('sortorder');
+
+            if(sortOrder != '')
+            {
+                self.state.order=sortOrder;
+            }
+
+            if(sortField != '')
+            {
+                self.state.sort_by=sortField;
+            }
+
+            self.sorting();
+
         });
 
         this.props.clipCollection.on('checkbox:click', function (data) {
@@ -22630,20 +22646,11 @@ var Listing = React.createClass({displayName: "Listing",
             self.setState({current_page:clipPage-1});
         }
 
-        var sortField = window.getCookie('sortfield');
-        var sortOrder = window.getCookie('sortorder');
 
-        if(sortOrder != '')
-        {
-            self.state.order=sortOrder;
-        }
-
-        if(sortField != '')
-        {
-            self.state.sort_by=sortField;
-            self.sorting();
-        }
-
+    },
+    componentWillMount:function()
+    {
+        var self=this;
 
     },
     getAnnotationId: function (clips) {
@@ -22705,6 +22712,7 @@ var Listing = React.createClass({displayName: "Listing",
         else{
             var clips = this.props.clipCollection.clipSort(this.state.sort_by, this.state.order);
         }
+        console.log("clipss",clips);
         this.setClips(clips);
 
     },
