@@ -63,14 +63,6 @@
         <div class="col-lg-12 country-list-wrapper">
             <div class="panel panel-default panel-wrap country-list-wrap">
                 <div class="panel-body">
-                    @if(!empty($contracts->suggestion))
-                        <div class="suggestion">
-                            Also showing results for :
-                            @foreach($contracts->suggestion as $suggestion)
-                                <span class="suggested-word">{{$suggestion->text}}</span>
-                            @endforeach
-                        </div>
-                    @endif
                     @include('contract.partials.search_list')
                     @include('contract.partials.pagination', ['total_item' => $contracts->total, 'per_page'=>$contracts->per_page, 'current_page' => $currentPage,'contracts' => $contracts ])
                 </div>
