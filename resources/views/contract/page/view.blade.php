@@ -89,7 +89,7 @@
 		var languageImage = '{{getCountryByLang($lang->getCurrentLang())}}';
 		var currentLanguage = '{{$lang->getCurrentLang()}}';
 		var localisationState = '{{config('localisation')}}';
-
+		var contractLang = {!! json_encode(trans('contract')) !!};
 		var isClipOn = '{{site()->isClipEnabled()}}';
 
 		function isSite(type) {

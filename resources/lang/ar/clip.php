@@ -56,5 +56,9 @@ return [
     'view_all_clips'     => "عرض الملحق التفسري المعلق",
     "all_clips"          => "جميع الملحقات التفسيرية المعلقة",
     'shareViaEmail'      => "مشاركة الملحقات المعلقة عبر البريد الاكتروني",
+    'click_to_enable_clip'  => "انقر هنا لتمكين كليب",
+    'click_to_disable_clip' => "انقر هنا لتعطيل كليب",
+    'csv'                   => "CSV",
+    'currently_no_clips'    => "لا يوجد حاليا أي مقاطع"
 
 ];

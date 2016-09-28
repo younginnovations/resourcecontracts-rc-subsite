@@ -1,5 +1,6 @@
 <?php
 return [
+
     'clip_all'           => "Couper tous",
     'email_message'      => "Ce message a été envoyé par",
     'via'                => "via",
@@ -56,4 +57,8 @@ return [
     'view_all_clips'     => "Voir Clips",
     "all_clips"          => "Tous les clips",
     'shareViaEmail'      => "Partager par email",
+    'click_to_enable_clip'  => "Cliquez ici pour activer pince.",
+    'click_to_disable_clip' => "Cliquez ici pour désactiver pince.",
+    'csv'                   => 'CSV',
+    'currently_no_clips'    => "Il n'y a pas de clips."
 ];

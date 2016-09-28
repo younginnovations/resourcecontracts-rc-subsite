@@ -2,6 +2,12 @@ var Pagination = React.createClass({
     clickHandler: function (e) {
         e.preventDefault();
         this.props.clipCollection.trigger('paginate', {page: $(e.target).text()});
+        $.cookie("clippage", $(e.target).text(), {
+            path: '/'
+        });
+        $.cookie("totalpages", this.props.pageState.total_pages, {
+            path: '/'
+        });
     },
     pages: function () {
         var page = [];

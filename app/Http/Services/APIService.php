@@ -257,6 +257,7 @@ class APIService
             'per_page'            => $all ? $from * 25 : $per_page,
             'from'                => $per_page * ($from - 1),
             'all'                 => $all,
+            'fuzzy'               => $fuzzy,
             'download'            => $download,
             'annotated'           => $annotated,
 
@@ -303,7 +304,7 @@ class APIService
             return json_decode($data);
 
         } catch (\Exception $e) {
-            Log::error($resource.":".$e->getMessage(), $query);
+            Log::error($resource . ":" . $e->getMessage(), $query);
 
             return null;
         }
@@ -449,9 +450,9 @@ class APIService
         $data      = [];
         foreach ($summaries->country_summary as $summary) {
 
-            $data[trans('country.'.strtoupper($summary->key))] = [
+            $data[trans('country.' . strtoupper($summary->key))] = [
                 'key'       => $summary->key,
-                'name'      => trans('country.'.strtoupper($summary->key)),
+                'name'      => trans('country.' . strtoupper($summary->key)),
                 'doc_count' => $summary->doc_count,
             ];
         }
@@ -474,14 +475,14 @@ class APIService
     public function downloadAPI($resource, array $query = [], $array = false, $id = "")
     {
         try {
-            $filename = "export".date('Y-m-d');
+            $filename = "export" . date('Y-m-d');
             if (!empty($id)) {
                 $metadata     = $this->contractDetail($id);
                 $contractName = $metadata->metadata->name;
                 $contractName = str_slug($contractName, "_");
-                $filename     = "Annotations_".$contractName."_".date('Ymdhis');
+                $filename     = "Annotations_" . $contractName . "_" . date('Ymdhis');
             }
-            $request           = new Request('GET', $this->apiURL($resource));
+            $request = new Request('GET', $this->apiURL($resource));
 
             if ($this->site->isCountrySite()) {
                 $query['country_code'] = strtolower($this->site->getCountryCode());
@@ -507,7 +508,7 @@ class APIService
             )->download('xls');
             die;
         } catch (\Exception $e) {
-            Log::error($resource.":".$e->getMessage(), $query);
+            Log::error($resource . ":" . $e->getMessage(), $query);
 
             return null;
         }
@@ -545,7 +546,7 @@ class APIService
                 'shapes'            => $annotation->shapes,
             ];
         } catch (\Exception $e) {
-            Log::error('Contract popup :'.$e->getMessage());
+            Log::error('Contract popup :' . $e->getMessage());
 
             return null;
         }

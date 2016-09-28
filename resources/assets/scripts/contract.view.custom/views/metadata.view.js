@@ -211,6 +211,7 @@ var MetadataView = React.createClass({
                             <span>{lang.disclosure_mode}</span>
                             <span>{this.getDisclosureMode()}</span>
 
+
                         </div>
                         {annexes_missing}
                         {pages_missing}

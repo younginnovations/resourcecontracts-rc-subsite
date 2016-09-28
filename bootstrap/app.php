@@ -98,9 +98,12 @@ class_alias('Maatwebsite\Excel\Facades\Excel', 'Excel');
 //class_alias('Collective\Html\FormFacade', 'Form');
 class_alias('Illuminate\Support\Facades\Response', 'Response');
 class_alias('LynX39\LaraPdfMerger\Facades\PdfMerger', 'PdfMerger');
+class_alias('Vsmoraes\Pdf\PdfFacade', 'PDF');
+
 
 // $app->register(App\Providers\EventServiceProvider::class);
-
+$app->register(Vsmoraes\Pdf\PdfServiceProvider::class);
+$app->register(Barryvdh\Snappy\LumenServiceProvider::class);
 $app->register(Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class);
 $app->register(\App\Providers\LogServiceProvider::class);
 
@@ -132,7 +135,10 @@ config(
                 'dir'          => 'rtl'
             ]
         ],
+        'localisation' => true,
         'clip'         => false,
+        'fuzzy'        => true
+
     ]
 );
 

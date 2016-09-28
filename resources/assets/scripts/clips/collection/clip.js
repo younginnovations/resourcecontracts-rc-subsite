@@ -99,8 +99,29 @@ var ClipCollection = Backbone.Collection.extend({
             }
             return -model.get(field);
         }));
-        console.log(data);
         return new ClipCollection(data.toArray());
+    },
+    clipSortForCheckBox : function(checkedData,order)
+    {
+        var checkClip=[];
+        var unCheckClip=[];
+        _.map(this.models, function (clip) {
+           if(checkedData.indexOf(clip.get('annotation_id'))>=0)
+           {
+               checkClip.push(clip);
+           }
+            else{
+               unCheckClip.push(clip)
+           }
+        });
+        console.log("uncheck clip",unCheckClip);
+        if(order=="asc")
+        {
+            return new ClipCollection(checkClip.concat(unCheckClip));
+        }
+        return new ClipCollection(unCheckClip.concat(checkClip));
+
+
     },
     filterMetadata: function () {
         var filter = [];

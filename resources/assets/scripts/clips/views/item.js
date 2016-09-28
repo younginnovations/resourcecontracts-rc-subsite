@@ -98,12 +98,12 @@ var Item = React.createClass({
     getPageUrl: function () {
         var pages = this.props.item.get('pages');
         var articleRef = this.props.item.get('article_reference');
-        articleRef = (articleRef == '') ? '' : ' ( ' + articleRef + ' )';
+        articleRef = (articleRef == '') ? '' :  articleRef ;
         var pageUrl = '';
         var openContractingId = this.props.item.get('open_contracting_id');
         _.map(pages, function (page) {
             var url = app_url + "/contract/" + openContractingId + '/view#/' + page.type + '/page/' + page.page + '/annotation/' + page.id;
-            pageUrl += '<a href=' + url + '>'+ langClip.page + page.page + articleRef + '</a>';
+            pageUrl += langClip.page+" " + page.page +' (<a href=' + url + '>'  + articleRef + '</a>)';
         });
         return pageUrl;
     },
@@ -127,7 +127,7 @@ var Item = React.createClass({
                     {this.props.item.get('name')}
                 </td>
                 <td>
-                    <a href={docUrl}><strong>{this.props.item.get('category')}</strong></a>
+                    <a href={docUrl}>{this.props.item.get('category')}</a>
                 </td>
                 <td>
                     {this.getShowText()}<br/>

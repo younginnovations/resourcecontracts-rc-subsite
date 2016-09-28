@@ -215,7 +215,7 @@
       margin-left: 14px;
       li {
         list-style: inherit;
-        text-indent: -6px;
+        //text-indent: -6px;
       }
     }
   }
@@ -400,7 +400,8 @@ td.contract-date {
   input[type="checkbox"] {
     float: left;
    // margin-left: -49px;
-    margin-left: -20px;
+   // margin-left: -20px;
+
     margin-top: 8px;
   }
   td:first-child {
@@ -414,6 +415,7 @@ td.contract-date {
     a {
       position: relative;
       display: inline-block;
+      min-height: 22px;
       &:before {
         content: "";
         border-left: 4px solid transparent;

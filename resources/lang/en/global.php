@@ -6,6 +6,8 @@ return [
     'contract_doc_from'       => 'CONTRACT DOCUMENTS FROM',
     'countries'               => 'Countries',
     'country'                 => 'Country',
+    'resource'                => 'Resource',
+    'resources'                => 'Resources',
     'view_all_countries'      => 'View All Countries',
     'contracts_related_to'    => 'CONTRACT DOCUMENTS RELATED TO',
     'all_contracts'           => 'All Contracts',

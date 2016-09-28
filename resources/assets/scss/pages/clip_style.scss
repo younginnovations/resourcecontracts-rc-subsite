@@ -1,5 +1,12 @@
 /* ---------  style for clip button and icon -------  */
 
+#clip-panel-title{
+  a{
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
 .annotation-table {
   padding: 60px 0;
   .col-lg-12 {
@@ -31,7 +38,7 @@
   }
 }
 
-#annotation-count {
+#annotation-count,#clear-all {
   color: #fff !important;
   background: $color_blue;
   padding: 0 18px 0 36px;
@@ -52,6 +59,30 @@
     background-color: $color_blue_hover;
   }
 }
+
+#clear-all {
+  font: 13px/21px Open-Sans-Light;
+  padding: 6px 15px 6px 40px;
+  border-radius: 19px;
+  display: inline-block;
+  text-decoration: none;
+  background: $color_danger;
+  margin-left: 8px;
+  &:before{
+    width: 22px;
+    top: 8px;
+    height: 16px;
+    left: 13px;
+    background: url(../images/ic-sprite.svg) no-repeat no-repeat -438px -405px;
+  }
+
+  &:hover{
+    background-color: $color_danger_hover;
+  }
+
+}
+
+
 
 .annotation-clip-icon,.clip-btn {
   text-indent: -9999px;
@@ -200,6 +231,21 @@
   text-indent: -9999px;
   margin: 0 auto;
   display: block;
+}
+
+.loading, .no-record {
+  top: 45%;
+  position: absolute;
+  display: block;
+  text-align: center;
+
+}
+.loading{
+  left: 49%;
+}
+.no-record {
+  width: 100%;
+  text-align: center;
 }
 
 .search-list-wrapper {
@@ -397,27 +443,6 @@
 
 /*style for clip list table*/
 
-.table.table-contract-list {
-  th .count-select {
-    padding: 0;
-    color: $color_link_color;
-    font-family: Open-Sans-Regular;
-
-    & > span:first-of-type {
-      text-transform: capitalize;
-      font-size: 10px;
-    }
-  }
-
-  & > tbody > tr td:first-child {
-    width: 75px;
-  }
-
-  & > thead > tr > th:first-child {
-    padding: 8px 0 6px 0;
-  }
-}
-
 #clip-annotation-list {
   clear: both;
   padding-top: 6px;
@@ -432,25 +457,51 @@
 
 /*style for clip list table*/
 
-.table.table-contract-list {
-  th .count-select {
-    padding: 0;
-    color: $color_link_color;
-    font-family: Open-Sans-Regular;
 
-    & > span:first-of-type {
-      text-transform: capitalize;
-      font-size: 10px;
+#clip-annotations {
+  .table.table-contract-list {
+    .table>tbody>tr td:first-child,
+    .table>thead>tr>th:first-child{
+      min-width: 75px;
+      width: auto;
+    }
+
+    th .count-select {
+      padding: 0;
+      color: $color_link_color;
+      font-family: Open-Sans-Regular;
+      display: inline-block;
+      margin-right: 4px;
+      border-radius: 0;
+      line-height: 22px;
+      vertical-align: top;
+      margin-left: -20px;
+
+      & > span:first-of-type {
+        text-transform: capitalize;
+        font-size: 10px;
+      }
+    }
+
+    & > tbody > tr td:first-child {
+      width: 75px;
+    }
+
+    input[type="checkbox"]{
+      margin-left: -20px;
+    }
+
+    th input[type="checkbox"]{
+      margin-top: 5px;
+      vertical-align: top;
+      float: none;
+    }
+
+    th .count-select ~ input[type="checkbox"]{
+      margin-left: 0;
     }
   }
 
-  & > tbody > tr td:first-child {
-    width: 75px;
-  }
-
-  & > thead > tr > th:first-child {
-    padding: 8px 0 6px 0;
-  }
 }
 
 #clip-annotation-list {
@@ -509,6 +560,12 @@ span.required {
   > .pull-left {
     margin-top: 0;
   }
+}
+
+/* ------ style for clear all clip --------- */
+
+#clear-all{
+
 }
 
 @media(min-width: 768px){

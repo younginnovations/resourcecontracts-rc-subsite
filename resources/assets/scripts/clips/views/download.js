@@ -16,8 +16,8 @@ var DownloadManager = React.createClass({
         }
         this.props.clipCollection.on('filterData', function (data) {
             self.setState({clips: data});
-        });
 
+        });
         $(document).click(function (event) {
             if (!$(event.target).closest('.download-dropdown').length && !$(event.target).is('.download-dropdown')) {
                 if ($('.download-dropdown').is(":visible")) {
@@ -27,9 +27,12 @@ var DownloadManager = React.createClass({
         });
     },
     handleDownload: function () {
+        console.log("download clips",this.state.clips);
         this.downloadAsCSV(this.state.clips);
     },
     handlePrint: function () {
+        console.log("print clips",this.state.clips);
+
         this.printClips(this.state.clips);
     },
     handleSave: function () {
@@ -73,8 +76,8 @@ var DownloadManager = React.createClass({
             printView += '<div></div><ul  style="list-style: none;padding: 0;">' +
                 "<li style='margin-bottom: 5px;'><b style='font-size: large'>" + data.get('name') + "</b></td>" +
                 "<li style='margin-bottom: 8px;'>" + data.get('text') + "</li>" +
-                "<li style='margin-bottom: 5px;'><b>langClip.category:</b> " + data.get('category') + "</li>" +
-                "<li> <b>Year : </b>" + data.get('year') + ", <b>Country: </b>" + data.get('country') + ", <b>lang.resource: </b>" + data.get('resource').toString() + "</li>" +
+                "<li style='margin-bottom: 5px;'><b>Category:</b> " + data.get('category') + "</li>" +
+                "<li> <b>Year : </b>" + data.get('year') + ", <b>Country: </b>" + data.get('country') + ", <b>Resource: </b>" + data.get('resource').toString() + "</li>" +
                 "</ul></div>" + "<hr>";
         });
         self.printPopUp(printView);
@@ -129,18 +132,19 @@ var DownloadManager = React.createClass({
             alert(langClip.wrongError);
         });
     },
+
     render: function () {
+
         var show = {'display': 'block'};
         var hide = {'display': 'none'};
         var style = this.state.dropdown ? show : hide;
-
         if (this.state.clips.length < 1) {
             return null;
         }
         var saveAction = null;
         if (key == '') {
             saveAction = (
-                <div id="save-clipping" onClick={this.handleSave}>{this.state.loading ? langClip.saving: langClip.saveClip}</div>
+                <div id="save-clipping"   onClick={this.handleSave}>{this.state.loading ? langClip.saving: langClip.saveClip}</div>
             );
         }
         return (
@@ -149,7 +153,7 @@ var DownloadManager = React.createClass({
                 <div className="download-dropdown">
                     <a onClick={this.toggleDropdown}><span>{langClip.download}</span></a>
                     <ul style={style} className="dropdown-menu">
-                        <li><a id="download-clip-filter" onClick={this.handleDownload}>{langClip.clip}</a></li>
+                        <li><a id="download-clip-filter" onClick={this.handleDownload}>{langClip.csv}</a></li>
                         <li><a id="pdf-zip-download" onClick={this.handleZipDownload}>{langClip.pdfClip}</a></li>
                     </ul>
                 </div>
