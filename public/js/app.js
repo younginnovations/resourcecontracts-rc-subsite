@@ -11749,7 +11749,6 @@ S2.define('jquery.mousewheel',[
   return select2;
 }));
 
-
 function htmlDecode(html) {
     var a = document.createElement('a');
     a.innerHTML = html;
@@ -11994,6 +11993,20 @@ $(document).ready(function () {
         }
     });
 
+    $(document).on('click', function (e) {
+        var container = $("#search-form");
+
+        if (!container.is(e.target) // if the target of the click isn't the container...
+            && container.has(e.target).length === 0) // ... nor a descendant of the container
+        {
+            $(".search-input-wrapper").hide();
+            $('.contract-number-wrap').show();
+        }
+        else if ($(".search-input-wrapper").is(':hidden')) {
+            $('.contract-number-wrap').show();
+        }
+    });
+
 
     $('.download-wrap,.view-pin-wrap').click(function () {
         $(this).siblings('ul').toggle();
@@ -12057,19 +12070,20 @@ $(document).ready(function () {
         }
     });
 
-    var calWidth = function(){
+    var calWidth = function () {
         var rightWidth = $(".navbar-header").outerWidth(),
             leftWidth = $(window).width() - rightWidth;
         $(".right-header-section").width(leftWidth - 50);
         $(".navbar .search-input-wrapper").width(leftWidth - 22);
         $(".right-header-section").removeClass("hidden");
     }
-    if($(window).width() > 768) {
+
+    if ($(window).width() > 768) {
         calWidth();
     }
 
-    $(window).resize(function(){
-        if($(window).width() > 768) {
+    $(window).resize(function () {
+        if ($(window).width() > 768) {
             calWidth();
         }
     });
@@ -12081,6 +12095,10 @@ $(document).ready(function () {
         if (!$(e.target).closest('.view-pin-wrap, #pinLists').length) {
             $("#pinLists").hide();
         }
+
+        /*  if (!$(e.target).closest('.search-input-wrapper').length) {
+         $(".search-input-wrapper").hide();
+         }*/
 
         if (!$(e.target).closest('#social-toggler').length) {
             $(".social-toggle").hide();
@@ -12205,9 +12223,28 @@ $(document).ready(function () {
 
     emailManager.init();
 
-    $('a.share-link').on('click', function(e){
+    $('a.share-link').on('click', function (e) {
         e.preventDefault();
-        window.open($(this).attr('href'), "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=650,height=400");
+        var location = '';
+        var share = {
+            'facebook': 'https://www.facebook.com/sharer/sharer.php?u=',
+            'google': 'https://plus.google.com/share?url=',
+            'twitter': 'https://twitter.com/share?text='
+        };
+        var url = document.location.href;
+
+        if ($(this).attr('href').replace('#', '') == 'facebook') {
+            location = share.facebook + url;
+        }
+
+        if ($(this).attr('href').replace('#', '') == 'google') {
+            location = share.google + url;
+        }
+
+        if ($(this).attr('href').replace('#', '') == 'twitter') {
+            location = share.twitter + document.title;
+        }
+        window.open(location, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=650,height=400");
     });
 });
 

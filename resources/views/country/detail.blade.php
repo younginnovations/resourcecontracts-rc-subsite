@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Lang;
                     <div class="panel-title">
                         <img src="{{getFlagUrl($country)}}"/>
                         {{@trans('country')[strtoupper($country)]}}
-                        @if(env("CATEGORY")=="rc")
+                        @if(site()->isRC())
                             @if(!empty(@trans('amla')[strtoupper($country)]))<a href="{{@trans('amla')[strtoupper($country)]}}" class="country-amla-link">AMLA</a>@endif
                         @endif
                     </div>
@@ -59,7 +59,7 @@ use Illuminate\Support\Facades\Lang;
 
                     <div class="panel-heading">@lang('countriespage.contracts_in') {{@trans('country')[strtoupper($country)]}}</div>
                     <div class="panel-body">
-                        @include('contract.partials.rccontractlist')
+                        @include('contract.partials.contract_list')
                         @include('contract.partials.pagination', ['total_item' => $contracts->total, 'per_page'=>$contracts->per_page, 'current_page' => $currentPage ])
                     </div>
                 </div>

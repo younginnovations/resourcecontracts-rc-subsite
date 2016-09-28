@@ -90,6 +90,7 @@ var MetadataView = React.createClass({
 
             var ct = this.props.metadata.get("contract_type");
             var contractType = ct.map(function (contractType, i) {
+                contractType = langContractType[contractType] ? langContractType[contractType] : contractType;
                 var link = app_url + "/search?q=&contract_type%5B%5D=" + contractType;
                 var separator = (i != ct.length - 1) ? ' | ' : '';
                 return (<nobr><nobr>{contractType}</nobr><nobr>{separator}</nobr></nobr>);
@@ -133,6 +134,22 @@ var MetadataView = React.createClass({
                 </div>);
             }
 
+            var countryBlock = null;
+            var  countryMore =null;
+
+            if(!isSite('country'))
+            {
+                countryBlock =(<div className="metadata-country">
+                                    <span>{lang.country}</span>
+                                            <span>
+                                                {getCountryName(this.props.metadata.get("country").code)}
+                                            </span>
+                                </div>);
+                countryMore =(<p><span></span><span>{lang.more_from}</span> <a href={countryLink}>{getCountryName(this.props.metadata.get("country").code)}</a></p>);
+            }
+
+            var disclosureMode = this.props.metadata.get("publisher_type");
+            disclosureMode = langDisclosure[disclosureMode] ? langDisclosure[disclosureMode] : disclosureMode;
             return (
                 <div id="metadata">
                     <div className="note-wrapper">
@@ -143,12 +160,7 @@ var MetadataView = React.createClass({
                         <div>
                             {lang.metadata}
                         </div>
-                        <div className="metadata-country">
-                            <span>{lang.country}</span>
-                            <span>
-                               {getCountryName(this.props.metadata.get("country").code)}
-                            </span>
-                        </div>
+                        {countryBlock}
                         <div className="metadata-signature-year">
                             <span>{lang.signature_year}</span>
                             <span>
@@ -169,14 +181,14 @@ var MetadataView = React.createClass({
                         </div>
                         <div className="metadata-ocid">
                             <span>{lang.disclosure_mode}</span>
-                            <span>{this.props.metadata.get("publisher_type") || "-"}</span>
+                            <span>{disclosureMode || "-"}</span>
                         </div>
                         {annexes_missing}
                         {pages_missing}
                         <AmlaUrl metadata={this.props.metadata}/>
                         <LandMatrixView metadata={this.props.metadata}/>
                         <div className="metadata-ocid">
-                            <p><span></span><span>{lang.more_from}</span> <a href={countryLink}>{getCountryName(this.props.metadata.get("country").code)}</a></p>
+                            {countryMore}
                             <p><span></span><span>{lang.more_for}</span> {this.getResourceLang(this.props.metadata.get("resource"), true)}</p>
                         </div>
                     </div>
