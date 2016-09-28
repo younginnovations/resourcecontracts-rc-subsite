@@ -8,3 +8,4 @@ return [
     'contracts_in'           => "عقود في",
     'resources_in'           => "موارد في",
 ];
+

@@ -26531,6 +26531,7 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                         React.createElement("div", {className: "metadata-ocid"}, 
                             React.createElement("span", null, lang.disclosure_mode), 
                             React.createElement("span", null, this.getDisclosureMode())
+
                         ), 
                         annexes_missing, 
                         pages_missing, 
@@ -26636,7 +26637,11 @@ var RelatedDocumentsView = React.createClass({displayName: "RelatedDocumentsView
             moreContracts = "";
         if (this.props.metadata.get("parent")) {
             parentContracts = this.props.metadata.get("parent").map(function (doc) {
+<<<<<<< HEAD
                 var docUrl = app_url + "/contract/" + doc.open_contracting_id+'/view'
+=======
+                var docUrl = app_url + "/contract/" + doc.open_contracting_id+"/view";
+>>>>>>> 934-UIrefactor merged with clip file and olc ui update
                 if (doc.is_published) {
                     return (
                         React.createElement("span", {className: "parent-contract"}, 
@@ -26651,7 +26656,11 @@ var RelatedDocumentsView = React.createClass({displayName: "RelatedDocumentsView
             for (var i = 0; i < maxDocs; i++) {
                 var doc = this.props.metadata.get("associated")[i];
                 if (doc.is_published) {
+<<<<<<< HEAD
                     var docUrl = app_url + "/contract/" + doc.open_contracting_id+'/view';
+=======
+                    var docUrl = app_url + "/contract/" + doc.open_contracting_id+"/view";
+>>>>>>> 934-UIrefactor merged with clip file and olc ui update
                     supportingContracts.push(React.createElement("span", {id: i, className: "child-contract"}, 
                         React.createElement("a", {href: docUrl}, truncate(doc.name))
                     ));

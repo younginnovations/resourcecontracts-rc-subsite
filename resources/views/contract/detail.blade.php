@@ -102,6 +102,7 @@ use Illuminate\Support\Facades\Lang;
 												{{$governmentEntity->name}} @if($governmentEntity->identifier)
 													({{$governmentEntity->identifier}})@endif
 											@endif
+
                                     	</span>
 									@endforeach
 								@else
@@ -166,6 +167,7 @@ use Illuminate\Support\Facades\Lang;
 							</ul>
 						@endif
 
+
 						@if(!$contract->metadata->is_contract_signed)
 							<ul>
 								<li>
@@ -173,6 +175,7 @@ use Illuminate\Support\Facades\Lang;
 								</li>
 							</ul>
 						@endif
+
 					</div>
 				</div>
 			</div>
@@ -219,6 +222,7 @@ use Illuminate\Support\Facades\Lang;
 				</div>
 			</div>
 		@endif
+
 
 		<div class="col-lg-12">
 			<div class="panel panel-default panel-wrap panel-contract-wrap">
@@ -273,6 +277,7 @@ use Illuminate\Support\Facades\Lang;
 									@else
 										-
 									@endif
+
                                 </span>
 							</li>
 						</ul>
@@ -293,6 +298,7 @@ use Illuminate\Support\Facades\Lang;
 								</li>
 								<li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
 									<label for="">@lang('contract.operator')</label>
+
 									<span>
 										@if(isset($company->is_operator))
 											@if($company->is_operator==true)
@@ -312,6 +318,7 @@ use Illuminate\Support\Facades\Lang;
 			</div>
 		</div>
 
+
 		<div class="col-lg-12">
 			<div class="panel panel-default panel-wrap panel-contract-wrap" id="associatedcontracts">
 				<div class="panel-heading">
@@ -320,6 +327,7 @@ use Illuminate\Support\Facades\Lang;
 				<div class="panel-body panel-table">
 					<table class="table table-responsive table-contract table-associated-contract">
 						<tbody>
+
 						@foreach($contract->metadata->parent as $parentContract)
 							<tr>
 								<td width="70%">

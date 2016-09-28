@@ -210,6 +210,7 @@ var MetadataView = React.createClass({
                         <div className="metadata-ocid">
                             <span>{lang.disclosure_mode}</span>
                             <span>{this.getDisclosureMode()}</span>
+
                         </div>
                         {annexes_missing}
                         {pages_missing}
@@ -315,7 +316,7 @@ var RelatedDocumentsView = React.createClass({
             moreContracts = "";
         if (this.props.metadata.get("parent")) {
             parentContracts = this.props.metadata.get("parent").map(function (doc) {
-                var docUrl = app_url + "/contract/" + doc.open_contracting_id+'/view'
+                var docUrl = app_url + "/contract/" + doc.open_contracting_id+"/view";
                 if (doc.is_published) {
                     return (
                         <span className="parent-contract">

@@ -23,6 +23,7 @@ var theme_olc = [
 ];
 
 
+
 var theme_tn = [
     './resources/assets/scss/themes/countries/tn.scss',
 ];
@@ -134,7 +135,7 @@ gulp.task('default_theme', function () {
             prefix: "style",
             extname: ".css"
         }))
-        .pipe(gulp.dest('./public/css'));
+   .pipe(gulp.dest('./public/css'));
 });
 
 gulp.task('rc', function () {
@@ -232,6 +233,25 @@ gulp.task('homepage-style',function(){
         .pipe(gulp.dest('./public/css'))
         .pipe(notify({message: 'css-homepage task complete'}));
 });
+
+gulp.task('contract-style',function(){
+    return gulp.src(contract_style)
+        .pipe(sourcemaps.init())
+        .pipe(sass())
+        .pipe(postcss([autoprefixer({browsers: ['last 30 versions', '> 1%', 'ie 8', 'ie 7']})]))
+        .pipe(sourcemaps.write('./maps'))
+        .pipe(uglifycss({
+            "max-line-len": 80
+        }))
+        .pipe(rename({
+            basename: "",
+            prefix: "contract",
+            extname: ".css"
+        }))
+        .pipe(gulp.dest('./public/css'))
+        .pipe(notify({message: 'css-contract task complete'}));
+});
+
 
 /*
  * Default task, running just `gulp` will compile the sass,
