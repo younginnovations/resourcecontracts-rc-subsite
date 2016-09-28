@@ -29,7 +29,7 @@ return [
     'document_type'           => "Type de document",
     'type_contract'           => "Type de contrat",
     'view_annotations'        => "visualiser toutes les annotations",
-    'see'                     => "visualiser",
+    'see'                     => "voir",
     'search_results'          => "chercher des résultats ",
     'page_doesnt_exist'       => "La page que vous recherchez n'existe pas",
     'if_you_are_looking'      => "Si vous cherchez des documents de contrats, utilisez la barre de recherche ci-dessus ",

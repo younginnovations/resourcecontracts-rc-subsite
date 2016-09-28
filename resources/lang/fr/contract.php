@@ -10,7 +10,7 @@ return [
     'company_number'       => "Numéro de la société",
     'corporate_grouping'   => "Regroupement de sociétés",
     'open_corporate_ID'    => "Identifiant OpenCorporates",
-    'share'                => "Partage Participation",
+    'share'                => "la participation",
     'operator'             => "Opérateur ",
     'associated_documents' => "Documents Connexes  ",
     'ass_doc_msg'          => "Aucun document connexe n'est disponible",
