@@ -148,6 +148,7 @@
         var currentLanguage = '{{$lang->getCurrentLang()}}';
         var localisationState =  '{{config('localisation')}}';
         var isClipOn = '{{isClipOn()}}';
+        var contractLang = {!! json_encode(trans('contract')) !!};
 
 		function isSite(type){
 			var country_code =  '{{env('COUNTRY','')}}';

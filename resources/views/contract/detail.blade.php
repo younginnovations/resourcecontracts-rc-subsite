@@ -59,12 +59,20 @@ use Illuminate\Support\Facades\Lang;
             <div class="col-md-6 col-lg-6">
                 <div class="panel panel-default panel-wrap panel-contract-wrap">
                     <div class="panel-body">
+                        @if(!$contract->metadata->is_contract_signed)
+                            <ul>
+                                <li>
+                                    <label>@lang('contract.contract_not_signed')</label>
+                                </li>
+                            </ul>
+                        @endif
                         <ul>
                             <li class="col-lg-12 open-contracting-id">
                                 <label for="">@lang('contract.open_contracting_id')</label>
                                 <span>{{_e($contract->metadata,'open_contracting_id','-')}}</span>
                             </li>
                         </ul>
+
                         <ul>
                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                 <label for="">@lang('global.language')</label>
@@ -398,9 +406,12 @@ use Illuminate\Support\Facades\Lang;
                         <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <label for="">@lang('contract.disclosure_mode')</label>
                             <span>
-                                @if(!empty($contract->metadata->publisher_type))
-                                    <?php $a = $contract->metadata->publisher_type ?>
+                                @if(!empty($contract->metadata->publisher->type))
+                                    <?php $a = $contract->metadata->publisher->type ?>
                                     {{_l("codelist/disclosure",$a)}}
+                                    @if(!empty($contract->metadata->publisher->note))
+                                        ( {{$contract->metadata->publisher->note}} )
+                                    @endif
                                 @else -
                                 @endif
                             </span>
