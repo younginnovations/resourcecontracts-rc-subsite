@@ -97,6 +97,9 @@ $app->get('admin/partner/create', ['as' => 'admin.partner.create', 'uses' => 'Ad
 $app->post('admin/partner', ['as' => 'admin.partner.store', 'uses' => 'Admin\PartnerController@store']);
 $app->delete('admin/partner', ['as' => 'admin.partner.delete', 'uses' => 'Admin\PartnerController@delete']);
 
+$app->get('admin/language', ['as' => 'admin.language', 'uses' => 'Admin\LanguageController@index']);
+$app->post('admin/language', ['as' => 'admin.language.update', 'uses' => 'Admin\LanguageController@update']);
+
 $app->get('admin/page', ['as' => 'admin.page', 'uses' => 'Admin\PageController@index']);
 $app->get('admin/page/create', ['as' => 'admin.page.create', 'uses' => 'Admin\PageController@create']);
 $app->post('admin/page/store', ['as' => 'admin.page.store', 'uses' => 'Admin\PageController@store']);

@@ -41,4 +41,8 @@ return [
         'partner_not_found' => 'شريك لم تتم إضافته حتى الان',
         'create'            => 'إضافة شريك',
     ],
+    'manage_language'       => 'إدارة اللغة',
+    'default_lang'          => 'اللغة الافتراضية',
+    'enable_localization'   => 'تمكين التوطين',
+    'choose_lang'           => 'اختيار اللغة',
 ];

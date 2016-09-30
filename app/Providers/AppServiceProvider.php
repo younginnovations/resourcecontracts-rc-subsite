@@ -8,6 +8,10 @@ use Aws\S3\S3Client;
 use League\Flysystem\AwsS3v2\AwsS3Adapter;
 use League\Flysystem\Filesystem;
 
+/**
+ * Class AppServiceProvider
+ * @package App\Providers
+ */
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -18,11 +22,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer('*', function ($view) {
-
             $data = [
                 'lang' => app(LocalizationService::class)
             ];
-
             $view->with($data);
         });
 

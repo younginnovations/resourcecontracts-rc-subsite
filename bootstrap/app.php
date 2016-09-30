@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Services\LocalizationService;
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
 Dotenv::load(__DIR__ . '/../');
@@ -43,6 +45,8 @@ $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
     App\Console\Kernel::class
 );
+
+$app->singleton(LocalizationService::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -128,7 +132,6 @@ config(
                 'dir'          => 'rtl'
             ]
         ],
-        'localisation' => true,
         'clip'         => false,
     ]
 );
