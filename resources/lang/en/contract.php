@@ -39,5 +39,6 @@ return [
     'results'              => "Results",
     'loading'              => "Loading ...",
     'social_share'         => "Share",
+    'contract_not_signed'  => "This document does not contain signatures.",
 
 ];

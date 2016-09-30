@@ -26396,6 +26396,31 @@ var MetadataView = React.createClass({displayName: "MetadataView",
 
         return resLang;
     },
+    getDisclosureMode:function()
+    {
+        var type = this.props.metadata.get("publisher").type;
+        var note = this.props.metadata.get("publisher").note;
+        var disclosure ="-";
+        if(type !='')
+        {
+            disclosure = type;
+            if(note !='')
+            {
+                disclosure=type + " ( " + note + " )";
+            }
+        }
+        return disclosure;
+    },
+    getContractSigned:function()
+    {
+        var isConractSigned=this.props.metadata.get("is_contract_signed");
+        var langContractNotSigned = contractLang['contract_not_signed'];
+
+        if(!isConractSigned)
+        {
+            return (React.createElement("span", {className: "note-inner-wrapper", dangerouslySetInnerHTML: {__html:langContractNotSigned}}));
+        }
+    },
     render: function () {
         var showLabel = lang.show_more;
         if (this.state.showMoreMetadata) {
@@ -26460,6 +26485,9 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                         noteHtml, 
                         more
                     ), 
+                    React.createElement("div", {className: "note-wrapper"}, 
+                        this.getContractSigned()
+                    ), 
                     React.createElement("div", {className: "metadata-view"}, 
                         React.createElement("div", null, 
                             lang.metadata
@@ -26490,7 +26518,7 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                         ), 
                         React.createElement("div", {className: "metadata-ocid"}, 
                             React.createElement("span", null, lang.disclosure_mode), 
-                            React.createElement("span", null, this.props.metadata.get("publisher_type") || "-")
+                            React.createElement("span", null, this.getDisclosureMode())
                         ), 
                         annexes_missing, 
                         pages_missing, 

@@ -75,6 +75,31 @@ var MetadataView = React.createClass({
 
         return resLang;
     },
+    getDisclosureMode:function()
+    {
+        var type = this.props.metadata.get("publisher").type;
+        var note = this.props.metadata.get("publisher").note;
+        var disclosure ="-";
+        if(type !='')
+        {
+            disclosure = type;
+            if(note !='')
+            {
+                disclosure=type + " ( " + note + " )";
+            }
+        }
+        return disclosure;
+    },
+    getContractSigned:function()
+    {
+        var isConractSigned=this.props.metadata.get("is_contract_signed");
+        var langContractNotSigned = contractLang['contract_not_signed'];
+
+        if(!isConractSigned)
+        {
+            return (<span className="note-inner-wrapper" dangerouslySetInnerHTML={{__html:langContractNotSigned}}></span>);
+        }
+    },
     render: function () {
         var showLabel = lang.show_more;
         if (this.state.showMoreMetadata) {
@@ -139,6 +164,9 @@ var MetadataView = React.createClass({
                         {noteHtml}
                         {more}
                     </div>
+                    <div className="note-wrapper">
+                        {this.getContractSigned()}
+                    </div>
                     <div className="metadata-view">
                         <div>
                             {lang.metadata}
@@ -169,7 +197,7 @@ var MetadataView = React.createClass({
                         </div>
                         <div className="metadata-ocid">
                             <span>{lang.disclosure_mode}</span>
-                            <span>{this.props.metadata.get("publisher_type") || "-"}</span>
+                            <span>{this.getDisclosureMode()}</span>
                         </div>
                         {annexes_missing}
                         {pages_missing}
