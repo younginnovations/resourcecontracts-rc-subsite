@@ -87,21 +87,21 @@
 
 }
 
-.pdf-wrapper{
-  clear: both;
-  background: #f0f0f0;
-  overflow: hidden;
-  canvas{
-    margin: 10px auto;
-    display: block;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    padding: 10px 20px;
-    border-radius: 4px;
-    background-color: #fff;
-    min-height: 60vh;
-    max-width: 800px;
-  }
-}
+//.pdf-wrapper{
+  //clear: both;
+//  background: #f0f0f0;
+//  overflow: hidden;
+//  canvas{
+//    margin: 10px auto;
+  //  display: block;
+    //box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    //padding: 10px 20px;
+   // border-radius: 4px;
+    //background-color: #fff;
+    //min-height: 60vh;
+   // max-width: 800px;
+  //}
+//}
 
 @media (max-width: 540px) {
   .info.head-wrap .pdf-zoom-options {

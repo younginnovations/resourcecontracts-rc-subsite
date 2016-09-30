@@ -49,7 +49,6 @@ class ApiController extends BaseController
     public function text($id)
     {
         $page = $this->api->getTextPage($id, null);
-
         return response()->json($page);
     }
 

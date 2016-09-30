@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import Header from './popup/Title';
-import Detail from './popup/Detail';
-import Pagination from './popup/Pagination';
-import Pdf from './popup/Pdf';
-import Event from "./popup/Event";
-import Zoom from "./popup/Zoom";
-import Loading from "./popup/Loading";
-import Alert from "./popup/Alert";
+import Header from './Title';
+import Detail from './Detail';
+import Pagination from './Pagination';
+import Pdf from './Pdf';
+import Event from "./Event";
+import Zoom from "./Zoom";
+import Loading from "./Loading";
+import Alert from "./Alert";
 
 class Popup extends Component {
 

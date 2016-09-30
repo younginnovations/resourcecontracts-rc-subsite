@@ -187,11 +187,13 @@ class APIService
     /**
      * Get Text Page
      *
-     * @param $contract_id
+     * @param      $contract_id
      *
-     * @return object|null
+     * @param null $page_no
+     *
+     * @return null|object
      */
-    public function getTextPage($contract_id, $page_no)
+    public function getTextPage($contract_id, $page_no = null)
     {
         $resource = sprintf('contract/%s/text', $contract_id);
 
@@ -237,7 +239,6 @@ class APIService
      */
     public function filterSearch($filter)
     {
-
         extract($filter);
         $per_page = !empty($per_page) ? $per_page : 25;
         $query    = [
@@ -292,7 +293,9 @@ class APIService
             }
 
             $query['category'] = strtolower($this->site->getCategory());
+
             $request->setQuery($query);
+
             $response = $this->client->send($request);
             $data     = $response->getBody();
 
@@ -481,7 +484,7 @@ class APIService
                 $contractName = str_slug($contractName, "_");
                 $filename     = "Annotations_".$contractName."_".date('Ymdhis');
             }
-            $request           = new Request('GET', $this->apiURL($resource));
+            $request = new Request('GET', $this->apiURL($resource));
 
             if ($this->site->isCountrySite()) {
                 $query['country_code'] = strtolower($this->site->getCountryCode());
