@@ -20,7 +20,7 @@ return [
     'signature_year'             => "تاريخ التوقيع",
     'resource'                   => "المورد",
     'type_contract'              => "نوع العقد",
-    'open_contracting_id'        => "معرّف OpenContracting",
+    'open_contracting_id'        => "معرّف Open Contracting",
     'loading'                    => "جاري التحميل",
     'related_docs'               => "الوثائق ذات الصلة",
     'all_related'                => "كل ما يتّصل",
