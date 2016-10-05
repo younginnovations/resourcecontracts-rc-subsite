@@ -27,8 +27,8 @@ return [
     "Stabilization Agreements"               => "Accords de stabilisation",
     "Sub Contract"                           => "Sous contrat",
     "Sub-lease"                              => "Sous location",
-    "Translated Contract"                    => "Contrat traduit",
-    "Timber Sale Contract"                   => "Contrat de vente de bois",
+    "Translated Contract"                    => "Contrat de vente de bois",
+    "Timber Sale Contract"                   => "Contrat traduit",
 
 ];
 

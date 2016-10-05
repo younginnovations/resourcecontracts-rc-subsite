@@ -41,4 +41,8 @@ return [
         'partner_not_found' => 'Partenaire pas encore ajouté.',
         'create'            => 'Ajouter un partenaire',
     ],
+    'manage_language'       => 'Gérer la langue',
+    'default_lang'          => 'Langage par défaut',
+    'enable_localization'   => 'Activer la localisation',
+    'choose_lang'           => 'Choisissez la langue',
 ];

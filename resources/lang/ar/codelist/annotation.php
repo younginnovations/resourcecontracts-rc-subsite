@@ -154,7 +154,7 @@ return [
         "Income tax: exemptions"                                                                                                                         => "ضريبة الدخل: الإعفاءات",
         "Income tax: other"                                                                                                                              => "ضريبة الدخل: أخرى",
         "Production Share - Cost Oil features  (basis of calculation, limits on cost recovery - e.g. as % of revenue or production, capex uplift, etc.)" => "إنتاج حصة - ميزات النفط التكلفة (أساس الحساب، والقيود المفروضة على استرداد التكاليف - على سبيل المثال كنسبة مئوية من الدخل أو الإنتاج، والنفقات الرأسمالية رفع، وما إلى ذلك)",
-        'Production Share - "Profit Oil features(triggers for variations in split - IRR, factor, production, etc .)'                                     => "إنتاج حصة - ملامح النفط الربح (مشغلات عن الاختلافات في انقسام - IRR، عامل، إنتاج، ... الخ)",
+        "Production Share - \"Profit Oil features (triggers for variations in split - IRR, factor, production, etc .)"                                   => "إنتاج حصة - ملامح النفط الربح (مشغلات عن الاختلافات في انقسام - IRR، عامل، إنتاج، ... الخ)",
         "Service Agreement - Fee to developer or contractor"                                                                                             => "اتفاقية الخدمة - رسوم على المطور أو المقاول",
         "Capital gains tax"                                                                                                                              => "ضريبة الأرباح الرأسمالية",
         "Withholding tax"                                                                                                                                => "الضريبة",

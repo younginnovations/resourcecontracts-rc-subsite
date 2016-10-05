@@ -14,5 +14,5 @@ return [
     'reset'                => 'Rénitialiser',
     'select'               => 'Selectionner',
     'refine_search'        => 'Change ou améliorer votre recherche',
-    'annotated'            => "Annoté",
+    'annotated'            => "Contrats annotées Seulement",
 ];
