@@ -24993,14 +24993,20 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	var pdfText = [];
 	var TextStore = _reflux2.default.createStore({
 	    listenables: [_textAction2.default],
 	    getPages: function getPages(id) {
 	        var _this = this;
 	
-	        _httpService2.default.get('contract/' + id + '/text').then(function (response) {
-	            _this.trigger('text:loaded', response);
-	        });
+	        if (pdfText.length == 0) {
+	            _httpService2.default.get('contract/' + id + '/text').then(function (response) {
+	                pdfText = response;
+	                _this.trigger('text:loaded', response);
+	            });
+	        } else {
+	            this.trigger('text:loaded', pdfText);
+	        }
 	    }
 	});
 	
@@ -25071,7 +25077,6 @@
 	        var pages = (0, _sortBy3.default)(response.result, function (page) {
 	            return page.page_no;
 	        });
-	        console.log(response);
 	        this.setState({ pages: pages, total: response.total, isLoading: false });
 	    },
 	    render: function render() {
@@ -28055,6 +28060,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _contract = __webpack_require__(/*! ../../contract */ 10);
+	
+	var _contract2 = _interopRequireDefault(_contract);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Link = _react2.default.createClass({
@@ -28089,12 +28098,27 @@
 	            article_reference: props.article_reference
 	        });
 	    },
-	    getLink: function getLink() {
+	    getLink: function getLink() {},
+	    clickHandler: function clickHandler(e) {
+	        e.preventDefault();
+	
+	        var link = '#/text/page/' + this.state.annotation.page_no + '/annotation/' + this.state.annotation.id;
+	
 	        if (this.state.type == "pdf") {
-	            return '#/pdf/page/' + this.state.annotation.page_no + '/annotation/' + this.state.annotation.id;
+	            link = '#/pdf/page/' + this.state.annotation.page_no + '/annotation/' + this.state.annotation.id;
 	        }
 	
-	        return '#/text/page/' + this.state.annotation.page_no + '/annotation/' + this.state.annotation.id;
+	        if (_contract2.default.getView() == this.state.type && this.state.type == 'pdf') {
+	            if (_contract2.default.getCurrentPage() == this.state.annotation.page_no) {
+	                console.log(_contract2.default.getCurrentPage(), this.state.annotation.page_no);
+	                _contract2.default.showPopup(this.state.annotation.id);
+	            } else {
+	                window.location.href = link;
+	            }
+	        } else {
+	            window.location.href = link;
+	            _contract2.default.showPopup(this.state.annotation.id);
+	        }
 	    },
 	    render: function render() {
 	        var displayText = this.state.page;
@@ -28108,7 +28132,7 @@
 	            { className: 'page-gap' },
 	            _react2.default.createElement(
 	                'a',
-	                { href: this.getLink() },
+	                { onClick: this.clickHandler, href: '#' },
 	                displayText
 	            ),
 	            this.state.last ? ', ' : ''

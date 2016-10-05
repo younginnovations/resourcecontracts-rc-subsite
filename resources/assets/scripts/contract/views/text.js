@@ -23,7 +23,6 @@ var Text = React.createClass({
         var pages = _sortBy(response.result, (page) => {
             return page.page_no;
         });
-        console.log(response);
         this.setState({pages: pages, total: response.total, isLoading: false});
     },
     render() {

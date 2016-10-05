@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import Contract from '../../contract';
 
 var Link = React.createClass({
     getInitialState () {
@@ -32,11 +33,30 @@ var Link = React.createClass({
         });
     },
     getLink () {
+
+    },
+    clickHandler(e)
+    {
+        e.preventDefault();
+
+        var link = '#/text/page/' + this.state.annotation.page_no + '/annotation/' + this.state.annotation.id;
+
         if (this.state.type == "pdf") {
-            return '#/pdf/page/' + this.state.annotation.page_no + '/annotation/' + this.state.annotation.id;
+            link = '#/pdf/page/' + this.state.annotation.page_no + '/annotation/' + this.state.annotation.id;
         }
 
-        return '#/text/page/' + this.state.annotation.page_no + '/annotation/' + this.state.annotation.id;
+        if (Contract.getView() == this.state.type && this.state.type == 'pdf') {
+            if (Contract.getCurrentPage() == this.state.annotation.page_no) {
+                console.log(Contract.getCurrentPage(), this.state.annotation.page_no);
+                Contract.showPopup(this.state.annotation.id);
+            } else {
+                window.location.href = link;
+            }
+        } else {
+            window.location.href = link;
+            Contract.showPopup(this.state.annotation.id);
+        }
+
     },
     render () {
         var displayText = this.state.page;
@@ -47,7 +67,7 @@ var Link = React.createClass({
 
         return (
             <span className="page-gap">
-                <a href={this.getLink()}>{displayText}</a>
+                <a onClick={this.clickHandler} href="#">{displayText}</a>
                 {this.state.last ? ', ' : ''}
             </span>
         )
