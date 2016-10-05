@@ -95,6 +95,7 @@ var MetadataView = React.createClass({
             var contractType = ct.map(function (contractType, i) {
                 var link = app_url + "/search?q=&contract_type%5B%5D=" + contractType;
                 var separator = (i != ct.length - 1) ? ' | ' : '';
+                contractType = langContractType[contractType] || contractType
                 return (<span>{contractType} {separator}</span>);
             });
 
@@ -173,7 +174,9 @@ var MetadataView = React.createClass({
                         <AmlaUrl metadata={this.props.metadata}/>
                         <LandMatrixView metadata={this.props.metadata}/>
                         <div className="metadata-ocid">
-                            <p><span></span><span>{lang.more_for}</span> {this.getResourceLang(this.props.metadata.get("resource"), true)}</p>
+                            <p>
+                                <span></span><span>{lang.more_for}</span> {this.getResourceLang(this.props.metadata.get("resource"), true)}
+                            </p>
                         </div>
                     </div>
                 </div>

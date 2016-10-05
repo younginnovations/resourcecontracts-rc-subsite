@@ -181,6 +181,7 @@
 
         var lang =  {!!  json_encode(trans('annotation')) !!};
         var langResource =  {!!  json_encode(trans('resources')) !!};
+        var langContractType =  {!! json_encode(trans('codelist/contract_type')) !!};
         var langClip = {!! json_encode(trans('clip'))  !!};
         var clipUrl= '{{route('clip.index')}}';
         var email = '<?php echo env('CONTACT_MAIL'); ?>';
