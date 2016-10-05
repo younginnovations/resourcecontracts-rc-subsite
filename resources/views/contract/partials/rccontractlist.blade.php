@@ -93,7 +93,7 @@ if ($path[0] == "resource") {
                         @foreach($contract->contract_type as $contracttype)
                             @if(!empty($contracttype))
                                 <li>
-                                    {{_l('codelist/contract_type.',$contracttype)}}
+                                    {{_l('codelist/contract_type', $contracttype)}}
                                 </li>
                             @else
                                 -

@@ -154,7 +154,7 @@ return [
         "Income tax: exemptions"                                                                                                                         => "Income tax: exemptions",
         "Income tax: other"                                                                                                                              => "Income tax: other",
         "Production Share - Cost Oil features  (basis of calculation, limits on cost recovery - e.g. as % of revenue or production, capex uplift, etc.)" => "Production Share - Cost Oil features  (basis of calculation, limits on cost recovery - e.g. as % of revenue or production, capex uplift, etc.)",
-        "Production Share - \"Profit Oil features(triggers for variations in split - IRR, factor, production, etc .)"                                    => "Production Share - \"Profit Oil features(triggers for variations in split - IRR, factor, production, etc .)",
+        "Production Share - \"Profit Oil features (triggers for variations in split - IRR, factor, production, etc .)"                                   => "Production Share - \"Profit Oil features(triggers for variations in split - IRR, factor, production, etc .)",
         "Service Agreement - Fee to developer or contractor"                                                                                             => "Service Agreement - Fee to developer or contractor",
         "Capital gains tax"                                                                                                                              => "Capital gains tax",
         "Withholding tax"                                                                                                                                => "Withholding tax",

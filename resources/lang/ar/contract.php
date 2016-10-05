@@ -5,7 +5,7 @@ return [
     'company'              => "الشركة",
     'company_name'         => "إسم الشركة",
     'jurisdiction'         => "الولاية القضائيّة حيث تمّ التأسيس",
-    'registration_agency'  => "الولاية القضائيّة ",
+    'registration_agency'  => "كالة التسجيل",
     'company_add'          => "عنوان الشركة",
     'company_number'       => "رقم الشركة",
     'corporate_grouping'   => "تجمّع الشركات",
@@ -37,4 +37,5 @@ return [
     'results'              => "النتائج",
     'loading'              => "جاري التحميل...",
     'social_share'         => "شارك",
+    'contract_not_signed'  => "لا يحتوي هذا المستند على التوقيعات.",
 ];

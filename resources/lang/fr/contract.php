@@ -10,7 +10,7 @@ return [
     'company_number'       => "Numéro de la société",
     'corporate_grouping'   => "Regroupement de sociétés",
     'open_corporate_ID'    => "Identifiant OpenCorporates",
-    'share'                => "la participation",
+    'share'                => "Partage Participation",
     'operator'             => "Opérateur ",
     'associated_documents' => "Documents Connexes  ",
     'ass_doc_msg'          => "Aucun document connexe n'est disponible",
@@ -37,5 +37,6 @@ return [
     'results'              => "Résultats",
     'loading'              => "Chargement ...",
     'social_share'         => "Partager",
+    'contract_not_signed'  => "Ce document ne contient pas de signatures.",
 
 ];

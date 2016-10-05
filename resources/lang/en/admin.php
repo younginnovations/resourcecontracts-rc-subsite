@@ -41,4 +41,8 @@ return [
         'partner_not_found' => 'Partner not added yet.',
         'create'            => 'Add partner',
     ],
+    'manage_language'       => 'Manage language',
+    'default_lang'          => 'Default language',
+    'enable_localization'   => 'Enable Localization',
+    'choose_lang'           => 'Choose language',
 ];

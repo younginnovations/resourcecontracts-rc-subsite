@@ -5,7 +5,7 @@ return [
     "Autre"                                  => "آخر",
     "Bail Foncier"                           => "ايجار العقارات",
     "Cahier des Charges"                     => "كراس الشروط",
-    "Concession Agreement"                   => "اتفاقية امتياز",
+    "Concession Agreement"                   => "البحث عن عقود الأراضي للبلد ",
     "Contract Amendment"                     => "تعديل العقد",
     "Contract Annex"                         => "ملحق العقد",
     "Contrat de Concession Agricole"         => "عقد امتياز زراعي",

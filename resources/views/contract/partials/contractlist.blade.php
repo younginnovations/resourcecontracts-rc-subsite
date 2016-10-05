@@ -37,12 +37,10 @@ if($route=="contracts" && isset($url['year']))
         <tr>
             <td></td>
             <td>
-
-                        <a class="title-{{$contract->open_contracting_id}}" href="{{ url(sprintf
-                        ("/contract/%s/view#/pdf", $contract->open_contracting_id )) }}">
-                            {{ $contract->name or ''}}
-                        </a>
-
+				<a class="title-{{$contract->open_contracting_id}}" href="{{ url(sprintf
+				("/contract/%s/view#/pdf", $contract->open_contracting_id )) }}">
+					{{ $contract->name or ''}}
+				</a>
                 <?php
                 $link = sprintf('/contract/%s#annotations', $contract->open_contracting_id);
                 ?>
@@ -161,13 +159,8 @@ if($route=="contracts" && isset($url['year']))
                         @foreach($contract->contract_type as $contracttype)
                             @if(!empty($contracttype))
                                 <li>
-                                    @if(Lang::has('codelist/contract_type.'.$contracttype))
-                                        {{ trans('codelist/contract_type')[$contracttype] }}
-                                    @else
-                                        {{ $contracttype }}
-                                    @endif
+									{{_l('codelist/contract_type', $contracttype)}}
                                 </li>
-
                             @else
                                 -
                             @endif
