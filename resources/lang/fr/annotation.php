@@ -32,7 +32,7 @@ return [
     'sorry_loading'              => "Nous nous excusons, le chargement de ce contrat présente des problèmes. Veuillez contacter",
     'to_let_us_know'             => "Pour nous informer, ou bien vérifier plus tard",
     'loading_page'               => "Chargement de la page PDF ",
-    'search_in_this_document'    => "Chercher dans ce document",
+    'search_in_this_document'    => "Rechercher dans ce document",
     'searching'                  => "Recherche en cours…",
     'no_results_found'           => "Aucun résultat trouvé",
     'text'                       => "Texte",

@@ -7,7 +7,7 @@ return [
     'countries'               => "Pays",
     'country'                 => "Pays",
     'view_all_countries'      => "Montrer tous les pays",
-    'contracts_related_to'    => "Documents du contrat liés à",
+    'contracts_related_to'    => "DOCUMENTS DES CONTRATS LIÉS À",
     'all_contracts'           => "Tous les contrats ",
     'view_all_resources'      => "Voir toutes les ressources",
     'document'                => "Document",
