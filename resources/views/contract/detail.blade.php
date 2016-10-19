@@ -92,7 +92,7 @@ use Illuminate\Support\Facades\Lang;
                             <li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                 <label for="">@lang('global.country')</label>
                                 @if($code = strtolower(_e($contract->metadata->country,'code')))
-                                    <span>{{ucfirst(_e($contract->metadata->country,'name'))}}
+                                    <span>{{_l('country',_e($contract->metadata->country,'code'))}}
                                         @if(env("CATEGORY")=="rc")
                                             @if(isset($contract->metadata->amla_url) && !empty($contract->metadata->amla_url))
                                                 <span class="amla-link">@lang('contract.see') <a

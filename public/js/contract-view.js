@@ -26416,6 +26416,7 @@ var MetadataView = React.createClass({displayName: "MetadataView",
             var contractType = ct.map(function (contractType, i) {
                 var link = app_url + "/search?q=&contract_type%5B%5D=" + contractType;
                 var separator = (i != ct.length - 1) ? ' | ' : '';
+                contractType = langContractType[contractType] || contractType
                 return (React.createElement("span", null, contractType, " ", separator));
             });
 
@@ -26494,7 +26495,9 @@ var MetadataView = React.createClass({displayName: "MetadataView",
                         React.createElement(AmlaUrl, {metadata: this.props.metadata}), 
                         React.createElement(LandMatrixView, {metadata: this.props.metadata}), 
                         React.createElement("div", {className: "metadata-ocid"}, 
-                            React.createElement("p", null, React.createElement("span", null), React.createElement("span", null, lang.more_for), " ", this.getResourceLang(this.props.metadata.get("resource"), true))
+                            React.createElement("p", null, 
+                                React.createElement("span", null), React.createElement("span", null, lang.more_for), " ", this.getResourceLang(this.props.metadata.get("resource"), true)
+                            )
                         )
                     )
                 )

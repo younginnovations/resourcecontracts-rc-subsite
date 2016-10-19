@@ -21,7 +21,7 @@
 		<div class="col-lg-3 footer-left-wrap">
 			<ul>
 				<li><a href="{{url('about')}}">@lang('footer.about')</a></li>
-				<li><a href="{{url('faqs')}}">FAQs</a></li>
+				<li><a href="{{url('faqs')}}">@lang('footer.faqs')</a></li>
 				<li><a href="{{url('page/resources')}}">@lang('global.resources')</a></li>
 				<li><a href="{{url('glossary')}}">@lang('footer.glossary')</a></li>
 				<li><a href="{{url('publish-contracts')}}">@lang('footer.publish_contracts')</a></li>

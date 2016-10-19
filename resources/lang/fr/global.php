@@ -18,7 +18,7 @@ return [
     'contract_type'           => "Type de contrat ",
     'filter_by_resource'      => "Entrez le nom de ressource ou sélectionnez une resource ci-dessous",
     'filter_by_countries'     => "Entrez le nom du pays ou sélectionnez un Pays ciـdessous",
-    'find_contract'           => "Chercher dans: Contrats marqués",
+    'find_contract'           => "Chercher dans Contrats :tag",
     'contracts_for'           => "Contrats pour",
     'go_back'                 => "Retourner",
     'download'                => "Télécharger",
