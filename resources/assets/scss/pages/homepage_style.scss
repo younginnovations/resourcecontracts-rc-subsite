@@ -1,0 +1,970 @@
+.front-row-top-wrap {
+  nav.navbar {
+    border-bottom: 1px solid $concrete;
+    border-bottom: 1px solid $concrete_20;
+    //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+    box-shadow: none;
+  }
+}
+
+//original selectors
+//.country-inner-wrap, .resource-inner-wrap
+%extend_6 {
+  color: $white;
+  font: 52px/76px $font_2;
+  margin-bottom: 20px;
+}
+
+//original selectors
+//.country-inner-wrap p, .resource-inner-wrap p
+%extend_7 {
+  font: 14px/19px $font_0;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+//original selectors
+//.country-list-wrap .col-lg-2, .country-list-wrap .col-lg-3
+%extend_12 {
+  text-align: center;
+  margin-top: 60px;
+  min-height: 150px;
+}
+
+
+//original selectors
+//.btn-view, .btn-view:hover, .btn-view:focus
+%extend_8 {
+  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+
+  background-color: $white;
+  background-color: $white_10;
+  border-radius: 16px;
+  color: $white;
+  color: $white_70;
+  padding: 6px 32px 6px 18px;
+  position: relative;
+
+  &:after{
+    content: "";
+    background: transparent url(#{$img-path}/ic-sprite.svg) -6px -383px;
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    height: 9px;
+    width: 5px;
+  }
+
+}
+
+.row-top-wrap {
+  background: no-repeat center/cover;
+  margin: 0;
+}
+
+
+.row-top-content {
+  padding: 100px 40px;
+}
+
+.tagline {
+  font-size: 26px;
+  line-height: 50px;
+  color: $white;
+  margin-bottom: 36px;
+  word-wrap: break-word;
+  span {
+    font-size: 50px;
+    font-family: $font_2;
+    line-height: 60px;
+    display: block;
+  }
+}
+
+.btn-search {
+  @extend %extend_5;
+  &:hover {
+    @extend %extend_5;
+    background: $color_link_hover_color;
+  }
+  &:focus {
+    @extend %extend_5;
+  }
+}
+
+.advanced-search {
+  font-size: 14px;
+  color: $white;
+  color: $white_50;
+  text-decoration: underline;
+  cursor: pointer;
+  display: none;
+  &:hover {
+    color: $white;
+  }
+}
+
+.row-content {
+  margin: 0;
+  > div[class*=col-lg] {
+    padding: 0;
+    > div {
+      padding: 148px 32px 72px;
+    }
+  }
+}
+
+.country-wrapper {
+  background: $color_calypso_approx $url_3 no-repeat center;
+}
+
+.country-inner-wrap {
+  @extend %extend_6;
+  p {
+    @extend %extend_7;
+  }
+}
+
+.resource-inner-wrap {
+  @extend %extend_6;
+  color: $color_cape_cod_approx;
+  p {
+    @extend %extend_7;
+  }
+}
+
+.btn-view {
+  @extend %extend_8;
+  &:hover {
+    @extend %extend_8;
+    background-color: $white_40;
+  }
+  &:focus {
+    @extend %extend_8;
+    background-color: $white_40;
+  }
+}
+
+.resource-wrapper {
+  background: $color_athens_gray_approx $url_4 no-repeat bottom right;
+  .btn-view {
+    background-color: $color_cape_cod_approx;
+    background-color: $color_cape_cod_10_approx;
+    color: $color_cape_cod_approx;
+    color: $color_cape_cod_70_approx;
+
+    &:after {
+      background: transparent url(#{$img-path}/ic-sprite.svg) -6px -344px;
+    }
+
+    &:hover {
+      background-color: $color_cape_cod_20_approx;
+    }
+  }
+}
+  .test {
+    background-image: radial-gradient(circle at 50% 38%, #4a715a, #05632c);
+  }
+
+  .advance-search a,
+  footer a {
+    color: rgba(255, 255, 255, 0.69);
+    &:focus,
+    &:hover,
+    &:active {
+      color: inherit;
+    }
+  }
+
+.petroleum-list a{
+  color: #484848;
+  &:focus,
+  &:hover,
+  &:active {
+    color: #484848;
+    text-decoration: none;
+  }
+
+}
+
+.petroleum-list a:hover small{
+  border-bottom: solid 1px #333;
+}
+
+.wrapper {
+    width: 950px;
+    margin: 0 auto;
+  }
+
+  .hero-image {
+    position: relative;
+    margin-top: -81px;
+  }
+
+  .petroleum-wrapper {
+    background-position:  center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .section-wrap {
+    position: relative;
+    padding: 133px 0 20px 0;
+    margin: 0 60px;
+  }
+
+  @media (min-width: 992px) {
+    .section-wrap {
+      min-height: 610px;
+    }
+  }
+
+  .petroleum-mineral {
+    padding: 120px 225px 120px 30px;
+    color: $white;
+    background: linear-gradient(rgba($black, 0.45), rgba($black, 0.45));
+    width: 747px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    .repo-description {
+      font-size: 26px;
+      line-height: 34px;
+    }
+    .large-title {
+      font-family: $font_2;
+      font-size: 58px;
+      line-height: 66px;
+
+      span {
+        display: block;
+      }
+
+    }
+  }
+
+  .hero-image {
+    .search-form {
+      padding: 0;
+      margin-top: 38px;
+      max-width: 600px;
+      .form-group {
+        input {
+          width: calc(100% - 126px);
+          border: none;
+          line-height: 18px;
+          background: linear-gradient(rgba($white, 0.45), rgba($white, 0.45));
+          float: left;
+          padding: 19px;
+          color: $white;
+          border-radius: 4px 0 0 4px;
+        }
+      }
+      .search-button {
+        width: 126px;
+        float: left;
+        border: none;
+        background: $color_link_color;
+        border-radius: 0 4px 4px 0;
+        padding: 17px 20px;
+        color: $white;
+        box-shadow: inset 0 2px 5px 0 rgba($white, 0.2);
+        border: solid 1px $color_link_color;
+        &:hover {
+          background: $color_link_hover_color;
+        }
+      }
+    }
+  }
+
+  .petroleum-mineral {
+    input::-webkit-input-placeholder {
+      color: rgba(255,255,255,0.8) !important;
+    }
+    input {
+      &:-webkit-input-placeholder {
+        color: rgba(255,255,255,0.8) !important;
+      }
+      &:-moz-placeholder {
+        color: rgba(255,255,255,0.8) !important;
+      }
+      &:-ms-input-placeholder {
+        color: rgba(255,255,255,0.8) !important;
+      }
+    }
+    input::-moz-placeholder {
+      color: rgba(255,255,255,0.8) !important;
+    }
+  }
+
+
+  @media (max-width: 1024px){
+    .petroleum-mineral {
+      input::-webkit-input-placeholder {
+        font-size: 13px !important;
+      }
+      input {
+        &:-webkit-input-placeholder {
+          font-size: 13px !important;
+        }
+        &:-moz-placeholder {
+          font-size: 13px !important;
+        }
+        &:-ms-input-placeholder {
+          font-size: 13px !important;
+        }
+      }
+      input::-moz-placeholder {
+        font-size: 13px !important;
+      }
+    }
+  }
+
+  .advance-search {
+    font-size: 12px;
+    line-height: 20px;
+    color: rgba(255, 255, 255, 0.69);
+    text-decoration: underline;
+    margin-top: 6px;
+  }
+
+  .petroleum-list {
+    position: absolute;
+    z-index: 999;
+    width: 387px;
+    //top: 264px;
+    top: calc(50% - 145px);
+    left: 610px;
+    border-radius: 4px;
+
+    .petroleum-list-inner {
+      padding: 20px 25px;
+      color: $light-black;
+      background-color: $white;
+      border-radius: 4px 4px 0 0;
+      .col-md-4 {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      .petroleum-list-title {
+        margin-bottom: 0;
+        font-size: 40px;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+      small {
+        font-size: 14px;
+        font-weight: bold;
+      }
+    }
+    .clear {
+      clear: both;
+    }
+  }
+  .list-item-wrap {
+    padding: 20px;
+    background-image: radial-gradient(circle at 50% 38%, $flame-pea, $list-item);
+    border-radius: 0 0 4px 4px;
+    .inner-list-item {
+      background: $list-bg;
+      padding: 30px 20px 35px;
+      .group-item-title {
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: normal;
+        color: rgba($white, 0.69);
+      }
+      .list-group {
+        margin-bottom: 0 !important;
+
+        .list-group-item {
+          padding: 0;
+          border: none;
+          background: transparent;
+          margin-bottom: 0;
+        }
+
+        .list-group-item a {
+          display: block;
+          width: 100%;
+          background: $list-item;
+          border: none;
+          color: $white;
+          padding: 14px 14px 14px 0;
+          border-bottom: 1px solid rgba(216, 216, 216, 0.1);
+          margin-bottom: 0;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          background: transparent url("../images/next.png") center right no-repeat;
+
+          &:hover{
+            text-decoration: underline;
+          }
+        }
+
+      }
+    }
+  }
+
+  .petroleum-list-each {
+    border-right: 2px solid rgba($color_link_color, 0.2);
+  }
+
+  .img-intro {
+    //background: linear-gradient(rgba(25, 90, 94, 0.6), rgba(25, 90, 94, 0.6)), url(../images/img_intro.png) no-repeat center center/cover;
+
+    p {
+      color: rgba(255, 255, 255, 0.69);
+      font-size: 24px;
+      line-height: 30px;
+      font-family: $font_4;
+      padding: 50px 0;
+      max-width: 960px;
+      margin: 0 auto;
+      a {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .explore-contracts {
+    text-align: center;
+    background-color: $explore-contracts;
+    .map-wrapper {
+      position: relative;
+      padding: 40px 0 28px 0;
+      .zooming {
+        position: absolute;
+        right: 0;
+        bottom: 150px;
+      }
+    }
+  }
+
+  .country-partners {
+    text-align: center;
+    background-color: $country-partners;
+    padding: 40px 0 40px 0;
+  }
+
+  .heading2 {
+    margin: 0;
+    padding-bottom: 30px;
+    color: $cloud;
+  }
+
+  .map-wrapper .heading2{
+    padding-bottom: 10px;
+  }
+
+.countrypartner{
+  display: none;
+}
+
+
+.slick-slider .slick-prev,
+.slick-slider .slick-next {
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  background: rgba($grey, 0.7) url(../images/previous.png) no-repeat center;
+  position: absolute;
+  top: 50%;
+  margin-top: -18px;
+  text-indent: -999px;
+  overflow: hidden;
+  z-index: 99;
+  border: none;
+  //display: none !important;
+}
+
+
+.slick-slider .slick-prev {
+  left: -18px;
+  &:hover {
+    background-color: $grey;
+  }
+}
+
+.slick-slider .slick-next {
+  transform: rotate(180deg);
+  right: -18px;
+  overflow: hidden;
+  &:hover {
+    background-color: $grey;
+  }
+}
+
+.slick-track{
+  margin: 0 auto;
+}
+
+.slick-slide img{
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+  .countrypartner{
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .hero-image .search-form .form-group input{
+    font-size: 13px;
+  }
+}
+
+
+@media (min-width: 400px){
+  .slider .multiple{
+    padding: 0 8px;
+  }
+}
+
+footer {
+  background-color: $dark-grey;
+  color: $white;
+  padding: 50px 57px 40px;
+  overflow: hidden;
+
+  .footer__wrap{
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .bigger-block {
+    max-width: 970px;
+    margin: 0 auto;
+  }
+  p {
+    color: rgba(255, 255, 255, 0.36);
+  }
+}
+
+
+
+p {
+  font-size: 12px;
+  line-height: 22px;
+}
+.partner-wrapper {
+  margin-top: 20px;
+  ul {
+    padding: 0;
+  }
+  li {
+    list-style: none;
+  }
+  .partner-inner-heading {
+    color: rgba(237, 239, 241, 0.4);
+    text-transform: uppercase;
+  }
+
+}
+
+.partner-inner-each{
+  .img-responsive{
+    &.logo__cu{
+      width: 166px;
+      height: 42px;
+      background: transparent url(../images/logo_columbia_university.png) 0 0 no-repeat;
+      @include background-image-retina(transparent,"../images/logo_columbia_university", "png",0,0);
+      background-size: 166px 42px !important;
+    }
+    &.logo__wb{
+      width: 193px;
+      height: 38px;
+      background: transparent url(../images/logo_wb.png) 0 0 no-repeat;
+      @include background-image-retina(transparent,"../images/logo_wb", "png",0,0);
+      background-size: 193px 38px !important;
+    }
+    &.logo__nrgi{
+      width: 114px;
+      height: 45px;
+      background: transparent url(../images/logo_nrgi.png) 0 0 no-repeat;
+      @include background-image-retina(transparent,"../images/logo_nrgi", "png",0,0);
+      background-size: 114px 45px !important;
+    }
+    &.logo__alsf{
+      width: 136px;
+      height: 54px;
+      background: transparent url(../images/logo_alsf.png) 0 0 no-repeat;
+      @include background-image-retina(transparent,"../images/logo_alsf", "png",0,0);
+      background-size: 136px 54px !important;
+    }
+    &.logo__ukaid{
+      width: 138px;
+      height: 47px;
+      background: transparent url(../images/logo_ukaid.png) 0 0 no-repeat;
+      @include background-image-retina(transparent,"../images/logo_ukaid", "png",0,0);
+      background-size: 138px 47px !important;
+    }
+
+    &.logo__ukaid{
+      width: 138px;
+      height: 47px;
+      background: transparent url(../images/logo_ukaid.png) 0 0 no-repeat;
+      @include background-image-retina(transparent,"../images/logo_ukaid", "png",0,0);
+      background-size: 138px 47px !important;
+    }
+
+    &.logo__oo{
+      width: 54px;
+      height:49px;
+      background: transparent url(../images/logo_oo.png) 0 0 no-repeat;
+      @include background-image-retina(transparent,"../images/logo_oo", "png",0,0);
+      background-size: 54px 49px !important;
+    }
+
+  }
+}
+
+.menu-list {
+  .menu-list-each a {
+    color: rgba(255, 255, 255, 0.7)
+  }
+}
+.footer-bottom {
+  float: right;
+  margin-top: 0;
+  .footer-description {
+    float: left;
+    img{
+      margin-left: 4px;
+    }
+  }
+}
+
+.menu-list-each {
+  float: right;
+  li {
+    display: inline-block;
+    float: left;
+    margin-right: 10px;
+    padding-right: 10px;
+    border-right: none;
+    position: relative;
+
+    &:after {
+      position: absolute;
+      content: " ";
+      height: 15px;
+      width: 1px;
+      background: rgba(255, 255, 255, 0.7);
+      top: 3px;
+      right: -1px;
+    }
+
+    &:last-child {
+      margin-right: 0;
+      padding-right: 0;
+      border-right: none;
+      &:after {
+        content: none;
+      }
+    }
+  }
+}
+
+  /*medium devices, desktop*/
+  @media only screen and (max-width: 992px) {
+    .wrapper {
+      width: 100%;
+    }
+
+    .petroleum-wrapper {
+      .petroleum-mineral {
+        width: 100%;
+      }
+    }
+
+    .petroleum-list {
+      position: static;
+      width: 100%;
+    }
+    .img-intro .img-intro-text,
+    .explore-contracts .map-wrapper,
+    .country-partners-wrapper,
+    footer {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+    .menu-list {
+      margin-top: 25px;
+    }
+
+    .menu-list-each {
+      li {
+        display: inline-block;
+        float: left;
+        margin: 0px 10px 0 0;
+        padding-right: 10px;
+        border-right: none;
+        position: relative;
+
+        &:after{
+          position: absolute;
+          content: " ";
+          height: 15px;
+          width: 1px;
+          background: rgba(255,255,255,0.7);
+          top: 3px;
+          right: -1px;
+        }
+
+        &:last-child {
+          margin-right: 0;
+          border-right: none;
+          &:after{
+            content: none;
+          }
+        }
+      }
+    }
+
+  }
+
+  @media all and (max-width: 880px) {
+    .petroleum-mineral {
+      padding: 80px 80px 80px 30px
+    }
+  }
+
+  /*small devices, tablets*/
+  @media only screen and (max-width: 768px) {
+
+    .section-wrap {
+      padding: 120px 0 10px 0;
+      margin: 0 30px;
+    }
+
+    .petroleum-mineral {
+      padding: 50px 15px;
+
+      .repo-description {
+        font-size: 22px;
+      }
+
+      .repo-title {
+        font-size: 36px;
+      }
+    }
+
+    .img-intro .img-intro-text {
+      width: 100%;
+      font-size: 14px;
+    }
+    .explore-contracts .map-wrapper .zooming {
+      bottom: 110px;
+    }
+
+    .img-intro .img-intro-text,
+    .explore-contracts .map-wrapper,
+    .country-partners-wrapper,
+    footer {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    .partner-wrapper {
+      text-align: center;
+      .partner-inner-each img {
+        margin: 0 auto;
+      }
+    }
+
+    .footer__wrap .language-selector{
+      margin: 20px auto;
+      float: none;
+    }
+
+    .heading2 {
+      font-size: 24px;
+    }
+    .partner-inner-each {
+
+    }
+    .menu-list-each li {
+      display: inline-block;
+      float: left;
+      margin: 0 10px 0 0;
+      &:last-child {
+        margin-right: 0;
+      }
+
+    }
+
+  }
+
+  @media only screen and (max-width: 480px) {
+
+    .hero-image .search-form .form-group input{
+      width: 100%;
+      border-radius: 4px 4px;
+      padding: 15px 10px;
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    .hero-image .search-form .search-button{
+      border-radius: 4px 4px;
+      width: 100%;
+      padding: 10px 12px;
+    }
+
+    .petroleum-wrapper .petroleum-mineral{
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    .section-wrap {
+      padding: 81px 0 0 0;
+      margin: 0;
+    }
+
+    .list-item-wrap {
+      padding: 20px 15px;
+    }
+
+    .petroleum-mineral .large-title {
+      font-size: 38px;
+      line-height: 48px;
+    }
+
+    .petroleum-mineral {
+      padding: 30px 20px;;
+    }
+
+    .petroleum-list .petroleum-list-inner {
+      padding: 20px 15px;
+      .petroleum-list-title {
+        font-size: 32px;
+      }
+    }
+    .explore-contracts .map-wrapper .zooming {
+      bottom: 60px;
+      width: 25px;
+    }
+    .partner-inner-each {
+      width: 100%;
+    }
+
+    .img-intro p{
+      padding: 0;
+      font-size: 16px;
+      line-height: 24px;
+    }
+
+    .country-partners{
+      padding: 0;
+    }
+
+    .heading2{
+      margin-bottom: 20px;
+    }
+
+    .img-intro .img-intro-text,
+    .explore-contracts .map-wrapper,
+    .country-partners-wrapper, footer{
+      padding: 20px 15px;
+    }
+
+
+
+  }
+
+@media (min-width: 599px){
+  .partner-inner ul li {
+    margin: 10px;
+  }
+
+  #map {
+    max-height: 245px;
+  }
+}
+
+
+
+@media (min-width: 895px){
+  .partner-inner {
+    width: calc(100% - 465px);
+    float: left;
+  }
+  
+  .menu-list{
+    width: 465px;
+    float: right;
+  }
+
+  .partner-inner ul li {
+    display: block;
+    margin: 0 0 20px;
+  }
+
+  .partner-inner{
+    .partner-inner-each:nth-child(1){
+      width: 210px;
+      float: left;
+    }
+
+    .partner-inner-each:nth-child(2){
+      width: calc(100% - 210px);
+      float: left;
+    }
+  }
+
+}
+
+@media (min-width: 970px) {
+  .partner-inner {
+    .partner-inner-each:nth-child(1) {
+      width: 50%;
+      float: left;
+    }
+
+    .partner-inner-each:nth-child(2) {
+      width: 50%;
+      float: left;
+    }
+  }
+}
+
+@media (max-width: 895px){
+  .partner-inner ul li {
+    display: inline-block;
+    margin: 10px 20px;
+    text-align: center;
+  }
+
+  .menu-list-each,.menu-list-each li{
+    float: none;
+  }
+}
+
+@media (min-width: 1200px){
+  .section-wrap{
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+.show-in-small-screen{
+  display: block;
+}
+
+@media (min-width: 992px){
+  .show-in-small-screen{
+    display: none;
+  }
+}
+
+@media (max-width: 992px) {
+  .show-in-bigger-screen {
+    display: none;
+  }
+}
+

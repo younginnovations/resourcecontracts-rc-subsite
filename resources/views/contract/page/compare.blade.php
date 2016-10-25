@@ -1,11 +1,6 @@
 @extends('layout.app-blank')
 @section('css')
-    <link rel="stylesheet" href="{{ url('css/annotation/pages.css') }}">
-    <link rel="stylesheet" href="{{ url('css/annotation/pagination.css') }}"/>
-    <link rel="stylesheet" href="{{ url('css/annotation/annotator.css') }}">
-    <link rel="stylesheet" href="{{ url('css/jquery-ui.css') }}">
-    <link rel="stylesheet" href="{{ url('css/contract-viewer.css') }}">
-    <link rel="stylesheet" href="{{ url('css/contract-compare.css') }}">
+    <link rel="stylesheet" href="{{ url('css/contract.css') }}">
 @stop
 @section('content')
     <div class="panel panel-default">

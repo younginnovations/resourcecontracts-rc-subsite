@@ -11,7 +11,7 @@
             <h3 class="panel-title">@lang('admin.add_new_page')</h3>
         </div>
         <div class="panel-body">
-    <form class="form-horizontal" action="{{route('admin.page.store')}}" method="POST">
+    <form  action="{{route('admin.page.store')}}" method="POST">
         <ul class="nav nav-tabs" role="tablist">
             @foreach(config('language') as $code=>$lang)
                 <li role="page" @if($code == 'en') class="active" @endif ><a href="#{{$code}}" aria-controls="{{$code}}" role="tab" data-toggle="tab">{{$lang['name']}}</a></li>
@@ -20,19 +20,14 @@
         <div class="tab-content" style="padding-top: 20px;">
             @foreach(config('language') as $code=>$lang)
                 <div role="tabpanel" class="tab-pane @if($code == 'en') active @endif " id="{{$code}}">
-
                     <div class="form-group">
-                        <label class="col-md-2 control-label">@lang('admin.title'):</label>
-                        <div class="col-md-6">
-                            <input id="title" class="form-control" name="title[{{$code}}]" value="{{old('title')}}"/>
-                        </div>
+                        <label for="title">@lang('admin.title'):</label>
+                        <input id="title" class="form-control" name="title[{{$code}}]" value="{{old('title')}}"/>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-md-2 control-label">@lang('admin.content'):</label>
-                        <div class="col-md-6">
-                            <textarea style="width:100%; height:500px" id="content" class="{{$code}}" name="content[{{$code}}]" >{{old('content')}}</textarea>
-                        </div>
+                        <label for="title">@lang('admin.content'):</label>
+                        <textarea style="width:100%; height:500px" id="content" class="{{$code}}" name="content[{{$code}}]" >{{old('content')}}</textarea>
                     </div>
                 </div>
             @endforeach

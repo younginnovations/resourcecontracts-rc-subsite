@@ -1,6 +1,6 @@
 @include('layout.partials.head')
 
-@if(\Request::url() != url())
+@if(Request::url() != url())
     @include('layout.partials.header')
 @endif
 

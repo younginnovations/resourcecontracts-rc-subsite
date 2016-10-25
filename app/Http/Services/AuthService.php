@@ -31,7 +31,7 @@ Class AuthService
      */
     public function login($username, $password)
     {
-        $baseUrl = trim(env('ADMIN_API_URL'), '/');
+        $baseUrl = site()->adminApiUrl();
 
         try {
             $client = new Client(['base_url' => $baseUrl]);

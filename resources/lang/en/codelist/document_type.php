@@ -6,10 +6,9 @@
 |
 */
 return [
-
     "Contract"                        => "Contract",
     "Environmental Impact Assessment" => "Environmental Impact Assessment",
-    "Feasiblity Study"                => "Feasiblity Study",
+    "Feasibility Study"               => "Feasibility Study",
     "Financial information"           => "Financial information",
     "Forest Management Plan"          => "Forest Management Plan",
     "Model Contract"                  => "Model Contract",
@@ -17,6 +16,5 @@ return [
     "Other"                           => "Other",
     "Project Plan"                    => "Project Plan",
     "Social Agreement"                => "Social Agreement",
-    "Social Impact Assessment"        => "Social Impact Assessment"
-
+    "Social Impact Assessment"        => "Social Impact Assessment",
 ];

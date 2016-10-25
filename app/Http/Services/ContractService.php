@@ -18,6 +18,7 @@ class ContractService
 
     /**
      * @param APIService $api
+     *
      * @internal param Log $logger
      */
     public function __construct(APIService $api)
@@ -29,6 +30,7 @@ class ContractService
      * Get Annotations
      *
      * @param $contractId
+     *
      * @return array
      */
     public function annotations($contractId)
@@ -41,7 +43,7 @@ class ContractService
                     'page'  => $annotations->page_no,
                     'quote' => $annotations->quote,
                     'text'  => $annotations->text,
-                    'tags'  => $annotations->tags
+                    'tags'  => $annotations->tags,
                 ];
             }
         }
@@ -53,6 +55,7 @@ class ContractService
      * Get Contract Text from AWS S3
      *
      * @param $file
+     *
      * @return null|string
      */
     public function getTextFromS3($file)
@@ -60,9 +63,27 @@ class ContractService
         try {
             return file_get_contents($file);
         } catch (Exception $e) {
-            Log::error('File not found:' . $e->getMessage());
+            Log::error('File not found:'.$e->getMessage());
 
             return null;
         }
+    }
+
+    /**
+     * Return array of country code
+     *
+     * @param $summary
+     *
+     * @return array
+     */
+    public function getListOfCountry($summary)
+    {
+        $countries = isset($summary->country_summary) ? $summary->country_summary : [];
+        $codeList  = [];
+        foreach ($countries as $country) {
+            array_push($codeList, ['key' => strtoupper($country->key), 'total' => $country->doc_count]);
+        }
+
+        return $codeList;
     }
 }

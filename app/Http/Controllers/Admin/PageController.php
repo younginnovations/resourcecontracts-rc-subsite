@@ -46,6 +46,7 @@ class PageController extends BaseController
 
     /**
      * Store page
+     *
      * @param Request $request
      *
      * @return
@@ -54,7 +55,7 @@ class PageController extends BaseController
     {
         $input = [
             'title'   => $request->input('title'),
-            'content' => $request->input('content')
+            'content' => $request->input('content'),
         ];
 
         if ($this->page->create($input)) {
@@ -68,6 +69,7 @@ class PageController extends BaseController
      * Edit page
      *
      * @param $id
+     *
      * @return \Illuminate\View\View
      */
     public function edit($id)
@@ -85,6 +87,7 @@ class PageController extends BaseController
      * Update Page
      *
      * @param Request $request
+     *
      * @return bool
      * @internal param $page
      *
@@ -93,7 +96,7 @@ class PageController extends BaseController
     {
         $input = [
             'title'   => $request->input('title'),
-            'content' => $request->input('content')
+            'content' => $request->input('content'),
         ];
 
         if ($this->page->save($id, $input)) {
@@ -101,6 +104,22 @@ class PageController extends BaseController
         }
 
         return redirect()->route('admin.page')->withError('Page could not be updated.');
+    }
+
+    /**
+     * Delete the page.
+     *
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function delete($id)
+    {
+        if ($this->page->destroy($id)) {
+            return redirect()->route('admin.page')->withSuccess('Page successfully deleted.');
+        }
+
+        return redirect()->route('admin.page')->withError('Page could not be deleted');
     }
 
 }

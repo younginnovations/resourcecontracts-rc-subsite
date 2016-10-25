@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Services\LocalizationService;
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
 Dotenv::load(__DIR__ . '/../');
@@ -43,6 +45,8 @@ $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
     App\Console\Kernel::class
 );
+
+$app->singleton(LocalizationService::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -94,17 +98,23 @@ class_alias('Maatwebsite\Excel\Facades\Excel', 'Excel');
 //class_alias('Collective\Html\FormFacade', 'Form');
 class_alias('Illuminate\Support\Facades\Response', 'Response');
 class_alias('LynX39\LaraPdfMerger\Facades\PdfMerger', 'PdfMerger');
+class_alias('Vsmoraes\Pdf\PdfFacade', 'PDF');
 
 
 // $app->register(App\Providers\EventServiceProvider::class);
+$app->register(Vsmoraes\Pdf\PdfServiceProvider::class);
+$app->register(Barryvdh\Snappy\LumenServiceProvider::class);
+$app->register(Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class);
+$app->register(\App\Providers\LogServiceProvider::class);
+
+if (env('APP_DEBUG')) {
+    $app->register(Barryvdh\Debugbar\LumenServiceProvider::class);
+    $app->configure('debugbar');
+}
 
 
 config(
     [
-        'hoglog'       => [
-            'rootPrefix' => 'logger/',
-            'logdir'     => storage_path() . '/logs'
-        ],
         'language'     => [
             'en' => [
                 'code'         => 'en',
@@ -124,15 +134,13 @@ config(
                 'name'         => 'Arabic',
                 'dir'          => 'rtl'
             ]
-
         ],
-        'localisation' => false,
+        'localisation' => true,
         'clip'         => false,
+        'fuzzy'        => true
 
     ]
 );
-$app->register('HogLog\HogLogServiceProvider');
-
 
 /*
 |--------------------------------------------------------------------------

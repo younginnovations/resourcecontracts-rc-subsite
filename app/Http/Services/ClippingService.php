@@ -3,9 +3,11 @@
 use App\Http\Models\Clip\Clip;
 use Exception;
 use Illuminate\Contracts\Filesystem\Factory as Filesystem;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Mail;
 use LynX39\LaraPdfMerger\Facades\PdfMerger;
 use LynX39\LaraPdfMerger\PdfManage;
+use Vsmoraes\Pdf\Pdf;
 use ZipArchive;
 
 /**
@@ -30,19 +32,25 @@ class ClippingService
      * @var Filesystem
      */
     public $file;
+    /**
+     * @var Pdf
+     */
+    private $hpdf;
 
     /**
      * @param APIService          $api
      * @param Clip                $clip
      * @param PdfMerger|PdfManage $pdf
      * @param Filesystem          $file
+     * @param Pdf                 $hpdf
      */
-    public function __construct (APIService $api, Clip $clip, PdfManage $pdf, Filesystem $file)
+    public function __construct(APIService $api, Clip $clip, PdfManage $pdf, Filesystem $file, Pdf $hpdf)
     {
         $this->api  = $api;
         $this->clip = $clip;
         $this->pdf  = $pdf;
         $this->file = $file;
+        $this->hpdf = $hpdf;
     }
 
     /**
@@ -52,7 +60,7 @@ class ClippingService
      *
      * @return array
      */
-    public function getAllAnnotations ($data)
+    public function getAllAnnotations($data)
     {
         $resource    = 'annotation/';
         $annotations = [];
@@ -75,7 +83,7 @@ class ClippingService
      *
      * @return string
      */
-    public function formatAnnotations ($annotationsId)
+    public function formatAnnotations($annotationsId)
     {
         $data        = [];
         $annotations = $this->getAllAnnotations($annotationsId);
@@ -124,7 +132,7 @@ class ClippingService
      *
      * @return string
      */
-    public function downloadAnnotations ($data)
+    public function downloadAnnotations($data)
     {
         $annotations = $this->getAllAnnotations($data);
 
@@ -158,7 +166,7 @@ class ClippingService
      *
      * @return string
      */
-    public function generateKey ()
+    public function generateKey()
     {
         $key = md5(microtime() . rand());
 
@@ -173,7 +181,7 @@ class ClippingService
      *
      * @return array
      */
-    public function saveClip ($data, $key)
+    public function saveClip($data, $key)
     {
         if (!empty($key)) {
 
@@ -192,7 +200,7 @@ class ClippingService
      *
      * @return array
      */
-    public function updateClip ($key, $data)
+    public function updateClip($key, $data)
     {
         $response = [
             'text' => 'Not Updated.',
@@ -216,7 +224,7 @@ class ClippingService
      *
      * @return array
      */
-    public function createClip ($key, $data)
+    public function createClip($key, $data)
     {
         $input    = [
             'key'         => $key,
@@ -243,7 +251,7 @@ class ClippingService
      *
      * @return string
      */
-    public function getClippedAnnotations ($key)
+    public function getClippedAnnotations($key)
     {
         $data        = $this->clip->where('key', $key)->get();
         $data        = $data->toArray();
@@ -262,7 +270,7 @@ class ClippingService
      *
      * @return bool
      */
-    public function sendMail ($formData)
+    public function sendMail($formData)
     {
         $formData['site'] = meta()->title;
         $to               = explode(',', $formData['to']);
@@ -290,18 +298,21 @@ class ClippingService
      *
      * @return bool|string
      */
-    public function getZipFile ($data)
+    public function getZipFile($data)
     {
-        $data           = explode(',', $data);
-        $annotations    = $this->getAllAnnotations($data);
-        $pdfs           = $this->getPdfUrl($annotations);
-        $basePath       = __DIR__ . '/../../../public';
-        $folder         = time();
-        $concatFileName = 'concat-' . time() . '.pdf';
-        $zipFileName    = 'pdf-' . time() . '.zip';
+        $data             = explode(',', $data);
+        $annotations      = $this->getAllAnnotations($data);
+        $annotationDetail = $this->formatAnnotations($data);
+        $pdfs             = $this->getPdfUrl($annotations);
+        $basePath         = __DIR__ . '/../../../public';
+        $folder           = time();
+        $concatFileName   = 'concat-' . time() . '.pdf';
+        $zipFileName      = 'pdf-' . time() . '.zip';
+
         try {
             $this->downloadFile($basePath, $folder, $pdfs);
-            $this->concatPDF($basePath, $folder, $concatFileName);
+
+            $this->concatPDF($annotationDetail, $basePath, $folder, $concatFileName);
             $this->zipFolder($basePath, $folder, $concatFileName, $zipFileName);
 
             return $this->upLoadZipFile($basePath, $folder, $zipFileName);
@@ -318,7 +329,7 @@ class ClippingService
      *
      * @return array
      */
-    public function getPdfUrl ($annotations)
+    public function getPdfUrl($annotations)
     {
         $pdf = [];
         foreach ($annotations as $annotation) {
@@ -341,7 +352,7 @@ class ClippingService
      *
      * @return bool
      */
-    public function downloadFile ($basePath, $folder, $pdfs)
+    public function downloadFile($basePath, $folder, $pdfs)
     {
         if (!is_dir($basePath . '/' . $folder)) {
             mkdir($basePath . '/' . $folder, 0777, true);
@@ -366,7 +377,7 @@ class ClippingService
      * @return bool
      * @throws \LynX39\LaraPdfMerger\Exception
      */
-    public function concatPDF ($basePath, $folder, $concatFileName)
+    public function concatPDF($annotationDetail, $basePath, $folder, $concatFileName)
     {
         $files = scandir($basePath . '/' . $folder);
         unset($files[0], $files[1]);
@@ -376,6 +387,7 @@ class ClippingService
         }
 
         $this->pdf->merge('file', $basePath . '/' . $folder . '/' . $concatFileName);
+        $this->makePdfOfAllAnnotation($annotationDetail, $basePath, $folder);
 
         return true;
     }
@@ -390,11 +402,12 @@ class ClippingService
      *
      * @return bool
      */
-    private function zipFolder ($basePath, $folder, $concatFileName, $zipFileName)
+    private function zipFolder($basePath, $folder, $concatFileName, $zipFileName)
     {
         $zip = new ZipArchive();
         $zip->open($basePath . '/' . $folder . '/' . $zipFileName, ZipArchive::CREATE);
         $zip->addFile($basePath . '/' . $folder . '/' . $concatFileName, $concatFileName);
+        $zip->addFile($basePath . '/' . $folder . '/' . "clippedannotations.pdf", "clippedannotations.pdf");
         $zip->close();
 
         return true;
@@ -409,7 +422,7 @@ class ClippingService
      *
      * @return string
      */
-    private function upLoadZipFile ($basePath, $folder, $zipFileName)
+    private function upLoadZipFile($basePath, $folder, $zipFileName)
     {
         $this->file->disk('s3')->put(
             '/downzip/' . $zipFileName,
@@ -426,7 +439,7 @@ class ClippingService
      *
      * @param $dir
      */
-    public function rrmdir ($dir)
+    public function rrmdir($dir)
     {
         if (is_dir($dir)) {
             $objects = scandir($dir);
@@ -441,5 +454,24 @@ class ClippingService
             }
             rmdir($dir);
         }
+    }
+
+    /**
+     * Make pdf file of all annotations
+     * @param $annotations
+     * @param $basePath
+     * @param $folder
+     * @return bool
+     * @throws Exception
+     * @throws \Throwable
+     */
+    public function makePdfOfAllAnnotation($annotations, $basePath, $folder)
+    {
+        $annotations = json_decode($annotations);
+        $html        = view('clip.pdfs', compact('annotations'))->render();
+        $this->hpdf->load($html)->filename($basePath . '/' . $folder . '/clippedannotations.pdf')->output();
+
+        return true;
+
     }
 }

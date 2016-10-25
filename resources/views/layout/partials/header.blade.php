@@ -1,50 +1,13 @@
-<?php $local = app('App\Http\Services\LocalizationService');
-?>
-<div class="row">
+<?php $local = app('App\Http\Services\LocalizationService'); ?>
+@include('layout.partials.clip')
+<div class="row title-wrap clearfix">
     <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
-            <span data-toggle="collapse-sidebar" data-target=".sidebar-collapse" data-target-2=".sidebar-collapse-container" class="pull-left trigger">trigger</span>
-            @if(env("CATEGORY")=="rc")
-            <a class="navbar-brand" href="{{url()}}" >Resource <span class="beta">Beta</span><span>Contracts</span></a>
-            @else
-            <a class="navbar-brand" href="{{url()}}" >OPENLAND <span class="beta">Beta</span><span>Contracts</span></a>
-            @endif
+            <span data-toggle="collapse-sidebar" data-target=".sidebar-collapse" data-target-2=".sidebar-collapse-container" class="pull-left trigger"></span>
+            @include('layout.partials.logo')
         </div>
-        <div class="right-header-section navbar-right">
-
+        <div class="right-header-section navbar-right hidden">
                 @include('layout.partials.searchdropdown')
-        </div>
-        <div class="floated-top-div">
-            @if(isClipOn())
-            <div class="clip-head">
-                <a href="{{route('clip.index')}}" id="annotation-count" style="display: none"></a>
-                <a href="#" class="" id="hide-annotation" style="display: none">@lang('clip.hide')</a>
-            </div>
-            @endif
-            @if(config('localisation'))
-
-                <div class="dropdown language-selector" >
-                    <button class="btn  dropdown-toggle"  data-toggle="dropdown" id="dropdownMenu2" aria-expanded="false">
-                        <img style="width: 16px ; height: 16px; margin-right: 6px;" src="{{getCountryByLang(app('translator')->getLocale())}}"/>{{config('language')[app('translator')->getLocale()]['name']}}
-                        <span class="caret"></span>
-                    </button>
-
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" style="min-width: 110px;">
-
-                        @foreach (config('language') as $locale => $language)
-                            @if(app('translator')->getLocale()!=$locale)
-                                <li>
-                                    <a href={{lang_url($locale)}}>
-                                        <img style="width: 16px ; height: 16px; margin-right: 6px;" src="{{getCountryByLang($locale)}}"/>
-                                        {{$language['name']}}
-                                    </a>
-                                </li>
-                            @endif
-                        @endforeach
-
-                    </ul>
-                </div>
-            @endif
         </div>
     </nav>
 

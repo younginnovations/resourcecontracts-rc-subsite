@@ -11,11 +11,13 @@ class Title extends Component {
         return (
             <nav className="navbar navbar-static-top no--search--wrap">
                 <div className="navbar-header">
-                    <div className="navbar-brand" href={APP_URL} >{this.props.site_name}<span className="beta">Beta</span><span>Contracts</span></div>
+                    <div className="navbar-brand" href={APP_URL}>
+                        {this.props.site_name}
+                        <span>Contracts</span>
+                    </div>
                 </div>
 
                 <div className="navbar-right">
-
                     <span className="title">{this.props.title}</span>
                 </div>
             </nav>

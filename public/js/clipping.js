@@ -21747,8 +21747,29 @@ var ClipCollection = Backbone.Collection.extend({
             }
             return -model.get(field);
         }));
-        console.log(data);
         return new ClipCollection(data.toArray());
+    },
+    clipSortForCheckBox : function(checkedData,order)
+    {
+        var checkClip=[];
+        var unCheckClip=[];
+        _.map(this.models, function (clip) {
+           if(checkedData.indexOf(clip.get('annotation_id'))>=0)
+           {
+               checkClip.push(clip);
+           }
+            else{
+               unCheckClip.push(clip)
+           }
+        });
+        console.log("uncheck clip",unCheckClip);
+        if(order=="asc")
+        {
+            return new ClipCollection(checkClip.concat(unCheckClip));
+        }
+        return new ClipCollection(unCheckClip.concat(checkClip));
+
+
     },
     filterMetadata: function () {
         var filter = [];
@@ -21854,7 +21875,7 @@ var ClipSelectCount = React.createClass({displayName: "ClipSelectCount",
         else{
             return (
                 React.createElement("div", {className: "count-select"}, 
-                    "Selected: ", React.createElement("span", null, this.state.count)
+                     React.createElement("span", null, this.state.count)
                 )
             );
         }
@@ -21879,8 +21900,8 @@ var DownloadManager = React.createClass({displayName: "DownloadManager",
         }
         this.props.clipCollection.on('filterData', function (data) {
             self.setState({clips: data});
-        });
 
+        });
         $(document).click(function (event) {
             if (!$(event.target).closest('.download-dropdown').length && !$(event.target).is('.download-dropdown')) {
                 if ($('.download-dropdown').is(":visible")) {
@@ -21890,9 +21911,12 @@ var DownloadManager = React.createClass({displayName: "DownloadManager",
         });
     },
     handleDownload: function () {
+        console.log("download clips",this.state.clips);
         this.downloadAsCSV(this.state.clips);
     },
     handlePrint: function () {
+        console.log("print clips",this.state.clips);
+
         this.printClips(this.state.clips);
     },
     handleSave: function () {
@@ -21936,8 +21960,8 @@ var DownloadManager = React.createClass({displayName: "DownloadManager",
             printView += '<div></div><ul  style="list-style: none;padding: 0;">' +
                 "<li style='margin-bottom: 5px;'><b style='font-size: large'>" + data.get('name') + "</b></td>" +
                 "<li style='margin-bottom: 8px;'>" + data.get('text') + "</li>" +
-                "<li style='margin-bottom: 5px;'><b>langClip.category:</b> " + data.get('category') + "</li>" +
-                "<li> <b>Year : </b>" + data.get('year') + ", <b>Country: </b>" + data.get('country') + ", <b>lang.resource: </b>" + data.get('resource').toString() + "</li>" +
+                "<li style='margin-bottom: 5px;'><b>Category:</b> " + data.get('category') + "</li>" +
+                "<li> <b>Year : </b>" + data.get('year') + ", <b>Country: </b>" + data.get('country') + ", <b>Resource: </b>" + data.get('resource').toString() + "</li>" +
                 "</ul></div>" + "<hr>";
         });
         self.printPopUp(printView);
@@ -21992,11 +22016,12 @@ var DownloadManager = React.createClass({displayName: "DownloadManager",
             alert(langClip.wrongError);
         });
     },
+
     render: function () {
+
         var show = {'display': 'block'};
         var hide = {'display': 'none'};
         var style = this.state.dropdown ? show : hide;
-
         if (this.state.clips.length < 1) {
             return null;
         }
@@ -22012,7 +22037,7 @@ var DownloadManager = React.createClass({displayName: "DownloadManager",
                 React.createElement("div", {className: "download-dropdown"}, 
                     React.createElement("a", {onClick: this.toggleDropdown}, React.createElement("span", null, langClip.download)), 
                     React.createElement("ul", {style: style, className: "dropdown-menu"}, 
-                        React.createElement("li", null, React.createElement("a", {id: "download-clip-filter", onClick: this.handleDownload}, langClip.clip)), 
+                        React.createElement("li", null, React.createElement("a", {id: "download-clip-filter", onClick: this.handleDownload}, langClip.csv)), 
                         React.createElement("li", null, React.createElement("a", {id: "pdf-zip-download", onClick: this.handleZipDownload}, langClip.pdfClip))
                     )
                 ), 
@@ -22266,6 +22291,12 @@ var Pagination = React.createClass({displayName: "Pagination",
     clickHandler: function (e) {
         e.preventDefault();
         this.props.clipCollection.trigger('paginate', {page: $(e.target).text()});
+        $.cookie("clippage", $(e.target).text(), {
+            path: '/'
+        });
+        $.cookie("totalpages", this.props.pageState.total_pages, {
+            path: '/'
+        });
     },
     pages: function () {
         var page = [];
@@ -22414,17 +22445,17 @@ var Item = React.createClass({displayName: "Item",
     getPageUrl: function () {
         var pages = this.props.item.get('pages');
         var articleRef = this.props.item.get('article_reference');
-        articleRef = (articleRef == '') ? '' : ' ( ' + articleRef + ' )';
+        articleRef = (articleRef == '') ? '' :  articleRef ;
         var pageUrl = '';
         var openContractingId = this.props.item.get('open_contracting_id');
         _.map(pages, function (page) {
             var url = app_url + "/contract/" + openContractingId + '/view#/' + page.type + '/page/' + page.page + '/annotation/' + page.id;
-            pageUrl += '<a href=' + url + '>'+ langClip.page + page.page + articleRef + '</a>';
+            pageUrl += langClip.page+" " + page.page +' (<a href=' + url + '>'  + articleRef + '</a>)';
         });
         return pageUrl;
     },
     openViewPage: function () {
-        var newwindow = window.open(this.props.item.get('page_url'), '_blank', 'toolbar=0,width=650,height=500,location=0,menubar=0, scrollbars=1');
+        var newwindow = window.open(this.props.item.get('page_url'), '_blank', 'toolbar=0,width=650,height=500,location=0,menubar=0, scrollbars=yes');
         if (window.focus) {
             newwindow.focus()
         }
@@ -22440,10 +22471,10 @@ var Item = React.createClass({displayName: "Item",
                               checkData: this.props.checkData})
                 ), 
                 React.createElement("td", null, 
-                    React.createElement("a", {href: docUrl}, this.props.item.get('name'))
+                    this.props.item.get('name')
                 ), 
                 React.createElement("td", null, 
-                    this.props.item.get('category')
+                    React.createElement("a", {href: docUrl}, this.props.item.get('category'))
                 ), 
                 React.createElement("td", null, 
                     this.getShowText(), React.createElement("br", null), 
@@ -22509,6 +22540,7 @@ var Checkbox = React.createClass({displayName: "Checkbox",
         );
     },
 });
+
 var Listing = React.createClass({displayName: "Listing",
     getInitialState: function () {
         return {
@@ -22521,7 +22553,8 @@ var Listing = React.createClass({displayName: "Listing",
             check_data: [],
             sort_by: 'name',
             'order': 'asc',
-            'loading': false
+            'loading': false,
+            'allclip':true
         }
     },
     getFilters: function (filter) {
@@ -22533,11 +22566,28 @@ var Listing = React.createClass({displayName: "Listing",
     },
     componentDidMount: function () {
         var self = this;
+
+
         this.setState({loading: true});
         this.props.clipCollection.on('data:change', function () {
             var annotid = self.getAnnotationId(self.props.clipCollection);
             self.setState({check_data: annotid});
             self.setClips(self.props.clipCollection);
+            var sortField = window.getCookie('sortfield');
+            var sortOrder = window.getCookie('sortorder');
+
+            if(sortOrder != '')
+            {
+                self.state.order=sortOrder;
+            }
+
+            if(sortField != '')
+            {
+                self.state.sort_by=sortField;
+            }
+
+            self.sorting();
+
         });
 
         this.props.clipCollection.on('checkbox:click', function (data) {
@@ -22573,6 +22623,34 @@ var Listing = React.createClass({displayName: "Listing",
             self.setClips(clips);
         });
 
+
+
+        var clipPage = window.getCookie('clippage');
+
+        if(clipPage != '')
+        {
+            var totalPage =  window.getCookie('totalpages');
+            if (clipPage == "Prev") {
+                clipPage = self.state.current_page - 2;
+            }
+            if (clipPage == "Next") {
+                clipPage = self.state.current_page + 2;
+            }
+            if (clipPage == "First") {
+                clipPage = 1;
+            }
+            if (clipPage == "Last") {
+                clipPage = parseInt(totalPage);
+            }
+            self.setState({current_page:clipPage-1});
+        }
+
+
+    },
+    componentWillMount:function()
+    {
+        var self=this;
+
     },
     getAnnotationId: function (clips) {
         var annotationID = [];
@@ -22600,12 +22678,6 @@ var Listing = React.createClass({displayName: "Listing",
     filterOnCheck: function (annotationID) {
         var filterClips = this.props.clipCollection.filterCheckData(annotationID);
         this.props.clipCollection.trigger('selectedData', annotationID);
-        if (annotationID.length < 1) {
-            filterClips = this.props.clipCollection;
-        }
-        if (annotationID.length < 1 && this.state.filters.length > 0) {
-            filterClips = this.props.clipCollection.withFilter(this.state.filters);
-        }
         this.props.clipCollection.trigger('filterData', filterClips);
     },
     handleSort: function (field) {
@@ -22613,16 +22685,78 @@ var Listing = React.createClass({displayName: "Listing",
         if (field == this.state.sort_by && this.state.order == "asc") {
             orderby = 'desc';
         }
+
         this.state.order = orderby;
         this.state.sort_by = field;
-        var clips = this.props.clipCollection.clipSort(this.state.sort_by, this.state.order);
-        this.setClips(clips);
+
+        $.cookie("sortfield", field, {
+            path: '/'
+        });
+        $.cookie("sortorder", orderby, {
+            path: '/'
+        });
+
+        this.sorting();
+
     },
+
+    sorting: function()
+    {
+        if(this.state.sort_by=="checkbox")
+        {
+            var clips = this.props.clipCollection.clipSortForCheckBox(this.state.check_data,this.state.order);
+        }
+        else{
+            var clips = this.props.clipCollection.clipSort(this.state.sort_by, this.state.order);
+        }
+        this.setClips(clips);
+
+    },
+
     showSortArrow: function (field) {
         var order = 'fa fa-black fa-sort-' + this.state.order;
         if (field == this.state.sort_by) {
             return (React.createElement("i", {className: order}));
         }
+    },
+    toggleDropdown: function () {
+        this.setState({dropdown: !this.state.dropdown})
+
+    },
+    uncheckDocs :  function()
+    {
+        var self = this;
+        self.setState({check_data: []})
+        self.filterOnCheck([]);
+    },
+    checkAllDocs : function()
+    {
+        var self = this;
+        var data=[];
+        _.map(self.state.clips['models'], function (clips) {
+            data.push(clips.get('annotation_id'));
+        });
+
+        self.setState({check_data:_.uniq(data)});
+        self.filterOnCheck(self.state.check_data);
+    },
+
+    toggleCheckBox : function()
+    {
+        var self=this;
+        var data=[];
+        var clips = self.props.clipCollection;
+
+        self.state.allclip=!this.state.allclip;
+        if(self.state.allclip)
+          {
+              _.map(clips['models'], function (clip) {
+                  data.push(clip.get('annotation_id'));
+              });
+          }
+        self.setState({check_data:  _.uniq(data)});
+        self.state.check_data=_.uniq(data);
+        self.filterOnCheck(self.state.check_data);
     },
 
     render: function () {
@@ -22634,23 +22768,33 @@ var Listing = React.createClass({displayName: "Listing",
                               checkData: self.state.check_data}))
             });
         }
+
         if (!this.state.loading) {
             if (this.state.clips.length < 1) {
-                return (React.createElement("div", {className: "no-record"}, "There is no clipped annotations."));
+                return (React.createElement("div", {className: "no-record"}, langClip.currently_no_clips));
             }
             var pagination = '';
             if (this.state.total_pages > 1) {
                 pagination = (React.createElement(Pagination, {clipCollection: this.props.clipCollection, pageState: this.state}));
             }
+            var isBoxChecked =  this.state.allclip?"checked":null;
             return (
                 React.createElement("div", {id: "clip-annotation-list"}, 
                     React.createElement("table", {className: "table table-responsive table-contract table-contract-list"}, 
                         React.createElement("thead", null, 
                         React.createElement("tr", null, 
-                            React.createElement("th", {width: "75px"}, React.createElement(ClipSelectCount, {clipCollection: this.props.clipCollection})), 
-                            React.createElement("th", {width: "20%"}, React.createElement("a", {onClick: this.handleSort.bind(this,'name')}, 
+
+                            React.createElement("th", {width: "75px"}, 
+                                    React.createElement(ClipSelectCount, {clipCollection: this.props.clipCollection}), 
+                                    React.createElement("input", {type: "checkbox", checked: isBoxChecked, onClick: this.toggleCheckBox.bind()}), 
+                                    React.createElement("a", {onClick: this.handleSort.bind(this,'checkbox')}, 
+                                    this.showSortArrow('checkbox'))
+
+                            ), 
+
+                            React.createElement("th", null, React.createElement("a", {onClick: this.handleSort.bind(this,'name')}, 
                                 "Document ", this.showSortArrow('name'))), 
-                            React.createElement("th", null, React.createElement("a", {
+                            React.createElement("th", {width: "20%"}, React.createElement("a", {
                                 onClick: this.handleSort.bind(this,'category')}, langClip.category, this.showSortArrow('category'))
                             ), 
                             React.createElement("th", {width: "35%"}, React.createElement("a", {
@@ -22660,7 +22804,7 @@ var Listing = React.createClass({displayName: "Listing",
                             ), 
                             React.createElement("th", {width: "84px"}, React.createElement("a", {
                                 onClick: this.handleSort.bind(this,'year')}, langClip.year, this.showSortArrow('year'))), 
-                            React.createElement("th", null, React.createElement("a", {
+                            React.createElement("th", {width: "150px"}, React.createElement("a", {
                                 onClick: this.handleSort.bind(this,'resourcetemp')}, langClip.resource, this.showSortArrow('resourcetemp'))
                             ), 
                             React.createElement("th", null, langClip.viewClip)
@@ -22683,7 +22827,7 @@ var ClipView = React.createClass({displayName: "ClipView",
     render: function () {
         return (
             React.createElement("div", null, 
-                React.createElement(DownloadManager, {clipCollection: this.props.clipCollection}), 
+                React.createElement(DownloadManager, {clipCollection: this.props.clipCollection, clipLocal: this.props.clipLocal}), 
                 React.createElement(Listing, {clipCollection: this.props.clipCollection})
             )
         );
@@ -22694,7 +22838,6 @@ $(function () {
     data.map(function (d) {
         clipData.push(d.id);
     });
-
     if (key != '') {
         var clipCollection = new ClipCollection(app_url + '/clip/api?key=' + key);
         clipCollection.fetch({reset: true});

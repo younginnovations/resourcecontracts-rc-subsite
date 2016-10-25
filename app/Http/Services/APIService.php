@@ -15,16 +15,20 @@ class APIService
     /**
      * @var Client
      */
-    public $client;
-    public $category;
+    protected $client;
+    /**
+     * @var SiteService
+     */
+    private $site;
 
     /**
-     * @param Client $client
+     * @param Client      $client
+     * @param SiteService $site
      */
-    public function __construct(Client $client)
+    public function __construct(Client $client, SiteService $site)
     {
-        $this->client   = $client;
-        $this->category = trim(env('CATEGORY'));
+        $this->client = $client;
+        $this->site   = $site;
     }
 
     /**
@@ -36,7 +40,7 @@ class APIService
      */
     public function apiURL($request)
     {
-        $host    = trim(env('ELASTIC_SEARCH_HOST'), '/');
+        $host    = trim(site()->esUrl(), '/');
         $request = trim($request, '/');
 
         return sprintf('%s/%s', $host, $request);
@@ -253,6 +257,7 @@ class APIService
             'per_page'            => $all ? $from * 25 : $per_page,
             'from'                => $per_page * ($from - 1),
             'all'                 => $all,
+            'fuzzy'               => $fuzzy,
             'download'            => $download,
             'annotated'           => $annotated,
 
@@ -281,8 +286,13 @@ class APIService
     public function apiCall($resource, array $query = [], $array = false)
     {
         try {
-            $request           = new Request('GET', $this->apiURL($resource));
-            $query['category'] = $this->category;
+            $request = new Request('GET', $this->apiURL($resource));
+
+            if ($this->site->isCountrySite()) {
+                $query['country_code'] = strtolower($this->site->getCountryCode());
+            }
+
+            $query['category'] = strtolower($this->site->getCategory());
             $request->setQuery($query);
             $response = $this->client->send($request);
             $data     = $response->getBody();
@@ -294,7 +304,7 @@ class APIService
             return json_decode($data);
 
         } catch (\Exception $e) {
-            Log::error($resource.":".$e->getMessage(), $query);
+            Log::error($resource . ":" . $e->getMessage(), $query);
 
             return null;
         }
@@ -440,9 +450,9 @@ class APIService
         $data      = [];
         foreach ($summaries->country_summary as $summary) {
 
-            $data[trans('country.'.strtoupper($summary->key))] = [
+            $data[trans('country.' . strtoupper($summary->key))] = [
                 'key'       => $summary->key,
-                'name'      => trans('country.'.strtoupper($summary->key)),
+                'name'      => trans('country.' . strtoupper($summary->key)),
                 'doc_count' => $summary->doc_count,
             ];
         }
@@ -465,15 +475,21 @@ class APIService
     public function downloadAPI($resource, array $query = [], $array = false, $id = "")
     {
         try {
-            $filename = "export".date('Y-m-d');
+            $filename = "export" . date('Y-m-d');
             if (!empty($id)) {
                 $metadata     = $this->contractDetail($id);
                 $contractName = $metadata->metadata->name;
                 $contractName = str_slug($contractName, "_");
-                $filename     = "Annotations_".$contractName."_".date('Ymdhis');
+                $filename     = "Annotations_" . $contractName . "_" . date('Ymdhis');
             }
-            $request           = new Request('GET', $this->apiURL($resource));
-            $query['category'] = $this->category;
+            $request = new Request('GET', $this->apiURL($resource));
+
+            if ($this->site->isCountrySite()) {
+                $query['country_code'] = strtolower($this->site->getCountryCode());
+            }
+
+            $query['category'] = strtolower($this->site->getCategory());
+
             $request->setQuery($query);
             $response = $this->client->send($request);
             $data     = $response->getBody()->getContents();
@@ -492,7 +508,7 @@ class APIService
             )->download('xls');
             die;
         } catch (\Exception $e) {
-            Log::error($resource.":".$e->getMessage(), $query);
+            Log::error($resource . ":" . $e->getMessage(), $query);
 
             return null;
         }
@@ -530,7 +546,7 @@ class APIService
                 'shapes'            => $annotation->shapes,
             ];
         } catch (\Exception $e) {
-            Log::error('Contract popup :'.$e->getMessage());
+            Log::error('Contract popup :' . $e->getMessage());
 
             return null;
         }
