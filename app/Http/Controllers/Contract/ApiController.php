@@ -49,7 +49,6 @@ class ApiController extends BaseController
     public function text($id)
     {
         $page = $this->api->getTextPage($id, null);
-
         return response()->json($page);
     }
 
@@ -70,7 +69,8 @@ class ApiController extends BaseController
     /**
      * Contract Annotations Search
      *
-     * @param $id
+     * @param         $id
+     * @param Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */

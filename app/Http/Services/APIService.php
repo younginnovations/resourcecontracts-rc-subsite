@@ -187,11 +187,13 @@ class APIService
     /**
      * Get Text Page
      *
-     * @param $contract_id
+     * @param      $contract_id
      *
-     * @return object|null
+     * @param null $page_no
+     *
+     * @return null|object
      */
-    public function getTextPage($contract_id, $page_no)
+    public function getTextPage($contract_id, $page_no = null)
     {
         $resource = sprintf('contract/%s/text', $contract_id);
 
@@ -237,7 +239,6 @@ class APIService
      */
     public function filterSearch($filter)
     {
-
         extract($filter);
         $per_page = !empty($per_page) ? $per_page : 25;
         $query    = [
@@ -292,7 +293,9 @@ class APIService
             }
 
             $query['category'] = strtolower($this->site->getCategory());
+
             $request->setQuery($query);
+
             $response = $this->client->send($request);
             $data     = $response->getBody();
 
@@ -303,7 +306,7 @@ class APIService
             return json_decode($data);
 
         } catch (\Exception $e) {
-            Log::error($resource . ":" . $e->getMessage(), $query);
+            Log::error($resource.":".$e->getMessage(), $query);
 
             return null;
         }
@@ -373,32 +376,6 @@ class APIService
     }
 
     /**
-     * Group the annotations by its category
-     *
-     * @param $annotations
-     *
-     * @return array
-     */
-    private function groupAnnotationsByCategory($annotations)
-    {
-        $annotations = $annotations->result;
-        $data        = [];
-        foreach ($annotations as $annotation) {
-
-            if (array_key_exists($annotation->category_key, $data)) {
-                array_push($data[$annotation->category_key], $annotation);
-            } else {
-
-                $data[$annotation->category_key] = [$annotation];
-            }
-        }
-
-        ksort($data);
-
-        return $data;
-    }
-
-    /**
      * Get Search Attributes such as contract_type,corporate_grouping,company_name
      *
      * @return object|null
@@ -449,9 +426,9 @@ class APIService
         $data      = [];
         foreach ($summaries->country_summary as $summary) {
 
-            $data[trans('country.' . strtoupper($summary->key))] = [
+            $data[trans('country.'.strtoupper($summary->key))] = [
                 'key'       => $summary->key,
-                'name'      => trans('country.' . strtoupper($summary->key)),
+                'name'      => trans('country.'.strtoupper($summary->key)),
                 'doc_count' => $summary->doc_count,
             ];
         }
@@ -474,12 +451,12 @@ class APIService
     public function downloadAPI($resource, array $query = [], $array = false, $id = "")
     {
         try {
-            $filename = "export" . date('Y-m-d');
+            $filename = "export".date('Y-m-d');
             if (!empty($id)) {
                 $metadata     = $this->contractDetail($id);
                 $contractName = $metadata->metadata->name;
                 $contractName = str_slug($contractName, "_");
-                $filename     = "Annotations_" . $contractName . "_" . date('Ymdhis');
+                $filename     = "Annotations_".$contractName."_".date('Ymdhis');
             }
             $request = new Request('GET', $this->apiURL($resource));
 
@@ -507,7 +484,7 @@ class APIService
             )->download('xls');
             die;
         } catch (\Exception $e) {
-            Log::error($resource . ":" . $e->getMessage(), $query);
+            Log::error($resource.":".$e->getMessage(), $query);
 
             return null;
         }
@@ -545,11 +522,35 @@ class APIService
                 'shapes'            => $annotation->shapes,
             ];
         } catch (\Exception $e) {
-            Log::error('Contract popup :' . $e->getMessage());
+            Log::error('Contract popup :'.$e->getMessage());
 
             return null;
         }
     }
 
+    /**
+     * Group the annotations by its category
+     *
+     * @param $annotations
+     *
+     * @return array
+     */
+    private function groupAnnotationsByCategory($annotations)
+    {
+        $annotations = $annotations->result;
+        $data        = [];
+        foreach ($annotations as $annotation) {
 
+            if (array_key_exists($annotation->category_key, $data)) {
+                array_push($data[$annotation->category_key], $annotation);
+            } else {
+
+                $data[$annotation->category_key] = [$annotation];
+            }
+        }
+
+        ksort($data);
+
+        return $data;
+    }
 }

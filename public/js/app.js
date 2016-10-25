@@ -12197,7 +12197,7 @@ $(document).ready(function () {
 
     };
 
-    var annotation = $(".annotate-text");
+    var annotation = $(".annotate-text, .hover-anchor");
     if (annotation.length) {
         annotation.popover(options);
     }

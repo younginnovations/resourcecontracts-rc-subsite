@@ -1,36 +1,63 @@
 var webpack = require('webpack');
 var path = require('path');
+var WebpackNotifierPlugin = require('webpack-notifier');
+
 
 var BUILD_DIR = path.resolve(__dirname, 'public/js');
 var APP_DIR = path.resolve(__dirname, 'resources/assets/scripts');
 
 var config = {
-  entry: [
-     APP_DIR + '/Popup.js',
-     'whatwg-fetch'
-  ],
-  output: {
-    path: BUILD_DIR,
-    filename: 'popup.js'
-  },
-  module : {
-    loaders : [
-      {
-        test : /\.js?/,
-        include : APP_DIR,
-        loader : 'babel'
-      }
+    cache: true,
+    devtool: 'eval',
+    //devtool: 'cheap-module-source-map',
+    entry: {
+        popup: [
+            APP_DIR + '/popup/index.js',
+        ],
+        contract_view: [
+            APP_DIR + '/contract/index.js',
+        ]
+    },
+    output: {
+        path: BUILD_DIR,
+        filename: '[name].js'
+    },
+    module: {
+        loaders: [
+            {
+                test: /[\.js?$|\.jsx?$]/,
+                include: APP_DIR,
+                exclude: /node_modules/,
+                loader: 'babel',
+                query: {
+                    cacheDirectory: true, //important for performance
+                    plugins: ["transform-regenerator"],
+                    presets: ["react", "es2015", "stage-0"]
+                }
+            }
+        ]
+    },
+    resolve: {
+        extensions: ['', '.js', '.jsx']
+    },
+    plugins: [
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.DedupePlugin(),
+/*
+        new webpack.optimize.UglifyJsPlugin({
+          compress: { warnings: false },
+          comments: false,
+          minimize: true
+        }),
+*/
+        new WebpackNotifierPlugin({title: 'Webpack'}),
+        new webpack.NoErrorsPlugin(),
+        new webpack.DefinePlugin({
+            'process.env': {
+              'NODE_ENV': JSON.stringify('production')
+            }
+          })
     ]
-  },
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin({minimize: true}),
-    new webpack.DefinePlugin({
-      'process.env': {
-        // This has effect on the react lib size
-        'NODE_ENV': JSON.stringify('production')
-      }
-    })
-  ]
 };
 
 module.exports = config;

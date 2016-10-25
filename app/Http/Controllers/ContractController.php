@@ -267,7 +267,7 @@ class ContractController extends BaseController
             'title' => $contract->metadata->name,
         ];
 
-        return view('contract.page.view', compact('contract', 'back', 'meta', 'show_advance'));
+        return view('contract.page.new_view', compact('contract', 'back', 'meta', 'show_advance'));
     }
 
     /**

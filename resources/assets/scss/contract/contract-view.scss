@@ -267,18 +267,43 @@ $img-path: "../images";
   float: left;
   background: #fff;
   border-radius: 4px;
-  -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  padding: 15px 30px;
+  padding: 15px 20px 15px 10px;
   float: left;
   margin: 15px;
 }
 
+.pdf-annotator {
+  padding: 15px 30px;
+}
+
 .pdf-annotator,.text-annotator {
-  height: 85vh;
+  height: calc(88vh - 23px);
   position: relative;
   overflow: auto;
+}
+
+/*style for loading text*/
+
+ .message{
+  text-align: center;
+}
+
+.message{
+  padding: 20px;
+  &:empty{
+    padding: 0;
+  }
+}
+
+.text-viewer,.pdf-viewer{
+  *:not('message'){
+    text-align: left;
+  }
+}
+
+.text-wrapper, .text-viewer-warning {
+  margin-left: 25px;
 }
 
 .text-viewer > span {
@@ -286,11 +311,15 @@ $img-path: "../images";
   margin-bottom: 20px;
   border: 1px solid #e1e1e1;
   padding: 10px;
-  margin-left: 15px;
-
-  > span:first-of-type {
-    margin-left: -26px;
-    float: left;
+  margin-right: 10px;
+ .page_no {
+   margin-left: -40px;
+   width: 25px;
+   font-family: Open-Sans-Bold;
+   font-size: 11px;
+   float: left;
+   text-align: right;
+   color: #6A6A6A;
   }
 }
 
@@ -314,6 +343,13 @@ $img-path: "../images";
     padding: 10px;
     border-radius: 50%;
     opacity: 1;
+    margin-top: -4px;
+  }
+
+  strong{
+    font-style: normal;
+    color: #000;
+    font-family: Open-Sans-Bold;
   }
 }
 
@@ -342,9 +378,11 @@ $img-path: "../images";
   padding-right: 35px;
 }
 
-.metadata-view {
-  padding: 0 18px 15px;
-  margin-bottom: 15px;
+#metadata {
+  &.right-column-view{
+    padding: 0 18px 15px;
+    margin-bottom: 15px;
+  }
 }
 
 
@@ -442,7 +480,7 @@ div > .annotation-item:first-of-type .annotation-cluster {
   overflow: hidden;
   position: relative;
 
-  &:not(:last-child) {
+  &:not(:last-of-type) {
     border-bottom: 1px solid rgba(220, 223, 226, 0.7);
   }
 
@@ -452,18 +490,32 @@ div > .annotation-item:first-of-type .annotation-cluster {
   }
 }
 
-
-.search-result-row .text, .search-result-row .annotations {
-  background: url(../images/ic-sprite-new.png) no-repeat -402px 2px;
-  text-indent: -9999px;
-  float: right;
-  width: 20px;
-  height: 20px;
-  opacity: 0.5;
-  position: absolute;
-  top: 20px;
-  right: 0;
+.search-no-found{
+  text-align: center;
+  padding: 15px 0;
+  box-shadow: 18px 0 0 #dfdfdf,-18px 0 0 #dfdfdf;
+  background: #dfdfdf;
 }
+
+.search-result-row {
+  .link{
+    width: calc(100% - 26px);
+    display: inline-block;
+  }
+
+  .text, .annotations{
+    background: url(../images/ic-sprite-new.png) no-repeat -402px 0px;
+    text-indent: -9999px;
+    float: right;
+    width: 20px;
+    height: 20px;
+    opacity: 0.5;
+    position: absolute;
+    top: 20px;
+    right: 0;
+  }
+}
+
 
 .search-result-row .annotations {
   background: url(../images/ic-annotate-title.png) no-repeat 0px 0px;
@@ -615,23 +667,49 @@ div > .annotation-item:first-of-type .annotation-cluster {
   padding: 18px 18px 10px;
 }
 
-.metadata-country, .metadata-signature-year, .metadata-type-contract, .metadata-resource, .metadata-ocid {
-  font-size: 12px;
-  margin-bottom: 16px;
-}
 
-.metadata-country, .metadata-signature-year, .metadata-type-contract, .metadata-resource, .metadata-ocid {
-  border-bottom: 1px solid #C5C5C5;
-  border-bottom: 1px solid rgba(197, 197, 197, 0.3);
+.metadata-item, .metadata-inline {
   padding-bottom: 16px;
+  margin-bottom: 16px;
+  font-size: 12px;
+
+  &:not(:last-of-type){
+    border-bottom: 1px solid #C5C5C5;
+    border-bottom: 1px solid rgba(197, 197, 197, 0.3);
+  }
 }
 
-.metadata-country span:first-child, .metadata-signature-year span:first-child, .metadata-type-contract span:first-child, .metadata-resource span:first-child, .metadata-ocid span:first-child {
-  color: rgba(64, 64, 64, 0.7);
+.metadata-item , .metadata-inline {
+  .key {
+    color: rgba(64, 64, 64, 0.7);
+  }
+
+  nobr{
+    display: inline-block;
+  }
+}
+
+.metadata-item .key{
   display: block;
 }
 
-.metadata-view div:last-child {
+.metadata-item p, .metadata-inline p{
+  margin: 0;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.metadata-inline {
+  p{
+    display: inline;
+  }
+
+  .value, a{
+    margin-left: 3px;
+  }
+}
+
+.metadata-view div:not("popover-content"):last-child {
   border-bottom: 0;
   margin-bottom: 0;
   padding-bottom: 0;
@@ -641,7 +719,7 @@ div > .annotation-item:first-of-type .annotation-cluster {
   display: none;
 }
 
-.relateddocument-view, .relateddocument-more-view, .other-sources-view {
+.relateddocument-more-view, .other-sources-view {
   padding: 0 18px;
 }
 
@@ -672,7 +750,7 @@ div > .annotation-item:first-of-type .annotation-cluster {
 }
 
 .text-viewer-warning {
-  margin: 10px 0 10px 15px;
+  margin-bottom: 10px;
   color: #9F6000;
   background-color: #FEEFB3;
   padding: 7px;
@@ -682,7 +760,9 @@ div > .annotation-item:first-of-type .annotation-cluster {
 
 .text-viewer-warning > .close {
   font-weight: bold;
-  font-size: 16px;
+  font-size: 14px;
+  line-height: 20px;
+  font-family: cursive;
 }
 
 .no-contract-error {
@@ -782,7 +862,7 @@ div > .annotation-item:first-of-type .annotation-cluster {
 }
 
 .annotation-inner-viewer {
-  height: 87vh;
+  height: 88vh;
   overflow-y: scroll;
 }
 
@@ -965,16 +1045,12 @@ div > .annotation-item:first-of-type .annotation-cluster {
   width: 100%;
 }
 
-.fixed + .document-wrap {
-  padding-top: 44px;
-}
-
 .note-wrapper {
   background: #f9f9f9;
-  margin: 20px 14px 10px;
-  padding: 12px;
+  padding: 20px 0;
   display: block;
   overflow: hidden;
+  box-shadow: 18px 0 0 #f9f9f9,-18px 0 0#f9f9f9;
 }
 
 .metadata-note {
@@ -1067,6 +1143,10 @@ div > .annotation-item:first-of-type .annotation-cluster {
     min-width: 100px;
   }
 
+  .fixed + .document-wrap {
+    padding-top: 44px;
+  }
+
   .head-wrap .right-column-view{
     width: auto;
     float: left;
@@ -1120,7 +1200,7 @@ div > .annotation-item:first-of-type .annotation-cluster {
   }
 
   .text-panel, .pdf-annotator {
-    margin: 20px 0;
+    margin: 10px 0;
     border-left: 20px solid #f0f0f0;
     border-right: 20px solid #f0f0f0;
     clear: both;

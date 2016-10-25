@@ -32,10 +32,6 @@ var contract_style = [
     './resources/assets/scss/contract/contract.scss',
 ];
 
-var homepage_style = [
-    './resources/assets/styles/slick.css',
-];
-
 var base_script = [
     './resources/assets/scripts/jquery.js',
     './resources/assets/scripts/lib/jquery.cookie.js',
@@ -221,17 +217,6 @@ gulp.task('watch', function () {
     gulp.watch(page_script, ['js-page']);
     gulp.watch(contract_view_scripts, ['js-react']);
     gulp.watch(homepage_script, ['js-homepage']);
-});
-
-gulp.task('homepage-style',function(){
-    return gulp.src(homepage_style)
-        .pipe(concat('homepage.css'))
-        .pipe(gulp.dest('./public/css'))
-        .pipe(uglifycss({
-            "max-line-len": 80
-        }))
-        .pipe(gulp.dest('./public/css'))
-        .pipe(notify({message: 'css-homepage task complete'}));
 });
 
 gulp.task('contract-style',function(){
