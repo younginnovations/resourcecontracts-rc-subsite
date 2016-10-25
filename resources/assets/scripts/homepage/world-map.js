@@ -26,7 +26,7 @@ function draw(ht) {
             if (newObj[d.properties.code] != undefined) {
                 return highlightColor;
             }
-            return '#f1f1f1';
+            return landColor;
         })
         .attr("cursor", function (d, i) {
             if (newObj[d.properties.code] != undefined) {
@@ -42,11 +42,11 @@ function draw(ht) {
             var documents = parseInt(newObj[d.properties.code]);
 
             if (documents == 1) {
-                str = documents + ' Document' + '<br/>' + str;
+                str = documents + ' '+ documentLang + '<br/>' + str;
             }
 
             if (documents > 1) {
-                str = documents + ' Documents' + '<br/>' + str;
+                str = documents + ' '+ documentsLang + '<br/>' + str;
             }
 
             tooltip.html(str)

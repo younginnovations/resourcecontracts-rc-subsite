@@ -1,6 +1,56 @@
 body.country{
+  .petroleum-mineral{
+    max-width: 720px;
+    width: auto;
+    display: inline-block;
+    padding: 50px;
+    min-height: initial;
+    .repo-description{
+      font-size: 54px;
+      line-height: 55px;
+      font-family: Open-Sans-Light;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+      color: #eee;
+    }
+
+    .large-title {
+      >span{
+        font-size: 54px;
+        line-height: 55px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+        color: #eee;
+      }
+    }
+  }
+
   .petroleum-list{
     display: none !important;
+  }
+
+  .petroleum-wrapper{
+    position: relative;
+  }
+
+  .petroleum-wrapper:before {
+    content:  "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0, 0.3);
+  }
+}
+
+
+@media (max-width: 767px){
+  body.country{
+    .petroleum-mineral{
+      .repo-description, .large-title > span{
+        font-size: 42px;
+        line-height: 45px;
+      }
+    }
   }
 }
 
@@ -12,7 +62,7 @@ body.country{
 
 @media (min-width: 992px) {
   body.country .petroleum-mineral {
-    padding: 140px 30px 84px 30px !important;
+    padding: 50px !important;
     margin: 0 auto 30px !important;
   }
 }
@@ -43,4 +93,5 @@ body.country{
     padding: 0 !important;
   }
 }
+
 

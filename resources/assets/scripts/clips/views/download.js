@@ -6,7 +6,8 @@ var DownloadManager = React.createClass({
             loading: false,
             showShare: false,
             clipKey: null,
-            showSharedropdown:null,
+            showSharedropdown: null,
+            loadingPdf: false
         }
     },
     componentDidMount: function () {
@@ -61,13 +62,11 @@ var DownloadManager = React.createClass({
             self.setState({showSharedropdown: true});
         });
     },
-    handleShare:function()
-    {
+    handleShare: function () {
         this.setState({showSharedropdown: !this.state.showSharedropdown});
     },
     getResource: function (data) {
-        var
-            resource = "";
+        var resource = "";
         _.map(data, function (d) {
             resource += '<li>' + d + '</li>';
         });
@@ -104,13 +103,13 @@ var DownloadManager = React.createClass({
     downloadAsCSV: function (clips) {
         var data = [];
         var d = new Date();
-       var date = d.getDate()  + "_" + (d.getMonth()+1) + "_" + d.getFullYear() + "_" +d.getHours() + "_" + d.getMinutes()+ "_" + d.getSeconds();
+        var date = d.getDate() + "_" + (d.getMonth() + 1) + "_" + d.getFullYear() + "_" + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds();
         var downloadName = "clipped_annotations_" + date;
         var csvContent = "data:text/csv;charset=utf-8,";
-        var head = [langClip.documentTitle,langClip.country, langClip.year, langClip.annotationCat, langClip.text];
+        var head = [langClip.documentTitle, langClip.country, langClip.year, langClip.annotationCat, langClip.text];
         csvContent += head.join(',') + "\n";
         _.map(clips.models, function (clip) {
-            var t = ['"' + clip.get('name') + '"', '"' + clip.get('year') + '"', '"' + clip.get('country') + '"', '"' + clip.get('category') + '"', '"' + clip.get('text') + '"'];
+            var t = ['"' + clip.get('name') + '"', '"' + clip.get('country') + '"', '"' + clip.get('year') + '"', '"' + clip.get('category') + '"', '"' + clip.get('text') + '"'];
             csvContent += t.join(',') + "\n";
         });
         var encodedUri = encodeURI(csvContent);
@@ -123,11 +122,16 @@ var DownloadManager = React.createClass({
         this.setState({dropdown: !this.state.dropdown})
     },
     handleZipDownload: function () {
+        if (this.state.loadingPdf) {
+            return;
+        }
         var clips = this.state.clips;
+        this.setState({loadingPdf: true});
         var annotId = [];
         clips.map(function (data) {
             annotId.push(data.get('annotation_id'));
         });
+        var self = this;
         $.ajax({
             type: "POST",
             url: app_url + "/clip/zip",
@@ -136,14 +140,11 @@ var DownloadManager = React.createClass({
             window.open(data, '_blank');
         }).error(function () {
             alert(langClip.wrongError);
+        }).complete(function () {
+            self.setState({loadingPdf: false});
         });
     },
-    showShareAndSave:function(){
-
-    },
-
     render: function () {
-
         var show = {'display': 'block'};
         var hide = {'display': 'none'};
         var style = this.state.dropdown ? show : hide;
@@ -156,14 +157,23 @@ var DownloadManager = React.createClass({
             return null;
         }
         var saveAction = null;
-        var shareAndSave=langClip.saveClip;
-        if(this.state.loading)
-        {
-            shareAndSave= langClip.saving;
+        var shareAndSave = langClip.saveClip;
+        if (this.state.loading) {
+            shareAndSave = langClip.saving;
         }
-        if(this.state.showShare)
-        {
-            shareAndSave= langClip.share;
+        if (this.state.showShare) {
+            shareAndSave = langClip.share;
+        }
+
+        var download_pdf = '';
+
+        if (this.state.loadingPdf) {
+            download_pdf = (<div className="pdf-download-processing">
+                <nobr>{langClip.pdfClip}</nobr>
+                <small>{langClip.processing}</small>
+            </div>);
+        } else {
+            download_pdf = (<a id="pdf-zip-download" onClick={this.handleZipDownload}>{langClip.pdfClip}</a>);
         }
 
         return (
@@ -173,15 +183,17 @@ var DownloadManager = React.createClass({
                     <a onClick={this.toggleDropdown}><span>{langClip.download}</span></a>
                     <ul style={style} className="dropdown-menu">
                         <li><a id="download-clip-filter" onClick={this.handleDownload}>{langClip.csv}</a></li>
-                        <li><a id="pdf-zip-download" onClick={this.handleZipDownload}>{langClip.pdfClip}</a></li>
+                        <li>{download_pdf}</li>
                     </ul>
                 </div>
                 <div id="print-clip-filter" onClick={this.handlePrint}>{langClip.printClip}</div>
                 <div className="modal-social-share-wrap social-share">
-                        <div>
-                            <div id="save-clipping" style={{width:'160px'}}   onClick={this.handleSave}>{this.state.loading?langClip.saving:langClip.save_and_shareClip}</div>
-                            <ShareManager clipKey={this.state.clipKey} clipCollection={this.props.clipCollection} showSharedropdown={this.state.showSharedropdown}/>
-                        </div>
+                    <div>
+                        <div id="save-clipping" style={{width:'135px'}}
+                             onClick={this.handleSave}>{this.state.loading ? langClip.saving : langClip.save_and_shareClip}</div>
+                        <ShareManager clipKey={this.state.clipKey} clipCollection={this.props.clipCollection}
+                                      showSharedropdown={this.state.showSharedropdown}/>
+                    </div>
                 </div>
             </div>
         );

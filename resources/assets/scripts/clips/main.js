@@ -146,7 +146,7 @@ $(document).ready(function () {
         clipAnnotations(id, this);
     });
     $(document).on('click',"#clear-all",function(){
-        var conf=confirm("Are you sure, you want to remove all clips?");
+        var conf=confirm(langClip.confirmMessage);
         if(conf)
         {
             data.map(function (d, index) {

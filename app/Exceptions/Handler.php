@@ -37,18 +37,18 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+
         if ($e instanceof HttpException) {
             return $this->renderHttpException($e);
         }
 
-        if ($e instanceof ErrorException) {
+        if ($e instanceof Exception) {
             return view('errors.error');
         }
 
         if (env('APP_ENV') === 'production') {
             $this->sendMail($e, $request);
         }
-
         return parent::render($request, $e);
     }
 
@@ -61,8 +61,10 @@ class Handler extends ExceptionHandler
      */
     private function renderHttpException(HttpException $e)
     {
-        if (view()->exists('errors.'.$e->getStatusCode())) {
-            return response(view('errors.'.$e->getStatusCode()), 404);
+        $status = $e->getStatusCode();
+
+        if (view()->exists('errors.'.$status)) {
+            return response(view('errors.'.$status), $status);
         } else {
             return (new SymfonyDisplayer(config('app.debug')))->createResponse($e);
         }

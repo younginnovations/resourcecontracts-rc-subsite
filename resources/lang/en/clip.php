@@ -61,4 +61,6 @@ return [
     'click_to_disable_clip' => "Click here to disable clip.",
     'csv'                   => 'CSV',
     'currently_no_clips'    => "There are currently no Clips.",
+    'confirmMessage'        => 'Are you sure that you want to clear all clips?',
+    'processing'            => '(Processing...)',
 ];

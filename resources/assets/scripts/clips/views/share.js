@@ -50,11 +50,11 @@ var ShareManager = React.createClass({
             return null;
         }
         return (
-            <div>
+            <div className="clipShare">
                 <ul className="social-toggle" style={style}>
-                    <li className="facebook"><a href={ this.getFacebookShare()} target="_blank">Facebook </a></li>
-                    <li className="twitter"><a href={ this.getTwitterShare()} target="_blank"> Twitter </a></li>
-                    <li className="email"><a onClick={this.handleShowModal}>Email</a></li>
+                    <li className="facebook"><a href={ this.getFacebookShare()} target="_blank"></a></li>
+                    <li className="twitter"><a href={ this.getTwitterShare()} target="_blank"></a></li>
+                    <li className="email"><a onClick={this.handleShowModal}></a></li>
                 </ul>
                 {this.state.view.showModal ? <Email url={this.getShareUrl()} handleHideModal={this.handleHideModal}/> : null}
             </div>

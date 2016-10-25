@@ -131,11 +131,21 @@
 }
 
 .modal .url-wrap{
+  clear: both;
+  overflow: hidden;
   span{
     display: inline;
   }
+
+  #url{
+    display: block;
+    width: calc(100% - 35px);
+    float: right;
+  }
+
   a{
-    display: inline;
+    word-break: break-all;
+    display: block;
     height: auto;
     width: auto;
     background: none;

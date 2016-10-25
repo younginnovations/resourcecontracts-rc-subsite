@@ -376,13 +376,3 @@ function getOptionText($key)
 
     return isset($option->$currentLang) ? $option->$currentLang : '';
 }
-
-/**
- * Get User IP Address
- *
- * @return string
- */
-function getUserIP()
-{
-    return \Illuminate\Support\Facades\Request::ip();
-}

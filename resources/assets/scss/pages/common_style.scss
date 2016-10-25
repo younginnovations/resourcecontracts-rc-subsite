@@ -48,9 +48,9 @@ a {
   }
 }
 
-.attached-top-wrapper{
+.attached-top-wrapper {
   position: relative;
-  .back{
+  .back {
     position: absolute;
     top: 0;
     left: 0;
@@ -61,7 +61,7 @@ a {
     margin-top: 0;
   }
 
-  .panel-title{
+  .panel-title {
     float: left;
     clear: none;
     margin: 0px 0 0 50px;
@@ -82,12 +82,11 @@ a {
     }
   }
 
-  .has-no-backbtn + .panel-title{
+  .has-no-backbtn + .panel-title {
     margin: 0 0 14px 20px;
   }
 
-
-  .title-pop{
+  .title-pop {
     position: absolute;
     z-index: 888;
     max-width: calc(80% - 50px);
@@ -95,30 +94,30 @@ a {
     overflow: visible;
     white-space: normal;
     background: #f8f8f8;
-    box-shadow: 0 20px 40px -30px rgba(0,0,0,0.6);
+    box-shadow: 0 20px 40px -30px rgba(0, 0, 0, 0.6);
 
-    span{
+    span {
       display: inline;
       background: #f8f8f8;
-      box-shadow: 12px 0px 0 #f8f8f8,-15px 2px #f8f8f8;
+      box-shadow: 12px 0px 0 #f8f8f8, -15px 2px #f8f8f8;
       padding-bottom: 10px;
     }
   }
 
-  @media (min-width: 768px){
+  @media (min-width: 768px) {
     .panel-top-content {
       padding: 0;
       min-height: 67px;
     }
   }
 
-  .action-links{
+  .action-links {
     margin: 16px 36px 13px 10px;
   }
 }
 
-@media all and (min-width: 768px){
-  .attached-top-wrapper .back{
+@media all and (min-width: 768px) {
+  .attached-top-wrapper .back {
     min-height: 67px;
   }
 }
@@ -161,7 +160,7 @@ a {
         }
       }
 
-      a.view-summary-btn{
+      a.view-summary-btn {
         background: $color_link_color url(../images/ic-sprite.svg) no-repeat -26px -130px;
       }
 
@@ -245,12 +244,13 @@ a {
   color: $color_cape_cod_70_approx;
   &.pull-right {
     margin-top: 10px;
+
   }
 }
 
 .contract-number-wrap {
   width: 134px;
-  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+   //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
   border-radius: 50%;
   height: 134px;
   position: absolute;
@@ -258,7 +258,7 @@ a {
   top: 24px;
   background: $white;
   border: 10px solid $color_concrete_approx;
-  //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+   //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
   box-shadow: 0 2px 4px $black_20;
   font-size: 12px;
   color: $color_cape_cod_70_approx;
@@ -271,61 +271,78 @@ a {
     font: 42px/44px $font_2;
     color: $color_cape_cod_approx;
     display: block;
+
   }
 }
 
 @media (min-width: 551px) {
-  .contract-number-wrap.has-static-search{
+  .contract-number-wrap.has-static-search {
     top: 90px;
+
   }
 }
 
-.contract-search-number-wrap{
+.contract-search-number-wrap {
   top: 67px;
 }
 
 .page-contracts {
-  .contract-number-wrap{
+  .contract-number-wrap {
     top: -4px;
+
   }
 }
 
 /* style to make total doc logo consitent*/
-.page-search{
+.page-search {
 
-  @media (min-width: 992px){
-    .contract-number-wrap {
-      right: 36px;
-    }
+   @media (min-width: 992px) {
+  .contract-number-wrap {
+    right: 36px;
+
   }
 
-  .filter-wrapper{
+}
+
+  .filter-wrapper {
     min-height: 90px !important;
+
   }
 
-  @media(min-width: 768px){
-    .advance-filter-wrapper .social-share, .actions-wrapper .social-share{
-      right: 313px;
-    }
+   @media (min-width: 768px) {
+  .advance-filter-wrapper .social-share, .actions-wrapper .social-share {
+    right: 313px;
+
   }
 
-  .download-csv{
+}
+
+  .download-csv {
     right: 182px;
+
   }
 
-  .search-list-wrapper{
+  .search-list-wrapper {
     margin-top: 60px;
+
   }
 }
 
-.title-wrap .panel-top-content{
+.title-wrap .panel-top-content {
   border-bottom: none;
   overflow: visible;
 }
 
-
 @media all and (min-width: 551px) and (max-width: 992px) {
   .country-contract-wrap .download-csv {
     right: 156px;
+
   }
 }
+
+@media (max-width: 767px){
+  .contract-number-wrap{
+    right: 0;
+  }
+}
+

@@ -134,7 +134,6 @@ config(
                 'dir'          => 'rtl'
             ]
         ],
-        'localisation' => true,
         'clip'         => true
     ]
 );

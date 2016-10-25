@@ -1,7 +1,9 @@
 <?php namespace App\Http\Services\Admin;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Filesystem\Factory as Filesystem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * Class ImageService
@@ -153,12 +155,18 @@ class ImageService
      */
     public function getImageUrl($type, $ext = 'jpg')
     {
-        $url = '';
-        if ($this->filesystem->disk('s3')->exists($this->getName($type, $ext))) {
+        $url  = '';
+        $name = $this->getName($type, $ext);
+        $key  = md5($name);
+
+        if (Cache::has($key)) {
+            $url = Cache::get($key);
+        } elseif ($this->filesystem->disk('s3')->exists($name)) {
             $url = $this->filesystem->disk('s3')->getDriver()
                                     ->getAdapter()
                                     ->getClient()
-                                    ->getObjectUrl(env('AWS_BUCKET'), $this->getName($type, $ext));
+                                    ->getObjectUrl(env('AWS_BUCKET'), $name);
+            Cache::put($key, $url, Carbon::now()->addDay(1));
         }
 
         return $url;

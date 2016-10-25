@@ -63,12 +63,10 @@
 
 #clear-all {
   position: relative;
-  font: 14px/21px Open-Sans-Light;
+  font: 13px/21px Open-Sans-Light;
   padding: 6px 15px 6px 40px;
-  //border-radius: 19px;
   display: inline-block;
   text-decoration: none;
-  //background: $color_danger;
   color: $color_link_color;
   margin-left: 8px;
   &:before{
@@ -76,9 +74,9 @@
     position: absolute;
     width: 22px;
     top: 8px;
-    height: 16px;
+    height: 20px;
     left: 13px;
-    background: url(../images/ic-sprite.svg) no-repeat no-repeat -438px -405px;
+    background: url(../images/ic-sprite.svg) no-repeat no-repeat -185px -481px;
   }
 
   &:hover{
@@ -130,7 +128,7 @@
   bottom: auto;
   top: auto;
   float: right;
-  margin-right: 20px;
+  margin-right: 0px;
   border-bottom: solid 1px;
   border-radius: 0;
   width: auto;

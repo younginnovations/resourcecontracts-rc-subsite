@@ -226,6 +226,7 @@
     width: 747px;
     border-radius: 4px;
     margin-bottom: 20px;
+    min-height: 488px;
     .repo-description {
       font-size: 26px;
       line-height: 34px;
@@ -457,6 +458,8 @@
 
   .map-wrapper .heading2{
     padding-bottom: 10px;
+    color: #fff;
+    text-shadow: 1px 2px 3px rgba(0,0,0,0.3);
   }
 
 .countrypartner{
@@ -781,6 +784,10 @@ p {
       float: none;
     }
 
+    .footer-bottom{
+      text-align: center;
+    }
+
     .heading2 {
       font-size: 24px;
     }
@@ -798,6 +805,13 @@ p {
     }
 
   }
+
+@media (max-width: 895px) {
+  .footer__wrap .language-selector {
+    float: none;
+  }
+}
+
 
   @media only screen and (max-width: 480px) {
 
@@ -939,9 +953,16 @@ p {
     text-align: center;
   }
 
-  .menu-list-each,.menu-list-each li{
+  .menu-list-each,.menu-list-each li, .footer-bottom, .footer-bottom .footer-description{
     float: none;
   }
+
+  .footer-bottom, .menu-list{
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+
 }
 
 @media (min-width: 1200px){

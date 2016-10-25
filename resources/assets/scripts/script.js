@@ -77,7 +77,7 @@ var emailManager = {
         if (this.validationInputs() || this.processing) {
             return false;
         }
-
+        $('.alert').remove();
         var formData = {
             to: this.input('to'),
             from: this.input('from'),
@@ -426,7 +426,7 @@ $(document).ready(function () {
 
     };
 
-    var annotation = $(".annotate-text");
+    var annotation = $(".annotate-text, .hover-anchor");
     if (annotation.length) {
         annotation.popover(options);
     }

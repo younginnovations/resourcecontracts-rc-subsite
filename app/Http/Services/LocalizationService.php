@@ -182,7 +182,7 @@ class LocalizationService
             }
         }
 
-        return $lang;
+        return collect($lang)->sortBy('name')->toArray();
     }
 
     /**

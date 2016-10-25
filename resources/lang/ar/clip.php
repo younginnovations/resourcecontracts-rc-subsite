@@ -61,5 +61,6 @@ return [
     'click_to_disable_clip' => "انقر هنا لتعطيل كليب",
     'csv'                   => "CSV",
     'currently_no_clips'    => "لا يوجد حاليا أي مقاطع",
-
+    'confirmMessage'        => 'هل أنت متأكد أنك تريد مسح جميع مقاطع؟',
+    'processing'            => '(معالجة...)',
 ];
