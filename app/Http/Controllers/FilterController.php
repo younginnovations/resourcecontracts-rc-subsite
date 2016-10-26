@@ -80,7 +80,6 @@ class FilterController
             'order'               => $request->get('order'),
             'group'               => $type,
             'all'                 => $request->get('all', '0'),
-            'fuzzy'               => config('fuzzy') ? 1 : 0,
             'download'            => $request->get('download', false)
 
         ];

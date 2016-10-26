@@ -257,7 +257,6 @@ class APIService
             'per_page'            => $all ? $from * 25 : $per_page,
             'from'                => $per_page * ($from - 1),
             'all'                 => $all,
-            'fuzzy'               => $fuzzy,
             'download'            => $download,
             'annotated'           => $annotated,
 
