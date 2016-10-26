@@ -136,8 +136,7 @@ config(
             ]
         ],
         'localisation' => true,
-        'clip'         => false,
-        'fuzzy'        => true
+        'clip'         => false
 
     ]
 );
