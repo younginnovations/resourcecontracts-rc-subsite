@@ -5,7 +5,8 @@ var DownloadManager = React.createClass({
             dropdown: false,
             loading: false,
             showShare: false,
-            clipKey: null
+            clipKey: null,
+            showSharedropdown:null,
         }
     },
     componentDidMount: function () {
@@ -22,17 +23,15 @@ var DownloadManager = React.createClass({
             if (!$(event.target).closest('.download-dropdown').length && !$(event.target).is('.download-dropdown')) {
                 if ($('.download-dropdown').is(":visible")) {
                     self.setState({dropdown: false});
+                    self.setState({showSharedropdown: false});
                 }
             }
         });
     },
     handleDownload: function () {
-        console.log("download clips",this.state.clips);
         this.downloadAsCSV(this.state.clips);
     },
     handlePrint: function () {
-        console.log("print clips",this.state.clips);
-
         this.printClips(this.state.clips);
     },
     handleSave: function () {
@@ -59,16 +58,23 @@ var DownloadManager = React.createClass({
                 path: '/'
             });
             self.setState({showShare: true, clipKey: response.key});
+            self.setState({showSharedropdown: true});
         });
     },
+    handleShare:function()
+    {
+        this.setState({showSharedropdown: !this.state.showSharedropdown});
+    },
     getResource: function (data) {
-        var resource = "";
+        var
+            resource = "";
         _.map(data, function (d) {
             resource += '<li>' + d + '</li>';
         });
 
         return resource;
     },
+
     printClips: function (clips) {
         var self = this;
         var printView = '';
@@ -132,24 +138,37 @@ var DownloadManager = React.createClass({
             alert(langClip.wrongError);
         });
     },
+    showShareAndSave:function(){
+
+    },
 
     render: function () {
 
         var show = {'display': 'block'};
         var hide = {'display': 'none'};
         var style = this.state.dropdown ? show : hide;
+
+        var shareshow = {'display': 'block'};
+        var sharehide = {'display': 'none'};
+        var sharestyle = this.state.showSharedropdown ? shareshow : sharehide;
+
         if (this.state.clips.length < 1) {
             return null;
         }
         var saveAction = null;
-        if (key == '') {
-            saveAction = (
-                <div id="save-clipping"   onClick={this.handleSave}>{this.state.loading ? langClip.saving: langClip.saveClip}</div>
-            );
+        var shareAndSave=langClip.saveClip;
+        if(this.state.loading)
+        {
+            shareAndSave= langClip.saving;
         }
+        if(this.state.showShare)
+        {
+            shareAndSave= langClip.share;
+        }
+
         return (
             <div className="actions-wrapper action-btn">
-                <ShareManager clipKey={this.state.clipKey} clipCollection={this.props.clipCollection}/>
+
                 <div className="download-dropdown">
                     <a onClick={this.toggleDropdown}><span>{langClip.download}</span></a>
                     <ul style={style} className="dropdown-menu">
@@ -158,7 +177,12 @@ var DownloadManager = React.createClass({
                     </ul>
                 </div>
                 <div id="print-clip-filter" onClick={this.handlePrint}>{langClip.printClip}</div>
-                {saveAction}
+                <div className="modal-social-share-wrap social-share">
+                        <div>
+                            <div id="save-clipping" style={{width:'160px'}}   onClick={this.handleSave}>{this.state.loading?langClip.saving:langClip.save_and_shareClip}</div>
+                            <ShareManager clipKey={this.state.clipKey} clipCollection={this.props.clipCollection} showSharedropdown={this.state.showSharedropdown}/>
+                        </div>
+                </div>
             </div>
         );
     }

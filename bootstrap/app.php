@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Services\LocalizationService;
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -136,8 +135,7 @@ config(
             ]
         ],
         'localisation' => true,
-        'clip'         => false
-
+        'clip'         => true
     ]
 );
 

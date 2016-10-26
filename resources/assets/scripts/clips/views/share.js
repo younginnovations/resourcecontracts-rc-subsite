@@ -4,7 +4,6 @@ var ShareManager = React.createClass({
             dropdown: false,
             view: {showModal: false},
             facebook_url: 'https://www.facebook.com/sharer/sharer.php?u=',
-            google_url: 'https://plus.google.com/share?url=',
             twitter_url: 'https://twitter.com/share?text=',
             clipKey: ''
         };
@@ -29,13 +28,11 @@ var ShareManager = React.createClass({
     getFacebookShare: function () {
         return this.state.facebook_url + this.getShareUrl();
     },
-    getGoogleShare: function () {
-        return this.state.google_url + this.getShareUrl();
-    },
     getTwitterShare: function () {
         return this.state.twitter_url + this.getShareUrl();
     },
     handleHideModal: function () {
+        console.log("show modal");
         this.setState({view: {showModal: false}})
     },
     handleShowModal: function () {
@@ -47,25 +44,19 @@ var ShareManager = React.createClass({
     render: function () {
         var show = {'display': 'block'};
         var hide = {'display': 'none'};
-        var style = this.state.dropdown ? show : hide;
+        var style = this.props.showSharedropdown ? show : hide;
 
         if (this.state.clipKey == null) {
             return null;
         }
         return (
-            <div className="modal-social-share-wrap">
-                <div className="social-share" id="social-toggler">
-                    <a onClick={this.toggleDropdown}><span>{langClip.share}</span></a>
-                    <ul className="social-toggle" style={style}>
-                        <li className="facebook"><a href={ this.getFacebookShare()} target="_blank">Facebook </a></li>
-                        <li className="twitter"><a href={ this.getTwitterShare()} target="_blank"> Twitter </a></li>
-                        <li className="google-plus"><a href={ this.getGoogleShare()} target="_blank"> Google Plus </a>
-                        </li>
-                        <li className="email"><a onClick={this.handleShowModal}>Email</a></li>
-                    </ul>
-                </div>
-                {this.state.view.showModal ?
-                    <Email url={this.getShareUrl()} handleHideModal={this.handleHideModal}/> : null}
+            <div>
+                <ul className="social-toggle" style={style}>
+                    <li className="facebook"><a href={ this.getFacebookShare()} target="_blank">Facebook </a></li>
+                    <li className="twitter"><a href={ this.getTwitterShare()} target="_blank"> Twitter </a></li>
+                    <li className="email"><a onClick={this.handleShowModal}>Email</a></li>
+                </ul>
+                {this.state.view.showModal ? <Email url={this.getShareUrl()} handleHideModal={this.handleHideModal}/> : null}
             </div>
         );
     }
@@ -224,7 +215,8 @@ var Email = React.createClass({
                                     URL : <a target="_blank" href={this.state.url}> {this.state.url}</a>
                                 </div>
                                 <div className="modal-footer">
-                                    <input type="submit" className="btn"  disabled={this.state.processing} value={langClip.sendEmail}/>
+                                    <input type="submit" className="btn" disabled={this.state.processing}
+                                           value={langClip.sendEmail}/>
                                 </div>
                             </form>
                         </div>

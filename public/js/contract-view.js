@@ -28036,8 +28036,6 @@ var DownloadUrl = React.createClass({displayName: "DownloadUrl",
                         React.createElement("ul", {className: "dropdown-menu", style: socialStyle}, 
                             React.createElement("li", {className: "facebook"}, React.createElement("a", {className: "share-link", href: "#facebook", target: "_blank"}, "FB")
                             ), 
-                            React.createElement("li", {className: "google-plus"}, React.createElement("a", {className: "share-link", href: "#google", target: "_blank"}, "G+")
-                            ), 
                             React.createElement("li", {className: "twitter"}, React.createElement("a", {className: "share-link", href: "#twitter", target: "_blank"}, "T")), 
                             React.createElement("li", {className: "email"}, React.createElement("a", {onClick: this.handleShowModal}, "1Email")
                             )
@@ -28065,8 +28063,6 @@ var DownloadUrl = React.createClass({displayName: "DownloadUrl",
                         React.createElement("ul", {className: "dropdown-menu", style: socialStyle}, 
                             React.createElement("li", {className: "facebook"}, React.createElement("a", {className: "share-link", href: "#facebook", target: "_blank"}, "FB")
                             ), 
-                            React.createElement("li", {className: "google-plus"}, React.createElement("a", {className: "share-link", href: "#google", target: "_blank"}, "G+")
-                            ), 
                             React.createElement("li", {className: "twitter"}, React.createElement("a", {className: "share-link", href: "#twitter", target: "_blank"}, "T")), 
                             React.createElement("li", {className: "email"}, React.createElement("a", {onClick: this.handleShowModal}, "Email")
                             )
@@ -28092,8 +28088,6 @@ var DownloadUrl = React.createClass({displayName: "DownloadUrl",
                         React.createElement("a", {href: "#", onClick: this.socialDropdown}, React.createElement("span", null, "share")), 
                         React.createElement("ul", {className: "dropdown-menu", style: socialStyle}, 
                             React.createElement("li", {className: "facebook"}, React.createElement("a", {className: "share-link", href: "#facebook", target: "_blank"}, "FB")
-                            ), 
-                            React.createElement("li", {className: "google-plus"}, React.createElement("a", {className: "share-link", href: "#google", target: "_blank"}, "G+")
                             ), 
                             React.createElement("li", {className: "twitter"}, React.createElement("a", {className: "share-link", href: "#twitter", target: "_blank"}, "T")), 
                             React.createElement("li", {className: "email"}, React.createElement("a", {onClick: this.handleShowModal}, "3Email")
@@ -28123,8 +28117,6 @@ var DownloadUrl = React.createClass({displayName: "DownloadUrl",
                         React.createElement("a", {href: "#", onClick: this.socialDropdown}, React.createElement("span", null, "share")), 
                         React.createElement("ul", {className: "dropdown-menu", style: socialStyle}, 
                             React.createElement("li", {className: "facebook"}, React.createElement("a", {className: "share-link", href: "#facebook", target: "_blank"}, "FB")
-                            ), 
-                            React.createElement("li", {className: "google-plus"}, React.createElement("a", {className: "share-link", href: "#google", target: "_blank"}, "G+")
                             ), 
                             React.createElement("li", {className: "twitter"}, React.createElement("a", {className: "share-link", href: "#twitter", target: "_blank"}, "T")), 
                             React.createElement("li", {className: "email"}, React.createElement("a", {onClick: this.handleShowModal}, "Email")

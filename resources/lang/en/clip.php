@@ -1,6 +1,6 @@
 <?php
 return [
-    'clip_all'              => "Clip all",
+    'clip_all'              => "Clip All",
     'email_message'         => "This message was sent by",
     'via'                   => "via",
     'clipped'               => "Clipped Annotations",
@@ -23,6 +23,7 @@ return [
     'pdfClip'               => "PDF",
     'print'                 => "Print",
     'saveClip'              => "Save",
+    'save_and_shareClip'    => "Share Clips",
     'saving'                => "Saving....",
     'text'                  => "Text",
     'viewClip'              => "View",
@@ -55,9 +56,9 @@ return [
     "all_clip"              => "All Clips",
     'view_all_clips'        => "View Clips",
     "all_clips"             => "All Clips",
-    'shareViaEmail'         => "Share via email",
+    'shareViaEmail'         => "Email Saved Clips",
     'click_to_enable_clip'  => "Click here to enable clip.",
     'click_to_disable_clip' => "Click here to disable clip.",
     'csv'                   => 'CSV',
-    'currently_no_clips'    => "There are currently no clips.",
+    'currently_no_clips'    => "There are currently no Clips.",
 ];

@@ -4,11 +4,6 @@
 		   href="#facebook"
 		   target="_blank">Facebook</a>
 	</li>
-	<li class="google-plus">
-		<a class="share-link"
-		   href="#google"
-		   target="_blank">Google</a>
-	</li>
 	<li class="twitter">
 		<a class="share-link"
 		   href="#twitter"

@@ -91,7 +91,7 @@
   //right: 40px;
   right: 178px;
   background: $white;
-  border: 1px solid rgba($color_link_color,0.2);
+  border: 1px solid $color_link_color;
   //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
   border-radius: 22px;
 }
@@ -368,19 +368,20 @@
   }
 }
 
+
 /* --------- style for advance filter social share ------------ */
 
 .advance-filter-wrapper .social-share,
-.actions-wrapper .social-share{
+.actions-wrapper .social-share,
+.modal-social-share-wrap{
   margin: 7px;
   right: 170px;
   bottom: -27px;
   padding: 0;
-
   > a{
     display: block;
     font-size: 12px;
-    color: $color_link_color,0.2;
+    color: $color_link_color;
     width: auto;
     text-decoration: none;
     padding: 13px 22px 13px 47px;
@@ -389,6 +390,7 @@
     border-radius: 50%;
     position: relative;
   }
+
   span{
     text-indent: 0;
   }
@@ -410,7 +412,6 @@
     background: #fff;
     left: 19px;
     display: none;
-
   }
 
   li{
@@ -418,7 +419,6 @@
   }
 
   li a{
-//    width: auto;
     height: auto;
     padding: 10px 15px 10px 25px;
     background: none;
@@ -559,5 +559,19 @@
   cursor: pointer;
   &:hover {
     background: url(../images/ic-mail.png) no-repeat 5px -35px;
+  }
+}
+
+.modal-social-share-wrap ul{
+  position: absolute;
+}
+
+.modal-social-share-wrap.social-share{
+  position: relative !important;
+  background: none !important;
+  margin: 0 !important;
+
+  ul{
+    top: 50px !important;
   }
 }

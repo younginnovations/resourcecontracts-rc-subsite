@@ -463,3 +463,12 @@ td.contract-date {
 tr:empty {
   display: none;
 }
+
+
+.country-list-wrap{
+  .clipping-article{
+    a:hover{
+        text-decoration: underline;
+      }
+  }
+}

@@ -22,7 +22,11 @@ class Loading extends Component {
     render() {
         if (this.state.loading) {
             return (
-                <div className="loading"><p><img src={loading_image}/> {this.state.text}</p></div>
+                <div className="loading">
+                    <p>
+                        {this.state.text}
+                    </p>
+                </div>
             );
         }
         else {

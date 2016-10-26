@@ -251,7 +251,7 @@ var Listing = React.createClass({
 
                             <th><a onClick={this.handleSort.bind(this,'name')}>
                                 Document {this.showSortArrow('name')}</a></th>
-                            <th width="20%"><a
+                            <th width="15%"><a
                                 onClick={this.handleSort.bind(this,'category')}>{langClip.category}{this.showSortArrow('category')}</a>
                             </th>
                             <th width="35%"><a
