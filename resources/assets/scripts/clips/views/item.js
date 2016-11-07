@@ -79,7 +79,7 @@ var Item = React.createClass({
         if (texToShow.length == 0) {
             texToShow = this.state.text;
         }
-        textToReturn = (<span>{texToShow}<a onClick={this.handleClick}>{more}</a></span>);
+        textToReturn = (<span>{texToShow} <a onClick={this.handleClick}> {more}</a></span>);
         return textToReturn;
     },
     getResource: function () {
@@ -87,7 +87,8 @@ var Item = React.createClass({
         var data = this.props.item.get('resource');
 
         _.map(data, function (d) {
-            resource += '<li>' + langResource[d] + '</li>';
+            var resource_lang = langResource[d] ? langResource[d] : d;
+            resource += '<li>' + resource_lang + '</li>';
         });
 
         return resource;
@@ -103,7 +104,7 @@ var Item = React.createClass({
         var openContractingId = this.props.item.get('open_contracting_id');
         _.map(pages, function (page) {
             var url = app_url + "/contract/" + openContractingId + '/view#/' + page.type + '/page/' + page.page + '/annotation/' + page.id;
-            pageUrl += langClip.page+" " + page.page +' (<a href=' + url + '>'  + articleRef + '</a>)';
+            pageUrl += langClip.page+" " + page.page +' (<a href=' + url + '>'  + articleRef + '</a>) ';
         });
         return pageUrl;
     },
@@ -129,7 +130,7 @@ var Item = React.createClass({
                 <td>
                     <a href={docUrl}>{this.props.item.get('category')}</a>
                 </td>
-                <td>
+                <td className="clipping-article">
                     {this.getShowText()}<br/>
                     <span dangerouslySetInnerHTML={{__html: this.getPageUrl()}}/>
                 </td>

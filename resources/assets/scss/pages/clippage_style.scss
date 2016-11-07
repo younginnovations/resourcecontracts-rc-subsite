@@ -39,6 +39,9 @@
     font-size: 12px;
     line-height: 18px;
     padding: 6px 10px 7px 0;
+    span.for_detail_space{
+      margin-right: 3px;
+    }
     p{
       &:nth-child(1){
         margin: 0 0 2px;

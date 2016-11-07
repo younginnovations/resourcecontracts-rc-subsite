@@ -39,6 +39,10 @@
       background:  $color_link_color;
       color: #fff;
     }
+
+    span{
+      font-size: 26px;
+    }
   }
 
   .form-group {
@@ -124,5 +128,20 @@
   line-height: 20px;
   padding: 6px 12px;
   width: 100%;
+}
+
+.modal .url-wrap{
+  span{
+    display: inline;
+  }
+  a{
+    display: inline;
+    height: auto;
+    width: auto;
+    background: none;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
 }
 

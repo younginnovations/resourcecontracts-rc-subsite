@@ -4,6 +4,7 @@ $siteName = site()->meta('name');
 if (!site()->isRC()) {
 	$siteName .= '<span class="beta">Beta</span>';
 }
+$siteName .= '<span>Contracts</span>';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +23,7 @@ if (!site()->isRC()) {
 	<script>
 		const APP_URL = '{{ url()}}';
 		const LANG = {!! json_encode(trans('annotation')) !!};
-		const SITE_NAME = '{{$siteName}}';
+		const SITE_NAME = '{!! $siteName !!}';
 		const Annotation = {!!json_encode($annotation)!!};
 		const lang_category = {!! json_encode(trans('codelist/annotation.categories')) !!};
 		const AWS_URL = "https://rc-stage.s3-us-west-2.amazonaws.com";

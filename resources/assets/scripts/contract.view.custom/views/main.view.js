@@ -95,8 +95,6 @@ var DownloadUrl = React.createClass({
                         <ul className="dropdown-menu" style={socialStyle}>
                             <li className="facebook"><a className="share-link" href='#facebook' target="_blank">FB</a>
                             </li>
-                            <li className="google-plus"><a className="share-link" href='#google' target="_blank">G+</a>
-                            </li>
                             <li className="twitter"><a className="share-link" href='#twitter' target="_blank">T</a></li>
                             <li className="email"><a onClick={this.handleShowModal}>1Email</a>
                             </li>
@@ -124,8 +122,6 @@ var DownloadUrl = React.createClass({
                         <ul className="dropdown-menu" style={socialStyle}>
                             <li className="facebook"><a className="share-link" href='#facebook' target="_blank">FB</a>
                             </li>
-                            <li className="google-plus"><a className="share-link" href='#google' target="_blank">G+</a>
-                            </li>
                             <li className="twitter"><a className="share-link" href='#twitter' target="_blank">T</a></li>
                             <li className="email"><a onClick={this.handleShowModal}>Email</a>
                             </li>
@@ -151,8 +147,6 @@ var DownloadUrl = React.createClass({
                         <a href="#" onClick={this.socialDropdown}><span>share</span></a>
                         <ul className="dropdown-menu" style={socialStyle}>
                             <li className="facebook"><a className="share-link" href='#facebook' target="_blank">FB</a>
-                            </li>
-                            <li className="google-plus"><a className="share-link" href='#google' target="_blank">G+</a>
                             </li>
                             <li className="twitter"><a className="share-link" href='#twitter' target="_blank">T</a></li>
                             <li className="email"><a onClick={this.handleShowModal}>3Email</a>
@@ -182,8 +176,6 @@ var DownloadUrl = React.createClass({
                         <a href="#" onClick={this.socialDropdown}><span>share</span></a>
                         <ul className="dropdown-menu" style={socialStyle}>
                             <li className="facebook"><a className="share-link" href='#facebook' target="_blank">FB</a>
-                            </li>
-                            <li className="google-plus"><a className="share-link" href='#google' target="_blank">G+</a>
                             </li>
                             <li className="twitter"><a className="share-link" href='#twitter' target="_blank">T</a></li>
                             <li className="email"><a onClick={this.handleShowModal}>Email</a>

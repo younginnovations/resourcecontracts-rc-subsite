@@ -21889,7 +21889,8 @@ var DownloadManager = React.createClass({displayName: "DownloadManager",
             dropdown: false,
             loading: false,
             showShare: false,
-            clipKey: null
+            clipKey: null,
+            showSharedropdown:null,
         }
     },
     componentDidMount: function () {
@@ -21906,17 +21907,15 @@ var DownloadManager = React.createClass({displayName: "DownloadManager",
             if (!$(event.target).closest('.download-dropdown').length && !$(event.target).is('.download-dropdown')) {
                 if ($('.download-dropdown').is(":visible")) {
                     self.setState({dropdown: false});
+                    self.setState({showSharedropdown: false});
                 }
             }
         });
     },
     handleDownload: function () {
-        console.log("download clips",this.state.clips);
         this.downloadAsCSV(this.state.clips);
     },
     handlePrint: function () {
-        console.log("print clips",this.state.clips);
-
         this.printClips(this.state.clips);
     },
     handleSave: function () {
@@ -21943,16 +21942,23 @@ var DownloadManager = React.createClass({displayName: "DownloadManager",
                 path: '/'
             });
             self.setState({showShare: true, clipKey: response.key});
+            self.setState({showSharedropdown: true});
         });
     },
+    handleShare:function()
+    {
+        this.setState({showSharedropdown: !this.state.showSharedropdown});
+    },
     getResource: function (data) {
-        var resource = "";
+        var
+            resource = "";
         _.map(data, function (d) {
             resource += '<li>' + d + '</li>';
         });
 
         return resource;
     },
+
     printClips: function (clips) {
         var self = this;
         var printView = '';
@@ -22016,24 +22022,37 @@ var DownloadManager = React.createClass({displayName: "DownloadManager",
             alert(langClip.wrongError);
         });
     },
+    showShareAndSave:function(){
+
+    },
 
     render: function () {
 
         var show = {'display': 'block'};
         var hide = {'display': 'none'};
         var style = this.state.dropdown ? show : hide;
+
+        var shareshow = {'display': 'block'};
+        var sharehide = {'display': 'none'};
+        var sharestyle = this.state.showSharedropdown ? shareshow : sharehide;
+
         if (this.state.clips.length < 1) {
             return null;
         }
         var saveAction = null;
-        if (key == '') {
-            saveAction = (
-                React.createElement("div", {id: "save-clipping", onClick: this.handleSave}, this.state.loading ? langClip.saving: langClip.saveClip)
-            );
+        var shareAndSave=langClip.saveClip;
+        if(this.state.loading)
+        {
+            shareAndSave= langClip.saving;
         }
+        if(this.state.showShare)
+        {
+            shareAndSave= langClip.share;
+        }
+
         return (
             React.createElement("div", {className: "actions-wrapper action-btn"}, 
-                React.createElement(ShareManager, {clipKey: this.state.clipKey, clipCollection: this.props.clipCollection}), 
+
                 React.createElement("div", {className: "download-dropdown"}, 
                     React.createElement("a", {onClick: this.toggleDropdown}, React.createElement("span", null, langClip.download)), 
                     React.createElement("ul", {style: style, className: "dropdown-menu"}, 
@@ -22042,7 +22061,12 @@ var DownloadManager = React.createClass({displayName: "DownloadManager",
                     )
                 ), 
                 React.createElement("div", {id: "print-clip-filter", onClick: this.handlePrint}, langClip.printClip), 
-                saveAction
+                React.createElement("div", {className: "modal-social-share-wrap social-share"}, 
+                        React.createElement("div", null, 
+                            React.createElement("div", {id: "save-clipping", style: {width:'160px'}, onClick: this.handleSave}, this.state.loading?langClip.saving:langClip.save_and_shareClip), 
+                            React.createElement(ShareManager, {clipKey: this.state.clipKey, clipCollection: this.props.clipCollection, showSharedropdown: this.state.showSharedropdown})
+                        )
+                )
             )
         );
     }
@@ -22054,7 +22078,6 @@ var ShareManager = React.createClass({displayName: "ShareManager",
             dropdown: false,
             view: {showModal: false},
             facebook_url: 'https://www.facebook.com/sharer/sharer.php?u=',
-            google_url: 'https://plus.google.com/share?url=',
             twitter_url: 'https://twitter.com/share?text=',
             clipKey: ''
         };
@@ -22079,13 +22102,11 @@ var ShareManager = React.createClass({displayName: "ShareManager",
     getFacebookShare: function () {
         return this.state.facebook_url + this.getShareUrl();
     },
-    getGoogleShare: function () {
-        return this.state.google_url + this.getShareUrl();
-    },
     getTwitterShare: function () {
         return this.state.twitter_url + this.getShareUrl();
     },
     handleHideModal: function () {
+        console.log("show modal");
         this.setState({view: {showModal: false}})
     },
     handleShowModal: function () {
@@ -22097,25 +22118,19 @@ var ShareManager = React.createClass({displayName: "ShareManager",
     render: function () {
         var show = {'display': 'block'};
         var hide = {'display': 'none'};
-        var style = this.state.dropdown ? show : hide;
+        var style = this.props.showSharedropdown ? show : hide;
 
         if (this.state.clipKey == null) {
             return null;
         }
         return (
-            React.createElement("div", {className: "modal-social-share-wrap"}, 
-                React.createElement("div", {className: "social-share", id: "social-toggler"}, 
-                    React.createElement("a", {onClick: this.toggleDropdown}, React.createElement("span", null, langClip.share)), 
-                    React.createElement("ul", {className: "social-toggle", style: style}, 
-                        React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  this.getFacebookShare(), target: "_blank"}, "Facebook ")), 
-                        React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  this.getTwitterShare(), target: "_blank"}, " Twitter ")), 
-                        React.createElement("li", {className: "google-plus"}, React.createElement("a", {href:  this.getGoogleShare(), target: "_blank"}, " Google Plus ")
-                        ), 
-                        React.createElement("li", {className: "email"}, React.createElement("a", {onClick: this.handleShowModal}, "Email"))
-                    )
+            React.createElement("div", null, 
+                React.createElement("ul", {className: "social-toggle", style: style}, 
+                    React.createElement("li", {className: "facebook"}, React.createElement("a", {href:  this.getFacebookShare(), target: "_blank"}, "Facebook ")), 
+                    React.createElement("li", {className: "twitter"}, React.createElement("a", {href:  this.getTwitterShare(), target: "_blank"}, " Twitter ")), 
+                    React.createElement("li", {className: "email"}, React.createElement("a", {onClick: this.handleShowModal}, "Email"))
                 ), 
-                this.state.view.showModal ?
-                    React.createElement(Email, {url: this.getShareUrl(), handleHideModal: this.handleHideModal}) : null
+                this.state.view.showModal ? React.createElement(Email, {url: this.getShareUrl(), handleHideModal: this.handleHideModal}) : null
             )
         );
     }
@@ -22274,7 +22289,8 @@ var Email = React.createClass({displayName: "Email",
                                     "URL : ", React.createElement("a", {target: "_blank", href: this.state.url}, " ", this.state.url)
                                 ), 
                                 React.createElement("div", {className: "modal-footer"}, 
-                                    React.createElement("input", {type: "submit", className: "btn", disabled: this.state.processing, value: langClip.sendEmail})
+                                    React.createElement("input", {type: "submit", className: "btn", disabled: this.state.processing, 
+                                           value: langClip.sendEmail})
                                 )
                             )
                         )
@@ -22426,7 +22442,7 @@ var Item = React.createClass({displayName: "Item",
         if (texToShow.length == 0) {
             texToShow = this.state.text;
         }
-        textToReturn = (React.createElement("span", null, texToShow, React.createElement("a", {onClick: this.handleClick}, more)));
+        textToReturn = (React.createElement("span", null, texToShow, " ", React.createElement("a", {onClick: this.handleClick}, " ", more)));
         return textToReturn;
     },
     getResource: function () {
@@ -22434,7 +22450,8 @@ var Item = React.createClass({displayName: "Item",
         var data = this.props.item.get('resource');
 
         _.map(data, function (d) {
-            resource += '<li>' + langResource[d] + '</li>';
+            var resource_lang = langResource[d] ? langResource[d] : d;
+            resource += '<li>' + resource_lang + '</li>';
         });
 
         return resource;
@@ -22450,7 +22467,7 @@ var Item = React.createClass({displayName: "Item",
         var openContractingId = this.props.item.get('open_contracting_id');
         _.map(pages, function (page) {
             var url = app_url + "/contract/" + openContractingId + '/view#/' + page.type + '/page/' + page.page + '/annotation/' + page.id;
-            pageUrl += langClip.page+" " + page.page +' (<a href=' + url + '>'  + articleRef + '</a>)';
+            pageUrl += langClip.page+" " + page.page +' (<a href=' + url + '>'  + articleRef + '</a>) ';
         });
         return pageUrl;
     },
@@ -22476,7 +22493,7 @@ var Item = React.createClass({displayName: "Item",
                 React.createElement("td", null, 
                     React.createElement("a", {href: docUrl}, this.props.item.get('category'))
                 ), 
-                React.createElement("td", null, 
+                React.createElement("td", {className: "clipping-article"}, 
                     this.getShowText(), React.createElement("br", null), 
                     React.createElement("span", {dangerouslySetInnerHTML: {__html: this.getPageUrl()}})
                 ), 
@@ -22794,7 +22811,7 @@ var Listing = React.createClass({displayName: "Listing",
 
                             React.createElement("th", null, React.createElement("a", {onClick: this.handleSort.bind(this,'name')}, 
                                 "Document ", this.showSortArrow('name'))), 
-                            React.createElement("th", {width: "20%"}, React.createElement("a", {
+                            React.createElement("th", {width: "15%"}, React.createElement("a", {
                                 onClick: this.handleSort.bind(this,'category')}, langClip.category, this.showSortArrow('category'))
                             ), 
                             React.createElement("th", {width: "35%"}, React.createElement("a", {

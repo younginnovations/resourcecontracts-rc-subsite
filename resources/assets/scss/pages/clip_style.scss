@@ -38,7 +38,7 @@
   }
 }
 
-#annotation-count,#clear-all {
+#annotation-count/* ,#clear-all */ {
   color: #fff !important;
   background: $color_blue;
   padding: 0 18px 0 36px;
@@ -48,6 +48,7 @@
   &:before{
     content: "";
     position: absolute;
+    display: inline-block;
     width: 20px;
     height: 20px;
     top: 7px;
@@ -61,14 +62,18 @@
 }
 
 #clear-all {
-  font: 13px/21px Open-Sans-Light;
+  position: relative;
+  font: 14px/21px Open-Sans-Light;
   padding: 6px 15px 6px 40px;
-  border-radius: 19px;
+  //border-radius: 19px;
   display: inline-block;
   text-decoration: none;
-  background: $color_danger;
+  //background: $color_danger;
+  color: $color_link_color;
   margin-left: 8px;
   &:before{
+    content: "";
+    position: absolute;
     width: 22px;
     top: 8px;
     height: 16px;
@@ -77,7 +82,8 @@
   }
 
   &:hover{
-    background-color: $color_danger_hover;
+    //background-color: $color_danger_hover;
+    text-decoration: underline;
   }
 
 }
@@ -98,6 +104,10 @@
   background: transparent url(#{$img-path}/ic-sprite.svg) no-repeat  -185px -403px;
   text-indent: -9999px;
   color: $color_blue !important;
+}
+
+.clip-btn.active{
+  background: transparent url(#{$img-path}/ic-sprite.svg) no-repeat  -185px -481px;
 }
 
 .clip-btn{
@@ -232,6 +242,14 @@
   margin: 0 auto;
   display: block;
 }
+
+
+.popup-wrapper .loading {
+  width: 120px;
+  padding-left: 35px;
+}
+
+
 
 .loading, .no-record {
   top: 45%;
@@ -562,11 +580,11 @@ span.required {
   }
 }
 
-/* ------ style for clear all clip --------- */
-
-#clear-all{
-
+.social-toggle{
+  list-style: none;
 }
+
+/* ------ style for clear all clip --------- */
 
 @media(min-width: 768px){
   .clip-panel-row .panel-top-content{
