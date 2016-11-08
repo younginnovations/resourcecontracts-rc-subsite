@@ -1,4 +1,4 @@
-<ul class="social-toggle">
+<ul class="social-toggle dropdown-menu">
 	<li class="facebook">
 		<a class="share-link"
 		   href="#facebook"

@@ -460,7 +460,7 @@ class APIService
     public function downloadAPI($resource, array $query = [], $array = false, $id = "")
     {
         try {
-            $filename = "export".date('Y-m-d');
+            $filename = "contract_".date('Y-m-d');
             if (!empty($id)) {
                 $metadata     = $this->contractDetail($id);
                 $contractName = $metadata->metadata->name;

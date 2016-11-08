@@ -7,7 +7,7 @@ return [
     'countries'               => 'Countries',
     'country'                 => 'Country',
     'resource'                => 'Resource',
-    'resources'                => 'Resources',
+    'resources'               => 'Resources',
     'view_all_countries'      => 'View All Countries',
     'contracts_related_to'    => 'CONTRACT DOCUMENTS RELATED TO',
     'all_contracts'           => 'All Contracts',

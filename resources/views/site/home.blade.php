@@ -156,7 +156,7 @@ $image_intro = site()->getImageUrl('intro_bg');
 					<h2 class="heading2">{{trans('global.country_partners')}}</h2>
 					<div class="col-md-12 col-sm-12">
 						<div class="countrypartner">
-							<div class="slider autoplay">
+							<div class="slider autoplay" dir="ltr">
 								@foreach($countryPartners as $partner)
 									<div class="multiple">
 										<a target="_blank" href="{{$partner->link}}">

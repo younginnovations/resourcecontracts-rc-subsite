@@ -117,7 +117,7 @@ $(document).ready(function () {
         $("select").val(null).trigger("change");
         $("select option").removeAttr('selected');
         $('#query').removeAttr('value');
-        $('#search_query').hide();
+        //$('#search_query').hide();
     });
     //slide effect for filter resource
     var sideslider = $('[data-toggle=collapse-side]');
@@ -219,52 +219,68 @@ $(document).ready(function () {
 
     // search form toggle
 
-    ($('#search-form:not(.search-page-form) input[type="text"]')).focus(function () {
-        if ($(this).parent().parent().parent().parent().hasClass("static-search")) {
-            return;
-        } else {
-            $('.search-input-wrapper').show();
-            $('.contract-number-wrap').hide();
+
+    var search_input_wrapper = $('.search-input-wrapper'),
+        adv_search_toggle = $('.adv_search_toogle'),
+        search_input = $('#search-form input[type="text"]');
+
+    function advanceSearch(mode){
+        if(mode == "show"){
+            search_input_wrapper.slideDown(200);
+        }else{
+            search_input_wrapper.slideUp(200);
+        }
+    }
+    search_input.on('click focus', function(e) {
+        e.stopPropagation();
+    });
+
+    $(document).on('click', function(e){
+        console.log('the target is ' + e.target);
+        if(e.target === adv_search_toggle || e.target === search_input) {
+            return
+        }else{
+            adv_search_toggle.fadeOut(100);
+        }
+
+    });
+
+    search_input.focus(function(e){
+        e.stopPropagation();
+        if(search_input_wrapper.is(':visible')){
+            return
+        }else{
+            adv_search_toggle.fadeIn(100);
         }
     });
 
-    $(document).on('click', '.search-close', function () {
-        $('.search-input-wrapper').hide();
-        $('.contract-number-wrap').show();
+    search_input.keyup(function() {
+        if($("#header-input-clone").length > 0){
+            $("#header-input-clone").val($(this).val());
+
+
+        }
+
+        console.log($("#header-input-clone").val());
     });
 
-    $('#search-form:not(.static-search .filter-country-wrap > #search-form) input[type="text"]').keyup(function () {
-        if ($(this).val() == '') {
-            $('.search-input-wrapper').hide();
-            $('.contract-number-wrap').show();
-        } else {
-            $('.search-input-wrapper').show();
-            $('.contract-number-wrap').hide();
-        }
-    });
+    adv_search_toggle.click(function(){
+            advanceSearch("show");
+            $(this).fadeOut(100);
+        });
 
-    $(document).on('click', function (e) {
-        var container = $("#search-form");
-
-        if (!container.is(e.target) // if the target of the click isn't the container...
-            && container.has(e.target).length === 0) // ... nor a descendant of the container
-        {
-            $(".search-input-wrapper").hide();
-            $('.contract-number-wrap').show();
-        }
-        else if ($(".search-input-wrapper").is(':hidden')) {
-            $('.contract-number-wrap').show();
-        }
-    });
+    $('.search-close').click(function(){
+        advanceSearch("hide");
+    })
 
 
-    $('.download-wrap,.view-pin-wrap').click(function () {
+    $('.view-pin-wrap').click(function () {
         $(this).siblings('ul').toggle();
     });
 
-    $('#social-toggler').click(function () {
+    /*$('#social-toggler').click(function () {
         $('.social-toggle').toggle();
-    });
+    });*/
 
     $('.search-click').click(function () {
         $('#search-form input[type="text"]').focus();
@@ -321,21 +337,21 @@ $(document).ready(function () {
     });
 
     var calWidth = function () {
-        var rightWidth = $(".navbar-header").outerWidth(),
-            leftWidth = $(window).width() - rightWidth;
-        $(".right-header-section").width(leftWidth - 50);
-        $(".navbar .search-input-wrapper").width(leftWidth - 22);
-        $(".right-header-section").removeClass("hidden");
-    }
-
-    if ($(window).width() > 768) {
-        calWidth();
-    }
-
-    $(window).resize(function () {
         if ($(window).width() > 768) {
-            calWidth();
+       
+            var rightWidth = $(".navbar-header").outerWidth(),
+                leftWidth = $(window).width() - rightWidth;
+            $(".right-header-section").width(leftWidth - 50);
+            //$(".navbar .search-input-wrapper").width(leftWidth - 22);
+            $(".right-header-section").removeClass("hidden");
         }
+
+    };
+
+    calWidth();
+
+    $(window).resize(function(){
+        calWidth();
     });
 
     $(document).click(function (e) {
@@ -350,9 +366,9 @@ $(document).ready(function () {
          $(".search-input-wrapper").hide();
          }*/
 
-        if (!$(e.target).closest('#social-toggler').length) {
+        /*if (!$(e.target).closest('#social-toggler').length) {
             $(".social-toggle").hide();
-        }
+        }*/
 
         if (!$(".language-selector").hasClass("open")) {
             $(".navbar-static-top").css("z-index", 1000);

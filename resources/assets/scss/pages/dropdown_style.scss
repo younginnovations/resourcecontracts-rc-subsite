@@ -76,7 +76,7 @@
     }
   }
   li:not(:last-child) {
-    border-bottom: 1px solid $color_wild_sand_approx;
+    border-bottom: dotted 1px #ccc;
   }
 }
 
@@ -91,6 +91,7 @@
   right: 178px;
   background: $white;
   border: 1px solid rgba($color_link_color, 0.2);
+  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
   border-radius: 22px;
 }
 
@@ -98,13 +99,30 @@
   right: 181px;
 }
 
-.download-csv a {
+.download-csv >a {
   display: block;
   font-size: 12px;
   color: $color_link_color;
   text-decoration: none;
-  padding: 13px 25px 13px 44px;
+  padding: 13px 18px 13px 44px;
   background: $url_2 no-repeat -152px -40px;
+}
+
+.download-csv{
+
+  .dropdown-menu{
+    top: 50px;
+    right: 0;
+    width: auto;
+    min-width: initial;
+    a {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    li:not(:last-child) {
+      border-bottom: dotted 1px #ccc;
+    }
+  }
 }
 
 .country-contract-wrap .download-csv {
@@ -131,6 +149,7 @@
     height: auto;
     float: right;
     padding-left: 15px;
+    padding-right: 15px;
     overflow: visible;
 
     .social-share{
@@ -191,9 +210,7 @@
     //margin-top: 2px;
     li {
       width: 100%;
-      border: 0;
       margin: 0;
-      padding: 2px 0;
     }
   }
 }
@@ -282,7 +299,7 @@
     border: 1px solid rgb(204, 204, 204);
     z-index: 10;
     border-radius: 4px;
-    width: 140px;
+    //width: 140px;
     background: rgb(255, 255, 255);
   }
 }
@@ -316,6 +333,7 @@
     padding: 0;
     z-index: 88;
     min-width: auto;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
   }
 
   li {
@@ -386,7 +404,7 @@
     color: $color_link_color;
     width: auto;
     text-decoration: none;
-    padding: 13px 22px 13px 47px;
+    padding: 13px 20px 13px 47px;
     background: url("../../images/ic-sprite.svg") -20px 2px no-repeat;
     height: 43px;
     border-radius: 50%;
@@ -537,16 +555,18 @@
   box-shadow: none;
   margin: 0;
   padding: 0;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
+  min-width: 90px;
 }
 
 .dropdown-menu > li > a,
 .dropdown-menu > div > li > a,
 .pdf-download-processing{
-  padding: 8px 15px;
+  padding: 10px;
   font-weight: normal;
-  font-size: 14px;
-  line-height: 20px;
   color: $color_link_color;
+  font-size: 12px;
+  line-height: 20px;
 
   > small {
     margin-left: 5px;

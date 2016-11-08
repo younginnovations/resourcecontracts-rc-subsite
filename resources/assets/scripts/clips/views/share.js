@@ -29,10 +29,9 @@ var ShareManager = React.createClass({
         return this.state.facebook_url + this.getShareUrl();
     },
     getTwitterShare: function () {
-        return this.state.twitter_url + this.getShareUrl();
+        return this.state.twitter_url + document.title + '&url=' + this.getShareUrl();
     },
     handleHideModal: function () {
-        console.log("show modal");
         this.setState({view: {showModal: false}})
     },
     handleShowModal: function () {

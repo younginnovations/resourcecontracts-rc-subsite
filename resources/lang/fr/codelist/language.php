@@ -48,6 +48,7 @@ return [
         'ee' => 'Éwé',
         'el' => 'Grec',
         'eo' => 'Espéranto',
+        'es' => 'Espanol',
         'et' => 'Estonien',
         'eu' => 'Basque',
         'fa' => 'Persan',

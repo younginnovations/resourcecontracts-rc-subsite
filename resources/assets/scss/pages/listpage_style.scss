@@ -472,3 +472,70 @@ tr:empty {
       }
   }
 }
+
+.contract-number-wrap{
+  @media (max-width: 768px){
+    border-top: solid 1px #eaeaea!important;
+  }
+}
+
+.advance-filter-wrapper.contract_page_actions{
+  @media (max-width: 551px){
+    min-height: initial;
+  }
+}
+
+.contract_page_actions{
+  .social-share{
+    right: 317px;
+    @media (max-width: 768px){
+      right: 150px;
+    }
+
+    @media (max-width: 480px){
+      bottom: -22px;
+      right: 79px;
+
+      > a{
+        height: 32px;
+        padding: 13px 20px 13px 36px;
+        background-position: -20px -3px;
+
+        span, i{
+          display: none;
+        }
+      }
+
+      .social-toggle{
+        top: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+  }
+
+  .download-csv{
+    @media (max-width: 768px){
+      right: 15px;
+    }
+
+    @media (max-width: 480px){
+      bottom: -15px;
+
+      > a{
+        padding: 13px 18px 13px 36px;
+        height: 32px;
+        background-position: -152px -44px;
+
+        span, i{
+          display: none;
+        }
+      }
+
+      .dropdown-menu{
+        left: auto;
+        top: 40px;
+      }
+    }
+  }
+}
