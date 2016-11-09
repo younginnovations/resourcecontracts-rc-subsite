@@ -73,7 +73,7 @@
 		</div>
 	</div>
 </footer>
-<script src="{{url('js/app.min.js')}}"></script>
+<script src="{{url('js/app.js')}}"></script>
 @yield('js')
 @if(site()->hasTracking())
 	<script>
@@ -93,5 +93,5 @@
 		ga('send', 'pageview');
 	</script>
 	@endif
-	</body>
-	</html>
+</body>
+</html>

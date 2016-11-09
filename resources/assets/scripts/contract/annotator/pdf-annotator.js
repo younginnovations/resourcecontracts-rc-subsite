@@ -13,11 +13,11 @@ Annotator.Plugin.PdfAnnotator = (function (_super) {
 
         annotator.subscribe("annotationsLoaded", function (annotation) {
             $('.annotator-pdf-hl').remove();
-            annotation.forEach(function (ann) {
-                if (ann.shapes !== undefined) {
-                    self.annotationLoader(ann);
-                }
-            });
+            annotation.map(function (ann) {
+                if (ann.shapes === undefined)
+                    return '';
+                self.annotationLoader(ann);
+            })
         });
 
         el.on('mouseover', 'div', function () {

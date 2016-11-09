@@ -1,8 +1,6 @@
-'use strict';
-
 import React, {Component} from "react";
 import {getHashPage} from "./Helper";
-import ReactPDF from "./ReactPDF";
+import PdfJS from "./PdfJS";
 import Event from './Event';
 
 class Pdf extends Component {
@@ -46,7 +44,8 @@ class Pdf extends Component {
         }
         return (
             <div>
-                <ReactPDF file={this.getFile()} page={this.state.page} scale={this.state.scale}/>
+                <div id="progress-bar-info"></div>
+                <PdfJS onPageRendered={()=>{}}  file={this.getFile()}  page={this.state.page} scale={this.state.scale}/>
             </div>
         );
     }

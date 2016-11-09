@@ -15,7 +15,10 @@ var config = {
             APP_DIR + '/popup/index.js',
         ],
         contract_view: [
-            APP_DIR + '/contract/index.js',
+            APP_DIR + '/contract/annotator/annotator.plugin.event.js',
+            APP_DIR + '/contract/annotator/annotator.plugin.viewer.js',
+            APP_DIR + '/contract/annotator/pdf-annotator.js',
+            APP_DIR + '/contract/index.js'
         ]
     },
     output: {
@@ -43,20 +46,20 @@ var config = {
     plugins: [
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.DedupePlugin(),
-/*
-        new webpack.optimize.UglifyJsPlugin({
-          compress: { warnings: false },
-          comments: false,
-          minimize: true
-        }),
-*/
+        /*
+         new webpack.optimize.UglifyJsPlugin({
+         compress: { warnings: false },
+         comments: false,
+         minimize: true
+         }),
+         */
         new WebpackNotifierPlugin({title: 'Webpack'}),
         new webpack.NoErrorsPlugin(),
         new webpack.DefinePlugin({
             'process.env': {
-              'NODE_ENV': JSON.stringify('production')
+                'NODE_ENV': JSON.stringify('production')
             }
-          })
+        })
     ]
 };
 

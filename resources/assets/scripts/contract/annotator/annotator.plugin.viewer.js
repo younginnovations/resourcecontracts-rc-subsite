@@ -11,25 +11,22 @@ Annotator.Plugin.AnnotatorNRGIViewer = (function (_super) {
         });
     };
     function AnnotatorNRGIViewer(element, options) {
+        this.updateViewer = __bind(this.updateViewer, this);
         AnnotatorNRGIViewer.__super__.constructor.apply(this, arguments);
     }
 
     AnnotatorNRGIViewer.prototype.updateViewer = function (field, annotation) {
         var contract = this.contract;
         var textDiv = $(field.parentNode).find('div:first-of-type')[0];
-        var html = getText(annotation);
-        html += getPageNo(annotation);
-        html += getCategory(annotation);
-      //  html += getRelatedDocuments(annotation);
+        var html = this.getText(annotation);
+        html += this.getCategory(annotation);
+        //  html += getRelatedDocuments(annotation);
         $(textDiv).html(html);
         $(field).remove();
 
         $(textDiv).on("click", "a.annotation-viewer-more", function (e) {
-            e.preventDefault();
-            contract.trigger("annotations:highlight", annotation);
+            contract.trigger("annotation:highlight", annotation);
         });
-
-        $('.annotation-viewer-category').html(annotation.category_key);
 
         $(document).on('click', '.parent_annotation_link', function () {
             var $this = $(this);
@@ -50,7 +47,7 @@ Annotator.Plugin.AnnotatorNRGIViewer = (function (_super) {
 
     };
 
-    function getText(annotation) {
+    AnnotatorNRGIViewer.prototype.getText = function (annotation) {
         var text = '';
         var annotatedText = annotation.text;
 
@@ -60,7 +57,7 @@ Annotator.Plugin.AnnotatorNRGIViewer = (function (_super) {
 
         if (annotatedText != '') {
             text = annotatedText.split(" ").splice(0, 10).join(" ");
-          //  text = nl2br(text);
+              text = this.nl2br(text);
             if (annotatedText.split(" ").length > 10) {
                 text = text + " ...";
             }
@@ -79,25 +76,11 @@ Annotator.Plugin.AnnotatorNRGIViewer = (function (_super) {
         link = ' <a class="annotation-viewer-more" href="#/' + viewPort + '/page/' + annotation.page_no + '/annotation/' + annotation.id + '">>></a>';
 
         return '<div class="annotation-viewer-text">' + text + article_reference + link + '</div>';
-    }
+    };
 
-    function getPageNo(annotation) {
-        var pageNo = annotation.page_no;
-
-        if (annotation.shapes) {
-            view = 'pdf';
-            link = "#/" + view + "/page/" + pageNo + "/annotation/" + annotation.id;
-        } else {
-            view = 'text';
-            link = "#/" + view + "/page/" + pageNo + "/annotation/" + annotation.id;
-        }
-
-        return '<div class="annotation-viewer-page"><a href="' + link + '" class="annotation-viewer-more"> Page ' + annotation.page_no + ' >> </a></div>';
-    }
-
-    function getCategory(annotation) {
-        return '<div class="annotation-viewer-category">' + annotation.category + '</div>';
-    }
+    AnnotatorNRGIViewer.prototype.getCategory = function (annotation) {
+        return '<div class="annotation-viewer-category">' + this.transCategory(annotation.category_key, annotation.category)+ '</div>';
+    };
 
     function getRelatedDocuments(annotation) {
         var html = '';

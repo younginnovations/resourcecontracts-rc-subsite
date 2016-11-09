@@ -3,6 +3,7 @@ import Item from "./item";
 import _map from "lodash/map";
 import _groupBy from "lodash/groupBy";
 import Event from '../../event';
+import ClipAll from '../clip/all';
 
 var List = React.createClass({
     getInitialState() {
@@ -99,6 +100,7 @@ var List = React.createClass({
 
         return (
             <div className="annotations-list" id="id-annotations-list">
+                <ClipAll/>
                 {render}
                 <a href="#" className="back-to-top btn btn-primary"><i className="fa fa-arrow-up"></i></a>
             </div>

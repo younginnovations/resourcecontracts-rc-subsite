@@ -5,6 +5,8 @@ import {scrollToAnnotation,transCategory} from '../../helper';
 import _sortBy from 'lodash/sortBy';
 import _groupBy from 'lodash/groupBy';
 import _toArray from 'lodash/toArray';
+import ClipButton from '../clip/button';
+import Config from '../../config';
 
 class Item extends Component {
     constructor(props) {
@@ -157,11 +159,13 @@ class Item extends Component {
     }
 
     render() {
-        var currentAnnotationClass = (this.state.active) ? "annotation-item selected-annotation" : "annotation-item";
-        var category = this.getCategory();
+        let currentAnnotationClass = (this.state.active) ? "annotation-item selected-annotation" : "annotation-item";
+        let category = this.getCategory();
+        let clipButton = Config.isClipOn ? <ClipButton id={this.state.parent.annotation_id}/> : null;
         return (
             <div className={currentAnnotationClass +' ' +this.getCluster() + this.getPageClasses()}
                  id={this.state.parent.annotation_id}>
+                {clipButton}
                 <p className="category">{category}</p>
                 <p className="annotated-text">{this.getShowText()}</p>
                 <div className="annotation-page">{this.getPages()}</div>

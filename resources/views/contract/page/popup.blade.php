@@ -5,6 +5,7 @@ if (!site()->isRC()) {
 	$siteName .= '<span class="beta">Beta</span>';
 }
 $siteName .= '<span>Contracts</span>';
+$contact_email = site()->contactEmail();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +17,12 @@ $siteName .= '<span>Contracts</span>';
 	<link rel="icon" href="{{$favicon}}">
 	<link href="{{url('css/style.css')}}" rel="stylesheet"/>
 	<link href="{{url('css/contract.css')}}" rel="stylesheet"/>
+	<style>
+		#progress-bar-info {
+			border-bottom: 2px solid #1757d5;
+			width: 0%;
+		}
+	</style>
 	<!--[if lt IE 9]>
 	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -25,9 +32,10 @@ $siteName .= '<span>Contracts</span>';
 		const LANG = {!! json_encode(trans('annotation')) !!};
 		const SITE_NAME = '{!! $siteName !!}';
 		const Annotation = {!!json_encode($annotation)!!};
+		const loading_page = {!! json_encode(trans('annotation.loading_page')) !!};
 		const lang_category = {!! json_encode(trans('codelist/annotation.categories')) !!};
 		const AWS_URL = "https://rc-stage.s3-us-west-2.amazonaws.com";
-		const CONTACT_EMAIL = '{{site()->contactEmail()}}';
+		const pdf_not_loading = "{!!sprintf(trans('annotation.pdf_not_shown'),'<a href=\"mailto:'.$contact_email.'\">'.$contact_email.'</a>')!!}";
 	</script>
 </head>
 <body data-spy="scroll">
