@@ -50,6 +50,17 @@ $category = $api->getAnnotationsCategory();
                     @endforeach
                 </select>
             </div>
+            <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
+                <label for="">@lang('search.project_name')</label>
+                <select name="project_name[]" id="project" multiple="multiple">
+                    <?php $project_array = array_map('trim', (array) $attributes->project_name);
+                    sort($project_array);
+                    ?>
+                    @foreach($project_array as $project)
+                        <option @if(isset($filter['project_name']) && in_array($project, $filter['project_name'])) selected="selected" @endif value="{{$project}}">{{$project}}</option>
+                    @endforeach
+                </select>
+            </div>
             @if(site()->isRC())
                 <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
                     <label for="">@lang('search.corporate_group')</label>
