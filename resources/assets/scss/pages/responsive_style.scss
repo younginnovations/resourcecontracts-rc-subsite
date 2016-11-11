@@ -134,6 +134,20 @@
   .annotation-category-cluster {
     display: block;
   }
+
+  .login-container .row-top-wrap {
+    //height: calc(100vh - 316px);
+  }
+  
+}
+
+.login-panel{
+  margin-top: 25%;
+  margin-bottom: 25%;
+
+  .panel-body{
+    padding: 30px;
+  }
 }
 
 
@@ -302,11 +316,10 @@
     }
   }
   thead {
-    display: block;
+    display: initial;
     tr {
       position: absolute;
-      top: -9999px;
-      left: -9999px;
+      display: none;
     }
   }
   tbody {
@@ -375,6 +388,10 @@
     .col-xs-6:last-child {
       //margin-top: 10px;
     }
+  }
+
+  .annotation-category-cluster {
+    display: none!important;
   }
 }
 

@@ -7,6 +7,7 @@ $image_intro = site()->getImageUrl('intro_bg');
 	<style>
 		.petroleum-wrapper {
 			background-image: url({{$image_main}});
+			position: relative;
 		}
 
 		.img-intro {
@@ -175,9 +176,12 @@ $image_intro = site()->getImageUrl('intro_bg');
 @if( !site()->isCountrySite())
 @section('js')
 	<script>
-		var highlightColor = '{!! site()->isRC()?'#FCCE99':'#417505' !!}';
+		var landColor = '{!! site()->isRC()?'#f1f1f1':'#fff' !!}';
+		var highlightColor = '{!! site()->isRC()?'#FCCE99':'#70bf4c' !!}';
 		var selectedCountries = '{!! json_encode($countryList) !!}';
 		var standardCountry = {!! json_encode(trans('country')) !!};
+		var documentLang = '{{trans('global.document')}}'; 
+		var documentsLang = '{{trans('global.documents')}}';
 	</script>
 	<script src="{{url('js/homepage.js')}}"></script>
 @stop

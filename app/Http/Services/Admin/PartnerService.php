@@ -1,8 +1,10 @@
 <?php namespace App\Http\Services\Admin;
 
 use Aws\CloudFront\Exception\Exception;
+use Carbon\Carbon;
 use Illuminate\Contracts\Filesystem\Factory as Filesystem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * Class PartnerService
@@ -20,8 +22,9 @@ class PartnerService
     private $option;
 
     /**
-     * @param Request    $request
-     * @param Filesystem $filesystem
+     * @param Request       $request
+     * @param Filesystem    $filesystem
+     * @param OptionService $option
      */
     public function __construct(Request $request, Filesystem $filesystem, OptionService $option)
     {
@@ -61,14 +64,20 @@ class PartnerService
     public function getImageUrl($filename)
     {
         $url = '';
-        if ($this->filesystem->disk('s3')->exists($filename)) {
+        $key = md5($filename);
+
+        if (Cache::has($key)) {
+            $url = Cache::get($key);
+        } elseif ($this->filesystem->disk('s3')->exists($filename)) {
             $url = $this->filesystem->disk('s3')->getDriver()
                                     ->getAdapter()
                                     ->getClient()
                                     ->getObjectUrl(env('AWS_BUCKET'), $filename);
+            Cache::put($key, $url, Carbon::now()->addDay(1));
         }
 
         return $url;
+
     }
 
 

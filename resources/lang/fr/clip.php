@@ -62,4 +62,6 @@ return [
     'click_to_disable_clip' => "Cliquez ici pour désactiver pince.",
     'csv'                   => 'CSV',
     'currently_no_clips'    => "Il n'y a pas de clips.",
+    'confirmMessage'        => 'Etes-vous sûr que vous voulez effacer tous les clips?',
+    'processing'            => '(En traitement...)',
 ];

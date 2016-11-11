@@ -2,12 +2,12 @@
 	<li class="facebook">
 		<a class="share-link"
 		   href="#facebook"
-		   target="_blank">Facebook</a>
+		   target="_blank"></a>
 	</li>
 	<li class="twitter">
 		<a class="share-link"
 		   href="#twitter"
-		   target="_blank">Twitter</a>
+		   target="_blank"></a>
 	</li>
-	<li class="email" data-toggle="modal" data-target="#emailModel"><a>Email</a></li>
+	<li class="email"><a href="#email" data-toggle="modal" data-target="#emailModel"></a></li>
 </ul>

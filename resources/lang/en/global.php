@@ -32,7 +32,7 @@ return [
     'type_contract'           => 'Type Of Contract',
     'view_annotations'        => 'View all Annotations',
     'see'                     => 'See',
-    'search_results'          => 'search results',
+    'search_results'          => 'Search results',
     'page_doesnt_exist'       => "The page you’re looking for doesn't exist",
     'if_you_are_looking'      => 'If you’re looking for contract documents, use the <span class="search-click">search box</span> above.</p>',
     'temporarily_unavailable' => ' is temporarily unavailable',

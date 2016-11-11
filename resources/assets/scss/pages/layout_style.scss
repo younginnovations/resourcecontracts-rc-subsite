@@ -188,8 +188,9 @@ nav.navbar {
 
 .page-home{
   .language-selector{
-    float: right;
-    margin-top: 25px;
+    position: absolute;
+    top: 25px;
+    right: 15px;
   }
 }
 
@@ -197,7 +198,15 @@ nav.navbar {
   float: right;
   position: static;
   margin: 20px 0;
+  clear: both;
 }
+
+/*@media (max-width: 992px){
+  .footer__wrap .language-selector {
+    float: none;
+  }
+}*/
+
 
 body.page-home .language-selector ul li a,
 body.page-home .clip-head #hide-annotation{
@@ -237,7 +246,7 @@ body.page-home .clip-head #hide-annotation{
   #hide-annotation{
     top: 28px;
     right: 0;
-    font-size: 14px;
+    font-size: 13px;
   }
 }
 

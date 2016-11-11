@@ -88,11 +88,9 @@
 .actions-wrapper .social-share{
   position: absolute;
   bottom: -20px;
-  //right: 40px;
   right: 178px;
   background: $white;
-  border: 1px solid $color_link_color;
-  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+  border: 1px solid rgba($color_link_color, 0.2);
   border-radius: 22px;
 }
 
@@ -342,9 +340,13 @@
   display: block;
   text-indent: -9999px;
   width: 21px;
-  height: 21px;
+  height: auto;
   background: url(../images/share-sprite.png) no-repeat -22px -40px;
   padding: 13px 14px;
+}
+
+.clipShare ul.social-toggle li > a {
+  height: 40px;
 }
 
 .social-share ul li a:hover {
@@ -538,14 +540,23 @@
 }
 
 .dropdown-menu > li > a,
-.dropdown-menu > div > li > a {
+.dropdown-menu > div > li > a,
+.pdf-download-processing{
   padding: 8px 15px;
   font-weight: normal;
   font-size: 14px;
   line-height: 20px;
   color: $color_link_color;
 
-  &:hover{
+  > small {
+    margin-left: 5px;
+    font-size: 10px;
+  }
+}
+
+.dropdown-menu > li > a,
+.dropdown-menu > div > li > a {
+  &:hover {
     text-decoration: underline;
     color: $color_link_color;
     background: none;
@@ -574,4 +585,8 @@
   ul{
     top: 50px !important;
   }
+}
+
+.advance-filter-wrapper #social-toggler ul li>a{
+  height: 41px;
 }

@@ -23,8 +23,6 @@ var Listing = React.createClass({
     },
     componentDidMount: function () {
         var self = this;
-
-
         this.setState({loading: true});
         this.props.clipCollection.on('data:change', function () {
             var annotid = self.getAnnotationId(self.props.clipCollection);
@@ -154,7 +152,6 @@ var Listing = React.createClass({
         });
 
         this.sorting();
-
     },
 
     sorting: function()
@@ -167,7 +164,6 @@ var Listing = React.createClass({
             var clips = this.props.clipCollection.clipSort(this.state.sort_by, this.state.order);
         }
         this.setClips(clips);
-
     },
 
     showSortArrow: function (field) {
@@ -212,7 +208,8 @@ var Listing = React.createClass({
               });
           }
         self.setState({check_data:  _.uniq(data)});
-        self.state.check_data=_.uniq(data);
+
+      //  self.state.check_data=_.uniq(data);
         self.filterOnCheck(self.state.check_data);
     },
 
@@ -221,7 +218,7 @@ var Listing = React.createClass({
         var tableview = '';
         if (this.state.clips) {
             tableview = this.state.clips.map(function (data, index) {
-                return (<Item item={data} index={index} clipCollection={self.props.clipCollection}
+                return (<Item item={data} key={index} index={index} clipCollection={self.props.clipCollection}
                               checkData={self.state.check_data}/>)
             });
         }
@@ -240,7 +237,6 @@ var Listing = React.createClass({
                     <table className="table table-responsive table-contract table-contract-list">
                         <thead>
                         <tr>
-
                             <th width="75px">
                                     <ClipSelectCount clipCollection={this.props.clipCollection}/>
                                     <input type="checkbox" checked={isBoxChecked} onClick={this.toggleCheckBox.bind()} />
@@ -248,7 +244,6 @@ var Listing = React.createClass({
                                     {this.showSortArrow('checkbox')}</a>
 
                             </th>
-
                             <th><a onClick={this.handleSort.bind(this,'name')}>
                                 Document {this.showSortArrow('name')}</a></th>
                             <th width="15%"><a

@@ -3,6 +3,40 @@ var Clip = Backbone.Model.extend({});
 var ClipCollection = Backbone.Collection.extend({
     initialize: function (url) {
         this.url = url;
+        this.sortField = "name";
+        this.sortDirection = "ASC";
+    },
+    setSortField: function (field, direction) {
+        this.sortField = field;
+        this.sortDirection = direction;
+    },
+
+    comparator: function (m) {
+        return m.get(this.sortField);
+    },
+
+    // Overriding sortBy (copied from underscore and just swapping left and right for reverse sort)
+    sortBy: function (iterator, context) {
+        var obj = this.models,
+            direction = this.sortDirection;
+
+        return _.pluck(_.map(obj, function (value, index, list) {
+            return {
+                value: value,
+                index: index,
+                criteria: iterator.call(context, value, index, list)
+            };
+        }).sort(function (left, right) {
+            // swap a and b for reverse sort
+            var a = direction === "ASC" ? left.criteria : right.criteria,
+                b = direction === "ASC" ? right.criteria : left.criteria;
+
+            if (a !== b) {
+                if (a > b || a === void 0) return 1;
+                if (a < b || b === void 0) return -1;
+            }
+            return left.index < right.index ? -1 : 1;
+        }), 'value');
     },
     model: Clip,
     url: this.url,
@@ -13,7 +47,6 @@ var ClipCollection = Backbone.Collection.extend({
     paginate: function (b, e, filter) {
         var clips = this.withFilter(filter);
         clips = _(clips.filter(function (data, index) {
-            console.log(b,e);
             if (index >= b && index <= e) {
 
                 return data;
@@ -69,8 +102,8 @@ var ClipCollection = Backbone.Collection.extend({
 
         return new ClipCollection(clips.toArray());
     },
-    filterCheckData:function(annotId){
-        var clips=[];
+    filterCheckData: function (annotId) {
+        var clips = [];
         clips = _(this.filter(function (data) {
             if (annotId.indexOf(data.get('annotation_id')) > -1) {
                 return data;
@@ -79,7 +112,7 @@ var ClipCollection = Backbone.Collection.extend({
 
         return new ClipCollection(clips.toArray());
     },
-    getSelectedClips:function(clips,annotId){
+    getSelectedClips: function (clips, annotId) {
         clips = _(this.filter(function (data) {
             if (annotId.indexOf(data.get('annotation_id')) > -1) {
                 return data;
@@ -88,35 +121,25 @@ var ClipCollection = Backbone.Collection.extend({
 
         return new ClipCollection(clips.toArray());
     },
-    clipSort:function (field,order)
-    {
+    clipSort: function (field, order) {
+        console.log(field,order);
 
-        var data=[];
-        data =  _(this.sortBy(function(model) {
-            if(order=="asc")
-            {
-                return model.get(field);
-            }
-            return -model.get(field);
-        }));
-        return new ClipCollection(data.toArray());
+        this.setSortField(field, order.toUpperCase());
+        return this.sort();
+//        return this;
     },
-    clipSortForCheckBox : function(checkedData,order)
-    {
-        var checkClip=[];
-        var unCheckClip=[];
+    clipSortForCheckBox: function (checkedData, order) {
+        var checkClip = [];
+        var unCheckClip = [];
         _.map(this.models, function (clip) {
-           if(checkedData.indexOf(clip.get('annotation_id'))>=0)
-           {
-               checkClip.push(clip);
-           }
-            else{
-               unCheckClip.push(clip)
-           }
+            if (checkedData.indexOf(clip.get('annotation_id')) >= 0) {
+                checkClip.push(clip);
+            }
+            else {
+                unCheckClip.push(clip)
+            }
         });
-        console.log("uncheck clip",unCheckClip);
-        if(order=="asc")
-        {
+        if (order == "asc") {
             return new ClipCollection(checkClip.concat(unCheckClip));
         }
         return new ClipCollection(unCheckClip.concat(checkClip));

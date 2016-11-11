@@ -18,7 +18,8 @@ $url_10: url(../../images/ic-folder.png);
 $url_14: url(../../images/error-bg.png);
 
 // gradients
-$linear_gradient_1: linear-gradient(-81deg, #181D11 1%, #181D11 100%);
+//$linear_gradient_1: linear-gradient(-81deg, #181D11 1%, #181D11 100%);
+$linear_gradient_1: linear-gradient(-81deg, #123241 1%, #1b3846 100%);
 $radial_gradient_1: radial-gradient(50% 79%, #b7df74 32%, #94ba63 79%);
 
 @import "../../main.scss";

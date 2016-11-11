@@ -26,20 +26,6 @@ class ApiController extends BaseController
     }
 
     /**
-     * Contract Metadata
-     *
-     * @param $id
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function metadata($id)
-    {
-        $metadata = $this->api->metadata($id);
-
-        return response()->json($metadata);
-    }
-
-    /**
      * Contract Text
      *
      * @param $id
@@ -49,28 +35,14 @@ class ApiController extends BaseController
     public function text($id)
     {
         $page = $this->api->getTextPage($id, null);
-
         return response()->json($page);
-    }
-
-    /**
-     * Contract Annotations
-     *
-     * @param $id
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function annotations($id)
-    {
-        $annotations = $this->api->getAnnotations($id);
-
-        return response()->json($annotations);
     }
 
     /**
      * Contract Annotations Search
      *
-     * @param $id
+     * @param         $id
+     * @param Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */

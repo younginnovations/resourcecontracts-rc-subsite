@@ -25,7 +25,7 @@
                         <textarea type="text" name="body" id="body"  class="form-control"></textarea>
                     </div>
                     <div class="form-group url-wrap">
-                        URL : <code id="url"><a href="{{Request::url()}}" target="__blank">{{Request::url()}}</a></code>
+                        URL : <span id="url"><a href="{{app('url')->full()}}" target="__blank">{{app('url')->full()}}</a></span>
                     </div>
                     <div class="modal-footer">
                         <input type="submit" class="btn btn-submit" value="{{trans('clip.send_email')}}" />
