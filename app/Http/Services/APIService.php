@@ -263,7 +263,7 @@ class APIService
             'all'                    => $all,
             'download'               => $download,
             'annotated'              => $annotated,
-            'is_supporting_document' => $is_supporting_document,
+            'is_supporting_document' => $is_supporting_document = ($is_supporting_document == 0 ? 0 : "0|1"),
 
         ];
 

@@ -64,16 +64,16 @@ class FilterController
 
         if($request->get('main_contract', ''))
         {
-            $mainContract = 0;
+            $supportingDoc = 0;
         } else
         {
-            $mainContract = 1;
+            $supportingDoc = 1;
         }
 
         return [
             'q'                      => $request->get('q', ''),
             'annotated'              => $request->get('annotated', ''),
-            'is_supporting_document' => $mainContract,
+            'is_supporting_document' => $supportingDoc,
             'country_code'           => is_array($request->get('country')) ? join(
                 '|',
                 $request->get('country')
