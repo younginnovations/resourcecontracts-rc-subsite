@@ -234,16 +234,21 @@
 
 .loading {
   background: $url_20 no-repeat 0 0;
-  width: 32px;
-  height: 32px;
+  background-position: left center;
+  height: 36px;
+  padding-left: 40px;
   text-indent: -9999px;
   margin: 0 auto;
   display: block;
+  p{
+    line-height: 33px;
+    margin: 0;
+  }
 }
 
 
 .popup-wrapper .loading {
-  width: 120px;
+  //width: 120px;
   padding-left: 35px;
 }
 
@@ -257,7 +262,8 @@
 
 }
 .loading{
-  left: 49%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 .no-record {
   width: 100%;

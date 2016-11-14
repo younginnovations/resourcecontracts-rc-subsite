@@ -10,3 +10,4 @@ return [
     'associated_documents'  => 'and associated documents',
     'about'                 => 'About',
 ];
+

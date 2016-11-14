@@ -1,6 +1,7 @@
 <?php
 return [
     'search'                  => "بحث",
+    'search_placeholder'      => "  يتوفر للبحث :count عقدا و وثائق ذات الصلة",
     'associated_documents'    => 'والوثائق المرتبطة',
     'contracts'               => "عقود",
     'contract_doc_from'       => "وثائق العقود من ",
@@ -34,6 +35,7 @@ return [
     'page_doesnt_exist'       => "الصفحة الّتي تبحثون عنها غير موجودة",
     'if_you_are_looking'      => "مربّع البحث",
     'temporarily_unavailable' => "غير متوفّر مؤقّتًا",
+    'site'                    => "موقع",
     'fix_message'             => "نعمل على حلّ هذه المشكلة. يرجى الاتّصال",
     'if_problem_persists'     => "في حال استمرار المشكلة",
     'apologize'               => "نعتذر عن أيّ إزعاج",
@@ -71,5 +73,7 @@ return [
     'explore_contract_terms'  => 'الاطلاع على  شروط العقد',
     'country_partners'        => "شركاء البلد",
     'resources'               => 'موارد',
-    'resource'                => "مورد",
+    'resource_count'          => '(:count) بموردين ',
+    'resource'                => 'مورد',
+    'tagline'                 => '  دليل Resource contracts   من تونس',
 ];

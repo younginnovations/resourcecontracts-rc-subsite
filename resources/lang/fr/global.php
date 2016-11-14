@@ -1,6 +1,7 @@
 <?php
 return [
     'search'                  => "Chercher",
+    'search_placeholder'      => "Chercher :count contrats et des documents associés",
     'associated_documents'    => 'et les documents associés',
     'contracts'               => "contrats",
     'contract_doc_from'       => "Documents du contrat de",
@@ -34,6 +35,7 @@ return [
     'page_doesnt_exist'       => "La page que vous recherchez n'existe pas",
     'if_you_are_looking'      => "Si vous cherchez des documents de contrats, utilisez la barre de recherche ci-dessus ",
     'temporarily_unavailable' => "est temporairement indisponible",
+    'site'                     => "Site ",
     'fix_message'             => "Nous cherchons à résoudre ce problème. Prière de contacter",
     'if_problem_persists'     => "Si le problème persiste ",
     'apologize'               => "Nous nous excusons pour tout inconvénient",
@@ -71,5 +73,9 @@ return [
     'explore_contract_terms'  => 'Découvrir les termes du contrat',
     'country_partners'        => 'Partenaires pays',
     'resources'               => 'Ressources',
+    'resource_count'          => ':count Ressources',
     'resource'                => "Ressource",
+    'tagline'                 => 'Un référentiel de Resource Contracts de :name',
+
+
 ];

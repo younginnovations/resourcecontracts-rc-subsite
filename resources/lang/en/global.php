@@ -36,6 +36,7 @@ return [
     'page_doesnt_exist'       => "The page you’re looking for doesn't exist",
     'if_you_are_looking'      => 'If you’re looking for contract documents, use the <span class="search-click">search box</span> above.</p>',
     'temporarily_unavailable' => ' is temporarily unavailable',
+    'site'                    => 'Site ',
     'fix_message'             => ' We are working to fix this. Please contact ',
     'if_problem_persists'     => ' if the problem persists.',
     'apologize'               => 'We apologize for any inconvenience.',
@@ -73,5 +74,7 @@ return [
     'explore_contract_terms'  => 'Explore contract terms',
     'country_partners'        => 'Country Partners',
     'resources'               => 'Resources',
+    'resource_count'          => ':count Resources',
     'resource'                => 'Resource',
+    'tagline'                 => 'A directory of Resource Contracts from :name',
 ];

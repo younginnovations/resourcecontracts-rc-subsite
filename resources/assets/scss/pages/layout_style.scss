@@ -41,7 +41,7 @@ body.page-home{
 %extend_4 {
   position: absolute;
   font-size: 12px;
-  right: -4px;
+  right: -10px;
   top: 0;
   color: $color_cape_cod_approx;
   color: $black_50;
@@ -339,6 +339,15 @@ body:not(.page-home){
         width: 71%;
         display: inline-block;
       }
+      span.brand_first{
+        width: auto;
+        max-width: 90%;
+        display: inline-block;
+        min-width: 115px;
+        color: #fff;
+        position: relative;
+      }
+
     }
     &:hover {
       background: $color_link_color;
@@ -378,6 +387,7 @@ body:not(.page-home){
       height: 65px;
       line-height: 20px;
       height: auto;
+      overflow-x: hidden;
       a {
         @extend %extend_21;
         &:hover {
@@ -426,8 +436,9 @@ body:not(.page-home){
 .sidebar-brand {
   .beta {
     @extend %extend_4;
-    top: 40px;
-    right: -60px;
+    width: auto;
+    top: 0px;
+    right: -30px;
   }
   a {
     position: relative;
