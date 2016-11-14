@@ -72,6 +72,7 @@ class FilterController
             'resource'            => is_array($request->get('resource')) ? join('|', $request->get('resource')) : $request->get('resource'),
             'corporate_group'     => is_array($request->get('corporate_group')) ? join('|', $request->get('corporate_group')) : $request->get('corporate_group'),
             'company_name'        => is_array($request->get('company_name')) ? join('|', $request->get('company_name')) : $request->get('company_name'),
+            'project_name'        => is_array($request->get('project_name')) ? join('|', $request->get('project_name')) : $request->get('project_name'),
             'contract_type'       => is_array($request->get('contract_type')) ? join('|', $request->get('contract_type')) : $request->get('contract_type'),
             'document_type'       => is_array($request->get('document_type')) ? join('|', $request->get('document_type')) : $request->get('document_type'),
             'language'            => is_array($request->get('language')) ? join('|', $request->get('language')) : $request->get('language'),
@@ -100,6 +101,7 @@ class FilterController
         $filter['year']                = is_array($request->get('year')) ? $request->get('year') : [$request->get('year')];
         $filter['corporate_group']     = is_array($request->get('corporate_group')) ? $request->get('corporate_group') : [$request->get('corporate_group')];
         $filter['company_name']        = is_array($request->get('company_name')) ? $request->get('company_name') : [$request->get('company_name')];
+        $filter['project_name']        = is_array($request->get('project_name')) ? $request->get('project_name') : [$request->get('project_name')];
         $filter['contract_type']       = is_array($request->get('contract_type')) ? $request->get('contract_type') : [$request->get('contract_type')];
         $filter['document_type']       = is_array($request->get('document_type')) ? $request->get('document_type') : [$request->get('document_type')];
         $filter['language']            = is_array($request->get('language')) ? $request->get('language') : [$request->get('language')];

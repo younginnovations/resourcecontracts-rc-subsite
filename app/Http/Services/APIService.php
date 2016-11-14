@@ -248,6 +248,7 @@ class APIService
             'country_code'        => $country_code,
             'corporate_group'     => $corporate_group,
             'company_name'        => $company_name,
+            'project_name'        => $project_name,
             'contract_type'       => $contract_type,
             'document_type'       => $document_type,
             'language'            => $language,
