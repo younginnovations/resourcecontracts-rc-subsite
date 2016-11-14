@@ -244,25 +244,26 @@ class APIService
         extract($filter);
         $per_page = !empty($per_page) ? $per_page : 25;
         $query    = [
-            'q'                   => urlencode($q),
-            'country_code'        => $country_code,
-            'corporate_group'     => $corporate_group,
-            'company_name'        => $company_name,
-            'project_name'        => $project_name,
-            'contract_type'       => $contract_type,
-            'document_type'       => $document_type,
-            'language'            => $language,
-            'year'                => $year,
-            'resource'            => $resource,
-            'group'               => $group,
-            'annotation_category' => $annotation_category,
-            'sort_by'             => $sortby,
-            'order'               => $order,
-            'per_page'            => $all ? $from * 25 : $per_page,
-            'from'                => $per_page * ($from - 1),
-            'all'                 => $all,
-            'download'            => $download,
-            'annotated'           => $annotated,
+            'q'                      => urlencode($q),
+            'country_code'           => $country_code,
+            'corporate_group'        => $corporate_group,
+            'company_name'           => $company_name,
+            'project_name'           => $project_name,
+            'contract_type'          => $contract_type,
+            'document_type'          => $document_type,
+            'language'               => $language,
+            'year'                   => $year,
+            'resource'               => $resource,
+            'group'                  => $group,
+            'annotation_category'    => $annotation_category,
+            'sort_by'                => $sortby,
+            'order'                  => $order,
+            'per_page'               => $all ? $from * 25 : $per_page,
+            'from'                   => $per_page * ($from - 1),
+            'all'                    => $all,
+            'download'               => $download,
+            'annotated'              => $annotated,
+            'is_supporting_document' => $is_supporting_document,
 
         ];
 
@@ -297,6 +298,7 @@ class APIService
 
             $query['category'] = strtolower($this->site->getCategory());
             $request->setQuery($query);
+
             $key = md5($request->getUrl());
 
             if (Cache::has($key)) {
@@ -307,7 +309,6 @@ class APIService
                 $data     = $data->getContents();
                 Cache::put($key, $data, Carbon::now()->addMinutes(5));
             }
-
 
             if ($array) {
                 return json_decode($data, true);

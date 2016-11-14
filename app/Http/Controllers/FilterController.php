@@ -40,7 +40,7 @@ class FilterController
 
         $meta = [
             'title'       => 'Search Contracts',
-            'description' => 'Search ' . site()->meta('title') . ' using different criteria - year signed, company name,
+            'description' => 'Search '.site()->meta('title').' using different criteria - year signed, company name,
             contract type, annotation category.',
         ];
 
@@ -62,26 +62,75 @@ class FilterController
         $type = is_array($request->get('type')) ? join(',', $request->get('type')) : $request->get('type');
         $type = $type == '' ? 'metadata|text|annotations' : $type;
 
+        if($request->get('main_contract', ''))
+        {
+            $mainContract = 0;
+        } else
+        {
+            $mainContract = 1;
+        }
+
         return [
-            'q'                   => $request->get('q', ''),
-            'annotated'           => $request->get('annotated', ''),
-            'country_code'        => is_array($request->get('country')) ? join('|', $request->get('country')) : $request->get('country'),
-            'year'                => is_array($request->get('year')) ? join('|', $request->get('year')) : $request->get('year'),
-            'from'                => is_array($request->get('from')) ? join('|', $request->get('from')) : $request->get('from'),
-            'per_page'            => is_array($request->get('per_page')) ? join('|', $request->get('per_page')) : $request->get('per_page'),
-            'resource'            => is_array($request->get('resource')) ? join('|', $request->get('resource')) : $request->get('resource'),
-            'corporate_group'     => is_array($request->get('corporate_group')) ? join('|', $request->get('corporate_group')) : $request->get('corporate_group'),
-            'company_name'        => is_array($request->get('company_name')) ? join('|', $request->get('company_name')) : $request->get('company_name'),
-            'project_name'        => is_array($request->get('project_name')) ? join('|', $request->get('project_name')) : $request->get('project_name'),
-            'contract_type'       => is_array($request->get('contract_type')) ? join('|', $request->get('contract_type')) : $request->get('contract_type'),
-            'document_type'       => is_array($request->get('document_type')) ? join('|', $request->get('document_type')) : $request->get('document_type'),
-            'language'            => is_array($request->get('language')) ? join('|', $request->get('language')) : $request->get('language'),
-            'annotation_category' => is_array($request->get('annotation_category')) ? join('|', $request->get('annotation_category')) : $request->get('annotation_category'),
-            'sortby'              => $request->get('sortby'),
-            'order'               => $request->get('order'),
-            'group'               => $type,
-            'all'                 => $request->get('all', '0'),
-            'download'            => $request->get('download', false)
+            'q'                      => $request->get('q', ''),
+            'annotated'              => $request->get('annotated', ''),
+            'is_supporting_document' => $mainContract,
+            'country_code'           => is_array($request->get('country')) ? join(
+                '|',
+                $request->get('country')
+            ) : $request->get('country'),
+            'year'                   => is_array($request->get('year')) ? join(
+                '|',
+                $request->get('year')
+            ) : $request->get('year'),
+            'from'                   => is_array($request->get('from')) ? join(
+                '|',
+                $request->get('from')
+            ) : $request->get('from'),
+            'per_page'               => is_array($request->get('per_page')) ? join(
+                '|',
+                $request->get('per_page')
+            ) : $request->get('per_page'),
+            'resource'               => is_array($request->get('resource')) ? join(
+                '|',
+                $request->get('resource')
+            ) : $request->get('resource'),
+            'corporate_group'        => is_array($request->get('corporate_group')) ? join(
+                '|',
+                $request->get(
+                    'corporate_group'
+                )
+            ) : $request->get('corporate_group'),
+            'company_name'           => is_array($request->get('company_name')) ? join(
+                '|',
+                $request->get('company_name')
+            ) : $request->get('company_name'),
+            'project_name'           => is_array($request->get('project_name')) ? join(
+                '|',
+                $request->get('project_name')
+            ) : $request->get('project_name'),
+            'contract_type'          => is_array($request->get('contract_type')) ? join(
+                '|',
+                $request->get('contract_type')
+            ) : $request->get('contract_type'),
+            'document_type'          => is_array($request->get('document_type')) ? join(
+                '|',
+                $request->get('document_type')
+            ) : $request->get('document_type'),
+            'language'               => is_array($request->get('language')) ? join(
+                '|',
+                $request->get('language')
+            ) : $request->get('language'),
+            'annotation_category'    => is_array($request->get('annotation_category')) ? join(
+                '|',
+                $request->get(
+                    'annotation_category'
+                )
+            ) : $request->get('annotation_category'),
+            'sortby'                 => $request->get('sortby'),
+            'order'                  => $request->get('order'),
+            'group'                  => $type,
+            'all'                    => $request->get('all', '0'),
+            'download'               => $request->get('download', false),
 
         ];
     }
@@ -97,17 +146,52 @@ class FilterController
      */
     protected function updateFilterData(array $filter, $contract, Request $request)
     {
-        $filter['country']             = is_array($request->get('country')) ? $request->get('country') : [$request->get('country')];
-        $filter['year']                = is_array($request->get('year')) ? $request->get('year') : [$request->get('year')];
-        $filter['corporate_group']     = is_array($request->get('corporate_group')) ? $request->get('corporate_group') : [$request->get('corporate_group')];
-        $filter['company_name']        = is_array($request->get('company_name')) ? $request->get('company_name') : [$request->get('company_name')];
-        $filter['project_name']        = is_array($request->get('project_name')) ? $request->get('project_name') : [$request->get('project_name')];
-        $filter['contract_type']       = is_array($request->get('contract_type')) ? $request->get('contract_type') : [$request->get('contract_type')];
-        $filter['document_type']       = is_array($request->get('document_type')) ? $request->get('document_type') : [$request->get('document_type')];
-        $filter['language']            = is_array($request->get('language')) ? $request->get('language') : [$request->get('language')];
-        $filter['resource']            = is_array($request->get('resource')) ? $request->get('resource') : [$request->get('resource')];
-        $filter['annotation_category'] = is_array($request->get('annotation_category')) ? $request->get('annotation_category') : [$request->get('annotations_category')];
-        $filter['type']                = is_array($request->get('type')) ? $request->get('type') : [$request->get('type')];
+        $filter['country']             = is_array($request->get('country')) ? $request->get('country') : [
+            $request->get(
+                'country'
+            ),
+        ];
+        $filter['year']                = is_array($request->get('year')) ? $request->get('year') : [
+            $request->get(
+                'year'
+            ),
+        ];
+        $filter['corporate_group']     = is_array($request->get('corporate_group')) ? $request->get(
+            'corporate_group'
+        ) : [$request->get('corporate_group')];
+        $filter['company_name']        = is_array($request->get('company_name')) ? $request->get(
+            'company_name'
+        ) : [$request->get('company_name')];
+        $filter['project_name']        = is_array($request->get('project_name')) ? $request->get(
+            'project_name'
+        ) : [$request->get('project_name')];
+        $filter['main_contract']        = is_array($request->get('is_supporting_document')) ? $request->get(
+            'is_supporting_document'
+        ) : [$request->get('is_supporting_document')];
+        $filter['contract_type']       = is_array($request->get('contract_type')) ? $request->get(
+            'contract_type'
+        ) : [$request->get('contract_type')];
+        $filter['document_type']       = is_array($request->get('document_type')) ? $request->get(
+            'document_type'
+        ) : [$request->get('document_type')];
+        $filter['language']            = is_array($request->get('language')) ? $request->get('language') : [
+            $request->get(
+                'language'
+            ),
+        ];
+        $filter['resource']            = is_array($request->get('resource')) ? $request->get('resource') : [
+            $request->get(
+                'resource'
+            ),
+        ];
+        $filter['annotation_category'] = is_array($request->get('annotation_category')) ? $request->get(
+            'annotation_category'
+        ) : [$request->get('annotations_category')];
+        $filter['type']                = is_array($request->get('type')) ? $request->get('type') : [
+            $request->get(
+                'type'
+            ),
+        ];
 
         if (!$request->get('type')) {
             $filter['type'] = isset($contract->type) ? $contract->type : ['metadata', 'text', 'annotations'];

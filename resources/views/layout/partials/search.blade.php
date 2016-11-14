@@ -123,7 +123,11 @@ $category = $api->getAnnotationsCategory();
                 <label for="">@lang('search.annotated')</label>
                 <input type="checkbox" name="annotated" value="1" class="form-control"
                        @if(isset($filter['annotated']) && $filter['annotated']==1) checked @endif>
-
+            </div>
+            <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
+                <label for="">@lang('search.main_contract')</label>
+                <input type="checkbox" name="main_contract" value="1" class="form-control" @if(isset
+            ($filter['is_supporting_document']) && $filter['is_supporting_document']==0) checked @endif>
             </div>
 
         </div>

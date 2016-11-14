@@ -16,4 +16,5 @@ return [
     'refine_search'        => 'Change or refine your search',
     'annotated'            => "Annotated Contracts Only",
     'project_name'         => "Project Name",
+    'main_contract'        => "Main Contracts Only",
 ];

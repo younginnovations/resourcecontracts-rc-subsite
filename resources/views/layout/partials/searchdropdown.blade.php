@@ -57,7 +57,7 @@ $category = $api->getAnnotationsCategory();
                     sort($project_array);
                     ?>
                     @foreach($project_array as $project)
-                        <option @if(isset($filter['project_name']) && in_array($project, $filter['project_name'])) selected="selected" @endif value="{{$project}}">{{$project}}</option>
+                        <option @if(isset($filter['project_name']) && !empty($filter['project_name']) && in_array($project, $filter['project_name'])) selected="selected" @endif value="{{$project}}">{{$project}}</option>
                     @endforeach
                 </select>
             </div>
@@ -112,6 +112,11 @@ $category = $api->getAnnotationsCategory();
 				<input type="checkbox" name="annotated" value="1" class="form-control" @if(isset($filter['annotated']) && $filter['annotated']==1) checked @endif>
 
 			</div>
+            <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
+                <label for="">@lang('search.main_contract')</label>
+                <input type="checkbox" name="main_contract" value="1" class="form-control" @if(isset
+                ($filter['is_supporting_document']) && $filter['is_supporting_document']==0) checked @endif>
+            </div>
 
         </div>
         <div class="col-lg-12">
