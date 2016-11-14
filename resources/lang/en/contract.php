@@ -16,7 +16,7 @@ return [
     'ass_doc_msg'          => 'No associated documents available.',
     'annotation_message'   => 'There’s no annotation added to this document yet.',
     'concession'           => 'CONCESSION / LICENSE AND PROJECT',
-    'project_title'        => 'Project Title',
+    'project_title'        => 'Project Name',
     'project_identifier'   => 'Project Identifier',
     'license_name'         => 'License Name',
     'license_identifier'   => 'License Identifier',
