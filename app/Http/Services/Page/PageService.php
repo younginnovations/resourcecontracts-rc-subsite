@@ -35,7 +35,7 @@ Class PageService
             'all',
             $this->cacheDuration,
             function () {
-                return $this->page->orderBy('id', 'DESC')->get();
+                return $this->page->country()->orderBy('id', 'DESC')->get();
             }
         );
     }
@@ -54,7 +54,7 @@ Class PageService
             $page,
             $this->cacheDuration,
             function () use ($page) {
-                return $this->page->where('slug', $page)->first();
+                return $this->page->country()->where('slug', $page)->first();
             }
         );
 
@@ -76,7 +76,7 @@ Class PageService
      */
     public function save($page_id, array $content)
     {
-        $page          = $this->page->where('id', $page_id)->first();
+        $page          = $this->page->country()->where('id', $page_id)->first();
         $page->title   = (object) $content['title'];
         $page->content = (object) $content['content'];
 
@@ -100,7 +100,7 @@ Class PageService
             $id,
             $this->cacheDuration,
             function () use ($id) {
-                return $this->page->find($id);
+                return $this->page->country()->find($id);
             }
         );
     }
@@ -133,9 +133,11 @@ Class PageService
      */
     public function destroy($id)
     {
-        $pageId = $this->find($id);
-        Cache::forget($id);
+        $page = $this->find($id);
+        Cache::forget('all');
+        Cache::forget($page->id);
+        Cache::forget($page->slug);
 
-        return $pageId->delete();
+        return $page->delete();
     }
 }

@@ -15,7 +15,7 @@ class Page extends Model
     /**
      * @var array
      */
-    protected $fillable = ['title', 'slug', 'content'];
+    protected $fillable = ['title', 'slug', 'content', 'country'];
 
     protected $casts = ['title' => 'object', 'content' => 'object'];
 
@@ -63,12 +63,64 @@ class Page extends Model
             $q       = join('', $text);
             $final[] = [
                 'a' => $a,
-                'q' => $q
+                'q' => $q,
             ];
         endforeach;
 
         return $final;
     }
 
+    /**
+     * Country Scope
+     *
+     * @param $query
+     *
+     */
+    public function scopeCountry($query)
+    {
+        if (site()->isCountrySite()) {
+            return $query->where('country', strtolower(site()->getCountryCode()));
+        }
+
+        return $query;
+    }
+
+    /**
+     *
+     * @return void|bool
+     */
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(
+            function ($page) {
+                if (site()->isCountrySite()) {
+                    $page->country = strtolower(site()->getCountryCode());
+                }
+
+                return true;
+            }
+        );
+
+        static::updating(
+            function ($page) {
+                if (site()->isCountrySite()) {
+                    $page->country = strtolower(site()->getCountryCode());
+                }
+
+                return true;
+            }
+        );
+
+        static::deleting(
+            function ($page) {
+                if (site()->isCountrySite()) {
+                    $page->country = strtolower(site()->getCountryCode());
+                }
+
+                return true;
+            }
+        );
+    }
 
 }
