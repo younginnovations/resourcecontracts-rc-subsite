@@ -57,7 +57,7 @@ $category = $api->getAnnotationsCategory();
                     sort($project_array);
                     ?>
                     @foreach($project_array as $project)
-                        <option @if(isset($filter['project_name']) && !empty($filter['project_name']) && in_array($project, $filter['project_name'])) selected="selected" @endif value="{{$project}}">{{$project}}</option>
+                        <option @if(isset($filter['project_name']) && in_array($project, $filter['project_name'])) selected="selected" @endif value="{{$project}}">{{$project}}</option>
                     @endforeach
                 </select>
             </div>
