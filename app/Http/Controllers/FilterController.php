@@ -63,15 +63,15 @@ class FilterController
         $type = $type == '' ? 'metadata|text|annotations' : $type;
 
         if ($request->get('main_contract', '')) {
-            $supportingDoc = 0;
+            $mainContract = 1;
         } else {
-            $supportingDoc = 1;
+            $mainContract = 0;
         }
 
         return [
             'q'                      => $request->get('q', ''),
             'annotated'              => $request->get('annotated', ''),
-            'is_supporting_document' => $supportingDoc,
+            'main_contract'          => $mainContract,
             'country_code'           => is_array($request->get('country')) ? join('|', $request->get('country')) : $request->get('country'),
             'year'                   => is_array($request->get('year')) ? join('|', $request->get('year')) : $request->get('year'),
             'from'                   => is_array($request->get('from')) ? join('|', $request->get('from')) : $request->get('from'),
@@ -109,7 +109,7 @@ class FilterController
         $filter['corporate_group']     = is_array($request->get('corporate_group')) ? $request->get('corporate_group') : [$request->get('corporate_group')];
         $filter['company_name']        = is_array($request->get('company_name')) ? $request->get('company_name') : [$request->get('company_name')];
         $filter['project_name']        = is_array($request->get('project_name')) ? $request->get('project_name') : [$request->get('project_name')];
-        $filter['main_contract']       = is_array($request->get('is_supporting_document')) ? $request->get('is_supporting_document') : [$request->get('is_supporting_document')];
+        $filter['main_contract']       = is_array($request->get('main_contract')) ? (integer) $request->get('main_contract') : (integer) $request->get('main_contract');
         $filter['contract_type']       = is_array($request->get('contract_type')) ? $request->get('contract_type') : [$request->get('contract_type')];
         $filter['document_type']       = is_array($request->get('document_type')) ? $request->get('document_type') : [$request->get('document_type')];
         $filter['language']            = is_array($request->get('language')) ? $request->get('language') : [$request->get('language'),];

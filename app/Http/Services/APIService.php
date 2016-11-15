@@ -263,7 +263,7 @@ class APIService
             'all'                    => $all,
             'download'               => $download,
             'annotated'              => $annotated,
-            'is_supporting_document' => $is_supporting_document = ($is_supporting_document == 0 ? 0 : "0|1"),
+            'main_contract'          => $main_contract = ($main_contract == 1 ? 1 : "0|1"),
 
         ];
 
