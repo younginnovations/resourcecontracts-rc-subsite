@@ -62,11 +62,9 @@ class FilterController
         $type = is_array($request->get('type')) ? join(',', $request->get('type')) : $request->get('type');
         $type = $type == '' ? 'metadata|text|annotations' : $type;
 
-        if($request->get('main_contract', ''))
-        {
+        if ($request->get('main_contract', '')) {
             $supportingDoc = 0;
-        } else
-        {
+        } else {
             $supportingDoc = 1;
         }
 
