@@ -16,7 +16,7 @@ return [
     'ass_doc_msg'          => "لا توجد  اية وثيقة ذات صلة ",
     'annotation_message'   => "لم يضف أي ملحق تفسيري لهذه الوثيقة",
     'concession'           => "الإمتياز/الرخصة والمشروع",
-    'project_title'        => "عنوان المشروع",
+    'project_title'        => "اسم المشروع",
     'project_identifier'   => "معرّف المشروع",
     'license_name'         => "إسم الرخصة ",
     'license_identifier'   => "معرّف الرخصة",

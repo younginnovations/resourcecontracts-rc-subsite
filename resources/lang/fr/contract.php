@@ -16,7 +16,7 @@ return [
     'ass_doc_msg'          => "Aucun document connexe n'est disponible",
     'annotation_message'   => "Aucune annotation n'a encore été ajoutée à ce document ",
     'concession'           => "Concession/Permis et Projet",
-    'project_title'        => "Titre du projet",
+    'project_title'        => "nom du projet",
     'project_identifier'   => "Identifiant du projet",
     'license_name'         => "Nom du permis",
     'license_identifier'   => "Identifiant du permis",

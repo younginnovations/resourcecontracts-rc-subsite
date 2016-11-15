@@ -15,4 +15,6 @@ return [
     'select'               => 'Selectionner',
     'refine_search'        => 'Change ou améliorer votre recherche',
     'annotated'            => "Contrats annotés Seulement",
+    'project_name'         => "nom du projet",
+    'main_contract'        => "Principaux contrats seulement",
 ];

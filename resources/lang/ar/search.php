@@ -15,4 +15,6 @@ return [
     'select'               => "اختيار",
     'refine_search'        => 'تغيير أو تعديل بحثك',
     'annotated'            => "يتوفر به ملحق تفسيري ",
+    'project_name'         => "اسم المشروع",
+    'main_contract'        => "العقود الرئيسية فقط",
 ];
