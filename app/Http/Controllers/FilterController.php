@@ -106,52 +106,18 @@ class FilterController
      */
     protected function updateFilterData(array $filter, $contract, Request $request)
     {
-        $filter['country']             = is_array($request->get('country')) ? $request->get('country') : [
-            $request->get(
-                'country'
-            ),
-        ];
-        $filter['year']                = is_array($request->get('year')) ? $request->get('year') : [
-            $request->get(
-                'year'
-            ),
-        ];
-        $filter['corporate_group']     = is_array($request->get('corporate_group')) ? $request->get(
-            'corporate_group'
-        ) : [$request->get('corporate_group')];
-        $filter['company_name']        = is_array($request->get('company_name')) ? $request->get(
-            'company_name'
-        ) : [$request->get('company_name')];
-        $filter['project_name']        = is_array($request->get('project_name')) ? $request->get(
-            'project_name'
-        ) : [$request->get('project_name')];
-        $filter['main_contract']        = is_array($request->get('is_supporting_document')) ? $request->get(
-            'is_supporting_document'
-        ) : [$request->get('is_supporting_document')];
-        $filter['contract_type']       = is_array($request->get('contract_type')) ? $request->get(
-            'contract_type'
-        ) : [$request->get('contract_type')];
-        $filter['document_type']       = is_array($request->get('document_type')) ? $request->get(
-            'document_type'
-        ) : [$request->get('document_type')];
-        $filter['language']            = is_array($request->get('language')) ? $request->get('language') : [
-            $request->get(
-                'language'
-            ),
-        ];
-        $filter['resource']            = is_array($request->get('resource')) ? $request->get('resource') : [
-            $request->get(
-                'resource'
-            ),
-        ];
-        $filter['annotation_category'] = is_array($request->get('annotation_category')) ? $request->get(
-            'annotation_category'
-        ) : [$request->get('annotations_category')];
-        $filter['type']                = is_array($request->get('type')) ? $request->get('type') : [
-            $request->get(
-                'type'
-            ),
-        ];
+        $filter['country']             = is_array($request->get('country')) ? $request->get('country') : [$request->get('country'),];
+        $filter['year']                = is_array($request->get('year')) ? $request->get('year') : [$request->get('year'),];
+        $filter['corporate_group']     = is_array($request->get('corporate_group')) ? $request->get('corporate_group') : [$request->get('corporate_group')];
+        $filter['company_name']        = is_array($request->get('company_name')) ? $request->get('company_name') : [$request->get('company_name')];
+        $filter['project_name']        = is_array($request->get('project_name')) ? $request->get('project_name') : [$request->get('project_name')];
+        $filter['main_contract']       = is_array($request->get('is_supporting_document')) ? $request->get('is_supporting_document') : [$request->get('is_supporting_document')];
+        $filter['contract_type']       = is_array($request->get('contract_type')) ? $request->get('contract_type') : [$request->get('contract_type')];
+        $filter['document_type']       = is_array($request->get('document_type')) ? $request->get('document_type') : [$request->get('document_type')];
+        $filter['language']            = is_array($request->get('language')) ? $request->get('language') : [$request->get('language'),];
+        $filter['resource']            = is_array($request->get('resource')) ? $request->get('resource') : [$request->get('resource'),];
+        $filter['annotation_category'] = is_array($request->get('annotation_category')) ? $request->get('annotation_category') : [$request->get('annotations_category')];
+        $filter['type']                = is_array($request->get('type')) ? $request->get('type') : [$request->get('type'),];
 
         if (!$request->get('type')) {
             $filter['type'] = isset($contract->type) ? $contract->type : ['metadata', 'text', 'annotations'];
