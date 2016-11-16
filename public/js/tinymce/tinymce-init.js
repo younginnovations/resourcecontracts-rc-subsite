@@ -10,6 +10,5 @@ tinymce.init({
     "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
     "save table directionality template paste textcolor colorpicker"
   ],
-  content_css: "css/content.css",
   toolbar: "insertfile undo redo | styleselect| fontselect | fontsizeselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image |  media fullpage | forecolor backcolor",
 });

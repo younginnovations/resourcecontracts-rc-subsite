@@ -76,7 +76,7 @@ use Illuminate\Support\Facades\Lang;
 									<span>
 
 											<?php $c = $contract->metadata->country;?>
-											{{trans('country')[$c->code]}}
+										{{trans('country')[$c->code]}}
 
 										@if(site()->isRC())
 											@if(isset($contract->metadata->amla_url) && !empty($contract->metadata->amla_url))
@@ -545,6 +545,9 @@ use Illuminate\Support\Facades\Lang;
 		var lang = <?php echo json_encode(trans('annotation'));?>;
 
 		function isScrolledTo(elem) {
+			if (elem.length < 1) {
+				return;
+			}
 			var docViewTop = $(window).scrollTop(); //num of pixels hidden above current screen
 			var docViewBottom = docViewTop + $(window).height();
 
@@ -596,7 +599,9 @@ use Illuminate\Support\Facades\Lang;
 				sticky.css({'position': 'fixed', 'left': '36px', 'top': '20px'});
 			}
 			var stopHeight = catcher.offset().top + catcher.height() + 240;
-			if (stopHeight > sticky.offset().top) {
+
+
+			if (sticky.length > 0 && stopHeight > sticky.offset().top) {
 				sticky.css({'position': 'absolute', 'left': 0, 'top': 0});
 			}
 		}
