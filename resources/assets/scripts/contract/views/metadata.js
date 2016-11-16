@@ -138,8 +138,8 @@ var Metadata = React.createClass({
         if (amla_url != '' && (isSite('country') || isSite('rc'))) {
             return (
                 <div className="metadata-item">
-                    <p class="value"> {LANG.see} <a href={amla_url}
-                                                    target="_blank">{LANG.legislation}</a> {LANG.african_mining} </p>
+                    <p class="value">{LANG.see} <a href={amla_url}
+                                                   target="_blank">{LANG.legislation}</a> {LANG.african_mining}</p>
                 </div>
             );
         } else {
@@ -223,6 +223,18 @@ var Metadata = React.createClass({
             </div>
         );
     },
+    disclosureMode(){
+        let dm = '-';
+        let type = this.state.metadata.publisher.type;
+
+        if (type != '') {
+            dm = LANG.disclosure[type] || type;
+        }
+
+        dm += this.state.metadata.publisher.note ? ' (' + this.state.metadata.publisher.note + ') ' : '';
+
+        return dm;
+    },
     renderMetadata() {
         return (
             <div id="metadata" className="right-column-view">
@@ -250,7 +262,7 @@ var Metadata = React.createClass({
                     </div>
                     <div className="metadata-item">
                         <p className="key">{LANG.disclosure_mode}</p>
-                        <p className="value">{this.state.metadata.publisher.type || "-"} {this.state.metadata.publisher.note ? '(' + this.state.metadata.publisher.note + ')' : null} </p>
+                        <p className="value">{this.disclosureMode()}</p>
                     </div>
                     {this.getAnnexesMissing()}
                     {this.getPagesMissing()}
