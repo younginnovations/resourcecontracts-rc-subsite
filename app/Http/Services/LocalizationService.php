@@ -167,6 +167,16 @@ class LocalizationService
     }
 
     /**
+     * Get Default Lang
+     *
+     * @return string
+     */
+    public function getDefaultLang()
+    {
+        return $this->defaultLang;
+    }
+
+    /**
      * Get Selected Languages
      *
      * @return array
@@ -227,4 +237,5 @@ class LocalizationService
         $this->defaultLang = $lang['default'];
         $this->lang        = (object) $lang;
     }
+
 }
