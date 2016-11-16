@@ -920,6 +920,8 @@ div > .annotation-item:first-of-type .annotation-cluster {
 
 .loading p {
   text-indent: 0;
+  line-height: 33px;
+  margin: 0;
 }
 
 @media all and (max-width: 1040px) {
@@ -1045,6 +1047,7 @@ div > .annotation-item:first-of-type .annotation-cluster {
   top: 0;
   z-index: 1;
   width: 100%;
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.15);
 }
 
 .note-wrapper {
@@ -1151,6 +1154,9 @@ div > .annotation-item:first-of-type .annotation-cluster {
   .head-wrap .right-column-view {
     width: auto;
     float: left;
+    >div{
+      float: left;
+    }
   }
 
   .pdf-zoom-options {
@@ -1247,6 +1253,10 @@ div > .annotation-item:first-of-type .annotation-cluster {
   .panel-top-content {
     padding: 0 15px;
     //overflow: visible;
+  }
+
+  .navigation a {
+    border: none;
   }
 
   .attached-top-wrapper .left-top-content {

@@ -57,8 +57,9 @@
 			text_disclaimer: "{!!trans('annotation.text_created_automatically').' <a target=\"_blank\" href=\"'.url('/faqs#learn_more').'\">'.trans('annotation.learn_more').'</a>'!!}"
 		};
 		config.isClipOn = '{{site()->isClipEnabled()}}';
-		LANG = {!! json_encode(trans('annotation')) !!};
+		var LANG = {!! json_encode(trans('annotation')) !!};
 		LANG.resourceLang = {!! json_encode(trans('resources')) !!};
+		LANG.disclosure = {!! json_encode(trans('codelist/disclosure')) !!};
 
 		var debug = function () {
 			if (config.debug) {

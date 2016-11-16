@@ -35,23 +35,29 @@
 				   class="@if(strpos($url, 'image') != false) active @endif list-group-item">
 					<i class="fa fa-image"></i> @lang('admin.manage_image')
 				</a>
-				<a href="{{route('admin.link')}}"
-				   class="@if(strpos($url, 'link') != false) active @endif list-group-item">
-					<i class="fa fa-link"></i> @lang('admin.manage_link')
-				</a>
+				@if(!site()->isCountrySite())
+					<a href="{{route('admin.link')}}"
+					   class="@if(strpos($url, 'link') != false) active @endif list-group-item">
+						<i class="fa fa-link"></i> @lang('admin.manage_link')
+					</a>
+				@endif
 				<a href="{{route('admin.text')}}"
 				   class="@if(strpos($url, 'text') != false) active @endif list-group-item">
 					<i class="fa fa-file-text-o"></i> @lang('admin.manage_text')
 				</a>
-				<a href="{{route('admin.partner')}}"
-				   class="@if(strpos($url, 'partner') != false) active @endif list-group-item">
-					<i class="fa fa-users"></i> @lang('admin.manage_partners')
-				</a>
+				@if(!site()->isCountrySite())
+					<a href="{{route('admin.partner')}}"
+					   class="@if(strpos($url, 'partner') != false) active @endif list-group-item">
+						<i class="fa fa-users"></i> @lang('admin.manage_partners')
+					</a>
+				@endif
+
 				<a href="{{route('admin.language')}}"
 				   class="@if(strpos($url, 'language') != false) active @endif list-group-item">
 					<i class="fa fa-language"></i> @lang('admin.manage_language')
 				</a>
-				<a href="{{ route('logout') }}" class="list-group-item"><i class="fa fa-sign-out"></i> @lang('admin.logout') ({{ auth()->user()->name }})</a>
+				<a href="{{ route('logout') }}" class="list-group-item"><i
+							class="fa fa-sign-out"></i> @lang('admin.logout') ({{ auth()->user()->name }})</a>
 			</div>
 		</div>
 		<div class="col-lg-8">

@@ -2,7 +2,7 @@
 
 @section('js')
     <script type="text/javascript" src="{{url('js/tinymce/tinymce.min.js')}}"></script>
-    <script type="text/javascript" src="{{url('js/tinymce-init.js')}}"></script>
+    <script type="text/javascript" src="{{url('js/tinymce/tinymce-init.js')}}"></script>
 @stop
 
 @section('content')

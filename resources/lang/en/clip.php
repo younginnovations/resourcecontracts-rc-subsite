@@ -63,4 +63,6 @@ return [
     'currently_no_clips'    => "There are currently no Clips.",
     'confirmMessage'        => 'Are you sure that you want to clear all clips?',
     'processing'            => '(Processing...)',
+    'clear_all_clips'       =>'Clear All Clips',
+    'sending'               => 'Sending...',
 ];

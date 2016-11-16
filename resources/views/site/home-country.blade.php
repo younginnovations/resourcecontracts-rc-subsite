@@ -46,45 +46,6 @@ $image_main = site()->getImageUrl('bg');
 				</div>
 			</div>
 		</div>
-		<div class="petroleum-list show-in-small-screen">
-			<div class="col-md-12 col-sm-12 col-xs-12 text-center petroleum-list-inner">
-				<div class="row">
-					<div class="col-md-4 col-sm-4 col-xs-4 petroleum-list-each">
-						<a href="{{route('contracts')}}">
-							<h2 class="petroleum-list-title">{{$contracts}}</h2>
-							<small>{{trans('global.documents')}}</small>
-						</a>
-					</div>
-					@if(!site()->isCountrySite())
-						<div class="col-md-4 col-sm-4 col-xs-4 petroleum-list-each">
-							<a href="{{route('countries')}}">
-								<h2 class="petroleum-list-title">{{$countries}}</h2>
-								<small>{{trans('global.countries')}}</small>
-							</a>
-						</div>
-					@endif
-					<div class="col-md-4 col-sm-4 col-xs-4">
-						<a href="{{route('resources')}}">
-							<h2 class="petroleum-list-title">{{$resources}}</h2>
-							<small>{{trans('global.resources')}}</small>
-						</a>
-					</div>
-				</div>
-			</div>
-			<div class="clear"></div>
-			<div class="list-item-wrap">
-				<div class="inner-list-item">
-					<label class="group-item-title">{{trans('global.explore_contract_terms')}}:</label>
-					<ul class="list-group">
-						@foreach($links as $link)
-							<li class="list-group-item">
-								<a href="{{$link['url']}}">{{$link['title']}}</a>
-							</li>
-						@endforeach
-					</ul>
-				</div>
-			</div>
-		</div>
 	</section>
 
 	<div class="row row-content">
@@ -97,9 +58,9 @@ $image_main = site()->getImageUrl('bg');
 			<div class="resource-wrap">
 				<div class="resource-inner-wrap">
 					<p>@lang('global.contracts_related_to')</p>
-					@if($resources > 1) {{$resources}} @lang('global.resources') @else {{$resources}} @lang('global.resource')  @endif
+					{{trans('global.resource_count', ['count'=>$resources])}}
 				</div>
-				<a href="{{url('resources')}}" class="btn btn-view">@lang('global.view_all_resources')</a>
+				<a href="{{route('resources')}}" class="btn btn-view">@lang('global.view_all_resources')</a>
 			</div>
 		</div>
 	</div>

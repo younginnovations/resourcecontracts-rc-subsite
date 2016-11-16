@@ -179,7 +179,7 @@ gulp.task('contract-style', function () {
  */
 gulp.task('watch', function () {
     gulp.watch('./resources/assets/scss/pages/*.scss', ['rc']);
-    gulp.watch(contract_style, ['contract-style']);
+    gulp.watch('./resources/assets/scss/contract/**/*.scss', ['contract-style']);
     gulp.watch(base_script, ['js-base']);
     gulp.watch(country_script, ['js-country']);
     gulp.watch(resource_script, ['js-resource']);
@@ -187,15 +187,16 @@ gulp.task('watch', function () {
     gulp.watch(homepage_script, ['js-homepage']);
 });
 
+/*
 gulp.task('contract-style', function () {
     return gulp.src(contract_style)
         .pipe(sourcemaps.init())
         .pipe(sass())
         .pipe(postcss([autoprefixer({browsers: ['last 30 versions', '> 1%', 'ie 8', 'ie 7']})]))
         .pipe(sourcemaps.write('./maps'))
-        .pipe(uglifycss({
+        /!*.pipe(uglifycss({
             "max-line-len": 80
-        }))
+        }))*!/
         .pipe(rename({
             basename: "",
             prefix: "contract",
@@ -204,6 +205,7 @@ gulp.task('contract-style', function () {
         .pipe(gulp.dest('./public/css'))
         .pipe(notify({message: 'css-contract task complete'}));
 });
+*/
 
 
 /*

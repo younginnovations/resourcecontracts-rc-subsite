@@ -1,12 +1,8 @@
 <?php
 return [
-    'name'                  => 'المورد',
-    'title'                 => 'ResourceContracts.org',
     'description'           => 'مرجع الكتروني  يضم عقودا لمشاريع الأراضي واسعة النطاق والمشاريع الزراعية والغابية المتاحة للعموم. يضم هذا المرجع الإلكتروني النصوص الكاملة للعقود إضافة الى توفر ملخص مبسط اللغة لاهم المصطلحات الاجتماعية والبيئية والجبائية والعملية والمتعلقة بحقوق الانسان، مرفق مع كل عقد إضافة الى آليات للبحث عن العقود ومقارنتها.',
-    'countries_description' => 'البحث عن عقود الموارد من بلدان متعددة -',
-    'country_description'   => 'البحث عن عقود الموارد من البلد -',
     'resources_description' => 'البحث عن عقود الموارد لموارد مختلفة -',
     'resource_description'  => 'البحث عن عقود الموارد للمورد -',
-    'tagline'               => '<p class="repo-description">دليل لل </p> <div class="large-title"><span>البترول و &amp; <div>العقود المعدنية</div> </span></div>',
-    'about'                 => 'حول ResourceContracts',
+    'tagline'               => '<div class="large-title"><span> دليل Resource contracts من :name </span></p>',
+    'about'                 => 'حول',
 ];

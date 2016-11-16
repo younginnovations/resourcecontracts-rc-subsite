@@ -243,6 +243,12 @@
     }
   }
 
+@media (max-width: 992px) {
+  .petroleum-mineral {
+    min-height: initial;
+  }
+}
+
   .hero-image {
     .search-form {
       padding: 0;
