@@ -24,9 +24,9 @@ $sidebar = $image->getImageUrl('sidebar');
 			<a href="{{url()}}">
 			    <span class="brand_first">
 				{{site()->meta('name')}}
-				@if(!site()->isRC())
-					<span class="beta">Beta</span>
-				@endif
+					@if(site()->isOLC())
+						<span class="beta">Beta</span>
+					@endif
 				</span>
 				<span>Contracts</span>
 			</a>

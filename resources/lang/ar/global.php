@@ -8,7 +8,7 @@ return [
     'countries'               => "البلدان",
     'country'                 => "البلد",
     'view_all_countries'      => "عرض جميع البلدان ",
-    'contracts_related_to'    => "وثائق العقود المرتبطة ب ",
+    'contracts_related_to'    => "وثائق عقود تتعلق",
     'all_contracts'           => "جميع العقود",
     'view_all_resources'      => "عرض جميع الموارد",
     'document'                => "وثيقة",
