@@ -120,7 +120,7 @@ $(document).ready(function () {
     var allData = clipLocalCollection.localStorage.findAll();
     if (allData.length != 0)
     {
-        var clearall = $("<a id='clear-all'>Clear All Clips</a>");
+        var clearall = $("<a id='clear-all'>"+langClip.clear_all_clips+"</a>");
         $("#all-clip-count").append("(" + allData.length + ")");
         $("#clip-panel-title").append(clearall);
 

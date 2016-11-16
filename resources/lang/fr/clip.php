@@ -64,4 +64,6 @@ return [
     'currently_no_clips'    => "Il n'y a pas de clips.",
     'confirmMessage'        => 'Etes-vous sûr que vous voulez effacer tous les clips?',
     'processing'            => '(En traitement...)',
+    'clear_all_clips'       => 'Effacer tous les clips',
+    'sending'               => 'Envoi...',
 ];

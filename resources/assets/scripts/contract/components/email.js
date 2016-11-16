@@ -132,32 +132,32 @@ class Email extends Component {
                         <div className="modal-header">
                             <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
-                            <h4 className="modal-title">Share via email</h4>
+                            <h4 className="modal-title">{langClip.shareViaEmail}</h4>
                         </div>
                         <div className="modal-body">
                             <div className="email-result"></div>
                             <form onSubmit={this.handleSubmit.bind(this)}>
                                 <div className="form-group">
-                                    <label for="emailto">To</label>
+                                    <label for="emailto">{langClip.to}</label>
                                     <input type="text" onChange={function(e) {self.setState({to:e.target.value})}}
                                            value={this.state.to} className="form-control"/>
                                     {this.getError('to')}
                                 </div>
                                 <div className="form-group">
-                                    <label for="emailfrom">From</label>
+                                    <label for="emailfrom">{langClip.from}</label>
                                     <input type="text"
                                            onChange={function(e) {self.setState({from:e.target.value})}}
                                            value={this.state.from} className="form-control"/>
                                     {this.getError('from')}
                                 </div>
                                 <div className="form-group">
-                                    <label for="subject">Subject</label>
+                                    <label for="subject">{langClip.subject}</label>
                                     <input type="text" onChange={function(e) {self.setState({subject:e.target.value})}}
                                            value={this.state.subject} className="form-control"/>
                                     {this.getError('subject')}
                                 </div>
                                 <div className="form-group">
-                                    <label for="emailbody">Message</label>
+                                    <label for="emailbody">{langClip.message}</label>
                                     <textarea type="text" onChange={function(e) {self.setState({body:e.target.value})}}
                                               value={this.state.body} className="form-control"/>
                                     {this.getError('body')}
@@ -167,7 +167,7 @@ class Email extends Component {
                                 </div>
                                 <div className="modal-footer">
                                     <input type="submit" className="btn"
-                                           value={this.state.processing ? 'Sending...' : 'Send Email'}/>
+                                           value={this.state.processing ? langClip.sending : langClip.sendEmail}/>
                                 </div>
                             </form>
                         </div>

@@ -63,4 +63,6 @@ return [
     'currently_no_clips'    => "لا يوجد حاليا أي مقاطع",
     'confirmMessage'        => 'هل أنت متأكد أنك تريد مسح جميع مقاطع؟',
     'processing'            => '(معالجة...)',
+    'clear_all_clips'       => 'مسح جميع كليب',
+    'sending'               => 'إرسال...',
 ];
