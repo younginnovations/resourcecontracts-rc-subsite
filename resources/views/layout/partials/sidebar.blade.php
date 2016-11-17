@@ -13,7 +13,7 @@ $sidebar = $image->getImageUrl('sidebar');
 @if($sidebar != '')
 	<style>
 		.sidebar-nav > .sidebar-brand a, .sidebar-nav > .sidebar-brand a:hover {
-			background: url('{{$sidebar}}');
+			background-image: url('{{$sidebar}}');
 		}
 	</style>
 @endif
@@ -21,15 +21,7 @@ $sidebar = $image->getImageUrl('sidebar');
 <div id="sidebar-wrapper" class="sidebar-collapse in">
 	<ul class="sidebar-nav">
 		<li class="sidebar-brand">
-			<a href="{{url()}}">
-			    <span class="brand_first">
-				{{site()->meta('name')}}
-					@if(site()->isOLC())
-						<span class="beta">Beta</span>
-					@endif
-				</span>
-				<span>Contracts</span>
-			</a>
+			@include('layout.partials.logo')
 		</li>
 		<li><a href="{{url('/')}}" @if(isActiveMenu('')) class="active" @endif > @lang('sidebar.home') </a></li>
 		<li><a href="{{url('contracts')}}"
