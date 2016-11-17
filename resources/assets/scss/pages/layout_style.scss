@@ -17,7 +17,7 @@ body.page-home{
   }
 }
 
-//original selectors
+//original selector
 //.navbar-brand, .navbar-brand:hover
 %extend_3 {
   font-size: 19px;
@@ -311,8 +311,6 @@ body:not(.page-home){
   padding: 0;
   list-style: none;
   li {
-    text-indent: 20px;
-    line-height: 40px;
     color: $color_silver_chalice_approx;
     line-height: normal;
     text-indent: inherit;
@@ -325,8 +323,7 @@ body:not(.page-home){
       &:hover {
         text-decoration: none;
         color: $white;
-        background: $white_20;
-        background: transparent;
+
       }
       &.active {
         background: $color_link_color;
@@ -349,7 +346,7 @@ body:not(.page-home){
       }
 
     }
-    &:hover {
+    &:not(.sidebar-brand) > a:hover {
       background: $color_link_color;
     }
 
@@ -479,10 +476,14 @@ body:not(.page-home){
 %extend_21 {
   color: $white;
   text-transform: uppercase;
-  background: $url_9 no-repeat 0 0/cover;
   font-size: 19px;
   font-family: Open-Sans-Bold;
   padding: 40px 32px;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: block;
+  margin: 0;
 }
 
 //original selectors
@@ -553,6 +554,11 @@ body:not(.page-home){
   }
 }
 
+.sidebar-nav{
+  li:not(.sidebar-brand){
+    border-bottom: solid 1px rgba(255,255,255,0.1);
+  }
+}
 
 /* -------------------- style for sidebar ends -------------------- */
 /* -------------------- ------------------------ --------------------*/
@@ -638,11 +644,3 @@ footer {
   }
 }
 
-.sidebar-nav{
-  li:not(.sidebar-brand){
-      border-bottom: solid 1px rgba(255,255,255,0.1);
-  }
-}
-
-/* -------------------- style for sidebar ends -------------------- */
-/* -------------------- ------------------------ --------------------*/
