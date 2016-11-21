@@ -665,3 +665,37 @@
   }
 
 }
+
+@media (max-width: 767px){
+  .modal {
+    button.close {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      position: absolute;
+      right: 8px;
+      top: 8px;
+      background: transparent;
+      opacity: 1;
+      font-size: 26px;
+      border: none;
+      color: #fff;
+      box-shadow: none;
+
+      &:hover, &:focus, &:active {
+        background: transparent;
+        color: #fff;
+      }
+
+      span {
+        font-size: 26px;
+      }
+    }
+  }
+}
+
+@media (max-width: 767px){
+  .right-column-view{
+    width: auto;
+  }
+}
