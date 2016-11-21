@@ -1,4 +1,20 @@
 body.country{
+  .country-flag {
+    display: inline-block !important;
+    vertical-align: top;
+    width: 20px;
+    img {
+      width: 20px;
+      height: 18px;
+      margin: 0 1px 2px 0;
+    }
+  }
+
+  .navbar-brand span{
+    font-size: 14px !important;
+    width: auto;
+  }
+
   .petroleum-mineral{
     max-width: 720px;
     width: auto;
