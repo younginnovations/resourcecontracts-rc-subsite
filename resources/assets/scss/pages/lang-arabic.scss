@@ -1,0 +1,39 @@
+body.lang-ar{
+
+  .table>thead>tr>th{
+    text-align: right;
+  }
+
+  .navbar {
+    .search-form {
+      .form-control{
+        text-align: left;
+      }
+    }
+
+  }
+
+
+  .petroleum-list{
+    @media (min-width: 992px){
+      right: calc(100% - 417px);
+    }
+  }
+
+  .petroleum-mineral{
+    padding: 120px 30px 120px 225px;
+    @media (min-width: 992px){
+      padding: 140px 30px 84px 227px;
+    }
+
+    @media only screen and (max-width: 767px){
+      padding: 30px 20px;
+    }
+  }
+
+  .attached-top-wrapper {
+    .panel-title{
+      text-align: left;
+    }
+  }
+}
