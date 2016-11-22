@@ -64,7 +64,7 @@
 #clear-all {
   position: relative;
   font: 13px/21px Open-Sans-Light;
-  padding: 6px 15px 6px 40px;
+  padding: 0px 15px 0px 40px;
   display: inline-block;
   text-decoration: none;
   color: $color_link_color;
@@ -73,7 +73,7 @@
     content: "";
     position: absolute;
     width: 22px;
-    top: 8px;
+    top: 1px;
     height: 20px;
     left: 13px;
     background: url(../images/ic-sprite.svg) no-repeat no-repeat -185px -481px;
