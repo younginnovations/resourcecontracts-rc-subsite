@@ -1,3 +1,46 @@
+/* ------ responsive for panel title at top ------- */
+
+@media all and (max-width: 768px) {
+  .attached-top-wrapper .panel-title {
+    font-size: 20px;
+    line-height: 26px;
+    margin: 0 0 14px 55px;
+  }
+
+  .attached-top-wrapper #show-full-title {
+    /*margin: 0 0 14px 15px;*/
+  }
+
+
+  .attached-top-wrapper .has-no-backbtn + .panel-title {
+    margin: 0 0 14px 0px !important;
+    width: 100%;
+  }
+
+  .attached-top-wrapper .action-links {
+    margin: 8px 0px 9px 20px;
+  }
+
+  .action-links ul li a {
+    padding: 10px 22px 10px 45px;
+  }
+
+  .panel-top-content {
+    padding: 0;
+    position: relative;
+  }
+
+  .attached-top-wrapper .left-top-content {
+    width: calc(100% - 188px);
+  }
+
+  .attached-top-wrapper .back {
+    background-position: 12px -538px;
+  }
+
+}
+
+
 /* ----------- media queries here after ------------- */
 
 @media all and(min-width: 380px) {
@@ -17,6 +60,12 @@
     border-right: 0;
     border-bottom: 1px solid rgba(220, 223, 226, 0.7);
     border-bottom: 1px solid rgb(220, 223, 226);
+  }
+}
+
+@media all and (max-width: 480px) {
+  .panel-top-content {
+    overflow: visible;
   }
 }
 
