@@ -36,4 +36,31 @@ body.lang-ar{
       text-align: left;
     }
   }
+
+  .pagination .previous, .pagination .next{
+    transform-origin: center center;
+    transform: rotate(180deg);
+  }
+
+  .pagination .next{
+    background-position: -268px -560px !important;
+  }
+
+  .pagination .previous{
+    background-position: -194px -560px !important;
+  }
+  
+  .right-column-view{
+    .clip-btn{
+      float: left;
+    }
+  }
+
+  .modal button.close{
+    left: -25px;
+    right: auto;
+    @media (max-width: 767px){
+      left: 8px;
+    }
+  }
 }

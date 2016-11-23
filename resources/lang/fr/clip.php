@@ -66,4 +66,5 @@ return [
     'processing'            => '(En traitement...)',
     'clear_all_clips'       => 'Effacer tous les clips',
     'sending'               => 'Envoi...',
+    'documents'             => 'Document',
 ];

@@ -65,4 +65,5 @@ return [
     'processing'            => '(معالجة...)',
     'clear_all_clips'       => 'مسح جميع كليب',
     'sending'               => 'إرسال...',
+    'document'              => 'وثيقة',
 ];
