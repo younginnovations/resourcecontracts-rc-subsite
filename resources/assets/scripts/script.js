@@ -14,7 +14,8 @@ var emailManager = {
         return re.test(email);
     },
     init: function () {
-        $(this.formEl).find('#subject').val(document.title);
+        var subject = 'Link from ' + document.title;
+        $(this.formEl).find('#subject').val(subject);
         $('#send-email').on('submit', function (event) {
             event.preventDefault();
             emailManager.submit();
