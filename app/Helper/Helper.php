@@ -376,3 +376,22 @@ function getOptionText($key)
 
     return isset($option->$currentLang) ? $option->$currentLang : '';
 }
+
+/**
+ * Determine if given string is old OCID
+ *
+ * @param $ocid
+ *
+ */
+function redirectIfOldOCID($old)
+{
+    $string = file_get_contents(base_path('public/ocid_mapping.json'));
+    $arr    = json_decode($string, true);
+    $new    = isset($arr[$old]) ? $arr[$old] : null;
+    if ($new) {
+        $url = str_replace($old, $new, \Request::fullUrl());
+        header("HTTP/1.1 301 Moved Permanently");
+        header(sprintf("Location: %s", $url));
+        die;
+    }
+}

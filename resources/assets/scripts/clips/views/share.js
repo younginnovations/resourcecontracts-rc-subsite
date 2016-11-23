@@ -56,7 +56,8 @@ var ShareManager = React.createClass({
                     <li className="twitter"><a href={ this.getTwitterShare()} target="_blank"></a></li>
                     <li className="email"><a onClick={this.handleShowModal}></a></li>
                 </ul>
-                {this.state.view.showModal ? <Email url={this.getShareUrl()} handleHideModal={this.handleHideModal}/> : null}
+                {this.state.view.showModal ?
+                    <Email url={this.getShareUrl()} handleHideModal={this.handleHideModal}/> : null}
             </div>
         );
     }
@@ -75,7 +76,8 @@ var Email = React.createClass({
         };
     },
     componentDidMount: function () {
-        this.setState({url: this.props.url});
+        var subject = 'Link from ' + document.title + ' ' + this.state.subject;
+        this.setState({url: this.props.url, subject: subject});
         $(this.getDOMNode()).modal('show');
         $(this.getDOMNode()).on('hidden.bs.modal', this.props.handleHideModal);
     },
