@@ -19,7 +19,7 @@ class Email extends Component {
     }
 
     componentDidMount() {
-        var pageTitle = document.title;
+        var pageTitle = 'Link from ' + document.title;
         var url = window.location.href;
         this.setState({url: url, subject: pageTitle});
         $(ReactDOM.findDOMNode(this)).modal('show');

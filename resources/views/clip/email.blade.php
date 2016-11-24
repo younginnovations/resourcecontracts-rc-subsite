@@ -1,8 +1,14 @@
-<p>
-	{{$body}}
-</p>
+<p>Message from {{$from}}:</p>
+
+<p>{{$body}}</p>
 
 <p>{{$url}}</p>
 
-<p>---</p>
-<p>@lang('clip.email_message') {{$from}} @lang('clip.via') <a href="{{url()}}">{{$site}}</a>.
+<hr/>
+<p>
+	This message was sent to you by {{$from}} at
+	{{\Carbon\Carbon::now()}}
+	{{date_default_timezone_get()}}
+	via <a href="{{url()}}">{{site()->meta('title')}}</a>,
+	{{site()->meta('email_subtitle')}}
+</p>

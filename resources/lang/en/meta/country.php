@@ -5,5 +5,6 @@ return [
     'resource_description'  => 'Find resource contracts for resource -',
     'tagline'               => '<p class="repo-description">A directory of </p> <div class="large-title"><span>Resource Contracts from :name</span><div>',
     'about'                 => 'About',
+    'email_subtitle'        => 'an annotated directory of petroleum and mineral contracts.',
 ];
 
