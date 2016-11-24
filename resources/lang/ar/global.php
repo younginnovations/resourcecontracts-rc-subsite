@@ -1,12 +1,13 @@
 <?php
 return [
     'search'                  => "بحث",
-    'search_placeholder'      => "  يتوفر للبحث :count عقدا و وثائق ذات الصلة",
     'associated_documents'    => 'والوثائق المرتبطة',
     'contracts'               => "عقود",
     'contract_doc_from'       => "وثائق العقود من ",
     'countries'               => "البلدان",
     'country'                 => "البلد",
+    'resource'                => 'مورد',
+    'resources'               => 'موارد',
     'view_all_countries'      => "عرض جميع البلدان ",
     'contracts_related_to'    => "وثائق عقود تتعلق",
     'all_contracts'           => "جميع العقود",

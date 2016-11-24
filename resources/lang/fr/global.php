@@ -1,12 +1,13 @@
 <?php
 return [
     'search'                  => "Chercher",
-    'search_placeholder'      => "Chercher :count contrats et des documents associés",
     'associated_documents'    => 'et les documents associés',
     'contracts'               => "contrats",
     'contract_doc_from'       => "Documents du contrat de",
     'countries'               => "Pays",
     'country'                 => "Pays",
+    'resource'                => 'Ressource',
+    'resources'               => 'Ressources',
     'view_all_countries'      => "Montrer tous les pays",
     'contracts_related_to'    => "Documents du contrat liés à",
     'all_contracts'           => "Tous les contrats ",
@@ -35,7 +36,7 @@ return [
     'page_doesnt_exist'       => "La page que vous recherchez n'existe pas",
     'if_you_are_looking'      => "Si vous cherchez des documents de contrats, utilisez la barre de recherche ci-dessus ",
     'temporarily_unavailable' => "est temporairement indisponible",
-    'site'                     => "Site ",
+    'site'                    => "Site ",
     'fix_message'             => "Nous cherchons à résoudre ce problème. Prière de contacter",
     'if_problem_persists'     => "Si le problème persiste ",
     'apologize'               => "Nous nous excusons pour tout inconvénient",
