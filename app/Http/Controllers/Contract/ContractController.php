@@ -77,6 +77,8 @@ class ContractController extends BaseController
      */
     public function detail($contract_id)
     {
+        redirectIfOldOCID($contract_id);
+
         $contract                     = $this->api->contractDetail($contract_id);
         $contract->annotationsCluster = $this->annotation->groupAnnotationsByCluster($contract->annotations);
         $referrer                     = \Request::server('HTTP_REFERER');
@@ -134,6 +136,8 @@ class ContractController extends BaseController
      */
     public function download($contract_id)
     {
+        redirectIfOldOCID($contract_id);
+
         $contract = $this->api->contractDetail($contract_id);
         if (empty($contract->metadata)) {
             abort(404);
@@ -176,6 +180,8 @@ class ContractController extends BaseController
      */
     public function downloadPdf($contract_id)
     {
+        redirectIfOldOCID($contract_id);
+
         $contract = $this->api->metadata($contract_id);
         if (empty($contract) || !isset($contract->file[0]->url)) {
             abort(404);
@@ -188,7 +194,7 @@ class ContractController extends BaseController
         );
         header('Content-Description: File Transfer');
         header('Content-Type: application/pdf');
-        header('Content-Disposition: attachment; filename="' . basename($filename) . '.pdf"');
+        header('Content-Disposition: attachment; filename="'.basename($filename).'.pdf"');
         header('Expires: 0');
         header('Cache-Control: must-revalidate');
         header('Pragma: public');
@@ -205,6 +211,8 @@ class ContractController extends BaseController
      */
     public function view($contract_id)
     {
+        redirectIfOldOCID($contract_id);
+
         $referrer              = \Request::server('HTTP_REFERER');
         $back                  = is_null($referrer) ? route('contract.view', ['id' => $contract_id]) : $referrer;
         $contract              = new \stdClass();
@@ -247,7 +255,7 @@ class ContractController extends BaseController
      */
     public function downloadAnnotations($id)
     {
-        $this->api->downloadAPI("contract/" . $id . "/annotations/download", [], "", $id);
+        $this->api->downloadAPI("contract/".$id."/annotations/download", [], "", $id);
         die;
     }
 
@@ -261,6 +269,8 @@ class ContractController extends BaseController
      */
     public function popup($contract_id, $annotation_id)
     {
+        redirectIfOldOCID($contract_id);
+
         $annotation = $this->api->getAnnotationDetail($contract_id, $annotation_id);
 
         if (empty($annotation)) {
