@@ -44,7 +44,7 @@
 		config.share = {
 			facebook: 'https://www.facebook.com/sharer/sharer.php?u=',
 			google: 'https://plus.google.com/share?url=',
-			twitter: 'https://twitter.com/share?text={{ site()->meta('title')}}'
+			twitter: 'https://twitter.com/share?text=' + document.title
 		};
 		config.download = {
 			'pdf': '{{route('contract.download.pdf',['id'=> $contract->metadata->open_contracting_id])}}',

@@ -229,5 +229,5 @@ return [
     "Zinc"                             => "Zinc",
     "Zinc-Lead"                        => "Zinc-Lead",
     "Zircon"                           => "Zircon",
-    "Zirconium"                        => "Zirconium"
+    "Zirconium"                        => "Zirconium",
 ];

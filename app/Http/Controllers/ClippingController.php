@@ -37,7 +37,11 @@ class ClippingController extends BaseController
      */
     public function index()
     {
-        return view('clip.index');
+        $meta = [
+            'title' => 'Clips',
+        ];
+
+        return view('clip.index', compact('meta'));
     }
 
     /**

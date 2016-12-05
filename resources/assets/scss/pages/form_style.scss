@@ -109,10 +109,9 @@
   margin-top: 20%;
   margin-bottom: 20%;
 
-  .panel-body{
+  .panel-body {
     padding: 35px;
   }
-
 
   .form-control::-webkit-input-placeholder {
     color: $color_cape_cod_50_approx;
@@ -153,6 +152,47 @@
   input[type='checkbox']:checked {
     background: $color_link_color;
     border: 1px solid $color_link_color;
+
+    &:before {
+      content: "";
+      width: 16px;
+      height: 12px;
+      position: absolute;
+      top: 5px;
+      left: 2px;
+      background: transparent url(#{$img-path}/ic-sprite.svg) -48px -195px;
+    }
+  }
+}
+
+.search-input-wrapper {
+  input[type='checkbox'] {
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 1px solid #aaa;
+    position: relative;
+    margin-top: 11px;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .form-control {
+    box-shadow: none !important;
+
+    &:focus {
+      box-shadow: none !important;
+    }
+  }
+  input[type='checkbox']:checked {
+    background: $color_link_color;
+    border: 1px solid $color_link_color;
+    outline: 0;
+
+    &:focus {
+      outline: 0;
+      box-shadow: none !important;
+    }
 
     &:before {
       content: "";
@@ -237,16 +277,13 @@
 }
 
 .search-input-wrapper {
-  position: absolute;
-  top: 80px;
-  left: 0;
   width: 100%;
   background: $white;
-  border: 1px solid $color_mystic_approx;
-  box-shadow: 0 4px 4px $black_20;
-  padding: 34px 0;
+  border-top: 1px solid $color_mystic_approx;
+  padding: 34px 20px;
   display: none;
   margin: 0;
+  overflow: hidden;
   z-index: 3;
 
   .col-lg-12 {
@@ -322,10 +359,13 @@
   i {
     display: inline-block;
     position: relative;
-    margin-left: 2px;
-    font-size: 15px;
+    margin-left: 3px;
+    top: 2px;
+    font-size: 17px;
     transition: all 0.3s ease;
+    color: #818181;
   }
+
   &:hover {
     background: #eee;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.20);
@@ -336,6 +376,25 @@
   .adv_search_toogle {
     bottom: -95px;
   }
+}
+
+.country-list-wrapper {
+  .search-input-wrapper {
+    border: none;
+    padding-top: 0;
+    border-bottom: 1px solid #e7e9eb;
+    padding-bottom: 7px;
+    margin-bottom: 15px;
+    label {
+      text-align: left;
+    }
+  }
+
+  [class^="col-"] {
+    min-height: initial;
+    margin-top: 0;
+  }
+
 }
 
 .input-wrapper {
@@ -568,6 +627,7 @@ input.select2-search__field {
 }
 
 .select2-container .select2-selection--multiple {
+
   max-width: 100%;
 }
 

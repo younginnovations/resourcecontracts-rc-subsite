@@ -276,14 +276,14 @@ a {
 }
 
 @media (min-width: 551px) {
-  .contract-number-wrap.has-static-search {
-    top: 90px;
 
+  .contract-number-wrap.has-static-search{
+    //top: 90px;
   }
 }
 
-.contract-search-number-wrap {
-  top: 67px;
+.contract-search-number-wrap{
+  top: -80px;
 }
 
 .page-contracts {
@@ -310,12 +310,12 @@ a {
   }
 
    @media (min-width: 768px) {
-  .advance-filter-wrapper .social-share, .actions-wrapper .social-share {
-    right: 313px;
+    .advance-filter-wrapper .social-share, .actions-wrapper .social-share {
+      right: 313px;
+
+    }
 
   }
-
-}
 
   .download-csv {
     right: 182px;

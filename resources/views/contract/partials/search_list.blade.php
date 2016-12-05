@@ -53,7 +53,7 @@ if ($route == "contracts" && isset($url['year'])) {
 		<?php $annotations = $api->getAnnotations($contract->id);?>
 		<tr>
 			<td></td>
-			<td>
+			<td data-title="@lang('global.document')">
 				<a class="title-{{$contract->open_contracting_id}}"
 				   href="{{ url(sprintf("/contract/%s/view#/pdf", $contract->open_contracting_id )) }}">
 					{{ $contract->name or ''}}
@@ -118,8 +118,8 @@ if ($route == "contracts" && isset($url['year'])) {
 			</td>
 			<td>
 				<div class="contract-info-section">
-					<div class="download-main-wrap">
-						<div class="download-wrap">
+					<div class="download-main-wrap dropdown">
+						<div class="download-wrap dropdown-toggle" data-toggle="dropdown">
 							<span>@lang('global.download')</span>
 						</div>
 						<ul class="dropdown-menu">
@@ -141,19 +141,19 @@ if ($route == "contracts" && isset($url['year'])) {
 				</div>
 			</td>
 			@if( !site()->isCountrySite() && $contract->country_code !='')
-				<td>
+				<td data-title="@lang('global.country')">
 					<img style="width: 24px ; height: auto" src="{{getFlagUrl($contract->country_code)}}"/>
 					<span class="country-name-title">{{@trans('country')[$contract->country_code]}}</span>
 				</td>
 			@endif
 			@if($showYear)
 				@if($contract->year_signed !='')
-					<td>{{$contract->year_signed}}</td>
+					<td data-title="@lang('global.year')">{{$contract->year_signed}}</td>
 				@else
 					<td></td>
 				@endif
 			@endif
-			<td>
+			<td data-title="@lang('global.resource')">
 				<?php
 				if (isset($url['sortby']) && $url['sortby'] == "resource") {
 					if ($url['order'] == "asc") {
@@ -182,7 +182,7 @@ if ($route == "contracts" && isset($url['year'])) {
 					@endforelse
 				</ul>
 			</td>
-			<td>
+			<td data-title="@lang('contract.contract_type')">
 				<ul>
 					@if(is_array($contract->contract_type))
 						@foreach($contract->contract_type as $contracttype)

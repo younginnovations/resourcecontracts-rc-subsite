@@ -26,8 +26,8 @@ use Illuminate\Support\Facades\Lang;
 			</div>
 			<div class="head-wrap">
 				<div class="right-column-view">
-					<div class="download-main-wrap">
-						<a class="download-wrap"> </a>
+					<div class="download-main-wrap dropdown">
+						<a class="download-wrap dropdown-toggle" data-toggle="dropdown"> </a>
 						<ul class="dropdown-menu">
 							<li>
 								<a href="{{route('contract.download.pdf',['id'=> $contract->metadata->open_contracting_id])}}">@lang('annotation.pdf')</a>
@@ -39,8 +39,8 @@ use Illuminate\Support\Facades\Lang;
 							@endif
 						</ul>
 					</div>
-					<div class="social-share" id="social-toggler">
-						<a><span>@lang('contract.social_share')</span></a>
+					<div class="social-share dropdown" id="social-toggler">
+						<a class="dropdown-toggle" data-toggle="dropdown"><span>@lang('contract.social_share')</span></a>
 						@include('contract.partials.share')
 					</div>
 					@if(site()->isClipEnabled())

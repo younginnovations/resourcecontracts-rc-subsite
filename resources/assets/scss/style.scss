@@ -1500,7 +1500,7 @@ a.filter-label{
 
 @media (min-width: 551px) {
   .contract-number-wrap.has-static-search{
-    top: 90px;
+    //top: 90px;
   }
 }
 
@@ -1634,9 +1634,7 @@ a.filter-label{
     //margin-top: 2px;
     li {
       width: 100%;
-      border: 0;
       margin: 0;
-      padding: 2px 0;
     }
   }
 }
@@ -2388,7 +2386,7 @@ td.contract-date {
 }
 
 .contract-search-number-wrap{
-  top: 67px;
+  top: -80px;
 }
 
 .page-contracts {
