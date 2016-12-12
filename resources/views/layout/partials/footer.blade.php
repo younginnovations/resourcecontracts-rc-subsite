@@ -62,6 +62,43 @@
 							@include('layout.partials.language')
 						</div>
 					@endif
+					<br>
+					<form action="http://localhost:8000/subscribe/" method="get" name="subscribe">
+						<style>
+							.input {
+								display: flex;
+								align-items: center;
+								border-radius: 0 5px 5px 0;
+							}
+							#email {
+								color: #000000;
+								padding: 5px;
+							}
+							.button {
+								height: 44px;
+								border: none;
+							}
+							#newsletter-submit {
+								width: 25%;
+								height: 46px;
+								background: #E86C8D;
+								font-family: inherit;
+								font-weight: bold;
+								color: inherit;
+								letter-spacing: 1px;
+								border-radius: 0 5px 5px 0;
+								cursor: pointer;
+								transition: background .3s ease-in-out;
+							}
+							#newsletter-submit:hover {
+								background: #d45d7d;
+							}
+						</style>
+						<div class="input">
+							<input type="text" class="button" id="email" name="email" placeholder="name@example.com">
+							<input type="submit" class="button" id="newsletter-submit" value="Subscribe">
+						</div>
+					</form>
 				</div>
 			</div>
 			<div class="footer-bottom">
