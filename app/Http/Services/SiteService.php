@@ -255,6 +255,11 @@ class SiteService
         return trim($this->getEnv('ADMIN_API_URL'), '/');
     }
 
+    public function newsletterUrl()
+    {
+        return trim($this->getEnv('NEWSLETTER_URL'), '/');
+    }
+
     /**
      * Get Country Detail
      *

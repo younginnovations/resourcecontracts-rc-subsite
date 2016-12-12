@@ -63,7 +63,7 @@
 						</div>
 					@endif
 					<br>
-					<form action="http://localhost:8000/subscribe/" method="get" name="subscribe">
+					<form action="{{site()->newsletterUrl()}}" method="get" name="subscribe">
 						<style>
 							.input {
 								display: flex;
