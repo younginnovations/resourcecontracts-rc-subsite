@@ -96,6 +96,7 @@
 						</style>
 						<div class="input">
 							<input type="text" class="button" id="email" name="email" placeholder="name@example.com">
+							<input type="hidden" name="source" value="{{site()->getSiteKey()}}">
 							<input type="submit" class="button" id="newsletter-submit" value="Subscribe">
 						</div>
 					</form>
