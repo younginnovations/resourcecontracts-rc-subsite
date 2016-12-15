@@ -33,6 +33,20 @@ $image_intro = site()->getImageUrl('intro_bg');
 	<section class="hero-image">
 			<div class="petroleum-wrapper">
 				<div class="section-wrap">
+					<div class="landing_section_logos partner-inner-each">
+						<p>PARTNERS</p>
+						<a href="http://www.resourcegovernance.org/" class="img-responsive logo__nrgi"
+						   target="_blank"></a>
+						<a href="http://ccsi.columbia.edu/" class="img-responsive logo__cu"
+						   target="_blank"></a>
+						<a href="http://www.worldbank.org/en/topic/governance"
+						   class="img-responsive logo__wb"
+						   target="_blank"></a>
+						<a href="http://www.dfid.gov.uk" class="img-responsive logo__ukaid"
+						   target="_blank"></a>
+						<a href="http://alsf.afdb.org/"
+						   class="img-responsive logo__alsf" target="_blank"></a>
+					</div>
 					<div class="petroleum-mineral">
 						{!! site()->meta('tagline') !!}
 						<div class="clearfix">
@@ -48,8 +62,8 @@ $image_intro = site()->getImageUrl('intro_bg');
 								<a href="{{url('search')}}">@lang('global.advanced_search')</a>
 							</div>
 						</div>
-					</div>
-					<div class="petroleum-list show-in-bigger-screen">
+
+						<div class="petroleum-list show-in-bigger-screen">
 						<div class="col-md-12 col-sm-12 col-xs-12 text-center petroleum-list-inner">
 							<div class="row">
 								<div class="col-md-4 col-sm-4 col-xs-4 petroleum-list-each">
@@ -87,6 +101,7 @@ $image_intro = site()->getImageUrl('intro_bg');
 								</ul>
 							</div>
 						</div>
+					</div>
 					</div>
 				</div>
 			</div>

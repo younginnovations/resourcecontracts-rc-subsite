@@ -200,6 +200,17 @@
 }
 
 
+
+@media all and (min-width: 1400px){
+  //.section-wrap {
+  //  min-height: 610px;
+  //  max-width: 1400px !important;
+  //  margin: 0 auto;
+  //
+  //}
+}
+
+
 @media all and (min-width: 1300px){
   .section-wrap {
     min-height: 610px;
@@ -222,11 +233,14 @@
     max-width: 600px;
   }
 }
+
+
+
 /*@media (max-width: 1110px) and (min-width: 992px){*/
 
 @media (min-width: 992px){
   .petroleum-mineral {
-    width: calc(100% - 186px);
+    width: calc(100% - 370px);
     padding: 140px 227px 84px 30px;
 
     .large-title{
@@ -236,9 +250,12 @@
   }
 
   .petroleum-list{
-    left: calc(100% - 417px);
-    top: calc(50% - 145px)
+    left: auto;
+    right: 15px;
+    transform: translateX(50%);
+    top: 30px;
   }
+
 
   .section-wrap{
     max-width: 1024px;
@@ -785,9 +802,39 @@
   }
 }
 
+@media (max-width: 992px) {
+
+  .section-wrap{
+    padding-top: 50px;
+  }
+
+  .landing_section_logos {
+    display: block;
+
+    p{
+      margin-bottom: 15px;
+    }
+  }
+
+  .landing_section_logos.partner-inner-each.landing_section_logos.partner-inner-each a {
+    display: inline-block;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    width: 131px!important;
+    background-size: 100%!important;
+  }
+}
+
 @media (max-width: 767px){
   .right-column-view{
     width: auto;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .landing_section_logos {
+    display: none;
   }
 }
 

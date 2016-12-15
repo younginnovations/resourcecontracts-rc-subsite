@@ -191,6 +191,39 @@
   border-bottom: solid 1px #333;
 }
 
+.section-wrap{
+  clear: both;
+}
+
+
+.section-wrap:after{
+  content: "";
+  display: block;
+  clear: both;
+}
+.landing_section_logos{
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 15px;
+
+  p{
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 0.75px;
+  }
+
+  a{
+    margin-bottom: 35px;
+  }
+}
+
+.petroleum-mineral{
+  display: inline-block;
+  position: relative;
+}
+
 .wrapper {
     width: 950px;
     margin: 0 auto;
@@ -256,7 +289,7 @@
       max-width: 600px;
       .form-group {
         input {
-          width: calc(100% - 126px);
+          width: calc(100% - 145px);
           border: none;
           line-height: 18px;
           background: linear-gradient(rgba($white, 0.45), rgba($white, 0.45));
