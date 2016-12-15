@@ -19,18 +19,24 @@ class APIService
      */
     protected $client;
     /**
+     * @var LocalizationService
+     */
+    protected $lang;
+    /**
      * @var SiteService
      */
     private $site;
 
     /**
-     * @param Client      $client
-     * @param SiteService $site
+     * @param Client              $client
+     * @param SiteService         $site
+     * @param LocalizationService $lang
      */
-    public function __construct(Client $client, SiteService $site)
+    public function __construct(Client $client, SiteService $site, LocalizationService $lang)
     {
         $this->client = $client;
         $this->site   = $site;
+        $this->lang   = $lang;
     }
 
     /**
@@ -294,6 +300,10 @@ class APIService
                 $query['country_code'] = strtolower($this->site->getCountryCode());
             }
 
+            if ($this->lang->getCurrentLang() != $this->lang->getDefaultLang()) {
+                $query['lang'] = $this->lang->getCurrentLang();
+            }
+
             $query['category'] = strtolower($this->site->getCategory());
             $request->setQuery($query);
             $key = md5($request->getUrl());
@@ -306,7 +316,6 @@ class APIService
                 $data     = $data->getContents();
                 Cache::put($key, $data, Carbon::now()->addMinutes(5));
             }
-
 
             if ($array) {
                 return json_decode($data, true);
