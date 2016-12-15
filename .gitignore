@@ -11,3 +11,5 @@ bourbon
 .DS_Store
 /storage/debugbar
 /docker
+*.map
+!spec/*.map

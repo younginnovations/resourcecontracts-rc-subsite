@@ -67,7 +67,7 @@ var Email = React.createClass({
         return {
             to: '',
             from: '',
-            subject: langClip.subjectClip,
+            subject: '',
             body: '',
             url: '',
             errors: [],
@@ -75,7 +75,7 @@ var Email = React.createClass({
         };
     },
     componentDidMount: function () {
-        var subject = 'Link from ' + document.title + ' ' + this.state.subject;
+        var subject = 'Clipped Annotations from ' + siteName;
         this.setState({url: this.props.url, subject: subject});
         $(this.getDOMNode()).modal('show');
         $(this.getDOMNode()).on('hidden.bs.modal', this.props.handleHideModal);
