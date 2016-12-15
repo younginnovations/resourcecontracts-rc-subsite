@@ -14,15 +14,12 @@
 		}
 	</style>
 	<script>
-		console.log('log');
 		var timeout = setTimeout(function () {
-			console.log(window.location.hash.indexOf('pdf'));
-			if (window.location.hash && window.location.hash.indexOf('pdf') == 2) {
-				document.location.href = '#/text';
-				document.getElementById('loading-text').innerHTML = "loading ... (redirected text view)"
+			if (window.location.hash && window.location.hash.indexOf('pdf') > 0) {
+				document.location.href = window.location.hash.replace('pdf', 'text');
+				document.getElementById('loading-text').innerHTML = '@lang('contract.loading_redirect')';
 			}
-
-		}, 20000);
+		}, 15000);
 	</script>
 @stop
 @section('content')

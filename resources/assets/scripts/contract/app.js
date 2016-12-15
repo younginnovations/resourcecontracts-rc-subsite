@@ -31,7 +31,6 @@ class App extends Component {
     }
 
     componentDidMount() {
-        console.log('timeout');
         clearTimeout(timeout);
         Event.subscribe('annotation:loaded', () => {
             Contract.showPopup();
