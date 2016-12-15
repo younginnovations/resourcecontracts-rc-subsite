@@ -77,4 +77,6 @@ return [
     'resource_count'          => ':count Resources',
     'resource'                => 'Resource',
     'tagline'                 => 'A directory of Resource Contracts from :name',
+    'partners'                => 'PARTNERS',
+    'donors'                  => 'DONORS',
 ];

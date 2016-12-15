@@ -13,21 +13,16 @@ body.lang-ar{
 
   }
 
-
-  .petroleum-list{
-    @media (min-width: 992px){
-      right: calc(100% - 417px);
-    }
-  }
-
   .petroleum-mineral{
     padding: 120px 30px 120px 225px;
     @media (min-width: 992px){
       padding: 140px 30px 84px 227px;
     }
-
+    @media (max-width: 880px){
+      padding: 80px 80px 80px 30px;
+    }
     @media only screen and (max-width: 767px){
-      padding: 30px 20px;
+      padding: 50px 15px;
     }
   }
 
@@ -49,7 +44,7 @@ body.lang-ar{
   .pagination .previous{
     background-position: -194px -560px !important;
   }
-  
+
   .right-column-view{
     .clip-btn{
       float: left;
@@ -61,6 +56,73 @@ body.lang-ar{
     right: auto;
     @media (max-width: 767px){
       left: 8px;
+    }
+  }
+}
+
+body.lang-ar.rc, body.lang-ar.olc{
+
+  .petroleum-list{
+    @media (min-width: 992px){
+      left: 0;
+      right: auto;
+      transform: translateX(-50%);
+    }
+  }
+
+}
+
+body.lang-ar.rc{
+
+  .landing_section_logos{
+    .partners{
+      padding-right: 0;
+      padding-left: 35px;
+      border-right: 0;
+      border-left: 1px solid rgba(255,255,255,0.5);
+      p{
+        text-align: right;
+      }
+      a{
+        margin-right: 0;
+        margin-right: 30px;
+        &.nrgi{
+          margin-right: 0;
+        }
+      }
+
+      @media screen and (max-width: 768px){
+        text-align: right;
+        border-left: 0;
+        padding-left: 0;
+
+        a {
+          margin-right: 15px;
+        }
+      }
+    }
+    @media screen and (max-width: 768px){
+      padding-left: 15px;
+      padding-right: 30px;
+    }
+    .donors{
+      padding-right: 35px;
+      padding-left: 0px;
+      text-align: right;
+      a{
+        margin-right: 0;
+        margin-left: 25px;
+        &:last-child{
+          margin-left: 0;
+        }
+      }
+      @media screen and (max-width: 768px){
+        padding-right: 0;
+
+        a {
+          margin-left: 15px;
+        }
+      }
     }
   }
 }

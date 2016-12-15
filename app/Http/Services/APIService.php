@@ -122,8 +122,11 @@ class APIService
      */
     public function contractDetail($contract_id)
     {
-        $contract                   = new \stdClass();
-        $contract->metadata         = $this->metadata($contract_id);
+        $contract           = new \stdClass();
+        $contract->metadata = $this->metadata($contract_id);
+        if (empty($contract->metadata)) {
+            return [];
+        }
         $contract->annotations      = $this->getAnnotationsGroup($contract_id);
         $contract->annotationsGroup = $this->groupAnnotationsByCategory($contract->annotations);
         $contract->pages            = $this->getTextPage($contract_id, 1);
@@ -272,7 +275,7 @@ class APIService
         ];
 
         if ($filter['download']) {
-            echo $this->downloadAPI('contracts/search', $query);
+            $this->downloadAPI('contracts/search', $query);
         }
         $contract = $this->apiCall('contracts/search', $query);
         if ($contract) {
@@ -460,52 +463,47 @@ class APIService
     /**
      * call API
      *
-     * @param       $resource
-     * @param array $query
-     * @param bool  $array
+     * @param        $resource
+     * @param array  $query
+     * @param bool   $array
+     *
+     * @param string $id
      *
      * @return null
+     * @throws \Exception
      */
     public function downloadAPI($resource, array $query = [], $array = false, $id = "")
     {
-        try {
-            $filename = "contract_".date('Y-m-d');
-            if (!empty($id)) {
-                $metadata     = $this->contractDetail($id);
-                $contractName = $metadata->metadata->name;
-                $contractName = str_slug($contractName, "_");
-                $filename     = "Annotations_".$contractName."_".date('Ymdhis');
+        $filename = "contract_".date('Y-m-d');
+        if (!empty($id)) {
+            $metadata = $this->contractDetail($id);
+            if (empty($metadata)) {
+                throw new \Exception('Contract not found with id '.$id);
             }
-            $request = new Request('GET', $this->apiURL($resource));
-
-            if ($this->site->isCountrySite()) {
-                $query['country'] = strtolower($this->site->getCountryCode());
-            }
-
-            $query['category'] = strtolower($this->site->getCategory());
-
-            $request->setQuery($query);
-            $response = $this->client->send($request);
-            $data     = $response->getBody()->getContents();
-            $data     = json_decode($data, true);
-
-            Excel::create(
-                $filename,
-                function ($csv) use (&$data) {
-                    $csv->sheet(
-                        'sheetname',
-                        function ($sheet) use (&$data) {
-                            $sheet->fromArray($data);
-                        }
-                    );
-                }
-            )->download('xls');
-            die;
-        } catch (\Exception $e) {
-            Log::error($resource.":".$e->getMessage(), $query);
-
-            return null;
         }
+        $request = new Request('GET', $this->apiURL($resource));
+
+        if ($this->site->isCountrySite()) {
+            $query['country'] = strtolower($this->site->getCountryCode());
+        }
+
+        $query['category'] = strtolower($this->site->getCategory());
+
+        $request->setQuery($query);
+        $response = $this->client->send($request);
+        $data     = $response->getBody()->getContents();
+        $data     = json_decode($data, true);
+        Excel::create(
+            $filename,
+            function ($csv) use (&$data) {
+                $csv->sheet(
+                    'sheetname',
+                    function ($sheet) use (&$data) {
+                        $sheet->fromArray($data);
+                    }
+                );
+            }
+        )->download('xls');
     }
 
     /**

@@ -58,11 +58,8 @@
   .navbar-header {
     width: 100%;
     border-right: 0;
-    border-bottom: 1px solid rgba(220, 223, 226, 0.7);
-    border-bottom: 1px solid rgb(220, 223, 226);
   }
 }
-
 @media all and (max-width: 480px) {
   .panel-top-content {
     overflow: visible;
@@ -200,6 +197,17 @@
 }
 
 
+
+@media all and (min-width: 1400px){
+  //.section-wrap {
+  //  min-height: 610px;
+  //  max-width: 1400px !important;
+  //  margin: 0 auto;
+  //
+  //}
+}
+
+
 @media all and (min-width: 1300px){
   .section-wrap {
     min-height: 610px;
@@ -222,7 +230,11 @@
     max-width: 600px;
   }
 }
+
+
+
 /*@media (max-width: 1110px) and (min-width: 992px){*/
+
 
 @media (min-width: 992px){
   .petroleum-mineral {
@@ -236,14 +248,26 @@
   }
 
   .petroleum-list{
-    left: calc(100% - 417px);
-    top: calc(50% - 145px)
+    left: auto;
+    right: 15px;
+    transform: translateX(50%);
+    top: 47px;
+
+    body.rc &{
+      top: 28px;
+    }
   }
 
   .section-wrap{
     max-width: 1024px;
     margin: 0 auto;
     padding: 133px 20px 20px 20px;
+    body.rc & {
+      padding-top: 110px;
+      min-height: 540px;
+      padding-bottom: 10px;
+    }
+
   }
 }
 
@@ -785,9 +809,33 @@
   }
 }
 
+@media (max-width: 992px) {
+
+  .section-wrap {
+    padding-top: 120px;
+  }
+}
+
 @media (max-width: 767px){
   .right-column-view{
     width: auto;
   }
 }
 
+
+@media (max-width: 480px) {
+  body.rc .landing_section_logos {
+    display: none;
+  }
+
+  .section-wrap{
+    padding-top: 81px;
+  }
+}
+//
+//@media (min-width: 1401px) {
+//  .section-wrap {
+//    padding-top: 150px!important;
+//    padding-bottom: 55px;
+//  }
+//}
