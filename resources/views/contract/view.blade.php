@@ -1,4 +1,5 @@
 @extends('layout.app-full')
+
 @section('css')
 	<link rel="stylesheet" href="{{ url('css/contract.css') }}">
 	<style>
@@ -12,11 +13,22 @@
 			text-align: center;
 		}
 	</style>
+	<script>
+		console.log('log');
+		var timeout = setTimeout(function () {
+			console.log(window.location.hash.indexOf('pdf'));
+			if (window.location.hash && window.location.hash.indexOf('pdf') == 2) {
+				document.location.href = '#/text';
+				document.getElementById('loading-text').innerHTML = "loading ... (redirected text view)"
+			}
+
+		}, 20000);
+	</script>
 @stop
 @section('content')
 	<div id="contract">
 		<div class="loader">
-			<img src="{{url('images/loading.gif')}}"/> @lang('contract.loading')
+			<img src="{{url('images/loading.gif')}}"/> <span id="loading-text">@lang('contract.loading')</span>
 		</div>
 	</div>
 @stop

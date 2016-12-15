@@ -1,8 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
 var WebpackNotifierPlugin = require('webpack-notifier');
-
-
 var BUILD_DIR = path.resolve(__dirname, 'public/js');
 var APP_DIR = path.resolve(__dirname, 'resources/assets/scripts');
 
@@ -46,13 +44,13 @@ var config = {
     plugins: [
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.DedupePlugin(),
-        /*
-         new webpack.optimize.UglifyJsPlugin({
-         compress: { warnings: false },
-         comments: false,
-         minimize: true
-         }),
-         */
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {warnings: false},
+            minimize: true,
+            output: {
+                comments: false
+            }
+        }),
         new WebpackNotifierPlugin({title: 'Webpack'}),
         new webpack.NoErrorsPlugin(),
         new webpack.DefinePlugin({

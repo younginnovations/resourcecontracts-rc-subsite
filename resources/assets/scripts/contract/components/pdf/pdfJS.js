@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Config from '../../config';
 import Contract from '../../contract';
-
+PDFJS.workerSrc = Config.appUrl('js/pdfjs/pdf.worker.js');
 var cachePDF = [];
 var PdfJS = React.createClass({
     propTypes: {

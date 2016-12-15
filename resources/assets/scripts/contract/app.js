@@ -31,9 +31,11 @@ class App extends Component {
     }
 
     componentDidMount() {
+        console.log('timeout');
+        clearTimeout(timeout);
         Event.subscribe('annotation:loaded', () => {
             Contract.showPopup();
-        })
+        });
         let titleHeadHeight = $('.title-wrap').height();
         $(window).scroll(function () {
             if ($(window).scrollTop() > titleHeadHeight) {

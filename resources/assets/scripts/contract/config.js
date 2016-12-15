@@ -11,4 +11,9 @@ Config.googleUrl = ()=> {
     return config.share.google + encodeURIComponent(window.location.href);
 };
 
+Config.appUrl = (uri)=> {
+    return config.APP_URL + '/' + uri.trim('/');
+};
+
+
 export default Config;

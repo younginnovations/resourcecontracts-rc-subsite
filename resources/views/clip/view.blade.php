@@ -21,15 +21,15 @@
 			</div>
 		</div>
 	</div>
-
-@endsection
+@stop
 
 @section('js')
 	<script>
-		var key ='{{$key}}';
+		var key = '{{$key}}';
 		var langResource =  {!!  json_encode(trans('resources')) !!};
 		var langCountry =  {!!  json_encode(trans('country')) !!};
 		var langClip = {!! json_encode(trans('clip')) !!};
+		var siteName = '{{site()->meta('title')}}';
 	</script>
 	<script src="{{url('js/clipping.js')}}"></script>
 @stop
