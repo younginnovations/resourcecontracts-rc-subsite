@@ -260,7 +260,7 @@
   .section-wrap{
     max-width: 1024px;
     margin: 0 auto;
-    padding: 133px 20px 20px 20px;
+    padding: 80px 20px 20px 20px;
   }
 }
 
@@ -821,7 +821,6 @@
     margin-right: 15px;
     margin-bottom: 15px;
     width: 131px!important;
-    background-size: 100%!important;
   }
 }
 
@@ -833,7 +832,7 @@
 
 
 @media (max-width: 480px) {
-  .landing_section_logos {
+  body.rc .landing_section_logos {
     display: none;
   }
 }

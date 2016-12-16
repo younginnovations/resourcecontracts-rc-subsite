@@ -201,28 +201,35 @@
   display: block;
   clear: both;
 }
-.landing_section_logos{
-  display: inline-block;
-  vertical-align: top;
-  margin-right: 15px;
 
-  p{
-    font-size: 18px;
-    color: #fff;
-    margin-bottom: 25px;
-    text-transform: uppercase;
-    letter-spacing: 0.75px;
+body.rc{
+
+  .landing_section_logos{
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 25px;
+
+    p{
+      font-size: 18px;
+      color: #fff;
+      margin-bottom: 25px;
+      text-transform: uppercase;
+      letter-spacing: 0.75px;
+    }
+
+    a{
+      margin-bottom: 35px;
+    }
   }
 
-  a{
-    margin-bottom: 35px;
-  }
 }
 
 .petroleum-mineral{
   display: inline-block;
   position: relative;
 }
+
+
 
 .wrapper {
     width: 950px;
@@ -663,6 +670,71 @@ p {
 
   }
 }
+
+
+/*** LANDING HERO IMAGE SECTION LOGOS STYLES ***/
+
+.landing_section_logos.partner-inner-each.landing_section_logos.partner-inner-each a {
+  opacity: 0.75;
+}
+
+.landing_section_logos.partner-inner-each{
+  .img-responsive{
+    &.logo__cu{
+      width: 166px;
+      height: 42px;
+      background: transparent url(../images/CCSI_logo.png) 0 0 no-repeat;
+      @include background-image-retina(transparent,"../images/CCSI_logo", "png",0,0);
+      background-size: contain!important;
+    }
+    &.logo__wb{
+      width: 166px;
+      height: 38px;
+      background: transparent url(../images/WORLDBANK_logo.png) 0 0 no-repeat;
+      @include background-image-retina(transparent,"../images/WORLDBANK_logo", "png",0,0);
+      background-size: contain!important;
+    }
+    &.logo__nrgi{
+      width: 114px;
+      height: 45px;
+      background: transparent url(../images/NRGI_logo.png) 0 0 no-repeat;
+      @include background-image-retina(transparent,"../images/NRGI_logo", "png",0,0);
+      background-size: contain!important;
+    }
+    &.logo__alsf{
+      width: 136px;
+      height: 54px;
+      background: transparent url(../images/ALSF_logo.png) 0 0 no-repeat;
+      @include background-image-retina(transparent,"../images/ALSF_logo", "png",0,0);
+      background-size: contain!important;
+    }
+    &.logo__ukaid{
+      width: 138px;
+      height: 47px;
+      background: transparent url(../images/UKAid_logo.png) 0 0 no-repeat;
+      @include background-image-retina(transparent,"../images/UKAid_logo", "png",0,0);
+      background-size: contain!important;
+    }
+
+    //&.logo__ukaid{
+    //  width: 138px;
+    //  height: 47px;
+    //  background: transparent url(../images/logo_ukaid.png) 0 0 no-repeat;
+    //  @include background-image-retina(transparent,"../images/logo_ukaid", "png",0,0);
+    //  background-size: contain!important;
+    //}
+
+    &.logo__oo{
+      width: 54px;
+      height:49px;
+      background: transparent url(../images/logo_oo.png) 0 0 no-repeat;
+      @include background-image-retina(transparent,"../images/logo_oo", "png",0,0);
+      background-size: contain!important;
+    }
+
+  }
+}
+
 
 .menu-list {
   .menu-list-each a {
