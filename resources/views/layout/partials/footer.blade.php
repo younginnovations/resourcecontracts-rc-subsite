@@ -4,46 +4,47 @@
 			{{getOptionText('footer_text')}}
 		</p>
 		<div class="partner-wrapper clearfix">
-
-			<div class="mini__menu clearfix">
-
+			<div @if(\Request::url() == url()) style="margin: 30px 0px;" @endif class="mini__menu clearfix">
 				<div class="partner-inner">
 					<div class="">
-						<div class="partner-inner-each">
-							<ul>
-								@if(site()->isRC() || site()->isCountrySite())
+						@if(\Request::url() != url())
+							<div class="partner-inner-each">
+								<ul>
+									@if(site()->isRC() || site()->isCountrySite())
+										<li>
+											<a href="http://www.resourcegovernance.org/"
+											   class="img-responsive logo__nrgi"
+											   target="_blank"></a>
+										</li>
+									@endif
 									<li>
-										<a href="http://www.resourcegovernance.org/" class="img-responsive logo__nrgi"
+										<a href="http://ccsi.columbia.edu/" class="img-responsive logo__cu"
 										   target="_blank"></a>
 									</li>
-								@endif
-								<li>
-									<a href="http://ccsi.columbia.edu/" class="img-responsive logo__cu"
-									   target="_blank"></a>
-								</li>
-								@if(site()->isRC() || site()->isCountrySite())
+									@if(site()->isRC() || site()->isCountrySite())
+										<li>
+											<a href="http://www.worldbank.org/en/topic/governance"
+											   class="img-responsive logo__wb"
+											   target="_blank"></a>
+										</li>
+									@endif
+								</ul>
+							</div>
+							<div class="partner-inner-each">
+								<ul>
 									<li>
-										<a href="http://www.worldbank.org/en/topic/governance"
-										   class="img-responsive logo__wb"
+										<a href="http://www.dfid.gov.uk" class="img-responsive logo__ukaid"
 										   target="_blank"></a>
 									</li>
-								@endif
-							</ul>
-						</div>
-						<div class="partner-inner-each">
-							<ul>
-								<li>
-									<a href="http://www.dfid.gov.uk" class="img-responsive logo__ukaid"
-									   target="_blank"></a>
-								</li>
-								@if(site()->isRC() || site()->isCountrySite())
-									<li>
-										<a href="http://alsf.afdb.org/"
-										   class="img-responsive logo__alsf" target="_blank"></a>
-									</li>
-								@endif
-							</ul>
-						</div>
+									@if(site()->isRC() || site()->isCountrySite())
+										<li>
+											<a href="http://alsf.afdb.org/"
+											   class="img-responsive logo__alsf" target="_blank"></a>
+										</li>
+									@endif
+								</ul>
+							</div>
+						@endif
 					</div>
 				</div>
 				<div class="menu-list clearfix">
@@ -66,7 +67,8 @@
 			</div>
 			<div class="footer-bottom">
 				<p class="footer-description">@lang('footer.licensed')
-					<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" dir="rtl">(CC BY-SA 4.0)</a>
+					<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" dir="rtl">(CC BY-SA
+						4.0)</a>
 					<img src="{{url('images/license-buttons.png')}}" width="88" height="31">
 				</p>
 			</div>
@@ -93,5 +95,5 @@
 		ga('send', 'pageview');
 	</script>
 	@endif
-</body>
-</html>
+	</body>
+	</html>

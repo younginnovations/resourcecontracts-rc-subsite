@@ -35,7 +35,7 @@ $image_intro = site()->getImageUrl('intro_bg');
 			<div class="section-wrap">
 				@if(site()->isRC())
 					<div class="landing_section_logos partner-inner-each">
-						<p>@lang('PARTNERS')</p>
+						<p>@lang('global.partners')</p>
 
 						<a href="http://www.resourcegovernance.org/" class="img-responsive logo__nrgi"
 						   target="_blank"></a>
@@ -44,7 +44,7 @@ $image_intro = site()->getImageUrl('intro_bg');
 						<a href="http://www.worldbank.org/en/topic/governance"
 						   class="img-responsive logo__wb"
 						   target="_blank"></a>
-						<p class="doners">DONERS</p>
+						<p>@lang('global.donors')</p>
 						<a href="http://www.dfid.gov.uk" class="img-responsive logo__ukaid"
 						   target="_blank"></a>
 						<a href="http://alsf.afdb.org/"
