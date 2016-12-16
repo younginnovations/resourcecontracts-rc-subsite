@@ -289,6 +289,7 @@ body.rc{
   }
 }
 
+
   .hero-image {
     .search-form {
       padding: 0;
@@ -296,7 +297,7 @@ body.rc{
       max-width: 600px;
       .form-group {
         input {
-          width: calc(100% - 145px);
+          width: calc(100% - 126px);
           border: none;
           line-height: 18px;
           background: linear-gradient(rgba($white, 0.45), rgba($white, 0.45));
@@ -323,7 +324,12 @@ body.rc{
     }
   }
 
-  .petroleum-mineral {
+body.rc .hero-image .search-form .form-group input{
+  width: calc(100% - 145px);
+}
+
+
+.petroleum-mineral {
     input::-webkit-input-placeholder {
       color: rgba(255,255,255,0.8) !important;
     }
