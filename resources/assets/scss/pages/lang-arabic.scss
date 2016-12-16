@@ -14,12 +14,6 @@ body.lang-ar{
   }
 
 
-  .petroleum-list{
-    @media (min-width: 992px){
-      right: calc(100% - 417px);
-    }
-  }
-
   .petroleum-mineral{
     padding: 120px 30px 120px 225px;
     @media (min-width: 992px){
@@ -49,7 +43,7 @@ body.lang-ar{
   .pagination .previous{
     background-position: -194px -560px !important;
   }
-  
+
   .right-column-view{
     .clip-btn{
       float: left;
@@ -63,4 +57,34 @@ body.lang-ar{
       left: 8px;
     }
   }
+}
+
+body.lang-ar.rc, body.lang-ar.olc{
+
+  .landing_section_logos{
+    text-align: right;
+    margin-right: 0;
+    margin-left: 15px;
+  }
+
+  .landing_section_logos.partner-inner-each a {
+    background-position: center right;
+  }
+
+  .petroleum-list{
+    @media (min-width: 992px){
+      left: 0;
+      right: auto;
+      transform: translateX(-50%);
+    }
+  }
+
+
+  @media (max-width: 992px){
+    .landing_section_logos.partner-inner-each.landing_section_logos.partner-inner-each a{
+      margin-right: 0;
+      margin-left: 15px;
+    }
+  }
+
 }

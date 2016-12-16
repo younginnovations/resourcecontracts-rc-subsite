@@ -215,6 +215,16 @@ body.rc{
       margin-bottom: 25px;
       text-transform: uppercase;
       letter-spacing: 0.75px;
+
+      @media screen and (max-width:992px){
+        margin-bottom: 15px;
+      }
+
+      &.doners{
+        @media screen and (max-width:992px){
+        margin-top: 25px;
+      }
+      }
     }
 
     a{
@@ -245,6 +255,13 @@ body.rc{
     background-position:  center center;
     background-repeat: no-repeat;
     background-size: cover;
+  }
+
+
+  body.rc {
+    .petroleum-wrapper {
+      background-position: top;
+    }
   }
 
   .section-wrap {
