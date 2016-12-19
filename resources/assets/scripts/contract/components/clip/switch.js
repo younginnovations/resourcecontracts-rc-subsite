@@ -1,11 +1,17 @@
 import React, {Component} from "react";
 
+
+const divStyle = {
+    position: 'relative',
+    display: 'inline-block'
+};
+
 class Switch extends Component {
 
     render() {
         return (
             <div className="pull-left">
-                <button className="clip-btn" id="on-annotation">On</button>
+                <span className="clip-btn" id="on-annotation" data-toggle="popover" style={ divStyle } data-popover-content={LANG.country}>On</span>
             </div>
         );
     }
