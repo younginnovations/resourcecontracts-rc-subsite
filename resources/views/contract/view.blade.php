@@ -66,7 +66,11 @@
 			text_disclaimer: "{!!trans('annotation.text_created_automatically').' <a target=\"_blank\" href=\"'.url('/faqs#learn_more').'\">'.trans('annotation.learn_more').'</a>'!!}"
 		};
 		config.isClipOn = '{{site()->isClipEnabled()}}';
+
+
+
 		var LANG = {!! json_encode(trans('annotation')) !!};
+		var langGlossary = {!! json_encode(trans('glossary')) !!};
 		LANG.resourceLang = {!! json_encode(trans('resources')) !!};
 		LANG.disclosure = {!! json_encode(trans('codelist/disclosure')) !!};
 
@@ -78,6 +82,8 @@
 				}
 			}
 		};
+
+
 	</script>
 	<script src="{{url('js/annotator/annotator-full.min.js')}}"></script>
 	<script src="{{url('js/annotator/annotator.utils.js')}}"></script>

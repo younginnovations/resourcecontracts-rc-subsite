@@ -67,6 +67,10 @@
  }
 
 .dropdown-menu {
+
+  &:hover + .popover.custom{
+    display: none;
+  }
   > {
     li > a {
       @extend %extend_24;
@@ -86,7 +90,7 @@
 .actions-wrapper a.download-wrap,
 .advance-filter-wrapper .social-share,
 .actions-wrapper .social-share{
-  position: absolute;
+  position: absolute!important;
   bottom: -20px;
   right: 178px;
   background: $white;
@@ -276,6 +280,7 @@
 }
 
 .download-dropdown {
+  margin-top: 12px;
   position: relative;
   float: left;
   span {
@@ -286,13 +291,12 @@
     white-space: nowrap;
   }
   > a {
-    margin-top: 12px;
     display: inline-block;
   }
   ul {
     display: none;
     position: absolute;
-    top: 40px;
+    top: 27px;
     left: 0; //b4 it wz 10px
     list-style: none;
     padding: 10px 15px;
@@ -425,7 +429,7 @@
   ul {
     margin: 0;
     padding: 11px 17px 11px 20px;
-    overflow: hidden;
+    //overflow: hidden;
     padding: 0;
     top: 50px;
     z-index: 99;

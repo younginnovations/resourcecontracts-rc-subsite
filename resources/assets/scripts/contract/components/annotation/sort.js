@@ -48,8 +48,18 @@ class Sort extends Component {
 
         return (
             <div className="annotation-sort">
-                <span className={pageClassName} onClick={this.onClickPage.bind(this)}>{lang.by_page}</span>
-                <span className={clusterClassName} onClick={this.onClickCluster.bind(this)}>{lang.by_topic}</span>
+                <span
+                    className={pageClassName}
+                    onClick={this.onClickPage.bind(this)}
+                    data-toggle="popover"
+                    data-title={langGlossary.contract_view.by_page}>
+                    {lang.by_page}</span>
+                <span
+                    className={clusterClassName}
+                    onClick={this.onClickCluster.bind(this)}
+                    data-toggle="popover"
+                    data-title={langGlossary.contract_view.by_topic}>
+                    {lang.by_topic}</span>
                 {cluster}
             </div>
         );

@@ -21,13 +21,17 @@ use \Illuminate\Support\Facades\Lang as Lang;
 			<div class="advance-filter-wrapper contract_page_actions">
 				@if($contracts->total!=0)
 
-					<div class="social-share dropdown" id="social-toggler">
+					<div class="social-share dropdown popoverUp" id="social-toggler"
+						 data-toggle="popover"
+						 data-title="@lang('glossary.global.social_share')">
 						<a class="dropdown-toggle"
 						   data-toggle="dropdown"><span>@lang('contract.social_share')</span></a>
 						@include('contract.partials.share')
 					</div>
 
-					<div class="dropdown download-csv">
+					<div class="dropdown download-csv popoverUp"
+						 data-toggle="popover"
+						 data-title="@lang('glossary.global.download_all_contracts')">
 						<a href="{{route('contract.csv.download',['q'=>'','download'=>true])}}">
 							<span>@lang('search.download')</span>
 						</a>

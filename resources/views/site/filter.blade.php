@@ -41,11 +41,15 @@
 			$params['download'] = true;
 			?>
 			@if($contracts->total!=0)
-				<div class="social-share dropdown" id="social-toggler">
+				<div class="social-share dropdown popoverUp" id="social-toggler"
+					 data-toggle="popover"
+					 data-title="@lang('glossary.global.social_share')">
 					<a class="dropdown-toggle" data-toggle="dropdown"><span>@lang('contract.social_share')</span></a>
 					@include('contract.partials.share')
 				</div>
-				<div class="download-csv">
+				<div class="download-csv popoverUp"
+					 data-toggle="popover"
+					 data-title="@lang('glossary.global.download_all_results')">
 					<a href="{{route('contract.csv.download',$params)}}">
 						@lang('search.download')
 					</a>

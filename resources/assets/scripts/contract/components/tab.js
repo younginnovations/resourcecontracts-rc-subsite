@@ -41,8 +41,12 @@ class Tab extends Component {
         return (
             <div className="navigation">
                 <Link to="/text" activeClassName="active"
-                      className={"tab tab-text " + this.state.activeTextClass }>{LANG.text}</Link>
+                      data-toggle="popover"
+                      data-title={langGlossary.contract_view.text_button}
+                    className={"tab tab-text " + this.state.activeTextClass }>{LANG.text}</Link>
                 <Link to="/pdf" activeClassName="active"
+                      data-toggle="popover"
+                      data-title={langGlossary.contract_view.PDF_button}
                       className={"tab tab-pdf " + this.state.activePdfClass }>{LANG.pdf}</Link>
                 <Link to="/annotations" activeClassName="active"
                       className="tab tab-annotation">{LANG.annotation_count}</Link>
