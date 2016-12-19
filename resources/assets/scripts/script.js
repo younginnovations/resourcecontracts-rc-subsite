@@ -393,10 +393,96 @@ $(document).ready(function () {
         }
     });
 
-    var toolTip = $('[data-toggle="tooltip"]');
-    if (toolTip.length) {
-        toolTip.tooltip();
-    }
+    //var toolTip = $('[data-toggle="tooltip"]');
+    //
+    //if (toolTip.length) {
+    //
+    //    toolTip.on('mouseover', function( e ){
+    //
+    //        toolTip.tooltip().tooltip('show');
+    //    });
+    //
+    //}
+    //
+    //if (toolTip.length) {
+    //
+    //    toolTip.on('mouseout', function( e ){
+    //
+    //        toolTip.tooltip('destroy');
+    //    });
+    //
+    //}
+
+
+    var popover = $('[data-toggle="popover"]');
+
+    var popover_content = '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title">hello</h3><div class="popover-content"></div></div>'
+
+
+    //if (popover.length) {
+    //
+    //    popover.on('mouseover', function( e ){
+    //
+    //        popover.popover({html:true,trigger:'focus',viewport:{ "padding": 10 }}).popover('show');
+    //    });
+    //
+    //}
+    //
+    //if (popover.length) {
+    //
+    //    popover.on('mouseout', function( e ){
+    //
+    //       // popover.popover('destroy');
+    //    });
+    //
+    //}
+
+    popover.on('mouseenter', function( e ) {
+
+        console.log(0);
+
+        var title = $(this).attr("title");
+        var content = $(this).data("popover-content");
+
+
+        $(this).find(".popover").remove();
+
+        popover.append(popover_content);
+
+        if(title) {
+
+            $(this).find(".popover-title").text(title);
+        }
+
+        if(content) {
+
+            $(this).find(".popover-content").html('<br />' + content + '<br /><br />');
+        }
+    });
+
+    //popover.hover(
+    //    function() {
+    //        console.log(0);
+    //
+    //        var title = $(this).attr("title");
+    //        var content = $(this).data("popover-content");
+    //
+    //
+    //        $(this).find(".popover").remove();
+    //
+    //        popover.append(popover_content);
+    //
+    //        $(this).find(".popover-title").text(title);
+    //
+    //        $(this).find(".popover-content").html(content);
+    //
+    //        $(this).find(".popover").show();
+    //
+    //    }, function() {
+    //        $(this).find(".popover").hide();
+    //    }
+    //)
+
 
     var originalLeave = $.fn.popover.Constructor.prototype.leave;
     $.fn.popover.Constructor.prototype.leave = function (obj) {
