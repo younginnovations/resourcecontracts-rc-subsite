@@ -29,7 +29,7 @@ function clipAnnotations(id, self) {
         clipLocalCollection.add(clip);
         clip.save();
         $(self).addClass('annotation-clipped');
-        $(self).attr('title', langClip.annotationClipped);
+        $(self).attr('data-title', langClip.alreadyClipped);
     }
     else {
         var clipC = clipLocalCollection.where({id: id});
@@ -42,7 +42,7 @@ function clipAnnotations(id, self) {
         }
 
         $(self).removeClass('annotation-clipped');
-        $(self).attr('title', langClip.clip_annotation);
+        $(self).attr('data-title', langClip.clip_annotation);
 
     }
     updateAnnotationCount();
@@ -131,14 +131,14 @@ $(document).ready(function () {
         $(".annotation-clip-icon , .annotation-clip, #hide-annotation, #annotation-count").hide();
         $('#on-annotation').html(off);
         $('#on-annotation').removeClass('active');
-        $('#on-annotation').attr('title',clipEnable);
+        $('#on-annotation').attr('data-title',clipEnable);
 
     } else {
 
         $(".annotation-clip-icon , .annotation-clip, #hide-annotation, #annotation-count").show();
         $('#on-annotation').html(on);
         $('#on-annotation').addClass('active');
-        $('#on-annotation').attr('title',clipDisable);
+        $('#on-annotation').attr('data-title',clipDisable);
     }
 
     $(".annotation-clip-icon").click(function () {
@@ -189,7 +189,7 @@ $(document).ready(function () {
         });
         $("#clip-all-annotations").addClass('annotation-clipped');
         $("#clip-all-annotations").attr('id', 'remove-all-annotations');
-        $("#remove-all-annotations").attr('title', langClip.annotationClipped);
+        $("#remove-all-annotations").attr('data-title', langClip.annotationClipped);
 
     }
 
@@ -225,7 +225,7 @@ $(document).ready(function () {
         });
         $("#remove-all-annotations").removeClass('annotation-clipped');
         $("#remove-all-annotations").attr('id', 'clip-all-annotations');
-        $("#clip-all-annotations").attr('title', 'Clip all annotations.');
+        $("#clip-all-annotations").attr('data-title', langClip.clipAllAnnotations);
 
     }
 
@@ -290,13 +290,13 @@ $(document).ready(function () {
         if (!$(this).hasClass('active')) {
             $(".annotation-clip-icon , .annotation-clip,  #hide-annotation, #annotation-count").show();
             $(this).addClass('active');
-            $(this).attr('title',clipDisable);
+            $(this).attr('data-title',clipDisable);
             $(this).html(langClip.onClip);
         }
         else {
             $(".annotation-clip-icon , .annotation-clip, #hide-annotation, #annotation-count").hide();
             $(this).removeClass('active');
-            $(this).attr('title',clipEnable);
+            $(this).attr('data-title',clipEnable);
             $(this).html(langClip.offClip);
         }
 

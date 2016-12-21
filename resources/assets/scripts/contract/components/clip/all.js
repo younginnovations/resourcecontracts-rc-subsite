@@ -45,8 +45,10 @@ class All extends Component {
     render() {
         return (
             <div className="clearfix">
-                <a id="clip-all-annotations" className="annotation-clip" title="Clip all annotations">
+                <a id="clip-all-annotations" className="annotation-clip"  data-toggle="popover" data-title={ langClip.clipAllAnnotations }>
+
                     <span className="link">{langClip.clip_all}</span>
+
                 </a>
             </div>
         );

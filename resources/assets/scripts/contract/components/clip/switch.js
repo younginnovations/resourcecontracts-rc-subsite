@@ -11,7 +11,7 @@ class Switch extends Component {
     render() {
         return (
             <div className="pull-left">
-                <span className="clip-btn" id="on-annotation" data-toggle="popover" style={ divStyle } data-popover-content={LANG.country}>On</span>
+                <span className="clip-btn" id="on-annotation" data-toggle="popover" style={ divStyle } data-popover-content="">On</span>
             </div>
         );
     }
