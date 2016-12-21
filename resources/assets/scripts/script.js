@@ -393,95 +393,61 @@ $(document).ready(function () {
         }
     });
 
-    //var toolTip = $('[data-toggle="tooltip"]');
-    //
-    //if (toolTip.length) {
-    //
-    //    toolTip.on('mouseover', function( e ){
-    //
-    //        toolTip.tooltip().tooltip('show');
-    //    });
-    //
-    //}
-    //
-    //if (toolTip.length) {
-    //
-    //    toolTip.on('mouseout', function( e ){
-    //
-    //        toolTip.tooltip('destroy');
-    //    });
-    //
-    //}
 
 
-    var popover = $('[data-toggle="popover"]');
-
-    var popover_content = '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title">hello</h3><div class="popover-content"></div></div>'
 
 
-    //if (popover.length) {
-    //
-    //    popover.on('mouseover', function( e ){
-    //
-    //        popover.popover({html:true,trigger:'focus',viewport:{ "padding": 10 }}).popover('show');
-    //    });
-    //
-    //}
-    //
-    //if (popover.length) {
-    //
-    //    popover.on('mouseout', function( e ){
-    //
-    //       // popover.popover('destroy');
-    //    });
-    //
-    //}
-
-    popover.on('mouseenter', function( e ) {
-
-        console.log(0);
-
-        var title = $(this).attr("title");
-        var content = $(this).data("popover-content");
+    // SCRIPT FOR CUSTOM POPOVER FOR HOVER DESCRIPTION TEXT
 
 
-        $(this).find(".popover").remove();
 
-        popover.append(popover_content);
+    $(document).ready(function(){
 
-        if(title) {
+        setTimeout(function(){
 
-            $(this).find(".popover-title").text(title);
-        }
 
-        if(content) {
 
-            $(this).find(".popover-content").html('<br />' + content + '<br /><br />');
-        }
-    });
+            var popover = $('[data-toggle="popover"]'); // select all popover toggles
 
-    //popover.hover(
-    //    function() {
-    //        console.log(0);
-    //
-    //        var title = $(this).attr("title");
-    //        var content = $(this).data("popover-content");
-    //
-    //
-    //        $(this).find(".popover").remove();
-    //
-    //        popover.append(popover_content);
-    //
-    //        $(this).find(".popover-title").text(title);
-    //
-    //        $(this).find(".popover-content").html(content);
-    //
-    //        $(this).find(".popover").show();
-    //
-    //    }, function() {
-    //        $(this).find(".popover").hide();
-    //    }
-    //)
+            // template for popover
+            var popover_content = '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+
+
+            $(document).find('.popover, .popover *').on('click focus', function( e ){
+                e.preventDefault();
+                e.stopPropagation();
+            })
+
+            popover.on('mouseenter', function( e ) {
+
+                console.log('entered')
+
+                var title = $(this).attr("data-title");
+                var content = $(this).data("popover-content");
+
+
+                $(this).find(".popover").remove();
+
+                popover.append(popover_content);
+
+                if(title) {
+
+                    $(this).find(".popover-title").html(title);
+                }
+
+                if(content) {
+
+                    $(this).find(".popover-content").html('<br />' + content + '<br /><br />');
+                }
+            });
+
+        }, 1000)
+    })
+
+    // END of SCRIPT FOR CUSTOM POPOVER FOR HOVER DESCRIPTION TEXT
+
+
+
 
 
     var originalLeave = $.fn.popover.Constructor.prototype.leave;

@@ -66,4 +66,5 @@ return [
     'clear_all_clips'       => 'مسح جميع كليب',
     'sending'               => 'إرسال...',
     'document'              => 'وثيقة',
+    'view-all-clips'        => 'عرض جميع مقاطع أو <a href=\'#\'>أعرف أكث </a>',
 ];

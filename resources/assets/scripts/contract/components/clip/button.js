@@ -29,10 +29,12 @@ class Button extends Component {
 
     render() {
         return (
-            <button data-id={this.props.id}
-                    onClick={this.clickHandler.bind(this)}
-                    className="annotation-clip-icon"
-                    title="Clip annotation.">{langClip.clip}</button>
+            <span
+                data-title={langClip.clip_annotation }
+                data-toggle="popover"data-id={this.props.id}
+                onClick={this.clickHandler.bind(this)}
+                className="annotation-clip-icon">{langClip.clip}
+                </span>
         );
     }
 }
