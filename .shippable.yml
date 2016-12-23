@@ -1,0 +1,41 @@
+language: php
+
+php:
+  - 5.6
+
+branches:
+  only:
+    - staging
+    - master
+    - 156-optimize-docker-file
+
+build:
+  ci:
+    # Get the latest image to reuse its cache. Will not work with Docker 1.10 . Docker 1.13 adds support with the
+    # --cache-from flag.
+    # Prevent build failure in case there is no latest image for the current branch with a conditional `echo`.
+    - docker pull nrgi/rc-subsite:$BRANCH || echo 'Cache not available'
+
+    - docker build -t nrgi/rc-subsite:$BRANCH.$COMMIT .
+    # Create the `latest` tag and force it in case the tag is already there from a previous build
+    - docker tag -f nrgi/rc-subsite:$BRANCH.$COMMIT nrgi/rc-subsite:$BRANCH
+
+    - docker push nrgi/rc-subsite:$BRANCH
+    - docker push nrgi/rc-subsite:$BRANCH.$COMMIT
+
+integrations:
+  hub:
+    - integrationName: nrgiDockerHub
+      type: docker
+  notifications:
+    - integrationName: email
+      type: email
+      recipients:
+        - nrgi@vitaminsoftware.com
+        - resourcecontracts@yipl.com.np
+      branches:
+        only:
+          - master
+          - staging
+      on_success: change
+      on_failure: always

@@ -42,6 +42,17 @@ RUN mkdir -p /etc/nginx \
  && mkdir -p /var/container_init \
  && mkdir -p /var/container_init/site_content 
 
+WORKDIR /var/container_init/site_content
+
+COPY composer.json /var/container_init/site_content
+COPY composer.lock /var/container_init/site_content
+COPY package.json /var/container_init/site_content
+RUN composer install --no-interaction --prefer-dist --no-scripts --no-autoloader \
+ && npm install --save-dev gulp-rename \
+ && npm install --save-dev gulp-react \
+ && npm install --dev \
+ && bourbon install
+
 COPY config/init.sh /var/container_init/init.sh
 COPY config/nginx_subsite.template /var/container_init/nginx_subsite.template
 COPY config/env.template /var/container_init/env.template
@@ -49,13 +60,7 @@ COPY config/nginx.conf /etc/nginx/nginx.conf
 COPY config/nginx-supervisor.ini /etc/supervisor.d/nginx-supervisor.ini
 COPY . /var/container_init/site_content
 
-#copy the site contents and install npm prerequsites and run composer
-WORKDIR /var/container_init/site_content
-RUN npm install --save-dev gulp-rename \
- && npm install --save-dev gulp-react \
- && npm install --dev \
- && bourbon install \
- && composer install --no-interaction --prefer-dist \
+RUN composer dump-autoload --optimize \
  && chmod +x /var/container_init/init.sh \
 #RC
  && mkdir -p /var/www/rc \
