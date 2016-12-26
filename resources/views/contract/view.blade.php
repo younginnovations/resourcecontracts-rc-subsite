@@ -19,7 +19,7 @@
 				document.location.href = window.location.hash.replace('pdf', 'text');
 				document.getElementById('loading-text').innerHTML = '@lang('contract.loading_redirect')';
 			}
-		}, 15000);
+		}, 30000);
 	</script>
 @stop
 @section('content')
