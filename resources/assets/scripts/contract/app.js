@@ -75,7 +75,7 @@ class App extends Component {
                         <div className="right-column-view">
                             <Download/>
                             <Share/>
-                            {clipSwitch}
+                            <ClipSwitch className="clip-btn" />
                         </div>
                     </div>
                 </div>

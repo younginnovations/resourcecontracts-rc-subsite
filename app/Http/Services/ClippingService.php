@@ -4,6 +4,7 @@ use App\Http\Models\Clip\Clip;
 use Exception;
 use Illuminate\Contracts\Filesystem\Factory as Filesystem;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
 use LynX39\LaraPdfMerger\Facades\PdfMerger;
 use LynX39\LaraPdfMerger\PdfManage;
@@ -274,6 +275,8 @@ class ClippingService
     {
         $formData['site'] = meta()->title;
         $to               = explode(',', $formData['to']);
+
+        var_dump($formData, $to);
         try {
             Mail::send(
                 'clip.email',
@@ -285,8 +288,10 @@ class ClippingService
                 }
             );
 
+
             return true;
         } catch (Exception $e) {
+            dd("some error". $e->getMessage());
             return false;
         }
     }
@@ -304,7 +309,7 @@ class ClippingService
         $annotations      = $this->getAllAnnotations($data);
         $annotationDetail = $this->formatAnnotations($data);
         $pdfs             = $this->getPdfUrl($annotations);
-        $basePath         = __DIR__ . '/../../../public';
+        $basePath         = base_path('public');
         $folder           = time();
         $concatFileName   = 'concat-' . time() . '.pdf';
         $zipFileName      = 'pdf-' . time() . '.zip';
@@ -315,10 +320,14 @@ class ClippingService
             $this->concatPDF($annotationDetail, $basePath, $folder, $concatFileName);
             $this->zipFolder($basePath, $folder, $concatFileName, $zipFileName);
 
-            return $this->upLoadZipFile($basePath, $folder, $zipFileName);
+            $files = glob($basePath."/".$folder."/*.pdf");
+            File::delete($files);
+            $url = env("APP_DOMAIN").$folder.'/'.$zipFileName;
+
+            return $url;
 
         } catch (Exception $e) {
-            return false;
+            return '/';
         }
     }
 

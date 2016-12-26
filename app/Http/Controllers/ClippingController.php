@@ -84,8 +84,8 @@ class ClippingController extends BaseController
     public function saveClip(Request $request)
     {
         $data         = $request->all();
-        $annotationID = isset($data['data']) ? explode(',', $data['data']) : [];
-        $key          = isset($data['key']) ? $data['key'] : '';
+        $annotationID = isset($data['data']) ? $data['data'] : [];
+        $key          = (isset($data['key']) AND $data['key'] !='undefined') ? $data['key'] : '';
 
         return json_encode($this->clip->saveClip($annotationID, $key));
     }
@@ -127,6 +127,7 @@ class ClippingController extends BaseController
     public function emailClip(Request $request)
     {
         $formData = $request->all();
+
 
         if ($this->clip->sendMail($formData)) {
             return response()->json(['status' => true, 'message' => "Email Sent."]);

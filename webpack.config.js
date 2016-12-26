@@ -12,11 +12,24 @@ var config = {
         popup: [
             APP_DIR + '/popup/index.js',
         ],
+
+        app: [
+            APP_DIR +'/vendor/lib/jquery.js',
+            APP_DIR +'/vendor/bootstrap.js',
+            APP_DIR +'/vendor/select2.js',
+            //APP_DIR +'/vendor/dataTables.min.js',
+            APP_DIR +'/vendor/backbone/underscore.js',
+            APP_DIR +'/script.js'
+        ],
         contract_view: [
             APP_DIR + '/contract/annotator/annotator.plugin.event.js',
             APP_DIR + '/contract/annotator/annotator.plugin.viewer.js',
             APP_DIR + '/contract/annotator/pdf-annotator.js',
             APP_DIR + '/contract/index.js'
+        ],
+
+        clipping: [
+            APP_DIR + '/contract/clip/main.js'
         ]
     },
     output: {
@@ -25,6 +38,10 @@ var config = {
     },
     module: {
         loaders: [
+            {
+                test: require.resolve("jquery"),
+                loader: "expose?$!expose?jQuery"
+            },
             {
                 test: /[\.js?$|\.jsx?$]/,
                 include: APP_DIR,
@@ -57,6 +74,11 @@ var config = {
             'process.env': {
                 'NODE_ENV': JSON.stringify('production')
             }
+        }),
+
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery"
         })
     ]
 };

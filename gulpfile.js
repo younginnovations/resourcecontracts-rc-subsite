@@ -32,16 +32,16 @@ var contract_style = [
 
 var base_script = [
     './resources/assets/scripts/vendor/lib/jquery.js',
-    './resources/assets/scripts/vendor/lib/jquery.cookie.js',
     './resources/assets/scripts/vendor/bootstrap.js',
     './resources/assets/scripts/vendor/select2.js',
+    './resources/assets/scripts/vendor/backbone/underscore.js',
     './resources/assets/scripts/script.js',
 
-    './resources/assets/scripts/vendor/backbone/underscore.js',
-    './resources/assets/scripts/vendor/backbone/backbone.js',
-    './resources/assets/scripts/vendor/backbone/backbone.localstorage.js',
-    './resources/assets/scripts/clips/collection/clip.local.js',
-    './resources/assets/scripts/clips/main.js'
+
+    //'./resources/assets/scripts/vendor/backbone/backbone.js',
+    //'./resources/assets/scripts/vendor/backbone/backbone.localstorage.js',
+    //'./resources/assets/scripts/clips/collection/clip.local.js',
+    //'./resources/assets/scripts/clips/main.js'
 ];
 
 var country_script = [
@@ -58,24 +58,28 @@ var resource_script = [
     './resources/assets/scripts/resources.js'
 ];
 
+//var clipping_script = [
+//    './resources/assets/scripts/vendor/react/react-with-addons.js',
+//    './resources/assets/scripts/vendor/backbone/underscore.js',
+//    './resources/assets/scripts/vendor/backbone/backbone.js',
+//    './resources/assets/scripts/vendor/backbone/backbone.fetch-cache.min.js',
+//    './resources/assets/scripts/vendor/backbone/backbone.paginator.min.js',
+//    './resources/assets/scripts/clips/collection/clip.js',
+//    './resources/assets/scripts/clips/views/filter.js',
+//    './resources/assets/scripts/clips/views/clipselectcount.js',
+//    './resources/assets/scripts/clips/views/download.js',
+//    './resources/assets/scripts/clips/views/share.js',
+//    './resources/assets/scripts/clips/views/pagination.js',
+//    './resources/assets/scripts/clips/views/item.js',
+//    './resources/assets/scripts/clips/views/listing.js',
+//    './resources/assets/scripts/clips/views/main.js',
+//    './resources/assets/scripts/clips/views/clip.main.js',
+//    './resources/assets/scripts/clips/clip.main.js'
+//];
+
 var clipping_script = [
-    './resources/assets/scripts/vendor/react/react-with-addons.js',
-    './resources/assets/scripts/vendor/backbone/underscore.js',
-    './resources/assets/scripts/vendor/backbone/backbone.js',
-    './resources/assets/scripts/vendor/backbone/backbone.fetch-cache.min.js',
-    './resources/assets/scripts/vendor/backbone/backbone.paginator.min.js',
-    './resources/assets/scripts/clips/collection/clip.js',
-    './resources/assets/scripts/clips/views/filter.js',
-    './resources/assets/scripts/clips/views/clipselectcount.js',
-    './resources/assets/scripts/clips/views/download.js',
-    './resources/assets/scripts/clips/views/share.js',
-    './resources/assets/scripts/clips/views/pagination.js',
-    './resources/assets/scripts/clips/views/item.js',
-    './resources/assets/scripts/clips/views/listing.js',
-    './resources/assets/scripts/clips/views/main.js',
-    './resources/assets/scripts/clips/views/clip.main.js',
-    './resources/assets/scripts/clips/clip.main.js'
-];
+    './resources/assets/scripts/contract/clip/clip-main.js'
+]
 
 var homepage_script = [
     './resources/assets/scripts/homepage/d3.min.js',
@@ -180,7 +184,7 @@ gulp.task('contract-style', function () {
 gulp.task('watch', function () {
     gulp.watch('./resources/assets/scss/pages/*.scss', ['rc']);
     gulp.watch('./resources/assets/scss/contract/**/*.scss', ['contract-style']);
-    gulp.watch(base_script, ['js-base']);
+    //gulp.watch(base_script, ['js-base']);
     gulp.watch(country_script, ['js-country']);
     gulp.watch(resource_script, ['js-resource']);
     gulp.watch(clipping_script, ['js-clipping']);
@@ -215,16 +219,16 @@ gulp.task('contract-style', function () {
 gulp.task('default', ['watch']);
 
 
-gulp.task('js-base', function () {
-    return gulp.src(base_script)
-        .pipe(sourcemaps.init())
-        .pipe(react())
-        .pipe(concat('app.js'))
-        .pipe(gulp.dest('./public/js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('./public/js'))
-        .pipe(notify({message: 'Js-base task complete'}));
-});
+//gulp.task('js-base', function () {
+//    return gulp.src(base_script)
+//        .pipe(sourcemaps.init())
+//        .pipe(react())
+//        .pipe(concat('app.js'))
+//        .pipe(gulp.dest('./public/js'))
+//        .pipe(uglify())
+//       .pipe(gulp.dest('./public/js'))
+//        .pipe(notify({message: 'Js-base task complete'}));
+//});
 
 gulp.task('js-country', function () {
     return gulp.src(country_script)
@@ -244,16 +248,16 @@ gulp.task('js-resource', function () {
         .pipe(notify({message: 'Js-resource task complete'}));
 });
 
-gulp.task('js-clipping', function () {
-    return gulp.src(clipping_script)
-        .pipe(sourcemaps.init())
-        .pipe(react())
-        .pipe(concat('clipping.js'))
-        .pipe(gulp.dest('./public/js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('./public/js'))
-        .pipe(notify({message: 'Js-clipping task complete'}));
-});
+//gulp.task('js-clipping', function () {
+//    return gulp.src(clipping_script)
+//        .pipe(sourcemaps.init())
+//        .pipe(react())
+//        .pipe(concat('clipping.js'))
+//        .pipe(gulp.dest('./public/js'))
+//        .pipe(uglify())
+//        .pipe(gulp.dest('./public/js'))
+//        .pipe(notify({message: 'Js-clipping task complete'}));
+//});
 
 gulp.task('js-homepage', function () {
     return gulp.src(homepage_script)

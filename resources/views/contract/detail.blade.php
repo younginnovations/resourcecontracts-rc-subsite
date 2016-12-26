@@ -44,7 +44,7 @@ use Illuminate\Support\Facades\Lang;
 						@include('contract.partials.share')
 					</div>
 					@if(site()->isClipEnabled())
-						<button class="clip-btn" id="on-annotation">@lang('clip.clip_on')</button>
+						<button class="clip-btn on-annotation" id="on-annotation">@lang('clip.clip_on')</button>
 					@endif
 				</div>
 			</div>
@@ -444,8 +444,9 @@ use Illuminate\Support\Facades\Lang;
 							@if(count($contract->annotationsGroup) > 1) @lang('annotation.annotations') @else  @lang('annotation.annotation') @endif
 						</div>
 						@if(site()->isClipEnabled())
-							<button id="clip-all-annotations" class="pull-right annotation-clip"
-									title="Clip all annotations"><span class="link">@lang('clip.clip_all')</span>
+							<button id="clip-all-annotations" class="pull-right annotation-clip clipToggleElems static"
+									title="Clip all annotations">
+								<span class="link">@lang('clip.clip_all')</span>
 							</button>
 						@endif
 					</div>
@@ -483,10 +484,9 @@ use Illuminate\Support\Facades\Lang;
 														{{_l('codelist/annotation.categories',$annotation->category_key)}}
 													</div>
 													@if(site()->isClipEnabled())
-														<button data-id={{$annotation->id}} class="pull-right
-																annotation-clip-icon
-														" title=@lang('clip.clip_annotation') style="display:
-														none">@lang('clip.clips')</button>
+														<button data-id={{ $annotation->id }}
+																class="pull-right annotation-clip-icon static clipToggleElems"
+														title=@lang('clip.clip_annotation') >@lang('clip.clips')</button>
 													@endif
 												</div>
 												<div class="annotation-text">

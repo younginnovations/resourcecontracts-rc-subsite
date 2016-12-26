@@ -8,8 +8,12 @@
 					<a href="#" class="back-button back"><span>@lang('global.go_back')</span></a>
 					<div class="panel-title" id="clip-panel-title">
                         <span>
-                        @lang('clip.all_clips') <span id="all-clip-count"></span>
+                        @lang('clip.all_clips') (<span class="clipSelectCount"></span>)
                         </span>
+						<a href="#" id="clear-all">
+                        	@lang('clip.clear_all_clips')
+						</a>
+
 					</div>
 				</div>
 			</div>
@@ -18,8 +22,9 @@
 
 	<div class="col-lg-12 country-list-wrapper search-list-wrapper" id="table-annotation">
 		<div class="panel panel-default panel-wrap country-list-wrap">
+			{{--<div class="loading">@lang('annotation.loading')</div>--}}
 			<div class="panel-body" id="clip-annotations">
-				<div class="loading">@lang('annotation.loading')</div>
+
 			</div>
 		</div>
 	</div>

@@ -1,3 +1,8 @@
+import Cookies from "js-cookie";
+import ClipHelper from "./contract/clip/clipHelper";
+
+var clipHelper = new ClipHelper;
+
 function htmlDecode(html) {
     var a = document.createElement('a');
     a.innerHTML = html;
@@ -511,5 +516,124 @@ $(document).ready(function () {
             location = share.twitter + document.title;
         }
         window.open(location, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=650,height=400");
+    });
+
+    //set initial clip select count on load
+    clipHelper.setClipCount();
+
+    if(Cookies.get('clipState') === "false" || Cookies.get('clipState') === undefined  ){
+        //$(".clip-head ").show();
+        document.body.classList.add('clippingOff');
+        var x = document.querySelectorAll(".clipToggleElems");
+        x.forEach(function( item ){
+            item.style.opacity = "1"
+        })
+
+    }else{
+        var x = document.querySelectorAll(".clipToggleElems");
+        x.forEach(function( item ){
+            item.style.opacity = "1"
+        })
+        $(".on-annotation").addClass("active");
+    }
+
+    function toggleClipState( e ){
+
+        var currentClipState = JSON.parse(Cookies.get('clipState'));
+        Cookies.set('clipState', !currentClipState);
+
+        $("body").toggleClass("clippingOff");
+    }
+
+    $(".on-annotation").click(function(){
+        $(this).toggleClass("active")
+        toggleClipState();
+    });
+
+    function hideClipping(){
+        $("#on-annotation").trigger("click");
+    }
+
+    //clear all clips
+    $("#clear-all").click( function( e ){
+
+        e.preventDefault();
+
+        var confirmClearAll = confirm(langClip.confirmMessage);
+
+        if(confirmClearAll) {
+            clipHelper.clearAllClips();
+
+            location.reload();
+        }else {
+            return nul
+        }
+
+    });
+
+    $("#hide-annotation").click(function(){
+        hideClipping()
+    });
+
+    function manageClipAllOnLoad(){
+        var allClipped = localStorage.allClipped;
+
+        if( allClipped ==="true" ){
+            $("#clip-all-annotations.static").attr("id", "remove-all-annotations").addClass("annotation-clipped");
+        }
+    }
+
+    manageClipAllOnLoad();
+
+    $(document).on("click", "#clip-all-annotations.static", function(e){
+        $(".annotation-clip-icon.static[data-action='add']").click();
+        $(this).attr("id", "remove-all-annotations").addClass("annotation-clipped");
+        localStorage.allClipped = true;
+    });
+
+    $(document).on("click", "#remove-all-annotations.static", function(e){
+        $(".annotation-clip-icon.static[data-action='remove']").click();
+        $(this).attr("id", "clip-all-annotations").removeClass("annotation-clipped");
+        localStorage.allClipped = false;
+    });
+
+
+    $(".annotation-clip-icon.static").each( function(){
+
+        checkClipped( this );
+
+    });
+
+    $(".annotation-clip-icon.static").click( function( e ){
+
+        clipHelper.clipActions(e);
+        $(this).toggleClass("annotation-clipped");
+
+    });
+
+
+    function checkClipped( elem ){
+        var id = $(elem).attr("data-id");
+        var clippedId = clipHelper.getLocalClips();
+
+
+        if( clippedId ) {
+
+            if (clippedId.indexOf(id) > -1) {
+                $(elem).addClass("annotation-clipped").attr("data-action", "remove");
+            }else{
+                $(elem).attr("data-action", "add");
+            }
+
+        }else{
+            $(elem).attr("data-action", "add");
+        }
+    }
+
+
+    //download dropdown toggle setting
+
+    $(document).on('click', '.actions-wrapper .dropdown-menu', function (e) {
+        e.stopPropagation();
     });
 });

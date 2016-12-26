@@ -346,3 +346,14 @@ a {
   }
 }
 
+/** TOGGLING CLIPPING STYLE **/
+.clippingOff{
+  .clipToggleElems{
+    visibility: hidden!important;
+  }
+}
+
+.clipToggleElems{
+  opacity: 0;
+}
+
