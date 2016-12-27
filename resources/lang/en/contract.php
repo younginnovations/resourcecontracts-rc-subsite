@@ -38,5 +38,5 @@ return [
     'loading'              => "Loading ...",
     'social_share'         => "Share",
     'contract_not_signed'  => "This document does not contain signatures.",
-
+    'loading_redirect'     => 'Loading... (redirected to text view)',
 ];
