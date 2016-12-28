@@ -50,7 +50,7 @@ if ($path[0] == "resource") {
             <td>
                 <div class="contract-info-section">
                     <div class="download-main-wrap">
-                        <div class="download-wrap">
+                        <div class="download-wrap dropdown-toggle" data-toggle="dropdown">
                             <span>@lang('global.download')</span>
                         </div>
                         <ul class="dropdown-menu">
