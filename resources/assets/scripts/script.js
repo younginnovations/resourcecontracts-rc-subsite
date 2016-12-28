@@ -410,7 +410,7 @@ $(document).ready(function () {
             var popover = $('[data-toggle="popover"]'); // select all popover toggles
 
             // template for popover
-            var popover_content = '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+            var popover_content = '<div class="popover custom" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
 
 
             $(document).find('.popover, .popover *').on('click focus', function( e ){
@@ -419,8 +419,6 @@ $(document).ready(function () {
             })
 
             popover.on('mouseenter', function( e ) {
-
-                console.log('entered')
 
                 var title = $(this).attr("data-title");
                 var content = $(this).data("popover-content");
