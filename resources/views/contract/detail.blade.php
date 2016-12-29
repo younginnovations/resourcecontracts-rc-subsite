@@ -44,7 +44,7 @@ use Illuminate\Support\Facades\Lang;
 						@include('contract.partials.share')
 					</div>
 					@if(site()->isClipEnabled())
-						<button class="clip-btn" id="on-annotation">@lang('clip.clip_on')</button>
+						<sapn class="clip-btn" data-toggle="popover" id="on-annotation">@lang('clip.clip_on')</sapn>
 					@endif
 				</div>
 			</div>
