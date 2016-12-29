@@ -31,24 +31,43 @@ $image_intro = site()->getImageUrl('intro_bg');
 		</nav>
 	</div>
 	<section class="hero-image">
-			<div class="petroleum-wrapper">
-				<div class="section-wrap">
-					<div class="petroleum-mineral">
-						{!! site()->meta('tagline') !!}
-						<div class="clearfix">
-							<form action="{{route('search')}}" method="GET" class="search-form" role="search">
-								<div class="form-group clearfix">
-									<input type="text" name="q" class="form-control" placeholder="@lang('global.search') {{$contracts}} @lang('global.contracts') @lang('global.associated_documents')">
-									<button type="submit" class="btn btn-default search-button">
-										@lang('global.search')
-									</button>
-								</div>
-							</form>
-							<div class="advance-search">
-								<a href="{{url('search')}}">@lang('global.advanced_search')</a>
+		<div class="petroleum-wrapper">
+			<div class="section-wrap">
+				@if(site()->isRC())
+					<div class="landing_section_logos partner-inner-each">
+						<p>@lang('global.partners')</p>
+
+						<a href="http://www.resourcegovernance.org/" class="img-responsive logo__nrgi"
+						   target="_blank"></a>
+						<a href="http://ccsi.columbia.edu/" class="img-responsive logo__cu"
+						   target="_blank"></a>
+						<a href="http://www.worldbank.org/en/topic/governance"
+						   class="img-responsive logo__wb"
+						   target="_blank"></a>
+						<p>@lang('global.donors')</p>
+						<a href="http://www.dfid.gov.uk" class="img-responsive logo__ukaid"
+						   target="_blank"></a>
+						<a href="http://alsf.afdb.org/"
+						   class="img-responsive logo__alsf" target="_blank"></a>
+					</div>
+				@endif
+				<div class="petroleum-mineral">
+					{!! site()->meta('tagline') !!}
+					<div class="clearfix">
+						<form action="{{route('search')}}" method="GET" class="search-form" role="search">
+							<div class="form-group clearfix">
+								<input type="text" name="q" class="form-control"
+									   placeholder="@lang('global.search') {{$contracts}} @lang('global.contracts') @lang('global.associated_documents')">
+								<button type="submit" class="btn btn-default search-button">
+									@lang('global.search')
+								</button>
 							</div>
+						</form>
+						<div class="advance-search">
+							<a href="{{url('search')}}">@lang('global.advanced_search')</a>
 						</div>
 					</div>
+
 					<div class="petroleum-list show-in-bigger-screen">
 						<div class="col-md-12 col-sm-12 col-xs-12 text-center petroleum-list-inner">
 							<div class="row">
@@ -90,6 +109,7 @@ $image_intro = site()->getImageUrl('intro_bg');
 					</div>
 				</div>
 			</div>
+		</div>
 		<div class="petroleum-list show-in-small-screen">
 			<div class="col-md-12 col-sm-12 col-xs-12 text-center petroleum-list-inner">
 				<div class="row">
@@ -180,7 +200,7 @@ $image_intro = site()->getImageUrl('intro_bg');
 		var highlightColor = '{!! site()->isRC()?'#FCCE99':'#70bf4c' !!}';
 		var selectedCountries = '{!! json_encode($countryList) !!}';
 		var standardCountry = {!! json_encode(trans('country')) !!};
-		var documentLang = '{{trans('global.document')}}'; 
+		var documentLang = '{{trans('global.document')}}';
 		var documentsLang = '{{trans('global.documents')}}';
 	</script>
 	<script src="{{url('js/homepage.js')}}"></script>
