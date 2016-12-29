@@ -7,12 +7,18 @@ branches:
   only:
     - staging
     - master
-    - 156-optimize-docker-file
 
+env:
+  global:
+    # Shippable API token used to trigger deploy
+    - secure: Z/9Zdsp/EftsvDPsWQLzo8yIl8XERSZXm0CIfFhrnOclCBxaSW2y+Kg8xgdvVwWXsQ+EOFLygXu6l/se0RC4EsKAaV8H8h98VdTSQFuCZplFrjRvvaFXgLTSSau21Uoghu0UUsHdovvCRd5A3+AoH/JMY7ruYLLczDbObQqT4lCszH/maeHsTUnszbfDqr+sbA+R6KepaGmsLlTMFd40eNPQoqKLgvfKPtPfyUbvoU2eZ/e9bCqISKY7byc/JFBXqp8a62MVwtPVqfts3nIXA31+tcwxCWTF5Xc7Rl4PonoY8+ozlwsOt+PJIjCqwTG4VHfd3KbQ5S9DNv/yYVPOSA==      
+      
 build:
   ci:
-    # Get the latest image to reuse its cache. Will not work with Docker 1.10 . Docker 1.13 adds support with the
-    # --cache-from flag.
+    # Create the version file
+    - ./create_version.sh
+      
+    # Get the latest image to reuse its cache. Will not work with Docker 1.10 . Docker 1.13 adds support with the --cache-from flag.
     # Prevent build failure in case there is no latest image for the current branch with a conditional `echo`.
     - docker pull nrgi/rc-subsite:$BRANCH || echo 'Cache not available'
 
@@ -23,6 +29,8 @@ build:
     - docker push nrgi/rc-subsite:$BRANCH
     - docker push nrgi/rc-subsite:$BRANCH.$COMMIT
 
+    - ./shippable-deploy.sh
+    
 integrations:
   hub:
     - integrationName: nrgiDockerHub

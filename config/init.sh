@@ -26,7 +26,7 @@ envsubst < ./env.template > /var/www/olc/.env
 
 #country-tn
 export SERVER_NAME=${DOMAIN_PREFIX}tunisia.resourcecontracts.org
-export TRACKING_ID=${RC_TRACKING_ID}
+export TRACKING_ID=${TN_TRACKING_ID}
 export DB_DATABASE=${COUNTRY_DB_DATABASE}
 export CONTACT_MAIL=${TN_CONTACT_MAIL}
 export COUNTRY=tn
