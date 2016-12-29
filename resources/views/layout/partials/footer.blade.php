@@ -63,6 +63,14 @@
 							@include('layout.partials.language')
 						</div>
 					@endif
+					<br>
+					<form action="{{site()->newsletterUrl()}}" method="get" name="subscribe">
+						<div class="subscribe">
+							<input type="text" class="subscribe_email_input" id="email" name="email" placeholder="name@example.com">
+							<input type="hidden" name="source" value="{{site()->getSiteKey()}}">
+							<input type="submit" class="subscribe_btn" id="newsletter-submit" value="Subscribe">
+						</div>
+					</form>
 				</div>
 			</div>
 			<div class="footer-bottom">

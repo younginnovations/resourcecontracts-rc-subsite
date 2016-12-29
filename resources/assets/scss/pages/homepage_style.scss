@@ -614,6 +614,76 @@ footer {
   p {
     color: rgba(255, 255, 255, 0.36);
   }
+
+  .subscribe{
+    overflow: hidden;
+    padding: 10px;
+    margin-top: 12px;
+
+    .subscribe_email_input{
+      height: 40px;
+      border: none;
+      padding: 7px 10px;
+      min-width: 250px;
+      border-radius: 4px 0px 0px 4px;
+      color: #484848;
+
+      &:focus{
+        outline: none;
+        background: #f5f5f5;
+      }
+      &:hover{
+        background: #f5f5f5;
+      }
+    }
+
+    .subscribe_btn{
+      height: 40px;
+      border: none;
+      padding: 7px 15px;
+      background: $color_link_color;
+      border-radius: 0px 4px 4px 0px;
+      position: relative;
+      left: -5px;
+
+      &:focus{
+        outline: none;
+      }
+      &:hover{
+        background: $color_link_color - 10;
+      }
+    }
+
+    @media screen and (max-width: 895px){
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    @media screen and (max-width: 768px){
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    @media screen and (max-width: 480px){
+      .subscribe_email_input, .subscribe_btn{
+        display: block;
+        width: 75%;
+        min-width: initial;
+        margin: 0 auto;
+        margin-bottom: 7px;
+        left: 0;
+        border-radius: 4px;
+      }
+    }
+
+    @media screen and (max-width: 400px){
+      .subscribe_email_input, .subscribe_btn {
+        width: 85%;
+      }
+    }
+
+
+  }
 }
 
 
