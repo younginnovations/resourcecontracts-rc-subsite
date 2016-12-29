@@ -483,9 +483,8 @@ use Illuminate\Support\Facades\Lang;
 														{{_l('codelist/annotation.categories',$annotation->category_key)}}
 													</div>
 													@if(site()->isClipEnabled())
-														<button data-id={{$annotation->id}} class="pull-right
-																annotation-clip-icon
-														" title=@lang('clip.clip_annotation') style="display:
+														<button data-id={{$annotation->id}} class="pull-right annotation-clip-icon"
+														title=@lang('clip.clip_annotation') style="display:
 														none">@lang('clip.clips')</button>
 													@endif
 												</div>

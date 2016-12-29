@@ -67,4 +67,5 @@ return [
     'clear_all_clips'       => 'Effacer tous les clips',
     'sending'               => 'Envoi...',
     'document'              => 'Document',
+    'view-all-clips'        => 'Voir tous les clips',
 ];

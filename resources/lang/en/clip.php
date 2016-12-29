@@ -66,4 +66,7 @@ return [
     'clear_all_clips'       => 'Clear All Clips',
     'sending'               => 'Sending...',
     'document'              => 'Document',
+    'view-all-clips'        => 'View all clips',
+    'or'                    => 'or',
+    'learn_more'            => 'Learn more',
 ];

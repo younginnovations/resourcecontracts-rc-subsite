@@ -393,10 +393,60 @@ $(document).ready(function () {
         }
     });
 
-    var toolTip = $('[data-toggle="tooltip"]');
-    if (toolTip.length) {
-        toolTip.tooltip();
-    }
+
+
+
+
+    // SCRIPT FOR CUSTOM POPOVER FOR HOVER DESCRIPTION TEXT
+
+
+
+    $(document).ready(function(){
+
+        setTimeout(function(){
+
+
+
+            var popover = $('[data-toggle="popover"]'); // select all popover toggles
+
+            // template for popover
+            var popover_content = '<div class="popover custom" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+
+
+            $(document).find('.popover, .popover *').on('click focus', function( e ){
+                e.preventDefault();
+                e.stopPropagation();
+            })
+
+            popover.on('mouseenter', function( e ) {
+
+                var title = $(this).attr("data-title");
+                var content = $(this).data("popover-content");
+
+
+                $(this).find(".popover").remove();
+
+                popover.append(popover_content);
+
+                if(title) {
+
+                    $(this).find(".popover-title").html(title);
+                }
+
+                if(content) {
+
+                    $(this).find(".popover-content").html('<br />' + content + '<br /><br />');
+                }
+            });
+
+        }, 1000)
+    })
+
+    // END of SCRIPT FOR CUSTOM POPOVER FOR HOVER DESCRIPTION TEXT
+
+
+
+
 
     var originalLeave = $.fn.popover.Constructor.prototype.leave;
     $.fn.popover.Constructor.prototype.leave = function (obj) {
