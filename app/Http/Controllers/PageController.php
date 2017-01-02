@@ -116,13 +116,13 @@ class PageController extends BaseController
     }
 
     /**
-     * Publish contracts
+     * Country Sites
      *
      * @return \Illuminate\View\View
      */
-    public function publishContracts()
+    public function countrySites()
     {
-        $page      = $this->page->get('publish-contracts');
+        $page      = $this->page->get('country-sites');
         $meta = [
             'title'       => $page->title(),
             'description' => 'Learn more about disclosing contracts on' . site()->meta('name') .', and how we can support host governments, investors, and other relevant stakeholders in their efforts to disclose contracts.'

@@ -56,7 +56,7 @@ return [
     "all_clip"              => "All Clips",
     'view_all_clips'        => "View Clips",
     "all_clips"             => "All Clips",
-    'shareViaEmail'         => "Email Saved Clips",
+    'shareViaEmail'         => "Email Page Link",
     'click_to_enable_clip'  => "Click here to enable clip.",
     'click_to_disable_clip' => "Click here to disable clip.",
     'csv'                   => 'CSV',

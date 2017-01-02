@@ -52,7 +52,7 @@
 						<li><a href="{{url('faqs')}}">@lang('footer.faqs')</a></li>
 						<li><a href="{{url('guides')}}">@lang('sidebar.guides')</a></li>
 						<li><a href="{{url('glossary')}}">@lang('footer.glossary')</a></li>
-						<li><a href="{{url('publish-contracts')}}">@lang('footer.publish_contracts')</a></li>
+						<li><a href="{{url('country-sites')}}">@lang('footer.country_sites')</a></li>
 						<li><a href="{{url('contact')}}">@lang('footer.contact')</a></li>
 						<li><a href="https://github.com/NRGI/resourcecontracts.org/wiki/API" target="_blank">API</a>
 						</li>
