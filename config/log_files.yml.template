@@ -1,0 +1,22 @@
+files:
+  - path: /var/log/nginx/access.log
+    tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-nginx-access.log
+  - path: /var/log/nginx/error.log
+    tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-nginx-error.log  
+  - path: /var/log/php-fpm.log
+    tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-php-fpm.log    
+  - path: /var/log/supervisor/supervisord.log
+    tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-supervisor-supervisord.log  
+  - path: /var/log/supervisor/remote-syslog.log
+    tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-supervisor-remote-syslog.log    
+  - path: /var/www/olc/storage/logs/*
+    tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-var-www-olc-storage-logs        
+  - path: /var/www/rc/storage/logs/*
+    tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-var-www-rc-storage-logs        
+  - path: /var/www/country-tn/storage/logs/*
+    tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-var-www-country-tn-storage-logs        
+destination:
+  host: logs2.papertrailapp.com
+  port: 39824
+  protocol: tls
+exclude_patterns:
