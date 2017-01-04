@@ -13,8 +13,9 @@ let Pdf = React.createClass({
         return {
             isLoading: true,
             pages: [],
-            currentPage: {}
-        }
+            currentPage: 1
+        };
+
     },
     componentDidMount: function () {
         TextAction.getPages(Contract.getGuid());
@@ -54,7 +55,7 @@ let Pdf = React.createClass({
         }
         return (
             <div id="view-pdf">
-                <Viewer page={this.state.currentPage}/>
+                <Viewer pages={this.state.pages} />
             </div>
         );
     }

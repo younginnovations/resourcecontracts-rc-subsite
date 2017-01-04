@@ -52,7 +52,7 @@ Annotator.Plugin.PdfAnnotator = (function (_super) {
     }
 
     PdfAnnotator.prototype.getShape = function (geometry) {
-        var canvas = this.annotator.element.find('canvas');
+        var canvas = this.annotator.element.find('img');
         var g = {};
         g.x = geometry.x * canvas.width();
         g.y = geometry.y * canvas.height();

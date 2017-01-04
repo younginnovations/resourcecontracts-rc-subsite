@@ -4,6 +4,7 @@
 ._.DS_Store
 /node_modules
 /public/css/maps
+/public/pdf
 /bourbon
 /.public
 npm-debug.log

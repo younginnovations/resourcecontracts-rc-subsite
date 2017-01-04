@@ -43,7 +43,7 @@
 	?>
 	<script>
 		var config = {};
-		config.debug = false;
+		config.debug = true;
 		config.ES_URL = '{{ url('api') }}/';
 		config.APP_URL = '{{ url() }}';
 		config.contract = {!!json_encode($contract)!!};
