@@ -346,3 +346,25 @@ a {
   }
 }
 
+
+.contract-detail-wrapper{
+  .panel-contract-wrap>.panel-body{
+    overflow: visible;
+  }
+}
+
+[data-toggle="popover"]{
+  position: relative;
+}
+
+.annotation-sort{
+  .popover.custom{
+    left: -12px;
+    transform: translate(0);
+    .arrow{
+      right: auto;
+      left: 10px;
+    }
+  }
+}
+

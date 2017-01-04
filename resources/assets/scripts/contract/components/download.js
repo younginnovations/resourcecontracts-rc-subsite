@@ -56,7 +56,9 @@ class Download extends Component {
         let hide = {'display': 'none'};
         let style = this.state.active ? show : hide;
         return (
-            <div className="download-dropdown">
+            <div className="download-dropdown"
+                 data-toggle="popover"
+                 data-title={langGlossary.contract_view.download_button}>
                 <a href="#" onClick={this.clickHandler.bind(this)}><span>{lang.download}</span></a>
                 <ul className="dropdown-menu" style={style}>
                     {this.pdf()}

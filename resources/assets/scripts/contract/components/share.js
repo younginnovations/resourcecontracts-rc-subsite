@@ -47,9 +47,21 @@ class Share extends Component {
                 <div className="social-share dropdown-wrap">
                     <a href="#" onClick={this.clickHandler.bind(this)}><span>{lang.share}</span></a>
                     <ul className="dropdown-menu" style={toggleStyle}>
-                        <li className="facebook"><a href={Config.facebookUrl()} target="_blank"></a></li>
-                        <li className="twitter"><a href={Config.twitterUrl()} target="_blank"></a></li>
-                        <li className="email"><a onClick={this.handleShowModal.bind(this)}></a></li>
+                        <li className="facebook"
+                            data-toggle="popover"
+                            data-title={ langGlossary.global.facebook_share }>
+                            <a href={Config.facebookUrl()} target="_blank"></a>
+                        </li>
+                        <li className="twitter"
+                            data-toggle="popover"
+                            data-title={ langGlossary.global.twitter_share }>
+                            <a href={Config.twitterUrl()} target="_blank"></a>
+                        </li>
+                        <li className="email"
+                            data-toggle="popover"
+                            data-title={ langGlossary.global.email_share }>
+                            <a onClick={this.handleShowModal.bind(this)}></a>
+                        </li>
                     </ul>
                 </div>
                 {this.state.showModal ? <Email handleHideModal={this.handleHideModal.bind(this)}/> : null}

@@ -133,7 +133,7 @@ use Illuminate\Support\Facades\Lang;
 						</ul>
 						<ul>
 							<li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-								<label for="">@lang('global.type_contract')</label>
+								<label for="" data-popover="true" data-toggle="popover" data-title="@lang('glossary.contract_summary.type_of_contract')">@lang('global.type_contract')</label>
                                 <span class="contract-type-list">@if(isset($contract->metadata->contract_type) && !empty($contract->metadata->contract_type) && is_array($contract->metadata->contract_type))
 										@foreach($contract->metadata->contract_type as $contractype)
 											<a href="{{route("search",['contract_type'=>$contractype])}}">{{_l('codelist/contract_type',$contractype) }}</a>
@@ -251,7 +251,7 @@ use Illuminate\Support\Facades\Lang;
                         </span>
 							</li>
 							<li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-								<label for="">@lang('contract.open_corporate_ID')</label>
+								<label for="" data-toggle="popover" data-title="@lang('glossary.contract_summary.open_contracting_ID')">@lang('contract.open_corporate_ID')</label>
                                 <span>
 									@if(isset($company->company->opencorporates_url) && !empty($company->company->opencorporates_url))
 										<a href="{{$company->company->opencorporates_url}}">{{str_limit($company->company->opencorporates_url,25)}}</a>
@@ -417,7 +417,7 @@ use Illuminate\Support\Facades\Lang;
 									-@endif</span>
 						</li>
 						<li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-							<label for="">@lang('contract.disclosure_mode')</label>
+							<label for="" data-toggle="popover" data-title="@lang('glossary.contract_summary.disclosure_mode')">@lang('contract.disclosure_mode')</label>
                             <span>
                                 @if(!empty($contract->metadata->publisher->type))
 									<?php $a = $contract->metadata->publisher->type ?>
@@ -445,7 +445,8 @@ use Illuminate\Support\Facades\Lang;
 						</div>
 						@if(site()->isClipEnabled())
 							<button id="clip-all-annotations" class="pull-right annotation-clip"
-									title="Clip all annotations"><span class="link">@lang('clip.clip_all')</span>
+									data-toggle="popover"
+									data-title="@lang('clip.clip_annotation')"><span class="link">@lang('clip.clip_all')</span>
 							</button>
 						@endif
 					</div>
@@ -483,9 +484,10 @@ use Illuminate\Support\Facades\Lang;
 														{{_l('codelist/annotation.categories',$annotation->category_key)}}
 													</div>
 													@if(site()->isClipEnabled())
-														<button data-id={{$annotation->id}} class="pull-right annotation-clip-icon"
-														title=@lang('clip.clip_annotation') style="display:
-														none">@lang('clip.clips')</button>
+														<button data-id={{$annotation->id}}  class="pull-right annotation-clip-icon"
+														 style="display: none" data-toggle="popover"
+														data-title="@lang('clip.clip_annotation')">
+														@lang('clip.clips')</button>
 													@endif
 												</div>
 												<div class="annotation-text">

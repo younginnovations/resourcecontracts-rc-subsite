@@ -22,13 +22,35 @@ class Cluster extends Component {
     render() {
         return (
             <div className="annotations-topic-list">
-                <span className="selected-topic" onClick={this.handleClick.bind(this,'All')}>{LANG.all}</span>
-                <span onClick={this.handleClick.bind(this,'general')}>{LANG.general}</span>
-                <span onClick={this.handleClick.bind(this,'environment')}>{LANG.environment}</span>
-                <span onClick={this.handleClick.bind(this,'fiscal')}>{LANG.fiscal}</span>
-                <span onClick={this.handleClick.bind(this,'operations')}>{LANG.operations}</span>
-                <span onClick={this.handleClick.bind(this,'social')}>{LANG.social}</span>
-                <span onClick={this.handleClick.bind(this,'legal_rules')}>{LANG.legal_rules}</span>
+                <span className="selected-topic"
+                    onClick={this.handleClick.bind(this,'All')}
+                    data-toggle="popover"
+                    data-title={langGlossary.contract_view.see_all}>
+                    {LANG.all}</span>
+                <span onClick={this.handleClick.bind(this,'general')}
+                    data-toggle="popover"
+                    data-title={langGlossary.contract_view.general}>
+                    {LANG.general}</span>
+                <span onClick={this.handleClick.bind(this,'environment')}
+                    data-toggle="popover"
+                    data-title={langGlossary.contract_view.environment}>
+                    {LANG.environment}</span>
+                <span onClick={this.handleClick.bind(this,'fiscal')}
+                    data-toggle="popover"
+                    data-title={langGlossary.contract_view.fiscal}>
+                    {LANG.fiscal}</span>
+                <span onClick={this.handleClick.bind(this,'operations')}
+                      data-toggle="popover"
+                      data-title={langGlossary.contract_view.operations}>
+                      {LANG.operations}</span>
+                <span onClick={this.handleClick.bind(this,'social')}
+                      data-toggle="popover"
+                      data-title={langGlossary.contract_view.social}>
+                      {LANG.social}</span>
+                <span onClick={this.handleClick.bind(this,'legal_rules')}
+                      data-toggle="popover"
+                      data-title={langGlossary.contract_view.legal_rules}>
+                      {LANG.legal_rules}</span>
             </div>
         );
     }

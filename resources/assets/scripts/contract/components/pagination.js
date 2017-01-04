@@ -80,7 +80,9 @@ class Pagination extends Component {
 
     render() {
         return (
-            <div className="text-pagination pagination">
+            <div className="text-pagination pagination"
+                 data-toggle="popover"
+                 data-title={langGlossary.contract_view.page_arrows_and_box}>
                 <a href="#" className="previous" onClick={this.clickPrevious.bind(this)}>{LANG.previous}</a>
                 <input type="text" className="goto" ref="pageNumber" onKeyDown={this.handleKeyDown.bind(this)}/>
                 <a href="#" className="next" onClick={this.clickNext.bind(this)}>{LANG.next}</a>
