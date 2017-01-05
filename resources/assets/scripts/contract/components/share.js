@@ -44,22 +44,18 @@ class Share extends Component {
         var toggleStyle = this.state.active ? show : hide;
         return (
             <div>
-                <div className="social-share dropdown-wrap">
+                <div className="social-share dropdown-wrap"
+                     data-toggle="popover"
+                     data-title={ langGlossary.global.social_share }>
                     <a href="#" onClick={this.clickHandler.bind(this)}><span>{lang.share}</span></a>
                     <ul className="dropdown-menu" style={toggleStyle}>
-                        <li className="facebook"
-                            data-toggle="popover"
-                            data-title={ langGlossary.global.facebook_share }>
+                        <li className="facebook">
                             <a href={Config.facebookUrl()} target="_blank"></a>
                         </li>
-                        <li className="twitter"
-                            data-toggle="popover"
-                            data-title={ langGlossary.global.twitter_share }>
+                        <li className="twitter">
                             <a href={Config.twitterUrl()} target="_blank"></a>
                         </li>
-                        <li className="email"
-                            data-toggle="popover"
-                            data-title={ langGlossary.global.email_share }>
+                        <li className="email">
                             <a onClick={this.handleShowModal.bind(this)}></a>
                         </li>
                     </ul>

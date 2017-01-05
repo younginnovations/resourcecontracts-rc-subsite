@@ -26,7 +26,9 @@ use Illuminate\Support\Facades\Lang;
 			</div>
 			<div class="head-wrap">
 				<div class="right-column-view">
-					<div class="download-main-wrap dropdown">
+					<div class="download-main-wrap dropdown"
+						 data-toggle="popover"
+						 data-title="@lang('glossary.contract_view.download_button')">
 						<a class="download-wrap dropdown-toggle" data-toggle="dropdown"> </a>
 						<ul class="dropdown-menu">
 							<li>
@@ -39,7 +41,9 @@ use Illuminate\Support\Facades\Lang;
 							@endif
 						</ul>
 					</div>
-					<div class="social-share dropdown" id="social-toggler">
+					<div class="social-share dropdown" id="social-toggler"
+						 data-toggle="popover"
+						 data-title="@lang('glossary.global.social_share')">
 						<a class="dropdown-toggle" data-toggle="dropdown"><span>@lang('contract.social_share')</span></a>
 						@include('contract.partials.share')
 					</div>
@@ -133,7 +137,10 @@ use Illuminate\Support\Facades\Lang;
 						</ul>
 						<ul>
 							<li class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-								<label for="" data-popover="true" data-toggle="popover" data-title="@lang('glossary.contract_summary.type_of_contract')">@lang('global.type_contract')</label>
+								<label for=""
+									   data-popover="true" data-toggle="popover"
+									   data-title="@lang('glossary.contract_summary.type_of_contract') <a href='{{url()}}/glossary' target='_blank'>@lang('glossary.contract_summary.see_glossary')</a>">
+									   @lang('global.type_contract')</label>
                                 <span class="contract-type-list">@if(isset($contract->metadata->contract_type) && !empty($contract->metadata->contract_type) && is_array($contract->metadata->contract_type))
 										@foreach($contract->metadata->contract_type as $contractype)
 											<a href="{{route("search",['contract_type'=>$contractype])}}">{{_l('codelist/contract_type',$contractype) }}</a>
@@ -251,7 +258,10 @@ use Illuminate\Support\Facades\Lang;
                         </span>
 							</li>
 							<li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-								<label for="" data-toggle="popover" data-title="@lang('glossary.contract_summary.open_contracting_ID')">@lang('contract.open_corporate_ID')</label>
+								<label for="" data-toggle="popover"
+									   data-title="@lang('glossary.contract_summary.open_contracting_ID') <a href='http://standard.open-contracting.org/latest/en/' target='_blank'>@lang('glossary.contract_summary.OCDS')</a>">
+									@lang('contract.open_corporate_ID')
+								</label>
                                 <span>
 									@if(isset($company->company->opencorporates_url) && !empty($company->company->opencorporates_url))
 										<a href="{{$company->company->opencorporates_url}}">{{str_limit($company->company->opencorporates_url,25)}}</a>

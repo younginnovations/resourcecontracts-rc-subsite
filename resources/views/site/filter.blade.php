@@ -41,7 +41,9 @@
 			$params['download'] = true;
 			?>
 			@if($contracts->total!=0)
-				<div class="social-share dropdown" id="social-toggler">
+				<div class="social-share dropdown" id="social-toggler"
+					 data-toggle="popover"
+					 data-title="@lang('glossary.global.social_share')">
 					<a class="dropdown-toggle" data-toggle="dropdown"><span>@lang('contract.social_share')</span></a>
 					@include('contract.partials.share')
 				</div>

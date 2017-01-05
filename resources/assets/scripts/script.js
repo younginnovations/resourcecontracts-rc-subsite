@@ -439,6 +439,10 @@ $(document).ready(function () {
                 }
             });
 
+            popover.on('click', function( e ) {
+                $(this).find(".popover.custom").remove();
+            });
+
         }, 1000)
     })
 
