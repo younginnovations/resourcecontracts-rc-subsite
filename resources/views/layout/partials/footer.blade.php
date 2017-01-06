@@ -63,7 +63,6 @@
 							@include('layout.partials.language')
 						</div>
 					@endif
-					<br>
 					<form action="{{site()->newsletterUrl()}}" method="get" name="subscribe">
 						<div class="subscribe">
 							<input type="text" class="subscribe_email_input" id="email" name="email" placeholder="name@example.com">
