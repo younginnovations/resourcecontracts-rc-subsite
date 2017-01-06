@@ -37,3 +37,5 @@ envsubst '$SERVER_NAME $CATEGORY'< ./nginx_subsite.template > /etc/nginx/sites-e
 export CATEGORY=rc
 envsubst < ./env.template > /var/www/country-tn/.env
 
+#log_files
+envsubst '${DEPLOYMENT_TYPE}' < ./log_files.yml.template > /etc/log_files.yml

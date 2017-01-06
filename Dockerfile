@@ -31,7 +31,12 @@ RUN apk --update add \
  && gem install --no-rdoc --no-ri sass \
  && gem install --no-rdoc --no-ri bourbon \
  && gem install --no-rdoc --no-ri io-console \
- && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
+ && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer \
+ && curl -O -L https://github.com/papertrail/remote_syslog2/releases/download/v0.19/remote_syslog_linux_amd64.tar.gz \
+ && tar -zxf remote_syslog_linux_amd64.tar.gz \
+ && cp remote_syslog/remote_syslog /usr/local/bin \
+ && rm -r remote_syslog_linux_amd64.tar.gz \
+ && rm -r remote_syslog
 
 RUN mkdir -p /etc/nginx \
  && mkdir -p /run/nginx \
@@ -55,9 +60,10 @@ RUN composer install --no-interaction --prefer-dist --no-scripts --no-autoloader
 
 COPY config/init.sh /var/container_init/init.sh
 COPY config/nginx_subsite.template /var/container_init/nginx_subsite.template
+COPY config/log_files.yml.template /var/container_init/log_files.yml.template
 COPY config/env.template /var/container_init/env.template
 COPY config/nginx.conf /etc/nginx/nginx.conf
-COPY config/nginx-supervisor.ini /etc/supervisor.d/nginx-supervisor.ini
+COPY config/supervisord.conf /etc/supervisord.conf
 COPY . /var/container_init/site_content
 
 RUN composer dump-autoload --optimize \
@@ -71,7 +77,7 @@ RUN composer dump-autoload --optimize \
 #OLC
  && mkdir -p /var/www/olc \
  && cp -R /var/container_init/site_content/. /var/www/olc \
- && gulp -cwd /var/www/olc olc \
+ && gulp --cwd /var/www/olc olc \
  && chmod -R 777 /var/www/olc/storage \
  && touch /var/www/olc/.env \
 #country site -- Tunisia / tn
@@ -84,4 +90,4 @@ RUN composer dump-autoload --optimize \
  && rm -r /var/container_init/site_content
 
 EXPOSE 80
-CMD cd /var/container_init && ./init.sh && /usr/bin/supervisord
+CMD cd /var/container_init && ./init.sh && /usr/bin/supervisord -c /etc/supervisord.conf

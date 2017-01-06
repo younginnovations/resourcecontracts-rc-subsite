@@ -346,3 +346,49 @@ a {
   }
 }
 
+
+.contract-detail-wrapper{
+  .panel-contract-wrap>.panel-body{
+    overflow: visible;
+  }
+}
+
+[data-toggle="popover"]{
+  position: relative;
+}
+
+.popover.custom{
+  font-family: 'Open-Sans-Regular';
+}
+
+.annotation-sort{
+  .popover.custom{
+    top: 85%;
+    left: -12px;
+    transform: translate(0);
+    .arrow{
+      right: auto;
+      left: 10px;
+    }
+  }
+}
+
+.dropdown-menu{
+  .popover.custom{
+    top: 70%;
+  }
+}
+
+
+.metadata-view{
+  .popover.custom{
+    top: 70%;
+    left: 0px;
+    transform: translate(0);
+    .arrow{
+      right: auto;
+      left: 10px;
+    }
+  }
+}
+

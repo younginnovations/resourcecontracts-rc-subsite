@@ -410,8 +410,7 @@ $(document).ready(function () {
             var popover = $('[data-toggle="popover"]'); // select all popover toggles
 
             // template for popover
-            var popover_content = '<div class="popover custom" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
-
+            var popover_content = '<div class="popover custom" ><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
 
             $(document).find('.popover, .popover *').on('click focus', function( e ){
                 e.preventDefault();
@@ -424,9 +423,9 @@ $(document).ready(function () {
                 var content = $(this).data("popover-content");
 
 
-                $(this).find(".popover").remove();
+                $('body').find(".popover.custom").remove();
 
-                popover.append(popover_content);
+                $(this).append(popover_content);
 
                 if(title) {
 
@@ -437,6 +436,10 @@ $(document).ready(function () {
 
                     $(this).find(".popover-content").html('<br />' + content + '<br /><br />');
                 }
+            });
+
+            popover.on('click', function( e ) {
+                $(this).find(".popover.custom").remove();
             });
 
         }, 1000)

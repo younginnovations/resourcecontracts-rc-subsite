@@ -236,6 +236,8 @@ var Metadata = React.createClass({
         return dm;
     },
     renderMetadata() {
+
+        let type_of_contract_link = langGlossary.contract_view.type_of_contract + ' <a href="'+ config.APP_URL + '/glossary" target="_blank">'+ langGlossary.contract_view.see_glossary + '</a>';
         return (
             <div id="metadata" className="right-column-view">
                 {this.getNote()}
@@ -253,15 +255,27 @@ var Metadata = React.createClass({
                         <p className="value"> {this.getResource()}</p>
                     </div>
                     <div className="metadata-item">
-                        <p className="key">{LANG.type_contract}</p>
+                        <p
+                            className="key"
+                            data-toggle="popover"
+                            data-title={ type_of_contract_link }>
+                            {LANG.type_contract}</p>
                         <p className="value">{this.getContractType()}</p>
                     </div>
                     <div className="metadata-item">
-                        <p className="key">{LANG.open_contracting_id}</p>
+                        <p
+                            className="key"
+                            data-toggle="popover"
+                            data-title={langGlossary.contract_view.open_contracting_identifier}>
+                            {LANG.open_contracting_id}</p>
                         <p className="value">{this.state.metadata.open_contracting_id}</p>
                     </div>
                     <div className="metadata-item">
-                        <p className="key">{LANG.disclosure_mode}</p>
+                        <p
+                            className="key"
+                            data-toggle="popover"
+                            data-title={langGlossary.contract_view.disclosure_mode}>
+                            {LANG.disclosure_mode}</p>
                         <p className="value">{this.disclosureMode()}</p>
                     </div>
                     {this.getAnnexesMissing()}

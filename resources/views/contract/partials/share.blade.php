@@ -9,5 +9,7 @@
 		   href="#twitter"
 		   target="_blank"></a>
 	</li>
-	<li class="email"><a href="#email" data-toggle="modal" data-target="#emailModel"></a></li>
+	<li class="email">
+		<a href="#email" data-toggle="modal" data-target="#emailModel"></a>
+	</li>
 </ul>
