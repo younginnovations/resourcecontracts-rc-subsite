@@ -6,8 +6,8 @@ var APP_DIR = path.resolve(__dirname, 'resources/assets/scripts');
 
 var config = {
     cache: true,
-    devtool: 'eval',
-    //devtool: 'cheap-module-source-map',
+   // devtool: 'eval',
+    devtool: 'cheap-module-source-map',
     entry: {
         popup: [
             APP_DIR + '/popup/index.js',
@@ -46,7 +46,7 @@ var config = {
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({
             compress: {warnings: false},
-            minimize: true,
+            minimize: false,
             output: {
                 comments: false
             }

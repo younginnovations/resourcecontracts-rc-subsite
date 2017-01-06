@@ -43,7 +43,7 @@
 	?>
 	<script>
 		var config = {};
-		config.debug = false;
+		config.debug = true;
 		config.ES_URL = '{{ url('api') }}/';
 		config.APP_URL = '{{ url() }}';
 		config.contract = {!!json_encode($contract)!!};
@@ -87,9 +87,5 @@
 	</script>
 	<script src="{{url('js/annotator/annotator-full.min.js')}}"></script>
 	<script src="{{url('js/annotator/annotator.utils.js')}}"></script>
-	<script src="{{url('js/pdfjs/pdf.js')}}"></script>
-	<script>
-		PDFJS.workerSrc = "{{url('js/pdfjs/pdf.worker.js')}}"
-	</script>
 	<script src="{{ url('js/contract_view.js') }}"></script>
 @stop

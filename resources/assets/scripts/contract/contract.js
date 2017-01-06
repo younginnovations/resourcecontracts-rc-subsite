@@ -162,7 +162,7 @@ class Contract {
     }
 
     getBoxPosition(geo) {
-        const canvas = $('.pdf-annotator').find('canvas').first();
+        const canvas = $('.pdf-wrapper #pdf-' + this.getCurrentPage() + ' .imageWrapper');
         const con_geo = {};
         con_geo.width = geo.width * canvas.width();
         con_geo.height = geo.height * canvas.height();
@@ -206,8 +206,10 @@ class Contract {
     showPdfAnnotationPopup(id) {
         const wrapperEl = $('.pdf-annotator');
         wrapperEl.find('.annotator-viewer').addClass('annotator-hide');
+
         const annotators = this.getAnnotations().result;
         annotators.forEach((annotation, i) => {
+            console.log(this.getCurrentPage());
             if (annotation.id == id && annotation.page_no == this.getCurrentPage()) {
                 let geo = annotation.shapes[0].geometry;
                 geo = this.getBoxPosition(geo);
@@ -217,7 +219,7 @@ class Contract {
                         scrollTop: position.top - 200
                     }, 'fast')
                 }(position, wrapperEl), 300);
-                wrapperEl.annotator().annotator('showViewer', [annotation], position);
+                $('#pdf-' + this.getCurrentPage() + ' .imageWrapper').annotator().annotator('showViewer', [annotation], position);
             }
         });
     }

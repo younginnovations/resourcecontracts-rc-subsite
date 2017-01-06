@@ -12,12 +12,12 @@ Annotator.Plugin.PdfAnnotator = (function (_super) {
         var self = this;
 
         annotator.subscribe("annotationsLoaded", function (annotation) {
-            $('.annotator-pdf-hl').remove();
+            $('#page-' + annotation[0].page_no + ' .annotator-pdf-hl').remove();
             annotation.map(function (ann) {
                 if (ann.shapes === undefined)
                     return '';
                 self.annotationLoader(ann);
-            })
+            });
         });
 
         el.on('mouseover', 'div', function () {
@@ -52,7 +52,7 @@ Annotator.Plugin.PdfAnnotator = (function (_super) {
     }
 
     PdfAnnotator.prototype.getShape = function (geometry) {
-        var canvas = this.annotator.element.find('canvas');
+        var canvas = this.annotator.element.find('.pdf-image');
         var g = {};
         g.x = geometry.x * canvas.width();
         g.y = geometry.y * canvas.height();

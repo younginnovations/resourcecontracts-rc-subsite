@@ -45,19 +45,10 @@ var Link = React.createClass({
             link = '#/pdf/page/' + this.state.annotation.page_no + '/annotation/' + this.state.annotation.id;
         }
 
-        if (Contract.getView() == this.state.type && this.state.type == 'pdf') {
-            if (Contract.getCurrentPage() == this.state.annotation.page_no && this.state.annotation.id == Contract.getCurrentAnnotation()) {
-                Contract.showPopup(this.state.annotation.id);
-            } else if (Contract.getCurrentPage() == this.state.annotation.page_no) {
-                window.location.href = link;
-                Contract.showPopup(this.state.annotation.id);
-            } else {
-                window.location.href = link;
-            }
+
+        if (Contract.getCurrentPage() == this.state.annotation.page_no) {
+            Contract.showPopup(this.state.annotation.id);
         } else {
-            if (Contract.getCurrentPage() == this.state.annotation.page_no) {
-                Contract.showPopup(this.state.annotation.id);
-            }
             window.location.href = link;
         }
 
