@@ -3,10 +3,12 @@ import PDFImage from './pdfimage';
 import Contract from "../../contract";
 import Event from '../../event';
 import AnnotationLoader from '../../annotator/loader';
+import Waypoint from '../waypoint';
 
 class Viewer extends Component {
     constructor(props) {
         super(props);
+        this.annotator = [];
         this.state = ({
             page_no: 1,
             pdf_url: "",
@@ -17,10 +19,13 @@ class Viewer extends Component {
     }
 
     componentDidMount() {
+        Contract.setDisablePagination(true);
         this.subscribe_zoom = Event.subscribe('zoom:change', (scale) => {
             this.setState({scale: scale});
+            $('.annotator-pdf-hl').hide();
         });
         this.updateState(this.props);
+        this.subscribePagination = Event.subscribe('pagination:change', this.paginationHandler);
     }
 
     updateState(props) {
@@ -34,16 +39,15 @@ class Viewer extends Component {
 
     componentWillUnmount() {
         this.subscribe_zoom.remove();
+        this.subscribePagination.remove();
     }
 
-    getAnnotations() {
+    getAnnotations(page_no) {
         let page = [];
         let annotations = Contract.getAnnotations();
 
         annotations.result.forEach(annotation=> {
-            if (typeof  annotation.shapes == 'object') {
-                annotation.shapes[0].geometry.y = annotation.shapes[0].geometry.y + (annotation.page_no - 1);
-                console.log(annotation);
+            if (typeof  annotation.shapes == 'object' && annotation.page_no == page_no) {
                 page.push(annotation);
             }
         });
@@ -52,42 +56,52 @@ class Viewer extends Component {
     }
 
     onPageRendered(page) {
-
-        console.log(page);
-
-        if (page < 24) {
-            return;
+        if (typeof this.annotator[page] == 'undefined') {
+            this.annotator[page] = new AnnotationLoader('.pdf-wrapper #pdf-' + page + ' .imageWrapper');
+            this.annotator[page].init();
+            Contract.setAnnotatorInstance(this.annotator[page]);
         }
 
-        if (!this.annotator) {
-            this.annotator = new AnnotationLoader('.pdf-wrapper');
-            this.annotator.init();
-            // Contract.setAnnotatorInstance(this.annotator);
-        }
-
-        const annotations = this.getAnnotations();
+        const annotations = this.getAnnotations(page);
 
         if (annotations.length > 0) {
-            this.annotator.content.annotator("loadAnnotations", annotations);
+            this.annotator[page].content.annotator("loadAnnotations", annotations);
         }
 
-        // Event.publish('annotation:loaded', 'pdf');
+        Event.publish('annotation:loaded', 'pdf');
     }
 
     componentWillReceiveProps(props) {
         this.updateState(props);
     }
 
-    /*   shouldComponentUpdate(nextProps, nextState) {
-     return (nextProps.page.page_no !== this.state.page_no || this.state.scale !== nextState.scale);
-     }*/
+    componentDidUpdate() {
+        this.paginationHandler(Contract.getCurrentPage());
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return (this.state.scale !== nextState.scale);
+    }
+
+    paginationHandler(page_no) {
+        let page = $('#pdf-' + page_no);
+        let parentWindow = $('.pdf-annotator');
+        if (page.offset()) {
+            let pageOffsetTop = page.offset().top;
+            let parentTop = parentWindow.scrollTop();
+            let parentOffsetTop = parentWindow.offset().top;
+            parentWindow.animate({scrollTop: parentTop - parentOffsetTop + pageOffsetTop}, 300, ()=> {
+                Contract.setDisablePagination(false);
+            });
+        }
+    }
+
 
     pdfImages() {
         if (typeof this.state.pages == 'undefined') return false;
         return this.state.pages.map(page=> {
             return (
-                <div id={'page-'+page.page_no}>
-                    {page.page_no}
+                <div id={'pdf-'+page.page_no}>
                     <PDFImage key={page.id}
                               onPageRendered={this.onPageRendered.bind(this)}
                               file={'http://localhost:8000/pdf/'+page.page_no+'.jpg'}
