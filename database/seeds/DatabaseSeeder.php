@@ -46,9 +46,9 @@ class DatabaseSeeder extends Seeder
                 'content' => ['en' => 'Glossary content', 'fr' => 'Fr Glossary Content'],
             ],
             [
-                'title'   => ['en' => 'Publish Contracts', 'fr' => 'Publish Contracts'],
-                'slug'    => 'publish-contracts',
-                'content' => ['en' => 'Publish Contracts', 'fr' => 'Fr Publish Contracts1'],
+                'title'   => ['en' => 'Country Sites', 'fr' => 'Country Sites'],
+                'slug'    => 'country-sites',
+                'content' => ['en' => 'Country Sites', 'fr' => 'Fr Country Sites'],
             ],
         ];
 

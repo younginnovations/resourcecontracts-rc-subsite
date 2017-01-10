@@ -194,19 +194,19 @@ var Metadata = React.createClass({
             }
         });
 
-        if (this.state.metadata.associated.length > MaxAllowed) {
-            supportingContracts.push((<p><a href={Contract.getSummaryUrl()}>{LANG.more}</a></p>));
-        }
-
         if (parentContracts.length || supportingContracts.length) {
             return (
-                <div className="relateddocument-view">
+                <div className="relateddocument-view metadata-item">
                     <div className="relateddocument-title">{LANG.related_docs}</div>
                     {parentContracts}
                     {supportingContracts}
                     {moreContracts}
                 </div>
             );
+        }
+
+        if (this.state.metadata.associated.length > MaxAllowed) {
+            supportingContracts.push((<p><a href={Contract.getSummaryUrl()}>{LANG.more}</a></p>));
         }
 
         return null;
@@ -268,12 +268,12 @@ var Metadata = React.createClass({
                     {this.getPagesMissing()}
                     {this.getAmlaLink()}
                     {this.getLandMatrix()}
+                    {this.getRelatedDocuments()}
                     {this.getCountry(true)}
                     <div className="metadata-inline">
                         <p className="key">{LANG.more_for}</p>
                         <p className="value">{this.getResource(true)}</p>
                     </div>
-                    {this.getRelatedDocuments()}
                 </div>
             </div>
         );

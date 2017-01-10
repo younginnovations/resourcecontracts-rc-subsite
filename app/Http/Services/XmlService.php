@@ -114,7 +114,7 @@ class XmlService
             'about',
             'page/resources',
             'glossary',
-            'publish-contracts',
+            'country-sites',
             'contact'
         ];
 
