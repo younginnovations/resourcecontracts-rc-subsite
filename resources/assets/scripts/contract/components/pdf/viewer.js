@@ -97,11 +97,10 @@ class Viewer extends Component {
         }
     }
 
-
     pdfImages() {
         if (typeof this.state.pages == 'undefined') return false;
         return this.state.pages.map(page=> {
-            let file = Config.appUrl('pdf/' + page.page_no + '.jpg');
+            let file = Config.appUrl('pdf/' + page.page_no + '.png');
             return (
                 <div id={'pdf-'+page.page_no}>
                     <PDFImage key={page.id}
@@ -113,7 +112,6 @@ class Viewer extends Component {
                 </div>
             );
         });
-
     }
 
     render() {

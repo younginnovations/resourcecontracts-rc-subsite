@@ -30,7 +30,6 @@ class PDFImage extends Component {
     componentDidMount() {
         var threshold = this.props.page.page_no == 1 ? 0 : -0.4;
         this.setState({threshold: threshold});
-        this.loadPdf(this.props);
     }
 
     loadPdf(props) {
@@ -66,10 +65,12 @@ class PDFImage extends Component {
     }
 
     height() {
-        return 792 * this.state.scale;
+        return 791 * this.state.scale;
     }
 
     _onEnter(number) {
+        this.loadPdf(this.props);
+
         if (Contract.isDisablePagination()) {
             return;
         }
