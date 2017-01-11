@@ -4,6 +4,7 @@ import Contract from "../../contract";
 import Event from '../../event';
 import AnnotationLoader from '../../annotator/loader';
 import Waypoint from '../waypoint';
+import Config from  '../../config';
 
 class Viewer extends Component {
     constructor(props) {
@@ -96,7 +97,6 @@ class Viewer extends Component {
         }
     }
 
-
     pdfImages() {
         if (typeof this.state.pages == 'undefined') return false;
         return this.state.pages.map(page=> {
@@ -104,14 +104,13 @@ class Viewer extends Component {
                 <div id={'pdf-'+page.page_no}>
                     <PDFImage key={page.id}
                               onPageRendered={this.onPageRendered.bind(this)}
-                              file={'http://localhost:8000/pdf/'+page.page_no+'.jpg'}
+                              file={Config.appUrl('pdf/'+page.page_no+'.png')}
                               page={page.page_no}
                               scale={this.state.scale}/>
                     <hr/>
                 </div>
             );
         });
-
     }
 
     render() {
