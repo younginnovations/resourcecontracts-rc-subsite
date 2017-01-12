@@ -83,8 +83,8 @@ class Pagination extends Component {
             <div className="text-pagination pagination">
                 <a href="#" className="previous" onClick={this.clickPrevious.bind(this)}>{LANG.previous}</a>
                 <input type="text" className="goto" ref="pageNumber" onKeyDown={this.handleKeyDown.bind(this)}/>
-                <a href="#" className="next" onClick={this.clickNext.bind(this)}>{LANG.next}</a>
                 {LANG.of} {this.state.total}
+                <a href="#" className="next" onClick={this.clickNext.bind(this)}>{LANG.next}</a>
             </div>
         );
     }

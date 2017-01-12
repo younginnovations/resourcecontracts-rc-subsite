@@ -73,7 +73,7 @@ Annotator.Plugin.AnnotatorNRGIViewer = (function (_super) {
         if (annotation.shapes) {
             viewPort = 'pdf';
         }
-        link = ' <a class="annotation-viewer-more" href="#/' + viewPort + '/page/' + annotation.page_no + '/annotation/' + annotation.id + '">>></a>';
+        link = ' <a class="annotation-viewer-more" data-target="annotations" href="#/' + viewPort + '/page/' + annotation.page_no + '/annotation/' + annotation.id + '">>></a>';
 
         return '<div class="annotation-viewer-text">' + text + article_reference + link + '</div>';
     };

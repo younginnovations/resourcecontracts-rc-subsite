@@ -93,12 +93,14 @@ var Annotations = React.createClass({
     },
     render() {
         if (!this.state.display) {
-            return null;
+           var styles = {
+               display: 'none'
+           }
         }
 
         var sort = this.state.total > 0 ? (<Sort type={this.state.sortBy}/>) : null;
         return (
-            <div id="annotations" className="annotations-viewer">
+            <div style={ styles } id="annotations" className="annotations-viewer tab-content hidden_tab">
                 <div className="annotation-inner-viewer" id="annotations-box">
                     <Header total={this.state.total}/>
                     {sort}

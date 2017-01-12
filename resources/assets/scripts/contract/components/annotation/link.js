@@ -71,7 +71,7 @@ var Link = React.createClass({
 
         return (
             <span className="page-gap">
-                <a onClick={this.clickHandler} href="#">{displayText}</a>
+                <a onClick={this.clickHandler} href="#"  data-target="view-container">{displayText}</a>
                 {this.state.last ? ', ' : ''}
             </span>
         )

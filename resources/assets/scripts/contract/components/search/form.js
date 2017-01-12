@@ -11,6 +11,13 @@ class Form extends Component {
             return;
         }
         window.location.hash = '#/search/' + decodeURIComponent(searchQuery);
+
+        if (window.matchMedia("(max-width: 800px)").matches) {
+
+            $(".tab-content").not("#view-container").addClass("hidden_tab");
+            $(".tab-content#view-container").removeClass("hidden_tab");
+
+        }
     }
 
     fireEvent(query) {

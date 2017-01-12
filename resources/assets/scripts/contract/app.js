@@ -77,12 +77,13 @@ class App extends Component {
                             <Share/>
                             {clipSwitch}
                         </div>
+                        <Pagination />
                     </div>
                 </div>
                 <div className="document-wrap">
                     <Annotations/>
                     <Search />
-                    <div className="view-container">
+                    <div className="view-container tab-content hidden_tab" id="view-container">
                         {this.props.children}
                     </div>
                     <Metadata/>
