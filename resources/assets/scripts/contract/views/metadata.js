@@ -25,6 +25,15 @@ var Metadata = React.createClass({
             this.setState({metadata: data, loading: false});
         }
     },
+    isContractSigned(){
+        var contract_signed = null;
+        if (!this.state.metadata.is_contract_signed) {
+            contract_signed = (<div className="metadata-item">
+                <p className="value">{LANG.contract.contract_not_signed}</p>
+            </div>);
+        }
+        return contract_signed;
+    },
     getCountry(more = false) {
         if (isSite('country')) {
             return null;
@@ -243,6 +252,7 @@ var Metadata = React.createClass({
                     <div className="metadata-heading">
                         {LANG.metadata}
                     </div>
+                    {this.isContractSigned()}
                     {this.getCountry()}
                     <div className="metadata-item">
                         <p className="key">{LANG.signature_year}</p>
