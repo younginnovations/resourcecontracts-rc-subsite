@@ -254,6 +254,8 @@ class ContractController extends BaseController
      */
     public function downloadAnnotations($id)
     {
+        redirectIfOldOCID($id);
+
         $this->api->downloadAPI("contract/".$id."/annotations/download", [], "", $id);
         die;
     }
