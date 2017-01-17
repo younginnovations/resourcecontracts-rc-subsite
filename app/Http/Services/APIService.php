@@ -91,15 +91,15 @@ class APIService
         $filter = array_merge($default, $filter);
 
         $query = [
-            'country'  => $filter['country'],
-            'year'     => $filter['year'],
-            'resource' => $filter['resource'],
-            'per_page' => $filter['per_page'],
-            'from'     => $filter['per_page'] * ($filter['from'] - 1),
-            'sort_by'  => $filter['sort_by'],
-            'order'    => $filter['order'],
-            'all'      => $filter['all'],
-            'download' => $filter['download'],
+            'country_code' => $filter['country'],
+            'year'         => $filter['year'],
+            'resource'     => $filter['resource'],
+            'per_page'     => $filter['per_page'],
+            'from'         => $filter['per_page'] * ($filter['from'] - 1),
+            'sort_by'      => $filter['sort_by'],
+            'order'        => $filter['order'],
+            'all'          => $filter['all'],
+            'download'     => $filter['download'],
         ];
         if ($query['download']) {
             echo $this->downloadAPI('contracts', $query);
