@@ -8,7 +8,7 @@ return [
     'clip'                  => "Clip",
     'clip_annotation'       => "Clip annotation.",
     'clip_on'               => "Clip mode on",
-    'share_clips_email'     => "Share via email",
+    'share_clips_email'     => "Email Saved Clips",
     'to'                    => "To",
     'from'                  => "From",
     'subject'               => "Subject",
