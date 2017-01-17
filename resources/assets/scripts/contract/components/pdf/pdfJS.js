@@ -32,16 +32,15 @@ var PdfJS = React.createClass({
         this.xhr.onprogress = (evt)=> {
             if (evt.lengthComputable) {
                 var percentComplete = (evt.loaded / evt.total) * 100;
-                $('.progress-bar-info').css('width', percentComplete + '%');
+                $('.percentage').text(' (' + Math.round(percentComplete) + '%)');
 
                 if (percentComplete > 99) {
                     setTimeout(()=> {
-                        $('.progress-bar-info').hide();
+                        $('.percentage').hide();
                     }, 600);
                 } else {
-                    $('.progress-bar-info').show();
+                    $('.percentage').show();
                 }
-
             }
         };
 
@@ -144,7 +143,7 @@ var PdfJS = React.createClass({
     },
     loadPdf (props) {
         debug('PDF JS Loading PDF ', props.page, props.file, props.scale);
-        this.notice('Loading PDF ' + props.page, true);
+        this.notice('Loading PDF ' + props.page + '<span class="percentage"></span>', true);
         this.queueRenderPage(props.file, props.scale);
     },
     componentWillReceiveProps (props) {

@@ -88,9 +88,6 @@ class Viewer extends Component {
         }
         return (
             <div className="pdf-viewer pdf-annotator">
-                <div className="progress-wrapper">
-                    <div className="progress-bar progress-bar-info"></div>
-                </div>
                 <div id={this.getPageID()} className="pdf-wrapper">
                     <PdfJS onPageRendered={this.onPageRendered.bind(this)}
                            file={this.state.pdf_url}

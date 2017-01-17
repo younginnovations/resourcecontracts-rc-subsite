@@ -267,22 +267,16 @@ $img-path: "../images";
   float: left;
   background: #fff;
   border-radius: 4px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  padding: 15px 20px 15px 10px;
-  float: left;
   margin: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.text-panel {
+  padding: 15px 20px 15px 10px;
 }
 
 .pdf-annotator {
   padding: 15px 20px;
-}
-
-.pdf-annotator .progress-wrapper {
-  height: 5px;
-  position: relative;
-  top: -16px;
-  margin-left: -20px;
-  margin-right: -20px;
 }
 
 .pdf-annotator, .text-annotator {
@@ -1011,7 +1005,7 @@ div > .annotation-item:first-of-type .annotation-cluster {
   top: 0;
   z-index: 1;
   width: 100%;
-  box-shadow: 0px 2px 5px rgba(0,0,0,0.15);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
 }
 
 .note-wrapper {
@@ -1118,7 +1112,7 @@ div > .annotation-item:first-of-type .annotation-cluster {
   .head-wrap .right-column-view {
     width: auto;
     float: left;
-    >div{
+    > div {
       float: left;
     }
   }
