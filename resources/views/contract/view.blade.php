@@ -69,6 +69,7 @@
 		var LANG = {!! json_encode(trans('annotation')) !!};
 		LANG.resourceLang = {!! json_encode(trans('resources')) !!};
 		LANG.disclosure = {!! json_encode(trans('codelist/disclosure')) !!};
+		LANG.contract = {!! json_encode(trans('contract')) !!};
 
 		var debug = function () {
 			if (config.debug) {
