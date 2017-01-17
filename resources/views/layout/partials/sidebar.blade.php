@@ -25,7 +25,7 @@ $sidebar = $image->getImageUrl('sidebar');
 		</li>
 		<li><a href="{{url('/')}}" @if(isActiveMenu('')) class="active" @endif > @lang('sidebar.home') </a></li>
 		<li><a href="{{url('contracts')}}"
-			   @if(isActiveMenu('contracts')) class="active" @endif >@lang('sidebar.all_contracts')</a></li>
+			   @if(isActiveMenu('contracts')) class="active" @endif >@lang('sidebar.all_documents')</a></li>
 		@if(!site()->isCountrySite())
 			<li><a href="{{url('countries')}}"
 				   @if(isActiveMenu('countries')) class="active" @endif>@lang('sidebar.view_by_country')</a></li>

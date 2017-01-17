@@ -1,7 +1,7 @@
 <?php namespace App\Exceptions;
 
-use ErrorException;
 use Exception;
+use Illuminate\Support\Facades\Mail;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Debug\ExceptionHandler as SymfonyDisplayer;
@@ -12,6 +12,16 @@ use Symfony\Component\Debug\ExceptionHandler as SymfonyDisplayer;
  */
 class Handler extends ExceptionHandler
 {
+
+    /**
+     * A list of the exception types that should not be reported.
+     *
+     * @var array
+     */
+    protected $dontReport = [
+        'Symfony\Component\HttpKernel\Exception\NotFoundHttpException',
+        HttpException::class,
+    ];
 
     /**
      * Report or log an exception.
@@ -49,7 +59,31 @@ class Handler extends ExceptionHandler
         if (env('APP_ENV') === 'production') {
             $this->sendMail($e, $request);
         }
+
         return parent::render($request, $e);
+    }
+
+    /**
+     * Sends email
+     *
+     * @param \Exception                $exception
+     * @param  \Illuminate\Http\Request $request
+     */
+    protected function sendMail($exception, $request)
+    {
+        $error       = $exception->getMessage();
+        $current_url = $request->fullUrl();
+        $message     = sprintf("Url: %s \n\rError: %s \n\rLog: %s", $current_url, $error, (string) $exception);
+        Mail::raw(
+            $message,
+            function ($msg) use ($current_url) {
+                $site       = env('CATEGORY');
+                $recipients = [env('ADMIN_EMAIL')];
+                $msg->subject("{$site} subsite has error - ".$current_url);
+                $msg->to($recipients);
+                $msg->from(['nrgi@yipl.com.np']);
+            }
+        );
     }
 
     /**
@@ -69,28 +103,4 @@ class Handler extends ExceptionHandler
             return (new SymfonyDisplayer(config('app.debug')))->createResponse($e);
         }
     }
-
-    /**
-     * Sends email
-     *
-     * @param \Exception                $exception
-     * @param  \Illuminate\Http\Request $request
-     */
-    protected function sendMail($exception, $request)
-    {
-        $error       = $exception->getMessage();
-        $current_url = $request->fullUrl();
-        $message     = sprintf("Url: %s \n\rError: %s \n\rLog: %s", $current_url, $error, (string) $exception);
-        \Mail::raw(
-            $message,
-            function ($msg) use ($current_url) {
-                $site       = env('CATEGORY');
-                $recipients = [env('ADMIN_EMAIL')];
-                $msg->subject("{$site} subsite has error - ".$current_url);
-                $msg->to($recipients);
-                $msg->from(['nrgi@yipl.com.np']);
-            }
-        );
-    }
-
 }

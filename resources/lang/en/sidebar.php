@@ -2,6 +2,7 @@
 return [
     'home'                     => 'Home',
     'all_contracts'            => 'All Contracts',
+    'all_documents'            => 'All Documents',
     'view_by_country'          => 'View by Country',
     'view_by_resource'         => 'View by Resource',
     'glossary'                 => 'Glossary',
