@@ -19,7 +19,7 @@
     "request": "^2.72.0",
     "webpack": "^1.13.1",
     "webpack-notifier": "^1.4.1",
-    "whatwg-fetch": "^1.0.0"
+    "whatwg-fetch": "^1.1.1"
   },
   "scripts": {
     "build": "NODE_ENV=production webpack -p --progress --colors",

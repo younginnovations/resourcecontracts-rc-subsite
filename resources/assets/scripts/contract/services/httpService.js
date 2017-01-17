@@ -1,4 +1,5 @@
 import Config from '../config';
+import 'whatwg-fetch';
 
 class Service {
 
