@@ -77,4 +77,6 @@ return [
     'resource_count'          => '(:count) بموردين ',
     'resource'                => 'مورد',
     'tagline'                 => '  دليل Resource contracts   من تونس',
+    'partners'                => 'الشركاء',
+    'donors'                  => 'المانحين',
 ];

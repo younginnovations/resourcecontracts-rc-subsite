@@ -4,6 +4,7 @@ use App\Http\Services\AnnotationService;
 use App\Http\Services\APIService;
 use App\Http\Services\ContractService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
 /**
@@ -256,8 +257,16 @@ class ContractController extends BaseController
     {
         redirectIfOldOCID($id);
 
-        $this->api->downloadAPI("contract/".$id."/annotations/download", [], "", $id);
-        die;
+        $url = "contract/".$id."/annotations/download";
+
+        try {
+            $this->api->downloadAPI($url, [], "", $id);
+            die;
+        } catch (\Exception $e) {
+            Log::warning($url.": ".$e->getMessage());
+
+            return abort(404);
+        }
     }
 
     /**

@@ -1,9 +1,14 @@
 .front-row-top-wrap {
   nav.navbar {
-    border-bottom: 1px solid $concrete;
-    border-bottom: 1px solid $concrete_20;
+    border-bottom: 1px solid rgba(242,242,242,0.3);
     //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
     box-shadow: none;
+  }
+}
+
+.page-home nav.navbar{
+  @media screen and (max-width:480px){
+    background: rgba($black, 0.35);;
   }
 }
 
@@ -30,7 +35,6 @@
   margin-top: 60px;
   min-height: 150px;
 }
-
 
 //original selectors
 //.btn-view, .btn-view:hover, .btn-view:focus
@@ -191,6 +195,108 @@
   border-bottom: solid 1px #333;
 }
 
+//.section-wrap{
+//  clear: both;
+//}
+
+
+.section-wrap:after{
+  content: "";
+  display: block;
+  clear: both;
+}
+
+
+/*** LANDING HERO IMAGE SECTION LOGOS STYLES ***/
+
+body.rc{
+  .landing_section_logos{
+    text-align: center;
+    padding: 0px 15px 24px 15px;
+    background: linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.4) 100%);
+    @media screen and (max-width:768px){
+      padding-left: 30px;
+      padding-right: 20px;
+    }
+
+    .partners,.donors{
+      display: inline-block;
+      text-align: left;
+
+      @media screen and (max-width:768px){
+        display: block;
+        padding-left: 0;
+      }
+      a{
+        margin-right: 30px;
+        &:last-child{
+          margin-right: 0;
+        }
+
+        @media screen and (max-width:768px){
+          margin-right: 15px;
+        }
+      }
+    }
+    .partners{
+      text-align: right;
+      padding-right: 35px;
+      border-right: 1px solid rgba(255,255,255,0.5);
+      p{
+        text-align: left;
+      }
+
+      @media screen and (max-width:768px){
+        margin-bottom: 25px;
+        text-align: left;
+        border-right:none;
+        padding-right: 0;
+      }
+    }
+    .donors{
+      padding-left: 35px;
+      @media screen and (max-width:768px){
+        padding-left: 0;
+      }
+    }
+    p{
+      font-size: 18px;
+      color: #fff;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.75px;
+      line-height: 16px;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.65);
+    }
+    img{
+      max-height: 40px;
+      width: auto;
+
+      @media screen and (min-width:993px) {
+        max-height: 45px;
+      }
+
+      &.ccsi{
+        max-height: 35px;
+        @media screen and (min-width:993px) {
+          max-height: 40px;
+        }
+      }
+
+      @media screen and (max-width:992px) and (min-width:767px) {
+        max-height: 35px;
+      }
+    }
+  }
+}
+
+.petroleum-mineral{
+  display: inline-block;
+  position: relative;
+}
+
+
+
 .wrapper {
     width: 950px;
     margin: 0 auto;
@@ -207,6 +313,13 @@
     background-size: cover;
   }
 
+
+  body.rc {
+    .petroleum-wrapper {
+      background-position: top;
+    }
+  }
+
   .section-wrap {
     position: relative;
     padding: 133px 0 20px 0;
@@ -220,13 +333,26 @@
   }
 
   .petroleum-mineral {
-    padding: 120px 225px 120px 30px;
+    padding: 75px 225px 75px 30px;
     color: $white;
-    background: linear-gradient(rgba($black, 0.45), rgba($black, 0.45));
+    background: rgba($black, 0.45);
     width: 747px;
     border-radius: 4px;
-    margin-bottom: 20px;
     min-height: 488px;
+    margin-bottom: 15px;
+
+
+    body.rc &{
+      min-height: 450px;
+      padding-bottom: 75px;
+      padding-top: 110px;
+
+      @media screen and (max-width:480px){
+        padding-top: 48px;
+        padding-bottom: 48px;
+        min-height: auto;
+      }
+    }
     .repo-description {
       font-size: 26px;
       line-height: 34px;
@@ -236,10 +362,18 @@
       font-size: 58px;
       line-height: 66px;
 
+      @media screen and (max-width: 768px){
+        font-size: 48px;
+        line-height: 55px;
+      }
+
       span {
         display: block;
       }
 
+    }
+    @media screen and (max-width: 480px){
+      background: rgba($black, 0.35);
     }
   }
 
@@ -248,6 +382,7 @@
     min-height: initial;
   }
 }
+
 
   .hero-image {
     .search-form {
@@ -280,10 +415,13 @@
           background: $color_link_hover_color;
         }
       }
+      @media screen and (max-width:480px){
+        margin-top: 30px;
+      }
     }
   }
 
-  .petroleum-mineral {
+.petroleum-mineral {
     input::-webkit-input-placeholder {
       color: rgba(255,255,255,0.8) !important;
     }
@@ -574,21 +712,24 @@ p {
 
 }
 
+
 .partner-inner-each{
   .img-responsive{
     &.logo__cu{
-      width: 166px;
+      width: 195px;
       height: 42px;
-      background: transparent url(../images/logo_columbia_university.png) 0 0 no-repeat;
-      @include background-image-retina(transparent,"../images/logo_columbia_university", "png",0,0);
-      background-size: 166px 42px !important;
+      background: transparent url(../images/CCSI_logo.png) 0 0 no-repeat;
+      @include background-image-retina(transparent,"../images/CCSI_logo", "png",0,0);
+      background-size: 100% auto!important;
+      opacity: 0.55;
     }
     &.logo__wb{
-      width: 193px;
-      height: 38px;
-      background: transparent url(../images/logo_wb.png) 0 0 no-repeat;
-      @include background-image-retina(transparent,"../images/logo_wb", "png",0,0);
-      background-size: 193px 38px !important;
+      width: 115px;
+      height: 47px;
+      background: transparent url(../images/WORLDBANK_logo.png) 0 0 no-repeat;
+      @include background-image-retina(transparent,"../images/WORLDBANK_logo", "png",0,0);
+      background-size: 100% 100% !important;
+      opacity: 0.55;
     }
     &.logo__nrgi{
       width: 114px;
@@ -822,7 +963,7 @@ p {
   @media only screen and (max-width: 480px) {
 
     .hero-image .search-form .form-group input{
-      width: 100%;
+      width: 100%!important;
       border-radius: 4px 4px;
       padding: 15px 10px;
       font-size: 12px;
@@ -851,11 +992,12 @@ p {
 
     .petroleum-mineral .large-title {
       font-size: 38px;
-      line-height: 48px;
+      line-height: 42px;
     }
 
     .petroleum-mineral {
-      padding: 30px 20px;;
+      padding: 48px 20px;
+      min-height: auto;
     }
 
     .petroleum-list .petroleum-list-inner {
@@ -994,4 +1136,5 @@ p {
     display: none;
   }
 }
+
 

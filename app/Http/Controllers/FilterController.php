@@ -2,6 +2,7 @@
 
 use App\Http\Services\APIService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class FilterController
@@ -120,10 +121,14 @@ class FilterController
      */
     public function downloadSearchResultAsCSV(Request $request)
     {
-        $currentPage    = $request->get('page', 1);
-        $filter         = $this->processQueries($request);
-        $filter['from'] = $currentPage;
-        $contracts      = $this->api->filterSearch($filter);
-        echo $contracts;
+        try {
+            $currentPage    = $request->get('page', 1);
+            $filter         = $this->processQueries($request);
+            $filter['from'] = $currentPage;
+            $this->api->filterSearch($filter);
+        } catch (\Exception $e) {
+            Log::warning($request->url().": ".$e->getMessage());
+            abort(404);
+        }
     }
 }
