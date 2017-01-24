@@ -262,6 +262,9 @@ class APIService
     {
         extract($filter);
         $per_page = !empty($per_page) ? $per_page : 25;
+
+        redirectIfOldAnnotationCategory($annotation_category);
+
         $query    = [
             'q'                   => urlencode($q),
             'country_code'        => $country_code,
@@ -287,7 +290,9 @@ class APIService
         if ($filter['download']) {
             $this->downloadAPI('contracts/search', $query);
         }
+
         $contract = $this->apiCall('contracts/search', $query);
+
         if ($contract) {
             return $contract;
         }

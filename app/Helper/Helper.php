@@ -388,10 +388,40 @@ function redirectIfOldOCID($old)
     $string = file_get_contents(base_path('public/ocid_mapping.json'));
     $arr    = json_decode($string, true);
     $new    = isset($arr[$old]) ? $arr[$old] : null;
+
     if ($new) {
         $url = str_replace($old, $new, \Request::fullUrl());
         header("HTTP/1.1 301 Moved Permanently");
         header(sprintf("Location: %s", $url));
+        die;
+    }
+}
+
+/**
+ * Checks for modified annotation category
+ *
+ * @param $old
+ */
+function redirectIfOldAnnotationCategory($old)
+{
+    $oldCategories    = explode('|', $old);
+    $newCategories    = [];
+    $searchCategories = [];
+    $string           = file_get_contents(base_path('public/annotation_category_mapping.json'));
+    $arr              = json_decode($string, true);
+
+    foreach ($oldCategories as $oldCategory) {
+        if (isset($arr[$oldCategory])) {
+            $searchCategories[] = $oldCategory;
+            $newCategories[]    = $arr[$oldCategory];
+        }
+    }
+
+    if (!empty($newCategories)) {
+        $url = urldecode(\Request::fullUrl());
+        $url = str_replace($searchCategories, $newCategories, $url);
+        header("HTTP/1.1 301 Moved Permanently");
+        header(sprintf("Location: %s", urldecode($url)));
         die;
     }
 }
