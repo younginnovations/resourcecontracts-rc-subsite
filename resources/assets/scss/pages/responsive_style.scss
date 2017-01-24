@@ -719,6 +719,10 @@
   .page-clip .action-btn {
     margin-right: 0;
   }
+  
+  .partner-description{
+    text-align: center;
+  }
 
   #clip-annotation-list {
     padding-top: 15px;
@@ -825,7 +829,21 @@
 
 @media (max-width: 480px) {
   body.rc .landing_section_logos {
-    display: none;
+    margin-top: 0;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 20px;
+    padding-bottom: 5px;
+    background: #4a4a4a;
+    .partners, .donors {
+      p {
+        font-size: 14px;
+        opacity: 0.85;
+      }
+    }
+    .partners {
+      margin-bottom: 15px;
+    }
   }
 
   .section-wrap{
@@ -839,3 +857,4 @@
 //    padding-bottom: 55px;
 //  }
 //}
+

@@ -264,7 +264,7 @@ body.rc{
       color: #fff;
       margin-bottom: 15px;
       text-transform: uppercase;
-      letter-spacing: 0.75px;
+      letter-spacing: 0.85px;
       line-height: 16px;
       text-shadow: 1px 1px 5px rgba(0,0,0,0.65);
     }
@@ -281,10 +281,19 @@ body.rc{
         @media screen and (min-width:993px) {
           max-height: 40px;
         }
+        @media screen and (max-width:480px) {
+          max-height: 30px;
+        }
       }
 
       @media screen and (max-width:992px) and (min-width:767px) {
         max-height: 35px;
+      }
+
+      @media screen and (max-width:480px) {
+        max-height: 35px;
+        margin-bottom: 15px;
+        opacity: 0.85;
       }
     }
   }
@@ -1136,5 +1145,17 @@ p {
     display: none;
   }
 }
+
+body.rc.page-home{
+  @media (max-width: 992px){
+    .partner-wrapper{
+      margin-top: 0;
+    }
+    .menu-list{
+      margin-top: 0;
+    }
+  }
+}
+
 
 
