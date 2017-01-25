@@ -159,8 +159,18 @@ class APIService
      */
     public function getAnnotations($contract_id)
     {
-        $resource = sprintf('contract/%s/annotations', $contract_id);
-        $response = $this->apiCall($resource);
+        $resource     = sprintf('contract/%s/annotations', $contract_id);
+        $response     = $this->apiCall($resource);
+        $categoryList = [];
+
+        foreach ($response->result as $result) {
+            if (!in_array($result->category_key, $categoryList)) {
+                $categoryList[] = $result->category_key;
+            }
+        }
+
+        $totalCategory   = count($categoryList);
+        $response->total = $totalCategory;
 
         return $response;
     }
