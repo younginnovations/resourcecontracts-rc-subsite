@@ -70,6 +70,7 @@
 		LANG.resourceLang = {!! json_encode(trans('resources')) !!};
 		LANG.disclosure = {!! json_encode(trans('codelist/disclosure')) !!};
 		LANG.contract = {!! json_encode(trans('contract')) !!};
+		LANG.contract_type = {!! json_encode(trans('codelist/contract_type')) !!};
 
 		var debug = function () {
 			if (config.debug) {
