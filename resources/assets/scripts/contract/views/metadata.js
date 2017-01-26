@@ -64,12 +64,22 @@ var Metadata = React.createClass({
     {
         var ct = this.state.metadata.contract_type;
 
+        if (ct.length < 1) {
+            return (<span>-</span>);
+        }
+
         return ct.map(function (contractType, i) {
             var sep = '';
             if (i != ct.length - 1) {
                 sep = ' | ';
             }
-            return (<span>{contractType} {sep}</span>);
+            let text = LANG.contract_type[contractType];
+
+            if (typeof text == 'undefined') {
+                text = contractType;
+            }
+
+            return (<span>{text} {sep}</span>);
         });
     },
     handleMoreText(e) {
