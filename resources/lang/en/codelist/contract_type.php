@@ -4,7 +4,7 @@ return [
     "Asset Sale and Purchase Agreement"      => "Asset Sale and Purchase Agreement",
     "Autre"                                  => "Autre",
     "Bail Foncier"                           => "Bail Foncier",
-    "Cahier des Charges"                     => "Cahier des Charges",
+    "Cahier des Charges"                     => "Mining Contract",
     "Concession Agreement"                   => "Concession Agreement",
     "Contract Amendment"                     => "Contract Amendment",
     "Contract Annex"                         => "Contract Annex",
