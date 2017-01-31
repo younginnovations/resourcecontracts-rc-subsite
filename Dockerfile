@@ -66,6 +66,9 @@ COPY config/nginx.conf /etc/nginx/nginx.conf
 COPY config/supervisord.conf /etc/supervisord.conf
 COPY . /var/container_init/site_content
 
+# Increase the number of worker processes for php-fpm
+RUN sed -i 's/^pm\.max_children.*/pm.max_children = 12/' /etc/php5/php-fpm.conf
+
 RUN composer dump-autoload --optimize \
  && chmod +x /var/container_init/init.sh \
 #RC
