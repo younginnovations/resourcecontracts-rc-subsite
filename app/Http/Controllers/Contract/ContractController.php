@@ -80,13 +80,14 @@ class ContractController extends BaseController
     {
         redirectIfOldOCID($contract_id);
 
-        $contract                     = $this->api->contractDetail($contract_id);
-        $contract->annotationsCluster = $this->annotation->groupAnnotationsByCluster($contract->annotations);
-        $referrer                     = \Request::server('HTTP_REFERER');
+        $contract = $this->api->contractDetail($contract_id);
 
-        if (empty($contract->metadata)) {
+        if (!isset($contract->metadata) && empty($contract->metadata)) {
             return abort(404);
         }
+
+        $contract->annotationsCluster = $this->annotation->groupAnnotationsByCluster($contract->annotations);
+        $referrer                     = \Request::server('HTTP_REFERER');
 
         $meta = [
             'title' => $contract->metadata->name,
