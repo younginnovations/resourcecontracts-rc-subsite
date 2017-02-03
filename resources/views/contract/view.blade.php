@@ -8,16 +8,16 @@
 		}
 
 		#contract .loader {
-			margin-top: 200px;
-			margin-bottom: 200px;
+			margin: 200px auto;
 			text-align: center;
+			width: 400px;
 		}
 	</style>
 	<script>
 		var timeout = setTimeout(function () {
 			if (window.location.hash && window.location.hash.indexOf('pdf') > 0) {
 				document.location.href = window.location.hash.replace('pdf', 'text');
-				document.getElementById('loading-text').innerHTML = '@lang('contract.loading_redirect')';
+				$('.loader').html('<div class="text-viewer-warning"><img src="{{url('images/loading.gif')}}">@lang('contract.loading_redirect')</div>');
 			}
 		}, 30000);
 	</script>
@@ -25,7 +25,7 @@
 @section('content')
 	<div id="contract">
 		<div class="loader">
-			<img src="{{url('images/loading.gif')}}"/> <span id="loading-text">@lang('contract.loading')</span>
+			<img src="{{url('images/loading.gif')}}"/> @lang('contract.loading')
 		</div>
 	</div>
 @stop

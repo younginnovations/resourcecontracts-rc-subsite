@@ -38,5 +38,5 @@ return [
     'loading'              => "جاري التحميل...",
     'social_share'         => "شارك",
     'contract_not_signed'  => "لا يحتوي هذا المستند على التوقيعات.",
-    'loading_redirect'     => 'إعادة توجيهك إلى عرض النص',
+    'loading_redirect'     => 'اتصال بطيء. تحميل عرض النص ...',
 ];
