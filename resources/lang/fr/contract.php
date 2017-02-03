@@ -38,5 +38,5 @@ return [
     'loading'              => "Chargement ...",
     'social_share'         => "Partager",
     'contract_not_signed'  => "Ce document ne contient pas de signatures.",
-    'loading_redirect'     => 'Chargement ... (redirigé vers la vue texte)',
+    'loading_redirect'     => 'Connexion lente. Chargement de la vue texte ...',
 ];
