@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import ReactDOM from "react-dom";
 import Reflux from "reflux";
 import MetadataAction from '../actions/metadataAction';
 import MetadataStore from '../stores/metadataStore';
@@ -19,6 +20,19 @@ var Metadata = React.createClass({
     },
     componentWillMount: function () {
         MetadataAction.getData();
+    },
+    componentDidUpdate: function(){
+        let hash = location.hash;
+        let hashId = hash.replace("/", "");
+
+        if (window.matchMedia("(max-width: 800px)").matches) {
+            if (hashId === "#metadata") {
+                let elem = this.refs.metadata;
+                console.log(elem);
+                $(hashId).removeClass("hidden_tab");
+            }
+        }
+
     },
     onChange(action, data){
         if (action == 'metadata:loaded') {
@@ -232,7 +246,7 @@ var Metadata = React.createClass({
     },
     renderLoading() {
         return (
-            <div id="metadata">
+            <div id="metadata" className="tab-content hidden_tab">
                 <div className="metadata-view">
                     <div className="metadata-heading">
                         {LANG.metadata}
@@ -256,7 +270,7 @@ var Metadata = React.createClass({
     },
     renderMetadata() {
         return (
-            <div id="metadata" className="right-column-view">
+            <div refs="metadata" id="metadata" className="right-column-view tab-content hidden_tab">
                 {this.getNote()}
                 <div className="metadata-view">
                     <div className="metadata-heading">

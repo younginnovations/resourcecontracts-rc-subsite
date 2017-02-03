@@ -40,13 +40,14 @@ class Tab extends Component {
     render() {
         return (
             <div className="navigation">
-                <Link to="/text" activeClassName="active"
+                <Link to="/text" activeClassName="active" data-target="view-container"
                       className={"tab tab-text " + this.state.activeTextClass }>{LANG.text}</Link>
-                <Link to="/pdf" activeClassName="active"
+                <Link to="/pdf" activeClassName="active" data-target="view-container"
                       className={"tab tab-pdf " + this.state.activePdfClass }>{LANG.pdf}</Link>
-                <Link to="/annotations" activeClassName="active"
-                      className="tab tab-annotation">{LANG.annotation_count}</Link>
-                <Link to="/metadata" activeClassName="active" className="tab tab-metadata">{LANG.metadata}</Link>
+                <Link to="/annotations" activeClassName="active" data-target="annotations"
+                      className="tab tab-annotations">{LANG.annotation_count}</Link>
+                <Link to="/metadata" activeClassName="active" data-target="metadata"
+                      className="tab tab-metadata">{LANG.metadata}</Link>
             </div>
         );
     }

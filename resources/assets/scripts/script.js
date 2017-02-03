@@ -512,4 +512,33 @@ $(document).ready(function () {
         }
         window.open(location, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=650,height=400");
     });
+
+    $(document).on("click", (".navigation a.tab, .search-results-list span.tab, .page-gap a, a.annotation-viewer-more"), function(){
+        var target = $(this).attr("data-target");
+        toggleTabs( target )
+    });
+
+    function toggleTabs( targetElem ){
+        if (window.matchMedia("(max-width: 800px)").matches) {
+
+            $(".tab-content").not("#" + targetElem).addClass("hidden_tab");
+            $(".tab-content#" + targetElem).removeClass("hidden_tab");
+
+        }
+    }
+
+    if ($("body").hasClass("page-contract")) {
+
+        console.log("is page-contract");
+        var hash = location.hash;
+        var hashId = hash.replace("/", "");
+        if( hashId === "#metadata" || hashId === "#annotations" ){
+            $(hashId).removeClass("hidden_tab");
+        }else{
+            $("#view-container").removeClass("hidden_tab");
+        }
+    }
+
+
 });
+

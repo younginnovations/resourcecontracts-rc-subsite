@@ -1,6 +1,7 @@
 <?php
 return [
     'search_placeholder'   => "البحث في جميع المستندات",
+    'advanced_search'      => 'بحث متقدم',
     'year_signed'          => "سنة التوقيع",
     'company_name'         => "إسم الشركة",
     'contract_type'        => "نوع العقد",

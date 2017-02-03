@@ -10,7 +10,7 @@ $img-path: "../images";
 }
 
 .navigation > a:nth-child(4) {
-  background: url(../images/ic-nav-metadata.png) no-repeat 16px 14px !important;
+  background: url(../images/ic-nav-metadata.png) no-repeat 16px 14px;
   display: none; /* hide metadata for large screen */
 }
 
@@ -26,13 +26,15 @@ $img-path: "../images";
     text-decoration: none;
     border-right: 1px solid #DCDFE2;
     display: inline-block;
-
+    @media screen and (max-width: 1040px){
+      width: 0;
+    }
     &.active {
       opacity: 1;
     }
 
     &:last-child {
-      background-position: -474px 13px;
+      //background-position: -474px 13px;
     }
 
     &:hover {
@@ -42,6 +44,7 @@ $img-path: "../images";
 
   }
 }
+
 
 .navigation > a.active {
   opacity: 1;
@@ -56,7 +59,7 @@ $img-path: "../images";
 }
 
 .pagination {
-  margin: 9px 8px 7px 6px;
+  margin: 8px;
 }
 
 .pdf-pagination.pagination span,
@@ -174,6 +177,7 @@ $img-path: "../images";
   border-bottom: 1px solid rgba(220, 223, 226, 0.7);
   > div {
     float: left;
+    font-size: 12px;
   }
 }
 
@@ -223,7 +227,7 @@ $img-path: "../images";
 
 .pagination {
   display: block;
-  padding: 2px 0;
+  padding-top: 4px;
   position: relative;
   z-index: 1;
 
@@ -233,12 +237,13 @@ $img-path: "../images";
     color: rgba(64, 64, 64, 0.4);
     text-align: center;
     margin-top: 2px;
+    margin-right: 4px;
   }
 
   .previous, .next {
     display: inline-block;
     text-indent: -9999px;
-    background: url(../images/ic-sprite-new.png) no-repeat -194px -562px !important;
+    background: url(../images/ic-sprite-new.png) no-repeat -194px -564px !important;
     height: 24px;
     width: 18px;
     padding: 0 !important;
@@ -246,7 +251,7 @@ $img-path: "../images";
 }
 
 .pagination .next {
-  background-position: -268px -562px !important;
+  background-position: -268px -564px !important;
 }
 
 .metadata-toggle-button span {
@@ -383,6 +388,9 @@ $img-path: "../images";
   &.right-column-view {
     padding: 0 18px 15px;
     margin-bottom: 15px;
+  }
+  @media screen and (max-width:800px){
+    height: auto;
   }
 }
 
@@ -1111,10 +1119,11 @@ div > .annotation-item:first-of-type .annotation-cluster {
 
   .head-wrap .right-column-view {
     width: auto;
-    float: left;
-    > div {
+    height: auto;
+    >div{
       float: left;
     }
+
   }
 
   .pdf-zoom-options {
@@ -1150,9 +1159,9 @@ div > .annotation-item:first-of-type .annotation-cluster {
   .annotations-list {
     border: none;
     .annotation-loading {
-      margin: 0;
       background: #fff;
       border: none;
+      margin: 0 0 20px 0;
     }
   }
   .annotations-viewer, .pdf-annotator, .right-column-view, .text-panel, .search-results-list {
@@ -1169,6 +1178,7 @@ div > .annotation-item:first-of-type .annotation-cluster {
     border-left: 20px solid #f0f0f0;
     border-right: 20px solid #f0f0f0;
     clear: both;
+    box-shadow: none;
   }
 
   .tools {
@@ -1230,5 +1240,47 @@ div > .annotation-item:first-of-type .annotation-cluster {
     padding: 10px 15px;
   }
 
+}
+
+@media all and (min-width: 481px) {
+  .head-wrap {
+    .right-column-view + .pagination {
+      display: none;
+    }
+  }
+}
+
+@media all and (max-width: 480px) {
+  .head-wrap {
+    .navigation + .pagination {
+      display: none;
+    }
+
+  }
+
+  .navigation>a.active{
+    background-color: #f5f5f5;
+  }
+
+  .right-column-view + .pagination {
+    width: 100%;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 10px 14px;
+    text-align: center;
+    input[type="text"]{
+      width: 20%;
+      margin: 0 10px;
+      height: 24px;
+    }
+    .next{
+      margin-left: 10px;
+    }
+  }
+}
+.hidden_tab{
+  @media  screen and (max-width: 800px){
+    display: none;
+  }
 }
 

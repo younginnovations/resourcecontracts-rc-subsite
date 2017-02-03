@@ -1,6 +1,7 @@
 <?php
 return [
     'search_placeholder'   => 'Search all documents',
+    'advanced_search'      => 'Advanced search',
     'year_signed'          => 'Year Signed',
     'company_name'         => 'Company Name',
     'contract_type'        => 'Contract Type',
