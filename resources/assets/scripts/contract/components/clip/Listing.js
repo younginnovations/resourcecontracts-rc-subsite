@@ -19,50 +19,6 @@ class Listing extends React.Component{
         })
 
     }
-    /*
-    isAllChecked = () =>{
-        if( this.state.totalAnnotations === this.state.totalChecked ){
-            this.setState({
-                allChecked: true
-            })
-        }else{
-            this.setState({
-                allChecked: false
-            })
-        }
-
-    }
-    toggleAllChecked = () =>{
-        if( this.state.allChecked ){
-            let checkedAnnotations = document.getElementsByClassName("checkedAnnotation");
-
-            for(let i=0; i < checkedAnnotations.length; i++ ){
-                checkedAnnotations[i].click();
-            };
-        }else{
-            let uncheckedAnnotations = document.getElementsByClassName("uncheckedAnnotation");
-
-            for(let i=0; i < uncheckedAnnotations.length; i++ ){
-                uncheckedAnnotations[i].click();
-            };
-        }
-        this.setState({
-            allChecked: !this.state.allChecked
-        })
-    }
-    changeTotalAnnotation = ( status ) =>{
-        if( status ){
-           this.setState({
-               totalChecked: --this.state.totalChecked
-           })
-        }else{
-            this.setState({
-                totalChecked: ++this.state.totalChecked
-            })
-        }
-
-        //this.isAllChecked();
-    }*/
     render() {
         let items = this.state.clips.map( ( clip, index ) => {
             let props = {

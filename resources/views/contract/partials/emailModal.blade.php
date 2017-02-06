@@ -8,8 +8,8 @@
             <div class="modal-body ">
                 <form id="send-email">
                     <div class="email-result"></div>
-                    <label for="to">@lang('clip.to')</label>
                     <div class="form-group">
+                        <label for="to">@lang('clip.to')</label>
                         <input type="text" id="to" name="to" class="form-control" />
                     </div>
                     <div class="form-group">

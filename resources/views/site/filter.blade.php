@@ -74,7 +74,6 @@
 			</div>
 		</div>
 	</div>
-	@include('contract.partials.emailModal')
 @stop
 
 @section('js')

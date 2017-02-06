@@ -276,7 +276,6 @@ class ClippingService
         $formData['site'] = meta()->title;
         $to               = explode(',', $formData['to']);
 
-        var_dump($formData, $to);
         try {
             Mail::send(
                 'clip.email',

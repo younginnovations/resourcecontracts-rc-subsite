@@ -3,8 +3,6 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import ClipHelper from "../../clip/clipHelper";
 
-import ShareManager from "./ShareManager";
-
 let clipHelper = new ClipHelper();
 
 
@@ -142,7 +140,6 @@ class DownloadManager extends React.Component{
             loadingPDF:true
         })
 
-        //let annotationIds = self.getCheckedAnnotationIds();
         let annotationIds = clipHelper.getLocalClips();
 
         axios.post( app_url + '/clip/zip?id=' + annotationIds )
@@ -198,11 +195,8 @@ class DownloadManager extends React.Component{
                     console.log( error );
 
                 })
-        };
+        }
 
-        //this.setState({
-        //    shareDropdownOpen: !this.state.shareDropdownOpen,
-        //})
     }
 
 
@@ -218,12 +212,6 @@ class DownloadManager extends React.Component{
 
         let shareText = this.state.clipSaving?"Saving...":langClip.save_and_shareClip;
 
-        //let modalView = () =>{
-        //    if( this.state.clipKey ){
-        //        return <ShareManager url={ this.state.clipKey } />
-        //        //return "hello"
-        //    }
-        //}
         return (
             <div className="actions-wrapper action-btn">
 
@@ -238,12 +226,23 @@ class DownloadManager extends React.Component{
                 <div className="modal-social-share-wrap social-share share-dropdown dropdown">
                     <a id="save-clipping" style={{width:'135px'}} onClick={ this.handleSaveClip } data-toggle="dropdown">{ shareText }</a>
                     <ul className="dropdown-menu">
-                        <li className="facebook" style={ savingStyle }><a href={ this.getFacebookShare() } target="_blank"></a></li>
-                        <li className="twitter" style={ savingStyle }><a href={ this.getTwitterShare() } target="_blank"></a></li>
-                        <li className="email" style={ savingStyle }><a data-toggle="modal" data-target="#shareModal"></a></li>
-                    </ul>
+                        <li className="facebook" style={ savingStyle }>
+                            <a href={ this.getFacebookShare() } target="_blank"></a>
+                        </li>
+                        <li className="twitter" style={ savingStyle }>
+                            <a href={ this.getTwitterShare() } target="_blank"></a>
+                        </li>
+                        <li className="email" style={ savingStyle }>
+                            <a href="#"
+                               className="shareEmailToggler"
+                               data-toggle="modal"
+                               data-target="#emailModel"
+                               data-title={ langClip.share_clips_email }
+                               data-share="clip">
 
-                    { this.state.clipKey?<ShareManager url={ this.state.clipKey } />:"" }
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         );

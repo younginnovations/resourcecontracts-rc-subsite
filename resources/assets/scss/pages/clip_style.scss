@@ -524,12 +524,6 @@ table td.view-clip>a {
     border-bottom: none;
     margin-bottom: 15px;
     thead > tr > th {
-      &:first-child {
-        &:after {
-          display: none;
-        }
-      }
-
       &:after{
         margin-left: 4px;
         float: none;
@@ -706,6 +700,18 @@ span.required {
 
 
 /* ------ style for clear all clip --------- */
+
+
+/** TOGGLING CLIPPING STYLE **/
+.clippingOff{
+  .clipToggleElems{
+    visibility: hidden!important;
+  }
+}
+
+.clipToggleElems{
+  opacity: 0;
+}
 
 @media(min-width: 768px){
   .clip-panel-row .panel-top-content{

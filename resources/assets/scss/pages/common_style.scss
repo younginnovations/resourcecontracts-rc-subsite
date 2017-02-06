@@ -346,14 +346,12 @@ a {
   }
 }
 
-/** TOGGLING CLIPPING STYLE **/
-.clippingOff{
-  .clipToggleElems{
-    visibility: hidden!important;
-  }
-}
 
-.clipToggleElems{
-  opacity: 0;
-}
 
+/**
+*** Annotator JS Style Overrides
+**/
+
+.annotator-adder, .annotator-outer, .annotator-notice{
+  z-index: 500!important;
+}

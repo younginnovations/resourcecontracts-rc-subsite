@@ -49,10 +49,15 @@ class Share extends Component {
                     <ul className="dropdown-menu" style={toggleStyle}>
                         <li className="facebook"><a href={Config.facebookUrl()} target="_blank"></a></li>
                         <li className="twitter"><a href={Config.twitterUrl()} target="_blank"></a></li>
-                        <li className="email"><a onClick={this.handleShowModal.bind(this)}></a></li>
+                        <li className="email">
+                            <a href="#email"
+                               className="shareEmailToggler"
+                               data-toggle="modal"
+                               data-target="#emailModel"
+                               data-title={ langClip.shareViaEmail }></a>
+                        </li>
                     </ul>
                 </div>
-                {this.state.showModal ? <Email handleHideModal={this.handleHideModal.bind(this)}/> : null}
             </div>
         );
     }

@@ -53,5 +53,4 @@ use \Illuminate\Support\Facades\Lang as Lang;
 		var lang = <?php echo json_encode(trans('annotation'));?>;
 	</script>
 
-	@include('contract.partials.emailModal')
 @stop

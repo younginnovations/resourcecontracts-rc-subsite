@@ -9,6 +9,17 @@ function htmlDecode(html) {
     return a.textContent;
 }
 
+jQuery.extend({
+    handleError: function( s, xhr, status, e ) {
+        // If a local callback was specified, fire it
+        if ( s.error )
+            s.error( xhr, status, e );
+        // If we have some XML response text (e.g. from an AJAX call) then log it in the console
+        else if(xhr.responseText)
+            console.log(xhr.responseText);
+    }
+});
+
 var emailManager = {
     formEl: '#send-email',
     errors: 0,
@@ -106,6 +117,7 @@ var emailManager = {
                 $('.email-result').append("<div class='alert alert-success'>" + res.message + "</div>");
             } else {
                 $('.email-result').append("<div class='alert alert-danger'>" + res.message + "</div>");
+                console.dir(res)
             }
             self.setProcessing(false);
             self.resetInput();
@@ -521,33 +533,18 @@ $(document).ready(function () {
     //set initial clip select count on load
     clipHelper.setClipCount();
 
-    if(Cookies.get('clipState') === "false" || Cookies.get('clipState') === undefined  ){
-        //$(".clip-head ").show();
-        document.body.classList.add('clippingOff');
-        var x = document.querySelectorAll(".clipToggleElems");
-        x.forEach(function( item ){
-            item.style.opacity = "1"
-        })
 
-    }else{
-        var x = document.querySelectorAll(".clipToggleElems");
-        x.forEach(function( item ){
-            item.style.opacity = "1"
-        })
-        $(".on-annotation").addClass("active");
-    }
 
     function toggleClipState( e ){
 
-        var currentClipState = JSON.parse(Cookies.get('clipState'));
-        Cookies.set('clipState', !currentClipState);
+        clipHelper.toggleClip();
 
         $("body").toggleClass("clippingOff");
     }
 
     $(".on-annotation").click(function(){
         $(this).toggleClass("active")
-        toggleClipState();
+        clipHelper.toggleClip();
     });
 
     function hideClipping(){
@@ -636,4 +633,69 @@ $(document).ready(function () {
     $(document).on('click', '.actions-wrapper .dropdown-menu', function (e) {
         e.stopPropagation();
     });
+
+
+
 });
+
+$(window).load( function(){
+    if(Cookies.get('clipState') === "false" || Cookies.get('clipState') === undefined  ){
+        //$(".clip-head ").show();
+        $("body").addClass('clippingOff');
+        $(".clipToggleElems").css("opacity", 1)
+
+    }else{
+        $(".clipToggleElems").css("opacity", 1)
+        $(".on-annotation").addClass("active");
+    }
+
+
+    /**
+     * Email Share Modal Field Content Manager
+     * @param elem selector
+     */
+
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    function shareModalFieldsManager(elem) {
+
+
+        $(document).on("click", elem, function( ){
+            event.preventDefault();
+
+            var title = $(elem).attr("data-title");
+            var url = location.href;
+
+            var shareType = $(elem).attr("data-share");
+
+            if( shareType === 'clip'){
+                url = location.href+ "/" + Cookies.get('clip_key');
+            }
+
+            $("#emailModel").find("#url a").text(url);
+
+            $("#emailModel").find(".modal-title").text(title);
+
+
+        });
+
+
+    }
+
+    shareModalFieldsManager(".shareEmailToggler");
+
+})

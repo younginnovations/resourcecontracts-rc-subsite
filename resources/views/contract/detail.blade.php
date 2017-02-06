@@ -537,7 +537,6 @@ use Illuminate\Support\Facades\Lang;
 			</div>
 		</div>
 	@endif
-	@include('contract.partials.emailModal')
 @stop
 
 @section('js')
