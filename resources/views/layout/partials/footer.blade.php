@@ -1,7 +1,7 @@
 <footer>
 	<div class="footer__wrap">
 		<p class="partner-description">
-			{{getOptionText('footer_text')}}
+			{!! nl2br(getOptionText('footer_text')) !!}
 		</p>
 		<div class="partner-wrapper clearfix">
 			<div @if(\Request::url() == url()) style="margin: 30px 0px;" @endif class="mini__menu clearfix">
@@ -53,7 +53,9 @@
 						<li><a href="{{url('faqs')}}">@lang('footer.faqs')</a></li>
 						<li><a href="{{url('guides')}}">@lang('sidebar.guides')</a></li>
 						<li><a href="{{url('glossary')}}">@lang('footer.glossary')</a></li>
-						<li><a href="{{url('country-sites')}}">@lang('footer.country_sites')</a></li>
+						@if(!site()->isCountrySite())
+							<li><a href="{{url('country-sites')}}">@lang('footer.country_sites')</a></li>
+						@endif
 						<li><a href="{{url('contact')}}">@lang('footer.contact')</a></li>
 						<li><a href="https://github.com/NRGI/resourcecontracts.org/wiki/API" target="_blank">API</a>
 						</li>
