@@ -1,7 +1,7 @@
 <footer>
 	<div class="footer__wrap">
 		<p class="partner-description">
-			{{getOptionText('footer_text')}}
+			{!! nl2br(getOptionText('footer_text')) !!}
 		</p>
 		<div class="partner-wrapper clearfix">
 			<div @if(\Request::url() == url()) style="margin: 30px 0px;" @endif class="mini__menu clearfix">
