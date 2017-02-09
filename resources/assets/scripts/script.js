@@ -682,11 +682,11 @@ $(window).load( function(){
 
             var shareType = $(elem).attr("data-share");
 
-            if( shareType === 'clip'){
+            if( shareType === 'clip' && !key ){
                 url = location.href+ "/" + Cookies.get('clip_key');
             }
 
-            $("#emailModel").find("#url a").text(url);
+            $("#emailModel").find("#url a").text(url).attr("href", url);
 
             $("#emailModel").find(".modal-title").text(title);
 

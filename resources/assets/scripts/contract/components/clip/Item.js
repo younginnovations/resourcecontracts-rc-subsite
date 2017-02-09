@@ -8,6 +8,7 @@ export default class Item extends React.Component {
         super( props );
 
         this.state = {
+            key: '',
             maxWords: 60,
             text: "",
             shortText: "",
@@ -25,7 +26,8 @@ export default class Item extends React.Component {
         this.setState({
             text,
             hasEllipses: showEllipse,
-            showEllipse
+            showEllipse,
+            key: key
         });
 
     }
@@ -119,7 +121,7 @@ export default class Item extends React.Component {
 
         let docURL = app_url + "/contract/" + this.props.open_contracting_id + '/view';
         let shortText = this.getShortText();
-        let moreText = this.state.shownFullText?"less":"more"
+        let moreText = this.state.shownFullText?"less":"more";
 
         return (
             <tr>
@@ -150,9 +152,12 @@ export default class Item extends React.Component {
                 <td className="view-clip">
                     <a href={ this.props.page_url } target="_blank" ><span></span></a>
                 </td>
-                <td className="delete-clip">
-                    <span data-id={ this.props.annotation_id } onClick={ this.removeClip }>sss</span>
-                </td>
+                {
+                    this.state.key?""
+                        :<td className="delete-clip">
+                            <span data-id={ this.props.annotation_id } onClick={ this.removeClip }></span>
+                        </td>
+                }
             </tr>
         );
 

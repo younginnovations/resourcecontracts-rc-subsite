@@ -8,14 +8,16 @@ class Listing extends React.Component{
 
         this.state = {
             clips: [],
-            totalAnnotations:0
+            totalAnnotations:0,
+            key: ''
         }
 
     }
     componentWillMount(){
         this.setState({
             clips: this.state.clips.concat(this.props.clips),
-            totalAnnotations: this.props.clips.length
+            totalAnnotations: this.props.clips.length,
+            key: key
         })
 
     }
@@ -56,7 +58,7 @@ class Listing extends React.Component{
                         </th>
                         <th data-sorting="no-sorting">{ langClip.viewClip }</th>
 
-                        <th data-sorting="no-sorting">Actions</th>
+                        { this.state.key?"":<th data-sorting="no-sorting">Actions</th>}
                     </tr>
                     </thead>
                     <tbody>

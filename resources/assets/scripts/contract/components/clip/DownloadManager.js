@@ -12,6 +12,7 @@ class DownloadManager extends React.Component{
         super( props )
 
         this.state ={
+            key: key,
             clips: this.props.clips,
             clipsToDownload: [],
             loadingPDF:false,
@@ -168,6 +169,10 @@ class DownloadManager extends React.Component{
     }
 
     handleSaveClip =()=>{
+        if(key){
+            return;
+        }
+
         this.setState({
             clipSaving: true
         });

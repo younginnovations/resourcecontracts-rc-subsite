@@ -8,7 +8,7 @@ import DownloadManager from "../components/clip/DownloadManager";
 import Listing from "../components/clip/Listing";
 
 let clipHelper = new ClipHelper();
-let key = clipHelper.getLocalClips();
+let localClip = clipHelper.getLocalClips();
 
 class ClipView extends React.Component{
     constructor() {
@@ -27,12 +27,13 @@ class ClipView extends React.Component{
         let self = this;
 
         if( key ){
+
             this.setState({
                 noClips:false
             })
 
             // Make a request
-            axios.get(app_url + '/clip/annotations?data=' + key)
+            axios.get( app_url + '/clip/api?key=' + key )
                 .then(function (response) {
 
                     self.setState({
@@ -56,18 +57,54 @@ class ClipView extends React.Component{
                     console.log(error);
                 });
 
+
         }else{
-            this.setState({
-                noClips:true,
-                loading: false
-            })
+
+            if( localClip ){
+                this.setState({
+                    noClips:false
+                })
+
+                // Make a request
+                axios.get( app_url + '/clip/annotations?data=' + localClip )
+                    .then(function (response) {
+
+                        self.setState({
+                            clips: self.state.clips.concat(response.data.result)
+                        })
+
+                        self.setState({
+                            loading: false
+                        })
+
+                        $('.table-contract-list').DataTable({
+                            paging:true,
+                            lengthChange: false,
+                            searching: false,
+                            pagingType: "full_numbers",
+                            info: false
+                        });
+
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+            }else{
+                this.setState({
+                    noClips:true,
+                    loading: false
+                })
+            }
+
         }
+
+
 
     }
     render = () => {
 
         let clips = this.state.clips;
-        console.log(clips);
 
         if( this.state.noClips ){
             return <div className="no-record">There are currently no Clips.</div>
