@@ -35,11 +35,13 @@ var List = React.createClass({
         this.sub.remove();
     },
     renderItems(){
+        console.log(this.state.results);
         return this.state.results.map((row, key) => {
             return (<Item key={key} result={row}/>);
         });
     },
     render() {
+        console.log(this.renderItems());
         if (this.state.isLoading) {
             return (
                 <div className="search-loading">

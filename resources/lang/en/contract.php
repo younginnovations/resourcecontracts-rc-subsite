@@ -39,4 +39,6 @@ return [
     'social_share'         => "Share",
     'contract_not_signed'  => "This document does not contain signatures.",
     'loading_redirect'     => 'Connection slow. Loading text view ...',
+    'fullscreen'           => 'View in fullscreen',
+    'exit_fullscreen'      => 'Exit fullscreen view',
 ];

@@ -51,12 +51,22 @@ export const scrollToAnnotation = function (annotation_id) {
     if (annotationEl.length < 1) {
         return false;
     }
-    setTimeout(()=> {
-        var pageOffsetTop = annotationEl.offset().top;
-        var parentTop = $('.annotation-inner-viewer').scrollTop();
-        var parentOffsetTop = $('.annotation-inner-viewer').offset().top;
-        var vTop = parentTop - parentOffsetTop + pageOffsetTop - 5;
-        $('.annotation-inner-viewer').animate({scrollTop: vTop}, 200);
-    }, 200);
+
+
+    if (window.matchMedia("(max-width: 800px)").matches) {
+        setTimeout(()=> {
+            var pageOffsetTop = annotationEl.offset().top - 125;
+            $('html, body').animate({scrollTop: pageOffsetTop}, 300);
+        }, 200);
+    }else{
+        setTimeout(()=> {
+            var pageOffsetTop = annotationEl.offset().top;
+            var parentTop = $('.annotation-inner-viewer').scrollTop();
+            var parentOffsetTop = $('.annotation-inner-viewer').offset().top;
+            var vTop = parentTop - parentOffsetTop + pageOffsetTop - 5;
+            $('.annotation-inner-viewer').animate({scrollTop: vTop}, 300);
+        }, 200);
+
+    }
 };
 

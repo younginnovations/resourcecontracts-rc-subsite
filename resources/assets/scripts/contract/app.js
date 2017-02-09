@@ -70,14 +70,19 @@ class App extends Component {
                     <div className="head-wrap clearfix">
                         <SearchForm/>
                         <Tab />
-                        <Pagination />
-                        <Zoom/>
+                        <div className="grouped-action hidden-xs">
+                            <Pagination />
+                            <Zoom/>
+                        </div>
                         <div className="right-column-view">
                             <Download/>
                             <Share/>
                             {clipSwitch}
                         </div>
-                        <Pagination />
+                        <div className="grouped-action visible-xs">
+                            <Pagination />
+                            <Zoom/>
+                        </div>
                     </div>
                 </div>
                 <div className="document-wrap">

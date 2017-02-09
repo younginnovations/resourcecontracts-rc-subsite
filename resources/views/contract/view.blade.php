@@ -1,7 +1,7 @@
 @extends('layout.app-full')
 
 @section('css')
-	<link rel="stylesheet" href="{{ url('css/contract.css') }}">
+	<link rel="stylesheet" href="{{ url('css/contract.css?v=1.01') }}">
 	<style>
 		.text-viewer > span {
 			min-height: 400px;

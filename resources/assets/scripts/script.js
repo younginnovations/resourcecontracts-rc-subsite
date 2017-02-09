@@ -268,7 +268,7 @@ $(document).ready(function () {
 
     $('.search-close').click(function(){
         advanceSearch("hide");
-    })
+    });
 
 
     $('.view-pin-wrap').click(function () {
@@ -510,31 +510,82 @@ $(document).ready(function () {
         window.open(location, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=650,height=400");
     });
 
-    $(document).on("click", (".navigation a.tab, .search-results-list span.tab, .page-gap a, a.annotation-viewer-more"), function(){
+
+    // .search-results-list span.tab, .page-gap a, a.annotation-viewer-more
+
+
+    $(document).on("click", (".navigation a.tab"), function(){
+
         var target = $(this).attr("data-target");
+
+        if(target === "annotations" || target === "metadata"){
+            $(".pagination").hide()
+        }else{
+            $(".pagination").css("display", "inline-block")
+        }
+
+        $(".navigation a.tab").removeClass("active");
+        $(".navigation a.tab.tab-" + target).addClass("active");
         toggleTabs( target )
+
+    });
+
+
+    $(document).on("click", (".page-gap a"), function(){
+
+        toggleTabs( "view-container" );
+
+        setTimeout(function(){
+            $(".navigation a.tab").removeClass("active");
+            $(".tab-pdf").addClass("active");
+        }, 50)
+
+    });
+
+    $(document).on("click", ("a.annotation-viewer-more"), function(){
+
+        toggleTabs( "annotations" );
+
+        setTimeout(function(){
+            $(".navigation a.tab").removeClass("active");
+            $(".tab-annotations").addClass("active");
+
+            $(".search-results-list").hide();
+        }, 50)
+
     });
 
     function toggleTabs( targetElem ){
         if (window.matchMedia("(max-width: 800px)").matches) {
 
             $(".tab-content").not("#" + targetElem).addClass("hidden_tab");
-            $(".tab-content#" + targetElem).removeClass("hidden_tab");
+            $(".tab-content#" + targetElem).removeClass("hidden_tab inSearch");
 
         }
     }
 
     if ($("body").hasClass("page-contract")) {
+        var hash = location.hash.replace("#/", "").split("/");
+        var hashId = hash[0];
 
-        var hash = location.hash;
-        var hashId = hash.replace("/", "");
-        if( hashId === "#metadata" || hashId === "#annotations" ){
-            $(hashId).removeClass("hidden_tab");
+        if( hashId === "metadata" || hashId === "annotations" ){
+            $("#" + hashId).removeClass("hidden_tab");
+            $(".pagination").hide()
         }else{
             $("#view-container").removeClass("hidden_tab");
         }
+        $(".tab-"+ hashId).addClass("active");
     }
 
 
+    //pdf full screen view scripts
+
+    $("body").on("click", ".change-view-icon", function(){
+        $(this).next(".tooltip").hide();
+        $("#view-pdf, .grouped-action").toggleClass("expanded");
+        $("html").toggleClass("overflow-hidden")
+    })
+
 });
+
 

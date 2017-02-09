@@ -26,6 +26,7 @@ $img-path: "../images";
     text-decoration: none;
     border-right: 1px solid #DCDFE2;
     display: inline-block;
+    vertical-align: top;
     @media screen and (max-width: 1040px){
       width: 0;
     }
@@ -58,9 +59,6 @@ $img-path: "../images";
   background: transparent !important
 }
 
-.pagination {
-  margin: 8px;
-}
 
 .pdf-pagination.pagination span,
 .text-pagination span,
@@ -226,10 +224,13 @@ $img-path: "../images";
 }
 
 .pagination {
+  height: 47px;
   display: block;
-  padding-top: 4px;
+  padding: 12px 7px 0px 7px;
   position: relative;
   z-index: 1;
+  margin: 0;
+  border-radius: 0;
 
   input[type="text"] {
     border: 1px solid #C0C0C0;
@@ -947,10 +948,6 @@ div > .annotation-item:first-of-type .annotation-cluster {
     width: 100%;
   }
 
-  .pagination {
-    margin-left: 180px;
-    margin-top: -40px;
-  }
 }
 
 @media all and (max-width: 720px) {
@@ -970,11 +967,6 @@ div > .annotation-item:first-of-type .annotation-cluster {
   }
 }
 
-@media all and (max-width: 480px) {
-  .pdf-zoom-options {
-    display: none !important;
-  }
-}
 
 /* ------ responsive for panel title at top ------- */
 
@@ -1085,6 +1077,48 @@ div > .annotation-item:first-of-type .annotation-cluster {
   background-position: 0 0;
 }
 
+
+.head-wrap{
+  .grouped-action{
+    float: left;
+    >div{
+      float: left;
+    }
+
+    @media screen and (max-width: 640px){
+      float: none;
+      overflow: hidden;
+      clear: both;
+      text-align: center;
+      display: table;
+      border-top: 1px solid #dcdfe2;
+
+      .pagination{
+        border-left: 1px solid #dcdfe2;
+        border-right: 1px solid #dcdfe2;
+        margin-right: -1px;
+        border-radius: 0;
+
+        .pdf-zoom-options{
+          padding-left: 15px;
+          padding-right: 15px;
+        }
+      }
+
+      >div{
+        float: none;
+        display: inline-block;
+        vertical-align: top;
+      }
+
+      .fullscreen{
+        float: none;
+        display: inline-block;
+        border-right: 1px solid #dcdfe2;
+      }
+    }
+  }
+}
 /* --------- responsive for contract view --------- */
 
 @media all and (max-width: 800px) {
@@ -1105,12 +1139,7 @@ div > .annotation-item:first-of-type .annotation-cluster {
 
   .navigation a:nth-last-child(-n+3) {
     display: inline-block;
-  }
-
-  .pagination {
-    margin: 9px 10px 9px 10px;
-    position: relative;
-    min-width: 100px;
+    vertical-align: top;
   }
 
   .fixed + .document-wrap {
@@ -1124,10 +1153,6 @@ div > .annotation-item:first-of-type .annotation-cluster {
       float: left;
     }
 
-  }
-
-  .pdf-zoom-options {
-    border-right: none;
   }
 
   .text-search {
@@ -1173,12 +1198,15 @@ div > .annotation-item:first-of-type .annotation-cluster {
     float: left;
   }
 
+  #view-pdf, #view-text{
+    padding: 10px;
+  }
+
   .text-panel, .pdf-annotator {
-    margin: 10px 0;
-    border-left: 20px solid #f0f0f0;
-    border-right: 20px solid #f0f0f0;
+    margin:0;
+    box-shadow: 0 3px 7px rgba(0,0,0,0.15);
     clear: both;
-    box-shadow: none;
+    border-radius: 0;
   }
 
   .tools {
@@ -1211,16 +1239,11 @@ div > .annotation-item:first-of-type .annotation-cluster {
   }
 }
 
-@media all and (max-width: 540px) {
-  .pdf-zoom-options {
-    display: none !important;
-  }
-}
 
 @media all and (max-width: 480px) {
 
-  .navigation a {
-    border: none;
+  .navigation a:last-child {
+    border-right: none;
   }
 
   .attached-top-wrapper .left-top-content {
@@ -1283,4 +1306,125 @@ div > .annotation-item:first-of-type .annotation-cluster {
     display: none;
   }
 }
+
+.inSearch{
+  display: none;
+}
+
+
+html.overflow-hidden{
+  overflow: hidden;
+}
+
+.grouped-action{
+  .tooltip{
+    border: none;
+    background: none;
+    font-family: Open-Sans-Regular;
+    opacity:1;
+
+    .tooltip-inner{
+      padding: 3px 10px;
+      font-size: 12px;
+      background: #ccc;
+      color: #404040;
+      box-shadow: 0px 3px 7px rgba(0,0,0,0.15);
+    }
+
+    .tooltip-arrow{
+      border-bottom-color: #ccc;
+    }
+
+  }
+}
+
+
+.fullscreen, .exit-fullscreen {
+  display: block;
+  width: 45px;
+  height: 47px;
+  float: left;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("../images/ic-expand.png");
+  cursor: pointer;
+  vertical-align: top;
+  
+  &:hover{
+    background-color: #f0f0f0;
+  }
+}
+
+.exit-fullscreen {
+  display: none;
+  background-image: url("../images/ic-exit.png");
+}
+
+
+.grouped-action.expanded{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  background-color: rgba(244,244,244,0.9);
+  border-radius: 0;
+  z-index: 5050;
+  box-shadow: 0px 3px 10px rgba(0,0,0,0.15);
+  >div{
+    float: none;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .fullscreen{
+    display: none;
+  }
+
+  .exit-fullscreen{
+    float: none;
+    display: inline-block;
+    border-right: 1px solid #dcdfe2;
+    background-image: url("../images/ic-exit.png");
+  }
+
+  .pagination{
+    border-left: 1px solid #dcdfe2;
+  }
+
+}
+
+#view-pdf.expanded {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5000;
+  background: #fff;
+  transition: all 0.5s ease;
+  text-align: center;
+  padding-top: 45px;
+
+  .pdf-annotator {
+    width: 100%;
+    box-shadow: none;
+    height: 100%;
+    margin: 0;
+  }
+
+  .annotator-wrapper {
+    display: inline-block;
+  }
+
+  .exit-fullscreen {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+  }
+}
+
 

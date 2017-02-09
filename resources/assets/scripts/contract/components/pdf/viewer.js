@@ -94,6 +94,7 @@ class Viewer extends Component {
                            page={this.state.page_no}
                            scale={this.state.scale}/>
                 </div>
+                <a href="#" className="change-view-icon exit-fullscreen"></a>
             </div>
         );
     }
