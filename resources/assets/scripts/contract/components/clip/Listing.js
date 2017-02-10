@@ -46,15 +46,15 @@ class Listing extends React.Component{
                     <thead>
                     <tr>
                         <th>
-                            <a>{ langClip.document }</a>
+                            <span>{ langClip.document }</span>
                         </th>
-                        <th width="15%"><a>{ langClip.category }</a>
+                        <th width="15%"><span>{ langClip.category }</span>
                         </th>
-                        <th width="35%"><a>{ langClip.text }</a></th>
-                        <th width="114px"><a>{ langClip.country }</a>
+                        <th width="35%"><span>{ langClip.text }</span></th>
+                        <th width="114px"><span>{ langClip.country }</span>
                         </th>
-                        <th width="84px"><a>{ langClip.year }</a></th>
-                        <th width="150px"><a>{ langClip.resource }</a>
+                        <th width="84px"><span>{ langClip.year }</span></th>
+                        <th width="150px"><span>{ langClip.resource }</span>
                         </th>
                         <th data-sorting="no-sorting">{ langClip.viewClip }</th>
 

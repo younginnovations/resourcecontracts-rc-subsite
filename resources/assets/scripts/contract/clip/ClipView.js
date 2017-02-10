@@ -49,9 +49,22 @@ class ClipView extends React.Component{
                         lengthChange: false,
                         searching: false,
                         pagingType: "full_numbers",
-                        info: false
+                        info: false,
+                        "drawCallback": function( settings ) {
+                            console.log(settings)
+                            var totalPage = $(".dataTables_paginate").find("span .paginate_button").length;
+
+                            if(totalPage < 2){
+                                $(".dataTables_paginate").hide()
+                            }
+                        }
                     });
 
+                    var totalPage = $(".dataTables_paginate").find("span .paginate_button").length;
+
+                    if(totalPage > 1){
+                        $(".dataTables_paginate").hide()
+                    }
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -82,8 +95,18 @@ class ClipView extends React.Component{
                             lengthChange: false,
                             searching: false,
                             pagingType: "full_numbers",
-                            info: false
+                            info: false,
+                            "drawCallback": function( settings ) {
+                                console.log(settings)
+                                var totalPage = $(".dataTables_paginate").find("span .paginate_button").length;
+
+                                if(totalPage < 2){
+                                    $(".dataTables_paginate").hide()
+                                }
+                            }
                         });
+
+
 
                     })
                     .catch(function (error) {

@@ -58,23 +58,42 @@ export default class Item extends React.Component {
 
     removeClip = ( e ) => {
 
+        var remainingClip = $(e.target.closest("table")).find("tbody tr").length;
 
-        var confirmRemoveClip = confirm("Are you sure that you want to remove the clips?");
+        if(remainingClip <= 1){
 
-        if( confirmRemoveClip ){
+            var confirmRemoveClipAll = confirm("No Clip will remain. Are you sure you want to remove the Clip anyway?");
 
-            //this.handleTotalOnRemove();
+            if( confirmRemoveClipAll ){
 
-            $(e.target.closest("tr")).remove();
+                $(e.target.closest("tr")).remove();
 
-            clipHelper.removeClip(e.target.getAttribute("data-id"));
+                clipHelper.removeClip(e.target.getAttribute("data-id"));
+                $("#clear-all").hide();
+                $("#clip-annotations").html('<div class="no-record">There are currently no Clips.</div>');
 
-            if($( ".table-contract-list tbody").find("tr").length == 0 ){
-                $( ".table-contract-list tbody").append("<tr><td colspan='9' class='noClipMsg'> There are currently no Clips.</td></tr>");
+            }else{
+                return null
             }
+
         }else{
-            return null
+
+            var confirmRemoveClip = confirm("Are you sure you want to remove the Clip?");
+
+            if( confirmRemoveClip ){
+
+                //this.handleTotalOnRemove();
+
+                $(e.target.closest("tr")).remove();
+
+                clipHelper.removeClip(e.target.getAttribute("data-id"));
+
+            }else{
+                return null
+            }
+
         }
+
     }
     handleText = ()=>{
         this.setState({
@@ -100,23 +119,6 @@ export default class Item extends React.Component {
         return pageURL;
 
     }
-
-
-    /*handleTotalOnRemove = () =>{
-        this.props.handleTotal( true );
-    }
-
-
-    handleTotal = ( e ) => {
-
-        let status = this.state.checked;
-
-        this.props.handleTotal( status );
-        this.setState({
-            checked:!this.state.checked
-        })
-
-    }*/
     render() {
 
         let docURL = app_url + "/contract/" + this.props.open_contracting_id + '/view';
@@ -126,35 +128,35 @@ export default class Item extends React.Component {
         return (
             <tr>
 
-                <td>
+                <td data-title={ langClip.document }>
                     { this.props.name }
                 </td>
-                <td>
+                <td data-title={ langClip.category }>
                     <a href={ docURL }>{ this.props.category }</a>
                 </td>
-                <td className="clipping-article">
+                <td className="clipping-article" data-title={ langClip.text }>
                     { this.state.showEllipse?shortText:this.state.text }
                     <span onClick={ this.handleText } className="listMore"> {this.state.hasEllipses? moreText :null}</span><br/>
                     <span dangerouslySetInnerHTML={{__html: this.getPages()}} />
                 </td>
 
-                <td>
+                <td data-title={ langClip.country }>
                     <span className="country-name-title">{ this.props.country }</span>
                 </td>
-                <td>
+                <td data-title={ langClip.year }>
                     { this.props.contractYear }
                 </td>
-                <td>
+                <td data-title={ langClip.resource }>
                     <ul>
                         { this.props.resources.map( (resource) => <li>{ resource }</li>) }
                     </ul>
                 </td>
-                <td className="view-clip">
+                <td className="view-clip" data-title={ langClip.viewClip }>
                     <a href={ this.props.page_url } target="_blank" ><span></span></a>
                 </td>
                 {
                     this.state.key?""
-                        :<td className="delete-clip">
+                        :<td className="delete-clip" data-title="ACTION">
                             <span data-id={ this.props.annotation_id } onClick={ this.removeClip }></span>
                         </td>
                 }

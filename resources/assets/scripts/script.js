@@ -533,6 +533,12 @@ $(document).ready(function () {
     //set initial clip select count on load
     clipHelper.setClipCount();
 
+    //manage clear all
+    var localClip = clipHelper.getLocalClips()
+
+    if(!localClip){
+        $("#clear-all").hide();
+    }
 
 
     function toggleClipState( e ){
@@ -560,6 +566,8 @@ $(document).ready(function () {
 
         if(confirmClearAll) {
             clipHelper.clearAllClips();
+
+            localStorage.allClipped = "false";
 
             location.reload();
         }else {
@@ -641,12 +649,17 @@ $(document).ready(function () {
 $(window).load( function(){
     if(Cookies.get('clipState') === "false" || Cookies.get('clipState') === undefined  ){
         //$(".clip-head ").show();
-        $("body").addClass('clippingOff');
-        $(".clipToggleElems").css("opacity", 1)
+        setTimeout(function(){
+            $("body").addClass('clippingOff');
+            $("body").find(".clipToggleElems").css("opacity", 1);
+        }, 100)
+
 
     }else{
-        $(".clipToggleElems").css("opacity", 1)
-        $(".on-annotation").addClass("active");
+        setTimeout(function() {
+            $(".clipToggleElems").css("opacity", 1);
+            $("body").find(".on-annotation").addClass("active");
+        }, 100)
     }
 
 

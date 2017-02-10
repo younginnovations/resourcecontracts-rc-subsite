@@ -524,9 +524,18 @@ table td.view-clip>a {
     border-bottom: none;
     margin-bottom: 15px;
     thead > tr > th {
+      span{
+        color: $color_link-color;
+      }
+
       &:after{
-        margin-left: 4px;
-        float: none;
+        display: none;
+      }
+
+      &.sorting_asc,&.sorting_desc{
+        &:after{
+
+        }
       }
 
       a{
@@ -584,6 +593,45 @@ table td.view-clip>a {
         }
       }
     }
+  }
+}
+
+#clip-annotations {
+  table.dataTable thead th span{
+    display: inline-block;
+    position: relative;
+  }
+
+  table.dataTable thead th>span:after {
+    content: "";
+    display: inline-block;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid rgba(64, 64, 64, 0.2);
+    position: absolute;
+    right: -12px;
+    bottom: 6px;
+  }
+  table.dataTable thead th>span:before {
+    content: "";
+    display: inline-block;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 4px solid rgba(64, 64, 64, 0.2);
+    position: absolute;
+    right: -12px;
+    bottom: 12px;
+  }
+
+  table.dataTable thead th.sorting_asc>span:before{
+    border-bottom: 4px solid $color_link-color;
+  }
+  table.dataTable thead th.sorting_desc>span:after{
+    border-top: 4px solid $color_link-color;
+  }
+
+  table.dataTable thead .sorting:after,table.dataTable thead .sorting:before{
+    display: none;
   }
 }
 
