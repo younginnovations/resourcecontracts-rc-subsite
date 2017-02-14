@@ -1,3 +1,12 @@
+body{
+  height: auto;
+}
+
+.content-wrap #content{
+  overflow: hidden;
+  padding-top: 15px;
+}
+
 
 .content-static-wrap{
   min-height: 48vh;
@@ -63,4 +72,127 @@
     }
   }
 
+}
+
+// FAQ page styles
+
+h1#title.faq-title{
+  padding-left: 0;
+  margin-left: 375px;
+}
+
+
+#target-nav{
+  position: absolute;
+  width: 330px;
+  background: #f7f7f7;
+  padding: 15px;
+  max-height: 80vh;
+  overflow-y: auto;
+
+  >h4{
+    margin-top: 0;
+    margin-left: -15px;
+    margin-right: -15px;
+    padding: 15px;
+    background: #eee;
+    border-bottom: 1px solid #ddd;
+    font-weight:bold;
+  }
+
+  ul>li{
+    margin-top: 12px;
+    line-height: 17px!important;
+    &:first-child{
+      margin-top: 0;
+    }
+
+    >span{
+      font-size: 13px;
+      line-height: 17px!important;
+      cursor: pointer;
+      &:hover{
+        color: $color_link-color;
+        text-decoration: underline;
+      }
+    }
+  }
+  
+}
+
+.content-wrap #title.faq-title{
+  font-size: 32px;
+  margin-top: 30px;
+  line-height:40px;
+}
+
+#scroll-able{
+  margin-left: 360px;
+  clear: both;
+  padding: 0 15px;
+  font-size: 16px;
+
+  ul{
+    padding-left: 18px;
+  }
+
+  p{
+    font-size: 16px;
+  }
+
+
+}
+
+#target-nav, #scroll-able{
+  .active{
+    color: $color_link_color;
+    background: transparent;
+  }
+}
+
+.faq-back-to-top{
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  display: none;
+}
+
+
+@media screen and (max-width: 999px){
+
+  .content-wrap #title.faq-title{
+    margin-left: 0;
+    padding-left: 15px;
+  }
+  nav.col-md-4{
+    width: 100%;
+    float: none;
+  }
+  #scroll-able{
+    width: 100%;
+    clear: both;
+    float: none;
+    margin-left: 0;
+  }
+  #target-nav {
+    position: relative!important;
+    top: auto;
+    width: auto;
+    max-width: initial;
+    max-height: initial;
+    height: auto;
+    margin-bottom: 35px;
+
+    ul{
+      column-count: 2;
+    }
+  }
+}
+
+@media screen and (max-width: 640px){
+  #target-nav {
+    ul{
+      column-count: auto;
+    }
+  }
 }
