@@ -59,7 +59,7 @@ return [
     'metadata'                => "Métadonnées",
     'contracts_in'            => "Contrats en",
     'documents'               => "Documents",
-    'advanced_search'         => "chercher Avancée",
+    'advanced_search'         => "Chercher avancée",
     'yes'                     => "Oui",
     'no'                      => "Non",
     'view_by_country'         => 'Voir par pays',

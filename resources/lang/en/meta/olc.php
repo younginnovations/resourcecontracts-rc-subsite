@@ -1,6 +1,6 @@
 <?php
 return [
-    'name'                  => 'OpenLand',
+    'name'                  => 'OpenLandContracts',
     'title'                 => 'OpenLandContracts.org',
     'description'           => 'An online repository of publicly available contracts for large-scale land, agriculture, and forestry projects. The repository includes the full text of contracts; plain language summaries of each contract’s key social, environmental, human rights, fiscal, and operational terms; and tools for searching and comparing contracts.',
     'countries_description' => 'Find land contracts from multiple countries - ',
