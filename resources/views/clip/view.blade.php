@@ -7,7 +7,12 @@
 				<div class="pull-left">
 					<a href="#" class="back-button back"><span>@lang('global.go_back')</span></a>
 					<div class="panel-title">
-						@lang('clip.all_clips')
+						<span>
+							@lang('clip.all_clips')
+							<span class="clipSelectCountWrapper" style="display: none;">
+								(<span class="viewClipCount"></span>)
+							</span>
+						</span>
 					</div>
 				</div>
 			</div>

@@ -21,6 +21,9 @@ use \Illuminate\Support\Facades\Lang as Lang;
 			<div class="advance-filter-wrapper contract_page_actions">
 				@if($contracts->total!=0)
 
+					<button class="clip-btn on-annotation"><span class="icon"></span><span
+								class="text">@lang('clip.clip')</span></button>
+
 					<div class="social-share dropdown" id="social-toggler">
 						<a class="dropdown-toggle"
 						   data-toggle="dropdown"><span>@lang('contract.social_share')</span></a>
@@ -53,5 +56,4 @@ use \Illuminate\Support\Facades\Lang as Lang;
 		var lang = <?php echo json_encode(trans('annotation'));?>;
 	</script>
 
-	@include('contract.partials.emailModal')
 @stop

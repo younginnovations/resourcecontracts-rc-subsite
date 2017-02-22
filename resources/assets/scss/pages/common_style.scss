@@ -274,6 +274,68 @@ a {
 
   }
 }
+.contract_page_actions{
+  .clip-btn, .clip-btn.active{
+    display: block;
+    position: absolute;
+    text-indent: 0;
+    font-size: 12px;
+    color: $color_link-color!important;
+    width: auto;
+    text-decoration: none;
+    padding: 13px 20px;
+    height: 45px;
+    top: 28px;
+    background: #fff;
+    right: 451px;
+    border-radius: 25px;
+    border: 1px solid rgba(243,115,86,0.2);
+    span.icon{
+      display: inline-block;
+      vertical-align: top;
+      background: transparent url(../images/ic-sprite.svg) no-repeat;
+      height: 18px;
+      width: 20px;
+      margin-right: 10px;
+    }
+
+    @media screen and (max-width: 768px){
+      top: 5px;
+      right: 278px;
+    }
+
+    @media screen and (max-width: 480px){
+      top: 9px;
+      right: 162px;
+      height: 37px;
+      padding: 7px 18px;
+      span.icon{
+        margin-right: 0;
+      }
+      span.text{
+        display: none;
+      }
+    }
+  }
+  .clip-btn{
+    span.icon{
+      background-position: -79px -402px;
+    }
+
+  }
+
+  .clip-btn.active{
+    span.icon {
+      background-position: -184px -481px;
+    }
+  }
+}
+
+.advance-filter-wrapper{
+  .clip-btn{
+    font-size: 12px;
+  }
+}
 
 @media (min-width: 551px) {
 
@@ -346,3 +408,12 @@ a {
   }
 }
 
+
+
+/**
+*** Annotator JS Style Overrides
+**/
+
+.annotator-adder, .annotator-outer, .annotator-notice{
+  z-index: 500!important;
+}

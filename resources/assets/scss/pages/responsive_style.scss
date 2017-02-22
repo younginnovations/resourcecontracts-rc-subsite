@@ -363,32 +363,14 @@
         &:empty {
           display: none;
         }
-        &:nth-of-type(1):before {
-          content: "";
+        
+        &:nth-of-type(1) {
+          background: transparent!important;
         }
-        /*&:nth-of-type(2):before {
-          content: "Document";
-        }
-        &:nth-of-type(3):before {
-          content: "";
-        }
-        &:nth-of-type(4):before {
-          content: "Country";
-        }
-        &:nth-of-type(5):before {
-          content: "Year";
-        }
-        &:nth-of-type(6):before {
-          content: "Resource Type";
-        }
-        &:nth-of-type(7):before {
-          content: "Contract Type";
-        }*/
       }
     }
     td:first-child {
       overflow: hidden;
-      display: none;
     }
   }
 
@@ -435,7 +417,7 @@
     &:first-child {
       background-position: 36px 17px;
     }
-    &:nth-child(2) > a {
+    &:first-child{
       background: $url_5 no-repeat 0 4px;
       padding-left: 20px;
       display: inline-block;
@@ -477,6 +459,10 @@
   .annotation-category-cluster {
     display: none!important;
   }
+
+  table.table-contract tr td:first-child{
+    display: none;
+  }
 }
 
 
@@ -488,6 +474,10 @@
 
 
 @media all and(max-width: 480px) {
+
+  table tr td{
+    padding-left: 40% !important;
+  }
   .filter-wrapper > .col-lg-2 {
     display: none;
   }
@@ -539,6 +529,9 @@
     padding: 0;
     height: 35px;
     width: 60px;
+    >span.text{
+      display: none;
+    }
   }
 
   .action-btn .download-dropdown>a{
@@ -673,6 +666,10 @@
   .contract-number-wrap{
     display: block !important;
     z-index: 88;
+  }
+
+  .contract_page_actions + .contract-number-wrap {
+    padding-top: 20px;
   }
 
   .country-list-wrap{
@@ -884,11 +881,4 @@
     padding-top: 81px;
   }
 }
-//
-//@media (min-width: 1401px) {
-//  .section-wrap {
-//    padding-top: 150px!important;
-//    padding-bottom: 55px;
-//  }
-//}
 

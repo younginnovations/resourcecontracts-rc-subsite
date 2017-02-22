@@ -77,6 +77,9 @@
 		</div>
 	</div>
 </footer>
+
+@include('contract.partials.emailModal')
+
 <script src="{{url('js/app.js')}}"></script>
 @yield('js')
 @if(site()->hasTracking())

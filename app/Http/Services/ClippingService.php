@@ -4,9 +4,12 @@ use App\Http\Models\Clip\Clip;
 use Exception;
 use Illuminate\Contracts\Filesystem\Factory as Filesystem;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use LynX39\LaraPdfMerger\Facades\PdfMerger;
 use LynX39\LaraPdfMerger\PdfManage;
+use Maatwebsite\Excel\Facades\Excel;
 use Vsmoraes\Pdf\Pdf;
 use ZipArchive;
 
@@ -274,6 +277,7 @@ class ClippingService
     {
         $formData['site'] = meta()->title;
         $to               = explode(',', $formData['to']);
+
         try {
             Mail::send(
                 'clip.email',
@@ -285,8 +289,10 @@ class ClippingService
                 }
             );
 
+
             return true;
         } catch (Exception $e) {
+            dd("some error". $e->getMessage());
             return false;
         }
     }
@@ -304,7 +310,7 @@ class ClippingService
         $annotations      = $this->getAllAnnotations($data);
         $annotationDetail = $this->formatAnnotations($data);
         $pdfs             = $this->getPdfUrl($annotations);
-        $basePath         = __DIR__ . '/../../../public';
+        $basePath         = base_path('storage');
         $folder           = time();
         $concatFileName   = 'concat-' . time() . '.pdf';
         $zipFileName      = 'pdf-' . time() . '.zip';
@@ -313,12 +319,20 @@ class ClippingService
             $this->downloadFile($basePath, $folder, $pdfs);
 
             $this->concatPDF($annotationDetail, $basePath, $folder, $concatFileName);
+            $this->createXls($annotationDetail, $folder);
             $this->zipFolder($basePath, $folder, $concatFileName, $zipFileName);
 
-            return $this->upLoadZipFile($basePath, $folder, $zipFileName);
+            $files = glob($basePath."/".$folder."/*.pdf");
+            File::delete($files);
+            copy($basePath.'/'.$folder.'/'.$zipFileName , base_path('public').'/'.$zipFileName);
+            $this->rrmdir($basePath . '/' . $folder);
+            $url = env("APP_DOMAIN").'/'.$zipFileName;
 
+            return $url;
         } catch (Exception $e) {
-            return false;
+            Log::info($e->getMessage());
+
+            return '';
         }
     }
 
@@ -393,6 +407,31 @@ class ClippingService
     }
 
     /**
+     * Downloads clipped annotations as XLS file
+     *
+     * @param $data
+     */
+    public function downloadXls($data)
+    {
+        $data     = json_decode($data, true)['result'];
+        $filename = "clipped_annotation_".date('Y-m-d');
+
+        $headerArray = $this->formatXls($data);
+
+        Excel::create(
+            $filename,
+            function ($excel) use (&$headerArray) {
+                $excel->sheet(
+                    'first sheet',
+                    function ($sheet) use (&$headerArray) {
+                        $sheet->fromArray($headerArray);
+                    }
+                );
+            }
+        )->download('xls');
+    }
+
+    /**
      * Zip folder
      *
      * @param $basePath
@@ -404,11 +443,16 @@ class ClippingService
      */
     private function zipFolder($basePath, $folder, $concatFileName, $zipFileName)
     {
-        $zip = new ZipArchive();
-        $zip->open($basePath . '/' . $folder . '/' . $zipFileName, ZipArchive::CREATE);
-        $zip->addFile($basePath . '/' . $folder . '/' . $concatFileName, $concatFileName);
-        $zip->addFile($basePath . '/' . $folder . '/' . "clippedannotations.pdf", "clippedannotations.pdf");
-        $zip->close();
+        try {
+            $zip = new ZipArchive();
+            $zip->open($basePath.'/'.$folder.'/'.$zipFileName, ZipArchive::CREATE);
+            $zip->addFile($basePath.'/'.$folder.'/'.$concatFileName, $concatFileName);
+            $zip->addFile($basePath.'/'.$folder.'/'."clippedannotations.pdf", "clippedannotations.pdf");
+            $zip->addFile($basePath.'/'.$folder.'/'."clipped_annotation.xls", "clipped_annotation.xls");
+            $zip->close();
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+        }
 
         return true;
     }
@@ -473,5 +517,66 @@ class ClippingService
 
         return true;
 
+    }
+
+    /**
+     * Creates and stores an XLS file for clipped annotations
+     *
+     * @param $annotationDetail
+     * @param $folder
+     *
+     * @return bool
+     */
+    public function createXls($annotationDetail, $folder)
+    {
+        $data        = json_decode($annotationDetail, true)['result'];
+        $filename    = "clipped_annotation";
+        $headerArray = $this->formatXls($data);
+
+        try {
+            Excel::create(
+                $filename,
+                function ($excel) use (&$headerArray) {
+                    $excel->sheet(
+                        'first sheet',
+                        function ($sheet) use (&$headerArray) {
+                            $sheet->fromArray($headerArray);
+                        }
+                    );
+                }
+            )->store('xls', base_path('storage'.'/'.$folder));
+
+            return true;
+
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+        }
+    }
+
+    /**
+     * Formats header of clipped annotation detail array
+     *
+     * @param $data
+     *
+     * @return array
+     */
+    public function formatXls($data)
+    {
+        $headerArray = [];
+
+        foreach ($data as $key => $d) {
+            array_push(
+                $headerArray,
+                $key = [
+                    'Document'            => $d['name'],
+                    'Country'             => $d['country'],
+                    'Year'                => $d['year'],
+                    'Annotation Category' => $d['category'],
+                    'Text'                => $d['text'],
+                ]
+            );
+        }
+
+        return $headerArray;
     }
 }

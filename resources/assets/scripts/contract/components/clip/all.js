@@ -2,51 +2,57 @@ import React, {Component} from "react";
 import ReactDOM from "react-dom";
 import Contract from "../../contract";
 import _map from "lodash/map";
+import Cookies from "js-cookie";
+import ClipHelper from "../../clip/clipHelper";
+
+let clipHelper = new ClipHelper();
+
+let allClipped = () => {
+    if ( localStorage.allClipped === "false" || localStorage.allClipped === undefined ) {
+        return false
+
+    } else {
+
+        return true
+
+    }
+}
 
 class All extends Component {
     constructor(props) {
         super(props);
-    }
 
-    componentDidMount() {
-        if ($.cookie("clipstate") == 0 || typeof $.cookie("clipstate") == 'undefined') {
-            $('#clip-all-annotations').css('display', 'none');
+        this.state = {
+            allClipped : allClipped()
         }
     }
+    clipAllToggle = () => {
 
-    componentDidUpdate() {
-        if (!this.checkAllClipped()) {
-            $(ReactDOM.findDOMNode(this)).find('.annotation-clip').removeClass('annotation-clipped');
-            $(ReactDOM.findDOMNode(this)).find('.annotation-clip').attr('id', 'clip-all-annotations');
+        if( !this.state.allClipped ){
+            clipHelper.clipAll();
+
+            this.setState({
+                allClipped: true
+            })
+        }else{
+
+            clipHelper.unclipAll();
+
+            this.setState({
+                allClipped: false
+            })
         }
-
-    }
-
-    checkAllClipped() {
-        let clipCollection = window.getClipLocalCollection();
-        let allAnnotations = Contract.getAnnotations();
-        let clipCollectionData = clipCollection.localStorage.findAll();
-        let clippedData = [];
-        clipCollectionData.forEach((d) => {
-            clippedData.push(parseInt(d.id));
-        });
-        let isAllClipped = false;
-        _map(allAnnotations.result, (d) => {
-            if (clippedData.indexOf(parseInt(d.annotation_id)) > -1) {
-                isAllClipped = true;
-            } else {
-                isAllClipped = false;
-            }
-        });
-
-        return isAllClipped;
     }
 
     render() {
+        let id = this.state.allClipped?"remove-all-annotations":"clip-all-annotations";
         return (
             <div className="clearfix">
-                <a id="clip-all-annotations" className="annotation-clip" title="Clip all annotations">
-                    <span className="link">{langClip.clip_all}</span>
+                <a id={ id }
+                   className= "annotation-clip clipToggleElems"
+                   title="Clip all annotations"
+                   onClick={ this.clipAllToggle }>
+                    <span className="link">{ langClip.clip_all }</span>
                 </a>
             </div>
         );

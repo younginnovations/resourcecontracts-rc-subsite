@@ -187,6 +187,14 @@ if (site()->isClipEnabled()) {
             $app->get('/', ['as' => 'clip.index', 'uses' => 'ClippingController@index']);
             $app->get('annotations', ['as' => 'api.annotation', 'uses' => 'ClippingController@getAllAnnotations']);
             $app->get('download', ['as' => 'clip.download', 'uses' => 'ClippingController@downloadAnnotations']);
+            $app->get(
+                'xls-download',
+                [
+                    'as'   => 'clip.download-xls',
+                    'uses' =>
+                        'ClippingController@downloadXls',
+                ]
+            );
             $app->get('api', ['as' => 'clip.api', 'uses' => 'ClippingController@getClippedData']);
             $app->get('{key}', ['as' => 'clip.view', 'uses' => 'ClippingController@clipView']);
             $app->post('save', ['as' => 'clip.save', 'uses' => 'ClippingController@saveClip']);

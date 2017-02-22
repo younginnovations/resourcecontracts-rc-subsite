@@ -394,11 +394,13 @@
   background: url(../images/ic-annotate-title.png) no-repeat left 0;
   padding-left: 23px !important;
   display: inline;
+  position: relative;
   font-size: 12px;
   color: rgba(64, 64, 64, 0.7);
   width: 18px;
   text-indent: -9999px;
   padding-bottom: 3px;
+  margin-right: 25px;
 }
 
 .panel-annotation-list-wrap .col-md-8 {

@@ -54,7 +54,7 @@
         padding: 8px 44px 8px 10px;
         white-space: nowrap;
         &:first-child {
-          @extend %extend_2;
+          //@extend %extend_2;
         }
       }
     }
@@ -92,8 +92,8 @@
 //.table > thead > tr > th:first-child, .table > tbody > tr > td:first-child
 %extend_2 {
   padding: 8px 0 8px 32px;
-  width: 54px;
-  min-width: 54px;
+  //width: 54px;
+  //min-width: 54px;
 }
 
 //original selectors
@@ -223,8 +223,8 @@
     @extend %extend_23;
   }
   tbody td:first-child {
-    background: $url_5 no-repeat 36px 16px;
-    padding-left: 60px;
+      background: $url_5 no-repeat 10px 16px;
+      padding-left: 60px;
   }
 }
 
@@ -332,8 +332,8 @@ td.contract-date {
       min-width: 140px;
     }
     &:first-child {
-      color: $color_boulder_approx;
-      font-size: 12px;
+      color: #404040;
+      font-size: 14px;
       line-height: 20px;
       overflow: hidden;
       > a {
@@ -403,13 +403,6 @@ td.contract-date {
    // margin-left: -20px;
 
     margin-top: 8px;
-  }
-  td:first-child {
-    background-position: 50px 33px;
-    padding-left: 60px;
-    > a {
-      padding-left: 13px;
-    }
   }
   th {
     a {
@@ -538,4 +531,31 @@ tr:empty {
       }
     }
   }
+}
+
+
+.listMore{
+  color: $color_link_color;
+  cursor: pointer;
+  &:hover{
+    text-decoration: underline;
+  }
+}
+
+.annotationCount {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  background: #979797;
+  display: inline-block;
+  font-size: 10px;
+  line-height: 15px;
+  height: 18px;
+  width: 27px;
+  text-indent: 0px;
+  padding: 0 5px;
+  border-radius: 10px;
+  color: #fff;
+  border: 2px solid #fff;
+  text-align: center;
 }

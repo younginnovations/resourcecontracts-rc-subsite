@@ -30,20 +30,6 @@ var contract_style = [
     './resources/assets/scss/contract/contract.scss',
 ];
 
-var base_script = [
-    './resources/assets/scripts/vendor/lib/jquery.js',
-    './resources/assets/scripts/vendor/lib/jquery.cookie.js',
-    './resources/assets/scripts/vendor/bootstrap.js',
-    './resources/assets/scripts/vendor/select2.js',
-    './resources/assets/scripts/script.js',
-
-    './resources/assets/scripts/vendor/backbone/underscore.js',
-    './resources/assets/scripts/vendor/backbone/backbone.js',
-    './resources/assets/scripts/vendor/backbone/backbone.localstorage.js',
-    './resources/assets/scripts/clips/collection/clip.local.js',
-    './resources/assets/scripts/clips/main.js'
-];
-
 var country_script = [
     './resources/assets/scripts/vendor/backbone/underscore.js',
     './resources/assets/scripts/vendor/backbone/backbone.js',
@@ -59,23 +45,8 @@ var resource_script = [
 ];
 
 var clipping_script = [
-    './resources/assets/scripts/vendor/react/react-with-addons.js',
-    './resources/assets/scripts/vendor/backbone/underscore.js',
-    './resources/assets/scripts/vendor/backbone/backbone.js',
-    './resources/assets/scripts/vendor/backbone/backbone.fetch-cache.min.js',
-    './resources/assets/scripts/vendor/backbone/backbone.paginator.min.js',
-    './resources/assets/scripts/clips/collection/clip.js',
-    './resources/assets/scripts/clips/views/filter.js',
-    './resources/assets/scripts/clips/views/clipselectcount.js',
-    './resources/assets/scripts/clips/views/download.js',
-    './resources/assets/scripts/clips/views/share.js',
-    './resources/assets/scripts/clips/views/pagination.js',
-    './resources/assets/scripts/clips/views/item.js',
-    './resources/assets/scripts/clips/views/listing.js',
-    './resources/assets/scripts/clips/views/main.js',
-    './resources/assets/scripts/clips/views/clip.main.js',
-    './resources/assets/scripts/clips/clip.main.js'
-];
+    './resources/assets/scripts/contract/clip/clip-main.js'
+]
 
 var homepage_script = [
     './resources/assets/scripts/homepage/d3.min.js',
@@ -188,38 +159,24 @@ gulp.task('watch', function () {
 });
 
 /*
-gulp.task('contract-style', function () {
-    return gulp.src(contract_style)
-        .pipe(sourcemaps.init())
-        .pipe(sass())
-        .pipe(postcss([autoprefixer({browsers: ['last 30 versions', '> 1%', 'ie 8', 'ie 7']})]))
-        .pipe(sourcemaps.write('./maps'))
-        /!*.pipe(uglifycss({
-            "max-line-len": 80
-        }))*!/
-        .pipe(rename({
-            basename: "",
-            prefix: "contract",
-            extname: ".css"
-        }))
-        .pipe(gulp.dest('./public/css'))
-        .pipe(notify({message: 'css-contract task complete'}));
-});
-*/
-
-
-/*
  * Default task, running just `gulp` will compile the sass,
  */
 
 gulp.task('default', ['watch']);
 
 
+var base_script = [
+    './resources/assets/scripts/vendor/jquery.js',
+    './resources/assets/scripts/vendor/bootstrap.js',
+    './resources/assets/scripts/vendor/select2.js',
+    './resources/assets/scripts/vendor/dataTables.min.js',
+    './resources/assets/scripts/vendor/backbone/underscore.js'
+];
+
 gulp.task('js-base', function () {
     return gulp.src(base_script)
         .pipe(sourcemaps.init())
-        .pipe(react())
-        .pipe(concat('app.js'))
+        .pipe(concat('plugins-bundle.js'))
         .pipe(gulp.dest('./public/js'))
         .pipe(uglify())
         .pipe(gulp.dest('./public/js'))
@@ -242,17 +199,6 @@ gulp.task('js-resource', function () {
         .pipe(uglify())
         .pipe(gulp.dest('./public/js'))
         .pipe(notify({message: 'Js-resource task complete'}));
-});
-
-gulp.task('js-clipping', function () {
-    return gulp.src(clipping_script)
-        .pipe(sourcemaps.init())
-        .pipe(react())
-        .pipe(concat('clipping.js'))
-        .pipe(gulp.dest('./public/js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('./public/js'))
-        .pipe(notify({message: 'Js-clipping task complete'}));
 });
 
 gulp.task('js-homepage', function () {

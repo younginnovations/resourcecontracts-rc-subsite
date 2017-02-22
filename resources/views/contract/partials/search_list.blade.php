@@ -50,7 +50,22 @@ if ($route == "contracts" && isset($url['year'])) {
 	</thead>
 	<tbody>
 	@forelse($contracts->results as $contract)
-		<?php $annotations = $api->getAnnotations($contract->id);?>
+		<?php $annotations = $api->getAnnotations($contract->id);
+				//dd($annotations);
+
+			$annotation_array = [];
+			foreach($annotations->result as $annotation) {
+				if (!in_array($annotation->annotation_id, $annotation_array)){
+					array_push($annotation_array,$annotation->annotation_id);
+				}
+			}
+
+			$annotation_length = sizeof($annotation_array);
+
+			$annotation_ids = (!empty($annotation_array)) ? implode(" ", $annotation_array)  : "";
+
+		?>
+
 		<tr>
 			<td></td>
 			<td data-title="@lang('global.document')">
@@ -60,10 +75,18 @@ if ($route == "contracts" && isset($url['year'])) {
 				</a>
 				<?php $link = sprintf('/contract/%s#annotations', $contract->open_contracting_id);?>
 				@if($annotations->total>0)
-					<div class="annotate-text" data-popover="true" data-html=true
-						 data-content="@if(site()->isRC())@lang('global.annotated', ['link' => url($link)])
+					<div class="annotate-text" data-popover="true" data-html="true"
+						 data-content="@if(site()->isRC())@lang('global.annotated', ['link' => url($link), 'ids' => $annotation_ids])
 						 @else @lang('global.annotated_no_link') @endif ">
+						<span class="annotationCount">{{ $annotation_length  }}</span>
 					</div>
+					<button class="annotation-clip-icon clipToggleElems contractClipIcon"
+							data-id="{{ $annotation_ids }}"
+							data-action="add"
+							data-popover="true"
+							data-html="true"
+							data-content="@lang('clip.clip_contract')">Clip</button>
+
 				@endif
 				<div class="search-text">
 					@if(isset($contract->text ) && $contract->text !='')
@@ -81,6 +104,12 @@ if ($route == "contracts" && isset($url['year'])) {
 								{!! $contract->annotations->annotation_text ." pg " .$contract->annotations->page_no !!}
 								<span class="contract-group">@lang('global.annotation') </span>
 							</a>
+							<button class="annotation-clip-icon clipToggleElems static"
+									data-id="{{ $contract->annotations->annotation_id }}"
+									data-action="add"
+									data-popover="true"
+									data-html="true"
+									data-content="@lang('clip.clip_annotation')">Clip</button>
 						</p>
 					@endif
 
@@ -106,10 +135,17 @@ if ($route == "contracts" && isset($url['year'])) {
 								<span style="color: #404040;">
 										{{str_limit($annotation['text'],50)}}
 								</span>
+
 								<a style="float: none"
 								   href="{{route('contract.detail',['id'=>$contract->open_contracting_id])}}#/{{$annotation_type}}/page/{{$annotation['page_no']}}/annotation/{{$annotation['id']}}">
 									[Pg {{$annotation['page_no']}}]
 								</a>
+								<button class="annotation-clip-icon clipToggleElems static"
+										data-id="{{ $annotation['annotation_id'] }}"
+										data-action="add"
+										data-popover="true"
+										data-html="true"
+										data-content="@lang('clip.clip_annotation')">Clip</button>
 								<br>
 							@endif
 						@endforeach

@@ -41,13 +41,19 @@
 			$params['download'] = true;
 			?>
 			@if($contracts->total!=0)
+				<button class="clip-btn on-annotation">
+					<span class="icon"></span>
+					<span class="text">@lang('clip.clip')</span>
+				</button>
 				<div class="social-share dropdown" id="social-toggler">
-					<a class="dropdown-toggle" data-toggle="dropdown"><span>@lang('contract.social_share')</span></a>
+					<a class="dropdown-toggle" data-toggle="dropdown">
+						<span class="text">@lang('contract.social_share')</span>
+					</a>
 					@include('contract.partials.share')
 				</div>
 				<div class="download-csv">
 					<a href="{{route('contract.csv.download',$params)}}">
-						@lang('search.download')
+						<span class="text">@lang('search.download')</span>
 					</a>
 				</div>
 			@endif
@@ -74,7 +80,6 @@
 			</div>
 		</div>
 	</div>
-	@include('contract.partials.emailModal')
 @stop
 
 @section('js')

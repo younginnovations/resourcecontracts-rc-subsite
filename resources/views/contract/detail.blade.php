@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Lang;
 					<ul>
 						@if($contract->pages->total>0)
 							<li class="pull-left">
-								<a href="{{route('contract.detail',['id'=>$contract->metadata->open_contracting_id])}}">@lang('global.view_document')</a>
+								<a href="{{route('contract.detail',['id'=>$contract->metadata->open_contracting_id])}}" target="_blank">@lang('global.view_document')</a>
 							</li>
 						@endif
 					</ul>
@@ -26,25 +26,25 @@ use Illuminate\Support\Facades\Lang;
 			</div>
 			<div class="head-wrap">
 				<div class="right-column-view">
-					<div class="download-main-wrap dropdown">
-						<a class="download-wrap dropdown-toggle" data-toggle="dropdown"> </a>
+					<div class="download-main-wrap dropdown-wrapper">
+						<a class="download-wrap dropdown-toggle"> </a>
 						<ul class="dropdown-menu">
 							<li>
-								<a href="{{route('contract.download.pdf',['id'=> $contract->metadata->open_contracting_id])}}">@lang('annotation.pdf')</a>
+								<a href="{{route('contract.download.pdf',['id'=> $contract->metadata->open_contracting_id])}}" target="_blank">@lang('annotation.pdf')</a>
 							</li>
 							@if(!site()->isOLC() && $contract->metadata->is_ocr_reviewed == 1 && $contract->pages->total > 0)
 								<li>
-									<a href="{{route('contract.download',['id'=> $contract->metadata->open_contracting_id])}}">@lang('global.word_file')</a>
+									<a href="{{route('contract.download',['id'=> $contract->metadata->open_contracting_id])}}" target="_blank">@lang('global.word_file')</a>
 								</li>
 							@endif
 						</ul>
 					</div>
-					<div class="social-share dropdown" id="social-toggler">
-						<a class="dropdown-toggle" data-toggle="dropdown"><span>@lang('contract.social_share')</span></a>
+					<div class="social-share dropdown-wrapper" id="social-toggler">
+						<a class="dropdown-toggle"><span>@lang('contract.social_share')</span></a>
 						@include('contract.partials.share')
 					</div>
 					@if(site()->isClipEnabled())
-						<button class="clip-btn" id="on-annotation">@lang('clip.clip_on')</button>
+						<button class="clip-btn on-annotation" id="on-annotation">@lang('clip.clip_on')</button>
 					@endif
 				</div>
 			</div>
@@ -136,7 +136,7 @@ use Illuminate\Support\Facades\Lang;
 								<label for="">@lang('global.type_contract')</label>
                                 <span class="contract-type-list">@if(isset($contract->metadata->contract_type) && !empty($contract->metadata->contract_type) && is_array($contract->metadata->contract_type))
 										@foreach($contract->metadata->contract_type as $contractype)
-											<a href="{{route("search",['contract_type'=>$contractype])}}">{{_l('codelist/contract_type',$contractype) }}</a>
+											<a href="{{route("search",['contract_type'=>$contractype])}}" target="_blank">{{_l('codelist/contract_type',$contractype) }}</a>
 										@endforeach
 									@endif
                                 </span>
@@ -149,7 +149,7 @@ use Illuminate\Support\Facades\Lang;
 								?>
 								<span class="resource-list">
                                 @foreach($resource as $res)
-										<a href="{{route("resource.detail",['key'=>urlencode($res)])}}">{{_l("resources",$res)}}</a>
+										<a href="{{route("resource.detail",['key'=>urlencode($res)])}}" target="_blank">{{_l("resources",$res)}}</a>
 									@endforeach
                             </span></li>
 						</ul>
@@ -276,7 +276,8 @@ use Illuminate\Support\Facades\Lang;
 								<label for="">@lang('contract.corporate_grouping')</label>
                                 <span>
 									@if(isset($company->company->corporate_grouping) && !empty($company->company->corporate_grouping))
-										<a href="{{route("search",['corporate_group'=>$company->company->corporate_grouping])}}">{{$company->company->corporate_grouping}} </a>
+										<a href="{{route("search",
+										['corporate_group'=>$company->company->corporate_grouping])}}" target="_blank">{{$company->company->corporate_grouping}} </a>
 									@else
 										-
 									@endif
@@ -335,7 +336,8 @@ use Illuminate\Support\Facades\Lang;
 							<tr>
 								<td width="70%">
 									@if($parentContract->is_published==1)
-										<a href="{{route('contract.detail',['id'=>$parentContract->open_contracting_id])}}">{{$parentContract->name}}</a>
+										<a href="{{route('contract.detail',
+										['id'=>$parentContract->open_contracting_id])}}" target="_blank">{{$parentContract->name}}</a>
 										&nbsp; @lang('contract.main_contract')
 									@else
 										{{$parentContract->name}} @lang('contract.main_contract')
@@ -349,7 +351,8 @@ use Illuminate\Support\Facades\Lang;
 							@if($supportingContract->is_published==1)
 								<tr>
 									<td width="70%">
-										<a href="{{route('contract.detail',['id'=>$supportingContract->open_contracting_id])}}"> {{$supportingContract->name}}</a>
+										<a href="{{route('contract.detail',
+										['id'=>$supportingContract->open_contracting_id])}}" target="_blank"> {{$supportingContract->name}}</a>
 									</td>
 								</tr>
 							@endif
@@ -446,8 +449,9 @@ use Illuminate\Support\Facades\Lang;
 							@if(count($contract->annotationsGroup) > 1) @lang('annotation.annotations') @else  @lang('annotation.annotation') @endif
 						</div>
 						@if(site()->isClipEnabled())
-							<button id="clip-all-annotations" class="pull-right annotation-clip"
-									title="Clip all annotations"><span class="link">@lang('clip.clip_all')</span>
+							<button id="clip-all-annotations" class="pull-right annotation-clip clipToggleElems static"
+									content="Clip all annotations">
+								<span class="link">@lang('clip.clip_all')</span>
 							</button>
 						@endif
 					</div>
@@ -485,10 +489,15 @@ use Illuminate\Support\Facades\Lang;
 														{{_l('codelist/annotation.categories',$annotation->category_key)}}
 													</div>
 													@if(site()->isClipEnabled())
-														<button data-id={{$annotation->id}} class="pull-right
-																annotation-clip-icon
-														" title=@lang('clip.clip_annotation') style="display:
-														none">@lang('clip.clips')</button>
+														<button data-id="{{ $annotation->id }}"
+																data-popover="true"
+																data-html="false"
+																data-content="@lang('clip.clip_annotation')"
+																class="pull-right annotation-clip-icon static clipToggleElems">
+
+																@lang('clip.clips')
+
+														</button>
 													@endif
 												</div>
 												<div class="annotation-text">
@@ -507,7 +516,7 @@ use Illuminate\Support\Facades\Lang;
 															@if($ref->article_reference !='')
 																<?php $page_type = isset($page->shapes) ? 'pdf' : 'text'; ?>
 																(
-																<a href="{{route('contract.detail',['id'=>$contract->metadata->open_contracting_id])}}#/{{$page_type}}/page/{{$ref->page_no}}/annotation/{{$ref->id}}">
+																<a href="{{route('contract.detail',['id'=>$contract->metadata->open_contracting_id])}}#/{{$page_type}}/page/{{$ref->page_no}}/annotation/{{$ref->id}}" target="_blank">
 																	{{$ref->article_reference}}
 																</a>
 																)
@@ -539,7 +548,6 @@ use Illuminate\Support\Facades\Lang;
 			</div>
 		</div>
 	@endif
-	@include('contract.partials.emailModal')
 @stop
 
 @section('js')
