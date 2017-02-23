@@ -7,6 +7,6 @@ return [
     'country_description'   => 'Trouvez des contrats dse ressources de Pays-',
     'resources_description' => 'Trouvez des contrats des ressources de  différentes ressources',
     'resource_description'  => 'Trouver des contrats des ressources pour une ressource',
-    'tagline'               => '<p class="repo-description">Un répertoire des </p> <div class="large-title"><span>Petroleum &amp; <div>Contrats miniers</div> </span></div>',
+    'tagline'               => '<p class="repo-description">Un répertoire de</p> <div class="large-title"><span>Petroleum &amp; <div>Contrats miniers</div> </span></div>',
     'about'                 => 'A propos ResourceContracts',
 ];
