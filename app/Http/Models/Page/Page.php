@@ -47,30 +47,6 @@ class Page extends Model
     }
 
     /**
-     * Get FAQ Content
-     *
-     * @return string
-     */
-    public function faqContent()
-    {
-        $faq   = array_map('trim', explode("<hr />", $this->content()));
-        $final = [];
-
-        foreach ($faq as $k => $v):
-            $text = explode("\r\n", $v);
-            $a    = $text[0];
-            unset($text[0]);
-            $q       = join('', $text);
-            $final[] = [
-                'a' => $a,
-                'q' => $q,
-            ];
-        endforeach;
-
-        return $final;
-    }
-
-    /**
      * Country Scope
      *
      * @param $query

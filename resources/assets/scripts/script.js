@@ -529,7 +529,6 @@ $(document).ready(function () {
 
     if ($("body").hasClass("page-contract")) {
 
-        console.log("is page-contract");
         var hash = location.hash;
         var hashId = hash.replace("/", "");
         if( hashId === "#metadata" || hashId === "#annotations" ){

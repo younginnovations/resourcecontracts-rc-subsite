@@ -94,7 +94,7 @@ class PageController extends BaseController
             contracts for large-scale land, agriculture, and forestry projects.'
         ];
 
-        return view('page.master', compact('page',  'meta'));
+        return view('page.faq', compact('page',  'meta'));
     }
 
     /**
