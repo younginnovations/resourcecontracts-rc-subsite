@@ -28,7 +28,6 @@ var Metadata = React.createClass({
         if (window.matchMedia("(max-width: 800px)").matches) {
             if (hashId === "#metadata") {
                 let elem = this.refs.metadata;
-                console.log(elem);
                 $(hashId).removeClass("hidden_tab");
             }
         }

@@ -236,7 +236,6 @@ $(document).ready(function () {
     });
 
     $(document).on('click', function(e){
-        console.log('the target is ' + e.target);
         if(e.target === adv_search_toggle || e.target === search_input) {
             return
         }else{
@@ -260,8 +259,6 @@ $(document).ready(function () {
 
 
         }
-
-        console.log($("#header-input-clone").val());
     });
 
     adv_search_toggle.click(function(){

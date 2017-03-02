@@ -10,21 +10,25 @@
 		#contract .loader {
 			margin: 200px auto;
 			text-align: center;
-			width: 400px;
+			width: 350px;
 		}
 	</style>
 	<script>
 		var timeout = setTimeout(function () {
-			if (window.location.hash && window.location.hash.indexOf('pdf') > 0) {
-				document.location.href = window.location.hash.replace('pdf', 'text');
-				$('.loader').html('<div class="text-viewer-warning"><img src="{{url('images/loading.gif')}}">@lang('contract.loading_redirect')</div>');
+			if (window.location.hash.indexOf('text') < 0) {
+				if (window.location.hash.indexOf('pdf') > 0) {
+					document.location.href = window.location.hash.replace('pdf', 'text');
+				} else {
+					document.location.href = window.location.pathname + '#/text';
+				}
+				document.getElementById('loader').innerHTML = '<div class="text-viewer-warning"><img src="{{url('images/loading.gif')}}"> @lang('contract.loading_redirect')</div>';
 			}
-		}, 30000);
+		}, 25000);
 	</script>
 @stop
 @section('content')
 	<div id="contract">
-		<div class="loader">
+		<div id="loader" class="loader">
 			<img src="{{url('images/loading.gif')}}"/> @lang('contract.loading')
 		</div>
 	</div>
