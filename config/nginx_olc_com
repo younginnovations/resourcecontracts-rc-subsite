@@ -1,0 +1,4 @@
+server {
+    server_name www.openlandcontracts.com openlandcontracts.com;
+    return 301 $scheme://www.openlandcontracts.org$request_uri;
+}

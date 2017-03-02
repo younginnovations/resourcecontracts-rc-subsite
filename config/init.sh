@@ -15,7 +15,7 @@ envsubst '$SERVER_NAME $CATEGORY'< ./nginx_subsite.template > /etc/nginx/sites-e
 envsubst < ./env.template > /var/www/rc/.env
 
 #olc
-export SERVER_NAME="www.openlandcontracts.org openlandcontracts.org www.openlandcontracts.com openlandcontracts.com *.openlandcontracts.org "
+export SERVER_NAME="www.openlandcontracts.org openlandcontracts.org *.openlandcontracts.org "
 export CATEGORY=olc
 export TRACKING_ID=${OLC_TRACKING_ID}
 export DB_DATABASE=${OLC_DB_DATABASE}
@@ -24,6 +24,9 @@ export COUNTRY=''
 
 envsubst '$SERVER_NAME $CATEGORY'< ./nginx_subsite.template > /etc/nginx/sites-enabled/olc
 envsubst < ./env.template > /var/www/olc/.env
+
+#olc.com redirect
+cp ./nginx_olc_com /etc/nginx/sites-enabled/olc.com
 
 #country-tn
 export SERVER_NAME="tunisia.resourcecontracts.org *.tunisia.resourcecontracts.org"
