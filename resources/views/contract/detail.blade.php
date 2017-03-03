@@ -254,7 +254,9 @@ use Illuminate\Support\Facades\Lang;
 								<label for="">@lang('contract.open_corporate_ID')</label>
                                 <span>
 									@if(isset($company->company->opencorporates_url) && !empty($company->company->opencorporates_url))
-										<a href="{{$company->company->opencorporates_url}}">{{str_limit($company->company->opencorporates_url,25)}}</a>
+										<a target="_blank" href="{{$company->company->opencorporates_url}}">
+											{{str_limit($company->company->opencorporates_url,25)}}
+										</a>
 									@else
 										-
 									@endif
@@ -626,4 +628,3 @@ use Illuminate\Support\Facades\Lang;
 
 	</script>
 @stop
-

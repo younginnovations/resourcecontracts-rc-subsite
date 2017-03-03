@@ -228,7 +228,6 @@ class Contract {
         }
         const wrapperEl = $('.text-annotator');
         wrapperEl.find('.annotator-viewer').addClass('annotator-hide');
-        console.log(wrapperEl.find('.annotator-hl'));
         wrapperEl.find('.annotator-hl').each((i, a) => {
             a = $(a);
             const annotation = a.data('annotation');
