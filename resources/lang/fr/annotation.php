@@ -73,4 +73,7 @@ return [
     'loading_error'              => "Une erreur est survenue lors du chargement du PDF .",
     'more_from'                  => 'Plus de',
     'more_for'                   => 'Plus de',
+    'ellipsis_and'               => ' ... et ',
+    'more_match_on_this_page'    => ' Plus de correspondance sur cette page',
+    'more_matches_on_this_page'  => ' Plus de correspondances sur cette page',
 ];

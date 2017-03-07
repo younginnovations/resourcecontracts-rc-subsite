@@ -73,4 +73,7 @@ return [
     'loading_error'              => "An error occurred while loading the PDF.",
     'more_from'                  => 'More from',
     'more_for'                   => 'More for',
+    'ellipsis_and'               => ' ... and ',
+    'more_match_on_this_page' => ' more match on this page',
+    'more_matches_on_this_page' =>' more matches on this page',
 ];

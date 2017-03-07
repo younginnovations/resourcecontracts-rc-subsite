@@ -173,7 +173,7 @@ class Contract {
 
     getSearchQuery() {
         var hash = window.location.hash;
-        var query = '';
+        var query = $('.text-search input').val();
 
         if (hash != '' && typeof hash.split('search/')[1] !== 'undefined') {
             query = hash.split('search/')[1];
