@@ -6,7 +6,7 @@ class Pagination extends Component {
 
     constructor(props) {
         super(props);
-        this.state = ({total: 1, page: 1});
+        this.state = ({total: 1, page: 1, active:true});
     }
 
     componentDidMount() {
@@ -79,6 +79,7 @@ class Pagination extends Component {
     }
 
     render() {
+
         return (
             <div className="text-pagination pagination">
                 <a href="#" className="previous" onClick={this.clickPrevious.bind(this)}>{LANG.previous}</a>

@@ -345,14 +345,14 @@
         display: block;
         border: none;
         position: relative;
-        padding-left: 50% !important;
+        padding-left: 130px !important;
         border-top: 1px solid $color_wild_sand_approx !important;
         &:before {
           content: attr(data-title);
           position: absolute;
           top: 17px;
           left: 15px;
-          width: 45%;
+          width: 120px;
           padding-right: 10px;
           white-space: nowrap;
           font: 12px $font_1;
@@ -388,8 +388,10 @@
     }
     td:first-child {
       overflow: hidden;
+      display: none;
     }
   }
+
   thead {
     display: initial;
     tr {
@@ -415,7 +417,14 @@
     tbody > tr > {
       td {
         // @extend %extend_31;
-        min-height: 51px;
+        min-height: 45px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+
+        &:before{
+          top: 7px;
+        }
+
       }
       th {
         // @extend %extend_31;
@@ -470,11 +479,6 @@
   }
 }
 
-@media all and (max-width: 500px){
-  #print-clip-filter,#save-clipping{
-    display: none;
-  }
-}
 
 @media (min-width: 800px) {
   #table-annotation {
@@ -526,6 +530,31 @@
     padding: 7px 12px;
     font-size: 11px;
   }
+
+  .actions-wrapper .actionText{
+    display: none;
+  }
+
+  .action-btn #print-clip-filter, .action-btn #save-clipping, .action-btn .download-dropdown>a{
+    padding: 0;
+    height: 35px;
+    width: 60px;
+  }
+
+  .action-btn .download-dropdown>a{
+    background-position: -150px -43px;
+  }
+
+  .action-btn #print-clip-filter{
+    background-position: 21px;
+  }
+
+  .action-btn #save-clipping{
+    width: 60px!important;
+    background-position: 21px;
+  }
+
+
 
 }
 
@@ -718,6 +747,7 @@
 
   .search-results-list{
     height: 30vh!important;
+    min-height: 250px;
   }
 
   .page-clip .action-btn {
@@ -774,10 +804,10 @@
       padding: 0;
     }
 
-    .search-form input{
-      padding: 15px 2px;
-      width: calc(100% - 43px);
-    }
+    //.search-form input{
+    //  padding: 15px 2px;
+    //  width: calc(100% - 43px);
+    //}
   }
 
   .btn-filter-search{

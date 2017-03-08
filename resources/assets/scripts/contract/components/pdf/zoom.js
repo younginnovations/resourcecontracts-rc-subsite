@@ -55,6 +55,9 @@ class Zoom extends Component {
                     <a className="btn btn-default" data-ref="increase" href="#"
                        onClick={this.handleClick.bind(this)}>+</a>
                 </div>
+                <span className="change-view-icon fullscreen"></span>
+
+                <span className="change-view-icon exit-fullscreen"></span>
             </div>
         );
     }

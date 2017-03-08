@@ -39,4 +39,6 @@ return [
     'social_share'         => "شارك",
     'contract_not_signed'  => "لا يحتوي هذا المستند على التوقيعات.",
     'loading_redirect'     => 'اتصال بطيء. تحميل عرض النص ...',
+    'fullscreen'           => 'عرض في وضع ملء الشاش',
+    'exit_fullscreen'      => 'خروج عرض ملء الشاشة',
 ];

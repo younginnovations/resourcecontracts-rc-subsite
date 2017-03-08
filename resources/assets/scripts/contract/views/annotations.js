@@ -92,15 +92,11 @@ var Annotations = React.createClass({
         scrollToAnnotation(Contract.getCurrentAnnotation());
     },
     render() {
-        if (!this.state.display) {
-           var styles = {
-               display: 'none'
-           }
-        }
+        var inSearch = this.state.display?"":"inSearch"
 
         var sort = this.state.total > 0 ? (<Sort type={this.state.sortBy}/>) : null;
         return (
-            <div style={ styles } id="annotations" className="annotations-viewer tab-content hidden_tab">
+            <div id="annotations" className={"annotations-viewer tab-content hidden_tab " + inSearch}>
                 <div className="annotation-inner-viewer" id="annotations-box">
                     <Header total={this.state.total}/>
                     {sort}

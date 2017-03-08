@@ -180,17 +180,17 @@ var DownloadManager = React.createClass({
             <div className="actions-wrapper action-btn">
 
                 <div className="download-dropdown">
-                    <a onClick={this.toggleDropdown}><span>{langClip.download}</span></a>
+                    <a onClick={this.toggleDropdown}><span className="actionText">{langClip.download}</span></a>
                     <ul style={style} className="dropdown-menu">
                         <li><a id="download-clip-filter" onClick={this.handleDownload}>{langClip.csv}</a></li>
                         <li>{download_pdf}</li>
                     </ul>
                 </div>
-                <div id="print-clip-filter" onClick={this.handlePrint}>{langClip.printClip}</div>
+                <div id="print-clip-filter" onClick={this.handlePrint}><span className="actionText">{langClip.printClip}</span></div>
                 <div className="modal-social-share-wrap social-share">
                     <div>
                         <div id="save-clipping" style={{width:'135px'}}
-                             onClick={this.handleSave}>{this.state.loading ? langClip.saving : langClip.save_and_shareClip}</div>
+                             onClick={this.handleSave}><span className="actionText">{this.state.loading ? langClip.saving : langClip.save_and_shareClip}</span></div>
                         <ShareManager clipKey={this.state.clipKey} clipCollection={this.props.clipCollection}
                                       showSharedropdown={this.state.showSharedropdown}/>
                     </div>
