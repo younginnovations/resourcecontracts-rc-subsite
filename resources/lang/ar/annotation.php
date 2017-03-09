@@ -73,4 +73,7 @@ return [
     'loading_error'              => "حدث خطأ أثناء تحميل ملف PDF",
     'more_from'                  => 'اكثر من',
     'more_for'                   => 'المزيد على ',
+    'ellipsis_and'               => ' ... و ',
+    'more_match_on_this_page' => ' أكثر مباراة على هذا باغ ي هذه ه',
+    'more_matches_on_this_page' =>' مزيد من المباريات في هذه الصفحة',
 ];

@@ -13,7 +13,8 @@ class Item extends Component {
             shortText: '',
             text: '',
             showEllipse: '',
-            showMoreFlag: ''
+            showMoreFlag: '',
+            found: ''
         });
     }
 
@@ -25,11 +26,14 @@ class Item extends Component {
             shortText = this.truncate(text);
         }
 
+        let found = this.getSearchCount();
+
         this.setState({
-            text: text,
-            showEllipse: showEllipse,
-            shortText: shortText,
-            showMoreFlag: true
+            text,
+            showEllipse,
+            shortText,
+            showMoreFlag: true,
+            found
         });
     }
 
@@ -94,11 +98,25 @@ class Item extends Component {
         );
     }
 
+    getSearchCount() {
+        let searchQuery = $('.text-search input').val().toLowerCase();
+        let id = '#text-' + this.props.result.page_no;
+        let shortTextSearchCount = ((this.props.result.text).toLowerCase().match(new RegExp(searchQuery, 'g')) || []).length;
+        let totalCount = ($(id).text().toLowerCase().match(new RegExp(searchQuery, 'g')) || []).length;
+        let count = (totalCount - shortTextSearchCount);
+
+        return count;
+    }
+
     pdfText() {
+        let count = this.state.found;
+        let countText = (1 > count) ? '' : (1 == count) ? LANG.ellipsis_and + count + LANG.more_match_on_this_page : LANG.ellipsis_and + count + LANG.more_matches_on_this_page;
+
         return (
             <span className="link" onClick={this.handleClick.bind(this)}>
                 <strong>Pg {this.props.result.page_no} </strong>
                 <span dangerouslySetInnerHTML={{__html: this.props.result.text}}/>
+                <span className='add-more-highlight'>{ countText }</span>
             </span>
         );
     }

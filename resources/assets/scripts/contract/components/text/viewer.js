@@ -15,7 +15,7 @@ class Viewer extends Component {
     componentDidMount() {
         this.subscribePagination = Event.subscribe('pagination:change', this.paginationHandler);
         Contract.setDisablePagination(true);
-
+        this.setState({highlight: decodeURIComponent(Contract.getSearchQuery())});
         this.subscribeSearch = Event.subscribe('search:updated', ({page_no, query}) => {
             this.setState({highlight: decodeURIComponent(query)});
             Contract.setDisablePagination(true);
