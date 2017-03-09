@@ -78,18 +78,21 @@ RUN composer dump-autoload --optimize \
  && cp -R /var/container_init/site_content/. /var/www/rc \
  && gulp --cwd /var/www/rc rc \
  && chmod -R 777 /var/www/rc/storage \
+ && chmod -R 777 /var/www/rc/public \
  && touch /var/www/rc/.env \
 #OLC
  && mkdir -p /var/www/olc \
  && cp -R /var/container_init/site_content/. /var/www/olc \
  && gulp --cwd /var/www/olc olc \
  && chmod -R 777 /var/www/olc/storage \
+ && chmod -R 777 /var/www/olc/public \
  && touch /var/www/olc/.env \
 #country site -- Tunisia / tn
  && mkdir -p /var/www/country-tn \
  && cp -R /var/container_init/site_content/. /var/www/country-tn \
  && gulp --cwd /var/www/country-tn tn \
  && chmod -R 777 /var/www/country-tn/storage \
+ && chmod -R 777 /var/www/country-tn/public \
  && touch /var/www/country-tn/.env \
 #cleanup
  && rm -r /var/container_init/site_content
