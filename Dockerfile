@@ -12,6 +12,7 @@ RUN apk --update add \
     php5-pdo_sqlite \
     php5-ctype \
     php5-zlib \
+    php5-zip \
     php5-pdo_pgsql \
     php5-phar \
     php5-dom \
