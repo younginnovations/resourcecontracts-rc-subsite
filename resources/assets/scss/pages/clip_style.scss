@@ -146,17 +146,20 @@
     height: 19px;
   }
 }
+
 #clip-all-annotations{
   &:after{
     background: transparent url(#{$img-path}/ic-sprite.svg) no-repeat -79px -402px;
   }
 }
 
-.annotation-clip.annotation-clipped {
+
+#remove-all-annotations{
   &:after{
     background: transparent url(#{$img-path}/ic-sprite.svg) no-repeat  -186px -403px;
   }
 }
+
 
 .annotation-clip:hover{
   .link{
@@ -275,16 +278,36 @@
   padding-top: 30px;
 }
 
-.view-clip span {
-  background: $url_21 no-repeat 0 0;
-  display: block;
-  text-indent: -9999px;
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-  margin-left: 6px;
-  a {
-    display: block;
+.view-clip {
+  text-align: center;
+  span {
+    background: $url_21 no-repeat 0 0;
+    display: inline-block;
+    text-indent: -9999px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    margin-left: 6px;
+    a {
+      display: block;
+    }
+  }
+}
+
+table td.view-clip>a {
+  margin-right: 0;
+}
+
+.delete-clip{
+  text-align: center;
+   span {
+    background: url(../../images/ic-trash.png) no-repeat 0 0;
+    display: inline-block;
+    text-indent: -9999px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    margin-left: 6px;
   }
 }
 
@@ -368,7 +391,7 @@
   }
 }
 
-.table-contract-list td:nth-child(3) {
+.table-contract-list td:nth-child(2) {
   font-size: 14px;
   a {
     //margin-left: -42px; makes dropdown in table distort
@@ -378,6 +401,22 @@
 .table-contract tbody td:first-child {
   /*width: 82px;
   background-position: 38px 16px;*/
+}
+
+.table-contract-list th[data-sorting="no-sorting"]{
+  &:after{
+    display: none;
+  }
+}
+
+.table-contract-list tbody td.noClipMsg{
+  height: 300px;
+  text-align: center;
+  background: none;
+  vertical-align: middle;
+  padding-left: 0!important;
+  color: #404040;
+  font-size: 14px;
 }
 
 .clip-search-row ~ .social-share {
@@ -469,7 +508,7 @@
 
 #clip-annotation-list {
   clear: both;
-  padding-top: 6px;
+  padding-top: 15px;
 }
 
 .page-clip{
@@ -481,14 +520,132 @@
 
 /*style for clip list table*/
 
+#clip-annotations {
+  .table.table-contract-list {
+    border-bottom: none;
+    margin-bottom: 15px;
+    thead > tr > th {
+      span{
+        color: $color_link-color;
+      }
+
+      &:after{
+        display: none;
+      }
+
+      &.sorting_asc,&.sorting_desc{
+        &:after{
+
+        }
+      }
+
+      a{
+        &:after,&:before{
+          display: none;
+        }
+      }
+    }
+    td{
+      word-break: break-word;
+    }
+  }
+  .dataTables_wrapper{
+    .dataTables_paginate {
+      float: none;
+      text-align: center;
+
+      a{
+        text-decoration: none;
+        color: #404040!important;
+        border: none!important;
+        font-size: 12px;
+
+        &.last,&.first,&.previous,&.next{
+          background: transparent;
+        }
+
+        &:hover{
+          background: none!important;
+          background-color: transparent!important;
+          color: #404040!important;
+          border: none!important;
+        }
+
+        &:active{
+          background: none;
+          background-color: transparent;
+          box-shadow: none;
+        }
+
+        &.current{
+          border: none;
+          color: #fff!important;
+          background: #404040;
+          border-radius: 50%;
+
+          &:hover{
+            color: #fff!important;
+            background: #404040!important;
+          }
+        }
+
+        &.disabled{
+          opacity: .5;
+        }
+      }
+    }
+  }
+}
+
+#clip-annotations {
+  table.dataTable thead th span{
+    display: inline-block;
+    position: relative;
+  }
+
+  table.dataTable thead th>span:after {
+    content: "";
+    display: inline-block;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid rgba(64, 64, 64, 0.2);
+    position: absolute;
+    right: -12px;
+    bottom: 6px;
+  }
+  table.dataTable thead th>span:before {
+    content: "";
+    display: inline-block;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 4px solid rgba(64, 64, 64, 0.2);
+    position: absolute;
+    right: -12px;
+    bottom: 12px;
+  }
+
+  table.dataTable thead th.sorting_asc>span:before{
+    border-bottom: 4px solid $color_link-color;
+  }
+  table.dataTable thead th.sorting_desc>span:after{
+    border-top: 4px solid $color_link-color;
+  }
+
+  table.dataTable thead .sorting:after,table.dataTable thead .sorting:before{
+    display: none;
+  }
+}
+
+
 
 #clip-annotations {
   .table.table-contract-list {
-    .table>tbody>tr td:first-child,
-    .table>thead>tr>th:first-child{
-      min-width: 75px;
-      width: auto;
+    thead{
+      .document{
+        min-width: 120px;
+      }
     }
+    .table>tbody>tr td:first-child,
 
     th .count-select {
       padding: 0;
@@ -505,10 +662,6 @@
         text-transform: capitalize;
         font-size: 10px;
       }
-    }
-
-    & > tbody > tr td:first-child {
-      width: 75px;
     }
 
     input[type="checkbox"]{
@@ -528,10 +681,6 @@
 
 }
 
-#clip-annotation-list {
-  clear: both;
-  padding-top: 6px;
-}
 
 .annotation-left{
   float: left;
@@ -553,23 +702,77 @@
     -webkit-border-radius: 22px;
     border-radius: 22px;
     z-index: 1;
-    padding: 12px 22px 13px 43px;
+    padding: 13px 20px;
     text-indent: initial;
     height: auto;
     width: auto;
-    background: #fff url(../images/ic-sprite.svg) no-repeat -272px -471px;
+    background: #fff;
     margin-top: 0;
-    font-size: 11px;
     line-height: 17px;
     color: $color_link_color !important;
     min-width: 45px;
 
+    span.icon{
+      display: inline-block;
+      vertical-align: top;
+      height: 18px;
+      width: 20px;
+      background: url(../images/ic-sprite.svg) no-repeat -79px -402px;
+      margin-right: 10px;
+    }
+
     &.active{
       color: $color_link_color !important;
-      background: #fff url(../images/ic-sprite.svg) no-repeat -171px -471px;
+      span.icon{
+        background-position: -184px -481px;
+      }
     }
   }
+  @media screen and (max-width: 480px){
+    .social-share, .clip-btn, .download-csv{
+      height: 34px;
+      bottom: -15px;
+      margin: 0;
+
+      span.text{
+        display: none;
+      }
+    }
+
+    .social-share{
+      right: 92px!important;
+      >a{
+        padding: 13px 30px 13px 30px;
+        background-position: -20px -2px;
+        height: 100%;
+      }
+    }
+
+    .download-csv{
+      right: 15px!important;
+      >a{
+        padding: 13px 30px 13px 30px;
+        background-position: -152px -44px;
+        height: 100%;
+      }
+    }
+
+    .clip-btn{
+      right: 169px!important;
+      padding: 7px 18px;
+      background-position: -165px -474px!important;
+      span.icon{
+        margin-right: 0;
+      }
+    }
+  }
+
 }
+
+.clipShare ul.social-toggle li>a {
+  height: 40px;
+}
+
 
 span.required {
   color: #E21616;
@@ -590,10 +793,71 @@ span.required {
   list-style: none;
 }
 
+#clip-annotations{
+  min-height: 500px;
+}
+
+.actions{
+  .view{
+    background: url(../../images/ic-view.png) no-repeat 0 0;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    margin-left: 6px;
+  }
+
+  .delete{
+    background: url(../../images/ic-trash.png) no-repeat 0 0;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    margin-left: 6px;
+  }
+  
+  .tooltip{
+    border: none;
+    
+    .tooltip-inner{
+      background: $color_link-color;
+      font-size: 12px;
+    }
+
+    .tooltip-arrow{
+      border-top-color: $color_link-color;
+    }
+  }
+}
+
+
 /* ------ style for clear all clip --------- */
+
+
+/** TOGGLING CLIPPING STYLE **/
+.clippingOff{
+  .clipToggleElems{
+    visibility: hidden!important;
+  }
+}
+
+.clipToggleElems{
+  opacity: 0;
+}
 
 @media(min-width: 768px){
   .clip-panel-row .panel-top-content{
     min-height: 67px;
   }
+}
+
+.no-record{
+  position: absolute;
+  top: 45%;
+  width: 100%;
+  text-align: center;
+}
+
+.clipMainWrapper{
+  transform: none!important;
 }

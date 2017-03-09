@@ -77,7 +77,7 @@ class App extends Component {
                         <div className="right-column-view">
                             <Download/>
                             <Share/>
-                            {clipSwitch}
+                            <ClipSwitch className="clip-btn" />
                         </div>
                         <div className="grouped-action visible-xs">
                             <Pagination />

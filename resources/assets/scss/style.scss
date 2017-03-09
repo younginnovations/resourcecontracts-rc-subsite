@@ -460,6 +460,10 @@ a{
 @include font-face($font_1, "../../fonts/opensans-bold-webfont", $file-formats: eot svg woff woff2);
 @include font-face($font_2, "../../fonts/opensans-light-webfont", $file-formats: eot svg woff woff2);
 
+textarea{
+  max-width: 100%;
+}
+
 .form-control {
   &::-webkit-input-placeholder {
     color: $white_50;

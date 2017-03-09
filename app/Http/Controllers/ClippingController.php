@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Services\Admin\ImageService;
+use App\Http\Services\APIService;
 use App\Http\Services\ClippingService;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
@@ -19,15 +20,21 @@ class ClippingController extends BaseController
      * @var ImageService
      */
     public $image;
+    /**
+     * @var APIService
+     */
+    protected $apiURL;
 
     /**
      * @param ClippingService $clip
      * @param ImageService    $image
+     * @param APIService      $apiURL
      */
-    public function __construct(ClippingService $clip, ImageService $image)
+    public function __construct(ClippingService $clip, ImageService $image, APIService $apiURL)
     {
         $this->clip  = $clip;
         $this->image = $image;
+        $this->apiURL = $apiURL;
     }
 
     /**
@@ -84,8 +91,8 @@ class ClippingController extends BaseController
     public function saveClip(Request $request)
     {
         $data         = $request->all();
-        $annotationID = isset($data['data']) ? explode(',', $data['data']) : [];
-        $key          = isset($data['key']) ? $data['key'] : '';
+        $annotationID = isset($data['data']) ? $data['data'] : [];
+        $key          = (isset($data['key']) AND $data['key'] !='undefined') ? $data['key'] : '';
 
         return json_encode($this->clip->saveClip($annotationID, $key));
     }
@@ -128,6 +135,7 @@ class ClippingController extends BaseController
     {
         $formData = $request->all();
 
+
         if ($this->clip->sendMail($formData)) {
             return response()->json(['status' => true, 'message' => "Email Sent."]);
         }
@@ -149,4 +157,17 @@ class ClippingController extends BaseController
         return $this->clip->getZipFile($data);
     }
 
+    /**
+     * Downloads clipped annotations as XLS file
+     *
+     * @param Request $request
+     */
+    public function downloadXls(Request $request)
+    {
+        $data        = $request->all();
+        $data        = isset($data['id']) ? explode(',', $data['id']) : [];
+        $data        = $this->clip->formatAnnotations($data);
+
+        $this->clip->downloadXls($data);
+    }
 }

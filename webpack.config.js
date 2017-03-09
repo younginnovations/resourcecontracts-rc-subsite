@@ -12,11 +12,19 @@ var config = {
         popup: [
             APP_DIR + '/popup/index.js',
         ],
+
+        app: [
+            APP_DIR +'/script.js'
+        ],
         contract_view: [
             APP_DIR + '/contract/annotator/annotator.plugin.event.js',
             APP_DIR + '/contract/annotator/annotator.plugin.viewer.js',
             APP_DIR + '/contract/annotator/pdf-annotator.js',
             APP_DIR + '/contract/index.js'
+        ],
+
+        clipping: [
+            APP_DIR + '/contract/clip/main.js'
         ]
     },
     output: {

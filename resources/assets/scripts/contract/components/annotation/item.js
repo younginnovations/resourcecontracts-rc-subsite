@@ -161,11 +161,11 @@ class Item extends Component {
     render() {
         let currentAnnotationClass = (this.state.active) ? "annotation-item selected-annotation" : "annotation-item";
         let category = this.getCategory();
-        let clipButton = Config.isClipOn ? <ClipButton id={this.state.parent.annotation_id}/> : null;
+        //let clipButton = Config.isClipOn ? <ClipButton id={this.state.parent.annotation_id}/> : null;
         return (
             <div className={currentAnnotationClass +' ' +this.getCluster() + this.getPageClasses()}
                  id={this.state.parent.annotation_id}>
-                {clipButton}
+                <ClipButton id={this.state.parent.annotation_id}/>
                 <p className="category">{category}</p>
                 <p className="annotated-text">{this.getShowText()}</p>
                 <div className="annotation-page">{this.getPages()}</div>

@@ -58,6 +58,17 @@ body.lang-ar{
       left: 8px;
     }
   }
+
+  .annotate-text{
+    margin-right: 0;
+    margin-left: 30px;
+
+    .annotationCount {
+      left: -45px;
+    }
+
+  }
+
 }
 
 body.lang-ar.rc, body.lang-ar.olc{

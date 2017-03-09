@@ -9,12 +9,12 @@ const Zoom = React.createClass({
 
     out(e){
         e.preventDefault();
-        this.setScale(this.state.currentScale + 0.25);
+        this.setScale(this.state.currentScale - 0.25);
     },
 
     in(e){
         e.preventDefault();
-        this.setScale(this.state.currentScale - 0.25);
+        this.setScale(this.state.currentScale + 0.25);
     },
 
     setScale(num)
@@ -34,9 +34,9 @@ const Zoom = React.createClass({
     {
         return (
             <div className="pdf-zoom-options">
-                <a className="btn btn-default" href="#" onClick={this.out}>+</a>
+                <a className="btn btn-default" href="#" onClick={this.out}>-</a>
                 <p>image</p>
-                <a className="btn btn-default" href="#" onClick={this.in}>-</a>
+                <a className="btn btn-default" href="#" onClick={this.in}>+</a>
             </div>
         )
     }

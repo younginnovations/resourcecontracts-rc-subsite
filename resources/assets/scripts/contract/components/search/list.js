@@ -9,7 +9,7 @@ import Event from '../../event';
 var List = React.createClass({
     mixins: [Reflux.listenTo(SearchStore, 'onChange')],
     getInitialState() {
-        return {isLoading: true, results: {}};
+        return {isLoading: true, results:[]};
     },
     componentDidMount(){
         this.search();
@@ -24,8 +24,8 @@ var List = React.createClass({
         SearchAction.getResults(Contract.getGuid(), Contract.getSearchQuery());
     },
     onChange (event, response) {
-        this.setState({isLoading: false, results: response.results});
-        if (response.results.length > 0) {
+        this.setState({isLoading: false, results: response.results ? response.results : [] });
+        if (typeof response.results !='undefined' && response.results.length > 0) {
             let param = {page_no: response.results[0].page_no, query: Contract.getSearchQuery()};
             Event.publish('search:updated', param);
             debug('Search List updated Published', param);
@@ -35,13 +35,11 @@ var List = React.createClass({
         this.sub.remove();
     },
     renderItems(){
-        console.log(this.state.results);
         return this.state.results.map((row, key) => {
             return (<Item key={key} result={row}/>);
         });
     },
     render() {
-        console.log(this.renderItems());
         if (this.state.isLoading) {
             return (
                 <div className="search-loading">
@@ -49,6 +47,7 @@ var List = React.createClass({
                 </div>
             );
         }
+
 
         if (this.state.results.length < 1) {
             return (
