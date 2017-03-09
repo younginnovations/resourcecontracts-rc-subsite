@@ -32,7 +32,7 @@ class App extends Component {
 
     componentDidMount() {
         clearTimeout(timeout);
-        Event.subscribe('annotation:loaded', () => {
+        this.sub = Event.subscribe('annotation:loaded', () => {
             Contract.showPopup();
         });
         let titleHeadHeight = $('.title-wrap').height();
@@ -44,6 +44,10 @@ class App extends Component {
                 $('.title-head-wrap').removeClass('fixed');
             }
         });
+    }
+
+    componentWillUnmount() {
+        this.sub.remove();
     }
 
     componentWillReceiveProps(props) {
@@ -61,7 +65,7 @@ class App extends Component {
     }
 
     render() {
-        let clipSwitch = Config.isClipOn ? <ClipSwitch/> : null;
+        let clipSwitch = Config.isClipOn ? <ClipSwitch className="clip-btn"/> : null;
 
         return (
             <div className="main-app">
@@ -77,7 +81,7 @@ class App extends Component {
                         <div className="right-column-view">
                             <Download/>
                             <Share/>
-                            <ClipSwitch className="clip-btn" />
+                            {clipSwitch}
                         </div>
                         <div className="grouped-action visible-xs">
                             <Pagination />

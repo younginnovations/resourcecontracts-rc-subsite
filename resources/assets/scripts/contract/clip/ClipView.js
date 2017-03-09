@@ -3,13 +3,11 @@ import axios from "axios";
 import dataTable from "../../vendor/dataTables.min.js";
 
 import clipHelper from "./clipHelper";
-import ClipCheckedManager from './ClipCheckedManager';
+import ClipCheckedManager from './clipCheckedManager';
 
 import DownloadManager from "../components/clip/DownloadManager";
 import Listing from "../components/clip/Listing";
 
-//let clipHelper = new ClipHelper();
-//let clipCheckedManager = new ClipCheckedManager();
 let localClip = clipHelper.getLocalClips();
 
 class ClipView extends React.Component{
