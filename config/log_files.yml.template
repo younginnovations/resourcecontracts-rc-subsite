@@ -14,7 +14,9 @@ files:
   - path: /var/www/rc/storage/logs/*
     tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-var-www-rc-storage-logs        
   - path: /var/www/country-tn/storage/logs/*
-    tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-var-www-country-tn-storage-logs        
+    tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-var-www-country-tn-storage-logs
+  - path: /var/www/country-drc/storage/logs/*
+    tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-var-www-country-drc-storage-logs
 destination:
   host: logs2.papertrailapp.com
   port: 39824
