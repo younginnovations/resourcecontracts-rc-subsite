@@ -41,5 +41,18 @@ envsubst '$SERVER_NAME $CATEGORY'< ./nginx_subsite.template > /etc/nginx/sites-e
 export CATEGORY=rc
 envsubst < ./env.template > /var/www/country-tn/.env
 
+#country-drc
+export SERVER_NAME="drc.openlandcontracts.org *.drc.openlandcontracts.org"
+export TRACKING_ID=${DRC_TRACKING_ID}
+export DB_DATABASE=${COUNTRY_DB_DATABASE}
+export CONTACT_MAIL=${DRC_CONTACT_MAIL}
+export COUNTRY=drc
+
+export CATEGORY=country-drc
+envsubst '$SERVER_NAME $CATEGORY'< ./nginx_subsite.template > /etc/nginx/sites-enabled/country-drc
+
+export CATEGORY=olc
+envsubst < ./env.template > /var/www/country-drc/.env
+
 #log_files
 envsubst '${DEPLOYMENT_TYPE}' < ./log_files.yml.template > /etc/log_files.yml
