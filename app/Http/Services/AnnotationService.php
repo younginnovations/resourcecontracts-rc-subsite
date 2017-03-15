@@ -22,7 +22,9 @@ class AnnotationService
 
     /**
      * Group the annotations by its Cluster
+     *
      * @param $annotations
+     *
      * @return array
      */
     public function groupAnnotationsByCluster($annotations)
@@ -39,12 +41,20 @@ class AnnotationService
 
     /**
      * Order the clusters data
+     *
      * @param $clusters
+     *
      * @return array
      */
     public function orderAnnotationsCluster($clusters)
     {
-        $order = ['General' => '', 'Environment' => '', 'Fiscal' => '', 'Social' => '', 'Operations' => '', 'Other' => ''];
+        $order = ['General'     => '',
+                  'Environment' => '',
+                  'Fiscal'      => '',
+                  'Social'      => '',
+                  'Operations'  => '',
+                  'Other'       => '',
+        ];
         foreach ($clusters as $key => $value) {
             $order[$key] = $value;
         }

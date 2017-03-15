@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Lang;
 					<ul>
 						@if($contract->pages->total>0)
 							<li class="pull-left">
-								<a href="{{route('contract.detail',['id'=>$contract->metadata->open_contracting_id])}}" target="_blank">@lang('global.view_document')</a>
+								<a href="{{route('contract.detail',['id'=>$contract->metadata->open_contracting_id])}}"
+								   target="_blank">@lang('global.view_document')</a>
 							</li>
 						@endif
 					</ul>
@@ -30,11 +31,13 @@ use Illuminate\Support\Facades\Lang;
 						<a class="download-wrap dropdown-toggle"> </a>
 						<ul class="dropdown-menu">
 							<li>
-								<a href="{{route('contract.download.pdf',['id'=> $contract->metadata->open_contracting_id])}}" target="_blank">@lang('annotation.pdf')</a>
+								<a href="{{route('contract.download.pdf',['id'=> $contract->metadata->open_contracting_id])}}"
+								   target="_blank">@lang('annotation.pdf')</a>
 							</li>
 							@if(!site()->isOLC() && $contract->metadata->is_ocr_reviewed == 1 && $contract->pages->total > 0)
 								<li>
-									<a href="{{route('contract.download',['id'=> $contract->metadata->open_contracting_id])}}" target="_blank">@lang('global.word_file')</a>
+									<a href="{{route('contract.download',['id'=> $contract->metadata->open_contracting_id])}}"
+									   target="_blank">@lang('global.word_file')</a>
 								</li>
 							@endif
 						</ul>
@@ -136,7 +139,8 @@ use Illuminate\Support\Facades\Lang;
 								<label for="">@lang('global.type_contract')</label>
                                 <span class="contract-type-list">@if(isset($contract->metadata->contract_type) && !empty($contract->metadata->contract_type) && is_array($contract->metadata->contract_type))
 										@foreach($contract->metadata->contract_type as $contractype)
-											<a href="{{route("search",['contract_type'=>$contractype])}}" target="_blank">{{_l('codelist/contract_type',$contractype) }}</a>
+											<a href="{{route("search",['contract_type'=>$contractype])}}"
+											   target="_blank">{{_l('codelist/contract_type',$contractype) }}</a>
 										@endforeach
 									@endif
                                 </span>
@@ -149,7 +153,8 @@ use Illuminate\Support\Facades\Lang;
 								?>
 								<span class="resource-list">
                                 @foreach($resource as $res)
-										<a href="{{route("resource.detail",['key'=>urlencode($res)])}}" target="_blank">{{_l("resources",$res)}}</a>
+										<a href="{{route("resource.detail",['key'=>urlencode($res)])}}"
+										   target="_blank">{{_l("resources",$res)}}</a>
 									@endforeach
                             </span></li>
 						</ul>
@@ -277,7 +282,8 @@ use Illuminate\Support\Facades\Lang;
                                 <span>
 									@if(isset($company->company->corporate_grouping) && !empty($company->company->corporate_grouping))
 										<a href="{{route("search",
-										['corporate_group'=>$company->company->corporate_grouping])}}" target="_blank">{{$company->company->corporate_grouping}} </a>
+										['corporate_group'=>$company->company->corporate_grouping])}}"
+										   target="_blank">{{$company->company->corporate_grouping}} </a>
 									@else
 										-
 									@endif
@@ -337,7 +343,8 @@ use Illuminate\Support\Facades\Lang;
 								<td width="70%">
 									@if($parentContract->is_published==1)
 										<a href="{{route('contract.detail',
-										['id'=>$parentContract->open_contracting_id])}}" target="_blank">{{$parentContract->name}}</a>
+										['id'=>$parentContract->open_contracting_id])}}"
+										   target="_blank">{{$parentContract->name}}</a>
 										&nbsp; @lang('contract.main_contract')
 									@else
 										{{$parentContract->name}} @lang('contract.main_contract')
@@ -352,7 +359,8 @@ use Illuminate\Support\Facades\Lang;
 								<tr>
 									<td width="70%">
 										<a href="{{route('contract.detail',
-										['id'=>$supportingContract->open_contracting_id])}}" target="_blank"> {{$supportingContract->name}}</a>
+										['id'=>$supportingContract->open_contracting_id])}}"
+										   target="_blank"> {{$supportingContract->name}}</a>
 									</td>
 								</tr>
 							@endif
@@ -489,7 +497,7 @@ use Illuminate\Support\Facades\Lang;
 														{{_l('codelist/annotation.categories',$annotation->category_key)}}
 													</div>
 													@if(site()->isClipEnabled())
-														<button data-id="{{ $annotation->id }}"
+														<button data-id="{{ $annotation->annotation_id }}"
 																data-popover="true"
 																data-html="false"
 																data-content="@lang('clip.clip_annotation')"
@@ -516,7 +524,8 @@ use Illuminate\Support\Facades\Lang;
 															@if($ref->article_reference !='')
 																<?php $page_type = isset($page->shapes) ? 'pdf' : 'text'; ?>
 																(
-																<a href="{{route('contract.detail',['id'=>$contract->metadata->open_contracting_id])}}#/{{$page_type}}/page/{{$ref->page_no}}/annotation/{{$ref->id}}" target="_blank">
+																<a href="{{route('contract.detail',['id'=>$contract->metadata->open_contracting_id])}}#/{{$page_type}}/page/{{$ref->page_no}}/annotation/{{$ref->id}}"
+																   target="_blank">
 																	{{$ref->article_reference}}
 																</a>
 																)

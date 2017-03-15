@@ -46,8 +46,8 @@ const Pagination = React.createClass({
     componentDidMount()
     {
         this.setState({
-            current: this.props.annotation.page_no,
-            input: this.props.annotation.page_no,
+            current: this.props.annotation.pages[0].page_no,
+            input: this.props.annotation.pages[0].page_no,
             total: this.props.annotation.total_pages
         });
         this.changePage();
