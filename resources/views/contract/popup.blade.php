@@ -1,5 +1,5 @@
 <?php
-$favicon = site()->getImageUrl('favicon', 'ico');
+$favicon  = site()->getImageUrl('favicon', 'ico');
 $siteName = site()->meta('name');
 if (!site()->isRC()) {
 	$siteName .= '<span class="beta">Beta</span>';
@@ -7,7 +7,7 @@ if (!site()->isRC()) {
 $siteName .= '<span>Contracts</span>';
 $contact_email = site()->contactEmail();
 ?>
-<!DOCTYPE html>
+		<!DOCTYPE html>
 <html lang="en">
 <head>
 	<title> {{ meta('')->title }}</title>
@@ -34,7 +34,7 @@ $contact_email = site()->contactEmail();
 		const Annotation = {!!json_encode($annotation)!!};
 		const loading_page = {!! json_encode(trans('annotation.loading_page')) !!};
 		const lang_category = {!! json_encode(trans('codelist/annotation.categories')) !!};
-		const AWS_URL = "https://rc-stage.s3-us-west-2.amazonaws.com";
+		const AWS_URL = "https://resourcecontracts-nrgi.s3-us-west-2.amazonaws.com";
 		const pdf_not_loading = "{!!sprintf(trans('annotation.pdf_not_shown'),'<a href=\"mailto:'.$contact_email.'\">'.$contact_email.'</a>')!!}";
 	</script>
 </head>

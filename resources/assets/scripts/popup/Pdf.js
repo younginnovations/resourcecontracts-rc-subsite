@@ -19,7 +19,7 @@ class Pdf extends Component {
 
     componentWillMount() {
         this.setState({
-            page: this.props.annotation.page_no,
+            page: this.props.annotation.pages[0].page_no,
             contract_id: this.props.annotation.contract_id,
             isLoading: false
         });
@@ -45,7 +45,7 @@ class Pdf extends Component {
         return (
             <div>
                 <div id="progress-bar-info"></div>
-                <PdfJS onPageRendered={()=>{}}  file={this.getFile()}  page={this.state.page} scale={this.state.scale}/>
+                <PdfJS onPageRendered={()=>{}} file={this.getFile()} page={this.state.page} scale={this.state.scale}/>
             </div>
         );
     }

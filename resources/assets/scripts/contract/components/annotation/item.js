@@ -102,7 +102,7 @@ class Item extends Component {
             });
 
             return (
-                <span className="page-num-wrapper"> {LANG.page} {page} ({ref}){last ? ', ' : ''}</span>
+                <span className="page-num-wrapper"> {LANG.page} {page} ( {ref} ){last ? ', ' : ''}</span>
             );
         });
     }

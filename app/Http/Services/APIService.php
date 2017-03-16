@@ -265,7 +265,7 @@ class APIService
 
         redirectIfOldAnnotationCategory($annotation_category);
 
-        $query    = [
+        $query = [
             'q'                   => urlencode($q),
             'country_code'        => $country_code,
             'corporate_group'     => $corporate_group,
@@ -536,21 +536,29 @@ class APIService
             $annotations = $this->getAnnotations($contract_id);
             $annotations = collect($annotations->result);
             $annotation  = $annotations->where('id', $annotation_id)->first();
+            $annotations = $annotations->groupBy('annotation_id')->toArray();
+            $pages       = [];
+
+            foreach ($annotations[$annotation->annotation_id] as $ann) {
+                $pages[] = [
+                    'id'                => $ann->id,
+                    'article_reference' => $ann->article_reference,
+                    'page_no'           => $ann->page_no,
+                ];
+            }
 
             return [
-                'contract_id'       => $metadata->id,
-                'contract_title'    => $metadata->name,
-                'id'                => $annotation->id,
-                'annotation_id'     => $annotation->annotation_id,
-                'total_pages'       => $metadata->number_of_pages,
-                'quote'             => $annotation->quote,
-                'text'              => $annotation->text,
-                'category'          => $annotation->category,
-                'category_key'      => $annotation->category_key,
-                'article_reference' => $annotation->article_reference,
-                'page_no'           => $annotation->page_no,
-                'cluster'           => $annotation->cluster,
-                'shapes'            => $annotation->shapes,
+                'contract_id'    => $metadata->id,
+                'contract_title' => $metadata->name,
+                'annotation_id'  => $annotation->annotation_id,
+                'total_pages'    => $metadata->number_of_pages,
+                'quote'          => $annotation->quote,
+                'text'           => $annotation->text,
+                'category'       => $annotation->category,
+                'category_key'   => $annotation->category_key,
+                'pages'          => $pages,
+                'cluster'        => $annotation->cluster,
+                'shapes'         => $annotation->shapes,
             ];
         } catch (\Exception $e) {
             Log::error('Contract popup :'.$e->getMessage());

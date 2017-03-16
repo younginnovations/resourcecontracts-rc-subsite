@@ -24,10 +24,6 @@ class ClippingService
      */
     public $api;
     /**
-     * @var Clip
-     */
-    private $clip;
-    /**
      * @var PdfMerger|PDFManage
      */
     public $pdf;
@@ -35,6 +31,10 @@ class ClippingService
      * @var Filesystem
      */
     public $file;
+    /**
+     * @var Clip
+     */
+    private $clip;
     /**
      * @var Pdf
      */
@@ -69,7 +69,7 @@ class ClippingService
         $annotations = [];
         foreach ($data as $id) {
             if (!empty($id)) {
-                $annotation = $this->api->apiCall($resource . $id);
+                $annotation = $this->api->apiCall($resource.$id);
                 if (!empty($annotation)) {
                     $annotations[] = $annotation;
                 }
@@ -114,15 +114,13 @@ class ClippingService
                     'annotation_id'       => $annotation->annotation_id,
                     'page_url'            => $pageUrl,
                     'resource'            => $metadata->resource,
-                    'resourcetemp'        => $metadata->resource[0],
                     'category'            => $annotation->category,
                     'text'                => $annotation->text,
                     'pages'               => $annotation->page,
-                    'article_reference'   => $annotation->article_reference,
                     'action'              => 'x',
                 ];
             }
-            $i ++;
+            $i++;
         }
 
         return json_encode(['result' => $data]);
@@ -144,17 +142,17 @@ class ClippingService
             $annotationUrl = route('contract.detail', ['id' => $annot->open_contracting_id]);
             $pageUrl       = "";
             foreach ($annot->page as $page) {
-                $pageUrl .= $annotationUrl . "#/" . $page->type . "/page/" . $page->page . "/annotation/" . $page->id . " | ";
+                $pageUrl .= $annotationUrl."#/".$page->type."/page/".$page->page."/annotation/".$page->id." | ";
             }
             $detail   = $this->api->contractDetail($annot->open_contracting_id);
             $metadata = $detail->metadata;
             if (!empty($metadata)) {
                 $annotation[] = [
-                    '"' . $metadata->name . '"',
-                    '"' . $metadata->country->name . '"',
-                    '"' . $metadata->year_signed . '"',
-                    '"' . $annot->category . '"',
-                    '"' . $annot->text . '"',
+                    '"'.$metadata->name.'"',
+                    '"'.$metadata->country->name.'"',
+                    '"'.$metadata->year_signed.'"',
+                    '"'.$annot->category.'"',
+                    '"'.$annot->text.'"',
                     $pageUrl,
                 ];
             }
@@ -171,7 +169,7 @@ class ClippingService
      */
     public function generateKey()
     {
-        $key = md5(microtime() . rand());
+        $key = md5(microtime().rand());
 
         return $key;
     }
@@ -289,10 +287,10 @@ class ClippingService
                 }
             );
 
-
             return true;
         } catch (Exception $e) {
-            dd("some error". $e->getMessage());
+            Log::info($e->getMessage());
+
             return false;
         }
     }
@@ -312,8 +310,8 @@ class ClippingService
         $pdfs             = $this->getPdfUrl($annotations);
         $basePath         = base_path('storage');
         $folder           = time();
-        $concatFileName   = 'concat-' . time() . '.pdf';
-        $zipFileName      = 'pdf-' . time() . '.zip';
+        $concatFileName   = 'concat-'.time().'.pdf';
+        $zipFileName      = 'pdf-'.time().'.zip';
 
         try {
             $this->downloadFile($basePath, $folder, $pdfs);
@@ -324,8 +322,8 @@ class ClippingService
 
             $files = glob($basePath."/".$folder."/*.pdf");
             File::delete($files);
-            copy($basePath.'/'.$folder.'/'.$zipFileName , base_path('public').'/'.$zipFileName);
-            $this->rrmdir($basePath . '/' . $folder);
+            copy($basePath.'/'.$folder.'/'.$zipFileName, base_path('public').'/'.$zipFileName);
+            $this->rrmdir($basePath.'/'.$folder);
             $url = env("APP_DOMAIN").'/'.$zipFileName;
 
             return $url;
@@ -368,14 +366,14 @@ class ClippingService
      */
     public function downloadFile($basePath, $folder, $pdfs)
     {
-        if (!is_dir($basePath . '/' . $folder)) {
-            mkdir($basePath . '/' . $folder, 0777, true);
+        if (!is_dir($basePath.'/'.$folder)) {
+            mkdir($basePath.'/'.$folder, 0777, true);
         }
 
         foreach ($pdfs as $pdf) {
             $fileName = explode('/', $pdf);
-            $fileName = $fileName[3] . '-' . $fileName[4];
-            file_put_contents($basePath . '/' . $folder . '/' . $fileName, file_get_contents($pdf));
+            $fileName = $fileName[3].'-'.$fileName[4];
+            file_put_contents($basePath.'/'.$folder.'/'.$fileName, file_get_contents($pdf));
         }
 
         return true;
@@ -393,14 +391,14 @@ class ClippingService
      */
     public function concatPDF($annotationDetail, $basePath, $folder, $concatFileName)
     {
-        $files = scandir($basePath . '/' . $folder);
+        $files = scandir($basePath.'/'.$folder);
         unset($files[0], $files[1]);
 
         foreach ($files as $file) {
-            $this->pdf->addPDF($basePath . '/' . $folder . '/' . $file);
+            $this->pdf->addPDF($basePath.'/'.$folder.'/'.$file);
         }
 
-        $this->pdf->merge('file', $basePath . '/' . $folder . '/' . $concatFileName);
+        $this->pdf->merge('file', $basePath.'/'.$folder.'/'.$concatFileName);
         $this->makePdfOfAllAnnotation($annotationDetail, $basePath, $folder);
 
         return true;
@@ -432,53 +430,6 @@ class ClippingService
     }
 
     /**
-     * Zip folder
-     *
-     * @param $basePath
-     * @param $folder
-     * @param $concatFileName
-     * @param $zipFileName
-     *
-     * @return bool
-     */
-    private function zipFolder($basePath, $folder, $concatFileName, $zipFileName)
-    {
-        try {
-            $zip = new ZipArchive();
-            $zip->open($basePath.'/'.$folder.'/'.$zipFileName, ZipArchive::CREATE);
-            $zip->addFile($basePath.'/'.$folder.'/'.$concatFileName, $concatFileName);
-            $zip->addFile($basePath.'/'.$folder.'/'."clippedannotations.pdf", "clippedannotations.pdf");
-            $zip->addFile($basePath.'/'.$folder.'/'."clipped_annotation.xls", "clipped_annotation.xls");
-            $zip->close();
-        } catch (Exception $e) {
-            Log::info($e->getMessage());
-        }
-
-        return true;
-    }
-
-    /**
-     * Upload Zip file
-     *
-     * @param $basePath
-     * @param $folder
-     * @param $zipFileName
-     *
-     * @return string
-     */
-    private function upLoadZipFile($basePath, $folder, $zipFileName)
-    {
-        $this->file->disk('s3')->put(
-            '/downzip/' . $zipFileName,
-            file_get_contents($basePath . '/' . $folder . '/' . $zipFileName)
-        );
-        $file = 'http://s3-us-west-2.amazonaws.com/' . env('AWS_BUCKET') . '/downzip/' . $zipFileName;
-        $this->rrmdir($basePath . '/' . $folder);
-
-        return $file;
-    }
-
-    /**
      * Remove directory
      *
      * @param $dir
@@ -489,10 +440,10 @@ class ClippingService
             $objects = scandir($dir);
             foreach ($objects as $object) {
                 if ($object != "." && $object != "..") {
-                    if (is_dir($dir . "/" . $object)) {
-                        rrmdir($dir . "/" . $object);
+                    if (is_dir($dir."/".$object)) {
+                        rrmdir($dir."/".$object);
                     } else {
-                        unlink($dir . "/" . $object);
+                        unlink($dir."/".$object);
                     }
                 }
             }
@@ -502,9 +453,11 @@ class ClippingService
 
     /**
      * Make pdf file of all annotations
+     *
      * @param $annotations
      * @param $basePath
      * @param $folder
+     *
      * @return bool
      * @throws Exception
      * @throws \Throwable
@@ -513,7 +466,7 @@ class ClippingService
     {
         $annotations = json_decode($annotations);
         $html        = view('clip.pdfs', compact('annotations'))->render();
-        $this->hpdf->load($html)->filename($basePath . '/' . $folder . '/clippedannotations.pdf')->output();
+        $this->hpdf->load($html)->filename($basePath.'/'.$folder.'/clippedannotations.pdf')->output();
 
         return true;
 
@@ -578,5 +531,52 @@ class ClippingService
         }
 
         return $headerArray;
+    }
+
+    /**
+     * Zip folder
+     *
+     * @param $basePath
+     * @param $folder
+     * @param $concatFileName
+     * @param $zipFileName
+     *
+     * @return bool
+     */
+    private function zipFolder($basePath, $folder, $concatFileName, $zipFileName)
+    {
+        try {
+            $zip = new ZipArchive();
+            $zip->open($basePath.'/'.$folder.'/'.$zipFileName, ZipArchive::CREATE);
+            $zip->addFile($basePath.'/'.$folder.'/'.$concatFileName, $concatFileName);
+            $zip->addFile($basePath.'/'.$folder.'/'."clippedannotations.pdf", "clippedannotations.pdf");
+            $zip->addFile($basePath.'/'.$folder.'/'."clipped_annotation.xls", "clipped_annotation.xls");
+            $zip->close();
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+        }
+
+        return true;
+    }
+
+    /**
+     * Upload Zip file
+     *
+     * @param $basePath
+     * @param $folder
+     * @param $zipFileName
+     *
+     * @return string
+     */
+    private function upLoadZipFile($basePath, $folder, $zipFileName)
+    {
+        $this->file->disk('s3')->put(
+            '/downzip/'.$zipFileName,
+            file_get_contents($basePath.'/'.$folder.'/'.$zipFileName)
+        );
+        $file = 'http://s3-us-west-2.amazonaws.com/'.env('AWS_BUCKET').'/downzip/'.$zipFileName;
+        $this->rrmdir($basePath.'/'.$folder);
+
+        return $file;
     }
 }
