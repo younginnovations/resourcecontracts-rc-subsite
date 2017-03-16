@@ -2,3 +2,8 @@ server {
     server_name www.openlandcontracts.com openlandcontracts.com;
     return 301 $scheme://www.openlandcontracts.org$request_uri;
 }
+
+server{
+    server_name drc.openlandcontracts.com;
+    return 301 http://drc.openlandcontracts.org$request_uri;
+}
