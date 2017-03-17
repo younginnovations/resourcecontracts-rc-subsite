@@ -346,7 +346,7 @@
         border: none;
         position: relative;
         padding-left: 130px !important;
-        border-top: 1px solid $color_wild_sand_approx !important;
+        border-top: 1px solid #f0f0f0 !important;
         &:before {
           content: attr(data-title);
           position: absolute;
@@ -423,10 +423,6 @@
       display: inline-block;
     }
   }
-  .table-contract-list input[type="checkbox"] {
-    margin-left: -20px;
-    margin-right: 5px;
-  }
   .country-contract-wrap td {
     &:nth-of-type(1):before {
       content: "";
@@ -460,8 +456,11 @@
     display: none!important;
   }
 
-  table.table-contract tr td:first-child{
-    display: none;
+  #clip-annotation-list table.table-contract tr td:first-child{
+    padding-left: 15px!important;
+    input{
+      margin-top: 15px;
+    }
   }
 }
 
@@ -475,9 +474,6 @@
 
 @media all and(max-width: 480px) {
 
-  table tr td{
-    padding-left: 40% !important;
-  }
   .filter-wrapper > .col-lg-2 {
     display: none;
   }
@@ -547,7 +543,9 @@
     background-position: 21px;
   }
 
-
+  .dataTables_wrapper .dataTables_paginate .paginate_button{
+    padding: .25em .7em!important;
+  }
 
 }
 

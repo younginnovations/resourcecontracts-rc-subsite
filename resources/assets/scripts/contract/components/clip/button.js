@@ -1,9 +1,7 @@
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
 import Cookies from "js-cookie";
-import ClipHelper from "../../clip/clipHelper";
-
-let clipHelper = new ClipHelper();
+import clipHelper from "../../clip/clipHelper";
 
 class Button extends Component {
 

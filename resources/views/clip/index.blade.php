@@ -40,6 +40,7 @@
 		var langResource =  {!!  json_encode(trans('resources')) !!};
 		var langCountry =  {!!  json_encode(trans('country')) !!};
 		var siteName = '{{site()->meta('title')}}';
+		var checkedClips = [];
 	</script>
 	<script src="{{url('js/clipping.js')}}"></script>
 @stop

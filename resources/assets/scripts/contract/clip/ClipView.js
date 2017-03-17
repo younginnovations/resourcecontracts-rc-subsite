@@ -2,12 +2,14 @@ import React from "react";
 import axios from "axios";
 import dataTable from "../../vendor/dataTables.min.js";
 
-import ClipHelper from "./clipHelper";
+import clipHelper from "./clipHelper";
+import ClipCheckedManager from './ClipCheckedManager';
 
 import DownloadManager from "../components/clip/DownloadManager";
 import Listing from "../components/clip/Listing";
 
-let clipHelper = new ClipHelper();
+//let clipHelper = new ClipHelper();
+//let clipCheckedManager = new ClipCheckedManager();
 let localClip = clipHelper.getLocalClips();
 
 class ClipView extends React.Component{
@@ -21,7 +23,6 @@ class ClipView extends React.Component{
         }
 
     }
-
     componentWillMount() {
 
         let self = this;
@@ -44,13 +45,14 @@ class ClipView extends React.Component{
                         loading: false
                     });
 
-                    $('.table-contract-list').DataTable({
+                    window.clipTable = $('.table-contract-list').DataTable({
                         paging:true,
                         lengthChange: false,
                         searching: false,
                         pagingType: "full_numbers",
                         info: false,
                         "autoWidth": false,
+                        stateSave: true,
                         "drawCallback": function( settings ) {
                             var totalPage = $(".dataTables_paginate").find("span .paginate_button").length;
 
@@ -59,8 +61,12 @@ class ClipView extends React.Component{
                             }
 
                             $(".viewClipCount").text(response.data.result.length);
-                            $(".clipSelectCountWrapper").show()
-                        }
+                            $(".clipSelectCountWrapper").show();
+                        },
+                        "aoColumnDefs" : [ {
+                            "bSortable" : false,
+                            "aTargets" : [ "no-sort" ]
+                        } ]
                     });
 
 
@@ -80,7 +86,6 @@ class ClipView extends React.Component{
                 // Make a request
                 axios.get( app_url + '/clip/annotations?data=' + localClip )
                     .then(function (response) {
-
                         self.setState({
                             clips: self.state.clips.concat(response.data.result)
                         });
@@ -89,13 +94,17 @@ class ClipView extends React.Component{
                             loading: false
                         });
 
-                        $('.table-contract-list').DataTable({
+                        var clipCheckedManager = new ClipCheckedManager();
+                        let initTimes = 1;
+
+                        window.clipTable = $('.table-contract-list').DataTable({
                             paging:true,
                             lengthChange: false,
                             searching: false,
                             pagingType: "full_numbers",
                             info: false,
                             "autoWidth": false,
+                            stateSave: true,
                             "drawCallback": function( settings ) {
                                 var totalPage = $(".dataTables_paginate").find("span .paginate_button").length;
 
@@ -103,10 +112,23 @@ class ClipView extends React.Component{
                                     $(".dataTables_paginate").hide()
                                 }
 
-                                $(".viewClipCount").text(response.data.result.length);
-                                $("#clear-all, .clipSelectCountWrapper").show()
-                            }
+
+                                if(initTimes == 1){
+                                    clipCheckedManager.init();
+                                }
+
+                                initTimes = 0
+
+                            },
+                            "aoColumnDefs" : [ {
+                                "bSortable" : false,
+                                "aTargets" : [ "no-sort" ]
+                            } ]
                         });
+
+                        $(".viewClipCount").text(response.data.result.length);
+                        $("#clear-all, .clipSelectCountWrapper").show();
+
 
                     })
                     .catch(function (error) {
@@ -121,8 +143,6 @@ class ClipView extends React.Component{
             }
 
         }
-
-
 
     }
     render = () => {
@@ -140,7 +160,7 @@ class ClipView extends React.Component{
         return (
             <div className="clipMainWrapper">
                 <DownloadManager clips={ clips }/>
-                <Listing clips={ clips }/>
+                <Listing clips={ clips } removeClip={ this.removeClip }/>
             </div>
         );
     }

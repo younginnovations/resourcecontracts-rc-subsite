@@ -9,9 +9,7 @@
       }
       td {
         @extend %extend_1;
-        &:first-child {
-          @extend %extend_2;
-        }
+        color: rgba(64, 64, 64, 0.7);
         &.no-data {
           background: none !important;
           padding-left: 30px !important;
@@ -204,12 +202,10 @@
 
 .table-contract {
   td {
-    &:not(:first-child) {
+    font-size: 12px;
+
+    &.documentTitle{
       font-size: 14px;
-    }
-    &:not(:nth-child(2)) {
-      font-size: 12px;
-      color: $color_cape_cod_70_approx;
     }
     > ul {
       margin-left: 14px;
@@ -222,9 +218,9 @@
   &:first-child > a {
     @extend %extend_23;
   }
-  tbody td:first-child {
-      background: $url_5 no-repeat 10px 16px;
-      padding-left: 60px;
+  tbody td.documentTitle {
+      background: $url_5 no-repeat 10px 20px;
+      padding-left: 35px;
   }
 }
 
@@ -397,13 +393,7 @@ td.contract-date {
 }
 
 .table-contract-list {
-  input[type="checkbox"] {
-    float: left;
-   // margin-left: -49px;
-   // margin-left: -20px;
 
-    margin-top: 8px;
-  }
   th {
     a {
       position: relative;

@@ -90,31 +90,42 @@
 
 .annotation-clip-icon,.clip-btn {
   text-indent: -9999px;
-  background: transparent url(#{$img-path}/ic-sprite.svg) no-repeat -79px -402px;
-  height: 18px;
+  height: 20px;
   width: 29px;
   border: 0;
   margin: 2px 0 0;
 }
 
+.annotation-clip-icon{
+  background: transparent url(#{$img-path}/ic-sprite.svg) no-repeat -79px -402px;
+}
+
 .annotation-clip-icon.annotation-clipped,
 .clip-btn.active{
-  background: transparent url(#{$img-path}/ic-sprite.svg) no-repeat  -185px -403px;
   text-indent: -9999px;
   color: $color_blue !important;
 }
 
-.clip-btn.active{
-  background: transparent url(#{$img-path}/ic-sprite.svg) no-repeat  -185px -481px;
+.annotation-clip-icon.annotation-clipped{
+  background: transparent url(#{$img-path}/ic-sprite.svg) no-repeat  -185px -403px;
 }
 
 .clip-btn{
+  background: transparent url(#{$img-path}/ic-sprite.svg) no-repeat  -354px -604px;
   margin-top: 14px;
   width: 20px;
 }
 
-.olc .clip-btn{
-  margin-left: 8px;
+.clip-btn.active{
+  background-position:  -284px -604px;
+}
+
+.olc .clip-btn.active{
+  background-position:  -78px -604px;
+}
+
+.rc .clip-btn.active{
+  background-position:  -184px -604px;
 }
 
 #clip-all-annotations,
@@ -156,7 +167,7 @@
 
 #remove-all-annotations{
   &:after{
-    background: transparent url(#{$img-path}/ic-sprite.svg) no-repeat  -186px -403px;
+    background: transparent url(#{$img-path}/ic-sprite.svg) no-repeat  -184px -403px;
   }
 }
 
@@ -409,6 +420,10 @@ table td.view-clip>a {
   }
 }
 
+table.dataTable thead .sorting, table.dataTable thead .sorting_desc, table.dataTable thead .sorting_asc{
+  background-image: none!important;
+}
+
 .table-contract-list tbody td.noClipMsg{
   height: 300px;
   text-align: center;
@@ -634,6 +649,11 @@ table td.view-clip>a {
   table.dataTable thead .sorting:after,table.dataTable thead .sorting:before{
     display: none;
   }
+
+  .checkedCount{
+    color: $color_link-color;
+    margin-left: 5px;
+  }
 }
 
 
@@ -664,19 +684,6 @@ table td.view-clip>a {
       }
     }
 
-    input[type="checkbox"]{
-      margin-left: -20px;
-    }
-
-    th input[type="checkbox"]{
-      margin-top: 5px;
-      vertical-align: top;
-      float: none;
-    }
-
-    th .count-select ~ input[type="checkbox"]{
-      margin-left: 0;
-    }
   }
 
 }
@@ -860,4 +867,82 @@ span.required {
 
 .clipMainWrapper{
   transform: none!important;
+}
+
+.checkedInfo{
+  padding: 30px 15px 10px 15px;
+  background: #F5F5F5;
+  text-align: center;
+  margin-top: -35px;
+  border-bottom: 1px solid rgba(188,188,188,0.5);
+  line-height: 18px;
+  .info{
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 5px;
+  }
+
+  @media screen and (max-width:800px){
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+
+  @media screen and (max-width:767px){
+    font-size: 12px;
+    margin-bottom: 25px;
+  }
+}
+
+.bulk_actions{
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 10px;
+  border-left: 1px solid #aaa;
+
+}
+
+.removeSelectedBtn{
+  padding: 5px 10px;
+  background: #ddd;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-left: 10px;
+  span{
+    display: inline-block;
+    vertical-align: top;
+    height: 18px;
+    width: 18px;
+    background: url(../../images/ic-sprite.svg) -360px -542px;
+    margin-right: 7px;
+    transform: scale(0.8);
+  }
+  &:hover{
+    background: #d5d5d5;
+  }
+}
+
+.checkAllClips{
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.clearChecked{
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+
+//HIDE CLIPPING IN SEARCH RESULT PAGE
+.table-contract-list {
+  .clipToggleElems{
+    display: none!important;
+  }
+}
+
+.filter-wrapper .clip-btn{
+  display: none!important;
+}
+.contract_page_actions .clip-btn, .contract_page_actions .clip-btn.active{
+  display: none!important;
 }

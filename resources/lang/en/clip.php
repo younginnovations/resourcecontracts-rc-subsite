@@ -60,6 +60,7 @@ return [
     'click_to_disable_clip'        => "Click here to disable clip.",
     'csv'                          => 'CSV',
     'xls'                          => 'XLS',
+    'zip'                          => 'ZIP',
     'currently_no_clips'           => "There are currently no Clips.",
     'confirmMessage'               => 'Are you sure that you want to clear all clips?',
     'no_clip_remain'               => 'No Clip will remain. Are you sure you want to remove the Clip anyway?',
@@ -74,4 +75,8 @@ return [
     'remove_clip_confirm'          => 'Are you sure you want to remove the Clip?',
     'clip_contract_annotations'    => 'Clip all annotations of this contract',
     'clipped_contract_annotations' => 'All annotations Clipped',
+    'clip_selected'                => 'Clip selected.',
+    'clips_selected'               => 'Clips selected.',
+    'remove_selected'              => 'Remove selected',
+    'confirm_remove_selected'      => 'Are you sure you want to remove the selected clips.',
 ];

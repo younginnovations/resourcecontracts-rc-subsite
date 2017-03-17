@@ -39,12 +39,33 @@ class Listing extends React.Component {
             return <Item { ...props }/>
         });
 
+        let hideStyle = {
+            display: "none"
+        };
+
         return (
             <div id="clip-annotation-list">
+                {
+                    this.state.key ? "" :
+                        <div className="checkedInfo" style={ hideStyle }>
+                            <span className="info"><span className="checkedCount">0</span>
+                                <span className="singular"> { langClip.clip_selected }</span>
+                                <span className="plural"> { langClip.clips_selected }</span>
+                            </span>
+                            <span className="bulk_actions">
+                                <button className="removeSelectedBtn"><span></span>{ langClip.remove_selected }</button>
+                            </span>
+                        </div>
+                }
                 <table className="table table-responsive table-contract table-contract-list">
                     <thead>
                     <tr>
-                        <th></th>
+                        {
+                            this.state.key ? "" :
+                                < th data-sorting="no-sorting" className="no-sort">
+                                    <input type="checkbox" className="selectVisible"/>
+                                </th>
+                        }
                         <th width="25%" className="document">
                             <span>{ langClip.document }</span>
                         </th>

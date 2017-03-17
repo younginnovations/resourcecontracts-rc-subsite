@@ -61,6 +61,7 @@ return [
     'click_to_disable_clip'        => "Cliquez ici pour désactiver pince.",
     'csv'                          => 'CSV',
     'xls'                          => 'XLS',
+    'zip'                          => 'ZIP',
     'currently_no_clips'           => "Il n'y a pas de clips.",
     'confirmMessage'               => 'Etes-vous sûr que vous voulez effacer tous les clips?',
     'no_clip_remain'               => 'Aucun clip ne restera. Voulez-vous vraiment supprimer le clip de toute façon?',
@@ -75,4 +76,8 @@ return [
     'remove_clip_confirm'          => 'Voulez-vous vraiment supprimer le Clip?',
     'clip_contracts_annotations'   => 'Copier toutes les annotations de ce contrat',
     'clipped_contract_annotations' => 'Toutes les annotations Clipped',
+    'clip_selected'                => 'Clip sélectionné',
+    'clips_selected'               => 'Clips sélectionnés',
+    'remove_selected'              => 'Enlever la sélection',
+    'confirm_remove_selected'      => 'Voulez-vous vraiment supprimer les clips sélectionnés.',
 ];
