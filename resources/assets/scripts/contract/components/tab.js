@@ -20,7 +20,7 @@ class Tab extends Component {
     }
 
     activeTab(view) {
-        if (view == 'text') {
+        if (view == 'text' || view == 'search') {
             this.setState({activeTextClass: 'active'});
         } else {
             this.setState({activeTextClass: ''});

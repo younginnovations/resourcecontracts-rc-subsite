@@ -18,9 +18,9 @@ class Form extends Component {
             $(".tab-content#view-container").removeClass("hidden_tab");
 
             $(".navigation a.tab").removeClass("active");
-            $(".search-results-list").show();
 
         }
+        $(".search-results-list").show();
     }
 
     fireEvent(query) {

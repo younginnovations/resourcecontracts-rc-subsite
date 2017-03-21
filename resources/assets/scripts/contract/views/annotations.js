@@ -47,7 +47,7 @@ var Annotations = React.createClass({
                 id = annotation.id;
             }
             scrollToAnnotation(id);
-            this.setState({selectedAnnotation: id});
+            this.setState({selectedAnnotation: id, display: true});
         });
 
         this.subscribeSort = Event.subscribe('sort:change', type => {
@@ -55,7 +55,7 @@ var Annotations = React.createClass({
             debug('annotation list sort:change listening', type);
         });
 
-        this.subscribeClose = Event.subscribe('search:close', ()=>{
+        this.subscribeClose = Event.subscribe('search:close', ()=> {
             this.setState({display: true});
             AnnotationActions.getList(Contract.getGuid());
         });
@@ -88,11 +88,16 @@ var Annotations = React.createClass({
         this.subscribeClose.remove();
     },
     onChange (event, response) {
-        this.setState({annotations: response.result, total: response.total, isLoading: false, selectedAnnotation:Contract.getCurrentAnnotation()})
+        this.setState({
+            annotations: response.result,
+            total: response.total,
+            isLoading: false,
+            selectedAnnotation: Contract.getCurrentAnnotation()
+        })
         scrollToAnnotation(Contract.getCurrentAnnotation());
     },
     render() {
-        var inSearch = this.state.display?"":"inSearch"
+        var inSearch = this.state.display ? "" : "inSearch"
 
         var sort = this.state.total > 0 ? (<Sort type={this.state.sortBy}/>) : null;
         return (
