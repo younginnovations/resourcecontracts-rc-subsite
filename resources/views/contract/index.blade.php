@@ -19,7 +19,7 @@ use \Illuminate\Support\Facades\Lang as Lang;
 				</div>
 			</div>
 			<div class="advance-filter-wrapper contract_page_actions">
-				@if($contracts->total!=0)
+				@if(isset($contracts->total) && $contracts->total!=0)
 
 					<button class="clip-btn on-annotation"><span class="icon"></span><span
 								class="text">@lang('clip.clip')</span></button>
@@ -38,7 +38,11 @@ use \Illuminate\Support\Facades\Lang as Lang;
 				@endif
 			</div>
 			<div class="contract-number-wrap">
-				<span>{{$contracts->total}}</span> {{ Lang::choice('global.documents' , $contracts->total) }}
+				@if(isset($contracts->total) && $contracts->total!=0)
+					<span>{{$contracts->total}}</span> {{ Lang::choice('global.documents' , $contracts->total) }}
+				@else
+					<span>0</span> {{ Lang::choice('global.documents' , 0) }}
+				@endif
 			</div>
 		</div>
 	</div>
@@ -47,7 +51,10 @@ use \Illuminate\Support\Facades\Lang as Lang;
 			<div class="panel panel-default panel-wrap country-list-wrap">
 				<div class="panel-body">
 					@include('contract.partials.search_list')
-					@include('contract.partials.pagination', ['total_item' => $contracts->total, 'per_page'=>$contracts->per_page, 'current_page' => $currentPage ])
+
+					@if(isset($contracts->total) && isset($contracts->per_page))
+						@include('contract.partials.pagination', ['total_item' => $contracts->total, 'per_page'=>$contracts->per_page, 'current_page' => $currentPage ])
+					@endif
 				</div>
 			</div>
 		</div>
