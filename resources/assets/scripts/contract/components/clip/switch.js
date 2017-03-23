@@ -1,10 +1,7 @@
 import React, {Component} from "react";
 import Cookies from "js-cookie";
 
-import ClipHelper from "../../clip/clipHelper";
-
-
-let clipHelper = new ClipHelper();
+import clipHelper from "../../clip/clipHelper";
 
 let currentClipState = Cookies.get("clipState")
 

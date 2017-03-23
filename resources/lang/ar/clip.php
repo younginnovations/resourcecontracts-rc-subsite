@@ -60,6 +60,7 @@ return [
     'click_to_disable_clip'        => "انقر هنا لتعطيل كليب",
     'csv'                          => "CSV",
     'xls'                          => 'XLS',
+    'zip'                          => 'ZIP',
     'currently_no_clips'           => "لا يوجد حاليا أي مقاطع",
     'confirmMessage'               => 'هل أنت متأكد أنك تريد مسح جميع مقاطع؟',
     'no_clip_remain'               => 'لن تحتفظ كليب. هل أنت متأكد أنك تريد إزالة كليب على أي حال؟',
@@ -74,4 +75,8 @@ return [
     'remove_clip_confirm'          => 'هل أنت متأكد أنك تريد إزالة كليب؟',
     'clip_contracts_annotations'   => 'كليب كل الشروح هذا العقد',
     'clipped_contract_annotations' => 'جميع الشروح قص',
+    'clip_selected'                => 'مقطع محدد.',
+    'clips_selected'               => 'تم تحديد المقاطع.',
+    'remove_selected'              => 'ازل المحدد',
+    'confirm_remove_selected'      => 'هل تريد بالتأكيد إزالة المقاطع المحددة.',
 ];

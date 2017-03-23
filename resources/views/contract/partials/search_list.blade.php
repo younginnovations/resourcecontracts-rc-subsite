@@ -17,7 +17,6 @@ if ($route == "contracts" && isset($url['year'])) {
 
 <table class="table table-responsive table-contract table-contract-list">
 	<thead>
-		<th></th>
 		<th width="50%">
 			<a href="{{appendInUrl($route,$url,"contract_name",$order)}}">@lang('global.document') {!!show_arrow($order, $sortBy=='contract_name')!!}</a>
 		</th>
@@ -67,8 +66,7 @@ if ($route == "contracts" && isset($url['year'])) {
 		?>
 
 		<tr>
-			<td></td>
-			<td data-title="@lang('global.document')">
+			<td data-title="@lang('global.document')"  class="documentTitle">
 				<a class="title-{{$contract->open_contracting_id}}"
 				   href="{{ url(sprintf("/contract/%s/view#/pdf", $contract->open_contracting_id )) }}">
 					{{ $contract->name or ''}}

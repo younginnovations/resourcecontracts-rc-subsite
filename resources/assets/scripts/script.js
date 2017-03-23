@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
-import ClipHelper from "./contract/clip/clipHelper";
+import clipHelper from "./contract/clip/clipHelper";
 
-var clipHelper = new ClipHelper;
+//var clipHelper = new ClipHelper;
 
 function htmlDecode(html) {
     var a = document.createElement('a');
@@ -10,15 +10,19 @@ function htmlDecode(html) {
 }
 
 jQuery.extend({
-    handleError: function( s, xhr, status, e ) {
+    handleError: function (s, xhr, status, e) {
         // If a local callback was specified, fire it
-        if ( s.error )
-            s.error( xhr, status, e );
+        if (s.error)
+            s.error(xhr, status, e);
         // If we have some XML response text (e.g. from an AJAX call) then log it in the console
-        else if(xhr.responseText)
+        else if (xhr.responseText)
             console.log(xhr.responseText);
     }
 });
+
+//global jQuery variables
+const body = $("body");
+const html = $("html");
 
 var emailManager = {
     formEl: '#send-email',
@@ -240,48 +244,49 @@ $(document).ready(function () {
         adv_search_toggle = $('.adv_search_toogle'),
         search_input = $('#search-form input[type="text"]');
 
-    function advanceSearch(mode){
-        if(mode == "show"){
+    function advanceSearch(mode) {
+        if (mode == "show") {
             search_input_wrapper.slideDown(200);
-        }else{
+        } else {
             search_input_wrapper.slideUp(200);
         }
     }
-    search_input.on('click focus', function(e) {
+
+    search_input.on('click focus', function (e) {
         e.stopPropagation();
     });
 
-    $(document).on('click', function(e){
-        if(e.target === adv_search_toggle || e.target === search_input) {
+    $(document).on('click', function (e) {
+        if (e.target === adv_search_toggle || e.target === search_input) {
             return
-        }else{
+        } else {
             adv_search_toggle.fadeOut(100);
         }
 
     });
 
-    search_input.focus(function(e){
+    search_input.focus(function (e) {
         e.stopPropagation();
-        if(search_input_wrapper.is(':visible')){
+        if (search_input_wrapper.is(':visible')) {
             return
-        }else{
+        } else {
             adv_search_toggle.fadeIn(100);
         }
     });
 
-    search_input.keyup(function() {
-        if($("#header-input-clone").length > 0){
+    search_input.keyup(function () {
+        if ($("#header-input-clone").length > 0) {
             $("#header-input-clone").val($(this).val());
         }
 
     });
 
-    adv_search_toggle.click(function(){
-            advanceSearch("show");
-            $(this).fadeOut(100);
-        });
+    adv_search_toggle.click(function () {
+        advanceSearch("show");
+        $(this).fadeOut(100);
+    });
 
-    $('.search-close').click(function(){
+    $('.search-close').click(function () {
         advanceSearch("hide");
     });
 
@@ -291,8 +296,8 @@ $(document).ready(function () {
     });
 
     /*$('#social-toggler').click(function () {
-        $('.social-toggle').toggle();
-    });*/
+     $('.social-toggle').toggle();
+     });*/
 
     $('.search-click').click(function () {
         $('#search-form input[type="text"]').focus();
@@ -350,7 +355,7 @@ $(document).ready(function () {
 
     var calWidth = function () {
         if ($(window).width() > 768) {
-       
+
             var rightWidth = $(".navbar-header").outerWidth(),
                 leftWidth = $(window).width() - rightWidth;
             $(".right-header-section").width(leftWidth - 50);
@@ -362,7 +367,7 @@ $(document).ready(function () {
 
     calWidth();
 
-    $(window).resize(function(){
+    $(window).resize(function () {
         calWidth();
     });
 
@@ -481,39 +486,39 @@ $(document).ready(function () {
     });
 
 
-    $(document).on("click", (".navigation a.tab"), function(){
+    $(document).on("click", (".navigation a.tab"), function () {
 
         var target = $(this).attr("data-target");
 
-        if(target === "annotations" || target === "metadata"){
+        if (target === "annotations" || target === "metadata") {
             $(".pagination").hide()
-        }else{
+        } else {
             $(".pagination").css("display", "inline-block")
         }
 
         $(".navigation a.tab").removeClass("active");
         $(".navigation a.tab.tab-" + target).addClass("active");
-        toggleTabs( target )
+        toggleTabs(target)
 
     });
 
 
-    $(document).on("click", (".page-gap a"), function(){
+    $(document).on("click", (".page-gap a"), function () {
 
-        toggleTabs( "view-container" );
+        toggleTabs("view-container");
 
-        setTimeout(function(){
+        setTimeout(function () {
             $(".navigation a.tab").removeClass("active");
             $(".tab-pdf").addClass("active");
         }, 50)
 
     });
 
-    $(document).on("click", ("a.annotation-viewer-more"), function(){
+    $(document).on("click", ("a.annotation-viewer-more"), function () {
 
-        toggleTabs( "annotations" );
+        toggleTabs("annotations");
 
-        setTimeout(function(){
+        setTimeout(function () {
             $(".navigation a.tab").removeClass("active");
             $(".tab-annotations").addClass("active");
 
@@ -522,7 +527,7 @@ $(document).ready(function () {
 
     });
 
-    function toggleTabs( targetElem ){
+    function toggleTabs(targetElem) {
         if (window.matchMedia("(max-width: 800px)").matches) {
 
             $(".tab-content").not("#" + targetElem).addClass("hidden_tab");
@@ -535,35 +540,35 @@ $(document).ready(function () {
         var hash = location.hash.replace("#/", "").split("/");
         var hashId = hash[0];
 
-        if( hashId === "metadata" || hashId === "annotations" ){
+        if (hashId === "metadata" || hashId === "annotations") {
             $("#" + hashId).removeClass("hidden_tab");
             $(".pagination").hide()
-        }else{
+        } else {
             $("#view-container").removeClass("hidden_tab");
         }
-        $(".tab-"+ hashId).addClass("active");
+        $(".tab-" + hashId).addClass("active");
     }
 
     // Set clip count on load
     clipHelper. setClipCount();
 
-    function toggleClipState( e ){
+    function toggleClipState(e) {
 
         clipHelper.toggleClip();
 
         $("body").toggleClass("clippingOff");
     }
 
-    $(".on-annotation").click(function(){
+    $(".on-annotation").click(function () {
         $(this).toggleClass("active")
         clipHelper.toggleClip();
     });
 
-    function hideClipping(){
+    function hideClipping() {
 
-        if($("#on-annotation").length > 0){
+        if ($("#on-annotation").length > 0) {
             $("#on-annotation").trigger("click");
-        }else{
+        } else {
             $("#on-annotation").removeClass("active");
             clipHelper.toggleClip();
         }
@@ -571,67 +576,70 @@ $(document).ready(function () {
     }
 
     //clear all clips
-    $("#clear-all").click( function( e ){
+    $("#clear-all").click(function (e) {
 
         e.preventDefault();
 
         var confirmClearAll = confirm(langClip.confirmMessage);
 
-        if(confirmClearAll) {
+        if (confirmClearAll) {
             clipHelper.clearAllClips();
 
             localStorage.allClipped = "false";
 
             location.reload();
-        }else {
+        } else {
             return null
         }
 
     });
 
-    $("#hide-annotation").click(function(){
+    $("#hide-annotation").click(function () {
         hideClipping()
     });
 
-    function manageClipAllOnLoad(){
+    function manageClipAllOnLoad() {
         var allClipped = localStorage.allClipped;
 
-        if( allClipped ==="true" ){
+        if (allClipped === "true") {
             $("#clip-all-annotations.static").attr("id", "remove-all-annotations").addClass("annotation-clipped");
         }
     }
 
     manageClipAllOnLoad();
 
-    $(document).on("click", "#clip-all-annotations.static", function(e){
+    $(document).on("click", "#clip-all-annotations.static", function (e) {
         $(".annotation-clip-icon.static[data-action='add']").click();
         $(this).attr("id", "remove-all-annotations").addClass("annotation-clipped");
         localStorage.allClipped = true;
     });
 
-    $(document).on("click", "#remove-all-annotations.static", function(e){
+    $(document).on("click", "#remove-all-annotations.static", function (e) {
         $(".annotation-clip-icon.static[data-action='remove']").click();
         $(this).attr("id", "clip-all-annotations").removeClass("annotation-clipped");
         localStorage.allClipped = false;
     });
 
 
-    function checkClipped( elem ) {
+    function checkClipped(elem) {
         let dataID = $(elem).attr("data-id");
         let IDs = dataID.split(' ');
         let clippedId = clipHelper.getLocalClips();
         let isClipped = false;
 
         let isContractClip = $(elem).hasClass("contractClipIcon");
-        let popoverTextClip = isContractClip?langClip.clip_contract_annotations:langClip.clip_annotation;
-        let popoverTextClipped = isContractClip?langClip.clipped_contract_annotations:langClip.clipped;
+        let popoverTextClip = isContractClip ? langClip.clip_contract_annotations : langClip.clip_annotation;
+        let popoverTextClipped = isContractClip ? langClip.clipped_contract_annotations : langClip.clipped;
 
         if (clippedId) {
 
             isClipped = IDs.every(id => clippedId.indexOf(id) > -1);
 
             if (isClipped) {
-                $(elem).addClass("annotation-clipped").attr({"data-action": "remove", "data-content": popoverTextClipped});
+                $(elem).addClass("annotation-clipped").attr({
+                    "data-action": "remove",
+                    "data-content": popoverTextClipped
+                });
             } else {
                 $(elem).attr({"data-action": "add", "data-content": popoverTextClip});
             }
@@ -642,58 +650,64 @@ $(document).ready(function () {
 
     }
 
-    $(".annotation-clip-icon.static").each( function(){
+    $(".annotation-clip-icon.static").each(function () {
 
-        checkClipped( this );
+        checkClipped(this);
 
     });
 
-    $("body").on( "click", ".annotation-clip-icon.static", function( e ){
+    $("body").on("click", ".annotation-clip-icon.static", function (e) {
 
         let action = $(this).attr("data-action");
         $(this).toggleClass("annotation-clipped");
         clipHelper.clipActions(e);
 
-        if(action === "add"){
+        if (action === "add") {
 
-            $(this).attr({"data-content": langClip.clipped });
+            $(this).attr({"data-content": langClip.clipped});
 
-        }else{
+        } else {
 
-            $(this).attr({"data-content": langClip.clip_annotation });
+            $(this).attr({"data-content": langClip.clip_annotation});
 
         }
 
     });
 
 
-    $(".annotation-clip-icon.contractClipIcon").each( function(){
+    $(".annotation-clip-icon.contractClipIcon").each(function () {
 
-        checkClipped( this );
+        checkClipped(this);
 
     });
 
 
-    $("body").on("click", ".contractClipIcon", function( e ){
+    $("body").on("click", ".contractClipIcon", function (e) {
 
         let action = $(this).attr("data-action");
 
         clipHelper.clipActions(e);
         $(this).toggleClass("annotation-clipped");
 
-        if(action === "add"){
+        if (action === "add") {
 
-            $(this).attr({"data-content": langClip.clipped_contract_annotations });
-            $(this).parents("td").find(".annotation-clip-icon.static").addClass("annotation-clipped").attr({"data-action": "remove", "data-content": langClip.clipped });;
+            $(this).attr({"data-content": langClip.clipped_contract_annotations});
+            $(this).parents("td").find(".annotation-clip-icon.static").addClass("annotation-clipped").attr({
+                "data-action": "remove",
+                "data-content": langClip.clipped
+            });
+            ;
 
-        }else{
+        } else {
 
-            $(this).attr({ "data-content": langClip.clip_contract_annotations });
-            $(this).parents("td").find(".annotation-clip-icon.static").removeClass("annotation-clipped").attr({ "data-action": "add", "data-content": langClip.clip_annotation });
+            $(this).attr({"data-content": langClip.clip_contract_annotations});
+            $(this).parents("td").find(".annotation-clip-icon.static").removeClass("annotation-clipped").attr({
+                "data-action": "add",
+                "data-content": langClip.clip_annotation
+            });
 
         }
     });
-
 
 
     //download dropdown toggle setting
@@ -705,9 +719,8 @@ $(document).ready(function () {
     });
 
 
-
     //pdf full screen view scripts
-    $("body").on("click", ".change-view-icon", function(){
+    $("body").on("click", ".change-view-icon", function () {
         $(this).next(".tooltip").hide();
         $("#view-pdf, .grouped-action").toggleClass("expanded");
         $("html").toggleClass("overflow-hidden")
@@ -715,16 +728,16 @@ $(document).ready(function () {
 
 });
 
-$(window).load( function(){
-    if(Cookies.get('clipState') === "false" || Cookies.get('clipState') === undefined  ){
-        setTimeout(function(){
+$(window).load(function () {
+    if (Cookies.get('clipState') === "false" || Cookies.get('clipState') === undefined) {
+        setTimeout(function () {
             $("body").addClass('clippingOff');
             $("body").find(".clipToggleElems").css("opacity", 1);
         }, 100)
 
 
-    }else{
-        setTimeout(function() {
+    } else {
+        setTimeout(function () {
             $(".clipToggleElems").css("opacity", 1);
             $("body").find(".on-annotation").addClass("active");
         }, 100)
@@ -740,7 +753,7 @@ $(window).load( function(){
         var name = cname + "=";
         var decodedCookie = decodeURIComponent(document.cookie);
         var ca = decodedCookie.split(';');
-        for(var i = 0; i <ca.length; i++) {
+        for (var i = 0; i < ca.length; i++) {
             var c = ca[i];
             while (c.charAt(0) == ' ') {
                 c = c.substring(1);
@@ -755,7 +768,7 @@ $(window).load( function(){
     function shareModalFieldsManager(elem) {
 
 
-        $(document).on("click", elem, function( ){
+        $(document).on("click", elem, function () {
             event.preventDefault();
 
             var title = $(elem).attr("data-title");
@@ -763,8 +776,8 @@ $(window).load( function(){
 
             var shareType = $(elem).attr("data-share");
 
-            if( shareType === 'clip' && !key ){
-                url = location.href+ "/" + Cookies.get('clip_key');
+            if (shareType === 'clip' && !key) {
+                url = location.href + "/" + Cookies.get('clip_key');
             }
 
             $("#emailModel").find("#url a").text(url).attr("href", url);

@@ -1,13 +1,12 @@
 import Cookies from "js-cookie";
 import _ from "lodash";
 
-export default class ClipHelper {
+class ClipHelper {
     constructor() {
 
     }
 
     toggleClip() {
-
 
         if (Cookies.get('clipState') === undefined) {
             Cookies.set('clipState', true);
@@ -72,7 +71,7 @@ export default class ClipHelper {
 
         if (localClips) {
 
-            annotationIds.forEach( (annotationId, index) =>{
+            annotationIds.forEach((annotationId, index) => {
 
                 if (localClips.indexOf(annotationId) < 0) {
 
@@ -97,27 +96,70 @@ export default class ClipHelper {
 
     }
 
-    removeClip(id) {
+    removeClip(e, id) {
 
         let localClips = this.getLocalClips();
-        let annotationIds = id.split(" ");
+        let annotationIds = [];
+
+        if (Array.isArray(id)) {
+            annotationIds = annotationIds.concat(id);
+        } else {
+            annotationIds = annotationIds.concat(id.split(" "));
+        }
 
         if (localClips && annotationIds) {
-
-            annotationIds.forEach( (annotationId) =>{
+            annotationIds.forEach((annotationId) => {
                 let index = localClips.indexOf(annotationId);
-                if(index > -1){
+                if (index > -1) {
                     localClips.splice(index, 1);
                 }
-            })
+            });
 
             localStorage.clipLocalCollection = localClips.join(" ");
 
             this.setClipCount();
+            if (typeof checkedClips !== "undefined") {
+                this.handleCheckClip(e, annotationIds);
+            }
 
         }
 
-    }
+        if(typeof clipTable !== "undefined"){
+            var viewClipCount = clipTable.rows().nodes().length;
+            $(".viewClipCount").text( viewClipCount );
+        }
+
+        if(typeof checkedClips !== "undefined"){
+            if(checkedClips.length < 1){
+                $(".checkedInfo").hide();
+            }
+            if(checkedClips.length < 2){
+                $(".checkedInfo .plural").hide();
+                $(".checkedInfo .singular").show();
+            }
+        }
+
+    };
+
+    handleCheckClip = (e, ids)=> {
+
+        if ($(e.target).hasClass(".removeSelectedBtn")) {
+            checkedClips = [];
+        } else {
+
+            _.remove(checkedClips, (id)=> {
+                return ids.indexOf(id) > -1;
+            });
+
+        }
+
+        this.setCheckedCount();
+    };
+
+    setCheckedCount = () => {
+        $(".checkedCount").text(checkedClips.length);
+        return checkedClips.length > 0 ? checkedClips.length : 0;
+    };
 
     clipActions(e) {
         var target = e.target;
@@ -125,7 +167,7 @@ export default class ClipHelper {
         //get annotation id to add
         let id = target.getAttribute('data-id');
 
-        if(!id){
+        if (!id) {
             return null
         }
 
@@ -138,7 +180,7 @@ export default class ClipHelper {
 
         } else {
 
-            this.removeClip(id);
+            this.removeClip(e, id);
             target.setAttribute("data-action", "add");
 
         }
@@ -173,3 +215,5 @@ export default class ClipHelper {
     }
 
 }
+
+export default new ClipHelper();

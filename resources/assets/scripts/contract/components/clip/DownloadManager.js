@@ -1,10 +1,9 @@
 import React from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import ClipHelper from "../../clip/clipHelper";
+import clipHelper from "../../clip/clipHelper";
 
-let clipHelper = new ClipHelper();
-
+//let clipHelper = new ClipHelper();
 
 class DownloadManager extends React.Component{
 
@@ -25,13 +24,10 @@ class DownloadManager extends React.Component{
 
     }
 
-
-
     getClipsToDownload = ( ids ) => {
 
         var checkedClips = this.state.clips.filter((annotation)=> {
             let annotation_id = String(annotation.annotation_id);
-
             return ids.indexOf(annotation_id) > -1;
         })
 
@@ -42,38 +38,24 @@ class DownloadManager extends React.Component{
             return this.state.clips;
         }
     }
-
-    getDataToDownloadAsCSV = ( ids )=>{
-
-        let clipsToDownload = this.getClipsToDownload( ids );
-
-        var csvContent = "data:text/csv;charset=utf-8,";
-        var head = [langClip.documentTitle, langClip.country, langClip.year, langClip.annotationCat, langClip.text];
-        csvContent += head.join(',') + "\n";
-        clipsToDownload.map( ( clip ) => {
-            var t = ['"' + clip.name + '"', '"' + clip.country + '"', '"' + clip.year + '"', '"' + clip.category + '"', '"' + clip.text + '"'];
-            csvContent += t.join(',') + "\n";
-        })
-
-        return csvContent
-
-    }
-
     getAnnotationIdsToDownload = ()=>{
 
-        let annotationIds = clipHelper.getLocalClips();
+        if( checkedClips.length > 0 ){
+            return checkedClips;
+        }
 
+        let annotationIds = clipHelper.getLocalClips();
         if(!annotationIds){
             annotationIds = this.state.clips.map( clip=> {
                 return clip.annotation_id;
             })
         }
 
-        return annotationIds?annotationIds:null;
+        return annotationIds;
 
     }
 
-    downloadCSV = () =>{
+    downloadXLS = () =>{
 
         let annotationIds = this.getAnnotationIdsToDownload();
 
@@ -127,24 +109,15 @@ class DownloadManager extends React.Component{
             alert("No clips added. Please add some clips");
             return null;
         }
-    }
-
-
+    };
 
     downloadPDF = () =>{
         let self = this;
         self.setState({
             loadingPDF:true
-        })
+        });
 
-        let annotationIds = clipHelper.getLocalClips();
-
-        if(!annotationIds){
-            annotationIds = this.state.clips.map( clip=> {
-                return clip.annotation_id;
-            })
-        }
-
+        let annotationIds = this.getAnnotationIdsToDownload();
         axios.post( app_url + '/clip/zip?id=' + annotationIds )
             .then( ( response ) => {
                 window.open(response.data, "__blank");
@@ -158,17 +131,17 @@ class DownloadManager extends React.Component{
                     loadingPDF:false
                 })
             })
-    }
+    };
 
     getShareUrl =() => {
         return app_url +"/clip/" + Cookies.get('clip_key');
-    }
+    };
     getFacebookShare = () =>{
         return this.state.facebook_url + this.getShareUrl();
-    }
+    };
     getTwitterShare = () =>{
         return this.state.twitter_url + document.title + '&url=' + this.getShareUrl();
-    }
+    };
 
     handleSaveClip =()=>{
 
@@ -205,9 +178,7 @@ class DownloadManager extends React.Component{
             return null;
         }
 
-
-    }
-
+    };
 
     render() {
         let loadingPDF = this.state.loadingPDF?"(Processing...)":"";
@@ -227,8 +198,8 @@ class DownloadManager extends React.Component{
                 <div className="download-dropdown dropdown-wrapper">
                     <a className="dropdown-toggle"><span className="text">{langClip.download}</span></a>
                     <ul className="dropdown-menu ">
-                        <li><a id="download-clip-filter" onClick={ this.downloadCSV }>{langClip.xls}</a></li>
-                        <li><a id="pdf_downloader" onClick={ this.downloadPDF }>{ langClip.pdfClip } <small><i>{ loadingPDF  }</i></small></a></li>
+                        <li><a id="download-clip-filter" onClick={ this.downloadXLS }>{langClip.xls}</a></li>
+                        <li><a id="pdf_downloader" onClick={ this.downloadPDF }>{ langClip.zip } <small><i>{ loadingPDF  }</i></small></a></li>
                     </ul>
                 </div>
                 <div id="print-clip-filter" onClick={ this.handlePrint }><span className="text">{langClip.printClip}</span></div>

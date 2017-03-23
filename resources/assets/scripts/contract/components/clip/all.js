@@ -3,9 +3,7 @@ import ReactDOM from "react-dom";
 import Contract from "../../contract";
 import _map from "lodash/map";
 import Cookies from "js-cookie";
-import ClipHelper from "../../clip/clipHelper";
-
-let clipHelper = new ClipHelper();
+import clipHelper from "../../clip/clipHelper";
 
 let allClipped = () => {
     if ( localStorage.allClipped === "false" || localStorage.allClipped === undefined ) {
@@ -23,7 +21,7 @@ class All extends Component {
         super(props);
 
         this.state = {
-            allClipped : allClipped()
+            allClipped : false
         }
     }
     clipAllToggle = () => {
@@ -42,9 +40,32 @@ class All extends Component {
                 allClipped: false
             })
         }
-    }
+    };
+
+    componentDidMount(){
+
+        let allClips = clipHelper.getLocalClips();
+        if(allClips) {
+            let allClipped = true;
+            let annotationItem = $(".annotation-item");
+            annotationItem.each((index)=> {
+
+                let id = $(annotationItem[index]).find("button").attr("data-id");
+                if (allClips.indexOf(id) < 0) {
+                    allClipped = false
+                }
+
+            });
+
+            this.setState({
+                allClipped
+            });
+        }
+
+    };
 
     render() {
+
         let id = this.state.allClipped?"remove-all-annotations":"clip-all-annotations";
         return (
             <div className="clearfix">

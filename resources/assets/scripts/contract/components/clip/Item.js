@@ -1,10 +1,9 @@
 import  React from "react";
-import  ClipHelper from "../../clip/clipHelper";
+import  clipHelper from "../../clip/clipHelper";
 import _SortBy from 'lodash/sortBy';
 import _GroupBy from 'lodash/groupBy';
 import _Map from 'lodash/map';
 
-let clipHelper = new ClipHelper();
 
 export default class Item extends React.Component {
     constructor(props) {
@@ -49,28 +48,45 @@ export default class Item extends React.Component {
         return totalWords > this.state.maxWords ? true : false;
     }
 
-    removeClip(e) {
+    removeClip = (e) => {
+
         var remainingClip = $(e.target.closest("table")).find("tbody tr").length;
+        var annotation_id = $(e.target).attr("data-id");
+
         if (remainingClip <= 1) {
-            if (confirm(langClip.no_clip_remain)) {
-                $(e.target.closest("tr")).remove();
-                clipHelper.removeClip($(e.target).attr("data-id"));
+
+            var confirmRemoveClipAll = confirm(langClip.no_clip_remain);
+
+            if (confirmRemoveClipAll) {
+
+                clipTable.row($(e.target).closest("tr")).remove().draw(false);
+
+                clipHelper.removeClip(e, annotation_id);
                 $("#clear-all").hide();
-                $("#clip-annotations").html('<div class="no-record">' + langClip.currently_no_clips + '</div>');
-                $(".viewClipCount").text(parseInt($(".viewClipCount").text()) - 1);
+                $("#clip-annotations .clipMainWrapper").hide();
+                $("#clip-annotations").append('<div class="no-record">' + langClip.currently_no_clips + '</div>');
+
             } else {
-                return null;
+                return null
             }
+
         } else {
-            if (confirm(langClip.remove_clip_confirm)) {
-                $(e.target.closest("tr")).remove();
-                clipHelper.removeClip(e.target.getAttribute("data-id"));
-                $(".viewClipCount").text(parseInt($(".viewClipCount").text()) - 1);
+
+            var confirmRemoveClip = confirm(langClip.remove_clip_confirm);
+
+            if (confirmRemoveClip) {
+
+                clipTable.row($(e.target).closest("tr")).remove().draw(false);
+
+                clipHelper.removeClip(e, annotation_id);
+
             } else {
-                return null;
+                return null
             }
+
         }
-    }
+
+    };
 
     handleText() {
         this.setState({
@@ -139,7 +155,15 @@ export default class Item extends React.Component {
 
         return (
             <tr>
-                <td></td>
+                {
+                    this.state.key ? "" :
+                        < td >
+                            < input type="checkbox"
+                                    className="clipSelect"
+                                    data-id={ this.props.annotation_id }
+                            />
+                        </td>
+                }
                 <td data-title={ langClip.document }>
                     <a href={ docURL }>{ this.props.name }</a>
                 </td>
