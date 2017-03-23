@@ -204,7 +204,7 @@ class DownloadManager extends React.Component{
                 </div>
                 <div id="print-clip-filter" onClick={ this.handlePrint }><span className="text">{langClip.printClip}</span></div>
                 <div className="modal-social-share-wrap social-share share-dropdown dropdown-wrapper">
-                    <a id="save-clipping" className="dropdown-toggle" style={{width:'135px'}} onClick={ this.handleSaveClip }><span className="text">{ shareText }</span></a>
+                    <a id="save-clipping" className="dropdown-toggle" onClick={ this.handleSaveClip }><span className="text">{ shareText }</span></a>
                     <ul className="dropdown-menu">
                         <li className="facebook" style={ savingStyle }>
                             <a href={ this.getFacebookShare() } target="_blank"></a>

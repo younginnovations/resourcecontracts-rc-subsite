@@ -67,13 +67,14 @@ class All extends Component {
     render() {
 
         let id = this.state.allClipped?"remove-all-annotations":"clip-all-annotations";
+        let link = this.state.allClipped?langClip.clear_all_clips:langClip.clip_all;
+
         return (
             <div className="clearfix">
                 <a id={ id }
                    className= "annotation-clip clipToggleElems"
-                   title="Clip all annotations"
                    onClick={ this.clipAllToggle }>
-                    <span className="link">{ langClip.clip_all }</span>
+                    <span className="link">{ link }</span>
                 </a>
             </div>
         );

@@ -1,7 +1,7 @@
 /* ---------  style for clip button and icon -------  */
 
-#clip-panel-title{
-  a{
+#clip-panel-title {
+  a {
     display: inline-block;
     vertical-align: middle;
   }
@@ -38,14 +38,15 @@
   }
 }
 
-#annotation-count/* ,#clear-all */ {
+#annotation-count /* ,#clear-all */
+{
   color: #fff !important;
   background: $color_blue;
   padding: 0 18px 0 36px;
   line-height: 34px;
   position: relative;
 
-  &:before{
+  &:before {
     content: "";
     position: absolute;
     display: inline-block;
@@ -56,7 +57,7 @@
     background: url(#{$img-path}/ic-sprite.svg) no-repeat no-repeat -285px -400px;
   }
 
-  &:hover{
+  &:hover {
     background-color: $color_blue_hover;
   }
 }
@@ -64,31 +65,45 @@
 #clear-all {
   position: relative;
   font: 13px/21px Open-Sans-Light;
-  padding: 0px 15px 0px 40px;
+  padding: 0px 35px 0px 15px;
   display: inline-block;
   text-decoration: none;
   color: $color_link_color;
   margin-left: 8px;
-  &:before{
+  &:before {
     content: "";
     position: absolute;
-    width: 22px;
-    top: 1px;
-    height: 20px;
-    left: 13px;
-    background: url(../images/ic-sprite.svg) no-repeat no-repeat -185px -481px;
+    width: 30px;
+    top: 0px;
+    height: 22px;
+    background: url(../images/ic-sprite.svg) no-repeat no-repeat -179px -542px;
+    right: 0;
   }
 
-  &:hover{
+  &:hover {
     //background-color: $color_danger_hover;
     text-decoration: underline;
   }
 
+  .olc{
+    #clear-all {
+      &:before{
+        background-position: -77px -542px;
+      }
+    }
+  }
+
+  .country{
+    #clear-all {
+      &:before{
+        background-position: -277px -542px;
+      }
+    }
+  }
+
 }
 
-
-
-.annotation-clip-icon,.clip-btn {
+.annotation-clip-icon, .clip-btn {
   text-indent: -9999px;
   height: 20px;
   width: 29px;
@@ -96,40 +111,40 @@
   margin: 2px 0 0;
 }
 
-.annotation-clip-icon{
+.annotation-clip-icon {
   background: transparent url(#{$img-path}/ic-sprite.svg) no-repeat -79px -402px;
 }
 
 .annotation-clip-icon.annotation-clipped,
-.clip-btn.active{
+.clip-btn.active {
   text-indent: -9999px;
   color: $color_blue !important;
 }
 
-.annotation-clip-icon.annotation-clipped{
+.annotation-clip-icon.annotation-clipped {
   background: transparent url(#{$img-path}/ic-sprite.svg) no-repeat  -185px -403px;
 }
 
-.clip-btn{
+.clip-btn {
   background: transparent url(#{$img-path}/ic-sprite.svg) no-repeat  -354px -604px;
   margin-top: 14px;
   width: 20px;
 }
 
-.clip-btn.active{
-  background-position:  -284px -604px;
+.clip-btn.active {
+  background-position: -284px -604px;
 }
 
-.olc .clip-btn.active{
-  background-position:  -78px -604px;
+.olc .clip-btn.active {
+  background-position: -78px -604px;
 }
 
-.rc .clip-btn.active{
-  background-position:  -184px -604px;
+.rc .clip-btn.active {
+  background-position: -184px -604px;
 }
 
 #clip-all-annotations,
-#remove-all-annotations{
+#remove-all-annotations {
   background: transparent;
   color: $color_blue !important;
   padding: 0 34px 0 0px;
@@ -148,7 +163,7 @@
   border: none;
   cursor: pointer;
 
-  &:after{
+  &:after {
     content: "";
     position: absolute;
     right: 0;
@@ -158,22 +173,20 @@
   }
 }
 
-#clip-all-annotations{
-  &:after{
+#clip-all-annotations {
+  &:after {
     background: transparent url(#{$img-path}/ic-sprite.svg) no-repeat -79px -402px;
   }
 }
 
-
-#remove-all-annotations{
-  &:after{
+#remove-all-annotations {
+  &:after {
     background: transparent url(#{$img-path}/ic-sprite.svg) no-repeat  -184px -403px;
   }
 }
 
-
-.annotation-clip:hover{
-  .link{
+.annotation-clip:hover {
+  .link {
     border-bottom: solid 1px $color_blue;
   }
 }
@@ -210,9 +223,8 @@
   }
 }
 
-
-.clip-panel-row{
-  .attached-top-wrapper .panel-title{
+.clip-panel-row {
+  .attached-top-wrapper .panel-title {
     width: calc(100% - 50px);
   }
 }
@@ -254,19 +266,16 @@
   text-indent: -9999px;
   margin: 0 auto;
   display: block;
-  p{
+  p {
     line-height: 33px;
     margin: 0;
   }
 }
 
-
 .popup-wrapper .loading {
   //width: 120px;
   padding-left: 35px;
 }
-
-
 
 .loading, .no-record {
   top: 45%;
@@ -275,10 +284,12 @@
   text-align: center;
 
 }
-.loading{
+
+.loading {
   left: 50%;
   transform: translateX(-50%);
 }
+
 .no-record {
   width: 100%;
   left: 0;
@@ -305,13 +316,13 @@
   }
 }
 
-table td.view-clip>a {
+table td.view-clip > a {
   margin-right: 0;
 }
 
-.delete-clip{
+.delete-clip {
   text-align: center;
-   span {
+  span {
     background: url(../../images/ic-trash.png) no-repeat 0 0;
     display: inline-block;
     text-indent: -9999px;
@@ -322,7 +333,7 @@ table td.view-clip>a {
   }
 }
 
-.annotations-topic-list{
+.annotations-topic-list {
   padding: 8px 0 0 !important;
 }
 
@@ -374,13 +385,13 @@ table td.view-clip>a {
     background: $white url(../../images/ic-print.png) no-repeat 19px;
   }
   #save-clipping {
-    background: $white url(../../images/ic-save.png) no-repeat 21px;
+    background: $white url(../../images/ic-sprite.svg) no-repeat -22px 3px;
   }
 }
 
-#clip-annotations{
-  .action-btn{
-    .social-share{
+#clip-annotations {
+  .action-btn {
+    .social-share {
       margin: 0 10px;
       background: #fff;
       right: auto;
@@ -414,22 +425,22 @@ table td.view-clip>a {
   background-position: 38px 16px;*/
 }
 
-.table-contract-list th[data-sorting="no-sorting"]{
-  &:after{
+.table-contract-list th[data-sorting="no-sorting"] {
+  &:after {
     display: none;
   }
 }
 
-table.dataTable thead .sorting, table.dataTable thead .sorting_desc, table.dataTable thead .sorting_asc{
-  background-image: none!important;
+table.dataTable thead .sorting, table.dataTable thead .sorting_desc, table.dataTable thead .sorting_asc {
+  background-image: none !important;
 }
 
-.table-contract-list tbody td.noClipMsg{
+.table-contract-list tbody td.noClipMsg {
   height: 300px;
   text-align: center;
   background: none;
   vertical-align: middle;
-  padding-left: 0!important;
+  padding-left: 0 !important;
   color: #404040;
   font-size: 14px;
 }
@@ -526,8 +537,8 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_desc, table.dataT
   padding-top: 15px;
 }
 
-.page-clip{
-  .action-btn{
+.page-clip {
+  .action-btn {
     margin-top: -25px;
     margin-right: 24px;
   }
@@ -540,71 +551,71 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_desc, table.dataT
     border-bottom: none;
     margin-bottom: 15px;
     thead > tr > th {
-      span{
+      span {
         color: $color_link-color;
       }
 
-      &:after{
+      &:after {
         display: none;
       }
 
-      &.sorting_asc,&.sorting_desc{
-        &:after{
+      &.sorting_asc, &.sorting_desc {
+        &:after {
 
         }
       }
 
-      a{
-        &:after,&:before{
+      a {
+        &:after, &:before {
           display: none;
         }
       }
     }
-    td{
+    td {
       word-break: break-word;
     }
   }
-  .dataTables_wrapper{
+  .dataTables_wrapper {
     .dataTables_paginate {
       float: none;
       text-align: center;
 
-      a{
+      a {
         text-decoration: none;
-        color: #404040!important;
-        border: none!important;
+        color: #404040 !important;
+        border: none !important;
         font-size: 12px;
 
-        &.last,&.first,&.previous,&.next{
+        &.last, &.first, &.previous, &.next {
           background: transparent;
         }
 
-        &:hover{
-          background: none!important;
-          background-color: transparent!important;
-          color: #404040!important;
-          border: none!important;
+        &:hover {
+          background: none !important;
+          background-color: transparent !important;
+          color: #404040 !important;
+          border: none !important;
         }
 
-        &:active{
+        &:active {
           background: none;
           background-color: transparent;
           box-shadow: none;
         }
 
-        &.current{
+        &.current {
           border: none;
-          color: #fff!important;
+          color: #fff !important;
           background: #404040;
           border-radius: 50%;
 
-          &:hover{
-            color: #fff!important;
-            background: #404040!important;
+          &:hover {
+            color: #fff !important;
+            background: #404040 !important;
           }
         }
 
-        &.disabled{
+        &.disabled {
           opacity: .5;
         }
       }
@@ -613,12 +624,12 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_desc, table.dataT
 }
 
 #clip-annotations {
-  table.dataTable thead th span{
+  table.dataTable thead th span {
     display: inline-block;
     position: relative;
   }
 
-  table.dataTable thead th>span:after {
+  table.dataTable thead th > span:after {
     content: "";
     display: inline-block;
     border-left: 4px solid transparent;
@@ -628,7 +639,7 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_desc, table.dataT
     right: -12px;
     bottom: 6px;
   }
-  table.dataTable thead th>span:before {
+  table.dataTable thead th > span:before {
     content: "";
     display: inline-block;
     border-left: 4px solid transparent;
@@ -639,34 +650,31 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_desc, table.dataT
     bottom: 12px;
   }
 
-  table.dataTable thead th.sorting_asc>span:before{
+  table.dataTable thead th.sorting_asc > span:before {
     border-bottom: 4px solid $color_link-color;
   }
-  table.dataTable thead th.sorting_desc>span:after{
+  table.dataTable thead th.sorting_desc > span:after {
     border-top: 4px solid $color_link-color;
   }
 
-  table.dataTable thead .sorting:after,table.dataTable thead .sorting:before{
+  table.dataTable thead .sorting:after, table.dataTable thead .sorting:before {
     display: none;
   }
 
-  .checkedCount{
+  .checkedCount {
     color: $color_link-color;
     margin-left: 5px;
   }
 }
 
-
-
 #clip-annotations {
   .table.table-contract-list {
-    thead{
-      .document{
+    thead {
+      .document {
         min-width: 120px;
       }
     }
-    .table>tbody>tr td:first-child,
-
+    .table > tbody > tr td:first-child,
     th .count-select {
       padding: 0;
       color: $color_link_color;
@@ -688,19 +696,18 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_desc, table.dataT
 
 }
 
-
-.annotation-left{
+.annotation-left {
   float: left;
   width: calc(100% - 120px);
 }
 
-.annotation-left + .annotation-clip{
+.annotation-left + .annotation-clip {
   margin-top: 0;
   display: none;
 }
 
-.filter-wrapper{
-  .clip-btn{
+.filter-wrapper {
+  .clip-btn {
     position: absolute;
     bottom: -20px;
     right: 291px;
@@ -719,7 +726,7 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_desc, table.dataT
     color: $color_link_color !important;
     min-width: 45px;
 
-    span.icon{
+    span.icon {
       display: inline-block;
       vertical-align: top;
       height: 18px;
@@ -728,47 +735,47 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_desc, table.dataT
       margin-right: 10px;
     }
 
-    &.active{
+    &.active {
       color: $color_link_color !important;
-      span.icon{
+      span.icon {
         background-position: -184px -481px;
       }
     }
   }
-  @media screen and (max-width: 480px){
-    .social-share, .clip-btn, .download-csv{
+  @media screen and (max-width: 480px) {
+    .social-share, .clip-btn, .download-csv {
       height: 34px;
       bottom: -15px;
       margin: 0;
 
-      span.text{
+      span.text {
         display: none;
       }
     }
 
-    .social-share{
-      right: 92px!important;
-      >a{
+    .social-share {
+      right: 92px !important;
+      > a {
         padding: 13px 30px 13px 30px;
         background-position: -20px -2px;
         height: 100%;
       }
     }
 
-    .download-csv{
-      right: 15px!important;
-      >a{
+    .download-csv {
+      right: 15px !important;
+      > a {
         padding: 13px 30px 13px 30px;
         background-position: -152px -44px;
         height: 100%;
       }
     }
 
-    .clip-btn{
-      right: 169px!important;
+    .clip-btn {
+      right: 169px !important;
       padding: 7px 18px;
-      background-position: -165px -474px!important;
-      span.icon{
+      background-position: -165px -474px !important;
+      span.icon {
         margin-right: 0;
       }
     }
@@ -776,10 +783,9 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_desc, table.dataT
 
 }
 
-.clipShare ul.social-toggle li>a {
+.clipShare ul.social-toggle li > a {
   height: 40px;
 }
-
 
 span.required {
   color: #E21616;
@@ -796,16 +802,16 @@ span.required {
   }
 }
 
-.social-toggle{
+.social-toggle {
   list-style: none;
 }
 
-#clip-annotations{
+#clip-annotations {
   min-height: 500px;
 }
 
-.actions{
-  .view{
+.actions {
+  .view {
     background: url(../../images/ic-view.png) no-repeat 0 0;
     display: inline-block;
     width: 18px;
@@ -814,86 +820,86 @@ span.required {
     margin-left: 6px;
   }
 
-  .delete{
-    background: url(../../images/ic-trash.png) no-repeat 0 0;
+  .delete {
+    background: url(../../images/ic-sprite.svg) no-repeat -358px -540px;
     display: inline-block;
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     cursor: pointer;
     margin-left: 6px;
+    transform: scale(0.9);
+    display: none;
   }
-  
-  .tooltip{
+
+  .tooltip {
     border: none;
-    
-    .tooltip-inner{
+
+    .tooltip-inner {
       background: $color_link-color;
       font-size: 12px;
     }
 
-    .tooltip-arrow{
+    .tooltip-arrow {
       border-top-color: $color_link-color;
     }
   }
 }
 
-
 /* ------ style for clear all clip --------- */
 
-
 /** TOGGLING CLIPPING STYLE **/
-.clippingOff{
-  .clipToggleElems{
-    visibility: hidden!important;
+.clippingOff {
+  .clipToggleElems {
+    visibility: hidden !important;
   }
 }
 
-.clipToggleElems{
+.clipToggleElems {
   opacity: 0;
 }
 
-@media(min-width: 768px){
-  .clip-panel-row .panel-top-content{
+@media(min-width: 768px) {
+  .clip-panel-row .panel-top-content {
     min-height: 67px;
   }
 }
 
-.no-record{
+.no-record {
   position: absolute;
   top: 45%;
   width: 100%;
   text-align: center;
 }
 
-.clipMainWrapper{
-  transform: none!important;
+.clipMainWrapper {
+  transform: none !important;
 }
 
-.checkedInfo{
+.checkedInfo {
   padding: 30px 15px 10px 15px;
   background: #F5F5F5;
   text-align: center;
   margin-top: -35px;
-  border-bottom: 1px solid rgba(188,188,188,0.5);
+  border-bottom: 1px solid rgba(188, 188, 188, 0.5);
   line-height: 18px;
-  .info{
+  .info {
     display: inline-block;
     vertical-align: top;
     margin-top: 5px;
   }
 
-  @media screen and (max-width:800px){
+  @media screen and (max-width: 800px) {
     margin-right: -15px;
     margin-left: -15px;
   }
 
-  @media screen and (max-width:767px){
+  @media screen and (max-width: 767px) {
     font-size: 12px;
     margin-bottom: 25px;
   }
 }
 
-.bulk_actions{
+.bulk_actions {
   display: inline-block;
   vertical-align: top;
   margin-left: 10px;
@@ -901,14 +907,14 @@ span.required {
 
 }
 
-.removeSelectedBtn{
+.removeSelectedBtn {
   padding: 5px 10px;
   background: #ddd;
   border: none;
   border-radius: 3px;
   cursor: pointer;
   margin-left: 10px;
-  span{
+  span {
     display: inline-block;
     vertical-align: top;
     height: 18px;
@@ -917,32 +923,32 @@ span.required {
     margin-right: 7px;
     transform: scale(0.8);
   }
-  &:hover{
+  &:hover {
     background: #d5d5d5;
   }
 }
 
-.checkAllClips{
+.checkAllClips {
   text-decoration: underline;
   cursor: pointer;
 }
 
-.clearChecked{
+.clearChecked {
   text-decoration: underline;
   cursor: pointer;
 }
-
 
 //HIDE CLIPPING IN SEARCH RESULT PAGE
 .table-contract-list {
-  .clipToggleElems{
-    display: none!important;
+  .clipToggleElems {
+    display: none !important;
   }
 }
 
-.filter-wrapper .clip-btn{
-  display: none!important;
+.filter-wrapper .clip-btn {
+  display: none !important;
 }
-.contract_page_actions .clip-btn, .contract_page_actions .clip-btn.active{
-  display: none!important;
+
+.contract_page_actions .clip-btn, .contract_page_actions .clip-btn.active {
+  display: none !important;
 }

@@ -370,7 +370,7 @@
       }
     }
     td:first-child {
-      overflow: hidden;
+      //overflow: hidden;
     }
   }
 
@@ -540,7 +540,7 @@
 
   .action-btn #save-clipping{
     width: 60px!important;
-    background-position: 21px;
+    background-position: -20px -3px;
   }
 
   .dataTables_wrapper .dataTables_paginate .paginate_button{
