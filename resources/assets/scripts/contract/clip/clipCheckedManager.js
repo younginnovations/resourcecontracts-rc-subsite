@@ -2,9 +2,6 @@ import _ from "lodash";
 import clipHelper from './clipHelper';
 
 export default class ClipCheckedManager {
-    constructor() {
-
-    }
 
     body = $("body");
 
@@ -43,12 +40,9 @@ export default class ClipCheckedManager {
         let annotation_id = elem.attr("data-id");
 
         if (checked) {
-
             _.includes(checkedClips, annotation_id) ? false : checkedClips.push(annotation_id);
-
             elem.addClass("selected");
             elem.parents("tr").css("background-color", "#f7f7f7").addClass("selectedRow");
-
         } else {
             elem.removeClass("selected");
             checkedClips = checkedClips.filter(function (id) {
@@ -57,7 +51,6 @@ export default class ClipCheckedManager {
 
             elem.parents("tr").css("background-color", "transparent").removeClass("selectedRow");
             this.elems.checkedInfo.hide();
-
         }
 
         if (clipHelper.setCheckedCount() > 0) {
@@ -78,7 +71,6 @@ export default class ClipCheckedManager {
         e.stopPropagation();
         const self = this;
         let checked = e.target.checked;
-
         var currentRows = clipTable.rows().nodes();
         if (checked) {
             if (typeof checkedClips !== "undefined") {
@@ -86,7 +78,6 @@ export default class ClipCheckedManager {
                     $(row).find(".clipSelect").prop("checked", true).trigger("change");
                     $(row).css("background-color", "#f7f7f7").addClass("selectedRow");
                 });
-
             }
         } else {
             currentRows.each(function (row) {
@@ -94,30 +85,33 @@ export default class ClipCheckedManager {
                 $(row).find(".clipSelect").prop("checked", false).trigger("change");
                 $(row).css("background-color", "transparent").removeClass("selectedRow");
             });
-
         }
-
 
         clipHelper.setCheckedCount();
         $(".checkAllClips span").text(clipHelper.getLocalClips() ? clipHelper.getLocalClips().length : 0);
     };
 
-
     deleteChecked = (e)=> {
         var confirmDeleteSelected = confirm(langClip.confirm_remove_selected);
-        if (confirmDeleteSelected) {
 
-            let selectedRow = $(".selectedRow");
-            clipTable.rows('.selectedRow').remove().draw(false);
+        if (!confirmDeleteSelected) {
+            return false;
+        }
 
-            clipHelper.removeClip(e, checkedClips);
-            var remainingClips = clipTable.rows().nodes().length;
+        let selectedRow = $(".selectedRow");
+        clipTable.rows('.selectedRow').remove().draw(false);
 
-            if (remainingClips < 1) {
-                $("#clear-all").hide();
-                $("#clip-annotations .clipMainWrapper").hide();
-                $("#clip-annotations").append('<div class="no-record">' + langClip.currently_no_clips + '</div>');
-            }
+        clipHelper.removeClip(e, checkedClips);
+
+        this.elems.checkedInfo.hide();
+        this.elems.checkAllVisible.prop("checked", false).trigger("change");
+
+        var remainingClips = clipTable.rows().nodes().length;
+
+        if (remainingClips < 1) {
+            $("#clear-all").hide();
+            $("#clip-annotations .clipMainWrapper").hide();
+            $("#clip-annotations").append('<div class="no-record">' + langClip.currently_no_clips + '</div>');
         }
     };
 }

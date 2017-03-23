@@ -22,7 +22,7 @@ var theme_olc = [
     './resources/assets/scss/themes/olc.scss',
 ];
 
-var theme_tn = [
+var theme_blue_style = [
     './resources/assets/scss/themes/countries/tn.scss',
 ];
 
@@ -109,8 +109,8 @@ gulp.task('olc', function () {
         .pipe(gulp.dest('./public/css'));
 });
 
-gulp.task('tn', function () {
-    return gulp.src(theme_tn)
+gulp.task('theme_blue', function () {
+    return gulp.src(theme_blue_style)
         .pipe(sourcemaps.init())
         .pipe(sass())
         .pipe(postcss([autoprefixer({browsers: ['last 30 versions', '> 1%', 'ie 8', 'ie 7']})]))

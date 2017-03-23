@@ -4,7 +4,8 @@
 			{!! nl2br(getOptionText('footer_text')) !!}
 		</p>
 		<div class="partner-wrapper clearfix">
-			<div @if(\Request::url() == url() && !site()->isCountrySite()) style="margin: 30px 0px;" @endif class="mini__menu clearfix">
+			<div @if(\Request::url() == url() && !site()->isCountrySite()) style="margin: 30px 0px;"
+				 @endif class="mini__menu clearfix">
 				<div class="partner-inner">
 					@if(\Request::url() != url() || site()->isCountrySite())
 						<div class="partner-inner-each">
@@ -15,20 +16,23 @@
 										   class="img-responsive logo__nrgi"
 										   target="_blank"></a>
 									</li>
-								@endif
-								<li>
-									<a href="http://ccsi.columbia.edu/" class="img-responsive logo__cu"
-									   target="_blank"></a>
-								</li>
-								@if(site()->isCategory('rc'))
-									<li>
-										<a href="http://www.worldbank.org/en/topic/governance"
-										   class="img-responsive logo__wb"
-										   target="_blank"></a>
-									</li>
+									@if(site()->isCategory('rc'))
+										<li>
+											<a href="http://www.worldbank.org/en/topic/governance"
+											   class="img-responsive logo__wb"
+											   target="_blank"></a>
+										</li>
+										@if(env('APP_DEBUG'))
+											<a href="http://openoil.net"
+											   class="img-responsive logo__oo"
+											   target="_blank">
+											</a>
+										@endif
+									@endif
 								@endif
 							</ul>
 						</div>
+
 						<div class="partner-inner-each">
 							<ul>
 								<li>

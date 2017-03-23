@@ -107,6 +107,13 @@ $image_intro = site()->getImageUrl('intro_bg');
 						   target="_blank">
 							<img src="{{url('images/WORLDBANK_logo.png')}}" alt="World Bank">
 						</a>
+
+						@if(env('APP_DEBUG'))
+						<a href="http://openoil.net"
+						   target="_blank">
+							<img src="{{url('images/OO_logo.png')}}" alt="Open Oil">
+						</a>
+						@endif
 					</div>
 					<div class="donors">
 						<p>@lang('global.donors')</p>

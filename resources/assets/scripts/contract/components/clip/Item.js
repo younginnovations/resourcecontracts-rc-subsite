@@ -158,14 +158,14 @@ export default class Item extends React.Component {
             <tr>
                 {
                     this.state.key ? "" :
-                        < td >
+                        < td className="checkbox_row">
                             < input type="checkbox"
                                     className="clipSelect"
                                     data-id={ this.props.annotation_id }
                             />
                         </td>
                 }
-                <td data-title={ langClip.document }>
+                <td data-title={ langClip.document } className="document_title">
                     <a href={ docURL }>{ this.props.name }</a>
                 </td>
                 <td data-title={ langClip.category }>

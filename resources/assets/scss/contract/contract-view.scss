@@ -1406,7 +1406,7 @@ html.overflow-hidden{
   background: #fff;
   transition: all 0.1s ease;
   text-align: center;
-  padding: 45px 0 0 0;
+  padding: 60px 0 0 0;
 
   .pdf-annotator {
     width: 100%;
@@ -1429,4 +1429,28 @@ html.overflow-hidden{
 
 .add-more-highlight{
   font-weight: bold;
+}
+
+// text view style from inline of contract/view.blade.php
+.text-viewer > span {
+  min-height: 400px;
+}
+
+#contract .loader {
+  margin: 200px auto;
+  text-align: center;
+  width: 350px;
+}
+
+.text-viewer-warning .download-dropdown {
+  display: inline-block;
+  float: none;
+  margin: 0px;
+  padding: 0px;
+  width: 40px;
+  margin-left: -17px;
+}
+
+.text-viewer-warning .download-dropdown span {
+  height: 20px;
 }

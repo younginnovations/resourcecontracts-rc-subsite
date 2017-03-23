@@ -1,31 +1,7 @@
 @extends('layout.app-full')
 
 @section('css')
-	<link rel="stylesheet" href="{{ url('css/contract.css?v=1.01') }}">
-	<style>
-		.text-viewer > span {
-			min-height: 400px;
-		}
-
-		#contract .loader {
-			margin: 200px auto;
-			text-align: center;
-			width: 350px;
-		}
-
-		.text-viewer-warning .download-dropdown {
-			display: inline-block;
-			float: none;
-			margin: 0px;
-			padding: 0px;
-			width: 40px;
-			margin-left: -17px;
-		}
-
-		.text-viewer-warning .download-dropdown span {
-			height: 20px;
-		}
-	</style>
+	<link rel="stylesheet" href="{{ url('css/contract.css?v=1.03') }}">
 	<script>
 		var slowConnection = false;
 		var timeout = setTimeout(function () {
