@@ -37,10 +37,17 @@ class Item extends Component {
         });
     }
 
-    handleClick() {
+    handleClick(e) {
+        e.preventDefault();
+
         if (this.props.result.type == 'annotation') {
             Contract.setIsSearch(true);
-            location.hash = "#/" + this.props.result.annotation_type + "/page/" + this.props.result.page_no + "/annotation/" + this.props.result.annotation_id;
+            if (Contract.getCurrentPage() == this.props.result.page_no) {
+                location.hash = "#/" + this.props.result.annotation_type + "/page/" + this.props.result.page_no + "/annotation/" + this.props.result.id;
+                Contract.showPopup(this.props.result.id);
+            } else {
+                location.hash = "#/" + this.props.result.annotation_type + "/page/" + this.props.result.page_no + "/annotation/" + this.props.result.id;
+            }
         } else if (Contract.getView() == 'pdf' && this.props.result.type == 'text') {
             Contract.setIsSearch(true);
             Contract.setCurrentPage(this.props.result.page_no);

@@ -83,7 +83,6 @@ if ($route == "contracts" && isset($url['year'])) {
 								data-html="true"
 								data-content="@lang('clip.clip_contract')">Clip
 						</button>
-
 					@endif
 					<div class="search-text">
 						@if(isset($contract->text) && $contract->text !='')
