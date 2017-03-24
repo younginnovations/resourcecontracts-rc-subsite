@@ -41,7 +41,13 @@ class ImageService
      */
     function getName($type, $ext = 'jpg')
     {
-        $fileName = site()->getSiteKey().'/'.$type.'.'.$ext;
+        $key = site()->getSiteKey();
+
+        if (site()->isCategory('olc')) {
+            $key .= '-olc';
+        }
+        
+        $fileName = $key.'/'.$type.'.'.$ext;
 
         return $fileName;
     }

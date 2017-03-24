@@ -7,3 +7,8 @@ server{
     server_name drc.openlandcontracts.com;
     return 301 http://drc.openlandcontracts.org$request_uri;
 }
+
+server{
+    server_name tanzania.openlandcontracts.com;
+    return 301 http://tanzania.openlandcontracts.org$request_uri;
+}

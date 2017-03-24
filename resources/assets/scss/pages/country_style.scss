@@ -15,18 +15,33 @@ body.country{
     width: auto;
   }
 
+  .navbar-brand, .navbar-brand:hover{
+    @media screen and(max-width: 767px){
+      font-size: 18px;
+    }
+  }
+
   .petroleum-mineral{
     max-width: 720px;
-    width: auto;
+    //width: auto;
     display: inline-block;
     padding: 50px;
     min-height: initial;
+    word-break: break-word;
     .repo-description{
-      font-size: 54px;
-      line-height: 55px;
+      font-size: 48px;
+      line-height: 60px;
       font-family: Open-Sans-Light;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
       color: #eee;
+      small{
+        font-size: 32px;
+
+        @media screen and (max-width: 767px){
+          font-size: 24px;
+        }
+
+      }
     }
 
     .large-title {
@@ -54,7 +69,7 @@ body.country{
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0,0,0, 0.3);
+    background: rgba(0,0,0, 0.1);
   }
 }
 
@@ -63,8 +78,8 @@ body.country{
   body.country{
     .petroleum-mineral{
       .repo-description, .large-title > span{
-        font-size: 42px;
-        line-height: 45px;
+        font-size: 32px;
+        line-height: 40px;
       }
     }
   }

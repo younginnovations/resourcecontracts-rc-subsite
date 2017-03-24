@@ -7,5 +7,5 @@
 	@if(site()->isOLC())
 		<span class="beta">Beta</span>
 	@endif
-	<span>@if(site()->isCountrySite()) Resource @endif Contracts</span>
+	<span>@if(site()->isCountrySite()) {{site()->meta('type')}} @endif Contracts</span>
 </a>

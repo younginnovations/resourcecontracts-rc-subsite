@@ -36,13 +36,17 @@ class PageController extends BaseController
      */
     public function about()
     {
-        $page      = $this->page->get('about');
+        $page = $this->page->get('about');
+
+        if (is_null($page)) {
+            abort(404);
+        }
 
         $meta = [
-            'title' => $page->title()
+            'title' => $page->title(),
         ];
 
-        return view('page.master', compact('page',  'meta'));
+        return view('page.master', compact('page', 'meta'));
     }
 
     /**
@@ -52,14 +56,18 @@ class PageController extends BaseController
      */
     public function contact()
     {
-        $page      = $this->page->get('contact');
+        $page = $this->page->get('contact');
+
+        if (is_null($page)) {
+            abort(404);
+        }
 
         $meta = [
             'title'       => $page->title(),
-            'description' => 'Please send your questions, comments, and feedback by email at ' . site()->contactEmail()
+            'description' => 'Please send your questions, comments, and feedback by email at '.site()->contactEmail(),
         ];
 
-        return view('page.master', compact('page',  'meta'));
+        return view('page.master', compact('page', 'meta'));
     }
 
     /**
@@ -69,14 +77,18 @@ class PageController extends BaseController
      */
     public function resources()
     {
-        $page      = $this->page->get('guides');
+        $page = $this->page->get('guides');
+
+        if (is_null($page)) {
+            abort(404);
+        }
 
         $meta = [
             'title'       => $page->title(),
-            'description' => 'Guides and documents providing further information on reading, understanding, and assessing land contracts.'
+            'description' => 'Guides and documents providing further information on reading, understanding, and assessing land contracts.',
         ];
 
-        return view('page.master', compact('page',  'meta'));
+        return view('page.master', compact('page', 'meta'));
     }
 
     /**
@@ -86,15 +98,19 @@ class PageController extends BaseController
      */
     public function faqs()
     {
-        $page      = $this->page->get('faqs');
+        $page = $this->page->get('faqs');
+
+        if (is_null($page)) {
+            abort(404);
+        }
 
         $meta = [
             'title'       => $page->title(),
-            'description' => 'Frequently Asked Questions about' . site()->meta('name') .', an online repository of publicly available
-            contracts for large-scale land, agriculture, and forestry projects.'
+            'description' => 'Frequently Asked Questions about'.site()->meta('name').', an online repository of publicly available
+            contracts for large-scale land, agriculture, and forestry projects.',
         ];
 
-        return view('page.faq', compact('page',  'meta'));
+        return view('page.faq', compact('page', 'meta'));
     }
 
     /**
@@ -104,15 +120,18 @@ class PageController extends BaseController
      */
     public function glossary()
     {
-        $page      = $this->page->get('glossary');
+        $page = $this->page->get('glossary');
+
+        if (is_null($page)) {
+            abort(404);
+        }
 
         $meta = [
             'title'       => $page->title(),
-            'description' => 'A glossary of key terms to help navigate contracts and conduct analysis.'
+            'description' => 'A glossary of key terms to help navigate contracts and conduct analysis.',
         ];
 
-        return view('page.master', compact('page',  'meta'));
-
+        return view('page.master', compact('page', 'meta'));
     }
 
     /**
@@ -122,13 +141,18 @@ class PageController extends BaseController
      */
     public function countrySites()
     {
-        $page      = $this->page->get('country-sites');
+        $page = $this->page->get('country-sites');
+
+        if (is_null($page)) {
+            abort(404);
+        }
+
         $meta = [
             'title'       => $page->title(),
-            'description' => 'Learn more about disclosing contracts on' . site()->meta('name') .', and how we can support host governments, investors, and other relevant stakeholders in their efforts to disclose contracts.'
+            'description' => 'Learn more about disclosing contracts on'.site()->meta('name').', and how we can support host governments, investors, and other relevant stakeholders in their efforts to disclose contracts.',
         ];
 
-        return view('page.master', compact('page',  'meta'));
+        return view('page.master', compact('page', 'meta'));
     }
 
 }
