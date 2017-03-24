@@ -93,6 +93,15 @@ class Viewer extends Component {
     render() {
         let content = (<div className="message">{LANG.wait_while_loading}</div>);
         let disclaimer = "";
+        let slowConnectionMessage = null;
+
+        if (slowConnection) {
+            slowConnectionMessage = (<div className="text-viewer-warning">
+                <span onClick={this.handleClickWarning} className="pull-right close">X</span>
+                <span
+                    dangerouslySetInnerHTML={ {__html: LANG.contract.slow_connection_message.replace('[gif]','<div  class="download-dropdown"><span>Download</span></div>')}}></span>
+            </div>);
+        }
 
         if (!this.state.isLoading) {
             content = this.renderPages();
@@ -107,6 +116,7 @@ class Viewer extends Component {
         }
         return (
             <div className="text-panel">
+                {slowConnectionMessage}
                 {disclaimer}
                 <div className="text-annotator">
                     <div></div>

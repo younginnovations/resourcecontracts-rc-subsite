@@ -12,8 +12,22 @@
 			text-align: center;
 			width: 350px;
 		}
+
+		.text-viewer-warning .download-dropdown {
+			display: inline-block;
+			float: none;
+			margin: 0px;
+			padding: 0px;
+			width: 40px;
+			margin-left: -17px;
+		}
+
+		.text-viewer-warning .download-dropdown span {
+			height: 20px;
+		}
 	</style>
 	<script>
+		var slowConnection = false;
 		var timeout = setTimeout(function () {
 			if (window.location.hash.indexOf('text') < 0) {
 				if (window.location.hash.indexOf('pdf') > 0) {
@@ -21,7 +35,8 @@
 				} else {
 					document.location.href = window.location.pathname + '#/text';
 				}
-				document.getElementById('loader').innerHTML = '<div class="text-viewer-warning"><img src="{{url('images/loading.gif')}}"> @lang('contract.loading_redirect')</div>';
+				slowConnection = true;
+				document.getElementById('loader').innerHTML = '<img src="{{url('images/loading.gif')}}"> @lang('contract.loading_redirect')';
 			}
 		}, 25000);
 	</script>
