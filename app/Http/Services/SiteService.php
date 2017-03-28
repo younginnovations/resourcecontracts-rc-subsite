@@ -315,6 +315,6 @@ class SiteService
     {
         $config = $this->getConfig($key);
 
-        return empty($config) ? false : true;
+        return is_string($config) ? false : true;
     }
 }
