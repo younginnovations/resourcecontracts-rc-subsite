@@ -66,7 +66,7 @@
 		LANG.disclosure = {!! json_encode(trans('codelist/disclosure')) !!};
 		LANG.contract = {!! json_encode(trans('contract')) !!};
 		LANG.contract_type = {!! json_encode(trans('codelist/contract_type')) !!};
-
+		LANG.current = '{!! app('translator')->getLocale() !!}';
 		var debug = function () {
 			if (config.debug) {
 				console.log("---------------------------");
