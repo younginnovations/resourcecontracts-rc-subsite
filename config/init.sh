@@ -54,5 +54,19 @@ envsubst '$SERVER_NAME $CATEGORY'< ./nginx_subsite.template > /etc/nginx/sites-e
 export CATEGORY=olc
 envsubst < ./env.template > /var/www/country-drc/.env
 
+
+#country-tanzania
+export SERVER_NAME="tanzania.openlandcontracts.org *.tanzania.openlandcontracts.org"
+export TRACKING_ID=${TZ_TRACKING_ID}
+export DB_DATABASE=${COUNTRY_DB_DATABASE}
+export CONTACT_MAIL=${TZ_CONTACT_MAIL}
+export COUNTRY=tz
+
+export CATEGORY=country-tz
+envsubst '$SERVER_NAME $CATEGORY'< ./nginx_subsite.template > /etc/nginx/sites-enabled/country-tz
+
+export CATEGORY=olc
+envsubst < ./env.template > /var/www/country-tz/.env
+
 #log_files
 envsubst '${DEPLOYMENT_TYPE}' < ./log_files.yml.template > /etc/log_files.yml

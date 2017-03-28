@@ -50,6 +50,18 @@ class SiteService
     }
 
     /**
+     * Determine if site has category
+     *
+     * @param $category
+     *
+     * @return bool
+     */
+    public function isCategory($category)
+    {
+        return (strtolower($category) == strtolower($this->getCategory()));
+    }
+
+    /**
      * Get Country Code
      *
      * @return string
@@ -107,15 +119,21 @@ class SiteService
      */
     public function meta($property = null)
     {
-        $key  = $this->getSiteType();
+        $key = $this->getSiteType();
+
+        if ($this->isCountrySite() && $this->hasConfigFile($this->getCountryCode())) {
+            $key = $this->getCountryCode();
+        }
+
         $data = $this->getConfig($key);
+
         if ($this->isCountrySite()) {
             $country         = $this->getCountryDetail();
-            $data['name']    = $country['name'];
-            $data['title']   = $country['name'];
+            $data['title']   = $data['name'] = isset($data['name']) ? $data['name'] : $country['name'];
+            $data['type']    = $this->isCategory('rc') ? 'Resource' : 'Open Land';
             $data['logo']    = $country['flag'];
-            $data['about']   = str_replace(':name', $country['name'], $data['about']);
-            $data['tagline'] = str_replace(':name', $country['name'], $data['tagline']);
+            $data['about']   = str_replace(':name', $data['name'], $data['about']);
+            $data['tagline'] = str_replace(':name', $data['name'], $data['tagline']);
         }
 
         if (is_null($property)) {
@@ -138,7 +156,7 @@ class SiteService
      */
     public function getConfig($key)
     {
-        return trans(sprintf("meta/%s", $key));
+        return trans(sprintf("meta/%s", strtolower($key)));
     }
 
     /**
@@ -256,6 +274,16 @@ class SiteService
     }
 
     /**
+     * Determine if clip is on or not
+     *
+     * @return bool
+     */
+    function isClipEnabled()
+    {
+        return (config('clip') == true);
+    }
+
+    /**
      * Get Country Detail
      *
      * @return array
@@ -277,12 +305,16 @@ class SiteService
     }
 
     /**
-     * Determine if clip is on or not
+     * Determine if config file is exist or not
+     *
+     * @param $key
      *
      * @return bool
      */
-    function isClipEnabled()
+    protected function hasConfigFile($key)
     {
-        return (config('clip') == true);
+        $config = $this->getConfig($key);
+
+        return empty($config) ? false : true;
     }
 }

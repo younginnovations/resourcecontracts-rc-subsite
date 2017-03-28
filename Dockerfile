@@ -94,14 +94,20 @@ RUN composer dump-autoload --optimize \
  && chmod -R 777 /var/www/country-tn/storage \
  && chmod -R 777 /var/www/country-tn/public \
  && touch /var/www/country-tn/.env \
-
- #country site -- drc
-  && mkdir -p /var/www/country-drc \
-  && cp -R /var/container_init/site_content/. /var/www/country-drc \
-  && gulp --cwd /var/www/country-drc tn \
-  && chmod -R 777 /var/www/country-drc/storage \
-  && chmod -R 777 /var/www/country-drc/public \
-  && touch /var/www/country-drc/.env \
+#country site -- Congo / drc
+ && mkdir -p /var/www/country-drc \
+ && cp -R /var/container_init/site_content/. /var/www/country-drc \
+ && gulp --cwd /var/www/country-drc tn \
+ && chmod -R 777 /var/www/country-drc/storage \
+ && chmod -R 777 /var/www/country-drc/public \
+ && touch /var/www/country-drc/.env \
+#country site -- Tanzania /tz
+ && mkdir -p /var/www/country-tz \
+ && cp -R /var/container_init/site_content/. /var/www/country-tz \
+ && gulp --cwd /var/www/country-tz tn \
+ && chmod -R 777 /var/www/country-tz/storage \
+ && chmod -R 777 /var/www/country-tz/public \
+ && touch /var/www/country-tz/.env \
 
 #cleanup
  && rm -r /var/container_init/site_content

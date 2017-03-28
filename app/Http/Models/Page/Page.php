@@ -17,7 +17,64 @@ class Page extends Model
      */
     protected $fillable = ['title', 'slug', 'content', 'country'];
 
+    /**
+     * @var array
+     */
     protected $casts = ['title' => 'object', 'content' => 'object'];
+
+    /**
+     *
+     * @return void|bool
+     */
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(
+            function ($page) {
+                if (site()->isCountrySite()) {
+                    $page->country = static::getDBKey();
+                }
+
+                return true;
+            }
+        );
+
+        static::updating(
+            function ($page) {
+                if (site()->isCountrySite()) {
+                    $page->country = static::getDBKey();
+                }
+
+                return true;
+            }
+        );
+
+        static::deleting(
+            function ($page) {
+                if (site()->isCountrySite()) {
+                    $page->country = static::getDBKey();
+                }
+
+                return true;
+            }
+        );
+    }
+
+    /**
+     * Get Database Key
+     *
+     * @return string
+     */
+    static protected function getDBKey()
+    {
+        $country = strtolower(site()->getCountryCode());
+
+        if (site()->isCategory('olc')) {
+            $country = $country.'-'.'olc';
+        }
+
+        return $country;
+    }
 
     /**
      * Get Page Title
@@ -55,48 +112,10 @@ class Page extends Model
     public function scopeCountry($query)
     {
         if (site()->isCountrySite()) {
-            return $query->where('country', strtolower(site()->getCountryCode()));
+            return $query->where('country', static::getDBKey());
         }
 
         return $query;
-    }
-
-    /**
-     *
-     * @return void|bool
-     */
-    public static function boot()
-    {
-        parent::boot();
-        static::creating(
-            function ($page) {
-                if (site()->isCountrySite()) {
-                    $page->country = strtolower(site()->getCountryCode());
-                }
-
-                return true;
-            }
-        );
-
-        static::updating(
-            function ($page) {
-                if (site()->isCountrySite()) {
-                    $page->country = strtolower(site()->getCountryCode());
-                }
-
-                return true;
-            }
-        );
-
-        static::deleting(
-            function ($page) {
-                if (site()->isCountrySite()) {
-                    $page->country = strtolower(site()->getCountryCode());
-                }
-
-                return true;
-            }
-        );
     }
 
 }
