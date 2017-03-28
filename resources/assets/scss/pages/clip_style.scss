@@ -135,14 +135,6 @@
   background-position: -284px -604px;
 }
 
-.olc .clip-btn.active {
-  background-position: -78px -604px;
-}
-
-.rc .clip-btn.active {
-  background-position: -184px -604px;
-}
-
 #clip-all-annotations,
 #remove-all-annotations {
   background: transparent;
@@ -541,6 +533,9 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_desc, table.dataT
   .action-btn {
     margin-top: -25px;
     margin-right: 24px;
+    @media screen and (max-width: 480px){
+      margin-top: -18px;
+    }
   }
 }
 
@@ -896,6 +891,10 @@ span.required {
   @media screen and (max-width: 767px) {
     font-size: 12px;
     margin-bottom: 25px;
+  }
+  @media screen and (max-width:480px){
+    margin-top: -40px;
+    margin-bottom: 0px;
   }
 }
 

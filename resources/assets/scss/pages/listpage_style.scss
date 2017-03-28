@@ -10,13 +10,19 @@
       td {
         @extend %extend_1;
         color: rgba(64, 64, 64, 0.7);
+        &.document_title{
+          color: #404040;
+        }
         &.no-data {
           background: none !important;
           padding-left: 30px !important;
           border: 0;
           min-width: inherit;
           width: inherit;
-          border: 0;
+        }
+        .checkbox{
+          margin-top: 0;
+
         }
         > a {
           color: $color_cape_cod_approx;
@@ -73,7 +79,7 @@
     display: inline-block;
   }
   tr:first-of-type td {
-    border: 0;
+    //border: 0;
   }
 }
 
@@ -204,7 +210,10 @@
   td {
     font-size: 12px;
 
-    &.documentTitle{
+    &.documentTitle {
+      color: $color_cape_cod_70_approx;
+    }
+    &.document_title {
       font-size: 14px;
     }
     > ul {

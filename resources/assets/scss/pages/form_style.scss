@@ -378,6 +378,12 @@
   }
 }
 
+@media (max-width: 480px) {
+  .adv_search_toogle {
+    bottom: -74px;
+  }
+}
+
 .country-list-wrapper {
   .search-input-wrapper {
     border: none;

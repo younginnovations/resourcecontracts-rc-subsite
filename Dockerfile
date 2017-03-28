@@ -90,21 +90,21 @@ RUN composer dump-autoload --optimize \
 #country site -- Tunisia / tn
  && mkdir -p /var/www/country-tn \
  && cp -R /var/container_init/site_content/. /var/www/country-tn \
- && gulp --cwd /var/www/country-tn tn \
+ && gulp --cwd /var/www/country-tn theme_blue \
  && chmod -R 777 /var/www/country-tn/storage \
  && chmod -R 777 /var/www/country-tn/public \
  && touch /var/www/country-tn/.env \
 #country site -- Congo / drc
  && mkdir -p /var/www/country-drc \
  && cp -R /var/container_init/site_content/. /var/www/country-drc \
- && gulp --cwd /var/www/country-drc tn \
+ && gulp --cwd /var/www/country-drc theme_blue \
  && chmod -R 777 /var/www/country-drc/storage \
  && chmod -R 777 /var/www/country-drc/public \
  && touch /var/www/country-drc/.env \
 #country site -- Tanzania /tz
  && mkdir -p /var/www/country-tz \
  && cp -R /var/container_init/site_content/. /var/www/country-tz \
- && gulp --cwd /var/www/country-tz tn \
+ && gulp --cwd /var/www/country-tz theme_blue \
  && chmod -R 777 /var/www/country-tz/storage \
  && chmod -R 777 /var/www/country-tz/public \
  && touch /var/www/country-tz/.env \

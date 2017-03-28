@@ -64,7 +64,7 @@ if ($route == "contracts" && isset($url['year'])) {
 			$annotation_ids = (!empty($annotation_array)) ? implode(" ", $annotation_array) : "";
 			?>
 			<tr>
-				<td data-title="@lang('global.document')" class="documentTitle">
+				<td data-title="@lang('global.document')" class="documentTitle document_title">
 					<a class="title-{{$contract->open_contracting_id}}"
 					   href="{{ url(sprintf("/contract/%s/view#/pdf", $contract->open_contracting_id )) }}">
 						{{ $contract->name or ''}}
@@ -153,7 +153,7 @@ if ($route == "contracts" && isset($url['year'])) {
 						@endif
 					@endif
 				</td>
-				<td>
+				<td class="download_row">
 
 					<div class="contract-info-section">
 						<div class="download-main-wrap dropdown">
