@@ -72,7 +72,8 @@ export default class Item extends React.Component {
 
         } else {
 
-            var confirmRemoveClip = confirm(langClip.remove_clip_confirm);
+            var removeConfirmMsg = langClip.remove_clip_confirm+' '+langClip.cannot_be_undone;
+            var confirmRemoveClip = confirm(removeConfirmMsg);
 
             if (confirmRemoveClip) {
 

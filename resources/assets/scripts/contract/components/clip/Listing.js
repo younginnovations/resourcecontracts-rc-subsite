@@ -76,7 +76,7 @@ class Listing extends React.Component {
                         </th>
                         <th ><span>{ langClip.resource }</span>
                         </th>
-                        <th data-sorting="no-sorting">{ langClip.actions }</th>
+                        <th data-sorting="no-sorting">{ langClip.view }</th>
                     </tr>
                     </thead>
                     <tbody>

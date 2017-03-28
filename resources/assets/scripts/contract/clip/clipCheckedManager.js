@@ -44,7 +44,7 @@ export default class ClipCheckedManager {
 
         if (checked) {
 
-            _.includes(checkedClips, annotation_id)?false:checkedClips.push(annotation_id);
+            _.includes(checkedClips, annotation_id) ? false : checkedClips.push(annotation_id);
 
             elem.addClass("selected");
             elem.parents("tr").css("background-color", "#f7f7f7").addClass("selectedRow");
@@ -65,7 +65,7 @@ export default class ClipCheckedManager {
             this.elems.checkedInfo.find(".singular").show();
             this.elems.checkedInfo.find(".plural").hide();
 
-            if (clipHelper.setCheckedCount() > 1){
+            if (clipHelper.setCheckedCount() > 1) {
                 this.elems.checkedInfo.find(".plural").show();
                 this.elems.checkedInfo.find(".singular").hide();
             }
@@ -82,8 +82,7 @@ export default class ClipCheckedManager {
         var currentRows = clipTable.rows().nodes();
         if (checked) {
             if (typeof checkedClips !== "undefined") {
-                currentRows.each( function(row) {
-
+                currentRows.each(function (row) {
                     $(row).find(".clipSelect").prop("checked", true).trigger("change");
                     $(row).css("background-color", "#f7f7f7").addClass("selectedRow");
                 });
@@ -105,26 +104,20 @@ export default class ClipCheckedManager {
 
 
     deleteChecked = (e)=> {
-        var confirmDeleteSelected = confirm( langClip.confirm_remove_selected );
+        var confirmDeleteSelected = confirm(langClip.confirm_remove_selected);
         if (confirmDeleteSelected) {
 
             let selectedRow = $(".selectedRow");
             clipTable.rows('.selectedRow').remove().draw(false);
 
             clipHelper.removeClip(e, checkedClips);
+            var remainingClips = clipTable.rows().nodes().length;
 
-        }
-
-        this.elems.checkedInfo.hide();
-        this.elems.checkAllVisible.prop("checked", false).trigger("change");
-
-        var remainingClips = clipTable.rows().nodes().length;
-
-        if(remainingClips<1){
-            $("#clear-all").hide();
-            $("#clip-annotations .clipMainWrapper").hide();
-            $("#clip-annotations").append('<div class="no-record">' + langClip.currently_no_clips + '</div>');
+            if (remainingClips < 1) {
+                $("#clear-all").hide();
+                $("#clip-annotations .clipMainWrapper").hide();
+                $("#clip-annotations").append('<div class="no-record">' + langClip.currently_no_clips + '</div>');
+            }
         }
     };
-
 }
