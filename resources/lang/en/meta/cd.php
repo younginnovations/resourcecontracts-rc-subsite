@@ -1,6 +1,7 @@
 <?php
 return [
     'name'                  => 'Democratic Republic of the Congo',
+    'short_name'            => 'DR Congo',
     'description'           => 'An online repository of publicly available contracts for large-scale land, agriculture, and forestry projects. The repository includes the full text of contracts; plain language summaries of each contract’s key social, environmental, human rights, fiscal, and operational terms; and tools for searching and comparing contracts.',
     'resources_description' => 'Find land contracts for different resources -',
     'resource_description'  => 'Find land contracts for resource -',

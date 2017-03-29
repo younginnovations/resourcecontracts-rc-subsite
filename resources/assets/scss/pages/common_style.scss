@@ -20,6 +20,12 @@ a {
   }
 }
 
+.navbar-brand {
+  i {
+    font-style: normal !important;
+  }
+}
+
 .panel-top-wrapper {
   background: $color_alabaster_approx;
   padding: 0;
@@ -250,7 +256,7 @@ a {
 
 .contract-number-wrap {
   width: 134px;
-   //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
   border-radius: 50%;
   height: 134px;
   position: absolute;
@@ -258,7 +264,7 @@ a {
   top: 24px;
   background: $white;
   border: 10px solid $color_concrete_approx;
-   //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+  //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
   box-shadow: 0 2px 4px $black_20;
   font-size: 12px;
   color: $color_cape_cod_70_approx;
@@ -274,13 +280,14 @@ a {
 
   }
 }
-.contract_page_actions{
-  .clip-btn, .clip-btn.active{
+
+.contract_page_actions {
+  .clip-btn, .clip-btn.active {
     display: block;
     position: absolute;
     text-indent: 0;
     font-size: 12px;
-    color: $color_link-color!important;
+    color: $color_link-color !important;
     width: auto;
     text-decoration: none;
     padding: 13px 20px;
@@ -289,8 +296,8 @@ a {
     background: #fff;
     right: 451px;
     border-radius: 25px;
-    border: 1px solid rgba(243,115,86,0.2);
-    span.icon{
+    border: 1px solid rgba(243, 115, 86, 0.2);
+    span.icon {
       display: inline-block;
       vertical-align: top;
       background: transparent url(../images/ic-sprite.svg) no-repeat;
@@ -299,52 +306,52 @@ a {
       margin-right: 10px;
     }
 
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 768px) {
       top: 5px;
       right: 278px;
     }
 
-    @media screen and (max-width: 480px){
+    @media screen and (max-width: 480px) {
       top: 9px;
       right: 162px;
       height: 37px;
       padding: 7px 18px;
-      span.icon{
+      span.icon {
         margin-right: 0;
       }
-      span.text{
+      span.text {
         display: none;
       }
     }
   }
-  .clip-btn{
-    span.icon{
+  .clip-btn {
+    span.icon {
       background-position: -79px -402px;
     }
 
   }
 
-  .clip-btn.active{
+  .clip-btn.active {
     span.icon {
       background-position: -184px -481px;
     }
   }
 }
 
-.advance-filter-wrapper{
-  .clip-btn{
+.advance-filter-wrapper {
+  .clip-btn {
     font-size: 12px;
   }
 }
 
 @media (min-width: 551px) {
 
-  .contract-number-wrap.has-static-search{
+  .contract-number-wrap.has-static-search {
     //top: 90px;
   }
 }
 
-.contract-search-number-wrap{
+.contract-search-number-wrap {
   top: -80px;
 }
 
@@ -358,20 +365,20 @@ a {
 /* style to make total doc logo consitent*/
 .page-search {
 
-   @media (min-width: 992px) {
-  .contract-number-wrap {
-    right: 36px;
+  @media (min-width: 992px) {
+    .contract-number-wrap {
+      right: 36px;
+
+    }
 
   }
-
-}
 
   .filter-wrapper {
     min-height: 90px !important;
 
   }
 
-   @media (min-width: 768px) {
+  @media (min-width: 768px) {
     .advance-filter-wrapper .social-share, .actions-wrapper .social-share {
       right: 313px;
 
@@ -402,14 +409,14 @@ a {
   }
 }
 
-@media (max-width: 767px){
-  .contract-number-wrap{
+@media (max-width: 767px) {
+  .contract-number-wrap {
     right: 0;
   }
 }
 
-.download-dropdown>span{
-  height: 20px!important;
+.download-dropdown > span {
+  height: 20px !important;
 }
 //  contract view search results element
 .add-more-highlight{
@@ -420,6 +427,10 @@ a {
 *** Annotator JS Style Overrides
 **/
 
-.annotator-adder, .annotator-outer, .annotator-notice{
-  z-index: 500!important;
+.annotator-adder, .annotator-outer, .annotator-notice {
+  z-index: 500 !important;
 }
+
+
+
+

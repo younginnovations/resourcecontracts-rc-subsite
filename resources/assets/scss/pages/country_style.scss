@@ -1,4 +1,4 @@
-body.country{
+body.country {
   .country-flag {
     display: inline-block !important;
     vertical-align: top;
@@ -10,34 +10,58 @@ body.country{
     }
   }
 
-  .navbar-brand span{
+  .navbar-brand span {
     font-size: 14px !important;
     width: auto;
+    @media screen and(max-width: 480px) {
+      font-size: 12px !important;
+    }
   }
 
-  .navbar-brand, .navbar-brand:hover{
-    @media screen and(max-width: 767px){
+  .navbar-brand, .navbar-brand:hover {
+    @media screen and(max-width: 767px) {
       font-size: 18px;
     }
   }
 
-  .petroleum-mineral{
+
+  //Country title design fixes
+
+  .hidden_small,.shown_small{
+    font-style: normal!important;
+  }
+  .shown_small {
+    @media screen and (min-width: 541px) {
+      display: none!important;
+    }
+  }
+
+  @media screen and (max-width: 540px) {
+    .hidden_small {
+      display: none!important;
+    }
+    .shown_small {
+      display: inline-block!important;
+    }
+  }
+
+  .petroleum-mineral {
     max-width: 720px;
     //width: auto;
     display: inline-block;
     padding: 50px;
     min-height: initial;
     word-break: break-word;
-    .repo-description{
+    .repo-description {
       font-size: 48px;
       line-height: 60px;
       font-family: Open-Sans-Light;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
       color: #eee;
-      small{
+      small {
         font-size: 32px;
 
-        @media screen and (max-width: 767px){
+        @media screen and (max-width: 767px) {
           font-size: 24px;
         }
 
@@ -45,7 +69,7 @@ body.country{
     }
 
     .large-title {
-      >span{
+      > span {
         font-size: 54px;
         line-height: 55px;
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
@@ -54,30 +78,29 @@ body.country{
     }
   }
 
-  .petroleum-list{
+  .petroleum-list {
     display: none !important;
   }
 
-  .petroleum-wrapper{
+  .petroleum-wrapper {
     position: relative;
   }
 
   .petroleum-wrapper:before {
-    content:  "";
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0,0,0, 0.1);
+    background: rgba(0, 0, 0, 0.1);
   }
 }
 
-
-@media (max-width: 767px){
-  body.country{
-    .petroleum-mineral{
-      .repo-description, .large-title > span{
+@media (max-width: 767px) {
+  body.country {
+    .petroleum-mineral {
+      .repo-description, .large-title > span {
         font-size: 32px;
         line-height: 40px;
       }
@@ -98,13 +121,13 @@ body.country{
   }
 }
 
-@media (max-width: 600px){
+@media (max-width: 600px) {
 
-  body.country .resource-wrap{
+  body.country .resource-wrap {
     padding: 50px 20px !important;
   }
 
-  body.country .country-wrap{
+  body.country .country-wrap {
     background-size: contain;
   }
 
@@ -113,13 +136,13 @@ body.country{
     padding: 40px 20px !important;
   }
 
-  .country-inner-wrap, .resource-inner-wrap{
+  .country-inner-wrap, .resource-inner-wrap {
     font: 40px/46px Open-Sans-Light;
   }
 
 }
 
-@media (max-width: 480px){
+@media (max-width: 480px) {
   body.country .country-wrapper {
     padding: 0 !important;
   }
