@@ -53,9 +53,10 @@ class Item extends Component {
             Contract.setCurrentPage(this.props.result.page_no);
             location.hash = "#/text";
         } else {
+            $('.pagintation input').val(this.props.result.page_no);
             Contract.setIsSearch(true);
+            Contract.setCurrentPage(this.props.result.page_no);
             Event.publish('pagination:change', this.props.result.page_no);
-            Contract.setIsSearch(false);
         }
     }
 
@@ -68,10 +69,8 @@ class Item extends Component {
 
     shallShowEllipse(text) {
         var words = (text + "").split(' ');
-        if (words.length >= (this.state.maxWords + 10)) {
-            return true;
-        }
-        return false;
+
+        return (words.length >= (this.state.maxWords + 10));
     }
 
     handleClickLessMore(e) {
@@ -107,12 +106,16 @@ class Item extends Component {
 
     getSearchCount() {
         let searchQuery = $('.text-search input').val().toLowerCase();
-        let id = '#text-' + this.props.result.page_no;
-        let shortTextSearchCount = ((this.props.result.text).toLowerCase().match(new RegExp(searchQuery, 'g')) || []).length;
-        let totalCount = ($(id).text().toLowerCase().match(new RegExp(searchQuery, 'g')) || []).length;
-        let count = (totalCount - shortTextSearchCount);
+        if (this.props.result.type == 'text') {
+            let id = '#text-' + this.props.result.page_no;
+            let shortTextSearchCount = ((this.props.result.text).toLowerCase().match(new RegExp('search-highlight-word', 'g')) || []).length;
+            let totalCount = ($(id).text().toLowerCase().match(new RegExp(searchQuery, 'g')) || []).length;
+            let count = (totalCount - shortTextSearchCount);
 
-        return count;
+            return count;
+        }
+
+        return 0;
     }
 
     pdfText() {
