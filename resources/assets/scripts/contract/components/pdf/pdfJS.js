@@ -91,7 +91,18 @@ var PdfJS = React.createClass({
                     return;
                 }
                 var ctx = canvas.getContext('2d');
-                var viewport = page.getViewport(this.props.scale);
+
+                var scale = this.props.scale;
+                var viewport = page.getViewport(1);
+
+                if (viewport.width > 600 && scale === 1) {
+                    scale = 595.0 / viewport.width;
+                } else if (viewport.width > 600) {
+                    scale = scale * 595.0 / viewport.width;
+                }
+
+                viewport = page.getViewport(scale);
+
                 canvas.height = viewport.height;
                 canvas.width = viewport.width;
                 var renderContext = {
