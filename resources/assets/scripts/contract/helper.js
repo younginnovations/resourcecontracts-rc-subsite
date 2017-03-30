@@ -52,7 +52,6 @@ export const scrollToAnnotation = function (annotation_id) {
         return false;
     }
 
-
     if (window.matchMedia("(max-width: 800px)").matches) {
         setTimeout(()=> {
             var pageOffsetTop = annotationEl.offset().top - 125;

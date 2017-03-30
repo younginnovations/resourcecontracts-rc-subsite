@@ -29,9 +29,12 @@ class Page extends Component {
 
     setText(props) {
         var text = sanitizeText(props.page.text);
-        if (props.highlight != '') {
-            text = highlightText(text, props.highlight);
+        if (props.highlight != '' && Array.isArray(props.highlight)) {
+            props.highlight.map((highlight, index)=> {
+                text = highlightText(text, highlight);
+            });
         }
+
         this.setState({text: text, page_no: props.page.page_no});
     }
 

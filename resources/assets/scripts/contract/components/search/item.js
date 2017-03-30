@@ -105,11 +105,9 @@ class Item extends Component {
     }
 
     getSearchCount() {
-        let searchQuery = $('.text-search input').val().toLowerCase();
         if (this.props.result.type == 'text') {
-            let id = '#text-' + this.props.result.page_no;
             let shortTextSearchCount = ((this.props.result.text).toLowerCase().match(new RegExp('search-highlight-word', 'g')) || []).length;
-            let totalCount = ($(id).text().toLowerCase().match(new RegExp(searchQuery, 'g')) || []).length;
+            let totalCount = this.props.result.count;
             let count = (totalCount - shortTextSearchCount);
 
             return count;

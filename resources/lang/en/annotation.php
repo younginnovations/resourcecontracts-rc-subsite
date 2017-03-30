@@ -76,9 +76,9 @@ return [
     'ellipsis_and'                     => ' ... and ',
     'more_match_on_this_page'          => ' more match on this page',
     'more_matches_on_this_page'        => ' more matches on this page',
-    'no_matches_found_in_current_page' => 'No matches found in current page.',
+    'no_matches_found_in_current_page' => 'No matches found in current page',
     'match'                            => 'match',
     'matches'                          => 'matches',
-    'in_document'                      => 'in document.',
-    'on_current_page'                  => 'on current page.',
+    'in_document'                      => 'in document',
+    'on_current_page'                  => 'in current page',
 ];
