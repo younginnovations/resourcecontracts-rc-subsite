@@ -602,7 +602,8 @@ $(document).ready(function () {
         var allClipped = localStorage.allClipped;
 
         if (allClipped === "true") {
-            $("#clip-all-annotations.static").attr("id", "remove-all-annotations").addClass("annotation-clipped");
+            var link = '<span class="link">'+langClip.clear_all_clips+'</span>';
+            $("#clip-all-annotations.static").attr("id", "remove-all-annotations").addClass("annotation-clipped").html(link);
         }
     }
 
@@ -610,13 +611,15 @@ $(document).ready(function () {
 
     $(document).on("click", "#clip-all-annotations.static", function (e) {
         $(".annotation-clip-icon.static[data-action='add']").click();
-        $(this).attr("id", "remove-all-annotations").addClass("annotation-clipped");
+        var link = '<span class="link">'+langClip.clear_all_clips+'</span>';
+        $(this).attr("id", "remove-all-annotations").addClass("annotation-clipped").html(link);
         localStorage.allClipped = true;
     });
 
     $(document).on("click", "#remove-all-annotations.static", function (e) {
         $(".annotation-clip-icon.static[data-action='remove']").click();
-        $(this).attr("id", "clip-all-annotations").removeClass("annotation-clipped");
+        var link = '<span class="link">'+langClip.clip_all+'</span>';
+        $(this).attr("id", "clip-all-annotations").removeClass("annotation-clipped").html(link);
         localStorage.allClipped = false;
     });
 
