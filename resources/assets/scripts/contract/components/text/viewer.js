@@ -8,16 +8,15 @@ import Config from '../../config';
 class Viewer extends Component {
     constructor(props) {
         super(props);
-        this.state = ({pages: {}, isLoading: true, highlight: ''});
+        this.state = ({pages: {}, isLoading: true, searchResults: []});
         this.annotator = '';
     }
 
     componentDidMount() {
         this.subscribePagination = Event.subscribe('pagination:change', this.paginationHandler);
         Contract.setDisablePagination(true);
-        this.setState({highlight: decodeURIComponent(Contract.getSearchQuery())});
-        this.subscribeSearch = Event.subscribe('search:updated', ({page_no, query}) => {
-            this.setState({highlight: decodeURIComponent(query)});
+        this.subscribeSearch = Event.subscribe('search:updated', ({page_no, query, res}) => {
+            this.setState({searchResults: res});
             Contract.setDisablePagination(true);
             this.paginationHandler(page_no, true);
             Contract.setCurrentPage(page_no);
@@ -25,7 +24,7 @@ class Viewer extends Component {
         });
 
         this.subscribeSearchClose = Event.subscribe('search:close', ()=> {
-            this.setState({highlight: ''});
+            this.setState({searchResults: []});
         });
 
         $('.close').on('click', ()=> {
@@ -72,16 +71,28 @@ class Viewer extends Component {
     }
 
     renderPages() {
+        let results = Contract.getIsSearch() ? Contract.getSearchQueries() : [];
         let pages = this.state.pages;
         let pageView = null;
         if (pages.length > 0) {
+            let search_text = [];
+            results.map(res => {
+                if (res.type == 'text') {
+                    search_text[res.page_no] = res.search_text;
+                }
+            });
             pageView = pages.map(page => {
-                return (<Page key={page.id} highlight={this.state.highlight} page={page}/>)
+                let search = [];
+                if (search_text[page.page_no]) {
+                    search = search_text[page.page_no];
+                }
+                return (<Page key={page.id} highlight={search} page={page}/>)
             });
         } else {
             return (<div className="text-viewer-warning"
                          dangerouslySetInnerHTML={ {__html: Config.message.pdf_not_loading }}/>);
         }
+
         return pageView;
     }
 

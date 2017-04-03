@@ -13,7 +13,8 @@ class Contract {
             annotator: {},
             annotations: Config.contract.annotations,
             disablePagination: false,
-            isSearch: false
+            isSearch: false,
+            searchQueries: []
         };
     }
 
@@ -35,6 +36,14 @@ class Contract {
 
     setIsSearch(bool) {
         this.options.isSearch = bool;
+    }
+
+    setSearchQueries(queries) {
+        this.options.searchQueries = queries;
+    }
+
+    getSearchQueries() {
+        return this.options.searchQueries;
     }
 
     getIsSearch() {

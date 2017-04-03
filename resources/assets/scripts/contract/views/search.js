@@ -18,13 +18,13 @@ class Search extends Component {
             this.setState({display: false});
         }
 
-        this.subscribeClose = Event.subscribe('search:close', ()=>{
+        this.subscribeClose = Event.subscribe('search:close', ()=> {
             this.setState({display: false});
+            Contract.setSearchQueries([]);
         });
 
         this.subscribeRoute = Event.subscribe('route:location', name => {
             if (name == 'search' || Contract.getIsSearch()) {
-                Contract.setIsSearch(false);
                 this.setState({display: true});
             } else {
                 this.setState({display: false});

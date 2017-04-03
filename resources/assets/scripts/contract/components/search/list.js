@@ -35,7 +35,8 @@ var List = React.createClass({
         this.setState({isLoading: false, results: response.results ? response.results : []});
         this.setState({totalSearchCount: response.total_search_count});
         if (typeof response.results != 'undefined' && response.results.length > 0) {
-            let param = {page_no: response.results[0].page_no, query: Contract.getSearchQuery()};
+            let param = {page_no: response.results[0].page_no, query: Contract.getSearchQuery(), res: response.results};
+            Contract.setSearchQueries(response.results);
             Event.publish('search:updated', param);
             debug('Search List updated Published', param);
         }
@@ -56,20 +57,22 @@ var List = React.createClass({
     searchTotalCount() {
         let count = this.state.totalSearchCount;
         let match = '';
-        count <= 1 ? match = LANG.match : match = LANG.matches;
+        if (count == 0 || count > 1) {
+            match = LANG.matches;
+        }
+        else if (count == 1) {
+            match = LANG.match;
+        }
 
         return (<p><strong>{count}</strong> {match} {LANG.in_document}</p>);
     },
 
     currentPageSearchCount(){
-        if (Contract.getView() == 'pdf') {
-            return null;
-        }
-
         let count = 0;
+
         this.state.results.map((row) => {
-            if (Contract.getCurrentPage() == row.page_no && row.type == 'text') {
-                count = row.count;
+            if (Contract.getCurrentPage() == row.page_no) {
+                count += row.count;
             }
         });
 
@@ -77,7 +80,7 @@ var List = React.createClass({
             return LANG.no_matches_found_in_current_page;
         }
         else if (count == 1) {
-                return (<p><strong> {count} </strong> {LANG.match} {LANG.on_current_page}</p>);
+            return (<p><strong> {count} </strong> {LANG.match} {LANG.on_current_page}</p>);
         }
         else {
             return (<p><strong>{count}</strong> {LANG.matches} {LANG.on_current_page}</p>);
