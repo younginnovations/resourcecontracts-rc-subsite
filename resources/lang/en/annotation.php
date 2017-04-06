@@ -80,5 +80,5 @@ return [
     'match'                            => 'match',
     'matches'                          => 'matches',
     'in_document'                      => 'in document',
-    'on_current_page'                  => 'in current page',
+    'on_current_page'                  => 'on current page',
 ];

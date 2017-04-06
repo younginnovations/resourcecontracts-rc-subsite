@@ -64,7 +64,7 @@ var List = React.createClass({
             match = LANG.match;
         }
 
-        return (<p><strong>{count}</strong> {match} {LANG.in_document}</p>);
+        return (<p className="search-query-list"><strong>{count}</strong> {match} {LANG.in_document}</p>);
     },
 
     currentPageSearchCount(){
@@ -80,10 +80,10 @@ var List = React.createClass({
             return LANG.no_matches_found_in_current_page;
         }
         else if (count == 1) {
-            return (<p><strong> {count} </strong> {LANG.match} {LANG.on_current_page}</p>);
+            return (<p className="search-query-list"><strong> {count} </strong> {LANG.match} {LANG.on_current_page}</p>);
         }
         else {
-            return (<p><strong>{count}</strong> {LANG.matches} {LANG.on_current_page}</p>);
+            return (<p className="search-query-list"><strong>{count}</strong> {LANG.matches} {LANG.on_current_page}</p>);
         }
     },
 
