@@ -22,9 +22,9 @@ build:
     # Prevent build failure in case there is no latest image for the current branch with a conditional `echo`.
     - docker pull nrgi/rc-subsite:$BRANCH || echo 'Cache not available'
 
-    - docker build -t nrgi/rc-subsite:$BRANCH.$COMMIT .
+    - docker build --cache-from nrgi/rc-subsite:$BRANCH -t nrgi/rc-subsite:$BRANCH.$COMMIT .
     # Create the `latest` tag and force it in case the tag is already there from a previous build
-    - docker tag -f nrgi/rc-subsite:$BRANCH.$COMMIT nrgi/rc-subsite:$BRANCH
+    - docker tag nrgi/rc-subsite:$BRANCH.$COMMIT nrgi/rc-subsite:$BRANCH
 
     - docker push nrgi/rc-subsite:$BRANCH
     - docker push nrgi/rc-subsite:$BRANCH.$COMMIT
