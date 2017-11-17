@@ -34,7 +34,7 @@ build:
 integrations:
   hub:
     - integrationName: iprunacheDockerRegistry
-      type: dockerRegistryLogins
+      type: dockerRegistryLogin
   notifications:
     - integrationName: email
       type: email
