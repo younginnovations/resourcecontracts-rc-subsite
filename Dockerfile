@@ -27,6 +27,7 @@ RUN apk --update add \
     make \
     g++ \
     gettext \
+    libffi-dev \
  && rm /var/cache/apk/* \
  && npm install --global gulp-cli \
  && gem install --no-rdoc --no-ri sass \
