@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.4
 RUN apk --update add \
     nginx \
     php5-fpm \
