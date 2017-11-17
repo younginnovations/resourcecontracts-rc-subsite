@@ -33,8 +33,8 @@ build:
     
 integrations:
   hub:
-    - integrationName: nrgiDockerHub
-      type: docker
+    - integrationName: iprunacheDockerRegistry
+      type: dockerRegistryLogin
   notifications:
     - integrationName: email
       type: email
