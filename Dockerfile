@@ -108,6 +108,13 @@ RUN composer dump-autoload --optimize \
  && chmod -R 777 /var/www/country-tz/storage \
  && chmod -R 777 /var/www/country-tz/public \
  && touch /var/www/country-tz/.env \
+#country site -- Guinea /gn
+ && mkdir -p /var/www/country-gn \
+ && cp -R /var/container_init/site_content/. /var/www/country-gn \
+ && gulp --cwd /var/www/country-gn theme_blue \
+ && chmod -R 777 /var/www/country-gn/storage \
+ && chmod -R 777 /var/www/country-gn/public \
+ && touch /var/www/country-gn/.env \
 
 #cleanup
  && rm -r /var/container_init/site_content
