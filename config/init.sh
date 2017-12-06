@@ -68,7 +68,7 @@ export CATEGORY=olc
 envsubst < ./env.template > /var/www/country-tz/.env
 
 #country-guinea
-export SERVER_NAME="guinea.resourcecontracts.org *.guinea.resourcecontracts.org"
+export SERVER_NAME="guinea.resourcecontracts.org *.guinea.resourcecontracts.org contratsminiersguinee.org *.contratsminiersguinee.org"
 export TRACKING_ID=${GN_TRACKING_ID}
 export DB_DATABASE=${COUNTRY_DB_DATABASE}
 export CONTACT_MAIL=${GN_CONTACT_MAIL}
