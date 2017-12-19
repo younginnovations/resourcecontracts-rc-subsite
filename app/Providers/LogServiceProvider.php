@@ -3,7 +3,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Monolog\Formatter\LineFormatter;
-use Monolog\Handler\RotatingFileHandler;
+use Monolog\Handler\StreamHandler;
 
 /**
  * Class LogServiceProvider
@@ -20,7 +20,7 @@ class LogServiceProvider extends ServiceProvider
     {
         $maxFiles = 5;
 
-        $handlers[] = (new RotatingFileHandler(storage_path("logs/lumen.log"), $maxFiles))
+        $handlers[] = (new StreamHandler(storage_path("logs/lumen.log")))
             ->setFormatter(new LineFormatter(null, null, true, true));
 
         $this->app['log']->setHandlers($handlers);

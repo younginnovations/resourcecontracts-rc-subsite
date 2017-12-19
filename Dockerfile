@@ -64,6 +64,7 @@ COPY config/init.sh /var/container_init/init.sh
 COPY config/nginx_subsite.template /var/container_init/nginx_subsite.template
 COPY config/nginx_olc_com /var/container_init/nginx_olc_com
 COPY config/log_files.yml.template /var/container_init/log_files.yml.template
+COPY config/logrotate.conf /etc/logrotate.d/rc-subsite
 COPY config/env.template /var/container_init/env.template
 COPY config/nginx.conf /etc/nginx/nginx.conf
 COPY config/supervisord.conf /etc/supervisord.conf

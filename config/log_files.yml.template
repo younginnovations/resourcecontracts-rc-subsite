@@ -9,17 +9,17 @@ files:
     tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-supervisor-supervisord.log  
   - path: /var/log/supervisor/remote-syslog.log
     tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-supervisor-remote-syslog.log    
-  - path: /var/www/olc/storage/logs/*.log
+  - path: /var/www/olc/storage/logs/lumen.log
     tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-var-www-olc-storage-logs        
-  - path: /var/www/rc/storage/logs/*.log
+  - path: /var/www/rc/storage/logs/lumen.log
     tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-var-www-rc-storage-logs        
-  - path: /var/www/country-tn/storage/logs/*.log
+  - path: /var/www/country-tn/storage/logs/lumen.log
     tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-var-www-country-tn-storage-logs
-  - path: /var/www/country-drc/storage/logs/*.log
+  - path: /var/www/country-drc/storage/logs/lumen.log
     tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-var-www-country-drc-storage-logs
-  - path: /var/www/country-tz/storage/logs/*.log
+  - path: /var/www/country-tz/storage/logs/lumen.log
     tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-var-www-country-tz-storage-logs
-  - path: /var/www/country-gn/storage/logs/*.log
+  - path: /var/www/country-gn/storage/logs/lumen.log
     tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-var-www-country-gn-storage-logs
 destination:
   host: logs2.papertrailapp.com
