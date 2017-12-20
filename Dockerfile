@@ -34,7 +34,7 @@ RUN apk --update add \
  && gem install --no-rdoc --no-ri bourbon \
  && gem install --no-rdoc --no-ri io-console \
  && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer \
- && curl -O -L https://github.com/papertrail/remote_syslog2/releases/download/v0.19/remote_syslog_linux_amd64.tar.gz \
+ && curl -O -L https://github.com/papertrail/remote_syslog2/releases/download/v0.20/remote_syslog_linux_amd64.tar.gz \
  && tar -zxf remote_syslog_linux_amd64.tar.gz \
  && cp remote_syslog/remote_syslog /usr/local/bin \
  && rm -r remote_syslog_linux_amd64.tar.gz \
