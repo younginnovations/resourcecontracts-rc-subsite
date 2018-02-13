@@ -77,6 +77,6 @@
     var country = <?php echo json_encode(trans('country'));?>;
 </script>
 
-<script type=" text/javascript" src="{{secure_asset('js/resource.js')}}"></script>
+<script type=" text/javascript" src="{{generate_asset_url('js/resource.js')}}"></script>
 @stop
 
