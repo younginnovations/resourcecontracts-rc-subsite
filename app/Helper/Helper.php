@@ -425,3 +425,39 @@ function redirectIfOldAnnotationCategory($old)
         die;
     }
 }
+
+/**
+ * Generate an asset path for the application.
+ *
+ * @param  string $path
+ * @return string
+ */
+function secure_asset($path)
+{
+    return asset($path, true);
+}
+
+/**
+ * Generate a HTTPS url for the application.
+ *
+ * @param  string $path
+ * @param  mixed $parameters
+ * @return string
+ */
+function secure_url($path, $parameters = array())
+{
+    return url($path, $parameters, true);
+}
+
+/**
+ * Generate an asset path for the application.
+ *
+ * @param  string $path
+ * @param  bool $secure
+ * @return string
+ */
+function asset($path, $secure = null)
+{
+    return app('url')->asset($path, $secure);
+}
+
