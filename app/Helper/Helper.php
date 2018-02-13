@@ -425,3 +425,41 @@ function redirectIfOldAnnotationCategory($old)
         die;
     }
 }
+
+/**
+ * Generate an asset URL for the application, secure URL if the X-Forwarded-Proto header is set tp https
+ *
+ * @param  string $path
+ * @return string
+ */
+function generate_asset_url($path)
+{
+    $isHttps = \Request::header("X-Forwarded-Proto") == "https";
+    return asset($path, $isHttps);
+}
+
+/**
+ * Generate a url for the application, secure URL if the X-Forwarded-Proto header is set to https.
+ *
+ * @param  string $path
+ * @param  mixed $parameters
+ * @return string
+ */
+function generate_url($path="", $parameters = array())
+{
+    $isHttps = \Request::header("X-Forwarded-Proto") == "https";
+    return url($path, $parameters, $isHttps);
+}
+
+/**
+ * Generate an asset path for the application.
+ *
+ * @param  string $path
+ * @param  bool $secure
+ * @return string
+ */
+function asset($path, $secure = null)
+{
+    return app('url')->asset($path, $secure);
+}
+

@@ -24,7 +24,7 @@
                 </div>
                 <div class="right-content">
                     <div class="filter-resource-wrap">
-                       <a href={{url('/resources')}} class="filter-label">@lang('global.view_by_resource')</a>
+                       <a href={{generate_url('/resources')}} class="filter-label">@lang('global.view_by_resource')</a>
                     </div>
                     <div class="side-collapse in">
                         <ul id="resources">
@@ -44,7 +44,7 @@
 @section('js')
 <script type="text/template" id="country-template">
     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-        <a href="{{url('countries')}}/<%= code %>">
+        <a href="{{generate_url('countries')}}/<%= code %>">
             <img width="200" src="{{getFlagUrl()}}<%= code %>.png" />
             <div class="country-name"><%= country[code.toUpperCase()]%></div>
         </a>
@@ -72,10 +72,10 @@
     </li>
 </script>
 <script>
-    var APP_URL = '{{url()}}';
+    var APP_URL = '{{generate_url()}}';
     var lang = <?php echo json_encode(trans('annotation'));?>;
     var country = <?php echo json_encode(trans('country'));?>;
     var resource = <?php echo json_encode(trans('resources'));?>;
 </script>
-<script type="text/javascript" src="{{url('js/country.js')}}"></script>
+<script type="text/javascript" src="{{generate_asset_url('js/country.js')}}"></script>
 @stop

@@ -31,7 +31,7 @@
 						<td>{{$page->title->en}}</td>
 						<td>{{$page->slug}}</td>
 						<td>
-							<a target="_blank" class="btn btn-success" href="{{url($page->slug)}}">
+							<a target="_blank" class="btn btn-success" href="{{generate_url($page->slug)}}">
 								<i class="fa fa-eye"></i>
 							</a>
 							<a class="btn btn-primary" href="{{route('admin.page.update', ['id'=>$page->id])}}">

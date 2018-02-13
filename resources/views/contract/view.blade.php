@@ -12,7 +12,7 @@
 					document.location.href = window.location.pathname + '#/text';
 				}
 				slowConnection = true;
-				document.getElementById('loader').innerHTML = '<img src="{{url('images/loading.gif')}}"> @lang('contract.loading_redirect')';
+				document.getElementById('loader').innerHTML = '<img src="{{generate_url('images/loading.gif')}}"> @lang('contract.loading_redirect')';
 			}
 		}, 25000);
 	</script>
@@ -20,7 +20,7 @@
 @section('content')
 	<div id="contract">
 		<div id="loader" class="loader">
-			<img src="{{url('images/loading.gif')}}"/> @lang('contract.loading')
+			<img src="{{secure_asset('images/loading.gif')}}"/> @lang('contract.loading')
 		</div>
 	</div>
 @stop
@@ -76,11 +76,11 @@
 			}
 		};
 	</script>
-	<script src="{{url('js/annotator/annotator-full.min.js')}}"></script>
-	<script src="{{url('js/annotator/annotator.utils.js')}}"></script>
-	<script src="{{url('js/pdfjs/pdf.js')}}"></script>
+	<script src="{{generate_asset_url('js/annotator/annotator-full.min.js')}}"></script>
+	<script src="{{generate_asset_url('js/annotator/annotator.utils.js')}}"></script>
+	<script src="{{generate_asset_url('js/pdfjs/pdf.js')}}"></script>
 	<script>
-		PDFJS.workerSrc = "{{url('js/pdfjs/pdf.worker.js')}}"
+		PDFJS.workerSrc = "{{generate_asset_url('js/pdfjs/pdf.worker.js')}}"
 	</script>
-	<script src="{{ url('js/contract_view.js') }}"></script>
+	<script src="{{ generate_asset_url('js/contract_view.js') }}"></script>
 @stop

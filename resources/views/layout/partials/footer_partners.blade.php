@@ -52,14 +52,14 @@
 	</div>
 	<div class="menu-list clearfix">
 		<ul class="menu-list-each">
-			<li><a href="{{url('about')}}">@lang('footer.about')</a></li>
-			<li><a href="{{url('faqs')}}">@lang('footer.faqs')</a></li>
-			<li><a href="{{url('guides')}}">@lang('sidebar.guides')</a></li>
-			<li><a href="{{url('glossary')}}">@lang('footer.glossary')</a></li>
+			<li><a href="{{generate_url('about')}}">@lang('footer.about')</a></li>
+			<li><a href="{{generate_url('faqs')}}">@lang('footer.faqs')</a></li>
+			<li><a href="{{generate_url('guides')}}">@lang('sidebar.guides')</a></li>
+			<li><a href="{{generate_url('glossary')}}">@lang('footer.glossary')</a></li>
 			@if(!site()->isCountrySite())
-				<li><a href="{{url('country-sites')}}">@lang('footer.country_sites')</a></li>
+				<li><a href="{{generate_url('country-sites')}}">@lang('footer.country_sites')</a></li>
 			@endif
-			<li><a href="{{url('contact')}}">@lang('footer.contact')</a></li>
+			<li><a href="{{generate_url('contact')}}">@lang('footer.contact')</a></li>
 			<li><a href="https://github.com/NRGI/resourcecontracts.org/wiki/API" target="_blank">API</a>
 			</li>
 		</ul>
