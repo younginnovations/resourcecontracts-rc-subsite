@@ -114,7 +114,7 @@ $SearchPage = isset($searchPage) && $searchPage ? true : false;
 
 		<div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
 			@if($SearchPage)
-				<a href="{{url('search')}}" class="btn btn-form-search btn-form-reset">
+				<a href="{{generate_url('search')}}" class="btn btn-form-search btn-form-reset">
 					@lang('search.reset')
 				</a>
 			@else

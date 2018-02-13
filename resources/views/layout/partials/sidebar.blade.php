@@ -23,20 +23,20 @@ $sidebar = $image->getImageUrl('sidebar');
 		<li class="sidebar-brand">
 			@include('layout.partials.logo')
 		</li>
-		<li><a href="{{url('/')}}" @if(isActiveMenu('')) class="active" @endif > @lang('sidebar.home') </a></li>
-		<li><a href="{{url('contracts')}}"
+		<li><a href="{{generate_url('/')}}" @if(isActiveMenu('')) class="active" @endif > @lang('sidebar.home') </a></li>
+		<li><a href="{{generate_url('contracts')}}"
 			   @if(isActiveMenu('contracts')) class="active" @endif >@lang('sidebar.all_documents')</a></li>
 		@if(!site()->isCountrySite())
-			<li><a href="{{url('countries')}}"
+			<li><a href="{{generate_url('countries')}}"
 				   @if(isActiveMenu('countries')) class="active" @endif>@lang('sidebar.view_by_country')</a></li>
 		@endif
-		<li><a href="{{url('resources')}}"
+		<li><a href="{{generate_url('resources')}}"
 			   @if(isActiveMenu('resources')) class="active" @endif>@lang('sidebar.view_by_resource')</a></li>
-		<li><a href="{{url('about')}}" @if(isActiveMenu('about')) class="active" @endif>{{site()->meta('about')}}</a>
+		<li><a href="{{generate_url('about')}}" @if(isActiveMenu('about')) class="active" @endif>{{site()->meta('about')}}</a>
 		</li>
-		<li><a href="{{url('glossary')}}"
+		<li><a href="{{generate_url('glossary')}}"
 			   @if(isActiveMenu('glossary')) class="active" @endif>@lang('sidebar.glossary')</a></li>
-		<li><a href="{{url('guides')}}" @if(isActiveMenu('guides')) class="active" @endif>@lang('sidebar.guides')</a>
+		<li><a href="{{generate_url('guides')}}" @if(isActiveMenu('guides')) class="active" @endif>@lang('sidebar.guides')</a>
 		</li>
 	</ul>
 </div>

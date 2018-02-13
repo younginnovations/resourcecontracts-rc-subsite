@@ -12,7 +12,7 @@
 					document.location.href = window.location.pathname + '#/text';
 				}
 				slowConnection = true;
-				document.getElementById('loader').innerHTML = '<img src="{{url('images/loading.gif')}}"> @lang('contract.loading_redirect')';
+				document.getElementById('loader').innerHTML = '<img src="{{generate_url('images/loading.gif')}}"> @lang('contract.loading_redirect')';
 			}
 		}, 25000);
 	</script>
@@ -76,11 +76,11 @@
 			}
 		};
 	</script>
-	<script src="{{secure_asset('js/annotator/annotator-full.min.js')}}"></script>
-	<script src="{{secure_asset('js/annotator/annotator.utils.js')}}"></script>
-	<script src="{{secure_asset('js/pdfjs/pdf.js')}}"></script>
+	<script src="{{generate_asset_url('js/annotator/annotator-full.min.js')}}"></script>
+	<script src="{{generate_asset_url('js/annotator/annotator.utils.js')}}"></script>
+	<script src="{{generate_asset_url('js/pdfjs/pdf.js')}}"></script>
 	<script>
-		PDFJS.workerSrc = "{{secure_asset('js/pdfjs/pdf.worker.js')}}"
+		PDFJS.workerSrc = "{{generate_asset_url('js/pdfjs/pdf.worker.js')}}"
 	</script>
-	<script src="{{ secure_asset('js/contract_view.js') }}"></script>
+	<script src="{{ generate_asset_url('js/contract_view.js') }}"></script>
 @stop

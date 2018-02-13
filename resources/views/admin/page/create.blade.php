@@ -1,8 +1,8 @@
 @extends('layout.admin')
 
 @section('js')
-    <script type="text/javascript" src="{{secure_asset('js/tinymce/tinymce.min.js')}}"></script>
-    <script type="text/javascript" src="{{secure_asset('js/tinymce/tinymce-init.js')}}"></script>
+    <script type="text/javascript" src="{{generate_asset_url('js/tinymce/tinymce.min.js')}}"></script>
+    <script type="text/javascript" src="{{generate_asset_url('js/tinymce/tinymce-init.js')}}"></script>
 @stop
 
 @section('content')

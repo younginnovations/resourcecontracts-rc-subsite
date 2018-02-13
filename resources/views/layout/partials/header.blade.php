@@ -2,7 +2,7 @@
 @include('layout.partials.clip')
 <div class="row title-wrap clearfix">
 	<nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-		<form action="{{url('search')}}" method="get" class="search-form" id="search-form">
+		<form action="{{generate_url('search')}}" method="get" class="search-form" id="search-form">
 			<div class="navbar-header">
 				<span data-toggle="collapse-sidebar" data-target=".sidebar-collapse"
 					  data-target-2=".sidebar-collapse-container" class="pull-left trigger"></span>
