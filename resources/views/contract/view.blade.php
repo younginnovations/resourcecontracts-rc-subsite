@@ -20,7 +20,7 @@
 @section('content')
 	<div id="contract">
 		<div id="loader" class="loader">
-			<img src="{{secure_asset('images/loading.gif')}}"/> @lang('contract.loading')
+			<img src="{{url('images/loading.gif')}}"/> @lang('contract.loading')
 		</div>
 	</div>
 @stop
@@ -76,11 +76,11 @@
 			}
 		};
 	</script>
-	<script src="{{secure_asset('js/annotator/annotator-full.min.js')}}"></script>
-	<script src="{{secure_asset('js/annotator/annotator.utils.js')}}"></script>
-	<script src="{{secure_asset('js/pdfjs/pdf.js')}}"></script>
+	<script src="{{url('js/annotator/annotator-full.min.js')}}"></script>
+	<script src="{{url('js/annotator/annotator.utils.js')}}"></script>
+	<script src="{{url('js/pdfjs/pdf.js')}}"></script>
 	<script>
-		PDFJS.workerSrc = "{{secure_asset('js/pdfjs/pdf.worker.js')}}"
+		PDFJS.workerSrc = "{{url('js/pdfjs/pdf.worker.js')}}"
 	</script>
-	<script src="{{ secure_asset('js/contract_view.js') }}"></script>
+	<script src="{{ url('js/contract_view.js') }}"></script>
 @stop

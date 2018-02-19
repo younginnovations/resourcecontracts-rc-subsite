@@ -15,8 +15,8 @@ $contact_email = site()->contactEmail();
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="{{$favicon}}">
-	<link href="{{secure_asset('css/style.css')}}" rel="stylesheet"/>
-	<link href="{{secure_asset('css/contract.css')}}" rel="stylesheet"/>
+	<link href="{{url('css/style.css')}}" rel="stylesheet"/>
+	<link href="{{url('css/contract.css')}}" rel="stylesheet"/>
 	<style>
 		#progress-bar-info {
 			border-bottom: 2px solid #1757d5;
@@ -46,7 +46,7 @@ $contact_email = site()->contactEmail();
 		</div>
 	</div>
 </div>
-<script src="{{secure_asset('js/pdfjs/pdf.js')}}" type="text/javascript"></script>
-<script src="{{secure_asset('js/popup.js')}}" type="text/javascript"></script>
+<script src="{{url('js/pdfjs/pdf.js')}}" type="text/javascript"></script>
+<script src="{{url('js/popup.js')}}" type="text/javascript"></script>
 </body>
 </html>
