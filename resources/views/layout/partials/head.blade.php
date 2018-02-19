@@ -24,13 +24,13 @@ $favicon     = site()->getImageUrl('favicon', 'ico');
 	<meta name="twitter:title" content="{{ $title }}"/>
 	<meta name="twitter:image" content="{{ site()->getImageUrl('bg')}}"/>
 	<link rel="icon" href="{{$favicon}}">
-	<link href="{{generate_asset_url('css/style.css?v=1.07')}}" rel="stylesheet"/>
+	<link href="{{url('css/style.css?v=1.07')}}" rel="stylesheet"/>
 	@yield('css')
     <!--[if lt IE 9]>
 	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	<![endif]-->
-	<script src="{{generate_asset_url('js/plugins-bundle.js')}}"></script>
+	<script src="{{url('js/plugins-bundle.js')}}"></script>
 	<script>
 		var app_url = '{{ url()}}';
 		var langSelect = '{{$langSelect}}';

@@ -26,7 +26,7 @@
 
 				<div class="right-content">
 					@if(!site()->isCountrySite())
-						<a class="filter-resource-wrap filter-label" href={{generate_url('/countries')}} >
+						<a class="filter-resource-wrap filter-label" href={{url('/countries')}} >
 							@lang('global.view_by_country')
 						</a>
 					@endif
@@ -44,7 +44,7 @@
 @section('js')
 	<script type="text/template" id="resource-template">
 		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-			<a href="{{generate_url('resource')}}/<%= value %>">
+			<a href="{{url('resource')}}/<%= value %>">
             <div class="country-name resource-name pull-left">
                 <% if(typeof resource[name] == 'undefined') {%>
                     <%= name %>
@@ -71,12 +71,12 @@
 </script>
 
 <script>
-    var APP_URL = '{{generate_url()}}';
+    var APP_URL = '{{url()}}';
     var lang = <?php echo json_encode(trans('annotation'));?>;
     var resource = <?php echo json_encode(trans('resources'));?>;
     var country = <?php echo json_encode(trans('country'));?>;
 </script>
 
-<script type=" text/javascript" src="{{generate_asset_url('js/resource.js')}}"></script>
+<script type=" text/javascript" src="{{url('js/resource.js')}}"></script>
 @stop
 

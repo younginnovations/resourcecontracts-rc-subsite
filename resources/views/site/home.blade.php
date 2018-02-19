@@ -46,7 +46,7 @@ $image_intro = site()->getImageUrl('intro_bg');
 							</div>
 						</form>
 						<div class="advance-search">
-							<a href="{{generate_url('search')}}">@lang('global.advanced_search')</a>
+							<a href="{{url('search')}}">@lang('global.advanced_search')</a>
 						</div>
 					</div>
 
@@ -97,21 +97,21 @@ $image_intro = site()->getImageUrl('intro_bg');
 						<p>@lang('global.partners')</p>
 						<a href="http://www.resourcegovernance.org/"
 						   target="_blank" class="nrgi">
-							<img src="{{generate_asset_url('images/NRGI_logo.png')}}" alt="NRGI">
+							<img src="{{url('images/NRGI_logo.png')}}" alt="NRGI">
 						</a>
 						<a href="http://ccsi.columbia.edu/"
 						   target="_blank">
-							<img src="{{generate_asset_url('images/CCSI_logo.png')}}" class="ccsi" alt="CCSI">
+							<img src="{{url('images/CCSI_logo.png')}}" class="ccsi" alt="CCSI">
 						</a>
 						<a href="http://www.worldbank.org/en/topic/governance"
 						   target="_blank">
-							<img src="{{generate_asset_url('images/WORLDBANK_logo.png')}}" alt="World Bank">
+							<img src="{{url('images/WORLDBANK_logo.png')}}" alt="World Bank">
 						</a>
 
 						@if(env('APP_DEBUG'))
 						<a href="http://openoil.net"
 						   target="_blank">
-							<img src="{{generate_asset_url('images/OO_logo.png')}}" alt="Open Oil">
+							<img src="{{url('images/OO_logo.png')}}" alt="Open Oil">
 						</a>
 						@endif
 					</div>
@@ -119,11 +119,11 @@ $image_intro = site()->getImageUrl('intro_bg');
 						<p>@lang('global.donors')</p>
 						<a href="http://www.dfid.gov.uk"
 						   target="_blank">
-							<img src="{{generate_asset_url('images/UKAid_logo.png')}}" alt="UKAid">
+							<img src="{{url('images/UKAid_logo.png')}}" alt="UKAid">
 						</a>
 						<a href="http://alsf.afdb.org/"
 						   target="_blank">
-							<img src="{{generate_asset_url('images/ALSF_logo.png')}}" alt="ALSF">
+							<img src="{{url('images/ALSF_logo.png')}}" alt="ALSF">
 						</a>
 					</div>
 				</div>
@@ -222,6 +222,6 @@ $image_intro = site()->getImageUrl('intro_bg');
 		var documentLang = '{{trans('global.document')}}';
 		var documentsLang = '{{trans('global.documents')}}';
 	</script>
-	<script src="{{generate_asset_url('js/homepage.js')}}"></script>
+	<script src="{{url('js/homepage.js')}}"></script>
 @stop
 @endif

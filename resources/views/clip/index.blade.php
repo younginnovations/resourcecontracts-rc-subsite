@@ -42,5 +42,5 @@
 		var siteName = '{{site()->meta('title')}}';
 		var checkedClips = [];
 	</script>
-	<script src="{{generate_asset_url('js/clipping.js')}}"></script>
+	<script src="{{url('js/clipping.js')}}"></script>
 @stop
