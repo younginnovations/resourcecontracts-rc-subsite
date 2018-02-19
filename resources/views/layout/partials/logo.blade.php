@@ -1,4 +1,4 @@
-<a class="navbar-brand" href="{{generate_url()}}">
+<a class="navbar-brand" href="{{url()}}">
 	@if(site()->isCountrySite())
 		<span class="country-flag">
 			<img src="{{site()->meta('logo')}}"/>

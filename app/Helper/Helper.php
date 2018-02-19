@@ -427,28 +427,26 @@ function redirectIfOldAnnotationCategory($old)
 }
 
 /**
- * Generate an asset URL for the application, secure URL if the X-Forwarded-Proto header is set tp https
+ * Generate an asset path for the application.
  *
  * @param  string $path
  * @return string
  */
-function generate_asset_url($path)
+function secure_asset($path)
 {
-    $isHttps = \Request::header("X-Forwarded-Proto") == "https";
-    return asset($path, $isHttps);
+    return asset($path, true);
 }
 
 /**
- * Generate a url for the application, secure URL if the X-Forwarded-Proto header is set to https.
+ * Generate a HTTPS url for the application.
  *
  * @param  string $path
  * @param  mixed $parameters
  * @return string
  */
-function generate_url($path="", $parameters = array())
+function secure_url($path, $parameters = array())
 {
-    $isHttps = \Request::header("X-Forwarded-Proto") == "https";
-    return url($path, $parameters, $isHttps);
+    return url($path, $parameters, true);
 }
 
 /**

@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Lang;
             <div class="filter-wrapper">
                 <div class="col-lg-12">
                     <div class="filter-country-wrap">
-                        <form action="{{generate_url('search')}}" method="GET" class="search-form filter-form">
+                        <form action="{{url('search')}}" method="GET" class="search-form filter-form">
                             <div class="form-group">
                                 <button type="submit" class="btn btn-filter-search pull-left"></button>
                                 <input type="text" name="q" class="form-control pull-left"

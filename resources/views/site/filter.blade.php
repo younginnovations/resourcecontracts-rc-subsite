@@ -31,7 +31,7 @@
 		<div class="filter-wrapper advance-filter-wrapper" style="min-height: 135px">
 			<div class="col-lg-12 static-search">
 				<div class="filter-country-wrap" style="display: none">
-					<form action="{{generate_url('search')}}" method="get" class="search-form" id="search-form">
+					<form action="{{url('search')}}" method="get" class="search-form" id="search-form">
 						<input type="hidden" name="q" value="" id="header-input-clone">
 						@include('layout.partials.search', ['searchPage' =>true])
 					</form>
@@ -85,7 +85,7 @@
 @section('js')
 	<script>
 		var lang = <?php echo json_encode(trans('annotation'));?>;
-		var contractURL = '{{generate_url('contract')}}';
+		var contractURL = '{{url('contract')}}';
 		$(function () {
 			$('.filter-country-wrap').show();
 		});

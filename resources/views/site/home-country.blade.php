@@ -40,7 +40,7 @@ $image_main = site()->getImageUrl('bg');
 							</div>
 						</form>
 						<div class="advance-search">
-							<a href="{{generate_url('search')}}">@lang('global.advanced_search')</a>
+							<a href="{{url('search')}}">@lang('global.advanced_search')</a>
 						</div>
 					</div>
 				</div>
