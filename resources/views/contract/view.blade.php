@@ -20,7 +20,7 @@
 @section('content')
 	<div id="contract">
 		<div id="loader" class="loader">
-			<img src="{{generate_asset_url('images/loading.gif')}}"/> @lang('contract.loading')
+			<img src="{{secure_asset('images/loading.gif')}}"/> @lang('contract.loading')
 		</div>
 	</div>
 @stop
