@@ -110,7 +110,13 @@ RUN composer dump-autoload --optimize \
  && gulp --cwd /var/www/country-tz theme_blue \
  && chmod -R 777 /var/www/country-tz/storage \
  && chmod -R 777 /var/www/country-tz/public \
- && touch /var/www/country-tz/.env \
+#country site -- Tanzania /tz olc
+ && mkdir -p /var/www/country-tz-olc \
+ && cp -R /var/container_init/site_content/. /var/www/country-tz-olc \
+ && gulp --cwd /var/www/country-tz-olc theme_blue \
+ && chmod -R 777 /var/www/country-tz-olc/storage \
+ && chmod -R 777 /var/www/country-tz-olc/public \
+ && touch /var/www/country-tz-olc/.env \
 #country site -- Guinea /gn
  && mkdir -p /var/www/country-gn \
  && cp -R /var/container_init/site_content/. /var/www/country-gn \

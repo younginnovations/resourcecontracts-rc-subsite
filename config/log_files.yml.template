@@ -2,23 +2,25 @@ files:
   - path: /var/log/nginx/access.log
     tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-nginx-access.log
   - path: /var/log/nginx/error.log
-    tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-nginx-error.log  
+    tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-nginx-error.log
   - path: /var/log/php-fpm.log
-    tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-php-fpm.log    
+    tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-php-fpm.log
   - path: /var/log/supervisor/supervisord.log
-    tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-supervisor-supervisord.log  
+    tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-supervisor-supervisord.log
   - path: /var/log/supervisor/remote-syslog.log
-    tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-supervisor-remote-syslog.log    
+    tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-supervisor-remote-syslog.log
   - path: /var/www/olc/storage/logs/*lumen.log
-    tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-var-www-olc-storage-logs        
+    tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-var-www-olc-storage-logs
   - path: /var/www/rc/storage/logs/*lumen.log
-    tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-var-www-rc-storage-logs        
+    tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-var-www-rc-storage-logs
   - path: /var/www/country-tn/storage/logs/*lumen.log
     tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-var-www-country-tn-storage-logs
   - path: /var/www/country-drc/storage/logs/*lumen.log
     tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-var-www-country-drc-storage-logs
   - path: /var/www/country-tz/storage/logs/*lumen.log
     tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-var-www-country-tz-storage-logs
+  - path: /var/www/country-tz-olc/storage/logs/*lumen.log
+    tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-var-www-country-tz-olc-storage-logs
   - path: /var/www/country-gn/storage/logs/*lumen.log
     tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-var-www-country-gn-storage-logs
 destination:
