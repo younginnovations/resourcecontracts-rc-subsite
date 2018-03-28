@@ -62,7 +62,7 @@ export CONTACT_MAIL=${TZ_CONTACT_MAIL}
 export COUNTRY=tz
 
 export CATEGORY=country-tz
-envsubst '$SERVER_NAME $CATEGORY'< ./nginx_subsite.template > /etc/nginx/sites-enabled/country-tz
+envsubst '$SERVER_NAME $CATEGORY'< ./nginx_subsite_protected.template > /etc/nginx/sites-enabled/country-tz
 
 export CATEGORY=rc
 envsubst < ./env.template > /var/www/country-tz/.env
