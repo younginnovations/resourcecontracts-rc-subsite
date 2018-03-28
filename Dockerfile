@@ -47,7 +47,7 @@ RUN mkdir -p /etc/nginx \
  && mkdir -p /var/log/supervisor \
  && rm /etc/nginx/nginx.conf \
  && mkdir -p /var/container_init \
- && mkdir -p /var/container_init/site_content 
+ && mkdir -p /var/container_init/site_content
 
 WORKDIR /var/container_init/site_content
 
@@ -62,6 +62,7 @@ RUN composer install --no-interaction --prefer-dist --no-scripts --no-autoloader
 
 COPY config/init.sh /var/container_init/init.sh
 COPY config/nginx_subsite.template /var/container_init/nginx_subsite.template
+COPY config/nginx_subsite_protected.template /var/container_init/nginx_subsite_protected.template
 COPY config/nginx_olc_com /var/container_init/nginx_olc_com
 COPY config/log_files.yml.template /var/container_init/log_files.yml.template
 COPY config/logrotate.conf /etc/logrotate.d/rc-subsite
