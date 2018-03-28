@@ -64,7 +64,7 @@ export COUNTRY=tz
 export CATEGORY=country-tz
 envsubst '$SERVER_NAME $CATEGORY'< ./nginx_subsite.template > /etc/nginx/sites-enabled/country-tz-olc
 
-export CATEGORY=rc
+export CATEGORY=olc
 envsubst < ./env.template > /var/www/country-tz-olc/.env
 
 #country-tanzania
