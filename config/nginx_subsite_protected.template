@@ -6,6 +6,10 @@ server {
   client_max_body_size 100M;
   fastcgi_read_timeout 1800;
 
+  location /api/ {
+    try_files $uri $uri/ /index.php?$query_string;
+  }
+
   location / {
     try_files $uri $uri/ /index.php?$query_string;
      auth_basic "Restricted content";
