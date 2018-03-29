@@ -61,7 +61,7 @@ export DB_DATABASE=${COUNTRY_DB_DATABASE}
 export CONTACT_MAIL=${TZ_CONTACT_MAIL}
 export COUNTRY=tz
 
-export CATEGORY=country-tz
+export CATEGORY=country-tz-olc
 envsubst '$SERVER_NAME $CATEGORY'< ./nginx_subsite.template > /etc/nginx/sites-enabled/country-tz-olc
 
 export CATEGORY=olc
