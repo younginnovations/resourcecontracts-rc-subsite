@@ -94,5 +94,18 @@ envsubst '$SERVER_NAME $CATEGORY'< ./nginx_subsite.template > /etc/nginx/sites-e
 export CATEGORY=rc
 envsubst < ./env.template > /var/www/country-gn/.env
 
+#country-zambia
+export SERVER_NAME="zambia.resourcecontracts.org *.zambia.resourcecontracts.org"
+export TRACKING_ID=${ZM_TRACKING_ID}
+export DB_DATABASE=${COUNTRY_DB_DATABASE}
+export CONTACT_MAIL=${ZM_CONTACT_MAIL}
+export COUNTRY=zm
+
+export CATEGORY=country-zm
+envsubst '$SERVER_NAME $CATEGORY'< ./nginx_subsite_protected.template > /etc/nginx/sites-enabled/country-zm
+
+export CATEGORY=rc
+envsubst < ./env.template > /var/www/country-zm/.env
+
 #log_files
 envsubst '${DEPLOYMENT_TYPE}' < ./log_files.yml.template > /etc/log_files.yml

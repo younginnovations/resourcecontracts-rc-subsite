@@ -124,6 +124,13 @@ RUN composer dump-autoload --optimize \
  && chmod -R 777 /var/www/country-gn/storage \
  && chmod -R 777 /var/www/country-gn/public \
  && touch /var/www/country-gn/.env \
+#country site -- Zambia /zm
+ && mkdir -p /var/www/country-zm \
+ && cp -R /var/container_init/site_content/. /var/www/country-zm \
+ && gulp --cwd /var/www/country-zm theme_blue \
+ && chmod -R 777 /var/www/country-zm/storage \
+ && chmod -R 777 /var/www/country-zm/public \
+ && touch /var/www/country-zm/.env \
 
 #cleanup
  && rm -r /var/container_init/site_content
