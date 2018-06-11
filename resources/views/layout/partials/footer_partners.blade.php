@@ -23,14 +23,12 @@
 							   class="img-responsive logo__wb"
 							   target="_blank"></a>
 						</li>
-						@if(env('APP_DEBUG'))
-							<li>
-								<a href="http://openoil.net"
-								   class="img-responsive logo__oo"
-								   target="_blank">
-								</a>
-							</li>
-						@endif
+						<li>
+							<a href="http://openoil.net"
+							   class="img-responsive logo__oo"
+							   target="_blank">
+							</a>
+						</li>
 					@endif
 				</ul>
 			</div>
