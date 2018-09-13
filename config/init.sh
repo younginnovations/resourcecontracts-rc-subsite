@@ -7,6 +7,7 @@
 export SERVER_NAME="www.resourcecontracts.org resourcecontracts.org *.resourcecontracts.org"
 export CATEGORY=rc
 export TRACKING_ID=${RC_TRACKING_ID}
+export GTM_ID=${RC_GTM_ID}
 export DB_DATABASE=${RC_DB_DATABASE}
 export CONTACT_MAIL=${RC_CONTACT_MAIL}
 export COUNTRY=''
