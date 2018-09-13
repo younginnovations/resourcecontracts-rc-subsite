@@ -6,6 +6,7 @@ $langSelect  = trans('search.select');
 $title       = (isset($meta['title'])) ? site()->meta('title').' - '.$meta['title'] : site()->meta('title');
 $description = (isset($meta['description'])) ? $meta['description'] : site()->meta('description');
 $favicon     = site()->getImageUrl('favicon', 'ico');
+$gtmID      =  site()->getEnv("GTM_ID");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +27,16 @@ $favicon     = site()->getImageUrl('favicon', 'ico');
 	<link rel="icon" href="{{$favicon}}">
 	<link href="{{url('css/style.css?v=1.07')}}" rel="stylesheet"/>
 	@yield('css')
+
+    @if($gtmID != '')
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','{{$gtmID}}');</script>
+        <!-- End Google Tag Manager -->
+    @endif
     <!--[if lt IE 9]>
 	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -39,6 +50,11 @@ $favicon     = site()->getImageUrl('favicon', 'ico');
 </head>
 
 <body data-spy="scroll" class="lang-{{$lang->getCurrentLang()}} {{site()->getSiteType()}} {{getPageClass()}}"  dir="{{$lang->getDirection()}}" lang="{{$lang->getCurrentLang()}}">
-
+    @if( $gtmID != '')
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{$gtmID}}"
+                      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    @endif
 <div id="wrapper">
 	<div id="page-wrapper" class="not-front sidebar-collapse-container">
