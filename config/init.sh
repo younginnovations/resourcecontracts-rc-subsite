@@ -19,6 +19,7 @@ envsubst < ./env.template > /var/www/rc/.env
 export SERVER_NAME="www.openlandcontracts.org openlandcontracts.org *.openlandcontracts.org "
 export CATEGORY=olc
 export TRACKING_ID=${OLC_TRACKING_ID}
+export GTM_ID=${OLC_GTM_ID}
 export DB_DATABASE=${OLC_DB_DATABASE}
 export CONTACT_MAIL=${OLC_CONTACT_MAIL}
 export COUNTRY=''
@@ -32,6 +33,7 @@ cp ./nginx_olc_com /etc/nginx/sites-enabled/olc.com
 #country-tn
 export SERVER_NAME="tunisia.resourcecontracts.org *.tunisia.resourcecontracts.org"
 export TRACKING_ID=${TN_TRACKING_ID}
+export GTM_ID=${TN_GTM_ID}
 export DB_DATABASE=${COUNTRY_DB_DATABASE}
 export CONTACT_MAIL=${TN_CONTACT_MAIL}
 export COUNTRY=tn
@@ -45,6 +47,7 @@ envsubst < ./env.template > /var/www/country-tn/.env
 #country-drc
 export SERVER_NAME="drc.openlandcontracts.org *.drc.openlandcontracts.org"
 export TRACKING_ID=${DRC_TRACKING_ID}
+export GTM_ID=${DRC_GTM_ID}
 export DB_DATABASE=${COUNTRY_DB_DATABASE}
 export CONTACT_MAIL=${DRC_CONTACT_MAIL}
 export COUNTRY=cd
@@ -58,6 +61,7 @@ envsubst < ./env.template > /var/www/country-drc/.env
 #country-tanzania-olc
 export SERVER_NAME="tanzania.openlandcontracts.org *.tanzania.openlandcontracts.org"
 export TRACKING_ID=${TZ_TRACKING_ID}
+export GTM_ID=${TZ_GTM_ID}
 export DB_DATABASE=${COUNTRY_DB_DATABASE}
 export CONTACT_MAIL=${TZ_CONTACT_MAIL}
 export COUNTRY=tz
@@ -71,6 +75,7 @@ envsubst < ./env.template > /var/www/country-tz-olc/.env
 #country-tanzania
 export SERVER_NAME="tanzania.resourcecontracts.org *.tanzania.resourcecontracts.org"
 export TRACKING_ID=${TZ_TRACKING_ID}
+export GTM_ID=${TZ_GTM_ID}
 export DB_DATABASE=${COUNTRY_DB_DATABASE}
 export CONTACT_MAIL=${TZ_CONTACT_MAIL}
 export COUNTRY=tz
@@ -84,6 +89,7 @@ envsubst < ./env.template > /var/www/country-tz/.env
 #country-guinea
 export SERVER_NAME="guinea.resourcecontracts.org *.guinea.resourcecontracts.org contratsminiersguinee.org *.contratsminiersguinee.org"
 export TRACKING_ID=${GN_TRACKING_ID}
+export GTM_ID=${GN_GTM_ID}
 export DB_DATABASE=${COUNTRY_DB_DATABASE}
 export CONTACT_MAIL=${GN_CONTACT_MAIL}
 export COUNTRY=gn
@@ -97,6 +103,7 @@ envsubst < ./env.template > /var/www/country-gn/.env
 #country-zambia
 export SERVER_NAME="zambia.resourcecontracts.org *.zambia.resourcecontracts.org"
 export TRACKING_ID=${ZM_TRACKING_ID}
+export GTM_ID=${ZM_GTM_ID}
 export DB_DATABASE=${COUNTRY_DB_DATABASE}
 export CONTACT_MAIL=${ZM_CONTACT_MAIL}
 export COUNTRY=zm
