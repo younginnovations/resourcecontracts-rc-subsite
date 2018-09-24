@@ -6,6 +6,9 @@
 |
 */
 $app->get('/', ['as' => 'home', 'uses' => 'SiteController@home']);
+$app->get('/health', function () {
+    return 'Healthy';
+});
 
 /*
 |--------------------------------------------------------------------------
