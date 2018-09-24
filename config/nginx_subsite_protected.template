@@ -1,4 +1,8 @@
 server {
+  if ($http_x_forwarded_proto != 'https' ) {
+    return 301 https://$host$request_uri;
+  }
+
   server_name ${SERVER_NAME};
   root        /var/www/${CATEGORY}/public;
   index       index.php;
