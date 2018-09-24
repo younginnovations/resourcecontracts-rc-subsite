@@ -3,13 +3,13 @@ server {
   server_name ${SERVER_NAME};
 
   if ($http_x_forwarded_proto != 'https' ) {
-    set $redirect_https '1';
+    set $redirect_https 1;
   }
-  if ( $request_uri != '/health' ) {
-      set $redirect_https  '${redirect_https}1';
+  if ( $request_uri = '/health' ) {
+      set $redirect_https 0;
   }
 
-  if ( $redirect_https = '11'){
+  if ( $redirect_https = 1){
     return 301 https://$host$request_uri;
   }
 
