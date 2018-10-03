@@ -2,7 +2,7 @@
 return [
     'name'                  => 'Resource',
     'title'                 => 'ResourceContracts.org',
-    'description'           => 'An online repository of publicly available contracts for large-scale land, agriculture, and forestry projects. The repository includes the full text of contracts; plain language summaries of each contract’s key social, environmental, human rights, fiscal, and operational terms; and tools for searching and comparing contracts.',
+    'description'           => 'An online repository of publicly available oil, gas, and mining contracts. The repository features plain language summaries of each contract’s key social, environmental, human rights, fiscal, and operational terms, and tools for searching and comparing contracts.',
     'countries_description' => 'Find resource contracts from multiple countries - ',
     'country_description'   => 'Find resource contracts from country - ',
     'resources_description' => 'Find resource contracts for different resources -',
