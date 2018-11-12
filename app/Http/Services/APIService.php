@@ -337,6 +337,7 @@ class APIService
                     Cache::put($key, $data, Carbon::now()->addMinutes(5));
                 }else {
                     Log::error("API call to:".$request->getUrl()." returned status code ".$statusCode);
+                    Log::error("Response body of the API call ".$request->getUrl()." was ".$data);
                 }
             }
 
