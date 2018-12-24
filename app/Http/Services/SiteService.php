@@ -128,12 +128,18 @@ class SiteService
         $data = $this->getConfig($key);
 
         if ($this->isCountrySite()) {
-            $country         = $this->getCountryDetail();
-            $data['title']   = $data['name'] = isset($data['name']) ? $data['name'] : $country['name'];
-            $data['type']    = $this->isCategory('rc') ? 'Resource' : 'Open Land';
-            $data['logo']    = $country['flag'];
-            $data['about']   = str_replace(':name', $data['name'], $data['about']);
-            $data['tagline'] = str_replace(':name', $data['name'], $data['tagline']);
+            $country       = $this->getCountryDetail();
+            $data['title'] = $data['name'] = isset($data['name']) ? $data['name'] : $country['name'];
+            $data['logo']  = $country['flag'];
+            $data['about'] = str_replace(':name', $data['name'], $data['about']);
+            $data['type']  = 'Open Land';
+
+            if ($this->isCategory('rc')) {
+                $data['type']    = 'Resource';
+                $data['tagline'] = str_replace(':name', $data['name'], $data['tag_line_rc']);
+            } elseif ($this->isCategory('olc')) {
+                $data['tagline'] = str_replace(':name', $data['name'], $data['tag_line_olc']);
+            }
         }
 
         if (is_null($property)) {
