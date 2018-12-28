@@ -6,5 +6,7 @@ return [
     'resources_description' => 'Trouvez des contrats des ressources de  différentes ressources',
     'resource_description'  => 'Trouver des contrats des ressources pour une ressource',
     'tagline'               => '<p class="repo-description"><small>Un répertoire de</small> <br/>contrats agricoles et forestiers de la :name</p>',
+    'tag_line_rc'           => '<p class="repo-description"> Un référentiel de </p> <div class="large-title"><span> Resource Contracts de :name</span></div>',
+    'tag_line_olc'          => '<p class="repo-description">Un référentiel en ligne de </p> <div class="large-title Contracts de :name</span></div>',
     'about'                 => 'A propos',
 ];
