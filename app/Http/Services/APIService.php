@@ -326,7 +326,6 @@ class APIService
 
             $query['category'] = strtolower($this->site->getCategory());
             $request->setQuery($query);
-
             $key = md5($request->getUrl());
 
             if (Cache::has($key)) {
@@ -510,7 +509,8 @@ class APIService
         $request = new Request('GET', $this->apiURL($resource));
 
         if ($this->site->isCountrySite()) {
-            $query['country'] = strtolower($this->site->getCountryCode());
+            $query['country']         = strtolower($this->site->getCountryCode());
+            $query['is_country_site'] = 1;
         }
 
         $query['category'] = strtolower($this->site->getCategory());
