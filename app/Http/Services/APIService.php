@@ -326,7 +326,6 @@ class APIService
 
             $query['category'] = strtolower($this->site->getCategory());
             $request->setQuery($query);
-
             $key = md5($request->getUrl());
 
             if (Cache::has($key)) {
