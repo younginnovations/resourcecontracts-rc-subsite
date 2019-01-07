@@ -7,4 +7,6 @@ return [
     'find_contract'          => "Trouver un contrat dans",
     'contracts_in'           => "Contrats dans",
     'resources_in'           => "Ressources dans",
+    'document'               => 'document',
+    'documents'              => 'des documents',
 ];

@@ -7,5 +7,7 @@ return [
     'find_contract'          => "إيجاد عقد في",
     'contracts_in'           => "عقود في",
     'resources_in'           => "موارد في",
+    'document'               => "عقد",
+    'documents'              => "عقود",
 ];
 
