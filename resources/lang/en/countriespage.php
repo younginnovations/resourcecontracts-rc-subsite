@@ -5,8 +5,9 @@ return [
     'contract'               => 'Contract',
     'contracts'              => 'Contracts',
     'find_contract'          => 'Search within :tag contracts',
-    'contracts_in'           => 'Contracts in',
-    'resources_in'           => 'Resources In',
+    'find_document'          => 'Search within :tag documents',
+    'contracts_in'           => 'Documents in',
+    'resources_in'           => 'Resources in',
     'document'               => 'Document',
     'documents'              => 'Documents',
 ];
