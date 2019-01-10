@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Services;
 
 use Carbon\Carbon;
@@ -28,8 +29,8 @@ class APIService
     private $site;
 
     /**
-     * @param Client              $client
-     * @param SiteService         $site
+     * @param Client $client
+     * @param SiteService $site
      * @param LocalizationService $lang
      */
     public function __construct(Client $client, SiteService $site, LocalizationService $lang)
@@ -305,7 +306,7 @@ class APIService
      *
      * @param       $resource
      * @param array $query
-     * @param bool  $array
+     * @param bool $array
      *
      * @return array|object|null
      */
@@ -315,7 +316,8 @@ class APIService
             $request = new Request('GET', $this->apiURL($resource));
 
             if ($this->site->isCountrySite()) {
-                $query['country_code'] = strtolower($this->site->getCountryCode());
+                $query['country_code']    = strtolower($this->site->getCountryCode());
+                $query['is_country_site'] = 1;
             }
 
             if ($this->lang->getCurrentLang() != $this->lang->getDefaultLang()) {
@@ -329,16 +331,16 @@ class APIService
             if (Cache::has($key)) {
                 $data = Cache::get($key);
             } else {
-                $response = $this->client->send($request);
-                $data     = $response->getBody();
-                $data     = $data->getContents();
+                $response   = $this->client->send($request);
+                $data       = $response->getBody();
+                $data       = $data->getContents();
                 $statusCode = $response->getStatusCode();
                 if ($statusCode == 200) {
                     Cache::put($key, $data, Carbon::now()->addMinutes(5));
-                }else {
+                } else {
                     Cache::put($key, $data, Carbon::now()->addMinutes(5));
-                    Log::error("API call to:".$request->getUrl()." returned status code ".$statusCode);
-                    Log::error("Response body of the API call ".$request->getUrl()." was ".$data);
+                    Log::error("API call to:" . $request->getUrl() . " returned status code " . $statusCode);
+                    Log::error("Response body of the API call " . $request->getUrl() . " was " . $data);
                 }
             }
 
@@ -349,7 +351,7 @@ class APIService
             return json_decode($data);
 
         } catch (\Exception $e) {
-            Log::error($resource.":".$e->getMessage(), $query);
+            Log::error($resource . ":" . $e->getMessage(), $query);
 
             return null;
         }
@@ -470,9 +472,9 @@ class APIService
 
         foreach ($summaries->country_summary as $summary) {
 
-            $data[trans('country.'.strtoupper($summary->key))] = [
+            $data[trans('country.' . strtoupper($summary->key))] = [
                 'key'       => $summary->key,
-                'name'      => trans('country.'.strtoupper($summary->key)),
+                'name'      => trans('country.' . strtoupper($summary->key)),
                 'doc_count' => $summary->doc_count,
             ];
         }
@@ -487,8 +489,8 @@ class APIService
      * call API
      *
      * @param        $resource
-     * @param array  $query
-     * @param bool   $array
+     * @param array $query
+     * @param bool $array
      *
      * @param string $id
      *
@@ -497,17 +499,18 @@ class APIService
      */
     public function downloadAPI($resource, array $query = [], $array = false, $id = "")
     {
-        $filename = "contract_".date('Y-m-d');
+        $filename = "contract_" . date('Y-m-d');
         if (!empty($id)) {
             $metadata = $this->contractDetail($id);
             if (empty($metadata)) {
-                throw new \Exception('Contract not found with id '.$id);
+                throw new \Exception('Contract not found with id ' . $id);
             }
         }
         $request = new Request('GET', $this->apiURL($resource));
 
         if ($this->site->isCountrySite()) {
-            $query['country'] = strtolower($this->site->getCountryCode());
+            $query['country']         = strtolower($this->site->getCountryCode());
+            $query['is_country_site'] = 1;
         }
 
         $query['category'] = strtolower($this->site->getCategory());
@@ -569,7 +572,7 @@ class APIService
                 'shapes'         => $annotation->shapes,
             ];
         } catch (\Exception $e) {
-            Log::error('Contract popup :'.$e->getMessage());
+            Log::error('Contract popup :' . $e->getMessage());
 
             return null;
         }
