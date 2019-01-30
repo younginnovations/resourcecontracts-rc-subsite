@@ -215,7 +215,7 @@ var Metadata = React.createClass({
         var totalDoc = 0;
         let supportingContracts = [];
         this.state.metadata.associated.forEach((doc)=> {
-            if (doc.is_published && totalDoc <= MaxAllowed) {
+            if (doc.is_published) {
                 totalDoc++;
                 var docUrl = `${Config.APP_URL}/contract/${doc.open_contracting_id}/view`;
                 supportingContracts.push(
