@@ -11,20 +11,21 @@
                     </div>
                 </div>
             </div>
-            <div class="filter-wrapper" id= "filter-by-category">
+            <div class="filter-wrapper" id="filter-by-category">
                 <div class="left-content">
                     <div class="filter-country-wrap">
                         <form class="search-form filter-form">
                             <div class="form-group">
                                 <button type="submit" class="btn btn-filter-search pull-left"></button>
-                          <input type="text" class="form-control search pull-left" placeholder="@lang('global.filter_by_countries')">
+                                <input type="text" class="form-control search pull-left"
+                                       placeholder="@lang('global.filter_by_countries')">
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="right-content">
                     <div class="filter-resource-wrap">
-                       <a href={{url('/resources')}} class="filter-label">@lang('global.view_by_resource')</a>
+                        <a href={{url('/resources')}} class="filter-label">@lang('global.view_by_resource')</a>
                     </div>
                     <div class="side-collapse in">
                         <ul id="resources">
@@ -42,17 +43,17 @@
 @stop
 
 @section('js')
-<script type="text/template" id="country-template">
-    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-        <a href="{{url('countries')}}/<%= code %>">
+    <script type="text/template" id="country-template">
+        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+            <a href="{{url('countries')}}/<%= code %>">
             <img width="200" src="{{getFlagUrl()}}<%= code %>.png" />
             <div class="country-name"><%= country[code.toUpperCase()]%></div>
         </a>
         <div class="contract-count"><%= contract %>
             <% if (contract > 1){%>
-            @lang('countriespage.contracts')
+            @lang('countriespage.documents')
             <% }else{ %>
-            @lang('countriespage.contract')
+            @lang('countriespage.document')
             <% } %>
 
         </div>
@@ -77,5 +78,5 @@
     var country = <?php echo json_encode(trans('country'));?>;
     var resource = <?php echo json_encode(trans('resources'));?>;
 </script>
-<script type="text/javascript" src="{{url('js/country.js')}}"></script>
+<script type=" text/javascript" src="{{url('js/country.js')}}"></script>
 @stop
