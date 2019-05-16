@@ -110,7 +110,7 @@ export CONTACT_MAIL=${ZM_CONTACT_MAIL}
 export COUNTRY=zm
 
 export CATEGORY=country-zm
-envsubst '$SERVER_NAME $CATEGORY'< ./nginx_subsite_protected.template > /etc/nginx/sites-enabled/country-zm
+envsubst '$SERVER_NAME $CATEGORY'< ./nginx_subsite.template > /etc/nginx/sites-enabled/country-zm
 
 export CATEGORY=rc
 envsubst < ./env.template > /var/www/country-zm/.env
