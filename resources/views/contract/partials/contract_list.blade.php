@@ -72,11 +72,13 @@ if ($path[0] == "resource") {
                 <td>
                     <?php
                     if (isset($url['sortby']) && $url['sortby'] == "resource") {
-                        if ($url['order'] == "asc") {
-                            asort($contract->resource);
-                        }
-                        if ($url['order'] == "desc") {
-                            rsort($contract->resource);
+                        if (isset($url['order'])){
+                            if ($url['order'] == "asc") {
+                                asort($contract->resource);
+                            }
+                            if ($url['order'] == "desc") {
+                                rsort($contract->resource);
+                            }
                         }
                     }
                     ?>
