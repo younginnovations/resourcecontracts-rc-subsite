@@ -32,7 +32,7 @@
 			<div class="col-lg-12 static-search">
 				<div class="filter-country-wrap" style="display: none">
 					<form action="{{url('search')}}" method="get" class="search-form" id="search-form">
-						<input type="hidden" name="q" value="" id="header-input-clone">
+						<input type="hidden" name="q" value="{{$q}}" id="header-input-clone">
 						@include('layout.partials.search', ['searchPage' =>true])
 					</form>
 				</div>
@@ -101,10 +101,10 @@
 				$('.static-search').slideDown(200);
 			});
 
-			// var query  = {!! json_encode($q) !!}
-			// if(query){
-			// 	$('#query').val(query);
-			// }
+			var query  = {!! json_encode($q) !!}
+			if(query){
+				$('#query').val(query);
+			}
 		});
 	</script>
 @stop
