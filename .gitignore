@@ -15,3 +15,4 @@ bourbon
 *.map
 !spec/*.map
 /public/[0-9]*
+*.lock

@@ -27,7 +27,7 @@ var List = React.createClass({
         }
         debug('Search List search:change listening', Contract.getSearchQuery());
         this.setState({isLoading: true});
-        SearchAction.getResults(Contract.getGuid(), Contract.getSearchQuery());
+        SearchAction.getResults(Contract.getID(), Contract.getSearchQuery());
     },
 
     onChange (event, response) {
