@@ -90,5 +90,22 @@
 			$('.filter-country-wrap').show();
 		});
 	</script>
+
+	<script type="text/javascript">
+		$('document').ready(function(){
+			$('.search-toggle').on('click', function(){
+				$('.static-search').slideUp(200);
+			});
+
+			$('.adv_search_toogle').on('click', function(){
+				$('.static-search').slideDown(200);
+			});
+
+			// var query  = {!! json_encode($q) !!}
+			// if(query){
+			// 	$('#query').val(query);
+			// }
+		});
+	</script>
 @stop
 
