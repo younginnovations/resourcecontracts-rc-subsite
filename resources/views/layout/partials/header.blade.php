@@ -17,7 +17,8 @@
 			</div>
 			@if(!$isSearchPage)
 				@include('layout.partials.search')
+				</form>
 			@endif
-		</form>
+			
 	</nav>
 </div>
