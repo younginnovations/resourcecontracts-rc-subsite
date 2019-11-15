@@ -31,8 +31,7 @@
 		<div class="filter-wrapper advance-filter-wrapper" style="min-height: 135px">
 			<div class="col-lg-12 static-search">
 				<div class="filter-country-wrap" style="display: none">
-					<form action="{{url('search')}}" method="get" class="search-form" id="search-form">
-						<input type="hidden" name="q" value="{{$q}}" id="header-input-clone">
+						<!-- <input type="hidden" name="q" value="{{$q}}" id="header-input-clone"> -->
 						@include('layout.partials.search', ['searchPage' =>true])
 					</form>
 				</div>
