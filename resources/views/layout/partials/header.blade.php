@@ -11,6 +11,7 @@
         $attributes = $api->searchAttributed();
         $category = $api->getAnnotationsCategory();
         ?>
+
 		<form action="{{$isGsearch ? url('gsearch'): url('search')}}" method="get" class="search-form" id="search-form">
 			<div class="navbar-header">
 				<span data-toggle="collapse-sidebar" data-target=".sidebar-collapse"
@@ -24,6 +25,9 @@
 					</div>
 				@endif
 			@show
+			<?php
+			$isSearchPage = in_array($segment, ['search']) ? true : false;
+			?>
 			@if(!$isSearchPage)
 				@include('layout.partials.search')
 				</form>

@@ -1,6 +1,6 @@
 <?php
-
-$total_page  = ceil($total_item / 25);
+$per_page    = $per_page ?: 25;
+$total_page  = ceil($total_item / $per_page);
 $no_of_pages = 6;
 $current_url = \Illuminate\Support\Facades\Input::url();
 $queries     = \Illuminate\Support\Facades\Input::get();
