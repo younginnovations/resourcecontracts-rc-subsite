@@ -253,6 +253,55 @@ class APIService
     }
 
     /**
+     * Full text search group
+     *
+     * @param $filter
+     *
+     * @return array
+     */
+    public function filterGroupSearch($filter)
+    {
+        extract($filter);
+        $per_page = !empty($per_page) ? $per_page : 25;
+
+        redirectIfOldAnnotationCategory($annotation_category);
+
+        $query = [
+            'q'                   => urlencode($q),
+            'country_code'        => $country_code,
+            'corporate_group'     => $corporate_group,
+            'company_name'        => $company_name,
+            'contract_type'       => $contract_type,
+            'document_type'       => $document_type,
+            'language'            => $language,
+            'year'                => $year,
+            'resource'            => $resource,
+            'group'               => $group,
+            'annotation_category' => $annotation_category,
+            'sort_by'             => $sortby,
+            'order'               => $order,
+            'per_page'            => $all ? $from * 25 : $per_page,
+            'from'                => $per_page * ($from - 1),
+            'all'                 => $all,
+            'download'            => $download,
+            'annotated'           => $annotated,
+
+        ];
+
+        if ($filter['download']) {
+            $this->downloadAPI('contracts/search', $query);
+        }
+
+        $contract = $this->apiCall('groupedcontracts/search', $query);
+
+        if ($contract) {
+            return $contract;
+        }
+
+        return null;
+    }
+
+    /**
      * Full text search
      *
      * @param $filter
