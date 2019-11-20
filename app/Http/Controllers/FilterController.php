@@ -51,6 +51,36 @@ class FilterController
     }
 
     /**
+     * Demo for grouping in search
+     *
+     * @param Request $request
+     * @return \Illuminate\View\View
+     */
+    public function groupIndex(Request $request)
+    {
+        
+        $currentPage    = $request->get('page', 1);
+        $filter         = $this->processQueries($request);
+        $filter['from'] = $currentPage;
+        $filter['per_page'] = 10;
+        $contracts      = $this->api->filterGroupSearch($filter);
+        $contracts->current_page = $currentPage;
+        $filter         = $this->updateFilterData($filter, $contracts, $request);
+
+
+        $meta = [
+            'title'       => 'Search Contracts',
+            'description' => 'Search ' . site()->meta('title') . ' using different criteria - year signed, company name,
+            contract type, annotation category.',
+        ];
+
+        return view(
+            'site.groupDemo',
+            compact('contracts', 'filter', 'total_contract', 'currentPage', 'meta')
+        );
+    }
+
+    /**
      * Process user search queries
      *
      * @param Request $request
