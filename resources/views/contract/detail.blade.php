@@ -323,7 +323,7 @@ use Illuminate\Support\Facades\Lang;
 		</div>
 
 		<div class="col-lg-12">
-			<div class="panel panel-default panel-wrap panel-contract-wrap" id="associatedcontracts">
+			<section class="panel panel-default panel-wrap panel-contract-wrap" id="associatedcontracts">
 				<div class="panel-heading">
 					@lang('contract.associated_documents')
 				</div>
@@ -345,11 +345,14 @@ use Illuminate\Support\Facades\Lang;
 							</tr>
 						@endforeach
 
-						<?php $supportingContracts = _e($contract->metadata, 'associated', []);?>
+                        <?php
+                        $supportingContracts = _e($contract->metadata, 'associated', []);
+                        $style = !empty($contract->metadata->parent)?"padding-left: 60px !important;":"";
+                        ?>
 						@foreach($contract->metadata->associated as $supportingContract)
 							@if($supportingContract->is_published==1)
 								<tr>
-									<td width="70%">
+									<td width="70%" style="<?php echo $style;?>">
 										<a href="{{route('contract.detail',
 										['id'=>$supportingContract->open_contracting_id])}}"> {{$supportingContract->name}}</a>
 									</td>
@@ -367,7 +370,7 @@ use Illuminate\Support\Facades\Lang;
 						</tbody>
 					</table>
 				</div>
-			</div>
+			</section>
 		</div>
 
 		@if(!site()->isOLC())
