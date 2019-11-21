@@ -124,16 +124,5 @@ $SearchPage = isset($searchPage) && $searchPage ? true : false;
 			@endif
 		</div>
 
-		@if(!$SearchPage)
-			<div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
-				<button type="button" class="btn btn-form-search search-close">@lang('global.hide')</button>
-			</div>
-		@endif
-
-		@if($SearchPage)
-			<div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
-				<button type="button" class="btn btn-danger search-toggle">@lang('global.hide')</button>
-			</div>
-		@endif
 	</div>
 </div>
