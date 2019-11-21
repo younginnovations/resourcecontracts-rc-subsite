@@ -10,7 +10,8 @@ $category = $api->getAnnotationsCategory();
 	<input type="text" autocomplete="off" name="q" id="query" class="form-control pull-left"
 		   placeholder='@lang('search.search_placeholder')'>
 </div>
-<span class="adv_search_toogle">@lang('search.advanced_search') <i class="fa fa-caret-down"></i></span>
+<span class="adv_search_toogle" id="open_adv_search"  @if(!$isSearchPage) style="display: inline" @endif>@lang('search.show_search')</span>
+<span class="adv_search_toogle" id="close_adv_search" @if($isSearchPage) style="display: inline" @endif>@lang('search.hide_search')</span>
 <script>
 	var lang = <?php echo json_encode(trans('annotation'));?>;
 </script>

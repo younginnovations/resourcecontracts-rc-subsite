@@ -16,4 +16,6 @@ return [
     'select'               => 'Select',
     'refine_search'        => 'Change or refine your search',
     'annotated'            => "Annotated Contracts Only",
+    'show_search'          => 'Show Search Tools',
+    'hide_search'          => 'Hide Search Tools'
 ];

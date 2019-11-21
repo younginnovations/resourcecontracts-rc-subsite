@@ -12,8 +12,8 @@
 			$segment = \Illuminate\Support\Facades\Request::segment(1);
 			$isSearchPage = in_array($segment, ['search']) ? true : false;
 			?>
-			<div class="right-header-section navbar-right hidden">
-				@include('layout.partials.searchdropdown')
+			<div class="right-header-section navbar-right hidden" @if(isset($isDocumentView)) style="display: none;" @endif>
+				@include('layout.partials.searchdropdown',["isSearchPage" => $isSearchPage])
 			</div>
 			@if(!$isSearchPage)
 				@include('layout.partials.search')
