@@ -56,7 +56,7 @@ class FilterController
      * @param Request $request
      * @return \Illuminate\View\View
      */
-    public function groupIndex(Request $request)
+    public function gIndex(Request $request)
     {
         
         $currentPage    = $request->get('page', 1);
