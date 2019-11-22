@@ -13,7 +13,7 @@ $annotation_length = sizeof($annotation_array);
 $annotation_ids = (!empty($annotation_array)) ? implode(" ", $annotation_array) : "";
 ?>
 <tr>
-    <td data-title="@lang('global.document')" class="documentTitle document_title {{ !isset($contract->children) ? 'associate' : ''}}">
+    <td data-title="@lang('global.document')" class="documentTitle document_title {{ !isset($contract->children) ? 'associate' : ''}} {{ $contract->score == 0 ? 'greyed' : ''}}">
         <a class="title-{{$contract->open_contracting_id}}"
            href="{{ url(sprintf("/contract/%s/view#/pdf", $contract->open_contracting_id )) }}">
             {{ $contract->name or ''}} 
@@ -34,6 +34,7 @@ $annotation_ids = (!empty($annotation_array)) ? implode(" ", $annotation_array) 
             </button>
         @endif
         {{ !isset($contract->children) ? '(Associate Contract)' : ''}}
+        <span>{{ $contract->score}}</span>
 
         <div class="search-text">
             @if(isset($contract->text) && $contract->text !='')

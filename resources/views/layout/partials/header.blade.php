@@ -24,10 +24,12 @@
 					</div>
 				@endif
 			@show
+			<?php
+			$isSearchPage = in_array($segment, ['search']) ? true : false;
+			?>
 			@if(!$isSearchPage)
 				@include('layout.partials.search')
 				</form>
 			@endif
-			
 	</nav>
 </div>

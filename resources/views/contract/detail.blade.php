@@ -323,7 +323,7 @@ use Illuminate\Support\Facades\Lang;
 		</div>
 
 		<div class="col-lg-12">
-			<div class="panel panel-default panel-wrap panel-contract-wrap" id="associatedcontracts">
+			<section class="panel panel-default panel-wrap panel-contract-wrap" id="associatedcontracts">
 				<div class="panel-heading">
 					@lang('contract.associated_documents')
 				</div>
@@ -367,7 +367,7 @@ use Illuminate\Support\Facades\Lang;
 						</tbody>
 					</table>
 				</div>
-			</div>
+			</section>
 		</div>
 
 		@if(!site()->isOLC())
