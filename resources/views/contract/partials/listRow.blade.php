@@ -33,7 +33,7 @@ $annotation_ids = (!empty($annotation_array)) ? implode(" ", $annotation_array) 
                     data-content="@lang('clip.clip_contract')">Clip
             </button>
         @endif
-        {{ !isset($contract->children) ? '(Associate Contract)' : ''}}
+        {{ !isset($contract->children) ? '(Associated document)' : ''}}
         <span>{{ isset($contract->score) ? $contract->score : 0 }}</span>
 
         <div class="search-text">
