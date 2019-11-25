@@ -15,10 +15,6 @@ if ($route == "contracts" && isset($url['year'])) {
 }
 ?>
 <style>
-    .associate > a {
-        color: blue !important;
-    }
-
     .greyed > a {
         color: #c7c6c1 !important;
     }
