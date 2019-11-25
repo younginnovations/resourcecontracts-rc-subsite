@@ -92,8 +92,9 @@ class ContractController extends BaseController
         $meta = [
             'title' => $contract->metadata->name,
         ];
+        $isDocumentView = true;
 
-        return view('contract.detail', compact('contract', 'referrer', 'meta'));
+        return view('contract.detail', compact('contract', 'referrer', 'meta', 'isDocumentView'));
     }
 
     /**
