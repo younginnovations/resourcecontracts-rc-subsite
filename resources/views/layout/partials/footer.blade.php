@@ -19,7 +19,7 @@
 
 @include('contract.partials.emailModal')
 
-<script src="{{url('js/app.js')}}"></script>
+<script src="{{url('js/app.js')}}?v=2019-11-25"></script>
 @yield('js')
 @if(site()->hasTracking())
 	<script>
