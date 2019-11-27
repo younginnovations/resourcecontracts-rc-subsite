@@ -1,10 +1,10 @@
 @extends('layout.app-full')
 @section('content')
 <?php 
-    $i = 0;
     $order = \Illuminate\Support\Facades\Input::get('order', '');
     $sortBy = \Illuminate\Support\Facades\Input::get('sortby', '');
     $showYear = true;
+    $q = \Illuminate\Support\Facades\Input::get('q');
 ?>
 
 <div class="row">
@@ -21,4 +21,35 @@
     </div>
 </div>
 
+@stop
+
+@section('js')
+<script>
+    var lang = <?php echo json_encode(trans('annotation'));?>;
+		var contractURL = '{{url('contract')}}';
+		$(function () {
+			$('.filter-country-wrap').show();
+		});
+</script>
+
+<script type="text/javascript">
+    $('document').ready(function(){
+			$('#close_adv_search').on('click', function(){
+				$('.static-search').slideUp(200);
+				$(this).hide();
+				$('#open_adv_search').show();
+			});
+
+			$('#open_adv_search').on('click', function(){
+				$('.static-search').slideDown(200);
+				$(this).hide();
+				$('#close_adv_search').show();
+			});
+
+			var query  = {!! json_encode($q) !!}
+			if(query){
+				$('#query').val(query);
+			}
+		});
+</script>
 @stop
