@@ -15,7 +15,7 @@
 			<?php
 			$isSearchPage = in_array($segment, ['search']) ? true : false;
 			?>
-			<div class="right-header-section navbar-right hidden" @if(isset($hideSearchBar)) style="display: none;" @endif>
+			<div class="right-header-section navbar-right hidden" @if(isset($hideSearchBar) && $hideSearchBar == true) style="display: none;" @endif>
 				@include('layout.partials.searchdropdown',["isSearchPage" => $isSearchPage])
 			</div>
 			@if(!$isSearchPage)
