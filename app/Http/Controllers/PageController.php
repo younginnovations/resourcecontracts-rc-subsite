@@ -46,7 +46,9 @@ class PageController extends BaseController
             'title' => $page->title(),
         ];
 
-        return view('page.master', compact('page', 'meta'));
+        $hideSearchBar = true;
+
+        return view('page.master', compact('page', 'meta', 'hideSearchBar'));
     }
 
     /**
@@ -67,7 +69,9 @@ class PageController extends BaseController
             'description' => 'Please send your questions, comments, and feedback by email at '.site()->contactEmail(),
         ];
 
-        return view('page.master', compact('page', 'meta'));
+        $hideSearchBar = true;
+
+        return view('page.master', compact('page', 'meta', 'hideSearchBar'));
     }
 
     /**
@@ -88,7 +92,9 @@ class PageController extends BaseController
             'description' => 'Guides and documents providing further information on reading, understanding, and assessing land contracts.',
         ];
 
-        return view('page.master', compact('page', 'meta'));
+        $hideSearchBar = true;
+
+        return view('page.master', compact('page', 'meta', 'hideSearchBar'));
     }
 
     /**
@@ -110,7 +116,9 @@ class PageController extends BaseController
             contracts for large-scale land, agriculture, and forestry projects.',
         ];
 
-        return view('page.faq', compact('page', 'meta'));
+        $hideSearchBar = true;
+
+        return view('page.faq', compact('page', 'meta', 'hideSearchBar'));
     }
 
     /**
@@ -131,7 +139,9 @@ class PageController extends BaseController
             'description' => 'A glossary of key terms to help navigate contracts and conduct analysis.',
         ];
 
-        return view('page.master', compact('page', 'meta'));
+        $hideSearchBar = true;
+
+        return view('page.master', compact('page', 'meta', 'hideSearchBar'));
     }
 
     /**
@@ -152,7 +162,9 @@ class PageController extends BaseController
             'description' => 'Learn more about disclosing contracts on'.site()->meta('name').', and how we can support host governments, investors, and other relevant stakeholders in their efforts to disclose contracts.',
         ];
 
-        return view('page.master', compact('page', 'meta'));
+        $hideSearchBar = true;
+
+        return view('page.master', compact('page', 'meta', 'hideSearchBar'));
     }
 
 }
