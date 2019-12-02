@@ -26,6 +26,7 @@ $gtmID      =  site()->getEnv("GTM_ID");
 	<meta name="twitter:image" content="{{ site()->getImageUrl('bg')}}"/>
 	<link rel="icon" href="{{$favicon}}">
 	<link href="{{url('css/style.css?v=1.07')}}" rel="stylesheet"/>
+	<link rel="stylesheet" href="{{url('css/new.css?v=1.0')}}"/>
 	@yield('css')
 
     @if($gtmID != '')
