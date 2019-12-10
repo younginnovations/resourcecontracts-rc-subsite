@@ -15,15 +15,52 @@ if ($route == "contracts" && isset($url['year'])) {
 }
 ?>
 <style>
-    .greyed > a {
+    .greyed>a {
         color: #c7c6c1 !important;
     }
 
     .associate {
-        padding-left: 80px !important;
-        background: url(../../images/ic-file.png) no-repeat 55px 20px !important;
+        padding-left: 60px !important;
+        background: none !important;
+    }
+
+    .other-document {
+        padding-left: 60px !important;
+        font-style: italic;
+    }
+
+    .table-contract tbody td.documentTitle{
+        background: none;
+        position: relative;
+    }
+    .table-contract tbody td.parent:before {
+        content: '';
+        background: url(../../images/ic-disabled-arrow.png) no-repeat;
+        width: 15px;
+        height: 10px;
+        display: inline-block;
+        position: absolute;
+        left: 5px;
+        top: 20px;
+        background-size: 90%;
+        transition: transform 0.3s ease-in;
+        transform: rotate(0)
+    }
+
+    .table-contract tbody td.parent.active:before{
+        transform: rotate(-180deg)
     }
 </style>
+
+<script>
+    $(document).ready(function() {
+        $(".expand").click(function() {
+            $(this).toggleClass("active")
+            $(this).children('.parent').toggleClass("active");
+        });
+    })
+  
+</script>
 
 <table class="table table-responsive table-contract table-contract-list">
     <thead>
@@ -62,18 +99,21 @@ if ($route == "contracts" && isset($url['year'])) {
         @if(isset($contracts->results) && !empty($contracts->results))
         @foreach($contracts->results as $contract)
         @include('contract.partials.listRow')
-        @if(isset($contract->children))
-        <?php $main = $contract; ?>
+        @if(isset($contract->children) && count($contract->children) > 0)
+        <?php 
+            $main = $contract; 
+            usort($contract->children, function($a, $b) {return intval($b->year_signed) - intval($a->year_signed);});
+        ?>
         @foreach($contract->children as $child)
         <?php $contract = $child; ?>
         @include('contract.partials.listRow')
         @endforeach
         @if(count($main->children) < count($main->supporting_contracts))
-            <tr>
-                <td colspan="100%">
+            <tr class='{{$main->id}} in'>
+                <td class="other-document">
                     View
                     <a href="{{route('contract.view',['id'=> $main->open_contracting_id]).'#associatedcontracts'}}">{{count($main->supporting_contracts)- count($main->children)}}
-                        other document(s) </a> associate with {{$main->name}}
+                        other document(s) </a> associated with {{$main->name}}
                 </td>
             </tr>
             @endif
