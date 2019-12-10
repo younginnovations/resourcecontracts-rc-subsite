@@ -11,9 +11,18 @@ foreach ($annotations->result as $annotation) {
 
 $annotation_length = sizeof($annotation_array);
 $annotation_ids = (!empty($annotation_array)) ? implode(" ", $annotation_array) : "";
+
+$toggleAttr = '';
+if(isset($contract->children)) {
+    if(count($contract->children) > 0)
+        $toggleAttr = 'class=expand data-toggle=collapse data-target=.'.$contract->id;
+} else {
+    $className = 'in '.$contract->translated_from[0]->id;
+    $toggleAttr = "class = '$className'";
+}
 ?>
-<tr>
-    <td data-title="@lang('global.document')" class="documentTitle document_title {{ !isset($contract->children) ? 'associate' : ''}} {{ $contract->score == 0 ? 'greyed' : ''}}">
+<tr {!! $toggleAttr !!}>
+    <td data-title="@lang('global.document')" class="documentTitle document_title {{ !isset($contract->children) ? 'associate' : ''}} {{ isset($contract->children) && count($contract->children) ? 'parent': ''  }} {{ $contract->score == 0 ? 'greyed' : ''}}">
         <a class="title-{{$contract->open_contracting_id}}"
            href="{{ url(sprintf("/contract/%s/view#/pdf", $contract->open_contracting_id )) }}">
             {{ $contract->name or ''}} 
