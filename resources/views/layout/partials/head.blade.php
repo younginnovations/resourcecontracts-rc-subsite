@@ -47,6 +47,7 @@ $gtmID      =  site()->getEnv("GTM_ID");
 		var app_url = '{{ url()}}';
 		var langSelect = '{{$langSelect}}';
 		var langClip =  {!! json_encode(trans('clip')) !!};
+        var lang = {!! json_encode(trans('annotation')) !!};
 	</script>
 </head>
 
