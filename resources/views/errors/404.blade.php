@@ -1,5 +1,7 @@
 @extends('layout.app')
-
+{{-- hide search bar from 404 page only--}}
+@section('search-bar')
+@endsection
 @section('content')
     <div class="row">
         <div class="col-lg-12 not-found-wrapper">
