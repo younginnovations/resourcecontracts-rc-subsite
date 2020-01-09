@@ -34,7 +34,13 @@ if ($route == "contracts" && isset($url['year'])) {
         position: relative;
     }
     .table-contract tbody td.parent:before {
-        content: '';
+        content: '';<<<<<<< 1245-api-groupContract
+59
+ 
+            $(this).toggleClass("active");
+60
+ 
+=======
         background: url(../../images/ic-disabled-arrow.png) no-repeat;
         width: 15px;
         height: 10px;
@@ -55,7 +61,7 @@ if ($route == "contracts" && isset($url['year'])) {
 <script>
     $(document).ready(function() {
         $(".expand").click(function() {
-            $(this).toggleClass("active");
+            $(this).toggleClass("active")
             $(this).children('.parent').toggleClass("active");
         });
     })
