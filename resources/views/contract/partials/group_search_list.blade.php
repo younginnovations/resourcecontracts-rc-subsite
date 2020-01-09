@@ -48,14 +48,14 @@ if ($route == "contracts" && isset($url['year'])) {
     }
 
     .table-contract tbody td.parent.active:before{
-        transform: rotate(-90deg)
+        transform: rotate(-180deg)
     }
 </style>
 
 <script>
     $(document).ready(function() {
         $(".expand").click(function() {
-            $(this).toggleClass("active");
+            $(this).toggleClass("active")
             $(this).children('.parent').toggleClass("active");
         });
     })
