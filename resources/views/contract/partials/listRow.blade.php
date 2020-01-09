@@ -43,7 +43,7 @@ if(isset($contract->children)) {
             </button>
         @endif
         {{ !isset($contract->children) ? '(Associated document)' : ''}}
-        <span>{{ isset($contract->score) ? $contract->score : 0 }}</span>
+        <span>{{ $contract->score}}</span>
 
         <div class="search-text">
             @if(isset($contract->text) && $contract->text !='')
