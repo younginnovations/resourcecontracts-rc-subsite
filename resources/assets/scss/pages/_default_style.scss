@@ -112,7 +112,7 @@ a{
 
 //gradients
 
-@import "../bourbon/bourbon";
+@import "bourbon/bourbon";
 
 @include font-face($font_0, "../../fonts/opensans-regular-webfont", $file-formats: eot svg woff woff2);
 @include font-face($font_1, "../../fonts/opensans-bold-webfont", $file-formats: eot svg woff woff2);
