@@ -55,7 +55,7 @@ if ($route == "contracts" && isset($url['year'])) {
 <script>
     $(document).ready(function() {
         $(".expand").click(function() {
-            $(this).toggleClass("active");
+            $(this).toggleClass("active")
             $(this).children('.parent').toggleClass("active");
         });
     })
