@@ -25,7 +25,7 @@ if(isset($contract->children)) {
     <td data-title="@lang('global.document')" class="documentTitle document_title {{ !isset($contract->children) ? 'associate' : ''}} {{ isset($contract->children) && count($contract->children) ? 'parent': ''  }} {{ $contract->score == 0 ? 'greyed' : ''}}">
         <a class="title-{{$contract->open_contracting_id}}"
            href="{{ url(sprintf("/contract/%s/view#/pdf", $contract->open_contracting_id )) }}">
-            {{ $contract->name or ''}} 
+            {{ $contract->name or ''}}
         </a>
         <?php $link = sprintf('/contract/%s#annotations', $contract->open_contracting_id);?>
         @if($annotations->total>0)
@@ -48,7 +48,8 @@ if(isset($contract->children)) {
         <div class="search-text">
             @if(isset($contract->text) && $contract->text !='')
                 <p>
-                    <a href="{{ url(sprintf("/contract/%s/view#/search/%s", $contract->open_contracting_id ,rawurlencode($url['q']))) }}">
+                    <a href="{{ url(sprintf("/contract/%s/view#/search/%s", $contract->open_contracting_id ,
+                    rawurlencode($filter_params['q']))) }}">
                         {!!$contract->text.'...'!!}
                         <span class="contract-group">@lang('global.text')</span>
                     </a>
@@ -152,11 +153,11 @@ if(isset($contract->children)) {
     @endif
     <td data-title="@lang('global.resource')">
         <?php
-        if (isset($url['sortby']) && $url['sortby'] == "resource") {
-            if (isset($url['order']) && $url['order'] == "asc") {
+        if (isset($filter_params['sortby']) && $filter_params['sortby'] == "resource") {
+            if (isset($filter_params['order']) && $filter_params['order'] == "asc") {
                 asort($contract->resource);
             }
-            if (isset($url['order']) && $url['order'] == "desc") {
+            if (isset($filter_params['order']) && $filter_params['order'] == "desc") {
                 rsort($contract->resource);
             }
         }
