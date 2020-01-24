@@ -1,5 +1,4 @@
 <?php
-use Illuminate\Support\Facades\Lang;
 ?>
 
 @extends('layout.app-full')
@@ -207,7 +206,7 @@ use Illuminate\Support\Facades\Lang;
 								<a href="javascript:void();"
 								   class="view-annotation disabled"><span>@lang('global.view_annotations')</span></a>
 							@endif
-
+						
 						</div>
 					</div>
 				</div>
@@ -348,8 +347,17 @@ use Illuminate\Support\Facades\Lang;
                         <?php
                         $supportingContracts = _e($contract->metadata, 'associated', []);
                         $style = !empty($contract->metadata->parent)?"padding-left: 60px !important;":"";
+                        $counter = 0;
                         ?>
 						@foreach($contract->metadata->associated as $supportingContract)
+							<?php $counter++;?>
+							@if($counter==1 && !$contract->metadata->is_associated_document)
+								<tr>
+									<td width="70%" style="padding-left: 10px !important;" class="greyed">
+										<span> {{$contract->metadata->name}}</span>
+									</td>
+								</tr>
+							@endif
 							@if($supportingContract->is_published==1)
 								<tr>
 									<td width="70%" style="<?php echo $style;?>">
