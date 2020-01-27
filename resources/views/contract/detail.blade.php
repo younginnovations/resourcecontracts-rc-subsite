@@ -354,7 +354,7 @@
 							@if($counter==1 && !$contract->metadata->is_associated_document)
 								<tr>
 									<td width="70%" style="padding-left: 10px !important;" class="greyed">
-										<span> {{$contract->metadata->name}}</span>
+										<span> {{$contract->metadata->name}} @lang('contract.main_contract')</span>
 									</td>
 								</tr>
 							@endif
