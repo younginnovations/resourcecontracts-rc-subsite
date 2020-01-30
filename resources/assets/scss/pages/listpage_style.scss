@@ -558,3 +558,39 @@ tr:empty {
   border: 2px solid #fff;
   text-align: center;
 }
+.greyed > a {
+  color: #c7c6c1 !important;
+}
+
+.associate {
+  padding-left: 60px !important;
+  background: none !important;
+}
+
+.other-document {
+  padding-left: 60px !important;
+  font-style: italic;
+}
+
+.table-contract tbody td.documentTitle {
+  background: none;
+  position: relative;
+}
+
+.table-contract tbody td.parent:before {
+  content: '';
+  background: url(../../images/ic-disabled-arrow.png) no-repeat;
+  width: 15px;
+  height: 10px;
+  display: inline-block;
+  position: absolute;
+  left: 5px;
+  top: 20px;
+  background-size: 90%;
+  transition: transform 0.3s ease-in;
+  transform: rotate(0)
+}
+
+.table-contract tbody td.parent.active:before {
+  transform: rotate(-90deg)
+}
