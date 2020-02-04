@@ -100,6 +100,7 @@ $app->get('guides', ['as' => 'page.resources', 'uses' => 'PageController@resourc
 $app->get('page/resources', ['as' => 'page.resources', 'uses' => 'PageController@resources']);
 $app->get('glossary', ['as' => 'guides', 'uses' => 'PageController@glossary']);
 $app->get('country-sites', ['as' => 'country-sites', 'uses' => 'PageController@countrySites']);
+$app->get('how-to-use', ['as' => 'how-to-use', 'uses' => 'PageController@howToUse']);
 
 /*
 |--------------------------------------------------------------------------

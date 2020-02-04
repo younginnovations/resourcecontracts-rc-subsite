@@ -101,6 +101,14 @@ $SearchPage = isset($searchPage) && $searchPage ? true : false;
 				@endforeach
 			</select>
 		</div>
+		@if(Request::path() === 'search/group')
+			<div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
+				<label for="">@lang('global.recent_documents')</label>
+				<input type="checkbox" name="recent" value="1" class="form-control"
+					@if(isset($filter['recent']) && $filter['recent']==1) checked @endif>
+			</div>
+		@endif
+
 		<div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
 			<label for="">@lang('search.annotated')</label>
 			<input type="checkbox" name="annotated" value="1" class="form-control"
@@ -114,7 +122,7 @@ $SearchPage = isset($searchPage) && $searchPage ? true : false;
 
 		<div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
 			@if($SearchPage)
-				<a href="{{url('search')}}" class="btn btn-form-search btn-form-reset">
+				<a href="{{url(Request::path())}}" class="btn btn-form-search btn-form-reset">
 					@lang('search.reset')
 				</a>
 			@else

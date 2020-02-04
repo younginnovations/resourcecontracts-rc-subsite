@@ -16,7 +16,7 @@ $image_intro = site()->getImageUrl('intro_bg');
 	</style>
 @stop
 @section('content')
-	<div class="row front-row-top-wrap">
+	<div class="front-row-top-wrap">
 		<nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
 			<div class="navbar-header">
 				<span data-toggle="collapse-sidebar" data-target=".sidebar-collapse"

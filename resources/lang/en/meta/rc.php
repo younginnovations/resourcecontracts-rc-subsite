@@ -10,4 +10,7 @@ return [
     'tagline'               => '<p class="repo-description">A directory of </p> <div class="large-title"><span>Petroleum &amp; <div>Mineral Contracts</div> </span></div>',
     'about'                 => 'About ResourceContracts',
     'email_subtitle'        => 'an annotated directory of petroleum and mineral contracts.',
+    'new_tag_line'          => 'A Directory of Petroleum and Mining Contracts',
+    'search'                => 'Search documents',
+    'recent'                => 'Recent documents',
 ];

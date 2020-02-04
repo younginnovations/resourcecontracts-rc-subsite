@@ -9,4 +9,8 @@ return [
     'resource_description'  => 'Trouver des contrats fonciers pour une ressource',
     'tagline'               => '<p class="repo-description">Un répertoire de </p> <div class="large-title olc-title"><span>contrats agricoles et forestiers</span></div>',
     'about'                 => 'A propos de OpenLandContracts',
+    'email_subtitle'        => 'a repository of investment contracts for agriculture and forestry projects. french',
+    'new_tag_line'          => 'Un répertoire de contrats agricoles et forestiers',
+    'search'                => 'Contrats de recherche',
+    'recent'                => 'Contrats récents',
 ];

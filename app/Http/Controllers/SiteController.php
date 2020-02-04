@@ -37,7 +37,6 @@ class SiteController extends BaseController
         $this->api      = $api;
         $this->request  = $request;
         $this->contract = $contract;
-
     }
 
     /**
@@ -57,7 +56,15 @@ class SiteController extends BaseController
         $countryList     = $this->contract->getListOfCountry($summary);
         $links           = $option->getLinks();
         $countryPartners = $partner->all();
+        $homePage        = true;
+
         $view            = site()->isCountrySite() ? 'site.home-country' : 'site.home';
+        // if (site()->isCountrySite()) {
+        //     $view = 'site.home-country';
+        // } else {
+        //     $resources = $this->api->recentContractCount();
+        //     $view      = ($this->request->url() == url()) ? 'site.new-home' : 'site.home';
+        // }
 
         return view(
             $view,
@@ -68,7 +75,8 @@ class SiteController extends BaseController
                 'countryList',
                 'image',
                 'links',
-                'countryPartners'
+                'countryPartners',
+                'homePage'
             )
         );
     }

@@ -9,4 +9,8 @@ return [
     'resource_description'  => 'البحث عن عقود الموارد للمورد -',
     'tagline'               => '<p class="repo-description">دليل لل </p> <div class="large-title"><span>البترول و &amp; <div>العقود المعدنية</div> </span></div>',
     'about'                 => 'حول ResourceContracts',
+    'email_subtitle'        => 'دليل مفصل لعقود البترول والمعادن',
+    'new_tag_line'          => 'دليل لل البترول و العقود المعدنية',
+    'search'                => 'وثائق البحث',
+    'recent'                => 'الوثائق الأخيرة',
 ];

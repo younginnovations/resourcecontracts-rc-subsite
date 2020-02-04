@@ -1,0 +1,12 @@
+$color-primary: #00b894;
+
+$gradient-base: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), #000000);
+
+$gradient-not-found: radial-gradient(50% 79%, #b7df74 32%, #94ba63 79%);
+ 
+$img-sprite: url(../../images/olc/ic_sprite.svg);
+
+$img-not-found: url(../../images/olc/error-bg.png);
+
+
+@import "../new-style.scss"; 

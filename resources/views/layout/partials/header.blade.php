@@ -1,10 +1,14 @@
-<?php $local = app('App\Http\Services\LocalizationService'); ?>
+<?php 
+	$local = app('App\Http\Services\LocalizationService');
+	$siteService = app('App\Http\Services\SiteService'); 
+?>
 @include('layout.partials.clip')
 <div class="row title-wrap clearfix">
 	<nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
         <?php
-        $segment = \Illuminate\Support\Facades\Request::segment(1);
-        $isGsearch = in_array($segment, ['gsearch']) ? true : false;
+		$segment = \Illuminate\Support\Facades\Request::segment(1);
+		$path = \Illuminate\Support\Facades\Request::path();
+		$formAction = $siteService->getCurrentPath($path);
         $isSearchPage = in_array($segment, ['search']) ? true : false;
         $api = app('App\Http\Services\APIService');
         $summary = $api->sortSummaryCountry();
@@ -12,7 +16,7 @@
         $category = $api->getAnnotationsCategory();
         ?>
 
-		<form action="{{$isGsearch ? url('gsearch'): url('search')}}" method="get" class="search-form" id="search-form">
+		<form action="{{$formAction}}" method="get" class="search-form" id="search-form">
 			<div class="navbar-header">
 				<span data-toggle="collapse-sidebar" data-target=".sidebar-collapse"
 					  data-target-2=".sidebar-collapse-container" class="pull-left trigger"></span>

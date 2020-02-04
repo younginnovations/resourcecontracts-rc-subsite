@@ -77,6 +77,14 @@ return [
     'tagline'                 => 'Un référentiel de Resource Contracts de :name',
     'partners'                => "LES PARTENAIRES",
     'donors'                  => "DONATEURS",
-
-
+    'rc_title'                => 'Un répertoire des contrats pétroliers et miniers',
+    'olc_title'               => 'Un référentiel en ligne de contrats fonciers ouverts',
+    'search_docs'             => 'Rechercher des documents',
+    'recent_docs'             => 'Documents récents',
+    'get_started'             => 'Apprenez comment commencer',
+    'get_started_desc'        => 'Rechercher et examiner les contrats pétroliers et miniers pour comprendre la clétermes et dispositions',
+    'search_box_text'         => 'Rechercher et examiner les contrats pétroliers, gaziers et miniers...',
+    'learn_start'             => 'Apprenez comment commencer',
+    'search_and_review'       => 'Rechercher et examiner les contrats fonciers et agricoles pour comprendre les principaux termes et les implications des accords à grande échelle',
+    'recent_documents'        => 'Documents récents'
 ];
