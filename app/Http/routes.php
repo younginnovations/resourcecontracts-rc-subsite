@@ -81,7 +81,8 @@ $app->group(
 );
 
 $app->get('search', ['as' => 'search', 'uses' => 'FilterController@index']);
-$app->get('gsearch', ['as' => 'gsearch', 'uses' => 'FilterController@gIndex']);
+$app->get('search/group', ['as' => 'search/group', 'uses' => 'FilterController@gIndex']);
+$app->get('search/recent', ['as' => 'search/recent', 'uses' => 'FilterController@recentIndex']);
 $app->get(
     'contracts/download/searchresult',
     ['as' => 'contract.csv.download', 'uses' => 'FilterController@downloadSearchResultAsCSV']
