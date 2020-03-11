@@ -73,7 +73,6 @@ class SiteController extends BaseController
                 'resources',
                 'contracts',
                 'countryList',
-                'image',
                 'links',
                 'countryPartners',
                 'homePage'

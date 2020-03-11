@@ -80,6 +80,22 @@ Class PageService
         $page->title   = (object) $content['title'];
         $page->content = (object) $content['content'];
 
+        if($page->isDirty('content')){
+            //if content changed
+            $version = array_values((array) $page->version);
+            array_push($version, (object) $content['content']);
+
+            if(count($version) > 10){
+                //if versions is greater than 10
+                array_shift($version);
+            }
+
+            $page->version = (object) $version;
+            $keys = array_keys($version);
+            $selected_key = end($keys);
+            $page->selected = $selected_key;
+        }
+
         Cache::forget('all');
         Cache::forget($page_id);
         Cache::forget($page->slug);
@@ -114,10 +130,15 @@ Class PageService
      */
     public function create($input)
     {
+        $version = [];
+        array_push($version, (object) $input['content']);
+
         $input = [
-            'title'   => (object) $input['title'],
-            'content' => (object) $input['content'],
-            'slug'    => str_slug($input['title']['en']),
+            'title'    => (object) $input['title'],
+            'content'  => (object) $input['content'],
+            'slug'     => str_slug($input['title']['en']),
+            'version'  => (object) $version,
+            'selected' => 0  
         ];
         Cache::forget('all');
 
@@ -139,5 +160,30 @@ Class PageService
         Cache::forget($page->slug);
 
         return $page->delete();
+    }
+
+    /** 
+     * Change the version of content
+     * 
+     * @param $id
+     * @param $new-selected
+     * 
+     * @return bool
+    */
+    public function versionUpdate($id, $new_selected)
+    {
+        $page = $this->page->country()->where('id', $id)->first();
+        $versions = array_values((array) $page->version);
+        
+        if(array_key_exists($new_selected, $versions)){
+            $page->content = (object) $versions[$new_selected];
+            $page->selected = $new_selected;
+        }
+
+        Cache::forget('all');
+        Cache::forget($id);
+        Cache::forget($page->slug);
+
+        return $page->save();  
     }
 }

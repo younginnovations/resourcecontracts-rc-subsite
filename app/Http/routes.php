@@ -96,7 +96,7 @@ $app->get(
 $app->get('about', ['as' => 'about', 'uses' => 'PageController@about']);
 $app->get('contact', ['as' => 'contact', 'uses' => 'PageController@contact']);
 $app->get('faqs', ['as' => 'faqs', 'uses' => 'PageController@faqs']);
-$app->get('guides', ['as' => 'page.resources', 'uses' => 'PageController@resources']);
+$app->get('guides', ['as' => 'page.resources', 'uses' => 'PageController@guides']);
 $app->get('page/resources', ['as' => 'page.resources', 'uses' => 'PageController@resources']);
 $app->get('glossary', ['as' => 'guides', 'uses' => 'PageController@glossary']);
 $app->get('country-sites', ['as' => 'country-sites', 'uses' => 'PageController@countrySites']);
@@ -164,6 +164,7 @@ $app->group(
         $app->get('page/{id}', ['as' => 'admin.page.edit', 'uses' => 'PageController@edit']);
         $app->post('page/{id}', ['as' => 'admin.page.update', 'uses' => 'PageController@update']);
         $app->delete('page/{id}', ['as' => 'admin.page.delete', 'uses' => 'PageController@delete']);
+        $app->post('version/{id}', ['as' => 'admin.version.edit', 'uses' => 'PageController@versionUpdate']);
     }
 );
 

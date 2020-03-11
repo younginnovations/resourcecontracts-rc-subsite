@@ -15,12 +15,12 @@ class Page extends Model
     /**
      * @var array
      */
-    protected $fillable = ['title', 'slug', 'content', 'country'];
+    protected $fillable = ['title', 'slug', 'content', 'country', 'version', 'selected'];
 
     /**
      * @var array
      */
-    protected $casts = ['title' => 'object', 'content' => 'object'];
+    protected $casts = ['title' => 'object', 'content' => 'object', 'version' => 'object'];
 
     /**
      *

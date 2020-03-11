@@ -45,4 +45,6 @@ return [
     'default_lang'          => 'Langage par défaut',
     'enable_localization'   => 'Activer la localisation',
     'choose_lang'           => 'Choisissez la langue',
+    'select_version'        => 'Sélectionnez la version',
+    'change_version'        => 'Changer de version',
 ];

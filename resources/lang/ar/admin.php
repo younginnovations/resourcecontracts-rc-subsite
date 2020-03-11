@@ -45,4 +45,6 @@ return [
     'default_lang'          => 'اللغة الافتراضية',
     'enable_localization'   => 'تمكين التوطين',
     'choose_lang'           => 'اختيار اللغة',
+    'select_version'        => 'حدد الإصدار',
+    'change_version'        => 'تغيير الإصدار'
 ];
