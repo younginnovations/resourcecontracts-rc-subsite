@@ -34,10 +34,8 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-6 col-md-offset-2">
-                <button type="submit" class="btn btn-primary">Submit</button>
-                <a class="btn btn-default" href="{{route('admin.page')}}">@lang('global.cancel')</a>
-            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a class="btn btn-default" href="{{route('admin.page')}}">@lang('global.cancel')</a>
         </div>
     </form>
     </div>
