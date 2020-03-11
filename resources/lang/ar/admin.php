@@ -17,6 +17,7 @@ return [
     'slug'                  => 'عنوان مختصر',
     'action'                => 'الإجراء',
     'editing'               => 'أنت في وضع التعديل. الرجاء',
+    "editing_page_version"  => "تقوم بعرضها :version في وضع التحرير. رجاء ",
     'click_here'            => 'اضغط هنا',
     'to_edit'               => 'لتعديل الصفحة',
     'logout'                => 'الخروج',
@@ -45,4 +46,6 @@ return [
     'default_lang'          => 'اللغة الافتراضية',
     'enable_localization'   => 'تمكين التوطين',
     'choose_lang'           => 'اختيار اللغة',
+    'select_version'        => 'حدد الإصدار',
+    'change_version'        => 'تغيير الإصدار'
 ];

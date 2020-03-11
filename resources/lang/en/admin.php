@@ -17,6 +17,7 @@ return [
     "slug"                  => "Slug",
     "action"                => "Action",
     "editing"               => "You are in editing mode. Please ",
+    "editing_page_version"  => "You are viewing :version in editing mode. Please ",
     "click_here"            => "click here",
     "to_edit"               => "to edit page",
     "logout"                => "Logout",
@@ -45,4 +46,10 @@ return [
     'default_lang'          => 'Default language',
     'enable_localization'   => 'Enable Localization',
     'choose_lang'           => 'Choose language',
+    'select_version'        => 'Select version',
+    'change_version'        => 'Change version',
+    'page'                  => [
+        'save_as_new_version'   => 'Save as new version',
+        'update_this_version'   => 'Update'
+    ]
 ];

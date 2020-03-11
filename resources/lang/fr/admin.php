@@ -17,6 +17,7 @@ return [
     'slug'                  => 'Limace',
     'action'                => 'Action',
     'editing'               => 'Vous êtes en mode de mise en forme.Veuillez ',
+    "editing_page_version"  => "Vous visualisez :version en mode édition. S'il vous plaît ",
     'click_here'            => 'cliquez ici',
     'to_edit'               => 'à la page modifier',
     'logout'                => 'Se déconnecter',
@@ -45,4 +46,6 @@ return [
     'default_lang'          => 'Langage par défaut',
     'enable_localization'   => 'Activer la localisation',
     'choose_lang'           => 'Choisissez la langue',
+    'select_version'        => 'Sélectionnez la version',
+    'change_version'        => 'Changer de version',
 ];

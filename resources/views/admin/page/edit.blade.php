@@ -1,8 +1,26 @@
 @extends('layout.admin')
-
+<?php
+$request = app('request');
+?>
 @section('js')
     <script type="text/javascript" src="{{url('js/tinymce/tinymce.min.js')}}"></script>
     <script type="text/javascript" src="{{url('js/tinymce/tinymce-init.js')}}"></script>
+    <script>
+        var pageVersion = {{ $request->query('v') ?? 'undefined' }};
+        $(document).ready(function () {
+            $('#update-page-button').click(function (e) {
+                e.preventDefault();
+                var $form = $('form#page-form');
+                var url = (new URL($form.attr('action')));
+                if (pageVersion != undefined) {
+                    url.searchParams.append('target_version',pageVersion);
+                }
+                url.searchParams.append('version_action', 'update');
+                $form.attr('action', url.toString());
+                $form.submit();
+            });
+        });
+    </script>
 @stop
 
 @section('content')
@@ -11,7 +29,7 @@
             <h3 class="panel-title">@lang('admin.edit_page') : {{$page->title()}}</h3>
         </div>
         <div class="panel-body">
-            <form class="" action="{{route('admin.page.update', ['id'=>$page->id])}}" method="POST">
+            <form id="page-form" class="" action="{{route('admin.page.update', ['id'=>$page->id])}}" method="POST">
                 <ul class="nav nav-tabs" role="tablist">
                     @foreach(config('language') as $code=>$lang)
                         <li role="page" @if($code == 'en') class="active" @endif ><a href="#{{$code}}" aria-controls="{{$code}}" role="tab" data-toggle="tab">{{$lang['name']}}</a></li>
@@ -39,8 +57,9 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="col-md-6">
-                        <button type="submit" class="btn btn-primary">@lang('admin.submit')</button>
+                    <div class="col-md-12">
+                        <button type="submit" id="update-page-button" class="btn btn-primary">@lang('admin.page.update_this_version')</button>
+                        <button type="submit" class="btn btn-primary">@lang('admin.page.save_as_new_version')</button>
                         <a class="btn btn-default" href="{{route('admin.page')}}">@lang('global.cancel')</a>
                     </div>
                 </div>
