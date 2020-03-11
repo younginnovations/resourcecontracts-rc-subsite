@@ -17,6 +17,7 @@ return [
     "slug"                  => "Slug",
     "action"                => "Action",
     "editing"               => "You are in editing mode. Please ",
+    "editing_page_version"  => "You are viewing :version in editing mode. Please ",
     "click_here"            => "click here",
     "to_edit"               => "to edit page",
     "logout"                => "Logout",
