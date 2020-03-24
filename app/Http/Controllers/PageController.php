@@ -189,4 +189,11 @@ class PageController extends BaseController
 
         return view('page.master', compact('page', 'meta', 'hideSearchBar'));
     }
+
+    public function tmpGuides()
+    {
+        $hideSearchBar = true;
+
+        return view('page.new-guides', compact('hideSearchBar'));
+    }
 }

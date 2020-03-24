@@ -93,6 +93,7 @@ $app->get(
 |--------------------------------------------------------------------------
 |
 */
+$app->get('tmp-guides', ['as' => 'tmp-guides', 'uses' => 'PageController@tmpGuides']);
 $app->get('about', ['as' => 'about', 'uses' => 'PageController@about']);
 $app->get('contact', ['as' => 'contact', 'uses' => 'PageController@contact']);
 $app->get('faqs', ['as' => 'faqs', 'uses' => 'PageController@faqs']);
