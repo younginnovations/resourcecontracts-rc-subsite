@@ -83,7 +83,10 @@ Class PageService
         if($page->isDirty('content')){
             //if content changed
             $version = array_values((array) $page->version);
-            array_push($version, (object) $content['content']);
+            $new_content = $content['content'];
+            $last_key = end($version);
+            $new_content['ver'] = empty($version) ? 0 :intval($last_key->ver) + 1;
+            array_push($version, (object) $new_content);
 
             if(count($version) > 10){
                 //if versions is greater than 10
@@ -131,7 +134,9 @@ Class PageService
     public function create($input)
     {
         $version = [];
-        array_push($version, (object) $input['content']);
+        $content =  $input['content'];
+        $content["ver"] = 0;
+        array_push($version, (object) $content);
 
         $input = [
             'title'    => (object) $input['title'],

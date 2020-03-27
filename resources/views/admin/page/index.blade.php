@@ -26,7 +26,7 @@
 			<tbody>
 				@foreach($pages as $page)
 				<?php
-				$versions = (array) $page->version;
+				$versions = array_values((array) $page->version);
 				?>
 				<tr>
 					<td></td>
@@ -41,7 +41,7 @@
 							<div class="form-group">
 								<select class="form-control select-version" name="new-selected">
 									@foreach($versions as $key => $value)
-									<option value="{{$key}}" @if($key==$page->selected) selected @endif>v{{$key}}</option>
+									<option value="{{$key}}" @if($key==$page->selected) selected @endif>v{{$value->ver}}</option>
 									@endforeach
 								</select>
 							</div>
