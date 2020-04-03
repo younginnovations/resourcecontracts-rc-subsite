@@ -594,3 +594,7 @@ tr:empty {
 .table-contract tbody td.parent.active:before {
   transform: rotate(-90deg)
 }
+
+.search-highlight-word {
+  font-weight: bold;
+}
