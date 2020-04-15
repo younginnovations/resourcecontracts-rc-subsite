@@ -9,4 +9,8 @@ return [
     'resource_description'  => 'Trouver des contrats des ressources pour une ressource',
     'tagline'               => '<p class="repo-description">Un répertoire de</p> <div class="large-title"><span>Petroleum &amp; <div>Contrats miniers</div> </span></div>',
     'about'                 => 'A propos ResourceContracts',
+    'email_subtitle'        => 'an annotated directory of petroleum and mineral contracts. french',
+    'new_tag_line'          => 'Un répertoire de Petroleum Contrats miniers',
+    'search'                => 'Rechercher des documents',
+    'recent'                => 'Documents récents',
 ];

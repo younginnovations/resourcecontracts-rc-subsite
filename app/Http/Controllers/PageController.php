@@ -167,4 +167,20 @@ class PageController extends BaseController
         return view('page.master', compact('page', 'meta', 'hideSearchBar'));
     }
 
+    /**
+     * How to use guide page
+     *
+     * @return \Illuminate\View\View
+     */
+    public function howToUSe()
+    {
+        $meta = [
+            'title' => 'How to use',
+            'description' => 'Learn on how to use the site.'
+        ];
+
+        $hideSearchBar = true;
+
+        return view('page.how-to-use', compact('meta', 'hideSearchBar'));
+    }
 }

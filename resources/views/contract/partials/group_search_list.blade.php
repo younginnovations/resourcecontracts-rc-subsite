@@ -53,7 +53,7 @@ $api = app('App\Http\Services\APIService');
 	@if(isset($contracts->results) && !empty($contracts->results))
 		@foreach($contracts->results as $contract)
 			@include('contract.partials.listRow')
-			@if(isset($contract->children) && count($contract->children) > 0)
+			@if(isset($contract->children))
                 <?php
                 usort(
                     $contract->children,
@@ -67,7 +67,7 @@ $api = app('App\Http\Services\APIService');
 				@endforeach
 				@if(count($contract->children) < count($contract->supporting_contracts))
 					<tr class='{{$contract->id}} in'>
-						<td class="other-document">
+						<td colspan="6" class="other-document">
 							View
 							<a href="{{route('contract.view',['id'=> $contract->open_contracting_id]).'#associatedcontracts'}}">{{count($contract->supporting_contracts)- count($contract->children)}}
 								other document(s) </a> associated with {{$contract->name}}

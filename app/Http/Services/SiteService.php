@@ -154,6 +154,37 @@ class SiteService
     }
 
     /**
+     * Returns new meta tag
+     *
+     * @param null $property
+     *
+     * @return mixed|object|null
+     */
+    public function newMeta($property = null)
+    {
+        $data = $this->getConfig($this->getSiteType());
+
+        if ($this->isCategory('rc')) {
+            $data['new_tag_line'] = str_replace(':name', $data['name'], $data['tag_line_rc']);
+            $data['new_tag_line'] = str_replace(':name', $data['name'], $data['tag_line_rc']);
+        } elseif ($this->isCategory('olc')) {
+            $data['new_tag_line'] = str_replace(':name', $data['name'], $data['tag_line_olc']);
+            $data['new_tag_line'] = str_replace(':name', $data['name'], $data['tag_line_olc']);
+        }
+
+        if (is_null($property)) {
+            return (object) $data;
+        }
+
+        if (array_key_exists($property, $data)) {
+            return $data[$property];
+        }
+
+        return null;
+
+    }
+
+    /**
      * Get site config
      *
      * @param $key
@@ -277,6 +308,61 @@ class SiteService
     public function adminApiUrl()
     {
         return trim($this->getEnv('ADMIN_API_URL'), '/');
+    }
+
+    /**
+     * Get route for form action
+     *
+     * @param [string] $path
+     * @return {route}
+     */
+    public function getCurrentPath($path)
+    {
+        switch($path){
+			case 'search/group':
+				$url = url('search/group');
+			break;
+			case 'search/recent':
+				$url = url('search/recent');
+            break;
+            case 'search':
+				$url = url('search');
+			break;
+			default:
+				$url = url('search');
+        }
+        
+        return $url;
+    }
+
+    /**
+     * Get array of links for group and recent page with queries
+     *
+     * @param [string] $path
+     * @param [string] $fullUrl
+     * @return array
+     */
+    public function createAllAndRecentDocsLink($path, $fullUrl)
+    {
+        $queries = '';
+
+        if (($pos = strpos($fullUrl, "?")) !== FALSE) { 
+            $queries = substr($fullUrl, $pos+1); 
+        }
+
+        if($path == 'search/group'){
+            $link['group'] = $fullUrl;
+            $recent = 'search/recent?'.$queries;
+            $link['recent'] = url($recent);
+
+            return $link;
+        }
+
+        $link['recent'] = $fullUrl;
+        $group = 'search/group?'.$queries;
+        $link['group'] = url($group);
+
+        return $link;
     }
 
     /**

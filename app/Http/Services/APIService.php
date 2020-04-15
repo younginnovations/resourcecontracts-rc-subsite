@@ -292,7 +292,7 @@ class APIService
             $this->downloadAPI('contracts/search', $query);
         }
 
-        $contract = $this->apiCall('recent-grouped-contracts', $query);
+        $contract = $this->apiCall('contracts/recent', $query);
 
         if ($contract) {
             return $contract;
@@ -341,7 +341,7 @@ class APIService
             $this->downloadAPI('contracts/search', $query);
         }
 
-        $contract = $this->apiCall('groupedcontracts/search', $query);
+        $contract = $this->apiCall('contracts/group', $query);
 
         if ($contract) {
             return $contract;
@@ -700,5 +700,18 @@ class APIService
         ksort($data);
 
         return $data;
+    }
+
+    /**
+     * Returns recent contract counts
+     *
+     * @return int
+     */
+    public function recentContractCount()
+    {
+        $recent_contract_count = $this->apiCall('contracts/recent/count');
+
+        return isset($recent_contract_count->aggregations->recent_contract_count->value) ?
+            $recent_contract_count->aggregations->recent_contract_count->value : 0;
     }
 }

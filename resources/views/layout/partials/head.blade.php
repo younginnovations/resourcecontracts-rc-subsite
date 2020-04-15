@@ -25,8 +25,14 @@ $gtmID      =  site()->getEnv("GTM_ID");
 	<meta name="twitter:title" content="{{ $title }}"/>
 	<meta name="twitter:image" content="{{ site()->getImageUrl('bg')}}"/>
 	<link rel="icon" href="{{$favicon}}">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet">
 	<link href="{{url('css/style.css?v=1.07')}}" rel="stylesheet"/>
 	<link rel="stylesheet" href="{{url('css/new.css?v=1.0')}}"/>
+	@if(site()->isRC())
+	<link rel="stylesheet" href="{{url('css/new-rc.css?v=1.0')}}"/>
+	@elseif(site()->isOLC())
+	<link rel="stylesheet" href="{{url('css/new-olc.css?v=1.0')}}"/>
+	@endif
 	@yield('css')
 
     @if($gtmID != '')
@@ -59,4 +65,4 @@ $gtmID      =  site()->getEnv("GTM_ID");
     <!-- End Google Tag Manager (noscript) -->
     @endif
 <div id="wrapper">
-	<div id="page-wrapper" class="not-front sidebar-collapse-container">
+	<div id="page-wrapper" class="sidebar-collapse-container @if(!isset($homePage)) not-front @endif">

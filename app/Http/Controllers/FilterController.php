@@ -60,16 +60,20 @@ class FilterController
      */
     public function gIndex(Request $request)
     {
+        $filter_params           = $request->all();
         $currentPage             = $request->get('page', 1);
         $filter                  = $this->processQueries($request);
         $filter['from']          = $currentPage;
         $filter['per_page']      = 10;
-        $contracts               = $this->api->filterGroupSearch($filter);
+
+        $contracts               = isset($filter_params['recent']) ?
+            $this->api->filterRecentSearch($filter) :
+            $this->api->filterGroupSearch($filter);
+
         $contracts->current_page = $currentPage;
         $filter                  = $this->updateFilterData($filter, $contracts, $request);
         $title                   = site()->meta('title');
         $descp                   = 'Search %s using different criteria - year signed, company name, contract type, annotation category.';
-        $filter_params           = $request->all();
         $orderBy                = isset($filter_params['order']) ? $filter_params['order'] : '';
         $sortBy                  = isset($filter_params['sort']) ? $filter_params['sort'] : '';
         $query                  = isset($filter_params['q']) ? $filter_params['q'] : '';
@@ -79,7 +83,6 @@ class FilterController
             'title'       => 'Search Contracts',
             'description' => sprintf($descp, $title),
         ];
-
 
         return view(
             'site.groupDemo',
@@ -161,6 +164,7 @@ class FilterController
         return [
             'q'                   => $request->get('q', ''),
             'annotated'           => $request->get('annotated', ''),
+            'recent'           => $request->get('recent', ''),
             'country_code'        => is_array($request->get('country')) ? join(
                 '|',
                 $request->get('country')
@@ -288,7 +292,7 @@ class FilterController
             $filter['from'] = $currentPage;
             $this->api->filterSearch($filter);
         } catch (\Exception $e) {
-            Log::warning($request->url().": ".$e->getMessage());
+            Log::warning($request->url() . ": " . $e->getMessage());
             abort(404);
         }
     }

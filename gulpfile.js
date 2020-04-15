@@ -30,6 +30,18 @@ var contract_style = [
     './resources/assets/scss/contract/contract.scss',
 ];
 
+var theme_new = [
+    './resources/assets/scss/new-style.scss',
+];
+
+var theme_rc_new = [
+    './resources/assets/scss/themes/new-rc.scss',
+];
+
+var theme_olc_new = [
+    './resources/assets/scss/themes/new-olc.scss',
+];
+
 var country_script = [
     './resources/assets/scripts/vendor/backbone/underscore.js',
     './resources/assets/scripts/vendor/backbone/backbone.js',
@@ -70,6 +82,23 @@ gulp.task('default_theme', function () {
         .pipe(rename({
             basename: "",
             prefix: "style",
+            extname: ".css"
+        }))
+        .pipe(gulp.dest('./public/css'));
+});
+
+gulp.task('new_theme', function () {
+    return gulp.src(theme_new)
+        .pipe(sourcemaps.init())
+        .pipe(sass())
+        .pipe(postcss([autoprefixer({browsers: ['last 30 versions', '> 1%', 'ie 8', 'ie 7']})]))
+        .pipe(sourcemaps.write('./maps'))
+        .pipe(uglifycss({
+            "max-line-len": 80
+        }))
+        .pipe(rename({
+            basename: "",
+            prefix: "new-style",
             extname: ".css"
         }))
         .pipe(gulp.dest('./public/css'));
