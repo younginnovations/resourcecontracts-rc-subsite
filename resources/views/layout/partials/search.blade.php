@@ -101,7 +101,7 @@ $SearchPage = isset($searchPage) && $searchPage ? true : false;
 				@endforeach
 			</select>
 		</div>
-		@if(Request::path() === 'search/group')
+		@if(Request::path() !== 'search')
 			<div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
 				<label for="">@lang('global.recent_documents')</label>
 				<input type="checkbox" name="recent" value="1" class="form-control"

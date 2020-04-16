@@ -36,7 +36,7 @@ $image_intro = site()->getImageUrl('intro_bg');
 				<div class="petroleum-mineral">
 					{!! site()->meta('tagline') !!}
 					<div class="clearfix">
-						<form action="{{route('search')}}" method="GET" class="search-form" role="search">
+						<form action="{{route('search/group')}}" method="GET" class="search-form" role="search">
 							<div class="form-group clearfix">
 								<input type="text" name="q" class="form-control"
 									   placeholder="@lang('global.search') {{$contracts}} @lang('global.contracts') @lang('global.associated_documents')">
@@ -46,7 +46,7 @@ $image_intro = site()->getImageUrl('intro_bg');
 							</div>
 						</form>
 						<div class="advance-search">
-							<a href="{{url('search')}}">@lang('global.advanced_search')</a>
+							<a href="{{url('search/group')}}">@lang('global.advanced_search')</a>
 						</div>
 					</div>
 

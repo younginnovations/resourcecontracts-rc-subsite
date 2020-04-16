@@ -329,7 +329,7 @@ class SiteService
 				$url = url('search');
 			break;
 			default:
-				$url = url('search');
+				$url = url('search/group');
         }
         
         return $url;
