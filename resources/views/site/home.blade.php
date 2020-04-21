@@ -97,31 +97,31 @@ $image_intro = site()->getImageUrl('intro_bg');
 						<p>@lang('global.partners')</p>
 						<a href="http://www.resourcegovernance.org/"
 						   target="_blank" class="nrgi">
-							<img src="{{url('images/NRGI_logo.png')}}" alt="NRGI">
+							<img src="{{url('images/NRGI_logo.png')}}" alt="NRGI" width="114" height="45" loading="lazy">
 						</a>
 						<a href="http://ccsi.columbia.edu/"
 						   target="_blank">
-							<img src="{{url('images/CCSI_logo.png')}}" class="ccsi" alt="CCSI">
+							<img src="{{url('images/CCSI_logo.png')}}" class="ccsi" alt="CCSI" width="224" height="40" loading="lazy">
 						</a>
 						<a href="http://www.worldbank.org/en/topic/governance"
 						   target="_blank">
-							<img src="{{url('images/WORLDBANK_logo.png')}}" alt="World Bank">
+							<img src="{{url('images/WORLDBANK_logo.png')}}" alt="World Bank" width="109" height="45" loading="lazy">
 						</a>
 
 						<a href="http://openoil.net"
 						   target="_blank">
-							<img src="{{url('images/OO_logo.png')}}" alt="Open Oil">
+							<img src="{{url('images/OO_logo.png')}}" alt="Open Oil" width="50" height="45" loading="lazy">
 						</a>
 					</div>
 					<div class="donors">
 						<p>@lang('global.donors')</p>
 						<a href="http://www.dfid.gov.uk"
 						   target="_blank">
-							<img src="{{url('images/UKAid_logo.png')}}" alt="UKAid">
+							<img src="{{url('images/UKAid_logo.png')}}" alt="UKAid" width="134" height="45" loading="lazy">
 						</a>
 						<a href="http://alsf.afdb.org/"
 						   target="_blank">
-							<img src="{{url('images/ALSF_logo.png')}}" alt="ALSF">
+							<img src="{{url('images/ALSF_logo.png')}}" alt="ALSF" width="113" height="45" loading="lazy">
 						</a>
 					</div>
 				</div>
@@ -197,7 +197,7 @@ $image_intro = site()->getImageUrl('intro_bg');
 								@foreach($countryPartners as $partner)
 									<div class="multiple">
 										<a target="_blank" href="{{$partner->link}}">
-											<img src="{{$partner->image}}">
+											<img src="{{$partner->image}}" alt="">
 										</a>
 									</div>
 								@endforeach
