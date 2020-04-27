@@ -60,13 +60,21 @@ class FilterController
      */
     public function gIndex(Request $request)
     {
-        $filter_params           = $request->all();
-        $currentPage             = $request->get('page', 1);
-        $filter                  = $this->processQueries($request);
-        $filter['from']          = $currentPage;
-        $filter['per_page']      = 10;
+        $filter_params      = $request->all();
+        $currentPage        = $request->get('page', 1);
+        $filter             = $this->processQueries($request);
+        $filter['from']     = $currentPage;
+        $filter['per_page'] = 10;
 
-        $contracts               = isset($filter_params['recent']) ?
+        if (array_key_exists('sortby', $filter) && empty($filter['sortby'])) {
+            $filter['sortby'] = 'year';
+        }
+
+        if (array_key_exists('order', $filter) && empty($filter['order'])) {
+            $filter['order'] = 'desc';
+        }
+
+        $contracts = isset($filter_params['recent']) ?
             $this->api->filterRecentSearch($filter) :
             $this->api->filterGroupSearch($filter);
 
@@ -74,9 +82,9 @@ class FilterController
         $filter                  = $this->updateFilterData($filter, $contracts, $request);
         $title                   = site()->meta('title');
         $descp                   = 'Search %s using different criteria - year signed, company name, contract type, annotation category.';
-        $orderBy                = isset($filter_params['order']) ? $filter_params['order'] : '';
+        $orderBy                 = isset($filter_params['order']) ? $filter_params['order'] : '';
         $sortBy                  = isset($filter_params['sort']) ? $filter_params['sort'] : '';
-        $query                  = isset($filter_params['q']) ? $filter_params['q'] : '';
+        $query                   = isset($filter_params['q']) ? $filter_params['q'] : '';
         $route                   = $request->path();
         $showYear                = ($route == "contracts" && isset($params['year'])) ? false : true;
         $meta                    = [
@@ -121,9 +129,9 @@ class FilterController
         $title                   = site()->meta('title');
         $descp                   = 'Search %s using different criteria - year signed, company name, contract type, annotation category.';
         $filter_params           = $request->all();
-        $orderBy                = isset($filter_params['order']) ? $filter_params['order'] : '';
+        $orderBy                 = isset($filter_params['order']) ? $filter_params['order'] : '';
         $sortBy                  = isset($filter_params['sort']) ? $filter_params['sort'] : '';
-        $query                  = isset($filter_params['q']) ? $filter_params['q'] : '';
+        $query                   = isset($filter_params['q']) ? $filter_params['q'] : '';
         $route                   = $request->path();
         $showYear                = ($route == "contracts" && isset($params['year'])) ? false : true;
         $meta                    = [
@@ -164,7 +172,7 @@ class FilterController
         return [
             'q'                   => $request->get('q', ''),
             'annotated'           => $request->get('annotated', ''),
-            'recent'           => $request->get('recent', ''),
+            'recent'              => $request->get('recent', ''),
             'country_code'        => is_array($request->get('country')) ? join(
                 '|',
                 $request->get('country')
@@ -292,7 +300,7 @@ class FilterController
             $filter['from'] = $currentPage;
             $this->api->filterSearch($filter);
         } catch (\Exception $e) {
-            Log::warning($request->url() . ": " . $e->getMessage());
+            Log::warning($request->url().": ".$e->getMessage());
             abort(404);
         }
     }
