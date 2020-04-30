@@ -65,7 +65,6 @@ class FilterController
         $filter                  = $this->processQueries($request);
         $filter['from']          = $currentPage;
         $filter['per_page']      = 10;
-
         $contracts               = isset($filter_params['recent']) ?
             $this->api->filterRecentSearch($filter) :
             $this->api->filterGroupSearch($filter);
