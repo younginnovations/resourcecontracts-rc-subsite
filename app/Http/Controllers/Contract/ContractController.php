@@ -50,17 +50,18 @@ class ContractController extends BaseController
      */
     public function index(Request $request)
     {
-        $currentPage = $request->get('page', 1);
-        $filter      = [
+        $currentPage     = $request->get('page', 1);
+        $filter          = [
             'year'    => $request->get('year'),
             'from'    => $currentPage,
-            'sort_by' => $request->get('sortby'),
+            'sort_by' => empty($request->get('sortby')) ? 'year' : $request->get('sortby'),
             'order'   => $request->get('order'),
             'all'     => $request->get('all', 0),
         ];
-        $contracts   = $this->api->allContracts($filter);
+        $filter['order'] = ($filter['sort_by'] == 'year' && empty($filter['order'])) ? 'desc' : $filter['order'];
 
-        $meta = [
+        $contracts       = $this->api->allContracts($filter);
+        $meta            = [
             'title'       => 'Search Contracts',
             'description' => 'Search '.site()->meta('title').' using different criteria - year signed, company name,
             contract type, annotation category.',
@@ -89,7 +90,7 @@ class ContractController extends BaseController
         $contract->annotationsCluster = $this->annotation->groupAnnotationsByCluster($contract->annotations);
         $referrer                     = \Request::server('HTTP_REFERER');
 
-        $meta = [
+        $meta          = [
             'title' => $contract->metadata->name,
         ];
         $hideSearchBar = true;
@@ -221,7 +222,7 @@ class ContractController extends BaseController
         $contract              = new \stdClass();
         $contract->metadata    = $this->api->metadata($contract_id);
         $contract->annotations = $this->api->getAnnotations($contract_id);
-        $hideSearchBar = true;
+        $hideSearchBar         = true;
 
         if (empty($contract->metadata)) {
             return abort(404);

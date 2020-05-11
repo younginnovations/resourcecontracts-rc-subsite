@@ -67,11 +67,19 @@ class ResourceController extends BaseController
      */
     public function detail(Request $request, $resource)
     {
-        $resource    = urldecode($resource);
-        $currentPage = $request->get('page', 1);
-        $filter      = ['resource' => $resource, 'from' => $currentPage, 'sort_by' => $request->get('sortby'), 'order' => $request->get('order'), 'all'=>$request->get('all','0'),];
-        $contracts   = $this->api->allContracts($filter);
-        $countries   = $this->api->getCountryByResource($filter);
+        $resource        = urldecode($resource);
+        $currentPage     = $request->get('page', 1);
+        $filter          = [
+            'resource' => $resource,
+            'from'     => $currentPage,
+            'sort_by'  => empty($request->get('sortby')) ? 'year' : $request->get('sortby'),
+            'order'    => $request->get('order'),
+            'all'      => $request->get('all', '0'),
+        ];
+        $filter['order'] = ($filter['sort_by'] == 'year' && empty($filter['order'])) ? 'desc' : $filter['order'];
+
+        $contracts = $this->api->allContracts($filter);
+        $countries = $this->api->getCountryByResource($filter);
 
         if (!$contracts) {
             return abort(404);
