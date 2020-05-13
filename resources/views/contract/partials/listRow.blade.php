@@ -42,7 +42,6 @@ if(isset($contract->children)) {
                     data-content="@lang('clip.clip_contract')">Clip
             </button>
         @endif
-        {{ !isset($contract->children) ? '(Associated document)' : ''}}
 
         <div class="search-text">
             @if(isset($contract->text) && $contract->text !='')
