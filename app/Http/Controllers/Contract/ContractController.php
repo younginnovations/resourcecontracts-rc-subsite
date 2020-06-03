@@ -59,7 +59,6 @@ class ContractController extends BaseController
             'all'     => $request->get('all', 0),
         ];
         $filter['order'] = ($filter['sort_by'] == 'year' && empty($filter['order'])) ? 'desc' : $filter['order'];
-
         $contracts       = $this->api->allContracts($filter);
         $meta            = [
             'title'       => 'Search Contracts',
