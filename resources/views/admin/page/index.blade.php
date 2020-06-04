@@ -28,14 +28,15 @@
 				<?php
 				$versions = array_values((array) $page->version);
 				?>
-				<tr data-toggle="collapse" data-target=".page-version-collapsible-{{$page->id}}">
+				<tr >
 					<td></td>
 					<td>{{$page->id}}</td>
 					<td>{{$page->title->en}}</td>
 					<td>{{$page->slug}}</td>
 					<td>
 						@if($versions)
-							<span>v{{ $page->selected }}</span>
+							<span class="badge">v{{ $page->selected }}</span>
+							<a href="#" data-toggle="collapse" data-target=".page-version-collapsible-{{$page->id}}">See versions</a>
 						@else
 						No versions available
 						@endif
@@ -59,19 +60,18 @@
 				@if(!empty($page->version))
 					@foreach($page->version as $key => $versionContent)
 						@if ($key != $page->selected)
-							<tr class="pages-content-versions-row">
+							<tr class="collapse page-version-collapsible-{{$page->id}}">
 								<td></td>
 								<td></td>
 								<td></td>
 								<td></td>
 								<td>
-									<div id="page-version-{{$page->id}}" class="collapse page-version-collapsible-{{$page->id}}">
+									<div>
 										v{{$key}}
 									</div>
 								</td>
 								<td>
-									<div class="collapse page-version-collapsible-{{$page->id}}">
-
+									<div]>
 										<form method="POST" action="{{ route('admin.version.edit', ['id'=>$page->id]) }}" style="display: inline">
 											<input name="_token" type="hidden" value="{{ csrf_token()}}">
 											<input name="selected" class="selected" type="hidden" value="{{ $key }}">
@@ -125,4 +125,7 @@
 		});
 	});
 </script>
+<style>
+
+</style>
 @endsection
