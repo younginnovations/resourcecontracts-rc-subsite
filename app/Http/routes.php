@@ -165,6 +165,7 @@ $app->group(
         $app->post('page/{id}', ['as' => 'admin.page.update', 'uses' => 'PageController@update']);
         $app->delete('page/{id}', ['as' => 'admin.page.delete', 'uses' => 'PageController@delete']);
         $app->post('version/{id}', ['as' => 'admin.version.edit', 'uses' => 'PageController@versionUpdate']);
+        $app->delete('page/{id}/version/{version}', ['as' => 'admin.page.version.delete', 'uses' => 'PageController@deleteVersion']);
     }
 );
 

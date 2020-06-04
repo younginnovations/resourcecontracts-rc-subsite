@@ -95,10 +95,20 @@ class Page extends Model
      *
      * @return string
      */
-    public function content()
+    public function content($v = null)
     {
         $lang    = app('translator')->getLocale();
-        $content = isset($this->content->$lang) ? $this->content->$lang : $this->content->en;
+        if (isset($v)) {
+            $content = isset($this->version->{$v}) ? (
+            isset($this->version->{$v}->{$lang}) ?
+                $this->version->{$v}->{$lang} :
+                $this->version->{$v}->en
+            ) : (
+                'This version not available'
+            );
+        } else {
+            $content = isset($this->content->$lang) ? $this->content->$lang : $this->content->en;
+        }
 
         return $content;
     }

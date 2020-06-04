@@ -6,6 +6,6 @@
 
     <div class="content-static-wrap">
         <h1 id="title">{{$page->title()}}</h1>
-        <div id="content">{!!$page->content()!!}</div>
+        <div id="content">{!!$page->content(app('request')->query('v'))!!}</div>
     </div>
 @stop

@@ -28,25 +28,14 @@
 				<?php
 				$versions = array_values((array) $page->version);
 				?>
-				<tr>
+				<tr data-toggle="collapse" data-target=".page-version-collapsible-{{$page->id}}">
 					<td></td>
 					<td>{{$page->id}}</td>
 					<td>{{$page->title->en}}</td>
 					<td>{{$page->slug}}</td>
 					<td>
 						@if($versions)
-						<form method="POST" action="{{ route('admin.version.edit', ['id'=>$page->id]) }}">
-							<input name="_token" type="hidden" value="{{ csrf_token()}}">
-							<input name="selected" class="selected" type="hidden" value="{{ $page->selected }}">
-							<div class="form-group">
-								<select class="form-control select-version" name="new-selected">
-									@foreach($versions as $key => $value)
-									<option value="{{$key}}" @if($key==$page->selected) selected @endif>v{{$value->ver}}</option>
-									@endforeach
-								</select>
-							</div>
-							<button class="btn btn-xs btn-info hide change-version" type="submit"><i class="fa fa-check"></i> @lang('admin.change_version')</button>
-						</form>
+							<span>v{{ $page->selected }}</span>
 						@else
 						No versions available
 						@endif
@@ -67,6 +56,48 @@
 						@endif
 					</td>
 				</tr>
+				@if(!empty($page->version))
+					@foreach($page->version as $key => $versionContent)
+						@if ($key != $page->selected)
+							<tr class="pages-content-versions-row">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td>
+									<div id="page-version-{{$page->id}}" class="collapse page-version-collapsible-{{$page->id}}">
+										v{{$key}}
+									</div>
+								</td>
+								<td>
+									<div class="collapse page-version-collapsible-{{$page->id}}">
+
+										<form method="POST" action="{{ route('admin.version.edit', ['id'=>$page->id]) }}" style="display: inline">
+											<input name="_token" type="hidden" value="{{ csrf_token()}}">
+											<input name="selected" class="selected" type="hidden" value="{{ $key }}">
+											<button class="btn btn-success" type="submit">
+												<i class="fa fa-check"></i>
+											</button>
+										</form>
+										<a target="_blank" class="btn btn-success" href="{{url($page->slug)}}?v={{$key}}">
+											<i class="fa fa-eye"></i>
+										</a>
+										<a class="btn btn-primary" href="{{route('admin.page.update', ['id'=>$page->id])}}?v={{$key}}">
+											<i class="fa fa-pencil-square-o"></i>
+										</a>
+										@if(auth()->user()->id ==1)
+											<form method="POST" action="{{ route('admin.page.version.delete' , ['id' => $page->id, 'version' => $key]) }}" accept-charset="UTF-8" style="display:inline" onsubmit="return confirm('Are you sure you want to delete this page?');">
+												<input name="_method" type="hidden" value="DELETE">
+												<input name="_token" type="hidden" value="{{ csrf_token()}}">
+												<button type="submit" class="btn btn-danger confirm" data-confirm="Are you sure you want to delete this page?"><i class="fa fa-trash"> </i></button>
+											</form>
+										@endif
+									</div>
+								</td>
+							</tr>
+						@endif
+					@endforeach
+				@endif
 				@endforeach
 			</tbody>
 		</table>

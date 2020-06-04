@@ -47,4 +47,8 @@ return [
     'choose_lang'           => 'Choose language',
     'select_version'        => 'Select version',
     'change_version'        => 'Change version',
+    'page'                  => [
+        'save_as_new_version'   => 'Save as new version',
+        'update_this_version'   => 'Update'
+    ]
 ];

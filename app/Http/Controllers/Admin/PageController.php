@@ -36,7 +36,7 @@ class PageController extends BaseController
      */
     public function index()
     {
-        
+
         $pages = $this->page->all();
         $hideSearchBar = $this->hideSearchBar;
 
@@ -79,10 +79,12 @@ class PageController extends BaseController
      *
      * @param $id
      *
+     * @param Request $request
      * @return \Illuminate\View\View
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
+        $version = $request->query('v');
         $page = $this->page->find($id);
         $hideSearchBar = $this->hideSearchBar;
 
@@ -104,12 +106,14 @@ class PageController extends BaseController
      */
     public function update(Request $request, $id)
     {
+        $versionAction = $request->input('version_action');
+        $options = ['version_action' => $versionAction, 'target_version' => $request->input('target_version')];
         $input = [
             'title'   => $request->input('title'),
             'content' => $request->input('content'),
         ];
 
-        if ($this->page->save($id, $input)) {
+        if ($this->page->save($id, $input, $options)) {
             return redirect()->route('admin.page')->withSuccess('Page successfully updated.');
         }
 
@@ -142,11 +146,17 @@ class PageController extends BaseController
      */
     public function versionUpdate(Request $request, $id)
     {
-        $new_selected = $request->input('new-selected');
+        $new_selected = $request->input('selected');
         if($this->page->versionUpdate($id, $new_selected)){
             return redirect()->route('admin.page')->withSuccess('Version successfully changed.');
         }
 
         return redirect()->route('admin.page')->withError('Version could not be changed.');
+    }
+
+    public function deleteVersion(Request $request, $id, $version)
+    {
+        $this->page->deleteVersion($id, $version);
+        return redirect()->route('admin.page')->withSuccess('Version deleted successfully');
     }
 }

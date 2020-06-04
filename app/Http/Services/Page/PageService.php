@@ -1,6 +1,7 @@
 <?php namespace App\Http\Services\Page;
 
 use App\Http\Models\Page\Page;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 
 /**
@@ -74,21 +75,32 @@ Class PageService
      * @return bool
      * @internal param $page
      */
-    public function save($page_id, array $content)
+    public function save($page_id, array $content, array $options = [])
     {
         $page          = $this->page->country()->where('id', $page_id)->first();
         $page->title   = (object) $content['title'];
-        $page->content = (object) $content['content'];
 
-        if($page->isDirty('content')){
-            //if content changed
-            $version = array_values((array) $page->version);
+        if (($options['version_action'] && $options['version_action'] == 'update') && (!empty($page->version) && !empty($page->selected)) ) {
+            $targetVersion = isset($options['target_version']) ? $options['target_version'] : $page->selected;
+            $versionContent = $page->version;
+            $targetVersionContent = (object)$content['content'];
+            $targetVersionContent->ver = $targetVersion;
+            $targetVersionContent->updated_at = Carbon::now()->toIso8601String();
+            $targetVersionContent->created_at = $versionContent->{$page->selected}->created_at;
+            $versionContent->{$page->selected} = $targetVersionContent;
+            $page->version = $versionContent;
+            $page->content = (object) $content['content'];
+        } else {
+            //if content changed + create new version
+            $hasVersions = !empty($page->version);
+            $version = array_values((array)$page->version);
             $new_content = $content['content'];
             $last_key = end($version);
-            $new_content['ver'] = empty($version) ? 0 :intval($last_key->ver) + 1;
-            array_push($version, (object) $new_content);
+            $new_content['ver'] = empty($version) ? 0 : intval($last_key->ver) + 1;
+            $new_content['created_at'] = $new_content['updated_at'] = Carbon::now()->toIso8601String();
+            array_push($version, (object)$new_content);
 
-            if(count($version) > 10){
+            if (count($version) > 10) {
                 //if versions is greater than 10
                 array_shift($version);
             }
@@ -96,7 +108,10 @@ Class PageService
             $page->version = (object) $version;
             $keys = array_keys($version);
             $selected_key = end($keys);
-            $page->selected = $selected_key;
+            if (!$hasVersions) {
+                $page->content = (object) $content['content'];
+                $page->selected = $selected_key;
+            }
         }
 
         Cache::forget('all');
@@ -190,5 +205,26 @@ Class PageService
         Cache::forget($page->slug);
 
         return $page->save();  
+    }
+
+    public function deleteVersion($page_id, $version)
+    {
+        $page = $this->page->country()->where('id', $page_id)->first();
+
+        if ($version == $page->selected) {
+            throw new \Exception('Cannot delete currently active version');
+        }
+        $versionContent = $page->version;
+
+        if ($versionContent && isset($versionContent->$version)) {
+            unset($versionContent->$version);
+            $page->version = $versionContent;
+        }
+
+        Cache::forget('all');
+        Cache::forget($page_id);
+        Cache::forget($page->slug);
+
+        return $page->save();
     }
 }
