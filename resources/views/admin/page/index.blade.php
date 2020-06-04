@@ -42,17 +42,17 @@
 						@endif
 					</td>
 					<td>
-						<a target="_blank" class="btn btn-success" href="{{url($page->slug)}}">
+						<a target="_blank" class="btn btn-success" href="{{url($page->slug)}}" data-toggle="tooltip" data-placement="top" title="View page">
 							<i class="fa fa-eye"></i>
 						</a>
-						<a class="btn btn-primary" href="{{route('admin.page.update', ['id'=>$page->id])}}">
+						<a class="btn btn-primary" href="{{route('admin.page.update', ['id'=>$page->id])}}"  data-toggle="tooltip" data-placement="top" title="Edit page">
 							<i class="fa fa-pencil-square-o"></i>
 						</a>
 						@if(auth()->user()->id ==1)
 						<form method="POST" action="{{ route('admin.page.delete' , ['id' => $page->id]) }}" accept-charset="UTF-8" style="display:inline" onsubmit="return confirm('Are you sure you want to delete this page?');">
 							<input name="_method" type="hidden" value="DELETE">
 							<input name="_token" type="hidden" value="{{ csrf_token()}}">
-							<button type="submit" class="btn btn-danger confirm" data-confirm="Are you sure you want to delete this page?"><i class="fa fa-trash"> </i></button>
+							<button type="submit" class="btn btn-danger confirm" data-confirm="Are you sure you want to delete this page?"  data-toggle="tooltip" data-placement="top" title="Delete page"><i class="fa fa-trash"> </i></button>
 						</form>
 						@endif
 					</td>
@@ -71,25 +71,25 @@
 									</div>
 								</td>
 								<td>
-									<div]>
+									<div>
 										<form method="POST" action="{{ route('admin.version.edit', ['id'=>$page->id]) }}" style="display: inline">
 											<input name="_token" type="hidden" value="{{ csrf_token()}}">
 											<input name="selected" class="selected" type="hidden" value="{{ $key }}">
-											<button class="btn btn-success" type="submit">
+											<button class="btn btn-success" type="submit"  data-toggle="tooltip" data-placement="top" title="Publish this version">
 												<i class="fa fa-check"></i>
 											</button>
 										</form>
-										<a target="_blank" class="btn btn-success" href="{{url($page->slug)}}?v={{$key}}">
+										<a target="_blank" class="btn btn-success" href="{{url($page->slug)}}?v={{$key}}"  data-toggle="tooltip" data-placement="top" title="View this page version">
 											<i class="fa fa-eye"></i>
 										</a>
-										<a class="btn btn-primary" href="{{route('admin.page.update', ['id'=>$page->id])}}?v={{$key}}">
+										<a class="btn btn-primary" href="{{route('admin.page.update', ['id'=>$page->id])}}?v={{$key}}"  data-toggle="tooltip" data-placement="top" title="Edit this version">
 											<i class="fa fa-pencil-square-o"></i>
 										</a>
 										@if(auth()->user()->id ==1)
 											<form method="POST" action="{{ route('admin.page.version.delete' , ['id' => $page->id, 'version' => $key]) }}" accept-charset="UTF-8" style="display:inline" onsubmit="return confirm('Are you sure you want to delete this page?');">
 												<input name="_method" type="hidden" value="DELETE">
 												<input name="_token" type="hidden" value="{{ csrf_token()}}">
-												<button type="submit" class="btn btn-danger confirm" data-confirm="Are you sure you want to delete this page?"><i class="fa fa-trash"> </i></button>
+												<button type="submit" class="btn btn-danger confirm" data-confirm="Are you sure you want to delete this page?"  data-toggle="tooltip" data-placement="top" title="Delete this version"><i class="fa fa-trash"> </i></button>
 											</form>
 										@endif
 									</div>
