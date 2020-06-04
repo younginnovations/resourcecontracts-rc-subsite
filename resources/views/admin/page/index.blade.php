@@ -59,43 +59,43 @@
 				</tr>
 				@if(!empty($page->version))
 					@foreach($page->version as $key => $versionContent)
-						@if ($key != $page->selected)
-							<tr class="collapse page-version-collapsible-{{$page->id}}">
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td>
-									<div>
-										v{{$key}}
-									</div>
-								</td>
-								<td>
-									<div>
-										<form method="POST" action="{{ route('admin.version.edit', ['id'=>$page->id]) }}" style="display: inline">
+						<tr class="collapse page-version-collapsible-{{$page->id}}">
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>
+								<div>
+									v{{$key}} <span class="badge">{{ \Carbon\Carbon::parse($versionContent->updated_at)->format('Y-m-d H:i:s') }}</span>
+								</div>
+							</td>
+							<td>
+								<div>
+									@if ($key != $page->selected)
+									<form method="POST" action="{{ route('admin.version.edit', ['id'=>$page->id]) }}" style="display: inline">
+										<input name="_token" type="hidden" value="{{ csrf_token()}}">
+										<input name="selected" class="selected" type="hidden" value="{{ $key }}">
+										<button class="btn btn-success" type="submit"  data-toggle="tooltip" data-placement="top" title="Publish this version">
+											<i class="fa fa-check"></i>
+										</button>
+									</form>
+									@endif
+									<a target="_blank" class="btn btn-success" href="{{url($page->slug)}}?v={{$key}}"  data-toggle="tooltip" data-placement="top" title="View this page version">
+										<i class="fa fa-eye"></i>
+									</a>
+									<a class="btn btn-primary" href="{{route('admin.page.update', ['id'=>$page->id])}}?v={{$key}}"  data-toggle="tooltip" data-placement="top" title="Edit this version">
+										<i class="fa fa-pencil-square-o"></i>
+									</a>
+									@if(auth()->user()->id ==1 && $key != $page->selected)
+										<form method="POST" action="{{ route('admin.page.version.delete' , ['id' => $page->id, 'version' => $key]) }}" accept-charset="UTF-8" style="display:inline" onsubmit="return confirm('Are you sure you want to delete this page?');">
+											<input name="_method" type="hidden" value="DELETE">
 											<input name="_token" type="hidden" value="{{ csrf_token()}}">
-											<input name="selected" class="selected" type="hidden" value="{{ $key }}">
-											<button class="btn btn-success" type="submit"  data-toggle="tooltip" data-placement="top" title="Publish this version">
-												<i class="fa fa-check"></i>
-											</button>
+											<button type="submit" class="btn btn-danger confirm" data-confirm="Are you sure you want to delete this page?"  data-toggle="tooltip" data-placement="top" title="Delete this version"><i class="fa fa-trash"> </i></button>
 										</form>
-										<a target="_blank" class="btn btn-success" href="{{url($page->slug)}}?v={{$key}}"  data-toggle="tooltip" data-placement="top" title="View this page version">
-											<i class="fa fa-eye"></i>
-										</a>
-										<a class="btn btn-primary" href="{{route('admin.page.update', ['id'=>$page->id])}}?v={{$key}}"  data-toggle="tooltip" data-placement="top" title="Edit this version">
-											<i class="fa fa-pencil-square-o"></i>
-										</a>
-										@if(auth()->user()->id ==1)
-											<form method="POST" action="{{ route('admin.page.version.delete' , ['id' => $page->id, 'version' => $key]) }}" accept-charset="UTF-8" style="display:inline" onsubmit="return confirm('Are you sure you want to delete this page?');">
-												<input name="_method" type="hidden" value="DELETE">
-												<input name="_token" type="hidden" value="{{ csrf_token()}}">
-												<button type="submit" class="btn btn-danger confirm" data-confirm="Are you sure you want to delete this page?"  data-toggle="tooltip" data-placement="top" title="Delete this version"><i class="fa fa-trash"> </i></button>
-											</form>
-										@endif
-									</div>
-								</td>
-							</tr>
-						@endif
+									@endif
+								</div>
+							</td>
+						</tr>
 					@endforeach
 				@endif
 				@endforeach

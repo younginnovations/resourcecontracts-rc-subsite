@@ -80,7 +80,7 @@ Class PageService
         $page          = $this->page->country()->where('id', $page_id)->first();
         $page->title   = (object) $content['title'];
 
-        if (($options['version_action'] && $options['version_action'] == 'update') && (!empty($page->version) && !empty($page->selected)) ) {
+        if (($options['version_action'] && $options['version_action'] == 'update') && (!empty($page->version)) ) {
             $targetVersion = isset($options['target_version']) ? $options['target_version'] : $page->selected;
             $versionContent = $page->version;
             $targetVersionContent = (object)$content['content'];
@@ -151,6 +151,7 @@ Class PageService
         $version = [];
         $content =  $input['content'];
         $content["ver"] = 0;
+        $content['updated_at'] = $content['created_at'] = Carbon::now()->toIso8601String();
         array_push($version, (object) $content);
 
         $input = [
