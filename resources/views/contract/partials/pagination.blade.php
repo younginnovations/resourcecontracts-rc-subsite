@@ -47,8 +47,9 @@ $current_url .= (http_build_query($queries) == '') ? '' : http_build_query($quer
                         <a href="{{ $current_url }}page={{ $current_page < $total_page ? $current_page + 1 : $current_page }}">@lang('global.next')</a>
                     </li>
                     <li class="num-text"><a href="{{ $current_url }}page={{ $total_page }}">@lang('global.last')</a></li>
-                    <li class="num-text"><a href="{{ $current_url }}all={{true}}">@lang('global.view_all')</a></li>
-
+                    @if (!Request::is('search/group'))
+                        <li class="num-text"><a href="{{ $current_url }}all={{true}}">@lang('global.view_all')</a></li>
+                    @endif
                 @endif
             </ul>
         </div>
