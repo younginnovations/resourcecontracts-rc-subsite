@@ -36,7 +36,9 @@
 					<td>
 						@if($versions)
 							<span class="badge">v{{ $page->selected }}</span>
-							<a href="#" data-toggle="collapse" data-target=".page-version-collapsible-{{$page->id}}">See versions</a>
+						@if (count($versions) > 1)
+								<a href="#" data-toggle="collapse" data-target=".page-version-collapsible-{{$page->id}}" class="see-versions">See versions</a>
+							@endif
 						@else
 						No versions available
 						@endif
@@ -48,7 +50,7 @@
 						<a class="btn btn-primary" href="{{route('admin.page.update', ['id'=>$page->id])}}"  data-toggle="tooltip" data-placement="top" title="Edit page">
 							<i class="fa fa-pencil-square-o"></i>
 						</a>
-						@if(auth()->user()->id ==1)
+						@if(auth()->user()->id ==1 && !empty($versions) && count($versions) <= 1)
 						<form method="POST" action="{{ route('admin.page.delete' , ['id' => $page->id]) }}" accept-charset="UTF-8" style="display:inline" onsubmit="return confirm('Are you sure you want to delete this page?');">
 							<input name="_method" type="hidden" value="DELETE">
 							<input name="_token" type="hidden" value="{{ csrf_token()}}">
@@ -66,7 +68,7 @@
 							<td></td>
 							<td>
 								<div>
-									v{{$key}} <span class="badge">{{ \Carbon\Carbon::parse($versionContent->updated_at)->format('Y-m-d H:i:s') }}</span>
+									<span style="{{ $key == $page->selected ? "font-weight: bolder":'' }}">v{{$key}}</span> <span class="badge">{{ \Carbon\Carbon::parse($versionContent->updated_at)->format('Y-m-d H:i:s') }}</span>
 								</div>
 							</td>
 							<td>
@@ -107,20 +109,12 @@
 @section('js')
 <script type="text/javascript">
 	$('document').ready(function() {
-		$('.select-version').on('change', function() {
-			var value = $(this).val();
-			var parent = $(this).parent().parent('form');
-			var selected_val = parent.find('.selected').val();
-			var button = parent.find('.change-version');
-
-			if (selected_val == value || value == null) {
-				if (!button.hasClass('hide')) {
-					button.addClass('hide');
-				}
-			} else {
-				if (button.hasClass('hide')) {
-					button.removeClass('hide');
-				}
+		$('.see-versions').on('click', function(e) {
+			var $el = $(this);
+			if ($el.attr('aria-expanded') == 'false' || !$el.attr('aria-expanded') ) {
+				$el.text('Hide versions');
+			}else{
+				$el.text('See versions');
 			}
 		});
 	});
