@@ -143,7 +143,7 @@ export default class Item extends React.Component {
     }
 
     render() {
-        let docURL = app_url + "/contract/" + this.props.open_contracting_id + '/view';
+        let docURL = app_url + "/contract/" + this.props.open_contracting_id + '/view#/pdf/page/' + this.props.pages[0].page +'/annotation/' + this.props.pages[0].id;
         let flagURL = this.getFlagUrl(this.props.country_code);
         let shortText = this.getShortText();
         let moreText = this.state.shownFullText ? "less" : "more";
@@ -168,10 +168,11 @@ export default class Item extends React.Component {
                 <td data-title={ langClip.document } className="document_title">
                     <a href={ docURL }>{ this.props.name }</a>
                 </td>
-                <td data-title={ langClip.category }>
+                <td>{ this.props.year }</td>
+                <td data-title={ langClip.key_clause }>
                     { this.props.category }
                 </td>
-                <td className="clipping-article" data-title={ langClip.text }>
+                <td className="clipping-article" data-title={ langClip.clause_summary }>
                     { this.state.showEllipse ? shortText : this.state.text }
                     <span onClick={ this.handleText.bind(this) }
                           className="listMore"> {this.state.hasEllipses ? moreText : null}</span><br/>
@@ -193,7 +194,7 @@ export default class Item extends React.Component {
                        title={ langClip.view_on_doc }
                        onClick={ this.openViewPage.bind(this) }
                     >
-                        <span className="view"></span>
+                        <span className="actions__view"></span>
                     </a>
                     {
                         this.state.key ? ""

@@ -21,6 +21,12 @@ class ClipHelper {
 
     }
 
+    hasLocalClips() {
+        let localClips = this.getLocalClips();
+
+        return localClips != null && localClips!= undefined && localClips.length != undefined && localClips.length > 0;
+    }
+
     getLocalClips() {
 
         let localClips = localStorage.clipLocalCollection;
