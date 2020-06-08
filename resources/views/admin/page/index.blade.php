@@ -35,9 +35,9 @@
 					<td>{{$page->slug}}</td>
 					<td>
 						@if($versions)
-							<span class="badge">v{{ $page->selected }}</span>
+							<span class="badge">v{{ $page->version_no }}</span>
 						@if (count($versions) > 1)
-								<a href="#" data-toggle="collapse" data-target=".page-version-collapsible-{{$page->id}}" class="see-versions">See versions</a>
+								<a href="#" data-toggle="collapse" data-target=".page-version-collapsible-{{$page->id}}" class="see-versions" data-version-count="{{ count((array) $page->version) }}">See all({{ count((array) $page->version) }})</a>
 							@endif
 						@else
 						No versions available
@@ -51,7 +51,7 @@
 							<i class="fa fa-pencil-square-o"></i>
 						</a>
 						@if(auth()->user()->id ==1 && !empty($versions) && count($versions) <= 1)
-						<form method="POST" action="{{ route('admin.page.delete' , ['id' => $page->id]) }}" accept-charset="UTF-8" style="display:inline" onsubmit="return confirm('Are you sure you want to delete this page?');">
+						<form method="POST" action="{{ route('admin.page.delete' , ['id' => $page->id]) }}" accept-charset="UTF-8" style="display:inline" onsubmit="return confirm('This is last version of this page. Do you want to delete this page as a whole?');">
 							<input name="_method" type="hidden" value="DELETE">
 							<input name="_token" type="hidden" value="{{ csrf_token()}}">
 							<button type="submit" class="btn btn-danger confirm" data-confirm="Are you sure you want to delete this page?"  data-toggle="tooltip" data-placement="top" title="Delete page"><i class="fa fa-trash"> </i></button>
@@ -68,15 +68,15 @@
 							<td></td>
 							<td>
 								<div>
-									<span style="{{ $key == $page->selected ? "font-weight: bolder":'' }}">v{{$key}}</span> <span class="badge">{{ \Carbon\Carbon::parse($versionContent->updated_at)->format('Y-m-d H:i:s') }}</span>
+									<span style="{{ $key == $page->version_no ? "font-weight: bolder":'' }}">v{{$key}}</span> <span class="badge">{{ \Carbon\Carbon::parse($versionContent->updated_at)->format('Y-m-d H:i:s') }}</span>
 								</div>
 							</td>
 							<td>
 								<div>
-									@if ($key != $page->selected)
+									@if ($key != $page->version_no)
 									<form method="POST" action="{{ route('admin.version.edit', ['id'=>$page->id]) }}" style="display: inline">
 										<input name="_token" type="hidden" value="{{ csrf_token()}}">
-										<input name="selected" class="selected" type="hidden" value="{{ $key }}">
+										<input name="version_no" class="selected" type="hidden" value="{{ $key }}">
 										<button class="btn btn-success" type="submit"  data-toggle="tooltip" data-placement="top" title="Publish this version">
 											<i class="fa fa-check"></i>
 										</button>
@@ -88,7 +88,7 @@
 									<a class="btn btn-primary" href="{{route('admin.page.update', ['id'=>$page->id])}}?v={{$key}}"  data-toggle="tooltip" data-placement="top" title="Edit this version">
 										<i class="fa fa-pencil-square-o"></i>
 									</a>
-									@if(auth()->user()->id ==1 && $key != $page->selected)
+									@if(auth()->user()->id ==1 && $key != $page->version_no)
 										<form method="POST" action="{{ route('admin.page.version.delete' , ['id' => $page->id, 'version' => $key]) }}" accept-charset="UTF-8" style="display:inline" onsubmit="return confirm('Are you sure you want to delete this page?');">
 											<input name="_method" type="hidden" value="DELETE">
 											<input name="_token" type="hidden" value="{{ csrf_token()}}">
@@ -112,9 +112,9 @@
 		$('.see-versions').on('click', function(e) {
 			var $el = $(this);
 			if ($el.attr('aria-expanded') == 'false' || !$el.attr('aria-expanded') ) {
-				$el.text('Hide versions');
+				$el.text('Hide' + '('+ $el.attr('data-version-count') +')');
 			}else{
-				$el.text('See versions');
+				$el.text('See all' + '('+ $el.attr('data-version-count') +')');
 			}
 		});
 	});

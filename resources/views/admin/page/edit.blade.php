@@ -1,15 +1,21 @@
 @extends('layout.admin')
-
+<?php
+$request = app('request');
+?>
 @section('js')
     <script type="text/javascript" src="{{url('js/tinymce/tinymce.min.js')}}"></script>
     <script type="text/javascript" src="{{url('js/tinymce/tinymce-init.js')}}"></script>
     <script>
+        var pageVersion = {{ $request->query('v') ?? 'undefined' }};
         $(document).ready(function () {
             $('#update-page-button').click(function (e) {
                 e.preventDefault();
-                var $form = $('form#page-form'), formAction = $form.attr('action');
+                var $form = $('form#page-form');
                 var url = (new URL($form.attr('action')));
-                url.searchParams.append('version_action', 'update')
+                if (pageVersion != undefined) {
+                    url.searchParams.append('target_version',pageVersion);
+                }
+                url.searchParams.append('version_action', 'update');
                 $form.attr('action', url.toString());
                 $form.submit();
             });

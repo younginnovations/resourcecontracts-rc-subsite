@@ -81,17 +81,17 @@ Class PageService
         $page->title   = (object) $content['title'];
 
         if (($options['version_action'] && $options['version_action'] == 'update') && (!empty($page->version)) ) {
-            $targetVersion = isset($options['target_version']) ? $options['target_version'] : $page->selected;
+            $targetVersion = isset($options['target_version']) ? $options['target_version'] : $page->version_no;
             $versionContent = $page->version;
             $targetVersionContent = (object)$content['content'];
             $targetVersionContent->ver = $targetVersion;
             $targetVersionContent->updated_at = Carbon::now()->toIso8601String();
-            $targetVersionContent->created_at = $versionContent->{$page->selected}->created_at;
-            $versionContent->{$page->selected} = $targetVersionContent;
+            $targetVersionContent->created_at = $versionContent->{$page->version_no}->created_at;
+            $versionContent->{$targetVersion} = $targetVersionContent;
             $page->version = $versionContent;
             $page->content = (object) $content['content'];
         } else {
-            //if content changed + create new version
+            // create new version
             $hasVersions = !empty($page->version);
             $version = array_values((array)$page->version);
             $new_content = $content['content'];
@@ -110,7 +110,7 @@ Class PageService
             $selected_key = end($keys);
             if (!$hasVersions) {
                 $page->content = (object) $content['content'];
-                $page->selected = $selected_key;
+                $page->version_no = $selected_key;
             }
         }
 
@@ -155,11 +155,11 @@ Class PageService
         array_push($version, (object) $content);
 
         $input = [
-            'title'    => (object) $input['title'],
-            'content'  => (object) $input['content'],
-            'slug'     => str_slug($input['title']['en']),
-            'version'  => (object) $version,
-            'selected' => 0  
+            'title'      => (object)$input['title'],
+            'content'    => (object)$input['content'],
+            'slug'       => str_slug($input['title']['en']),
+            'version'    => (object)$version,
+            'version_no' => 0
         ];
         Cache::forget('all');
 
@@ -187,7 +187,7 @@ Class PageService
      * Change the version of content
      * 
      * @param $id
-     * @param $new-selected
+     * @param $new_selected
      * 
      * @return bool
     */
@@ -198,7 +198,7 @@ Class PageService
         
         if(array_key_exists($new_selected, $versions)){
             $page->content = (object) $versions[$new_selected];
-            $page->selected = $new_selected;
+            $page->version_no = $new_selected;
         }
 
         Cache::forget('all');
@@ -212,7 +212,7 @@ Class PageService
     {
         $page = $this->page->country()->where('id', $page_id)->first();
 
-        if ($version == $page->selected) {
+        if ($version == $page->version_no) {
             throw new \Exception('Cannot delete currently active version');
         }
         $versionContent = $page->version;

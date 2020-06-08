@@ -146,7 +146,7 @@ class PageController extends BaseController
      */
     public function versionUpdate(Request $request, $id)
     {
-        $new_selected = $request->input('selected');
+        $new_selected = $request->input('version_no');
         if($this->page->versionUpdate($id, $new_selected)){
             return redirect()->route('admin.page')->withSuccess('Version successfully changed.');
         }

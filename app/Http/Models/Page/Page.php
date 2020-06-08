@@ -15,7 +15,7 @@ class Page extends Model
     /**
      * @var array
      */
-    protected $fillable = ['title', 'slug', 'content', 'country', 'version', 'selected'];
+    protected $fillable = ['title', 'slug', 'content', 'country', 'version', 'version_no'];
 
     /**
      * @var array
@@ -99,6 +99,7 @@ class Page extends Model
     {
         $lang    = app('translator')->getLocale();
         if (isset($v)) {
+//            dd($this->version->{$v}->{$lang});
             $content = isset($this->version->{$v}) ? (
             isset($this->version->{$v}->{$lang}) ?
                 $this->version->{$v}->{$lang} :

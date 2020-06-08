@@ -13,9 +13,9 @@ class UpdatePagesTable extends Migration
      */
     public function up()
     {
-          Schema::table('pages', function($table) {
+          Schema::table('pages', function(Blueprint $table) {
             $table->json('version')->nullable();
-            $table->string('selected')->nullable();
+            $table->unsignedInteger('version_no')->nullable();
         });
     }
 
@@ -28,7 +28,7 @@ class UpdatePagesTable extends Migration
     {
           Schema::table('pages', function($table) {
             $table->dropColumn('version');
-            $table->dropColumn('selected');
+            $table->dropColumn('version_no');
         });
     }
 }
