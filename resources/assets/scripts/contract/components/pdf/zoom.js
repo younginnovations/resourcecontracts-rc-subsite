@@ -9,7 +9,12 @@ class Zoom extends Component {
     }
 
     componentDidMount() {
+        var scale = 1.5;
         this.setState({scale: Contract.getPdfScale(), active: this.isPdfView()});
+        if (this.isPdfView() && this.hasValidAnnotationPath()) {
+            this.setState({scale: scale});
+            Contract.setPdfScale(scale);
+        }
         this.subscribe = Event.subscribe('route:location', ()=> {
             this.setState({active: this.isPdfView()});
         });
@@ -17,6 +22,17 @@ class Zoom extends Component {
 
     componentWillUnmount() {
         this.subscribe.remove();
+    }
+
+    hasValidAnnotationPath() {
+        var route = window.location.href.split('#');
+        if (route.length <= 1) {
+            return false
+        }
+        var route = route[1];
+        var reg = /pdf\/page\/(.*)\/(.*|$)/g;
+        var match = reg.exec(route);
+        return match != null;
     }
 
     isPdfView() {

@@ -12,6 +12,10 @@ export const getHashPage = () => {
     return isNaN(page) ? 0 : parseInt(page);
 };
 
+export const setPageHash = (page) => {
+    window.location.hash = '#/page/' + page;
+}
+
 export const lang = (key, defaultValue) => {
     return typeof lang_category[key] != 'undefined' ? lang_category[key] : defaultValue;
 };
