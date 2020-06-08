@@ -15,8 +15,8 @@ $contact_email = site()->contactEmail();
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="{{$favicon}}">
-	<link href="{{url('css/style.css')}}" rel="stylesheet"/>
-	<link href="{{url('css/contract.css')}}" rel="stylesheet"/>
+	<link href="{{url('css/style.css')}}?v=2020-07-22" rel="stylesheet"/>
+	<link href="{{url('css/contract.css')}}?v=2020-07-22" rel="stylesheet"/>
 	<style>
 		#progress-bar-info {
 			border-bottom: 2px solid #1757d5;
@@ -46,7 +46,49 @@ $contact_email = site()->contactEmail();
 		</div>
 	</div>
 </div>
-<script src="{{url('js/pdfjs/pdf.js')}}" type="text/javascript"></script>
-<script src="{{url('js/popup.js')}}" type="text/javascript"></script>
+<script>
+	var langClip = {!! json_encode(trans('clip')) !!};
+	var annotationTerms = {
+		annotation_category: @if(site()->isRC()) langClip.key_clause @else langClip.category @endif ,
+		annotation_text: @if(site()->isRC()) langClip.clause_summary @else langClip.text @endif,
+		annotation_text_predefined_placeholder: @if(site()->isRC()) langClip.clause_summary_not_prepared @else langClip.annotation @endif,
+		view_annotation: @if(site()->isRC()) langClip.view_clause @else langClip.view @endif
+	};
+	var config = {};
+	config.debug = false;
+	config.ES_URL = '{{ url('api') }}/';
+	config.APP_URL = '{{ url() }}';
+	config.contract = {!!json_encode($contract)!!};
+	config.countryList = {!! json_encode(trans('country')) !!};
+	config.siteKey = '{{site()->getSiteKey()}}';
+	config.lang_categories = {!! json_encode(trans('codelist/annotation.categories')) !!};
+	config.share = {
+		facebook: 'https://www.facebook.com/sharer/sharer.php?u=',
+		google: 'https://plus.google.com/share?url=',
+		twitter: 'https://twitter.com/share?text=' + document.title
+	};
+	LANG.resourceLang = {!! json_encode(trans('resources')) !!};
+	LANG.disclosure = {!! json_encode(trans('codelist/disclosure')) !!};
+	LANG.contract = {!! json_encode(trans('contract')) !!};
+	LANG.contract_type = {!! json_encode(trans('codelist/contract_type')) !!};
+	LANG.current = '{!! app('translator')->getLocale() !!}';
+	var debug = function () {
+		if (config.debug) {
+			console.log("---------------------------");
+			for (var i = 0; i < arguments.length; i++) {
+				console.log(arguments[i]);
+			}
+		}
+	};
+</script>
+
+<script src="{{url('js/plugins-bundle.js')}}"></script>
+<script src="{{url('js/annotator/annotator-full.min.js')}}"></script>
+<script src="{{url('js/annotator/annotator.utils.js')}}"></script>
+<script src="{{url('js/pdfjs/pdf.js')}}"></script>
+<script>
+	PDFJS.workerSrc = "{{url('js/pdfjs/pdf.worker.js')}}"
+</script>
+<script src="{{url('js/popup.js')}}?v=2020-07-22" type="text/javascript"></script>
 </body>
 </html>

@@ -19,5 +19,7 @@ return [
     'show_search'          => 'Afficher les outils de recherche',
     'hide_search'          => 'Masquer les outils de recherche',
     'hydrocarbons'         => 'Hydrocarbures',
-    'minerals'             => 'Minéraux'
+    'minerals'             => 'Minéraux',
+    'key_clauses'          => 'Clauses clés',
+    'tagged_contracts_only'=> 'Contrats étiquetés uniquement',
 ];

@@ -1,6 +1,5 @@
 <?php
 return [
-
     'clip_all'                     => "Couper tous",
     'email_message'                => "Ce message a été envoyé par",
     'via'                          => "via",
@@ -16,6 +15,7 @@ return [
     'message'                      => "Message",
     'send_email'                   => "Envoyer un email",
     'category'                     => "Catégorie",
+    'key_clause'                   => "Clause clé",
     'documentTitle'                => "Document",
     'country'                      => "Pays",
     'year'                         => "An",
@@ -27,6 +27,7 @@ return [
     'save_and_shareClip'           => "Partager",
     'saving'                       => "En train de sauvegarder....",
     'text'                         => "Texte",
+    'clause_summary'               => "Résumé de la clause",
     'viewClip'                     => "voir",
     'printClip'                    => "Imprimer",
     'emailError'                   => "S'il vous plaît entrez une adresse e-mail valide.",
@@ -89,5 +90,8 @@ return [
     'go_to_all_clip_pages'         => 'Accéder à la page Tous les clips',
     'save_as_ms_excel'             => 'Enregistrer sous MS Excel',
     'save_as_pdf'                  => 'Enregistrer sous Pdf',
-    'view'                         => 'VUE'
+    'view'                         => 'VUE',
+    'view_clause'                  => 'Afficher la clause',
+    'clause_summary_not_prepared'  => 'Les résumés des clauses n\'ont pas été préparés pour ce document',
+    'annotation_text_not_prepared' => 'Le texte d\'annotation n\'a pas été préparé pour ce document',
 ];

@@ -1,5 +1,6 @@
 <?php namespace App\Http\Services;
 
+use App\Helper\ExcelHelperTrait;
 use App\Http\Models\Clip\Clip;
 use Exception;
 use Illuminate\Contracts\Filesystem\Factory as Filesystem;
@@ -9,7 +10,9 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use LynX39\LaraPdfMerger\Facades\PdfMerger;
 use LynX39\LaraPdfMerger\PdfManage;
+use Maatwebsite\Excel\Classes\LaravelExcelWorksheet;
 use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Writers\LaravelExcelWriter;
 use Vsmoraes\Pdf\Pdf;
 use ZipArchive;
 
@@ -19,6 +22,8 @@ use ZipArchive;
  */
 class ClippingService
 {
+    use ExcelHelperTrait;
+
     /**
      * @var APIService
      */
@@ -310,15 +315,16 @@ class ClippingService
         $pdfs             = $this->getPdfUrl($annotations);
         $basePath         = base_path('storage');
         $folder           = time();
-        $concatFileName   = 'concat-'.time().'.pdf';
-        $zipFileName      = 'pdf-'.time().'.zip';
+        $concatFileName   = 'Clause contract pages.pdf';
+        $zipFileName      = 'Clipped clauses ' . date('Y-m-d') . '.' .time().'.zip';
+        $clausesFileName = 'Clipped clauses ' . date('Y-m-d');
 
         try {
             $this->downloadFile($basePath, $folder, $pdfs);
 
-            $this->concatPDF($annotationDetail, $basePath, $folder, $concatFileName);
-            $this->createXls($annotationDetail, $folder);
-            $this->zipFolder($basePath, $folder, $concatFileName, $zipFileName);
+            $this->concatPDF($annotationDetail, $basePath, $folder, $concatFileName, $clausesFileName);
+            $this->createXls($annotationDetail, $folder, $clausesFileName);
+            $this->zipFolder($basePath, $folder, $concatFileName, $clausesFileName, $zipFileName);
 
             $files = glob($basePath."/".$folder."/*.pdf");
             File::delete($files);
@@ -389,7 +395,7 @@ class ClippingService
      * @return bool
      * @throws \LynX39\LaraPdfMerger\Exception
      */
-    public function concatPDF($annotationDetail, $basePath, $folder, $concatFileName)
+    public function concatPDF($annotationDetail, $basePath, $folder, $concatFileName, $clippedPdfFilename)
     {
         $files = scandir($basePath.'/'.$folder);
         unset($files[0], $files[1]);
@@ -399,7 +405,7 @@ class ClippingService
         }
 
         $this->pdf->merge('file', $basePath.'/'.$folder.'/'.$concatFileName);
-        $this->makePdfOfAllAnnotation($annotationDetail, $basePath, $folder);
+        $this->makePdfOfAllAnnotation($annotationDetail, $basePath, $folder, $clippedPdfFilename);
 
         return true;
     }
@@ -412,18 +418,16 @@ class ClippingService
     public function downloadXls($data)
     {
         $data     = json_decode($data, true)['result'];
-        $filename = "clipped_annotation_".date('Y-m-d');
+        $filename = "Clipped clauses ".date('Y-m-d');
 
-        $headerArray = $this->formatXls($data);
+        $properties = $this->formatXls($data);
 
         Excel::create(
             $filename,
-            function ($excel) use (&$headerArray) {
+            function (LaravelExcelWriter $excel) use (&$properties) {
                 $excel->sheet(
                     'first sheet',
-                    function ($sheet) use (&$headerArray) {
-                        $sheet->fromArray($headerArray);
-                    }
+                    $this->excelSheetCurry($properties)
                 );
             }
         )->download('xls');
@@ -462,11 +466,11 @@ class ClippingService
      * @throws Exception
      * @throws \Throwable
      */
-    public function makePdfOfAllAnnotation($annotations, $basePath, $folder)
+    public function makePdfOfAllAnnotation($annotations, $basePath, $folder, $filename)
     {
         $annotations = json_decode($annotations);
         $html        = view('clip.pdfs', compact('annotations'))->render();
-        $this->hpdf->load($html)->filename($basePath.'/'.$folder.'/clippedannotations.pdf')->output();
+        $this->hpdf->load($html)->filename($basePath.'/'.$folder.'/' . $filename . '.pdf')->output();
 
         return true;
 
@@ -480,21 +484,19 @@ class ClippingService
      *
      * @return bool
      */
-    public function createXls($annotationDetail, $folder)
+    public function createXls($annotationDetail, $folder,$filename)
     {
         $data        = json_decode($annotationDetail, true)['result'];
-        $filename    = "clipped_annotation";
-        $headerArray = $this->formatXls($data);
+
+        $properties = $this->formatXls($data);
 
         try {
             Excel::create(
                 $filename,
-                function ($excel) use (&$headerArray) {
+                function (LaravelExcelWriter $excel) use (&$properties) {
                     $excel->sheet(
                         'first sheet',
-                        function ($sheet) use (&$headerArray) {
-                            $sheet->fromArray($headerArray);
-                        }
+                        $this->excelSheetCurry($properties)
                     );
                 }
             )->store('xls', base_path('storage'.'/'.$folder));
@@ -506,6 +508,27 @@ class ClippingService
         }
     }
 
+    private function excelSheetCurry($properties)
+    {
+        return function (LaravelExcelWorksheet $sheet) use (&$properties) {
+            if (empty($properties)) {
+                return $sheet;
+            }
+
+            $headings = array_keys($properties[0]);
+
+            $this->fillHeaders($sheet,$headings);
+            $row = 2;
+            foreach ($properties as $data) {
+                $col = 'A';
+                $this->fillRow($sheet, $row, $data);
+                $row++;
+            }
+
+            return $sheet;
+        };
+    }
+
     /**
      * Formats header of clipped annotation detail array
      *
@@ -515,22 +538,61 @@ class ClippingService
      */
     public function formatXls($data)
     {
-        $headerArray = [];
+        $properties = [];
+
+        $annotationCategory = site()->isRC() ? 'Key Clause' : 'Annotation Category';
+        $annotationText     = site()->isRC() ? 'Clause Summary' : 'Text';
+        $viewAnnnotation    = site()->isRC() ? 'View Clause' : 'View Annotation';
+        $placeholderText    = site()->isRC() ?
+            trans('clip.clause_summary_not_prepared', [], 'messages', 'en')
+            : trans('clip.annotation_text_not_prepared', [], 'messages', 'en');
 
         foreach ($data as $key => $d) {
-            array_push(
-                $headerArray,
-                $key = [
-                    'Document'            => $d['name'],
-                    'Country'             => $d['country'],
-                    'Year'                => $d['year'],
-                    'Annotation Category' => $d['category'],
-                    'Text'                => $d['text'],
-                ]
-            );
+            $emptyText = empty(trim($d['text']));
+            $properties[] = [
+                'Document'       => [
+                    'header' => 'Document',
+                    'text'   => $d['name'],
+                    'format' => []
+                ],
+                'Year'           => [
+                    'header'  => 'Year',
+                    'text'   => $d['year'],
+                    'format' => []
+                ],
+                $annotationCategory    => [
+                    'header'  => $annotationCategory,
+                    'text'   => $d['category'],
+                    'format' => []
+                ],
+                $annotationText => [
+                    'header'  => $annotationText,
+                    'text'   =>  $emptyText? $placeholderText : $d['text'],
+                    'format' => ['italic' => $emptyText]
+                ],
+                'Country'        => [
+                    'header'  => 'Country',
+                    'text'   => $d['country'],
+                    'format' => []
+                ],
+                'Resource'       => [
+                    'header'  => 'Resource',
+                    'text'   => join(', ', $d['resource']),
+                    'format' => []
+                ],
+                $viewAnnnotation    => [
+                    'header'  => $viewAnnnotation,
+                    'text'   => $d['page_url'],
+                    'format' => [
+                        'hyperlink' => [
+                            'url' => $d['page_url'],
+                        ],
+                    ]
+                ],
+            ];
         }
 
-        return $headerArray;
+        return $properties;
     }
 
     /**
@@ -543,14 +605,14 @@ class ClippingService
      *
      * @return bool
      */
-    private function zipFolder($basePath, $folder, $concatFileName, $zipFileName)
+    private function zipFolder($basePath, $folder, $concatFileName, $clausesFileName, $zipFileName)
     {
         try {
             $zip = new ZipArchive();
             $zip->open($basePath.'/'.$folder.'/'.$zipFileName, ZipArchive::CREATE);
             $zip->addFile($basePath.'/'.$folder.'/'.$concatFileName, $concatFileName);
-            $zip->addFile($basePath.'/'.$folder.'/'."clippedannotations.pdf", "clippedannotations.pdf");
-            $zip->addFile($basePath.'/'.$folder.'/'."clipped_annotation.xls", "clipped_annotation.xls");
+            $zip->addFile($basePath.'/'.$folder.'/'. $clausesFileName.".pdf", "$clausesFileName.pdf");
+            $zip->addFile($basePath.'/'.$folder.'/'."$clausesFileName.xls", "$clausesFileName.xls");
             $zip->close();
         } catch (Exception $e) {
             Log::info($e->getMessage());
@@ -578,5 +640,18 @@ class ClippingService
         $this->rrmdir($basePath.'/'.$folder);
 
         return $file;
+    }
+
+    private function normalizeData(array $headerArray)
+    {
+        if (empty($headerArray)) {
+            return ['headers' => [], 'data' => []];
+        }
+        $headers = array_keys($headerArray[0]);
+        $data = $headerArray;
+
+        return [
+            'headers' => $headers, 'data' => $data,
+        ];
     }
 }
