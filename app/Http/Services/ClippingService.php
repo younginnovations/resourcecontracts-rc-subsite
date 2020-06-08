@@ -525,6 +525,7 @@ class ClippingService
                     'Country'             => $d['country'],
                     'Year'                => $d['year'],
                     'Annotation Category' => $d['category'],
+                    'Annotation Page'     => $d['page_url'],
                     'Text'                => $d['text'],
                 ]
             );
