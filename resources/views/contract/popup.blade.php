@@ -46,7 +46,42 @@ $contact_email = site()->contactEmail();
 		</div>
 	</div>
 </div>
-<script src="{{url('js/pdfjs/pdf.js')}}" type="text/javascript"></script>
+<script>
+	var config = {};
+	config.debug = false;
+	config.ES_URL = '{{ url('api') }}/';
+	config.APP_URL = '{{ url() }}';
+	config.contract = {!!json_encode($contract)!!};
+	config.countryList = {!! json_encode(trans('country')) !!};
+	config.siteKey = '{{site()->getSiteKey()}}';
+	config.lang_categories = {!! json_encode(trans('codelist/annotation.categories')) !!};
+	config.share = {
+		facebook: 'https://www.facebook.com/sharer/sharer.php?u=',
+		google: 'https://plus.google.com/share?url=',
+		twitter: 'https://twitter.com/share?text=' + document.title
+	};
+	LANG.resourceLang = {!! json_encode(trans('resources')) !!};
+	LANG.disclosure = {!! json_encode(trans('codelist/disclosure')) !!};
+	LANG.contract = {!! json_encode(trans('contract')) !!};
+	LANG.contract_type = {!! json_encode(trans('codelist/contract_type')) !!};
+	LANG.current = '{!! app('translator')->getLocale() !!}';
+	var debug = function () {
+		if (config.debug) {
+			console.log("---------------------------");
+			for (var i = 0; i < arguments.length; i++) {
+				console.log(arguments[i]);
+			}
+		}
+	};
+</script>
+
+<script src="{{url('js/plugins-bundle.js')}}"></script>
+<script src="{{url('js/annotator/annotator-full.min.js')}}"></script>
+<script src="{{url('js/annotator/annotator.utils.js')}}"></script>
+<script src="{{url('js/pdfjs/pdf.js')}}"></script>
+<script>
+	PDFJS.workerSrc = "{{url('js/pdfjs/pdf.worker.js')}}"
+</script>
 <script src="{{url('js/popup.js')}}" type="text/javascript"></script>
 </body>
 </html>
