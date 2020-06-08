@@ -19,5 +19,7 @@ return [
     'show_search'          => 'إظهار أدوات البحث',
     'hide_search'          => 'إخفاء أدوات البحث',
     'hydrocarbons'         => 'الهيدروكربونات',
-    'minerals'             => 'المعادن'
+    'minerals'             => 'المعادن',
+    'key_clauses'          => 'البنود الرئيسية',
+    'tagged_contracts_only'=> 'العقود الموسومة فقط',
 ];

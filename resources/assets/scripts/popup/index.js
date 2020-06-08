@@ -4,16 +4,38 @@ import Header from './Title';
 import Detail from './Detail';
 import Pagination from './Pagination';
 import Pdf from './Pdf';
-import Event from "./Event";
 import Zoom from "./Zoom";
 import Loading from "./Loading";
 import Alert from "./Alert";
+import Config from "./config";
+import { setPageHash } from "./Helper";
 
 class Popup extends Component {
 
     constructor(props) {
         super(props);
         this.state = {site: SITE_NAME};
+    }
+
+    componentDidMount() {
+        this.changeAnnotationPageHash();
+    }
+
+    changeAnnotationPageHash() {
+        var annotation = this.props.annotation;
+        var page = this.getAnnotationPage(annotation);
+        if (page) {
+            setPageHash(page);
+        }
+    }
+
+    getAnnotationPage(annotation){
+        var annotationData = Config.contract.annotations.result.filter( item => item.annotation_id == annotation.annotation_id && (typeof item.shapes == 'object'));
+        if ( annotationData && annotationData[0].page_no) {
+            return annotationData[0].page_no;
+        }
+
+        return 1;
     }
 
     render() {
@@ -39,4 +61,4 @@ class Popup extends Component {
     }
 }
 
-ReactDOM.render(<Popup annotation={Annotation}/>, document.getElementById('app'));
+ReactDOM.render(<Popup annotation={Config.popupAnnotation}/>, document.getElementById('app'));

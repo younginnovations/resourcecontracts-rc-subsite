@@ -15,6 +15,7 @@ return [
     'message'                      => "الرسالة",
     'send_email'                   => "ارسال  رسالة عبر البريد الكتروني",
     'category'                     => "فئة",
+    'key_clause'                   => "البند الرئيسي",
     'documentTitle'                => "وثيقة",
     'country'                      => "بلد",
     'year'                         => "عام",
@@ -26,6 +27,7 @@ return [
     'save_and_shareClip'           => "شارك",
     'saving'                       => "جاري الحفظ...",
     'text'                         => "نص",
+    'clause_summary'               => 'ملخص الفقرة',
     'viewClip'                     => "عرض",
     'printClip'                    => "طباعة",
     'emailError'                   => "الرجاء إدخال عنوان بريد إلكتروني صحيح.",
@@ -88,5 +90,8 @@ return [
     'go_to_all_clip_pages'         => 'الذهاب إلى الصفحة جميع كليب',
     'save_as_ms_excel'             => 'باستثناء ما مايكروسوفت إكسل',
     'save_as_pdf'                  => 'حفظ كملف PDF',
-    'view'                         => 'رأي'
+    'view'                         => 'رأي',
+    'view_clause'                  => 'عرض البند',
+    'clause_summary_not_prepared'  => 'لم يتم إعداد ملخصات الفقرة لهذه الوثيقة',
+
 ];

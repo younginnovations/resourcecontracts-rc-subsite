@@ -48,34 +48,37 @@ Annotator.Plugin.AnnotatorNRGIViewer = (function (_super) {
     };
 
     AnnotatorNRGIViewer.prototype.getText = function (annotation) {
-        var text = '';
-        var annotatedText = annotation.text;
+        var text = '',
+            annotatedText = annotation.text,
+            predefinedPlaceholderText = 'Clause summaries have not been prepared for this document',
+            content = '',
+            article_reference = '',
+            link = '',
+            viewPort = 'text';
 
-        if (typeof annotatedText == 'undefined') {
-            return false;
+        if (typeof annotation.article_reference !== 'undefined' && annotation.article_reference != '') {
+            article_reference = ' - ' + annotation.article_reference;
         }
 
-        if (annotatedText != '') {
+        if (annotation.shapes) {
+            viewPort = 'pdf';
+        }
+        link = ' <a class="annotation-viewer-more" data-target="annotations" href="#/' + viewPort + '/page/' + annotation.page_no + '/annotation/' + annotation.id + '">>></a>';
+        if (typeof annotatedText == 'undefined' || annotatedText === '') {
+            content = '<div class="annotation-viewer-text">' + predefinedPlaceholderText  + article_reference + link + '</div>';
+        }
+        else if (annotatedText != '') {
             text = annotatedText.split(" ").splice(0, 10).join(" ");
               text = this.nl2br(text);
             if (annotatedText.split(" ").length > 10) {
                 text = text + " ...";
             }
+
+            content = '<div class="annotation-viewer-text">' + text + article_reference + link + '</div>';
         }
 
-        var article_reference = '';
-        if (typeof annotation.article_reference !== 'undefined' && annotation.article_reference != '') {
-            article_reference = ' - ' + annotation.article_reference;
-        }
 
-        var link = "";
-        var viewPort = 'text';
-        if (annotation.shapes) {
-            viewPort = 'pdf';
-        }
-        link = ' <a class="annotation-viewer-more" data-target="annotations" href="#/' + viewPort + '/page/' + annotation.page_no + '/annotation/' + annotation.id + '">>></a>';
-
-        return '<div class="annotation-viewer-text">' + text + article_reference + link + '</div>';
+        return content;
     };
 
     AnnotatorNRGIViewer.prototype.getCategory = function (annotation) {

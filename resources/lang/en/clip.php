@@ -15,6 +15,7 @@ return [
     'message'                      => "Message",
     'send_email'                   => "Send Email",
     'category'                     => "Category",
+    'key_clause'                   => "Key clause",
     'documentTitle'                => "Document",
     'country'                      => "Country",
     'year'                         => "Year",
@@ -26,6 +27,7 @@ return [
     'save_and_shareClip'           => "Share",
     'saving'                       => "Saving....",
     'text'                         => "Text",
+    'clause_summary'               => "Clause summary",
     'viewClip'                     => "View",
     'printClip'                    => "Print",
     'emailError'                   => "Please enter valid email address.",
@@ -88,5 +90,7 @@ return [
     'go_to_all_clip_pages'         => 'Go to All Clips page',
     'save_as_ms_excel'             => 'Save as MS Excel',
     'save_as_pdf'                  => 'Save as Pdf',
-    'view'                         => 'VIEW'
+    'view'                         => 'View',
+    'view_clause'                  => 'View Clause',
+    'clause_summary_not_prepared'  => 'Clause summaries have not been prepared for this document',
 ];

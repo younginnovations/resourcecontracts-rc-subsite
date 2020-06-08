@@ -1,7 +1,7 @@
 @extends('layout.app-full')
 
 @section('css')
-	<link rel="stylesheet" href="{{ url('css/contract.css?v=1.03') }}">
+	<link rel="stylesheet" href="{{ url('css/contract.css?v=1.04') }}">
 	<script>
 		var slowConnection = false;
 		var timeout = setTimeout(function () {
@@ -82,5 +82,5 @@
 	<script>
 		PDFJS.workerSrc = "{{url('js/pdfjs/pdf.worker.js')}}"
 	</script>
-	<script src="{{ url('js/contract_view.js') }}"></script>
+	<script src="{{ url('js/contract_view.js') }}?v=2020-07-22"></script>
 @stop
