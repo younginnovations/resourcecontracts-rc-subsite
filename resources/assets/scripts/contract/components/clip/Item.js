@@ -143,7 +143,7 @@ export default class Item extends React.Component {
     }
 
     render() {
-        let docURL = app_url + "/contract/" + this.props.open_contracting_id + '/view';
+        let docURL = app_url + "/contract/" + this.props.open_contracting_id + '/view#/pdf/page/' + this.props.pages[0].page +'/annotation/' + this.props.annotation_id;
         let flagURL = this.getFlagUrl(this.props.country_code);
         let shortText = this.getShortText();
         let moreText = this.state.shownFullText ? "less" : "more";
