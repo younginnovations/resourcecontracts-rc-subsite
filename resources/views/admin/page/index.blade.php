@@ -69,7 +69,7 @@
 							<td>
 								<span class="badge" style="{{ "font-weight: bolder; background-color: #337ab7;" }}">v{{$key}}</span>
 								@if ($key == $page->version_no) <span style="font-style: italic;">Current version</span> @endif
-								<span style="display: block;">{{ \Carbon\Carbon::parse($versionContent->updated_at)->format('M d,Y') }}</span>
+								<span style="display: block;"><strong>Updated:</strong> {{ \Carbon\Carbon::parse($versionContent->updated_at)->format('M d,Y') }}</span>
 							</td>
 							<td>
 
