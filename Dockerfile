@@ -134,6 +134,13 @@ RUN composer dump-autoload --optimize \
  && chmod -R 777 /var/www/country-zm/storage \
  && chmod -R 777 /var/www/country-zm/public \
  && touch /var/www/country-zm/.env \
+ #country site -- Ivory Coast /ci
+  && mkdir -p /var/www/country-ci \
+  && cp -R /var/container_init/site_content/. /var/www/country-ci \
+  && gulp --cwd /var/www/country-ci theme_blue \
+  && chmod -R 777 /var/www/country-ci/storage \
+  && chmod -R 777 /var/www/country-ci/public \
+  && touch /var/www/country-ci/.env \
 
 #cleanup
  && rm -r /var/container_init/site_content

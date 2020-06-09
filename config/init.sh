@@ -115,5 +115,19 @@ envsubst '$SERVER_NAME $CATEGORY'< ./nginx_subsite.template > /etc/nginx/sites-e
 export CATEGORY=rc
 envsubst < ./env.template > /var/www/country-zm/.env
 
+#country-ivory-coast
+export SERVER_NAME="ivorycoast.resourcecontracts.org *.ivorycoast.resourcecontracts.org"
+export TRACKING_ID=${CI_TRACKING_ID}
+export GTM_ID=${CI_GTM_ID}
+export DB_DATABASE=${COUNTRY_DB_DATABASE}
+export CONTACT_MAIL=${CI_CONTACT_MAIL}
+export COUNTRY=ci
+
+export CATEGORY=country-ci
+envsubst '$SERVER_NAME $CATEGORY'< ./nginx_subsite.template > /etc/nginx/sites-enabled/country-ci
+
+export CATEGORY=rc
+envsubst < ./env.template > /var/www/country-ci/.env
+
 #log_files
 envsubst '${DEPLOYMENT_TYPE}' < ./log_files.yml.template > /etc/log_files.yml

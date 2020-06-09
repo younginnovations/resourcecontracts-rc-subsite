@@ -25,6 +25,8 @@ files:
     tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-var-www-country-gn-storage-logs
   - path: /var/www/country-zm/storage/logs/*lumen.log
     tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-var-www-country-zm-storage-logs
+  - path: /var/www/country-ci/storage/logs/*lumen.log
+    tag: ecs-rc-subsite-$DEPLOYMENT_TYPE-var-www-country-ci-storage-logs
 destination:
   host: logs2.papertrailapp.com
   port: 39824
