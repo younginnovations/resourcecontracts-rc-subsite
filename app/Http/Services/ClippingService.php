@@ -443,9 +443,19 @@ class ClippingService
                             $col = 'A';
                             foreach ($headings as $heading) {
                                 if ($heading == 'Annotation Page') {
-                                    $sheet->getCell($col.$row)->getHyperlink()->setUrl($data[$heading])->setTooltip('Open link in browser');
+                                    $sheet->getCell($col.$row)->getHyperlink()->setUrl($data[$heading]);
                                     $sheet->setCellValue($col . $row, $data[$heading]);
-                                }else{
+                                    $sheet->getCell($col . $row)->getStyle()->applyFromArray(
+                                        [
+                                            'font' => [
+                                                'color'     => [
+                                                    'rgb' => '0000FF'
+                                                ],
+                                                'underline' => 'single'
+                                            ]
+                                        ]
+                                    );
+                                } else {
                                     $sheet->setCellValue($col . $row, $data[$heading]);
                                 }
                                 $col++;
