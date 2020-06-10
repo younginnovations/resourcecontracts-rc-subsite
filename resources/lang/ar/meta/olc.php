@@ -10,7 +10,9 @@ return [
     'tagline'               => '<p class="repo-description">و التخزين الإلكتروني ل </p> <div class="large-title olc-title"><span>عقود الاراضى المفتوحة</span></div>',
     'about'                 => 'حول OpenLandContracts',
     'email_subtitle'        => 'مستودع عقود الاستثمار لمشاريع الزراعة والحراجة',
-    'new_tag_line'          => 'و التخزين الإلكتروني ل عقود الاراضى المفتوحة',
+    'new_sub_tag_line'      => 'مستودع على الإنترنت',
+    'new_tag_line'          => 'عقود الأراضي المفتوحة',
+    'new_tag_line_desc'     => 'بحث ومراجعة عقود الأراضي والزراعة لفهم الشروط والآثار الرئيسية للصفقات واسعة النطاق',
     'search'                => 'عقود البحث',
     'recent'                => 'العقود الأخيرة',
 ];

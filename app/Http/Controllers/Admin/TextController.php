@@ -46,7 +46,22 @@ class TextController extends BaseController
      */
     public function update(Request $request)
     {
-        $input = $request->only('homepage_text', 'footer_text');
+        $input = $request->only(
+            'homepage_new_sub_tag_line_text',
+            'homepage_new_tag_line_text',
+            'homepage_new_tag_line_desc_text',
+            'homepage_search_placeholder_text',
+            'homepage_get_started_text',
+            'homepage_annotation_navigation_text',
+//            'homepage_country_card_text',
+//            'homepage_document_card_text',
+//            'homepage_resource_card_text',
+//            'homepage_recent_document_card_text',
+            'homepage_map_card_text',
+            'homepage_footer_text',
+            'homepage_footer_link_text',
+            'footer_text'
+        );
 
         if ($this->option->updateGroup($input, 'text')) {
             return redirect()->route('admin.text')->with('success', 'Text successfully updated.');

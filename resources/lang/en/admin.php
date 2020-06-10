@@ -51,5 +51,18 @@ return [
     'page'                  => [
         'save_as_new_version'   => 'Save as new version',
         'update_this_version'   => 'Update'
-    ]
+    ],
+    'homepage_new_sub_tag_line'      => 'Homepage Sub Tag Line',
+    'homepage_new_tag_line'          => 'Homepage Tag Line',
+    'homepage_new_tag_line_desc'     => 'Homepage Tag Line Description',
+    'homepage_search_placeholder'    => 'Homepage Search Placeholder',
+    'homepage_get_started'           => 'Homepage Get Started',
+    'homepage_annotation_navigation' => 'Homepage Navigation',
+    'homepage_country_card'          => 'Homepage County',
+    'homepage_document_card'         => 'Homepage Document',
+    'homepage_resource_card'         => 'Homepage Resource',
+    'homepage_recent_document_card'  => 'Homepage Recent Document',
+    'homepage_map_card'              => 'Homepage Map',
+    'homepage_footer'                => 'Homepage Footer Text',
+    'homepage_footer_link'           => 'Homepage Footer Link Text',
 ];

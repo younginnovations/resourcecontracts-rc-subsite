@@ -10,7 +10,7 @@ $image_main = site()->getImageUrl('bg');
 	</style>
 @stop
 @section('content')
-	<div class="row front-row-top-wrap">
+	<div class="front-row-top-wrap">
 		<nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
 			<div class="navbar-header">
 				<span data-toggle="collapse-sidebar" data-target=".sidebar-collapse"
@@ -19,7 +19,7 @@ $image_main = site()->getImageUrl('bg');
 				</span>
 				@include('layout.partials.logo')
 			</div>
-			<div class="clearfix">
+			<div class="navbar-right">
 				@include('layout.partials.language')
 			</div>
 		</nav>
