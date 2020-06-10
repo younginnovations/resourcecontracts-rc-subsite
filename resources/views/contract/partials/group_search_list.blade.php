@@ -65,7 +65,18 @@ $api = app('App\Http\Services\APIService');
 				@foreach($contract->children as $child)
 					@include('contract.partials.listRow',['contract'=>$child])
 				@endforeach
-				@if(count($contract->children) < count($contract->supporting_contracts))
+                <?php
+                $published_supporting_contract_count = 0;
+
+                if(isset($contract->supporting_contracts)) {
+                    foreach ($contract->supporting_contracts as $supporting_contract) {
+                        if ($supporting_contract->is_published) {
+                            $published_supporting_contract_count++;
+                        }
+                    }
+				}
+                ?>
+				@if(count($contract->children) < $published_supporting_contract_count)
 					<tr class='{{$contract->id}} in'>
 						<td colspan="6" class="other-document">
 							View
