@@ -1,7 +1,7 @@
 @include('layout.partials.head')
 @include('layout.partials.sidebar')
 @include('layout.partials.header')
-<div class="container" style="margin-top: 20px;">
+<div class="container" style="margin: 60px auto 40px;">
 
 	@if(Session::has('error'))
 		<div class="alert alert-danger alert-dismissable">

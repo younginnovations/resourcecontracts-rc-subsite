@@ -10,7 +10,9 @@ return [
     'tagline'               => '<p class="repo-description">دليل لل </p> <div class="large-title"><span>البترول و &amp; <div>العقود المعدنية</div> </span></div>',
     'about'                 => 'حول ResourceContracts',
     'email_subtitle'        => 'دليل مفصل لعقود البترول والمعادن',
-    'new_tag_line'          => 'دليل لل البترول و العقود المعدنية',
+    'new_sub_tag_line'      => 'دليل',  
+    'new_tag_line'          => 'عقود البترول والتعدين',
+    'new_tag_line_desc'     => 'بحث ومراجعة عقود النفط والتعدين لفهم الشروط والأحكام الرئيسية',
     'search'                => 'وثائق البحث',
     'recent'                => 'الوثائق الأخيرة',
 ];

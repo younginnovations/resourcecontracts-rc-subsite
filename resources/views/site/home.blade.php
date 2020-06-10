@@ -213,8 +213,8 @@ $image_intro = site()->getImageUrl('intro_bg');
 @if( !site()->isCountrySite())
 @section('js')
 	<script>
-		var landColor = '{!! site()->isRC()?'#f1f1f1':'#fff' !!}';
-		var highlightColor = '{!! site()->isRC()?'#FCCE99':'#70bf4c' !!}';
+		var landColor = '{!! site()->isRC()?'#fff':'#fff' !!}';
+		var highlightColor = '{!! site()->isRC()?'#FBCE9D':'#70bf4c' !!}';
 		var selectedCountries = '{!! json_encode($countryList) !!}';
 		var standardCountry = {!! json_encode(trans('country')) !!};
 		var documentLang = '{{trans('global.document')}}';
