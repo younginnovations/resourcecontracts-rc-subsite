@@ -4,7 +4,7 @@
 <div class="panel panel-default">
 	<div class="panel-heading clearfix">
 		<h3 class="panel-title pull-left">@lang('admin.manage_pages')</h3>
-		@if(auth()->user()->id ==1)
+		@if(auth()->user()->is_admin)
 		<div class="pull-right">
 			<a class="btn btn-default" href="{{ route('admin.page.create') }}">
 				Add New page</a>

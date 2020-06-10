@@ -10,7 +10,9 @@ return [
     'tagline'               => '<p class="repo-description">Un répertoire de </p> <div class="large-title olc-title"><span>contrats agricoles et forestiers</span></div>',
     'about'                 => 'A propos de OpenLandContracts',
     'email_subtitle'        => 'a repository of investment contracts for agriculture and forestry projects. french',
-    'new_tag_line'          => 'Un répertoire de contrats agricoles et forestiers',
+    'new_sub_tag_line'      => 'Un référentiel en ligne de',
+    'new_tag_line'          => 'Contrats fonciers ouverts',
+    'new_tag_line_desc'     => 'Recherchez et examinez les contrats fonciers et agricoles pour comprendre les principaux termes et implications des accords à grande échelle',
     'search'                => 'Contrats de recherche',
     'recent'                => 'Contrats récents',
 ];

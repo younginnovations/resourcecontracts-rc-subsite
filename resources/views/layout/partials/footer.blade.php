@@ -10,7 +10,7 @@
 			<div class="footer-bottom">
 				<p class="footer-description">@lang('footer.licensed')
 					<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" dir="rtl">(CC BY-SA 4.0)</a>
-					<img src="{{url('images/license-buttons.png')}}" width="88" height="31">
+					<!-- <img src="{{url('images/license-buttons.png')}}" width="88" height="31"> -->
 				</p>
 			</div>
 		</div>

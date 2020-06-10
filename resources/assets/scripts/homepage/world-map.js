@@ -8,7 +8,11 @@ function draw(ht) {
     var width = $("svg").parent().width();
     var height = ht;
 
-    projection = d3.geo.equirectangular().scale((width / 640) * 100).translate([width / 2, height / 2]);
+    // projection = d3.geo
+    //   .geoEckert3()
+    //   .scale((width / 640) * 100)
+    //   .translate([width / 2, height / 2]);
+    projection = d3.geo.equirectangular().scale((width / 640) * 100).translate([width / 2, height / 1.7]);
     var path = d3.geo.path().projection(projection);
     var newObj = {};
 
@@ -67,7 +71,7 @@ function draw(ht) {
         });
 }
 
-draw(($("#map").width()) / 2);
+draw(($("#map").width()) / 2.6);
 
 $(window).resize(function () {
     if (this.resizeTO) clearTimeout(this.resizeTO);
@@ -77,7 +81,7 @@ $(window).resize(function () {
 });
 
 $(window).bind('resizeEnd', function () {
-    var height = $("#map").width() / 2;
+    var height = $("#map").width() / 2.6;
     $("#map svg").css("height", height);
     draw(height);
 });

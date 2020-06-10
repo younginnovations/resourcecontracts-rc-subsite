@@ -8,9 +8,11 @@
             @include('layout.partials.new-logo')
         </div>
         <div class="navbar-right">
-            <!-- <div class="guide-link"><a href="{{route('page.resources')}}">@lang('sidebar.guides')</a></div> -->
+            @if(site()->isOLC())
+                <div class="guide-link"><a href="{{route('page.guides')}}">@lang('sidebar.use_this_site')</a></div>
+            @endif
             <ul>
-                @include('layout.partials.new-language')
+            @include('layout.partials.new-language')
             </ul>
         </div>
     </nav>

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Session;
  * Class AuthService
  * @package App\Http\Services
  */
-Class AuthService
+class AuthService
 {
     /**
      * @var Client
@@ -27,6 +27,7 @@ Class AuthService
      *
      * @param $username
      * @param $password
+     *
      * @return bool
      */
     public function login($username, $password)
@@ -34,17 +35,18 @@ Class AuthService
         $baseUrl = site()->adminApiUrl();
 
         try {
-            $client = new Client(['base_url' => $baseUrl]);
+            $client      = new Client(['base_url' => $baseUrl]);
             $credentials = [
                 'username' => $username,
-                'password' => $password
+                'password' => $password,
             ];
 
-            $request = $client->post('/api/login', ['body'=> $credentials]);
+            $request = $client->post('/api/login', ['body' => $credentials]);
 
             $data = json_decode($request->getBody()->getContents());
 
             if ($data->status == 'success') {
+                $data->message->is_admin = isset($data->is_admin) ? $data->is_admin : false;
                 $this->setAuth($data);
 
                 return true;

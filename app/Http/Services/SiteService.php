@@ -142,6 +142,7 @@ class SiteService
             }
         }
 
+        // dd($data);
         if (is_null($property)) {
             return (object) $data;
         }
