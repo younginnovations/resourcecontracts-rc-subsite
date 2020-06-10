@@ -1,28 +1,28 @@
 /* -------------------- ------------------------ --------------------*/
 /* -------------------- style for navigation bar starts -------------------- */
 
-.trigger {
-  background: url(../../images/ic-menu.png) no-repeat center;
-  text-indent: -9999px;
-  padding: 40px 28px;
-  border-right: 1px solid rgba(216, 216, 216, 0.5);
-  cursor: pointer;
-}
+// .trigger {
+//   background: url(../../images/ic-menu.png) no-repeat center;
+//   text-indent: -9999px;
+//   padding: 40px 28px;
+//   border-right: 1px solid rgba(216, 216, 216, 0.5);
+//   cursor: pointer;
+// }
 
-body.page-home{
-  .trigger {
-    background: url(../../images/ic-menu-white.png) no-repeat center;
-    border-right: 1px solid rgba(242,242,242,0.2);
-    padding: 40px 28px;
-  }
-}
+// body.page-home{
+//   .trigger {
+//     background: url(../../images/ic-menu-white.png) no-repeat center;
+//     border-right: 1px solid rgba(242,242,242,0.2);
+//     padding: 40px 28px;
+//   }
+// }
 
 //original selector
 //.navbar-brand, .navbar-brand:hover
 %extend_3 {
   font-size: 19px;
   font-family: $font_1;
-  color: $color_link_color;
+  // color: $color_link_color;
   text-transform: uppercase;
   height: auto;
   position: relative;
@@ -57,10 +57,6 @@ body.page-home{
   .beta {
     @extend %extend_4;
   }
-  span {
-    display: block;
-    color: $color_cape_cod_70_approx;
-  }
 }
 
 .rc{
@@ -69,21 +65,21 @@ body.page-home{
   }
 }
 
-body.page-home{
-  .navbar-brand {
-   color: #fff;
-    &:hover {
-      color: #fff;
-    }
-    .beta {
-     color: rgba(255, 255, 255, 0.7);
-    }
-    span {
-      display: block;
-      color: rgba(255, 255, 255, 0.7);
-    }
-  }
-}
+// body.page-home{
+//   .navbar-brand {
+//    color: #fff;
+//     &:hover {
+//       color: #fff;
+//     }
+//     .beta {
+//      color: rgba(255, 255, 255, 0.7);
+//     }
+//     span {
+//       display: block;
+//       color: rgba(255, 255, 255, 0.7);
+//     }
+//   }
+// }
 
 nav.navbar {
   //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
@@ -93,19 +89,15 @@ nav.navbar {
   z-index: 1000;
 }
 
-.navbar-brand {
-  span {
-    display: block;
-    color: $color_cape_cod_70_approx;
-  }
-}
-
 .navbar-right {
   margin: 0;
   position: relative;
-  border-left: 1px solid $color_mystic_approx;
+  // border-left: 1px solid $color_mystic_approx;
   border-top: 1px solid $color_mystic_approx;
   padding-left: 30px;
+  ul li a.active {
+    background-color: $color_link_color;
+  }
 }
 
 .navbar .search-form {

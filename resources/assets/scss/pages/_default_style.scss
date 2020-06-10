@@ -123,22 +123,6 @@ html {
   height: 100%;
 }
 
-body {
-  height: 100%;
-  font-family: $font_0;
-  color: $color_cape_cod_approx;
-  background: $white;
-  position: relative;
-  overflow-x: hidden;
-  margin: 0;
-}
-
-* {
-  -webkit-padding-start: 0px;
-  margin: 0;
-  padding: 0;
-}
-
 .search-click {
   text-decoration: underline;
   cursor: pointer;

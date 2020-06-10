@@ -96,7 +96,7 @@ $app->get(
 $app->get('about', ['as' => 'about', 'uses' => 'PageController@about']);
 $app->get('contact', ['as' => 'contact', 'uses' => 'PageController@contact']);
 $app->get('faqs', ['as' => 'faqs', 'uses' => 'PageController@faqs']);
-$app->get('guides', ['as' => 'page.resources', 'uses' => 'PageController@guides']);
+$app->get('guides', ['as' => 'page.guides', 'uses' => 'PageController@resources']);
 $app->get('page/resources', ['as' => 'page.resources', 'uses' => 'PageController@resources']);
 $app->get('glossary', ['as' => 'guides', 'uses' => 'PageController@glossary']);
 $app->get('country-sites', ['as' => 'country-sites', 'uses' => 'PageController@countrySites']);

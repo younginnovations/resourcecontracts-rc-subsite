@@ -8,7 +8,10 @@ function draw(ht) {
     var width = $("svg").parent().width();
     var height = ht;
 
-    projection = d3.geo.equirectangular().scale((width / 640) * 100).translate([width / 2, height / 2]);
+    projection = d3.geo
+      .geoEckert3()
+      .scale((width / 640) * 100)
+      .translate([width / 2, height / 2]);
     var path = d3.geo.path().projection(projection);
     var newObj = {};
 

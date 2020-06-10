@@ -8,7 +8,7 @@
             @include('layout.partials.new-logo')
         </div>
         <div class="navbar-right">
-            <!-- <div class="guide-link"><a href="{{route('page.resources')}}">@lang('sidebar.guides')</a></div> -->
+            <div class="guide-link"><a href="{{route('page.guides')}}">@lang('sidebar.use_this_site')</a></div>
             <ul>
                 @include('layout.partials.new-language')
             </ul>

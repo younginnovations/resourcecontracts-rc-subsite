@@ -3,7 +3,7 @@ $language = app('App\Http\Services\LocalizationService');
 ?>
 
 @if($language->isEnabled())
-	<div class="dropdown language-selector">
+	<!-- <div class="dropdown language-selector"> -->
 		<ul>
 			@foreach ($language->switcher() as $lang)
 				<li>
@@ -14,6 +14,6 @@ $language = app('App\Http\Services\LocalizationService');
 				</li>
 			@endforeach
 		</ul>
-	</div>
+	<!-- </div> -->
 @endif
 

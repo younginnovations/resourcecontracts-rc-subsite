@@ -10,7 +10,9 @@ return [
     'tagline'               => '<p class="repo-description">Un répertoire de</p> <div class="large-title"><span>Petroleum &amp; <div>Contrats miniers</div> </span></div>',
     'about'                 => 'A propos ResourceContracts',
     'email_subtitle'        => 'an annotated directory of petroleum and mineral contracts. french',
-    'new_tag_line'          => 'Un répertoire de Petroleum Contrats miniers',
+    'new_sub_tag_line'      => 'Un répertoire de',  
+    'new_tag_line'          => 'Contrats pétroliers et miniers',
+    'new_tag_line_desc'     => 'Recherchez et examinez les contrats pétroliers et miniers pour comprendre les principaux termes et dispositions',
     'search'                => 'Rechercher des documents',
     'recent'                => 'Documents récents',
 ];
