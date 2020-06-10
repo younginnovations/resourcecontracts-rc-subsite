@@ -41,7 +41,6 @@ class Zoom extends Component {
 
     handleClick(e, ev) {
         e.preventDefault();
-        debugger
         var type = e.target.getAttribute('data-ref');
         var int = this.state.scale;
         if (int < 2 && type == 'increase') {
