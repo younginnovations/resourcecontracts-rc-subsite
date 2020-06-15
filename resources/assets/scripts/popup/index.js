@@ -8,6 +8,7 @@ import Event from "./Event";
 import Zoom from "./Zoom";
 import Loading from "./Loading";
 import Alert from "./Alert";
+import Config from "./config";
 
 class Popup extends Component {
 
@@ -39,4 +40,4 @@ class Popup extends Component {
     }
 }
 
-ReactDOM.render(<Popup annotation={Annotation}/>, document.getElementById('app'));
+ReactDOM.render(<Popup annotation={Config.popupAnnotation}/>, document.getElementById('app'));

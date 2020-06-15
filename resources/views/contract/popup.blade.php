@@ -34,7 +34,8 @@ $contact_email = site()->contactEmail();
 		const Annotation = {!!json_encode($annotation)!!};
 		const loading_page = {!! json_encode(trans('annotation.loading_page')) !!};
 		const lang_category = {!! json_encode(trans('codelist/annotation.categories')) !!};
-		const AWS_URL = "https://resourcecontracts-nrgi.s3-us-west-2.amazonaws.com";
+		// const AWS_URL = "https://resourcecontracts-nrgi.s3-us-west-2.amazonaws.com"; // TODO uncomment this for production url
+		const AWS_URL = "https://resourcecontracts-admin-demo.s3-us-west-2.amazonaws.com";
 		const pdf_not_loading = "{!!sprintf(trans('annotation.pdf_not_shown'),'<a href=\"mailto:'.$contact_email.'\">'.$contact_email.'</a>')!!}";
 	</script>
 </head>
@@ -46,7 +47,53 @@ $contact_email = site()->contactEmail();
 		</div>
 	</div>
 </div>
-<script src="{{url('js/pdfjs/pdf.js')}}" type="text/javascript"></script>
+<script>
+	var config = {};
+	config.debug = false;
+	config.ES_URL = '{{ url('api') }}/';
+	config.APP_URL = '{{ url() }}';
+	config.contract = {!!json_encode($contract)!!};
+	config.countryList = {!! json_encode(trans('country')) !!};
+	config.siteKey = '{{site()->getSiteKey()}}';
+	config.lang_categories = {!! json_encode(trans('codelist/annotation.categories')) !!};
+	config.share = {
+		facebook: 'https://www.facebook.com/sharer/sharer.php?u=',
+		google: 'https://plus.google.com/share?url=',
+		twitter: 'https://twitter.com/share?text=' + document.title
+	};
+	{{--config.download = {--}}
+	{{--	'pdf': '{{route('contract.download.pdf',['id'=> $contract->metadata->open_contracting_id])}}',--}}
+	{{--	'text': '{{$textDownloadUrl}}',--}}
+	{{--	'annotation': '{{$annotationsDownloadUrl}}'--}}
+	{{--};--}}
+	{{--config.message = {--}}
+	{{--	text_not_published: "{!!sprintf(trans('annotation.processing_pdf_file'),'<a href=\"mailto:'.$contact_email.'\">'.$contact_email.'</a>')!!}",--}}
+	{{--	pdf_not_loading: "{!!sprintf(trans('annotation.pdf_not_shown'),'<a href=\"mailto:'.$contact_email.'\">'.$contact_email.'</a>')!!}",--}}
+	{{--	text_disclaimer: "{!!trans('annotation.text_created_automatically').' <a target=\"_blank\" href=\"'.url('/faqs#learn_more').'\">'.trans('annotation.learn_more').'</a>'!!}"--}}
+	{{--};--}}
+	{{--config.isClipOn = '{{site()->isClipEnabled()}}';--}}
+	LANG.resourceLang = {!! json_encode(trans('resources')) !!};
+	LANG.disclosure = {!! json_encode(trans('codelist/disclosure')) !!};
+	LANG.contract = {!! json_encode(trans('contract')) !!};
+	LANG.contract_type = {!! json_encode(trans('codelist/contract_type')) !!};
+	LANG.current = '{!! app('translator')->getLocale() !!}';
+	var debug = function () {
+		if (config.debug) {
+			console.log("---------------------------");
+			for (var i = 0; i < arguments.length; i++) {
+				console.log(arguments[i]);
+			}
+		}
+	};
+</script>
+
+<script src="{{url('js/plugins-bundle.js')}}"></script>
+<script src="{{url('js/annotator/annotator-full.min.js')}}"></script>
+<script src="{{url('js/annotator/annotator.utils.js')}}"></script>
+<script src="{{url('js/pdfjs/pdf.js')}}"></script>
+<script>
+	PDFJS.workerSrc = "{{url('js/pdfjs/pdf.worker.js')}}"
+</script>
 <script src="{{url('js/popup.js')}}" type="text/javascript"></script>
 </body>
 </html>

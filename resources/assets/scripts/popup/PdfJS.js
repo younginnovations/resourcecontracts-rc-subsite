@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Event from './Event';
+import Contract from "./Contract";
+import Config from "./config";
 
 var cachePDF = [];
 var PdfJS = React.createClass({
@@ -101,6 +103,10 @@ var PdfJS = React.createClass({
 
                 var renderTask = page.render(renderContext);
                 renderTask.promise.then(()=> {
+                    if (this.state.page == Config.popupAnnotation.page_no) {
+                        Contract.showPopup(Config.popupAnnotation.annotation_id);
+                    }
+
                     this.setState({pageRendering: false});
                     this.notice('');
                     Event.publish('loading', false);

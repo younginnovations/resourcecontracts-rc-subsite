@@ -103,7 +103,7 @@ class ClippingService
                     'contract_id'   => $annotation->open_contracting_id,
                     'annotation_id' => $page->id,
                 ]
-            );
+            ) . '#/pdf/page/' . $page->page . '/annotations/' . $page->id;
 
             if (!empty($metadata)) {
                 $data[] = [
