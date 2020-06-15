@@ -1,8 +1,9 @@
 import React, {Component} from "react";
 import {getHashPage} from "./Helper";
+import PdfJS from "./PdfJS";
 import Event from './Event';
 import AnnotationLoader from "../contract/annotator/loader";
-import Contract from "../contract/contract";
+import Contract from "./Contract";
 import Config from "./config";
 import Viewer from "./Viewer";
 
@@ -18,6 +19,15 @@ class Pdf extends Component {
         Event.subscribe('zomm.scale', zoom=> {
             this.setState({scale: zoom.scale});
         });
+        this.subscribe = Event.subscribe('pagination:change', this.paginationHandler.bind(this));
+    }
+
+    paginationHandler(page_no) {
+        let view = Contract.getView();
+        if (view == 'pdf' && this.state.page != page_no) {
+            $('.pdf-viewer').animate({scrollTop: 0}, 'slow');
+            // this.setState({currentPage: this.getSelectedPage(this.state.pages)})
+        }
     }
 
     componentWillMount() {
@@ -36,6 +46,7 @@ class Pdf extends Component {
     changePage() {
         let page = getHashPage();
         if (page > 0) {
+            Contract.setCurrentPage(page);
             this.setState({page: page});
         }
     }
@@ -77,25 +88,18 @@ class Pdf extends Component {
         if (this.state.isLoading) {
             return null;
         }
-        // return (
-        //     <div>
-        //         <div id="progress-bar-info"></div>
-        //         <PdfJS onPageRendered={()=>{}} file={this.getFile()} page={this.state.page} scale={this.state.scale}/>
-        //     </div>
-        // );
 
         return (
-            <div id="view-pdf">
-                <div id="progress-bar-info"></div>
-                <Viewer page={this.state.page} pdf_url={this.getFile()}/>
+            <div className="pdf-viewer pdf-annotator">
+                {/*<div className="pdf-wrapper">*/}
+
+            {/*    </div>*/}
+            {/*</div>*/}
+            {/*<div className="annotator-viewer" id="pdf-container">*/}
+            {/*    <div id="progress-bar-info"></div>*/}
+                <PdfJS onPageRendered={this.onPageRendered.bind(this)} file={this.getFile()} page={this.state.page} scale={this.state.scale}/>
             </div>
         );
-        // return (
-        //     <div className="annotator-viewer" id="pdf-container">
-        //         <div id="progress-bar-info"></div>
-        //         <PdfJS onPageRendered={this.onPageRendered.bind(this)} file={this.getFile()} page={this.state.page} scale={this.state.scale}/>
-        //     </div>
-        // );
     }
 }
 

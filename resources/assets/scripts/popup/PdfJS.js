@@ -103,7 +103,8 @@ var PdfJS = React.createClass({
 
                 var renderTask = page.render(renderContext);
                 renderTask.promise.then(()=> {
-                    if (this.state.page == Config.popupAnnotation.page_no) {
+                    var popupAnnotation = Config.contract.annotations.result.filter( item => item.annotation_id == Config.popupAnnotation.annotation_id && (typeof item.shapes == 'object'));
+                    if ( popupAnnotation && this.props.page == popupAnnotation[0].page_no) {
                         Contract.showPopup(Config.popupAnnotation.annotation_id);
                     }
 
@@ -158,7 +159,9 @@ var PdfJS = React.createClass({
         return (
             <div className="canvas-wrap">
                 <div className="message" dangerouslySetInnerHTML={{__html: this.state.message}}/>
-                <canvas ref="pdfCanvas"></canvas>
+                <div className="pdf-container">
+                    <canvas ref="pdfCanvas"></canvas>
+                </div>
             </div>
         );
     }

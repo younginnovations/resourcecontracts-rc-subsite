@@ -83,31 +83,6 @@ class Contract {
         return name;
     }
 
-    setPageNumber(route) {
-        route = route.split('annotation');
-        var annotation_id = route[1] || '';
-        annotation_id = annotation_id.replace('/', '');
-        this.setCurrentAnnotation(annotation_id);
-
-        route = route[0];
-        var reg = /pdf\/page\/(.*?)\/(?:\s|$)/g;
-        var match = reg.exec(route);
-        if (match !== null) {
-            this.setCurrentPage(parseInt(match[1]));
-            return true;
-        }
-
-        reg = /text\/page\/(.*?)\/(?:\s|$)/g;
-        match = reg.exec(route);
-
-        if (match !== null) {
-            this.setCurrentPage(parseInt(match[1]));
-            return true;
-        }
-
-        return false;
-    }
-
     setPdfScale(scale) {
         this.options.pdfScale = scale;
     }
@@ -207,7 +182,7 @@ class Contract {
         wrapperEl.find('#pdf-container').addClass('annotator-hide');
         const annotators = this.getAnnotations().result;
         annotators.forEach((annotation, i) => {
-            if (annotation.id == id && annotation.page_no == this.getCurrentPage()) {
+            if (annotation.annotation_id == id && typeof annotation.shapes == 'object' && annotation.page_no == this.getCurrentPage()) {
                 let geo = annotation.shapes[0].geometry;
                 geo = this.getBoxPosition(geo);
                 const position = {top: (geo.y + geo.height / 2), left: (geo.x + geo.width / 2)};

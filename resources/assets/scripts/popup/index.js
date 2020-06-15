@@ -9,12 +9,36 @@ import Zoom from "./Zoom";
 import Loading from "./Loading";
 import Alert from "./Alert";
 import Config from "./config";
+import Contract from "./Contract";
+import { setPageHash } from "./Helper";
 
 class Popup extends Component {
 
     constructor(props) {
         super(props);
         this.state = {site: SITE_NAME};
+    }
+
+    componentDidMount() {
+        this.changeAnnotationPageHash();
+    }
+
+    changeAnnotationPageHash() {
+        var annotation = this.props.annotation;
+        var page = this.getAnnotationPage(annotation);
+        if (page) {
+            setPageHash(page);
+        }
+    }
+
+    getAnnotationPage(annotation){
+        debugger
+        var annotationData = Config.contract.annotations.result.filter( item => item.annotation_id == annotation.annotation_id && (typeof item.shapes == 'object'));
+        if ( annotationData && annotationData[0].page_no) {
+            return annotationData[0].page_no;
+        }
+
+        return 1;
     }
 
     render() {
