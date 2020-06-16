@@ -34,22 +34,6 @@ class Contract {
         this.options.currentPage = page;
     }
 
-    setIsSearch(bool) {
-        this.options.isSearch = bool;
-    }
-
-    setSearchQueries(queries) {
-        this.options.searchQueries = queries;
-    }
-
-    getSearchQueries() {
-        return this.options.searchQueries;
-    }
-
-    getIsSearch() {
-        return this.options.isSearch;
-    }
-
     getCurrentAnnotation() {
         return parseInt(this.options.currentAnnotation);
     }
@@ -62,38 +46,8 @@ class Contract {
         return this.options.annotator = annotator;
     }
 
-    setDisablePagination(boolean) {
-        this.options.disablePagination = boolean;
-    }
-
-    isDisablePagination() {
-        return this.options.disablePagination;
-    }
-
-    getAnnotatorInstance() {
-        return this.options.annotator;
-    }
-
-    getViewName(routeName) {
-        var name = routeName.replace('/', '').split('/')[0];
-        if (name == '') {
-            return this.options.defaultView;
-        }
-
-        return name;
-    }
-
-    setPdfScale(scale) {
-        this.options.pdfScale = scale;
-    }
-
     getPdfScale() {
         return this.options.pdfScale;
-    }
-
-    setView(view) {
-        this.options.view = view;
-        this.trigger('route:location', view)
     }
 
     getView() {
@@ -106,38 +60,6 @@ class Contract {
 
     getGuid() {
         return this.getMetadata().open_contracting_id;
-    }
-
-    getSummaryUrl() {
-        return Config.APP_URL + '/contract/' + this.getGuid();
-    }
-
-    getAllPageUrl() {
-        return Config.ES_URL + "contract/" + this.getGuid() + "/text";
-    }
-
-    getAllAnnotationsUrl() {
-        return Config.ES_URL + "contract/" + this.getGuid() + "/annotations";
-    }
-
-    getSearchUrl() {
-        return Config.ES_URL + "contract/" + this.getGuid() + "/searchtext"
-    }
-
-    getTotalPages() {
-        return this.getMetadata().number_of_pages;
-    }
-
-    setSelectedAnnotation(annotation_id) {
-        this.options.selectedAnnotation = annotation_id;
-    }
-
-    resetSelectedAnnotation() {
-        this.options.selectedAnnotation = 0;
-    }
-
-    getSelectedAnnotation() {
-        return this.options.selectedAnnotation;
     }
 
     trigger(what, data) {
@@ -153,17 +75,6 @@ class Contract {
         con_geo.x = geo.x * canvas.width();
         con_geo.y = geo.y * canvas.height();
         return con_geo;
-    }
-
-    getSearchQuery() {
-        var hash = window.location.hash;
-        var query = $('.text-search input').val();
-
-        if (hash != '' && typeof hash.split('search/')[1] !== 'undefined') {
-            query = hash.split('search/')[1];
-        }
-
-        return query;
     }
 
     showPopup(id = null) {
