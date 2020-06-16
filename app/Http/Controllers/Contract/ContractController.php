@@ -287,16 +287,6 @@ class ContractController extends BaseController
         $contract              = new \stdClass();
         $contract->metadata    = $this->api->metadata($contract_id);
         $contract->annotations = $this->api->getAnnotations($contract_id);
-        $annotation = $contract->annotations;
-        $annotation->result = array_values(
-            array_filter($annotation->result,
-                function ($item) use ($annotation_id) {
-                    return $item->annotation_id == $annotation_id && isset($item->shapes);
-                }
-            )
-        );
-
-        $annotation->total = count($annotation->result);
         if (empty($contract->metadata)) {
             return abort(404);
         }

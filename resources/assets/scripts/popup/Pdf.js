@@ -74,7 +74,7 @@ class Pdf extends Component {
             Contract.setAnnotatorInstance(this.annotator);
         }
 
-        const annotations = this.getAnnotations();
+        const annotations = this.getAnnotations().filter( item => item.annotation_id == Config.popupAnnotation.annotation_id );
 
         if (annotations.length > 0) {
             this.annotator.content.annotator("loadAnnotations", [...annotations]);
