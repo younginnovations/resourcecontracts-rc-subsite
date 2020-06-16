@@ -284,12 +284,32 @@ class ContractController extends BaseController
     {
         redirectIfOldOCID($contract_id);
 
+        $contract              = new \stdClass();
+        $contract->metadata    = $this->api->metadata($contract_id);
+        $contract->annotations = $this->api->getAnnotations($contract_id);
+        $annotation = $contract->annotations;
+        $annotation->result = array_values(
+            array_filter($annotation->result,
+                function ($item) use ($annotation_id) {
+                    return $item->annotation_id == $annotation_id && isset($item->shapes);
+                }
+            )
+        );
+
+        $annotation->total = count($annotation->result);
+        if (empty($contract->metadata)) {
+            return abort(404);
+        }
+
+        $meta = [
+            'title' => $contract->metadata->name,
+        ];
         $annotation = $this->api->getAnnotationDetail($contract_id, $annotation_id);
 
         if (empty($annotation)) {
             return abort(404);
         }
 
-        return view('contract.popup', compact('annotation'));
+        return view('contract.popup', compact('annotation','contract', 'meta'));
     }
 }

@@ -2,6 +2,7 @@
 import React from "react";
 import {getHashPage} from "./Helper";
 import Event from "./Event";
+import Contract from "./Contract";
 
 const Pagination = React.createClass({
     getInitialState() {
@@ -27,6 +28,10 @@ const Pagination = React.createClass({
             return;
         }
         this.setState({current: page, input: page});
+        Contract.setCurrentPage(page);
+        $('.annotator-viewer').addClass('annotator-hide');
+        $('.annotator-pdf-hl').hide();
+
         window.location.hash = '#/page/' + page;
     },
 

@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Event from './Event';
+import Contract from "./Contract";
+import Config from "./config";
 
 var cachePDF = [];
 var PdfJS = React.createClass({
@@ -101,6 +103,11 @@ var PdfJS = React.createClass({
 
                 var renderTask = page.render(renderContext);
                 renderTask.promise.then(()=> {
+                    var popupAnnotation = Config.contract.annotations.result.filter( item => item.annotation_id == Config.popupAnnotation.annotation_id && (typeof item.shapes == 'object'));
+                    if ( popupAnnotation && this.props.page == popupAnnotation[0].page_no) {
+                        Contract.showPopup(Config.popupAnnotation.annotation_id);
+                    }
+
                     this.setState({pageRendering: false});
                     this.notice('');
                     Event.publish('loading', false);
@@ -120,6 +127,8 @@ var PdfJS = React.createClass({
         this.setState({message: msg});
         if (clear) {
             var canvas = ReactDOM.findDOMNode(this.refs.pdfCanvas);
+            $('.annotator-viewer').addClass('annotator-hide');
+            $('.annotator-pdf-hl').hide();
             if (canvas) {
                 var context = canvas.getContext('2d');
                 context.clearRect(0, 0, canvas.width, canvas.height);
@@ -151,8 +160,10 @@ var PdfJS = React.createClass({
     render () {
         return (
             <div className="canvas-wrap">
-                <div className="message" dangerouslySetInnerHTML={{__html: this.state.message}}/>
-                <canvas ref="pdfCanvas"></canvas>
+                {/*<div className="message" dangerouslySetInnerHTML={{__html: this.state.message}}/>*/}
+                <div className="pdf-container">
+                    <canvas ref="pdfCanvas"></canvas>
+                </div>
             </div>
         );
     }
