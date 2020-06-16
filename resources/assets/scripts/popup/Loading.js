@@ -20,7 +20,7 @@ class Loading extends Component {
     }
 
     render() {
-        // if (this.state.loading) {
+        if (this.state.loading) {
             return (
                 <div className="loading">
                     <p>
@@ -28,11 +28,10 @@ class Loading extends Component {
                     </p>
                 </div>
             );
-        // }
-        // else {
-        //     return null;
-        // }
-
+        }
+        else {
+            return null;
+        }
     }
 }
 
