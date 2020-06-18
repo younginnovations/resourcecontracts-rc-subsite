@@ -6,7 +6,7 @@ $request = app('request');
     <script type="text/javascript" src="{{url('js/tinymce/tinymce.min.js')}}"></script>
     <script type="text/javascript" src="{{url('js/tinymce/tinymce-init.js')}}"></script>
     <script>
-        var pageVersion = {{ $request->query('v') ?? 'undefined' }};
+        var pageVersion = {{ $request->query('v') ? $request->query('v') : 'undefined' }};
         $(document).ready(function () {
             $('#update-page-button').click(function (e) {
                 e.preventDefault();

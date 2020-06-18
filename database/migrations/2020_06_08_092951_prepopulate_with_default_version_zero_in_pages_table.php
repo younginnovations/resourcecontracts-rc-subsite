@@ -1,7 +1,9 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
 class PrepopulateWithDefaultVersionZeroInPagesTable extends Migration
 {
@@ -12,19 +14,22 @@ class PrepopulateWithDefaultVersionZeroInPagesTable extends Migration
      */
     public function up()
     {
-        $pages = \App\Http\Models\Page\Page::all();
+        $pages = DB::table('pages')->get();
 
         foreach ($pages as $page) {
+            $content = json_decode($page->content);
             if (is_null($page->version)) {
                 $versionContent = [
-                    0 => $page->content
+                    0 => $content
                 ];
                 $versionContent['0']->ver = 0;
-                $versionContent['0']->created_at = $page->created_at->toIso8601String();
-                $versionContent['0']->updated_at = $page->updated_at->toIso8601String();
-                $page->version = (object)$versionContent;
+                $createdAt = Carbon::parse($page->created_at);
+                $updatedAt = Carbon::parse($page->updated_at);
+                $versionContent['0']->created_at = $createdAt->toIso8601String();
+                $versionContent['0']->updated_at = $updatedAt->toIso8601String();
+                $page->version = json_encode((object)$versionContent);
                 $page->version_no = 0;
-                $page->save();
+                DB::table('pages')->where('id', $page->id)->update((array) $page);
             }
         }
     }

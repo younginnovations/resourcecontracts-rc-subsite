@@ -58,7 +58,7 @@ class PageController extends BaseController
      *
      * @param Request $request
      *
-     * @return
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -92,6 +92,14 @@ class PageController extends BaseController
             abort(404);
         }
 
+        if (!is_null($version)) {
+            if (isset($page->version->$version)) {
+                $page->content = $page->version->$version;
+            }
+            else{
+                abort(404, 'Invalid version provided');
+            }
+        }
         return view('admin.page.edit', compact('page','hideSearchBar'));
     }
 
@@ -154,6 +162,14 @@ class PageController extends BaseController
         return redirect()->route('admin.page')->withError('Version could not be changed.');
     }
 
+    /**
+     * Delete a page version
+     * @param Request $request
+     * @param $id
+     * @param $version
+     * @return mixed
+     * @throws \Exception
+     */
     public function deleteVersion(Request $request, $id, $version)
     {
         $this->page->deleteVersion($id, $version);

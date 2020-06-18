@@ -99,7 +99,6 @@ class Page extends Model
     {
         $lang    = app('translator')->getLocale();
         if (isset($v)) {
-//            dd($this->version->{$v}->{$lang});
             $content = isset($this->version->{$v}) ? (
             isset($this->version->{$v}->{$lang}) ?
                 $this->version->{$v}->{$lang} :

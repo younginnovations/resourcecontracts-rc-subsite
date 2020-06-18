@@ -208,6 +208,12 @@ Class PageService
         return $page->save();  
     }
 
+    /**
+     * @param $page_id
+     * @param $version
+     * @return mixed
+     * @throws \Exception
+     */
     public function deleteVersion($page_id, $version)
     {
         $page = $this->page->country()->where('id', $page_id)->first();
