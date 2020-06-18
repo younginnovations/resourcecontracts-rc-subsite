@@ -159,7 +159,7 @@ var PdfJS = React.createClass({
     },
     render () {
         return (
-            <div className="canvas-wrap">
+            <div className="canvas-wrap canvas-wrapper">
                 <div className="message" dangerouslySetInnerHTML={{__html: this.state.message}}/>
                 <div className="pdf-container">
                     <canvas ref="pdfCanvas"></canvas>

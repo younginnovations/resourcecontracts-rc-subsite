@@ -89,7 +89,7 @@ class Pdf extends Component {
         }
 
         return (
-            <div className="pdf-viewer pdf-annotator">
+            <div className="pdf-viewer pdf-annotator popup-pdf-viewer">
                 {/*<div className="pdf-wrapper">*/}
             {/*    </div>*/}
             {/*</div>*/}
