@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use LynX39\LaraPdfMerger\Facades\PdfMerger;
 use LynX39\LaraPdfMerger\PdfManage;
+use Maatwebsite\Excel\Classes\LaravelExcelWorksheet;
 use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Writers\LaravelExcelWriter;
 use Vsmoraes\Pdf\Pdf;
 use ZipArchive;
 
@@ -418,11 +420,50 @@ class ClippingService
 
         Excel::create(
             $filename,
-            function ($excel) use (&$headerArray) {
+            function (LaravelExcelWriter $excel) use (&$headerArray) {
                 $excel->sheet(
                     'first sheet',
                     function ($sheet) use (&$headerArray) {
-                        $sheet->fromArray($headerArray);
+                        /* @var LaravelExcelWorksheet $sheet*/
+                        if (empty($headerArray)) {
+                            return $sheet;
+                        }
+
+                        $row = 1;
+                        $col = 'A';
+                        $headings = array_keys($headerArray[0]);
+                        foreach ($headings as $heading) {
+                            $sheet->setCellValue($col.$row, $heading);
+                            $sheet->getCell($col . $row)->getStyle()->getFont()->setBold(true);
+                            $col++;
+                        }
+
+                        $row = 2;
+                        foreach ($headerArray as $data) {
+                            $col = 'A';
+                            foreach ($headings as $heading) {
+                                if ($heading == 'Annotation Page') {
+                                    $sheet->getCell($col.$row)->getHyperlink()->setUrl($data[$heading]);
+                                    $sheet->setCellValue($col . $row, $data[$heading]);
+                                    $sheet->getCell($col . $row)->getStyle()->applyFromArray(
+                                        [
+                                            'font' => [
+                                                'color'     => [
+                                                    'rgb' => '0000FF'
+                                                ],
+                                                'underline' => 'single'
+                                            ]
+                                        ]
+                                    );
+                                } else {
+                                    $sheet->setCellValue($col . $row, $data[$heading]);
+                                }
+                                $col++;
+                            }
+                            $row++;
+                        }
+
+                        return $sheet;
                     }
                 );
             }
@@ -525,6 +566,7 @@ class ClippingService
                     'Country'             => $d['country'],
                     'Year'                => $d['year'],
                     'Annotation Category' => $d['category'],
+                    'Annotation Page'     => $d['page_url'],
                     'Text'                => $d['text'],
                 ]
             );
@@ -578,5 +620,18 @@ class ClippingService
         $this->rrmdir($basePath.'/'.$folder);
 
         return $file;
+    }
+
+    private function normalizeData(array $headerArray)
+    {
+        if (empty($headerArray)) {
+            return ['headers' => [], 'data' => []];
+        }
+        $headers = array_keys($headerArray[0]);
+        $data = $headerArray;
+
+        return [
+            'headers' => $headers, 'data' => $data,
+        ];
     }
 }
