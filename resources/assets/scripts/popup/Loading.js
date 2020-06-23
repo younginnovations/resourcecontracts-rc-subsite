@@ -32,7 +32,6 @@ class Loading extends Component {
         else {
             return null;
         }
-
     }
 }
 

@@ -75,7 +75,6 @@ class SiteController extends BaseController
                 'contracts',
                 'recent_contracts',
                 'countryList',
-                'image',
                 'links',
                 'text',
                 'countryPartners',
