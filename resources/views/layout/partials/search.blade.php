@@ -30,17 +30,24 @@ $summary->resource_summary = array_map(
 			<label for="">@lang('global.resource')</label>
 
 			<select name="resource[]" id="resource" multiple="multiple">
-                <optgroup label="">
-					<option value="Hydrocarbons" data-option-type="category" data-category="Hydrocarbons">Hydrocarbons</option>
-					<option value="Minerals" data-option-type="category" data-category="Minerals">Minerals</option>
-                </optgroup>
-                <optgroup label="-----">
-                    @foreach($summary->resource_summary as $resource)
-                        <option @if(isset($filter['resource']) && in_array($resource->key, $filter['resource'])) selected="selected"
-								@endif value="{{$resource->key}}" data-option-type="resource" data-resource-category="{{$resource->category}}">{{_l("resources",$resource->key)}}</option>
-                    @endforeach
-                </optgroup>
-            </select>
+				@if(site()->isRC())
+					<optgroup label="">
+						<option value="Hydrocarbons" data-option-type="category" data-category="Hydrocarbons">Hydrocarbons</option>
+						<option value="Minerals" data-option-type="category" data-category="Minerals">Minerals</option>
+					</optgroup>
+					<optgroup label="-----">
+						@foreach($summary->resource_summary as $resource)
+							<option @if(isset($filter['resource']) && in_array($resource->key, $filter['resource'])) selected="selected"
+									@endif value="{{$resource->key}}" data-option-type="resource" data-resource-category="{{$resource->category}}">{{_l("resources",$resource->key)}}</option>
+						@endforeach
+					</optgroup>
+				@else
+					@foreach($summary->resource_summary as $resource)
+						<option @if(isset($filter['resource']) && in_array($resource->key, $filter['resource'])) selected="selected"
+								@endif value="{{$resource->key}}">{{_l("resources",$resource->key)}}</option>
+					@endforeach
+				@endif
+			</select>
 		</div>
 		<div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
 			<label for="">@lang('search.year_signed')</label>
@@ -147,19 +154,21 @@ $summary->resource_summary = array_map(
 
 	</div>
 </div>
-@push('footer-scripts')
-<script>
-	$(document).ready(function () {
-		var categories = ['Minerals', 'Hydrocarbons'];
-		$('#resource').on('select2:select', function (e) {
-			var $option = $(e.params.data.element);
-			if($option.data('option-type') === 'category' && categories.indexOf($option.val()) != -1){
-				var category = $option.val();
-				$(this).find('option[data-resource-category=' + category + ']').prop('selected', true);
-				$(this).find('option[data-category=' + category + ']').prop('selected', false);
-				$(this).trigger('change');
-			}
-		});
-	});
-</script>
-@endpush
+@if (site()->isRC())
+	@push('footer-scripts')
+		<script>
+			$(document).ready(function () {
+				var categories = ['Minerals', 'Hydrocarbons'];
+				$('#resource').on('select2:select', function (e) {
+					var $option = $(e.params.data.element);
+					if($option.data('option-type') === 'category' && categories.indexOf($option.val()) != -1){
+						var category = $option.val();
+						$(this).find('option[data-resource-category=' + category + ']').prop('selected', true);
+						$(this).find('option[data-category=' + category + ']').prop('selected', false);
+						$(this).trigger('change');
+					}
+				});
+			});
+		</script>
+	@endpush
+@endif
