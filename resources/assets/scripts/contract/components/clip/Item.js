@@ -194,7 +194,7 @@ export default class Item extends React.Component {
                        title={ langClip.view_on_doc }
                        onClick={ this.openViewPage.bind(this) }
                     >
-                        <span className="view"></span>
+                        <span className="actions__view"></span>
                     </a>
                     {
                         this.state.key ? ""
