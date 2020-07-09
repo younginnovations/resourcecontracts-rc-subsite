@@ -80,6 +80,7 @@ a {
 
 .hero-image .search-form button {
     background-color: $color-primary;
+
     &:hover {
         background-color: darken($color-primary, 5%);
     }
@@ -360,7 +361,7 @@ a {
 .landing_section_logos {
     background: transparent !important;
     margin: 0 auto;
-    padding: 0!important;
+    padding: 0 !important;
     max-width: 1100px;
     position: relative;
 
@@ -403,6 +404,10 @@ footer {
     background: #1d6690;
     margin-top: -1px;
     padding: 4px 20px 0;
+
+    @media all and (min-width: 768px) {
+        padding-top: 40px;
+    }
 
     @media all and (min-width: 895px) {
         padding-left: 15px !important;
