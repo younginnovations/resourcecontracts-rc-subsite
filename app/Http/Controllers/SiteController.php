@@ -49,22 +49,22 @@ class SiteController extends BaseController
      */
     public function home(OptionService $option, PartnerService $partner)
     {
-        $summary         = $this->api->summary();
-        $countries       = count($summary->country_summary);
-        $resources       = count($summary->resource_summary);
-        $contracts       = $summary->contract_count;
-        $countryList     = $this->contract->getListOfCountry($summary);
-        $links           = $option->getLinks();
-        $countryPartners = $partner->all();
-        $homePage        = true;
+        $summary          = $this->api->summary();
+        $countries        = count($summary->country_summary);
+        $resources        = count($summary->resource_summary);
+        $contracts        = $summary->contract_count;
+        $recent_contracts = $summary->recent_contract_count;
+        $countryList      = $this->contract->getListOfCountry($summary);
+        $links            = $option->getLinks();
+        $text             = $option->getByGroup('text');
+        $countryPartners  = $partner->all();
+        $homePage         = true;
 
-        $view            = site()->isCountrySite() ? 'site.home-country' : 'site.home';
-        // if (site()->isCountrySite()) {
-        //     $view = 'site.home-country';
-        // } else {
-        //     $resources = $this->api->recentContractCount();
-        //     $view      = ($this->request->url() == url()) ? 'site.new-home' : 'site.home';
-        // }
+        if (site()->isCountrySite()) {
+            $view = 'site.home-country';
+        } else {
+            $view = ($this->request->url() == url()) ? 'site.new-home' : 'site.home';
+        }
 
         return view(
             $view,
@@ -72,9 +72,11 @@ class SiteController extends BaseController
                 'countries',
                 'resources',
                 'contracts',
+                'recent_contracts',
                 'countryList',
                 'image',
                 'links',
+                'text',
                 'countryPartners',
                 'homePage'
             )

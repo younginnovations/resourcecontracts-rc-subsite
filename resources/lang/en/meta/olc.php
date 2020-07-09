@@ -10,7 +10,9 @@ return [
     'tagline'               => '<p class="repo-description">An online repository of </p> <div class="large-title olc-title"><span>Open Land Contracts</span></div>',
     'about'                 => 'About OpenLandContracts',
     'email_subtitle'        => 'a repository of investment contracts for agriculture and forestry projects.',
-    'new_tag_line'          => 'An online repository of Open Land Contracts',
+    'new_sub_tag_line'      => 'An online repository of',
+    'new_tag_line'          => 'Open Land Contracts',
+    'new_tag_line_desc'     => 'Search and review land and agriculture contracts to understand the key terms and implications of large-scale deals',
     'search'                => 'Search contracts',
     'recent'                => 'Recent contracts',
 ];

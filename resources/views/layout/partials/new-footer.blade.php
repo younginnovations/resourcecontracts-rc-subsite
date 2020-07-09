@@ -4,7 +4,6 @@
 			{!! nl2br(getOptionText('footer_text')) !!}
 		</p>
 		<div class="partner-wrapper clearfix">
-
 			@include('layout.partials.new-footer_partners')
 
 			<!-- <div class="footer-bottom">
