@@ -23,7 +23,7 @@ $currentLang = app('translator')->getLocale();
 				<span>{{ $text->homepage_new_sub_tag_line_text->$currentLang or ''}} </span>
 				<h1>{{ $text->homepage_new_tag_line_text->$currentLang or ''}} </h1>
 				<p>{{ $text->homepage_new_tag_line_desc_text->$currentLang or ''}} </p>
-				<form action="{{route('search')}}" method="GET" class="search-form" role="search">
+				<form action="{{route('search/group')}}" method="GET" class="search-form" role="search">
 					<div class="form-group clearfix">
 						<input type="text" name="q" class="form-control"
 							   placeholder="@lang('global.search') {{$contracts}} {{ $text->homepage_search_placeholder_text->$currentLang or ''}}..." autocomplete="off">
