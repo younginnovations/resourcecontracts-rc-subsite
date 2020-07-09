@@ -167,20 +167,26 @@ class PageController extends BaseController
         return view('page.master', compact('page', 'meta', 'hideSearchBar'));
     }
 
-    /**
-     * How to use guide page
+     /**
+     * Guides Page
      *
      * @return \Illuminate\View\View
      */
-    public function howToUSe()
+    public function guides()
     {
+        $page = $this->page->get('guides');
+
+        if (is_null($page)) {
+            abort(404);
+        }
+
         $meta = [
-            'title' => 'How to use',
-            'description' => 'Learn on how to use the site.'
+            'title'       => $page->title(),
+            'description' => 'Guides and documents providing further information on reading, understanding, and assessing land contracts.',
         ];
 
         $hideSearchBar = true;
 
-        return view('page.how-to-use', compact('meta', 'hideSearchBar'));
+        return view('page.master', compact('page', 'meta', 'hideSearchBar'));
     }
 }
