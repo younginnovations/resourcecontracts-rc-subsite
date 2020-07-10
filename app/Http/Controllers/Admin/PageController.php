@@ -2,6 +2,7 @@
 
 use App\Http\Services\Page\PageService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
 /**
@@ -28,6 +29,13 @@ class PageController extends BaseController
         $this->page = $page;
         $this->middleware('user');
         $this->hideSearchBar = true;
+    }
+
+    public function cacheClear()
+    {
+        Artisan::call('cache:clear');
+
+        return "Cache is cleared";
     }
 
     /**

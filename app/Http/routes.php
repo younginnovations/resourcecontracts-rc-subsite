@@ -166,6 +166,7 @@ $app->group(
         $app->delete('page/{id}', ['as' => 'admin.page.delete', 'uses' => 'PageController@delete']);
         $app->post('version/{id}', ['as' => 'admin.version.edit', 'uses' => 'PageController@versionUpdate']);
         $app->delete('page/{id}/version/{version}', ['as' => 'admin.page.version.delete', 'uses' => 'PageController@deleteVersion']);
+        $app->get('/cache-clear', ['as' => 'cache.clear', 'uses' => 'PageController@cacheClear']);
     }
 );
 
