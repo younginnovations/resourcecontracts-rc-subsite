@@ -13,8 +13,11 @@ if ( currentClipState === undefined) {
 
     currentClipState = JSON.parse( Cookies.get("clipState")  )
 }
-currentClipState = currentClipState || (clipHelper.getLocalClips() && clipHelper.getLocalClips().length);
-Cookies.set('clipState', true)
+currentClipState = currentClipState == true || clipHelper.hasLocalClips();
+if (currentClipState === true) {
+    Cookies.set('clipState', currentClipState);
+}
+
 class Switch extends Component {
     constructor(){
         super();
