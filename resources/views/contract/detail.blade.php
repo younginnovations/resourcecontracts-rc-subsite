@@ -580,51 +580,10 @@
 		var catcher = $('.contract-detail-wrapper');
 		var sticky = $('.annotation-category-cluster');
 
-		$(document).on("ready scroll", onScroll);
-		$('.annotation-category-cluster a[href^="#"]').on('click', function (e) {
-			e.preventDefault();
-			$(document).off("scroll");
-
-			$('.annotation-category-cluster ul li a').removeClass('active');
-			$(this).addClass('active');
-
-			var target = this.hash,
-					$target = $(target);
-			$('html, body').stop().animate({
-				'scrollTop': $target.offset().top + 2
-			}, 600, 'swing', function () {
-				window.location.hash = target;
-				$(document).on("scroll", onScroll);
-			});
-		});
+		$(document).on("ready scroll",onScroll),$('.annotation-category-cluster a[href^="#"]').on("click",function(o){o.preventDefault(),$(document).off("scroll"),$(".annotation-category-cluster ul li a").removeClass("active"),$(this).addClass("active");var t=this.hash,n=$(t);$("html, body").stop().animate({scrollTop:n.offset().top+2},600,"swing",function(){window.location.hash=t,$(document).on("scroll",onScroll)})});
 
 
-		function onScroll() {
-			var scrollPos = $(document).scrollTop();
-
-			$('.annotation-category-cluster ul li a').each(function () {
-				var currLink = $(this);
-				var refElement = $(currLink.attr("href"));
-				if (refElement.offset().top <= scrollPos && refElement.offset().top + refElement.height() > scrollPos) {
-					$('.annotation-category-cluster ul li a').removeClass("active");
-					currLink.addClass("active");
-					return false;
-				}
-				else if ($($('.annotation-category-cluster ul li a').eq(0).attr('href')).offset().top > scrollPos) {
-					$('.annotation-category-cluster ul li a').removeClass("active").eq(0).addClass("active");
-				}
-			});
-
-			if (isScrolledTo(sticky)) {
-				sticky.css({'position': 'fixed', 'left': '36px', 'top': '20px'});
-			}
-			var stopHeight = catcher.offset().top + catcher.height() + 240;
-
-
-			if (sticky.length > 0 && stopHeight > sticky.offset().top) {
-				sticky.css({'position': 'absolute', 'left': 0, 'top': 0});
-			}
-		}
+		function onScroll(){var t=$(document).scrollTop();$(".annotation-category-cluster ul li a").each(function(){var o=$(this),e=$(o.attr("href"));if(e.offset().top<=t&&e.offset().top+e.height()>t)return $(".annotation-category-cluster ul li a").removeClass("active"),o.addClass("active"),!1;$($(".annotation-category-cluster ul li a").eq(0).attr("href")).offset().top>t&&$(".annotation-category-cluster ul li a").removeClass("active").eq(0).addClass("active")}),isScrolledTo(sticky)&&sticky.css({position:"fixed",left:"36px",top:"20px"});var o=catcher.offset().top+catcher.height()+240;sticky.length>0&&o>sticky.offset().top&&sticky.css({position:"absolute",left:0,top:0})}
 
 
 		var isScrolledIntoView = function (elem) {

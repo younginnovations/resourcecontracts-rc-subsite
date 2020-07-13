@@ -4,13 +4,7 @@ $api = app('App\Http\Services\APIService');
 
 
 <script>
-    $(document).ready(function () {
-        $(".expand").click(function () {
-            $(this).toggleClass("active");
-            $(this).children('.parent').toggleClass("active");
-        });
-    })
-
+ $(document).ready(function(){$(".expand").click(function(){$(this).toggleClass("active"),$(this).children(".parent").toggleClass("active")})});
 </script>
 
 <table class="table table-responsive table-contract table-contract-list">
