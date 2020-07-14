@@ -52,7 +52,7 @@ $gtmID      =  site()->getEnv("GTM_ID");
 	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	<![endif]-->
-    <script src="{{url('js/plugins-bundle.js')}}"></script>
+    <script defer src="{{url('js/plugins-bundle.js')}}"></script>
 	<script>
 		var app_url = '{{ url()}}';
 		var langSelect = '{{$langSelect}}';

@@ -129,7 +129,7 @@ $currentLang = app('translator')->getLocale();
         var documentLang = '{{trans('global.document')}}';
         var documentsLang = '{{trans('global.documents')}}';
 	</script>
-	<script src="{{url('js/homepage.js')}}"></script>
+	<script defer src="{{url('js/homepage.js')}}"></script>
 	<script>
 		$("body").hasClass("lang-ar")?$(".annotation-wrap").slick({dots:!0,arrows:!1,autoplay:!0,autoplaySpeed:2400,rtl:!0}):$(".annotation-wrap").slick({dots:!0,arrows:!1,autoplay:!0,autoplaySpeed:2400});
 	</script>
