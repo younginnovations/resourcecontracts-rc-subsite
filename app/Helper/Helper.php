@@ -433,7 +433,7 @@ function redirectIfOldAnnotationCategory($old)
  */
 function getResourceMeta()
 {
-    return [
+    $resources = [
         'Acacia'                           => ['category' => 'NA',],
         'Aggregates'                       => ['category' => 'Minerals',],
         'Agroindustry'                     => ['category' => 'NA',],
@@ -655,4 +655,9 @@ function getResourceMeta()
         'Zircon'                           => ['category' => 'Minerals',],
         'Zirconium'                        => ['category' => '',],
     ];
+    foreach ($resources as $key => $data) {
+        $resources[strtolower($key)] = $data;
+        unset($resources[$key]);
+    }
+    return $resources;
 }

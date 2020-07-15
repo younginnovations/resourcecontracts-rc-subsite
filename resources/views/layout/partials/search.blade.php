@@ -7,7 +7,7 @@ $SearchPage = isset($searchPage) && $searchPage ? true : false;
 $resourceMeta = getResourceMeta();
 $summary->resource_summary = array_map(
 		function ($resourceSummary) use($resourceMeta) {
-			$resourceSummary->category = isset($resourceMeta[$resourceSummary->key]) ? $resourceMeta[$resourceSummary->key]['category'] :'no_category';
+			$resourceSummary->category = isset($resourceMeta[strtolower($resourceSummary->key)]) ? $resourceMeta[strtolower($resourceSummary->key)]['category'] :'';
 			return $resourceSummary;
 		},
 		$summary->resource_summary
