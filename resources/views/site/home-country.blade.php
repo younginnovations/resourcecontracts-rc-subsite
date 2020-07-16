@@ -30,7 +30,7 @@ $image_main = site()->getImageUrl('bg');
 				<div class="petroleum-mineral">
 					{!! site()->meta('tagline') !!}
 					<div class="clearfix">
-						<form action="{{route('search')}}" method="GET" class="search-form" role="search">
+						<form action="{{route('search/group')}}" method="GET" class="search-form" role="search">
 							<div class="form-group clearfix">
 								<input type="text" name="q" class="form-control"
 									   placeholder="@lang('global.search') {{$contracts}} @lang('global.contracts') @lang('global.associated_documents')">
@@ -49,18 +49,29 @@ $image_main = site()->getImageUrl('bg');
 	</section>
 
 	<div class="row row-content">
-		<div class="col-sm-6 col-md-6 col-lg-6 country-wrapper">
-			<div class="country-wrap">
-				<div class="country-inner-wrap"></div>
-			</div>
-		</div>
-		<div class="col-sm-6 col-md-6 col-lg-6 resource-wrapper">
+		<div class="col-sm-4 col-md-4 col-lg-4 resource-wrapper">
 			<div class="resource-wrap">
 				<div class="resource-inner-wrap">
-					<p>@lang('global.contracts_related_to')</p>
+					{{trans('global.document_count', ['count'=>$contracts])}}
+				</div>
+				<a href="{{route('search/group')}}" class="btn btn-view">@lang('global.view_all')</a>
+			</div>
+		</div>
+		<div class="col-sm-4 col-md-4 col-lg-4 resource-wrapper">
+			<div class="resource-wrap">
+				<div class="resource-inner-wrap">
 					{{trans('global.resource_count', ['count'=>$resources])}}
 				</div>
-				<a href="{{route('resources')}}" class="btn btn-view">@lang('global.view_all_resources')</a>
+				<a href="{{route('resources')}}" class="btn btn-view">@lang('global.view_all')</a>
+			</div>
+		</div>
+		<div class="col-sm-4 col-md-4 col-lg-4 resource-wrapper">
+			<div class="resource-wrap">
+				<div class="resource-inner-wrap">
+					{{trans('global.recent_document_count', ['count'=>$recent_contracts])}}
+				</div>
+				<a href="{{route('search/group', ['recent' => 1])}}" class="btn btn-view">@lang('global.view_all')
+				</a>
 			</div>
 		</div>
 	</div>
