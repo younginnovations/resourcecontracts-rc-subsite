@@ -414,7 +414,7 @@ class ClippingService
     public function downloadXls($data)
     {
         $data     = json_decode($data, true)['result'];
-        $filename = "clipped_annotation_".date('Y-m-d');
+        $filename = "Clipped clauses ".date('Y-m-d');
 
         $headerArray = $this->formatXls($data);
 
