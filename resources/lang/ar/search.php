@@ -17,5 +17,7 @@ return [
     'refine_search'        => 'تغيير أو تعديل بحثك',
     'annotated'            => "يتوفر به ملحق تفسيري ",
     'show_search'          => 'إظهار أدوات البحث',
-    'hide_search'          => 'إخفاء أدوات البحث'
+    'hide_search'          => 'إخفاء أدوات البحث',
+    'hydrocarbons'         => 'الهيدروكربونات',
+    'minerals'             => 'المعادن'
 ];
