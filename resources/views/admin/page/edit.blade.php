@@ -7,19 +7,7 @@ $request = app('request');
     <script type="text/javascript" src="{{url('js/tinymce/tinymce-init.js')}}"></script>
     <script>
         var pageVersion = {{ $request->query('v') ? $request->query('v') : 'undefined' }};
-        $(document).ready(function () {
-            $('#update-page-button').click(function (e) {
-                e.preventDefault();
-                var $form = $('form#page-form');
-                var url = (new URL($form.attr('action')));
-                if (pageVersion != undefined) {
-                    url.searchParams.append('target_version',pageVersion);
-                }
-                url.searchParams.append('version_action', 'update');
-                $form.attr('action', url.toString());
-                $form.submit();
-            });
-        });
+        $(document).ready(function(){$("#update-page-button").click(function(a){a.preventDefault();var e=$("form#page-form"),t=new URL(e.attr("action"));null!=pageVersion&&t.searchParams.append("target_version",pageVersion),t.searchParams.append("version_action","update"),e.attr("action",t.toString()),e.submit()})});
     </script>
 @stop
 

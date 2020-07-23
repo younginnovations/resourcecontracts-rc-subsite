@@ -92,17 +92,7 @@
 
 	<script type="text/javascript">
 		$('document').ready(function(){
-			$('#close_adv_search').on('click', function(){
-				$('.static-search').slideUp(200);
-				$(this).hide();
-				$('#open_adv_search').show();
-			});
-
-			$('#open_adv_search').on('click', function(){
-				$('.static-search').slideDown(200);
-				$(this).hide();
-				$('#close_adv_search').show();
-			});
+			$("#close_adv_search").on("click",function(){$(".static-search").slideUp(200),$(this).hide(),$("#open_adv_search").show()}),$("#open_adv_search").on("click",function(){$(".static-search").slideDown(200),$(this).hide(),$("#close_adv_search").show()});
 
 			var query  = {!! json_encode($q) !!}
 			if(query){

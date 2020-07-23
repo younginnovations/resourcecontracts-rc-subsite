@@ -120,10 +120,8 @@ $currentLang = app('translator')->getLocale();
 @if( !site()->isCountrySite())
 @section('js')
 	<script>
-        // var landColor = '{!! site()->isRC()?'#f1f1f1':'#fff' !!}';
         var highlightColor = '{!! site()->isRC()?'#FBCE9D':'#27AE60' !!}';
         var landColor = '#fff';
-        // var highlightColor = '#FBCE9D';
         var selectedCountries = '{!! json_encode($countryList) !!}';
         var standardCountry = {!! json_encode(trans('country')) !!};
         var documentLang = '{{trans('global.document')}}';
@@ -131,26 +129,7 @@ $currentLang = app('translator')->getLocale();
 	</script>
 	<script src="{{url('js/homepage.js')}}"></script>
 	<script>
-
-		if($('body').hasClass('lang-ar')) {
-			$('.annotation-wrap').slick({
-				dots: true,
-				arrows: false,
-				autoplay: true,
-				autoplaySpeed: 2400,
-				rtl: true
-			});
-		}
-
-		else {
-			$('.annotation-wrap').slick({
-				dots: true,
-				arrows: false,
-				autoplay: true,
-				autoplaySpeed: 2400,
-			});
-		}
-
+		$("body").hasClass("lang-ar")?$(".annotation-wrap").slick({dots:!0,arrows:!1,autoplay:!0,autoplaySpeed:2400,rtl:!0}):$(".annotation-wrap").slick({dots:!0,arrows:!1,autoplay:!0,autoplaySpeed:2400});
 	</script>
 @stop
 @endif

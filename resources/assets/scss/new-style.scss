@@ -78,13 +78,13 @@ a {
     border: solid 1px $color-primary;
 }
 
-.hero-image .search-form button {
-    background-color: $color-primary;
+// .hero-image .search-form button {
+//     background-color: $color-primary;
 
-    &:hover {
-        background-color: darken($color-primary, 5%);
-    }
-}
+//     &:hover {
+//         background-color: darken($color-primary, 5%);
+//     }
+// }
 
 .annotation-wrap .slick-dots .slick-active button {
     background: $color-primary;
@@ -132,138 +132,6 @@ a {
         background-color: $color-primary;
     }
 }
-
-// .count-block {
-//     border: 0;
-//     cursor: pointer;
-//     height: 356px;
-//     padding: 0;
-//     transition: all 0.3s ease-in-out;
-//     z-index: 1;
-
-//     &:hover {
-//         transform: scale(1.05);
-//         z-index: 2;
-
-//         .view {
-//             color: $color-base;
-
-//             &:after {
-//                 border-left-color: $color-base;
-//             }
-//         }
-//     }
-
-//     a {
-//         display: block;
-//         padding: 130px 40px 90px;
-//         position: relative;
-//         width: 100%;
-//         height: 100%;
-
-//         &:hover {
-//             text-decoration: none;
-//         }
-
-//         &:before,
-//         &:after {
-//             background-image: url(../../images/ic_sprite.svg);
-//             background-position: no-repeat;
-//             content: '';
-//             position: absolute;
-//         }
-
-//         &:before {
-//             left: 0;
-//             top: 0;
-//         }
-
-//         &:after {
-//             right: 12px;
-//             bottom: -10px;
-//         }
-//     }
-
-//     h2 {
-//         color: $color-base;
-//         font-size: 32px;
-//         font-family: Open-Sans-Regular;
-//         max-width: 260px;
-//         position: relative;
-//         text-transform: capitalize;
-//     }
-// }
-
-// .count {
-//     &-search {
-//         background-color: $color-primary;
-
-//         a {
-
-//             &:before,
-//             &:after {
-//                 background-position: 0 -31px;
-//                 height: 110px;
-//                 opacity: 0.1;
-//                 width: 72px;
-//             }
-//         }
-//     }
-
-//     &-countries {
-//         background-color: #385363;
-
-//         a:before {
-//             background: url(../../images/ic-map.svg) no-repeat 0 0;
-//             height: 240px;
-//             max-width: 438px;
-//             top: 58px;
-//             left: -38px;
-//             width: 100%;
-//         }
-//     }
-
-//     &-resources {
-//         background-color: #372f2f;
-
-//         a {
-
-//             &:before,
-//             &:after {
-//                 background-position: -81px -31px;
-//                 height: 132px;
-//                 width: 110px;
-//             }
-
-//             &:before {
-//                 left: auto;
-//                 right: 60px;
-//                 top: -42px;
-//             }
-
-//             &:after {
-//                 bottom: -17px;
-//                 left: 10px;
-//             }
-//         }
-//     }
-
-//     &-recent {
-//         background-color: #01665e;
-
-//         a {
-
-//             &:before,
-//             &:after {
-//                 background-position: 0 -31px;
-//                 filter: brightness(0) invert(1);
-//                 height: 110px;
-//                 opacity: 0.4;
-//                 width: 72px;
-//             }
-//         }
-//     }
-// }
 
 .view {
     background-color: rgba($color-base, 0.2);
@@ -868,4 +736,22 @@ footer {
             margin-right: 25px !important;
         }
     }
+}
+
+#open_adv_search {
+    color: rgb(192, 192, 192) !important;
+    font-size: 12px !important;
+}
+
+#close_adv_search {
+    color: rgb(192, 192, 192) !important;
+    font-size: 12px !important;
+}
+
+.table-contract tbody td.documentTitle {
+    background: url(../../images/ic-file.png) no-repeat 10px 20px;
+}
+
+.partner-inner-each a img {
+    opacity: 0.5;
 }

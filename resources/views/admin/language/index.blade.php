@@ -62,26 +62,6 @@
 
 @section('js')
 	<script>
-		$(function () {
-			$('#lang-default').on('change', function () {
-				var selected = $(this).val();
-				$('#lang-available').find('input').each(function () {
-					$(this).attr('disabled', false);
-
-					if ($(this).val() == selected) {
-						$(this).prop('checked', true);
-						$(this).attr('disabled', true);
-					}
-				});
-			});
-
-			$('#lang-enable').on('change', function () {
-				if ($(this).is(':checked')) {
-					$('#lang-available').show()
-				} else {
-					$('#lang-available').hide()
-				}
-			});
-		});
+		$(function(){$("#lang-default").on("change",function(){var a=$(this).val();$("#lang-available").find("input").each(function(){$(this).attr("disabled",!1),$(this).val()==a&&($(this).prop("checked",!0),$(this).attr("disabled",!0))})}),$("#lang-enable").on("change",function(){$(this).is(":checked")?$("#lang-available").show():$("#lang-available").hide()})});
 	</script>
 @stop
