@@ -47,7 +47,9 @@ class OptionService
         $option = $this->isKeyUnique($key);
 
         if (!$option) {
-            $update = $this->option->where('key', $key)->update(['value' => $value, 'group' => $group]);
+            $update = $this->option->where('key', $key)->update(
+                ['value' => $value, 'group' => $group]
+            );
             Cache::forget($key);
 
             return $update;
@@ -59,6 +61,44 @@ class OptionService
                 'key'   => $key,
                 'value' => $value,
                 'group' => $group,
+            ]
+        );
+    }
+
+    /**
+     * Save Option
+     *
+     * @param      $key
+     * @param      $value
+     * @param null $group
+     * @param null $country_code
+     *
+     * @return Option
+     */
+    public function updateCountry($key, $value, $group = null, $country_code = null)
+    {
+        if (is_array($value) || is_object($value)) {
+            $value = json_encode($value);
+        }
+
+        $option = $this->isCountryKeyUnique($key, $country_code);
+
+        if (!$option) {
+            $where_attr = ['key' => $key, 'country' => $country_code];
+            $update_val = ['value' => $value, 'group' => $group, 'country' => $country_code];
+            $update     = $this->option->where($where_attr)->update($update_val);
+            Cache::forget($key);
+
+            return $update;
+        }
+        Cache::forget($group);
+
+        return $this->option->create(
+            [
+                'key'     => $key,
+                'value'   => $value,
+                'group'   => $group,
+                'country' => $country_code,
             ]
         );
     }
@@ -102,6 +142,21 @@ class OptionService
     public function isKeyUnique($key)
     {
         $count = $this->option->where('key', $key)->count();
+
+        return ($count > 0) ? false : true;
+    }
+
+    /**
+     * Determine country key is unique.
+     *
+     * @param $key
+     * @param $country_code
+     *
+     * @return bool
+     */
+    public function isCountryKeyUnique($key, $country_code)
+    {
+        $count = $this->option->where(['key' => $key, 'country' => $country_code])->count();
 
         return ($count > 0) ? false : true;
     }
@@ -153,6 +208,43 @@ class OptionService
     }
 
     /**
+     * Get Option by Group
+     *
+     * @param      $group
+     * @param      $country_code
+     *
+     * @return \stdClass
+     */
+    public function getByCountryGroup($group, $country_code)
+    {
+        $cache_key = "$group-$country_code";
+        $data      = Cache::remember(
+            $cache_key,
+            $this->cacheDuration,
+            function () use ($group, $country_code) {
+                $homepage_text = $this->option->where(['group' => $group, 'country' => $country_code])->get();
+                $footer_text   = $this->option->where(['group' => $group, 'key' => 'footer_text'])->get();
+
+                return $homepage_text->merge($footer_text);
+            }
+        );
+
+        $group = new \stdClass();
+        if (!empty($data)) {
+            foreach ($data as $v) {
+                $key = $v->key;
+
+                if ($this->isJson($v->value)) {
+                    $v->value = json_decode($v->value);
+                }
+                $group->$key = $v->value;
+            }
+        }
+
+        return $group;
+    }
+
+    /**
      * Update option by Group
      *
      * @param $options
@@ -167,6 +259,28 @@ class OptionService
         }
 
         Cache::forget($group);
+
+        return true;
+    }
+
+    /**
+     * Update country option by Group
+     *
+     * @param $options
+     * @param $group
+     * @param $country_code
+     *
+     * @return bool
+     */
+    public function updateCountryGroup($options, $group, $country_code)
+    {
+        foreach ($options as $key => $option) {
+            $this->updateCountry($key, $option, $group, $country_code);
+        }
+
+        $cache_key = "$group-$country_code";
+
+        Cache::forget($cache_key);
 
         return true;
     }

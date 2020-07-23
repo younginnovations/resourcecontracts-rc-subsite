@@ -56,14 +56,15 @@ class SiteController extends BaseController
         $recent_contracts = $summary->recent_contract_count;
         $countryList      = $this->contract->getListOfCountry($summary);
         $links            = $option->getLinks();
-        $text             = $option->getByGroup('text');
         $countryPartners  = $partner->all();
         $homePage         = true;
 
         if (site()->isCountrySite()) {
-            $view = 'site.home-country';
+            $view = 'site.new-home-country';
+            $text = $option->getByCountryGroup('text', strtolower(site()->getCountryCode()));
         } else {
             $view = ($this->request->url() == url()) ? 'site.new-home' : 'site.home';
+            $text = $option->getByGroup('text');
         }
 
         return view(

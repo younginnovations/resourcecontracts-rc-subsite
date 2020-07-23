@@ -32,7 +32,11 @@ class TextController extends BaseController
      */
     public function index()
     {
-        $text = $this->option->getByGroup('text');
+        if (site()->isCountrySite()) {
+            $text = $this->option->getByCountryGroup('text', strtolower(site()->getCountryCode()));
+        } else {
+            $text = $this->option->getByGroup('text');
+        }
 
         return view('admin.text.index', compact('text'));
     }
@@ -46,6 +50,14 @@ class TextController extends BaseController
      */
     public function update(Request $request)
     {
+        if (site()->isCountrySite()) {
+            if ($this->updateCountryText($request)) {
+                return redirect()->route('admin.text')->with('success', 'Text successfully updated.');
+            }
+
+            return redirect()->route('admin.text')->with('error', 'Text could not be updated.');
+        }
+
         $input = $request->only(
             'homepage_new_sub_tag_line_text',
             'homepage_new_tag_line_text',
@@ -53,10 +65,6 @@ class TextController extends BaseController
             'homepage_search_placeholder_text',
             'homepage_get_started_text',
             'homepage_annotation_navigation_text',
-//            'homepage_country_card_text',
-//            'homepage_document_card_text',
-//            'homepage_resource_card_text',
-//            'homepage_recent_document_card_text',
             'homepage_map_card_text',
             'homepage_footer_text',
             'homepage_footer_link_text',
@@ -68,6 +76,29 @@ class TextController extends BaseController
         }
 
         return redirect()->route('admin.text')->with('error', 'Text could not be updated.');
+    }
+
+    /**
+     * Update country text
+     *
+     * @param $request
+     *
+     * @return bool
+     */
+    public function updateCountryText($request)
+    {
+        $input = $request->only(
+            'homepage_new_sub_tag_line_text',
+            'homepage_new_tag_line_text',
+            'homepage_new_tag_line_desc_text',
+            'homepage_search_placeholder_text',
+            'homepage_get_started_text'
+        );
+
+        $country_update = $this->option->updateCountryGroup($input, 'text', strtolower(site()->getCountryCode()));
+        $footer_update  = $this->option->updateGroup($request->only('footer_text'), 'text');
+
+        return ($country_update && $footer_update);
     }
 
 }

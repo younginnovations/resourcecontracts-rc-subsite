@@ -15,5 +15,5 @@ class Option extends Model
     /**
      * @var array
      */
-    protected $fillable = ['key', 'value', 'group'];
+    protected $fillable = ['key', 'value', 'group', 'country'];
 }
