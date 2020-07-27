@@ -521,7 +521,7 @@ class ClippingService
      * @param array $properties
      * @return \Closure
      */
-    private function excelSheetCurry(array $properties): \Closure
+    private function excelSheetCurry(array $properties)
     {
         return function (LaravelExcelWorksheet $sheet) use (&$properties) {
             if (empty($properties)) {
@@ -549,7 +549,7 @@ class ClippingService
      *
      * @return array
      */
-    public function formatXls($data): array
+    public function formatXls($data)
     {
         $properties = [];
 
