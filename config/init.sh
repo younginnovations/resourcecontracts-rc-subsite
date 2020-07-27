@@ -123,7 +123,7 @@ export CONTACT_MAIL=${CI_CONTACT_MAIL}
 export COUNTRY=ci
 
 export CATEGORY=country-ci
-envsubst '$SERVER_NAME $CATEGORY'< ./nginx_subsite.template > /etc/nginx/sites-enabled/country-ci
+envsubst '$SERVER_NAME $CATEGORY'< ./nginx_subsite_protected.template > /etc/nginx/sites-enabled/country-ci
 
 export CATEGORY=rc
 envsubst < ./env.template > /var/www/country-ci/.env
