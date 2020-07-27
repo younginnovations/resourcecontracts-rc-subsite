@@ -1,5 +1,5 @@
-
 server {
+
   server_name ${SERVER_NAME};
 
   root        /var/www/${CATEGORY}/public;
@@ -7,6 +7,13 @@ server {
 
   client_max_body_size 100M;
   fastcgi_read_timeout 1800;
+
+  # gzip compression
+  gzip on;
+  gzip_disable "MSIE [1-6]\.(?!.*SV1)";
+  gzip_vary on;
+  gzip_types text/plain text/css text/javascript image/svg+xml image/x-icon application/javascript application/x-javascript;
+
 
   location / {
     try_files $uri $uri/ /index.php?$query_string;
@@ -25,12 +32,5 @@ server {
     fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
     fastcgi_pass  127.0.0.1:9000;
   }
-
-  # gzip compression
-    ########################
-    gzip on;
-    gzip_disable "MSIE [1-6]\.(?!.*SV1)";
-    gzip_vary on;
-    gzip_types text/plain text/css text/javascript image/svg+xml image/x-icon application/javascript application/x-javascript;
 }
 
