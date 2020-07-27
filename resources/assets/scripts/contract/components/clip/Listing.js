@@ -34,7 +34,8 @@ class Listing extends React.Component {
                 contractYear: clip.year,
                 resources: clip.resource,
                 pages: clip.pages,
-                country_code: clip.country_code
+                country_code: clip.country_code,
+                year: clip.year
             };
             return <Item { ...props }/>
         });
@@ -69,14 +70,15 @@ class Listing extends React.Component {
                         <th width="25%" className="document">
                             <span>{ langClip.document }</span>
                         </th>
-                        <th width="15%"><span>{ langClip.category }</span>
+                        <th><span>{ langClip.year }</span></th>
+                        <th width="15%"><span>{ annotationTerms.annotation_category }</span>
                         </th>
-                        <th width="32%"><span>{ langClip.text }</span></th>
+                        <th width="32%"><span>{ annotationTerms.annotation_text }</span></th>
                         <th width="10%"><span>{ langClip.country }</span>
                         </th>
-                        <th ><span>{ langClip.resource }</span>
+                        <th width="15%"><span>{ langClip.resource }</span>
                         </th>
-                        <th data-sorting="no-sorting">{ langClip.view }</th>
+                        <th data-sorting="no-sorting">{ annotationTerms.view_annotation }</th>
                     </tr>
                     </thead>
                     <tbody>

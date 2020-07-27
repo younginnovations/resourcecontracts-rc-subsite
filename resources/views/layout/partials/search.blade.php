@@ -12,6 +12,8 @@ $summary->resource_summary = array_map(
 		},
 		$summary->resource_summary
 	);
+$annotationCategoryLabel = site()->isRC() ? _l('search','key_clauses') : _l('search','annotations_category');
+$annotatedContractsOnlyCheckboxLabel = site()->isRC() ? _l('search','tagged_contracts_only') : _l('search','annotated');
 ?>
 <div class="search-input-wrapper">
 	<div class="col-lg-12">
@@ -109,7 +111,7 @@ $summary->resource_summary = array_map(
 			</select>
 		</div>
 		<div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
-			<label for="">@lang('search.annotations_category')</label>
+			<label for="">{{ $annotationCategoryLabel }}</label>
 			<?php $annotation_category = array_map('trim', (array) $category->results);
 			sort($annotation_category);
 			?>
@@ -130,7 +132,7 @@ $summary->resource_summary = array_map(
 		@endif
 
 		<div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
-			<label for="">@lang('search.annotated')</label>
+			<label for="">{{ $annotatedContractsOnlyCheckboxLabel }}</label>
 			<input type="checkbox" name="annotated" value="1" class="form-control"
 				   @if(isset($filter['annotated']) && $filter['annotated']==1) checked @endif>
 		</div>

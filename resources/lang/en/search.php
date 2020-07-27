@@ -19,5 +19,7 @@ return [
     'show_search'          => 'Show Search Tools',
     'hide_search'          => 'Hide Search Tools',
     'hydrocarbons'         => 'Hydrocarbons',
-    'minerals'             => 'Minerals'
+    'minerals'             => 'Minerals',
+    'key_clauses'          => 'Key Clauses',
+    'tagged_contracts_only'=> 'Tagged Contracts Only',
 ];
