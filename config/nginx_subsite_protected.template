@@ -7,6 +7,13 @@ server {
   client_max_body_size 100M;
   fastcgi_read_timeout 1800;
 
+  # gzip compression
+  gzip on;
+  gzip_disable "MSIE [1-6]\.(?!.*SV1)";
+  gzip_vary on;
+  gzip_types text/plain text/css text/javascript image/svg+xml image/x-icon application/javascript application/x-javascript;
+
+  # The API remains unprotected for now since the frontend is not aware of the password
   location /api/ {
     try_files $uri $uri/ /index.php?$query_string;
   }
