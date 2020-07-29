@@ -123,7 +123,14 @@ export CONTACT_MAIL=${CI_CONTACT_MAIL}
 export COUNTRY=ci
 
 export CATEGORY=country-ci
-envsubst '$SERVER_NAME $CATEGORY'< ./nginx_subsite_protected.template > /etc/nginx/sites-enabled/protected-country-ci
+
+# Only password protect the production site
+if [[ $DEPLOYMENT_TYPE == 'master' ]]
+then
+	envsubst '$SERVER_NAME $CATEGORY'< ./nginx_subsite_protected.template > /etc/nginx/sites-enabled/protected-country-ci
+else
+	envsubst '$SERVER_NAME $CATEGORY'< ./nginx_subsite.template > /etc/nginx/sites-enabled/country-ci
+fi
 
 export CATEGORY=rc
 envsubst < ./env.template > /var/www/country-ci/.env
