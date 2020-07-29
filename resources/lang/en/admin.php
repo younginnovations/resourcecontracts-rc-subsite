@@ -65,4 +65,5 @@ return [
     'homepage_map_card'              => 'Homepage Map',
     'homepage_footer'                => 'Homepage Footer Text',
     'homepage_footer_link'           => 'Homepage Footer Link Text',
+    'research_and_analysis'          => 'Research and Analysis',
 ];

@@ -47,5 +47,6 @@ return [
     'enable_localization'   => 'تمكين التوطين',
     'choose_lang'           => 'اختيار اللغة',
     'select_version'        => 'حدد الإصدار',
-    'change_version'        => 'تغيير الإصدار'
+    'change_version'        => 'تغيير الإصدار',
+    'research_and_analysis' => 'Research and Analysis',
 ];

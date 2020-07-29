@@ -167,6 +167,13 @@ $app->group(
         $app->post('version/{id}', ['as' => 'admin.version.edit', 'uses' => 'PageController@versionUpdate']);
         $app->delete('page/{id}/version/{version}', ['as' => 'admin.page.version.delete', 'uses' => 'PageController@deleteVersion']);
         $app->get('/cache-clear', ['as' => 'cache.clear', 'uses' => 'PageController@cacheClear']);
+
+        $app->get('research-and-analysis', ['as' => 'admin.research-and-analysis.index', 'uses' => 'ResearchAndAnalysisController@index']);
+        $app->get('research-and-analysis/create', ['as' => 'admin.research-and-analysis.create', 'uses' => 'ResearchAndAnalysisController@create']);
+        $app->post('research-and-analysis', ['as' => 'admin.research-and-analysis.store', 'uses' => 'ResearchAndAnalysisController@store']);
+        $app->get('research-and-analysis/{id}/edit', ['as' => 'admin.research-and-analysis.edit', 'uses' => 'ResearchAndAnalysisController@edit']);
+        $app->put('research-and-analysis/{id}', ['as' => 'admin.research-and-analysis.update', 'uses' => 'ResearchAndAnalysisController@update']);
+        $app->delete('research-and-analysis/{id}', ['as' => 'admin.research-and-analysis.delete', 'uses' => 'ResearchAndAnalysisController@delete']);
     }
 );
 
