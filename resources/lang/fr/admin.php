@@ -48,4 +48,5 @@ return [
     'choose_lang'           => 'Choisissez la langue',
     'select_version'        => 'Sélectionnez la version',
     'change_version'        => 'Changer de version',
+    'research_and_analysis' => 'Research and Analysis',
 ];
