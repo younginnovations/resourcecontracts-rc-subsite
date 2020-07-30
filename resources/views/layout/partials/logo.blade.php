@@ -8,8 +8,5 @@
 	@if(!empty(site()->meta('short_name')))
 		<i class="shown_small">{{site()->meta('short_name')}}</i>
 	@endif
-	@if(site()->isOLC())
-		<span class="beta">Beta</span>
-	@endif
 	<span>@if(site()->isCountrySite()) {{site()->meta('type')}} @endif Contracts</span>
 </a>

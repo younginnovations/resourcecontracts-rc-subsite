@@ -43,14 +43,16 @@
 							</div>
 
 							<div class="form-group">
-								<label for="homepage_new_tag_line_desc_text">@lang('admin.homepage_new_tag_line_desc'):</label>
+								<label for="homepage_new_tag_line_desc_text">@lang('admin.homepage_new_tag_line_desc')
+									:</label>
 								<textarea id="homepage_new_tag_line_desc_text" style="width:100%; height:100px"
 										  class="{{$code}}"
 										  name="homepage_new_tag_line_desc_text[{{$code}}]">{{$text->homepage_new_tag_line_desc_text->$code or ''}}</textarea>
 							</div>
 
 							<div class="form-group">
-								<label for="homepage_search_placeholder_text">@lang('admin.homepage_search_placeholder'):</label>
+								<label for="homepage_search_placeholder_text">@lang('admin.homepage_search_placeholder')
+									:</label>
 								<textarea id="homepage_search_placeholder_text" style="width:100%; height:100px"
 										  class="{{$code}}"
 										  name="homepage_search_placeholder_text[{{$code}}]">{{$text->homepage_search_placeholder_text->$code or ''}}</textarea>
@@ -63,58 +65,36 @@
 										  name="homepage_get_started_text[{{$code}}]">{{$text->homepage_get_started_text->$code or ''}}</textarea>
 							</div>
 
-							<div class="form-group">
-								<label for="homepage_annotation_navigation_text">@lang('admin.homepage_annotation_navigation'):</label>
-								<textarea id="homepage_annotation_navigation_text" style="width:100%; height:100px"
-										  class="{{$code}}"
-										  name="homepage_annotation_navigation_text[{{$code}}]">{{$text->homepage_annotation_navigation_text->$code or ''}}</textarea>
-							</div>
+							@if(!site()->isCountrySite())
+								<div class="form-group">
+									<label for="homepage_annotation_navigation_text">@lang('admin.homepage_annotation_navigation')
+										:</label>
+									<textarea id="homepage_annotation_navigation_text" style="width:100%; height:100px"
+											  class="{{$code}}"
+											  name="homepage_annotation_navigation_text[{{$code}}]">{{$text->homepage_annotation_navigation_text->$code or ''}}</textarea>
+								</div>
 
-{{--							<div class="form-group">--}}
-{{--								<label for="homepage_country_card_text">@lang('admin.homepage_country_card'):</label>--}}
-{{--								<textarea id="homepage_country_card_text" style="width:100%; height:100px"--}}
-{{--										  class="{{$code}}"--}}
-{{--										  name="homepage_country_card_text[{{$code}}]">{{$text->homepage_country_card_text->$code or ''}}</textarea>--}}
-{{--							</div>--}}
+								<div class="form-group">
+									<label for="homepage_map_card_text">@lang('admin.homepage_map_card'):</label>
+									<textarea id="homepage_map_card_text" style="width:100%; height:100px"
+											  class="{{$code}}"
+											  name="homepage_map_card_text[{{$code}}]">{{$text->homepage_map_card_text->$code or ''}}</textarea>
+								</div>
 
-{{--							<div class="form-group">--}}
-{{--								<label for="homepage_document_card_text">@lang('admin.homepage_document_card'):</label>--}}
-{{--								<textarea id="homepage_document_card_text" style="width:100%; height:100px"--}}
-{{--										  class="{{$code}}"--}}
-{{--										  name="homepage_document_card_text[{{$code}}]">{{$text->homepage_document_card_text->$code or ''}}</textarea>--}}
-{{--							</div>--}}
+								<div class="form-group">
+									<label for="homepage_footer_text">@lang('admin.homepage_footer'):</label>
+									<textarea id="homepage_footer_text" style="width:100%; height:100px"
+											  class="{{$code}}"
+											  name="homepage_footer_text[{{$code}}]">{{$text->homepage_footer_text->$code or ''}}</textarea>
+								</div>
 
-{{--							<div class="form-group">--}}
-{{--								<label for="homepage_resource_card_text">@lang('admin.homepage_resource_card'):</label>--}}
-{{--								<textarea id="homepage_resource_card_text" style="width:100%; height:100px"--}}
-{{--										  class="{{$code}}"--}}
-{{--										  name="homepage_resource_card_text[{{$code}}]">{{$text->homepage_resource_card_text->$code or ''}}</textarea>--}}
-{{--							</div>--}}
-
-{{--							<div class="form-group">--}}
-{{--								<label for="homepage_recent_document_card_text">@lang('admin.homepage_recent_document_card'):</label>--}}
-{{--								<textarea id="homepage_recent_document_card_text" style="width:100%; height:100px"--}}
-{{--										  class="{{$code}}"--}}
-{{--										  name="homepage_recent_document_card_text[{{$code}}]">{{$text->homepage_recent_document_card_text->$code or ''}}</textarea>--}}
-{{--							</div>--}}
-
-							<div class="form-group">
-								<label for="homepage_map_card_text">@lang('admin.homepage_map_card'):</label>
-								<textarea id="homepage_map_card_text" style="width:100%; height:100px" class="{{$code}}"
-										  name="homepage_map_card_text[{{$code}}]">{{$text->homepage_map_card_text->$code or ''}}</textarea>
-							</div>
-
-							<div class="form-group">
-								<label for="homepage_footer_text">@lang('admin.homepage_footer'):</label>
-								<textarea id="homepage_footer_text" style="width:100%; height:100px" class="{{$code}}"
-										  name="homepage_footer_text[{{$code}}]">{{$text->homepage_footer_text->$code or ''}}</textarea>
-							</div>
-
-							<div class="form-group">
-								<label for="homepage_footer_link_text">@lang('admin.homepage_footer_link'):</label>
-								<textarea id="homepage_footer_link_text" style="width:100%; height:100px" class="{{$code}}"
-										  name="homepage_footer_link_text[{{$code}}]">{{$text->homepage_footer_link_text->$code or ''}}</textarea>
-							</div>
+								<div class="form-group">
+									<label for="homepage_footer_link_text">@lang('admin.homepage_footer_link'):</label>
+									<textarea id="homepage_footer_link_text" style="width:100%; height:100px"
+											  class="{{$code}}"
+											  name="homepage_footer_link_text[{{$code}}]">{{$text->homepage_footer_link_text->$code or ''}}</textarea>
+								</div>
+							@endif
 
 							<div class="form-group">
 								<label for="footer_text">@lang('admin.footer_text'):</label>
