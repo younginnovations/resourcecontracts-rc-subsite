@@ -8,13 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class ResearchAndAnalysis extends Model
 {
-    const STATUS_UNPUBLISHED = 0;
-    const STATUS_PUBLISHED   = 1;
-    const STATUS_FEATURED    = 2;
-
     protected $table = 'research_analysis';
 
-    protected $fillable = ['title', 'content', 'slug', 'status'];
+    protected $fillable = ['title','url'];
 
     protected $casts = [
         'content' => 'object',
