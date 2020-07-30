@@ -8,21 +8,45 @@ use App\Http\Models\ResearchAndAnalysis\ResearchAndAnalysis;
 
 class ResearchAndAnalysisService
 {
-    public function __construct()
+    /**
+     * @var ResearchAndAnalysis
+     */
+    private $researchAndAnalysis;
+
+    /**
+     * ResearchAndAnalysisService constructor.
+     * @param ResearchAndAnalysis $researchAndAnalysis
+     */
+    public function __construct(ResearchAndAnalysis $researchAndAnalysis)
     {
+        $this->researchAndAnalysis = $researchAndAnalysis;
     }
 
     public function all()
     {
-        return ResearchAndAnalysis::paginate();
+        return $this->researchAndAnalysis->paginate();
     }
 
     public function create(array $attributes)
     {
-        $attributes['slug'] = str_slug($attributes['title']['en']);
-        $attributes['status'] = isset($attributes['status'])
-            && in_array($attributes['status'], [ResearchAndAnalysis::STATUS_UNPUBLISHED,ResearchAndAnalysis::STATUS_PUBLISHED])
-            ? $attributes['status'] : ResearchAndAnalysis::STATUS_UNPUBLISHED;
-        return ResearchAndAnalysis::create($attributes);
+        $attributes['status'] = 0;
+        return $this->researchAndAnalysis->create($attributes);
+    }
+
+    public function update($id, array $data)
+    {
+        $research = $this->researchAndAnalysis->find($id);
+        return $research->update($data);
+    }
+
+    public function find($id)
+    {
+        return $this->researchAndAnalysis->findOrFail($id);
+    }
+
+    public function delete($id)
+    {
+        $research = $this->researchAndAnalysis->find($id);
+        return $research->delete();
     }
 }

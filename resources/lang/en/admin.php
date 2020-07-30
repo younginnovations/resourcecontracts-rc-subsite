@@ -66,4 +66,5 @@ return [
     'homepage_footer'                => 'Homepage Footer Text',
     'homepage_footer_link'           => 'Homepage Footer Link Text',
     'research_and_analysis'          => 'Research and Analysis',
+    'add_new_research_analysis'      => 'Add new Research and Analysis link'
 ];

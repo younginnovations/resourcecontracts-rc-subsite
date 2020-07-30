@@ -14,24 +14,20 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th></th>
                         <th>@lang('admin.id')</th>
                         <th>@lang('admin.title')</th>
-                        <th>@lang('admin.slug')</th>
-                        <th style="min-width: 178px;">Status</th>
+                        <th>@lang('admin.link')</th>
                         <th style="min-width: 228px;">@lang('admin.action')</th>
                     </tr>
                     </thead>
                     <tbody>
                         @foreach($pages as $page)
                             <tr>
-                                <td></td>
                                 <td>{{ $page->id }}</td>
-                                <td>{{ $page->title->en }}</td>
-                                <td>{{ $page->slug }}</td>
-                                <td>{{ $page->status }}</td>
+                                <td>{{ $page->title }}</td>
+                                <td><a href="{{ $page->url }}">{{ $page->url }}</a></td>
                                 <td>
-                                    <a target="_blank" class="btn btn-success" style="color: white;" href="{{url($page->slug)}}" title="View page">
+                                    <a target="_blank" class="btn btn-success" style="color: white;" href="{{url($page->url)}}" title="View page">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                     <a class="btn btn-primary" style="color: white;" href="{{route('admin.research-and-analysis.edit', ['id'=>$page->id])}}" title="Edit page">
@@ -43,7 +39,6 @@
                                         <button type="submit" class="btn btn-danger confirm" data-confirm="Are you sure you want to delete this page?" title="Delete page"><i class="fa fa-trash"> </i></button>
                                     </form>
                                 </td>
-
                             </tr>
                         @endforeach
                     </tbody>
