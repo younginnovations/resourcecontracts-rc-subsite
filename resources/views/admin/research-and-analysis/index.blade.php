@@ -31,9 +31,6 @@
                                 <td>{{ $page->title }}</td>
                                 <td><a href="{{ $page->url }}">{{ $page->url }}</a></td>
                                 <td>
-                                    <a target="_blank" class="btn btn-success" style="color: white;" href="{{url($page->url)}}" title="View page">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
                                     <a class="btn btn-primary" style="color: white;" href="{{route('admin.research-and-analysis.edit', ['id'=>$page->id])}}" title="Edit page">
                                         <i class="fa fa-pencil-square-o"></i>
                                     </a>

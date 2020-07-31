@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Models\ResearchAndAnalysis\ResearchAndAnalysis;
+use App\Http\Services\Admin\ResearchAndAnalysisService;
 use App\Http\Services\LocalizationService;
 use App\Http\Services\Page\PageService;
 use Laravel\Lumen\Routing\Controller as BaseController;
@@ -19,15 +20,21 @@ class PageController extends BaseController
      * @var LocalizationService
      */
     protected $lang;
+    /**
+     * @var ResearchAndAnalysisService
+     */
+    private $researchAndAnalysisService;
 
     /**
-     * @param PageService         $page
+     * @param PageService $page
      * @param LocalizationService $lang
+     * @param ResearchAndAnalysisService $researchAndAnalysisService
      */
-    public function __construct(PageService $page, LocalizationService $lang)
+    public function __construct(PageService $page, LocalizationService $lang, ResearchAndAnalysisService $researchAndAnalysisService)
     {
         $this->page = $page;
         $this->lang = $lang;
+        $this->researchAndAnalysisService = $researchAndAnalysisService;
     }
 
     /**
@@ -207,9 +214,9 @@ class PageController extends BaseController
 
         $hideSearchBar = true;
 
-        $researches = ResearchAndAnalysis::all();
+        $researches = $this->researchAndAnalysisService->paginate();
 
-        $featured = ResearchAndAnalysis::whereNotNull('featured_at')->orderBy('featured_index')->get();
+        $featured = $this->researchAndAnalysisService->getFeatured();
 
         return view('page.research-and-analysis', compact('page', 'meta' , 'hideSearchBar', 'researches', 'featured'));
     }
