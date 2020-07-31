@@ -10,7 +10,7 @@ class ResearchAndAnalysis extends Model
 {
     protected $table = 'research_analysis';
 
-    protected $fillable = ['title','url'];
+    protected $fillable = ['title','url', 'featured_index' , 'featured_at'];
 
     protected $casts = [
         'content' => 'object',
