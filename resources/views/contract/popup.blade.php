@@ -1,13 +1,10 @@
 <?php
 $favicon  = site()->getImageUrl('favicon', 'ico');
 $siteName = site()->meta('name');
-if (!site()->isRC()) {
-	$siteName .= '<span class="beta">Beta</span>';
-}
 $siteName .= '<span>Contracts</span>';
 $contact_email = site()->contactEmail();
 ?>
-		<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<title> {{ meta('')->title }}</title>
@@ -49,10 +46,10 @@ $contact_email = site()->contactEmail();
 <script>
 	var langClip = {!! json_encode(trans('clip')) !!};
 	var annotationTerms = {
-		annotation_category: @if(site()->isRC()) langClip.key_clause @else langClip.category @endif ,
-		annotation_text: @if(site()->isRC()) langClip.clause_summary @else langClip.text @endif,
-		annotation_text_predefined_placeholder: @if(site()->isRC()) langClip.clause_summary_not_prepared @else langClip.annotation_text_not_prepared @endif,
-		view_annotation: @if(site()->isRC()) langClip.view_clause @else langClip.view @endif
+		annotation_category: @if(site()->isRCCategorySite()) langClip.key_clause @else langClip.category @endif ,
+		annotation_text: @if(site()->isRCCategorySite()) langClip.clause_summary @else langClip.text @endif,
+		annotation_text_predefined_placeholder: @if(site()->isRCCategorySite()) langClip.clause_summary_not_prepared @else langClip.annotation_text_not_prepared @endif,
+		view_annotation: @if(site()->isRCCategorySite()) langClip.view_clause @else langClip.view @endif
 	};
 	var config = {};
 	config.debug = false;

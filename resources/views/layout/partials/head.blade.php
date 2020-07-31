@@ -59,10 +59,10 @@ $gtmID      =  site()->getEnv("GTM_ID");
 		var langSelect = '{{$langSelect}}';
 		var langClip =  {!! json_encode(trans('clip')) !!};
 		var annotationTerms = {
-			annotation_category: @if(site()->isRC()) langClip.key_clause @else langClip.category @endif ,
-			annotation_text: @if(site()->isRC()) langClip.clause_summary @else langClip.text @endif,
-			annotation_text_predefined_placeholder: @if(site()->isRC()) langClip.clause_summary_not_prepared @else langClip.annotation_text_not_prepared @endif,
-			view_annotation: @if(site()->isRC()) langClip.view_clause @else langClip.view @endif
+			annotation_category: @if(site()->isRCCategorySite()) langClip.key_clause @else langClip.category @endif ,
+			annotation_text: @if(site()->isRCCategorySite()) langClip.clause_summary @else langClip.text @endif,
+			annotation_text_predefined_placeholder: @if(site()->isRCCategorySite()) langClip.clause_summary_not_prepared @else langClip.annotation_text_not_prepared @endif,
+			view_annotation: @if(site()->isRCCategorySite()) langClip.view_clause @else langClip.view @endif
 		};
 		var lang = {!! json_encode(trans('annotation')) !!};
 	</script>
