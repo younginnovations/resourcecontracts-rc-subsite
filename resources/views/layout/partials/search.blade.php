@@ -12,8 +12,8 @@ $summary->resource_summary = array_map(
 		},
 		$summary->resource_summary
 	);
-$annotationCategoryLabel = site()->isRC() ? _l('search','key_clauses') : _l('search','annotations_category');
-$annotatedContractsOnlyCheckboxLabel = site()->isRC() ? _l('search','tagged_contracts_only') : _l('search','annotated');
+$annotationCategoryLabel = site()->isRCCategorySite() ? _l('search','key_clauses') : _l('search','annotations_category');
+$annotatedContractsOnlyCheckboxLabel = site()->isRCCategorySite() ? _l('search','tagged_contracts_only') : _l('search','annotated');
 ?>
 <div class="search-input-wrapper">
 	<div class="col-lg-12">

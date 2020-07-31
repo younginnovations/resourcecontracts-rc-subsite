@@ -111,6 +111,16 @@ class SiteService
     }
 
     /**
+     * Check if site category is RC
+     *
+     * @return bool
+     */
+    public function isRCCategorySite()
+    {
+        return strtolower($this->getCategory()) == 'rc';
+    }
+
+    /**
      * Get Site Meta
      *
      * @param null $property

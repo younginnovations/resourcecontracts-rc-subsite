@@ -553,10 +553,10 @@ class ClippingService
     {
         $properties = [];
 
-        $annotationCategory = site()->isRC() ? 'Key Clause' : 'Annotation Category';
-        $annotationText     = site()->isRC() ? 'Clause Summary' : 'Text';
-        $viewAnnnotation    = site()->isRC() ? 'View Clause' : 'View Annotation';
-        $placeholderText    = site()->isRC() ?
+        $annotationCategory = site()->isRCCategorySite() ? 'Key Clause' : 'Annotation Category';
+        $annotationText     = site()->isRCCategorySite() ? 'Clause Summary' : 'Text';
+        $viewAnnnotation    = site()->isRCCategorySite() ? 'View Clause' : 'View Annotation';
+        $placeholderText    = site()->isRCCategorySite() ?
             trans('clip.clause_summary_not_prepared', [], 'messages', 'en')
             : trans('clip.annotation_text_not_prepared', [], 'messages', 'en');
 
