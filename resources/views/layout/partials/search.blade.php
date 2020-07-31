@@ -123,6 +123,10 @@ $annotatedContractsOnlyCheckboxLabel = site()->isRCCategorySite() ? _l('search',
 				@endforeach
 			</select>
 		</div>
+		@if(site()->isCountrySite())
+			<div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
+			</div>
+		@endif
 		@if(Request::path() !== 'search')
 			<div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
 				<label for="">@lang('global.recent_documents')</label>
