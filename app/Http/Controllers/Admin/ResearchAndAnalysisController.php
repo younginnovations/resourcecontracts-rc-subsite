@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Services\Admin\ResearchAndAnalysisService;
+use Illuminate\Contracts\Validation\ValidationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Laravel\Lumen\Routing\Controller;
 
 class ResearchAndAnalysisController extends Controller
@@ -30,7 +32,7 @@ class ResearchAndAnalysisController extends Controller
      */
     public function index()
     {
-        $pages = $this->researchAndAnalysisService->all();
+        $pages = $this->researchAndAnalysisService->paginate();
         return view('admin.research-and-analysis.index', compact('pages'));
     }
 
@@ -47,6 +49,14 @@ class ResearchAndAnalysisController extends Controller
      */
     public function store(Request $request)
     {
+        /* @var \Illuminate\Validation\Validator $validator*/
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string',
+            'url'   => 'required|url'
+        ]);
+        if ($validator->fails()) {
+            throw new ValidationException($validator);
+        }
         $attributes = $request->all();
         $attributes['status'] = isset($attributes['status']) ? (int) $attributes['status'] : 0;
         $this->researchAndAnalysisService->create($request->all());
@@ -63,10 +73,10 @@ class ResearchAndAnalysisController extends Controller
 
     public function update(Request $request, $id)
     {
-        $attritbutes = $request->all();
-        $attritbutes['status'] = isset($attritbutes['status']) ? $attritbutes['status'] : 0;
+        $attributes = $request->all();
+        $attributes['status'] = isset($attributes['status']) ? $attributes['status'] : 0;
 
-        $this->researchAndAnalysisService->update($id, $request->all());
+        $this->researchAndAnalysisService->update($id, $attributes);
 
         return redirect()->route('admin.research-and-analysis.index');
     }
@@ -78,8 +88,27 @@ class ResearchAndAnalysisController extends Controller
         return redirect()->route('admin.research-and-analysis.index');
     }
 
-    public function featured()
+    public function getFeatured()
     {
+        return view('admin.research-and-analysis.edit-featured', [
+            'featured' => $this->researchAndAnalysisService->getFeatured(),
+            'researches' => $this->researchAndAnalysisService->all()
+        ]);
+    }
 
+    public function updateFeatured(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'featured' => 'array',
+            'featured.*.id' => 'required|integer|exists:research_analysis,id',
+            'featured.*.featured_index' => 'required|integer|in:' . join(',', [1,2,3])
+        ]);
+//        if ($validator->fails()) {
+//            return redirect()->back()->withErrors($validator);
+//        }
+
+        $this->researchAndAnalysisService->updateFeatured($request->input('featured'));
+
+        return redirect()->route('admin.research-and-analysis.index');
     }
 }

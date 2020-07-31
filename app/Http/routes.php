@@ -101,6 +101,7 @@ $app->get('page/resources', ['as' => 'page.resources', 'uses' => 'PageController
 $app->get('glossary', ['as' => 'guides', 'uses' => 'PageController@glossary']);
 $app->get('country-sites', ['as' => 'country-sites', 'uses' => 'PageController@countrySites']);
 $app->get('how-to-use', ['as' => 'how-to-use', 'uses' => 'PageController@howToUse']);
+$app->get('research-and-analysis', ['as' => 'how-to-use', 'uses' => 'PageController@researchAndAnalysis']);
 
 /*
 |--------------------------------------------------------------------------
@@ -174,6 +175,8 @@ $app->group(
         $app->get('research-and-analysis/{id}/edit', ['as' => 'admin.research-and-analysis.edit', 'uses' => 'ResearchAndAnalysisController@edit']);
         $app->put('research-and-analysis/{id}', ['as' => 'admin.research-and-analysis.update', 'uses' => 'ResearchAndAnalysisController@update']);
         $app->delete('research-and-analysis/{id}', ['as' => 'admin.research-and-analysis.delete', 'uses' => 'ResearchAndAnalysisController@delete']);
+        $app->get('research-and-analysis/featured', ['as' => 'admin.research-and-analysis.get-featured', 'uses' => 'ResearchAndAnalysisController@getFeatured']);
+        $app->post('research-and-analysis/featured', ['as' => 'admin.research-and-analysis.update-featured', 'uses' => 'ResearchAndAnalysisController@updateFeatured']);
     }
 );
 

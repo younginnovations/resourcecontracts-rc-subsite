@@ -6,6 +6,10 @@
             <h3 class="panel-title pull-left">@lang('admin.research_and_analysis')</h3>
             @if(auth()->user()->is_admin)
                 <div class="pull-right">
+                    <a class="btn btn-default" href="{{ route('admin.research-and-analysis.get-featured') }}">
+                        {{--@lang('admin.edit_featured_research_analysis')--}}
+                        Manage featured research links
+                    </a>
                     <a class="btn btn-default" href="{{ route('admin.research-and-analysis.create') }}">
                         @lang('admin.add_new_research_analysis')</a>
                 </div>

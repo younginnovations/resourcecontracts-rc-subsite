@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Http\Models\ResearchAndAnalysis\ResearchAndAnalysis;
 use App\Http\Services\LocalizationService;
 use App\Http\Services\Page\PageService;
 use Laravel\Lumen\Routing\Controller as BaseController;
@@ -188,5 +189,28 @@ class PageController extends BaseController
         $hideSearchBar = true;
 
         return view('page.master', compact('page', 'meta', 'hideSearchBar'));
+    }
+
+    /**
+     * Research and analysis page
+     *
+     * @return \Illuminate\View\View
+     */
+    public function researchAndAnalysis()
+    {
+        $page = $this->page->get('research-and-analysis');
+
+        $meta = [
+            'title'       => $page->title(),
+            'description' => 'Guides and documents providing further information on reading, understanding, and assessing land contracts.',
+        ];
+
+        $hideSearchBar = true;
+
+        $researches = ResearchAndAnalysis::all();
+
+        $featured = ResearchAndAnalysis::whereNotNull('featured_at')->orderBy('featured_index')->get();
+
+        return view('page.research-and-analysis', compact('page', 'meta' , 'hideSearchBar', 'researches', 'featured'));
     }
 }
