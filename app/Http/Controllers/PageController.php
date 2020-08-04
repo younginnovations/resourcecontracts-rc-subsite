@@ -27,6 +27,7 @@ class PageController extends BaseController
     {
         $this->page = $page;
         $this->lang = $lang;
+        view()->share('currentLang', $lang->getCurrentLang());
     }
 
     /**
@@ -175,17 +176,20 @@ class PageController extends BaseController
     public function guides()
     {
         $page = $this->page->get('guides');
+        $hideSearchBar = true;
 
         if (is_null($page)) {
             abort(404);
+        }
+
+        if(site()->isOLC()) {
+            return view('page.guides', compact('page', 'hideSearchBar'));
         }
 
         $meta = [
             'title'       => $page->title(),
             'description' => 'Guides and documents providing further information on reading, understanding, and assessing land contracts.',
         ];
-
-        $hideSearchBar = true;
 
         return view('page.master', compact('page', 'meta', 'hideSearchBar'));
     }
