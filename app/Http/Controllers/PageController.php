@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Models\ResearchAndAnalysis\ResearchAndAnalysis;
+use App\Http\Services\Admin\OptionService;
 use App\Http\Services\Admin\ResearchAndAnalysisService;
 use App\Http\Services\LocalizationService;
 use App\Http\Services\Page\PageService;
@@ -205,7 +205,8 @@ class PageController extends BaseController
      */
     public function researchAndAnalysis()
     {
-        $page = $this->page->get('research-and-analysis');
+        $optionService = app(OptionService::class);
+        $page = $optionService->get('research_and_analysis_page_text', true);
 
         $meta = [
             'title'       => $page->title(),

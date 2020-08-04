@@ -19,7 +19,7 @@
                     <select name="featured[{{ $featureIndex }}][id]" id="featured-{{ $featureIndex }}" required>
                         <option value="" readonly="">Select featured</option>
                         @foreach($researches as $research)
-                            <option value="{{ $research->id }}" @if($research->featured_index == $featureIndex) selected @endif>{{ $research->title }}</option>
+                            <option value="{{ $research->id }}" @if($research->featured_index == $featureIndex) selected @endif>{{ $research->title->en }}</option>
                         @endforeach
                     </select>
                 </div>

@@ -4,8 +4,8 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Http\Services\Admin\OptionService;
 use App\Http\Services\Admin\ResearchAndAnalysisService;
-use Illuminate\Contracts\Validation\ValidationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Lumen\Routing\Controller;
@@ -16,15 +16,21 @@ class ResearchAndAnalysisController extends Controller
      * @var ResearchAndAnalysisService
      */
     private $researchAndAnalysisService;
+    /**
+     * @var OptionService
+     */
+    private $optionService;
 
     /**
      * ResearchAndAnalysisController constructor.
      * @param ResearchAndAnalysisService $researchAndAnalysisService
+     * @param OptionService $optionService
      */
-    public function __construct(ResearchAndAnalysisService $researchAndAnalysisService)
+    public function __construct(ResearchAndAnalysisService $researchAndAnalysisService, OptionService $optionService)
     {
         $this->researchAndAnalysisService = $researchAndAnalysisService;
         $this->middleware('user');
+        $this->optionService = $optionService;
     }
 
     /**
@@ -32,8 +38,9 @@ class ResearchAndAnalysisController extends Controller
      */
     public function index()
     {
+        $textOptions = $this->optionService->get('research_and_analysis_page_text', true);
         $pages = $this->researchAndAnalysisService->paginate();
-        return view('admin.research-and-analysis.index', compact('pages'));
+        return view('admin.research-and-analysis.index', compact('pages', 'textOptions'));
     }
 
     /**
@@ -49,14 +56,14 @@ class ResearchAndAnalysisController extends Controller
      */
     public function store(Request $request)
     {
-        /* @var \Illuminate\Validation\Validator $validator*/
-        $validator = Validator::make($request->all(), [
-            'title' => 'required|string',
-            'url'   => 'required|url'
-        ]);
-        if ($validator->fails()) {
-            throw new ValidationException($validator);
-        }
+//        /* @var \Illuminate\Validation\Validator $validator*/
+//        $validator = Validator::make($request->all(), [
+//            'title' => 'required|array',
+//            'url'   => 'required|url'
+//        ]);
+//        if ($validator->fails()) {
+//            return redirect()->back()->withErrors($validator);
+//        }
         $attributes = $request->all();
         $attributes['status'] = isset($attributes['status']) ? (int) $attributes['status'] : 0;
         $this->researchAndAnalysisService->create($request->all());
@@ -98,16 +105,30 @@ class ResearchAndAnalysisController extends Controller
 
     public function updateFeatured(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'featured' => 'array',
-            'featured.*.id' => 'required|integer|exists:research_analysis,id',
-            'featured.*.featured_index' => 'required|integer|in:' . join(',', [1,2,3])
-        ]);
+//        $validator = Validator::make($request->all(), [
+//            'featured' => 'array',
+//            'featured.*.id' => 'required|integer|exists:research_analysis,id',
+//            'featured.*.featured_index' => 'required|integer|in:' . join(',', [1,2,3])
+//        ]);
 //        if ($validator->fails()) {
 //            return redirect()->back()->withErrors($validator);
 //        }
 
         $this->researchAndAnalysisService->updateFeatured($request->input('featured'));
+
+        return redirect()->route('admin.research-and-analysis.index');
+    }
+
+    public function editHeadingText()
+    {
+        $textOptions = $this->optionService->get('research_and_analysis_page_text', true);
+
+        return view('admin.research-and-analysis.edit-page-text', compact('textOptions'));
+    }
+    public function updateHeadingText(Request $request)
+    {
+        $options = $request->all();
+        $this->optionService->update('research_and_analysis_page_text', $options, 'research_and_analysis');
 
         return redirect()->route('admin.research-and-analysis.index');
     }

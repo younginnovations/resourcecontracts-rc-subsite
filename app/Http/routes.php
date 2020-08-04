@@ -177,6 +177,8 @@ $app->group(
         $app->delete('research-and-analysis/{id}', ['as' => 'admin.research-and-analysis.delete', 'uses' => 'ResearchAndAnalysisController@delete']);
         $app->get('research-and-analysis/featured', ['as' => 'admin.research-and-analysis.get-featured', 'uses' => 'ResearchAndAnalysisController@getFeatured']);
         $app->post('research-and-analysis/featured', ['as' => 'admin.research-and-analysis.update-featured', 'uses' => 'ResearchAndAnalysisController@updateFeatured']);
+        $app->post('research-and-analysis/configuration', ['as' => 'admin.research-and-analysis.text-configuration', 'uses' => 'ResearchAndAnalysisController@updateHeadingText']);
+        $app->get('research-and-analysis/configuration', ['as' => 'admin.research-and-analysis.text-configuration', 'uses' => 'ResearchAndAnalysisController@editHeadingText']);
     }
 );
 

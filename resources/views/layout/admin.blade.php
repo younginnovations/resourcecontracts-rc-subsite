@@ -33,7 +33,7 @@
 				@if(site()->isRC())
 					<a href="{{route('admin.research-and-analysis.index')}}"
 							class="@if(strpos($url, 'admin/research-and-analysis') != false) active @endif list-group-item">
-						<i class="fa fa-newspaper-o"></i> @lang('admin.research_and_analysis')
+						<i class="fa fa-newspaper-o"></i> @lang('admin.research_and_analysis.research_and_analysis')
 					</a>
 				@endif
 

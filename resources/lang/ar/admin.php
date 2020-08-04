@@ -48,5 +48,15 @@ return [
     'choose_lang'           => 'اختيار اللغة',
     'select_version'        => 'حدد الإصدار',
     'change_version'        => 'تغيير الإصدار',
-    'research_and_analysis' => 'Research and Analysis',
+    'research_and_analysis'          => [
+        'title'                     => 'عنوان',
+        'url'                       => 'URL',
+        'heading'                   => 'عنوان',
+        'description'               => 'وصف',
+        'research_and_analysis'     => 'البحث والتحليل',
+        'add_new'                   => 'جديد',
+        'links'                     => 'الروابط',
+        'configure_text'            => 'تكوين النص',
+        'manage_featured'           => 'متميز',
+    ],
 ];
