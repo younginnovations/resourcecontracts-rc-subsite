@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layout.app-page')
 <?php
 $editingMode = auth()->isloggedIn();
 $pageVersion = app('request')->get('v');
