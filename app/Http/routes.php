@@ -111,6 +111,19 @@ $app->get('country-sites', ['as' => 'country-sites', 'uses' => 'PageController@c
 $app->get('how-to-use', ['as' => 'how-to-use', 'uses' => 'PageController@howToUse']);
 $app->get('research-and-analysis', ['as' => 'research-and-analysis', 'uses' => 'PageController@researchAndAnalysis']);
 
+
+/*
+|--------------------------------------------------------------------------
+| Download Pages
+|--------------------------------------------------------------------------
+|
+*/
+$app->get('guides/download', ['as' => 'guides.download', 'uses' => 'PageController@guidesDownload']);
+
+
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Auth
