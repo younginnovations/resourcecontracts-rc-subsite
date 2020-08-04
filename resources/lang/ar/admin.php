@@ -56,7 +56,10 @@ return [
         'research_and_analysis'     => 'البحث والتحليل',
         'add_new'                   => 'جديد',
         'links'                     => 'الروابط',
+        'link'                      => 'حلقة الوصل',
         'configure_text'            => 'تكوين النص',
         'manage_featured'           => 'متميز',
+        'featured_links'            => 'روابط مميزة',
+        'edit_link'                 => 'تحرير الارتباط',
     ],
 ];

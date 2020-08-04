@@ -17,7 +17,7 @@
                     <tr>
                         <th>@lang('admin.id')</th>
                         <th>@lang('admin.title')</th>
-                        <th>@lang('admin.link')</th>
+                        <th>@lang('admin.research_and_analysis.links')</th>
                         <th style="min-width: 228px;">@lang('admin.action')</th>
                     </tr>
                     </thead>

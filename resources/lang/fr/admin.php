@@ -56,7 +56,10 @@ return [
         'research_and_analysis'     => 'Recherche et analyse',
         'add_new'                   => 'Ajouter',
         'links'                     => 'Liens',
+        'link'                      => 'Lien',
         'configure_text'            => 'Configurer le texte',
         'manage_featured'           => 'En vedette',
+        'featured_links'           => 'Liens en vedette',
+        'edit_link'                 => 'Modifier le lien',
     ],
 ];

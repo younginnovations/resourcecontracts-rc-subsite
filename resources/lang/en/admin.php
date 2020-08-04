@@ -73,7 +73,10 @@ return [
         'research_and_analysis'     => 'Research and Analysis',
         'add_new'                   => 'New',
         'links'                     => 'Links',
+        'link'                      => 'Link',
         'configure_text'            => 'Configure text',
         'manage_featured'           => 'Featured',
+        'featured_links'            => 'Featured links',
+        'edit_link'                 => 'Edit link',
     ],
 ];
