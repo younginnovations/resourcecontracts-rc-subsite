@@ -18,7 +18,6 @@ $pageVersion = app('request')->get('v');
                     <a href="{{url('logout')}}">@lang('admin.logout')</a></div>
             </div>
         @endif
-
     @endif
 
     <div class="content-static-wrap">

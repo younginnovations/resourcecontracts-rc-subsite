@@ -48,5 +48,15 @@ return [
     'choose_lang'           => 'Choisissez la langue',
     'select_version'        => 'Sélectionnez la version',
     'change_version'        => 'Changer de version',
-    'research_and_analysis' => 'Research and Analysis',
+    'research_and_analysis'          => [
+        'title'                     => 'Titre',
+        'url'                       => 'URL',
+        'heading'                   => 'Titre',
+        'description'               => 'La description',
+        'research_and_analysis'     => 'Recherche et analyse',
+        'add_new'                   => 'Ajouter',
+        'links'                     => 'Liens',
+        'configure_text'            => 'Configurer le texte',
+        'manage_featured'           => 'En vedette',
+    ],
 ];

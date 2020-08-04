@@ -3,15 +3,12 @@
 @section('content')
     <div class="panel panel-default">
         <div class="panel-heading clearfix">
-            <h3 class="panel-title pull-left">@lang('admin.research_and_analysis')</h3>
+            <h3 class="panel-title pull-left">@lang('admin.research_and_analysis.research_and_analysis')</h3>
             @if(auth()->user()->is_admin)
                 <div class="pull-right">
-                    <a class="btn btn-default" href="{{ route('admin.research-and-analysis.get-featured') }}">
-                        {{--@lang('admin.edit_featured_research_analysis')--}}
-                        Manage featured research links
-                    </a>
-                    <a class="btn btn-default" href="{{ route('admin.research-and-analysis.create') }}">
-                        @lang('admin.add_new_research_analysis')</a>
+                    <a class="btn btn-default" href="{{ route('admin.research-and-analysis.get-featured') }}">@lang('admin.research_and_analysis.manage_featured')</a>
+                    <a class="btn btn-default" href="{{ route('admin.research-and-analysis.create') }}">@lang('admin.research_and_analysis.add_new')</a>
+                    <a class="btn btn-primary" href="{{route('admin.research-and-analysis.text-configuration')}}">@lang('admin.research_and_analysis.configure_text')</a>
                 </div>
             @endif
             <div class="panel-body">
@@ -28,7 +25,7 @@
                         @foreach($pages as $page)
                             <tr>
                                 <td>{{ $page->id }}</td>
-                                <td>{{ $page->title }}</td>
+                                <td>{{ $page->title->en }}</td>
                                 <td><a href="{{ $page->url }}">{{ $page->url }}</a></td>
                                 <td>
                                     <a class="btn btn-primary" style="color: white;" href="{{route('admin.research-and-analysis.edit', ['id'=>$page->id])}}" title="Edit page">
@@ -44,6 +41,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div>{!! $pages->render() !!}</div>
             </div>
         </div>
     </div>
