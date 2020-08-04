@@ -27,6 +27,7 @@ class PageController extends BaseController
     {
         $this->page = $page;
         $this->lang = $lang;
+        view()->share('currentLang', $lang->getCurrentLang());
     }
 
     /**
@@ -179,14 +180,8 @@ class PageController extends BaseController
         if (is_null($page)) {
             abort(404);
         }
-
-        $meta = [
-            'title'       => $page->title(),
-            'description' => 'Guides and documents providing further information on reading, understanding, and assessing land contracts.',
-        ];
-
         $hideSearchBar = true;
 
-        return view('page.master', compact('page', 'meta', 'hideSearchBar'));
+        return view('page.guides', compact('page', 'hideSearchBar'));
     }
 }

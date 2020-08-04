@@ -9,7 +9,7 @@
         </div>
         <div class="navbar-right">
             @if(site()->isOLC())
-                <div class="guide-link"><a href="{{route('page.guides')}}">@lang('sidebar.use_this_site')</a></div>
+                <div class="guide-link"><a href="{{route('guides')}}">@lang('sidebar.use_this_site')</a></div>
             @endif
             <ul>
             @include('layout.partials.new-language')
