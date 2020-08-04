@@ -1,29 +1,9 @@
-<?php
-if (!isset($summary)) {
-    $api     = app('App\Http\Services\APIService');
-    $summary = $api->sortSummaryCountry();
-}
-?>
-
-<?php
-$image   = app('App\Http\Services\Admin\ImageService');
-$sidebar = $image->getImageUrl('sidebar');
-?>
-
-@if($sidebar != '')
-	<style>
-        .sidebar-nav > .sidebar-brand a,
-        .sidebar-nav > .sidebar-brand a:hover {
-            background-image: url('{{$sidebar}}');
-        }
-	</style>
-@endif
-
 <div id="sidebar-wrapper" class="sidebar-collapse in">
 	<ul class="sidebar-nav">
 		<li class="sidebar-brand">
-			@include('layout.partials.logo')
+			@include('layout.partials.new-logo')
 		</li>
+
 		@if(site()->isRC())
 			<li><a href="{{url('/')}}" @if(isActiveMenu('')) class="active" @endif> @lang('sidebar.home') </a></li>
 			<li><a href="{{url('about')}}" @if(isActiveMenu('about')) class="active" @endif>@lang('sidebar.about')</a>
@@ -35,13 +15,13 @@ $sidebar = $image->getImageUrl('sidebar');
 			<li><a href="{{url('contact')}}" @if(isActiveMenu('contact')) class="active" @endif>@lang('sidebar.contact')</a></li>
 		@endif
 		@if(site()->isOLC())
-			<li><a href="{{url('/')}}" @if(isActiveMenu('')) class="active" @endif> @lang('sidebar.home') </a></li>
-			<li><a href="{{url('countries')}}" @if(isActiveMenu('countries')) class="active"@endif>@lang('sidebar.browse_by_country')</a>
-			<li><a href="{{url('resources')}}" @if(isActiveMenu('resources')) class="active"@endif>@lang('sidebar.browse_by_resource')</a></li>
-			<li><a href="{{url('about')}}" @if(isActiveMenu('about')) class="active" @endif>@lang('sidebar.aboutOLC')</a></li>
-			<li><a href="{{url('guides')}}" @if(isActiveMenu('guides')) class="active" @endif>@lang('sidebar.guidesOLC')</a></li>
-			<li><a href="{{url('glossary')}}" @if(isActiveMenu('glossary')) class="active"@endif>@lang('sidebar.glossary')</a></li>
-			<li><a href="{{url('faqs')}}" @if(isActiveMenu('faqs')) class="active" @endif>@lang('sidebar.faqs')</a></li>
+			<li><a href="{{url('/')}}" @if(isActiveMenu('')) class="active" @endif > @lang('sidebar_olc.home') </a></li>
+			<li><a href="{{url('countries')}}" @if(isActiveMenu('countries')) class="active" @endif>@lang('sidebar_olc.view_by_country')</a></li>
+			<li><a href="{{url('resources')}}" @if(isActiveMenu('resources')) class="active" @endif>@lang('sidebar_olc.view_by_resource')</a></li>
+			<li><a href="{{url('about')}}" @if(isActiveMenu('about')) class="active" @endif>@lang('sidebar_olc.about')</a></li>
+			<li><a href="{{url('guides')}}" @if(isActiveMenu('guides')) class="active" @endif>@lang('sidebar_olc.use_this_site')</a></li>
+			<li><a href="{{url('glossary')}}" @if(isActiveMenu('glossary')) class="active" @endif>@lang('sidebar_olc.glossary')</a></li>
+			<li><a href="{{url('faqs')}}" @if(isActiveMenu('faqs')) class="active" @endif>@lang('sidebar_olc.faqs')</a></li>
 		@endif
 		@if(site()->isCountrySite())
 			<li><a href="{{url('/')}}" @if(isActiveMenu('')) class="active" @endif> @lang('sidebar.home') </a></li>
