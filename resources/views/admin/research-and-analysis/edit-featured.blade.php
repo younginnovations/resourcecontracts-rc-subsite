@@ -8,7 +8,7 @@
 @section('content')
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">Featured links</h3>
+            <h3 class="panel-title">@lang('admin.research_and_analysis.featured_links')</h3>
         </div>
         <div class="panel-body">
             <form action="{{route('admin.research-and-analysis.update-featured')}}" method="POST">
