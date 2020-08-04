@@ -35,6 +35,7 @@ class PageController extends BaseController
         $this->page = $page;
         $this->lang = $lang;
         $this->researchAndAnalysisService = $researchAndAnalysisService;
+        view()->share('currentLang', $lang->getCurrentLang());
     }
 
     /**
