@@ -15,8 +15,10 @@ class CreateResearchAnalysisTable extends Migration
     {
         Schema::create('research_analysis', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('title');
+            $table->json('title');
             $table->text('url');
+            $table->tinyInteger('featured_index')->nullable();
+            $table->timestamp('featured_at')->nullable();
             $table->timestamps();
         });
     }
