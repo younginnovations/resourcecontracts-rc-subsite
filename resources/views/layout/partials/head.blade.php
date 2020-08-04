@@ -32,7 +32,7 @@ $gtmID      =  site()->getEnv("GTM_ID");
 	</style>
 
 	<link rel="stylesheet" href="{{url('css/style.css?v=1.08')}}">
-    <link rel="stylesheet" href="{{url('css/new.css?v=1.08')}}">
+    <link rel="stylesheet" href="{{url('css/new.css?v=1.09')}}">
     @if(site()->isRC())
         <link rel="stylesheet" href="{{url('css/new-rc.css?v=1.0')}}" media="print" onload="this.media='all'"/>
     @elseif(site()->isOLC())
