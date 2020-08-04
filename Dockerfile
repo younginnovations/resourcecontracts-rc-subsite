@@ -18,6 +18,7 @@ RUN apk --update add \
     php5-dom \
     php5-curl \
     php5-xml \
+    php5-gd \
     supervisor \
     git \
     curl \
