@@ -157,12 +157,30 @@ class FilterController
      */
     protected function processQueries(Request $request)
     {
+        $isRcCategorySite = site()->isRCCategorySite();
         $type = is_array($request->get('type')) ? join(',', $request->get('type')) : $request->get('type');
         $type = $type == '' ? 'metadata|text|annotations' : $type;
 
+        $annotated = $isRcCategorySite ? $request->get('tagged') : $request->get('annotated', '');
+        if ($isRcCategorySite) {
+            $annotationCategoryInput = is_array($request->get('key_clause')) ? join(
+                '|',
+                $request->get(
+                    'key_clause'
+                )
+            ) : $request->get('key_clause');
+        }else{
+            $annotationCategoryInput = is_array($request->get('annotation_category')) ? join(
+                '|',
+                $request->get(
+                    'annotation_category'
+                )
+            ) : $request->get('annotation_category');
+        }
+
         return [
             'q'                   => $request->get('q', ''),
-            'annotated'           => $request->get('annotated', ''),
+            'annotated'           => $annotated,
             'recent'           => $request->get('recent', ''),
             'country_code'        => is_array($request->get('country')) ? join(
                 '|',
@@ -204,12 +222,7 @@ class FilterController
                 '|',
                 $request->get('language')
             ) : $request->get('language'),
-            'annotation_category' => is_array($request->get('annotation_category')) ? join(
-                '|',
-                $request->get(
-                    'annotation_category'
-                )
-            ) : $request->get('annotation_category'),
+            'annotation_category' => $annotationCategoryInput,
             'sortby'              => $request->get('sortby'),
             'order'               => $request->get('order'),
             'group'               => $type,
@@ -230,6 +243,14 @@ class FilterController
      */
     protected function updateFilterData(array $filter, $contract, Request $request)
     {
+        $isRcCategorySite = site()->isRCCategorySite();
+        if ($isRcCategorySite) {
+            $annotationCategoryInput =  is_array($request->get('key_clause'))
+                ? $request->get('key_clause') : [$request->get('key_clause')];
+        }else{
+            $annotationCategoryInput = is_array($request->get('annotation_category'))
+                ? $request->get('annotation_category') : [$request->get('annotation_category')];
+        }
         $filter['country']             = is_array($request->get('country')) ? $request->get('country') : [
             $request->get(
                 'country'
@@ -262,9 +283,7 @@ class FilterController
                 'resource'
             ),
         ];
-        $filter['annotation_category'] = is_array($request->get('annotation_category')) ? $request->get(
-            'annotation_category'
-        ) : [$request->get('annotations_category')];
+        $filter['annotation_category'] = $annotationCategoryInput;
         $filter['type']                = is_array($request->get('type')) ? $request->get('type') : [
             $request->get(
                 'type'
