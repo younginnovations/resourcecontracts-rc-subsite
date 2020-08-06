@@ -30,7 +30,7 @@ class ResearchAndAnalysisService
 
     public function paginate()
     {
-        return $this->researchAndAnalysis->orderBy('updated_at','desc')->paginate();
+        return $this->researchAndAnalysis->whereNull('featured_index')->orderBy('updated_at','desc')->paginate();
     }
 
     public function create(array $attributes)
