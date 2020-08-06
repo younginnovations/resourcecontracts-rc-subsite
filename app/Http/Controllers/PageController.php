@@ -209,8 +209,8 @@ class PageController extends BaseController
         $page = $optionService->get('research_and_analysis_page_text', true);
 
         $meta = [
-            'title'       => $page->title(),
-            'description' => 'Guides and documents providing further information on reading, understanding, and assessing land contracts.',
+            'title'       => 'Research and analysis',
+            'description' => 'Research and analysis',
         ];
 
         $hideSearchBar = true;
