@@ -20,7 +20,7 @@ var Annotations = React.createClass({
             sortBy: 'cluster',
             selectedAnnotation: 0,
             total: 0,
-            message: LANG.loading_annotations,
+            message: annotationTerms.loading_annotations,
             display: false
         }
     },

@@ -31,6 +31,7 @@ return [
     'document_type'                  => 'Document Type',
     'type_contract'                  => 'Type Of Contract',
     'view_annotations'               => 'View all Annotations',
+    'view_annotations_new'           => 'View all Key Clauses',
     'see'                            => 'See',
     'search_results'                 => 'Search results',
     'page_doesnt_exist'              => "The page you’re looking for doesn't exist",

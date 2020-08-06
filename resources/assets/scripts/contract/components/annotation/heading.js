@@ -13,7 +13,7 @@ class Heading extends Component {
 
     render() {
         return (
-            <div className="annotation-title">{this.state.total} {LANG.annotation_count}</div>
+            <div className="annotation-title">{this.state.total} {annotationTerms.annotation_count_text}</div>
         );
     }
 }

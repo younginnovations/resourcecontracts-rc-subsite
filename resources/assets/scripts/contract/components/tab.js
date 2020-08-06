@@ -45,7 +45,7 @@ class Tab extends Component {
                 <Link to="/pdf" data-target="view-container"
                       className={"tab tab-pdf " + this.state.activePdfClass }>{LANG.pdf}</Link>
                 <Link to="/annotations" data-target="annotations"
-                      className="tab tab-annotations">{LANG.annotation_count}</Link>
+                      className="tab tab-annotations">{annotationTerms.langAnnotation.annotation_count}</Link>
                 <Link to="/metadata" data-target="metadata"
                       className="tab tab-metadata">{LANG.metadata}</Link>
             </div>

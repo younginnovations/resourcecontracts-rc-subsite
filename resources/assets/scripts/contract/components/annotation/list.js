@@ -87,7 +87,7 @@ let List = React.createClass({
         });
     },
     render() {
-        let render = (<p className="annotation-loading">{LANG.loading_annotations}</p>);
+        let render = (<p className="annotation-loading">{annotationTerms.langAnnotation.loading_annotations}</p>);
         let clipAll = null;
         if (!this.state.isLoading) {
             let annotations = this.getAnnotations();
@@ -95,7 +95,7 @@ let List = React.createClass({
                 render = this.renderItems();
                 clipAll = (<ClipAll/>);
             } else {
-                render = (<p className="annotation-loading">{LANG.no_annotation}</p>);
+                render = (<p className="annotation-loading">{annotationTerms.no_annotation_msg}</p>);
             }
         }
 

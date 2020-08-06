@@ -15,6 +15,7 @@ return [
     'associated_documents'    => "الوثائق ذات الصلة ",
     'ass_doc_msg'             => "لا توجد  اية وثيقة ذات صلة ",
     'annotation_message'      => "لم يضف أي ملحق تفسيري لهذه الوثيقة",
+    'annotation_message_new'  => 'لم تتم إضافة أي بند رئيسي إلى هذا المستند حتى الآن.',
     'concession'              => "الإمتياز/الرخصة والمشروع",
     'project_title'           => "عنوان المشروع",
     'project_identifier'      => "معرّف المشروع",
@@ -32,6 +33,7 @@ return [
     'view_pins'               => "عرض الملصقات",
     'export'                  => "تصدير",
     'view_annotations'        => "عرض الملحقات التفسيرية",
+    'view_annotations_new'    => "عرض البنود الرئيسية",
     'view_metadata'           => "عرض  البيانات الوصفية",
     'search'                  => "بحث...",
     'results'                 => "النتائج",
@@ -43,5 +45,3 @@ return [
     'exit_fullscreen'         => 'خروج عرض ملء الشاشة',
     'slow_connection_message' => 'تمت إعادة توجيهك إلى عرض نصي بسبب اتصال بطيء بالإنترنت. وثيقة بدف متاحة للتنزيل باستخدام الزر [gif] إلى اليمين.',
 ];
-
-
