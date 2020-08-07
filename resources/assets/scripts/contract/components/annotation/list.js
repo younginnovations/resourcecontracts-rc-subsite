@@ -95,7 +95,7 @@ let List = React.createClass({
                 render = this.renderItems();
                 clipAll = (<ClipAll/>);
             } else {
-                render = (<p className="annotation-loading">{LANG.no_annotation}</p>);
+                render = (<p className="annotation-loading">{annotationTerms.no_annotation_msg}</p>);
             }
         }
 

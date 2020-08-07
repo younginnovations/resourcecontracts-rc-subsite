@@ -31,6 +31,7 @@ return [
     'document_type'                => "Type de document",
     'type_contract'                => "Type de contrat",
     'view_annotations'             => "visualiser toutes les annotations",
+    'view_tags'                    => 'Afficher tous les tags',
     'see'                          => "visualiser",
     'search_results'               => "chercher des résultats ",
     'page_doesnt_exist'            => "La page que vous recherchez n'existe pas",

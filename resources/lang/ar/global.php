@@ -31,6 +31,7 @@ return [
     'document_type'                => "نوع الوثيقة",
     'type_contract'                => "نوع العقد",
     'view_annotations'             => "عرض جميع الملحقات التفسيرية",
+    'view_tags'                    => 'عرض جميع العلامات',
     'see'                          => "عرض",
     'search_results'               => "نتائج البحث",
     'page_doesnt_exist'            => "الصفحة الّتي تبحثون عنها غير موجودة",

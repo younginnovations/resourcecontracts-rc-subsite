@@ -183,7 +183,7 @@
 				<div class="panel panel-default panel-wrap panel-annotation-wrap">
 					<div class="panel-body">
 						<div class="annotation-block">
-							<div class="title">@lang('annotation.annotations')</div>
+							<div class="title">@if(site()->isRCCategorySite()) @lang('annotation.tags') @else @lang('annotation.annotations') @endif</div>
 							<ul>
 								<?php $i = 0; ?>
 								@forelse($contract->annotationsGroup as $category=>$annotation)
@@ -194,17 +194,17 @@
 										<?php $i++; ?>
 									@endif
 								@empty
-									<div class="no-data">@lang('contract.annotation_message')</div>
+									<div class="no-data">@if(site()->isRCCategorySite()) @lang('contract.no_tag_message') @else @lang('contract.annotation_message') @endif</div>
 								@endforelse
 							</ul>
 						</div>
 						<div class="view-all-annotations">
 							@if(count($contract->annotationsGroup)>0)
 								<a href="#annotations"
-								   class="view-annotation"><span>@lang('global.view_annotations')</span></a>
+								   class="view-annotation"><span>@if(site()->isRCCategorySite()) @lang('global.view_tags') @else @lang('global.view_annotations') @endif</span></a>
 							@else
 								<a href="javascript:void();"
-								   class="view-annotation disabled"><span>@lang('global.view_annotations')</span></a>
+								   class="view-annotation disabled"><span>@if(site()->isRCCategorySite()) @lang('global.view_tags') @else @lang('global.view_annotations') @endif</span></a>
 							@endif
 						
 						</div>
@@ -456,7 +456,7 @@
 					<div class="panel-heading clearfix">
 						<div class="annotation-left">
 							{{count($contract->annotationsGroup)}}
-							@if(count($contract->annotationsGroup) > 1) @lang('annotation.annotations') @else  @lang('annotation.annotation') @endif
+							@if(count($contract->annotationsGroup) > 1) @lang('annotation.tags') @else  @lang('annotation.annotation') @endif
 						</div>
 						@if(site()->isClipEnabled())
 							<button id="clip-all-annotations" class="pull-right annotation-clip clipToggleElems static"
@@ -470,6 +470,7 @@
 							<div class="col-md-4">
 								<div class="annotation-category-cluster">
 									<ul>
+										<?php dd($contract->annotationsCluster) ?>
 										@foreach($contract->annotationsCluster as $cluster=>$value)
 											<li>
 												<a href="#cluster-{{str_slug($cluster,'-')}}">  {{_l('annotation', snake_case($cluster))}}</a>
@@ -547,7 +548,7 @@
 
 									<div class="category-wrap">
 										<ul>
-											<li class="no-data">@lang('contract.annotation_message')</li>
+											<li class="no-data">@if(site()->isRCCategorySite()) @lang('contract.no_tag_message') @else @lang('contract.annotation_message') @endif</li>
 										</ul>
 									</div>
 								@endforelse

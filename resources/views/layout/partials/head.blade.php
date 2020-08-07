@@ -58,11 +58,17 @@ $gtmID      =  site()->getEnv("GTM_ID");
 		var app_url = '{{ url()}}';
 		var langSelect = '{{$langSelect}}';
 		var langClip =  {!! json_encode(trans('clip')) !!};
+		var langContract = {!! json_encode(trans('contract')) !!};
+		var langAnnotation = {!! json_encode(trans('annotation')) !!};
 		var annotationTerms = {
 			annotation_category: @if(site()->isRCCategorySite()) langClip.key_clause @else langClip.category @endif ,
 			annotation_text: @if(site()->isRCCategorySite()) langClip.clause_summary @else langClip.text @endif,
 			annotation_text_predefined_placeholder: @if(site()->isRCCategorySite()) langClip.clause_summary_not_prepared @else langClip.annotation_text_not_prepared @endif,
-			view_annotation: @if(site()->isRCCategorySite()) langClip.view_clause @else langClip.view @endif
+			view_annotation: @if(site()->isRCCategorySite()) langClip.view_clause @else langClip.view @endif,
+			document_has_no_annotations: @if(site()->isRCCategorySite()) langAnnotation.no_tag @else langAnnotation.no_annotation @endif,
+			annotation_count_text: @if(site()->isRCCategorySite()) langAnnotation.tag_count @else langAnnotation.annotation_count @endif,
+			loading_annotations: @if(site()->isRCCategorySite()) langAnnotation.loading_tags @else langAnnotation.loading_tags @endif,
+			no_annotation_msg: @if(site()->isRCCategorySite()) langAnnotation.no_tag @else langAnnotation.no_annotation @endif,
 		};
 		var lang = {!! json_encode(trans('annotation')) !!};
 	</script>

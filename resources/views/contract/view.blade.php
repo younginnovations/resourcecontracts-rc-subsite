@@ -1,5 +1,7 @@
 @extends('layout.app-full')
-
+<?php
+$isRcCategorySite = site()->isRCCategorySite();
+?>
 @section('css')
 	<link rel="stylesheet" href="{{ url('css/contract.css?v=1.04') }}">
 	<script>
