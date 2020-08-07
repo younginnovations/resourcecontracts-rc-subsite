@@ -45,7 +45,7 @@ class ResearchAndAnalysisController extends Controller
     }
 
     /**
-     * @return \Illuminate\View\View|\Laravel\Lumen\Application
+     * @return \Illuminate\View\View
      */
     public function create()
     {
