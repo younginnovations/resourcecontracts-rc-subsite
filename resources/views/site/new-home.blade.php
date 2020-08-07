@@ -1,5 +1,5 @@
 <?php
-$image_main  = site()->getImageUrl('bg');
+$image_main = site()->getImageUrl('bg');
 $image_intro = site()->getImageUrl('intro_bg');
 $currentLang = app('translator')->getLocale();
 ?>
@@ -25,13 +25,16 @@ $currentLang = app('translator')->getLocale();
 				<p>{{ $text->homepage_new_tag_line_desc_text->$currentLang or ''}} </p>
 				<form action="{{route('search/group')}}" method="GET" class="search-form" role="search">
 					<div class="form-group clearfix">
-						<input type="text" name="q" class="form-control"
-							   placeholder="@lang('global.search') {{$contracts}} {{ $text->homepage_search_placeholder_text->$currentLang or ''}}..." autocomplete="off">
+						<input type="text" name="q" class="form-control" id="doc-search-field"
+							   placeholder="@lang('global.search') {{$contracts}} {{ $text->homepage_search_placeholder_text->$currentLang or ''}}..."
+							   autocomplete="off">
 						<button>@lang('global.search')</button>
 					</div>
 				</form>
 				<div class="get-started">
-					<h3><a href="{{route('page.resources')}}"> {{ $text->homepage_get_started_text->$currentLang or ''}}</a></h3>
+					<h3>
+						<a href="{{route('page.resources')}}"> {{ $text->homepage_get_started_text->$currentLang or ''}}</a>
+					</h3>
 				</div>
 			</div>
 			<div class="hero-right-wrap">
@@ -86,7 +89,7 @@ $currentLang = app('translator')->getLocale();
 			<h2 class="heading2">{{ $text->homepage_map_card_text->$currentLang or ''}}</h2>
 			<div id="map" class="map-wrap"></div>
 		</div>
-		<!-- <div class="landing_section_logos">
+	<!-- <div class="landing_section_logos">
 			<div class="partners">
 				<h3>@lang('global.partners')</h3>
 				<a href="http://www.resourcegovernance.org/" target="_blank" class="nrgi"
@@ -126,10 +129,36 @@ $currentLang = app('translator')->getLocale();
         var standardCountry = {!! json_encode(trans('country')) !!};
         var documentLang = '{{trans('global.document')}}';
         var documentsLang = '{{trans('global.documents')}}';
+        var searchLang = '{{trans('global.search')}}';
+        var total_docs = '{!! $contracts !!}';
 	</script>
 	<script src="{{url('js/homepage.js')}}"></script>
 	<script>
-		$("body").hasClass("lang-ar")?$(".annotation-wrap").slick({dots:!0,arrows:!1,autoplay:!0,autoplaySpeed:2400,rtl:!0}):$(".annotation-wrap").slick({dots:!0,arrows:!1,autoplay:!0,autoplaySpeed:2400});
+        $("body").hasClass("lang-ar") ? $(".annotation-wrap").slick({
+            dots: !0,
+            arrows: !1,
+            autoplay: !0,
+            autoplaySpeed: 2400,
+            rtl: !0
+        }) : $(".annotation-wrap").slick({dots: !0, arrows: !1, autoplay: !0, autoplaySpeed: 2400});
+
+        if ($(window).width() < 350) {
+            $('#doc-search-field').attr("placeholder", searchLang);
+        } else if ($(window).width() > 350 && $(window).width() < 600) {
+            let placeholder = searchLang + ' ' + total_docs + ' ' + documentsLang;
+            $('#doc-search-field').attr("placeholder", placeholder);
+        }
+        $(window).resize(function () {
+            if ($(window).width() < 350) {
+                $('#doc-search-field').attr("placeholder", searchLang);
+            } else if ($(window).width() > 350 && $(window).width() < 600) {
+                let placeholder = searchLang + ' ' + total_docs + ' ' + documentsLang;
+                $('#doc-search-field').attr("placeholder", placeholder);
+            } else {
+                let placeholder = searchLang + ' ' + total_docs + ' ' + '{!! $text->homepage_search_placeholder_text->$currentLang  or "" !!}...';
+                $('#doc-search-field').attr("placeholder", placeholder);
+            }
+        });
 	</script>
 @stop
 @endif
