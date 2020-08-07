@@ -16,6 +16,7 @@ class ResearchAndAnalysisController extends Controller
      * @var ResearchAndAnalysisService
      */
     private $researchAndAnalysisService;
+
     /**
      * @var OptionService
      */
@@ -56,14 +57,6 @@ class ResearchAndAnalysisController extends Controller
      */
     public function store(Request $request)
     {
-//        /* @var \Illuminate\Validation\Validator $validator*/
-//        $validator = Validator::make($request->all(), [
-//            'title' => 'required|array',
-//            'url'   => 'required|url'
-//        ]);
-//        if ($validator->fails()) {
-//            return redirect()->back()->withErrors($validator);
-//        }
         $attributes = $request->all();
         $attributes['status'] = isset($attributes['status']) ? (int) $attributes['status'] : 0;
         $this->researchAndAnalysisService->create($request->all());
@@ -71,6 +64,10 @@ class ResearchAndAnalysisController extends Controller
         return redirect()->route('admin.research-and-analysis.index');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\View\View|\Laravel\Lumen\Application
+     */
     public function edit($id)
     {
         $research = $this->researchAndAnalysisService->find($id);
@@ -78,16 +75,24 @@ class ResearchAndAnalysisController extends Controller
         return view('admin.research-and-analysis.edit', compact('research'));
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request, $id)
     {
         $attributes = $request->all();
         $attributes['status'] = isset($attributes['status']) ? $attributes['status'] : 0;
-
         $this->researchAndAnalysisService->update($id, $attributes);
 
         return redirect()->route('admin.research-and-analysis.index');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function delete($id)
     {
         $this->researchAndAnalysisService->delete($id);
@@ -95,6 +100,9 @@ class ResearchAndAnalysisController extends Controller
         return redirect()->route('admin.research-and-analysis.index');
     }
 
+    /**
+     * @return \Illuminate\View\View
+     */
     public function getFeatured()
     {
         return view('admin.research-and-analysis.edit-featured', [
@@ -103,28 +111,31 @@ class ResearchAndAnalysisController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updateFeatured(Request $request)
     {
-//        $validator = Validator::make($request->all(), [
-//            'featured' => 'array',
-//            'featured.*.id' => 'required|integer|exists:research_analysis,id',
-//            'featured.*.featured_index' => 'required|integer|in:' . join(',', [1,2,3])
-//        ]);
-//        if ($validator->fails()) {
-//            return redirect()->back()->withErrors($validator);
-//        }
-
         $this->researchAndAnalysisService->updateFeatured($request->input('featured'));
 
         return redirect()->route('admin.research-and-analysis.index');
     }
 
+    /**
+     * @return \Illuminate\View\View
+     */
     public function editHeadingText()
     {
         $textOptions = $this->optionService->get('research_and_analysis_page_text', true);
 
         return view('admin.research-and-analysis.edit-page-text', compact('textOptions'));
     }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updateHeadingText(Request $request)
     {
         $options = $request->all();

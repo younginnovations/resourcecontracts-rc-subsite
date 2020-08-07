@@ -207,16 +207,12 @@ class PageController extends BaseController
     {
         $optionService = app(OptionService::class);
         $page = $optionService->get('research_and_analysis_page_text', true);
-
         $meta = [
             'title'       => 'Research and analysis',
             'description' => 'Research and analysis',
         ];
-
         $hideSearchBar = true;
-
         $researches = $this->researchAndAnalysisService->paginate();
-
         $featured = $this->researchAndAnalysisService->getFeatured();
 
         return view('page.research-and-analysis', compact('page', 'meta' , 'hideSearchBar', 'researches', 'featured'));
