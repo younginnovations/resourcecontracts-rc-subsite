@@ -176,12 +176,21 @@ class PageController extends BaseController
     public function guides()
     {
         $page = $this->page->get('guides');
+        $hideSearchBar = true;
 
         if (is_null($page)) {
             abort(404);
         }
-        $hideSearchBar = true;
 
-        return view('page.guides', compact('page', 'hideSearchBar'));
+        if(site()->isOLC()) {
+            return view('page.guides', compact('page', 'hideSearchBar'));
+        }
+
+        $meta = [
+            'title'       => $page->title(),
+            'description' => 'Guides and documents providing further information on reading, understanding, and assessing land contracts.',
+        ];
+
+        return view('page.master', compact('page', 'meta', 'hideSearchBar'));
     }
 }
