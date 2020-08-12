@@ -1638,6 +1638,7 @@ footer {
   text-decoration: none;
 }
 
+
 .guide-nav li.active:after {
   background: #F1755B;
   border-radius: 4px;
@@ -1646,6 +1647,22 @@ footer {
   height: 5px;
   margin-top: 6px;
   width: 100%;
+}
+
+.guide-nav li:hover a {
+  color: #F1755B;
+}
+
+.olc .guide-nav li.active:after{
+  background: #27AE60;
+}
+
+.olc .guide-nav li:hover a {
+  color: #27AE60;
+}
+
+.olc .guide-nav li.active a {
+  color: #000;
 }
 
 .content-static-wrap {
@@ -1816,13 +1833,13 @@ footer {
 }
 
 .not-front .mini__menu,
-.page-guides .not-front .mini__menu,
-.page-faqs .not-front .mini__menu,
-.page-glossary .not-front .mini__menu,
-.page-about .not-front .mini__menu,
-.page-contact .not-front .mini__menu,
-.page-research-and-analysis .not-front .mini__menu,
-.page-country-sites .not-front .mini__menu {
+.rc .page-guides .not-front .mini__menu,
+.rc .page-faqs .not-front .mini__menu,
+.rc .page-glossary .not-front .mini__menu,
+.rc .page-about .not-front .mini__menu,
+.rc .page-contact .not-front .mini__menu,
+.rc .page-research-and-analysis .not-front .mini__menu,
+.rc .page-country-sites .not-front .mini__menu {
   display: block !important;
 }
 
@@ -1837,7 +1854,7 @@ footer {
 }
 
 @media all and (min-width: 980px) {
-  .not-front .mini__menu {
+  .olc .not-front .mini__menu {
     display: flex !important;
   }
 }
