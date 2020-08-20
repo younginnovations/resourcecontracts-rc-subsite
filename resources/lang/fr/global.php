@@ -91,4 +91,5 @@ return [
     'term_explained'               => 'Explication des termes du contrat',
     'view'                         => 'Vue',
     'explore_contracts_by_country' => 'Explorer les contrats par pays',
+    'research_and_analysis'        => 'Recherche et Analyse',
 ];

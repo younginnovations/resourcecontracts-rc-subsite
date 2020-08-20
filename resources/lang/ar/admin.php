@@ -47,5 +47,21 @@ return [
     'enable_localization'   => 'تمكين التوطين',
     'choose_lang'           => 'اختيار اللغة',
     'select_version'        => 'حدد الإصدار',
-    'change_version'        => 'تغيير الإصدار'
+    'change_version'        => 'تغيير الإصدار',
+    'research_and_analysis'          => [
+        'title'                     => 'عنوان',
+        'url'                       => 'URL',
+        'heading'                   => 'عنوان',
+        'description'               => 'وصف',
+        'research_and_analysis'     => 'البحث والتحليل',
+        'add_new'                   => 'جديد',
+        'links'                     => 'الروابط',
+        'link'                      => 'حلقة الوصل',
+        'configure_text'            => 'تكوين النص',
+        'manage_featured'           => 'متميز',
+        'featured_links'            => 'روابط مميزة',
+        'edit_link'                 => 'تحرير الارتباط',
+        'publication_date'          => 'تاريخ النشر',
+        'ignore_publication_day'    => 'تجاهل النشر اليوم'
+    ],
 ];

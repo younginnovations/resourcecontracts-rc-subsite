@@ -8,6 +8,9 @@
             @include('layout.partials.new-logo')
         </div>
         <div class="navbar-right">
+            @if(site()->isRC())
+                <div class="guide-link"><a href="{{route('research-and-analysis')}}">@lang('global.research_and_analysis')</a></div>
+            @endif
             @if(site()->isOLC())
                 <div class="guide-link"><a href="{{route('page.guides')}}">@lang('sidebar.use_this_site')</a></div>
             @endif

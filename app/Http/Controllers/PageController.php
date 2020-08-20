@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+use App\Http\Services\Admin\OptionService;
+use App\Http\Services\Admin\ResearchAndAnalysisService;
 use App\Http\Services\LocalizationService;
 use App\Http\Services\Page\PageService;
 use Laravel\Lumen\Routing\Controller as BaseController;
@@ -18,15 +20,21 @@ class PageController extends BaseController
      * @var LocalizationService
      */
     protected $lang;
+    /**
+     * @var ResearchAndAnalysisService
+     */
+    private $researchAndAnalysisService;
 
     /**
-     * @param PageService         $page
+     * @param PageService $page
      * @param LocalizationService $lang
+     * @param ResearchAndAnalysisService $researchAndAnalysisService
      */
-    public function __construct(PageService $page, LocalizationService $lang)
+    public function __construct(PageService $page, LocalizationService $lang, ResearchAndAnalysisService $researchAndAnalysisService)
     {
         $this->page = $page;
         $this->lang = $lang;
+        $this->researchAndAnalysisService = $researchAndAnalysisService;
     }
 
     /**
@@ -179,14 +187,29 @@ class PageController extends BaseController
         if (is_null($page)) {
             abort(404);
         }
-
-        $meta = [
-            'title'       => $page->title(),
-            'description' => 'Guides and documents providing further information on reading, understanding, and assessing land contracts.',
-        ];
-
         $hideSearchBar = true;
 
-        return view('page.master', compact('page', 'meta', 'hideSearchBar'));
+        return view('page.guides', compact('page', 'hideSearchBar'));
+    }
+
+    /**
+     * Research and analysis page
+     *
+     * @return \Illuminate\View\View
+     */
+    public function researchAndAnalysis()
+    {
+        $optionService = app(OptionService::class);
+        $page = $optionService->get('research_and_analysis_page_text', true);
+        $background = $optionService->get('research_and_analysis_bg_image', true);
+        $meta = [
+            'title'       => 'Research and analysis',
+            'description' => 'Research and analysis',
+        ];
+        $hideSearchBar = true;
+        $researches = $this->researchAndAnalysisService->getLinks();
+        $featured = $this->researchAndAnalysisService->getFeaturedLinks();
+
+        return view('page.research-and-analysis', compact('page', 'meta' , 'hideSearchBar', 'researches', 'featured', 'background'));
     }
 }

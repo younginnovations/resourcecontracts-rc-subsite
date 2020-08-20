@@ -65,4 +65,22 @@ return [
     'homepage_map_card'              => 'Homepage Map',
     'homepage_footer'                => 'Homepage Footer Text',
     'homepage_footer_link'           => 'Homepage Footer Link Text',
+    'research_and_analysis'          => [
+        'title'                         => 'Title',
+        'url'                           => 'URL',
+        'heading'                       => 'Heading',
+        'description'                   => 'Description',
+        'research_and_analysis'         => 'Research and Analysis',
+        'add_new'                       => 'New',
+        'links'                         => 'Links',
+        'link'                          => 'Link',
+        'configure_text'                => 'Configure text',
+        'manage_featured'               => 'Featured',
+        'featured_links'                => 'Featured links',
+        'edit_link'                     => 'Edit link',
+        'edit_background_image_title'   => 'Background image',
+        'background_image'              => 'Background Image',
+        'publication_date'              => 'Publication Date',
+        'ignore_publication_day'        => 'Ignore publication day'
+    ],
 ];

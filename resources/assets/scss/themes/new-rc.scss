@@ -2,7 +2,7 @@ $color-primary: #f37456;
 
 $gradient-base: linear-gradient(180deg,
   #131317 -60.19%,
-  rgba(65, 66, 99, 0.09) 100%);
+  rgba(65, 66, 99, 0.2) 100%);
 
 $gradient-not-found: radial-gradient(50% 79%, #f99172 32%, #df8a71 79%);
 
@@ -11,39 +11,6 @@ $img-sprite: url(../../images/ic_sprite.svg);
 $img-not-found: url(../../images/error-bg.png);
 
 @import "../new-style.scss";
-
-// .front-row-top-wrap {
-//   border-bottom: 1px solid rgba(242, 242, 242, 0.3);
-//   margin-top: -1px;
-//   position: relative;
-//   z-index: 1;
-// }
-
-// .trigger:before {
-//   filter: brightness(0) invert(1);
-// }
-
-// .navbar-brand,
-// .navbar-brand:hover {
-//   color: #fff;
-
-//   span {
-//     color: rgba(#fff, 0.7);
-//   }
-// }
-
-// .navbar-right ul li a {
-//   color: rgba(#fff, 0.7);
-
-//   &:hover {
-//     color: #fff;
-//   }
-
-//   &.active {
-//     color: #fff;
-//     font-family: Open-Sans-Regular;
-//   }
-// }
 
 .hero-image {
   padding-top: 80px;
