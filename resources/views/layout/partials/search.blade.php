@@ -12,8 +12,9 @@ $summary->resource_summary = array_map(
 		},
 		$summary->resource_summary
 	);
-$annotationCategoryLabel = site()->isRCCategorySite() ? _l('search','key_clauses') : _l('search','annotations_category');
-$annotatedContractsOnlyCheckboxLabel = site()->isRCCategorySite() ? _l('search','tagged_contracts_only') : _l('search','annotated');
+$isRcCategory = site()->isRCCategorySite();
+$annotationCategoryLabel = $isRcCategory ? _l('search','key_clauses') : _l('search','annotations_category');
+$annotatedContractsOnlyCheckboxLabel = $isRcCategory ? _l('search','tagged_contracts_only') : _l('search','annotated');
 ?>
 <div class="search-input-wrapper">
 	<div class="col-lg-12">
@@ -115,7 +116,7 @@ $annotatedContractsOnlyCheckboxLabel = site()->isRCCategorySite() ? _l('search',
 			<?php $annotation_category = array_map('trim', (array) $category->results);
 			sort($annotation_category);
 			?>
-			<select name="annotation_category[]" id="annotation_category" multiple="multiple">
+			<select name="@if($isRcCategory){{ 'key_clause[]' }}@else{{ 'annotation_category[]' }}@endif" id="annotation_category" multiple="multiple">
 				@foreach(array_filter($annotation_category) as $cat)
 					<option @if(isset($filter['annotation_category']) && in_array($cat,
                         $filter['annotation_category'])) selected="selected"
@@ -137,8 +138,9 @@ $annotatedContractsOnlyCheckboxLabel = site()->isRCCategorySite() ? _l('search',
 
 		<div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
 			<label for="">{{ $annotatedContractsOnlyCheckboxLabel }}</label>
-			<input type="checkbox" name="annotated" value="1" class="form-control"
-				   @if(isset($filter['annotated']) && $filter['annotated']==1) checked @endif>
+			<input type="checkbox" name="@if($isRcCategory){{ 'tagged' }}@else{{ 'annotated' }}@endif" value="1" class="form-control"
+				   @if((isset($filter['annotated']) && $filter['annotated']==1) || (isset($filter['tagged']) && $filter['tagged'] == 1)) checked @endif
+			>
 		</div>
 	</div>
 	<div class="col-lg-12">

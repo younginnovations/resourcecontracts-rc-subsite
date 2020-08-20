@@ -1,5 +1,7 @@
 @extends('layout.app-full')
-
+<?php
+$isRcCategorySite = site()->isRCCategorySite();
+?>
 @section('css')
 	<link rel="stylesheet" href="{{ url('css/contract.css?v=1.04') }}">
 	<script>
@@ -82,5 +84,5 @@
 	<script>
 		PDFJS.workerSrc = "{{url('js/pdfjs/pdf.worker.js')}}"
 	</script>
-	<script src="{{ url('js/contract_view.js') }}?v=2020-07-22"></script>
+	<script src="{{ url('js/contract_view.js') }}?v=2020-08-19"></script>
 @stop

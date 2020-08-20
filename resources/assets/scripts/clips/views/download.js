@@ -106,7 +106,7 @@ var DownloadManager = React.createClass({
         var date = d.getDate() + "_" + (d.getMonth() + 1) + "_" + d.getFullYear() + "_" + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds();
         var downloadName = "clipped_annotations_" + date;
         var csvContent = "data:text/csv;charset=utf-8,";
-        var head = [langClip.documentTitle, langClip.country, langClip.year, langClip.annotationCat, langClip.text];
+        var head = [langClip.documentTitle, langClip.country, langClip.year, annotationTerms.langClip.annotationCat, annotationTerms.langClip.text];
         csvContent += head.join(',') + "\n";
         _.map(clips.models, function (clip) {
             var t = ['"' + clip.get('name') + '"', '"' + clip.get('country') + '"', '"' + clip.get('year') + '"', '"' + clip.get('category') + '"', '"' + clip.get('text') + '"'];

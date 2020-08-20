@@ -58,11 +58,35 @@ $gtmID      =  site()->getEnv("GTM_ID");
 		var app_url = '{{ url()}}';
 		var langSelect = '{{$langSelect}}';
 		var langClip =  {!! json_encode(trans('clip')) !!};
+		var langContract = {!! json_encode(trans('contract')) !!};
+		var langAnnotation = {!! json_encode(trans('annotation')) !!};
 		var annotationTerms = {
 			annotation_category: @if(site()->isRCCategorySite()) langClip.key_clause @else langClip.category @endif ,
 			annotation_text: @if(site()->isRCCategorySite()) langClip.clause_summary @else langClip.text @endif,
 			annotation_text_predefined_placeholder: @if(site()->isRCCategorySite()) langClip.clause_summary_not_prepared @else langClip.annotation_text_not_prepared @endif,
-			view_annotation: @if(site()->isRCCategorySite()) langClip.view_clause @else langClip.view @endif
+			view_annotation: @if(site()->isRCCategorySite()) langClip.view_clause @else langClip.view @endif,
+			document_has_no_annotations: @if(site()->isRCCategorySite()) langAnnotation.no_annotation_new @else langAnnotation.no_annotation @endif,
+			annotation_count_text: @if(site()->isRCCategorySite()) langAnnotation.annotation_count_new @else langAnnotation.annotation_count @endif,
+			loading_annotations: @if(site()->isRCCategorySite()) langAnnotation.loading_annotations_new @else langAnnotation.loading_annotations @endif,
+			no_annotation_msg: @if(site()->isRCCategorySite()) langAnnotation.no_annotation_new @else langAnnotation.no_annotation @endif,
+			langClip: {
+				clip_annotation: @if(site()->isRCCategorySite()) langClip.clip_annotation_new @else langClip.clip_annotation @endif,
+				clip_contract_annotations: @if(site()->isRCCategorySite()) langClip.clip_contract_annotations_new @else langClip.clip_contract_annotations @endif,
+				clipped_contract_annotations: @if(site()->isRCCategorySite()) langClip.clipped_contract_annotations_new @else langClip.clipped_contract_annotations @endif,
+				annotationCat: @if(site()->isRCCategorySite()) langClip.key_clause @else langClip.annotationCat @endif,
+				text: @if(site()->isRCCategorySite()) langClip.clause_summary @else langClip.text @endif,
+				subjectClip: @if(site()->isRCCategorySite()) langClip.subjectClipNew @else langClip.subjectClip @endif,
+				clipped: @if(site()->isRCCategorySite()) langClip.clipped_new @else langClip.clipped @endif
+			},
+			langContract: {
+
+			},
+			langAnnotation: {
+				loading_annotations: @if(site()->isRCCategorySite()) langAnnotation.loading_annotations_new @else langAnnotation.loading_annotations @endif,
+				annotation: @if(site()->isRCCategorySite()) langAnnotation.annotation_new @else langAnnotation.annotation @endif,
+				annotation_excel: @if(site()->isRCCategorySite()) langAnnotation.annotations_excel_new @else langAnnotation.annotations_excel @endif,
+				annotation_count_text: @if(site()->isRCCategorySite()) langAnnotation.annotation_count_new @else langAnnotation.annotation_count @endif
+			}
 		};
 		var lang = {!! json_encode(trans('annotation')) !!};
 	</script>

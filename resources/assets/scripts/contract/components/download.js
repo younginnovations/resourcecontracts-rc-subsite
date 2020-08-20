@@ -46,7 +46,7 @@ class Download extends Component {
         return (
             <li>
                 <a href={Config.download.annotation}>
-                    <div dangerouslySetInnerHTML={{__html: lang.annotations_excel}}/>
+                    <div dangerouslySetInnerHTML={{__html: annotationTerms.langAnnotation.annotations_excel}}/>
                 </a>
             </li>);
     }

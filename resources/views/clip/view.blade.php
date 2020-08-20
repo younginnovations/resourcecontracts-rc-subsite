@@ -1,6 +1,9 @@
 @extends('layout.app-full')
 
 @section('content')
+<?php
+$isRcCategorySite = site()->isRCCategorySite();
+?>
 	<div class="row clip-panel-row">
 		<div class="col-lg-12 panel-top-wrapper attached-top-wrapper">
 			<div class="panel-top-content">

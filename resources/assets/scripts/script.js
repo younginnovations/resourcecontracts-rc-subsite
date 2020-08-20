@@ -639,8 +639,8 @@ $(document).ready(function () {
         let isClipped = false;
 
         let isContractClip = $(elem).hasClass("contractClipIcon");
-        let popoverTextClip = isContractClip ? langClip.clip_contract_annotations : langClip.clip_annotation;
-        let popoverTextClipped = isContractClip ? langClip.clipped_contract_annotations : langClip.clipped;
+        let popoverTextClip = isContractClip ? annotationTerms.langClip.clip_contract_annotations : annotationTerms.langClip.clip_annotation;
+        let popoverTextClipped = isContractClip ? annotationTerms.langClip.clipped_contract_annotations : annotationTerms.langClip.clipped;
 
         if (clippedId) {
 
@@ -656,7 +656,7 @@ $(document).ready(function () {
             }
 
         } else {
-            $(elem).attr({"data-action": "add", "data-content": langClip.clip_annotation});
+            $(elem).attr({"data-action": "add", "data-content": annotationTerms.langClip.clip_annotation});
         }
 
     }
@@ -675,11 +675,11 @@ $(document).ready(function () {
 
         if (action === "add") {
 
-            $(this).attr({"data-content": langClip.clipped});
+            $(this).attr({"data-content": annotationTerms.langClip.clipped});
 
         } else {
 
-            $(this).attr({"data-content": langClip.clip_annotation});
+            $(this).attr({"data-content": annotationTerms.langClip.clip_annotation});
 
         }
 
@@ -702,19 +702,19 @@ $(document).ready(function () {
 
         if (action === "add") {
 
-            $(this).attr({"data-content": langClip.clipped_contract_annotations});
+            $(this).attr({"data-content": annotationTerms.langClip.clipped_contract_annotations});
             $(this).parents("td").find(".annotation-clip-icon.static").addClass("annotation-clipped").attr({
                 "data-action": "remove",
-                "data-content": langClip.clipped
+                "data-content": annotationTerms.langClip.clipped
             });
             ;
 
         } else {
 
-            $(this).attr({"data-content": langClip.clip_contract_annotations});
+            $(this).attr({"data-content": annotationTerms.langClip.clip_contract_annotations});
             $(this).parents("td").find(".annotation-clip-icon.static").removeClass("annotation-clipped").attr({
                 "data-action": "add",
-                "data-content": langClip.clip_annotation
+                "data-content": annotationTerms.langClip.clip_annotation
             });
 
         }

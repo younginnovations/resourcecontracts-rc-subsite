@@ -183,7 +183,7 @@
 				<div class="panel panel-default panel-wrap panel-annotation-wrap">
 					<div class="panel-body">
 						<div class="annotation-block">
-							<div class="title">@lang('annotation.annotations')</div>
+							<div class="title">@if(site()->isRCCategorySite()) @lang('annotation.annotations_new') @else @lang('annotation.annotations') @endif</div>
 							<ul>
 								<?php $i = 0; ?>
 								@forelse($contract->annotationsGroup as $category=>$annotation)
@@ -194,17 +194,17 @@
 										<?php $i++; ?>
 									@endif
 								@empty
-									<div class="no-data">@lang('contract.annotation_message')</div>
+									<div class="no-data">@if(site()->isRCCategorySite()) @lang('contract.annotation_message_new') @else @lang('contract.annotation_message') @endif</div>
 								@endforelse
 							</ul>
 						</div>
 						<div class="view-all-annotations">
 							@if(count($contract->annotationsGroup)>0)
 								<a href="#annotations"
-								   class="view-annotation"><span>@lang('global.view_annotations')</span></a>
+								   class="view-annotation"><span>@if(site()->isRCCategorySite()) @lang('global.view_annotations_new') @else @lang('global.view_annotations') @endif</span></a>
 							@else
 								<a href="javascript:void();"
-								   class="view-annotation disabled"><span>@lang('global.view_annotations')</span></a>
+								   class="view-annotation disabled"><span>@if(site()->isRCCategorySite()) @lang('global.view_annotations_new') @else @lang('global.view_annotations') @endif</span></a>
 							@endif
 						
 						</div>
@@ -456,7 +456,11 @@
 					<div class="panel-heading clearfix">
 						<div class="annotation-left">
 							{{count($contract->annotationsGroup)}}
-							@if(count($contract->annotationsGroup) > 1) @lang('annotation.annotations') @else  @lang('annotation.annotation') @endif
+							@if(count($contract->annotationsGroup) > 1)
+								@if(site()->isRCCategorySite()) @lang('annotation.annotations_new') @else @lang('annotation.annotations') @endif
+							@else
+								@if(site()->isRCCategorySite()) @lang('annotation.annotation_new') @else @lang('annotation.annotation') @endif
+							@endif
 						</div>
 						@if(site()->isClipEnabled())
 							<button id="clip-all-annotations" class="pull-right annotation-clip clipToggleElems static"
@@ -547,7 +551,7 @@
 
 									<div class="category-wrap">
 										<ul>
-											<li class="no-data">@lang('contract.annotation_message')</li>
+											<li class="no-data">@if(site()->isRCCategorySite()) @lang('contract.annotation_message_new') @else @lang('contract.annotation_message') @endif</li>
 										</ul>
 									</div>
 								@endforelse

@@ -141,7 +141,7 @@ class Item extends Component {
     }
 
     getType() {
-        var titleText = (this.props.result.type == 'text') ? LANG.text : LANG.annotation;
+        var titleText = (this.props.result.type == 'text') ? LANG.text : annotationTerms.langAnnotation.annotation;
         var className = (this.props.result.type == 'text') ? 'text' : 'annotations';
 
         return (<span className={className} title={titleText}></span>);
