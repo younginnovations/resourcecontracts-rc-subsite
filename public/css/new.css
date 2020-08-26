@@ -1617,7 +1617,7 @@ footer {
 .content-static-wrap h1 {
   font-size: 32px;
   line-height: 50px;
-  margin: 0 0 40px;
+  margin: 0 0 40px!important;
 }
 
 .content-static-wrap ul.guide-nav {
@@ -1653,7 +1653,7 @@ footer {
   color: #F1755B;
 }
 
-.olc .guide-nav li.active:after{
+.olc .guide-nav li.active:after {
   background: #27AE60;
 }
 
@@ -1671,15 +1671,15 @@ footer {
 
 .content-static-wrap h2 {
   font-size: 32px;
-  font-weight: bold;
+  font-family: Open-Sans-Bold;
+  line-height: 42px;
   margin: 0 0 30px;
-  padding-top: 30px;
 }
 
 .content-static-wrap ul li,
 .content-static-wrap ol li,
 .content-static-wrap p {
-  font-size: 14px;
+  font-size: 14px !important;
 }
 
 .content-static-wrap ul li,
@@ -1689,7 +1689,8 @@ footer {
 
 .content-static-wrap h3 {
   font-size: 20px;
-  font-weight: bold;
+  font-family: Open-Sans-Bold;
+  line-height: 28px;
   margin: 0 0 14px;
 }
 
@@ -1705,6 +1706,14 @@ footer {
   margin: 0;
 }
 
+.content-static-wrap section {
+  margin-bottom: 48px;
+}
+
+.content-static-wrap section>div {
+  margin-bottom: 40px;
+}
+
 .page-break {
   margin-bottom: 30px;
 }
@@ -1716,6 +1725,10 @@ footer {
   height: 1px;
   margin: 40px auto 0;
   width: 214px;
+}
+
+.guide-wrapper h2 {
+  padding-top: 30px;
 }
 
 .guide-steps {
