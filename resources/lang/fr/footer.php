@@ -4,7 +4,7 @@ return [
     'about'             => 'A propos',
     'glossary'          => 'Glossaire',
     'country_sites'     => 'Sites de pays',
-    'contact'           => 'Contrat',
+    'contact'           => 'Nous contacter',
     'licensed'          => 'Le contenu est distribué sous licence Attribution-ShareAlike 4.0 international',
     'founding_partners' => 'Partenaires fondateurs',
     'donors'            => 'Les bailleurs de fonds',
