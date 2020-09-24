@@ -4,6 +4,7 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Filesystem\Factory as Filesystem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Class ImageService
@@ -176,5 +177,23 @@ class ImageService
         }
 
         return $url;
+    }
+
+    public function uploadResearchAnalysisBgImage(array $attributes)
+    {
+        /* @var UploadedFile $image */
+        $image = $attributes['image'];
+        $hash = hash_file('sha1', $image);
+        $fileName = $hash . '.' . $image->getClientOriginalExtension();
+        $details              = [];
+        $details['fileName']  = 'uploads/' . $fileName;
+        $details['minWidth']  = 200;
+        $details['minHeight'] = 100;
+
+        $this->upload($details);
+        return $this->filesystem->disk('s3')->getDriver()
+            ->getAdapter()
+            ->getClient()
+            ->getObjectUrl(env('AWS_BUCKET'), $details['fileName']);
     }
 }

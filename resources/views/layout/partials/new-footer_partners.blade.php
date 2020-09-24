@@ -1,3 +1,4 @@
+<?php $currentLang = app('App\Http\Services\LocalizationService')->getCurrentLang() ?>
 <div @if(\Request::url()==url() && !site()->isCountrySite())
 	 @endif class="mini__menu clearfix">
 <!-- @if(\Request::url() != url() || !site()->isRC())
@@ -102,6 +103,9 @@
 				<li><a href="{{url('faqs')}}">@lang('footer.faqs')</a></li>
 				<li><a href="{{url('guides')}}">@lang('sidebar.guides')</a></li>
 				<li><a href="{{url('glossary')}}">@lang('footer.glossary')</a></li>
+				@if(site()->isRC())
+					<li><a href="{{url('research-and-analysis')}}">@lang('footer.research_and_analysis')</a></li>
+				@endif
 				@if(!site()->isCountrySite())
 					<li><a href="{{url('country-sites')}}">@lang('footer.country_sites')</a></li>
 				@endif

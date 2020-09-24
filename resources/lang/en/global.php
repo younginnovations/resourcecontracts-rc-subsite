@@ -91,4 +91,5 @@ return [
     'term_explained'                 => 'Contract terms explained',
     'view'                           => 'View',
     'explore_contracts_by_country'   => 'Explore Contracts by Country',
+    'research_and_analysis'          => 'Research & Analysis'
 ];

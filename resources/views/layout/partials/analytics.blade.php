@@ -1,5 +1,6 @@
 <script src="{{url('js/app.js')}}?v=2020-08-19"></script>
 @yield('js')
+@stack('footer-scripts')
 @if(site()->hasTracking())
 	<script>
         (function (i, s, o, g, r, a, m) {

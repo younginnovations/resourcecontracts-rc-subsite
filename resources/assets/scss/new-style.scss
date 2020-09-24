@@ -42,10 +42,6 @@ a {
         &.active {
             background-color: $color-primary;
         }
-
-        // @media all and (min-width: 420px) {
-        //     font-size: 16px;
-        // }
     }
 }
 
@@ -56,7 +52,7 @@ a {
     }
 
     @media all and (min-width: 420px) {
-        padding: 0 20px 0;
+        padding: 0 10px 0;
     }
 }
 
@@ -77,14 +73,6 @@ a {
     background: $color-primary;
     border: solid 1px $color-primary;
 }
-
-// .hero-image .search-form button {
-//     background-color: $color-primary;
-
-//     &:hover {
-//         background-color: darken($color-primary, 5%);
-//     }
-// }
 
 .annotation-wrap .slick-dots .slick-active button {
     background: $color-primary;
@@ -127,8 +115,6 @@ a {
         }
 
         @media all and (min-width: 768px) {
-            // padding-bottom: 0;
-
             h2 {
                 font-size: 32px;
                 margin-bottom: 50px;
@@ -137,31 +123,20 @@ a {
 
         @media all and (min-width:1280px) and (min-height: 740px) {
             margin-bottom: -60px;
-
-            // h2 {
-            //     margin-bottom: 0;
-            // }
         }
     }
 }
 
 #map {
     max-height: initial !important;
-    // max-height: calc(100vh - 50px) !important;
-    // max-width: 100% !important;
 }
 
 .map-wrap #map {
-    // margin: -30px 0;
     transform: scale(0.95);
 
     @media all and (min-width: 1200px) {
         transform: scale(0.9);
     }
-
-    // @media all and (min-width: 1300px) {
-    //     transform: scale(0.8);
-    // }
 }
 
 
@@ -169,48 +144,6 @@ a {
 .map-wrap path {
     stroke: #356f90;
 }
-
-// .landing_section_logos {
-//     background: transparent !important;
-//     margin: 0 auto;
-//     padding: 0 !important;
-//     max-width: 1100px;
-//     position: relative;
-
-//     h3 {
-//         font-size: 14px;
-//         text-transform: uppercase;
-//     }
-
-//     >div>a {
-//         display: inline-block;
-//         margin-bottom: 15px;
-//     }
-
-//     img {
-//         max-height: initial !important;
-//     }
-
-//     @media all and (min-width: 768px) {
-//         display: flex;
-//         justify-content: space-between;
-//         padding: 0 !important;
-//     }
-
-//     >div {
-//         text-align: left !important;
-
-//         h3 {
-//             color: $color-base;
-//             margin-bottom: 20px;
-//             margin-top: 0;
-//         }
-//     }
-
-//     .partners {
-//         border: 0 !important;
-//     }
-// }
 
 .olc footer {
     background-color: #154a85;
@@ -233,14 +166,6 @@ a {
         }
     }
 
-    .mini__menu {
-        display: flex;
-
-        .menu-list-each li {
-            margin-right: 14px;
-        }
-    }
-
     .menu-list {
         margin-top: 15px !important;
     }
@@ -257,10 +182,6 @@ a {
         }
     }
 }
-
-// .title-wrap .navbar-brand span {
-//     color: rgba(64, 64, 64, 0.7) !important;
-// }
 
 .back {
     background-color: $color-primary;

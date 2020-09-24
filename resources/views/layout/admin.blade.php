@@ -30,9 +30,15 @@
 				   class="@if($url == '/admin' || strpos($url, 'page') != false) active @endif  list-group-item">
 					<i class="fa fa-file-archive-o"></i> @lang('admin.manage_pages')
 				</a>
+				@if(site()->isRC())
+					<a href="{{route('admin.research-and-analysis.index')}}"
+							class="@if(strpos($url, 'admin/research-and-analysis') != false) active @endif list-group-item">
+						<i class="fa fa-newspaper-o"></i> @lang('admin.research_and_analysis.research_and_analysis')
+					</a>
+				@endif
 
 				<a href="{{route('admin.image')}}"
-				   class="@if(strpos($url, 'image') != false) active @endif list-group-item">
+				   class="@if(strpos($url, '/image') != false) active @endif list-group-item">
 					<i class="fa fa-image"></i> @lang('admin.manage_image')
 				</a>
 				@if(!site()->isCountrySite())
@@ -66,5 +72,5 @@
 	</div>
 </div>
 
-@include('layout.partials.footer')
+@include('layout.partials.new-footer')
 

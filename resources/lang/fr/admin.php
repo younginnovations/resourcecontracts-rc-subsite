@@ -48,4 +48,20 @@ return [
     'choose_lang'           => 'Choisissez la langue',
     'select_version'        => 'Sélectionnez la version',
     'change_version'        => 'Changer de version',
+    'research_and_analysis'          => [
+        'title'                     => 'Titre',
+        'url'                       => 'URL',
+        'heading'                   => 'Titre',
+        'description'               => 'La description',
+        'research_and_analysis'     => 'Recherche et analyse',
+        'add_new'                   => 'Ajouter',
+        'links'                     => 'Liens',
+        'link'                      => 'Lien',
+        'configure_text'            => 'Configurer le texte',
+        'manage_featured'           => 'En vedette',
+        'featured_links'            => 'Liens en vedette',
+        'edit_link'                 => 'Modifier le lien',
+        'publication_date'          => 'Date de publication',
+        'ignore_publication_day'    => 'Ignorer le jour de publication'
+    ],
 ];

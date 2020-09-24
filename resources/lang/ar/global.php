@@ -91,4 +91,5 @@ return [
     'term_explained'               => 'وأوضح شروط العقد',
     'view'                         => 'رأي',
     'explore_contracts_by_country' => 'استكشف العقود حسب البلد',
+    'research_and_analysis'        => 'البحث والتحليل',
 ];

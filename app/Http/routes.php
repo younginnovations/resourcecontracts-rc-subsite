@@ -96,11 +96,12 @@ $app->get(
 $app->get('about', ['as' => 'about', 'uses' => 'PageController@about']);
 $app->get('contact', ['as' => 'contact', 'uses' => 'PageController@contact']);
 $app->get('faqs', ['as' => 'faqs', 'uses' => 'PageController@faqs']);
-$app->get('guides', ['as' => 'page.guides', 'uses' => 'PageController@guides']);
+$app->get('guides', ['as' => 'guides', 'uses' => 'PageController@guides']);
 $app->get('page/resources', ['as' => 'page.resources', 'uses' => 'PageController@resources']);
-$app->get('glossary', ['as' => 'guides', 'uses' => 'PageController@glossary']);
+$app->get('glossary', ['as' => 'glossary', 'uses' => 'PageController@glossary']);
 $app->get('country-sites', ['as' => 'country-sites', 'uses' => 'PageController@countrySites']);
 $app->get('how-to-use', ['as' => 'how-to-use', 'uses' => 'PageController@howToUse']);
+$app->get('research-and-analysis', ['as' => 'research-and-analysis', 'uses' => 'PageController@researchAndAnalysis']);
 
 /*
 |--------------------------------------------------------------------------
@@ -167,6 +168,19 @@ $app->group(
         $app->post('version/{id}', ['as' => 'admin.version.edit', 'uses' => 'PageController@versionUpdate']);
         $app->delete('page/{id}/version/{version}', ['as' => 'admin.page.version.delete', 'uses' => 'PageController@deleteVersion']);
         $app->get('/cache-clear', ['as' => 'cache.clear', 'uses' => 'PageController@cacheClear']);
+
+        $app->get('research-and-analysis/background-image/edit', ['as' => 'admin.research-and-analysis.edit-background-image', 'uses' => 'ResearchAndAnalysisController@editBackgroundImage']);
+        $app->post('research-and-analysis/background-image', ['as' => 'admin.research-and-analysis.store-background-image', 'uses' => 'ResearchAndAnalysisController@storeBackgroundImage']);
+        $app->get('research-and-analysis', ['as' => 'admin.research-and-analysis.index', 'uses' => 'ResearchAndAnalysisController@index']);
+        $app->get('research-and-analysis/create', ['as' => 'admin.research-and-analysis.create', 'uses' => 'ResearchAndAnalysisController@create']);
+        $app->post('research-and-analysis', ['as' => 'admin.research-and-analysis.store', 'uses' => 'ResearchAndAnalysisController@store']);
+        $app->get('research-and-analysis/{id}/edit', ['as' => 'admin.research-and-analysis.edit', 'uses' => 'ResearchAndAnalysisController@edit']);
+        $app->put('research-and-analysis/{id}', ['as' => 'admin.research-and-analysis.update', 'uses' => 'ResearchAndAnalysisController@update']);
+        $app->delete('research-and-analysis/{id}', ['as' => 'admin.research-and-analysis.delete', 'uses' => 'ResearchAndAnalysisController@delete']);
+        $app->get('research-and-analysis/featured', ['as' => 'admin.research-and-analysis.get-featured', 'uses' => 'ResearchAndAnalysisController@getFeatured']);
+        $app->post('research-and-analysis/featured', ['as' => 'admin.research-and-analysis.update-featured', 'uses' => 'ResearchAndAnalysisController@updateFeatured']);
+        $app->post('research-and-analysis/configuration', ['as' => 'admin.research-and-analysis.text-configuration', 'uses' => 'ResearchAndAnalysisController@updateHeadingText']);
+        $app->get('research-and-analysis/configuration', ['as' => 'admin.research-and-analysis.text-configuration', 'uses' => 'ResearchAndAnalysisController@editHeadingText']);
     }
 );
 

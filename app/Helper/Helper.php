@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Services\LocalizationService;
 use Illuminate\Support\Facades\Lang;
 
 /**
@@ -662,4 +664,11 @@ function getResourceMeta()
         unset($resources[$key]);
     }
     return $resources;
+}
+
+if (!function_exists('getCurrentLang')) {
+    function getCurrentLang()
+    {
+        return app(LocalizationService::class)->getCurrentLang();
+    }
 }
