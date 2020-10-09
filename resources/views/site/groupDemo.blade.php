@@ -73,7 +73,7 @@
 					=>$sortBy,
 					'route'=>$route, 'showYear' =>$showYear])
 
-					@include('contract.partials.pagination', ['total_item' => $contracts->total, 'per_page'=>
+					@include('contract.partials.pagination', ['total_item' => $contracts->result_total, 'per_page'=>
 					$contracts->per_page, 'current_page' => $contracts->current_page ])
 				</div>
 			</div>
