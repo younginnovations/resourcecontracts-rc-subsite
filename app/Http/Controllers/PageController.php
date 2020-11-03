@@ -189,6 +189,9 @@ class PageController extends BaseController
         }
         $hideSearchBar = true;
 
+        if (site()->isRC()) {
+            return view('page.master', compact('page', 'hideSearchBar'));
+        }
         return view('page.guides', compact('page', 'hideSearchBar'));
     }
 
