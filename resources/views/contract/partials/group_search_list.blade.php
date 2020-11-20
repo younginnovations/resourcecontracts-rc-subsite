@@ -10,7 +10,7 @@ $api = app('App\Http\Services\APIService');
 <table class="table table-responsive table-contract table-contract-list">
 	<thead>
 	<th width="50%">
-        <a href="javascript:void(0)" onClick="window.location.href = '{{url($path)}}' + '?' + '{{getSortQuery($route,$filter_params,"contract_name",$order)}}'; return false;">
+        <a href="javascript:void(0)" onClick="window.location.href = '{{url($path)}}' + '?' + '{{getSortQuery($route,$filter_params,"contract_name",$orderBy)}}'; return false;">
             @lang('global.document')
 			{!!show_arrow($orderBy,$sortBy=='contract_name')!!}
         </a>
@@ -18,7 +18,7 @@ $api = app('App\Http\Services\APIService');
 	<th></th>
 	@if(!site()->isCountrySite())
 		<th width="12%">
-            <a href="javascript:void(0)" onClick="window.location.href = '{{url($path)}}' + '?' + '{{getSortQuery($route,$filter_params,"country",$order)}}'; return false;">
+            <a href="javascript:void(0)" onClick="window.location.href = '{{url($path)}}' + '?' + '{{getSortQuery($route,$filter_params,"country",$orderBy)}}'; return false;">
                 @lang('global.country')
                 {!!show_arrow($orderBy, $sortBy=='country')!!}
             </a>
@@ -26,20 +26,20 @@ $api = app('App\Http\Services\APIService');
 	@endif
 	@if($showYear)
 		<th>
-            <a href="javascript:void(0)" onClick="window.location.href = '{{url($path)}}' + '?' + '{{getSortQuery($route,$filter_params,"year",$order)}}'; return false;">
+            <a href="javascript:void(0)" onClick="window.location.href = '{{url($path)}}' + '?' + '{{getSortQuery($route,$filter_params,"year",$orderBy)}}'; return false;">
 				@lang('global.year')
 				{!!show_arrow($orderBy, $sortBy=='year')!!}
 			</a>
 		</th>
 	@endif
 	<th width="13%">
-        <a href="javascript:void(0)" onClick="window.location.href = '{{url($path)}}' + '?' + '{{getSortQuery($route,$filter_params,"resource",$order)}}'; return false;">
+        <a href="javascript:void(0)" onClick="window.location.href = '{{url($path)}}' + '?' + '{{getSortQuery($route,$filter_params,"resource",$orderBy)}}'; return false;">
 			@lang('global.resource')
 			{!!show_arrow($orderBy, $sortBy=='resource')!!}
 		</a>
 	</th>
 	<th width="25%">
-        <a href="javascript:void(0)" onClick="window.location.href = '{{url($path)}}' + '?' + '{{getSortQuery($route,$filter_params,"contract_type",$order)}}'; return false;">
+        <a href="javascript:void(0)" onClick="window.location.href = '{{url($path)}}' + '?' + '{{getSortQuery($route,$filter_params,"contract_type",$orderBy)}}'; return false;">
 			@lang('contract.contract_type')
 			{!!show_arrow($orderBy, $sortBy=='contract_type')!!}
 		</a>
