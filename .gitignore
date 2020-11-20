@@ -16,3 +16,6 @@ bourbon
 !spec/*.map
 /public/[0-9]*
 *.lock
+
+.docker-compose.env
+docker-compose.yml

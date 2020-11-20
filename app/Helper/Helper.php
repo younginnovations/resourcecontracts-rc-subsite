@@ -144,6 +144,22 @@ function appendInUrl($route, $url, $sortby, $order)
 }
 
 /**
+ * Builds the query string needed to sort by the given sort criteria and order starting from an existing url and query
+ * parameters.
+ *
+ * @param $route string the path of the page to sort without the host part
+ * @param $url array dictionary of existing query parameters
+ * @param $sortby string sort criteria
+ * @param $order string sort order
+ * @return string the query string needed to sort the given page with the given sort criteria
+ */
+function getSortQuery($route, $url, $sortby, $order)
+{
+    $location = appendInUrl($route, $url, $sortby, $order);
+    return parse_url($location)['query'];
+}
+
+/**
  * Show array icon
  *
  * @param      $order
