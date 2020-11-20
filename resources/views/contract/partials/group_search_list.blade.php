@@ -10,34 +10,36 @@ $api = app('App\Http\Services\APIService');
 <table class="table table-responsive table-contract table-contract-list">
 	<thead>
 	<th width="50%">
-		<a href="{{appendInUrl($route,$filter_params,"contract_name",$orderBy)}}">@lang('global.document')
-			{!!show_arrow
-		($orderBy,
-			$sortBy=='contract_name')!!}</a>
+        <a href="javascript:void(0)" onClick="window.location.href = '{{url($path)}}' + '?' + '{{getSortQuery($route,$filter_params,"contract_name",$order)}}'; return false;">
+            @lang('global.document')
+			{!!show_arrow($orderBy,$sortBy=='contract_name')!!}
+        </a>
 	</th>
 	<th></th>
 	@if(!site()->isCountrySite())
-		<th width="12%"><a href="{{appendInUrl($route,$filter_params,"country",$orderBy)}}">@lang('global.country')
-				{!!show_arrow
-				($orderBy, $sortBy=='country')!!}</a>
+		<th width="12%">
+            <a href="javascript:void(0)" onClick="window.location.href = '{{url($path)}}' + '?' + '{{getSortQuery($route,$filter_params,"country",$order)}}'; return false;">
+                @lang('global.country')
+                {!!show_arrow($orderBy, $sortBy=='country')!!}
+            </a>
 		</th>
 	@endif
 	@if($showYear)
 		<th>
-			<a href="{{appendInUrl($route,$filter_params,"year",$orderBy)}}">
+            <a href="javascript:void(0)" onClick="window.location.href = '{{url($path)}}' + '?' + '{{getSortQuery($route,$filter_params,"year",$order)}}'; return false;">
 				@lang('global.year')
 				{!!show_arrow($orderBy, $sortBy=='year')!!}
 			</a>
 		</th>
 	@endif
 	<th width="13%">
-		<a href="{{appendInUrl($route,$filter_params,"resource",$orderBy)}}">
+        <a href="javascript:void(0)" onClick="window.location.href = '{{url($path)}}' + '?' + '{{getSortQuery($route,$filter_params,"resource",$order)}}'; return false;">
 			@lang('global.resource')
 			{!!show_arrow($orderBy, $sortBy=='resource')!!}
 		</a>
 	</th>
 	<th width="25%">
-		<a href="{{appendInUrl($route,$filter_params,"contract_type",$orderBy)}}">
+        <a href="javascript:void(0)" onClick="window.location.href = '{{url($path)}}' + '?' + '{{getSortQuery($route,$filter_params,"contract_type",$order)}}'; return false;">
 			@lang('contract.contract_type')
 			{!!show_arrow($orderBy, $sortBy=='contract_type')!!}
 		</a>

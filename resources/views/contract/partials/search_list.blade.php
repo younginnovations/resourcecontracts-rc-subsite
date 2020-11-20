@@ -18,30 +18,36 @@ if ($route == "contracts" && isset($url['year'])) {
 <table class="table table-responsive table-contract table-contract-list">
     <thead>
     <th width="50%">
-        <a href="{{appendInUrl($route,$url,"contract_name",$order)}}">@lang('global.document') {!!show_arrow($order, $sortBy=='contract_name')!!}</a>
+        <a href="javascript:void(0)" onClick="window.location.href = '{{url($path)}}' + '?' + '{{getSortQuery($route,$url,"contract_name",$order)}}'; return false;">
+            @lang('global.document')
+            {!!show_arrow($order, $sortBy=='contract_name')!!}
+        </a>
     </th>
     <th></th>
     @if(!site()->isCountrySite())
-        <th width="12%"><a href="{{appendInUrl($route,$url,"country",$order)}}">@lang('global.country') {!!show_arrow
-					($order, $sortBy=='country')!!}</a>
+        <th width="12%">
+            <a href="javascript:void(0)" onClick="window.location.href = '{{url($path)}}' + '?' + '{{getSortQuery($route,$url,"country",$order)}}'; return false;">
+                @lang('global.country')
+                {!!show_arrow($order, $sortBy=='country')!!}
+            </a>
         </th>
     @endif
     @if($showYear)
         <th>
-            <a href="{{appendInUrl($route,$url,"year",$order)}}">
+            <a href="javascript:void(0)" onClick="window.location.href = '{{url($path)}}' + '?' + '{{getSortQuery($route,$url,"year",$order)}}'; return false;">
                 @lang('global.year')
                 {!!show_arrow($order, $sortBy=='year')!!}
             </a>
         </th>
     @endif
     <th width="13%">
-        <a href="{{appendInUrl($route,$url,"resource",$order)}}">
+        <a href="javascript:void(0)" onClick="window.location.href = '{{url($path)}}' + '?' + '{{getSortQuery($route,$url,"resource",$order)}}'; return false;">
             @lang('global.resource')
             {!!show_arrow($order, $sortBy=='resource')!!}
         </a>
     </th>
     <th width="25%">
-        <a href="{{appendInUrl($route,$url,"contract_type",$order)}}">
+        <a href="javascript:void(0)" onClick="window.location.href = '{{url($path)}}' + '?' + '{{getSortQuery($route,$url,"contract_type",$order)}}'; return false;">
             @lang('contract.contract_type')
             {!!show_arrow($order, $sortBy=='contract_type')!!}
         </a>
