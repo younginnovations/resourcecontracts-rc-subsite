@@ -5,6 +5,8 @@ $no_of_pages = 6;
 $current_url = \Illuminate\Support\Facades\Input::url();
 $queries     = \Illuminate\Support\Facades\Input::get();
 $queries = array_except($queries,['page']);
+$page_url = \Illuminate\Support\Facades\Input::url();
+$queries_with_all = http_build_query(array_merge($queries, ['all' => '1']));
 $current_url .= "?";
 $current_url .= (http_build_query($queries) == '') ? '' : http_build_query($queries) . '&';
 ?>
@@ -48,7 +50,8 @@ $current_url .= (http_build_query($queries) == '') ? '' : http_build_query($quer
                     </li>
                     <li class="num-text"><a href="{{ $current_url }}page={{ $total_page }}">@lang('global.last')</a></li>
                     @if (!Request::is('search/group'))
-                        <li class="num-text"><a href="{{ $current_url }}all={{true}}">@lang('global.view_all')</a></li>
+
+                <li class="num-text"><a href="javascript:void(0)" onClick="window.location.href = '{{$page_url}}' + '?' + '{{$queries_with_all}}'; return false;">@lang('global.view_all')</a></li>
                     @endif
                 @endif
             </ul>
