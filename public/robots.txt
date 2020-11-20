@@ -1,8 +1,8 @@
 User-agent: *
 
 Disallow: /search
-Disallow: /search/group
-Disallow: /search*
+Allow: /search/group$
 
 Disallow: /*all=1*
 Disallow: /*sortby=*
+Disallow: /*?q=1*

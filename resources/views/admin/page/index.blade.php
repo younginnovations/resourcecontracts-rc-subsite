@@ -49,7 +49,7 @@
                             <a class="btn btn-primary" style="color: white;" href="{{route('admin.page.update', ['id'=>$page->id])}}" title="Edit page">
                                 <i class="fa fa-pencil-square-o"></i>
                             </a>
-                            @if(auth()->user()->id ==1 && !empty($versions) && count($versions) <= 1)
+                            @if(auth()->user()->is_admin && !empty($versions) && count($versions) <= 1)
                             <form method="POST" action="{{ route('admin.page.delete' , ['id' => $page->id]) }}" accept-charset="UTF-8" style="display:inline" onsubmit="return confirm('This is last version of this page. Do you want to delete this page as a whole?');">
                                 <input name="_method" type="hidden" value="DELETE">
                                 <input name="_token" type="hidden" value="{{ csrf_token()}}">
@@ -87,7 +87,7 @@
                                         <a class="btn btn-primary" style="color:white;" href="{{route('admin.page.update', ['id'=>$page->id])}}?v={{$key}}" title="Edit this version">
                                             <i class="fa fa-pencil-square-o"></i>
                                         </a>
-                                        @if(auth()->user()->id ==1 && $key != $page->version_no)
+                                        @if(auth()->user()->is_admin && $key != $page->version_no)
                                             <form method="POST" action="{{ route('admin.page.version.delete' , ['id' => $page->id, 'version' => $key]) }}" accept-charset="UTF-8" style="display:inline" onsubmit="return confirm('Are you sure you want to delete this page?');">
                                                 <input name="_method" type="hidden" value="DELETE">
                                                 <input name="_token" type="hidden" value="{{ csrf_token()}}">

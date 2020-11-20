@@ -3,6 +3,7 @@ $url = Request::all();
 $order = \Illuminate\Support\Facades\Input::get('order', '');
 $sortBy = \Illuminate\Support\Facades\Input::get('sortby', '');
 $path = Request::path();
+$full_path = $path;
 $path = explode('/', $path);
 $url['key'] = $path[1];
 $route = "country.detail";
@@ -14,15 +15,31 @@ if ($path[0] == "resource") {
     <thead>
     <th></th>
     <th>
-        <a href="{{appendInUrl($route,$url,"contract_name",$order)}}">@lang('global.document'){!!show_arrow($order, $sortBy=='contract_name')!!}</a>
+        <a href="javascript:void(0)" onClick="window.location.href = '{{url($full_path)}}' + '?' + '{{getSortQuery($route,$url,"contract_name",$order)}}'; return false;">
+            @lang('global.document')
+            {!!show_arrow($order, $sortBy=='contract_name')!!}
+        </a>
     </th>
     <th></th>
-    <th width="10%"><a href="{{appendInUrl($route,$url,"year",$order)}}">@lang('global.year') {!!show_arrow($order, $sortBy=='year')!!}</a></th>
+    <th width="10%">
+        <a href="javascript:void(0)" onClick="window.location.href = '{{url($full_path)}}' + '?' + '{{getSortQuery($route,$url,"year",$order)}}'; return false;">
+            @lang('global.year')
+            {!!show_arrow($order, $sortBy=='year')!!}
+        </a>
+    </th>
 
     <th>
-        <a href="{{appendInUrl($route,$url,"resource",$order)}}">@lang('global.resource') {!!show_arrow($order, $sortBy=='resource')!!}</a>
+        <a href="javascript:void(0)" onClick="window.location.href = '{{url($full_path)}}' + '?' + '{{getSortQuery($route,$url,"resource",$order)}}'; return false;">
+            @lang('global.resource')
+            {!!show_arrow($order, $sortBy=='resource')!!}
+        </a>
     </th>
-    <th><a href="{{appendInUrl($route,$url,"contract_type",$order)}}">@lang('global.contract_type'){!!show_arrow($order, $sortBy=='contract_type')!!}</a></th>
+    <th>
+        <a href="javascript:void(0)" onClick="window.location.href = '{{url($full_path)}}' + '?' + '{{getSortQuery($route,$url,"contract_type",$order)}}'; return false;">
+            @lang('global.contract_type')
+            {!!show_arrow($order, $sortBy=='contract_type')!!}
+        </a>
+    </th>
     </thead>
     <tbody>
     @if(isset($contracts->results))
