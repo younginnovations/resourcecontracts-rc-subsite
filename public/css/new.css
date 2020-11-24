@@ -1248,6 +1248,16 @@ body.rc .petroleum-mineral {
   border-right: 1px solid rgba(255, 255, 255, 0.5);
 }
 
+.landing_section_logos .olc-partners a:first-child img {
+  width: 260px;
+  height: 45px;
+}
+
+.landing_section_logos .olc-partners a:nth-child(2) img {
+  width: 65px;
+  height: 50px;
+}
+
 .landing_section_logos .partners,
 .landing_section_logos .donors {
   display: inline-block;
