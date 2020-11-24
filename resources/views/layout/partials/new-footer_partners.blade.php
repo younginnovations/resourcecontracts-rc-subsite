@@ -90,7 +90,7 @@
 					<img src="{{url('images/CCSI_logo.png')}}" class="ccsi" alt="CCSI" width="252" height="45">
 				</a>
 				<a href="http://www.dfid.gov.uk" target="_blank" title="UKAid">
-					<img src="{{url('images/UKAid_logo.png')}}" alt="UKAid" width="134" height="45">
+					<img src="{{url('images/UKAid_logo_new.png')}}" alt="UKAid" width="134" height="45">
 				</a>
 			</div>
 		</div>
