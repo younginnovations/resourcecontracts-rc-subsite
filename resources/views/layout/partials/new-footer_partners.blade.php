@@ -85,7 +85,7 @@
 
 	@if(site()->isCategory('olc'))
 		<div class="landing_section_logos">
-			<div class="partners">
+			<div class="partners olc-partners">
 				<a href="http://ccsi.columbia.edu/" target="_blank" title="Columbia Center on Sustainable Investment">
 					<img src="{{url('images/CCSI_logo.png')}}" class="ccsi" alt="CCSI" width="252" height="45">
 				</a>
