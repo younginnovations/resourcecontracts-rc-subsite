@@ -33,7 +33,7 @@ $currentLang = app('translator')->getLocale();
 				</form>
 				<div class="get-started">
 					<h3>
-						<a href="{{route('page.resources')}}"> {{ $text->homepage_get_started_text->$currentLang or ''}}</a>
+						<a href="{{route('faqs')}}"> {{ $text->homepage_get_started_text->$currentLang or ''}}</a>
 					</h3>
 				</div>
 			</div>
