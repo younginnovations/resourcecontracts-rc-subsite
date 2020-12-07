@@ -87,7 +87,7 @@ return [
     'search_box_text'                => 'Search and review petroleum, gas and mining contracts...',
     'learn_start'                    => 'Learn how to get started1',
     'search_and_review'              => 'Search and review land and agriculture contracts to understand the key terms and the implications of large-scale deals1',
-    'recent_documents'               => 'Recent Documents',
+    'recent_documents'               => 'Recently Added',
     'term_explained'                 => 'Contract terms explained',
     'view'                           => 'View',
     'explore_contracts_by_country'   => 'Explore Contracts by Country',

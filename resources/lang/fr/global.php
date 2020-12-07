@@ -87,7 +87,7 @@ return [
     'search_box_text'              => 'Rechercher et examiner les contrats pétroliers, gaziers et miniers...',
     'learn_start'                  => 'Apprenez comment commencer',
     'search_and_review'            => 'Rechercher et examiner les contrats fonciers et agricoles pour comprendre les principaux termes et les implications des accords à grande échelle',
-    'recent_documents'             => 'Documents récents',
+    'recent_documents'             => 'Récemment ajouté',
     'term_explained'               => 'Explication des termes du contrat',
     'view'                         => 'Vue',
     'explore_contracts_by_country' => 'Explorer les contrats par pays',
