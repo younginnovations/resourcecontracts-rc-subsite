@@ -200,7 +200,7 @@
 						</div>
 						<div class="view-all-annotations">
 							@if(count($contract->annotationsGroup)>0)
-								<a href="#annotations"
+								<a href="#keyclauses"
 								   class="view-annotation"><span>@if(site()->isRCCategorySite()) @lang('global.view_annotations_new') @else @lang('global.view_annotations') @endif</span></a>
 							@else
 								<a href="javascript:void();"
