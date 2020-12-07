@@ -55,10 +55,31 @@
 			<div class="col-md-6 col-lg-6">
 				<div class="panel panel-default panel-wrap panel-contract-wrap">
 					<div class="panel-body">
+						<div class="row">
+					
 						<ul>
-							<li class="col-lg-12 open-contracting-id">
+							<li class="col-xs-12 col-sm-6">
 								<label for="">@lang('contract.open_contracting_id')</label>
-								<span>{{_e($contract->metadata,'open_contracting_id','-')}}</span>
+								<span >{{_e($contract->metadata,'open_contracting_id','-')}}</span>
+							
+							</li>
+							<li class="col-xs-12 col-sm-6">
+								@if(site()->isOLC())
+								<label for="">@lang('contract.posted_date')</label>
+
+								@else
+								<label for="">@lang('contract.publication_date')</label>
+								@endif
+								<span>
+									<?php
+									$date = $contract->metadata->published_at;
+									$date = strtotime($date);
+									?>
+									<span>@if($date) <?php $m = date(
+												'F',
+												$date
+										);?>{{ trans('codelist/month')[$m] }} {{date('d',$date)}}, {{date('Y',$date)}}@else
+											- @endif</span>
 							</li>
 						</ul>
 						<ul>
@@ -175,8 +196,9 @@
 								</li>
 							</ul>
 						@endif
-
+						</div>
 					</div>
+
 				</div>
 			</div>
 			<div class="col-md-6 col-lg-6">
