@@ -44,4 +44,8 @@ return [
     'fullscreen'              => 'عرض في وضع ملء الشاش',
     'exit_fullscreen'         => 'خروج عرض ملء الشاشة',
     'slow_connection_message' => 'تمت إعادة توجيهك إلى عرض نصي بسبب اتصال بطيء بالإنترنت. وثيقة بدف متاحة للتنزيل باستخدام الزر [gif] إلى اليمين.',
+    'publication_date'       => "تاريخ النشر في ResourceContracts",
+    'posted_date'            =>"تاريخ النشر على OpenLandContracts",
+
+
 ];
