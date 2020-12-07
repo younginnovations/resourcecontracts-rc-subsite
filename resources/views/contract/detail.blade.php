@@ -56,9 +56,15 @@
 				<div class="panel panel-default panel-wrap panel-contract-wrap">
 					<div class="panel-body">
 						<ul>
-							<li class="col-lg-12 open-contracting-id">
+							<li class="col-xs-12 col-sm-6 col-md-6 col-lg-6 open-contracting-id">
 								<label for="">@lang('contract.open_contracting_id')</label>
 								<span>{{_e($contract->metadata,'open_contracting_id','-')}}</span>
+							
+							</li>
+							<li class="col-xs-12 col-sm-6 col-md-6 col-lg-6 publication-date">
+								<label for="">@lang('contract.publication_date')</label>
+								<span>{{date('F d Y',strtotime(_e($contract->metadata,'created_at','-')))}}</span>
+							
 							</li>
 						</ul>
 						<ul>
