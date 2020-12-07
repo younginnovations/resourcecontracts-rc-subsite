@@ -1,7 +1,7 @@
 <?php
 if (!isset($summary)) {
-	$api     = app('App\Http\Services\APIService');
-	$summary = $api->sortSummaryCountry();
+    $api     = app('App\Http\Services\APIService');
+    $summary = $api->sortSummaryCountry();
 }
 ?>
 
@@ -12,9 +12,9 @@ $sidebar = $image->getImageUrl('sidebar');
 
 @if($sidebar != '')
 	<style>
-		.sidebar-nav > .sidebar-brand a, .sidebar-nav > .sidebar-brand a:hover {
-			background-image: url('{{$sidebar}}');
-		}
+        .sidebar-nav > .sidebar-brand a, .sidebar-nav > .sidebar-brand a:hover {
+            background-image: url('{{$sidebar}}');
+        }
 	</style>
 @endif
 

@@ -85,12 +85,12 @@
 
 	@if(site()->isCategory('olc'))
 		<div class="landing_section_logos">
-			<div class="partners">
+			<div class="partners olc-partners">
 				<a href="http://ccsi.columbia.edu/" target="_blank" title="Columbia Center on Sustainable Investment">
 					<img src="{{url('images/CCSI_logo.png')}}" class="ccsi" alt="CCSI" width="252" height="45">
 				</a>
 				<a href="http://www.dfid.gov.uk" target="_blank" title="UKAid">
-					<img src="{{url('images/UKAid_logo.png')}}" alt="UKAid" width="134" height="45">
+					<img src="{{url('images/UKAid_logo_new.png')}}" alt="UKAid" width="134" height="45">
 				</a>
 			</div>
 		</div>
@@ -99,19 +99,30 @@
 	<div class="partner-right">
 		<div class="menu-list clearfix">
 			<ul class="menu-list-each">
-				<li><a href="{{url('about')}}">@lang('footer.about')</a></li>
-				<li><a href="{{url('faqs')}}">@lang('footer.faqs')</a></li>
-				<li><a href="{{url('guides')}}">@lang('sidebar.guides')</a></li>
-				<li><a href="{{url('glossary')}}">@lang('footer.glossary')</a></li>
-				@if(site()->isRC())
-					<li><a href="{{url('research-and-analysis')}}">@lang('footer.research_and_analysis')</a></li>
-				@endif
-				@if(!site()->isCountrySite())
+				@if(site()->isOLC())
+					<li><a href="{{url('about')}}">@lang('footer.about')</a></li>
+					<li><a href="{{url('guides')}}">@lang('sidebar_olc.use_this_site')</a></li>
+					<li><a href="{{url('glossary')}}">@lang('footer.glossary')</a></li>
+					<li><a href="{{url('faqs')}}">@lang('footer.faqs')</a></li>
 					<li><a href="{{url('country-sites')}}">@lang('footer.country_sites')</a></li>
+					<li><a href="{{url('contact')}}">@lang('footer.contact')</a></li>
+					<li><a href="https://github.com/NRGI/resourcecontracts.org/wiki/API" target="_blank">API</a>
+					</li>
+				@else
+					<li><a href="{{url('about')}}">@lang('footer.about')</a></li>
+					<li><a href="{{url('faqs')}}">@lang('footer.faqs')</a></li>
+					<li><a href="{{url('guides')}}">@lang('sidebar.guides')</a></li>
+					<li><a href="{{url('glossary')}}">@lang('footer.glossary')</a></li>
+					@if(site()->isRC())
+						<li><a href="{{url('research-and-analysis')}}">@lang('footer.research_and_analysis')</a></li>
+					@endif
+					@if(!site()->isCountrySite())
+						<li><a href="{{url('country-sites')}}">@lang('footer.country_sites')</a></li>
+					@endif
+					<li><a href="{{url('contact')}}">@lang('footer.contact')</a></li>
+					<li><a href="https://github.com/NRGI/resourcecontracts.org/wiki/API" target="_blank">API</a>
+					</li>
 				@endif
-				<li><a href="{{url('contact')}}">@lang('footer.contact')</a></li>
-				<li><a href="https://github.com/NRGI/resourcecontracts.org/wiki/API" target="_blank">API</a>
-				</li>
 			</ul>
 			@if(\Request::url() != url())
 				<div class="clearfix">

@@ -20,7 +20,5 @@
 					<li><a href="{{url('country-sites')}}">@lang('sidebar.country_sites')</a></li>
 				@endif
 				<li><a href="{{url('contact')}}">@lang('sidebar.contact')</a></li>
-
-	
 	</ul>
 </div>
