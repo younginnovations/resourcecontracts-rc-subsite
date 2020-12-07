@@ -9,8 +9,9 @@ return [
     'guides'           => 'Guides',
     'view_all'         => 'See All',
     'use_this_site'    => 'USING THIS SITE',
-    'faqs'             =>'Frequently Asked Questions',
+    'faqs'             =>'FAQS',
     'research_and_analysis'=>'Research & Analysis',
     'country_sites'             =>'Country Sites',
     'contact'=>'Contact',
+    'about'=>'About',
 ];
