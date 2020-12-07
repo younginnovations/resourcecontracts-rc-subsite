@@ -63,7 +63,7 @@
 							</li>
 							<li class="col-xs-12 col-sm-6 col-md-6 col-lg-6 publication-date">
 								<label for="">@lang('contract.publication_date')</label>
-								<span>{{date('F d Y',strtotime(_e($contract->metadata,'published_at','-')))}}</span>
+								<span>@if(!empty($contract->metadata->published_at)){{date('F d Y',strtotime(_e($contract->metadata,'published_at','-')))}}@endif</span>
 							
 							</li>
 						</ul>
