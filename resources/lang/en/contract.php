@@ -24,7 +24,7 @@ return [
     'source'                  => 'Source',
     'source_url'              => 'Source URL',
     'disclosure_mode'         => 'Disclosure Mode',
-    'open_contracting_id'     => 'Open Contracting ID :',
+    'open_contracting_id'     => 'Open Contracting ID',
     'see'                     => "See",
     'legislation'             => "Legislation",
     'african_mining'          => "in African Mining Legislation Atlas",
@@ -43,5 +43,7 @@ return [
     'loading_redirect'        => 'Connection slow. Loading text view ...',
     'fullscreen'              => 'View in fullscreen',
     'exit_fullscreen'         => 'Exit fullscreen view',
-    'slow_connection_message' => "You've been redirected to text view because of a slow internet connection. The PDF document is available to download using the button [gif] to the right."
+    'slow_connection_message' => "You've been redirected to text view because of a slow internet connection. The PDF document is available to download using the button [gif] to the right.",
+    'publication_date'       => "Date published",
+    'posted_date'            =>"Date posted",
 ];
