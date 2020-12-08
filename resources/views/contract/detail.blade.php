@@ -221,7 +221,7 @@
 						</div>
 						<div class="view-all-annotations">
 							@if(count($contract->annotationsGroup)>0)
-								<a href="#annotations"
+								<a href="#keyclauses"
 								   class="view-annotation"><span>@if(site()->isRCCategorySite()) @lang('global.view_annotations_new') @else @lang('global.view_annotations') @endif</span></a>
 							@else
 								<a href="javascript:void();"
@@ -471,7 +471,7 @@
 		</div>
 	</div>
 	@if(count($contract->annotationsGroup)>0)
-		<div class="row annotation-list-wrapper" id="annotations">
+		<div class="row annotation-list-wrapper" id="keyclauses">
 			<div class="col-lg-12">
 				<div class="panel panel-default panel-wrap panel-annotation-list-wrap">
 					<div class="panel-heading clearfix">
