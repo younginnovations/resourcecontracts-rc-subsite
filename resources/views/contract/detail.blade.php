@@ -56,7 +56,9 @@
 				<div class="panel panel-default panel-wrap panel-contract-wrap">
 					<div class="panel-body">
 						<ul>
+
 							<li class="col-sm-6">
+
 								<label for="">@lang('contract.open_contracting_id')</label>
 								<span >{{_e($contract->metadata,'open_contracting_id','-')}}</span>
 							

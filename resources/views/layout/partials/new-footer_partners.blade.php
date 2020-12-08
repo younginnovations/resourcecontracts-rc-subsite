@@ -99,19 +99,30 @@
 	<div class="partner-right">
 		<div class="menu-list clearfix">
 			<ul class="menu-list-each">
-				<li><a href="{{url('about')}}">@lang('footer.about')</a></li>
-				<li><a href="{{url('faqs')}}">@lang('footer.faqs')</a></li>
-				<li><a href="{{url('guides')}}">@lang('sidebar.guides')</a></li>
-				<li><a href="{{url('glossary')}}">@lang('footer.glossary')</a></li>
-				@if(site()->isRC())
-					<li><a href="{{url('research-and-analysis')}}">@lang('footer.research_and_analysis')</a></li>
-				@endif
-				@if(!site()->isCountrySite())
+				@if(site()->isOLC())
+					<li><a href="{{url('about')}}">@lang('footer.about')</a></li>
+					<li><a href="{{url('guides')}}">@lang('sidebar_olc.use_this_site')</a></li>
+					<li><a href="{{url('glossary')}}">@lang('footer.glossary')</a></li>
+					<li><a href="{{url('faqs')}}">@lang('footer.faqs')</a></li>
 					<li><a href="{{url('country-sites')}}">@lang('footer.country_sites')</a></li>
+					<li><a href="{{url('contact')}}">@lang('footer.contact')</a></li>
+					<li><a href="https://github.com/NRGI/resourcecontracts.org/wiki/API" target="_blank">API</a>
+					</li>
+				@else
+					<li><a href="{{url('about')}}">@lang('footer.about')</a></li>
+					<li><a href="{{url('faqs')}}">@lang('footer.faqs')</a></li>
+					<li><a href="{{url('guides')}}">@lang('sidebar.guides')</a></li>
+					<li><a href="{{url('glossary')}}">@lang('footer.glossary')</a></li>
+					@if(site()->isRC())
+						<li><a href="{{url('research-and-analysis')}}">@lang('footer.research_and_analysis')</a></li>
+					@endif
+					@if(!site()->isCountrySite())
+						<li><a href="{{url('country-sites')}}">@lang('footer.country_sites')</a></li>
+					@endif
+					<li><a href="{{url('contact')}}">@lang('footer.contact')</a></li>
+					<li><a href="https://github.com/NRGI/resourcecontracts.org/wiki/API" target="_blank">API</a>
+					</li>
 				@endif
-				<li><a href="{{url('contact')}}">@lang('footer.contact')</a></li>
-				<li><a href="https://github.com/NRGI/resourcecontracts.org/wiki/API" target="_blank">API</a>
-				</li>
 			</ul>
 			@if(\Request::url() != url())
 				<div class="clearfix">
