@@ -57,13 +57,17 @@
 					<div class="panel-body">
 						<ul>
 
-							<li class="col-sm-6">
+							<li class="col-sm">
 
 								<label for="">@lang('contract.open_contracting_id')</label>
 								<span >{{_e($contract->metadata,'open_contracting_id','-')}}</span>
 							
 							</li>
-							<li class="col-sm-6 publication-date">
+
+							<li class="col-sm">
+
+						
+
 								@if(site()->isOLC())
 								<label for="">@lang('contract.posted_date')</label>
 
