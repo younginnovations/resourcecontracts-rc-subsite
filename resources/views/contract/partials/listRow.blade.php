@@ -30,7 +30,7 @@ if($contract->is_supporting_document == '0') {
            href="{{ url(sprintf("/contract/%s/view#/pdf", $contract->open_contracting_id )) }}">
             {{ $contract->name or ''}}
         </a>
-        <?php $link = sprintf('/contract/%s#annotations', $contract->open_contracting_id);?>
+        <?php $link = sprintf('/contract/%s#keyclauses', $contract->open_contracting_id);?>
         @if($annotations->total>0)
             <div class="annotate-text" data-popover="true" data-html="true"
                  data-content="@if(site()->isRC())@lang('global.annotated', ['link' => url($link), 'ids' => $annotation_ids])

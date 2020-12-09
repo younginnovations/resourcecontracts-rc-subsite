@@ -46,4 +46,5 @@ return [
     'slow_connection_message' => "You've been redirected to text view because of a slow internet connection. The PDF document is available to download using the button [gif] to the right.",
     'publication_date'       => "Date published on ResourceContracts",
     'posted_date'            =>"Date posted on OpenLandContracts",
+
 ];

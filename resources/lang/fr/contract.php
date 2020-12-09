@@ -48,4 +48,5 @@ return [
     'posted_date'            =>"Date de publication sur OpenLandContracts",
 
 
+
 ];
