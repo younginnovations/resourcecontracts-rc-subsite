@@ -139,7 +139,7 @@ if($contract->is_supporting_document == '0') {
                 </ul>
             </div>
         </div>
-    @if( !site()->isCountrySite() && $contract->country_code !='')
+    @if( !site()->isCountrySite() && $contract->country_code !='' && $showCountry)
         <td data-title="@lang('global.country')">
             <img style="width: 24px ; height: auto" src="{{getFlagUrl($contract->country_code)}}"/>
             <span class="country-name-title">{{@trans('country')[$contract->country_code]}}</span>

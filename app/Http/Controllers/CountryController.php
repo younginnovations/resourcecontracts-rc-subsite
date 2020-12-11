@@ -69,6 +69,8 @@ class CountryController extends BaseController
             'sort_by' => empty($request->get('sortby')) ? 'year' : $request->get('sortby'),
             'order'   => $request->get('order'),
             'all'     => $request->get('all', '0'),
+            'group'    =>'metadata|text|annotations',
+            'from'      =>$currentPage,
         ];
         $filter['order'] = ($filter['sort_by'] == 'year' && empty($filter['order'])) ? 'desc' : $filter['order'];
 
@@ -82,8 +84,11 @@ class CountryController extends BaseController
             'title'       => $countryName,
             'description' => site()->meta('country_description').$countryName,
         ];
-
-        return view('country.detail', compact('contracts', 'country', 'resources', 'currentPage', 'meta'));
+        $route                   = $request->path();
+        $showYear                = ($route == "contracts" && isset($params['year'])) ? false : true;
+        $showCountry=false;
+        return view('country.detail', compact('contracts', 'country', 'resources', 'currentPage', 'meta','showYear','showCountry'
+    ));
     }
 
 }
