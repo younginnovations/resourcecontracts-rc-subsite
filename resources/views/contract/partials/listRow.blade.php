@@ -83,10 +83,11 @@ if($contract->is_supporting_document == '0') {
             @endif
         </div>
         @if($annotations->total>0)
-            @if(\Illuminate\Support\Facades\Input::has('annotation_category'))
-                <?php $annotation_categories = \Illuminate\Support\Facades\Input::get(
-                    'annotation_category'
-                )?>
+            @if(\Illuminate\Support\Facades\Input::has('annotation_category') || \Illuminate\Support\Facades\Input::has('key_clause'))
+                <?php
+                $input = site()->isOLC() ? 'annotation_category' : 'key_clause'; 
+                $annotation_categories = \Illuminate\Support\Facades\Input::get($input);
+                ?>
                 @foreach($annotation_categories as $category)
                     <?php
                     $annotation = searchInArray($annotations->result, 'category', $category);
