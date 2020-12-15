@@ -82,7 +82,7 @@ class FilterController
             'title'       => 'Search Contracts',
             'description' => sprintf($descp, $title),
         ];
-
+$showCountry=true;
         return view(
             'site.groupDemo',
             compact(
@@ -96,7 +96,8 @@ class FilterController
                 'orderBy',
                 'sortBy',
                 'route',
-                'showYear'
+                'showYear',
+                'showCountry'
             )
         );
     }

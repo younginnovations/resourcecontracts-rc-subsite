@@ -46,9 +46,9 @@ use Illuminate\Support\Facades\Lang;
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-lg-12 country-detail-wrapper">
+		<div class="col-lg-12 country-list-wrapper">
 			<div class="@if(!site()->isCountrySite()) col-md-8 col-lg-8 @else col-md-12 col-lg-12 @endif">
-				<div class="panel panel-default panel-wrap country-contract-wrap">
+				<div class="panel panel-default panel-wrap country-list-wrap">
 					<div class="panel-heading">@lang('global.contracts_for') {{_l("resources",$resource)}}</div>
 					<div class="panel-body">
 						@include('contract.partials.contract_list')

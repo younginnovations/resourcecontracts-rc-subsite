@@ -75,12 +75,13 @@ class ResourceController extends BaseController
             'sort_by'  => empty($request->get('sortby')) ? 'year' : $request->get('sortby'),
             'order'    => $request->get('order'),
             'all'      => $request->get('all', '0'),
+            'group'    =>'metadata|text|annotations',
+            'from'      =>$currentPage,
         ];
         $filter['order'] = ($filter['sort_by'] == 'year' && empty($filter['order'])) ? 'desc' : $filter['order'];
 
         $contracts = $this->api->allContracts($filter);
         $countries = $this->api->getCountryByResource($filter);
-
         if (!$contracts) {
             return abort(404);
         }
@@ -90,8 +91,10 @@ class ResourceController extends BaseController
             'description' => site()->meta('resource_description').$resource,
 
         ];
-
-        return view('resource.detail', compact('contracts', 'resource', 'countries', 'currentPage', 'meta'));
+        $route                   = $request->path();
+        $showYear                = ($route == "contracts" && isset($params['year'])) ? false : true;
+        $showCountry=true;
+        return view('resource.detail', compact('contracts', 'resource', 'countries', 'currentPage', 'meta','showYear','showCountry'));
     }
 
 }

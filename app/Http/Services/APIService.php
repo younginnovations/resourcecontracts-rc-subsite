@@ -90,7 +90,6 @@ class APIService
         ];
 
         $filter = array_merge($default, $filter);
-
         $query = [
             'country_code' => $filter['country'],
             'year'         => $filter['year'],
@@ -101,12 +100,13 @@ class APIService
             'order'        => $filter['order'],
             'all'          => $filter['all'],
             'download'     => $filter['download'],
+            'group'         =>$filter['group'],
         ];
         if ($query['download']) {
             echo $this->downloadAPI('contracts', $query);
         }
-        $contract = $this->apiCall('contracts', $query);
-
+        // dd($query);
+        $contract = $this->apiCall('contracts/group', $query);
         if ($contract->total > 0) {
             return $contract;
         }
@@ -336,13 +336,10 @@ class APIService
             'annotated'           => $annotated,
 
         ];
-
         if ($filter['download']) {
             $this->downloadAPI('contracts/search', $query);
         }
-
         $contract = $this->apiCall('contracts/group', $query);
-
         if ($contract) {
             return $contract;
         }
