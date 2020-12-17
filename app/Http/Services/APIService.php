@@ -621,6 +621,12 @@ class APIService
                     'sheetname',
                     function ($sheet) use (&$data) {
                         $sheet->fromArray($data);
+                        $sheet->row(1, function ($row) {
+
+                            $row->setFontSize(10);
+                            $row->setFontWeight('bold');
+                
+                        });
                     }
                 );
             }
