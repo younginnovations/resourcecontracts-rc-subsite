@@ -103,7 +103,7 @@ class APIService
             'group'         =>$filter['group'],
         ];
         if ($query['download']) {
-            echo $this->downloadAPI('contracts', $query);
+             $this->downloadAPI('contracts/search', $query);
         }
         // dd($query);
         $contract = $this->apiCall('contracts/group', $query);
