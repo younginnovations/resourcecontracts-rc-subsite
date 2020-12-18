@@ -246,6 +246,7 @@ class ContractController extends BaseController
             'resource' => $request['resource'],
             'download' => $request['download'],
             'from'     => 1,
+            'group'     =>'metadata|text|annotations',
         ];
         $this->api->allContracts($filter);
         die;
