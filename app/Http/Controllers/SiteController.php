@@ -95,7 +95,8 @@ class SiteController extends BaseController
         $filter = [
             'from'     => 1,
             'per_page' => 10000,
-        ];
+            'group'     =>'metadata|text|annotations',
+           ];
 
         $file = base_path('public/sitemap.xml');
 
