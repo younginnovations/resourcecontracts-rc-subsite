@@ -57,6 +57,10 @@ class ContractController extends BaseController
             'sort_by' => empty($request->get('sortby')) ? 'year' : $request->get('sortby'),
             'order'   => $request->get('order'),
             'all'     => $request->get('all', 0),
+            'group'     =>'metadata|text|annotations',
+
+
+
         ];
         $filter['order'] = ($filter['sort_by'] == 'year' && empty($filter['order'])) ? 'desc' : $filter['order'];
         $contracts       = $this->api->allContracts($filter);
@@ -246,6 +250,7 @@ class ContractController extends BaseController
             'resource' => $request['resource'],
             'download' => $request['download'],
             'from'     => 1,
+            'group'     =>'metadata|text|annotations',
         ];
         $this->api->allContracts($filter);
         die;
