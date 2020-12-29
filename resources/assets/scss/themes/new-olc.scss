@@ -1,40 +1,78 @@
-$color-primary: #27AE60;
+$color-primary: #27ae60;
 
 $gradient-base: linear-gradient(180deg, #131317 -60.19%, rgba(65, 66, 99, 0.09) 100%);
 
 $gradient-not-found: radial-gradient(50% 79%, #b7df74 32%, #94ba63 79%);
- 
+
 $img-sprite: url(../../images/olc/ic_sprite.svg);
 
 $img-not-found: url(../../images/olc/error-bg.png);
 
-
-@import "../new-style.scss"; 
+@import '../new-style.scss';
 
 .trigger:before {
-    filter: none;
+  filter: none;
 }
 
 .navbar-brand,
 .navbar-brand:hover {
-    color: #404040;
+  color: #404040;
 
-    span {
-        color: #404040;
-    }
+  span {
+    color: #404040;
+  }
 }
 
 .navbar-right ul li a {
-    color: #404040;
+  color: #404040;
 
-    &:hover {
-        color: #000;
-    }
-    &.active {
-        color: #fff;
-    }
+  &:hover {
+    color: #000;
+  }
+  &.active {
+    color: #fff;
+  }
 }
 
 .hero-image {
-    margin-top: 0;
+  margin-top: 0;
+}
+
+.download-btn {
+  align-items: center;
+  background-color: #30ad63;
+  border-radius: 100px;
+  border: 1px solid #30ad63;
+  color: #ffffff;
+  display: flex;
+  font-family: 'Open Sans';
+  font-weight: 400;
+  font-size: 14px;
+  height: 40px;
+  justify-content: center;
+  left: 82%;
+  position: absolute;
+  top: 170px;
+  width: 164px;
+
+  &:hover {
+    background-color: #2c9e5a;
+  }
+
+  img {
+    height: 18px;
+    margin-right: 8px;
+    position: relative;
+    width: 18px;
+  }
+}
+
+@media print {
+  h1,
+  h2,
+  h3,
+  li {
+    font-size: 100px !important;
+    color: red;
+  }
 }
