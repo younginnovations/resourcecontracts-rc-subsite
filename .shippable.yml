@@ -33,7 +33,7 @@ build:
     
 integrations:
   hub:
-    - integrationName: nrgiDockerRegistry
+    - integrationName: nrgiDockerHub
       type: dockerRegistryLogin
   notifications:
     - integrationName: email
