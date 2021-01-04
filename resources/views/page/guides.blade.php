@@ -217,7 +217,7 @@ $pageVersion = app('request')->get('v');
         </div>--}}
     <!-- <div id="content">{!!$page->content(app('request')->query('v'))!!}</div> -->
     <div id="content">
-        <p><button id="download-button" class="download-btn"><img src="../../images/download-2-line.svg" alt="" /> Download PDF</button></p>
+        <p><a href="{{url('guides/download')}}"><button id="download-button" class="download-btn"><img src="../../images/download-2-line.svg" alt="" /> Download PDF</button></a></p>
         <div id="pdf-page" class="guide-wrapper">
             <h1 class='toDownload'>How to use Resource Contracts?</h1>
             <ul class="guide-nav" data-html2canvas-ignore="true">
