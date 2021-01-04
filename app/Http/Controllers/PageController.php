@@ -5,7 +5,7 @@ use App\Http\Services\Admin\ResearchAndAnalysisService;
 use App\Http\Services\LocalizationService;
 use App\Http\Services\Page\PageService;
 use Laravel\Lumen\Routing\Controller as BaseController;
-use Vsmoraes\Pdf\Pdf;
+use Spipu\Html2Pdf\Html2Pdf;
 
 /**
  * Class PageController
@@ -25,18 +25,18 @@ class PageController extends BaseController
      * @var ResearchAndAnalysisService
      */
     private $researchAndAnalysisService;
-    private $pdfDownload;
+    private $pageToPDF;
     /**
      * @param PageService $page
      * @param LocalizationService $lang
      * @param ResearchAndAnalysisService $researchAndAnalysisService
      */
-    public function __construct(PageService $page, LocalizationService $lang, ResearchAndAnalysisService $researchAndAnalysisService,Pdf $pdfDownload)
+    public function __construct(PageService $page, LocalizationService $lang, ResearchAndAnalysisService $researchAndAnalysisService,Html2Pdf $pageToPDF)
     {
         $this->page = $page;
         $this->lang = $lang;
         $this->researchAndAnalysisService = $researchAndAnalysisService;
-        $this->pdfDownload=$pdfDownload;
+        $this->pageToPDF=$pageToPDF;
         view()->share('currentLang', $lang->getCurrentLang());
     }
 
@@ -201,9 +201,10 @@ class PageController extends BaseController
     public function guidesDownload()
     {
         $guidePage= view('page.guide-download')->render(); 
-        return $this->pdfDownload
-        ->load($guidePage)->filename('guide-page')
-        ->download();
+        $this->pageToPDF->writeHTML($guidePage);
+        
+        //D is for download 
+        $this->pageToPDF->output('guide-page.pdf', 'D');
 
     }
 
