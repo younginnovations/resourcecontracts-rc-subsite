@@ -301,7 +301,7 @@ class OptionService
         foreach ($options as $link) {
             $links           [] = [
                 'title' => isset($link->title->$currentLang) ? $link->title->$currentLang : '',
-                'url'   => isset($link->url->$currentLang) ? $link->url->$currentLang : '',
+                'url'   => isset($link->url->$currentLang) ? str_replace('annotation_category','key_clause' ,$link->url->$currentLang) : '',
             ];
         }
 
