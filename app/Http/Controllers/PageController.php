@@ -201,6 +201,7 @@ class PageController extends BaseController
     public function guidesDownload()
     {
         $guidePage= view('page.guide-download')->render(); 
+        $this->pageToPDF->setTestIsImage(false);
         $this->pageToPDF->writeHTML($guidePage);
         
         //D is for download 

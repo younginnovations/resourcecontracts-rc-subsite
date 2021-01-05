@@ -66,13 +66,3 @@ $img-not-found: url(../../images/olc/error-bg.png);
     width: 18px;
   }
 }
-
-@media print {
-  h1,
-  h2,
-  h3,
-  li {
-    font-size: 100px !important;
-    color: red;
-  }
-}
