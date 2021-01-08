@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f105d3a4cd16dbabb7990a09c60b446d",
+    "content-hash": "5b60c5b3bd0e473e06581952cd40d52c",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -174,6 +174,72 @@
                 "wkhtmltopdf"
             ],
             "time": "2016-08-05T13:08:28+00:00"
+        },
+        {
+            "name": "daltcore/lara-pdf-merger",
+            "version": "2.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DALTCORE/lara-pdf-merger.git",
+                "reference": "f794509b12fe61c9d6a6af9d3af52ffecddc90cf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DALTCORE/lara-pdf-merger/zipball/f794509b12fe61c9d6a6af9d3af52ffecddc90cf",
+                "reference": "f794509b12fe61c9d6a6af9d3af52ffecddc90cf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "LynX39\\LaraPdfMerger\\PdfMergerServiceProvider"
+                    ],
+                    "aliases": {
+                        "PdfMerger": "LynX39\\LaraPdfMerger\\Facades\\PdfMerger"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "LynX39\\LaraPdfMerger": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Musso",
+                    "email": "lynx@deltaaskii.com",
+                    "homepage": "https://github.com/LynX39"
+                },
+                {
+                    "name": "Ramon Smit",
+                    "email": "rsmit@daltcore.com",
+                    "homepage": "https://github.com/daltcore"
+                },
+                {
+                    "name": "Marouan Sami",
+                    "email": "sami.marwen.isetcom@gmail.com",
+                    "homepage": "https://github.com/MarwenSami"
+                }
+            ],
+            "homepage": "https://github.com/MarwenSami/lara-pdf-merger",
+            "keywords": [
+                "duplex merge",
+                "laravel",
+                "manage",
+                "merge",
+                "merger",
+                "paginate",
+                "pdf"
+            ],
+            "time": "2020-05-06T07:49:12+00:00"
         },
         {
             "name": "danielstjules/stringy",
@@ -536,6 +602,7 @@
                 }
             ],
             "description": "Provides a simple API and specification that abstracts away the details of HTTP into a single PHP function.",
+            "abandoned": true,
             "time": "2015-05-20T03:37:09+00:00"
         },
         {
@@ -586,6 +653,7 @@
                 "Guzzle",
                 "stream"
             ],
+            "abandoned": true,
             "time": "2014-10-12T19:18:40+00:00"
         },
         {
@@ -2023,52 +2091,8 @@
                 }
             ],
             "description": "Flysystem adapter for AWS S3 SDK v2",
+            "abandoned": "league/flysystem-aws-s3-v3",
             "time": "2015-10-15T15:55:48+00:00"
-        },
-        {
-            "name": "lynx39/lara-pdf-merger",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/LynX39/lara-pdf-merger.git",
-                "reference": "3fcacef620ccfa0b758a09381e57b4211982d887"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/LynX39/lara-pdf-merger/zipball/3fcacef620ccfa0b758a09381e57b4211982d887",
-                "reference": "3fcacef620ccfa0b758a09381e57b4211982d887",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "LynX39\\LaraPdfMerger": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michael Musso",
-                    "email": "lynx@deltaaskii.com",
-                    "homepage": "https://github.com/LynX39"
-                }
-            ],
-            "homepage": "https://github.com/LynX39/lara-pdf-merger",
-            "keywords": [
-                "laravel",
-                "manage",
-                "merge",
-                "merger",
-                "paginate",
-                "pdf"
-            ],
-            "time": "2016-05-10T16:15:09+00:00"
         },
         {
             "name": "maatwebsite/excel",
@@ -2318,6 +2342,7 @@
                 "cron",
                 "schedule"
             ],
+            "abandoned": "dragonmantank/cron-expression",
             "time": "2016-01-26T21:23:30+00:00"
         },
         {
@@ -2547,6 +2572,7 @@
                 "xls",
                 "xlsx"
             ],
+            "abandoned": "phpoffice/phpspreadsheet",
             "time": "2015-05-01T07:00:55+00:00"
         },
         {
@@ -3580,6 +3606,7 @@
                 "laravel",
                 "pdf"
             ],
+            "abandoned": "barryvdh/laravel-dompdf",
             "time": "2016-01-12T13:38:27+00:00"
         }
     ],
@@ -3684,6 +3711,7 @@
                 "faker",
                 "fixtures"
             ],
+            "abandoned": true,
             "time": "2016-04-29T12:21:54+00:00"
         },
         {
@@ -4135,6 +4163,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2015-09-15T10:49:45+00:00"
         },
         {
@@ -4263,6 +4292,7 @@
                 "mock",
                 "xunit"
             ],
+            "abandoned": true,
             "time": "2015-10-02T06:51:40+00:00"
         },
         {
@@ -4739,9 +4769,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "lynx39/lara-pdf-merger": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
