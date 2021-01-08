@@ -38,6 +38,10 @@ $img-not-found: url(../../images/olc/error-bg.png);
   margin-top: 0;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 .download-btn {
   align-items: center;
   background-color: #30ad63;
@@ -47,13 +51,12 @@ $img-not-found: url(../../images/olc/error-bg.png);
   display: flex;
   font-family: 'Open Sans';
   font-weight: 400;
-  font-size: 14px;
-  height: 40px;
+  font-size: 24px;
+  height: 80px;
   justify-content: center;
-  left: 82%;
-  position: absolute;
-  top: 170px;
-  width: 164px;
+  margin: 50px auto;
+  top: 80px;
+  width: 400px;
 
   &:hover {
     background-color: #2c9e5a;
@@ -63,6 +66,6 @@ $img-not-found: url(../../images/olc/error-bg.png);
     height: 18px;
     margin-right: 8px;
     position: relative;
-    width: 18px;
+    width: 20px;
   }
 }
