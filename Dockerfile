@@ -29,10 +29,10 @@ RUN apk --update add \
     gettext \
     libffi-dev \
  && rm /var/cache/apk/* \
- && npm install --global gulp-cli \
- && gem install --no-rdoc --no-ri sass \
- && gem install --no-rdoc --no-ri bourbon \
- && gem install --no-rdoc --no-ri io-console \
+ && npm install --global gulp-cli@2.0.1\
+ && gem install --no-rdoc --no-ri sass -v '~> 3.7.3'\
+ && gem install --no-rdoc --no-ri bourbon -v '~> 5.1.0'\
+ && gem install --no-rdoc --no-ri io-console -v 0.5.4\
  && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer \
  && curl -O -L https://github.com/papertrail/remote_syslog2/releases/download/v0.20/remote_syslog_linux_amd64.tar.gz \
  && tar -zxf remote_syslog_linux_amd64.tar.gz \
