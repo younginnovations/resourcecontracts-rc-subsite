@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "content-hash": "5b60c5b3bd0e473e06581952cd40d52c",
-=======
-    "content-hash": "e4366621d086c21ed03c61ce50484c6b",
->>>>>>> added download button for pdf
+    "content-hash": "9965686593383bb0e0954ef9a0ab325f",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -2768,10 +2764,6 @@
                 "html2pdf",
                 "pdf"
             ],
-            "support": {
-                "issues": "https://github.com/spipu/html2pdf/issues",
-                "source": "https://github.com/spipu/html2pdf/tree/v5.2.2"
-            },
             "time": "2020-03-22T16:23:26+00:00"
         },
         {
@@ -3589,10 +3581,6 @@
                 "pdf417",
                 "qrcode"
             ],
-            "support": {
-                "issues": "https://github.com/tecnickcom/TCPDF/issues",
-                "source": "https://github.com/tecnickcom/TCPDF/tree/6.3.5"
-            },
             "time": "2020-02-14T14:20:12+00:00"
         },
         {
@@ -4902,5 +4890,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "1.1.0"
 }
