@@ -3,7 +3,7 @@
 
 <?php
 $editingMode = auth()->isloggedIn();
-$pageVersion = app('request')->get('v');        
+$pageVersion = app('request')->get('v');
 ?>
 
 @section('content')
@@ -12,13 +12,15 @@ $pageVersion = app('request')->get('v');
 <div class="edit-mode">
     <div>@lang('admin.editing_page_version', ['version' => 'v' . $pageVersion])
         <a target="_blank" href="{{route('admin.page.edit', ['id'=>$page->id])}}?v={{ $pageVersion }}">@lang('admin.click_here')</a> @lang('admin.to_edit') -
-        <a href="{{ url('logout') }}">@lang('admin.logout')</a></div>
+        <a href="{{ url('logout') }}">@lang('admin.logout')</a>
+    </div>
 </div>
 @else
 <div class="edit-mode">
     <div>@lang('admin.editing')
         <a target="_blank" href="{{route('admin.page.edit', ['id'=>$page->id])}}">@lang('admin.click_here')</a> @lang('admin.to_edit') -
-        <a href="{{url('logout')}}">@lang('admin.logout')</a></div>
+        <a href="{{url('logout')}}">@lang('admin.logout')</a>
+    </div>
 </div>
 @endif
 

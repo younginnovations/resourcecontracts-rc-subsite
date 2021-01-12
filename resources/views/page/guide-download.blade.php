@@ -53,7 +53,7 @@
         <tr>
             <td style="vertical-align: top; padding-top: 40px;"><img src="images/guide-step-3.png" alt="image" width='260' height='170'></td>
             <td width="390" style="padding-left: -30px; padding-top: 40px;">
-                <h4 id='view-document-heading'style="margin: 0px;">View a Document</h4>
+                <h4 id='view-document-heading' style="margin: 0px;">View a Document</h4>
                 <ul style="margin-left: -22px;">
                     <li id='h3l1'>To see any contract, click on the contract title to go to the View Document page.</li>
                     <li id='h3l2'>You can scroll through the full PDF document page by page, or click the &ldquo;TEXT&rdquo; button to switch to a text- only view.</li>
