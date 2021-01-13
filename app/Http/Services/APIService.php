@@ -337,7 +337,7 @@ class APIService
 
         ];
         if ($filter['download']) {
-            $this->downloadAPI('contracts/search', $query);
+            $this->downloadAPI('contracts/group', $query);
         }
         $contract = $this->apiCall('contracts/group', $query);
         if ($contract) {
@@ -581,15 +581,13 @@ class APIService
     }
 
     /**
-     * call API
+     * Downloads CSV
      *
      * @param        $resource
-     * @param array $query
-     * @param bool $array
-     *
+     * @param array  $query
+     * @param false  $array
      * @param string $id
      *
-     * @return null
      * @throws \Exception
      */
     public function downloadAPI($resource, array $query = [], $array = false, $id = "")
