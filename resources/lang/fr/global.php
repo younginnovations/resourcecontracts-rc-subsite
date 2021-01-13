@@ -47,7 +47,7 @@ return [
     'next'                         => "Suivant",
     'last'                         => "Dernier",
     'first'                        => "Premier",
-    'annotated'                    => "Ce contrat contient des Clauses clés. <a href=':link' target='_blank'>visualiser toutes les Clauses clés.</a>",
+    'annotated'                    => "Ce contrat contient des Clauses clés. <a href=':link' target='_blank'>Afficher les clauses clés</a>",
     'annotated_no_link'            => "Ce contrat contient des Clauses clés.",
     'previous'                     => "Précédent",
     'close_annotations'            => "Fermer les Clauses clés",

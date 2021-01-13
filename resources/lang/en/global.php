@@ -47,7 +47,7 @@ return [
     'next'                           => 'Next',
     'last'                           => 'Last',
     'first'                          => 'First',
-    'annotated'                      => "This contract has key clauses. <a href=':link' target='_blank'>View all key clauses</a>",
+    'annotated'                      => "This contract has key clauses. <a href=':link' target='_blank'>View key clauses</a>",
     'annotated_no_link'              => "This contract has Key Clauses.",
     'previous'                       => 'Previous',
     'close_annotations'              => 'Close Key Clauses',
