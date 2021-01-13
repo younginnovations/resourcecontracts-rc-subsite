@@ -47,7 +47,7 @@ return [
     'next'                         => "اللاحق",
     'last'                         => "الأخير",
     'first'                        => "الأوّل",
-    'annotated'                    => "يحتوي هذا العقد على بنود أساسية.<a href=':link' target='_blank'>عرض البنود الرئيسية</a>",
+    'annotated'                    => "<a href=':link' target='_blank'>عرض البنود الرئيسية</a>",
     'annotated_no_link'            => "يحتوي هذا العقد على بنود أساسية.",
     'previous'                     => "السابق",
     'close_annotations'            => "أغلق البنود الرئيسية",
