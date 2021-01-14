@@ -3,18 +3,22 @@
 		<li class="sidebar-brand">
 			@include('layout.partials.new-logo')
 		</li>
+
 	
 		@if(site()->isRC())
 		<li><a href="{{url('/')}}" @if(isActiveMenu('')) class="active" @endif > @lang('sidebar.home') </a></li>
 
-		<li><a href="{{url('about')}}" @if(isActiveMenu('about')) class="active" @endif>@lang('sidebar.about')</a>
 
-		<li><a href="{{url('faqs')}}" @if(isActiveMenu('faqs')) class="active" @endif>@lang('sidebar.faqs')</a></li>
+			<li><a href="{{url('about')}}" @if(isActiveMenu('about')) class="active" @endif>@lang('sidebar.about')</a>
 
-		<li><a href="{{url('guides')}}" @if(isActiveMenu('guides')) class="active" @endif>@lang('sidebar.guides')</a>
-		</li>
-		<li><a href="{{url('glossary')}}"
-			   @if(isActiveMenu('glossary')) class="active" @endif>@lang('sidebar.glossary')</a></li>
+			<li><a href="{{url('faqs')}}" @if(isActiveMenu('faqs')) class="active" @endif>@lang('sidebar.faqs')</a></li>
+
+			<li><a href="{{url('guides')}}"
+				   @if(isActiveMenu('guides')) class="active" @endif>@lang('sidebar.guides')</a>
+			</li>
+			<li><a href="{{url('glossary')}}"
+				   @if(isActiveMenu('glossary')) class="active" @endif>@lang('sidebar.glossary')</a></li>
+
 
 			<li><a href="{{url('research-and-analysis')}}">@lang('sidebar.research_and_analysis')</a></li>
 
@@ -40,5 +44,6 @@
 			<li><a href="{{url('faqs')}}">@lang('sidebar.faqs')</a></li>
 
 		@endif
+
 	</ul>
 </div>

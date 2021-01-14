@@ -60,5 +60,14 @@ $sidebar = $image->getImageUrl('sidebar');
 
 		@endif
 
+
+			@if(!site()->isCountrySite())
+				<li><a href="{{url('country-sites')}}"
+					   @if(isActiveMenu('country-sites')) class="active" @endif>@lang('sidebar.country_sites')</a></li>
+			@endif
+			<li><a href="{{url('contact')}}"
+				   @if(isActiveMenu('contact')) class="active" @endif>@lang('sidebar.contact')</a>
+			</li>
+		@endif
 	</ul>
 </div>

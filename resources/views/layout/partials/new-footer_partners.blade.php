@@ -100,6 +100,7 @@
 		<div class="menu-list clearfix">
 			<ul class="menu-list-each">
 
+
 				@if(site()->isCategory('rc'))
 			
 				<li><a href="{{url('about')}}">@lang('footer.about')</a></li>
@@ -124,6 +125,7 @@
 				<li><a href="{{url('contact')}}">@lang('footer.contact')</a></li>
 				<li><a href="https://github.com/NRGI/resourcecontracts.org/wiki/API" target="_blank">API</a>
 				</li>
+
 			</ul>
 			@if(\Request::url() != url())
 				<div class="clearfix">

@@ -1,28 +1,33 @@
-@extends('layout.app')
+@extends('layout.app-page')
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
 <?php
 $editingMode = auth()->isloggedIn();
 $pageVersion = app('request')->get('v');
 ?>
+
 @section('content')
-    @if($editingMode)
-        @if (!is_null($pageVersion))
-            <div class="edit-mode">
-                <div>@lang('admin.editing_page_version', ['version' => 'v' . $pageVersion])
-                    <a target="_blank" href="{{route('admin.page.edit', ['id'=>$page->id])}}?v={{ $pageVersion }}">@lang('admin.click_here')</a> @lang('admin.to_edit') -
-                    <a href="{{ url('logout') }}">@lang('admin.logout')</a></div>
-            </div>
-        @else
-            <div class="edit-mode">
-                <div>@lang('admin.editing')
-                    <a target="_blank" href="{{route('admin.page.edit', ['id'=>$page->id])}}">@lang('admin.click_here')</a> @lang('admin.to_edit') -
-                    <a href="{{url('logout')}}">@lang('admin.logout')</a></div>
-            </div>
-        @endif
+@if($editingMode)
+@if (!is_null($pageVersion))
+<div class="edit-mode">
+    <div>@lang('admin.editing_page_version', ['version' => 'v' . $pageVersion])
+        <a target="_blank" href="{{route('admin.page.edit', ['id'=>$page->id])}}?v={{ $pageVersion }}">@lang('admin.click_here')</a> @lang('admin.to_edit') -
+        <a href="{{ url('logout') }}">@lang('admin.logout')</a>
+    </div>
+</div>
+@else
+<div class="edit-mode">
+    <div>@lang('admin.editing')
+        <a target="_blank" href="{{route('admin.page.edit', ['id'=>$page->id])}}">@lang('admin.click_here')</a> @lang('admin.to_edit') -
+        <a href="{{url('logout')}}">@lang('admin.logout')</a>
+    </div>
+</div>
+@endif
 
-    @endif
+@endif
 
-    <div class="content-static-wrap">
-        {{--<div class="guide-wrapper">
+<div class="content-static-wrap">
+    {{--<div class="guide-wrapper">
             <h1>How to use Resource Contracts?</h1>
             <ul class="guide-nav">
                 <li><a href="#introduction">Introduction</a></li>
@@ -210,21 +215,33 @@ $pageVersion = app('request')->get('v');
                 <a href="glossary">Next</a>
             </div>
         </div>--}}
-        <div id="content">{!!$page->content(app('request')->query('v'))!!}</div>
-    </div>
-    <script type="text/javascript">
-        $('.guide-nav a').click(function(e){
-            e.preventDefault();
-            scrollToElement( $(this).attr('href'), 1000 );
-            $('.guide-nav li').removeClass('active');
-            $(this).parent('li').addClass('active');
-        });
+    <div id="content">{!!$page->content(app('request')->query('v'))!!}</div>
+</div>
 
-        var scrollToElement = function(el, ms){
-            var speed = (ms) ? ms : 600;
-            $('html,body').animate({
-                scrollTop: $(el).offset().top
-            }, speed);
-        }
-    </script>
+<script type="text/javascript">
+    $('.guide-nav a').click(function(e) {
+        e.preventDefault();
+        scrollToElement($(this).attr('href'), 1000);
+        $('.guide-nav li').removeClass('active');
+        $(this).parent('li').addClass('active');
+    });
+
+    var scrollToElement = function(el, ms) {
+        var speed = (ms) ? ms : 600;
+        $('html,body').animate({
+            scrollTop: $(el).offset().top
+        }, speed);
+    }
+
+
+    if (this.hash !== "") {
+        event.preventDefault();
+        var hash = this.hash;
+        $('html, body').animate({
+            scrollTop: $(hash).offset().top
+        }, 800, function() {
+            window.location.hash = hash;
+        });
+    }
+</script>
 @stop
