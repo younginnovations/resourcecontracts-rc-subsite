@@ -35,10 +35,12 @@ $sidebar = $image->getImageUrl('sidebar');
 		<li><a href="{{url('glossary')}}"
 			   @if(isActiveMenu('glossary')) class="active" @endif>@lang('sidebar.glossary')</a></li>
 
+
 			<li><a href="{{url('research-and-analysis')}}" @if(isActiveMenu('research-and-analysis')) class="active" @endif>@lang('sidebar.research_and_analysis')</a></li>
 
 			<li><a href="{{url('country-sites')}}" @if(isActiveMenu('country-sites')) class="active" @endif>@lang('sidebar.country_sites')</a></li>
 		<li><a href="{{url('contact')}}" @if(isActiveMenu('contact')) class="active" @endif>@lang('sidebar.contact')</a></li>
+
 		
 		@else
 
@@ -54,9 +56,11 @@ $sidebar = $image->getImageUrl('sidebar');
 		<li><a href="{{url('guides')}}"
 			   @if(isActiveMenu('guides')) class="active" @endif>@lang('sidebar.guidesOLC')</a></li>
 
+
 			<li><a href="{{url('glossary')}}"  @if(isActiveMenu('glossary')) class="active" @endif>@lang('sidebar.glossary')</a></li>
 
 			<li><a href="{{url('faqs')}}" @if(isActiveMenu('faqs')) class="active" @endif>@lang('sidebar.faqs')</a></li>
+
 
 		@endif
 
