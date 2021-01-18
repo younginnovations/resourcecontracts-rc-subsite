@@ -15,7 +15,8 @@
         "barryvdh/laravel-debugbar": "^2.2",
         "barryvdh/laravel-snappy": "^0.3.1",
         "vsmoraes/laravel-pdf": "^1.0",
-        "daltcore/lara-pdf-merger": "^2.0.6"
+        "daltcore/lara-pdf-merger": "^2.0.6",
+        "spipu/html2pdf": "^5.2"
     },
     "require-dev":{
         "phpunit/phpunit": "~4.0",
