@@ -7,27 +7,28 @@
 
     .logo {
         font-size: 19px;
+        margin-top: -50px;
     }
 
     h1 {
         font-size: 38px;
-        margin-top: 60px;
-        margin-bottom: 40px;
+        margin-top: 50px;
+        margin-bottom: 30px;
     }
 
     h2 {
-        font-size: 25px;
+        font-size: 24px;
         margin-top: 20px;
     }
 
     h3 {
-        font-size: 20px;
+        font-size: 18px;
         margin-top: 0;
     }
 
     p, ul li {
-        font-size: 14px;
-        line-height: 22px;
+        font-size: 13px;
+        line-height: 17px;
     }
 
     ul {
@@ -44,7 +45,15 @@
    }
 </style>
 
-<page backtop="40px" backbottom="40px" backleft="40px" backright="40px">
+<page backtop="60px" backbottom="40px" backleft="40px" backright="40px">
+   <page_header>
+        <table class="page_header" width="100%"> 
+            <tr>
+                <td width="560"></td>
+                <td width="200" style="vertical-align: middle; text-align: right; font-size: 12px;"><em>Page [[page_cu]] of [[page_nb]]</em></td>
+            </tr>
+        </table>
+   </page_header>  
     <strong class="logo"><span style="color: #27ae60;">OPENLAND</span> <br> <span style="color: rgba(64,64,64,0.7)">CONTRACTS</span></strong> 
     <h1>How to use OpenLand Contracts?</h1>
     <h2>Introduction</h2>
