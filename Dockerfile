@@ -94,6 +94,12 @@ RUN composer dump-autoload --optimize \
  && chmod -R 777 /var/www/olc/storage \
  && chmod -R 777 /var/www/olc/public \
  && touch /var/www/olc/.env \
+ && cp /var/www/olc/public/fonts/opensans.afm /var/www/olc/vendor/tecnickcom/tcpdf/fonts \
+ && cp /var/www/olc/public/fonts/opensans.php /var/www/olc/vendor/tecnickcom/tcpdf/fonts \
+ && cp /var/www/olc/public/fonts/opensans.z /var/www/olc/vendor/tecnickcom/tcpdf/fonts \
+ && cp /var/www/olc/public/fonts/opensansb.afm /var/www/olc/vendor/tecnickcom/tcpdf/fonts \
+ && cp /var/www/olc/public/fonts/opensansb.php /var/www/olc/vendor/tecnickcom/tcpdf/fonts \
+ && cp /var/www/olc/public/fonts/opensansb.z /var/www/olc/vendor/tecnickcom/tcpdf/fonts \
 #country site -- Tunisia / tn
  && mkdir -p /var/www/country-tn \
  && cp -R /var/container_init/site_content/. /var/www/country-tn \
