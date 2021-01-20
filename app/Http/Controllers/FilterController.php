@@ -309,7 +309,7 @@ $showCountry=true;
             $currentPage    = $request->get('page', 1);
             $filter         = $this->processQueries($request);
             $filter['from'] = $currentPage;
-            $this->api->filterSearch($filter);
+            $this->api->filterGroupSearch($filter);
         } catch (\Exception $e) {
             Log::warning($request->url() . ": " . $e->getMessage());
             abort(404);

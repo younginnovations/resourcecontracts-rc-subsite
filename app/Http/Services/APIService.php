@@ -337,7 +337,7 @@ class APIService
 
         ];
         if ($filter['download']) {
-            $this->downloadAPI('contracts/search', $query);
+            $this->downloadAPI('contracts/group', $query);
         }
         $contract = $this->apiCall('contracts/group', $query);
         if ($contract) {
@@ -581,15 +581,13 @@ class APIService
     }
 
     /**
-     * call API
+     * Downloads CSV
      *
      * @param        $resource
-     * @param array $query
-     * @param bool $array
-     *
+     * @param array  $query
+     * @param false  $array
      * @param string $id
      *
-     * @return null
      * @throws \Exception
      */
     public function downloadAPI($resource, array $query = [], $array = false, $id = "")
@@ -621,9 +619,36 @@ class APIService
                     'sheetname',
                     function ($sheet) use (&$data) {
                         $sheet->fromArray($data);
+                       
+                        $sheet->row(1, function ($row) {
+
+                            $row->setFontSize(10);
+                            $row->setFontWeight('bold');
+                
+                        });
+                       if(site()->isRC()){
+
+                        for($i=2;$i<=sizeof($data)+1;$i++)
+                        {
+                            $pdfUrlCell = 'D'.$i;
+                            $sourceUrlCell='Z'.$i;
+                            $openCoperateCell='S'.$i;
+
+                            $sheet->getCell($pdfUrlCell) ->getHyperlink() ->setUrl($data[$i-2]['PDF URL']);
+                            $sheet->getStyle($pdfUrlCell) ->applyFromArray(array( 'font' => array( 'color' => ['rgb' => '0000FF'], 'underline' => 'single' ) ));
+                       
+                            $sheet->getCell($sourceUrlCell) ->getHyperlink() ->setUrl($data[$i-2]['Source Url']);
+                            $sheet->getStyle($sourceUrlCell) ->applyFromArray(array( 'font' => array( 'color' => ['rgb' => '0000FF'], 'underline' => 'single' ) ));
+                       
+                            $sheet->getCell($openCoperateCell) ->getHyperlink() ->setUrl($data[$i-2]['Open Corporates Link']);
+                            $sheet->getStyle($openCoperateCell) ->applyFromArray(array( 'font' => array( 'color' => ['rgb' => '0000FF'], 'underline' => 'single' ) ));
+                       
+                        }
                     }
-                );
+                
             }
+        );
+    }
         )->download('xls');
     }
 
