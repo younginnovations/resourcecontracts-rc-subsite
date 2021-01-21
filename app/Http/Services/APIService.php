@@ -29,8 +29,8 @@ class APIService
     private $site;
 
     /**
-     * @param Client $client
-     * @param SiteService $site
+     * @param Client              $client
+     * @param SiteService         $site
      * @param LocalizationService $lang
      */
     public function __construct(Client $client, SiteService $site, LocalizationService $lang)
@@ -90,7 +90,7 @@ class APIService
         ];
 
         $filter = array_merge($default, $filter);
-        $query = [
+        $query  = [
             'country_code' => $filter['country'],
             'year'         => $filter['year'],
             'resource'     => $filter['resource'],
@@ -100,13 +100,13 @@ class APIService
             'order'        => $filter['order'],
             'all'          => $filter['all'],
             'download'     => $filter['download'],
-            'group'         =>$filter['group'],
+            'group'        => $filter['group'],
         ];
         if ($query['download']) {
-             $this->downloadAPI('contracts/search', $query);
+            $this->downloadAPI('contracts/search', $query);
         }
-        // dd($query);
         $contract = $this->apiCall('contracts/group', $query);
+
         if ($contract->total > 0) {
             return $contract;
         }
@@ -252,7 +252,7 @@ class APIService
         return $this->apiCall($resource, ['q' => $query], true);
     }
 
-     /**
+    /**
      * Recent contracts search
      *
      * @param $filter
@@ -401,7 +401,7 @@ class APIService
      *
      * @param       $resource
      * @param array $query
-     * @param bool $array
+     * @param bool  $array
      *
      * @return array|object|null
      */
@@ -434,8 +434,8 @@ class APIService
                     Cache::put($key, $data, Carbon::now()->addMinutes(5));
                 } else {
                     Cache::put($key, $data, Carbon::now()->addMinutes(5));
-                    Log::error("API call to:" . $request->getUrl() . " returned status code " . $statusCode);
-                    Log::error("Response body of the API call " . $request->getUrl() . " was " . $data);
+                    Log::error("API call to:".$request->getUrl()." returned status code ".$statusCode);
+                    Log::error("Response body of the API call ".$request->getUrl()." was ".$data);
                 }
             }
 
@@ -446,7 +446,7 @@ class APIService
             return json_decode($data);
 
         } catch (\Exception $e) {
-            Log::error($resource . ":" . $e->getMessage(), $query);
+            Log::error($resource.":".$e->getMessage(), $query);
 
             return null;
         }
@@ -567,9 +567,9 @@ class APIService
 
         foreach ($summaries->country_summary as $summary) {
 
-            $data[trans('country.' . strtoupper($summary->key))] = [
+            $data[trans('country.'.strtoupper($summary->key))] = [
                 'key'       => $summary->key,
-                'name'      => trans('country.' . strtoupper($summary->key)),
+                'name'      => trans('country.'.strtoupper($summary->key)),
                 'doc_count' => $summary->doc_count,
             ];
         }
@@ -592,11 +592,13 @@ class APIService
      */
     public function downloadAPI($resource, array $query = [], $array = false, $id = "")
     {
-        $filename = "contract_" . date('Y-m-d');
+        $filename = "contract_".date('Y-m-d');
+
         if (!empty($id)) {
             $metadata = $this->contractDetail($id);
+
             if (empty($metadata)) {
-                throw new \Exception('Contract not found with id ' . $id);
+                throw new \Exception('Contract not found with id '.$id);
             }
         }
         $request = new Request('GET', $this->apiURL($resource));
@@ -605,50 +607,139 @@ class APIService
             $query['country']         = strtolower($this->site->getCountryCode());
             $query['is_country_site'] = 1;
         }
-
         $query['category'] = strtolower($this->site->getCategory());
-
         $request->setQuery($query);
-        $response = $this->client->send($request);
-        $data     = $response->getBody()->getContents();
-        $data     = json_decode($data, true);
+        $response                  = $this->client->send($request);
+        $data                      = $response->getBody()->getContents();
+        $data                      = json_decode($data, true);
+        $is_rc_with_annotation_cat = false;
+
+        if (site()->isRC() && isset($query['annotation_category']) && !empty($query['annotation_category'])) {
+            $is_rc_with_annotation_cat = true;
+
+            foreach ($data as $key => $datum) {
+                unset($data[$key]['OCID']);
+                unset($data[$key]['Document Type']);
+                unset($data[$key]['Government Entity']);
+                unset($data[$key]['Company Address']);
+                unset($data[$key]['Jurisdiction of Incorporation']);
+                unset($data[$key]['Registration Agency']);
+                unset($data[$key]['Company Number']);
+                unset($data[$key]['Corporate Grouping']);
+                unset($data[$key]['Participation Share']);
+                unset($data[$key]['Open Corporates Link']);
+                unset($data[$key]['Incorporation Date']);
+                unset($data[$key]['Operator']);
+                unset($data[$key]['Project Title']);
+                unset($data[$key]['Project Identifier']);
+                unset($data[$key]['License Name']);
+                unset($data[$key]['License Identifier']);
+                unset($data[$key]['Source Url']);
+                unset($data[$key]['Disclosure Mode']);
+                unset($data[$key]['Retrieval Date']);
+            }
+        }
+
         Excel::create(
             $filename,
-            function ($csv) use (&$data) {
+            function ($csv) use (&$data, $is_rc_with_annotation_cat) {
                 $csv->sheet(
                     'sheetname',
-                    function ($sheet) use (&$data) {
+                    function ($sheet) use (&$data, $is_rc_with_annotation_cat) {
                         $sheet->fromArray($data);
-                       
-                        $sheet->row(1, function ($row) {
 
-                            $row->setFontSize(10);
-                            $row->setFontWeight('bold');
-                
-                        });
-                       if(site()->isRC()){
+                        $sheet->row(
+                            1,
+                            function ($row) {
 
-                        for($i=2;$i<=sizeof($data)+1;$i++)
-                        {
-                            $pdfUrlCell = 'D'.$i;
-                            $sourceUrlCell='Z'.$i;
-                            $openCoperateCell='S'.$i;
+                                $row->setFontSize(10);
+                                $row->setFontWeight('bold');
 
-                            $sheet->getCell($pdfUrlCell) ->getHyperlink() ->setUrl($data[$i-2]['PDF URL']);
-                            $sheet->getStyle($pdfUrlCell) ->applyFromArray(array( 'font' => array( 'color' => ['rgb' => '0000FF'], 'underline' => 'single' ) ));
-                       
-                            $sheet->getCell($sourceUrlCell) ->getHyperlink() ->setUrl($data[$i-2]['Source Url']);
-                            $sheet->getStyle($sourceUrlCell) ->applyFromArray(array( 'font' => array( 'color' => ['rgb' => '0000FF'], 'underline' => 'single' ) ));
-                       
-                            $sheet->getCell($openCoperateCell) ->getHyperlink() ->setUrl($data[$i-2]['Open Corporates Link']);
-                            $sheet->getStyle($openCoperateCell) ->applyFromArray(array( 'font' => array( 'color' => ['rgb' => '0000FF'], 'underline' => 'single' ) ));
-                       
+                            }
+                        );
+
+                        if (site()->isRC()) {
+                            if ($is_rc_with_annotation_cat) {
+                                for ($i = 2; $i <= sizeof($data) + 1; $i++) {
+                                    $pdfUrlCell = 'C'.$i;
+                                    $sheet->getCell($pdfUrlCell)->getHyperlink()->setUrl($data[$i - 2]['PDF URL']);
+                                    $sheet->getStyle($pdfUrlCell)->applyFromArray(
+                                        array('font' => array('color' => ['rgb' => '0000FF'], 'underline' => 'single'))
+                                    );
+
+                                    if (isset($data[$i - 2]['Link']) && !empty($data[$i - 2]['Link'])) {
+                                        $articleRefCell = 'K'.$i;
+                                        $removeLinkCell = 'L'.($i - 1);
+                                        $removeLink     = 'L'.$i;
+
+                                        $sheet->getCell($articleRefCell)->getHyperlink()->setUrl(
+                                            url().'/'.$data[$i - 2]['Link']
+                                        );
+                                        $sheet->getStyle($articleRefCell)->applyFromArray(
+                                            array(
+                                                'font' => array(
+                                                    'color'     => ['rgb' => '0000FF'],
+                                                    'underline' => 'single',
+                                                ),
+                                            )
+                                        );
+
+                                        $sheet->getCell($removeLinkCell)->setValue(' ');
+                                        $sheet->getCell($removeLink)->setValue(' ');
+                                    }
+                                }
+                            } else {
+                                for ($i = 2; $i <= sizeof($data) + 1; $i++) {
+                                    $pdfUrlCell        = 'D'.$i;
+                                    $sourceUrlCell     = 'Z'.$i;
+                                    $openCorporateCell = 'S'.$i;
+                                    $sheet->getCell($pdfUrlCell)->getHyperlink()->setUrl($data[$i - 2]['PDF URL']);
+                                    $sheet->getStyle($pdfUrlCell)->applyFromArray(
+                                        array('font' => array('color' => ['rgb' => '0000FF'], 'underline' => 'single'))
+                                    );
+
+                                    $sheet->getCell($sourceUrlCell)->getHyperlink()->setUrl(
+                                        $data[$i - 2]['Source Url']
+                                    );
+                                    $sheet->getStyle($sourceUrlCell)->applyFromArray(
+                                        array('font' => array('color' => ['rgb' => '0000FF'], 'underline' => 'single'))
+                                    );
+
+                                    $sheet->getCell($openCorporateCell)->getHyperlink()->setUrl(
+                                        $data[$i - 2]['Open Corporates Link']
+                                    );
+                                    $sheet->getStyle($openCorporateCell)->applyFromArray(
+                                        array('font' => array('color' => ['rgb' => '0000FF'], 'underline' => 'single'))
+                                    );
+
+                                    if (isset($data[$i - 2]['Link']) && !empty($data[$i - 2]['Link'])) {
+
+                                        $articleRefCell = 'AD'.$i;
+                                        $removeLinkCell = 'AE'.($i - 1);
+                                        $removeLink     = 'AE'.$i;
+
+                                        $sheet->getCell($articleRefCell)->getHyperlink()->setUrl(
+                                            url().'/'.$data[$i - 2]['Link']
+                                        );
+                                        $sheet->getStyle($articleRefCell)->applyFromArray(
+                                            array(
+                                                'font' => array(
+                                                    'color'     => ['rgb' => '0000FF'],
+                                                    'underline' => 'single',
+                                                ),
+                                            )
+                                        );
+
+                                        $sheet->getCell($removeLinkCell)->setValue(' ');
+                                        $sheet->getCell($removeLink)->setValue(' ');
+
+                                    }
+                                }
+                            }
                         }
                     }
-                
+                );
             }
-        );
-    }
         )->download('xls');
     }
 
@@ -692,7 +783,7 @@ class APIService
                 'shapes'         => $annotation->shapes,
             ];
         } catch (\Exception $e) {
-            Log::error('Contract popup :' . $e->getMessage());
+            Log::error('Contract popup :'.$e->getMessage());
 
             return null;
         }
