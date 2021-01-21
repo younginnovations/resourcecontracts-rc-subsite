@@ -14,4 +14,8 @@ return [
     'country_sites'         => 'مواقع الدول',
     'contact'               => 'اتصل',
     'about'                 => 'حول',
+    'browse_by_country'     =>  'تصفح حسب الدولة',
+    'browse_by_resource'     => 'تصفح حسب المصدر',
+    'aboutOLC'               =>  'حول OpenLandContracts',
+    'guidesOLC'             => 'باستخدام هذا الموقع',
 ];
