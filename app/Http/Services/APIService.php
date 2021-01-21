@@ -605,14 +605,12 @@ class APIService
             $query['country']         = strtolower($this->site->getCountryCode());
             $query['is_country_site'] = 1;
         }
-
         $query['category'] = strtolower($this->site->getCategory());
-
         $request->setQuery($query);
         $response = $this->client->send($request);
         $data     = $response->getBody()->getContents();
         $data     = json_decode($data, true);
-        Excel::create(
+         Excel::create(
             $filename,
             function ($csv) use (&$data) {
                 $csv->sheet(
@@ -633,6 +631,7 @@ class APIService
                             $pdfUrlCell = 'D'.$i;
                             $sourceUrlCell='Z'.$i;
                             $openCoperateCell='S'.$i;
+                            
 
                             $sheet->getCell($pdfUrlCell) ->getHyperlink() ->setUrl($data[$i-2]['PDF URL']);
                             $sheet->getStyle($pdfUrlCell) ->applyFromArray(array( 'font' => array( 'color' => ['rgb' => '0000FF'], 'underline' => 'single' ) ));
@@ -642,7 +641,20 @@ class APIService
                        
                             $sheet->getCell($openCoperateCell) ->getHyperlink() ->setUrl($data[$i-2]['Open Corporates Link']);
                             $sheet->getStyle($openCoperateCell) ->applyFromArray(array( 'font' => array( 'color' => ['rgb' => '0000FF'], 'underline' => 'single' ) ));
-                       
+                            
+                             if(isset($data[$i-2]['Link']) && !empty($data[$i-2]['Link'])){
+
+                                 $articalRefCell='AD'.$i;
+                                 $removeLinkCell='AE'.($i-1);
+                                 $removeLink='AE'.$i;
+
+                                 $sheet->getCell($articalRefCell) ->getHyperlink() ->setUrl(rtrim(env('APP_DOMAIN'),'/').'/'.$data[$i-2]['Link']);
+                                 $sheet->getStyle($articalRefCell) ->applyFromArray(array( 'font' => array( 'color' => ['rgb' => '0000FF'], 'underline' => 'single' ) ));
+                             
+                                 $sheet->getCell($removeLinkCell)->setValue(' ');
+                                 $sheet->getCell($removeLink)->setValue(' ');
+
+                             }
                         }
                     }
                 
