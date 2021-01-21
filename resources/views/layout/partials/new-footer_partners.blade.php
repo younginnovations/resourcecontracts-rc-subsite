@@ -106,21 +106,28 @@
 				<li><a href="{{url('faqs')}}">@lang('footer.faqs')</a></li>
 				<li><a href="{{url('guides')}}">@lang('sidebar.guides')</a></li>
 				<li><a href="{{url('glossary')}}">@lang('footer.glossary')</a></li>
-			<li><a href="{{url('research-and-analysis')}}">@lang('sidebar.research_and_analysis')</a></li>
-			<li><a href="{{url('country-sites')}}">@lang('sidebar.country_sites')</a></li>
+				<li><a href="{{url('research-and-analysis')}}">@lang('sidebar.research_and_analysis')</a></li>
+				@if(!site()->isCountrySite())
+				
+				<li><a href="{{url('country-sites')}}">@lang('sidebar.country_sites')</a></li>
 
 				@endif
+				@endif
+
 			@if(site()->isCategory('olc'))
 
-		<li><a href="{{url('about')}}" >@lang('sidebar.about')</a>
-			<li><a href="{{url('guides')}}"
-				>@lang('sidebar.guidesOLC')</a></li>
+			<li><a href="{{url('about')}}" >@lang('sidebar.about')</a>
+			<li><a href="{{url('guides')}}">@lang('sidebar.guidesOLC')</a></li>
 			<li><a href="{{url('glossary')}}">@lang('sidebar.glossary')</a></li>
 			<li><a href="{{url('faqs')}}">@lang('sidebar.faqs')</a></li>
+			
+			@if(!site()->isCountrySite())
+
 			<li><a href="{{url('country-sites')}}">@lang('sidebar.country_sites')</a></li>
-
-
+			
 			@endif
+			@endif
+			
 				<li><a href="{{url('contact')}}">@lang('footer.contact')</a></li>
 				<li><a href="https://github.com/NRGI/resourcecontracts.org/wiki/API" target="_blank">API</a>
 				</li>
