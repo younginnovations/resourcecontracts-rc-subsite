@@ -14,9 +14,9 @@ return [
     'country_sites'         => 'Sites de pays',
     'contact'               => 'Contact',
     'about'                 => 'À propos de',
-    'browse_by_country'     =>  'Parcourir par pays',
-    'browse_by_resource'     => 'Parcourir par ressource',
-    'aboutOLC'               =>  'À proposOpenLandContracts',
+    'browse_by_country'     => 'Parcourir par pays',
+    'browse_by_resource'    => 'Parcourir par ressource',
+    'aboutOLC'              => 'À proposOpenLandContracts',
     'guidesOLC'             => 'Utilisation de ce site',
 
 ];
