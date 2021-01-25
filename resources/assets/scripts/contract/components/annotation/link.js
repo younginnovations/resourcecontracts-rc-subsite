@@ -38,11 +38,13 @@ var Link = React.createClass({
     clickHandler(e)
     {
         e.preventDefault();
+        var route_split_key = Contract.isSiteRc() ? 'tagged' : 'annotation';
+        console.log('link.js:', route_split_key);
 
-        var link = '#/text/page/' + this.state.annotation.page_no + '/annotation/' + this.state.annotation.id;
+        var link = '#/text/page/' + this.state.annotation.page_no + '/' + route_split_key + '/' + this.state.annotation.id;
 
         if (this.state.type == "pdf") {
-            link = '#/pdf/page/' + this.state.annotation.page_no + '/annotation/' + this.state.annotation.id;
+            link = '#/pdf/page/' + this.state.annotation.page_no + '/'+route_split_key+'/' + this.state.annotation.id;
         }
 
         if (Contract.getView() == this.state.type && this.state.type == 'pdf') {

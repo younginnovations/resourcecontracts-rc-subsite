@@ -42,11 +42,14 @@ class Item extends Component {
 
         if (this.props.result.type == 'annotation') {
             Contract.setIsSearch(true);
+            var route_split_key = this.contract.isSiteRc() ? 'tagged' : 'annotation';
+            console.log('Item.js:', route_split_key);
+
             if (Contract.getCurrentPage() == this.props.result.page_no) {
-                location.hash = "#/" + this.props.result.annotation_type + "/page/" + this.props.result.page_no + "/annotation/" + this.props.result.id;
+                location.hash = "#/" + this.props.result.annotation_type + "/page/" + this.props.result.page_no + "/"+route_split_key+"/" + this.props.result.id;
                 Contract.showPopup(this.props.result.id);
             } else {
-                location.hash = "#/" + this.props.result.annotation_type + "/page/" + this.props.result.page_no + "/annotation/" + this.props.result.id;
+                location.hash = "#/" + this.props.result.annotation_type + "/page/" + this.props.result.page_no + "/"+route_split_key+"/" + this.props.result.id;
             }
         } else if (Contract.getView() == 'pdf' && this.props.result.type == 'text') {
             Contract.setIsSearch(true);

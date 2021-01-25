@@ -63,7 +63,10 @@ Annotator.Plugin.AnnotatorNRGIViewer = (function (_super) {
         if (annotation.shapes) {
             viewPort = 'pdf';
         }
-        link = ' <a class="annotation-viewer-more" data-target="annotations" href="#/' + viewPort + '/page/' + annotation.page_no + '/annotation/' + annotation.id + '">>></a>';
+        var route_split_key = this.contract.isSiteRc() ? 'tagged' : 'annotation';
+        console.log('annotator.plugin.viewer.js:', route_split_key);
+
+        link = ' <a class="annotation-viewer-more" data-target="annotations" href="#/' + viewPort + '/page/' + annotation.page_no + '/' + route_split_key + '/' + annotation.id + '">>></a>';
         if (typeof annotatedText == 'undefined' || annotatedText === '') {
             content = '<div class="annotation-viewer-text">' + predefinedPlaceholderText  + article_reference + link + '</div>';
         }

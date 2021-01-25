@@ -84,5 +84,5 @@ $isRcCategorySite = site()->isRCCategorySite();
 	<script>
 		PDFJS.workerSrc = "{{url('js/pdfjs/pdf.worker.js')}}"
 	</script>
-	<script src="{{ url('js/contract_view.js') }}?v=2020-08-19"></script>
+	<script src="{{ url('js/contract_view.js') }}?v=2021-01-25"></script>
 @stop

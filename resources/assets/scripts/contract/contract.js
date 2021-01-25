@@ -14,7 +14,8 @@ class Contract {
             annotations: Config.contract.annotations,
             disablePagination: false,
             isSearch: false,
-            searchQueries: []
+            searchQueries: [],
+            siteKey: Config.siteKey
         };
     }
 
@@ -82,9 +83,15 @@ class Contract {
 
         return name;
     }
+    isSiteRc() {
+        return this.options.siteKey === 'rc'
+    }
 
     setPageNumber(route) {
-        route = route.split('annotation');
+        var route_split_key = this.isSiteRc() ? 'tagged' : 'annotation';
+        console.log('contract.js:', route_split_key);
+
+        route = route.split(route_split_key);
         var annotation_id = route[1] || '';
         annotation_id = annotation_id.replace('/', '');
         this.setCurrentAnnotation(annotation_id);
