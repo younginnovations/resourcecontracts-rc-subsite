@@ -542,7 +542,7 @@
 													$pages = collect($annotation->pages);
 													$pages = $pages->groupBy('page_no');
 													$j = 0;
-													$route_split_key = site()->isRCCategorySite()?'tagged':'annotation';
+													$route_split_key = site()->isRC()?'tagged':'annotation';
 													?>
 													@foreach($pages as $refs)
 														<?php  $page = $refs[0]; $j++;?>
