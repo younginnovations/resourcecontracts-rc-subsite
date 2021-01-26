@@ -60,12 +60,12 @@ class FilterController
      */
     public function gIndex(Request $request)
     {
-        $filter_params           = $request->all();
-        $currentPage             = $request->get('page', 1);
-        $filter                  = $this->processQueries($request);
-        $filter['from']          = $currentPage;
-        $filter['per_page']      = 10;
-        $contracts               = isset($filter_params['recent']) ?
+        $filter_params      = $request->all();
+        $currentPage        = $request->get('page', 1);
+        $filter             = $this->processQueries($request);
+        $filter['from']     = $currentPage;
+        $filter['per_page'] = 10;
+        $contracts          = isset($filter_params['recent']) ?
             $this->api->filterRecentSearch($filter) :
             $this->api->filterGroupSearch($filter);
 
@@ -73,16 +73,17 @@ class FilterController
         $filter                  = $this->updateFilterData($filter, $contracts, $request);
         $title                   = site()->meta('title');
         $descp                   = 'Search %s using different criteria - year signed, company name, contract type, annotation category.';
-        $orderBy                = isset($filter_params['order']) ? $filter_params['order'] : '';
+        $orderBy                 = isset($filter_params['order']) ? $filter_params['order'] : '';
         $sortBy                  = isset($filter_params['sort']) ? $filter_params['sort'] : '';
-        $query                  = isset($filter_params['q']) ? $filter_params['q'] : '';
+        $query                   = isset($filter_params['q']) ? $filter_params['q'] : '';
         $route                   = $request->path();
         $showYear                = ($route == "contracts" && isset($params['year'])) ? false : true;
         $meta                    = [
             'title'       => 'Search Contracts',
             'description' => sprintf($descp, $title),
         ];
-$showCountry=true;
+        $showCountry             = true;
+
         return view(
             'site.groupDemo',
             compact(
@@ -121,9 +122,9 @@ $showCountry=true;
         $title                   = site()->meta('title');
         $descp                   = 'Search %s using different criteria - year signed, company name, contract type, annotation category.';
         $filter_params           = $request->all();
-        $orderBy                = isset($filter_params['order']) ? $filter_params['order'] : '';
+        $orderBy                 = isset($filter_params['order']) ? $filter_params['order'] : '';
         $sortBy                  = isset($filter_params['sort']) ? $filter_params['sort'] : '';
-        $query                  = isset($filter_params['q']) ? $filter_params['q'] : '';
+        $query                   = isset($filter_params['q']) ? $filter_params['q'] : '';
         $route                   = $request->path();
         $showYear                = ($route == "contracts" && isset($params['year'])) ? false : true;
         $meta                    = [
@@ -159,8 +160,8 @@ $showCountry=true;
     protected function processQueries(Request $request)
     {
         $isRcCategorySite = site()->isRCCategorySite();
-        $type = is_array($request->get('type')) ? join(',', $request->get('type')) : $request->get('type');
-        $type = $type == '' ? 'metadata|text|annotations' : $type;
+        $type             = is_array($request->get('type')) ? join(',', $request->get('type')) : $request->get('type');
+        $type             = $type == '' ? 'metadata|text|annotations' : $type;
 
         $annotated = $isRcCategorySite ? $request->get('tagged') : $request->get('annotated', '');
         if ($isRcCategorySite) {
@@ -170,7 +171,7 @@ $showCountry=true;
                     'key_clause'
                 )
             ) : $request->get('key_clause');
-        }else{
+        } else {
             $annotationCategoryInput = is_array($request->get('annotation_category')) ? join(
                 '|',
                 $request->get(
@@ -182,7 +183,7 @@ $showCountry=true;
         return [
             'q'                   => $request->get('q', ''),
             'annotated'           => $annotated,
-            'recent'           => $request->get('recent', ''),
+            'recent'              => $request->get('recent', ''),
             'country_code'        => is_array($request->get('country')) ? join(
                 '|',
                 $request->get('country')
@@ -246,9 +247,9 @@ $showCountry=true;
     {
         $isRcCategorySite = site()->isRCCategorySite();
         if ($isRcCategorySite) {
-            $annotationCategoryInput =  is_array($request->get('key_clause'))
+            $annotationCategoryInput = is_array($request->get('key_clause'))
                 ? $request->get('key_clause') : [$request->get('key_clause')];
-        }else{
+        } else {
             $annotationCategoryInput = is_array($request->get('annotation_category'))
                 ? $request->get('annotation_category') : [$request->get('annotation_category')];
         }
@@ -311,7 +312,7 @@ $showCountry=true;
             $filter['from'] = $currentPage;
             $this->api->filterGroupSearch($filter);
         } catch (\Exception $e) {
-            Log::warning($request->url() . ": " . $e->getMessage());
+            Log::warning($request->url().": ".$e->getMessage());
             abort(404);
         }
     }

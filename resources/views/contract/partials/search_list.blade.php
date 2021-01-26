@@ -13,6 +13,7 @@ $showYear = true;
 if ($route == "contracts" && isset($url['year'])) {
     $showYear = false;
 }
+$route_split_key = site()->isRC()?'tagged':'annotation';
 ?>
 
 <table class="table table-responsive table-contract table-contract-list">
@@ -102,7 +103,7 @@ if ($route == "contracts" && isset($url['year'])) {
 
                         @if(isset($contract->annotations ) && !empty($contract->annotations))
                             <p>
-                                <a href="{{ url(sprintf("/contract/%s/view#/pdf/page/%s/annotation/%s", $contract->open_contracting_id ,$contract->annotations->page_no , $contract->annotations->annotation_id  )) }}">
+                                <a href="{{ url(sprintf("/contract/%s/view#/pdf/page/%s/%s/%s", $contract->open_contracting_id ,$contract->annotations->page_no , $route_split_key, $contract->annotations->annotation_id  )) }}">
                                     {!! $contract->annotations->annotation_text ." pg " .$contract->annotations->page_no !!}
                                     <span class="contract-group">@lang('global.annotation') </span>
                                 </a>
@@ -142,7 +143,8 @@ if ($route == "contracts" && isset($url['year'])) {
 									</span>
 
                                     <a style="float: none"
-                                       href="{{route('contract.detail',['id'=>$contract->open_contracting_id])}}#/{{$annotation_type}}/page/{{$annotation['page_no']}}/annotation/{{$annotation['id']}}">
+                                       href="{{route('contract.detail',['id'=>$contract->open_contracting_id]) }}#/{{$annotation_type}}/page/{{$annotation['page_no']}}/{{$route_split_key}}/{{$annotation['id
+                                       ']}}">
                                         [Pg {{$annotation['page_no']}}]
                                     </a>
                                     <button class="annotation-clip-icon clipToggleElems static"

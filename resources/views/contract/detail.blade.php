@@ -542,6 +542,7 @@
 													$pages = collect($annotation->pages);
 													$pages = $pages->groupBy('page_no');
 													$j = 0;
+													$route_split_key = site()->isRC()?'tagged':'annotation';
 													?>
 													@foreach($pages as $refs)
 														<?php  $page = $refs[0]; $j++;?>
@@ -550,7 +551,7 @@
 															@if($ref->article_reference !='')
 																<?php $page_type = isset($page->shapes) ? 'pdf' : 'text'; ?>
 																(
-																<a href="{{route('contract.detail',['id'=>$contract->metadata->open_contracting_id])}}#/{{$page_type}}/page/{{$ref->page_no}}/annotation/{{$ref->id}}">
+																<a href="{{route('contract.detail',['id'=>$contract->metadata->open_contracting_id])}}#/{{$page_type}}/page/{{$ref->page_no}}/{{$route_split_key}}/{{$ref->id}}">
 																	{{$ref->article_reference}}
 																</a>
 																)
