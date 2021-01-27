@@ -56,7 +56,7 @@ class Handler extends ExceptionHandler
             return view('errors.error');
         }
 
-        if (env('APP_ENV') === 'production') {
+        if (env('APP_ENV') === 'production' || env('APP_ENV') === 'staging') {
             $this->sendMail($e, $request);
         }
 
