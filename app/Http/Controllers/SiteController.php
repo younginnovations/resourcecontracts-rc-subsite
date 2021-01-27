@@ -84,6 +84,21 @@ class SiteController extends BaseController
     }
 
     /**
+     * Dynamically generates the robots.txt file.
+     */
+    public function robots()
+    {
+        if (env('APP_ENV') === 'production')
+        {
+            return response(view('site.prod-robots-txt'))
+                ->header('Content-Type', 'text/plain');
+        } else {
+            return response(view('site.staging-robots-txt'))
+                ->header('Content-Type', 'text/plain');
+        }
+    }
+
+    /**
      * Generates sitemap.xml file
      *
      * @param XmlService $xml
