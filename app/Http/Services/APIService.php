@@ -647,8 +647,10 @@ class APIService
                                  $articalRefCell='AD'.$i;
                                  $removeLinkCell='AE'.($i-1);
                                  $removeLink='AE'.$i;
+                                 $domain=(env('DOMAIN_PREFIX')=='staging')?'https://staging.resourcecontracts.org/':'https://resourcecontracts.org/';
 
-                                 $sheet->getCell($articalRefCell) ->getHyperlink() ->setUrl(rtrim(env('APP_DOMAIN'),'/').'/'.$data[$i-2]['Link']);
+
+                                 $sheet->getCell($articalRefCell) ->getHyperlink() ->setUrl($domain.'/'.$data[$i-2]['Link']);
                                  $sheet->getStyle($articalRefCell) ->applyFromArray(array( 'font' => array( 'color' => ['rgb' => '0000FF'], 'underline' => 'single' ) ));
                              
                                  $sheet->getCell($removeLinkCell)->setValue(' ');
