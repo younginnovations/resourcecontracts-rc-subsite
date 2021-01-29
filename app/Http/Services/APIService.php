@@ -647,7 +647,8 @@ class APIService
                                  $articalRefCell='AD'.$i;
                                  $removeLinkCell='AE'.($i-1);
                                  $removeLink='AE'.$i;
-                                 $domain=(env('DOMAIN_PREFIX')=='staging')?'https://staging.resourcecontracts.org/':'https://resourcecontracts.org/';
+//                                 $domain=(env('DOMAIN_PREFIX')=='staging')?'https://staging.resourcecontracts.org/':'https://resourcecontracts.org/';
+                                 $domain='https://staging.resourcecontracts.org';
 
 
                                  $sheet->getCell($articalRefCell) ->getHyperlink() ->setUrl($domain.'/'.$data[$i-2]['Link']);
