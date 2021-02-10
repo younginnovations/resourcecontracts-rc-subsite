@@ -8,7 +8,7 @@ use GuzzleHttp\Message\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
-use Request as IncomingRequest;
+//use Request as IncomingRequest;
 
 /**
  * Class APIService
@@ -658,7 +658,8 @@ class APIService
 
                             }
                         );
-                        $domain         = IncomingRequest::getHost();
+                        //$domain='https://staging.resourcecontracts.org';
+                        //$domain         = IncomingRequest::getHost();
 
                         if (site()->isRC()) {
                             if ($is_rc_with_annotation_cat) {
@@ -675,7 +676,7 @@ class APIService
                                         $removeLink     = 'L'.$i;
 
                                         $sheet->getCell($articleRefCell)->getHyperlink()->setUrl(
-                                            $domain.'/'.$data[$i - 2]['Link']
+                                            url().'/'.$data[$i - 2]['Link']
                                         );
                                         $sheet->getStyle($articleRefCell)->applyFromArray(
                                             array(
@@ -721,7 +722,7 @@ class APIService
                                         $removeLink     = 'AE'.$i;
 
                                         $sheet->getCell($articleRefCell)->getHyperlink()->setUrl(
-                                            $domain.'/'.$data[$i - 2]['Link']
+                                            url().'/'.$data[$i - 2]['Link']
                                         );
                                         $sheet->getStyle($articleRefCell)->applyFromArray(
                                             array(
