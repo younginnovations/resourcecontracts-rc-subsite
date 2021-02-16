@@ -1,5 +1,6 @@
 <?php namespace App\Http\Services;
 
+use App\Exceptions\Handler;
 use App\Helper\ExcelHelperTrait;
 use App\Http\Models\Clip\Clip;
 use Exception;
@@ -56,7 +57,7 @@ class ClippingService
     {
         $this->api  = $api;
         $this->clip = $clip;
-        $this->pdf  = $pdf;
+        $this->pdf  = $pdf->init();
         $this->file = $file;
         $this->hpdf = $hpdf;
     }
@@ -342,6 +343,8 @@ class ClippingService
             return $url;
         } catch (Exception $e) {
             Log::info($e->getMessage());
+            $h = new Handler(app());
+            $h->report($e);
 
             return '';
         }
@@ -411,7 +414,8 @@ class ClippingService
             $this->pdf->addPDF($basePath.'/'.$folder.'/'.$file);
         }
 
-        $this->pdf->merge('file', $basePath.'/'.$folder.'/'.$concatFileName);
+        $this->pdf->merge();
+        $this->pdf->save($basePath.'/'.$folder.'/'.$concatFileName, 'file');
         $this->makePdfOfAllAnnotation($annotationDetail, $basePath, $folder, $clippedPdfFilename);
 
         return true;
