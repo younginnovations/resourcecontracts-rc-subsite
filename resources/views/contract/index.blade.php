@@ -18,6 +18,12 @@ use \Illuminate\Support\Facades\Lang as Lang;
 					</div>
 				</div>
 			</div>
+            <?php
+            $params['download'] = true;
+            $params['q'] = '';
+            $download_route = route('contract.csv.download');
+            $querystring = http_build_query($params);
+            ?>
 			<div class="advance-filter-wrapper contract_page_actions">
 				@if(isset($contracts->total) && $contracts->total!=0)
 
@@ -31,7 +37,8 @@ use \Illuminate\Support\Facades\Lang as Lang;
 					</div>
 
 					<div class="dropdown download-csv">
-						<a href="{{route('contract.csv.download',['q'=>'','download'=>true])}}">
+                        <!-- Build link dynamically with JS to prevent access for aggressive web crawlers. -->
+                        <a href="javascript:void(0)" onClick="window.location.href = '{{$download_route}}' + '?' + '{{$querystring}}'; return false;">
 							<span>@lang('search.download')</span>
 						</a>
 					</div>
