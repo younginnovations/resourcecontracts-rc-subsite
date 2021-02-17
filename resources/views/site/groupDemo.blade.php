@@ -33,6 +33,8 @@
 			</div>
 			<?php
 			$params['download'] = true;
+			$download_route = route('contract.csv.download');
+			$querystring = http_build_query($params);
 			?>
 			@if($contracts->total!=0)
 				<button class="clip-btn on-annotation">
@@ -46,7 +48,8 @@
 					@include('contract.partials.share')
 				</div>
 				<div class="download-csv">
-					<a href="{{route('contract.csv.download',$params)}}">
+                    <!-- Build link dynamically with JS to prevent access for aggressive web crawlers. -->
+                    <a href="javascript:void(0)" onClick="window.location.href = '{{$download_route}}' + '?' + '{{$querystring}}'; return false;">
 						<span class="text">@lang('search.download')</span>
 					</a>
 				</div>
