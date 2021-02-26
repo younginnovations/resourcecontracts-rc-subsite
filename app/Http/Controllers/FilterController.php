@@ -47,7 +47,7 @@ class FilterController
 
         return view(
             'site.filter',
-            compact('contracts', 'filter', 'total_contract', 'currentPage', 'meta')
+            compact('contracts', 'filter', 'currentPage', 'meta')
         );
     }
 
@@ -89,7 +89,6 @@ class FilterController
             compact(
                 'contracts',
                 'filter',
-                'total_contract',
                 'currentPage',
                 'meta',
                 'filter_params',
@@ -137,7 +136,6 @@ class FilterController
             compact(
                 'contracts',
                 'filter',
-                'total_contract',
                 'currentPage',
                 'meta',
                 'filter_params',
