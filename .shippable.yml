@@ -11,7 +11,7 @@ branches:
 env:
   global:
     # Shippable API token used to trigger deploy
-    - secure: Z/9Zdsp/EftsvDPsWQLzo8yIl8XERSZXm0CIfFhrnOclCBxaSW2y+Kg8xgdvVwWXsQ+EOFLygXu6l/se0RC4EsKAaV8H8h98VdTSQFuCZplFrjRvvaFXgLTSSau21Uoghu0UUsHdovvCRd5A3+AoH/JMY7ruYLLczDbObQqT4lCszH/maeHsTUnszbfDqr+sbA+R6KepaGmsLlTMFd40eNPQoqKLgvfKPtPfyUbvoU2eZ/e9bCqISKY7byc/JFBXqp8a62MVwtPVqfts3nIXA31+tcwxCWTF5Xc7Rl4PonoY8+ozlwsOt+PJIjCqwTG4VHfd3KbQ5S9DNv/yYVPOSA==      
+    - secure: kKPo9i11eUP09DVVzEmT5SsAkd9SMXexAxLiTwBrLpFyLF6K4z4goZEHiIbCAFIiqKkJKXtDDneiCyprXCbxDbwnamxfMwOQsGliKiqDQ51m67ps+BtZa9WP6uPG/XfjC4pvTZS09f6w1+ufOgY/+CCKOb90Klp0HfAFar+c4d+RhJbQ3NfI/NBpXT1cLOhzrHyp0DKJpnOHPR102zeTmIdGuypj+SyodIX3qz6+C04iFRAtQCHkKPv3tbrHLIG/26VoNMqYk/s4BXiqJGYXmH4YMPW8GYLGrsQenxfKuGr8CrgsPP3VtaKctK7nz5S+xfQ1VxUP7c8d6E3xcT/Nvw==      
       
 build:
   ci:
@@ -39,7 +39,7 @@ integrations:
     - integrationName: email
       type: email
       recipients:
-        - nrgi@vitaminsoftware.com
+        - AWSDevOps@cloudelligent.com
         - resourcecontracts@yipl.com.np
       branches:
         only:
