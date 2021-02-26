@@ -34,6 +34,7 @@ return [
         'br' => 'Breton',
         'bs' => 'Bosnian',
         'ca' => 'Catalan',
+        'cd' => 'Congolese',
         'ce' => 'Chechen',
         'ch' => 'Chamorro',
         'co' => 'Corsican',

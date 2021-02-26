@@ -57,7 +57,11 @@ $api = app('App\Http\Services\APIService');
                         return intval($b->year_signed) - intval($a->year_signed);
                     }
                 );
+
+                $supporting_contracts_count = !empty($contract->supporting_contracts) ? count($contract->supporting_contracts) : 0;
+                $children_contracts_count = !empty($contract->children) ? count($contract->children) : 0;
                 ?>
+
 				@foreach($contract->children as $child)
 					@include('contract.partials.listRow',['contract'=>$child])
 				@endforeach
@@ -76,7 +80,7 @@ $api = app('App\Http\Services\APIService');
 					<tr class='{{$contract->id}} in'>
 						<td colspan="6" class="other-document">
 							View
-							<a href="{{route('contract.view',['id'=> $contract->open_contracting_id]).'#associatedcontracts'}}">{{count($contract->supporting_contracts)- count($contract->children)}}
+							<a href="{{route('contract.view',['id'=> $contract->open_contracting_id]).'#associatedcontracts'}}">{{$supporting_contracts_count - $children_contracts_count}}
 								other document(s) </a> associated with {{$contract->name}}
 						</td>
 					</tr>

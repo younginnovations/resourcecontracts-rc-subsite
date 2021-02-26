@@ -15,7 +15,7 @@ $annotation_ids = (!empty($annotation_array)) ? implode(" ", $annotation_array) 
 $toggleAttr = '';
 $className='';
 if($contract->is_supporting_document == '0') {
-    if(count($contract->supporting_contracts) > 0)
+    if(!empty($contract->supporting_contracts) && count($contract->supporting_contracts) > 0)
         $toggleAttr = 'class=expand data-toggle=collapse data-target=.'.$contract->id;
 } else {
     $className = 'in '.$contract->translated_from->id;
@@ -25,7 +25,8 @@ $route_split_key = site()->isRC()?'tagged':'annotation';
 ?>
 <tr {!! $toggleAttr !!}>
     <td data-title="@lang('global.document')" style="background: 0" class="documentTitle document_title {{ !isset
-    ($contract->children) ? 'associate' : ''}} {{ count($contract->supporting_contracts) ? 'parent': ''  }} {{
+    ($contract->children) ? 'associate' : ''}} {{ (!empty($contract->supporting_contracts) && count
+    ($contract->supporting_contracts)) ? 'parent': ''  }} {{
     $contract->score === 0 ? 'greyed' : ''}}">
         <a class="title-{{$contract->open_contracting_id}}"
            href="{{ url(sprintf("/contract/%s/view#/pdf", $contract->open_contracting_id )) }}">
