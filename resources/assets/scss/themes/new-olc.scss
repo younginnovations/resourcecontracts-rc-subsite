@@ -71,25 +71,22 @@ a:hover {
 }
 
 .btn__download-guide {
-  border: 1px solid #000;
+  background-color: $color-primary;
+  border: 1px solid $color-primary;
   border-radius: 100px;
-  color: #000;
+  color: $color-base;
   display: block;
   font-size: 24px;
   line-height: 66px;
   margin: 0 auto 112px;
   width: 400px;
   img {
-    filter: brightness(0);
     margin-top: -4px;
     margin-right: 10px;
   }
   &:hover {
-    background-color: $color-primary;
-    border-color: $color-primary;
+    background-color: #2c9e5a;
+    border-color: #2c9e5a;
     color: $color-base;
-    img {
-      filter: none;
-    }
   }
 }
