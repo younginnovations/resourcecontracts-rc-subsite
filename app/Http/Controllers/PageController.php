@@ -197,7 +197,13 @@ class PageController extends BaseController
         }
         return view('page.guides', compact('page', 'hideSearchBar'));
     }
-    
+
+    /**
+     * Downloads pdf file
+     * 
+     * @throws \Spipu\Html2Pdf\Exception\Html2PdfException
+     * @throws \Throwable
+     */
     public function guidesDownload()
     {
         $guidePage= view('page.guide-download')->render(); 
@@ -205,14 +211,10 @@ class PageController extends BaseController
         $this->pageToPDF->setDefaultFont('OpenSans');      
         $this->pageToPDF->writeHTML($guidePage);    
   
-        
-        //D is for download 
+        //D is for download
         $this->pageToPDF->output('guide-page.pdf', 'D');
-
-
     }
 
-    
     /**
      * Research and analysis page
      *
