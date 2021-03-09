@@ -130,7 +130,7 @@
             <td width="420">
                 <h3>View Annotations of Contract Terms</h3>
                 <ul>
-                    <li>OpenLandContracts features hundreds of contract <strong>Annotations</strong>: plain-language summaries that help to explain key provisions and to locate certain topics within a contract.</li>
+                    <li>OpenLandContracts features hundreds of contract <strong>Annotations</strong> : plain-language summaries that help to explain key provisions and to locate certain topics within a contract.</li>
                     <li>Annotations are listed <strong>alongside a contract</strong> on the left as you view the document, and marked with yellow boxes on relevant pages as you scroll through the contract PDF. Click on an Annotation to skip to the relevant page in the PDF viewer.</li>
                     <li>Annotations are organized by the Topic of the related contract provision. Topics include: <strong>Environment, Fiscal, Legal Rules, Social, Operations and General</strong>. You can view a contract's Annotations by Topic or in order by page. </li> 
                     <li>Every Annotation has its own <strong>unique web address (URL)</strong>, to make it easier to bookmark, cite, and share specific contract provisions. </li>
