@@ -88,7 +88,7 @@ class LocalizationService
             }
         } else {
             Log::warning("INVALID HTTP_ACCEPT_LANGUAGE");
-            Log::warning($browserLang);
+            Log::warning(json_encode($browserLang));
         }
 
         if (is_null($lang)) {
