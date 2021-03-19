@@ -155,7 +155,7 @@
 								<label for="">@lang('global.type_contract')</label>
                                 <span class="contract-type-list">@if(isset($contract->metadata->contract_type) && !empty($contract->metadata->contract_type) && is_array($contract->metadata->contract_type))
 										@foreach($contract->metadata->contract_type as $contractype)
-											<a href="{{route("search",['contract_type'=>$contractype])}}">{{_l('codelist/contract_type',$contractype) }}</a>
+											<a href="{{route("search/group",['contract_type'=>$contractype])}}">{{_l('codelist/contract_type',$contractype) }}</a>
 										@endforeach
 									@endif
                                 </span>
@@ -255,7 +255,7 @@
 							<li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
 								<label for="">@lang('contract.company_name')</label>
                                 <span>@if(isset($company->company->name) && !empty($company->company->name)) <a
-											href="{{route("search",['company_name'=>$company->company->name])}}">{{$company->company->name}} </a> @else
+											href="{{route("search/group",['company_name'=>$company->company->name])}}">{{$company->company->name}} </a> @else
 										- @endif</span>
 							</li>
 							<li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
@@ -295,7 +295,7 @@
 								<label for="">@lang('contract.corporate_grouping')</label>
                                 <span>
 									@if(isset($company->company->corporate_grouping) && !empty($company->company->corporate_grouping))
-										<a href="{{route("search",
+										<a href="{{route("search/group",
 										['corporate_group'=>$company->company->corporate_grouping])}}">{{$company->company->corporate_grouping}} </a>
 									@else
 										-
