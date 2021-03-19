@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Lang;
             <div class="filter-wrapper">
                 <div class="col-lg-12">
                     <div class="filter-country-wrap">
-                        <form action="{{url('search')}}" method="GET" class="search-form filter-form">
+                        <form action="{{url('search/group')}}" method="GET" class="search-form filter-form">
                             <div class="form-group">
                                 <button type="submit" class="btn btn-filter-search pull-left"></button>
                                 <input type="text" name="q" class="form-control pull-left"
@@ -72,7 +72,7 @@ use Illuminate\Support\Facades\Lang;
                         <ul>
                             @foreach($resources as $resource)
                                 <li>
-                                    <span><a href="{{route("search")}}?q=&country%5B%5D={{$country}}&resource%5B%5D={{urlencode($resource->resource)}}">{{_l("resources",$resource->resource)}}</a></span>
+                                    <span><a href="{{route("search/group")}}?q=&country%5B%5D={{$country}}&resource%5B%5D={{urlencode($resource->resource)}}">{{_l("resources",$resource->resource)}}</a></span>
                                     <span class="count pull-right">{{$resource->contract}}</span>
                                 </li>
                             @endforeach
