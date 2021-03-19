@@ -3,6 +3,7 @@
 use App\Http\Services\Admin\OptionService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Translation\Translator;
 
 /**
@@ -81,8 +82,13 @@ class LocalizationService
 
         $browserLang = isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2) : '';
 
-        if (!isset($_COOKIE[$this->key]) && array_key_exists($browserLang, $availableLang)) {
+        if(is_int($browserLang)||is_string($browserLang)) {
+            if (!isset($_COOKIE[$this->key]) && array_key_exists($browserLang, $availableLang)) {
             $lang = $browserLang;
+            }
+        } else {
+            Log::warning("INVALID HTTP_ACCEPT_LANGUAGE");
+            Log::warning($browserLang);
         }
 
         if (is_null($lang)) {
