@@ -15,15 +15,14 @@ jobs:
         env:
           DOCKER_USER: ${{secrets.DOCKER_USER}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-          GIT_HASH: $(git rev-parse --short "$GITHUB_SHA")
-          GIT_BRANCH: ${GITHUB_REF#refs/heads/}
+          GIT_HASH: ${{ github.sha }}
         run: |
           # Build a docker container and
           # push it to Docker Hub so that it can
           # be deployed to ECS.
           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-          docker pull nrgi/rc-subsite:$GIT_BRANCH || echo 'Cache not available'
-          docker build --cache-from nrgi/rc-subsite:$GIT_BRANCH -t nrgi/rc-subsite:$GIT_BRANCH.$GIT_HASH .
-          docker tag nrgi/rc-subsite:$GIT_BRANCH.$GIT_HASH nrgi/rc-subsite:$GIT_BRANCH
-          docker push nrgi/rc-subsite:$GIT_BRANCH
-          docker push nrgi/rc-subsite:$GIT_BRANCH.$GIT_HASH
+          docker pull nrgi/rc-subsite:${GITHUB_REF##*/} || echo 'Cache not available'
+          docker build --cache-from nrgi/rc-subsite:${GITHUB_REF##*/} -t nrgi/rc-subsite:${GITHUB_REF##*/}.$GIT_HASH .
+          docker tag nrgi/rc-subsite:${GITHUB_REF##*/}.$GIT_HASH nrgi/rc-subsite:${GITHUB_REF##*/}
+          docker push nrgi/rc-subsite:${GITHUB_REF##*/}
+          docker push nrgi/rc-subsite:${GITHUB_REF##*/}.$GIT_HASH
