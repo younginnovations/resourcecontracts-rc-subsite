@@ -1,0 +1,29 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ feature/enhancements ]
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: docker login
+        env:
+          DOCKER_USER: ${{secrets.DOCKER_USER}}
+          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+          GIT_HASH: $(git rev-parse --short "$GITHUB_SHA")
+          GIT_BRANCH: ${GITHUB_REF#refs/heads/}
+        run: |
+          # Build a docker container and
+          # push it to Docker Hub so that it can
+          # be deployed to ECS.
+          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+          docker pull nrgi/rc-subsite:$GIT_BRANCH || echo 'Cache not available'
+          docker build --cache-from nrgi/rc-subsite:$GIT_BRANCH -t nrgi/rc-subsite:$GIT_BRANCH.$GIT_HASH .
+          docker tag nrgi/rc-subsite:$GIT_BRANCH.$GIT_HASH nrgi/rc-subsite:$GIT_BRANCH
+          docker push nrgi/rc-subsite:$GIT_BRANCH
+          docker push nrgi/rc-subsite:$GIT_BRANCH.$GIT_HASH
