@@ -28,8 +28,8 @@ jobs:
           docker push nrgi/rc-subsite:${GITHUB_REF##*/}.$GIT_HASH
           echo "::set-output name=image::nrgi/rc-subsite:${GITHUB_REF##*/}.$GIT_HASH"
       - name: Add secrets to Task Definition
-          run: |
-            echo "$ECS_TASK_DEFINITION" > task-definition.json
+          run: 'echo "$ECS_TASK_DEFINITION" > task-definition.json'
+          shell: bash
           env:
             ECS_TASK_DEFINITION: ${{secrets.ECS_TASK_DEFINITION}}
 
