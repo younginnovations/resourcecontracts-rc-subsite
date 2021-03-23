@@ -32,6 +32,7 @@ jobs:
           echo "::set-output name=image::$DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/}.$GIT_HASH"
           echo "$ECS_TASK_DEFINITION" > task-definition.json
           sed -i "s/IMAGE_NAME/$image/g" task-definition.json
+          echo task-definition.json
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -52,6 +53,7 @@ jobs:
           image: $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/}.$GIT_HASH
 
       - name: Deploy Amazon ECS task definition
+        run: echo ${{ steps.task-def.outputs.task-definition }}
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
