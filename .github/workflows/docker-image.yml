@@ -52,6 +52,6 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.fill-task-def.outputs.task-definition }}
-          service: rc-subsite-master-task
+          service: rc-subsite-master-service
           cluster: nrgi-demo
           wait-for-service-stability: true
