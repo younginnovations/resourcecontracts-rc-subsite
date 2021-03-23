@@ -15,19 +15,21 @@ jobs:
         env:
           DOCKER_USER: ${{secrets.DOCKER_USER}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+          DOCKER_REGISTRY: ${{secrets.DOCKER_REGISTRY}}
+          DOCKER_REPOSITORY: ${{secrets.DOCKER_REPOSITORY}}
           GIT_HASH: ${{ github.sha }}
         run: |
           # Build a docker container and
           # push it to Docker Hub so that it can
           # be deployed to ECS.
           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-          docker pull nrgi/rc-subsite:${GITHUB_REF##*/} || echo 'Cache not available'
-          docker build --cache-from nrgi/rc-subsite:${GITHUB_REF##*/} -t nrgi/rc-subsite:${GITHUB_REF##*/}.$GIT_HASH .
-          docker tag nrgi/rc-subsite:${GITHUB_REF##*/}.$GIT_HASH nrgi/rc-subsite:${GITHUB_REF##*/}
-          docker push nrgi/rc-subsite:${GITHUB_REF##*/}
-          docker push nrgi/rc-subsite:${GITHUB_REF##*/}.$GIT_HASH
-          echo "::set-output name=image::$DOCKER_REGISTRY:$IMAGE_TAG"
-          #echo "::set-output name=image::$DOCKER_REGISTRY:${GITHUB_REF##*/}.$GIT_HASH"
+          docker pull $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/} || echo 'Cache not available'
+          docker build --cache-from $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/} -t $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/}.$GIT_HASH .
+          docker tag $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/}.$GIT_HASH $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/}
+          docker push $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/}
+          docker push $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/}.$GIT_HASH
+          #echo "::set-output name=image::$DOCKER_REGISTRY:$IMAGE_TAG"
+          echo "::set-output name=image::$DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/}.$GIT_HASH"
       - name: Add secrets to Task Definition
         run: echo "$ECS_TASK_DEFINITION" > task-definition.json
         env:
