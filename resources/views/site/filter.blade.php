@@ -1,3 +1,8 @@
+<?php
+    header("Status: 301 Moved Permanently");
+    header("Location:./search/group?". $_SERVER['QUERY_STRING']);
+    die();
+?>
 @extends('layout.app-full')
 
 @section('content')
