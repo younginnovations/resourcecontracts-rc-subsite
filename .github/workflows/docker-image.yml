@@ -51,9 +51,9 @@ jobs:
           task-definition: task-definition.json
           container-name: ${{ secrets.CONTAINER_NAME }}
           image: $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/}.$GIT_HASH
-
-      - name: Deploy Amazon ECS task definition
+      - name: Verify Task Defination
         run: echo ${{ steps.task-def.outputs.task-definition }}
+      - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
