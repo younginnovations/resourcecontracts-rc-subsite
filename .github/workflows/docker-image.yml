@@ -24,11 +24,12 @@ jobs:
           # be deployed to ECS.
           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
           docker pull $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/} || echo 'Cache not available'
-          docker build --cache-from $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/} -t $DOCKER_REGISTRY/$DOCKER_REPOSITORY:latest .
-          docker tag $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/}.$GIT_HASH $DOCKER_REGISTRY/$DOCKER_REPOSITORY:latest
-          docker push $DOCKER_REGISTRY/$DOCKER_REPOSITORY:latest
-          docker push $DOCKER_REGISTRY/$DOCKER_REPOSITORY:latest
-          echo "::set-output name=image::$DOCKER_REGISTRY/$DOCKER_REPOSITORY:latest"
+          docker build --cache-from $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/} -t $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/}.$GIT_HASH .
+          docker tag $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/}.$GIT_HASH $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/}
+          docker push $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/}
+          docker push $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/}.$GIT_HASH
+          #echo "::set-output name=image::$DOCKER_REGISTRY:$IMAGE_TAG"
+          echo "::set-output name=image::$DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/}.$GIT_HASH"
       - name: Add secrets to Task Definition
         run: echo "$ECS_TASK_DEFINITION" > task-definition.json
         env:
@@ -41,12 +42,16 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
       - name: Fill in the new image ID in the Amazon ECS task definition
+        env:
+          DOCKER_REGISTRY: ${{secrets.DOCKER_REGISTRY}}
+          DOCKER_REPOSITORY: ${{secrets.DOCKER_REPOSITORY}}
+          GIT_HASH: ${{ github.sha }}
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: task-definition.json
           container-name: ${{ secrets.CONTAINER_NAME }}
-          image: nrgi/rc-subsite:latest
+          image: $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/}.$GIT_HASH
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
