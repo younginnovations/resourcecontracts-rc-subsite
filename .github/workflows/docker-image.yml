@@ -40,12 +40,12 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Fill in the nginx image ID in the Amazon ECS task definition
-          id: fill-task-def
-          uses: aws-actions/amazon-ecs-render-task-definition@v1
-          with:
-            task-definition: task-definition.json
-            container-name: rc-subsite-master-container
-            image: ${{ steps.create-docker-image.outputs.image }}
+        id: fill-task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: task-definition.json
+          container-name: rc-subsite-master-container
+          image: ${{ steps.create-docker-image.outputs.image }}
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
