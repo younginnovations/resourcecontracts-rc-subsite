@@ -31,6 +31,7 @@ jobs:
           docker push $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/}
           docker push $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/}.$GIT_HASH
           echo "::set-output name=image::$DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/}.$GIT_HASH"
+          echo $ECS_TASK_DEFINITION > task-definition.json
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
