@@ -45,13 +45,13 @@ jobs:
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: task-definition.json
-          container-name: rc-subsite-master-container
+          container-name: ${{ secrets.CONTAINER_NAME }}
           image: ${{ steps.create-docker-image.outputs.image }}
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.fill-task-def.outputs.task-definition }}
-          service: rc-subsite-master-service
-          cluster: nrgi-demo
+          service: ${{ secrets.ECS_SERVICE }}
+          cluster: ${{ secrets.ECS_CLUSTER }}
           wait-for-service-stability: true
