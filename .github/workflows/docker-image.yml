@@ -24,12 +24,11 @@ jobs:
           # be deployed to ECS.
           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
           docker pull $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/} || echo 'Cache not available'
-          docker build --cache-from $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/} -t $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/}.$GIT_HASH .
-          docker tag $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/}.$GIT_HASH $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/}
-          docker push $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/}
-          docker push $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/}.$GIT_HASH
-          #echo "::set-output name=image::$DOCKER_REGISTRY:$IMAGE_TAG"
-          echo "::set-output name=image::$DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/}.$GIT_HASH"
+          docker build --cache-from $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/} -t $DOCKER_REGISTRY/$DOCKER_REPOSITORY:latest .
+          docker tag $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/}.$GIT_HASH $DOCKER_REGISTRY/$DOCKER_REPOSITORY:latest
+          docker push $DOCKER_REGISTRY/$DOCKER_REPOSITORY:latest
+          docker push $DOCKER_REGISTRY/$DOCKER_REPOSITORY:latest
+          echo "::set-output name=image::$DOCKER_REGISTRY/$DOCKER_REPOSITORY:latest"
       - name: Add secrets to Task Definition
         run: echo "$ECS_TASK_DEFINITION" > task-definition.json
         env:
@@ -47,7 +46,7 @@ jobs:
         with:
           task-definition: task-definition.json
           container-name: ${{ secrets.CONTAINER_NAME }}
-          image: ${{ steps.build-image.outputs.image }}
+          image: nrgi/rc-subsite:latest
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
