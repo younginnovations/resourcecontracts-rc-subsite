@@ -11,12 +11,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: docker login
+      - name: Docker login Docker Build Docker PUsh
         env:
           DOCKER_USER: ${{secrets.DOCKER_USER}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
           DOCKER_REGISTRY: ${{secrets.DOCKER_REGISTRY}}
           DOCKER_REPOSITORY: ${{secrets.DOCKER_REPOSITORY}}
+          ECS_TASK_DEFINITION: ${{secrets.ECS_TASK_DEFINITION}}
           GIT_HASH: ${{ github.sha }}
         run: |
           # Build a docker container and
@@ -30,10 +31,9 @@ jobs:
           docker push $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/}.$GIT_HASH
           #echo "::set-output name=image::$DOCKER_REGISTRY:$IMAGE_TAG"
           echo "::set-output name=image::$DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/}.$GIT_HASH"
-      - name: Add secrets to Task Definition
-        run: echo "$ECS_TASK_DEFINITION" > task-definition.json
-        env:
-          ECS_TASK_DEFINITION: ${{secrets.ECS_TASK_DEFINITION}}
+          echo $DOCKER_REGISTRY/$DOCKER_REPOSITORY:${GITHUB_REF##*/}.$GIT_HASH >
+          echo "$ECS_TASK_DEFINITION" > task-definition.json
+          sed -i "s/IMAGE_NAME/$image/g" task-definition.json
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
