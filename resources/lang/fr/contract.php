@@ -45,7 +45,7 @@ return [
     'exit_fullscreen'         => 'Quitter la vue plein écran',
     'slow_connection_message' => "Vous avez été redirigé vers la vue texte en raison d'une connexion Internet lente. Le document PDF est disponible en téléchargement à l'aide du bouton [gif] à droite.",
     'publication_date'       => "Date de publication sur ResourceContracts",
-    'posted_date'            =>"Date publiée sur ResourceContracts",
+    'posted_date'            =>"Date publiée sur OpenLandContracts",
 
 
 ];
