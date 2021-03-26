@@ -263,7 +263,8 @@ class APIService
     {
         extract($filter);
         $per_page = !empty($per_page) ? $per_page : 25;
-
+        $currentTime=Carbon::now()->toDateTimeString();
+        Log::warning('Step3.1'.json_encode($currentTime));
         redirectIfOldAnnotationCategory($annotation_category);
 
         $query = [
@@ -287,13 +288,17 @@ class APIService
             'annotated'           => $annotated,
 
         ];
-
+        $currentTime=Carbon::now()->toDateTimeString();
+        Log::warning('Step3.2'.json_encode($currentTime));
         if ($filter['download']) {
             $this->downloadAPI('contracts/search', $query);
         }
+        $currentTime=Carbon::now()->toDateTimeString();
+        Log::warning('Step3.3'.json_encode($currentTime));
 
         $contract = $this->apiCall('contracts/recent', $query);
-
+        $currentTime=Carbon::now()->toDateTimeString();
+        Log::warning('Step3.4'.json_encode($currentTime));
         if ($contract) {
             return $contract;
         }
@@ -312,7 +317,8 @@ class APIService
     {
         extract($filter);
         $per_page = !empty($per_page) ? $per_page : 25;
-
+        $currentTime=Carbon::now()->toDateTimeString();
+        Log::warning('Step3.11'.json_encode($currentTime));
         redirectIfOldAnnotationCategory($annotation_category);
 
         $query = [
@@ -336,10 +342,16 @@ class APIService
             'annotated'           => $annotated,
 
         ];
+        $currentTime=Carbon::now()->toDateTimeString();
+        Log::warning('Step3.21'.json_encode($currentTime));
         if ($filter['download']) {
             $this->downloadAPI('contracts/group', $query);
         }
+        $currentTime=Carbon::now()->toDateTimeString();
+        Log::warning('Step3.31'.json_encode($currentTime));
         $contract = $this->apiCall('contracts/group', $query);
+        $currentTime=Carbon::now()->toDateTimeString();
+        Log::warning('Step3.41'.json_encode($currentTime));
         if ($contract) {
             return $contract;
         }
