@@ -61,29 +61,18 @@ class FilterController
      */
     public function gIndex(Request $request)
     {
-        $currentTime=Carbon::now()->toDateTimeString();
-        Log::warning('Step1'.json_encode($currentTime));
         $filter_params      = $request->all();
         $currentPage        = $request->get('page', 1);
-        $currentTime=Carbon::now()->toDateTimeString();
-        Log::warning('Step2'.json_encode($currentTime));
         $filter             = $this->processQueries($request);
-        $currentTime=Carbon::now()->toDateTimeString();
-        Log::warning('Step3'.json_encode($currentTime));
         $filter['from']     = $currentPage;
         $filter['per_page'] = 10;
         $contracts          = isset($filter_params['recent']) ?
             $this->api->filterRecentSearch($filter) :
             $this->api->filterGroupSearch($filter);
-            $currentTime=Carbon::now()->toDateTimeString();
-            Log::warning('Step4'.json_encode($currentTime));
+
         $contracts->current_page = $currentPage;
         $filter                  = $this->updateFilterData($filter, $contracts, $request);
-        $currentTime=Carbon::now()->toDateTimeString();
-        Log::warning('Step5'.json_encode($currentTime));
         $title                   = site()->meta('title');
-        $currentTime=Carbon::now()->toDateTimeString();
-        Log::warning('Step6'.json_encode($currentTime));
         $descp                   = 'Search %s using different criteria - year signed, company name, contract type, annotation category.';
         $orderBy                 = isset($filter_params['order']) ? $filter_params['order'] : '';
         $sortBy                  = isset($filter_params['sort']) ? $filter_params['sort'] : '';
@@ -95,8 +84,6 @@ class FilterController
             'description' => sprintf($descp, $title),
         ];
         $showCountry             = true;
-        $currentTime=Carbon::now()->toDateTimeString();
-        Log::warning('Rendering page'.json_encode($currentTime));
         return view(
             'site.groupDemo',
             compact(
