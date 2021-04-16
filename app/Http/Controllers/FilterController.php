@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Http\Services\APIService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -83,7 +84,6 @@ class FilterController
             'description' => sprintf($descp, $title),
         ];
         $showCountry             = true;
-
         return view(
             'site.groupDemo',
             compact(
