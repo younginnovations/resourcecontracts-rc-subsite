@@ -278,8 +278,8 @@ class APIService
             'resource'            => $resource,
             'group'               => $group,
             'annotation_category' => $annotation_category,
-            'sort_by'             => $sortby,
-            'order'               => $order,
+            'sort_by'             => empty($sortby) ? 'year' :$sort_by,
+            'order'               => empty($order) ? 'desc' :$order,
             'per_page'            => $all ? $from * 25 : $per_page,
             'from'                => $per_page * ($from - 1),
             'all'                 => $all,
@@ -327,8 +327,8 @@ class APIService
             'resource'            => $resource,
             'group'               => $group,
             'annotation_category' => $annotation_category,
-            'sort_by'             => $sortby,
-            'order'               => $order,
+            'sort_by'             => empty($sortby)?'year':$sort_by,
+            'order'               => empty($order)?'desc':$order,
             'per_page'            => $all ? $from * 25 : $per_page,
             'from'                => $per_page * ($from - 1),
             'all'                 => $all,
@@ -357,6 +357,7 @@ class APIService
     public function filterSearch($filter)
     {
         extract($filter);
+
         $per_page = !empty($per_page) ? $per_page : 25;
 
         redirectIfOldAnnotationCategory($annotation_category);
@@ -373,8 +374,8 @@ class APIService
             'resource'            => $resource,
             'group'               => $group,
             'annotation_category' => $annotation_category,
-            'sort_by'             => $sortby,
-            'order'               => $order,
+            'sort_by'             => empty($sortby)?'year':$sort_by,
+            'order'               => empty($order)?'desc':$order,
             'per_page'            => $all ? $from * 25 : $per_page,
             'from'                => $per_page * ($from - 1),
             'all'                 => $all,
