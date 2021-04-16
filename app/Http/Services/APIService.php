@@ -263,7 +263,6 @@ class APIService
     {
         extract($filter);
         $per_page = !empty($per_page) ? $per_page : 25;
-
         redirectIfOldAnnotationCategory($annotation_category);
 
         $query = [
@@ -287,13 +286,11 @@ class APIService
             'annotated'           => $annotated,
 
         ];
-
         if ($filter['download']) {
             $this->downloadAPI('contracts/search', $query);
         }
 
         $contract = $this->apiCall('contracts/recent', $query);
-
         if ($contract) {
             return $contract;
         }
@@ -312,7 +309,6 @@ class APIService
     {
         extract($filter);
         $per_page = !empty($per_page) ? $per_page : 25;
-
         redirectIfOldAnnotationCategory($annotation_category);
 
         $query = [
