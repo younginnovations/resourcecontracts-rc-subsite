@@ -55,7 +55,7 @@ return [
     'annexes_missing'                  => "Annexe(s) manquant(s) du document ",
     'all'                              => "Tout",
     'no_annotation'                    => "Ce document n'a pas d'annotations.",
-    'no_annotation_new'                => "Ce document ne contient aucune clause clé.",
+    'no_annotation_new'                => "Ce document n'a pas encore été balisé.",
     'download'                         => "Télécharger",
     'word_file'                        => "MS WORD",
     'zoom'                             => 'Zoom',
