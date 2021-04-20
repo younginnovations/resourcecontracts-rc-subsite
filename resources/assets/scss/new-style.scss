@@ -444,3 +444,14 @@ a {
 .partner-inner-each a img {
     opacity: 0.5;
 }
+
+.table-contract tbody td.documentTitle.parent {
+    @media (max-width: 480px) {
+      padding-left: 26px !important;
+      
+      &:before {
+          top: 14px !important;
+          left: 0px;
+      }
+    }
+  }
