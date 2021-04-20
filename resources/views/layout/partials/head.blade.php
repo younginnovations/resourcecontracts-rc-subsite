@@ -89,6 +89,7 @@ $gtmID      =  site()->getEnv("GTM_ID");
 			}
 		};
 		var lang = {!! json_encode(trans('annotation')) !!};
+		var isRCSite = @if(site()->isRCCategorySite()) true @else false @endif;
 	</script>
 </head>
 
