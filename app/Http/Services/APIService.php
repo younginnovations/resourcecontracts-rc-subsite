@@ -330,6 +330,7 @@ class APIService
             'all'                 => $all,
             'download'            => $download,
             'annotated'           => $annotated,
+            'and'                 => $and
 
         ];
         if ($filter['download']) {
@@ -377,7 +378,7 @@ class APIService
             'all'                 => $all,
             'download'            => $download,
             'annotated'           => $annotated,
-
+            'and'                 => $and
         ];
 
         if ($filter['download']) {

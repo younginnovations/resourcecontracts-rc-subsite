@@ -228,7 +228,7 @@ class FilterController
             'group'               => $type,
             'all'                 => $request->get('all', '0'),
             'download'            => $request->get('download', false),
-
+            'and'                 => $request->get('and',''),
         ];
     }
 
@@ -292,6 +292,10 @@ class FilterController
 
         if (!$request->get('type')) {
             $filter['type'] = isset($contract->type) ? $contract->type : ['metadata', 'text', 'annotations'];
+        }
+
+        if(!$request->get('and')) {
+            $filter['and'] = $request->get('and');
         }
 
         return $filter;

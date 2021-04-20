@@ -1,4 +1,5 @@
 $color-base: #fff;
+@import './themes/custom-switch.scss';
 
 // .img-intro {
 //     background-image: url({{$image_intro}});
@@ -456,3 +457,168 @@ a {
       }
     }
   }
+
+.keyclauses-switch-wrapper {
+    position: relative;
+}
+
+.keyclauses-switch:hover + .keyclauses-help-tooltip {
+    display: block;
+}
+
+.keyclauses-help-tooltip {
+    display: none;
+    position: absolute;
+    left: 52%;
+    bottom: 34px;
+    background: gray;
+    z-index: 1000;
+    padding: 8px;
+    border-radius: 4px;
+    color: white;
+    width: 200px;
+    font-size: 13px;
+}
+
+body.lang-en {
+    .switch {
+        width: 57px;
+
+        .slider:before {
+            width: 20px;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(37px);
+            -ms-transform: translateX(37px);
+            transform: translateX(37px);
+        }
+
+        .text:after {
+            content: "OR";
+        }
+
+        .text:before {
+            content: "AND";
+        }
+    }
+}
+
+body.lang-fr {
+    .switch {
+        .text:after {
+            content: "ou alors";
+        }
+
+        .text:before {
+            content: "et";
+        }
+    }
+}
+
+body.lang-ar {
+    .switch {
+        width: 57px;
+
+        .slider:before {
+            width: 20px;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(37px);
+            -ms-transform: translateX(37px);
+            transform: translateX(37px);
+        }
+        
+        .text:after {
+            content: "أو";
+        }
+
+        .text:before {
+            content: "و";
+        }
+    }
+
+    .keyclauses-help-tooltip {
+        left: -67%;
+    }
+}
+
+body.olc {
+    .switch {
+        .slider:before {
+            background-color: #27ae60;
+        }
+    }
+
+    .keyclauses-help-tooltip {
+        left: 2%;
+        bottom: -42px;
+
+        @media screen and (max-width: 1530px) {
+            left: -110%;
+        }
+
+        @media screen and (max-width: 1301px) {
+            left: -140%;
+        }
+
+        @media screen and (max-width: 1200px) {
+            left: -110%;
+        }
+
+        @media screen and (max-width: 1024px) {
+            left: -166%;
+        }
+
+        @media screen and (max-width: 768px) {
+            left: 0;
+        }
+
+        @media screen and (max-width: 630px) {
+            left: -103px;
+            bottom: 42px;
+        }
+        
+    }
+}
+
+body.olc.lang-ar {
+    .keyclauses-help-tooltip {
+        right: 2%;
+        left: unset;
+
+        @media screen and (max-width: 1530px) {
+            right: -110%;
+            left: unset;
+        }
+
+        @media screen and (max-width: 1301px) {
+            right: -140%;
+            left: unset;
+        }
+
+        @media screen and (max-width: 1200px) {
+            right: -110%;
+            left: unset;
+        }
+
+        @media screen and (max-width: 1024px) {
+            right: -166%;
+            left: unset;
+        }
+
+        @media screen and (max-width: 768px) {
+            right: 0;
+            left: unset;
+        }
+
+        @media screen and (max-width: 630px) {
+            right: -103px;
+            left: unset;
+            bottom: 42px;
+        }
+        
+    }
+}
+  
