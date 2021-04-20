@@ -1,0 +1,88 @@
+.switch {
+    position: relative;
+    display: inline-block !important;
+    width: 91px;
+    height: 23px;
+    cursor: pointer;
+
+    input {
+        width: 0 !important;
+        height: 0 !important;
+    }
+
+    .slider {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #777;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 24px;
+        width: 32px;
+        left: 0px;
+        bottom: -1px;
+        top: -1px;
+        background-color: #f37456;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+    }
+
+    input:checked + .slider {
+        background-color: #777;
+    }
+
+    input:focus + .slider {
+        box-shadow: 0 0 1px #777;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(59px);
+        -ms-transform: translateX(59px);
+        transform: translateX(59px);
+    }
+
+    .text {
+        color: white;
+    }
+
+    .text:after {
+        position: absolute;
+        top: 3px;
+        font-size: 12px;
+        right: 7px;
+        -webkit-transition: opacity 0.5s ease-in-out;
+        -moz-transition: opacity 0.5s ease-in-out;
+        transition: opacity 0.5s ease-in-out;
+    }
+    .text:before {
+        position: absolute;
+        top: 3px;
+        font-size: 12px;
+        left: 7px;
+        -webkit-transition: opacity 0.5s ease-in-out;
+        -moz-transition: opacity 0.5s ease-in-out;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    input + .slider + .text:after {
+        opacity: 1;
+    }
+    input + .slider + .text:before {
+        opacity: 0;
+    }
+
+    input:checked + .slider + .text:after {
+        opacity: 0;
+    }
+
+    input:checked + .slider + .text:before {
+        opacity: 1;
+    }
+}
