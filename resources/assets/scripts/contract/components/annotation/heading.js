@@ -12,9 +12,13 @@ class Heading extends Component {
     }
 
     render() {
-        return (
-            <div className="annotation-title">{this.state.total} {annotationTerms.annotation_count_text}</div>
-        );
+        let render = (<div className="annotation-title">{this.state.total} {annotationTerms.annotation_count_text}</div>);
+        if (isRCSite) {
+            return this.state.total > 0 ? render : null;
+        } else {
+            return render;
+        }
+        
     }
 }
 
