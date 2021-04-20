@@ -22,4 +22,8 @@ return [
     'minerals'             => 'Minéraux',
     'key_clauses'          => 'Clauses clés',
     'tagged_contracts_only'=> 'Contrats étiquetés uniquement',
+    'tagged_keyclauses_helptext' => '<b>OR</b> (default) returns documents tagged with at least one of the selected criteria. 
+                                        <br /> <b>AND</b> returns documents tagged with all selected criteria.',
+    'annotated_keyclauses_helptext' => '<b>OR</b> (default) returns documents annotated with at least one of the selected criteria. 
+                                             <br /> <b>AND</b> returns documents annotated with all selected criteria.',
 ];

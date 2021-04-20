@@ -15,6 +15,7 @@ $summary->resource_summary = array_map(
 $isRcCategory = site()->isRCCategorySite();
 $annotationCategoryLabel = $isRcCategory ? _l('search','key_clauses') : _l('search','annotations_category');
 $annotatedContractsOnlyCheckboxLabel = $isRcCategory ? _l('search','tagged_contracts_only') : _l('search','annotated');
+$keyClausesHelptext = $isRcCategory ? _l('search', 'tagged_keyclauses_helptext') : _l('search', 'annotated_keyclauses_helptext');
 ?>
 <div class="search-input-wrapper">
 	<div class="col-lg-12">
@@ -112,7 +113,22 @@ $annotatedContractsOnlyCheckboxLabel = $isRcCategory ? _l('search','tagged_contr
 			</select>
 		</div>
 		<div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
-			<label for="">{{ $annotationCategoryLabel }}</label>
+			<div class="keyclauses-label">
+				<label for="">{{ $annotationCategoryLabel }}</label>
+				<div class="keyclauses-switch-wrapper">
+					<div class='custom-switch keyclauses-switch'>
+						<input type='checkbox' name="and" value="1" 
+							@if(isset($filter['and']) && $filter['and']==1) checked @endif>
+					</div>
+					<div class="keyclauses-switch-helptext">
+						{!! $keyClausesHelptext !!}
+					</div>
+				</div>
+				
+			</div>
+			
+			{{-- <input type="checkbox" name="and" value="1" class="form-control"
+					@if(isset($filter['and']) && $filter['and']==1) checked @endif> --}}
 			<?php $annotation_category = array_map('trim', (array) $category->results);
 			sort($annotation_category);
 			?>

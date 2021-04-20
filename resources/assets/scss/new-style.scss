@@ -1,4 +1,5 @@
 $color-base: #fff;
+@import "./themes/custom-switch.scss";
 
 // .img-intro {
 //     background-image: url({{$image_intro}});
@@ -455,3 +456,32 @@ a {
       }
     }
   }
+
+.keyclauses-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.keyclauses-switch-wrapper {
+    position: relative;
+}
+
+.keyclauses-switch:hover + .keyclauses-switch-helptext {
+    display: block;
+}
+
+.keyclauses-switch-helptext {
+    display: none;
+    position: absolute;
+    background: gray;
+    z-index: 53;
+    padding: 8px;
+    border-radius: 4px;
+    top: -67px;
+    color: white;
+    width: 200px;
+    left: 98%;
+    font-size: 13px;
+}
+
