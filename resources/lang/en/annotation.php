@@ -55,7 +55,7 @@ return [
     'annexes_missing'                  => 'Annex(es) missing from document',
     'all'                              => 'All',
     'no_annotation'                    => "This document has no annotations.",
-    'no_annotation_new'                => "This document has no key clauses.",
+    'no_annotation_new'                => "This document has not yet been tagged.",
     'download'                         => 'Download',
     'word_file'                        => 'MS WORD',
     'zoom'                             => 'Zoom',
