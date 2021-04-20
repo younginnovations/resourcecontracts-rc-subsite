@@ -34,9 +34,9 @@ $gtmID      =  site()->getEnv("GTM_ID");
 	<link rel="stylesheet" href="{{url('css/style.css?v=1.08')}}">
     <link rel="stylesheet" href="{{url('css/new.css?v=2020-08-24')}}">
     @if(site()->isRC())
-        <link rel="stylesheet" href="{{url('css/new-rc.css?v=2020-08-24')}}" media="print" onload="this.media='all'"/>
+        <link rel="stylesheet" href="{{url('css/new-rc.css?v=2021-04-30')}}" media="print" onload="this.media='all'"/>
     @elseif(site()->isOLC())
-        <link rel="stylesheet" href="{{url('css/new-olc.css?v=2021-03-05')}}" media="print" onload="this.media='all'"/>
+        <link rel="stylesheet" href="{{url('css/new-olc.css?v=2021-04-30')}}" media="print" onload="this.media='all'"/>
     @endif
 	@yield('css')
 
@@ -89,6 +89,7 @@ $gtmID      =  site()->getEnv("GTM_ID");
 			}
 		};
 		var lang = {!! json_encode(trans('annotation')) !!};
+		var isRCSite = @if(site()->isRCCategorySite()) true @else false @endif;
 	</script>
 </head>
 
