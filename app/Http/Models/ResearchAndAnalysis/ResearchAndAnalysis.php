@@ -28,6 +28,18 @@ class ResearchAndAnalysis extends Model
         if (empty($this->publication_date)) {
             return '';
         }
-        return $this->ignore_publication_day ? $this->publication_date->format('F Y') : $this->publication_date->format('j F Y');
+        $trans = trans('codelist/month');
+
+        if($this->ignore_publication_day) {
+            $date_arr = explode(" ", $this->publication_date->format('F Y'));
+            $translated_month = $trans[$date_arr[0]];
+
+            return $translated_month." ".$date_arr[1];
+        }
+
+        $date_arr = explode(" ", $this->publication_date->format('j F Y'));
+        $translated_month = $trans[$date_arr[1]];
+
+        return $date_arr[0]." ".$translated_month." ".$date_arr[2];
     }
 }

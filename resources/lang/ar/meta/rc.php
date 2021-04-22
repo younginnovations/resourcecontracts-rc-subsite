@@ -15,4 +15,5 @@ return [
     'new_tag_line_desc'     => 'بحث ومراجعة عقود النفط والتعدين لفهم الشروط والأحكام الرئيسية',
     'search'                => 'وثائق البحث',
     'recent'                => 'الوثائق الأخيرة',
+    'research_and_analysis_publication' => 'المنشورات',
 ];
