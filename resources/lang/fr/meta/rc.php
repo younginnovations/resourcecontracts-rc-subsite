@@ -15,5 +15,5 @@ return [
     'new_tag_line_desc'     => 'Recherchez et examinez les contrats pétroliers et miniers pour comprendre les principaux termes et dispositions',
     'search'                => 'Rechercher des documents',
     'recent'                => 'Documents récents',
-    'research_and_analysis_publication' => 'Publications',
+    'research_and_analysis_publication' => 'Les publications',
 ];
