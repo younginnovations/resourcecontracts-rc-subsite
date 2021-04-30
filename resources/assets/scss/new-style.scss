@@ -244,6 +244,7 @@ a {
 
 .annotation-inner-viewer {
     height: calc(100vh - 198px) !important;
+    overflow-y: auto !important;
 }
 
 .back-to-top {
