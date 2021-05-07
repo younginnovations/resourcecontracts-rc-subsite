@@ -237,6 +237,7 @@ a{
 %extend_11 {
   //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
   border-radius: 4px;
+  
   background: $color_link_color;
   color: $white;
   width: 138px;

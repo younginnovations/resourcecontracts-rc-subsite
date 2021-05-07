@@ -114,14 +114,16 @@ $keyClausesHelptext = $isRcCategory ? _l('search', 'tagged_keyclauses_helptext')
 		</div>
 		<div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
 			<div class="keyclauses-switch-wrapper">
-				<div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+				<div>
 					<label for="">{{ $annotationCategoryLabel }}</label>
 					@if(!site()->isCountrySite())
-						<label class="switch keyclauses-switch">
+						<label for="" class="switch keyclauses-switch">
 							<input type="checkbox" name="and" value="1" class="form-control"
 								@if(isset($filter['and']) && $filter['and']==1) checked @endif>
-							<div class="slider"></div>
-							<div class="text"></div>
+							<div class="switch-div">
+							<div>{{_l('search','or')}}</div>
+							<div>{{_l('search','and')}}</div>
+							</div>
 						</label>
 						<div class="keyclauses-help-tooltip">
 							{!! $keyClausesHelptext !!}
