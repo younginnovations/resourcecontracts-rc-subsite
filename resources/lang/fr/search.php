@@ -25,4 +25,6 @@ return [
     'tagged_keyclauses_helptext' => "<b>ou alors</b> (par défaut) renvoie les documents étiquetés avec au moins l'un des critères sélectionnés. <br/> <b>et</b> renvoie les documents balisés avec tous les critères sélectionnés.",
     'annotated_keyclauses_helptext' => '<b>ou alors</b> (par défaut) renvoie les documents annotés avec au moins un des critères sélectionnés.
     <br /> <b>et</b> renvoie les documents annotés avec tous les critères sélectionnés.',
+    'or'                   => 'ou alors',
+    'and'                  => 'et'
 ];

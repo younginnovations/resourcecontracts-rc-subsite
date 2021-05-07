@@ -1,12 +1,12 @@
 $color-base: #fff;
-@import './themes/custom-switch.scss';
+@import "./themes/custom-switch.scss";
 
 // .img-intro {
 //     background-image: url({{$image_intro}});
 // }
 
 body {
-    &[lang='ar'] {
+    &[lang="ar"] {
         .navbar {
             flex-direction: row-reverse;
 
@@ -52,7 +52,7 @@ a {
         text-decoration: none;
     }
 
-    @media all and (min-width : 420px) {
+    @media all and (min-width: 420px) {
         padding: 0 10px 0;
     }
 }
@@ -61,7 +61,7 @@ a {
     background: #163940;
 }
 
-.sidebar-nav li:not(.sidebar-brand)>a:hover,
+.sidebar-nav li:not(.sidebar-brand) > a:hover,
 .sidebar-nav li a.active {
     background: $color-primary;
 }
@@ -105,7 +105,7 @@ a {
 
         h2 {
             color: rgba($color-base, 0.7);
-            font: 18px 'Open-Sans-Light';
+            font: 18px "Open-Sans-Light";
             margin-bottom: 20px;
             text-align: center;
             text-shadow: none;
@@ -122,7 +122,7 @@ a {
             }
         }
 
-        @media all and (min-width:1280px) and (min-height: 740px) {
+        @media all and (min-width: 1280px) and (min-height: 740px) {
             margin-bottom: -60px;
         }
     }
@@ -139,8 +139,6 @@ a {
         transform: scale(0.9);
     }
 }
-
-
 
 .map-wrap path {
     stroke: #356f90;
@@ -201,9 +199,9 @@ a {
     background: #777;
 }
 
-.advance-filter-wrapper .social-share>a,
-.actions-wrapper .social-share>a,
-.modal-social-share-wrap>a,
+.advance-filter-wrapper .social-share > a,
+.actions-wrapper .social-share > a,
+.modal-social-share-wrap > a,
 .download-csv a,
 .annotations-topic-list span {
     color: $color-primary;
@@ -217,11 +215,11 @@ a {
 }
 
 .language-selector ul li a.active,
-.annotations-topic-list>.selected-topic {
+.annotations-topic-list > .selected-topic {
     background: $color-primary;
 }
 
-.search-input-wrapper input[type='checkbox']:checked {
+.search-input-wrapper input[type="checkbox"]:checked {
     background: $color-primary;
     border: 1px solid $color-primary;
 }
@@ -235,7 +233,7 @@ a {
     }
 }
 
-.annotation-sort>.active {
+.annotation-sort > .active {
     background: $color-primary;
 
     &:after {
@@ -260,7 +258,7 @@ a {
     }
 }
 
-.annotation-category-cluster>ul>li a {
+.annotation-category-cluster > ul > li a {
     &:hover {
         background: $color-primary;
     }
@@ -398,7 +396,7 @@ a {
     }
 
     @media all and (max-width: 768px) {
-        .landing_section_logos>div {
+        .landing_section_logos > div {
             width: 100%;
         }
     }
@@ -469,102 +467,83 @@ a {
 .keyclauses-help-tooltip {
     display: none;
     position: absolute;
-    left: 52%;
-    bottom: 34px;
-    background: gray;
+    background: #fff;
     z-index: 1000;
     padding: 8px;
     border-radius: 4px;
-    color: white;
     width: 200px;
     font-size: 13px;
+    box-shadow: 0 0px 22px rgb(0 0 0 / 13%);
+}
+
+body.rc {
+    .keyclauses-help-tooltip {
+        left: 52%;
+        bottom: 34px;
+    }
+
+    &.lang-ar {
+        .keyclauses-help-tooltip {
+            left: -67%;
+        }
+    }
 }
 
 body.lang-en {
     .switch {
         width: 57px;
-
-        .slider:before {
-            width: 20px;
-        }
-
-        input:checked + .slider:before {
-            -webkit-transform: translateX(37px);
-            -ms-transform: translateX(37px);
-            transform: translateX(37px);
-        }
-
-        .text:after {
-            content: "OR";
-        }
-
-        .text:before {
-            content: "AND";
-        }
     }
 }
 
 body.lang-fr {
     .switch {
-        .text:after {
-            content: "ou alors";
-        }
-
-        .text:before {
-            content: "et";
-        }
+        width: 126px !important;
     }
 }
 
 body.lang-ar {
     .switch {
-        width: 57px;
+        width: 57px !important;
 
-        .slider:before {
-            width: 20px;
+        .switch-div {
+            & > div:first-child {
+                border-left: 1px solid #757575;
+                border-right: unset;
+            }
         }
 
-        input:checked + .slider:before {
-            -webkit-transform: translateX(37px);
-            -ms-transform: translateX(37px);
-            transform: translateX(37px);
-        }
-        
-        .text:after {
-            content: "أو";
-        }
+        input {
+            left: 0;
 
-        .text:before {
-            content: "و";
+            &:checked {
+                left: 50%;
+            }
         }
-    }
-
-    .keyclauses-help-tooltip {
-        left: -67%;
     }
 }
 
-body.olc {
-    .switch {
-        .slider:before {
-            background-color: #27ae60;
-        }
-    }
-
+body.olc.lang-en, body.olc.lang-fr {
     .keyclauses-help-tooltip {
-        left: 2%;
-        bottom: -42px;
+        bottom: -80px;
+        right: -73%;
+
+        @media screen and (max-width: 1570px) {
+            right: unset;
+            left: -15%;
+        }
 
         @media screen and (max-width: 1530px) {
-            left: -110%;
+            right: -77%;
+            left: unset;
         }
 
         @media screen and (max-width: 1301px) {
-            left: -140%;
+            right: -102%;
         }
 
         @media screen and (max-width: 1200px) {
-            left: -110%;
+            left: -112%;
+            right: unset;
         }
 
         @media screen and (max-width: 1024px) {
@@ -572,14 +551,10 @@ body.olc {
         }
 
         @media screen and (max-width: 768px) {
-            left: 0;
+            bottom: -186px;
+            left: unset;
+            right: 0;
         }
-
-        @media screen and (max-width: 630px) {
-            left: -103px;
-            bottom: 42px;
-        }
-        
     }
 }
 
@@ -589,36 +564,30 @@ body.olc.lang-ar {
         left: unset;
 
         @media screen and (max-width: 1530px) {
-            right: -110%;
+            right: -48%;
             left: unset;
         }
 
-        @media screen and (max-width: 1301px) {
-            right: -140%;
-            left: unset;
+        @media screen and (max-width: 1300px) {
+            right: -136%;
         }
 
         @media screen and (max-width: 1200px) {
-            right: -110%;
-            left: unset;
+            right: -49%;
         }
 
         @media screen and (max-width: 1024px) {
             right: -166%;
-            left: unset;
         }
 
-        @media screen and (max-width: 768px) {
-            right: 0;
-            left: unset;
-        }
-
-        @media screen and (max-width: 630px) {
-            right: -103px;
-            left: unset;
+        @media screen and (max-width: 767px) {
+            right: unset;
+            left: 0;
             bottom: 42px;
         }
-        
     }
 }
-  
+
+.search-input-wrapper .col-lg-12 {
+    overflow: unset;
+}

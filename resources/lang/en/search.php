@@ -26,4 +26,6 @@ return [
                                         <br /> <b>AND</b> returns documents tagged with all selected criteria.',
     'annotated_keyclauses_helptext' => '<b>OR</b> (default) returns documents annotated with at least one of the selected criteria. 
                                         <br /> <b>AND</b> returns documents annotated with all selected criteria.',
+    'or'                   => 'OR',
+    'and'                  => 'AND'
 ];
