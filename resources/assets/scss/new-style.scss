@@ -540,13 +540,25 @@ body.lang-fr {
 }
 
 body.lang-ar {
+    .keyclauses-label {
+        margin-right: 0;
+        margin-left: 10px;
+    }
+
     .switch {
         width: 57px !important;
 
         .switch-div {
             & > div:first-child {
                 border-left: 1px solid #757575;
-                border-right: unset;
+                border-right: 1px solid #aaa;
+                border-radius: 0px 3px 3px 0;
+            }
+
+            & > div:nth-child(2) {
+                border-left: 1px solid #aaa;
+                border-radius: 3px 0 0 3px;
+                border-right: 0;
             }
         }
 
@@ -651,7 +663,7 @@ body.olc {
         .switch {
             @media screen and (max-width: 1529px) {
                 position: absolute;
-                right: -68px;
+                right: -86px;
             }
 
             @media screen and (max-width: 1300px) {
@@ -664,5 +676,9 @@ body.olc {
             }
         }
     }
+}
+
+.keyclauses-label {
+    margin-right: 10px;
 }
 

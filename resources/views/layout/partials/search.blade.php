@@ -115,7 +115,7 @@ $keyClausesHelptext = $isRcCategory ? _l('search', 'tagged_keyclauses_helptext')
 		<div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 input-wrapper">
 			<div class="keyclauses-switch-wrapper">
 				<div>
-					<label for="">{{ $annotationCategoryLabel }}</label>
+					<label for="" class="keyclauses-label">{{ $annotationCategoryLabel }}</label>
 					@if(!site()->isCountrySite())
 						<label for="" class="switch keyclauses-switch">
 							<input type="checkbox" name="and" value="1" class="form-control"
