@@ -7,7 +7,7 @@
     "require": {
         "laravel/lumen-framework": "5.1.*",
         "vlucas/phpdotenv": "~1.0",
-        "guzzlehttp/guzzle": "~5.0",
+        "guzzlehttp/guzzle": "~6.5",
         "league/flysystem-aws-s3-v2": "^1.0",
         "illuminate/mail": "5.1.*",
         "maatwebsite/excel": "~2.0",
