@@ -43,7 +43,7 @@
     "bourbon": "^4.2.6",
     "expose": "^0.1.4",
     "expose-loader": "^0.7.1",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-cached": "^1.1.0",
     "gulp-concat": "^2.6.0",
